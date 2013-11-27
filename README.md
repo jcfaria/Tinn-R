@@ -7,7 +7,8 @@ testing unreleased versions, fixing bugs, writing code, etc.
 Tinn-R is free, simple but efficient replacement for the basic code editor provided by Rgui.
 The project is coordinate by José Cláudio Faria/UESC/DCET.
 All users are welcome to make it better.
-LANGUAGE: Object Pascal, IDE: DELPHI 2007.
+
+LANGUAGE: **Object Pascal**, IDE: **DELPHI 2007**.
 
 To download do the following in a terminal emulator:
 
