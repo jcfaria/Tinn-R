@@ -1,0 +1,15 @@
+Functional LaTeX Symbols Classification Criteria (according with the KISS principle):
+
+ 1. Empty
+ 2. Natural order to ordinal (ex: Greek, Solar system)
+ 3. Usability
+ 4. Structural simplicity
+ 5. Number of straight lines
+ 6. Number of curved lines
+ 7. Number of sloped lines
+ 8. Clock wise rotation
+
+Authors: José Cláudio Faria and Jorge Alexandre Wiendl
+Version: 1.0
+Date   : 11/27/2007 00:55:20
+KISS   : Keep it simple, stupid

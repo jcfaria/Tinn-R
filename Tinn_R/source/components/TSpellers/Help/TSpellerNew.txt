@@ -1,0 +1,13 @@
+++ NEW IN VERSION 3.0.1 ++
+* Bug in connection with insufficient user rights on Windows NT/2K/XP corrected.
+
+++ NEW IN VERSION 3.0.3 ++
+* Minor bugs corrected
+* Delphi 5 and 7 version added
+
+++ NEW IN VERSION 3.0.4 ++
+* Code cleaned in some parts
+* Support for non MDI applications added
+
+++ NEW IN VERSION 3.0.5 ++
+* Bug in connection with TAB character fixed

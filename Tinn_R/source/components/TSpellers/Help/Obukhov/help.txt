@@ -1,0 +1,390 @@
+TSpellChecker
+
+TSpellChecker implements MS Office 97 compatible spell-checker. 
+
+Unit
+spellers
+
+Description
+TSpellChecker is non-visual component, which enables spelling check in 
+your applications.
+
+-----------------------------------------------------------------------
+TSpellChecker properties
+	Caption
+	CurrentLanguage
+	CustomDict
+	FinishMessage
+	HTMLSupport
+	Language
+	ModalDialog
+	Options
+	ShowFinishMessage
+	SpellMode
+
+TSpellChecker methods
+	AddWord
+	Check
+	Close
+	GetVariants
+	IsKnownWord
+	RegisterEditControl
+
+TSpellChecker events
+	OnChangeText
+	OnGetDictionary
+	OnMisspelling
+
+-----------------------------------------------------------------------
+TSpellChecker.Caption
+Defines caption for speller dialog.
+
+property Caption: TCaption;
+
+Description
+In interactive mode defines caption for speller dialog window. Symbols 
+"%s" can be used to substitute language name.
+
+-----------------------------------------------------------------------
+TSpellChecker.CurrentLanguage
+Returns current language of spellchecker.
+
+property CurrentLanguage: TLanguage; (see TSpellChecker.Language)
+
+Description
+The property can be used within OnChangeText and OnMisspelling 
+event handlers to get current language.
+
+-----------------------------------------------------------------------
+TSpellChecker.FinishMessage
+Defines text of message box after spelling check is finished.
+
+property FinishMessage: String;
+
+Description
+In interactive mode message box can be shown after spelling check is 
+complete if ShowFinishMessage property is True. In this case 
+FinishMessage defines text of the maessage box.
+
+-----------------------------------------------------------------------
+TSpellChecker.HTMLSupport
+Allows to check HTML text.
+
+property HTMLSupport: Boolean;
+
+Description
+When True, any text whithin < >, <% %> and <!-- --> brackets is ignored.
+
+-----------------------------------------------------------------------
+TSpellChecker.Language
+Defines language for spelling check.
+
+type
+  TLanguage = 0..$FFFF;
+
+property Language: TLanguage;
+
+Description
+The property defines language for which spelling check is executed. The value 
+can be any valid system LCID, but spelling check will work only when 
+corresponding spell checker is properly installed in MS Office (use 
+GetSpellLanguages to get list of installed spell-checkers). This property
+is used when checked memo can't support different languages.
+
+In Object Inspector value of Language can bet set by four ways:
+- type decimal or hexadecimal value of LCID, e.g. $409, 1049;
+- type three-letter standard abbreviation of language name, e.g. ENU, RUS;
+- type English name of language, e.g. English (United States), Russian;
+- type language name in your native language (more exactly, native for 
+  your Windows).
+In run-time you can use some constants to set value of Language.
+
+const
+  langAfrikaans = TLanguage(1078);
+  langAlbanian = TLanguage(1052);
+  langArabic = TLanguage(1025);
+  langBasque = TLanguage(1069);
+  langBelgianDutch = TLanguage(2067);
+  langBelgianFrench = TLanguage(2060);
+  langBrazilianPortuguese = TLanguage(1046);
+  langBulgarian = TLanguage(1026);
+  langByelorussian = TLanguage(1059);
+  langCatalan = TLanguage(1027);
+  langCroatian = TLanguage(1050);
+  langCzech = TLanguage(1029);
+  langDanish = TLanguage(1030);
+  langDutch = TLanguage(1043);
+  langEnglishAUS = TLanguage(3081);
+  langEnglishCanadian = TLanguage(4105);
+  langEnglishNewZealand = TLanguage(5129);
+  langEnglishSouthAfrica = TLanguage(7177);
+  langEnglishUK = TLanguage(2057);
+  langEnglishUS = TLanguage(1033);
+  langEstonian = TLanguage(1061);
+  langFaeroese = TLanguage(1080);
+  langFarsi = TLanguage(1065);
+  langFinnish = TLanguage(1035);
+  langFinnishSwedish = TLanguage(2077);
+  langFrench = TLanguage(1036);
+  langFrenchCanadian = TLanguage(3084);
+  langGerman = TLanguage(1031);
+  langGreek = TLanguage(1032);
+  langHebrew = TLanguage(1037);
+  langHungarian = TLanguage(1038);
+  langItalian = TLanguage(1040);
+  langIcelandic = TLanguage(1039);
+  langIndonesian = TLanguage(1057);
+  langJapanese = TLanguage(1041);
+  langKorean = TLanguage(1042);
+  langLatvian = TLanguage(1062);
+  langLithuanian = TLanguage(1063);
+  langMacedonian = TLanguage(1071);
+  langMalaysian = TLanguage(1086);
+  langMexicanSpanish = TLanguage(2058);
+  langNorwegianBokmol = TLanguage(1044);
+  langNorwegianNynorsk = TLanguage(2068);
+  langPolish = TLanguage(1045);
+  langPortuguese = TLanguage(2070);
+  langRomanian = TLanguage(1048);
+  langRussian = TLanguage(1049);
+  langSerbianCyrillic = TLanguage(3098);
+  langSerbianLatin = TLanguage(2074);
+  langSesotho = TLanguage(1072);
+  langSimplifiedChinese = TLanguage(2052);
+  langSlovak = TLanguage(1051);
+  langSlovenian = TLanguage(1060);
+  langSpanish = TLanguage(1034);
+  langSpanishModernSort = TLanguage(3082);
+  langSwedish = TLanguage(1053);
+  langSwissFrench = TLanguage(4108);
+  langSwissGerman = TLanguage(2055);
+  langSwissItalian = TLanguage(2064);
+  langThai = TLanguage(1054);
+  langTraditionalChinese = TLanguage(1028);
+  langTsonga = TLanguage(1073);
+  langTswana = TLanguage(1074);
+  langTurkish = TLanguage(1055);
+  langUkrainian = TLanguage(1058);
+  langVenda = TLanguage(1075);
+  langVietnamese = TLanguage(1066);
+  langXhosa = TLanguage(1076);
+  langZulu = TLanguage(1077);
+
+-----------------------------------------------------------------------
+TSpellChecker.CustomDict
+Allows to define custom dictionary.
+
+property CustomDictionary: TFileName;
+
+Description
+The property defines default custom dictionary file name. If checked 
+memo can support dufferent languages you can define other 
+dictionaries in OnGetDictionary event handler.
+
+-----------------------------------------------------------------------
+TSpellChecker.ModalDialog
+Allows to select modal or non-modal behavior of speller dialog window.
+
+property ModalDialog: Boolean;
+
+Description
+When True, the speller dialog window is modal. When False, the dialog 
+window is non-modal (like MS Word) and user can leave the window 
+without closing, make some changes and then restart spelling check. 
+This mode also includes support of MDI, that is while non-modal dialog 
+window  is inactive, current MDI window can be changed. After restarting 
+of spelling check the new MDI window will be checked. The new MDI window 
+can be another type then the old one but it must contain TCustomMemo 
+control (or it's descendant) with the same Name as Memo, for which 
+CheckMemo was called.
+
+-----------------------------------------------------------------------
+TSpellChecker.Options
+Defines options of spell-checker.
+
+type
+  TSpellOption = (spoSuggestFromUserDict, spoIgnoreAllCaps, 
+spoIgnoreMixedDigits, spoIgnoreRomanNumerals, spoFindUncappedSentences, 
+spoFindMissingSpaces, spoFindRepeatWord, spoFindExtraSpaces, 
+spoFindSpacesBeforePunc, spoFindSpacesAfterPunc, spoRateSuggestions, 
+spoFindInitialNumerals);
+
+  TSpellOptions = set of TSpellOption;
+
+property Options: TSpellOptions;
+
+Description
+spoSuggestFromUserDict
+	When suggestions are generated, they should attempt to compare with the usable user dictionaries.
+spoIgnoreAllCaps
+	Ignore a word if all uppercase.
+spoIgnoreMixedDigits
+	Ignore word if has any numbers in it.
+spoIgnoreRomanNumerals
+	Ignore word composed of all roman numerals.
+spoFindUncappedSentences
+	Flag sentences which don't start with a cap. For the CSAPI module to perform this check, the SpellCheck() routine must be enabled for continuous checking, or told where sentences start via the wSpellState field in the SIB. If this option is set, suggestions for flagged words that begin a sentence are capitalized.
+spoFindMissingSpaces
+	Find missing spaces between words/sentences.
+spoFindRepeatWord
+	Flag repeated words.
+spoFindExtraSpaces
+	Flag extra spaces between words/sentences.
+spoFindSpacesBeforePunc
+	Flag space preceding certain punctuation. E.g., (the ) would be flagged. The following chars relate to this flag: ) ] \} > , ; % . ? !
+spoFindSpacesAfterPunc
+	Flag space after certain punctuation. E.g., ( the) is flagged. The following chars relate to this flag: ( [ \{ $
+spoRateSuggestions
+	Fill SRB's (Spell Return Buffer, see SpellCheck()) rgbRating with ratings for suggestions.
+
+-----------------------------------------------------------------------
+TSpellChecker.ShowFinishMessage
+Defines whether message box after spelling check is shown.
+
+property ShowFinishMessage: Boolean;
+
+Description
+Message box can be shown after spelling check is 
+complete if ShowFinishMessage property is True. In this case 
+FinishMessage defines text of the message box.
+
+-----------------------------------------------------------------------
+TSpellChecker.AddWord
+Returns suggestions for unknown word.
+
+procedure AddWord(Word: String; Language: TLanguage);
+
+Description
+Adds Word to dictionary for specified Language.
+
+-----------------------------------------------------------------------
+TSpellChecker.Check
+Checks TCustomMemo object or its descendants.
+
+procedure Check(Memo: TCustomMemo);
+
+Description
+Performs interactive spelling check of Memo.
+
+Tip
+Set Memo.HideSelection to False to see misspellings in Memo.
+
+-----------------------------------------------------------------------
+TSpellChecker.GetVariants
+Returns suggestions for unknown word.
+
+procedure GetVariants(Word: String; Variants: TStrings; Language: TLanguage);
+
+Description
+Fills Variants with alternatives of Word using specified Language. If Word 
+isn't misspelling, Variants is empty list.
+
+-----------------------------------------------------------------------
+TSpellChecker.IsKnownWord
+Determines whether word is known.
+
+function IsKnownWord(Word: String; Language: TLanguage): Boolean;
+
+Description
+Returns True when Word doesn't contain misspellings for specified
+Language.
+
+-----------------------------------------------------------------------
+TSpellChecker.RegisterEditControl
+Registers memo class for using with spell-checker.
+
+class procedure RegisterEditControl(MemoClass: String; Unicode, Multilanguage: Boolean);
+
+Description
+Registers class with name MemoClass (and it's descendants). Unicode specifies if
+MemoClass can work with Unicode strings. Multilanguage specifies if MemoClass
+can store language information. Currently only RichEdit98 supports both these
+features. In most of cases you don't need to register memo classes. By default,
+three classes are registered: TCustomMemo, TCustomRichEdit and TCustomRichEdit98.
+You must register your memo controls only if it supports these special features.
+
+-----------------------------------------------------------------------
+TSpellChecker.OnChangeText
+OnChangeText occurs when spell-checker is to change misspelling with 
+alternative.
+
+type
+  TChangeTextEvent = procedure(Sender: TObject; BufPos, Len: Integer; NewWord: String) of object;
+
+property OnChangeText: TChangeTextEvent;
+
+Description
+The event occurs whenever user pushs Change or Change All in speller 
+dialog window. In last case event occurs for every occurence of 
+misspelled word in the checked text. BufPos is zero-based start 
+position of misspelling in text (like SelStart property of TMemo). When 
+occurs in CheckText, BufPos must be incremented by 1 to obtain string 
+index. Len is length of misspelling (like SelLength property of TMemo). 
+NewWord is selected suggestion or typed alternative.
+
+-----------------------------------------------------------------------
+TSpellChecker.OnGetDictionary
+OnClose occurs when method Close is called.
+
+TGetDictEvent = procedure(Sender: TObject; Language: TLanguage;
+var Dict: TFileName) of object;
+
+property OnGetDictionary: TGetDictEvent; 
+
+Description
+The event occurs when spell checker activating specified Language.
+Variable Dict contains custom dictionary file name as it taken from
+registry. You can specify another custom dictionary name.
+
+-----------------------------------------------------------------------
+TSpellChecker.OnMisspelling
+OnMisspelling occurs when misspelling is found.
+
+type
+  TSpellReturnCode = (srNoErrors, srUnknownInputWord, 
+srReturningChangeAlways, srReturningChangeOnce, srInvalidHyphenation, 
+srErrorCapitalization, srWordConsideredAbbreviation, 
+srHyphChangesSpelling, srNoMoreSuggestions, 
+srMoreInfoThanBufferCouldHold, srNoSentenceStartCap, srRepeatWord, 
+srExtraSpaces, srMissingSpace, srInitialNumeral);
+
+  TMisspellEvent = procedure (Sender: TObject; SRC: TSpellReturnCode; 
+BufPos, Len: Integer) of object;
+
+property OnMisspelling: TMisspellEvent;
+
+Description
+The event occurs whenever spell-checker found misspelling in checked 
+text. SRC describes type of misspelling. Description of constants are 
+in CSAPI.DOC. If you not satisfied by names of constants, please try to 
+find the document anywhere on Internet. I wasn't able. BufPos is zero-
+based start position of misspelling in text (like SelStart property of 
+TMemo). When occurs in CheckText, BufPos must be incremented by 1 to 
+obtain string index. Len is length of misspelling (like SelLength 
+property of TMemo).
+
+-----------------------------------------------------------------------
+GetSpellLanguages
+Fills string list with names of installed spell-checkers.
+
+type
+  TLangOption = (loLocalized, loEnglish, loNative, loAbbrev);
+
+function GetSpellLanguages(Languages: TStrings; Option: TLangOption): 
+Integer;
+
+Description
+Use GetSpellLanguages to get list of installed spell-checkers in 
+Languages parameter. Languages.Items contains names of installed 
+languages as defined in Option and Languages.Objects contains 
+corresponding language identifiers, which can be used by the next way:
+
+  SpellChecker.Language:= TLanguage(Languages.Objects[N]);
+
+Option defines which names of languages you want:
+
+loLocalized	Names in your native language.
+loEnglish	English names of languages.
+loNative	Names of languages in that languages.
+loAbbrev	Three-letter abbreviated names.
+

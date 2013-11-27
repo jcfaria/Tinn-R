@@ -1,0 +1,44 @@
+package tb2kdsgn_d7;
+
+{ $jrsoftware: tb2k/Packages/tb2kdsgn_d7.dpk,v 1.4 2003/04/17 19:40:26 jr Exp $ }
+
+{$R *.res}
+{$R '..\Source\TB2Reg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $3F800000}
+{$DESCRIPTION 'Toolbar2000 Design Package (Jordan Russell)'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl,
+  dclstd,
+  tb2k_d7;
+
+contains
+  TB2Reg in '..\Source\TB2Reg.pas',
+  TB2DsgnItemEditor in '..\Source\TB2DsgnItemEditor.pas' {TBToolbarEditForm},
+  TB2DsgnConverter in '..\Source\TB2DsgnConverter.pas' {TBConverterForm},
+  TB2DsgnConvertOptions in '..\Source\TB2DsgnConvertOptions.pas' {TBConvertOptionsForm};
+
+end.
+

@@ -1,0 +1,12 @@
+:Base SpellerEn.hlp
+:Title Spell Checker (LS)
+:Index SpellerEn=SpellerEn.hlp
+1 Spell Checker (LS)
+2 TSpellChecker=TSpellChecker
+2 TSpellLanguageComboBox=TSpellLanguageComboBox
+2 TLanguage=TLanguage
+2 TLangOption=TLangOption
+2 TSpellerType=TSpellerType
+2 Units=SeeAlsoUnits>PopWin
+2 Licence=Licence
+2 Author=Author
