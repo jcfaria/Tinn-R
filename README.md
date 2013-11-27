@@ -11,11 +11,11 @@ LANGUAGE: Object Pascal, IDE: DELPHI 2007.
 
 To download do the following in a terminal emulator:
 
-git clone git://github.com/jcfaria/Tinn-R.git
-
-or
-
-git clone https://jcfaria@github.com/jcfaria/Tinn-R.git
+> git clone git://github.com/jcfaria/Tinn-R.git
+>
+> or
+>
+> git clone https://jcfaria@github.com/jcfaria/Tinn-R.git
 
 The stable version of this software is available at:
 - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
