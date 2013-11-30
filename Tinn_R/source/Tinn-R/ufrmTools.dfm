@@ -39,7 +39,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 320
     Height = 565
-    ActivePage = tbsR
+    ActivePage = tbsDatabase
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -4479,8 +4479,6 @@ object frmTools: TfrmTools
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = [fsBold]
-              OnDblClick = dbgCompletionDblClick
-              OnKeyDown = dbgCompletionKeyDown
               Columns = <
                 item
                   Expanded = False
@@ -4913,8 +4911,6 @@ object frmTools: TfrmTools
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = [fsBold]
-              OnDblClick = dbgCompletionDblClick
-              OnKeyDown = dbgCompletionKeyDown
               Columns = <
                 item
                   Expanded = False
@@ -5364,7 +5360,6 @@ object frmTools: TfrmTools
                 Action = frmTinnMain.actREnvironmentRefresh
                 Caption = 'Refresh environment'
                 TabOrder = 1
-                OnClick = bbtREnvironmentRefreshClick
                 Glyph.Data = {
                   36040000424D3604000000000000360000002800000010000000100000000100
                   2000000000000004000000000000000000000000000000000000FF00FF00FF00

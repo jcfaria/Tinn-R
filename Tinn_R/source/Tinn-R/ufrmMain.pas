@@ -1,4 +1,4 @@
-{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
+ï»¿{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
 {$MINSTACKSIZE $00004000}
 {$MAXSTACKSIZE $00100000}
 {$IMAGEBASE $00400000}
@@ -69,7 +69,7 @@
   Russell May - http://www.solarvoid.com
 
  Tinn-R is an extension of Tinn that provides additional tools to control R
- (http://cran.r-project.org). The project is coordened by José Cláudio Faria
+ (http://cran.r-project.org). The project is coordened by JosÃ© ClÃ¡udio Faria
  (joseclaudio.faria@gmail.com).
 
  As such, Tinn-R is a feature-rich replacement of the basic script editor
@@ -2451,7 +2451,7 @@ type
     bRRequireKnitr                 : boolean;
     bRSendAll                      : boolean;
     bRSmartSend                    : boolean;
-    bRsvSocket_Connect             : boolean;  // Variáveis de controle do TinnRcom e dependências
+    bRsvSocket_Connect             : boolean;  // VariÃ¡veis de controle do TinnRcom e dependÃªncias
     bRtermCloseWithoutAsk          : boolean;
     bRtermHorizontal               : boolean;  // IO disposition for IO and Log in the same view
     bRtermOptionCancel             : boolean;
@@ -8120,6 +8120,39 @@ begin
   CloseFile(tfTmp);
 end;
 
+{
+procedure TfrmTinnMain.SetPathRgui;
+begin
+  // In the R version 2.12.0 the path of executables was changed
+  if (AnsiCompareStr(sRversion,
+                     '2.12.0') < 0) then sPathRgui:= sPathR +
+                                                     '\bin\Rgui.exe'
+  else
+    if bRArchitecture64 then sPathRgui:= sPathR +
+                                         '\bin\x64\Rgui.exe'
+                        else sPathRgui:= sPathR +
+                                         '\bin\i386\Rgui.exe';
+end;
+}
+
+procedure TfrmTinnMain.SetPathRgui;
+const
+  sRVersion = '';
+
+begin
+  // In the R version 2.12.0 the path of executables was changed
+  if (AnsiCompareStr(sRversion,
+                     '2.12.0') < 0) and
+  (sRversion <> EmptyStr) then sPathRterm:= sPathR +
+                                            '\bin\Rterm.exe'
+  else
+    if bRArchitecture64 then sPathRgui:= sPathR +
+                                         '\bin\x64\Rgui.exe'
+                        else sPathRgui:= sPathR +
+                                         '\bin\i386\Rgui.exe';
+end;
+
+{
 procedure TfrmTinnMain.SetPathRTerm;
 begin
   // In the R version 2.12.0 the path of executables was changed
@@ -8132,18 +8165,19 @@ begin
                         else sPathRterm:= sPathR +
                                           '\bin\i386\Rterm.exe';
 end;
-
-procedure TfrmTinnMain.SetPathRgui;
+}
+procedure TfrmTinnMain.SetPathRTerm;
 begin
   // In the R version 2.12.0 the path of executables was changed
   if (AnsiCompareStr(sRversion,
-                     '2.12.0') < 0) then sPathRgui:= sPathR +
-                                                     '\bin\Rgui.exe'
+                     '2.12.0') < 0) and
+  (sRversion <> EmptyStr) then sPathRterm:= sPathR +
+                                            '\bin\Rterm.exe'
   else
-    if bRArchitecture64 then sPathRgui:= sPathR +
-                                         '\bin\x64\Rgui.exe'
-                        else sPathRgui:= sPathR +
-                                         '\bin\i386\Rgui.exe';
+    if bRArchitecture64 then sPathRterm:= sPathR +
+                                          '\bin\x64\Rterm.exe'
+                        else sPathRterm:= sPathR +
+                                          '\bin\i386\Rterm.exe';
 end;
 
 procedure TfrmTinnMain.SetRcard;
@@ -12324,7 +12358,7 @@ end;
 procedure TfrmTinnMain.menHelCitationClick(Sender: TObject);
 begin
   Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E. (2013). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
-                     ' URL http://nbcgib.uesc.br/lec/software/desenvolvidos/editores/tinn-r/en.';
+                     ' URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
 
   MessageDlg('Many thanks for cite Tinn-R.' + #13 + #13 +
              'The citation was put on clipboard!',
