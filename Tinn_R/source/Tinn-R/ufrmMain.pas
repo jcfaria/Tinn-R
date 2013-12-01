@@ -5459,15 +5459,22 @@ begin
     end;
   end
   else begin
+    // Will read from INI because the user choice is not to use the latest instaled version of R
     sPathRterm:= trim(ifTinn.ReadString('App', 'sPathRterm', EmptyStr));
     if (sPathRterm = EmptyStr) or
-       not FileExists(sPathRterm) then
-         if (sPathR <> EmptyStr) then SetPathRTerm;
+       not FileExists(sPathRterm) then begin
+         sPathR    := 'UNKNOWN';
+         sRversion := 'UNKNOWN';
+         sPathRterm:= 'UNKNOWN';
+    end;
 
     sPathRgui:= trim(ifTinn.ReadString('App', 'sPathRgui', EmptyStr));
     if (sPathRgui = EmptyStr) or
-       not FileExists(sPathRgui) then
-         if (sPathR <> EmptyStr) then SetPathRgui;
+       not FileExists(sPathRgui) then begin
+         sPathR   := 'UNKNOWN';
+         sRversion:= 'UNKNOWN';
+         sPathRgui:= 'UNKNOWN';
+    end;
   end;
 
   sRmirror:= trim(ifTinn.ReadString('App', 'sRmirror', 'http://cran.at.r-project.org/'));
@@ -8116,47 +8123,16 @@ begin
             'This folder stores:' + #13 +
             '''Editor.ini'' and ''Editor.kst'' files.'+ #13 +
             'Notice: the latest is always deleted when Tinn-R starts and recreated (storing the user preferences) when the application finishes.');
-  
+
   CloseFile(tfTmp);
 end;
 
-{
-procedure TfrmTinnMain.SetPathRgui;
-begin
-  // In the R version 2.12.0 the path of executables was changed
-  if (AnsiCompareStr(sRversion,
-                     '2.12.0') < 0) then sPathRgui:= sPathR +
-                                                     '\bin\Rgui.exe'
-  else
-    if bRArchitecture64 then sPathRgui:= sPathR +
-                                         '\bin\x64\Rgui.exe'
-                        else sPathRgui:= sPathR +
-                                         '\bin\i386\Rgui.exe';
-end;
-}
-
-procedure TfrmTinnMain.SetPathRgui;
-const
-  sRVersion = '';
-
-begin
-  // In the R version 2.12.0 the path of executables was changed
-  if (AnsiCompareStr(sRversion,
-                     '2.12.0') < 0) and
-  (sRversion <> EmptyStr) then sPathRterm:= sPathR +
-                                            '\bin\Rterm.exe'
-  else
-    if bRArchitecture64 then sPathRgui:= sPathR +
-                                         '\bin\x64\Rgui.exe'
-                        else sPathRgui:= sPathR +
-                                         '\bin\i386\Rgui.exe';
-end;
-
-{
 procedure TfrmTinnMain.SetPathRTerm;
 begin
-  // In the R version 2.12.0 the path of executables was changed
-  if (AnsiCompareStr(sRversion,
+  if (sRversion <> EmptyStr) and
+     IsValidNumber_RVersion(sRversion) and
+     // In the R version 2.12.0 the path of executables was changed
+     (AnsiCompareStr(sRversion,
                      '2.12.0') < 0) then sPathRterm:= sPathR +
                                                       '\bin\Rterm.exe'
   else
@@ -8165,19 +8141,20 @@ begin
                         else sPathRterm:= sPathR +
                                           '\bin\i386\Rterm.exe';
 end;
-}
-procedure TfrmTinnMain.SetPathRTerm;
+
+procedure TfrmTinnMain.SetPathRgui;
 begin
-  // In the R version 2.12.0 the path of executables was changed
-  if (AnsiCompareStr(sRversion,
-                     '2.12.0') < 0) and
-  (sRversion <> EmptyStr) then sPathRterm:= sPathR +
-                                            '\bin\Rterm.exe'
+  if (sRversion <> EmptyStr) and
+     IsValidNumber_RVersion(sRversion) and
+     // In the R version 2.12.0 the path of executables was changed
+     (AnsiCompareStr(sRversion,
+                     '2.12.0') < 0) then sPathRgui:= sPathR +
+                                                     '\bin\Rgui.exe'
   else
-    if bRArchitecture64 then sPathRterm:= sPathR +
-                                          '\bin\x64\Rterm.exe'
-                        else sPathRterm:= sPathR +
-                                          '\bin\i386\Rterm.exe';
+    if bRArchitecture64 then sPathRgui:= sPathR +
+                                         '\bin\x64\Rgui.exe'
+                        else sPathRgui:= sPathR +
+                                         '\bin\i386\Rgui.exe';
 end;
 
 procedure TfrmTinnMain.SetRcard;
@@ -19643,8 +19620,8 @@ begin
       sTmp:= sPathRgui;
       if (sTmp = EmptyStr) then sTmp:= 'Empty';
       MessageDlg(sTmp + #13 + #13 +
-                 'The file above is not executable.' + #13 +
-                 'Please, set it with ''Options/Main/R/Path/Gui!''',
+                 'The file above is not executable!' + #13 +
+                 'Please, set Rgui path at: Options/Application/R/Path (R)/Rgui',
                  mtError,
                  [mbOk],
                  0);
@@ -21682,13 +21659,6 @@ procedure TfrmTinnMain.actRContTermStartCloseExecute(Sender: TObject);
 
   procedure CloseRterm;
   begin
-    {
-    with synIO do begin
-      CaretY:= Lines.Count;
-      LineText:= '> ' + 'quit()';
-    end;
-    cRterm.SendInput('quit()' + #13#10);
-    }
     if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Clear
                                   else frmRterm.synLog.Clear;
     
@@ -21733,8 +21703,8 @@ begin
       if (sTmp = EmptyStr) then sTmp:= 'Empty';
 
       MessageDlg(sTmp + #13 + #13 +
-                 'The file above is not executable.' + #13 +
-                 'Please, set it with ''Options/Main/R/Path/Term!''',
+                 'The file above is not executable!' + #13 +
+                 'Please, set Rterm path at: Options/Application/R/Path (R)/Rterm',
                  mtError,
                  [mbOk],
                  0);

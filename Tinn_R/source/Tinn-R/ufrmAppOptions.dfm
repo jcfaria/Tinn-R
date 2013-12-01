@@ -117,7 +117,7 @@ object frmAppOptions: TfrmAppOptions
       Top = 1
       Width = 340
       Height = 487
-      ActivePage = tbsAppMoreLatex
+      ActivePage = tbsAppPathR
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -158,6 +158,10 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'General'
         ImageIndex = 3
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox4: TGroupBox
           Left = 0
           Top = 0
@@ -405,6 +409,10 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Appearance'
         ImageIndex = 24
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox20: TGroupBox
           Left = 0
           Top = 0
@@ -506,6 +514,10 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Dock'
         ImageIndex = 5
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox8: TGroupBox
           Left = 0
           Top = 0
@@ -561,6 +573,10 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Files (extensions)'
         ImageIndex = 21
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox18: TGroupBox
           Left = 0
           Top = 0
@@ -587,6 +603,10 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Display'
         ImageIndex = 21
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object gbRightEdge: TGroupBox
           Left = 0
           Top = 0
@@ -890,6 +910,10 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Advanced'
         ImageIndex = 22
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label23: TLabel
           Left = 0
           Top = 321
@@ -1173,7 +1197,7 @@ object frmAppOptions: TfrmAppOptions
             Width = 205
             Height = 21
             Style = csDropDownList
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 0
             Items.Strings = (
               'Vertical Line'
@@ -1187,7 +1211,7 @@ object frmAppOptions: TfrmAppOptions
             Width = 205
             Height = 21
             Style = csDropDownList
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 1
             Items.Strings = (
               'Vertical Line'
@@ -1201,6 +1225,10 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Keystrokes'
         ImageIndex = 23
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label20: TLabel
           Left = 3
           Top = 363
@@ -1292,7 +1320,7 @@ object frmAppOptions: TfrmAppOptions
             Height = 21
             BevelInner = bvNone
             BevelOuter = bvNone
-            ItemHeight = 13
+            ItemHeight = 0
             Sorted = True
             TabOrder = 0
             OnExit = cbCommandsExit
@@ -2741,6 +2769,10 @@ object frmAppOptions: TfrmAppOptions
               Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
               object tbsIPLocal: TTabSheet
                 Caption = 'Local'
+                ExplicitLeft = 0
+                ExplicitTop = 0
+                ExplicitWidth = 0
+                ExplicitHeight = 0
                 object Label2: TLabel
                   Left = 5
                   Top = 3

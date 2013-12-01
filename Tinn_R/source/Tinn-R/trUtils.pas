@@ -73,6 +73,7 @@ type
   function InvertString(sStr: string): string;
   function IsConnected: boolean;
   function IsGuiRunning(var hRgui: HWND; var sCaption: string; var iRecognitionCaption, iRecognitionType: integer): Boolean;
+  function IsValidNumber_RVersion(s: string): boolean;
   function OpenCmdLine(const CmdLine: string; wWindowState: Word): Boolean;
   function OpenUrl(const sURL: string): Boolean;
   function OpenUrlByIEShell(const sURL: string): Boolean;
@@ -1385,6 +1386,20 @@ begin
 
   Result:= InternetGetConnectedState(@dwConnectionTypes,
                                      0);
+end;
+
+function IsValidNumber_RVersion(s: string): boolean;
+var
+  i: integer;
+
+begin
+  i:= 1;
+
+  while (i <= length(s)) and
+        (s[i] in ['0'..'9',
+                  '.']) do inc(i);
+
+  result:= i > length(s);
 end;
 
 end.

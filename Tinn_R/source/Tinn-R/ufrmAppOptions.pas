@@ -954,9 +954,12 @@ begin
   if (rdgRArchitecture.ItemIndex = 1) then bRArchitecture64:= True
                                       else bRArchitecture64:= False;
 
+  // Rterm
   SetPathRTerm;
-  SetPathRgui;
   edPathRTerm.Text:= sPathRterm;
+
+  // Rgui
+  SetPathRgui;
   edPathRgui.Text := sPathRgui;
 end;
 
