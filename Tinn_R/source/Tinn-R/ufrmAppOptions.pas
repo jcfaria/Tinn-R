@@ -406,6 +406,7 @@ type
     WindowFrame1: TMenuItem;
     WindowText1: TMenuItem;
     Label25: TLabel;
+    Label26: TLabel;
 
     procedure bbtConPathDeplateClick(Sender: TObject);
     procedure bbtConPathTxt2tagsClick(Sender: TObject);
