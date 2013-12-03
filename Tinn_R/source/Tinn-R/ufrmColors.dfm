@@ -281,7 +281,7 @@ object frmColors: TfrmColors
         OnMouseUp = shActiveLineMouseUp
         Caption = 'Active line (choice)'
       end
-      object cbHighlighted: TCheckBox
+      object cbActiveLineBG: TCheckBox
         Left = 6
         Top = 22
         Width = 15
@@ -293,7 +293,7 @@ object frmColors: TfrmColors
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnMouseUp = cbHighlightedMouseUp
+        OnMouseUp = cbActiveLineBGMouseUp
       end
     end
     object GroupBox3: TGroupBox

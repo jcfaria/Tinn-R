@@ -63,7 +63,7 @@ type
     bbtSetBGForAllIdentifiers: TBitBtn;
     bbtSetBGForAllIHighlighters: TBitBtn;
     cbBold: TCheckBox;
-    cbHighlighted: TCheckBox;
+    cbActiveLineBG: TCheckBox;
     cbItalic: TCheckBox;
     cbUnderline: TCheckBox;
     cgColors: TColorGrid;
@@ -93,7 +93,7 @@ type
     procedure bbtOKClick(Sender: TObject);
     procedure bbtSetBGForAllIdentifiersClick(Sender: TObject);
     procedure bbtSetBGForAllIHighlightersClick(Sender: TObject);
-    procedure cbHighlightedMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure cbActiveLineBGMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure cgColorsMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -275,7 +275,7 @@ begin
     UpdateColors(shBGAllHighlighters,
                  clBGForAllHighlighters);
 
-    cbHighlighted.Checked:= bActiveLine;
+    cbActiveLineBG.Checked:= bActiveLine;
     with synSample do begin
       OnPaintTransient:= synPaintTransient;
       if bActiveLine then ActiveLineColor:= TColor(clActiveLine)
@@ -900,12 +900,12 @@ end;
 procedure TfrmColors.UpdateActiveLine;
 begin
   with synSample do
-    if cbHighlighted.Checked then ActiveLineColor:= TColor(shActiveLine.Brush.Color)
-                             else ActiveLineColor:= TColor(clNone);
+    if cbActiveLineBG.Checked then ActiveLineColor:= TColor(shActiveLine.Brush.Color)
+                              else ActiveLineColor:= TColor(clNone);
 end;
 
 
-procedure TfrmColors.cbHighlightedMouseUp(Sender: TObject;
+procedure TfrmColors.cbActiveLineBGMouseUp(Sender: TObject;
                                           Button: TMouseButton;
                                           Shift: TShiftState;
                                           X, Y: Integer);

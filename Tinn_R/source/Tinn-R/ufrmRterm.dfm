@@ -31,7 +31,7 @@ object frmRterm: TfrmRterm
     Top = 0
     Width = 689
     Height = 310
-    ActivePage = tbsLog
+    ActivePage = tbsIO
     Align = alClient
     Anchors = []
     Font.Charset = ANSI_CHARSET

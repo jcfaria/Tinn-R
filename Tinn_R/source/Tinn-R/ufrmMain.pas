@@ -8977,7 +8977,7 @@ begin
         clBrackets            := shBrackets.Brush.Color;
         clBGForAllHighlighters:= shBGAllHighlighters.Brush.Color;
         clBGPreferred         := shBGPreferred.Brush.Color;
-        bActiveLine           := cbHighlighted.Checked;
+        bActiveLine           := cbActiveLineBG.Checked;
       end;
     end
     else begin  // Cancel: will restore a prior backup o all ini syntax files
@@ -11630,8 +11630,10 @@ begin
                         ];
 
     // Appearance
-    ActiveLineColor:= clActiveLine;
-    RightEdge      := 0;
+    if bActiveLine then ActiveLineColor:= clActiveLine
+                   else ActiveLineColor:= clNone;
+
+    RightEdge:= 0;
   end;
 
   // Not all options of the editor are suitable to synLog
@@ -11646,8 +11648,10 @@ begin
                         ];
 
     // Appearance
-    ActiveLineColor:= clActiveLine;
-    RightEdge      := 0;
+    if bActiveLine then ActiveLineColor:= clActiveLine
+                   else ActiveLineColor:= clNone;
+
+    RightEdge:= 0;
   end;
 
   // Not all options of the editor are suitable to synLog2
@@ -11663,8 +11667,10 @@ begin
                           ];
 
       // Appearance
-      ActiveLineColor:= clActiveLine;
-      RightEdge      := 0;
+      if bActiveLine then ActiveLineColor:= clActiveLine
+                     else ActiveLineColor:= clNone;
+
+      RightEdge:= 0;
     end;
 end;
 
