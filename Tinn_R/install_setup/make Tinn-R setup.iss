@@ -1,5 +1,5 @@
 ; Tinn-R Inno (Installer) Setup Script
-; By: José Cláudio Faria (11/2012)
+; By: José Cláudio Faria (11/2013)
 ; Tinn-R:     http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 ; INNO Setup: http://www.innosetup.com
 
@@ -9,13 +9,13 @@ AppPublisher         = Tinn-R Team
 AppPublisherURL      = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppSupportURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppUpdatesURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppVerName           = Tinn-R 3.0.2.4
+AppVerName           = Tinn-R 3.0.2.5
 ChangesAssociations  = true
 Compression          = lzma
 DefaultDirName       = {sd}\Tinn-R
 DefaultGroupName     = Tinn-R
 LicenseFile          = ..\doc\licence_gpl3.txt
-OutputBaseFilename   = Tinn-R_3.0.2.4_setup
+OutputBaseFilename   = Tinn-R_3.0.2.5_setup
 OutputDir            = ..\install_setup\bin
 SolidCompression     = yes
 WizardImageFile      = ..\res\setup.bmp

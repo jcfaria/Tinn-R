@@ -4966,7 +4966,7 @@ begin
   iDelay                := ifTinn.ReadInteger('App', 'iDelay', 100);
   iPandocFrom           := ifTinn.ReadInteger('App', 'iPandocFrom', 4);
   iPandocTo             := ifTinn.ReadInteger('App', 'iPandocTo', 7);
-  iTransparency         := ifTinn.ReadInteger('App', 'iTransparency', 10);
+  iTransparency         := ifTinn.ReadInteger('App', 'iTransparency', 0);
   iViewStyleRExplorer   := ifTinn.ReadInteger('App', 'iViewStyleRExplorer', 1);
   sShortcutsInUse       := trim(ifTinn.ReadString('App', 'sShortcutsInUse', sPathData + '\Shortcuts.xml'));
 
