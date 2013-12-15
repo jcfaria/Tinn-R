@@ -2,7 +2,7 @@
 # What  : Necessary packages and details of installation to Tinn-R project #
 # To    : Delphi 7 and CodeGear 2007                                       #
 # Who   : Jose Claudio Faria                                               #
-# When  : 2013/10/15                                                       #
+# When  : 2013/12/15                                                       #
 # Doubts: joseclaudio.faria@gmail.com                                      #
 #==========================================================================#
 
@@ -42,11 +42,25 @@
     - Instructions: compile and install
 
 08. SynEdit
-    - This version is adapted to Tinn-R project
-    - Add the source subdirectory (e.g., C:\Users\jcfaria\Documents\RAD
-      Studio\components\SynEdit\Source) to the IDE's library path
-    - SynEdit_R2007.dpk: compile
-    - SynEdit_D2007.dpk: compile and install
+    - It is the main component of Tinn-R project
+    - From Tinn-R version 3.X.X.X.X we have been using the latest SynEdit UNICODE available at: http://sourceforge.net/projects/synedit/
+    - All necessary adaptations in the SynEdit component to Tinn-R project are in two folder:
+      - ..\source\SynEdit_adapted
+      - ..\source\SynEdit_highlighters
+      - We made compilation directives in Tinn_R.dpr file as below:
+        - SynEditPrintPreview in '..\SynEdit_adapted\SynEditPrintPreview.pas',
+        - SynEditStrConst in '..\SynEdit_adapted\SynEditStrConst.pas',
+        - SynCompletionProposal in '..\SynEdit_adapted\SynCompletionProposal.pas',
+        - SynHighlighterAll in '..\SynEdit_highlighters\SynHighlighterAll.pas',
+        - SynHighlighterR in '..\SynEdit_highlighters\SynHighlighterR.pas',
+        - SynHighlighterR_term in '..\SynEdit_highlighters\SynHighlighterR_term.pas',
+        - SynHighlighterTeX in '..\SynEdit_highlighters\SynHighlighterTeX.pas',
+        - SynHighlighterText in '..\SynEdit_highlighters\SynHighlighterText.pas',
+        - SynHighlighterText_term in '..\SynEdit_highlighters\SynHighlighterText_term.pas',
+        - SynHighlighterURI in '..\SynEdit_highlighters\SynHighlighterURI.pas',
+    - See in the doc how to install te component in Delphi
+    - It is a big suite of components and resources and
+      it is not released with the sources of the Tinn-R project.
 
 09. TB2k
     - tb2k_d2007.dpk: compile
