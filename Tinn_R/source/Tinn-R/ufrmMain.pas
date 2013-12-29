@@ -946,8 +946,8 @@ type
     menToolsDatabase: TMenuItem;
     menToolsDatabaseComments: TMenuItem;
     menToolsDatabaseCompletion: TMenuItem;
-    menToolsDatabaseRcard: TMenuItem;
-    menToolsDatabaseRmirrors: TMenuItem;
+    menToolsDatabaseCardR: TMenuItem;
+    menToolsDatabaseMirrorsR: TMenuItem;
     menToolsDatabaseShortcuts: TMenuItem;
     menToolsDifferences: TMenuItem;
     menToolsMacro: TMenuItem;
@@ -1307,7 +1307,6 @@ type
     N70: TMenuItem;
     N71: TMenuItem;
     N72: TMenuItem;
-    N73: TMenuItem;
     N74: TMenuItem;
     N75: TMenuItem;
     N76: TMenuItem;
@@ -1903,6 +1902,21 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
+    menHelUserList: TMenuItem;
+    N179: TMenuItem;
+    menWebRGuiTinnRUserList: TMenuItem;
+    N73: TMenuItem;
+    oolsshowhide1: TMenuItem;
+    Rtermshowhide1: TMenuItem;
+    N187: TMenuItem;
+    oolsmaximize1: TMenuItem;
+    oolsdivide1: TMenuItem;
+    oolsminimize1: TMenuItem;
+    Rtermmaximize1: TMenuItem;
+    Rtermdivide1: TMenuItem;
+    Rtermminimize1: TMenuItem;
+    N188: TMenuItem;
+    OrganizescreenTinnRRgui1: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2306,8 +2320,8 @@ type
     procedure menToolsConversionPandocClick(Sender: TObject);
     procedure menToolsDatabaseCommentsClick(Sender: TObject);
     procedure menToolsDatabaseCompletionClick(Sender: TObject);
-    procedure menToolsDatabaseRcardClick(Sender: TObject);
-    procedure menToolsDatabaseRmirrorsClick(Sender: TObject);
+    procedure menToolsDatabaseCardRClick(Sender: TObject);
+    procedure menToolsDatabaseMirrorsRClick(Sender: TObject);
     procedure menToolsDatabaseShortcutsClick(Sender: TObject);
     procedure menToolsUtilsActionlistToClipboardClick(Sender: TObject);
     procedure menToolsUtilsActionlistToDatasetClick(Sender: TObject);
@@ -2427,6 +2441,8 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
+    procedure menWebRGuiTinnRUserListClick(Sender: TObject);
+    procedure menHelUserListClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -2958,7 +2974,7 @@ begin
   sCurrentVersion_Completion:= '3.00.01.01';
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
-  sCurrentVersion_Rmirrors  := '3.00.01.01';
+  sCurrentVersion_Rmirrors  := '3.00.02.06';
   sCurrentVersion_Shortcuts := '3.00.02.01';
 
   // Cache
@@ -6502,6 +6518,11 @@ begin
   end;
 end;
 
+procedure TfrmTinnMain.menHelUserListClick(Sender: TObject);
+begin
+  OpenUrl('http://groups.google.com/forum/?fromgroups#!forum/tinn-r');
+end;
+
 procedure TfrmTinnMain.actTobSearchVisibleExecute(Sender: TObject);
 begin
   tobSearch.Visible             := not(tobSearch.Visible);
@@ -8374,7 +8395,7 @@ end;
 procedure TfrmTinnMain.actRmirrorsEditExecute(Sender: TObject);
 begin
   sRmirrorsBookMark:= modDados.cdRmirrors.Bookmark;
-  menToolsDatabaseRmirrorsClick(nil);
+  menToolsDatabaseMirrorsRClick(nil);
 end;
 
 procedure TfrmTinnMain.actRmirrorsHelpExecute(Sender: TObject);
@@ -12333,6 +12354,11 @@ begin
   OpenUrl('sourceforge.net/projects/tinn-r');
 end;
 
+procedure TfrmTinnMain.menWebRGuiTinnRUserListClick(Sender: TObject);
+begin
+  OpenUrl('http://groups.google.com/forum/?fromgroups#!forum/tinn-r');
+end;
+
 procedure TfrmTinnMain.menWebRguiTinnRSciViewsClick(Sender: TObject);
 begin
   OpenUrl('www.sciviews.org/Tinn-R');
@@ -14017,7 +14043,7 @@ end;
 procedure TfrmTinnMain.actRcardEditExecute(Sender: TObject);
 begin
   sRcardBookMark:= modDados.cdRcard.Bookmark;
-  menToolsDatabaseRcardClick(nil);
+  menToolsDatabaseCardRClick(nil);
 end;
 
 procedure TfrmTinnMain.actRcardCopyDescritionExecute(Sender: TObject);
@@ -17364,7 +17390,7 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.menToolsDatabaseRcardClick(Sender: TObject);
+procedure TfrmTinnMain.menToolsDatabaseCardRClick(Sender: TObject);
 var
   pTmp: pointer;
   
@@ -17388,7 +17414,7 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.menToolsDatabaseRmirrorsClick(Sender: TObject);
+procedure TfrmTinnMain.menToolsDatabaseMirrorsRClick(Sender: TObject);
 var
   pTmp: pointer;
 

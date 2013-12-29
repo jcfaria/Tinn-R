@@ -39,7 +39,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 320
     Height = 565
-    ActivePage = tbsDatabase
+    ActivePage = tbsR
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -4028,7 +4028,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsRMirrors
+        ActivePage = tbsShortcuts
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4591,404 +4591,6 @@ object frmTools: TfrmTools
             end
           end
         end
-        object tbsRCard: TTabSheet
-          Caption = 'R card'
-          object splRCard: TSplitter
-            Left = 0
-            Top = 113
-            Width = 304
-            Height = 4
-            Cursor = crVSplit
-            Align = alTop
-            Beveled = True
-            Color = clActiveCaption
-            ParentColor = False
-            ExplicitTop = 157
-            ExplicitWidth = 345
-          end
-          object panRCard: TPanel
-            Left = 0
-            Top = 26
-            Width = 304
-            Height = 87
-            Align = alTop
-            BevelOuter = bvNone
-            Constraints.MinHeight = 15
-            TabOrder = 0
-            object lbRcard: TListBox
-              Left = 0
-              Top = 0
-              Width = 304
-              Height = 87
-              AutoComplete = False
-              Align = alClient
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              BorderStyle = bsNone
-              Ctl3D = False
-              ItemHeight = 13
-              ParentCtl3D = False
-              PopupMenu = frmTinnMain.pmenFontGeneric
-              TabOrder = 0
-              OnClick = lbRcardClick
-            end
-          end
-          object panRCard4: TPanel
-            Left = 0
-            Top = 117
-            Width = 304
-            Height = 392
-            Align = alClient
-            BevelOuter = bvNone
-            TabOrder = 1
-            object dbRCardMemo: TDBMemo
-              Left = 0
-              Top = 312
-              Width = 304
-              Height = 80
-              HelpType = htKeyword
-              Align = alBottom
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              Constraints.MaxHeight = 80
-              Ctl3D = False
-              DataField = 'Description'
-              DataSource = modDados.dsRcard
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clBlack
-              Font.Height = -11
-              Font.Name = 'MS Sans Serif'
-              Font.Style = []
-              ParentCtl3D = False
-              ParentFont = False
-              ParentShowHint = False
-              PopupMenu = frmTinnMain.pmenRCardMemo
-              ReadOnly = True
-              ScrollBars = ssVertical
-              ShowHint = False
-              TabOrder = 0
-              WantReturns = False
-            end
-            object dbgRCard: TDBGrid
-              Left = 0
-              Top = 18
-              Width = 304
-              Height = 294
-              Align = alClient
-              BorderStyle = bsNone
-              DataSource = modDados.dsRcard
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'MS Sans Serif'
-              Font.Style = []
-              Options = [dgIndicator, dgConfirmDelete, dgCancelOnExit]
-              ParentFont = False
-              PopupMenu = frmTinnMain.pmenRcard
-              TabOrder = 1
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = [fsBold]
-              OnDblClick = dbgRCardDblClick
-              OnKeyDown = dbgRCardKeyDown
-              Columns = <
-                item
-                  Expanded = False
-                  FieldName = 'Function'
-                  Width = 390
-                  Visible = True
-                end>
-            end
-            object panRCard3: TPanel
-              Left = 0
-              Top = 0
-              Width = 304
-              Height = 18
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 2
-              object DBNavigator1: TDBNavigator
-                Left = 0
-                Top = 0
-                Width = 304
-                Height = 18
-                DataSource = modDados.dsRcard
-                VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
-                Align = alClient
-                TabOrder = 0
-              end
-            end
-          end
-          object panRCard1: TPanel
-            Left = 0
-            Top = 0
-            Width = 304
-            Height = 26
-            Align = alTop
-            BevelOuter = bvNone
-            TabOrder = 2
-            object TBDRcard: TTBDock
-              Left = 0
-              Top = 0
-              Width = 304
-              Height = 26
-              BackgroundOnToolbars = False
-              object TBRcard: TTBToolbar
-                Left = 0
-                Top = 0
-                BorderStyle = bsNone
-                Caption = 'TBProject'
-                ChevronMoveItems = False
-                DockMode = dmCannotFloatOrChangeDocks
-                DockPos = 0
-                Images = frmTinnMain.imlTinnR
-                TabOrder = 0
-                object TBSeparatorItemRCard18: TTBSeparatorItem
-                end
-                object TBItemRCard23: TTBItem
-                  Action = frmTinnMain.actRCardHelp
-                end
-                object TBItemRCard24: TTBItem
-                  Action = frmTinnMain.actRCardExample
-                end
-                object TBSeparatorItemRCard20: TTBSeparatorItem
-                end
-                object TBSubmenuItemRCard2: TTBSubmenuItem
-                  Caption = 'Copy'
-                  Hint = 'R card: copy'
-                  ImageIndex = 50
-                  object TBItemRCard25: TTBItem
-                    Action = frmTinnMain.actRCardCopyFunction
-                  end
-                  object TBItemRCard27: TTBItem
-                    Action = frmTinnMain.actRCardCopyDescrition
-                  end
-                end
-                object TBSeparatorItemRCard21: TTBSeparatorItem
-                end
-                object TBItemRCard26: TTBItem
-                  Action = frmTinnMain.actRCardEdit
-                end
-                object TBSeparatorItem1: TTBSeparatorItem
-                end
-                object TBItem8: TTBItem
-                  Action = frmTinnMain.actRcardInsert
-                end
-              end
-            end
-          end
-        end
-        object tbsRMirrors: TTabSheet
-          Caption = 'R mirrors'
-          ImageIndex = 4
-          object Splitter1: TSplitter
-            Left = 0
-            Top = 113
-            Width = 304
-            Height = 4
-            Cursor = crVSplit
-            Align = alTop
-            Beveled = True
-            Color = clActiveCaption
-            ParentColor = False
-          end
-          object Panel16: TPanel
-            Left = 0
-            Top = 0
-            Width = 304
-            Height = 26
-            Align = alTop
-            BevelOuter = bvNone
-            TabOrder = 0
-            object TBDock2: TTBDock
-              Left = 0
-              Top = 0
-              Width = 304
-              Height = 26
-              BackgroundOnToolbars = False
-              object TBToolbar4: TTBToolbar
-                Left = 0
-                Top = 0
-                BorderStyle = bsNone
-                Caption = 'TBProject'
-                ChevronMoveItems = False
-                DockMode = dmCannotFloatOrChangeDocks
-                DockPos = 0
-                Images = frmTinnMain.imlTinnR
-                TabOrder = 0
-                object TBSeparatorItem10: TTBSeparatorItem
-                end
-                object TBItem26: TTBItem
-                  Action = frmTinnMain.actRmirrorsHelp
-                end
-                object TBSeparatorItem16: TTBSeparatorItem
-                end
-                object TBItem27: TTBItem
-                  Action = frmTinnMain.actRmirrorsUpdate
-                end
-                object TBSeparatorItem11: TTBSeparatorItem
-                end
-                object TBSubmenuItem2: TTBSubmenuItem
-                  Caption = 'Copy'
-                  Hint = 'Mirrors: copy'
-                  ImageIndex = 50
-                  object TBItem29: TTBItem
-                    Action = frmTinnMain.actRmirrorsCopyHost
-                  end
-                  object TBItem30: TTBItem
-                    Action = frmTinnMain.actRmirrorsCopyURL
-                  end
-                end
-                object TBSeparatorItem12: TTBSeparatorItem
-                end
-                object TBItem31: TTBItem
-                  Action = frmTinnMain.actRmirrorsEdit
-                end
-                object TBSeparatorItem13: TTBSeparatorItem
-                end
-                object TBItem32: TTBItem
-                  Action = frmTinnMain.actRmirrorsSetRepos
-                end
-              end
-            end
-          end
-          object panCountries: TPanel
-            Left = 0
-            Top = 26
-            Width = 304
-            Height = 87
-            Align = alTop
-            BevelOuter = bvNone
-            Constraints.MinHeight = 15
-            TabOrder = 1
-            object lbCountries: TListBox
-              Left = 0
-              Top = 0
-              Width = 304
-              Height = 87
-              AutoComplete = False
-              Align = alClient
-              BevelInner = bvNone
-              BevelOuter = bvNone
-              BorderStyle = bsNone
-              Ctl3D = False
-              ItemHeight = 13
-              ParentCtl3D = False
-              PopupMenu = frmTinnMain.pmenFontGeneric
-              TabOrder = 0
-              OnClick = lbCountriesClick
-            end
-          end
-          object Panel18: TPanel
-            Left = 0
-            Top = 117
-            Width = 304
-            Height = 332
-            Align = alClient
-            BevelOuter = bvNone
-            TabOrder = 2
-            object dbgRmirrors: TDBGrid
-              Left = 0
-              Top = 18
-              Width = 304
-              Height = 314
-              Align = alClient
-              BorderStyle = bsNone
-              DataSource = modDados.dsRmirrors
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'MS Sans Serif'
-              Font.Style = []
-              Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-              ParentFont = False
-              PopupMenu = frmTinnMain.pmenCompletion
-              TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = [fsBold]
-              Columns = <
-                item
-                  Expanded = False
-                  FieldName = 'Name'
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'City'
-                  Width = 64
-                  Visible = True
-                end>
-            end
-            object Panel19: TPanel
-              Left = 0
-              Top = 0
-              Width = 304
-              Height = 18
-              Align = alTop
-              BevelOuter = bvNone
-              TabOrder = 1
-              object DBNavigator5: TDBNavigator
-                Left = 0
-                Top = 0
-                Width = 304
-                Height = 18
-                DataSource = modDados.dsRmirrors
-                VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
-                Align = alClient
-                TabOrder = 0
-              end
-            end
-          end
-          object Panel20: TPanel
-            Left = 0
-            Top = 449
-            Width = 304
-            Height = 60
-            Align = alBottom
-            TabOrder = 3
-            object dbeRmirrorsURL: TDBEdit
-              Left = 1
-              Top = 20
-              Width = 302
-              Height = 19
-              Align = alTop
-              DataField = 'URL'
-              DataSource = modDados.dsRmirrors
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clTeal
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              TabOrder = 0
-            end
-            object dbeRmirrorsCode: TDBEdit
-              Left = 1
-              Top = 39
-              Width = 302
-              Height = 19
-              Align = alTop
-              DataField = 'Code'
-              DataSource = modDados.dsRmirrors
-              TabOrder = 1
-            end
-            object dbeRmirrorsHost: TDBEdit
-              Left = 1
-              Top = 1
-              Width = 302
-              Height = 19
-              Align = alTop
-              DataField = 'Host'
-              DataSource = modDados.dsRmirrors
-              TabOrder = 2
-            end
-          end
-        end
       end
     end
     object tbsR: TTabSheet
@@ -4999,7 +4601,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsRExplorer
+        ActivePage = tbsRMirrors
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -5481,6 +5083,404 @@ object frmTools: TfrmTools
             OnKeyUp = lvRexplorerKeyUp
             OnSelectItem = lvRexplorerSelectItem
             OnStartDrag = lvRexplorerStartDrag
+          end
+        end
+        object tbsRCard: TTabSheet
+          Caption = 'Card'
+          object splRCard: TSplitter
+            Left = 0
+            Top = 113
+            Width = 304
+            Height = 4
+            Cursor = crVSplit
+            Align = alTop
+            Beveled = True
+            Color = clActiveCaption
+            ParentColor = False
+            ExplicitTop = 157
+            ExplicitWidth = 345
+          end
+          object panRCard: TPanel
+            Left = 0
+            Top = 26
+            Width = 304
+            Height = 87
+            Align = alTop
+            BevelOuter = bvNone
+            Constraints.MinHeight = 15
+            TabOrder = 0
+            object lbRcard: TListBox
+              Left = 0
+              Top = 0
+              Width = 304
+              Height = 87
+              AutoComplete = False
+              Align = alClient
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Ctl3D = False
+              ItemHeight = 13
+              ParentCtl3D = False
+              PopupMenu = frmTinnMain.pmenFontGeneric
+              TabOrder = 0
+              OnClick = lbRcardClick
+            end
+          end
+          object panRCard4: TPanel
+            Left = 0
+            Top = 117
+            Width = 304
+            Height = 392
+            Align = alClient
+            BevelOuter = bvNone
+            TabOrder = 1
+            object dbRCardMemo: TDBMemo
+              Left = 0
+              Top = 312
+              Width = 304
+              Height = 80
+              HelpType = htKeyword
+              Align = alBottom
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              Constraints.MaxHeight = 80
+              Ctl3D = False
+              DataField = 'Description'
+              DataSource = modDados.dsRcard
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentCtl3D = False
+              ParentFont = False
+              ParentShowHint = False
+              PopupMenu = frmTinnMain.pmenRCardMemo
+              ReadOnly = True
+              ScrollBars = ssVertical
+              ShowHint = False
+              TabOrder = 0
+              WantReturns = False
+            end
+            object dbgRCard: TDBGrid
+              Left = 0
+              Top = 18
+              Width = 304
+              Height = 294
+              Align = alClient
+              BorderStyle = bsNone
+              DataSource = modDados.dsRcard
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              Options = [dgIndicator, dgConfirmDelete, dgCancelOnExit]
+              ParentFont = False
+              PopupMenu = frmTinnMain.pmenRcard
+              TabOrder = 1
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'MS Sans Serif'
+              TitleFont.Style = [fsBold]
+              OnDblClick = dbgRCardDblClick
+              OnKeyDown = dbgRCardKeyDown
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'Function'
+                  Width = 390
+                  Visible = True
+                end>
+            end
+            object panRCard3: TPanel
+              Left = 0
+              Top = 0
+              Width = 304
+              Height = 18
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 2
+              object DBNavigator1: TDBNavigator
+                Left = 0
+                Top = 0
+                Width = 304
+                Height = 18
+                DataSource = modDados.dsRcard
+                VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+                Align = alClient
+                TabOrder = 0
+              end
+            end
+          end
+          object panRCard1: TPanel
+            Left = 0
+            Top = 0
+            Width = 304
+            Height = 26
+            Align = alTop
+            BevelOuter = bvNone
+            TabOrder = 2
+            object TBDRcard: TTBDock
+              Left = 0
+              Top = 0
+              Width = 304
+              Height = 26
+              BackgroundOnToolbars = False
+              object TBRcard: TTBToolbar
+                Left = 0
+                Top = 0
+                BorderStyle = bsNone
+                Caption = 'TBProject'
+                ChevronMoveItems = False
+                DockMode = dmCannotFloatOrChangeDocks
+                DockPos = 0
+                Images = frmTinnMain.imlTinnR
+                TabOrder = 0
+                object TBSeparatorItemRCard18: TTBSeparatorItem
+                end
+                object TBItemRCard23: TTBItem
+                  Action = frmTinnMain.actRCardHelp
+                end
+                object TBItemRCard24: TTBItem
+                  Action = frmTinnMain.actRCardExample
+                end
+                object TBSeparatorItemRCard20: TTBSeparatorItem
+                end
+                object TBSubmenuItemRCard2: TTBSubmenuItem
+                  Caption = 'Copy'
+                  Hint = 'R card: copy'
+                  ImageIndex = 50
+                  object TBItemRCard25: TTBItem
+                    Action = frmTinnMain.actRCardCopyFunction
+                  end
+                  object TBItemRCard27: TTBItem
+                    Action = frmTinnMain.actRCardCopyDescrition
+                  end
+                end
+                object TBSeparatorItemRCard21: TTBSeparatorItem
+                end
+                object TBItemRCard26: TTBItem
+                  Action = frmTinnMain.actRCardEdit
+                end
+                object TBSeparatorItem1: TTBSeparatorItem
+                end
+                object TBItem8: TTBItem
+                  Action = frmTinnMain.actRcardInsert
+                end
+              end
+            end
+          end
+        end
+        object tbsRMirrors: TTabSheet
+          Caption = 'Mirrors'
+          ImageIndex = 4
+          object Splitter1: TSplitter
+            Left = 0
+            Top = 113
+            Width = 304
+            Height = 4
+            Cursor = crVSplit
+            Align = alTop
+            Beveled = True
+            Color = clActiveCaption
+            ParentColor = False
+          end
+          object Panel16: TPanel
+            Left = 0
+            Top = 0
+            Width = 304
+            Height = 26
+            Align = alTop
+            BevelOuter = bvNone
+            TabOrder = 0
+            object TBDock2: TTBDock
+              Left = 0
+              Top = 0
+              Width = 304
+              Height = 26
+              BackgroundOnToolbars = False
+              object TBToolbar4: TTBToolbar
+                Left = 0
+                Top = 0
+                BorderStyle = bsNone
+                Caption = 'TBProject'
+                ChevronMoveItems = False
+                DockMode = dmCannotFloatOrChangeDocks
+                DockPos = 0
+                Images = frmTinnMain.imlTinnR
+                TabOrder = 0
+                object TBSeparatorItem10: TTBSeparatorItem
+                end
+                object TBItem26: TTBItem
+                  Action = frmTinnMain.actRmirrorsHelp
+                end
+                object TBSeparatorItem16: TTBSeparatorItem
+                end
+                object TBItem27: TTBItem
+                  Action = frmTinnMain.actRmirrorsUpdate
+                end
+                object TBSeparatorItem11: TTBSeparatorItem
+                end
+                object TBSubmenuItem2: TTBSubmenuItem
+                  Caption = 'Copy'
+                  Hint = 'Mirrors: copy'
+                  ImageIndex = 50
+                  object TBItem29: TTBItem
+                    Action = frmTinnMain.actRmirrorsCopyHost
+                  end
+                  object TBItem30: TTBItem
+                    Action = frmTinnMain.actRmirrorsCopyURL
+                  end
+                end
+                object TBSeparatorItem12: TTBSeparatorItem
+                end
+                object TBItem31: TTBItem
+                  Action = frmTinnMain.actRmirrorsEdit
+                end
+                object TBSeparatorItem13: TTBSeparatorItem
+                end
+                object TBItem32: TTBItem
+                  Action = frmTinnMain.actRmirrorsSetRepos
+                end
+              end
+            end
+          end
+          object panCountries: TPanel
+            Left = 0
+            Top = 26
+            Width = 304
+            Height = 87
+            Align = alTop
+            BevelOuter = bvNone
+            Constraints.MinHeight = 15
+            TabOrder = 1
+            object lbCountries: TListBox
+              Left = 0
+              Top = 0
+              Width = 304
+              Height = 87
+              AutoComplete = False
+              Align = alClient
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Ctl3D = False
+              ItemHeight = 13
+              ParentCtl3D = False
+              PopupMenu = frmTinnMain.pmenFontGeneric
+              TabOrder = 0
+              OnClick = lbCountriesClick
+            end
+          end
+          object Panel18: TPanel
+            Left = 0
+            Top = 117
+            Width = 304
+            Height = 332
+            Align = alClient
+            BevelOuter = bvNone
+            TabOrder = 2
+            object dbgRmirrors: TDBGrid
+              Left = 0
+              Top = 18
+              Width = 304
+              Height = 314
+              Align = alClient
+              BorderStyle = bsNone
+              DataSource = modDados.dsRmirrors
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              ParentFont = False
+              PopupMenu = frmTinnMain.pmenCompletion
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'MS Sans Serif'
+              TitleFont.Style = [fsBold]
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'Name'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'City'
+                  Width = 64
+                  Visible = True
+                end>
+            end
+            object Panel19: TPanel
+              Left = 0
+              Top = 0
+              Width = 304
+              Height = 18
+              Align = alTop
+              BevelOuter = bvNone
+              TabOrder = 1
+              object DBNavigator5: TDBNavigator
+                Left = 0
+                Top = 0
+                Width = 304
+                Height = 18
+                DataSource = modDados.dsRmirrors
+                VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+                Align = alClient
+                TabOrder = 0
+              end
+            end
+          end
+          object Panel20: TPanel
+            Left = 0
+            Top = 449
+            Width = 304
+            Height = 60
+            Align = alBottom
+            TabOrder = 3
+            object dbeRmirrorsURL: TDBEdit
+              Left = 1
+              Top = 20
+              Width = 302
+              Height = 19
+              Align = alTop
+              DataField = 'URL'
+              DataSource = modDados.dsRmirrors
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clTeal
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+            end
+            object dbeRmirrorsCode: TDBEdit
+              Left = 1
+              Top = 39
+              Width = 302
+              Height = 19
+              Align = alTop
+              DataField = 'Code'
+              DataSource = modDados.dsRmirrors
+              TabOrder = 1
+            end
+            object dbeRmirrorsHost: TDBEdit
+              Left = 1
+              Top = 1
+              Width = 302
+              Height = 19
+              Align = alTop
+              DataField = 'Host'
+              DataSource = modDados.dsRmirrors
+              TabOrder = 2
+            end
           end
         end
       end

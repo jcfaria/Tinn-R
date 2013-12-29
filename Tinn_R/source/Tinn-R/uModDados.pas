@@ -931,7 +931,7 @@ function TmodDados.Rmirrors_Update(sFile: string): boolean;
 
       with FieldDefs.AddFieldDef do begin
         DataType:= ftString;
-        Size    := 60;
+        Size    := 80;
         Name    := 'Host';
       end;
 

@@ -1702,7 +1702,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 144
     Bitmap = {
-      494C01010A009805980510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A00A805A80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2572,7 +2572,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 112
     Bitmap = {
-      494C010120019805980510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012001A805A80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009004000001002000000000000090
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -15116,7 +15116,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 176
     Bitmap = {
-      494C010105009805980510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010500A805A80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -15616,7 +15616,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 208
     Bitmap = {
-      494C010104009805980510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400A805A80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -17397,16 +17397,16 @@ object frmTinnMain: TfrmTinnMain
           ImageIndex = 139
           OnClick = menToolsDatabaseCommentsClick
         end
-        object menToolsDatabaseRcard: TMenuItem
-          Caption = 'R card'
+        object menToolsDatabaseCardR: TMenuItem
+          Caption = 'Card (R)'
           GroupIndex = 1
-          OnClick = menToolsDatabaseRcardClick
+          OnClick = menToolsDatabaseCardRClick
         end
-        object menToolsDatabaseRmirrors: TMenuItem
-          Caption = 'R mirrors'
+        object menToolsDatabaseMirrorsR: TMenuItem
+          Caption = 'Mirrors (R)'
           GroupIndex = 1
           ImageIndex = 162
-          OnClick = menToolsDatabaseRmirrorsClick
+          OnClick = menToolsDatabaseMirrorsRClick
         end
       end
       object N2: TMenuItem
@@ -18180,12 +18180,6 @@ object frmTinnMain: TfrmTinnMain
             object Commentsshowhide1: TMenuItem
               Action = actDataCommentsVisible
             end
-            object Card1: TMenuItem
-              Action = actDataRcardVisible
-            end
-            object Databaseshowhide2: TMenuItem
-              Action = actDataRmirrorsVisible
-            end
           end
           object menViewToolsResR: TMenuItem
             Caption = 'R'
@@ -18197,6 +18191,12 @@ object frmTinnMain: TfrmTinnMain
             end
             object Explorer1: TMenuItem
               Action = actRExplorerVisible
+            end
+            object Card1: TMenuItem
+              Action = actDataRcardVisible
+            end
+            object Databaseshowhide2: TMenuItem
+              Action = actDataRmirrorsVisible
             end
           end
         end
@@ -18327,6 +18327,42 @@ object frmTinnMain: TfrmTinnMain
         end
       end
       object N28: TMenuItem
+        Caption = '-'
+      end
+      object OrganizescreenTinnRRgui1: TMenuItem
+        Action = actOrganizeScreen
+      end
+      object N188: TMenuItem
+        Caption = '-'
+      end
+      object oolsshowhide1: TMenuItem
+        Action = actToolsVisible
+      end
+      object oolsmaximize1: TMenuItem
+        Action = actToolsMaximize
+      end
+      object oolsdivide1: TMenuItem
+        Action = actToolsDivide
+      end
+      object oolsminimize1: TMenuItem
+        Action = actToolsMinimize
+      end
+      object N187: TMenuItem
+        Caption = '-'
+      end
+      object Rtermshowhide1: TMenuItem
+        Action = actRtermVisible
+      end
+      object Rtermmaximize1: TMenuItem
+        Action = actRtermMaximize
+      end
+      object Rtermdivide1: TMenuItem
+        Action = actRtermDivide
+      end
+      object Rtermminimize1: TMenuItem
+        Action = actRtermMinimize
+      end
+      object N73: TMenuItem
         Caption = '-'
       end
       object Wordwrap1: TMenuItem
@@ -18586,6 +18622,14 @@ object frmTinnMain: TfrmTinnMain
             Caption = 'SciViews (old web page)'
             OnClick = menWebRGuiTinnRSciViewsClick
           end
+          object N179: TMenuItem
+            Caption = '-'
+          end
+          object menWebRGuiTinnRUserList: TMenuItem
+            Caption = 'User list (discussion group)'
+            ImageIndex = 64
+            OnClick = menWebRGuiTinnRUserListClick
+          end
         end
         object VimRplugin1: TMenuItem
           Caption = 'Vim-R-plugin'
@@ -18668,23 +18712,13 @@ object frmTinnMain: TfrmTinnMain
         ImageIndex = 157
         OnClick = menHelUserGuideClick
       end
-      object menHelCitation: TMenuItem
-        Caption = 'Citation (put on clipboard)'
+      object menHelUserList: TMenuItem
+        Caption = 'User list (discussion group)'
         GroupIndex = 1
-        ImageIndex = 156
-        OnClick = menHelCitationClick
+        ImageIndex = 64
+        OnClick = menHelUserListClick
       end
       object N23: TMenuItem
-        Caption = '-'
-        GroupIndex = 1
-      end
-      object menHelIniFiles: TMenuItem
-        Caption = 'Ini files (path information)'
-        GroupIndex = 1
-        ImageIndex = 211
-        OnClick = menHelIniFilesClick
-      end
-      object N73: TMenuItem
         Caption = '-'
         GroupIndex = 1
       end
@@ -18728,6 +18762,18 @@ object frmTinnMain: TfrmTinnMain
       object N68: TMenuItem
         Caption = '-'
         GroupIndex = 1
+      end
+      object menHelIniFiles: TMenuItem
+        Caption = 'Ini files (path information)'
+        GroupIndex = 1
+        ImageIndex = 211
+        OnClick = menHelIniFilesClick
+      end
+      object menHelCitation: TMenuItem
+        Caption = 'Citation (put on clipboard)'
+        GroupIndex = 1
+        ImageIndex = 156
+        OnClick = menHelCitationClick
       end
       object menHelAbout: TMenuItem
         Action = actAbout
@@ -19064,7 +19110,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 240
     Bitmap = {
-      494C010104008002800210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104009002900210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
