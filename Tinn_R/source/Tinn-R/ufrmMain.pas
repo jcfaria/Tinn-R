@@ -744,6 +744,7 @@ type
     menHelpStatJournalStatisticalSoftware: TMenuItem;
     menHelpStatStatSoft: TMenuItem;
     menHelUserGuide: TMenuItem;
+    menHelUserList: TMenuItem;
     menInserCompletion: TMenuItem;
     menInsert: TMenuItem;
     menInsertDateTime: TMenuItem;
@@ -944,9 +945,9 @@ type
     menToolsConversionTxt2tagsToLatex: TMenuItem;
     menToolsConversionTxt2tagsToSweave: TMenuItem;
     menToolsDatabase: TMenuItem;
+    menToolsDatabaseCardR: TMenuItem;
     menToolsDatabaseComments: TMenuItem;
     menToolsDatabaseCompletion: TMenuItem;
-    menToolsDatabaseCardR: TMenuItem;
     menToolsDatabaseMirrorsR: TMenuItem;
     menToolsDatabaseShortcuts: TMenuItem;
     menToolsDifferences: TMenuItem;
@@ -1095,6 +1096,7 @@ type
     menWebRGuiTinnRLEC: TMenuItem;
     menWebRguiTinnRSciViews: TMenuItem;
     menWebRguiTinnRSourceForge: TMenuItem;
+    menWebRGuiTinnRUserList: TMenuItem;
     menWebRInformation: TMenuItem;
     menWebRInformationsBioconductor: TMenuItem;
     menWebRInformationsCRAN: TMenuItem;
@@ -1230,6 +1232,7 @@ type
     N176: TMenuItem;
     N177: TMenuItem;
     N178: TMenuItem;
+    N179: TMenuItem;
     N18: TMenuItem;
     N180: TMenuItem;
     N181: TMenuItem;
@@ -1238,6 +1241,9 @@ type
     N184: TMenuItem;
     N185: TMenuItem;
     N186: TMenuItem;
+    N187: TMenuItem;
+    N188: TMenuItem;
+    N189: TMenuItem;
     N19: TMenuItem;
     N2: TMenuItem;
     N20: TMenuItem;
@@ -1307,6 +1313,7 @@ type
     N70: TMenuItem;
     N71: TMenuItem;
     N72: TMenuItem;
+    N73: TMenuItem;
     N74: TMenuItem;
     N75: TMenuItem;
     N76: TMenuItem;
@@ -1336,11 +1343,16 @@ type
     N98: TMenuItem;
     N99: TMenuItem;
     odMain: TOpenDialog;
+    oolsdivide1: TMenuItem;
+    oolsmaximize1: TMenuItem;
+    oolsminimize1: TMenuItem;
+    oolsshowhide1: TMenuItem;
     op1: TMenuItem;
     op2: TMenuItem;
     op3: TMenuItem;
     Openallselectedgroup1: TMenuItem;
     Opennode1: TMenuItem;
+    OrganizescreenTinnRRgui1: TMenuItem;
     PageMaker1: TMenuItem;
     Panel1: TPanel;
     panInvisibleParent: TPanel;
@@ -1655,10 +1667,14 @@ type
     Right1: TMenuItem;
     Right2: TMenuItem;
     Rshowhide1: TMenuItem;
+    Rtermdivide1: TMenuItem;
     RtermIOLinewrapshowhide1: TMenuItem;
     RtermIOshowhide1: TMenuItem;
     RtermLogLinewrapshowhide1: TMenuItem;
     RtermLogLinewrapshowhide2: TMenuItem;
+    Rtermmaximize1: TMenuItem;
+    Rtermminimize1: TMenuItem;
+    Rtermshowhide1: TMenuItem;
     sdMain: TSaveDialog;
     Search1: TMenuItem;
     SGML1: TMenuItem;
@@ -1902,21 +1918,6 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    menHelUserList: TMenuItem;
-    N179: TMenuItem;
-    menWebRGuiTinnRUserList: TMenuItem;
-    N73: TMenuItem;
-    oolsshowhide1: TMenuItem;
-    Rtermshowhide1: TMenuItem;
-    N187: TMenuItem;
-    oolsmaximize1: TMenuItem;
-    oolsdivide1: TMenuItem;
-    oolsminimize1: TMenuItem;
-    Rtermmaximize1: TMenuItem;
-    Rtermdivide1: TMenuItem;
-    Rtermminimize1: TMenuItem;
-    N188: TMenuItem;
-    OrganizescreenTinnRRgui1: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2310,6 +2311,7 @@ type
     procedure menHelpStatJournalStatisticalSoftwareClick(Sender: TObject);
     procedure menHelpStatStatSoftClick(Sender: TObject);
     procedure menHelUserGuideClick(Sender: TObject);
+    procedure menHelUserListClick(Sender: TObject);
     procedure menOptionsShortcutsClick(Sender: TObject);
     procedure menRget_InfoClick(Sender: TObject);
     procedure menRHotKeysClick(Sender: TObject);
@@ -2318,9 +2320,9 @@ type
     procedure menRtermHistoryNextClick(Sender: TObject);
     procedure menRtermHistoryPriorClick(Sender: TObject);
     procedure menToolsConversionPandocClick(Sender: TObject);
+    procedure menToolsDatabaseCardRClick(Sender: TObject);
     procedure menToolsDatabaseCommentsClick(Sender: TObject);
     procedure menToolsDatabaseCompletionClick(Sender: TObject);
-    procedure menToolsDatabaseCardRClick(Sender: TObject);
     procedure menToolsDatabaseMirrorsRClick(Sender: TObject);
     procedure menToolsDatabaseShortcutsClick(Sender: TObject);
     procedure menToolsUtilsActionlistToClipboardClick(Sender: TObject);
@@ -2338,6 +2340,7 @@ type
     procedure menWebRGuiTinnRLECClick(Sender: TObject);
     procedure menWebRguiTinnRSciViewsClick(Sender: TObject);
     procedure menWebRguiTinnRSourceForgeClick(Sender: TObject);
+    procedure menWebRGuiTinnRUserListClick(Sender: TObject);
     procedure menWebRInformationsBioconductorClick(Sender: TObject);
     procedure menWebRInformationsCRANClick(Sender: TObject);
     procedure menWebRInformationsNewsClick(Sender: TObject);
@@ -2441,8 +2444,6 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
-    procedure menWebRGuiTinnRUserListClick(Sender: TObject);
-    procedure menHelUserListClick(Sender: TObject);
 
   private
     { Private declarations }
