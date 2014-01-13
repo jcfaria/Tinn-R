@@ -1918,6 +1918,8 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
+    actRmirrorsOpenURLActive: TAction;
+    actRmirrorsOpenURLCurrent: TAction;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2444,6 +2446,8 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
+    procedure actRmirrorsOpenURLActiveExecute(Sender: TObject);
+    procedure actRmirrorsOpenURLCurrentExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2976,7 +2980,7 @@ begin
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '3.00.02.06';
-  sCurrentVersion_Shortcuts := '3.00.02.01';
+  sCurrentVersion_Shortcuts := '3.00.02.08';
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -5495,6 +5499,7 @@ begin
   end;
 
   sRmirror:= trim(ifTinn.ReadString('App', 'sRmirror', 'http://cran.at.r-project.org/'));
+  frmTools.stbRMirrors.Panels[1].Text:= sRmirror;
 
   iAlphaBlendValue:= 255 - (255 * iTransparency) Div 100;
 end;
@@ -8422,6 +8427,16 @@ begin
   end;
 end;
 
+procedure TfrmTinnMain.actRmirrorsOpenURLActiveExecute(Sender: TObject);
+begin
+  OpenUrl(frmTools.stbRMirrors.Panels[1].Text);
+end;
+
+procedure TfrmTinnMain.actRmirrorsOpenURLCurrentExecute(Sender: TObject);
+begin
+  OpenUrl(frmTools.dbeRmirrorsURL.Text);
+end;
+
 procedure TfrmTinnMain.actRmirrorsSetReposExecute(Sender: TObject);
 var
   sTmp: string;
@@ -8436,6 +8451,8 @@ begin
                   ')';
 
   DoSend(sTmp);
+
+  frmTools.stbRMirrors.Panels[1].Text:= sRmirror;
 end;
 
 procedure TfrmTinnMain.RmirrorsInterface_Update;

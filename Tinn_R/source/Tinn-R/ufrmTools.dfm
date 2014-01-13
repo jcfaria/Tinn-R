@@ -5324,6 +5324,17 @@ object frmTools: TfrmTools
                 end
                 object TBSeparatorItem11: TTBSeparatorItem
                 end
+                object TBSubmenuItem3: TTBSubmenuItem
+                  Caption = 'URL'
+                  Hint = 'Mirrors: open URL'
+                  ImageIndex = 288
+                  object TBItem33: TTBItem
+                    Action = frmTinnMain.actRmirrorsOpenURLCurrent
+                  end
+                  object TBItem34: TTBItem
+                    Action = frmTinnMain.actRmirrorsOpenURLActive
+                  end
+                end
                 object TBSubmenuItem2: TTBSubmenuItem
                   Caption = 'Copy'
                   Hint = 'Mirrors: copy'
@@ -5379,7 +5390,7 @@ object frmTools: TfrmTools
             Left = 0
             Top = 117
             Width = 304
-            Height = 332
+            Height = 313
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 2
@@ -5387,7 +5398,7 @@ object frmTools: TfrmTools
               Left = 0
               Top = 18
               Width = 304
-              Height = 314
+              Height = 295
               Align = alClient
               BorderStyle = bsNone
               DataSource = modDados.dsRmirrors
@@ -5398,7 +5409,7 @@ object frmTools: TfrmTools
               Font.Style = []
               Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
-              PopupMenu = frmTinnMain.pmenCompletion
+              PopupMenu = frmTinnMain.pmenFontGeneric
               TabOrder = 0
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
@@ -5440,7 +5451,7 @@ object frmTools: TfrmTools
           end
           object Panel20: TPanel
             Left = 0
-            Top = 449
+            Top = 430
             Width = 304
             Height = 60
             Align = alBottom
@@ -5454,12 +5465,14 @@ object frmTools: TfrmTools
               DataField = 'URL'
               DataSource = modDados.dsRmirrors
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = clTeal
+              Font.Color = clBtnText
               Font.Height = -11
               Font.Name = 'Tahoma'
               Font.Style = []
               ParentFont = False
               TabOrder = 0
+              OnClick = dbeRmirrorsURLClick
+              OnMouseMove = dbeRmirrorsURLMouseMove
             end
             object dbeRmirrorsCode: TDBEdit
               Left = 1
@@ -5481,6 +5494,26 @@ object frmTools: TfrmTools
               DataSource = modDados.dsRmirrors
               TabOrder = 2
             end
+          end
+          object stbRMirrors: TStatusBar
+            Left = 0
+            Top = 490
+            Width = 304
+            Height = 19
+            Panels = <
+              item
+                Bevel = pbNone
+                Style = psOwnerDraw
+                Text = 'Active:'
+                Width = 36
+              end
+              item
+                Style = psOwnerDraw
+                Width = 40
+              end>
+            OnClick = stbRMirrorsClick
+            OnMouseMove = stbRMirrorsMouseMove
+            OnDrawPanel = stbRMirrorsDrawPanel
           end
         end
       end

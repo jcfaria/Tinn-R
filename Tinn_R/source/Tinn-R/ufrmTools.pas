@@ -477,6 +477,10 @@ type
     TBToolbar4: TTBToolbar;
     tvProject: TTreeView;
     tvSearch: TTreeView;
+    stbRMirrors: TStatusBar;
+    TBSubmenuItem3: TTBSubmenuItem;
+    TBItem33: TTBItem;
+    TBItem34: TTBItem;
 
     procedure bbtExplorerAddFavoritesClick(Sender: TObject);
     procedure bbtExplorerRemoveFavoritesClick(Sender: TObject);
@@ -559,6 +563,14 @@ type
     procedure tvSearchDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure tvSearchEndDrag(Sender, Target: TObject; X, Y: Integer);
     procedure tvSearchStartDrag(Sender: TObject; var DragObject: TDragObject);
+    procedure stbRMirrorsDrawPanel(StatusBar: TStatusBar;
+      Panel: TStatusPanel; const Rect: TRect);
+    procedure stbRMirrorsClick(Sender: TObject);
+    procedure stbRMirrorsMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure dbeRmirrorsURLMouseMove(Sender: TObject; Shift: TShiftState;
+      X, Y: Integer);
+    procedure dbeRmirrorsURLClick(Sender: TObject);
     
   private
     { Private declarations }
@@ -749,6 +761,20 @@ begin
                        [mbYes, mbNo],
                        0) = mrYes) then bbtExplorerRemoveFavoritesClick(nil);
   end;
+end;
+
+procedure TfrmTools.dbeRmirrorsURLClick(Sender: TObject);
+begin
+  with frmTinnMain do
+    actRmirrorsOpenURLCurrentExecute(nil);
+end;
+
+procedure TfrmTools.dbeRmirrorsURLMouseMove(Sender: TObject;
+                                            Shift: TShiftState;
+                                            X,
+                                             Y: Integer);
+begin
+  dbeRmirrorsURL.Cursor:= crHandPoint;
 end;
 
 procedure TfrmTools.dbgCompletionDblClick(Sender: TObject);
@@ -1027,6 +1053,45 @@ procedure TfrmTools.splRExplorerPaint(Sender: TObject);
 begin
   cbbToolsRExplorer.Width     := (panRExplorer.Width - 35);
   edToolsRExplorerFilter.Width:= (panRFilter.Width - 29);
+end;
+
+procedure TfrmTools.stbRMirrorsClick(Sender: TObject);
+begin
+  with frmTinnMain do
+    actRmirrorsOpenURLActiveExecute(nil);
+end;
+
+procedure TfrmTools.stbRMirrorsDrawPanel(StatusBar: TStatusBar;
+                                         Panel: TStatusPanel;
+                                         const Rect: TRect);
+begin
+  with stbRMirrors.Canvas do begin
+       case Panel.Index of
+         0: begin
+              //Brush.Color:= cTmp;
+              Font.Color := clGreen;
+              //Font.Style := [fsBold];
+           end;
+         1: begin
+              //Brush.Color:= clYellow;
+              Font.Color := clGreen;
+              Font.Style := [fsBold];
+           end;
+       end;
+
+       TextOut(Rect.left + 2,
+               Rect.top + 1,
+               Panel.Text);
+  end;
+end;
+
+procedure TfrmTools.stbRMirrorsMouseMove(Sender: TObject;
+                                         Shift:
+                                         TShiftState;
+                                         X,
+                                          Y: Integer);
+begin
+  stbRMirrors.Cursor:= crHandPoint;
 end;
 
 procedure TfrmTools.tbRecentClick(Sender: TObject);

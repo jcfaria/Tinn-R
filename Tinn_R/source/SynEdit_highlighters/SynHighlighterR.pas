@@ -3281,7 +3281,8 @@ begin
       else
         inc(Run);
     end; //case
-  until (FLine[Run] = '"');
+  until (FLine[Run] = '"') and
+        (FLine[Run - 1] <> '\');  // It is necessary due to scape \ in some args, for example: read.table(quote="\"")
 
   if FLine[Run] <> #0 then
     inc(Run);
@@ -3301,7 +3302,7 @@ begin
       else
         inc(Run);
     end; //case
-  until (FLine[Run] = #39);
+  until (FLine[Run] = #39);  // It is necessary due to scape \ in some args, for example: read.table(quote='\'');
 
   if FLine[Run] <> #0 then
     inc(Run);

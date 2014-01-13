@@ -99,7 +99,7 @@ object frmAbout: TfrmAbout
     Top = 0
     Width = 513
     Height = 442
-    ActivePage = tbsAboutAcknowledgments
+    ActivePage = tbsAboutVersion
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
