@@ -93,7 +93,7 @@ type
     actPrint: TAction;
     actPrintConfig: TAction;
     actSyntaxColor: TAction;
-    actWordWrap: TAction;
+    actLineWrap: TAction;
     bbtClose: TBitBtn;
     bbtPreview: TBitBtn;
     bbtPrint: TBitBtn;
@@ -120,7 +120,7 @@ type
     procedure actPrintConfigExecute(Sender: TObject);
     procedure actPrintExecute(Sender: TObject);
     procedure actSyntaxColorExecute(Sender: TObject);
-    procedure actWordWrapExecute(Sender: TObject);
+    procedure actLineWrapExecute(Sender: TObject);
     procedure bbtCloseClick(Sender: TObject);
     procedure bbtPreviewClick(Sender: TObject);
     procedure edEndPageKeyPress(Sender: TObject; var Key: Char);
@@ -156,7 +156,7 @@ begin
   prnOptions.Title       := frmTinnMain.Caption;
   prnOptions.SynEdit     := seEditorPrint;
   prnOptions.LineNumbers := actLineNumber.Checked;
-  prnOptions.Wrap        := actWordWrap.Checked;
+  prnOptions.Wrap        := actLineWrap.Checked;
   prnOptions.Highlight   := actSyntaxColor.Checked;
   prnOptions.Colors      := actImpressionColored.Checked;
   prnOptions.SelectedOnly:= rbSelection.Checked;
@@ -203,7 +203,7 @@ begin
     bPrintPageNumber := actPageNumber.Checked;
     bPrintColors     := actImpressionColored.Checked;
     bPrintSyntaxColor:= actSyntaxColor.Checked;
-    bPrintLineWrap   := actWordWrap.Checked;
+    bPrintLineWrap   := actLineWrap.Checked;
   end;
   Close;
 end;
@@ -216,7 +216,7 @@ begin
     actPageNumber.Checked       := bPrintPageNumber;
     actImpressionColored.Checked:= bPrintColors;
     actSyntaxColor.Checked      := bPrintSyntaxColor;
-    actWordWrap.Checked         := bPrintLineWrap;
+    actLineWrap.Checked         := bPrintLineWrap;
     rbSelection.Checked         := bselectedToPreview;
   end;
   bbtPrintConfig.Glyph:= nil;
@@ -280,12 +280,12 @@ begin
   end;
 end;
 
-procedure TfrmConfigurePrint.actWordWrapExecute(Sender: TObject);
+procedure TfrmConfigurePrint.actLineWrapExecute(Sender: TObject);
 begin
-  with actWordWrap do
+  with actLineWrap do
     Checked:= not Checked;
   if Assigned(frmPrintPreview) then begin
-    prnOptions.Wrap:= actWordWrap.Checked;
+    prnOptions.Wrap:= actLineWrap.Checked;
     frmPrintPreview.synPP.UpdatePreview;
   end;
 end;

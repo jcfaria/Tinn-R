@@ -66,7 +66,7 @@ object frmConfigurePrint: TfrmConfigurePrint
       Top = 24
       Width = 84
       Height = 17
-      Action = actWordWrap
+      Action = actLineWrap
       TabOrder = 0
     end
     object chkColors: TCheckBox
@@ -268,11 +268,11 @@ object frmConfigurePrint: TfrmConfigurePrint
       ImageIndex = 100
       OnExecute = actLineNumberExecute
     end
-    object actWordWrap: TAction
-      Caption = 'Word wrap'
-      Hint = 'Word wrap'
+    object actLineWrap: TAction
+      Caption = 'Line wrap'
+      Hint = 'Line wrap'
       ImageIndex = 101
-      OnExecute = actWordWrapExecute
+      OnExecute = actLineWrapExecute
     end
     object actSyntaxColor: TAction
       Caption = 'Syntax color'

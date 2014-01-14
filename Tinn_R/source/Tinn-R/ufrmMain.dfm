@@ -174,7 +174,6 @@ object frmTinnMain: TfrmTinnMain
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 651
   end
   object Panel1: TPanel
     Left = 0
@@ -1149,7 +1148,6 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 651
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -1209,7 +1207,6 @@ object frmTinnMain: TfrmTinnMain
     SizeGrip = False
     OnClick = stbMainClick
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 760
   end
   object TBDockRight: TTBDock
     Left = 1009
@@ -1221,7 +1218,6 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 651
   end
   object TBDockBottom: TTBDock
     Left = 0
@@ -1233,7 +1229,6 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 751
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -1707,7 +1702,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 144
     Bitmap = {
-      494C01010A00B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A00BC05BC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2577,7 +2572,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 112
     Bitmap = {
-      494C01012101B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012101BC05BC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009004000001002000000000000090
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000008080
@@ -12375,40 +12370,40 @@ object frmTinnMain: TfrmTinnMain
       OnExecute = actCompletionInsertExecute
     end
     object actRCardHelp: TAction
-      Category = 'dtb R Card'
+      Category = 'dtb Card (R)'
       Caption = 'Help'
       Hint = 'R card: help'
       ImageIndex = 25
       OnExecute = actRCardHelpExecute
     end
     object actRCardExample: TAction
-      Category = 'dtb R Card'
+      Category = 'dtb Card (R)'
       Caption = 'Example'
       Hint = 'R card: example'
       ImageIndex = 26
       OnExecute = actRCardExampleExecute
     end
     object actRCardCopyFunction: TAction
-      Category = 'dtb R Card'
+      Category = 'dtb Card (R)'
       Caption = 'Copy function'
       Hint = 'R card: copy function'
       OnExecute = actRCardCopyFunctionExecute
     end
     object actRCardCopyDescrition: TAction
-      Category = 'dtb R Card'
+      Category = 'dtb Card (R)'
       Caption = 'Copy descrition'
       Hint = 'R card: copy descrition'
       OnExecute = actRCardCopyDescritionExecute
     end
     object actRCardEdit: TAction
-      Category = 'dtb R Card'
+      Category = 'dtb Card (R)'
       Caption = 'Edit'
       Hint = 'R card: edit'
       ImageIndex = 18
       OnExecute = actRCardEditExecute
     end
     object actRcardInsert: TAction
-      Category = 'dtb R Card'
+      Category = 'dtb Card (R)'
       Caption = 'Insert'
       Enabled = False
       Hint = 'R card: insert'
@@ -15066,14 +15061,14 @@ object frmTinnMain: TfrmTinnMain
       OnExecute = actCommentsHelpExecute
     end
     object actRmirrorsHelp: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'Help'
       Hint = 'R mirrors: help'
       ImageIndex = 25
       OnExecute = actRmirrorsHelpExecute
     end
     object actRmirrorsUpdate: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'Update mirrors'
       Enabled = False
       Hint = 'R mirrors: update'
@@ -15081,38 +15076,38 @@ object frmTinnMain: TfrmTinnMain
       OnExecute = actRmirrorsUpdateExecute
     end
     object actRmirrorsOpenURLCurrent: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'Open current'
       Hint = 'R mirrors: open URL current'
       OnExecute = actRmirrorsOpenURLCurrentExecute
     end
     object actRmirrorsOpenURLDefault: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'Open default'
       Hint = 'R mirrors: open URL default'
       OnExecute = actRmirrorsOpenURLDefaultExecute
     end
     object actRmirrorsCopyURL: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'URL'
       Hint = 'R mirrors: copy URL'
       OnExecute = actRmirrorsCopyURLExecute
     end
     object actRmirrorsCopyHost: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'Host'
       Hint = 'R mirrors: copy host'
       OnExecute = actRmirrorsCopyHostExecute
     end
     object actRmirrorsEdit: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'Edit'
       Hint = 'R mirrors: edit'
       ImageIndex = 18
       OnExecute = actRmirrorsEditExecute
     end
     object actRmirrorsSetRepos: TAction
-      Category = 'dtb R Mirrors'
+      Category = 'dtb Mirrors (R)'
       Caption = 'Set repos'
       Enabled = False
       Hint = 'R mirrors: set repos'
@@ -15133,7 +15128,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 176
     Bitmap = {
-      494C01010500B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010500BC05BC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -15633,7 +15628,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 208
     Bitmap = {
-      494C01010400B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400BC05BC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -19038,7 +19033,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 240
     Bitmap = {
-      494C01010400A002A00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400A402A40210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -154,7 +154,9 @@ object frmPrintPreview: TfrmPrintPreview
       object tbWordWrap: TToolButton
         Left = 264
         Top = 0
+        Hint = 'Line wrap'
         Action = frmConfigurePrint.actWordWrap
+        Caption = 'Line wrap'
         ParentShowHint = False
         ShowHint = True
         Style = tbsCheck
