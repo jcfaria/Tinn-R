@@ -4028,7 +4028,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsShortcuts
+        ActivePage = tbsComments
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4472,7 +4472,7 @@ object frmTools: TfrmTools
               Font.Style = []
               Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
-              PopupMenu = frmTinnMain.pmenCompletion
+              PopupMenu = frmTinnMain.pmenComments
               TabOrder = 0
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
@@ -5332,7 +5332,7 @@ object frmTools: TfrmTools
                     Action = frmTinnMain.actRmirrorsOpenURLCurrent
                   end
                   object TBItem34: TTBItem
-                    Action = frmTinnMain.actRmirrorsOpenURLActive
+                    Action = frmTinnMain.actRmirrorsOpenURLDefault
                   end
                 end
                 object TBSubmenuItem2: TTBSubmenuItem
@@ -5409,7 +5409,7 @@ object frmTools: TfrmTools
               Font.Style = []
               Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
-              PopupMenu = frmTinnMain.pmenFontGeneric
+              PopupMenu = frmTinnMain.pmenRmirrors
               TabOrder = 0
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
@@ -5504,8 +5504,8 @@ object frmTools: TfrmTools
               item
                 Bevel = pbNone
                 Style = psOwnerDraw
-                Text = 'Active:'
-                Width = 36
+                Text = 'Default:'
+                Width = 42
               end
               item
                 Style = psOwnerDraw

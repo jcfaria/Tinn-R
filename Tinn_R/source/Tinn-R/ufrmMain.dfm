@@ -2,7 +2,7 @@ object frmTinnMain: TfrmTinnMain
   Left = 0
   Top = 0
   Width = 1026
-  Height = 826
+  Height = 864
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -167,13 +167,14 @@ object frmTinnMain: TfrmTinnMain
     Left = 0
     Top = 100
     Width = 1
-    Height = 651
+    Height = 689
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
+    ExplicitHeight = 651
   end
   object Panel1: TPanel
     Left = 0
@@ -1142,12 +1143,13 @@ object frmTinnMain: TfrmTinnMain
     Left = 1
     Top = 100
     Width = 9
-    Height = 651
+    Height = 689
     BoundLines = [blTop, blBottom, blLeft, blRight]
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
+    ExplicitHeight = 651
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -1160,7 +1162,7 @@ object frmTinnMain: TfrmTinnMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 760
+    Top = 798
     Width = 1018
     Height = 20
     Anchors = [akLeft, akBottom]
@@ -1207,21 +1209,23 @@ object frmTinnMain: TfrmTinnMain
     SizeGrip = False
     OnClick = stbMainClick
     OnDrawPanel = stbMainDrawPanel
+    ExplicitTop = 760
   end
   object TBDockRight: TTBDock
     Left = 1009
     Top = 100
     Width = 9
-    Height = 651
+    Height = 689
     BoundLines = [blTop, blBottom, blLeft, blRight]
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
+    ExplicitHeight = 651
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 751
+    Top = 789
     Width = 1018
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -1229,6 +1233,7 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
+    ExplicitTop = 751
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -1444,8 +1449,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 48
-    Top = 176
+    Left = 16
+    Top = 240
     object pmenGroup_OLD: TMenuItem
       Caption = 'Group'
       SubMenuImages = imlTinnR
@@ -1618,7 +1623,7 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 48
-    Top = 272
+    Top = 304
     object pmenRCardHelp: TMenuItem
       Action = actRCardHelp
     end
@@ -1670,8 +1675,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 16
-    Top = 272
+    Left = 80
+    Top = 304
     object pmenRCardMemoCopy: TMenuItem
       Action = actRCardCopyDescrition
     end
@@ -1702,7 +1707,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 144
     Bitmap = {
-      494C01010A00B405B40510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A00B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2116,7 +2121,7 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 16
-    Top = 208
+    Top = 304
     object pmenRexplorerHelp: TMenuItem
       Action = actRExplorerHelp
     end
@@ -2247,8 +2252,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 112
-    Top = 176
+    Left = 48
+    Top = 208
     object pmenWinExplorerFilesRefresh: TMenuItem
       Caption = 'Refresh'
       ImageIndex = 86
@@ -2286,8 +2291,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 80
-    Top = 176
+    Left = 48
+    Top = 240
     object pmenResultsOpenLink: TMenuItem
       Caption = 'Locate link'
       OnClick = pmenResultsOpenLinkClick
@@ -2323,8 +2328,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 16
-    Top = 176
+    Left = 112
+    Top = 144
     object pmenRResSend: TMenuItem
       Caption = 'Send to R'
       ImageIndex = 0
@@ -2572,7 +2577,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 112
     Bitmap = {
-      494C01012101B405B40510001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01012101B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009004000001002000000000000090
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000008080
@@ -12212,7 +12217,8 @@ object frmTinnMain: TfrmTinnMain
       FFFFBFFD8001FFFFFE3FA00D8001F00BFE1FBFFD8001FFFDE00FA00D8001F00D
       E007BFFD8001FFFBE007A00D8001F00FE00FBFFD8001FFFFE01FA00D8001D00F
       FE3FBFFD8001BFFFFE7FA01D8001B00FFFFFBFE18001DFFFFFFFBFF38003FFFF
-      FFFF80078007FFFFFFFFFFFFFFFDFFFF}
+      FFFF80078007FFFFFFFFFFFFFFFDFFFF00000000000000000000000000000000
+      000000000000}
   end
   object SpellChecker: TSpellChecker
     Language = 2057
@@ -12244,8 +12250,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 112
-    Top = 144
+    Left = 80
+    Top = 240
     object pmemSpellClearAll: TMenuItem
       Caption = 'Clear all'
       OnClick = pmemSpellClearAllClick
@@ -12369,40 +12375,40 @@ object frmTinnMain: TfrmTinnMain
       OnExecute = actCompletionInsertExecute
     end
     object actRCardHelp: TAction
-      Category = 'dtb Rcard'
+      Category = 'dtb R Card'
       Caption = 'Help'
       Hint = 'R card: help'
       ImageIndex = 25
       OnExecute = actRCardHelpExecute
     end
     object actRCardExample: TAction
-      Category = 'dtb Rcard'
+      Category = 'dtb R Card'
       Caption = 'Example'
       Hint = 'R card: example'
       ImageIndex = 26
       OnExecute = actRCardExampleExecute
     end
     object actRCardCopyFunction: TAction
-      Category = 'dtb Rcard'
+      Category = 'dtb R Card'
       Caption = 'Copy function'
       Hint = 'R card: copy function'
       OnExecute = actRCardCopyFunctionExecute
     end
     object actRCardCopyDescrition: TAction
-      Category = 'dtb Rcard'
+      Category = 'dtb R Card'
       Caption = 'Copy descrition'
       Hint = 'R card: copy descrition'
       OnExecute = actRCardCopyDescritionExecute
     end
     object actRCardEdit: TAction
-      Category = 'dtb Rcard'
+      Category = 'dtb R Card'
       Caption = 'Edit'
       Hint = 'R card: edit'
       ImageIndex = 18
       OnExecute = actRCardEditExecute
     end
     object actRcardInsert: TAction
-      Category = 'dtb Rcard'
+      Category = 'dtb R Card'
       Caption = 'Insert'
       Enabled = False
       Hint = 'R card: insert'
@@ -15060,44 +15066,56 @@ object frmTinnMain: TfrmTinnMain
       OnExecute = actCommentsHelpExecute
     end
     object actRmirrorsHelp: TAction
-      Category = 'dtb Rmirrors'
+      Category = 'dtb R Mirrors'
       Caption = 'Help'
-      Hint = 'Mirrors: help'
+      Hint = 'R mirrors: help'
       ImageIndex = 25
       OnExecute = actRmirrorsHelpExecute
     end
     object actRmirrorsUpdate: TAction
-      Category = 'dtb Rmirrors'
+      Category = 'dtb R Mirrors'
       Caption = 'Update mirrors'
       Enabled = False
-      Hint = 'Mirrors: update'
+      Hint = 'R mirrors: update'
       ImageIndex = 162
       OnExecute = actRmirrorsUpdateExecute
     end
+    object actRmirrorsOpenURLCurrent: TAction
+      Category = 'dtb R Mirrors'
+      Caption = 'Open current'
+      Hint = 'R mirrors: open URL current'
+      OnExecute = actRmirrorsOpenURLCurrentExecute
+    end
+    object actRmirrorsOpenURLDefault: TAction
+      Category = 'dtb R Mirrors'
+      Caption = 'Open default'
+      Hint = 'R mirrors: open URL default'
+      OnExecute = actRmirrorsOpenURLDefaultExecute
+    end
     object actRmirrorsCopyURL: TAction
-      Category = 'dtb Rmirrors'
-      Caption = 'Copy URL'
-      Hint = 'Mirrors: copy URL'
+      Category = 'dtb R Mirrors'
+      Caption = 'URL'
+      Hint = 'R mirrors: copy URL'
       OnExecute = actRmirrorsCopyURLExecute
     end
     object actRmirrorsCopyHost: TAction
-      Category = 'dtb Rmirrors'
-      Caption = 'Copy host'
-      Hint = 'Mirrors: copy host'
+      Category = 'dtb R Mirrors'
+      Caption = 'Host'
+      Hint = 'R mirrors: copy host'
       OnExecute = actRmirrorsCopyHostExecute
     end
     object actRmirrorsEdit: TAction
-      Category = 'dtb Rmirrors'
+      Category = 'dtb R Mirrors'
       Caption = 'Edit'
-      Hint = 'Mirrors: edit'
+      Hint = 'R mirrors: edit'
       ImageIndex = 18
       OnExecute = actRmirrorsEditExecute
     end
     object actRmirrorsSetRepos: TAction
-      Category = 'dtb Rmirrors'
+      Category = 'dtb R Mirrors'
       Caption = 'Set repos'
       Enabled = False
-      Hint = 'Mirrors: set repos'
+      Hint = 'R mirrors: set repos'
       ImageIndex = 267
       OnExecute = actRmirrorsSetReposExecute
     end
@@ -15110,24 +15128,12 @@ object frmTinnMain: TfrmTinnMain
       ShortCut = 24651
       OnExecute = actRSendKnitHtmlExecute
     end
-    object actRmirrorsOpenURLCurrent: TAction
-      Category = 'dtb Rmirrors'
-      Caption = 'Open URL current'
-      Hint = 'Mirrors: open URL current'
-      OnExecute = actRmirrorsOpenURLCurrentExecute
-    end
-    object actRmirrorsOpenURLActive: TAction
-      Category = 'dtb Rmirrors'
-      Caption = 'Open URL active'
-      Hint = 'Mirrors: open URL active'
-      OnExecute = actRmirrorsOpenURLActiveExecute
-    end
   end
   object imlProject: TImageList
     Left = 176
     Top = 176
     Bitmap = {
-      494C01010500B405B40510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010500B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -15627,7 +15633,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 208
     Bitmap = {
-      494C01010400B405B40510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400B805B80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -16064,8 +16070,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 48
-    Top = 208
+    Left = 16
+    Top = 176
     object pmemIOShowHide: TMenuItem
       Action = actRtermVisible
     end
@@ -16246,8 +16252,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 80
-    Top = 208
+    Left = 48
+    Top = 176
     object pmemLogShowHide: TMenuItem
       Action = actRtermVisible
     end
@@ -16445,8 +16451,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 80
-    Top = 240
+    Left = 16
+    Top = 336
     object pmenGenericFont: TMenuItem
       Caption = 'Font (not permanent)'
       ImageIndex = 260
@@ -18806,8 +18812,8 @@ object frmTinnMain: TfrmTinnMain
     ImageMargin.Bottom = 0
     ImageSize.Height = 0
     ImageSize.Width = 0
-    Left = 48
-    Top = 240
+    Left = 112
+    Top = 176
   end
   object pmenMainMRU: TJvPopupMenu
     Style = msOffice
@@ -18817,103 +18823,8 @@ object frmTinnMain: TfrmTinnMain
     ImageMargin.Bottom = 0
     ImageSize.Height = 0
     ImageSize.Width = 0
-    Left = 16
-    Top = 240
-  end
-  object pmenRtipMemo: TJvPopupMenu
-    Images = imlTinnR
-    Style = msOffice
-    ImageMargin.Left = 0
-    ImageMargin.Top = 0
-    ImageMargin.Right = 0
-    ImageMargin.Bottom = 0
-    ImageSize.Height = 0
-    ImageSize.Width = 0
-    TextMargin = 1
-    Left = 16
-    Top = 304
-    object MenuItem1: TMenuItem
-      Caption = 'Copy descrition'
-      Hint = 'R tip: copy descrition'
-    end
-    object MenuItem3: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem4: TMenuItem
-      Caption = 'Font (not permanent)'
-      ImageIndex = 260
-      object MenuItem5: TMenuItem
-        Action = actFontIncrease
-      end
-      object MenuItem6: TMenuItem
-        Action = actFontDecrease
-      end
-    end
-  end
-  object pmenRtip: TJvPopupMenu
-    Images = imlTinnR
-    Style = msOffice
-    ImageMargin.Left = 0
-    ImageMargin.Top = 0
-    ImageMargin.Right = 0
-    ImageMargin.Bottom = 0
-    ImageSize.Height = 0
-    ImageSize.Width = 0
-    TextMargin = 1
-    Left = 48
-    Top = 304
-    object MenuItem7: TMenuItem
-      Caption = 'Help'
-      Hint = 'R tip: help'
-      ImageIndex = 25
-    end
-    object MenuItem8: TMenuItem
-      Caption = 'Example'
-      Hint = 'R tip: example'
-      ImageIndex = 26
-    end
-    object MenuItem9: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem10: TMenuItem
-      Caption = 'Copy function'
-      Hint = 'R tip: copy function'
-    end
-    object MenuItem11: TMenuItem
-      Caption = 'Copy descrition'
-      Hint = 'R tip: copy descrition'
-    end
-    object MenuItem12: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem13: TMenuItem
-      Caption = 'Edit'
-      Hint = 'R tip: edit'
-      ImageIndex = 18
-    end
-    object N169: TMenuItem
-      Caption = '-'
-    end
-    object Insert2: TMenuItem
-      Caption = 'Insert'
-      Enabled = False
-      Hint = 'R tip: insert'
-      ImageIndex = 267
-      OnClick = actRtipInsertExecute
-    end
-    object MenuItem15: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem16: TMenuItem
-      Caption = 'Font (not permanent)'
-      ImageIndex = 260
-      object MenuItem18: TMenuItem
-        Action = actFontIncrease
-      end
-      object MenuItem19: TMenuItem
-        Action = actFontDecrease
-      end
-    end
+    Left = 80
+    Top = 176
   end
   object pmenCompletionMemo: TJvPopupMenu
     Images = imlTinnR
@@ -18925,8 +18836,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 16
-    Top = 338
+    Left = 80
+    Top = 272
     object MenuItem20: TMenuItem
       Action = actCompletionCopyDescrition
     end
@@ -18955,7 +18866,7 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 48
-    Top = 338
+    Top = 272
     object MenuItem25: TMenuItem
       Action = actCompletionHelp
     end
@@ -19008,7 +18919,7 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 112
-    Top = 240
+    Top = 208
     object pmenWorkExplorerFilesRefresh: TMenuItem
       Caption = 'Refresh'
       ImageIndex = 86
@@ -19038,7 +18949,7 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 112
+    Left = 16
     Top = 208
     object pmenWinExplorerFoldersRefresh: TMenuItem
       Caption = 'Refresh'
@@ -19069,8 +18980,8 @@ object frmTinnMain: TfrmTinnMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 112
-    Top = 272
+    Left = 80
+    Top = 208
     object pmenWorkExplorerFoldersRefresh: TMenuItem
       Caption = 'Refresh'
       ImageIndex = 86
@@ -19099,7 +19010,7 @@ object frmTinnMain: TfrmTinnMain
     ImageMargin.Bottom = 0
     ImageSize.Height = 0
     ImageSize.Width = 0
-    Left = 80
+    Left = 16
     Top = 272
     object Help1: TMenuItem
       Action = actShortcutsHelp
@@ -19127,7 +19038,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 240
     Bitmap = {
-      494C010104009C029C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400A002A00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -19402,5 +19313,92 @@ object frmTinnMain: TfrmTinnMain
     Options = [cdFullOpen]
     Left = 209
     Top = 241
+  end
+  object pmenComments: TJvPopupMenu
+    Images = imlTinnR
+    Style = msOffice
+    ImageMargin.Left = 0
+    ImageMargin.Top = 0
+    ImageMargin.Right = 0
+    ImageMargin.Bottom = 0
+    ImageSize.Height = 0
+    ImageSize.Width = 0
+    Left = 112
+    Top = 272
+    object MenuItem1: TMenuItem
+      Action = actCommentsHelp
+    end
+    object MenuItem2: TMenuItem
+      Action = actCommentsEdit
+    end
+  end
+  object pmenRmirrors: TJvPopupMenu
+    Images = imlTinnR
+    Style = msOffice
+    ImageMargin.Left = 0
+    ImageMargin.Top = 0
+    ImageMargin.Right = 0
+    ImageMargin.Bottom = 0
+    ImageSize.Height = 0
+    ImageSize.Width = 0
+    TextMargin = 1
+    Left = 112
+    Top = 304
+    object MenuItem3: TMenuItem
+      Action = actRmirrorsHelp
+    end
+    object MenuItem4: TMenuItem
+      Action = actRmirrorsUpdate
+    end
+    object MenuItem5: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      Caption = 'URL'
+      Hint = 'R mirrors: URL'
+      OnClick = actRCardCopyFunctionExecute
+      object OpenURLcurrent1: TMenuItem
+        Action = actRmirrorsOpenURLCurrent
+      end
+      object OpenURLactive1: TMenuItem
+        Action = actRmirrorsOpenURLDefault
+      end
+    end
+    object MenuItem7: TMenuItem
+      Caption = 'Copy'
+      Hint = 'R mirrors: copy'
+      OnClick = actRCardCopyDescritionExecute
+      object Copyhost1: TMenuItem
+        Action = actRmirrorsCopyHost
+      end
+      object CopyURL1: TMenuItem
+        Action = actRmirrorsCopyURL
+      end
+    end
+    object MenuItem8: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem9: TMenuItem
+      Action = actRmirrorsEdit
+    end
+    object MenuItem10: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem11: TMenuItem
+      Action = actRmirrorsSetRepos
+    end
+    object MenuItem12: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem13: TMenuItem
+      Caption = 'Font (not permanent)'
+      ImageIndex = 260
+      object MenuItem15: TMenuItem
+        Action = actFontIncrease
+      end
+      object MenuItem16: TMenuItem
+        Action = actFontDecrease
+      end
+    end
   end
 end

@@ -309,6 +309,7 @@ type
     splWork: TSplitter;
     stbProject: TStatusBar;
     stbRexplorer: TStatusBar;
+    stbRMirrors: TStatusBar;
     stbSearch: TStatusBar;
     TBControlItem1: TTBControlItem;
     TBDLatex: TTBDock;
@@ -352,6 +353,8 @@ type
     TBItem30: TTBItem;
     TBItem31: TTBItem;
     TBItem32: TTBItem;
+    TBItem33: TTBItem;
+    TBItem34: TTBItem;
     TBItem36: TTBItem;
     TBItem37: TTBItem;
     TBItem38: TTBItem;
@@ -466,6 +469,7 @@ type
     TBSubmenuItem15: TTBSubmenuItem;
     TBSubmenuItem16: TTBSubmenuItem;
     TBSubmenuItem2: TTBSubmenuItem;
+    TBSubmenuItem3: TTBSubmenuItem;
     TBSubmenuItem4: TTBSubmenuItem;
     TBSubmenuItem5: TTBSubmenuItem;
     tbsWinExplorer: TTabSheet;
@@ -477,10 +481,6 @@ type
     TBToolbar4: TTBToolbar;
     tvProject: TTreeView;
     tvSearch: TTreeView;
-    stbRMirrors: TStatusBar;
-    TBSubmenuItem3: TTBSubmenuItem;
-    TBItem33: TTBItem;
-    TBItem34: TTBItem;
 
     procedure bbtExplorerAddFavoritesClick(Sender: TObject);
     procedure bbtExplorerRemoveFavoritesClick(Sender: TObject);
@@ -499,6 +499,8 @@ type
     procedure cbbToolsRExplorerMeasureItem(Control: TWinControl; Index: Integer; var Height: Integer);
     procedure cbbToolsRExplorerSelect(Sender: TObject);
     procedure cbExplorerFavoritesChange(Sender: TObject);
+    procedure dbeRmirrorsURLClick(Sender: TObject);
+    procedure dbeRmirrorsURLMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure dbgCompletionDblClick(Sender: TObject);
     procedure dbgCompletionKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure dbgRcardDblClick(Sender: TObject);
@@ -548,6 +550,9 @@ type
     procedure slvExplorerStartDrag(Sender: TObject; var DragObject: TDragObject);
     procedure splRExplorerMoved(Sender: TObject);
     procedure splRExplorerPaint(Sender: TObject);
+    procedure stbRMirrorsClick(Sender: TObject);
+    procedure stbRMirrorsDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel; const Rect: TRect);
+    procedure stbRMirrorsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure tbRecentClick(Sender: TObject);
     procedure tvProjectAddition(Sender: TObject; Node: TTreeNode);
     procedure tvProjectChange(Sender: TObject; Node: TTreeNode);
@@ -563,14 +568,6 @@ type
     procedure tvSearchDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure tvSearchEndDrag(Sender, Target: TObject; X, Y: Integer);
     procedure tvSearchStartDrag(Sender: TObject; var DragObject: TDragObject);
-    procedure stbRMirrorsDrawPanel(StatusBar: TStatusBar;
-      Panel: TStatusPanel; const Rect: TRect);
-    procedure stbRMirrorsClick(Sender: TObject);
-    procedure stbRMirrorsMouseMove(Sender: TObject; Shift: TShiftState; X,
-      Y: Integer);
-    procedure dbeRmirrorsURLMouseMove(Sender: TObject; Shift: TShiftState;
-      X, Y: Integer);
-    procedure dbeRmirrorsURLClick(Sender: TObject);
     
   private
     { Private declarations }
@@ -1058,7 +1055,7 @@ end;
 procedure TfrmTools.stbRMirrorsClick(Sender: TObject);
 begin
   with frmTinnMain do
-    actRmirrorsOpenURLActiveExecute(nil);
+    actRmirrorsOpenURLDefaultExecute(nil);
 end;
 
 procedure TfrmTools.stbRMirrorsDrawPanel(StatusBar: TStatusBar;

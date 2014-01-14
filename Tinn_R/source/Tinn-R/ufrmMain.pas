@@ -450,6 +450,8 @@ type
     actRmirrorsCopyURL: TAction;
     actRmirrorsEdit: TAction;
     actRmirrorsHelp: TAction;
+    actRmirrorsOpenURLCurrent: TAction;
+    actRmirrorsOpenURLDefault: TAction;
     actRmirrorsSetRepos: TAction;
     actRmirrorsUpdate: TAction;
     actRSendBlockMarked: TAction;
@@ -596,6 +598,8 @@ type
     Completionshowhide1: TMenuItem;
     Contiguous1: TMenuItem;
     ContiguousechoTRUE1: TMenuItem;
+    Copyhost1: TMenuItem;
+    CopyURL1: TMenuItem;
     csREnvironment: TClientSocket;
     csRExplorer: TClientSocket;
     csRGeneral: TClientSocket;
@@ -622,7 +626,6 @@ type
     Indent1: TMenuItem;
     Inilog1: TMenuItem;
     Insert1: TMenuItem;
-    Insert2: TMenuItem;
     Insert3: TMenuItem;
     InvertCase1: TMenuItem;
     Invertcase2: TMenuItem;
@@ -989,8 +992,7 @@ type
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
     MenuItem16: TMenuItem;
-    MenuItem18: TMenuItem;
-    MenuItem19: TMenuItem;
+    MenuItem2: TMenuItem;
     MenuItem20: TMenuItem;
     MenuItem21: TMenuItem;
     MenuItem22: TMenuItem;
@@ -1221,7 +1223,6 @@ type
     N166: TMenuItem;
     N167: TMenuItem;
     N168: TMenuItem;
-    N169: TMenuItem;
     N17: TMenuItem;
     N170: TMenuItem;
     N171: TMenuItem;
@@ -1352,6 +1353,8 @@ type
     op3: TMenuItem;
     Openallselectedgroup1: TMenuItem;
     Opennode1: TMenuItem;
+    OpenURLactive1: TMenuItem;
+    OpenURLcurrent1: TMenuItem;
     OrganizescreenTinnRRgui1: TMenuItem;
     PageMaker1: TMenuItem;
     Panel1: TPanel;
@@ -1457,6 +1460,7 @@ type
     pmemSpellFontIncrease: TMenuItem;
     pmemSpellPaste: TMenuItem;
     pmemSpellSelectAll: TMenuItem;
+    pmenComments: TJvPopupMenu;
     pmenCompletion: TJvPopupMenu;
     pmenCompletionMemo: TJvPopupMenu;
     pmenEditor: TJvPopupMenu;
@@ -1594,6 +1598,7 @@ type
     pmenRexplorerStructure: TMenuItem;
     pmenRexplorerStyle: TMenuItem;
     pmenRexplorerSummary: TMenuItem;
+    pmenRmirrors: TJvPopupMenu;
     pmenRRes: TJvPopupMenu;
     pmenRResCont: TMenuItem;
     pmenRResContClearAll: TMenuItem;
@@ -1617,8 +1622,6 @@ type
     pmenRResContTCPConnection: TMenuItem;
     pmenRResContTermStartClose: TMenuItem;
     pmenRResSend: TMenuItem;
-    pmenRtip: TJvPopupMenu;
-    pmenRtipMemo: TJvPopupMenu;
     pmenSearch: TJvPopupMenu;
     pmenShortcuts: TJvPopupMenu;
     pmenSpell: TJvPopupMenu;
@@ -1918,8 +1921,6 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    actRmirrorsOpenURLActive: TAction;
-    actRmirrorsOpenURLCurrent: TAction;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2133,6 +2134,8 @@ type
     procedure actRmirrorsCopyURLExecute(Sender: TObject);
     procedure actRmirrorsEditExecute(Sender: TObject);
     procedure actRmirrorsHelpExecute(Sender: TObject);
+    procedure actRmirrorsOpenURLCurrentExecute(Sender: TObject);
+    procedure actRmirrorsOpenURLDefaultExecute(Sender: TObject);
     procedure actRmirrorsSetReposExecute(Sender: TObject);
     procedure actRmirrorsUpdateExecute(Sender: TObject);
     procedure actRSendBlockMarkedExecute(Sender: TObject);
@@ -2446,8 +2449,6 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
-    procedure actRmirrorsOpenURLActiveExecute(Sender: TObject);
-    procedure actRmirrorsOpenURLCurrentExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2931,17 +2932,17 @@ procedure TfrmTinnMain.SetShortcuts;
 begin
 (*
 ----------------------------------------------------------------------------------------------
-  Will update (from dataset shoetcut.xml) all actions inside of alMain:
-   1- Comment the line below (DatasetToActionList(nil) when was done any change in the alMain
-   2- Generate a new Dataset: Tools/Utils/Actionlist to dataset (menu not visible by default when compiled in release mode)
-   3- Copy the file Shortcuts_tmp.xml generated to the folder data on the project
-      renaming it to Shortcuts.xml
-   4- Delete the old file data.zip
-   5- Generate a new one data.zip
-   6- Change the version of sCurrentVersion_Shortcuts in procedure TfrmTinnMain.CheckVersion
-      or delete the file Shortcuts.xml from data in the ini folder of your OS
-   7- Uncomment this line newly
-   8- Run Tinn-R and the new Shortcuts will be updated
+  Will update (from dataset shortcut.xml) all actions inside of alMain:
+   1- Comment the line below (DatasetToActionList(nil)) when was done any change in the alMain
+   2- Generate a new Dataset: Tools/Utils/Actionlist to dataset (menu visible when compiled in debug mode)
+   3- Delete the old file Shortcuts.xml from INI/data
+   4- Rename the file Shortcuts_tmp.xml generated to Shortcuts.xml
+   5- Copy the new Shortcuts.xml to the folder data from the project
+   6- Delete the old file data.zip
+   7- Generate a new one data.zip with all XML data files
+   8- Change the version of sCurrentVersion_Shortcuts in procedure TfrmTinnMain.CheckVersion
+   9- Uncomment this line newly (DatasetToActionList(nil))
+  10- Run Tinn-R and the new Shortcuts will be updated to the interface
 ----------------------------------------------------------------------------------------------
 *)
 
@@ -8427,7 +8428,7 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.actRmirrorsOpenURLActiveExecute(Sender: TObject);
+procedure TfrmTinnMain.actRmirrorsOpenURLDefaultExecute(Sender: TObject);
 begin
   OpenUrl(frmTools.stbRMirrors.Panels[1].Text);
 end;
