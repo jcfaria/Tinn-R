@@ -5586,6 +5586,13 @@ procedure TfrmTinnMain.GetCallTip(var sRObject,
                          '''',
                          [rfReplaceAll]);
 
+    // Particular cases of R
+    // read.table(quote="\"'"  : it is very strange!
+    sRes:= StringReplace(sRes,
+                         '\\''''',
+                         '\"',
+                         [rfReplaceAll]);
+
     Result:= trim(sRes);
   end;
 
