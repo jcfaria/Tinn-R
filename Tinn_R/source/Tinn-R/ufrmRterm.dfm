@@ -159,7 +159,7 @@ object frmRterm: TfrmRterm
   object TBToolbarRterm: TTBToolbar
     Left = 92
     Top = 2
-    Width = 300
+    Width = 375
     Height = 22
     Caption = 'TBToolbarRterm'
     Color = clBtnHighlight
@@ -169,6 +169,17 @@ object frmRterm: TfrmRterm
       Action = frmTinnMain.actRContTermStartClose
     end
     object TBSeparatorItem5: TTBSeparatorItem
+    end
+    object TBItem41: TTBItem
+      Action = frmTinnMain.actRContHelpSelectedWord
+    end
+    object TBItem40: TTBItem
+      Action = frmTinnMain.actRContExampleSelectedWord
+    end
+    object TBItem42: TTBItem
+      Action = frmTinnMain.actRContHelp
+    end
+    object TBSeparatorItem2: TTBSeparatorItem
     end
     object TBSubmenuItem10: TTBSubmenuItem
       Caption = 'Edit'

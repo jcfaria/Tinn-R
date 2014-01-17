@@ -1921,6 +1921,14 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
+    N169: TMenuItem;
+    Helpselected1: TMenuItem;
+    Exampleselected1: TMenuItem;
+    Help2: TMenuItem;
+    N190: TMenuItem;
+    Helpselected2: TMenuItem;
+    Exampleselected2: TMenuItem;
+    Help3: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -6344,10 +6352,10 @@ begin
   actRContCloseAllGraphics.Enabled     := bOption;
   actRContEditVariable.Enabled         := bOption and (pgFiles.PageCount > 0);
   actRContEscape.Enabled               := bOption and not Rterm_Running;
-  actRContExampleSelectedWord.Enabled  := bOption and (pgFiles.PageCount > 0);
+  actRContExampleSelectedWord.Enabled  := bOption;
   actRContFixVariable.Enabled          := bOption and (pgFiles.PageCount > 0);
   actRContHelp.Enabled                 := bOption;
-  actRContHelpSelectedWord.Enabled     := bOption and (pgFiles.PageCount > 0);
+  actRContHelpSelectedWord.Enabled     := bOption;
   actRContListAllObjects.Enabled       := bOption;
   actRContListVariableNames.Enabled    := bOption and (pgFiles.PageCount > 0);
   actRContListVariableStructure.Enabled:= bOption and (pgFiles.PageCount > 0);
@@ -10154,10 +10162,9 @@ var
   seTmp: TSynEdit;
 
 begin
-  if (pgFiles.PageCount = 0) then Exit;
-
   seTmp:= nil;
   case iSynWithFocus of
+    0: Exit;
     1: seTmp:= (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor;
     2: seTmp:= (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor2;
     3: seTmp:= frmRterm.synIO;

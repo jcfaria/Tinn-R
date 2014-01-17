@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{41404e8d-7c9c-4960-8fe4-9710c13b5832}</ProjectGuid>
     <MainSource>Tinn_R.dpr</MainSource>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
     <DCC_DependencyCheckOutputName>..\..\bin\Tinn_R.exe</DCC_DependencyCheckOutputName>

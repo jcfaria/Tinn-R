@@ -4028,7 +4028,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsComments
+        ActivePage = tbsCompletion
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

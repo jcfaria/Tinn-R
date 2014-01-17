@@ -124,6 +124,10 @@ type
     TBSubmenuItem8: TTBSubmenuItem;
     TBSubmenuItem9: TTBSubmenuItem;
     TBToolbarRterm: TTBToolbar;
+    TBItem40: TTBItem;
+    TBItem41: TTBItem;
+    TBItem42: TTBItem;
+    TBSeparatorItem2: TTBSeparatorItem;
 
     procedure cRTermError(Sender: TObject; const Cmd: string);
     procedure cRTermProcessStatusChange(Sender: TObject; IsRunning: Boolean);
