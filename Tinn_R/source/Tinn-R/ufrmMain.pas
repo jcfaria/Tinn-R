@@ -227,8 +227,9 @@ type
     actCompletionCopyDescrition: TAction;
     actCompletionCopyFunction: TAction;
     actCompletionEdit: TAction;
-    actCompletionExample: TAction;
+    actCompletionExampleSelected: TAction;
     actCompletionHelp: TAction;
+    actCompletionHelpSelected: TAction;
     actCompletionInsert: TAction;
     actCopyFormatted: TAction;
     actCopyFormattedHtml: TAction;
@@ -379,8 +380,9 @@ type
     actRcardCopyDescrition: TAction;
     actRcardCopyFunction: TAction;
     actRcardEdit: TAction;
-    actRcardExample: TAction;
-    actRcardHelp: TAction;
+    actRCardExampleSelected: TAction;
+    actRCardHelp: TAction;
+    actRCardHelpSelected: TAction;
     actRcardInsert: TAction;
     actRComplexDefault: TAction;
     actRContClearAll: TAction;
@@ -426,13 +428,14 @@ type
     actRExplorerBasic: TAction;
     actRExplorerContent: TAction;
     actRExplorerEdit: TAction;
-    actRExplorerExample: TAction;
+    actRExplorerExampleSelected: TAction;
     actRExplorerExpAscii: TAction;
     actRExplorerExpHtml: TAction;
     actRExplorerExpRaw: TAction;
     actRExplorerExpTeX: TAction;
     actRExplorerFix: TAction;
     actRExplorerHelp: TAction;
+    actRExplorerHelpSelected: TAction;
     actRExplorerNames: TAction;
     actRExplorerPlot: TAction;
     actRExplorerRefresh: TAction;
@@ -613,10 +616,16 @@ type
     Edit1: TMenuItem;
     Editorshowhide1: TMenuItem;
     ESS1: TMenuItem;
+    Exampleselected1: TMenuItem;
+    Exampleselected2: TMenuItem;
     Explorer1: TMenuItem;
     Fontofactivecontrolnotpermanent1: TMenuItem;
     GoogleCodeWiki1: TMenuItem;
     Help1: TMenuItem;
+    Help2: TMenuItem;
+    Help3: TMenuItem;
+    Helpselected1: TMenuItem;
+    Helpselected2: TMenuItem;
     imlProject: TImageList;
     imlRexplorer: TImageList;
     imlSearch: TImageList;
@@ -1223,6 +1232,7 @@ type
     N166: TMenuItem;
     N167: TMenuItem;
     N168: TMenuItem;
+    N169: TMenuItem;
     N17: TMenuItem;
     N170: TMenuItem;
     N171: TMenuItem;
@@ -1246,6 +1256,7 @@ type
     N188: TMenuItem;
     N189: TMenuItem;
     N19: TMenuItem;
+    N190: TMenuItem;
     N2: TMenuItem;
     N20: TMenuItem;
     N21: TMenuItem;
@@ -1921,14 +1932,8 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    N169: TMenuItem;
-    Helpselected1: TMenuItem;
-    Exampleselected1: TMenuItem;
-    Help2: TMenuItem;
-    N190: TMenuItem;
-    Helpselected2: TMenuItem;
-    Exampleselected2: TMenuItem;
-    Help3: TMenuItem;
+    menHelSecrets: TMenuItem;
+    N191: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -1946,9 +1951,9 @@ type
     procedure actCompletionCopyDescritionExecute(Sender: TObject);
     procedure actCompletionCopyFunctionExecute(Sender: TObject);
     procedure actCompletionEditExecute(Sender: TObject);
-    procedure actCompletionExampleExecute(Sender: TObject);
+    procedure actCompletionExampleSelectedExecute(Sender: TObject);
     procedure actCompletionExecute(Sender: TObject);
-    procedure actCompletionHelpExecute(Sender: TObject);
+    procedure actCompletionHelpSelectedExecute(Sender: TObject);
     procedure actCompletionInsertExecute(Sender: TObject);
     procedure actCopyFormattedExecute(Sender: TObject);
     procedure actCopyFormattedHtmlExecute(Sender: TObject);
@@ -2070,8 +2075,8 @@ type
     procedure actRcardCopyDescritionExecute(Sender: TObject);
     procedure actRcardCopyFunctionExecute(Sender: TObject);
     procedure actRcardEditExecute(Sender: TObject);
-    procedure actRcardExampleExecute(Sender: TObject);
-    procedure actRcardHelpExecute(Sender: TObject);
+    procedure actRCardExampleSelectedExecute(Sender: TObject);
+    procedure actRCardHelpSelectedExecute(Sender: TObject);
     procedure actRcardInsertExecute(Sender: TObject);
     procedure actRComplexDefaultExecute(Sender: TObject);
     procedure actRContClearAllExecute(Sender: TObject);
@@ -2118,13 +2123,13 @@ type
     procedure actRExplorerBasicExecute(Sender: TObject);
     procedure actRExplorerContentExecute(Sender: TObject);
     procedure actRExplorerEditExecute(Sender: TObject);
-    procedure actRExplorerExampleExecute(Sender: TObject);
+    procedure actRExplorerExampleSelectedExecute(Sender: TObject);
     procedure actRExplorerExpAsciiExecute(Sender: TObject);
     procedure actRExplorerExpHtmlExecute(Sender: TObject);
     procedure actRExplorerExpRawExecute(Sender: TObject);
     procedure actRExplorerExpTeXExecute(Sender: TObject);
     procedure actRExplorerFixExecute(Sender: TObject);
-    procedure actRExplorerHelpExecute(Sender: TObject);
+    procedure actRExplorerHelpSelectedExecute(Sender: TObject);
     procedure actRExplorerNamesExecute(Sender: TObject);
     procedure actRExplorerPlotExecute(Sender: TObject);
     procedure actRExplorerRefreshExecute(Sender: TObject);
@@ -2457,6 +2462,10 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
+    procedure actRCardHelpExecute(Sender: TObject);
+    procedure actCompletionHelpExecute(Sender: TObject);
+    procedure actRExplorerHelpExecute(Sender: TObject);
+    procedure menHelSecretsClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -2875,6 +2884,7 @@ type
     procedure OpenAllFilesOfGroup;
     procedure OpenFileFromSearch;
     procedure OpenFileIntoTinn(sFile: string; iLineNumberJump: integer = 0; bOpenProjetcText: boolean = False; bUpdateMRU: boolean = True);
+    procedure OpenUserGuidePDF(sWhere: string);
     procedure PrintMessage(sInstruction: string; bNewLine: boolean; sSignal: string = '> ');
     procedure RemoveTab(sTabCaption: string);
     procedure SendRCustom(sRC: string);
@@ -5752,14 +5762,19 @@ begin
                length(sRClassFor));
     end;
 
-    if (sRClassFor <> EmptyStr) then
+    if (sRClassFor <> EmptyStr) then begin
       if (sRClassFor[length(sRClassFor)] = ',') then
         Delete(sRClassFor,
                length(sRClassFor),
                1);
 
-    try
+      sRClassFor:= StringReplace(sRClassFor,
+                                 '''',
+                                 '"',
+                                 [rfReplaceAll]);  // Avoid problem with read.table(file='test',
+    end;
 
+    try
       GetTipFrom_TCPIP(sRClassFor);
     finally
       //TODO
@@ -6387,12 +6402,12 @@ begin
   menRtermHistoryPrior.Enabled  := bOption and Rterm_Running;
 
   // Rcard
-  actRcardExample.Enabled:= bOption;
-  actRcardHelp.Enabled   := bOption;
+  actRcardExampleSelected.Enabled:= bOption;
+  actRcardHelpSelected.Enabled   := bOption;
 
   // Rcompletion
-  actCompletionExample.Enabled:= bOption;
-  actCompletionHelp.Enabled   := bOption;
+  actCompletionExampleSelected.Enabled:= bOption;
+  actCompletionHelpSelected.Enabled   := bOption;
 
   // Rmirrors
   actRmirrorsSetRepos.Enabled:= bOption;
@@ -6517,27 +6532,55 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.menHelUserGuideClick(Sender: TObject);
+procedure TfrmTinnMain.OpenUserGuidePDF(sWhere: string);
 var
-  sFile: string;
+  sFile,
+   sViewerDefault,
+   sPathSumatra,
+   sParameter: string;
 
 begin
   sFile:= sPathTinnR +
           '\doc\User guide.pdf';
+
+  sParameter:= '-reuse-instance ' +
+               '-named-dest ' +
+               sWhere;
   try
-    // Open browser
-    ShellExecute(0,
-                 'open',
-                 Pchar(sFile),
-                 nil,
-                 nil,
-                 sw_shownormal);
+    sViewerDefault:= GetAssociation('.pdf');
+
+    if pos('Sumatra',
+           sViewerDefault) > 0 then
+      // Open default PDF viewer
+      ShellExecute(0,
+                   'open',
+                   Pchar(sFile),
+                   Pchar(sParameter),
+                   nil,
+                   sw_shownormal)
+    else begin
+      sPathSumatra:= sPathTinnR +
+                     '\sumatra\SumatraPDF.exe';
+
+      // Open SumatraPDF viewer
+      OpenCmdLine(sPathSumatra +
+                  ' "' +
+                  sFile +
+                  '"' +
+                  sParameter,
+                  sw_shownormal);
+    end;
   except
     MessageDlg('PDF viewer is not accessible!',
                mtInformation,
                [mbOk],
                0);
   end;
+end;
+
+procedure TfrmTinnMain.menHelUserGuideClick(Sender: TObject);
+begin
+  OpenUserGuidePDF('"Contents"');
 end;
 
 procedure TfrmTinnMain.menHelUserListClick(Sender: TObject);
@@ -8421,26 +8464,8 @@ begin
 end;
 
 procedure TfrmTinnMain.actRmirrorsHelpExecute(Sender: TObject);
-var
-  sFile: string;
-
 begin
-  sFile:= sPathTinnR + '\doc\User guide.pdf';
-
-  try
-    // Open
-    ShellExecute(0,
-                 nil,
-                 Pchar(sFile),
-                 nil,
-                 nil,
-                 sw_shownormal);
-  except
-    MessageDlg('Viewer is not accessible!',
-               mtInformation,
-               [mbOk],
-               0);
-  end;
+  OpenUserGuidePDF('"Tools interface"');
 end;
 
 procedure TfrmTinnMain.actRmirrorsOpenURLDefaultExecute(Sender: TObject);
@@ -10911,6 +10936,11 @@ begin
   OpenUrl('www.statsoftinc.com/textbook/stathome.html');
 end;
 
+procedure TfrmTinnMain.menHelSecretsClick(Sender: TObject);
+begin
+  OpenUserGuidePDF('"Some Secrets for an Efficient Use"');
+end;
+
 procedure TfrmTinnMain.menWebSearchSelGoogleClick(Sender: TObject);
 var
   sTmp,
@@ -12939,13 +12969,13 @@ procedure TfrmTinnMain.SetRExplorer(bOption: boolean);
 begin
   actRExplorerContent.Enabled            := bOption;
   actRExplorerEdit.Enabled               := bOption;
-  actRExplorerExample.Enabled            := bOption;
+  actRExplorerExampleSelected.Enabled    := bOption;
   actRExplorerExpAscii.Enabled           := bOption;
   actRExplorerExpHtml.Enabled            := bOption;
   actRExplorerExpRaw.Enabled             := bOption;
   actRExplorerExpTeX.Enabled             := bOption;
   actRExplorerFix.Enabled                := bOption;
-  actRExplorerHelp.Enabled               := bOption;
+  actRExplorerHelpSelected.Enabled       := bOption;
   actRExplorerNames.Enabled              := bOption;
   actRExplorerPlot.Enabled               := bOption;
   actRExplorerRemove.Enabled             := bOption;
@@ -13756,6 +13786,11 @@ begin
 end;
 
 procedure TfrmTinnMain.actRExplorerHelpExecute(Sender: TObject);
+begin
+  OpenUserGuidePDF('"Tools interface"');
+end;
+
+procedure TfrmTinnMain.actRExplorerHelpSelectedExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -13767,7 +13802,7 @@ begin
   DoSend(sTmp);
 end;
 
-procedure TfrmTinnMain.actRExplorerExampleExecute(Sender: TObject);
+procedure TfrmTinnMain.actRExplorerExampleSelectedExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -13969,7 +14004,12 @@ begin
   DoSend(sTmp);
 end;
 
-procedure TfrmTinnMain.actRcardHelpExecute(Sender: TObject);
+procedure TfrmTinnMain.actRCardHelpExecute(Sender: TObject);
+begin
+  OpenUserGuidePDF('"Tools interface"');
+end;
+
+procedure TfrmTinnMain.actRCardHelpSelectedExecute(Sender: TObject);
 
   function GetWord: string;
   var
@@ -14026,7 +14066,7 @@ begin
               0);
 end;
 
-procedure TfrmTinnMain.actRcardExampleExecute(Sender: TObject);
+procedure TfrmTinnMain.actRCardExampleSelectedExecute(Sender: TObject);
 
   function GetWord: string;
   var
@@ -18314,26 +18354,8 @@ begin
 end;
 
 procedure TfrmTinnMain.actShortcutsHelpExecute(Sender: TObject);
-var
-  sFile: string;
-
 begin
-  sFile:= sPathTinnR + '\doc\User guide.pdf';
-
-  try
-    // Open
-    ShellExecute(0,
-                 nil,
-                 Pchar(sFile),
-                 nil,
-                 nil,
-                 sw_shownormal);
-  except
-    MessageDlg('Viewer is not accessible!',
-               mtInformation,
-               [mbOk],
-               0);
-  end;
+  OpenUserGuidePDF('"Database"');
 end;
 
 procedure TfrmTinnMain.actFindExecute(Sender: TObject);
@@ -18684,26 +18706,8 @@ begin
 end;
 
 procedure TfrmTinnMain.actCommentsHelpExecute(Sender: TObject);
-var
-  sFile: string;
-
 begin
-  sFile:= sPathTinnR + '\doc\User guide.pdf';
-
-  try
-    // Open
-    ShellExecute(0,
-                 nil,
-                 Pchar(sFile),
-                 nil,
-                 nil,
-                 sw_shownormal);
-  except
-    MessageDlg('Viewer is not accessible!',
-               mtInformation,
-               [mbOk],
-               0);
-  end;
+  OpenUserGuidePDF('"Database"');
 end;
 
 procedure TfrmTinnMain.actCompletionCopyDescritionExecute(Sender: TObject);
@@ -18725,7 +18729,7 @@ begin
   menToolsDatabaseCompletionClick(nil);
 end;
 
-procedure TfrmTinnMain.actCompletionExampleExecute(Sender: TObject);
+procedure TfrmTinnMain.actCompletionExampleSelectedExecute(Sender: TObject);
 
   function GetWord: string;
   var
@@ -18780,6 +18784,11 @@ begin
 end;
 
 procedure TfrmTinnMain.actCompletionHelpExecute(Sender: TObject);
+begin
+  OpenUserGuidePDF('"Database"');
+end;
+
+procedure TfrmTinnMain.actCompletionHelpSelectedExecute(Sender: TObject);
 
   function GetWord: string;
   var

@@ -407,6 +407,7 @@ type
     WindowText1: TMenuItem;
     Label25: TLabel;
     Label26: TLabel;
+    bbHelp: TBitBtn;
 
     procedure bbtConPathDeplateClick(Sender: TObject);
     procedure bbtConPathTxt2tagsClick(Sender: TObject);
@@ -458,6 +459,7 @@ type
     procedure tbLastSearchChange(Sender: TObject);
     procedure tbRguiTinnRProportionChange(Sender: TObject);
     procedure tbTransparencyPosChange(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -838,6 +840,11 @@ end;
 procedure TfrmAppOptions.bbtParTxt2tagsClick(Sender: TObject);
 begin
   edParTxt2tags.Text:= '-t';
+end;
+
+procedure TfrmAppOptions.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('"Application options"');
 end;
 
 procedure TfrmAppOptions.bbtConPathDeplateClick(Sender: TObject);

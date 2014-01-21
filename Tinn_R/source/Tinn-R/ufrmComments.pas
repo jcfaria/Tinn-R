@@ -80,6 +80,7 @@ type
     Label8: TLabel;
     Panel2: TPanel;
     stbComments: TStatusBar;
+    bbHelp: TBitBtn;
 
     procedure bbtCommentsCancelAllClick(Sender: TObject);
     procedure bbtCommentsCancelClick(Sender: TObject);
@@ -94,6 +95,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -286,6 +288,11 @@ procedure TfrmComments.dbgCommentsTitleClick(Column: TColumn);
 begin
   with modDados.cdComments do
     IndexFieldNames:= Column.FieldName;
+end;
+
+procedure TfrmComments.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('"Database"');
 end;
 
 procedure TfrmComments.bbtCommentsCancelAllClick(Sender: TObject);

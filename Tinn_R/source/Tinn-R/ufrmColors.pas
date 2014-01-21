@@ -79,7 +79,7 @@ type
     lbHighlighters: TListBox;
     lbIdentifiers: TListBox;
     lHighlighters: TLabel;
-    lWarning: TLabel;
+    lWarning_1: TLabel;
     shActiveLine: TtrShape;
     shBG: TtrShape;
     shBGAllHighlighters: TtrShape;
@@ -88,6 +88,8 @@ type
     shFG: TtrShape;
     gpbSample: TGroupBox;
     synSample: TSynEdit;
+    lWarning_2: TLabel;
+    bbHelp: TBitBtn;
 
     procedure actTextAttributesExecute(Sender: TObject);
     procedure bbtOKClick(Sender: TObject);
@@ -109,6 +111,7 @@ type
     procedure shFGMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure synSampleChange(Sender: TObject);
     procedure synSampleClick(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -396,13 +399,15 @@ begin
       if MatchStr(sHighlighter,
                   aSynMultiSyn) then begin
         //gpbAttributes.Enabled:= False;  // This is so invasive
-        lWarning.Visible     := True;
+        lWarning_1.Visible   := True;
+        lWarning_2.Visible   := True;
         lHighlighters.Visible:= True;
         ShowStructure(dmSyn.Components[j] as TSynMultiSyn)
       end
       else begin
         //gpbAttributes.Enabled:= True;  // This is so invasive
-        lWarning.Visible     := False;
+        lWarning_1.Visible   := False;
+        lWarning_2.Visible   := False;
         lHighlighters.Visible:= False;
       end;
       Break;
@@ -498,6 +503,11 @@ end;
 procedure TfrmColors.lbIdentifiersClick(Sender: TObject);
 begin
   ShowAttributes;
+end;
+
+procedure TfrmColors.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('"Highlighters (settings)"');
 end;
 
 procedure TfrmColors.bbtOKClick(Sender: TObject);

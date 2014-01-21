@@ -84,6 +84,7 @@ type
     dbeURL: TDBEdit;
     Label9: TLabel;
     dbeCode: TDBEdit;
+    bbHelp: TBitBtn;
 
     procedure bbtRmirrorsCancelAllClick(Sender: TObject);
     procedure bbtRmirrorsCancelClick(Sender: TObject);
@@ -101,6 +102,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -354,6 +356,11 @@ procedure TfrmRmirrors.dbgRmirrorsTitleClick(Column: TColumn);
 begin
   with modDados.cdRmirrors do
     IndexFieldNames:= Column.FieldName;
+end;
+
+procedure TfrmRmirrors.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('"Database"');
 end;
 
 procedure TfrmRmirrors.bbtRmirrorsCancelAllClick(Sender: TObject);

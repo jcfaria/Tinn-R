@@ -9,13 +9,13 @@ AppPublisher         = Tinn-R Team
 AppPublisherURL      = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppSupportURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppUpdatesURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppVerName           = Tinn-R 3.0.2.7
+AppVerName           = Tinn-R 3.0.2.8
 ChangesAssociations  = true
 Compression          = lzma
 DefaultDirName       = {sd}\Tinn-R
 DefaultGroupName     = Tinn-R
 LicenseFile          = ..\doc\licence_gpl3.txt
-OutputBaseFilename   = Tinn-R_3.0.2.7_setup
+OutputBaseFilename   = Tinn-R_3.0.2.8_setup
 OutputDir            = ..\install_setup\bin
 SolidCompression     = yes
 WizardImageFile      = ..\res\setup.bmp
@@ -50,8 +50,8 @@ Source: ..\doc\textdiff.hlp;                    DestDir: {app}\doc
 Source: ..\doc\Tinn-R_recognized words.r;       DestDir: {app}\doc
 Source: ..\doc\User guide.pdf;                  DestDir: {app}\doc
 Source: ..\latex\latex.zip;                     DestDir: {app}\latex
-Source: ..\package\TinnRcom_1.0-14.tar.gz;      DestDir: {app}\package
-Source: ..\package\TinnRcom_1.0-14.zip;         DestDir: {app}\package
+Source: ..\package\TinnRcom_1.0-15.tar.gz;      DestDir: {app}\package
+Source: ..\package\TinnRcom_1.0-15.zip;         DestDir: {app}\package
 Source: ..\res\logo.jpg;                        DestDir: {app}\res
 Source: ..\res\sp_00.jpg;                       DestDir: {app}\res
 Source: ..\res\sp_01.jpg;                       DestDir: {app}\res
@@ -70,6 +70,7 @@ Source: ..\sample\deplate.dplt;                 DestDir: {app}\sample
 Source: ..\sample\pandoc.markdown;              DestDir: {app}\sample
 Source: ..\sample\Tinn-R_example of script.r;   DestDir: {app}\sample
 Source: ..\sample\txt2tags.t2t;                 DestDir: {app}\sample
+SOurce: ..\sumatra\SumatraPDF.exe;              DestDir: {app}\sumatra
 Source: ..\templates\R doc_dataset.Rd;          DestDir: {app}\templates
 Source: ..\templates\R doc_empty.Rd;            DestDir: {app}\templates
 Source: ..\templates\R doc_function.Rd;         DestDir: {app}\templates

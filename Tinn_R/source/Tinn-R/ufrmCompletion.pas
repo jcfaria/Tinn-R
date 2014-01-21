@@ -80,6 +80,7 @@ type
     Label7: TLabel;
     Panel2: TPanel;
     stbCompletion: TStatusBar;
+    bbHelp: TBitBtn;
 
     procedure bbtCompletionCancelAllClick(Sender: TObject);
     procedure bbtCompletionCancelClick(Sender: TObject);
@@ -97,6 +98,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -343,6 +345,11 @@ procedure TfrmCompletion.dbgCompletionTitleClick(Column: TColumn);
 begin
   with modDados.cdCompletion do
     IndexFieldNames:= Column.FieldName;
+end;
+
+procedure TfrmCompletion.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('"Database"');
 end;
 
 procedure TfrmCompletion.bbtCompletionCancelAllClick(Sender: TObject);

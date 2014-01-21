@@ -39,7 +39,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 320
     Height = 565
-    ActivePage = tbsR
+    ActivePage = tbsDatabase
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -4028,7 +4028,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsCompletion
+        ActivePage = tbsComments
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4104,8 +4104,6 @@ object frmTools: TfrmTools
                 DockPos = 0
                 Images = frmTinnMain.imlTinnR
                 TabOrder = 0
-                object TBSeparatorItem5: TTBSeparatorItem
-                end
                 object TBItem24: TTBItem
                   Action = frmTinnMain.actShortcutsHelp
                 end
@@ -4411,13 +4409,16 @@ object frmTools: TfrmTools
                 DockPos = 0
                 Images = frmTinnMain.imlTinnR
                 TabOrder = 0
-                object TBSeparatorItemCompletion18: TTBSeparatorItem
-                end
                 object TBItemCompletion23: TTBItem
                   Action = frmTinnMain.actCompletionHelp
                 end
+                object TBSeparatorItem18: TTBSeparatorItem
+                end
+                object TBItem35: TTBItem
+                  Action = frmTinnMain.actCompletionHelpSelected
+                end
                 object TBItem21: TTBItem
-                  Action = frmTinnMain.actCompletionExample
+                  Action = frmTinnMain.actCompletionExampleSelected
                 end
                 object TBSeparatorItemCompletion21: TTBSeparatorItem
                 end
@@ -4552,8 +4553,6 @@ object frmTools: TfrmTools
                 DockPos = 0
                 Images = frmTinnMain.imlTinnR
                 TabOrder = 0
-                object TBSeparatorItem2: TTBSeparatorItem
-                end
                 object TBItem9: TTBItem
                   Action = frmTinnMain.actCommentsHelp
                 end
@@ -4601,7 +4600,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsRMirrors
+        ActivePage = tbsRExplorer
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4847,8 +4846,13 @@ object frmTools: TfrmTools
                 object TBItem13: TTBItem
                   Action = frmTinnMain.actRExplorerHelp
                 end
+                object TBSeparatorItem20: TTBSeparatorItem
+                end
+                object TBItem39: TTBItem
+                  Action = frmTinnMain.actRExplorerHelpSelected
+                end
                 object TBItem14: TTBItem
-                  Action = frmTinnMain.actRExplorerExample
+                  Action = frmTinnMain.actRExplorerExampleSelected
                 end
                 object TBSeparatorItem19: TTBSeparatorItem
                 end
@@ -4888,7 +4892,7 @@ object frmTools: TfrmTools
                 end
                 object TBSubmenuItem1: TTBSubmenuItem
                   Caption = 'Name'
-                  Hint = 'R explorer: name'
+                  Hint = 'Explorer (R): name'
                   ImageIndex = 195
                   object TBItem12: TTBItem
                     Action = frmTinnMain.actRExplorerSendNameToEditor
@@ -4899,7 +4903,7 @@ object frmTools: TfrmTools
                 end
                 object TBSubmenuItem4: TTBSubmenuItem
                   Caption = 'Content'
-                  Hint = 'R explorer: content'
+                  Hint = 'Explorer (R): content'
                   ImageIndex = 196
                   object TBItem19: TTBItem
                     Action = frmTinnMain.actRExplorerExpRaw
@@ -5239,19 +5243,22 @@ object frmTools: TfrmTools
                 DockPos = 0
                 Images = frmTinnMain.imlTinnR
                 TabOrder = 0
-                object TBSeparatorItemRCard18: TTBSeparatorItem
-                end
                 object TBItemRCard23: TTBItem
                   Action = frmTinnMain.actRCardHelp
                 end
+                object TBSeparatorItemRCard18: TTBSeparatorItem
+                end
+                object TBItem40: TTBItem
+                  Action = frmTinnMain.actRCardHelpSelected
+                end
                 object TBItemRCard24: TTBItem
-                  Action = frmTinnMain.actRCardExample
+                  Action = frmTinnMain.actRCardExampleSelected
                 end
                 object TBSeparatorItemRCard20: TTBSeparatorItem
                 end
                 object TBSubmenuItemRCard2: TTBSubmenuItem
                   Caption = 'Copy'
-                  Hint = 'R card: copy'
+                  Hint = 'Card (R): copy'
                   ImageIndex = 50
                   object TBItemRCard25: TTBItem
                     Action = frmTinnMain.actRCardCopyFunction
@@ -5312,8 +5319,6 @@ object frmTools: TfrmTools
                 DockPos = 0
                 Images = frmTinnMain.imlTinnR
                 TabOrder = 0
-                object TBSeparatorItem10: TTBSeparatorItem
-                end
                 object TBItem26: TTBItem
                   Action = frmTinnMain.actRmirrorsHelp
                 end
@@ -5326,7 +5331,7 @@ object frmTools: TfrmTools
                 end
                 object TBSubmenuItem3: TTBSubmenuItem
                   Caption = 'URL'
-                  Hint = 'Mirrors: open URL'
+                  Hint = 'Mirrors (R): open URL'
                   ImageIndex = 288
                   object TBItem33: TTBItem
                     Action = frmTinnMain.actRmirrorsOpenURLCurrent
@@ -5337,7 +5342,7 @@ object frmTools: TfrmTools
                 end
                 object TBSubmenuItem2: TTBSubmenuItem
                   Caption = 'Copy'
-                  Hint = 'Mirrors: copy'
+                  Hint = 'Mirrors (R): copy'
                   ImageIndex = 50
                   object TBItem29: TTBItem
                     Action = frmTinnMain.actRmirrorsCopyHost

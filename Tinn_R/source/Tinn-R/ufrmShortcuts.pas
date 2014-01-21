@@ -82,6 +82,7 @@ type
     jvhkShortcut: TJvHotKey;
     imgShortcut: TImage;
     Label8: TLabel;
+    bbHelp: TBitBtn;
 
     procedure bbtShortcutsCancelAllClick(Sender: TObject);
     procedure bbtShortcutsCancelClick(Sender: TObject);
@@ -111,6 +112,7 @@ type
     procedure dbmHintEnter(Sender: TObject);
     procedure jvhkShortcutKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -614,6 +616,11 @@ end;
 procedure TfrmShortcuts.DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
 begin
   ClearWarnings;
+end;
+
+procedure TfrmShortcuts.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('"Database"');
 end;
 
 procedure TfrmShortcuts.bbtShortcutsCancelAllClick(Sender: TObject);

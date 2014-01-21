@@ -355,10 +355,13 @@ type
     TBItem32: TTBItem;
     TBItem33: TTBItem;
     TBItem34: TTBItem;
+    TBItem35: TTBItem;
     TBItem36: TTBItem;
     TBItem37: TTBItem;
     TBItem38: TTBItem;
+    TBItem39: TTBItem;
     TBItem4: TTBItem;
+    TBItem40: TTBItem;
     TBItem46: TTBItem;
     TBItem47: TTBItem;
     TBItem5: TTBItem;
@@ -408,7 +411,6 @@ type
     tbsCompletion: TTabSheet;
     tbsDatabase: TTabSheet;
     TBSeparatorItem1: TTBSeparatorItem;
-    TBSeparatorItem10: TTBSeparatorItem;
     TBSeparatorItem11: TTBSeparatorItem;
     TBSeparatorItem12: TTBSeparatorItem;
     TBSeparatorItem13: TTBSeparatorItem;
@@ -416,8 +418,9 @@ type
     TBSeparatorItem15: TTBSeparatorItem;
     TBSeparatorItem16: TTBSeparatorItem;
     TBSeparatorItem17: TTBSeparatorItem;
+    TBSeparatorItem18: TTBSeparatorItem;
     TBSeparatorItem19: TTBSeparatorItem;
-    TBSeparatorItem2: TTBSeparatorItem;
+    TBSeparatorItem20: TTBSeparatorItem;
     TBSeparatorItem26: TTBSeparatorItem;
     TBSeparatorItem29: TTBSeparatorItem;
     TBSeparatorItem3: TTBSeparatorItem;
@@ -426,7 +429,6 @@ type
     TBSeparatorItem34: TTBSeparatorItem;
     TBSeparatorItem4: TTBSeparatorItem;
     TBSeparatorItem41: TTBSeparatorItem;
-    TBSeparatorItem5: TTBSeparatorItem;
     TBSeparatorItem6: TTBSeparatorItem;
     TBSeparatorItem7: TTBSeparatorItem;
     TBSeparatorItem8: TTBSeparatorItem;

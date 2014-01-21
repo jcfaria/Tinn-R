@@ -72,6 +72,7 @@ type
     tbsAboutCredits: TTabSheet;
     tbsAboutProject: TTabSheet;
     tbsAboutVersion: TTabSheet;
+    bbHelp: TBitBtn;
     
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -88,6 +89,7 @@ type
     procedure lblURLWebPageClick(Sender: TObject);
     procedure lblURLWebPageMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure tbsAboutVersionMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -308,6 +310,11 @@ procedure TfrmAbout.tbsAboutVersionMouseMove(Sender: TObject;
 begin
   lblURLWebPage.Font.Style:= [];
   lblURLSourceforge.Font.Style:= [];
+end;
+
+procedure TfrmAbout.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('"Contents"');
 end;
 
 procedure TfrmAbout.FormActivate(Sender: TObject);

@@ -54,7 +54,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Controls, Forms, Dialogs, StdCtrls,
   ComCtrls, ExtCtrls, Grids, inifiles, FileCtrl, JvAppHotKey,
-  JvExComCtrls, JvHotKey, JvComCtrls, JvgPage, EditAlign, Graphics;
+  JvExComCtrls, JvHotKey, JvComCtrls, JvgPage, EditAlign, Graphics, Buttons;
 
 type
   TfrmHotKeys = class(TForm)
@@ -72,6 +72,7 @@ type
     strgDefault: TStringGrid;
     tbsCustom: TTabSheet;
     tbsDefault: TTabSheet;
+    bbHelp: TBitBtn;
 
     procedure btnAddHotKeyClick(Sender: TObject);
     procedure btnClearAllHotKeysClick(Sender: TObject);
@@ -90,6 +91,7 @@ type
     procedure strgDefaultClick(Sender: TObject);
     procedure strgDefaultDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure strgDefaultSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     bNothing: boolean;
@@ -270,6 +272,11 @@ begin
   end;
 
   pgHotkeys.TabIndex:= 0;
+end;
+
+procedure TfrmHotKeys.bbHelpClick(Sender: TObject);
+begin
+  frmTinnMain.OpenUserGuidePDF('" Hotkeys (operational system)"');
 end;
 
 procedure TfrmHotKeys.btnAddHotKeyClick(Sender: TObject);
