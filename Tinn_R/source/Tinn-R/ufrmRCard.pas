@@ -310,7 +310,7 @@ end;
 
 procedure TfrmRcard.bbHelpClick(Sender: TObject);
 begin
-  frmTinnMain.OpenUserGuidePDF('"Database"');
+  frmTinnMain.OpenUserGuidePDF('"Card (R)"');
 end;
 
 procedure TfrmRcard.bbtRcardCancelAllClick(Sender: TObject);

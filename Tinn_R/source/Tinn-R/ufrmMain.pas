@@ -2500,6 +2500,7 @@ type
     bRTinnRcom_Installed           : boolean;
     bRTinnRcom_Load                : boolean;
     bRTinnRcom_Loaded              : boolean;
+    bRTinnRcom_Updating            : boolean;
     bRUseLatest                    : boolean;
     bScrollSendingLines            : boolean;
     bSearchDirectory               : boolean;
@@ -2554,6 +2555,7 @@ type
     sCurrentVersion_Rcard          : string;
     sCurrentVersion_Rmirrors       : string;
     sCurrentVersion_Shortcuts      : string;
+    sCurrentVersion_TinnRcom       : string;
     sDataCompletion                : string;
     sEncodingDefault               : string;
     sFileLatexOrigin               : string;
@@ -3000,6 +3002,7 @@ begin
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '3.00.02.06';
   sCurrentVersion_Shortcuts := '3.00.02.08';
+  sCurrentVersion_TinnRcom  := '1.0.15';  // Released joinly with Tinn-R setup program
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -8465,7 +8468,7 @@ end;
 
 procedure TfrmTinnMain.actRmirrorsHelpExecute(Sender: TObject);
 begin
-  OpenUserGuidePDF('"Tools interface"');
+  OpenUserGuidePDF('"Mirrors (R)"');
 end;
 
 procedure TfrmTinnMain.actRmirrorsOpenURLDefaultExecute(Sender: TObject);
@@ -10450,6 +10453,19 @@ begin
      bRTinnRcom_Load and  // The package (if installed) it is loaded aotomatically by: GetTinnRcom_Info
      bRsvSocket_Connect and
      not bTCPIPRunning then StartSocketServer_svSocket;
+
+  // Update TinnRcom package
+  if (AnsiCompareStr(sVersion_TinnRcomInstalled,
+                     sCurrentVersion_TinnRcom) < 0) then
+    if Rterm_Running and
+       (frmRTerm.cRterm.bRterm_Ready) then begin
+      bRTinnRcom_Updating:= True;
+      actRContPacInstTinnRcomExecute(nil);
+    end
+    else if Rgui_Running then begin
+      bRTinnRcom_Updating:= True;
+      actRContPacInstTinnRcomExecute(nil);
+    end;
 end;
 
 procedure TfrmTinnMain.GetTinnRcom_Info;
@@ -14006,7 +14022,7 @@ end;
 
 procedure TfrmTinnMain.actRCardHelpExecute(Sender: TObject);
 begin
-  OpenUserGuidePDF('"Tools interface"');
+  OpenUserGuidePDF('"Card (R)"');
 end;
 
 procedure TfrmTinnMain.actRCardHelpSelectedExecute(Sender: TObject);
@@ -18355,7 +18371,7 @@ end;
 
 procedure TfrmTinnMain.actShortcutsHelpExecute(Sender: TObject);
 begin
-  OpenUserGuidePDF('"Database"');
+  OpenUserGuidePDF('"Shortcuts"');
 end;
 
 procedure TfrmTinnMain.actFindExecute(Sender: TObject);
@@ -18707,7 +18723,7 @@ end;
 
 procedure TfrmTinnMain.actCommentsHelpExecute(Sender: TObject);
 begin
-  OpenUserGuidePDF('"Database"');
+  OpenUserGuidePDF('"Comments"');
 end;
 
 procedure TfrmTinnMain.actCompletionCopyDescritionExecute(Sender: TObject);
@@ -18785,7 +18801,7 @@ end;
 
 procedure TfrmTinnMain.actCompletionHelpExecute(Sender: TObject);
 begin
-  OpenUserGuidePDF('"Database"');
+  OpenUserGuidePDF('"Completion"');
 end;
 
 procedure TfrmTinnMain.actCompletionHelpSelectedExecute(Sender: TObject);
@@ -20233,7 +20249,7 @@ begin
   DoSend(sTmp);
 end;
 
-// Install TinnRcom from TinnRcom_X.X-X.zip
+// Install TinnRcom from TinnRcom_X.X.X.zip
 procedure TfrmTinnMain.actRContPacInstTinnRcomExecute(Sender: TObject);
 
   function IsPackageInstalled(sName: string): boolean;
@@ -20334,12 +20350,12 @@ begin
 
   // The user can be more than one source of the package.
   // So will install the latest version
-  sLatest:= 'TinnRcom_00.00-00.zip';
+  sLatest:= 'TinnRcom_00.00.00.zip';
 
   try
     // Try to find the source of TinnRcom package
     if FindFirst(sPathTinnRcom +
-                 '\TinnRcom_?.?-??.zip',
+                 '\TinnRcom_?.?.??.zip',
                  faAnyFile,
                  srTmp) = 0 then
     begin
@@ -20352,7 +20368,7 @@ begin
       FindClose(srTmp);
     end;
 
-    if (sLatest = 'TinnRcom_0.0-0.zip') then begin
+    if (sLatest = 'TinnRcom_0.0.0.zip') then begin
       MessageDlg(sPathTinnRcom + '\' + #13 + #13 +
                  'It was not possible to found a valid version of TinnRcom package in the path above.' + #13 + #13 +
                  'If it was manual (or accidentally) removed, please make a dowload and try it again!',
@@ -20380,6 +20396,22 @@ begin
     for i:= 0 to (slRLibPaths.Count - 1) do
       if DirectoryExists(slRLibPaths.Strings[i] +
                          sName) then begin
+        if bRTinnRcom_Updating then
+          MessageDlg('Package to install: '+
+                      sLatest + #13 + #13 +
+                      'Package installed: ' +
+                      'TinnRcom' +
+                      '_' +
+                      sVersion_TinnRcomInstalled + #13 +
+                      '(' +
+                      slRLibPaths.Strings[i] +
+                      sName +
+                      ')' + #13 + #13 +
+                      'The TinnRcom package will be updated to the latest version!',
+                      mtWarning,
+                      [mbOK],
+                      0)
+        else
         uOption:= MessageDlg('Package to install: '+
                              sLatest + #13 + #13 +
                              'Package installed: ' +
@@ -20408,13 +20440,17 @@ begin
 
     if (bRTinnRcom_Installed) then begin
       Sleep(5*iDelay);  // R is not fast to install TinnRcom package
+
       stbMain.Panels[7].Text:= 'Done!';
       stbMain.Panels[8].Text:= 'Installed package: TinnRcom';
+
+      bRTinnRcom_Updating:= False;
       Application.ProcessMessages;
     end
     else begin
       stbMain.Panels[7].Text:= 'Error!';
       stbMain.Panels[8].Text:= 'Not installed package: TinnRcom';
+
       Application.ProcessMessages;
     end;
   finally

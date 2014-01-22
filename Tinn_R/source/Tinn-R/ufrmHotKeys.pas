@@ -276,7 +276,7 @@ end;
 
 procedure TfrmHotKeys.bbHelpClick(Sender: TObject);
 begin
-  frmTinnMain.OpenUserGuidePDF('" Hotkeys (operational system)"');
+  frmTinnMain.OpenUserGuidePDF('"3.6 Hotkeys (operational system)"');
 end;
 
 procedure TfrmHotKeys.btnAddHotKeyClick(Sender: TObject);

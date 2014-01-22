@@ -620,7 +620,7 @@ end;
 
 procedure TfrmShortcuts.bbHelpClick(Sender: TObject);
 begin
-  frmTinnMain.OpenUserGuidePDF('"Database"');
+  frmTinnMain.OpenUserGuidePDF('"Shortcuts"');
 end;
 
 procedure TfrmShortcuts.bbtShortcutsCancelAllClick(Sender: TObject);

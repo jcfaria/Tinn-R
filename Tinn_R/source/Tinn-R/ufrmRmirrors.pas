@@ -360,7 +360,7 @@ end;
 
 procedure TfrmRmirrors.bbHelpClick(Sender: TObject);
 begin
-  frmTinnMain.OpenUserGuidePDF('"Database"');
+  frmTinnMain.OpenUserGuidePDF('"Mirrors (R)"');
 end;
 
 procedure TfrmRmirrors.bbtRmirrorsCancelAllClick(Sender: TObject);

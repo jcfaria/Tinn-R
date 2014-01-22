@@ -6,6 +6,14 @@
 # 2013-10-21 12:03:23
 #------------------------------------------------------------------------
 
+# Try to detach
+try(detach(package:TinnRcom),
+    silent=TRUE)
+
+# Try to remove
+try(remove.packages('TinnRcom'),
+    silent=TRUE)
+
 # Check packages TinnRcom depends
 depends <- c('svSocket',
              'formatR',

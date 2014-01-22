@@ -349,7 +349,7 @@ end;
 
 procedure TfrmCompletion.bbHelpClick(Sender: TObject);
 begin
-  frmTinnMain.OpenUserGuidePDF('"Database"');
+  frmTinnMain.OpenUserGuidePDF('"Completion"');
 end;
 
 procedure TfrmCompletion.bbtCompletionCancelAllClick(Sender: TObject);

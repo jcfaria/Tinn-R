@@ -32,5 +32,6 @@ del /S %1*.ressrc%2%3%4
 del /S %1*.cesettings%2%3%4
 del /S %1*.stat%2%3%4
 del /S %1*.ndx%2%3%4
-del /S %1*.exe%2%3%4
 del /S %1*.rar%2%3%4
+rem del /S %1*.exe%2%3%4
+

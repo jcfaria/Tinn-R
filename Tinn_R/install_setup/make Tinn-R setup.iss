@@ -50,8 +50,8 @@ Source: ..\doc\textdiff.hlp;                    DestDir: {app}\doc
 Source: ..\doc\Tinn-R_recognized words.r;       DestDir: {app}\doc
 Source: ..\doc\User guide.pdf;                  DestDir: {app}\doc
 Source: ..\latex\latex.zip;                     DestDir: {app}\latex
-Source: ..\package\TinnRcom_1.0-15.tar.gz;      DestDir: {app}\package
-Source: ..\package\TinnRcom_1.0-15.zip;         DestDir: {app}\package
+Source: ..\package\TinnRcom_1.0.15.tar.gz;      DestDir: {app}\package
+Source: ..\package\TinnRcom_1.0.15.zip;         DestDir: {app}\package
 Source: ..\res\logo.jpg;                        DestDir: {app}\res
 Source: ..\res\sp_00.jpg;                       DestDir: {app}\res
 Source: ..\res\sp_01.jpg;                       DestDir: {app}\res
