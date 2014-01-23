@@ -2,7 +2,7 @@ object frmTinnMain: TfrmTinnMain
   Left = 0
   Top = 0
   Width = 1026
-  Height = 902
+  Height = 1062
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -167,13 +167,14 @@ object frmTinnMain: TfrmTinnMain
     Left = 0
     Top = 100
     Width = 1
-    Height = 727
+    Height = 887
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
+    ExplicitHeight = 727
   end
   object Panel1: TPanel
     Left = 0
@@ -1142,12 +1143,13 @@ object frmTinnMain: TfrmTinnMain
     Left = 1
     Top = 100
     Width = 9
-    Height = 727
+    Height = 887
     BoundLines = [blTop, blBottom, blLeft, blRight]
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
+    ExplicitHeight = 727
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -1160,7 +1162,7 @@ object frmTinnMain: TfrmTinnMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 836
+    Top = 996
     Width = 1018
     Height = 20
     Anchors = [akLeft, akBottom]
@@ -1207,21 +1209,23 @@ object frmTinnMain: TfrmTinnMain
     SizeGrip = False
     OnClick = stbMainClick
     OnDrawPanel = stbMainDrawPanel
+    ExplicitTop = 836
   end
   object TBDockRight: TTBDock
     Left = 1009
     Top = 100
     Width = 9
-    Height = 727
+    Height = 887
     BoundLines = [blTop, blBottom, blLeft, blRight]
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
+    ExplicitHeight = 727
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 827
+    Top = 987
     Width = 1018
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -1229,6 +1233,7 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
+    ExplicitTop = 827
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -1619,6 +1624,12 @@ object frmTinnMain: TfrmTinnMain
     TextMargin = 1
     Left = 48
     Top = 304
+    object Help5: TMenuItem
+      Action = actRCardHelp
+    end
+    object N196: TMenuItem
+      Caption = '-'
+    end
     object pmenRCardHelp: TMenuItem
       Action = actRCardHelpSelected
     end
@@ -1702,7 +1713,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 144
     Bitmap = {
-      494C01010A00EC05EC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A00F005F00510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2117,6 +2128,12 @@ object frmTinnMain: TfrmTinnMain
     TextMargin = 1
     Left = 16
     Top = 304
+    object act1: TMenuItem
+      Action = actRExplorerHelp
+    end
+    object N195: TMenuItem
+      Caption = '-'
+    end
     object pmenRexplorerHelp: TMenuItem
       Action = actRExplorerHelpSelected
     end
@@ -2572,7 +2589,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 112
     Bitmap = {
-      494C01012401EC05EC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012401F005F00510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0040000010020000000000000A0
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -15284,7 +15301,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 176
     Bitmap = {
-      494C01010500EC05EC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010500F005F00510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -15784,7 +15801,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 208
     Bitmap = {
-      494C01010400EC05EC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400F005F00510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -19050,6 +19067,12 @@ object frmTinnMain: TfrmTinnMain
     TextMargin = 1
     Left = 48
     Top = 272
+    object Help4: TMenuItem
+      Action = actCompletionHelp
+    end
+    object N193: TMenuItem
+      Caption = '-'
+    end
     object MenuItem25: TMenuItem
       Action = actCompletionHelpSelected
     end
@@ -19198,6 +19221,9 @@ object frmTinnMain: TfrmTinnMain
     object Help1: TMenuItem
       Action = actShortcutsHelp
     end
+    object N192: TMenuItem
+      Caption = '-'
+    end
     object Edit1: TMenuItem
       Action = actShortcutsEdit
     end
@@ -19221,7 +19247,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 240
     Bitmap = {
-      494C01010400D402D40210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400D802D80210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -19511,6 +19537,9 @@ object frmTinnMain: TfrmTinnMain
     object MenuItem1: TMenuItem
       Action = actCommentsHelp
     end
+    object N194: TMenuItem
+      Caption = '-'
+    end
     object MenuItem2: TMenuItem
       Action = actCommentsEdit
     end
@@ -19529,6 +19558,9 @@ object frmTinnMain: TfrmTinnMain
     Top = 304
     object MenuItem3: TMenuItem
       Action = actRmirrorsHelp
+    end
+    object N197: TMenuItem
+      Caption = '-'
     end
     object MenuItem4: TMenuItem
       Action = actRmirrorsUpdate

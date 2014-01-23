@@ -53,6 +53,7 @@ uses
 
 type
   TfrmRcard = class(TForm)
+    bbHelp: TBitBtn;
     bbtRcardCancel: TBitBtn;
     bbtRcardCancelAll: TBitBtn;
     bbtRcardClose: TBitBtn;
@@ -76,7 +77,6 @@ type
     lblSearchGroup: TLabel;
     Panel2: TPanel;
     stbRcard: TStatusBar;
-    bbHelp: TBitBtn;
 
     procedure bbtRcardCancelAllClick(Sender: TObject);
     procedure bbtRcardCancelClick(Sender: TObject);

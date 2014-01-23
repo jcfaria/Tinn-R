@@ -53,6 +53,7 @@ uses
 
 type
   TfrmCompletion = class(TForm)
+    bbHelp: TBitBtn;
     bbtCompletionCancel: TBitBtn;
     bbtCompletionCancelAll: TBitBtn;
     bbtCompletionClose: TBitBtn;
@@ -80,7 +81,6 @@ type
     Label7: TLabel;
     Panel2: TPanel;
     stbCompletion: TStatusBar;
-    bbHelp: TBitBtn;
 
     procedure bbtCompletionCancelAllClick(Sender: TObject);
     procedure bbtCompletionCancelClick(Sender: TObject);

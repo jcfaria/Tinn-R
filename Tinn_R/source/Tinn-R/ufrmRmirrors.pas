@@ -53,6 +53,7 @@ uses
 
 type
   TfrmRmirrors = class(TForm)
+    bbHelp: TBitBtn;
     bbtRmirrorsCancel: TBitBtn;
     bbtRmirrorsCancelAll: TBitBtn;
     bbtRmirrorsClose: TBitBtn;
@@ -61,14 +62,17 @@ type
     bbtRmirrorsNew: TBitBtn;
     bbtRmirrorsRestoreDefault: TBitBtn;
     bbtRmirrorsSave: TBitBtn;
-    dbeName: TDBEdit;
-    dbeCountry: TDBEdit;
     dbeCity: TDBEdit;
+    dbeCode: TDBEdit;
+    dbeCountry: TDBEdit;
+    dbeHost: TDBEdit;
+    dbeName: TDBEdit;
+    dbeURL: TDBEdit;
     dbgRmirrors: TDBGrid;
     DBNavigator1: TDBNavigator;
-    edtNameSearch: TEdit;
     edtCitySearch: TEdit;
     edtCountrySearch: TEdit;
+    edtNameSearch: TEdit;
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -77,14 +81,10 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     Panel2: TPanel;
     stbRmirrors: TStatusBar;
-    dbeHost: TDBEdit;
-    Label8: TLabel;
-    dbeURL: TDBEdit;
-    Label9: TLabel;
-    dbeCode: TDBEdit;
-    bbHelp: TBitBtn;
 
     procedure bbtRmirrorsCancelAllClick(Sender: TObject);
     procedure bbtRmirrorsCancelClick(Sender: TObject);

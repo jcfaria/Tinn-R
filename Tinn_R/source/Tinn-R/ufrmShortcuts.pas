@@ -53,14 +53,15 @@ uses
 
 type
   TfrmShortcuts = class(TForm)
+    bbHelp: TBitBtn;
     bbtShortcutsCancel: TBitBtn;
     bbtShortcutsCancelAll: TBitBtn;
     bbtShortcutsClose: TBitBtn;
-    bbtShortcutsSaveDefault: TBitBtn;
     bbtShortcutsEdit: TBitBtn;
     bbtShortcutsLoad: TBitBtn;
     bbtShortcutsRestoreDefault: TBitBtn;
     bbtShortcutsSave: TBitBtn;
+    bbtShortcutsSaveDefault: TBitBtn;
     dbeCaption: TDBEdit;
     dbeGroup: TDBEdit;
     dbgShortcuts: TDBGrid;
@@ -69,6 +70,9 @@ type
     edtCaptionSearch: TEdit;
     edtGroupSearch: TEdit;
     GroupBox1: TGroupBox;
+    imgShortcut: TImage;
+    jvhkShortcut: TJvHotKey;
+    jvhkShortcutSearch: TJvHotKey;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -76,13 +80,9 @@ type
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    Label8: TLabel;
     Panel2: TPanel;
     stbShortcuts: TStatusBar;
-    jvhkShortcutSearch: TJvHotKey;
-    jvhkShortcut: TJvHotKey;
-    imgShortcut: TImage;
-    Label8: TLabel;
-    bbHelp: TBitBtn;
 
     procedure bbtShortcutsCancelAllClick(Sender: TObject);
     procedure bbtShortcutsCancelClick(Sender: TObject);

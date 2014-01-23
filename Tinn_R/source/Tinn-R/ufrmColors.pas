@@ -58,12 +58,13 @@ type
   TfrmColors = class(TForm)
     actTextAttributes: TAction;
     alAttributes: TActionList;
+    bbHelp: TBitBtn;
     bbtCancel: TBitBtn;
     bbtOK: TBitBtn;
     bbtSetBGForAllIdentifiers: TBitBtn;
     bbtSetBGForAllIHighlighters: TBitBtn;
-    cbBold: TCheckBox;
     cbActiveLineBG: TCheckBox;
+    cbBold: TCheckBox;
     cbItalic: TCheckBox;
     cbUnderline: TCheckBox;
     cgColors: TColorGrid;
@@ -71,6 +72,7 @@ type
     gpbHighlighters: TGroupBox;
     gpbIdentifiers: TGroupBox;
     gpbMorColors: TGroupBox;
+    gpbSample: TGroupBox;
     gpbText: TGroupBox;
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
@@ -80,16 +82,14 @@ type
     lbIdentifiers: TListBox;
     lHighlighters: TLabel;
     lWarning_1: TLabel;
+    lWarning_2: TLabel;
     shActiveLine: TtrShape;
     shBG: TtrShape;
     shBGAllHighlighters: TtrShape;
     shBGPreferred: TtrShape;
     shBrackets: TtrShape;
     shFG: TtrShape;
-    gpbSample: TGroupBox;
     synSample: TSynEdit;
-    lWarning_2: TLabel;
-    bbHelp: TBitBtn;
 
     procedure actTextAttributesExecute(Sender: TObject);
     procedure bbtOKClick(Sender: TObject);

@@ -52,6 +52,7 @@ uses
 
 type
   TfrmAbout = class(TForm)
+    bbHelp: TBitBtn;
     bbtOK: TBitBtn;
     Copyright: TLabel;
     FreeRes: TLabel;
@@ -72,7 +73,6 @@ type
     tbsAboutCredits: TTabSheet;
     tbsAboutProject: TTabSheet;
     tbsAboutVersion: TTabSheet;
-    bbHelp: TBitBtn;
     
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);

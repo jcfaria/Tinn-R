@@ -58,6 +58,7 @@ uses
 
 type
   TfrmHotKeys = class(TForm)
+    bbHelp: TBitBtn;
     btnAddHotKey: TButton;
     btnClearAllHotKeys: TButton;
     btnOK: TButton;
@@ -72,7 +73,6 @@ type
     strgDefault: TStringGrid;
     tbsCustom: TTabSheet;
     tbsDefault: TTabSheet;
-    bbHelp: TBitBtn;
 
     procedure btnAddHotKeyClick(Sender: TObject);
     procedure btnClearAllHotKeysClick(Sender: TObject);

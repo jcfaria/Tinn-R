@@ -65,6 +65,7 @@ type
     ActiveCaption1: TMenuItem;
     ApplicationWorkspace1: TMenuItem;
     Background1: TMenuItem;
+    bbHelp: TBitBtn;
     bbtCancel: TBitBtn;
     bbtConPathDeplate: TBitBtn;
     bbtConPathTxt2tags: TBitBtn;
@@ -301,6 +302,8 @@ type
     Label22: TLabel;
     Label23: TLabel;
     Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -405,9 +408,6 @@ type
     Window1: TMenuItem;
     WindowFrame1: TMenuItem;
     WindowText1: TMenuItem;
-    Label25: TLabel;
-    Label26: TLabel;
-    bbHelp: TBitBtn;
 
     procedure bbtConPathDeplateClick(Sender: TObject);
     procedure bbtConPathTxt2tagsClick(Sender: TObject);

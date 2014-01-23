@@ -208,6 +208,7 @@ var
 type
   TfrmTinnMain = class(TForm)
     a1: TMenuItem;
+    act1: TMenuItem;
     actAbout: TAction;
     actANSI: TAction;
     actAplicationExit: TAction;
@@ -624,6 +625,8 @@ type
     Help1: TMenuItem;
     Help2: TMenuItem;
     Help3: TMenuItem;
+    Help4: TMenuItem;
+    Help5: TMenuItem;
     Helpselected1: TMenuItem;
     Helpselected2: TMenuItem;
     imlProject: TImageList;
@@ -755,6 +758,7 @@ type
     menHelpStatHyperstat: TMenuItem;
     menHelpStatJournalStatisticalSoftware: TMenuItem;
     menHelpStatStatSoft: TMenuItem;
+    menHelSecrets: TMenuItem;
     menHelUserGuide: TMenuItem;
     menHelUserList: TMenuItem;
     menInserCompletion: TMenuItem;
@@ -1257,6 +1261,13 @@ type
     N189: TMenuItem;
     N19: TMenuItem;
     N190: TMenuItem;
+    N191: TMenuItem;
+    N192: TMenuItem;
+    N193: TMenuItem;
+    N194: TMenuItem;
+    N195: TMenuItem;
+    N196: TMenuItem;
+    N197: TMenuItem;
     N2: TMenuItem;
     N20: TMenuItem;
     N21: TMenuItem;
@@ -1932,8 +1943,6 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    menHelSecrets: TMenuItem;
-    N191: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);

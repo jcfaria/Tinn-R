@@ -53,6 +53,7 @@ uses
 
 type
   TfrmComments = class(TForm)
+    bbHelp: TBitBtn;
     bbtCommentsCancel: TBitBtn;
     bbtCommentsCancelAll: TBitBtn;
     bbtCommentsClose: TBitBtn;
@@ -80,7 +81,6 @@ type
     Label8: TLabel;
     Panel2: TPanel;
     stbComments: TStatusBar;
-    bbHelp: TBitBtn;
 
     procedure bbtCommentsCancelAllClick(Sender: TObject);
     procedure bbtCommentsCancelClick(Sender: TObject);
