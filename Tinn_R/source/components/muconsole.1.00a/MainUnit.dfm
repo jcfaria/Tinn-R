@@ -1,9 +1,9 @@
 object MainForm: TMainForm
   Left = 635
   Top = 124
-  Width = 640
-  Height = 533
   Caption = 'MainForm'
+  ClientHeight = 506
+  ClientWidth = 632
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object MainForm: TMainForm
   OnResize = FormResize
   OnShow = FormShow
   DesignSize = (
-    624
-    480)
+    632
+    506)
   PixelsPerInch = 96
   TextHeight = 13
   object ApplicationLabel: TLabel
@@ -59,7 +59,7 @@ object MainForm: TMainForm
     Width = 121
     Height = 21
     TabOrder = 0
-    Text = 'C:\R\R-2.6.1pat\bin\Rterm.exe --no-save'
+    Text = 'C:\R\R-3.0.2patched\bin\x64\Rterm.exe --no-save'
   end
   object CommandEdit: TEdit
     Left = 64

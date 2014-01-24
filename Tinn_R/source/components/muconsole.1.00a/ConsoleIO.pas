@@ -346,7 +346,7 @@ begin
   The below it is important due that the R package Matrix
   when loaded changes all messages received form R:
    - Matrix not loaded: string#13#10 (Windows default)
-   - Matrix loaded    : strng#10     (Linux default)
+   - Matrix loaded    : string#10    (Linux default)
   *)
   if (Pos(#13#10, OutputBuffer) > 0) then SplitMode:= sm0D0A
                                      else SplitMode:= smSplitChar;
