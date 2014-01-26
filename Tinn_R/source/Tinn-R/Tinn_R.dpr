@@ -105,7 +105,8 @@ uses
   ufrmComments in 'ufrmComments.pas' {frmComments},
   ufrmCompletion in 'ufrmCompletion.pas' {frmCompletion},
   ufrmRmirrors in 'ufrmRmirrors.pas' {frmRmirrors},
-  SynEditOC in '..\SynEdit_adapted\SynEditOC.pas';
+  SynEditOC in '..\SynEdit_adapted\SynEditOC.pas',
+  Split in '..\others\Split.pas';
 
 {$R Tinn_R.KLR}
 {$R *.RES}

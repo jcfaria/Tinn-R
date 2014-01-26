@@ -7,5 +7,6 @@
     <Transaction>2013-10-05 19:03:58.607.pas,D:\$tinn-r\$tinn-r_3.0.1.1_UNICODE_CG\source\SynEdit_adapted\SynEditOptionsContainer.pas=D:\$tinn-r\$tinn-r_3.0.1.1_UNICODE_CG\source\SynEdit_adapted\SynEditOC.pas</Transaction>
     <Transaction>2013-10-12 19:41:04.183.pas,D:\$tinn-r\$tinn-r_3.0.1.2_UNICODE_CG\source\SynEdit_highlighters\SynHighlighterText.pas=D:\$tinn-r\$tinn-r_3.0.1.2_UNICODE_CG\source\SynEdit_highlighters\SynHighlighterText_term.pas</Transaction>
     <Transaction>2013-10-12 19:41:19.815.pas,D:\$tinn-r\$tinn-r_3.0.1.2_UNICODE_CG\source\SynEdit_highlighters\SynHighlighterRterm.pas=D:\$tinn-r\$tinn-r_3.0.1.2_UNICODE_CG\source\SynEdit_highlighters\SynHighlighterR_term.pas</Transaction>
+    <Transaction>2014/01/25 11:58:20.161.pas,D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\Unit1.pas=D:\GitHub\Tinn-R\Tinn_R\source\others\Split.pas</Transaction>
   </Transactions>
 </BorlandProject>

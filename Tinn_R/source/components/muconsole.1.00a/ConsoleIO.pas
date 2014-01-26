@@ -266,6 +266,7 @@ end;
 *)
 
 // Adapted by J.C.Faria To Tinn-R project
+// It is now very fast (Tinn-R version 3.0.2.9)!
 procedure TConsoleIO.ReceiveOutput(Buf: Pointer;
                                    Size: Integer);
 
@@ -280,7 +281,7 @@ procedure TConsoleIO.ReceiveOutput(Buf: Pointer;
     end;
   end;
 
-  procedure TinnRCheck_1;
+  procedure Tinn_R_Check;
   var
     iPos: integer;
 
@@ -298,44 +299,50 @@ procedure TConsoleIO.ReceiveOutput(Buf: Pointer;
     end;
 
     if (Length(Trim(OutputBuffer)) >= 1) then // Imcomplete intructions
-      if (OutputBuffer[Length(OutputBuffer) - 1] = '+') then OutputBuffer:= OutputBuffer + #10;
+      if (OutputBuffer[Length(OutputBuffer) - 1] = '+') then
+        OutputBuffer:= OutputBuffer + #10;
 
 {
-    if (Length(Trim(OutputBuffer)) > 1) and   // 'cat' intructions J.C.Faria
+    if (Length(Trim(OutputBuffer)) > 1) and   // 'cat' intructions
       (OutputBuffer[Length(OutputBuffer) - 1] = '>') then OutputBuffer:= OutputBuffer + #10;
 }
 
+
     if (Length(Trim(OutputBuffer)) > 1) then begin
-      if (OutputBuffer[Length(OutputBuffer) - 1] = '>') then OutputBuffer:= OutputBuffer + #10;   // 'cat' intructions J.C.Faria
+{
+      if (OutputBuffer[Length(OutputBuffer) - 1] = '>') then
+        OutputBuffer:= OutputBuffer + #10;   // 'cat' intructions
+}
+
       if (OutputBuffer[Length(OutputBuffer) - 1] = ':') then
         if IsInteger(Copy(OutputBuffer,
                           0,
                           Pos(':',
-                              OutputBuffer) - 1))  then OutputBuffer:= OutputBuffer + #10;   // sem package J.C.Faria
-    end;
-  end;
-
-  procedure TinnRCheck_2;
-  begin
-    if (Trim(OutputBuffer) = '>') then begin
-        FOnReceiveOutput(Self, '> ');
-        OutputBuffer:= '';
-        bRterm_Ready:= True;
-        Screen.Cursor:= crDefault;  // J.C.Faria
+                              OutputBuffer) - 1))  then
+          OutputBuffer:= OutputBuffer + #10;   // sem package
     end;
   end;
 
 var
-  Cmd        : string;
-  TastyStrPos: Integer;
+  Cmd,
+   sOutput: string;
+  iPos    : Integer;
 
 begin
   if (Size <= 0) then Exit;
   Screen.Cursor:= crHourglass;  // J.C.Faria
 
-  SetLength(Cmd, Size);
-  Move(Buf^, Cmd[1], Size);
-  OutputBuffer:= OutputBuffer + Cmd;
+  sOutput:= '';
+
+  SetLength(Cmd,
+            Size);
+
+  Move(Buf^,
+       Cmd[1],
+       Size);
+
+  OutputBuffer:= OutputBuffer +
+                 Cmd;
 
   if not Assigned(FOnReceiveOutput) or
      (OutputBuffer = '') or
@@ -343,57 +350,77 @@ begin
 
   (*
   J.C.Faria
-  The below it is important due that the R package Matrix
-  when loaded changes all messages received form R:
-   - Matrix not loaded: string#13#10 (Windows default)
-   - Matrix loaded    : string#10    (Linux default)
+  The below it is important due that some times,
+  according with the packages loaded,
+  R changes all messages received:
+  - from the default Windows -> string#13#10
+  - to default Linux         -> string#10
   *)
-  if (Pos(#13#10, OutputBuffer) > 0) then SplitMode:= sm0D0A
-                                     else SplitMode:= smSplitChar;
+
+  if (Pos(#13#10,
+          OutputBuffer) > 0) then SplitMode:= sm0D0A
+                             else SplitMode:= smSplitChar;
 
   if not SplitReceive or
      (SplitMode = smNone) then begin
-    FOnReceiveOutput(Self, OutputBuffer);
+    FOnReceiveOutput(Self,
+                     OutputBuffer);
 
     OutputBuffer := '';
   end
   else if (SplitMode = sm0D0A) then begin
-    TinnRCheck_1;
+    Tinn_R_Check;
+
     repeat
-      TinnRCheck_2;
+      iPos:= Pos(#13#10,
+                 OutputBuffer);
 
-      TastyStrPos:= Pos(#13#10, OutputBuffer);
+      if (iPos = 0) then Break;
 
-      if (TastyStrPos = 0) then Break;
-
-      FOnReceiveOutput(Self,
-                       Copy(OutputBuffer,
-                            1,
-                            TastyStrPos - 1));
+      sOutput:= sOutput +
+                Copy(OutputBuffer,
+                     1,
+                     iPos+1);
 
       OutputBuffer:= Copy(OutputBuffer,
-                          TastyStrPos + 2,
+                          iPos + 2,
                           Length(OutputBuffer));
     until False
   end
-  else if (SplitMode = smSplitChar) then TinnRCheck_1;
+  else if (SplitMode = smSplitChar) then begin
+    Tinn_R_Check;
+
     repeat
-      TinnRCheck_2;
+      iPos:= Pos(SplitChar,
+                 OutputBuffer);
 
-      TastyStrPos:= Pos(SplitChar,
-                        OutputBuffer);
+      if (iPos = 0) then Break;
 
-      if (TastyStrPos = 0) then Break;
-
-      FOnReceiveOutput(Self,
-                       Copy(OutputBuffer,
-                            1,
-                            TastyStrPos - 1));
+      sOutput:= sOutput +
+                Copy(OutputBuffer,
+                     1,
+                     iPos+1);
 
       OutputBuffer:= Copy(OutputBuffer,
-                          TastyStrPos + 1,
+                          iPos + 1,
                           Length(OutputBuffer));
     until False;
+  end;
+
+  FOnReceiveOutput(Self,
+                   TrimRight(sOutput));
+
+  // Checks if the request finished
+  if (OutputBuffer = '> ') then begin
+    FOnReceiveOutput(Self,
+                     OutputBuffer);
+
+    OutputBuffer:= '';
+
+    bRterm_Ready:= True;
+
+    Screen.Cursor:= crDefault
+  end;
 end;
 
 (* //Original

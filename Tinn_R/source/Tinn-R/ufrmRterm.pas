@@ -335,6 +335,27 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
      end;
    end;
 
+   // It is very nice!
+   procedure AddROutput;
+   var
+     slTmp: TStringList;
+
+   begin
+     try
+       slTmp:= TStringList.Create;
+
+       slTmp.Text:= StringReplace(Cmd,
+                                  #13#10,
+                                  #13#10,
+                                  [rfReplaceAll]);
+
+       with synIO do
+         Lines.AddStrings(slTmp);
+     finally
+       FreeAndNil(slTmp);
+     end;
+   end;
+
 var
   i    : integer;
   slTmp: TStringList;
@@ -356,22 +377,25 @@ begin
 
     if bRterm_Sent then begin
       if (Cmd = '> ') then Lines.Add(Cmd)
-                      else LineText:= Cmd;
+                      else AddROutput;
+
       bRterm_Sent:= False;
 
       if bTab then begin
         try
           slTmp:= TStringList.Create;
+
           StrSplit(' ',
                    Cmd,
                    slTmp);
+
           if (slTmp.Count = 2) then begin
             if (sTabPrefix <> '') then sTab:= sTabPrefix +
                                               slTmp[1]
                                   else sTab:= slTmp[1];
           end;
         finally
-         FreeAndNil(slTmp);
+          FreeAndNil(slTmp);
         end;
       end;
     end
@@ -387,7 +411,7 @@ begin
         sTab:= '';
         bTab:= False;
       end
-      else Lines.Add(Cmd);
+      else AddROutput;
     end;
 
     ExecuteCommand(ecEditorBottom,
@@ -791,7 +815,6 @@ begin
                                   #0,
                                   nil);
                    LineText:= sTmp;
-                   Lines.Add('');
                    ExecuteCommand(ecEditorBottom,
                                   #0,
                                   nil);
@@ -859,6 +882,8 @@ begin
   if (Key = VK_RETURN) then begin // Send latest line to R when editing related to Rterm
     if not frmTinnMain.Rterm_Running then Exit;
     with synIO do begin
+      key:= VK_PAUSE;  // Avoid a blank line below the instruction
+
       BeginUpdate;
       ExecuteCommand(ecLineEnd,
                      #0,
@@ -904,7 +929,7 @@ begin
       bRterm_Plus:= False;
       frmTinnMain.DoSend(sToSend,
                          False);
-      CaretY:= Lines.Count;
+      //CaretY:= Lines.Count - 1;
       EndUpdate;
     end;
   end;
