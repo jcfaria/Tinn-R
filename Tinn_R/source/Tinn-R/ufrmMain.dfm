@@ -605,7 +605,7 @@ object frmTinnMain: TfrmTinnMain
           end
         end
         object TBSMiktex: TTBSubmenuItem
-          Caption = 'MikTeX'
+          Caption = 'LaTeX'
           Hint = 'Processing: compilation'
           ImageIndex = 128
           Images = imlTinnR
@@ -630,6 +630,11 @@ object frmTinnMain: TfrmTinnMain
           end
           object TBItem58: TTBItem
             Action = actLatexToPDFBibtex
+          end
+          object TBSeparatorItem29: TTBSeparatorItem
+          end
+          object TBItem66: TTBItem
+            Action = actLatexMakeIndex
           end
         end
         object TBSViewer: TTBSubmenuItem
@@ -1708,7 +1713,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 144
     Bitmap = {
-      494C01010A00F805F80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A00FC05FC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2584,7 +2589,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 112
     Bitmap = {
-      494C01012401F805F80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01012401FC05FC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000A0040000010020000000000000A0
       0400000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -12888,7 +12893,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Dimensional (n x m)'
       Enabled = False
-      Hint = 'Insert: latex dimensional'
+      Hint = 'Insert: LaTeX dimensional'
       ImageIndex = 213
       ShortCut = 24649
       OnExecute = actLatexDimensionalExecute
@@ -12897,7 +12902,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'frac{}{}'
       Enabled = False
-      Hint = 'Insert: latex \frac{}{}'
+      Hint = 'Insert: LaTeX \frac{}{}'
       ImageIndex = 236
       OnExecute = actLatexAlgebricFracExecute
     end
@@ -12905,7 +12910,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'sqrt{}'
       Enabled = False
-      Hint = 'Insert: latex \sqrt{}'
+      Hint = 'Insert: LaTeX \sqrt{}'
       ImageIndex = 237
       OnExecute = actLatexAlgebricSqrtExecute
     end
@@ -12913,7 +12918,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'sqrt[]{}'
       Enabled = False
-      Hint = 'Insert: latex \sqrt[]{}'
+      Hint = 'Insert: LaTeX \sqrt[]{}'
       ImageIndex = 238
       OnExecute = actLatexAlgebricSqrtNExecute
     end
@@ -12921,7 +12926,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Part'
       Enabled = False
-      Hint = 'Insert: latex \part{}'
+      Hint = 'Insert: LaTeX \part{}'
       OnExecute = LatexHeader
     end
     object actLatexHeaderChapter: TAction
@@ -12929,7 +12934,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Chapter'
       Enabled = False
-      Hint = 'Insert: latex \chapter{}'
+      Hint = 'Insert: LaTeX \chapter{}'
       OnExecute = LatexHeader
     end
     object actLatexHeaderSection: TAction
@@ -12937,7 +12942,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Section'
       Enabled = False
-      Hint = 'Insert: latex \section{}'
+      Hint = 'Insert: LaTeX \section{}'
       ImageIndex = 233
       OnExecute = LatexHeader
     end
@@ -12946,7 +12951,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Sub-section'
       Enabled = False
-      Hint = 'Insert: latex \subsection{}'
+      Hint = 'Insert: LaTeX \subsection{}'
       ImageIndex = 234
       OnExecute = LatexHeader
     end
@@ -12955,7 +12960,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Sub-sub-section'
       Enabled = False
-      Hint = 'Insert: latex \subsubsection{}'
+      Hint = 'Insert: LaTeX \subsubsection{}'
       ImageIndex = 235
       OnExecute = LatexHeader
     end
@@ -12964,7 +12969,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Paragraph'
       Enabled = False
-      Hint = 'Insert: latex \paragraph{}'
+      Hint = 'Insert: LaTeX \paragraph{}'
       OnExecute = LatexHeader
     end
     object actLatexHeaderSubParagraph: TAction
@@ -12972,14 +12977,14 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Sub-paragraph'
       Enabled = False
-      Hint = 'Insert: latex \subparagraph{}'
+      Hint = 'Insert: LaTeX \subparagraph{}'
       OnExecute = LatexHeader
     end
     object actLatexFormatItemization: TAction
       Category = 'Insert'
       Caption = 'Itemization'
       Enabled = False
-      Hint = 'Insert: latex itemization'
+      Hint = 'Insert: LaTeX itemization'
       ImageIndex = 227
       OnExecute = LatexFormat
     end
@@ -12988,7 +12993,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Enumeration'
       Enabled = False
-      Hint = 'Insert: latex enumeration'
+      Hint = 'Insert: LaTeX enumeration'
       ImageIndex = 228
       OnExecute = LatexFormat
     end
@@ -12997,7 +13002,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Left'
       Enabled = False
-      Hint = 'Insert: latex left'
+      Hint = 'Insert: LaTeX left'
       ImageIndex = 219
       OnExecute = LatexFormat
     end
@@ -13006,7 +13011,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Center'
       Enabled = False
-      Hint = 'Insert: latex center'
+      Hint = 'Insert: LaTeX center'
       ImageIndex = 218
       OnExecute = LatexFormat
     end
@@ -13015,7 +13020,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Right'
       Enabled = False
-      Hint = 'Insert: latex right'
+      Hint = 'Insert: LaTeX right'
       ImageIndex = 220
       OnExecute = LatexFormat
     end
@@ -13023,7 +13028,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Enphase'
       Enabled = False
-      Hint = 'Insert: latex \emph{}'
+      Hint = 'Insert: LaTeX \emph{}'
       OnExecute = LatexFont
     end
     object actLatexFontBold: TAction
@@ -13031,7 +13036,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Bold'
       Enabled = False
-      Hint = 'Insert: latex \textbf{}'
+      Hint = 'Insert: LaTeX \textbf{}'
       ImageIndex = 222
       OnExecute = LatexFont
     end
@@ -13040,7 +13045,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Italic'
       Enabled = False
-      Hint = 'Insert: latex \textit{}'
+      Hint = 'Insert: LaTeX \textit{}'
       ImageIndex = 225
       OnExecute = LatexFont
     end
@@ -13049,7 +13054,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Slatend'
       Enabled = False
-      Hint = 'Insert: latex \textsl{}'
+      Hint = 'Insert: LaTeX \textsl{}'
       OnExecute = LatexFont
     end
     object actLatexFontTypewriter: TAction
@@ -13057,7 +13062,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Typewriter'
       Enabled = False
-      Hint = 'Insert: latex \texttt{}'
+      Hint = 'Insert: LaTeX \texttt{}'
       OnExecute = LatexFont
     end
     object actLatexFontSmallcaps: TAction
@@ -13065,7 +13070,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Small caps'
       Enabled = False
-      Hint = 'Insert: latex \textsc{}'
+      Hint = 'Insert: LaTeX \textsc{}'
       ImageIndex = 229
       OnExecute = LatexFont
     end
@@ -13073,7 +13078,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Tiny'
       Enabled = False
-      Hint = 'Insert: latex {\tiny {}}'
+      Hint = 'Insert: LaTeX {\tiny {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontScript: TAction
@@ -13081,7 +13086,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Script size'
       Enabled = False
-      Hint = 'Insert: latex {\scriptsize {}}'
+      Hint = 'Insert: LaTeX {\scriptsize {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontFootnote: TAction
@@ -13089,7 +13094,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Footnote size'
       Enabled = False
-      Hint = 'Insert: latex {\footnotesize {}}'
+      Hint = 'Insert: LaTeX {\footnotesize {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontSmall: TAction
@@ -13097,7 +13102,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Small'
       Enabled = False
-      Hint = 'Insert: latex {\small {}}'
+      Hint = 'Insert: LaTeX {\small {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontNormal: TAction
@@ -13105,7 +13110,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Normal'
       Enabled = False
-      Hint = 'Insert: latex {\normalsize {}}'
+      Hint = 'Insert: LaTeX {\normalsize {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontLarge: TAction
@@ -13113,7 +13118,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Large'
       Enabled = False
-      Hint = 'Insert: latex {\large {}}'
+      Hint = 'Insert: LaTeX {\large {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontLarger: TAction
@@ -13121,7 +13126,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Larger'
       Enabled = False
-      Hint = 'Insert: latex {\Large {}}'
+      Hint = 'Insert: LaTeX {\Large {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontLargest: TAction
@@ -13129,7 +13134,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Largest'
       Enabled = False
-      Hint = 'Insert: latex {\LARGE {}}'
+      Hint = 'Insert: LaTeX {\LARGE {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontHuge: TAction
@@ -13137,7 +13142,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Huge'
       Enabled = False
-      Hint = 'Insert: latex {\huge {}}'
+      Hint = 'Insert: LaTeX {\huge {}}'
       OnExecute = LatexFontSize
     end
     object actLatexFontHuger: TAction
@@ -13145,7 +13150,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Insert'
       Caption = 'Huger'
       Enabled = False
-      Hint = 'Insert: latex {\Huge {}}'
+      Hint = 'Insert: LaTeX {\Huge {}}'
       OnExecute = LatexFontSize
     end
     object actBlockMark: TAction
@@ -14484,7 +14489,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Tools'
       Caption = 'DVI (single)'
       Enabled = False
-      Hint = 'Tools: compile Latex to DVI (single)'
+      Hint = 'Tools: compile LaTeX to DVI (single)'
       ShortCut = 49220
       OnExecute = actLatexToDVISingleExecute
     end
@@ -14492,7 +14497,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Tools'
       Caption = 'DVI (bibtex)'
       Enabled = False
-      Hint = 'Tools: compile Latex to DVI (bibtex)'
+      Hint = 'Tools: compile LaTeX to DVI (bibtex)'
       ShortCut = 57412
       OnExecute = actLatexToDVIBibtexExecute
     end
@@ -14500,7 +14505,7 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Tools'
       Caption = 'PDF (single)'
       Enabled = False
-      Hint = 'Tools: compile Latex to PDF (single)'
+      Hint = 'Tools: compile LaTeX to PDF (single)'
       ShortCut = 49232
       OnExecute = actLatexToPDFSingleExecute
     end
@@ -14508,9 +14513,17 @@ object frmTinnMain: TfrmTinnMain
       Category = 'Tools'
       Caption = 'PDF (bibtex)'
       Enabled = False
-      Hint = 'Tools: compile Latex to PDF (bibtex)'
+      Hint = 'Tools: compile LaTeX to PDF (bibtex)'
       ShortCut = 57424
       OnExecute = actLatexToPDFBibtexExecute
+    end
+    object actLatexMakeIndex: TAction
+      Category = 'Tools'
+      Caption = 'Make index (makeindex)'
+      Enabled = False
+      Hint = 'Tools: make index (LaTeX)'
+      ShortCut = 49225
+      OnExecute = actLatexMakeIndexExecute
     end
     object actDVIOpenFile: TAction
       Category = 'Tools'
@@ -15021,9 +15034,9 @@ object frmTinnMain: TfrmTinnMain
     end
     object actLatexVisible: TAction
       Category = 'Visualization'
-      Caption = 'Latex (show/hide)'
+      Caption = 'LaTeX (show/hide)'
       Checked = True
-      Hint = 'Visualization: tools latex (show/hide)'
+      Hint = 'Visualization: tools LaTeX (show/hide)'
       OnExecute = actLatexVisibleExecute
     end
     object actTxt2tagsVisible: TAction
@@ -15296,7 +15309,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 176
     Bitmap = {
-      494C01010500F805F80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010500FC05FC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -15796,7 +15809,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 208
     Bitmap = {
-      494C01010400F805F80510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400FC05FC0510001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -17077,7 +17090,7 @@ object frmTinnMain: TfrmTinnMain
       Caption = '&Insert'
       GroupIndex = 6
       object menInsertLatex: TMenuItem
-        Caption = 'Latex'
+        Caption = 'LaTeX'
         object menInsertLatexMath: TMenuItem
           Caption = 'Math'
           ImageIndex = 97
@@ -17516,7 +17529,7 @@ object frmTinnMain: TfrmTinnMain
           end
         end
         object menToolsCompilation: TMenuItem
-          Caption = 'Compilation (Latex to)'
+          Caption = 'Compilation (LaTeX)'
           ImageIndex = 128
           object menToolsCompilationMinimized: TMenuItem
             Action = actDOSMinimizedAlways
@@ -17538,6 +17551,12 @@ object frmTinnMain: TfrmTinnMain
           end
           object menToolsCompilationLaTeXToPDFBibtex: TMenuItem
             Action = actLatexToPDFBibtex
+          end
+          object N198: TMenuItem
+            Caption = '-'
+          end
+          object Makeindexmakeindex1: TMenuItem
+            Action = actLatexMakeIndex
           end
         end
         object menToolsViewer: TMenuItem
@@ -19242,7 +19261,7 @@ object frmTinnMain: TfrmTinnMain
     Left = 176
     Top = 240
     Bitmap = {
-      494C01010400E002E00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010400E402E40210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -1943,6 +1943,11 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
+    N198: TMenuItem;
+    actLatexMakeIndex: TAction;
+    Makeindexmakeindex1: TMenuItem;
+    TBSeparatorItem29: TTBSeparatorItem;
+    TBItem66: TTBItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2475,6 +2480,7 @@ type
     procedure actCompletionHelpExecute(Sender: TObject);
     procedure actRExplorerHelpExecute(Sender: TObject);
     procedure menHelSecretsClick(Sender: TObject);
+    procedure actLatexMakeIndexExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2963,15 +2969,13 @@ begin
 ----------------------------------------------------------------------------------------------
   Will update (from dataset shortcut.xml) all actions inside of alMain:
    1- Comment the line below (DatasetToActionList(nil)) when was done any change in the alMain
-   2- Generate a new Dataset: Tools/Utils/Actionlist to dataset (menu visible when compiled in debug mode)
-   3- Delete the old file Shortcuts.xml from INI/data
-   4- Rename the file Shortcuts_tmp.xml generated to Shortcuts.xml
-   5- Copy the new Shortcuts.xml to the folder data from the project
-   6- Delete the old file data.zip
-   7- Generate a new one data.zip with all XML data files
-   8- Change the version of sCurrentVersion_Shortcuts in procedure TfrmTinnMain.CheckVersion
-   9- Uncomment this line newly (DatasetToActionList(nil))
-  10- Run Tinn-R and the new Shortcuts will be updated to the interface
+   2- Run Tinn-R
+   3- Generate a new Dataset: Tools/Utils/Actionlist to dataset (menu visible only when compiled in debug mode)
+   4- Close Tinn-R
+   5- Change the version of sCurrentVersion_Shortcuts in procedure TfrmTinnMain.CheckVersion
+      (It is very important to the user version be updated!)
+   6- Uncomment this line newly (DatasetToActionList(nil))
+   7- It is all!
 ----------------------------------------------------------------------------------------------
 *)
 
@@ -3010,7 +3014,7 @@ begin
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '3.00.02.06';
-  sCurrentVersion_Shortcuts := '3.00.02.08';
+  sCurrentVersion_Shortcuts := '3.00.02.09';
   sCurrentVersion_TinnRcom  := '1.0.15';  // Released joinly with Tinn-R setup program
 
   // Cache
@@ -10095,16 +10099,93 @@ begin
   stbMain.Panels[7].Text:= 'Done!';
 end;
 
+// Tinn-R version (3.0.2.9): I was a bit tired of doing the below manually!
 procedure TfrmTinnMain.menToolsUtilsActionlistToDatasetClick(Sender: TObject);
+
+  procedure MakeNewData_Zip;
+    var
+      sBackup: string;
+
+  begin
+    sBackup:= sPathTinnR +
+              '\data\' +
+              'data.zip';
+
+    DeleteFile(sBackup);
+
+    try
+      DeleteFile(sBackup);
+
+      zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
+      with zipKit do begin
+        FileName:= sBackup;
+
+        with ModDados do begin
+          AddFiles(sPathData + '\*.*',
+                   0);
+          CloseArchive;
+        end;
+      end;
+      MessageDlg(sBackup + #13 + #13 +
+                 'The new file "data.zip" was created' + #13 +
+                 'successfully in the path above!',
+                 mtInformation,
+                 [mbOk],
+                 0);
+    except
+      MessageDlg(sBackup + #13 + #13 +
+                 'A problem occurred while trying to copy the file.' + #13 +
+                 'The "data.zip" file wall not be copied!',
+                 mtError,
+                 [mbOk],
+                 0);
+      Exit;
+    end;  // try
+  end;
+
+  procedure DoMessage (sTmp: string);
+  begin
+    MessageDlg(sTmp + #13 + #13 +
+               'A problem occurred while trying to copy the file.' + #13 +
+               'The "Shortcuts_new.xml" file wall not be copied!',
+               mtError,
+               [mbOk],
+               0);
+  end;
+
+var
+  sOrigin,
+   sDest: string;
+
 begin
   with modDados do
     if not ActionlistToDataset then Exit;
 
+  sOrigin:= sPathData +
+            '\' +
+            'Shortcuts.xml';
+
+  sDest:= sPathTinnR +
+          '\data\' +
+          'Shortcuts.xml';
+
+  try
+    if not (CopyFile(PChar(sOrigin),
+                     PChar(sDest),
+                     False)) then begin  // False: replace the old file
+      DoMessage(sDest);
+      Exit;
+    end;
+  except
+    DoMessage(sDest);
+    Exit;
+  end;
+
+  MakeNewData_Zip;
+
   with stbMain do begin
     Panels[7].Text:= 'Done!';
-    Panels[8].Text:= 'The file ' +
-                     '''Shortcuts_tmp.xml'' ' +
-                     'was created in ' +
+    Panels[8].Text:= 'Shortcuts.xml replaced: ' +
                      sPathData;
   end;
 end;
@@ -16509,7 +16590,8 @@ end;
 procedure TfrmTinnMain.actBackupDatabaseExecute(Sender: TObject);
 var
   sBackup: string;
-  sd     : TSaveDialog;
+
+  sd: TSaveDialog;
 
 begin
   sd           := TSaveDialog.Create(Self);
@@ -17826,12 +17908,13 @@ procedure TfrmTinnMain.SetToolbarProcessing(sFileExtension: string);
     actTxt2tagsToPm6.Enabled   := bTmp;
   end;
 
-  procedure SetMiktex(bTmp: boolean);
+  procedure SetTex(bTmp: boolean);
   begin
     actLatexToDviSingle.Enabled:= bTmp;
     actLatexToDviBibtex.Enabled:= bTmp;
     actLatexToPdfSingle.Enabled:= bTmp;
     actLatexToPdfBibtex.Enabled:= bTmp;
+    actLatexMakeIndex.Enabled  := bTmp;
   end;
 
 const
@@ -17878,8 +17961,8 @@ begin
   SetTxt2tags(True);  // any file extension
 
   // MikTeX
-  if (sExt = '.tex') then SetMiktex(True)
-                     else SetMiktex(False);
+  if (sExt = '.tex') then SetTex(True)
+                     else SetTex(False);
 end;
 
 procedure TfrmTinnMain.menHelFileConversionDeplateClick(Sender: TObject);
@@ -21059,6 +21142,52 @@ begin
     SearchReplace('.',
                   EmptyStr,
                   synSearchOptions);
+  end;
+end;
+
+procedure TfrmTinnMain.actLatexMakeIndexExecute(Sender: TObject);
+var
+  i,
+   iPos: integer;
+
+  oldCursor: TCursor;
+
+  sTmpFile,
+   sTmpDir: string;
+
+  wOption: word;
+
+begin
+  i:= FindTopWindow;
+  sTmpFile:= ExtractFileName((Self.MDIChildren[i] as TfrmEditor).sActiveFile);;
+
+  if (LowerCase(ExtractFileExt(sTmpFile)) <> '.tex') then Exit;
+
+  iPos:= Pos('.',
+             sTmpFile);
+
+  sTmpFile:= Copy(sTmpFile,
+                  0,
+                  iPos-1);
+                  
+  oldCursor:= (Self.MDIChildren[i] as TfrmEditor).Cursor;
+
+  (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
+
+  actFileSaveExecute(Self);
+  sTmpDir:= ExtractFilePath((Self.MDIChildren[i] as TfrmEditor).sActiveFile);
+
+  try
+    SetCurrentDir(sTmpDir);
+
+    if actDosMinimizedAlways.Checked then wOption:= SW_SHOWMINIMIZED
+                                     else wOption:= SW_RESTORE;
+
+    ExecCmdLineAndWait('makeindex ' +
+                       sTmpFile,
+                       wOption)
+  finally
+    (Self.MDIChildren[i] as TfrmEditor).Cursor:= oldCursor;
   end;
 end;
 

@@ -824,7 +824,7 @@ function TmodDados.ActionlistToDataset: boolean;
       end;
 
       FileName:= frmTinnMain.sPathData +
-                 '\Shortcuts_tmp.xml';
+                 '\Shortcuts.xml';
       CreateDataSet;
     end;
   end;

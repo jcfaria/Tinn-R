@@ -790,7 +790,6 @@ begin
       frmTinnMain.DoSend(sToSend,
                          False);
 
-      Lines.Add('');
       ExecuteCommand(ecEditorBottom,
                      #0,
                      nil);

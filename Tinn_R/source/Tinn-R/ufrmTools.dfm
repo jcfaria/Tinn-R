@@ -39,7 +39,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 320
     Height = 565
-    ActivePage = tbsDatabase
+    ActivePage = tbsMarkup
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1822,7 +1822,7 @@ object frmTools: TfrmTools
           end
         end
         object tbsLatex: TTabSheet
-          Caption = 'Latex'
+          Caption = 'LaTeX'
           ImageIndex = 1
           object pgLatex: TJvgPageControl
             Left = 0
@@ -3684,7 +3684,7 @@ object frmTools: TfrmTools
               TabOrder = 0
               object TBSubmenuItem16: TTBSubmenuItem
                 Caption = 'Math'
-                Hint = 'Latex: math'
+                Hint = 'LaTeX: math'
                 ImageIndex = 97
                 object TBItem59: TTBItem
                   Action = frmTinnMain.actLatexDimensional
@@ -3705,7 +3705,7 @@ object frmTools: TfrmTools
               end
               object TBSubmenuItem13: TTBSubmenuItem
                 Caption = 'Header'
-                Hint = 'Latex: header'
+                Hint = 'LaTeX: header'
                 ImageIndex = 214
                 object tbiHeader: TTBItem
                   Action = frmTinnMain.actLatexHeaderPart
@@ -3731,7 +3731,7 @@ object frmTools: TfrmTools
               end
               object TBSubmenuItem14: TTBSubmenuItem
                 Caption = 'Format'
-                Hint = 'Latex: format'
+                Hint = 'LaTeX: format'
                 ImageIndex = 217
                 object tbiFormat: TTBItem
                   Action = frmTinnMain.actLatexFormatItemization
@@ -3753,7 +3753,7 @@ object frmTools: TfrmTools
               end
               object TBSubmenuItem15: TTBSubmenuItem
                 Caption = 'Font'
-                Hint = 'Latex: font'
+                Hint = 'LaTeX: font'
                 ImageIndex = 221
                 object tbiFont: TTBItem
                   Action = frmTinnMain.actLatexFontEnphase
@@ -3810,6 +3810,7 @@ object frmTools: TfrmTools
               end
               object TBItem65: TTBItem
                 Action = frmTinnMain.actReloadLatexSymbols
+                Hint = 'LaTeX: reload symbols (from ini)'
               end
             end
           end
