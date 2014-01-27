@@ -361,6 +361,9 @@ var
   slTmp: TStringList;
 
 begin
+  if (Cmd = '') and
+     bTab then Exit;
+
   if Assigned(slError) then begin
     GetError;
     FreeAndNil(slError);
