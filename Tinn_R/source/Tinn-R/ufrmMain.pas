@@ -345,6 +345,7 @@ type
     actLatexHeaderSubParagraph: TAction;
     actLatexHeaderSubSection: TAction;
     actLatexHeaderSubSubSection: TAction;
+    actLatexMakeIndex: TAction;
     actLatexToDviBibtex: TAction;
     actLatexToDviSingle: TAction;
     actLatexToPdfBibtex: TAction;
@@ -663,6 +664,7 @@ type
     LowercaseWord1: TMenuItem;
     Lowercaseword2: TMenuItem;
     MagicPoint1: TMenuItem;
+    Makeindexmakeindex1: TMenuItem;
     Manpage1: TMenuItem;
     memRTCPConnection: TMenuItem;
     menChaLinEndMAC: TMenuItem;
@@ -1268,6 +1270,7 @@ type
     N195: TMenuItem;
     N196: TMenuItem;
     N197: TMenuItem;
+    N198: TMenuItem;
     N2: TMenuItem;
     N20: TMenuItem;
     N21: TMenuItem;
@@ -1795,6 +1798,7 @@ type
     TBItem63: TTBItem;
     TBItem64: TTBItem;
     TBItem65: TTBItem;
+    TBItem66: TTBItem;
     TBItem7: TTBItem;
     TBItem72: TTBItem;
     TBItem73: TTBItem;
@@ -1876,6 +1880,7 @@ type
     TBSeparatorItem26: TTBSeparatorItem;
     TBSeparatorItem27: TTBSeparatorItem;
     TBSeparatorItem28: TTBSeparatorItem;
+    TBSeparatorItem29: TTBSeparatorItem;
     TBSeparatorItem3: TTBSeparatorItem;
     TBSeparatorItem31: TTBSeparatorItem;
     TBSeparatorItem32: TTBSeparatorItem;
@@ -1943,11 +1948,6 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    N198: TMenuItem;
-    actLatexMakeIndex: TAction;
-    Makeindexmakeindex1: TMenuItem;
-    TBSeparatorItem29: TTBSeparatorItem;
-    TBItem66: TTBItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -1967,6 +1967,7 @@ type
     procedure actCompletionEditExecute(Sender: TObject);
     procedure actCompletionExampleSelectedExecute(Sender: TObject);
     procedure actCompletionExecute(Sender: TObject);
+    procedure actCompletionHelpExecute(Sender: TObject);
     procedure actCompletionHelpSelectedExecute(Sender: TObject);
     procedure actCompletionInsertExecute(Sender: TObject);
     procedure actCopyFormattedExecute(Sender: TObject);
@@ -2053,6 +2054,7 @@ type
     procedure actLatexAlgebricSqrtExecute(Sender: TObject);
     procedure actLatexAlgebricSqrtNExecute(Sender: TObject);
     procedure actLatexDimensionalExecute(Sender: TObject);
+    procedure actLatexMakeIndexExecute(Sender: TObject);
     procedure actLatexToDviBibtexExecute(Sender: TObject);
     procedure actLatexToDviSingleExecute(Sender: TObject);
     procedure actLatexToPdfBibtexExecute(Sender: TObject);
@@ -2090,6 +2092,7 @@ type
     procedure actRcardCopyFunctionExecute(Sender: TObject);
     procedure actRcardEditExecute(Sender: TObject);
     procedure actRCardExampleSelectedExecute(Sender: TObject);
+    procedure actRCardHelpExecute(Sender: TObject);
     procedure actRCardHelpSelectedExecute(Sender: TObject);
     procedure actRcardInsertExecute(Sender: TObject);
     procedure actRComplexDefaultExecute(Sender: TObject);
@@ -2143,6 +2146,7 @@ type
     procedure actRExplorerExpRawExecute(Sender: TObject);
     procedure actRExplorerExpTeXExecute(Sender: TObject);
     procedure actRExplorerFixExecute(Sender: TObject);
+    procedure actRExplorerHelpExecute(Sender: TObject);
     procedure actRExplorerHelpSelectedExecute(Sender: TObject);
     procedure actRExplorerNamesExecute(Sender: TObject);
     procedure actRExplorerPlotExecute(Sender: TObject);
@@ -2342,6 +2346,7 @@ type
     procedure menHelpStatHyperstatClick(Sender: TObject);
     procedure menHelpStatJournalStatisticalSoftwareClick(Sender: TObject);
     procedure menHelpStatStatSoftClick(Sender: TObject);
+    procedure menHelSecretsClick(Sender: TObject);
     procedure menHelUserGuideClick(Sender: TObject);
     procedure menHelUserListClick(Sender: TObject);
     procedure menOptionsShortcutsClick(Sender: TObject);
@@ -2476,11 +2481,6 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
-    procedure actRCardHelpExecute(Sender: TObject);
-    procedure actCompletionHelpExecute(Sender: TObject);
-    procedure actRExplorerHelpExecute(Sender: TObject);
-    procedure menHelSecretsClick(Sender: TObject);
-    procedure actLatexMakeIndexExecute(Sender: TObject);
 
   private
     { Private declarations }

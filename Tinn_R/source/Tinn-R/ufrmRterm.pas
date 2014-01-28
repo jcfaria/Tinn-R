@@ -135,16 +135,16 @@ type
     procedure cRTermReceiveOutput(Sender: TObject; const Cmd: string);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure pgRtermResize(Sender: TObject);
+    procedure synIOEnter(Sender: TObject);
     procedure synIOKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synIOKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synIOMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure synLogEnter(Sender: TObject);
     procedure synLogKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synLogKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synLogMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure synIOEnter(Sender: TObject);
-    procedure synLogEnter(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure pgRtermResize(Sender: TObject);
 
   private
     { Private declarations }
@@ -165,8 +165,8 @@ type
     iSynLog2Height       : integer;
     iSynLog2Width        : integer;
     splRIO               : TSplitter;
-    synLog2              : TSynEdit;
     sRDebugPrefix        : string;
+    synLog2              : TSynEdit;
 
     procedure RtermSplit(bSplitHorizontal: boolean = True);
   end;
@@ -864,7 +864,7 @@ begin
     if not SelAvail then begin
       if (CaretY = Lines.Count - 1) and
          (Key = VK_DOWN) then begin
-        key   := VK_PAUSE;
+        key:= VK_PAUSE;
 
         CaretY:= Lines.Count;
 
@@ -875,13 +875,13 @@ begin
       else if (CaretY <> Lines.Count) then Exit;
     end;
   end;
-
+{
   with synIO do
     if not SelAvail then
       if (LineText <> '') then
         if (LineText[1] in cOk) and
            (CaretX <= 3) then CaretX:= 3;
-
+}
   if (Key = VK_RETURN) then begin // Send latest line to R when editing related to Rterm
     if not frmTinnMain.Rterm_Running then Exit;
 
@@ -959,14 +959,15 @@ begin
     VK_BACK: begin
                with synIO do begin
                  if not SelAvail then begin
-                   sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+                   sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
 
                    if (sPrior = '>') or
                       (sPrior = '+') or
                       (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
                  end
                  else begin
-                   if (CaretY = Lines.Count) then
+                   if (CaretY = Lines.Count) and
+                      (BlockBegin.Line <> BlockEnd.Line) then
                      with cRterm do begin
                        if (SelText = Text) then synIO.Clear;
 
@@ -998,7 +999,8 @@ begin
                        end;
                    end
                    else begin
-                     if (CaretY = Lines.Count) then
+                     if (CaretY = Lines.Count) and
+                        (BlockBegin.Line <> BlockEnd.Line) then
                        with cRterm do begin
                          if (SelText = Text) then synIO.Clear;
 

@@ -573,17 +573,10 @@ type
     
   private
     { Private declarations }
-
-    //function KeyboardHookProc(code:Integer; wParam:WPARAM; lParam:LPARAM):LRESULT; stdcall;
-    //procedure DisableActionList(Sender: TObject);
-    //procedure EnableActionList(Sender: TObject);
     procedure AdjustColumnWidths(DBGrid: TDBGrid);
 
   public
     { Public declarations }
-    //eKeyShort: THotKey;
-    //kbHook: HHook;
-
     procedure DoProjectOpenNode;
   end;
 
