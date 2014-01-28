@@ -4,11 +4,14 @@
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
 # J.C.Faria
-# 2013-10-24 17:35:40
+# 28/01/2014 00:39:20
 #------------------------------------------------------------------------
 
 # Set repos: Rterm does not always shows the dialog to choose the repository
 options('repos'='%repos')
+
+# Necessary to package "debug" under Rterm interface
+options(debug.catfile="stdout")
 
 # Tinn-R/tmp/R_info.txt
 tr_info <- paste(Sys.getenv('APPDATA'),

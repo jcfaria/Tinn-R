@@ -326,9 +326,14 @@ procedure TConsoleIO.ReceiveOutput(Buf: Pointer;
 var
   Cmd,
    sOutput: string;
-  iPos    : Integer;
+
+  iPos: Integer;
+
+  bUnderDebug: boolean;
 
 begin
+  bUnderDebug:= False;
+
   if (Size <= 0) then Exit;
   Screen.Cursor:= crHourglass;  // J.C.Faria
 
@@ -411,7 +416,15 @@ begin
                    TrimRight(sOutput));
 
   // Checks if the request finished
-  if (OutputBuffer = '> ') then begin
+     // Function debug
+  if (Pos('Browse[',
+              OutputBuffer) > 0) or
+     // Package debug
+     (Pos('D(',
+              OutputBuffer) > 0) then bUnderDebug:= True;
+
+  if (OutputBuffer = '> ') or
+     bUnderDebug then begin
     FOnReceiveOutput(Self,
                      OutputBuffer);
 

@@ -2787,8 +2787,6 @@ type
     bRTCPIPConsoleUse         : boolean;
     bRtermBeepOnError         : boolean;
     bRtermFindError           : boolean;
-    bRUnderDebugFunction      : boolean;
-    bRUnderDebugPackage       : boolean;
     bSearchBackwards          : boolean;
     bSearchCaseSensitive      : boolean;
     bSearchFromCursor         : boolean;
@@ -2866,7 +2864,6 @@ type
     sPathTinnRcom             : string;
     sPathTmp                  : string;
     sRcardBookMark            : string;
-    sRDebugPrefix             : string;
     sRmirror                  : string;
     sRmirrorsBookMark         : string;
     sRtipBookMark             : string;
@@ -13411,10 +13408,10 @@ begin
        if frmRterm.bRterm_Plus then LineText:= '+ ' +
                                                frmTinnMain.RHistory.GetNext
        else
-         if frmTinnMain.bRUnderDebugPackage or
-            frmTinnMain.bRUnderDebugFunction then LineText:= frmTinnMain.sRDebugPrefix +
-                                                 ' ' +
-                                                 frmTinnMain.RHistory.GetNext
+         if frmRterm.bRUnderDebug_Function or
+            frmRterm.bRUnderDebug_Package then LineText:= frmRterm.sRDebugPrefix +
+                                                          ' ' +
+                                                          frmTinnMain.RHistory.GetNext
                                  else LineText:= '> ' +
                                                  frmTinnMain.RHistory.GetNext;
        ExecuteCommand(ecLineEnd,
@@ -13427,21 +13424,21 @@ procedure TfrmTinnMain.menRtermHistoryPriorClick(Sender: TObject);
 begin
   if not frmTinnMain.Rterm_Running then Exit;
 
-  with frmRterm.synIO do begin
-       CaretY:= Lines.Count;
-       if (SelText <> EmptyStr) then Exit;
-       if frmRterm.bRterm_Plus then LineText:= '+ ' +
-                                               frmTinnMain.RHistory.GetPrior
+  with frmRterm do begin
+       synIO.CaretY:= synIO.Lines.Count;
+       if (synIO.SelText <> EmptyStr) then Exit;
+       if bRterm_Plus then synIO.LineText:= '+ ' +
+                                            frmTinnMain.RHistory.GetPrior
        else
-         if frmTinnMain.bRUnderDebugPackage or
-            frmTinnMain.bRUnderDebugFunction then LineText:= frmTinnMain.sRDebugPrefix +
-                                                 ' ' +
-                                                 frmTinnMain.RHistory.GetPrior
-                                 else LineText:= '> ' +
+         if bRUnderDebug_Function or
+            bRUnderDebug_Package then synIO.LineText:= sRDebugPrefix +
+                                                       ' ' +
+                                                       frmTinnMain.RHistory.GetPrior
+                                 else synIO.LineText:= '> ' +
                                                  frmTinnMain.RHistory.GetPrior;
-       ExecuteCommand(ecLineEnd,
-                      #0,
-                      nil);
+       synIO.ExecuteCommand(ecLineEnd,
+                            #0,
+                            nil);
   end;
 end;
 
@@ -14480,13 +14477,6 @@ begin
                    sTmpPrior);
         if (iPos <> 0) then Delete(sTmpPrior,
                                    iPos + 1,
-                                   length(sTmpPrior));
-
-        // Check if under debug package
-        iPos:= pos(')>',
-                   sTmpPrior);
-        if (iPos <> 0) then Delete(sTmpPrior,
-                                   iPos + 2,
                                    length(sTmpPrior));
 
         // Check if under debug function
@@ -15986,14 +15976,15 @@ begin
   if Rterm_Running then begin
     CheckRterm;
 
-    if bRUnderDebugPackage or
-       bRUnderDebugFunction then begin
+    if frmRterm.bRUnderDebug_Function or
+       frmRterm.bRUnderDebug_Package then begin
 
-      with frmRterm.synIO do begin
-        LineText:= frmTinnMain.sRDebugPrefix + ' ';
-        ExecuteCommand(ecLineEnd,
-                       #0,
-                       nil);
+      with frmRterm do begin
+        synIO.LineText:= sRDebugPrefix +
+                         ' ';
+        synIO.ExecuteCommand(ecLineEnd,
+                             #0,
+                             nil);
       end;
     end
     else sToSend:= EmptyStr + #13#10;
@@ -20429,6 +20420,8 @@ const
   sName = '\TinnRcom';
 
 begin
+  uOption:= mrNone;
+
   if (CheckConnection = False) then begin
     Beep;
     Exit;
@@ -22814,21 +22807,21 @@ end;
 procedure TfrmTinnMain.actRtermIOHistoryNextExecute(Sender: TObject);
 begin
   if not Rterm_Running then Exit;
-  with frmRterm.synIO do begin
-    CaretY:= Lines.Count;
-    if (SelText <> EmptyStr) then Exit;
-    if frmRterm.bRterm_Plus then LineText:= '+ ' +
-                                            RHistory.GetNext
+  with frmRterm do begin
+    synIO.CaretY:= synIO.Lines.Count;
+    if (synIO.SelText <> EmptyStr) then Exit;
+    if bRterm_Plus then synIO.LineText:= '+ ' +
+                                         RHistory.GetNext
     else
-      if bRUnderDebugPackage or
-         bRUnderDebugFunction then LineText:= sRDebugPrefix +
-                                              ' ' +
-                                              RHistory.GetNext
-                              else LineText:= '> ' +
-                                              RHistory.GetNext;
-    ExecuteCommand(ecLineEnd,
-                   #0,
-                   nil);
+      if bRUnderDebug_Function or
+         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebugPrefix +
+                                                    ' ' +
+                                                    RHistory.GetNext
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.GetNext;
+    synIO.ExecuteCommand(ecLineEnd,
+                         #0,
+                         nil);
    end;
 end;
 
@@ -22836,22 +22829,22 @@ procedure TfrmTinnMain.actRtermIOHistoryPriorExecute(Sender: TObject);
 begin
   if not Rterm_Running then Exit;
   
-  with frmRterm.synIO do begin
-    CaretY:= Lines.Count;
-    if (SelText <> EmptyStr) then Exit;
-    if frmRterm.bRterm_Plus then LineText:= '+ ' +
-                                            RHistory.GetPrior
+  with frmRterm do begin
+    synIO.CaretY:= synIO.Lines.Count;
+    if (synIO.SelText <> EmptyStr) then Exit;
+    if bRterm_Plus then synIO.LineText:= '+ ' +
+                                         RHistory.GetPrior
     else
-      if bRUnderDebugPackage or
-         bRUnderDebugFunction then LineText:= sRDebugPrefix +
-                                              ' ' +
-                                              RHistory.GetPrior
-                              else LineText:= '> ' +
-                                              RHistory.GetPrior;
-  
-    ExecuteCommand(ecLineEnd,
-                   #0,
-                   nil);
+      if bRUnderDebug_Function or
+         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebugPrefix +
+                                                    ' ' +
+                                                    RHistory.GetPrior
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.GetPrior;
+
+    synIO.ExecuteCommand(ecLineEnd,
+                         #0,
+                         nil);
    end;
 end;
 

@@ -158,12 +158,15 @@ type
 
   public
     { Public declarations }
-    bRterm_Plus   : boolean;
-    bRterm_Running: boolean;
-    iSynLog2Height: integer;
-    iSynLog2Width : integer;
-    splRIO        : TSplitter;
-    synLog2       : TSynEdit;
+    bRterm_Plus          : boolean;
+    bRterm_Running       : boolean;
+    bRUnderDebug_Function: boolean;
+    bRUnderDebug_Package : boolean;
+    iSynLog2Height       : integer;
+    iSynLog2Width        : integer;
+    splRIO               : TSplitter;
+    synLog2              : TSynEdit;
+    sRDebugPrefix        : string;
 
     procedure RtermSplit(bSplitHorizontal: boolean = True);
   end;
@@ -279,35 +282,7 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
     end;
   end;
 
-  procedure CheckIfUnderDebugPackage;
-  var
-    iPosDbg1,
-     iPosDbg2 : integer;
-
-   begin
-     // It is necessary due the use of package debug: D(number)>
-     iPosDbg1:= Pos('D(',
-                    Cmd);
-     iPosDbg2:= Pos(')>',
-                    Cmd);
-     if (iPosDbg1 <> 0) and
-        (iPosDbg2 <> 0) then begin
-       with frmTinnMain do begin
-         bRUnderDebugPackage:= True;
-         sRDebugPrefix      := Trim(Copy(Cmd,
-                                         iPosDbg1,
-                                         iPosDbg2 - iPosDbg1 + 2));
-       end;
-     end
-     else begin
-       with frmTinnMain do begin
-         bRUnderDebugPackage:= False;
-         if not bRUnderDebugFunction then sRDebugPrefix:= '';
-       end;
-     end;
-   end;
-
-  procedure CheckIfUnderDebugFunction;
+  procedure CheckIfUnderDebug_Function;
   var
     iPosDbg1,
      iPosDbg2 : integer;
@@ -320,18 +295,35 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
                     Cmd);
      if (iPosDbg1 <> 0) and
         (iPosDbg2 <> 0) then begin
-       with frmTinnMain do begin
-         bRUnderDebugFunction:= True;
+       bRUnderDebug_Function:= True;
+       sRDebugPrefix        := Trim(Copy(Cmd,
+                                         iPosDbg1,
+                                         iPosDbg2 - iPosDbg1 + 2));
+     end
+     else bRUnderDebug_Function:= False;
+   end;
+
+  procedure CheckIfUnderDebug_Package;
+  var
+    iPosDbg1,
+     iPosDbg2 : integer;
+
+   begin
+     // It is necessary due the use of package debug: D(number)>
+     iPosDbg1:= Pos('D(',
+                    Cmd);
+     iPosDbg2:= Pos(')>',
+                    Cmd);
+     if (iPosDbg1 <> 0) and
+        (iPosDbg2 <> 0) then begin
+         bRUnderDebug_Package:= True;
          sRDebugPrefix       := Trim(Copy(Cmd,
                                           iPosDbg1,
                                           iPosDbg2 - iPosDbg1 + 2));
-       end;
      end
      else begin
-       with frmTinnMain do begin
-         bRUnderDebugFunction:= False;
-         if not bRUnderDebugPackage then sRDebugPrefix:= '';
-       end;
+       bRUnderDebug_Package:= False;
+       if not bRUnderDebug_Function then sRDebugPrefix:= '';
      end;
    end;
 
@@ -350,7 +342,13 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
                                   [rfReplaceAll]);
 
        with synIO do
-         Lines.AddStrings(slTmp);
+         if bRUnderDebug_Function or
+            bRUnderDebug_Package then begin
+           Lines.Add('');
+           Lines.AddStrings(slTmp);
+         end
+         else
+           Lines.AddStrings(slTmp);
      finally
        FreeAndNil(slTmp);
      end;
@@ -370,8 +368,8 @@ begin
   end;
 
   pgRterm.ActivePage:= tbsIO;
-  CheckIfUnderDebugPackage;
-  CheckIfUnderDebugFunction;
+  CheckIfUnderDebug_Function;
+  CheckIfUnderDebug_Package;
 
   with synIO do begin
     BeginUpdate;
@@ -682,6 +680,7 @@ begin
     end;
   end;
 
+
   if (Shift = [ssCtrl]) then
     case Key of
       VK_TAB: begin
@@ -860,13 +859,15 @@ begin
     end;
   end;
 
-  // All below will make restrictions and special features to the keystrokes on the last line (the prompt: > )
+  // All below will make restrictions and special features to the keystrokes on the last line (prompt)
   with synIO do begin
     if not SelAvail then begin
       if (CaretY = Lines.Count - 1) and
          (Key = VK_DOWN) then begin
         key   := VK_PAUSE;
+
         CaretY:= Lines.Count;
+
         ExecuteCommand(ecLineEnd,
                        #0,
                        nil);
@@ -883,55 +884,70 @@ begin
 
   if (Key = VK_RETURN) then begin // Send latest line to R when editing related to Rterm
     if not frmTinnMain.Rterm_Running then Exit;
+
     with synIO do begin
       key:= VK_PAUSE;  // Avoid a blank line below the instruction
 
       BeginUpdate;
+
       ExecuteCommand(ecLineEnd,
                      #0,
                      nil);
+
       sTmp:= Trim(LineText);
+
       if (sTmp = '') then sTmp:= '> ';
+
       if (sTmp[1] in cOk) then Delete(sTmp,
                                       1,
                                       1);
       if (sTmp <> '') and
          (sTmp <> '> ') then begin
-        // It is necessary due the use of package debug: D(number)>
-        if frmTinnMain.bRUnderDebugPackage then begin
-          iPos:= Pos(')>',
-                     sTmp);
-          sEfective:= Trim(Copy(sTmp,
-                                (iPos + 2),
-                                (Length(sTmp) - iPos + 2)));
-          if (sEfective = '') then sTmp:= ''
-                              else sTmp:= sEfective;
-        end
-        // It is necessary due the use of function debug: D[number]>
-        else if frmTinnMain.bRUnderDebugFunction then begin
+
+        // It is necessary due the use of function debug: Browse[number]>
+        if bRUnderDebug_Function then begin
           iPos:= Pos(']>',
                      sTmp);
+
           sEfective:= Trim(Copy(sTmp,
                            (iPos + 2),
                            (Length(sTmp) - iPos + 2)));
+
           if (sEfective = '') then sTmp:= ''
                               else sTmp:= sEfective;
         end
+
+        // It is necessary due the use of package debug: D(number)>
+        else if bRUnderDebug_Package then begin
+          iPos:= Pos(')>',
+                     sTmp);
+
+          sEfective:= Trim(Copy(sTmp,
+                                (iPos + 2),
+                                (Length(sTmp) - iPos + 2)));
+
+          if (sEfective = '') then sTmp:= ''
+                              else sTmp:= sEfective;
+        end
+
         // It is necessary due the use of package sem (John Fox)
         else if (sTmp[Length(sTmp)] = ':') then
             if IsInteger(Copy(sTmp,
                               0,
                               Pos(':',
-                                  sTmp) - 1)) then
-              sTmp:= '';
+                                  sTmp) - 1)) then sTmp:= '';
       end;
       if (sTmp <> '') then frmTinnMain.RHistory.Add(Trim(sTmp));
-      sToSend    := Trim(sTmp);
+
+      sToSend:= Trim(sTmp);
+
       bRterm_Sent:= True;
+
       bRterm_Plus:= False;
+
       frmTinnMain.DoSend(sToSend,
                          False);
-      //CaretY:= Lines.Count - 1;
+
       EndUpdate;
     end;
   end;
@@ -944,16 +960,16 @@ begin
                with synIO do begin
                  if not SelAvail then begin
                    sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+
                    if (sPrior = '>') or
-                      (sPrior = '+') then begin
-                     key:= VK_PAUSE;
-                     //ExecuteCommand(ecLineEnd, #0, nil);
-                   end;
+                      (sPrior = '+') or
+                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
                  end
                  else begin
                    if (CaretY = Lines.Count) then
                      with cRterm do begin
                        if (SelText = Text) then synIO.Clear;
+
                        if IsRunning then SendInput('' +
                                                    #13#10);
                      end;
@@ -965,21 +981,27 @@ begin
     VK_DELETE: begin
                  with synIO do begin
                    if not SelAvail then begin
+
                      sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+
                      sAfter:= Trim(ConsoleGetCursorTo('EndLine'));
+
                      if (sPrior = '>') or
-                        (sPrior = '+') then
-                        if (sAfter = '')  then begin
-                       key:= VK_PAUSE;
-                       ExecuteCommand(ecLineEnd,
-                                      #0,
-                                      nil);
-                     end;
+                        (sPrior = '+') or
+                        (sPrior = sRDebugPrefix) then
+                       if (sAfter = '')  then begin
+                         key:= VK_PAUSE;
+
+                         ExecuteCommand(ecLineEnd,
+                                        #0,
+                                        nil);
+                       end;
                    end
                    else begin
                      if (CaretY = Lines.Count) then
                        with cRterm do begin
                          if (SelText = Text) then synIO.Clear;
+
                          if IsRunning then SendInput('' +
                                                      #13#10);
                        end;
@@ -990,17 +1012,18 @@ begin
     VK_LEFT: with synIO do begin
                if not SelAvail then begin
                  sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+
                  if (sPrior = '>') or
-                    (sPrior = '+') then begin
-                   key:= VK_PAUSE;
-                   CaretX:= 3;
-                 end;
+                    (sPrior = '+') or
+                    (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
                end;
              end;
 
     VK_HOME: with synIO do begin
+               if (sRDebugPrefix <> '') then CaretX:= length(sRDebugPrefix) + 2
+                                        else CaretX:= 3;
+
                key:= VK_PAUSE;
-               CaretX:= 3;
              end;
   end;
 end;
