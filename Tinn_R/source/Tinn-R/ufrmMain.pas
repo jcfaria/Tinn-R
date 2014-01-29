@@ -16105,30 +16105,14 @@ var
   sTmp: string;
 
 begin
-(*
-  stbMain.Panels[7].Text:= EmptyStr;
-  with actRtermWarningError do begin
-    Visible:= False;
-    Checked:= False;
-  end;
-  // Related to Rgui
-  if not RguiRunning then Exit;
-  if UseTCPIP then Exit;
-  sTmp:= '{ESC}';
-  fCodeSender.DoPrepare;
-  fCodeSender.SendString(sTmp);
-  CheckTop;
-  SetFocus_Rgui(iDelay);
-*)
-
   stbMain.Panels[8].Text:= EmptyStr;
   with actRtermWarningError do begin
     Visible:= False;
     Checked:= False;
   end;
 
-  if not Rgui_Running then Exit;
-  if UseTCPIP then Exit;
+  if not (Rgui_Running) then Exit;
+  //if UseTCPIP then Exit;
   sTmp:= '{ESC}';
   fCodeSender.DoPrepare;
   fCodeSender.SendString(sTmp);
