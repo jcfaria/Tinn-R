@@ -1083,11 +1083,11 @@ begin
 
   if frmTinnMain.actReadOnly.Checked then Exit;
 
-  //Define the active editor
+  // Define the active editor
   if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
-  //SHIFT + Ins is the default 'paste' shortcut of synEdit
+  // SHIFT + Ins is the default 'paste' shortcut of synEdit
   if (Shift = [ssShift]) and
      (Key = VK_INSERT) then EnableSave;
 

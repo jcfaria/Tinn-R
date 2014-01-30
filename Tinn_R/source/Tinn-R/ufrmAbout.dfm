@@ -212,7 +212,7 @@ object frmAbout: TfrmAbout
         Top = 364
         Width = 118
         Height = 13
-        Caption = 'Copyright 2001-2013'
+        Caption = 'Copyright 2001-2014'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -241,10 +241,6 @@ object frmAbout: TfrmAbout
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memAboutProject: TMemo
         Left = 0
         Top = 0
@@ -299,10 +295,6 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memAboutAknowledgments: TMemo
         Left = 0
         Top = 0
@@ -387,10 +379,6 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memAboutCredits: TMemo
         Left = 0
         Top = 0

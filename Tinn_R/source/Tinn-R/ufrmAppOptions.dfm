@@ -117,7 +117,7 @@ object frmAppOptions: TfrmAppOptions
       Top = 1
       Width = 340
       Height = 487
-      ActivePage = tbsAppMoreLatex
+      ActivePage = tbsEditorAdvanced
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -908,7 +908,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 0
           object ckAutoIndent: TCheckBox
-            Left = 9
+            Left = 8
             Top = 15
             Width = 130
             Height = 17
@@ -919,7 +919,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 0
           end
           object ckDragAndDropEditing: TCheckBox
-            Left = 9
+            Left = 8
             Top = 53
             Width = 130
             Height = 17
@@ -930,7 +930,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 2
           end
           object ckAutoSizeMaxWidth: TCheckBox
-            Left = 9
+            Left = 8
             Top = 34
             Width = 130
             Height = 17
@@ -939,7 +939,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 1
           end
           object ckHalfPageScroll: TCheckBox
-            Left = 178
+            Left = 182
             Top = 15
             Width = 130
             Height = 17
@@ -950,7 +950,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 12
           end
           object ckEnhanceEndKey: TCheckBox
-            Left = 9
+            Left = 8
             Top = 186
             Width = 130
             Height = 17
@@ -959,7 +959,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 9
           end
           object ckScrollByOneLess: TCheckBox
-            Left = 178
+            Left = 182
             Top = 34
             Width = 130
             Height = 17
@@ -968,7 +968,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 13
           end
           object ckScrollPastEOF: TCheckBox
-            Left = 178
+            Left = 182
             Top = 53
             Width = 130
             Height = 17
@@ -977,7 +977,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 14
           end
           object ckScrollPastEOL: TCheckBox
-            Left = 178
+            Left = 182
             Top = 72
             Width = 130
             Height = 17
@@ -988,7 +988,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 15
           end
           object ckShowScrollHint: TCheckBox
-            Left = 178
+            Left = 182
             Top = 91
             Width = 130
             Height = 17
@@ -999,7 +999,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 16
           end
           object ckSmartTabs: TCheckBox
-            Left = 9
+            Left = 8
             Top = 129
             Width = 130
             Height = 17
@@ -1010,7 +1010,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 6
           end
           object ckTabsToSpaces: TCheckBox
-            Left = 178
+            Left = 182
             Top = 129
             Width = 130
             Height = 17
@@ -1019,7 +1019,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 18
           end
           object ckTrimTrailingSpaces: TCheckBox
-            Left = 178
+            Left = 182
             Top = 148
             Width = 130
             Height = 17
@@ -1028,18 +1028,18 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 19
           end
           object ckWantTabs: TCheckBox
-            Left = 9
+            Left = 8
             Top = 110
-            Width = 130
+            Width = 170
             Height = 17
             Hint = 
               'Let the editor accept tab characters instead of going to the nex' +
               't control'
-            Caption = 'Want tabs'
+            Caption = 'Want tabs (ind./unind. selec.)'
             TabOrder = 5
           end
           object ckAltSetsColumnMode: TCheckBox
-            Left = 9
+            Left = 8
             Top = 72
             Width = 130
             Height = 17
@@ -1050,7 +1050,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 3
           end
           object ckKeepCaretX: TCheckBox
-            Left = 9
+            Left = 8
             Top = 91
             Width = 130
             Height = 17
@@ -1061,7 +1061,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 4
           end
           object ckScrollHintFollows: TCheckBox
-            Left = 178
+            Left = 182
             Top = 110
             Width = 138
             Height = 17
@@ -1070,7 +1070,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 17
           end
           object ckGroupUndo: TCheckBox
-            Left = 178
+            Left = 182
             Top = 167
             Width = 130
             Height = 17
@@ -1082,16 +1082,16 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 20
           end
           object ckSmartTabDelete: TCheckBox
-            Left = 9
+            Left = 8
             Top = 148
-            Width = 130
+            Width = 157
             Height = 17
             Hint = 'similar to Smart Tabs, but when you delete characters'
-            Caption = 'Smart tab delete'
+            Caption = 'Backspace to last character'
             TabOrder = 7
           end
           object ckRightMouseMoves: TCheckBox
-            Left = 178
+            Left = 182
             Top = 186
             Width = 146
             Height = 17
@@ -1102,7 +1102,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 21
           end
           object ckEnhanceHomeKey: TCheckBox
-            Left = 9
+            Left = 8
             Top = 167
             Width = 146
             Height = 17
@@ -1111,7 +1111,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 8
           end
           object ckHideShowScrollbars: TCheckBox
-            Left = 9
+            Left = 8
             Top = 205
             Width = 156
             Height = 17
@@ -1123,7 +1123,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 10
           end
           object ckDisableScrollArrows: TCheckBox
-            Left = 9
+            Left = 8
             Top = 224
             Width = 130
             Height = 17
@@ -1134,7 +1134,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 11
           end
           object ckShowSpecialChars: TCheckBox
-            Left = 178
+            Left = 182
             Top = 205
             Width = 130
             Height = 17

@@ -1948,6 +1948,7 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
+    menHelNews: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2481,6 +2482,7 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
+    procedure menHelNewsClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -5563,7 +5565,7 @@ begin
     Font.Size               := ifEditor.ReadInteger('Editor', 'iFont.Size', 11);
     HideSelection           := ifEditor.ReadBool('Editor', 'bHideSelection', False);
     InsertCaret             := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iInsertCaret', 0));
-    Options                 := TSynEditorOptions(ifEditor.ReadInteger('Editor', 'iOptions', 105744407));  // My basic preferences!
+    Options                 := TSynEditorOptions(ifEditor.ReadInteger('Editor', 'iOptions', 124618775));  // My basic preferences!
     OverWriteCaret          := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iOverWriteCaret', 3));
     RightEdge               := ifEditor.ReadInteger('Editor', 'iRightEdge', 80);
     RightEdgeColor          := ifEditor.ReadInteger('Editor', 'iRightEdgeColor', coEditor.RightEdgeColor);
@@ -19333,6 +19335,11 @@ begin
              mtInformation,
              [mbOk],
              0);
+end;
+
+procedure TfrmTinnMain.menHelNewsClick(Sender: TObject);
+begin
+  OpenUserGuidePDF('"What is new?"');
 end;
 
 procedure TfrmTinnMain.actRFilterRefreshExecute(Sender: TObject);

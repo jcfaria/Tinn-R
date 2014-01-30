@@ -1318,7 +1318,7 @@ begin
   ckSmartTabs.Checked          := eoSmartTabs in coTmp.Options;
   ckTabsToSpaces.Checked       := eoTabsToSpaces in coTmp.Options;
   ckTrimTrailingSpaces.Checked := eoTrimTrailingSpaces in coTmp.Options;
-  ckWantTabs.Checked           := coTmp.WantTabs;
+  ckWantTabs.Checked           := eoTabIndent in coTmp.Options;
 
   // Caret
   cInsertCaret.ItemIndex   := ord(coTmp.InsertCaret);
@@ -1389,7 +1389,7 @@ begin
 
   // Options
   vOptions:= coTmp.Options;  // Keep old values for unsupported options
-  coTmp.WantTabs:= ckWantTabs.Checked;
+  SetFlag(eoTabIndent, ckWantTabs.Checked);
   SetFlag(eoAltSetsColumnMode, ckAltSetsColumnMode.Checked);
   SetFlag(eoAutoIndent, ckAutoIndent.Checked);
   SetFlag(eoAutoSizeMaxScrollWidth, ckAutoSizeMaxWidth.Checked);
