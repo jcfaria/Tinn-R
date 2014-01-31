@@ -68,91 +68,81 @@ type
   TtkTokenKind = (
                   {tkBrace,
                   tkBracket,} //J.C.Faria
-                  tkSymbol, //J.C.Faria
-                  tkNull,
-                  tkSpace,
-                  tkText,
                   tkComment,
                   tkControlSequence,
-                  tkMathMode
+                  tkMathMode,
+                  tkNull,
+                  tkSpace,
+                  tkSymbol, //J.C.Faria
+                  tkText
                  );
 
 type
   TSynTeXSyn = class(TSynCustomHighlighter)
   private
-    fTokenID: TtkTokenKind;
-    fTextAttri: TSynHighlighterAttributes;
-    fControlSequenceAttri: TSynHighlighterAttributes;
-    fMathmodeAttri: TSynHighlighterAttributes;
-    fCommentAttri: TSynHighlighterAttributes;
-    fSpaceAttri: TSynHighlighterAttributes;
     {
     fBracketAttri: TSynHighlighterAttributes;
     fBraceAttri: TSynHighlighterAttributes;
     } //J.C.Faria
+    fCommentAttri: TSynHighlighterAttributes;
+    fControlSequenceAttri: TSynHighlighterAttributes;
+    fMathmodeAttri: TSynHighlighterAttributes;
+    fSpaceAttri: TSynHighlighterAttributes;
     fSymbolAttri: TSynHighlighterAttributes; //J.C.Faria
+    fTextAttri: TSynHighlighterAttributes;
+    fTokenID: TtkTokenKind;
 
     function CreateHighlighterAttributes(Name: string; FriendlyName: UnicodeString;
       Foreground, Background: TColor; FontStyles: TFontStyles): TSynHighlighterAttributes;
 
-    procedure CRProc;
-    procedure TextProc;
-    procedure LFProc;
-    procedure NullProc;
-    procedure CommentProc;
-    procedure SpaceProc;
-    procedure ControlSequenceProc;
     {
     procedure BraceOpenProc;
     procedure BraceCloseProc;
     procedure BracketOpenProc;
     procedure BracketCloseProc;
     } //J.C.Faria
-    procedure SymbolProc; //J.C.Faria
+    procedure CommentProc;
+    procedure ControlSequenceProc;
+    procedure CRProc;
+    procedure LFProc;
     procedure MathmodeProc;
+    procedure NullProc;
+    procedure SpaceProc;
+    procedure SymbolProc; //J.C.Faria
+    procedure TextProc;
 
   protected
     function GetSampleSource: UnicodeString; override;
     function IsFilterStored: Boolean; override;
 
   public
-    class function GetLanguageName: string; override;
     class function GetFriendlyLanguageName: UnicodeString; override;
+    class function GetLanguageName: string; override;
 
   public
     constructor Create(AOwner: TComponent); override;
-    function GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;
-      override;
+
+    function GetDefaultAttribute(Index: integer): TSynHighlighterAttributes; override;
     function GetEol: Boolean; override;
-    function GetTokenID: TtkTokenKind;
     function GetTokenAttribute: TSynHighlighterAttributes; override;
+    function GetTokenID: TtkTokenKind;
     function GetTokenKind: integer; override;
+
     procedure Next; override;
 
   published
-    property CommentAttri : TSynHighlighterAttributes read fCommentAttri
-                                                      write fCommentAttri;
-
-    property TextAttri: TSynHighlighterAttributes read fTextAttri
-                                                  write fTextAttri;
-
-    property ControlSequenceAttri: TSynHighlighterAttributes read fControlSequenceAttri
-                                                            write fControlSequenceAttri;
-
-    property MathmodeAttri: TSynHighlighterAttributes read fMathmodeAttri
-                                                      write fMathmodeAttri;
-
-    property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri
-                                                   write fSpaceAttri;
     {
     property BraceAttri: TSynHighlighterAttributes read fBraceAttri
       write fBraceAttri;
     property BracketAttri: TSynHighlighterAttributes read fBracketAttri
       write fBracketAttri;
     } //J.C.Faria
-
-    property SymbolAttri: TSynHighlighterAttributes read fSymbolAttri
-                                                   write fSymbolAttri; //J.C.Faria
+    property CommentAttri : TSynHighlighterAttributes read fCommentAttri write fCommentAttri;
+    property ControlSequenceAttri: TSynHighlighterAttributes read fControlSequenceAttri write fControlSequenceAttri;
+    property MathmodeAttri: TSynHighlighterAttributes read fMathmodeAttri write fMathmodeAttri;
+    property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri write fSpaceAttri;
+    property SymbolAttri: TSynHighlighterAttributes read fSymbolAttri write fSymbolAttri; //J.C.Faria
+    property TextAttri: TSynHighlighterAttributes read fTextAttri write fTextAttri;
   end;
 
 implementation

@@ -1,9 +1,10 @@
+#------------------------------------------------------------------------
 # This script will install all dependencies and
 # the necessary TinnRcom package.
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
-# J.C.Faria
-# 2013-10-21 12:03:23
+# J.C.Faria - Tinn-R Team
+# 31/01/2014 19:42:36
 #------------------------------------------------------------------------
 
 # Try to detach

@@ -59,8 +59,8 @@ type
     spLine: TJvSpinEdit;
     
     procedure BitBtn1Click(Sender: TObject);
-    procedure spLineKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure spLineKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     
   private
     { Private declarations }

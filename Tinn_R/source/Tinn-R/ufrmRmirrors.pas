@@ -86,6 +86,7 @@ type
     Panel2: TPanel;
     stbRmirrors: TStatusBar;
 
+    procedure bbHelpClick(Sender: TObject);
     procedure bbtRmirrorsCancelAllClick(Sender: TObject);
     procedure bbtRmirrorsCancelClick(Sender: TObject);
     procedure bbtRmirrorsCloseClick(Sender: TObject);
@@ -95,14 +96,13 @@ type
     procedure bbtRmirrorsRestoreDefaultClick(Sender: TObject);
     procedure bbtRmirrorsSaveClick(Sender: TObject);
     procedure dbgRmirrorsTitleClick(Column: TColumn);
-    procedure edtNameSearchChange(Sender: TObject);
     procedure edtCitySearchChange(Sender: TObject);
     procedure edtCountrySearchChange(Sender: TObject);
+    procedure edtNameSearchChange(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
-    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }

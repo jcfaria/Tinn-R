@@ -74,28 +74,28 @@ uses
 type
   TtkTokenKind = (
                   tkComment,
-                  tkIdentifier,
-                  tkPrograming,
-                  tkFunctions,
                   tkDatasets,
-                  tkPlotting,
+                  tkFloat,
+                  tkFunctions,
+                  tkHex,
+                  tkIdentifier,
                   tkNull,
+                  tkNumber,
+                  tkOct,
+                  tkOperator,
+                  tkPlotting,
+                  tkPrograming,
                   tkSpace,
                   tkString,
                   tkSymbol,
-                  tkOperator,
-                  tkNumber,
-                  tkFloat,
-                  tkHex,
-                  tkOct,
                   tkUnknown
                  );
 
   TRangeState = (
+                 //rsMultilineString  // Multiline is not suitable for Rterm!
                  rsANil,
                  rsComment,
                  rsUnKnown
-                 //rsMultilineString  // Multiline is not suitable for Rterm! 
                 );
 
 type
@@ -103,38 +103,38 @@ type
 
   private
     //fStringStarter: WideChar;  // used only for rsMultilineString stuff   // Multiline is not suitable for Rterm!
-    fRange: TRangeState;
-    FTokenID: TtkTokenKind;
-    FKeywords: TUnicodeStringList;
-    fStringAttri: TSynHighlighterAttributes;
-    fNumberAttri: TSynHighlighterAttributes;
-    fFloatAttri: TSynHighlighterAttributes;
-    fHexAttri: TSynHighlighterAttributes;
-    fOctalAttri: TSynHighlighterAttributes;
-    fProgramingAttri: TSynHighlighterAttributes;
-    fFunctionsAttri: TSynHighlighterAttributes;
-    fDatasetsAttri: TSynHighlighterAttributes;
-    fPlottingAttri: TSynHighlighterAttributes;
-    fSymbolAttri: TSynHighlighterAttributes;
-    fOperatorAttri: TSynHighlighterAttributes;
     fCommentAttri: TSynHighlighterAttributes;
+    fDatasetsAttri: TSynHighlighterAttributes;
+    fFloatAttri: TSynHighlighterAttributes;
+    fFunctionsAttri: TSynHighlighterAttributes;
+    fHexAttri: TSynHighlighterAttributes;
     fIdentifierAttri: TSynHighlighterAttributes;
+    FKeywords: TUnicodeStringList;
+    fNumberAttri: TSynHighlighterAttributes;
+    fOctalAttri: TSynHighlighterAttributes;
+    fOperatorAttri: TSynHighlighterAttributes;
+    fPlottingAttri: TSynHighlighterAttributes;
+    fProgramingAttri: TSynHighlighterAttributes;
+    fRange: TRangeState;
     fSpaceAttri: TSynHighlighterAttributes;
+    fStringAttri: TSynHighlighterAttributes;
+    fSymbolAttri: TSynHighlighterAttributes;
+    FTokenID: TtkTokenKind;
 
     function IdentKind(MayBe: PWideChar): TtkTokenKind;
 
-    procedure SymbolProc;
-    procedure OperatorProc;
-    procedure CRProc;
+    //procedure StringEndProc(EndChar: WideChar);
     procedure CommentProc;
+    procedure CRProc;
     procedure IdentProc;
     procedure LFProc;
     procedure NullProc;
     procedure NumberProc;
+    procedure OperatorProc;
     procedure SpaceProc;
     procedure String34Proc;
     procedure String39Proc;
-    //procedure StringEndProc(EndChar: WideChar);
+    procedure SymbolProc;
     procedure UnknownProc;
 
   protected
@@ -145,8 +145,8 @@ type
     property TokenID: TtkTokenKind read FTokenID;
 
   public
-    class function GetLanguageName: string; override;
     class function GetFriendlyLanguageName: UnicodeString; override;
+    class function GetLanguageName: string; override;
 
   public
     constructor Create(AOwner: TComponent); override;
@@ -155,57 +155,30 @@ type
     function GetDefaultAttribute(Index: integer): TSynHighlighterAttributes; override;
     function GetEol: Boolean; override;
     function GetRange: Pointer; override;
-    function GetTokenID: TtkTokenKind;
     function GetTokenAttribute: TSynHighlighterAttributes; override;
+    function GetTokenID: TtkTokenKind;
     function GetTokenKind: integer; override;
     function IsIdentChar(AChar: WideChar): Boolean; override;
 
     procedure Next; override;
-    procedure SetRange(Value: Pointer); override;
     procedure ResetRange; override;
+    procedure SetRange(Value: Pointer); override;
 
   published
-    property CommentAttri: TSynHighlighterAttributes read fCommentAttri
-                                                     write fCommentAttri;
-
-    property IdentifierAttri: TSynHighlighterAttributes read fIdentifierAttri
-                                                        write fIdentifierAttri;
-
-    property ProgramingAttri: TSynHighlighterAttributes read fProgramingAttri
-	                                                write fProgramingAttri;
-
-    property FunctionsAttri: TSynHighlighterAttributes read fFunctionsAttri
-                                                       write fFunctionsAttri;
-
-    property DatasetsAttri: TSynHighlighterAttributes read fDatasetsAttri
-                                                      write fDatasetsAttri;
-
-    property PlottingAttri: TSynHighlighterAttributes read fPlottingAttri
-                                                      write fPlottingAttri;
-
-    property NumberAttri: TSynHighlighterAttributes read fNumberAttri
-                                                    write fNumberAttri;
-
-    property HexAttri: TSynHighlighterAttributes read fHexAttri
-                                                 write fHexAttri;
-
-    property OctalAttri: TSynHighlighterAttributes read fOctalAttri
-                                                   write fOctalAttri;
-
-    property FloatAttri: TSynHighlighterAttributes read fFloatAttri
-                                                   write fFloatAttri;
-
-    property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri
-                                                   write fSpaceAttri;
-
-    property StringAttri: TSynHighlighterAttributes read fStringAttri
-                                                    write fStringAttri;
-
-    property SymbolAttri: TSynHighlighterAttributes read fSymbolAttri
-                                                    write fSymbolAttri;
-
-    property OperatorAttri: TSynHighlighterAttributes read fOperatorAttri
-                                                      write fOperatorAttri;
+    property CommentAttri: TSynHighlighterAttributes read fCommentAttri write fCommentAttri;
+    property DatasetsAttri: TSynHighlighterAttributes read fDatasetsAttri write fDatasetsAttri;
+    property FloatAttri: TSynHighlighterAttributes read fFloatAttri write fFloatAttri;
+    property FunctionsAttri: TSynHighlighterAttributes read fFunctionsAttri write fFunctionsAttri;
+    property HexAttri: TSynHighlighterAttributes read fHexAttri write fHexAttri;
+    property IdentifierAttri: TSynHighlighterAttributes read fIdentifierAttri write fIdentifierAttri;
+    property NumberAttri: TSynHighlighterAttributes read fNumberAttri write fNumberAttri;
+    property OctalAttri: TSynHighlighterAttributes read fOctalAttri write fOctalAttri;
+    property OperatorAttri: TSynHighlighterAttributes read fOperatorAttri write fOperatorAttri;
+    property PlottingAttri: TSynHighlighterAttributes read fPlottingAttri write fPlottingAttri;
+    property ProgramingAttri: TSynHighlighterAttributes read fProgramingAttri write fProgramingAttri;
+    property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri write fSpaceAttri;
+    property StringAttri: TSynHighlighterAttributes read fStringAttri write fStringAttri;
+    property SymbolAttri: TSynHighlighterAttributes read fSymbolAttri write fSymbolAttri;
   end;
 
 implementation

@@ -1,10 +1,10 @@
 #===============================================================================
 # Name   : R script template
 # Author : Tinn-R Team
-# Date   : 20/11/2013 13:25:36
-# Version: v2
+# Date   : 31/01/2014 19:48:33
+# Version: v3
 # Aim    : Template to R script
-# Mail   : http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
+# URL    : http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 #===============================================================================
 
 #===============================

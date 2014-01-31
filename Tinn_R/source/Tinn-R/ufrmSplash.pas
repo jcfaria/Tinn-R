@@ -52,9 +52,10 @@ uses
 
 type
   TfrmSplash = class(TForm)
+    imSplash: TImage;
     Label1: TLabel;
     lVersion: TLabel;
-    imSplash: TImage;
+
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }

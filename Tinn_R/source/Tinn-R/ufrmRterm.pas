@@ -93,12 +93,16 @@ type
     TBItem38: TTBItem;
     TBItem39: TTBItem;
     TBItem4: TTBItem;
+    TBItem40: TTBItem;
+    TBItem41: TTBItem;
+    TBItem42: TTBItem;
     TBItem5: TTBItem;
     TBItem6: TTBItem;
     TBItem7: TTBItem;
     TBItem8: TTBItem;
     TBItem9: TTBItem;
     TBSeparatorItem1: TTBSeparatorItem;
+    TBSeparatorItem2: TTBSeparatorItem;
     TBSeparatorItem3: TTBSeparatorItem;
     TBSeparatorItem4: TTBSeparatorItem;
     TBSeparatorItem5: TTBSeparatorItem;
@@ -124,10 +128,6 @@ type
     TBSubmenuItem8: TTBSubmenuItem;
     TBSubmenuItem9: TTBSubmenuItem;
     TBToolbarRterm: TTBToolbar;
-    TBItem40: TTBItem;
-    TBItem41: TTBItem;
-    TBItem42: TTBItem;
-    TBSeparatorItem2: TTBSeparatorItem;
 
     procedure cRTermError(Sender: TObject; const Cmd: string);
     procedure cRTermProcessStatusChange(Sender: TObject; IsRunning: Boolean);
@@ -150,9 +150,9 @@ type
     { Private declarations }
     bRterm_Sent : boolean;
     bTab        : boolean;
+    slError     : TStringList;
     sTab        : string;
     sTabPrefix  : string;
-    slError     : TStringList;
 
     procedure splRIOMoved(Sender: TObject);
 

@@ -1,8 +1,8 @@
 %===============================================================================
 % Name   : R doc template
 % Author : Tinn-R Team
-% Date   : 19/11/2013 07:46:52
-% Version: v1
+% Date   : 31/01/2014 19:46:49
+% Version: v2
 % Aim    : Template to dataset
 % URL    : http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 %===============================================================================
@@ -42,7 +42,7 @@
 
 \examples{
 data(My dataset)
-# maybe str(My dataset) ; plot(My dataset) ...
+# maybe str(My dataset); plot(My dataset) ...
 }
 
 \keyword{datasets}

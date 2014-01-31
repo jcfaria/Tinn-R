@@ -1,10 +1,12 @@
+#------------------------------------------------------------------------
 # This script runs always when Tinn-R identifies an R instance.
-# It has the purpose of obtaining essential information regarding of
-# R and TinnRcom package.
+# Aim:
+# - Set automatically some options related to R
+# - Obtaining essential information regarding of R and TinnRcom package.
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
-# J.C.Faria
-# 28/01/2014 00:39:20
+# J.C.Faria - Tinn-R Team
+# 31/01/2014 19:40:38
 #------------------------------------------------------------------------
 
 # Set repos: Rterm does not always shows the dialog to choose the repository

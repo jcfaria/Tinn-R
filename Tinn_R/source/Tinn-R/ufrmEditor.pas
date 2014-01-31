@@ -70,6 +70,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure SplitMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure SplitMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure SplitMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -85,7 +86,6 @@ type
     procedure synEditorMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure synEditorReplaceText(Sender: TObject; const ASearch, AReplace: WideString; Line, Column: Integer; var Action: TSynReplaceAction);
     procedure synEditorStatusChange(Sender: TObject; Changes: TSynStatusChanges);
-    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -123,9 +123,9 @@ type
 
     //procedure MatchBracket;
     //procedure RtermSplit(bSplitHoriz: boolean = True);
-    function GetCurrentHighLighter: TSynCustomHighlighter;
     function GetBBHighLighter: TSynCustomHighlighter;
     function GetBEHighLighter: TSynCustomHighlighter;
+    function GetCurrentHighLighter: TSynCustomHighlighter;
     function ScrubCaption(sCap: string): string;
     function SetHighlighterID: integer;
     procedure CheckSaveStatus;

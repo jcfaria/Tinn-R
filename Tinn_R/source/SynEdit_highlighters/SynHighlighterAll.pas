@@ -74,58 +74,58 @@ uses
 type
   TtkTokenKind = (
                   tkComment,
+                  tkFloat,
+                  tkHex,
                   tkIdentifier,
                   tkNull,
+                  tkNumber,
+                  tkOct,
+                  tkOperator,
                   tkSpace,
                   tkString,
                   tkSymbol,
-                  tkOperator,
-                  tkNumber,
-                  tkFloat,
-                  tkHex,
-                  tkOct,
                   tkUnknown
                  );
 
   TRangeState = (
                  rsANil,
                  rsComment,
-                 rsUnKnown,
-                 rsMultilineString
+                 rsMultilineString,
+                 rsUnKnown
                 );
 
 type
   TSynAllSyn = class(TSynCustomHighLighter)
 
   private
-    fStringStarter: WideChar;  // used only for rsMultilineString stuff
-    fRange: TRangeState;
-    FTokenID: TtkTokenKind;
-    FKeywords: TUnicodeStringList;
-    fStringAttri: TSynHighlighterAttributes;
-    fNumberAttri: TSynHighlighterAttributes;
+    fCommentAttri: TSynHighlighterAttributes;
     fFloatAttri: TSynHighlighterAttributes;
     fHexAttri: TSynHighlighterAttributes;
-    fOctalAttri: TSynHighlighterAttributes;
-    fSymbolAttri: TSynHighlighterAttributes;
-    fOperatorAttri: TSynHighlighterAttributes;
-    fCommentAttri: TSynHighlighterAttributes;
     fIdentifierAttri: TSynHighlighterAttributes;
+    FKeywords: TUnicodeStringList;
+    fNumberAttri: TSynHighlighterAttributes;
+    fOctalAttri: TSynHighlighterAttributes;
+    fOperatorAttri: TSynHighlighterAttributes;
+    fRange: TRangeState;
     fSpaceAttri: TSynHighlighterAttributes;
+    fStringAttri: TSynHighlighterAttributes;
+    fStringStarter: WideChar;  // used only for rsMultilineString stuff
+    fSymbolAttri: TSynHighlighterAttributes;
+    FTokenID: TtkTokenKind;
 
     function IdentKind(MayBe: PWideChar): TtkTokenKind;
-    procedure SymbolProc;
-    procedure OperatorProc;
-    procedure CRProc;
     procedure CommentProc;
+    procedure CRProc;
     procedure IdentProc;
     procedure LFProc;
     procedure NullProc;
     procedure NumberProc;
+    procedure OperatorProc;
     procedure SpaceProc;
     procedure String34Proc;
     procedure String39Proc;
     procedure StringEndProc(EndChar: WideChar);
+    procedure SymbolProc;
     procedure UnknownProc;
 
   protected
@@ -136,8 +136,8 @@ type
     property TokenID: TtkTokenKind read FTokenID;
 
   public
-    class function GetLanguageName: string; override;
     class function GetFriendlyLanguageName: UnicodeString; override;
+    class function GetLanguageName: string; override;
 
   public
     constructor Create(AOwner: TComponent); override;
@@ -146,45 +146,26 @@ type
     function GetDefaultAttribute(Index: integer): TSynHighlighterAttributes; override;
     function GetEol: Boolean; override;
     function GetRange: Pointer; override;
-    function GetTokenID: TtkTokenKind;
     function GetTokenAttribute: TSynHighlighterAttributes; override;
+    function GetTokenID: TtkTokenKind;
     function GetTokenKind: integer; override;
     function IsIdentChar(AChar: WideChar): Boolean; override;
 
     procedure Next; override;
-    procedure SetRange(Value: Pointer); override;
     procedure ResetRange; override;
+    procedure SetRange(Value: Pointer); override;
 
   published
-    property CommentAttri: TSynHighlighterAttributes read fCommentAttri
-                                                     write fCommentAttri;
-
-    property IdentifierAttri: TSynHighlighterAttributes read fIdentifierAttri
-                                                        write fIdentifierAttri;
-
-    property NumberAttri: TSynHighlighterAttributes read fNumberAttri
-                                                    write fNumberAttri;
-
-    property HexAttri: TSynHighlighterAttributes read fHexAttri
-                                                 write fHexAttri;
-
-    property OctalAttri: TSynHighlighterAttributes read fOctalAttri
-                                                   write fOctalAttri;
-
-    property FloatAttri: TSynHighlighterAttributes read fFloatAttri
-                                                   write fFloatAttri;
-
-    property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri
-                                                   write fSpaceAttri;
-
-    property StringAttri: TSynHighlighterAttributes read fStringAttri
-                                                    write fStringAttri;
-
-    property SymbolAttri: TSynHighlighterAttributes read fSymbolAttri
-                                                    write fSymbolAttri;
-
-    property OperatorAttri: TSynHighlighterAttributes read fOperatorAttri
-                                                      write fOperatorAttri;
+    property CommentAttri: TSynHighlighterAttributes read fCommentAttri write fCommentAttri;
+    property FloatAttri: TSynHighlighterAttributes read fFloatAttri write fFloatAttri;
+    property HexAttri: TSynHighlighterAttributes read fHexAttri write fHexAttri;
+    property IdentifierAttri: TSynHighlighterAttributes read fIdentifierAttri write fIdentifierAttri;
+    property NumberAttri: TSynHighlighterAttributes read fNumberAttri write fNumberAttri;
+    property OctalAttri: TSynHighlighterAttributes read fOctalAttri write fOctalAttri;
+    property OperatorAttri: TSynHighlighterAttributes read fOperatorAttri write fOperatorAttri;
+    property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri write fSpaceAttri;
+    property StringAttri: TSynHighlighterAttributes read fStringAttri write fStringAttri;
+    property SymbolAttri: TSynHighlighterAttributes read fSymbolAttri write fSymbolAttri;
   end;
 
 implementation

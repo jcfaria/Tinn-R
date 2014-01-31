@@ -755,6 +755,7 @@ type
     menHelFileConversionPandoc: TMenuItem;
     menHelFileConversionTxt2tags: TMenuItem;
     menHelIniFiles: TMenuItem;
+    menHelNews: TMenuItem;
     menHelp: TMenuItem;
     menHelpRecognizedWords: TMenuItem;
     menHelpStatHyperstat: TMenuItem;
@@ -1948,7 +1949,6 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    menHelNews: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2342,6 +2342,7 @@ type
     procedure menHelFileConversionPandocClick(Sender: TObject);
     procedure menHelFileConversionTxt2tagsClick(Sender: TObject);
     procedure menHelIniFilesClick(Sender: TObject);
+    procedure menHelNewsClick(Sender: TObject);
     procedure menHelpEnglishChanges_t2tClick(Sender: TObject);
     procedure menHelpRecognizedWordsClick(Sender: TObject);
     procedure menHelpStatHyperstatClick(Sender: TObject);
@@ -2482,7 +2483,6 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
-    procedure menHelNewsClick(Sender: TObject);
 
   private
     { Private declarations }

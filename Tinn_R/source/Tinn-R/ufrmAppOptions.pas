@@ -409,6 +409,7 @@ type
     WindowFrame1: TMenuItem;
     WindowText1: TMenuItem;
 
+    procedure bbHelpClick(Sender: TObject);
     procedure bbtConPathDeplateClick(Sender: TObject);
     procedure bbtConPathTxt2tagsClick(Sender: TObject);
     procedure bbtDVIParametersBibtexClick(Sender: TObject);
@@ -459,15 +460,14 @@ type
     procedure tbLastSearchChange(Sender: TObject);
     procedure tbRguiTinnRProportionChange(Sender: TObject);
     procedure tbTransparencyPosChange(Sender: TObject);
-    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
     bRArchitecture64: boolean;  // It is necessary here due to automatic changes in path according with user option.
                                 // The same variable name exists also as private in frmTinnMain.
 
-    bFormVisible      : boolean;
     bExtended         : boolean;
+    bFormVisible      : boolean;
     cpFrom            : TColorPopup;
     eKeyShort         : TSynHotKey;
     liOldSelected     : TListItem;

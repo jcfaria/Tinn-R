@@ -56,6 +56,7 @@ type
   TfrmReplaceDialog = class(TfrmSearchDialog)
     cbReplaceText: TComboBox;
     Label2: TLabel;
+
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
 

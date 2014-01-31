@@ -56,6 +56,7 @@ type
     bbtOK: TBitBtn;
     edtNewGroup: TEdit;
     Label1: TLabel;
+
     procedure FormShow(Sender: TObject);
 
   private

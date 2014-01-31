@@ -52,17 +52,19 @@ uses
 
 type
   TfrmLatexDimensional = class(TForm)
-    rdgType: TRadioGroup;
-    gpbDimension: TGroupBox;
-    edRows: TEdit;
-    Label1: TLabel;
-    edCols: TEdit;
-    Label2: TLabel;
-    btnOK: TButton;
     btnCancel: TButton;
+    btnOK: TButton;
+    edCols: TEdit;
+    edRows: TEdit;
+    gpbDimension: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
     rdgAlign: TRadioGroup;
-    procedure rdgTypeClick(Sender: TObject);
+    rdgType: TRadioGroup;
+
     procedure FormShow(Sender: TObject);
+    procedure rdgTypeClick(Sender: TObject);
+
   private
     { Private declarations }
   public

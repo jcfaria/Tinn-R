@@ -2,8 +2,8 @@
 #===============================================================================
 # Name   : R markdown template
 # Author : Tinn-R Team (based on the Yihui Xie demo)
-# Date   : 20/11/2013 13:25:04
-# Version: v2
+# Date   : 31/01/2014 19:48:09
+# Version: v3
 # Aim    : Template to markdown
 # URL    : http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 #===============================================================================

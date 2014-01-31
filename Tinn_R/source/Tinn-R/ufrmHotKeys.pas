@@ -74,6 +74,7 @@ type
     tbsCustom: TTabSheet;
     tbsDefault: TTabSheet;
 
+    procedure bbHelpClick(Sender: TObject);
     procedure btnAddHotKeyClick(Sender: TObject);
     procedure btnClearAllHotKeysClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
@@ -91,7 +92,6 @@ type
     procedure strgDefaultClick(Sender: TObject);
     procedure strgDefaultDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure strgDefaultSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
-    procedure bbHelpClick(Sender: TObject);
 
   private
     bNothing: boolean;

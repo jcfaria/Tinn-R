@@ -84,40 +84,40 @@ type
     Panel2: TPanel;
     stbShortcuts: TStatusBar;
 
+    procedure bbHelpClick(Sender: TObject);
     procedure bbtShortcutsCancelAllClick(Sender: TObject);
     procedure bbtShortcutsCancelClick(Sender: TObject);
     procedure bbtShortcutsCloseClick(Sender: TObject);
     procedure bbtShortcutsEditClick(Sender: TObject);
+    procedure bbtShortcutsLoadClick(Sender: TObject);
     procedure bbtShortcutsRestoreDefaultClick(Sender: TObject);
     procedure bbtShortcutsSaveClick(Sender: TObject);
+    procedure bbtShortcutsSaveDefaultClick(Sender: TObject);
+    procedure dbeCaptionEnter(Sender: TObject);
+    procedure dbeGroupEnter(Sender: TObject);
+    procedure dbgShortcutsEnter(Sender: TObject);
+    procedure dbgShortcutsKeyPress(Sender: TObject; var Key: Char);
     procedure dbgShortcutsTitleClick(Column: TColumn);
+    procedure dbmHintEnter(Sender: TObject);
+    procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
     procedure edtCaptionSearchChange(Sender: TObject);
+    procedure edtCaptionSearchEnter(Sender: TObject);
     procedure edtGroupSearchChange(Sender: TObject);
+    procedure edtGroupSearchEnter(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure bbtShortcutsSaveDefaultClick(Sender: TObject);
-    procedure bbtShortcutsLoadClick(Sender: TObject);
-    procedure jvhkShortcutSearchChange(Sender: TObject);
-    procedure jvhkShortcutEnter(Sender: TObject);
-    procedure jvhkShortcutKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
-    procedure dbgShortcutsKeyPress(Sender: TObject; var Key: Char);
-    procedure dbgShortcutsEnter(Sender: TObject);
-    procedure edtGroupSearchEnter(Sender: TObject);
-    procedure edtCaptionSearchEnter(Sender: TObject);
-    procedure jvhkShortcutSearchEnter(Sender: TObject);
-    procedure dbeGroupEnter(Sender: TObject);
-    procedure dbeCaptionEnter(Sender: TObject);
-    procedure dbmHintEnter(Sender: TObject);
-    procedure jvhkShortcutKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
-    procedure bbHelpClick(Sender: TObject);
+    procedure jvhkShortcutEnter(Sender: TObject);
+    procedure jvhkShortcutKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure jvhkShortcutKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure jvhkShortcutSearchChange(Sender: TObject);
+    procedure jvhkShortcutSearchEnter(Sender: TObject);
 
   private
     { Private declarations }
-    bShortcutInUse: boolean;
     bNothing      : boolean;
+    bShortcutInUse: boolean;
     
     procedure ActualizeGroups;
     procedure ClearWarnings;

@@ -72,6 +72,13 @@ type
     cdRcardDescription: TMemoField;
     cdRcardFunction: TStringField;
     cdRcardGroup: TStringField;
+    cdRmirrors: TClientDataSet;
+    cdRmirrorsCity: TStringField;
+    cdRmirrorsCode: TStringField;
+    cdRmirrorsCountry: TStringField;
+    cdRmirrorsHost: TStringField;
+    cdRmirrorsName: TStringField;
+    cdRmirrorsURL: TStringField;
     cdShortcuts: TClientDataSet;
     cdShortcutsCaption: TStringField;
     cdShortcutsGroup: TStringField;
@@ -83,15 +90,8 @@ type
     dsComments: TDataSource;
     dsCompletion: TDataSource;
     dsRcard: TDataSource;
-    dsShortcuts: TDataSource;
-    cdRmirrors: TClientDataSet;
     dsRmirrors: TDataSource;
-    cdRmirrorsName: TStringField;
-    cdRmirrorsCountry: TStringField;
-    cdRmirrorsCity: TStringField;
-    cdRmirrorsURL: TStringField;
-    cdRmirrorsHost: TStringField;
-    cdRmirrorsCode: TStringField;
+    dsShortcuts: TDataSource;
 
     procedure cdCommentsAfterPost(DataSet: TDataSet);
     procedure cdCommentsAfterScroll(DataSet: TDataSet);
@@ -106,6 +106,10 @@ type
     procedure cdRcardBeforeEdit(DataSet: TDataSet);
     procedure cdRcardFilterRecord(DataSet: TDataSet; var Accept: Boolean);
     procedure cdRcardPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
+    procedure cdRmirrorsAfterPost(DataSet: TDataSet);
+    procedure cdRmirrorsAfterScroll(DataSet: TDataSet);
+    procedure cdRmirrorsBeforeEdit(DataSet: TDataSet);
+    procedure cdRmirrorsPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdRtipPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdShortcutsAfterPost(DataSet: TDataSet);
     procedure cdShortcutsAfterScroll(DataSet: TDataSet);
@@ -114,10 +118,6 @@ type
     procedure cdShortcutsPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure cdRmirrorsAfterPost(DataSet: TDataSet);
-    procedure cdRmirrorsAfterScroll(DataSet: TDataSet);
-    procedure cdRmirrorsBeforeEdit(DataSet: TDataSet);
-    procedure cdRmirrorsPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 
   private
     { Private declarations }
@@ -125,8 +125,8 @@ type
   public
     { Public declarations }
     slCompletion_Groups : TStringList;  //Stores groups of Completion
-    slRmirrors_Countries: TStringList;  //Stores countries of R mirrors
     slRcard_Groups      : TStringList;  //Stores groups of R card
+    slRmirrors_Countries: TStringList;  //Stores countries of R mirrors
     slShortcuts_Groups  : TStringList;  //Stores groups of Shortcuts
 
     function ActionlistToDataset: boolean;
@@ -134,8 +134,8 @@ type
     function Rmirrors_Update(sFile: string): boolean;
     function SaveFileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
     procedure CompletionGroupsFilter(Sender: TObject);
-    procedure RmirrorsCountriesFilter(Sender: TObject);
     procedure RcardGroupsFilter(Sender: TObject);
+    procedure RmirrorsCountriesFilter(Sender: TObject);
     procedure SetCurrentHighlighter(sLanguage: string);
     procedure ShortcutsGroupsFilter(Sender: TObject);
     procedure ShortcutsValidation(sOldShortcutsFile, sNewShortcutsFile: string);

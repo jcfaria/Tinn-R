@@ -52,12 +52,14 @@ uses
 
 type
   TfrmCount = class(TForm)
+    bbtOK: TBitBtn;
     GroupBox1: TGroupBox;
     rdgCount: TRadioGroup;
     strGrid: TStringGrid;
-    bbtOK: TBitBtn;
-    procedure strGridDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+
     procedure FormShow(Sender: TObject);
+    procedure strGridDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+
   private
     { Private declarations }
   public

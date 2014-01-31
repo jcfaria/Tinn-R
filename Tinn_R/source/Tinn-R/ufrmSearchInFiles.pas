@@ -76,8 +76,8 @@ type
     procedure cbDirectoriesClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure sbtnDirectoryClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure sbtnDirectoryClick(Sender: TObject);
 
   private
     { Private declarations }

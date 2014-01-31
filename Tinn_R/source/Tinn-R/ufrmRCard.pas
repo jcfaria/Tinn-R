@@ -78,6 +78,7 @@ type
     Panel2: TPanel;
     stbRcard: TStatusBar;
 
+    procedure bbHelpClick(Sender: TObject);
     procedure bbtRcardCancelAllClick(Sender: TObject);
     procedure bbtRcardCancelClick(Sender: TObject);
     procedure bbtRcardCloseClick(Sender: TObject);
@@ -93,7 +94,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
-    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }

@@ -74,6 +74,7 @@ type
     tbsAboutProject: TTabSheet;
     tbsAboutVersion: TTabSheet;
     
+    procedure bbHelpClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -89,7 +90,6 @@ type
     procedure lblURLWebPageClick(Sender: TObject);
     procedure lblURLWebPageMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure tbsAboutVersionMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }

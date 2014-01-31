@@ -82,6 +82,7 @@ type
     Panel2: TPanel;
     stbCompletion: TStatusBar;
 
+    procedure bbHelpClick(Sender: TObject);
     procedure bbtCompletionCancelAllClick(Sender: TObject);
     procedure bbtCompletionCancelClick(Sender: TObject);
     procedure bbtCompletionCloseClick(Sender: TObject);
@@ -98,7 +99,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
-    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }

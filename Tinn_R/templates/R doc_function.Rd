@@ -1,8 +1,8 @@
 %===============================================================================
 % Name   : R doc template
 % Author : Tinn-R Team
-% Date   : 19/11/2013 07:46:52
-% Version: v1
+% Date   : 31/01/2014 19:47:24
+% Version: v2
 % Aim    : Template to function
 % URL    : http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 %===============================================================================

@@ -92,6 +92,7 @@ type
     synSample: TSynEdit;
 
     procedure actTextAttributesExecute(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
     procedure bbtOKClick(Sender: TObject);
     procedure bbtSetBGForAllIdentifiersClick(Sender: TObject);
     procedure bbtSetBGForAllIHighlightersClick(Sender: TObject);
@@ -111,7 +112,6 @@ type
     procedure shFGMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure synSampleChange(Sender: TObject);
     procedure synSampleClick(Sender: TObject);
-    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
