@@ -39,7 +39,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 320
     Height = 565
-    ActivePage = tbsMarkup
+    ActivePage = tbsResults
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -3825,7 +3825,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsSearch
+        ActivePage = tbsIniLog
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

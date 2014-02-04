@@ -23131,13 +23131,14 @@ begin
               PostMessage(TWinControl(Self.MDIChildren[i] as TfrmEditor).Handle,
                           WM_SETFOCUS,
                           0,
-                          0)
-            else // Do nothing!
-          end  
-    else PostMessage(TWinControl(frmRTerm.synIO).Handle,
-                     WM_SETFOCUS,
-                     0,
-                     0);
+                          0);
+          end
+    else
+      if (frmRTerm.Visible) then
+        PostMessage(TWinControl(frmRTerm.synIO).Handle,
+                    WM_SETFOCUS,
+                    0,
+                    0);
   end;
 end;
 

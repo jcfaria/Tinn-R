@@ -454,6 +454,7 @@ procedure TConsoleIO.ReceiveError(Buf: Pointer;
                                   Size: Integer);
 var
   iPos: integer;
+
   Cmd,
    sSplit : string;
 
@@ -644,10 +645,17 @@ end;
 
 procedure TConsoleIO.ReaderProc(Handle: THandle;
                                 MessageCode: Integer);
+const
+  //CBytesToRead = 1024;
+  //CBytesToRead = 2048;
+  CBytesToRead = 4096;
+
 var
-  Buf:       array[0..1024] of Char;
+  Buf: array[0..CBytesToRead] of Char;
+
   BytesRead: Cardinal;
-  Err:       string;
+
+  Err: string;
 
 begin
   repeat

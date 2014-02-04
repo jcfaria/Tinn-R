@@ -48,7 +48,7 @@ interface
 
 uses
   Windows, SysUtils, Dialogs, Classes, Clipbrd, Registry, Graphics, Controls, StrUtils,
-  ActiveX, ShlObj, ComObj, PerlRegEx, WinInet;
+  ActiveX, ShlObj, ComObj, PerlRegEx, WinInet, StdCtrls;
 
 type
   TCharSet = set of Char;
@@ -90,6 +90,7 @@ type
   function StripNonConforming(const sTmp: string; const ValidChars: TCharSet): string;
   function StripPath(sFileName: string): string;
   function StrippedOfNonAscii(const s: string): string;
+  procedure CaptureConsoleOutput(const ACommand, AParameters: String; AMemo: TMemo);
   procedure DeleteDir(sDir: string);
   procedure GetRInfo(sTmp: string; var sRPackage, sRObject: string);
   procedure OpenFile(sFileName: string);
@@ -1400,6 +1401,59 @@ begin
                   '.']) do inc(i);
 
   result:= i > length(s);
+end;
+
+// From: http://delphi.wikia.com/wiki/Capture_Console_Output_Realtime_To_Memo
+procedure CaptureConsoleOutput(const ACommand, AParameters: String; AMemo: TMemo);
+ const
+   CReadBuffer = 2400;
+ var
+   saSecurity: TSecurityAttributes;
+   hRead: THandle;
+   hWrite: THandle;
+   suiStartup: TStartupInfo;
+   piProcess: TProcessInformation;
+   pBuffer: array[0..CReadBuffer] of Char;
+   dRead: DWord;
+   dRunning: DWord;
+ begin
+   saSecurity.nLength := SizeOf(TSecurityAttributes);
+   saSecurity.bInheritHandle := True;  
+   saSecurity.lpSecurityDescriptor := nil; 
+ 
+   if CreatePipe(hRead, hWrite, @saSecurity, 0) then
+   begin    
+     FillChar(suiStartup, SizeOf(TStartupInfo), #0);
+     suiStartup.cb := SizeOf(TStartupInfo);
+     suiStartup.hStdInput := hRead;
+     suiStartup.hStdOutput := hWrite;
+     suiStartup.hStdError := hWrite;
+     suiStartup.dwFlags := STARTF_USESTDHANDLES or STARTF_USESHOWWINDOW;    
+     suiStartup.wShowWindow := SW_HIDE; 
+ 
+     if CreateProcess(nil, PChar(ACommand + ' ' + AParameters), @saSecurity,
+       @saSecurity, True, NORMAL_PRIORITY_CLASS, nil, nil, suiStartup, piProcess)
+       then
+     begin
+       repeat
+         dRunning  := WaitForSingleObject(piProcess.hProcess, 100);        
+         Application.ProcessMessages(); 
+         repeat
+           dRead := 0;
+           ReadFile(hRead, pBuffer[0], CReadBuffer, dRead, nil);          
+           pBuffer[dRead] := #0; 
+ 
+           OemToAnsi(pBuffer, pBuffer);
+           AMemo.Lines.Add(String(pBuffer));
+         until (dRead < CReadBuffer);      
+       until (dRunning <> WAIT_TIMEOUT);
+       CloseHandle(piProcess.hProcess);
+       CloseHandle(piProcess.hThread);    
+     end; 
+ 
+     CloseHandle(hRead);
+     CloseHandle(hWrite);
+   end;
 end;
 
 end.

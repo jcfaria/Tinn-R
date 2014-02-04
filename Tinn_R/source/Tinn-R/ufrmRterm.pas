@@ -409,7 +409,9 @@ begin
          bTab then begin
         Lines.Add(Cmd +
                   sTab);
+
         sTab:= '';
+
         bTab:= False;
       end
       else AddROutput;
@@ -419,9 +421,6 @@ begin
                    #0,
                    nil);
 
-    if not frmTinnMain.bRguiReturnFocus and
-       synIO.Visible then SetFocus;
-
     if not WordWrap then
       for i:= 0 to 1 do
         ExecuteCommand(ecScrollLeft,
@@ -429,7 +428,10 @@ begin
                        nil);
     EndUpdate;
   end;
-  frmTinnMain.SetFocus_Rterm;
+
+  with frmTinnMain do
+    if (pgFiles.PageCount > 0) then SetFocus_Rterm
+                               else synIO.SetFocus;
 end;
 
 procedure TfrmRterm.cRTermError(Sender: TObject;
@@ -441,11 +443,14 @@ begin
     if not frmTinnMain.bRguiReturnFocus then SetFocus;
     EndUpdate;
   end;
+
   frmTinnMain.stbMain.Panels[8].Text:= 'Log: received warning or error!';
+
   with frmTinnMain.actRtermWarningError do begin
     Visible:= True;
     Checked:= False;
   end;
+
   frmTinnMain.SetFocus_Rterm;
 end;
 
@@ -476,6 +481,7 @@ procedure TfrmRterm.cRTermReceiveError(Sender: TObject;
       if (Pos(aError[i],
               lowercase(Cmd)) > 0) then begin
         Result:= True;
+
         Break;
       end;
   end;
@@ -487,8 +493,11 @@ begin
   if CheckIfError then begin
     with frmTinnMain do begin
       stbMain.Panels[8].Text:= 'Error!';
+
       actRtermWarningError.ImageIndex:= 254;
+
       if bRtermBeepOnError then Beep;
+
       if bRtermFindError then
         if not bRterm_Sent and
            not Assigned(slError) then
@@ -498,6 +507,7 @@ begin
   else begin
     with frmTinnMain do begin
       stbMain.Panels[8].Text:= 'Warning!';
+
       actRtermWarningError.ImageIndex:= 252;
     end;
   end;
@@ -507,15 +517,20 @@ begin
 
   with seLog do begin
     BeginUpdate;
+
     if bRterm_Sent then bRterm_Sent:= False;
+
     Lines.Add(Cmd);
+
     PostMessage(TWinControl(seLog).Handle,
                 WM_SETFOCUS,
                 0,
                 0);  // Will force ecEditorBottom below
+
     ExecuteCommand(ecEditorBottom,
                    #0,
                    nil);
+
     EndUpdate;
   end;
 
@@ -524,11 +539,11 @@ begin
 
   with frmTinnMain.actRtermWarningError do begin
     Visible:= True;
+
     Checked:= False;
   end;
 
-  with frmTinnMain do
-    SetFocus_Rterm;
+  frmTinnMain.SetFocus_Rterm;
 end;
 
 procedure TfrmRterm.FormCloseQuery(Sender: TObject;
@@ -546,6 +561,7 @@ begin
     OnPaintTransient:= frmTinnMain.synPaintTransient;
 
   JvDockClientRterm.DockStyle:= frmTinnMain.JvDockVSNetStyle;
+
   ManualDock(frmTinnMain.JvDockServer.RightDockPanel,
              nil,
              AlClient);
