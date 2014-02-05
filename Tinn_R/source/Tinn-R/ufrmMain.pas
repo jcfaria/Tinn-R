@@ -2906,8 +2906,8 @@ type
     procedure SendRCustom(sRC: string);
     procedure SendToConsole(sTmp: string);
     procedure SetFileSize_StatusBar(sFileName: string);
+    procedure SetFocus_Main;
     procedure SetFocus_Rgui(iDelay: integer);
-    procedure SetFocus_Rterm;
     procedure SetPathRgui;
     procedure SetPathRTerm;
     procedure SetSyntaxComboBox(sSynName: string);
@@ -6639,6 +6639,7 @@ begin
     finally
       frmTinnMain.Refresh;
       FreeAndNil(frmAbout);
+      SetFocus_Main;
     end;
 end;
 
@@ -8476,6 +8477,7 @@ procedure TfrmTinnMain.actRmirrorsEditExecute(Sender: TObject);
 begin
   sRmirrorsBookMark:= modDados.cdRmirrors.Bookmark;
   menToolsDatabaseMirrorsRClick(nil);
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actRmirrorsHelpExecute(Sender: TObject);
@@ -8880,6 +8882,7 @@ begin
     finally
       FreeAndNil(frmConfigurePrint);
       frmTinnMain.Repaint;
+      SetFocus_Main;
     end;
   end;
 end;
@@ -9112,6 +9115,7 @@ begin
   end;
 
   UpdateAppearance(False);
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actStatusBarVisibleExecute(Sender: TObject);
@@ -10302,32 +10306,9 @@ begin
 end;
 
 procedure TfrmTinnMain.menRHotKeysClick(Sender: TObject);
-var
-  n: integer;
-
-  sShortcuts: array of string;
-
-  procedure RemoveShortcuts;
-  var
-    i: integer;
-
-  begin
-    // Reset all shortcuts
-    with frmTinnMain.alMain do begin
-      n:= ActionCount;
-      SetLength(sShortcuts,
-                n);
-
-      for i:= 0 to n - 1 do
-        If (Actions[i] is TAction) then begin
-           sShortcuts[i]:= ShortCutToText(TAction(Actions[i]).Shortcut);
-           TAction(Actions[i]).Shortcut:= TextToShortCut('None');
-        end;
-    end;
-  end;
-
 begin
   hkTinnR.ShowModal;
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actEditorLineWrapExecute(Sender: TObject);
@@ -12534,7 +12515,7 @@ end;
 
 procedure TfrmTinnMain.menHelCitationClick(Sender: TObject);
 begin
-  Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E. (2013). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
+  Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E. (2014). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
                      ' URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
 
   MessageDlg('Many thanks for cite Tinn-R.' + #13 + #13 +
@@ -12542,6 +12523,8 @@ begin
              mtWarning,
              [mbOk],
              0);
+
+  SetFocus_Main;             
 end;
 
 procedure TfrmTinnMain.actShowAppOptionsExecute(Sender: TObject);
@@ -13061,6 +13044,7 @@ begin
     end;
   finally
     FreeAndNil(dlg);
+    SetFocus_Main;
   end;
 end;
 
@@ -13373,6 +13357,7 @@ begin
     frmRServer.ShowModal;
   finally
     FreeAndNil(frmRServer);
+    SetFocus_Main;
   end;
   frmTinnMain.Refresh;
 end;
@@ -14222,6 +14207,7 @@ procedure TfrmTinnMain.actRcardEditExecute(Sender: TObject);
 begin
   sRcardBookMark:= modDados.cdRcard.Bookmark;
   menToolsDatabaseCardRClick(nil);
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actRcardCopyDescritionExecute(Sender: TObject);
@@ -14270,6 +14256,8 @@ begin
   SetDataCompletion(synEditor2DataCompletion,
                     (Self.MDIChildren[i] as TfrmEditor).synEditor2,
                     sTriggerRDataCompletion);
+
+  SetFocus_Main;                    
 end;
 
 procedure TfrmTinnMain.actSplitHorizontalExecute(Sender: TObject);
@@ -14290,6 +14278,8 @@ begin
   SetDataCompletion(synEditor2DataCompletion,
                     (Self.MDIChildren[i] as TfrmEditor).synEditor2,
                     sTriggerRDataCompletion);
+
+  SetFocus_Main;                    
 end;
 
 procedure TfrmTinnMain.actSplitRemoveExecute(Sender: TObject);
@@ -16562,6 +16552,7 @@ end;
 procedure TfrmTinnMain.actBackupSystemConfigurationExecute(Sender: TObject);
 begin
   BackupSystemConfiguration(False);
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actBackupDatabaseExecute(Sender: TObject);
@@ -16656,6 +16647,7 @@ begin
     end;  // if (sd.Execute)
   finally
     FreeAndNil(sd);
+    SetFocus_Main;
   end;
 end;
 
@@ -18435,6 +18427,7 @@ begin
       frmTinnMain.Refresh;
       FreeAndNil(frmShortcuts);
       DatasetToActionList(Self);
+      SetFocus_Main;
     end;
 end;
 
@@ -18507,12 +18500,16 @@ procedure TfrmTinnMain.actFullPathUnixExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
     FullPathUnix;
+
+  SetFocus_Main;  
 end;
 
 procedure TfrmTinnMain.actFullPathWindowsExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
     FullPathWindows;
+
+  SetFocus_Main;  
 end;
 
 procedure TfrmTinnMain.actDatabaseVisibleExecute(Sender: TObject);
@@ -18788,6 +18785,7 @@ procedure TfrmTinnMain.actCommentsEditExecute(Sender: TObject);
 begin
   sCommentsBookMark:= modDados.cdComments.Bookmark;
   menToolsDatabaseCommentsClick(nil);
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actCommentsHelpExecute(Sender: TObject);
@@ -18812,6 +18810,7 @@ procedure TfrmTinnMain.actCompletionEditExecute(Sender: TObject);
 begin
   sCompletionBookMark:= modDados.cdCompletion.Bookmark;
   menToolsDatabaseCompletionClick(nil);
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actCompletionExampleSelectedExecute(Sender: TObject);
@@ -19335,6 +19334,8 @@ begin
              mtInformation,
              [mbOk],
              0);
+
+  SetFocus_Main;             
 end;
 
 procedure TfrmTinnMain.menHelNewsClick(Sender: TObject);
@@ -22045,6 +22046,8 @@ begin
     else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height - 100)  // Top
     else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  - 100)  // Right
     else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height - 100); // Bottom
+
+  SetFocus_Main;    
 end;
 
 procedure TfrmTinnMain.actRtermDivideExecute(Sender: TObject);
@@ -22057,6 +22060,8 @@ begin
     else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height div 2 - 20)  // Top
     else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 2 - 20)  // Right
     else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height div 2 - 20); // Bottom
+
+  SetFocus_Main;    
 end;
 
 procedure TfrmTinnMain.actRtermMinimizeExecute(Sender: TObject);
@@ -22069,6 +22074,8 @@ begin
     else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height div 20)  // Top
     else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 20)  // Right
     else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height div 20); // Bottom
+
+  SetFocus_Main;    
 end;
 
 procedure TfrmTinnMain.actToolsMaximizeExecute(Sender: TObject);
@@ -22436,6 +22443,7 @@ begin
   DoUndoAutoHideRterm;
   if frmRterm.Visible then RtermHide
                       else RtermShow;
+  SetFocus_Main;                      
 end;
 
 procedure TfrmTinnMain.actToolsVisibleExecute(Sender: TObject);
@@ -22521,9 +22529,9 @@ begin
     with frmTools do
     if (pgTools.ActivePage = tbsRcard) then lbRcard.SetFocus;
   end;
+
   actToolsVisible.Checked:= frmTools.Visible;
-  //frmTools.Visible:= not frmTools.Visible;
-  //actToolsVisible.Checked:= frmTools.Visible;
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actRtermTabsBottomExecute(Sender: TObject);
@@ -23119,10 +23127,10 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.SetFocus_Rterm;
+procedure TfrmTinnMain.SetFocus_Main;
 var
   i: integer;
-  
+
 begin
   case iSynWithFocus of
     1..2: begin
@@ -23134,12 +23142,15 @@ begin
                           0);
           end
     else
-      if (frmRTerm.Visible) then
-        PostMessage(TWinControl(frmRTerm.synIO).Handle,
-                    WM_SETFOCUS,
-                    0,
-                    0);
-  end;
+      {
+      PostMessage(TWinControl(frmRTerm.synIO).Handle,
+                  WM_SETFOCUS,
+                  0,
+                  0);
+      }
+      if frmRTerm.Visible then
+        frmRterm.synIO.SetFocus;
+    end;
 end;
 
 function TfrmTinnMain.GetFocus: integer;

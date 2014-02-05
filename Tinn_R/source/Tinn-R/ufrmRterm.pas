@@ -430,7 +430,7 @@ begin
   end;
 
   with frmTinnMain do
-    if (pgFiles.PageCount > 0) then SetFocus_Rterm
+    if (pgFiles.PageCount > 0) then SetFocus_Main
                                else synIO.SetFocus;
 end;
 
@@ -451,7 +451,7 @@ begin
     Checked:= False;
   end;
 
-  frmTinnMain.SetFocus_Rterm;
+  frmTinnMain.SetFocus_Main;
 end;
 
 procedure TfrmRterm.cRTermProcessStatusChange(Sender: TObject;
@@ -543,7 +543,7 @@ begin
     Checked:= False;
   end;
 
-  frmTinnMain.SetFocus_Rterm;
+  frmTinnMain.SetFocus_Main;
 end;
 
 procedure TfrmRterm.FormCloseQuery(Sender: TObject;
