@@ -3247,15 +3247,15 @@ begin
     case FLine[Run] of
       #0, #10, #13:
         begin
-          fStringStarter:= '"';
+          fStringStarter:= #34;
           fRange:= rsMultilineString;
           Break;
         end;
       else
         inc(Run);
     end; //case
-  until (FLine[Run] = '"') and
-        (FLine[Run - 1] <> '\');  // It is necessary due to scape \ in some args, for example: read.table(quote="\"")
+  until (FLine[Run] = #34) and
+        (FLine[Run + 1] <> #34); // It is necessary due to scape \ in some args, for example: read.table(quote="\"")
 
   if FLine[Run] <> #0 then
     inc(Run);
@@ -3275,7 +3275,8 @@ begin
       else
         inc(Run);
     end; //case
-  until (FLine[Run] = #39);  // It is necessary due to scape \ in some args, for example: read.table(quote='\'');
+  until (FLine[Run] = #39) and
+        (FLine[Run + 1] <> #39);  // It is necessary due to scape \ in some args, for example: read.table(quote='\'');
 
   if FLine[Run] <> #0 then
     inc(Run);
