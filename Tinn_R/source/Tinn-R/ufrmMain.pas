@@ -19019,10 +19019,13 @@ begin
       if (synEditor.SelText <> '') then begin
         scBBHighlighter:= GetBBHighLighter;                 // Highlighter of the block begin
         scBEHighlighter:= GetBEHighLighter;                 // Highlighter of the block end
+
         if (scBBHighlighter <> scBEHighlighter) then Exit;  // Will no be commented!
       end;
+
       scHighlighter:= GetCurrentHighLighter;
     end;
+
     sLanguage:= scHighlighter.GetFriendlyLanguageName;
     modDados.SetCurrentHighlighter(sLanguage);
   end;

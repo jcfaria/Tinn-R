@@ -199,7 +199,8 @@ uses
   ufrmPrintPreview,
   ufrmReplaceText,
   ufrmSearchText,
-  uModDados, ufrmTools;
+  uModDados,
+  ufrmTools;
 
 {$R *.DFM}
 
@@ -2224,36 +2225,6 @@ begin
   end;
 end;
 
-(*
-By Jan Fiala - PSPad editor
-
-This is my function for return current highlighter:
-
-function TPSSynEdit.GetCurrentHighLighter: TSynCustomHighlighter;
-var
-  i: Integer;
-begin
-  if Highlighter is TSynMultiSyn then
-  begin
-    i := (Integer(TSynEditStringList(Lines).Ranges[CaretY - 1]) and $F) - 2;
-    if (i > TSynMultiSyn(HighLighter).Schemes.Count - 1) or (i < 0) then
-      Result := TSynMultiSyn(Highlighter).DefaultHighLighter
-    else
-      Result := TSynMultiSyn(Highlighter).Schemes[i].Highlighter
-  end
-  else
-    Result := Highlighter;
-end;
-
-I have this function in descendant of TSynedit.
-You need to replace Highlighter e.g. with Editor.Highlighter and Lines with Editor.Lines
-or send editor as function parameter and add after begin something like:
-
-with Editor do
-begin
-...
-*)
-
 function TfrmEditor.GetBBHighLighter: TSynCustomHighlighter;
 var
   i: integer;
@@ -2267,7 +2238,7 @@ begin
   with seEditor do
     if Highlighter is TSynMultiSyn then
     begin
-      i:= (Integer(TSynEditStringList(Lines).Ranges[BlockBegin.Line - 2]) and $F) - 1;
+      i:= (Integer(TSynEditStringList(Lines).Ranges[BlockBegin.Line - 2]) and $F) - 9;
 
       if (i < 0) or
          (i = 7) then  // R markdown
@@ -2292,7 +2263,7 @@ begin
   with seEditor do
     if Highlighter is TSynMultiSyn then
     begin
-      i:= (Integer(TSynEditStringList(Lines).Ranges[BlockEnd.Line - 2]) and $F) - 1;
+      i:= (Integer(TSynEditStringList(Lines).Ranges[BlockEnd.Line - 2]) and $F) - 9;
 
       if (i < 0) or
          (i = 7) then  // R markdown
@@ -2317,14 +2288,18 @@ begin
   with seEditor do
     if Highlighter is TSynMultiSyn then
     begin
+      // Below the more pure Vodoo suggested by Jan Fiala and adapted by me ;)
+      // Please, do not change if you do not know what you're doing! :(
       i:= (Integer(TSynEditStringList(Lines).Ranges[BlockEnd.Line - 2]) and $F) - 1;
 
-      if (i < 0) or
-         (i = 7) then  // R markdown
-        Result:= TSynMultiSyn(Highlighter).DefaultHighLighter
-      else
-        Result:= TSynMultiSyn(Highlighter).Schemes[i].Highlighter
-    end
+      case i of
+        -99 .. -1: Result:= TSynMultiSyn(Highlighter).DefaultHighLighter;
+                7: Result:= TSynMultiSyn(Highlighter).DefaultHighLighter;      // Related to Markdown
+                8: Result:= TSynMultiSyn(Highlighter).Schemes[0].Highlighter;  // Related to all R TSynMultiSyn
+        else
+          Result:= TSynMultiSyn(Highlighter).Schemes[i].Highlighter
+      end;
+    end //if Highlighter is TSynMultiSyn
     else
       Result:= Highlighter;
 end;
@@ -2960,6 +2935,35 @@ end;
 
 end.
 
+(*
+By Jan Fiala - PSPad editor
+
+This is my function for return current highlighter:
+
+function TPSSynEdit.GetCurrentHighLighter: TSynCustomHighlighter;
+var
+  i: Integer;
+begin
+  if Highlighter is TSynMultiSyn then
+  begin
+    i := (Integer(TSynEditStringList(Lines).Ranges[CaretY - 1]) and $F) - 2;
+    if (i > TSynMultiSyn(HighLighter).Schemes.Count - 1) or (i < 0) then
+      Result := TSynMultiSyn(Highlighter).DefaultHighLighter
+    else
+      Result := TSynMultiSyn(Highlighter).Schemes[i].Highlighter
+  end
+  else
+    Result := Highlighter;
+end;
+
+I have this function in descendant of TSynedit.
+You need to replace Highlighter e.g. with Editor.Highlighter and Lines with Editor.Lines
+or send editor as function parameter and add after begin something like:
+
+with Editor do
+begin
+...
+*)
 
 (* I is very slow to big files!
 procedure TfrmEditor.Uncomment(sStartComment,

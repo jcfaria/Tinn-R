@@ -458,8 +458,53 @@ begin
   synXML        := TSynXMLSyn.Create(Self);
 
   //---------------------------------------------------------------
-  //  MultiHighlighters
+  // Begin MultiHighlighters
   //---------------------------------------------------------------
+  // HTML complex
+  with SynHTMLcomplex do begin
+    DefaultLanguageName:= 'HTML complex';
+    DefaultFilter      := 'HTML complex (*.html; *.htm)|*.html; *.htm';
+    DefaultHighlighter := synHTML;
+    with Schemes do begin
+      Add.Index:= 0;
+      with Items[0] do begin
+        Highlighter:= synJScript;
+        SchemeName := 'JavaScript';
+        StartExpr  := '<script';
+        EndExpr    := '</script>';
+        with MarkerAttri do
+          Background:= clNone;
+      end;
+    end;
+  end;
+
+  // PHP complex
+  with SynPHPcomplex do begin
+    DefaultLanguageName:= 'PHP complex';
+    DefaultFilter      := 'PHP complex (*.php; *.php3; *.phtml; *.inc)|*.php; *.php3; *.phtml; *.inc';
+    DefaultHighlighter := synHTML;
+    with Schemes do begin
+      Add.Index:= 0;
+      with Items[0] do begin
+        Highlighter:= synPHP;
+        SchemeName := 'PHP';
+        StartExpr  := '<\?';
+        EndExpr    := '\?>';
+        with MarkerAttri do
+          Background:= clNone;
+      end;
+      Add.Index:= 1;
+      with Items[1] do begin
+        Highlighter:= synJScript;
+        SchemeName := 'JavaScript';
+        StartExpr  := '<script';
+        EndExpr    := '</script>';
+        with MarkerAttri do
+          Background:= clNone;
+      end;
+    end;
+  end;
+
   // R complex
   with SynRcomplex do begin
     DefaultLanguageName:= 'R complex';
@@ -549,52 +594,8 @@ begin
       end;
     end;
   end;
-
-  // HTML complex
-  with SynHTMLcomplex do begin
-    DefaultLanguageName:= 'HTML complex';
-    DefaultFilter      := 'HTML complex (*.html; *.htm)|*.html; *.htm';
-    DefaultHighlighter := synHTML;
-    with Schemes do begin
-      Add.Index:= 0;
-      with Items[0] do begin
-        Highlighter:= synJScript;
-        SchemeName := 'JavaScript';
-        StartExpr  := '<script';
-        EndExpr    := '</script>';
-        with MarkerAttri do
-          Background:= clNone;
-      end;
-    end;
-  end;
-
-  // PHP complex
-  with SynPHPcomplex do begin
-    DefaultLanguageName:= 'PHP complex';
-    DefaultFilter      := 'PHP complex (*.php; *.php3; *.phtml; *.inc)|*.php; *.php3; *.phtml; *.inc';
-    DefaultHighlighter := synHTML;
-    with Schemes do begin
-      Add.Index:= 0;
-      with Items[0] do begin
-        Highlighter:= synPHP;
-        SchemeName := 'PHP';
-        StartExpr  := '<\?';
-        EndExpr    := '\?>';
-        with MarkerAttri do
-          Background:= clNone;
-      end;
-      Add.Index:= 1;
-      with Items[1] do begin
-        Highlighter:= synJScript;
-        SchemeName := 'JavaScript';
-        StartExpr  := '<script';
-        EndExpr    := '</script>';
-        with MarkerAttri do
-          Background:= clNone;
-      end;
-    end;
-  end;
-
+  //---------------------------------------------------------------
+  // End MultiHighlighters
   //---------------------------------------------------------------
 
   iHigCount:= ComponentCount;
