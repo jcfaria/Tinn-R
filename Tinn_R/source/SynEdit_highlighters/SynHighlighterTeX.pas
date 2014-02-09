@@ -389,13 +389,55 @@ end;
 
 function TSynTeXSyn.GetSampleSource: UnicodeString;
 begin
-  Result:='\documentclass[a4paper]{article}'+#13#10+
-          '% LaTeX sample source'+#13#10+
-          '\begin{document}'+#13#10+
-          #13#10+                        //J.C.Faria
-          '() {} []  %Symbols'+#13#10 +  //J.C.Faria
-          'Here is a formula: $ (2x + 3)*5y $'+#13#10+
-          '\end{document}';
+  Result:=
+    '% Latex highlighter sample'#13#10 +
+    '\documentclass[12pt]{article}'#13#10 +
+    '\usepackage{lingmacros}'#13#10 +
+    '\usepackage{tree-dvips}'#13#10 +
+    '\begin{document}'#13#10 +
+    ''#13#10 +
+    '\section*{Notes for My Paper}'#13#10 +
+    ''#13#10 +
+    'Don''t forget to include examples of topicalization.'#13#10 +
+    'They look like this:'#13#10 +
+    ''#13#10 +
+    '{\small'#13#10 +
+    '\enumsentence{Topicalization from sentential subject:\\'#13#10 +
+    '\shortex{7}{a John$_i$ [a & kltukl & [el &'#13#10 +
+    '  {\bf l-}oltoir & er & ngii$_i$ & a Mary]]}'#13#10 +
+    '{ & {\bf R-}clear & {\sc comp} &'#13#10 +
+    '  {\bf IR}.{\sc 3s}-love   & P & him & }'#13#10 +
+    '{John, (it''s) clear that Mary loves (him).}}'#13#10 +
+    '}'#13#10 +
+    ''#13#10 +
+    '\subsection*{How to handle topicalization}'#13#10 +
+    ''#13#10 +
+    'I''ll just assume a tree structure like (\ex{1}).'#13#10 +
+    ''#13#10 +
+    '{\small'#13#10 +
+    '\enumsentence{Structure of A$''$ Projections:\\ [2ex]'#13#10 +
+    '\begin{tabular}[t]{cccc}'#13#10 +
+    '    & \node{i}{CP}\\ [2ex]'#13#10 +
+    '    \node{ii}{Spec} &   &\node{iii}{C$''$}\\ [2ex]'#13#10 +
+    '        &\node{iv}{C} & & \node{v}{SAgrP}'#13#10 +
+    '\end{tabular}'#13#10 +
+    '\nodeconnect{i}{ii}'#13#10 +
+    '\nodeconnect{i}{iii}'#13#10 +
+    '\nodeconnect{iii}{iv}'#13#10 +
+    '\nodeconnect{iii}{v}'#13#10 +
+    '}'#13#10 +
+    '}'#13#10 +
+    ''#13#10 +
+    '\subsection*{Mood}'#13#10 +
+    ''#13#10 +
+    'Mood changes when there is a topic, as well as when'#13#10 +
+    'there is WH-movement.  \emph{Irrealis} is the mood when'#13#10 +
+    'there is a non-subject topic or WH-phrase in Comp.'#13#10 +
+    '\emph{Realis} is the mood when there is a subject topic'#13#10 +
+    'or WH-phrase.'#13#10 +
+    ''#13#10 +
+    '\end{document}';
+
 end;
 
 {$IFNDEF SYN_CPPB_1}

@@ -871,7 +871,7 @@ end;
 function TSynTextSyn.GetSampleSource: UnicodeString;
 begin
   Result:=
-    '''Text sample'''#13#10 +
+    '# Text highlighter sample'#13#10 +
     '# Notes and observations!                      #Comment'#13#10 +
     'pB <- 3.5E2                                    #Float number'#13#10 +
     '0 1 2 3 4 5 6 8 9                              #Numbers'#13#10 +

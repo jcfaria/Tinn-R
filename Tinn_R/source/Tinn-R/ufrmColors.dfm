@@ -6,8 +6,8 @@ object frmColors: TfrmColors
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Highlighters settings'
-  ClientHeight = 450
-  ClientWidth = 706
+  ClientHeight = 537
+  ClientWidth = 1046
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,14 +21,18 @@ object frmColors: TfrmColors
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object Bevel1: TBevel
+    Left = 153
+    Top = 431
+    Width = 384
+    Height = 66
+  end
   object lWarning_1: TLabel
-    Left = 6
-    Top = 417
-    Width = 414
+    Left = 162
+    Top = 439
+    Width = 203
     Height = 13
-    Caption = 
-      'The selected is a multi/complex highlighter. Changes in attribut' +
-      'es will not be permanent! '
+    Caption = 'The selected is a multi/complex highlighter.'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clMaroon
     Font.Height = -11
@@ -38,8 +42,8 @@ object frmColors: TfrmColors
     Visible = False
   end
   object lHighlighters: TLabel
-    Left = 117
-    Top = 433
+    Left = 273
+    Top = 476
     Width = 5
     Height = 13
     Font.Charset = DEFAULT_CHARSET
@@ -50,9 +54,9 @@ object frmColors: TfrmColors
     ParentFont = False
     Visible = False
   end
-  object lWarning_2: TLabel
-    Left = 6
-    Top = 433
+  object lWarning_3: TLabel
+    Left = 162
+    Top = 476
     Width = 111
     Height = 13
     Caption = 'For this, please, select: '
@@ -64,9 +68,23 @@ object frmColors: TfrmColors
     ParentFont = False
     Visible = False
   end
+  object lWarning_2: TLabel
+    Left = 162
+    Top = 458
+    Width = 208
+    Height = 13
+    Caption = 'Changes in attributes will not be permanent! '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMaroon
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
   object bbtOK: TBitBtn
-    Left = 551
-    Top = 418
+    Left = 891
+    Top = 503
     Width = 75
     Height = 25
     Caption = 'OK'
@@ -77,8 +95,8 @@ object frmColors: TfrmColors
     NumGlyphs = 2
   end
   object bbtCancel: TBitBtn
-    Left = 626
-    Top = 418
+    Left = 966
+    Top = 503
     Width = 75
     Height = 25
     Cancel = True
@@ -91,16 +109,17 @@ object frmColors: TfrmColors
     Left = 6
     Top = 4
     Width = 141
-    Height = 409
+    Height = 493
     Caption = ' Highlighters '
     Ctl3D = False
     ParentCtl3D = False
     TabOrder = 2
     object lbHighlighters: TListBox
-      Left = 8
-      Top = 18
-      Width = 124
-      Height = 379
+      Left = 1
+      Top = 14
+      Width = 139
+      Height = 478
+      Align = alClient
       BevelInner = bvNone
       BevelOuter = bvNone
       BorderStyle = bsNone
@@ -109,22 +128,26 @@ object frmColors: TfrmColors
       Sorted = True
       TabOrder = 0
       OnClick = lbHighlightersClick
+      ExplicitLeft = 8
+      ExplicitTop = 18
+      ExplicitWidth = 124
+      ExplicitHeight = 467
     end
   end
   object gpbIdentifiers: TGroupBox
     Left = 153
     Top = 4
-    Width = 547
-    Height = 182
+    Width = 384
+    Height = 288
     Caption = ' Identifiers of selected highlighter '
     Ctl3D = False
     ParentCtl3D = False
     TabOrder = 3
     object lbIdentifiers: TListBox
-      Left = 9
+      Left = 1
       Top = 18
-      Width = 160
-      Height = 156
+      Width = 156
+      Height = 261
       BevelInner = bvNone
       BevelOuter = bvNone
       BorderStyle = bsNone
@@ -134,18 +157,18 @@ object frmColors: TfrmColors
       OnClick = lbIdentifiersClick
     end
     object gpbAttributes: TGroupBox
-      Left = 175
+      Left = 158
       Top = 13
-      Width = 365
-      Height = 162
-      Caption = ' Attributes (FG = ForeGround, BG = BackGround) '
+      Width = 219
+      Height = 266
+      Caption = ' Attributes (FG and BG) '
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
       object cgColors: TColorGrid
         Left = 8
         Top = 18
-        Width = 70
+        Width = 56
         Height = 136
         GridOrdering = go2x8
         BackgroundIndex = 15
@@ -159,10 +182,10 @@ object frmColors: TfrmColors
         OnMouseUp = cgColorsMouseUp
       end
       object gpbMorColors: TGroupBox
-        Left = 83
+        Left = 70
         Top = 13
-        Width = 275
-        Height = 85
+        Width = 142
+        Height = 141
         Caption = ' More colors '
         TabOrder = 1
         object shFG: TtrShape
@@ -175,8 +198,8 @@ object frmColors: TfrmColors
           Caption = 'FG (choice)'
         end
         object shBG: TtrShape
-          Left = 139
-          Top = 24
+          Left = 8
+          Top = 52
           Width = 128
           Height = 22
           Shape = stRoundRect
@@ -184,8 +207,8 @@ object frmColors: TfrmColors
           Caption = 'BG (choice)'
         end
         object shBGPreferred: TtrShape
-          Left = 139
-          Top = 51
+          Left = 8
+          Top = 82
           Width = 128
           Height = 22
           Shape = stRoundRect
@@ -194,7 +217,7 @@ object frmColors: TfrmColors
         end
         object bbtSetBGForAllIdentifiers: TBitBtn
           Left = 8
-          Top = 51
+          Top = 111
           Width = 128
           Height = 22
           Hint = 'Set background color for all identifiers'
@@ -214,15 +237,15 @@ object frmColors: TfrmColors
         end
       end
       object gpbText: TGroupBox
-        Left = 83
-        Top = 101
-        Width = 275
-        Height = 53
+        Left = 8
+        Top = 160
+        Width = 204
+        Height = 98
         Caption = ' Text '
         TabOrder = 2
         object cbBold: TCheckBox
           Left = 10
-          Top = 22
+          Top = 20
           Width = 44
           Height = 17
           Action = actTextAttributes
@@ -236,8 +259,8 @@ object frmColors: TfrmColors
           TabOrder = 0
         end
         object cbItalic: TCheckBox
-          Left = 91
-          Top = 23
+          Left = 10
+          Top = 44
           Width = 47
           Height = 17
           Action = actTextAttributes
@@ -251,8 +274,8 @@ object frmColors: TfrmColors
           TabOrder = 1
         end
         object cbUnderline: TCheckBox
-          Left = 170
-          Top = 23
+          Left = 10
+          Top = 68
           Width = 66
           Height = 17
           Action = actTextAttributes
@@ -270,9 +293,9 @@ object frmColors: TfrmColors
   end
   object GroupBox4: TGroupBox
     Left = 153
-    Top = 188
-    Width = 547
-    Height = 69
+    Top = 292
+    Width = 384
+    Height = 133
     Caption = ' For all '
     Ctl3D = False
     ParentCtl3D = False
@@ -280,8 +303,8 @@ object frmColors: TfrmColors
     object GroupBox2: TGroupBox
       Left = 6
       Top = 13
-      Width = 133
-      Height = 48
+      Width = 182
+      Height = 52
       Caption = ' Active line (BG) '
       Ctl3D = False
       ParentCtl3D = False
@@ -289,7 +312,7 @@ object frmColors: TfrmColors
       object shActiveLine: TtrShape
         Left = 24
         Top = 20
-        Width = 101
+        Width = 151
         Height = 22
         Shape = stRoundRect
         OnMouseUp = shActiveLineMouseUp
@@ -311,27 +334,27 @@ object frmColors: TfrmColors
       end
     end
     object GroupBox3: TGroupBox
-      Left = 261
-      Top = 13
-      Width = 279
-      Height = 48
+      Left = 6
+      Top = 72
+      Width = 371
+      Height = 51
       Caption = ' Highlighters (BG) '
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
       object shBGAllHighlighters: TtrShape
-        Left = 149
+        Left = 196
         Top = 20
-        Width = 121
+        Width = 166
         Height = 22
         Shape = stRoundRect
         OnMouseUp = shBGAllHighlightersMouseUp
         Caption = 'BG preferred (choice)'
       end
       object bbtSetBGForAllIHighlighters: TBitBtn
-        Left = 7
+        Left = 6
         Top = 20
-        Width = 139
+        Width = 169
         Height = 23
         Hint = 'Set background color for all identifiers'
         Caption = 'Set BG for all highlighters'
@@ -350,10 +373,10 @@ object frmColors: TfrmColors
       end
     end
     object GroupBox6: TGroupBox
-      Left = 144
+      Left = 195
       Top = 13
-      Width = 112
-      Height = 48
+      Width = 182
+      Height = 52
       Caption = ' Brackets (FG) '
       Ctl3D = False
       ParentCtl3D = False
@@ -361,7 +384,7 @@ object frmColors: TfrmColors
       object shBrackets: TtrShape
         Left = 7
         Top = 20
-        Width = 98
+        Width = 166
         Height = 22
         Shape = stRoundRect
         OnMouseUp = shBracketsMouseUp
@@ -370,19 +393,20 @@ object frmColors: TfrmColors
     end
   end
   object gpbSample: TGroupBox
-    Left = 153
-    Top = 259
-    Width = 547
-    Height = 154
+    Left = 543
+    Top = 4
+    Width = 497
+    Height = 493
     Caption = ' Sample code '
     Ctl3D = False
     ParentCtl3D = False
     TabOrder = 5
     object synSample: TSynEdit
-      Left = 13
-      Top = 11
-      Width = 531
-      Height = 139
+      Left = 1
+      Top = 14
+      Width = 495
+      Height = 478
+      Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -400,6 +424,10 @@ object frmColors: TfrmColors
       Gutter.Width = 0
       OnChange = synSampleChange
       FontSmoothing = fsmNone
+      ExplicitLeft = 9
+      ExplicitTop = 15
+      ExplicitWidth = 480
+      ExplicitHeight = 474
       RemovedKeystrokes = <
         item
           Command = ecContextHelp
@@ -413,8 +441,8 @@ object frmColors: TfrmColors
     end
   end
   object bbHelp: TBitBtn
-    Left = 476
-    Top = 418
+    Left = 816
+    Top = 503
     Width = 75
     Height = 25
     Caption = '&Help'

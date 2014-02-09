@@ -241,6 +241,10 @@ object frmAbout: TfrmAbout
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object memAboutProject: TMemo
         Left = 0
         Top = 0
@@ -295,6 +299,10 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object memAboutAknowledgments: TMemo
         Left = 0
         Top = 0
@@ -379,6 +387,10 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object memAboutCredits: TMemo
         Left = 0
         Top = 0

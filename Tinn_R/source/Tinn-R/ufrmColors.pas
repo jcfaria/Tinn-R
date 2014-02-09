@@ -80,9 +80,6 @@ type
     GroupBox6: TGroupBox;
     lbHighlighters: TListBox;
     lbIdentifiers: TListBox;
-    lHighlighters: TLabel;
-    lWarning_1: TLabel;
-    lWarning_2: TLabel;
     shActiveLine: TtrShape;
     shBG: TtrShape;
     shBGAllHighlighters: TtrShape;
@@ -90,6 +87,11 @@ type
     shBrackets: TtrShape;
     shFG: TtrShape;
     synSample: TSynEdit;
+    Bevel1: TBevel;
+    lWarning_1: TLabel;
+    lHighlighters: TLabel;
+    lWarning_3: TLabel;
+    lWarning_2: TLabel;
 
     procedure actTextAttributesExecute(Sender: TObject);
     procedure bbHelpClick(Sender: TObject);
@@ -401,6 +403,7 @@ begin
         //gpbAttributes.Enabled:= False;  // This is so invasive
         lWarning_1.Visible   := True;
         lWarning_2.Visible   := True;
+        lWarning_3.Visible   := True;
         lHighlighters.Visible:= True;
         ShowStructure(dmSyn.Components[j] as TSynMultiSyn)
       end
@@ -408,6 +411,7 @@ begin
         //gpbAttributes.Enabled:= True;  // This is so invasive
         lWarning_1.Visible   := False;
         lWarning_2.Visible   := False;
+        lWarning_3.Visible   := False;
         lHighlighters.Visible:= False;
       end;
       Break;
@@ -417,11 +421,11 @@ begin
   // Will show the sample of the selected highlighter
   if (iHighlighterID > -1) then begin
     if ((dmSyn.Components[iHighlighterID] as TSynCustomHighlighter).GetFriendlyLanguageName = 'General_Multi-Highlighter') then begin
-      if (sHighlighter = 'HTML complex')         then synSample.Lines.Text:= dmSyn.SynHTML.SampleSource
-      else if (sHighlighter = 'PHP complex')     then synSample.Lines.Text:= dmSyn.SynPHP.SampleSource
+      if (sHighlighter = 'HTML complex')         then synSample.Lines.Text:= sSampleHTMLcomplex
+      else if (sHighlighter = 'PHP complex')     then synSample.Lines.Text:= sSamplePHPcomplex
       else if (sHighlighter = 'R complex')       then synSample.Lines.Text:= sSampleRcomplex
       else if (sHighlighter = 'R doc')           then synSample.Lines.Text:= sSampleRdoc
-      else if (sHighlighter = 'R html')           then synSample.Lines.Text:= sSampleRhtml
+      else if (sHighlighter = 'R html')          then synSample.Lines.Text:= sSampleRhtml
       else if (sHighlighter = 'R markdown')      then synSample.Lines.Text:= sSampleRmarkdown
       else if (sHighlighter = 'R noweb')         then synSample.Lines.Text:= sSampleRnoweb;
       if (synSample.Lines.Count = 0)             then synSample.Lines.Text:= sSampleUnknowed;
@@ -432,13 +436,17 @@ begin
       synSample.Highlighter:= nil;
       synSample.Lines.Text := (dmSyn.Components[iHighlighterID] as TSynCustomHighlighter).SampleSource;
 
-      if (synSample.Lines.Count = 0) then begin
-        if (sHighlighter = 'Fortran')    then synSample.Lines.Text:= sSampleFortran
-        else if (sHighlighter = 'Structured Text') then synSample.Lines.Text:= sSampleST
-        else synSample.Lines.Text:= sSampleUnknowed;
-      end;
+      //if (synSample.Lines.Count = 0) then begin
+        if (sHighlighter = 'C#')                   then synSample.Lines.Text:= sSampleCSharp
+        else if (sHighlighter = 'CSS')             then synSample.Lines.Text:= sSampleCSS
+        else if (sHighlighter = 'Fortran')         then synSample.Lines.Text:= sSampleFortran
+        else if (sHighlighter = 'Structured Text') then synSample.Lines.Text:= sSampleST;
+        //else synSample.Lines.Text:= sSampleUnknowed;
+      //end;
 
+      if (synSample.Lines.Count = 0) then synSample.Lines.Text:= sSampleUnknowed;
       synSample.Highlighter:= (dmSyn.Components[iHighlighterID] as TSynCustomHighlighter);
+
     end;
     lbIdentifiers.ItemIndex:= 0;
 
