@@ -56,21 +56,10 @@ type
     actZoomPageWidth: TAction;
     alPrintPreview: TActionList;
     ControlBar1: TControlBar;
-    Impressioncolored1: TMenuItem;
-    Linenumber1: TMenuItem;
-    N1: TMenuItem;
-    N2: TMenuItem;
-    N3: TMenuItem;
     Pageheight1: TMenuItem;
     Pagewidth1: TMenuItem;
     panPage: TPanel;
-    popClose1: TMenuItem;
-    popPageHeight: TMenuItem;
-    popPageWidth: TMenuItem;
-    popPrintPreview: TPopupMenu;
     popZoom: TPopupMenu;
-    Print1: TMenuItem;
-    Printersettings1: TMenuItem;
     synPP: TSynEditPrintPreview;
     tbClose: TToolButton;
     tbFirstPage: TToolButton;
@@ -91,8 +80,9 @@ type
     ToolButton4: TToolButton;
     ToolButton9: TToolButton;
     udZoom: TUpDown;
-    Usesyntaxcolor1: TMenuItem;
-    Wordwrap1: TMenuItem;
+    tbImpressionFontDecrease: TToolButton;
+    tbImpressionFontIncrease: TToolButton;
+    ToolButton5: TToolButton;
 
     procedure actZoomPageHeightExecute(Sender: TObject);
     procedure actZoomPageWidthExecute(Sender: TObject);
@@ -109,6 +99,8 @@ type
     procedure tbNextPageClick(Sender: TObject);
     procedure tbPriorPageClick(Sender: TObject);
     procedure udZoomMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure tbImpressionFontDecreaseClick(Sender: TObject);
+    procedure tbImpressionFontIncreaseClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -138,6 +130,24 @@ end;
 procedure TfrmPrintPreview.tbPriorPageClick(Sender: TObject);
 begin
   synPP.NextPage;
+end;
+
+procedure TfrmPrintPreview.tbImpressionFontDecreaseClick(Sender: TObject);
+begin
+  with synPP do
+    if (SynEditPrint.Font.Size > 04) then begin
+      SynEditPrint.Font.Size:= SynEditPrint.Font.Size - 2;
+      UpdatePreview;
+    end;
+end;
+
+procedure TfrmPrintPreview.tbImpressionFontIncreaseClick(Sender: TObject);
+begin
+  with synPP do
+    if (SynEditPrint.Font.Size < 20) then begin
+      SynEditPrint.Font.Size:= SynEditPrint.Font.Size + 2;
+      UpdatePreview;
+    end;
 end;
 
 procedure TfrmPrintPreview.tbLastPageClick(Sender: TObject);

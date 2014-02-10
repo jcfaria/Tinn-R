@@ -27,7 +27,6 @@ object frmPrintPreview: TfrmPrintPreview
     Width = 576
     Height = 208
     BorderStyle = bsNone
-    PopupMenu = popPrintPreview
     ScalePercent = 90
     OnPreviewPage = synPPPreviewPage
   end
@@ -42,8 +41,9 @@ object frmPrintPreview: TfrmPrintPreview
     object tbPrintPreview: TToolBar
       Left = 11
       Top = 2
-      Width = 424
+      Width = 500
       Height = 22
+      AutoSize = True
       DragMode = dmAutomatic
       EdgeInner = esLowered
       Images = frmTinnMain.imlTinnR
@@ -154,9 +154,7 @@ object frmPrintPreview: TfrmPrintPreview
       object tbWordWrap: TToolButton
         Left = 264
         Top = 0
-        Hint = 'Line wrap'
-        Action = frmConfigurePrint.actWordWrap
-        Caption = 'Line wrap'
+        Action = frmConfigurePrint.actLineWrap
         ParentShowHint = False
         ShowHint = True
         Style = tbsCheck
@@ -185,22 +183,50 @@ object frmPrintPreview: TfrmPrintPreview
         ImageIndex = 31
         Style = tbsSeparator
       end
-      object tbPrintConfigure: TToolButton
+      object tbImpressionFontIncrease: TToolButton
         Left = 341
+        Top = 0
+        Hint = 'Font (increase)'
+        Caption = 'Font (increase)'
+        ImageIndex = 261
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = tbImpressionFontIncreaseClick
+      end
+      object tbImpressionFontDecrease: TToolButton
+        Left = 364
+        Top = 0
+        Hint = 'Font (decrease)'
+        Caption = 'Font (decrease)'
+        ImageIndex = 262
+        ParentShowHint = False
+        ShowHint = True
+        OnClick = tbImpressionFontDecreaseClick
+      end
+      object ToolButton5: TToolButton
+        Left = 387
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton5'
+        ImageIndex = 156
+        Style = tbsSeparator
+      end
+      object tbPrintConfigure: TToolButton
+        Left = 395
         Top = 0
         Action = frmConfigurePrint.actPrintConfig
         ParentShowHint = False
         ShowHint = True
       end
       object tbPrint: TToolButton
-        Left = 364
+        Left = 418
         Top = 0
         Action = frmConfigurePrint.actPrint
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton9: TToolButton
-        Left = 387
+        Left = 441
         Top = 0
         Width = 8
         Caption = 'ToolButton9'
@@ -208,7 +234,7 @@ object frmPrintPreview: TfrmPrintPreview
         Style = tbsSeparator
       end
       object tbClose: TToolButton
-        Left = 395
+        Left = 449
         Top = 0
         Hint = 'Exit'
         ImageIndex = 155
@@ -218,53 +244,10 @@ object frmPrintPreview: TfrmPrintPreview
       end
     end
   end
-  object popPrintPreview: TPopupMenu
-    Images = frmTinnMain.imlTinnR
-    Left = 48
-    Top = 43
-    object popClose1: TMenuItem
-      Caption = 'Close'
-      ImageIndex = 42
-      OnClick = popClose1Click
-    end
-    object N3: TMenuItem
-      Caption = '-'
-    end
-    object popPageWidth: TMenuItem
-      Action = actZoomPageWidth
-    end
-    object popPageHeight: TMenuItem
-      Action = actZoomPageHeight
-    end
-    object N1: TMenuItem
-      Caption = '-'
-    end
-    object Linenumber1: TMenuItem
-      Action = frmConfigurePrint.actLineNumber
-    end
-    object Wordwrap1: TMenuItem
-      Action = frmConfigurePrint.actWordWrap
-    end
-    object Usesyntaxcolor1: TMenuItem
-      Action = frmConfigurePrint.actSyntaxColor
-    end
-    object Impressioncolored1: TMenuItem
-      Action = frmConfigurePrint.actImpressionColored
-    end
-    object N2: TMenuItem
-      Caption = '-'
-    end
-    object Printersettings1: TMenuItem
-      Action = frmConfigurePrint.actPrintConfig
-    end
-    object Print1: TMenuItem
-      Action = frmConfigurePrint.actPrint
-    end
-  end
   object popZoom: TPopupMenu
     Images = frmTinnMain.imlTinnR
     Left = 48
-    Top = 78
+    Top = 44
     object Pagewidth1: TMenuItem
       Action = actZoomPageWidth
     end
@@ -275,7 +258,7 @@ object frmPrintPreview: TfrmPrintPreview
   object alPrintPreview: TActionList
     Images = frmTinnMain.imlTinnR
     Left = 48
-    Top = 113
+    Top = 77
     object actZoomPageWidth: TAction
       Caption = 'Page width'
       ImageIndex = 136

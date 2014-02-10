@@ -252,8 +252,8 @@ object frmConfigurePrint: TfrmConfigurePrint
   end
   object acConfigurePrint: TActionList
     Images = frmTinnMain.imlTinnR
-    Left = 270
-    Top = 49
+    Left = 6
+    Top = 106
     object actFileName: TAction
       Caption = 'File name'
       OnExecute = actFileNameExecute
