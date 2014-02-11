@@ -128,7 +128,6 @@ object frmColors: TfrmColors
       Sorted = True
       TabOrder = 0
       OnClick = lbHighlightersClick
-      ExplicitWidth = 139
     end
   end
   object gpbIdentifiers: TGroupBox
@@ -295,7 +294,13 @@ object frmColors: TfrmColors
     Height = 133
     Caption = ' For all '
     Ctl3D = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMaroon
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
     ParentCtl3D = False
+    ParentFont = False
     TabOrder = 4
     object GroupBox2: TGroupBox
       Left = 6
@@ -340,24 +345,24 @@ object frmColors: TfrmColors
       ParentCtl3D = False
       TabOrder = 1
       object shBGAllHighlighters: TtrShape
-        Left = 196
+        Left = 24
         Top = 20
-        Width = 149
+        Width = 151
         Height = 22
         Shape = stRoundRect
         OnMouseUp = shBGAllHighlightersMouseUp
         Caption = 'BG preferred (choice)'
       end
       object bbtSetBGForAllIHighlighters: TBitBtn
-        Left = 6
-        Top = 20
-        Width = 169
-        Height = 23
+        Left = 196
+        Top = 19
+        Width = 149
+        Height = 24
         Hint = 'Set background color for all identifiers'
         Caption = 'Set BG for all highlighters'
         Default = True
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clMaroon
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = []
@@ -421,7 +426,6 @@ object frmColors: TfrmColors
       Gutter.Width = 0
       OnChange = synSampleChange
       FontSmoothing = fsmNone
-      ExplicitLeft = 0
       RemovedKeystrokes = <
         item
           Command = ecContextHelp
