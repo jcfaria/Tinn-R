@@ -160,28 +160,34 @@ type
     property PageCount: Integer read GetPageCount;
   published
     property Align default alClient;
-    property BorderStyle: TBorderStyle read FBorderStyle write SetBorderStyle
-      default bsSingle;
+    property BorderStyle: TBorderStyle read FBorderStyle
+                                       write SetBorderStyle
+                                       default bsSingle;
     property Color default clAppWorkspace;
     property Cursor;
-    property PageBGColor: TColor read FPageBG write SetPageBG default clWhite;
-    property PopupMenu;                                                         // JD 2002-01-9
+    property PageBGColor: TColor read FPageBG
+                                 write SetPageBG
+                                 default clWhite;
+    property PopupMenu;
     property SynEditPrint: TSynEditPrint read FSynEditPrint
-      write SetSynEditPrint;
-    property ScaleMode: TSynPreviewScale read FScaleMode write SetScaleMode
-      default pscUserScaled;
-    property ScalePercent: Integer read FScalePercent write SetScalePercent
-      default 100;
+                                         write SetSynEditPrint;
+    property ScaleMode: TSynPreviewScale read FScaleMode
+                                         write SetScaleMode
+                                         default pscUserScaled;
+    property ScalePercent: Integer read FScalePercent
+                                   write SetScalePercent
+                                   default 100;
     property Visible default True;
-    property ShowScrollHint: Boolean read FShowScrollHint write FShowScrollHint
-      default True;
+    property ShowScrollHint: Boolean read FShowScrollHint
+                                     write FShowScrollHint
+                                     default True;
     property OnClick;
     property OnMouseDown;
     property OnMouseUp;
     property OnPreviewPage: TPreviewPageEvent read FOnPreviewPage
-      write FOnPreviewPage;
-    property OnScaleChange: TNotifyEvent read FOnScaleChange                    // JD 2002-01-9
-      write FOnScaleChange;                                                     // JD 2002-01-9
+                                              write FOnPreviewPage;
+    property OnScaleChange: TNotifyEvent read FOnScaleChange
+                                         write FOnScaleChange;
   end;
 
 implementation
@@ -194,8 +200,8 @@ uses
 {$ENDIF}
 
 const
-  MARGIN_X = 12; // margin width left and right of page
-  MARGIN_Y = 12; // margin height above and below page
+  MARGIN_X = 12;   // margin width left and right of page
+  MARGIN_Y = 12;   // margin height above and below page
   SHADOW_SIZE = 2; // page shadow width
 
 { TSynEditPrintPreview }

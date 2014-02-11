@@ -113,7 +113,9 @@ var
 
 implementation
 uses
-  ufrmMain, ufrmEditor, ufrmConfigurePrint;
+  ufrmMain,
+  ufrmEditor,
+  ufrmConfigurePrint;
 
 {$R *.DFM}
 
@@ -132,20 +134,22 @@ begin
   synPP.NextPage;
 end;
 
-procedure TfrmPrintPreview.tbImpressionFontDecreaseClick(Sender: TObject);
-begin
-  with synPP do
-    if (SynEditPrint.Font.Size > 04) then begin
-      SynEditPrint.Font.Size:= SynEditPrint.Font.Size - 2;
-      UpdatePreview;
-    end;
-end;
-
 procedure TfrmPrintPreview.tbImpressionFontIncreaseClick(Sender: TObject);
 begin
   with synPP do
     if (SynEditPrint.Font.Size < 20) then begin
       SynEditPrint.Font.Size:= SynEditPrint.Font.Size + 2;
+      frmConfigurePrint.iFontSize:= SynEditPrint.Font.Size;
+      UpdatePreview;
+    end;
+end;
+
+procedure TfrmPrintPreview.tbImpressionFontDecreaseClick(Sender: TObject);
+begin
+  with synPP do
+    if (SynEditPrint.Font.Size > 04) then begin
+      SynEditPrint.Font.Size:= SynEditPrint.Font.Size - 2;
+      frmConfigurePrint.iFontSize:= SynEditPrint.Font.Size;
       UpdatePreview;
     end;
 end;

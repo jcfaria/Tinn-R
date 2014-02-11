@@ -129,12 +129,17 @@ type
     procedure rbAllClick(Sender: TObject);
     procedure rbSelectionClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+
   public
+    iFontSize: integer;
+
     procedure ShowDialog(const seEditor: TSynEdit);
+
   private
     prnConfigureDlg: TPrinterSetupDialog;
     prnOptions     : TSynEditPrint;
     seEditorPrint  : TSynEdit;
+
     procedure LoadOptions(Header: boolean);
   end;
 
@@ -144,7 +149,10 @@ var
 implementation
 
 uses
-  ufrmMain, ufrmEditor, ufrmPrintPreview;
+  ufrmMain,
+  ufrmEditor,
+  ufrmPrintPreview;
+
 {$R *.dfm}
 
 procedure TfrmConfigurePrint.LoadOptions(Header: boolean);
@@ -160,13 +168,20 @@ begin
   prnOptions.Highlight   := actSyntaxColor.Checked;
   prnOptions.Colors      := actImpressionColored.Checked;
   prnOptions.SelectedOnly:= rbSelection.Checked;
+  prnOptions.Font.Size   := iFontSize;
   AFont:= TFont.Create;
   if Header then begin
     if actFileName.Checked then begin
       prnOptions.Header.Clear;
-      prnOptions.Header.Add('$TITLE$', aFont, taLeftJustify, 1);
+      prnOptions.Header.Add('$TITLE$',
+                            aFont,
+                            taLeftJustify,
+                            1);
     end;
-    if actPageNumber.Checked then prnOptions.Header.Add('$PAGENUM$/$PAGECOUNT$', aFont, taRightJustify, 1);
+    if actPageNumber.Checked then prnOptions.Header.Add('$PAGENUM$/$PAGECOUNT$',
+                                                        aFont,
+                                                        taRightJustify,
+                                                        1);
   end;
 end;
 
@@ -187,8 +202,13 @@ end;
 
 procedure TfrmConfigurePrint.ShowDialog(const seEditor: TSynEdit);
 begin
+  iFontSize:= seEditor.Font.Size;  // Iy can be changed by user in ufrmPrintPreview interface
+
   seEditorPrint:= seEditor;
-  Caption:= 'Print ' + frmTinnMain.Caption;
+
+  Caption:= 'Print ' +
+            frmTinnMain.Caption;
+
   ShowModal;
 end;
 
@@ -326,7 +346,8 @@ procedure TfrmConfigurePrint.actPrintExecute(Sender: TObject);
 begin
   LoadOptions(True);
   if (edStartPage.Text <> '') or
-     (edStartPage.Text <> '') then prnOptions.PrintRange(StrToInt(edStartPage.Text), StrToInt(edEndPage.Text))
+     (edStartPage.Text <> '') then prnOptions.PrintRange(StrToInt(edStartPage.Text),
+                                                         StrToInt(edEndPage.Text))
   else begin
     if rbSelection.Checked then prnOptions.SelectedOnly:= True
                            else prnOptions.SelectedOnly:= False;
@@ -336,11 +357,14 @@ begin
     // TO DO
     end;
   end;
+
   frmConfigurePrint.Hide;
+
   if Assigned(frmPrintPreview) then begin
     frmPrintPreview.Hide;
     frmPrintPreview.Close;
   end;
+
   frmConfigurePrint.Close;
   frmTinnMain.Refresh;
 end;

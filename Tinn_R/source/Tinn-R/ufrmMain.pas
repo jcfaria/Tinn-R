@@ -8875,8 +8875,8 @@ begin
     try
       if (pgFiles.PageCount <> 0) then begin
         with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do begin
-          if (sActiveEditor = 'synEditor2') then ShowDialog(synEditor2);
-          if (sActiveEditor = 'synEditor')  then ShowDialog(synEditor);
+          if (sActiveEditor = 'synEditor')       then ShowDialog(synEditor)
+          else if (sActiveEditor = 'synEditor2') then ShowDialog(synEditor2);
         end;
       end;
     finally
