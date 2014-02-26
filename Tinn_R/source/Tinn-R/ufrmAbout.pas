@@ -132,9 +132,9 @@ begin
 
   lVersion.Caption:= lVersion.Caption +
                      ' ' +
-                     frmTinnMain.GetBuildInfo +
+                     frmTinnMain.GetBuildInfo;{ +
                      ' ' +
-                     'RC';
+                     'RC';}
 
   sPathTinnR:= ExtractFilePath(Application.ExeName);
 
