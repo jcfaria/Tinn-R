@@ -82,7 +82,8 @@ plot(fitted(fm),
      resid(fm),
      xlab="Fitted values",
      ylab="Residuals",
-     main="Residuals vs Fitted")
+     main="Residuals vs 
+           Fitted")
 # A standard regression diagnostic plot to check for heteroscedasticity. Can you see it?
 
 qqnorm(resid(fm),

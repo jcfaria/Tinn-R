@@ -60,8 +60,7 @@ Known Issues:
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -131,7 +130,7 @@ end;
 
 procedure TfrmConfirmReplaceDialog.FormShow(Sender: TObject);
 begin
-    AlphaBlendValue:= (frmTinnMain.iAlphaBlendValue * 7) Div 10;  // I want 30% more transparency!
+  AlphaBlendValue:= (frmTinnMain.iAlphaBlendValue * 7) Div 10;  // I want 30% more transparency!
 end;
 
 {

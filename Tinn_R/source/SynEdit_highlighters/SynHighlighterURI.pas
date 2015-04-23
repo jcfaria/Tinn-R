@@ -12,6 +12,7 @@ The Original Code is: SynHighlighterURI.pas, released 2003-04-10.
 The initial author of this file is Maël Hörz.
 Unicode translation by Maël Hörz.
 Adapted by José Cláudio Faria (Tinn-R Team): (2013-11-19)
+Adapted by José Cláudio Faria (Tinn-R Team): (2014-12-15)
 
 All Rights Reserved.
 
@@ -205,6 +206,10 @@ type
     property CommentAttri: TSynHighlighterAttributes read fCommentAttri
                                                      write fCommentAttri;
 
+    // J.C.Faria
+    property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri
+                                                   write fSpaceAttri;
+
     property URIAttri: TSynHighlighterAttributes read fURIAttri
                                                  write SetURIAttri;
 
@@ -315,7 +320,10 @@ begin
   inherited Create(AOwner);
   fCaseSensitive := False;
 
+  // J.C.Faria
   fSpaceAttri := TSynHighlighterAttributes.Create(SYNS_AttrSpace, SYNS_FriendlyAttrSpace);
+  AddAttribute(fSpaceAttri);
+  
   fIdentifierAttri := TSynHighlighterAttributes.Create(SYNS_AttrIdentifier, SYNS_FriendlyAttrIdentifier);
 
   fURIAttri := TSynHighlighterAttributes.Create(SYNS_AttrURI, SYNS_FriendlyAttrURI);
@@ -342,11 +350,11 @@ begin
   fRange := rsText;  // J.C.Faria
 end;
 
-destructor TSynURISyn.Destroy; 
+destructor TSynURISyn.Destroy;
 begin
   inherited;
   //the other attributes are automatically freed because of AddAttribute()
-  fSpaceAttri.Free;
+  //fSpaceAttri.Free;  // J.C.Faria (It generates a pointer bug!)
   fIdentifierAttri.Free;
 end;
 

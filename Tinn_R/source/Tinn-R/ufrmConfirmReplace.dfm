@@ -7,7 +7,7 @@ object frmConfirmReplaceDialog: TfrmConfirmReplaceDialog
   Caption = 'Confirm replace'
   ClientHeight = 98
   ClientWidth = 328
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

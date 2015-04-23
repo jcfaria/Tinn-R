@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -48,37 +47,39 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
-  Buttons, ExtCtrls, ShellAPI, jpeg, Dialogs, ComCtrls, JvgPage;
+  Buttons, ExtCtrls, ShellAPI, jpeg, Dialogs, ComCtrls, JvgPage, pngimage,
+  SynEdit, JvExExtCtrls, JvImage;
 
 type
   TfrmAbout = class(TForm)
     bbHelp: TBitBtn;
     bbtOK: TBitBtn;
     Copyright: TLabel;
-    FreeRes: TLabel;
-    imgAboutMain: TImage;
     Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
     lblURLSourceforge: TLabel;
     lblURLWebPage: TLabel;
     lVersion: TLabel;
-    memAboutAknowledgments: TMemo;
-    memAboutCredits: TMemo;
-    memAboutProject: TMemo;
     pgAbout: TJvgPageControl;
-    PhysMem: TLabel;
     tbsAboutAcknowledgments: TTabSheet;
     tbsAboutCredits: TTabSheet;
     tbsAboutProject: TTabSheet;
     tbsAboutVersion: TTabSheet;
-    
+    TabSheet1: TTabSheet;
+    imgDonation: TImage;
+    Label3: TLabel;
+    PhysMem: TLabel;
+    Label4: TLabel;
+    FreeRes: TLabel;
+    Label6: TLabel;
+    synAboutProject: TSynEdit;
+    synAboutAknowledgments: TSynEdit;
+    synAboutCredits: TSynEdit;
+    synAboutDonation: TSynEdit;
+    imAbout: TJvImage;
+
     procedure bbHelpClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure FormPaint(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lblMailJCFariaClick(Sender: TObject);
     procedure lblMailPhilippeClick(Sender: TObject);
@@ -90,6 +91,13 @@ type
     procedure lblURLWebPageClick(Sender: TObject);
     procedure lblURLWebPageMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure tbsAboutVersionMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure imgDonationClick(Sender: TObject);
+    procedure synAboutProjectClick(Sender: TObject);
+    procedure synAboutAknowledgmentsClick(Sender: TObject);
+    procedure synAboutCreditsClick(Sender: TObject);
+    procedure synAboutDonationClick(Sender: TObject);
+    procedure imgDonationMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
 
   private
     { Private declarations }
@@ -102,8 +110,6 @@ type
     {$HINTS ON}
   public
     { Public declarations }
-    imTinnLogo : TJPEGImage;
-    //function GetBuildInfo : string;
   end;
 
 var
@@ -113,14 +119,13 @@ implementation
 
 uses
   ufrmMain,
-  trUtils;
+  trUtils,
+  uDMSyn;
 
 {$R *.DFM}
 procedure TfrmAbout.FormCreate(Sender: TObject);
 var
-  MS         : TMemoryStatus;
-  sPathTinnR,
-   sPathBMP  : string;
+  MS: TMemoryStatus;
 
 begin
   GlobalMemoryStatus(MS);
@@ -132,54 +137,12 @@ begin
 
   lVersion.Caption:= lVersion.Caption +
                      ' ' +
-                     frmTinnMain.GetBuildInfo;{ +
-                     ' ' +
-                     'RC';}
-
-  sPathTinnR:= ExtractFilePath(Application.ExeName);
-
-  Delete(sPathTinnR,
-         length(sPathTinnR) - 4,
-         5);  //Exclude '\bin\' of path
-
-  sPathBMP:= sPathTinnR +
-             '\res\logo.jpg';
-
-  imTinnLogo:= TJPEGImage.Create;
-
-  imTinnLogo.LoadFromFile(sPathBMP);
+                     frmTinnMain.GetBuildInfo;
+                     //' ' +
+                     //'RC';
 
   pgAbout.ActivePage:= tbsAboutVersion;
 end;
-
-{
-function TfrmAbout.GetBuildInfo : string;
-var
-  VerInfoSize:  DWORD;
-  VerInfo:      Pointer;
-  VerValueSize: DWORD;
-  VerValue:     PVSFixedFileInfo;
-  Dummy:        DWORD;
-  wV1:          Word;
-  wV2:          Word;
-  wV3:          Word;
-  wV4:          Word;
-
-begin
-  VerInfoSize:= GetFileVersionInfoSize(PChar(ParamStr(0)), Dummy);
-  GetMem(VerInfo, VerInfoSize);
-  GetFileVersionInfo(PChar(ParamStr(0)), 0, VerInfoSize, VerInfo);
-  VerQueryValue(VerInfo, '\', Pointer(VerValue), VerValueSize);
-  with VerValue^ do begin
-    wV1:= dwFileVersionMS shr 16;
-    wV2:= dwFileVersionMS and $FFFF;
-    wV3:= dwFileVersionLS shr 16;
-    wV4:= dwFileVersionLS and $FFFF;
-  end;
-  FreeMem(VerInfo, VerInfoSize);
-  Result:= InttoStr(wV1) + '.' + InttoStr(wV2) + '.' + InttoStr(wV3) + '.' + InttoStr(wV4);
-end;
-}
 
 procedure TfrmAbout.lblURLTinnClick(Sender: TObject);
 begin
@@ -270,11 +233,24 @@ begin
     end
 end;
 
-procedure TfrmAbout.FormPaint(Sender: TObject);
+procedure TfrmAbout.synAboutAknowledgmentsClick(Sender: TObject);
 begin
-  imgAboutMain.Canvas.Draw(0,
-                           0,
-                           imTinnLogo);
+  frmTinnMain.synURIOpener.Editor:= synAboutAknowledgments;
+end;
+
+procedure TfrmAbout.synAboutCreditsClick(Sender: TObject);
+begin
+  frmTinnMain.synURIOpener.Editor:= synAboutCredits;
+end;
+
+procedure TfrmAbout.synAboutDonationClick(Sender: TObject);
+begin
+  frmTinnMain.synURIOpener.Editor:= synAboutDonation;
+end;
+
+procedure TfrmAbout.synAboutProjectClick(Sender: TObject);
+begin
+  frmTinnMain.synURIOpener.Editor:= synAboutProject;
 end;
 
 procedure TfrmAbout.FormShow(Sender: TObject);
@@ -285,9 +261,17 @@ begin
   AlphaBlendValue:= frmTinnMain.iAlphaBlendValue;
 end;
 
-procedure TfrmAbout.FormDestroy(Sender: TObject);
+procedure TfrmAbout.imgDonationClick(Sender: TObject);
 begin
-  FreeAndNil(imTinnLogo);
+  OpenUrl('paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B5GDCSVXH6JV4');
+end;
+
+procedure TfrmAbout.imgDonationMouseMove(Sender: TObject;
+                                         Shift: TShiftState;
+                                         X,
+                                         Y: Integer);
+begin
+  imgDonation.Cursor:= crHandPoint;
 end;
 
 procedure TfrmAbout.lblURLSourceforgeClick(Sender: TObject);
@@ -319,24 +303,50 @@ end;
 
 procedure TfrmAbout.FormActivate(Sender: TObject);
 begin
-  with frmTinnMain do begin
+  with frmTinnMain do
     pgAbout.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
 
-    with memAboutProject do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
-    end;
-
-    with memAboutAknowledgments do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
-    end;
-
-    with memAboutCredits do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
-    end;
+  with synAboutProject do begin
+    OnPaintTransient:= frmTinnMain.synPaintTransient;
+    if frmTinnMain.bActiveLine then ActiveLineColor:= TColor(frmTinnMain.clActiveLine)
+                               else ActiveLineColor:= TColor(clNone);
   end;
+
+  with synAboutAknowledgments do begin
+    OnPaintTransient:= frmTinnMain.synPaintTransient;
+    if frmTinnMain.bActiveLine then ActiveLineColor:= TColor(frmTinnMain.clActiveLine)
+                               else ActiveLineColor:= TColor(clNone);
+  end;
+
+  with synAboutCredits do begin
+    OnPaintTransient:= frmTinnMain.synPaintTransient;
+    if frmTinnMain.bActiveLine then ActiveLineColor:= TColor(frmTinnMain.clActiveLine)
+                               else ActiveLineColor:= TColor(clNone);
+  end;
+
+  with synAboutDonation do begin
+    OnPaintTransient:= frmTinnMain.synPaintTransient;
+    if frmTinnMain.bActiveLine then ActiveLineColor:= TColor(frmTinnMain.clActiveLine)
+                               else ActiveLineColor:= TColor(clNone);
+  end;
+
+  // Update the appearance based in the editor
+  with frmTinnMain.coEditor do begin
+    AssignTo(synAboutProject);
+    AssignTo(synAboutAknowledgments);
+    AssignTo(synAboutCredits);
+    AssignTo(synAboutDonation);
+  end;
+
+  synAboutProject.Highlighter       := dmSyn.synURI;
+  synAboutAknowledgments.Highlighter:= dmSyn.synURI;
+  synAboutCredits.Highlighter       := dmSyn.synURI;
+  synAboutDonation.Highlighter      := dmSyn.synURI;
+
+  synAboutProject.Gutter.ShowLineNumbers:= False;
+  synAboutAknowledgments.Gutter.ShowLineNumbers:= False;
+  synAboutCredits.Gutter.ShowLineNumbers:= False;
+  synAboutDonation.Gutter.ShowLineNumbers:= False;
 end;
 
 end.

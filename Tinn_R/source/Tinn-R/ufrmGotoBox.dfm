@@ -7,7 +7,7 @@ object frmGotoBox: TfrmGotoBox
   Caption = 'Go to line number'
   ClientHeight = 80
   ClientWidth = 246
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

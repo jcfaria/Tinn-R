@@ -8,7 +8,7 @@ object frmComments: TfrmComments
   Caption = 'Comments (xml based)'
   ClientHeight = 376
   ClientWidth = 529
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -28,6 +28,8 @@ object frmComments: TfrmComments
     Height = 20
     Align = alTop
     BevelOuter = bvNone
+    Color = 16250871
+    ParentBackground = False
     TabOrder = 8
     object DBNavigator1: TDBNavigator
       Left = 0
@@ -65,7 +67,7 @@ object frmComments: TfrmComments
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -87,7 +89,7 @@ object frmComments: TfrmComments
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -109,7 +111,7 @@ object frmComments: TfrmComments
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -131,7 +133,7 @@ object frmComments: TfrmComments
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -295,6 +297,7 @@ object frmComments: TfrmComments
     Top = 357
     Width = 529
     Height = 19
+    Color = 16250871
     Panels = <
       item
         Width = 50

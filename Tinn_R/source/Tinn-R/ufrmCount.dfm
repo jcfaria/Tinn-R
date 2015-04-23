@@ -7,7 +7,7 @@ object frmCount: TfrmCount
   Caption = 'Count'
   ClientHeight = 169
   ClientWidth = 273
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

@@ -289,11 +289,12 @@ procedure TConsoleIO.ReceiveOutput(Buf: Pointer;
     iPos:= Pos(']:',
                OutputBuffer);
 
-    if (iPos <> 0) then  begin
+    if (iPos <> 0) and
+       (iPos = Length(OutputBuffer) - 2) then  begin
       OutputBuffer:= '';
 
       FOnReceiveOutput(Self,
-                       'Please, stop the process from ''Rterm (close)'' option!');
+                       'Please, stop the Rterm process from ''Rterm (close)'' option!');
 
       SendInput('' + #10);
     end;
@@ -302,24 +303,13 @@ procedure TConsoleIO.ReceiveOutput(Buf: Pointer;
       if (OutputBuffer[Length(OutputBuffer) - 1] = '+') then
         OutputBuffer:= OutputBuffer + #10;
 
-{
-    if (Length(Trim(OutputBuffer)) > 1) and   // 'cat' intructions
-      (OutputBuffer[Length(OutputBuffer) - 1] = '>') then OutputBuffer:= OutputBuffer + #10;
-}
-
-
     if (Length(Trim(OutputBuffer)) > 1) then begin
-{
-      if (OutputBuffer[Length(OutputBuffer) - 1] = '>') then
-        OutputBuffer:= OutputBuffer + #10;   // 'cat' intructions
-}
-
       if (OutputBuffer[Length(OutputBuffer) - 1] = ':') then
         if IsInteger(Copy(OutputBuffer,
                           0,
                           Pos(':',
-                              OutputBuffer) - 1))  then
-          OutputBuffer:= OutputBuffer + #10;   // sem package
+                              OutputBuffer) - 1)) then
+          OutputBuffer:= OutputBuffer + #10;   // "sem" package
     end;
   end;
 
@@ -418,22 +408,25 @@ begin
   // Checks if the request finished
      // Function debug
   if (Pos('Browse[',
-              OutputBuffer) > 0) or
+          OutputBuffer) > 0) or
      // Package debug
      (Pos('D(',
-              OutputBuffer) > 0) then bUnderDebug:= True;
+          OutputBuffer) > 0) then bUnderDebug:= True;
 
-  if (OutputBuffer = '> ') or
-     bUnderDebug then begin
-    FOnReceiveOutput(Self,
-                     OutputBuffer);
+  if (length(OutputBuffer) >=2) then
+    if (OutputBuffer = '> ') or
+       (Pos('> ',
+          OutputBuffer) = length(OutputBuffer) - 1) or  //cat('x')
+       bUnderDebug then begin
+      FOnReceiveOutput(Self,
+                       OutputBuffer);
 
-    OutputBuffer:= '';
+      OutputBuffer:= '';
 
-    bRterm_Ready:= True;
+      bRterm_Ready:= True;
 
-    Screen.Cursor:= crDefault
-  end;
+      Screen.Cursor:= crDefault
+    end;
 end;
 
 (* //Original

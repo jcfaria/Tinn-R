@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -74,7 +73,6 @@ uses
   ufrmGroupRename in 'ufrmGroupRename.pas' {frmGroupRename},
   ufrmHotKeys in 'ufrmHotKeys.pas' {frmHotKeys},
   ufrmLatexDimensional in 'ufrmLatexDimensional.pas' {frmLatexDimensional},
-  ufrmMain in 'ufrmMain.pas' {frmTinnMain},
   ufrmNewGoup in 'ufrmNewGoup.pas' {frmNewGroup},
   ufrmPandoc in 'ufrmPandoc.pas' {frmPandoc},
   ufrmPrintPreview in 'ufrmPrintPreview.pas' {frmPrintPreview},
@@ -92,6 +90,7 @@ uses
   sndkey32 in '..\others\sndkey32.pas',
   uActionMacro in '..\others\uActionMacro.pas',
   ufrmAsciiChart in '..\others\ufrmAsciiChart.pas' {frmAsciiChart},
+  ATxCodepages in '..\others\ATxCodepages.pas',
   SynEditPrintPreview in '..\SynEdit_adapted\SynEditPrintPreview.pas',
   SynEditStrConst in '..\SynEdit_adapted\SynEditStrConst.pas',
   SynCompletionProposal in '..\SynEdit_adapted\SynCompletionProposal.pas',
@@ -106,7 +105,8 @@ uses
   ufrmCompletion in 'ufrmCompletion.pas' {frmCompletion},
   ufrmRmirrors in 'ufrmRmirrors.pas' {frmRmirrors},
   SynEditOC in '..\SynEdit_adapted\SynEditOC.pas',
-  Split in '..\others\Split.pas';
+  Split in '..\others\Split.pas',
+  ufrmMain in 'ufrmMain.pas' {frmTinnMain};
 
 {$R Tinn_R.KLR}
 {$R *.RES}
@@ -221,9 +221,10 @@ begin
 
   frmSplash:= TfrmSplash.Create(Application);
   frmSplash.Show;
+  frmSplash.Update;
   Application.Initialize;
 
-  Application.Title   := 'Tinn-R';
+  Application.Title := 'Tinn-R Editor';
   Application.HelpFile:= '';
   Application.CreateForm(TfrmTinnMain, frmTinnMain);
   if (ParamCount > 0) then FillFileList(slFilesStarting);

@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -240,7 +239,7 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * / ^ = <- -> <> ~ $ ? ! & :            # Operator'#13#10 +
+    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
     'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
@@ -318,7 +317,7 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * / ^ = <- -> <> ~ $ ? ! & :            # Operator'#13#10 +
+    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
     'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
@@ -357,7 +356,7 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * / ^ = <- -> <> ~ $ ? ! & :            # Operator'#13#10 +
+    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
     'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
@@ -396,7 +395,7 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * / ^ = <- -> <> ~ $ ? ! & :            # Operator'#13#10 +
+    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
     'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +

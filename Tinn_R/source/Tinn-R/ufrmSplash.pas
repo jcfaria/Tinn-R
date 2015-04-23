@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -48,13 +47,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, EditAlign, ExtCtrls, jpeg;
+  Dialogs, StdCtrls, EditAlign, ExtCtrls, jpeg, JvExExtCtrls, JvImage,
+  JvProgressBar, JvExControls, JvSpecialProgress, JvGIF, pngimage,
+  ComCtrls, JvExComCtrls;
 
 type
   TfrmSplash = class(TForm)
-    imSplash: TImage;
-    Label1: TLabel;
-    lVersion: TLabel;
+    imSplash: TJvImage;
+    pb: TJvSpecialProgress;
 
     procedure FormCreate(Sender: TObject);
   private
@@ -74,11 +74,16 @@ uses ufrmMain;
 
 procedure TfrmSplash.FormCreate(Sender: TObject);
 begin
+{
   lVersion.Caption:= lVersion.Caption +
                      ' ' +
-                     frmTinnMain.GetBuildInfo;
-                     //+ ' ' +
-                     //'RC';
+                     frmTinnMain.GetBuildInfo
+                     + ' ' +
+                     'RC';
+}
+  pb.StartColor:= RGB(246, 164, 20);
+  pb.EndColor  := RGB(246, 164, 20);
+  pb.update;
 end;
 
 end.

@@ -6,8 +6,8 @@ object frmAppOptions: TfrmAppOptions
   BorderStyle = bsDialog
   Caption = 'Application options'
   ClientHeight = 525
-  ClientWidth = 524
-  Color = clBtnFace
+  ClientWidth = 532
+  Color = 16250871
   ParentFont = True
   OldCreateOrder = False
   Position = poMainFormCenter
@@ -42,17 +42,19 @@ object frmAppOptions: TfrmAppOptions
   object panAppOptions: TPanel
     Left = 0
     Top = 0
-    Width = 524
+    Width = 532
     Height = 489
     Align = alTop
+    Color = 16250871
+    ParentBackground = False
     TabOrder = 2
     object jtvAppOptions: TJvTreeView
       Left = 1
       Top = 1
-      Width = 182
+      Width = 190
       Height = 487
       Align = alLeft
-      Indent = 19
+      Indent = 17
       ReadOnly = True
       TabOrder = 0
       OnChange = jtvAppOptionsChange
@@ -61,63 +63,64 @@ object frmAppOptions: TfrmAppOptions
         00044D00610069006E00270000000000000000000000FFFFFFFFFFFFFFFF0000
         00000000000007470065006E006500720061006C002D00000000000000000000
         00FFFFFFFFFFFFFFFF00000000000000000A4100700070006500610072006100
-        6E0063006500210000000000000000000000FFFFFFFFFFFFFFFF000000000000
-        00000444006F0063006B003D0000000000000000000000FFFFFFFFFFFFFFFF00
-        0000000000000012460069006C00650073002000280065007800740065006E00
-        730069006F006E0073002900250000000000000000000000FFFFFFFFFFFFFFFF
-        00000000030000000645006400690074006F0072002700000000000000000000
-        00FFFFFFFFFFFFFFFF00000000000000000744006900730070006C0061007900
-        290000000000000000000000FFFFFFFFFFFFFFFF000000000000000008410064
-        00760061006E006300650064002D0000000000000000000000FFFFFFFFFFFFFF
-        FF00000000000000000A4B00650079007300740072006F006B00650073001B00
-        00000000000000000000FFFFFFFFFFFFFFFF0000000008000000015200290000
-        000000000000000000FFFFFFFFFFFFFFFF000000000000000008500061007400
-        680020002800520029002B0000000000000000000000FFFFFFFFFFFFFFFF0000
-        0000000000000942006100730069006300200028005200290033000000000000
-        0000000000FFFFFFFFFFFFFFFF00000000000000000D5200650073006F007500
-        72006300650073002000280052002900310000000000000000000000FFFFFFFF
-        FFFFFFFF00000000000000000C5000610063006B006100670065007300200028
-        0052002900210000000000000000000000FFFFFFFFFFFFFFFF00000000020000
-        00045200670075006900350000000000000000000000FFFFFFFFFFFFFFFF0000
-        0000000000000E4F007000740069006F006E0073002000280052006700750069
-        0029003D0000000000000000000000FFFFFFFFFFFFFFFF000000000000000012
-        5200650063006F0067006E006900740069006F006E0020002800520067007500
-        69002900230000000000000000000000FFFFFFFFFFFFFFFF0000000002000000
-        0552007400650072006D00370000000000000000000000FFFFFFFFFFFFFFFF00
-        000000000000000F4F007000740069006F006E00730020002800520074006500
-        72006D002900330000000000000000000000FFFFFFFFFFFFFFFF000000000000
-        00000D4500720072006F0072002000280052007400650072006D002900290000
-        000000000000000000FFFFFFFFFFFFFFFF000000000200000008520065006600
-        6F0072006D0061007400310000000000000000000000FFFFFFFFFFFFFFFF0000
-        0000000000000C5200200028007200650066006F0072006D0061007400290033
-        0000000000000000000000FFFFFFFFFFFFFFFF00000000000000000D52006400
-        200028007200650066006F0072006D0061007400290029000000000000000000
-        0000FFFFFFFFFFFFFFFF00000000000000000852002000730065007200760065
-        0072002D0000000000000000000000FFFFFFFFFFFFFFFF00000000020000000A
-        500072006F00630065007300730069006E0067002D0000000000000000000000
-        FFFFFFFFFFFFFFFF00000000040000000A43006F006E00760065007200730069
-        006F006E00270000000000000000000000FFFFFFFFFFFFFFFF00000000000000
-        00074400650070006C00610074006500250000000000000000000000FFFFFFFF
-        FFFFFFFF000000000000000006500061006E0064006F00630029000000000000
-        0000000000FFFFFFFFFFFFFFFF00000000000000000854007800740032007400
-        6100670073003B0000000000000000000000FFFFFFFFFFFFFFFF000000000000
-        0000114D006F00720065002000280063006F006E00760065007200730069006F
-        006E002900230000000000000000000000FFFFFFFFFFFFFFFF00000000030000
-        00054C0061007400650078002F0000000000000000000000FFFFFFFFFFFFFFFF
-        00000000000000000B440056004900200028006C00610074006500780029002F
-        0000000000000000000000FFFFFFFFFFFFFFFF00000000000000000B50004400
-        4600200028006C0061007400650078002900310000000000000000000000FFFF
-        FFFFFFFFFFFF00000000000000000C4D006F0072006500200028006C00610074
-        00650078002900}
+        6E0063006500510000000000000000000000FFFFFFFFFFFFFFFF000000000000
+        00001C44006F0063006B002F0046006C006F00610074002000280054006F006F
+        006C007300200061006E006400200052007400650072006D0029003D00000000
+        00000000000000FFFFFFFFFFFFFFFF000000000000000012460069006C006500
+        73002000280065007800740065006E00730069006F006E007300290025000000
+        0000000000000000FFFFFFFFFFFFFFFF00000000030000000645006400690074
+        006F007200270000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+        000744006900730070006C0061007900290000000000000000000000FFFFFFFF
+        FFFFFFFF00000000000000000841006400760061006E006300650064002D0000
+        000000000000000000FFFFFFFFFFFFFFFF00000000000000000A4B0065007900
+        7300740072006F006B00650073001B0000000000000000000000FFFFFFFFFFFF
+        FFFF0000000008000000015200290000000000000000000000FFFFFFFFFFFFFF
+        FF000000000000000008500061007400680020002800520029002B0000000000
+        000000000000FFFFFFFFFFFFFFFF000000000000000009420061007300690063
+        002000280052002900330000000000000000000000FFFFFFFFFFFFFFFF000000
+        00000000000D5200650073006F00750072006300650073002000280052002900
+        310000000000000000000000FFFFFFFFFFFFFFFF00000000000000000C500061
+        0063006B00610067006500730020002800520029002100000000000000000000
+        00FFFFFFFFFFFFFFFF0000000002000000045200670075006900350000000000
+        000000000000FFFFFFFFFFFFFFFF00000000000000000E4F007000740069006F
+        006E00730020002800520067007500690029003D0000000000000000000000FF
+        FFFFFFFFFFFFFF0000000000000000125200650063006F0067006E0069007400
+        69006F006E002000280052006700750069002900230000000000000000000000
+        FFFFFFFFFFFFFFFF00000000020000000552007400650072006D003700000000
+        00000000000000FFFFFFFFFFFFFFFF00000000000000000F4F00700074006900
+        6F006E0073002000280052007400650072006D00290033000000000000000000
+        0000FFFFFFFFFFFFFFFF00000000000000000D4500720072006F007200200028
+        0052007400650072006D002900250000000000000000000000FFFFFFFFFFFFFF
+        FF00000000020000000646006F0072006D00610074002D000000000000000000
+        0000FFFFFFFFFFFFFFFF00000000000000000A52002000280046006F0072006D
+        006100740029002F0000000000000000000000FFFFFFFFFFFFFFFF0000000000
+        0000000B520064002000280046006F0072006D00610074002900290000000000
+        000000000000FFFFFFFFFFFFFFFF000000000000000008520020007300650072
+        007600650072002D0000000000000000000000FFFFFFFFFFFFFFFF0000000002
+        0000000A500072006F00630065007300730069006E0067002D00000000000000
+        00000000FFFFFFFFFFFFFFFF00000000040000000A43006F006E007600650072
+        00730069006F006E00270000000000000000000000FFFFFFFFFFFFFFFF000000
+        0000000000074400650070006C00610074006500250000000000000000000000
+        FFFFFFFFFFFFFFFF000000000000000006500061006E0064006F006300290000
+        000000000000000000FFFFFFFFFFFFFFFF000000000000000008540078007400
+        320074006100670073003B0000000000000000000000FFFFFFFFFFFFFFFF0000
+        000000000000114D006F00720065002000280063006F006E0076006500720073
+        0069006F006E002900230000000000000000000000FFFFFFFFFFFFFFFF000000
+        0003000000054C0061007400650078002F0000000000000000000000FFFFFFFF
+        FFFFFFFF00000000000000000B440056004900200028006C0061007400650078
+        0029002F0000000000000000000000FFFFFFFFFFFFFFFF00000000000000000B
+        500044004600200028006C006100740065007800290031000000000000000000
+        0000FFFFFFFFFFFFFFFF00000000000000000C4D006F0072006500200028006C
+        0061007400650078002900}
       LineColor = clScrollBar
       PageControl = pgApp
     end
     object pgApp: TJvgPageControl
-      Left = 183
+      Left = 191
       Top = 1
       Width = 340
       Height = 487
-      ActivePage = tbsEditorAdvanced
+      ActivePage = tbsAppFormatRd
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -125,6 +128,7 @@ object frmAppOptions: TfrmAppOptions
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      Style = tsFlatButtons
       TabOrder = 1
       TabStop = False
       TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
@@ -196,7 +200,7 @@ object frmAppOptions: TfrmAppOptions
           end
           object btnMRUClear: TButton
             Left = 203
-            Top = 17
+            Top = 15
             Width = 78
             Height = 22
             Caption = 'Clear history'
@@ -210,7 +214,7 @@ object frmAppOptions: TfrmAppOptions
             OnClick = btnMRUClearClick
           end
           object tbLastFile: TTrackBar
-            Left = 3
+            Left = 1
             Top = 18
             Width = 48
             Height = 25
@@ -222,7 +226,7 @@ object frmAppOptions: TfrmAppOptions
             OnChange = tbLastFileChange
           end
           object tbLastSearch: TTrackBar
-            Left = 3
+            Left = 1
             Top = 46
             Width = 48
             Height = 25
@@ -234,7 +238,7 @@ object frmAppOptions: TfrmAppOptions
             OnChange = tbLastSearchChange
           end
           object cbRememberSearchList: TCheckBox
-            Left = 23
+            Left = 11
             Top = 76
             Width = 72
             Height = 18
@@ -254,14 +258,14 @@ object frmAppOptions: TfrmAppOptions
           Left = 0
           Top = 102
           Width = 332
-          Height = 96
+          Height = 113
           Align = alTop
           Caption = ' Settings '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
           object cbRemoveExtension: TCheckBox
-            Left = 23
+            Left = 11
             Top = 34
             Width = 177
             Height = 18
@@ -275,8 +279,8 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 1
           end
           object cbUndoAfterSave: TCheckBox
-            Left = 23
-            Top = 53
+            Left = 11
+            Top = 52
             Width = 102
             Height = 18
             Caption = 'Undo after save'
@@ -289,8 +293,8 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 2
           end
           object cbMinimizeTinn: TCheckBox
-            Left = 23
-            Top = 72
+            Left = 11
+            Top = 70
             Width = 173
             Height = 18
             Caption = 'Minimize after the last file closed'
@@ -305,7 +309,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 3
           end
           object cbRememberFileState: TCheckBox
-            Left = 23
+            Left = 11
             Top = 16
             Width = 118
             Height = 18
@@ -318,10 +322,26 @@ object frmAppOptions: TfrmAppOptions
             ParentFont = False
             TabOrder = 0
           end
+          object cbConnectionBeepOnError: TCheckBox
+            Left = 11
+            Top = 89
+            Width = 305
+            Height = 18
+            Caption = 'Beep if no internet connection (procedures important olnly)'
+            Ctl3D = True
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentCtl3D = False
+            ParentFont = False
+            TabOrder = 4
+          end
         end
         object GroupBox3: TGroupBox
           Left = 0
-          Top = 198
+          Top = 215
           Width = 332
           Height = 62
           Align = alTop
@@ -330,7 +350,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 2
           object cbComPriority_Line: TCheckBox
-            Left = 23
+            Left = 11
             Top = 38
             Width = 190
             Height = 18
@@ -344,7 +364,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 0
           end
           object cbComAutoDetect_Language: TCheckBox
-            Left = 23
+            Left = 11
             Top = 19
             Width = 202
             Height = 17
@@ -352,32 +372,16 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 1
           end
         end
-        object rdgConnectionBeepOnError: TRadioGroup
-          Left = 0
-          Top = 260
-          Width = 332
-          Height = 41
-          Align = alTop
-          Caption = ' Beep if no internet connection (procedures important) '
-          Columns = 2
-          Ctl3D = False
-          ItemIndex = 0
-          Items.Strings = (
-            'Yes'
-            'No')
-          ParentCtl3D = False
-          TabOrder = 3
-        end
         object gpbDelay: TGroupBox
           Left = 0
-          Top = 301
+          Top = 339
           Width = 332
           Height = 70
           Align = alTop
           Caption = ' Computational synchronization (delay) '
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 4
+          TabOrder = 3
           object lbDelay: TLabel
             Left = 244
             Top = 37
@@ -398,6 +402,43 @@ object frmAppOptions: TfrmAppOptions
             Max = 350
             Position = 50
             OnPosChange = tbDelayPosChange
+          end
+        end
+        object GroupBox10: TGroupBox
+          Left = 0
+          Top = 277
+          Width = 332
+          Height = 62
+          Align = alTop
+          Caption = ' File status/changes (made by external) '
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 4
+          object cbNotification_US: TCheckBox
+            Left = 11
+            Top = 38
+            Width = 101
+            Height = 18
+            Hint = 'Options: update silently satus/changes (made by external)'
+            Caption = 'Update silently'
+            Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+          end
+          object cbNotification: TCheckBox
+            Left = 11
+            Top = 19
+            Width = 115
+            Height = 17
+            Hint = 'Options: notification file status/changes (made by external)'
+            Caption = 'Enable notification'
+            TabOrder = 1
+            OnClick = cbNotificationClick
           end
         end
       end
@@ -503,58 +544,83 @@ object frmAppOptions: TfrmAppOptions
         end
       end
       object tbsAppDock: TTabSheet
-        Caption = 'Dock'
+        Caption = 'Dock/Float (Tools and Rterm)'
         ImageIndex = 5
         TabVisible = False
         object GroupBox8: TGroupBox
           Left = 0
           Top = 0
           Width = 332
-          Height = 40
+          Height = 219
           Align = alTop
-          Caption = ' Tools and Rterm interface '
+          Caption = ' Restore (default disposition) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
           object cbRestoreIniDock: TCheckBox
-            Left = 10
+            Left = 11
             Top = 18
             Width = 99
             Height = 18
-            Caption = 'Restore default'
+            Caption = 'Restore'
             TabOrder = 0
           end
+          object Memo1: TMemo
+            Left = 8
+            Top = 38
+            Width = 314
+            Height = 179
+            BevelEdges = []
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = bsNone
+            Color = 16250871
+            Lines.Strings = (
+              'Mark this option to restore the default configuration of'
+              'Tools and Rterm'
+              ' panels in the next time when starting the apllicative.'
+              '    '
+              
+                'When Tinn-R starts again, this option will first to remove the f' +
+                'ile'
+              'Tinn-R_dock.ini from the ini folder'
+              'and it will be recreated, according with the user arrangment,'
+              'when closing normaly.'
+              ''
+              'It is useful if some problem occur with the new resources'
+              '(dock/hide and place).'
+              ''
+              'Remember: Tinn-R needs to be restarted manually!')
+            ReadOnly = True
+            TabOrder = 1
+          end
         end
-        object Memo1: TMemo
+        object GroupBox22: TGroupBox
           Left = 0
-          Top = 40
+          Top = 219
           Width = 332
-          Height = 193
+          Height = 61
           Align = alTop
-          BevelEdges = []
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          BorderStyle = bsNone
-          Color = clBtnFace
-          Lines.Strings = (
-            ''
-            'Mark this option to restore the default configuration of'
-            'Tools and Rterm'
-            ' interface in the next time when starting the apllicative.'
-            '    '
-            
-              'When Tinn-R starts again, this option will first to remove the f' +
-              'ile'
-            'Tinn-R_dock.ini from the ini folder'
-            'and it will be recreated, according with the user arrangment,'
-            'when closing normaly.'
-            ''
-            'It is useful if some problem occur with the new resources'
-            '(dock/hide and place).'
-            ''
-            'Remember: Tinn-R needs to be restarted manually!')
-          ReadOnly = True
+          Caption = ' Enable float (interface/panel) '
+          Ctl3D = False
+          ParentCtl3D = False
           TabOrder = 1
+          object cbToolsCanFloat: TCheckBox
+            Left = 11
+            Top = 18
+            Width = 58
+            Height = 17
+            Caption = 'Tools'
+            TabOrder = 0
+          end
+          object cbRtermCanFloat: TCheckBox
+            Left = 11
+            Top = 38
+            Width = 58
+            Height = 17
+            Caption = 'Rterm'
+            TabOrder = 1
+          end
         end
       end
       object tbsAppFilesExtensions: TTabSheet
@@ -710,6 +776,8 @@ object frmAppOptions: TfrmAppOptions
             Height = 60
             Align = alBottom
             BevelOuter = bvLowered
+            Color = 16250871
+            ParentBackground = False
             TabOrder = 5
             object labFont: TLabel
               Left = 83
@@ -755,7 +823,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 1
           end
           object ckGutterShowLineNumbers: TCheckBox
-            Left = 20
+            Left = 11
             Top = 69
             Width = 118
             Height = 17
@@ -763,7 +831,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 2
           end
           object ckGutterShowLeaderZeros: TCheckBox
-            Left = 20
+            Left = 11
             Top = 89
             Width = 118
             Height = 17
@@ -779,7 +847,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 3
           end
           object ckGutterVisible: TCheckBox
-            Left = 20
+            Left = 11
             Top = 49
             Width = 118
             Height = 17
@@ -852,6 +920,8 @@ object frmAppOptions: TfrmAppOptions
             Height = 60
             Align = alBottom
             BevelOuter = bvLowered
+            Color = 16250871
+            ParentBackground = False
             TabOrder = 8
             object lblGutterFont: TLabel
               Left = 107
@@ -859,11 +929,13 @@ object frmAppOptions: TfrmAppOptions
               Width = 91
               Height = 14
               Caption = 'Courier New 8'
+              Color = clBtnFace
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'Courier New'
               Font.Style = []
+              ParentColor = False
               ParentFont = False
               Transparent = True
             end
@@ -908,7 +980,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 0
           object ckAutoIndent: TCheckBox
-            Left = 8
+            Left = 11
             Top = 15
             Width = 130
             Height = 17
@@ -919,7 +991,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 0
           end
           object ckDragAndDropEditing: TCheckBox
-            Left = 8
+            Left = 11
             Top = 53
             Width = 130
             Height = 17
@@ -930,7 +1002,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 2
           end
           object ckAutoSizeMaxWidth: TCheckBox
-            Left = 8
+            Left = 11
             Top = 34
             Width = 130
             Height = 17
@@ -950,7 +1022,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 12
           end
           object ckEnhanceEndKey: TCheckBox
-            Left = 8
+            Left = 11
             Top = 186
             Width = 130
             Height = 17
@@ -999,7 +1071,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 16
           end
           object ckSmartTabs: TCheckBox
-            Left = 8
+            Left = 11
             Top = 129
             Width = 130
             Height = 17
@@ -1028,7 +1100,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 19
           end
           object ckWantTabs: TCheckBox
-            Left = 8
+            Left = 11
             Top = 110
             Width = 170
             Height = 17
@@ -1039,7 +1111,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 5
           end
           object ckAltSetsColumnMode: TCheckBox
-            Left = 8
+            Left = 11
             Top = 72
             Width = 130
             Height = 17
@@ -1050,7 +1122,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 3
           end
           object ckKeepCaretX: TCheckBox
-            Left = 8
+            Left = 11
             Top = 91
             Width = 130
             Height = 17
@@ -1082,7 +1154,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 20
           end
           object ckSmartTabDelete: TCheckBox
-            Left = 8
+            Left = 11
             Top = 148
             Width = 157
             Height = 17
@@ -1102,7 +1174,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 21
           end
           object ckEnhanceHomeKey: TCheckBox
-            Left = 8
+            Left = 11
             Top = 167
             Width = 146
             Height = 17
@@ -1111,7 +1183,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 8
           end
           object ckHideShowScrollbars: TCheckBox
-            Left = 8
+            Left = 11
             Top = 205
             Width = 156
             Height = 17
@@ -1123,7 +1195,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 10
           end
           object ckDisableScrollArrows: TCheckBox
-            Left = 8
+            Left = 11
             Top = 224
             Width = 130
             Height = 17
@@ -1141,6 +1213,15 @@ object frmAppOptions: TfrmAppOptions
             Hint = 'Shows linebreaks, spaces and tabs using special symbols'
             Caption = 'Show special chars'
             TabOrder = 22
+          end
+          object ckAutocomplete: TCheckBox
+            Left = 182
+            Top = 224
+            Width = 135
+            Height = 17
+            Hint = 'Auto complete (  [  '#39'  "'
+            Caption = 'Auto completion ( [ { '#39' "'
+            TabOrder = 23
           end
         end
         object gbCaret: TGroupBox
@@ -1524,58 +1605,37 @@ object frmAppOptions: TfrmAppOptions
         TabVisible = False
         object Label10: TLabel
           Left = 0
-          Top = 395
+          Top = 355
           Width = 120
           Height = 13
           Caption = '*     Highly recommended'
         end
         object Label4: TLabel
           Left = 0
-          Top = 425
-          Width = 166
+          Top = 385
+          Width = 170
           Height = 13
-          Caption = '*** Remember: R is case sensitive'
+          Caption = '*** Remember: R is case sensitive!'
         end
         object Label6: TLabel
           Left = 0
-          Top = 410
+          Top = 370
           Width = 117
           Height = 13
           Caption = '**   Changes are sparse'
         end
-        object gpbRExplorer: TGroupBox
-          Left = 0
-          Top = 57
-          Width = 332
-          Height = 41
-          Align = alTop
-          Caption = ' Explorer (trObjList parameter) '
-          Ctl3D = False
-          ParentCtl3D = False
-          TabOrder = 0
-          object cbAllNames: TCheckBox
-            Left = 11
-            Top = 17
-            Width = 104
-            Height = 18
-            Caption = 'all.names=TRUE'
-            Checked = True
-            State = cbChecked
-            TabOrder = 0
-          end
-        end
         object gpbMaxDeparseLength: TGroupBox
           Left = 0
-          Top = 98
+          Top = 156
           Width = 332
           Height = 47
           Align = alTop
           Caption = ' Option (max.deparse.length (echo=TRUE)) '
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 1
+          TabOrder = 0
           object edMaxDeparseLength: TEdit
-            Left = 11
+            Left = 16
             Top = 20
             Width = 102
             Height = 19
@@ -1583,73 +1643,16 @@ object frmAppOptions: TfrmAppOptions
             OnKeyPress = edMaxDeparseLengthKeyPress
           end
         end
-        object rdgRScrollSendingLines: TRadioGroup
-          Left = 0
-          Top = 202
-          Width = 332
-          Height = 39
-          Align = alTop
-          Caption = ' Scroll automatically (send line) '
-          Columns = 2
-          Ctl3D = False
-          ItemIndex = 0
-          Items.Strings = (
-            'Yes'
-            'No')
-          ParentCtl3D = False
-          TabOrder = 3
-        end
-        object GroupBox10: TGroupBox
-          Left = 0
-          Top = 145
-          Width = 332
-          Height = 57
-          Align = alTop
-          Caption = ' Comments (send) '
-          Ctl3D = False
-          ParentCtl3D = False
-          TabOrder = 2
-          object rdgRSmartSend: TRadioGroup
-            Left = 169
-            Top = 15
-            Width = 157
-            Height = 34
-            Caption = ' Smart '
-            Columns = 2
-            Ctl3D = False
-            ItemIndex = 1
-            Items.Strings = (
-              'Yes'
-              'No')
-            ParentCtl3D = False
-            TabOrder = 0
-          end
-          object rdgRComments: TRadioGroup
-            Left = 6
-            Top = 15
-            Width = 157
-            Height = 34
-            Caption = ' All '
-            Columns = 2
-            Ctl3D = False
-            ItemIndex = 1
-            Items.Strings = (
-              'Yes'
-              'No')
-            ParentCtl3D = False
-            TabOrder = 1
-          end
-        end
         object GroupBox9: TGroupBox
           Left = 0
-          Top = 241
+          Top = 203
           Width = 332
           Height = 151
           Align = alTop
           Caption = ' Tip and data completion '
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 4
+          TabOrder = 1
           object gpbRTriggers: TGroupBox
             Left = 6
             Top = 17
@@ -1714,7 +1717,7 @@ object frmAppOptions: TfrmAppOptions
             ItemIndex = 0
             Items.Strings = (
               'Find the pattern X anywhere (recomended)'
-              'Junst starting by the pattern X')
+              'Just starting by the pattern X')
             ParentCtl3D = False
             TabOrder = 1
           end
@@ -1723,41 +1726,67 @@ object frmAppOptions: TfrmAppOptions
           Left = 0
           Top = 0
           Width = 332
-          Height = 57
+          Height = 156
           Align = alTop
-          Caption = ' Get information (always when R is detected) '
+          Caption = ' Baisc (when startup/detected) and R is running '
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 5
-          object rdgRget_Info: TRadioGroup
-            Left = 6
-            Top = 16
-            Width = 157
-            Height = 34
-            Caption = ' TinnRcom (package)* '
-            Columns = 2
-            Ctl3D = False
-            ItemIndex = 0
-            Items.Strings = (
-              'Yes'
-              'No')
-            ParentCtl3D = False
+          TabOrder = 2
+          object cbRget_Info: TCheckBox
+            Left = 11
+            Top = 18
+            Width = 302
+            Height = 17
+            Caption = 'Get information about the necessary TinnRcom package* '
             TabOrder = 0
           end
-          object rdgRmirros_Update: TRadioGroup
-            Left = 169
-            Top = 15
-            Width = 157
-            Height = 34
-            Caption = ' CRAN mirrors (update)** '
-            Columns = 2
-            Ctl3D = False
-            ItemIndex = 1
-            Items.Strings = (
-              'Yes'
-              'No')
-            ParentCtl3D = False
+          object cbRmirros_Update: TCheckBox
+            Left = 11
+            Top = 36
+            Width = 147
+            Height = 17
+            Caption = 'CRAN mirrors update** '
             TabOrder = 1
+          end
+          object cbRSetWorkDir_Starting: TCheckBox
+            Left = 11
+            Top = 55
+            Width = 209
+            Height = 17
+            Caption = 'Set workdir to the path of current file'
+            TabOrder = 2
+          end
+          object cbAllNames: TCheckBox
+            Left = 11
+            Top = 74
+            Width = 163
+            Height = 18
+            Caption = 'R explorer (all.names=TRUE)'
+            TabOrder = 3
+          end
+          object cbRSendAll: TCheckBox
+            Left = 11
+            Top = 93
+            Width = 112
+            Height = 18
+            Caption = 'Send all coments'
+            TabOrder = 4
+          end
+          object cbRSmartSend: TCheckBox
+            Left = 11
+            Top = 112
+            Width = 189
+            Height = 18
+            Caption = 'Send smart (selection, blocks, etc)'
+            TabOrder = 5
+          end
+          object cbScrollSendingLines: TCheckBox
+            Left = 11
+            Top = 131
+            Width = 189
+            Height = 18
+            Caption = 'Scroll automatically (send line)'
+            TabOrder = 6
           end
         end
       end
@@ -1776,7 +1805,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 0
           object cbRSendSourceFile: TCheckBox
-            Left = 8
+            Left = 11
             Top = 15
             Width = 79
             Height = 17
@@ -1784,7 +1813,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 0
           end
           object cbRSendSourceSelection: TCheckBox
-            Left = 8
+            Left = 11
             Top = 33
             Width = 107
             Height = 17
@@ -1792,7 +1821,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 2
           end
           object cbRSendSourceBlockMarked: TCheckBox
-            Left = 8
+            Left = 11
             Top = 69
             Width = 128
             Height = 17
@@ -1800,7 +1829,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 6
           end
           object cbRSendLine: TCheckBox
-            Left = 8
+            Left = 11
             Top = 105
             Width = 43
             Height = 17
@@ -1848,7 +1877,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 12
           end
           object cbRSendCursorToBeginningLine: TCheckBox
-            Left = 8
+            Left = 11
             Top = 141
             Width = 133
             Height = 17
@@ -1856,7 +1885,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 13
           end
           object cbRSendSweave: TCheckBox
-            Left = 8
+            Left = 11
             Top = 159
             Width = 62
             Height = 17
@@ -1872,7 +1901,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 5
           end
           object cbRSendSourceClipboard: TCheckBox
-            Left = 8
+            Left = 11
             Top = 51
             Width = 107
             Height = 17
@@ -1880,7 +1909,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 4
           end
           object cbRSendSourceContiguous: TCheckBox
-            Left = 8
+            Left = 11
             Top = 87
             Width = 121
             Height = 17
@@ -1896,7 +1925,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 9
           end
           object cbRCurrentLineToTop: TCheckBox
-            Left = 8
+            Left = 11
             Top = 122
             Width = 112
             Height = 17
@@ -1923,7 +1952,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 1
           object cbRSetWorkDirectory: TCheckBox
-            Left = 8
+            Left = 11
             Top = 15
             Width = 110
             Height = 18
@@ -1939,7 +1968,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 1
           end
           object cbRListVariableNames: TCheckBox
-            Left = 8
+            Left = 11
             Top = 50
             Width = 121
             Height = 18
@@ -1947,7 +1976,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 4
           end
           object cbREditVariable: TCheckBox
-            Left = 8
+            Left = 11
             Top = 67
             Width = 115
             Height = 18
@@ -1955,7 +1984,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 6
           end
           object cbRClearConsole: TCheckBox
-            Left = 8
+            Left = 11
             Top = 85
             Width = 86
             Height = 18
@@ -1963,7 +1992,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 8
           end
           object cbRRemoveAllObjects: TCheckBox
-            Left = 8
+            Left = 11
             Top = 102
             Width = 113
             Height = 18
@@ -1971,7 +2000,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 10
           end
           object cbREscape: TCheckBox
-            Left = 8
+            Left = 11
             Top = 120
             Width = 58
             Height = 18
@@ -1979,7 +2008,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 12
           end
           object cbRExampleSelectedWord: TCheckBox
-            Left = 8
+            Left = 11
             Top = 137
             Width = 112
             Height = 17
@@ -1995,7 +2024,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 19
           end
           object cbRPrintVariableContent: TCheckBox
-            Left = 8
+            Left = 11
             Top = 32
             Width = 131
             Height = 18
@@ -2051,7 +2080,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 15
           end
           object cbRGuiStartClose: TCheckBox
-            Left = 8
+            Left = 11
             Top = 155
             Width = 61
             Height = 17
@@ -2059,7 +2088,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 16
           end
           object cbRPackages: TCheckBox
-            Left = 8
+            Left = 11
             Top = 173
             Width = 70
             Height = 17
@@ -2089,15 +2118,15 @@ object frmAppOptions: TfrmAppOptions
         ImageIndex = 7
         TabVisible = False
         object Label5: TLabel
-          Left = 1
-          Top = 355
+          Left = 0
+          Top = 325
           Width = 135
           Height = 13
           Caption = '*   If and only if R is running'
         end
         object Label25: TLabel
-          Left = 1
-          Top = 373
+          Left = 0
+          Top = 343
           Width = 318
           Height = 13
           Caption = 
@@ -2108,49 +2137,19 @@ object frmAppOptions: TfrmAppOptions
           Left = 0
           Top = 0
           Width = 332
-          Height = 150
+          Height = 146
           Align = alTop
           Caption = ' TinnRcom (package) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
-          object rdgRTinnRcomInstall: TRadioGroup
-            Left = 6
-            Top = 102
-            Width = 157
-            Height = 39
-            Caption = ' Install (automatically)* '
-            Columns = 2
-            Ctl3D = False
-            Items.Strings = (
-              'Yes'
-              'No')
-            ParentCtl3D = False
-            TabOrder = 0
-            OnClick = rdgRUseLatestClick
-          end
-          object rdgRTinnRcomLoad: TRadioGroup
-            Left = 169
-            Top = 102
-            Width = 157
-            Height = 39
-            Caption = ' Load (automatically)* '
-            Columns = 2
-            Ctl3D = False
-            Items.Strings = (
-              'Yes'
-              'No')
-            ParentCtl3D = False
-            TabOrder = 1
-            OnClick = rdgRUseLatestClick
-          end
           object GroupBox7: TGroupBox
             Left = 6
             Top = 18
             Width = 320
             Height = 77
             Caption = ' Path and version* '
-            TabOrder = 2
+            TabOrder = 0
             object edVersion_TinnRcomInstalled: TEdit
               Left = 11
               Top = 51
@@ -2177,35 +2176,45 @@ object frmAppOptions: TfrmAppOptions
               TabOrder = 1
             end
           end
+          object cbRTinnRcom_Install: TCheckBox
+            Left = 11
+            Top = 102
+            Width = 137
+            Height = 17
+            Caption = 'Install (automatically)*'
+            TabOrder = 1
+          end
+          object cbRTinnRcom_Load: TCheckBox
+            Left = 11
+            Top = 122
+            Width = 137
+            Height = 17
+            Caption = 'Load (automatically)*'
+            TabOrder = 2
+          end
         end
         object GroupBox11: TGroupBox
           Left = 0
-          Top = 150
+          Top = 146
           Width = 332
-          Height = 69
+          Height = 46
           Align = alTop
           Caption = ' svSocket (package)** '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
-          object rdgRsvSocketConnect: TRadioGroup
-            Left = 6
-            Top = 18
-            Width = 320
-            Height = 42
-            Caption = ' Connect (automatically)* '
-            Columns = 2
-            Ctl3D = False
-            Items.Strings = (
-              'Yes'
-              'No')
-            ParentCtl3D = False
+          object cbRsvSocket_Connect: TCheckBox
+            Left = 11
+            Top = 19
+            Width = 149
+            Height = 17
+            Caption = 'Connect (automatically)*'
             TabOrder = 0
           end
         end
         object GroupBox17: TGroupBox
           Left = 0
-          Top = 219
+          Top = 192
           Width = 332
           Height = 129
           Align = alTop
@@ -2273,7 +2282,7 @@ object frmAppOptions: TfrmAppOptions
           Left = 0
           Top = 109
           Width = 332
-          Height = 173
+          Height = 196
           Align = alTop
           Caption = ' Screen (proportion used by Tinn-R) '
           Ctl3D = False
@@ -2313,6 +2322,8 @@ object frmAppOptions: TfrmAppOptions
             Height = 107
             BevelOuter = bvNone
             BorderStyle = bsSingle
+            Color = 16250871
+            ParentBackground = False
             TabOrder = 1
             object panTinnR: TPanel
               Left = 0
@@ -2323,11 +2334,13 @@ object frmAppOptions: TfrmAppOptions
               BevelOuter = bvNone
               BorderStyle = bsSingle
               Caption = 'Tinn-R'
+              Color = 16250871
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = [fsBold]
+              ParentBackground = False
               ParentFont = False
               TabOrder = 0
             end
@@ -2340,23 +2353,25 @@ object frmAppOptions: TfrmAppOptions
               BevelOuter = bvNone
               BorderStyle = bsSingle
               Caption = 'Rgui'
+              Color = 16250871
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlue
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = [fsBold]
+              ParentBackground = False
               ParentFont = False
               TabOrder = 1
             end
           end
-        end
-        object cbRguiOrganizeAutomatically: TCheckBox
-          Left = 0
-          Top = 284
-          Width = 272
-          Height = 18
-          Caption = 'Organize automatically (only if Rgui is running)'
-          TabOrder = 3
+          object cbRguiOrganizeAutomatically: TCheckBox
+            Left = 11
+            Top = 170
+            Width = 272
+            Height = 18
+            Caption = 'Organize automatically (only if Rgui is running)'
+            TabOrder = 2
+          end
         end
       end
       object tbsAppRecognitionRgui: TTabSheet
@@ -2416,13 +2431,27 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Options (Rterm)'
         ImageIndex = 14
         TabVisible = False
+        object Label27: TLabel
+          Left = 3
+          Top = 89
+          Width = 208
+          Height = 13
+          Caption = '* Valid only to: en, de, fr, es and po locale!'
+        end
+        object Label28: TLabel
+          Left = 3
+          Top = 316
+          Width = 71
+          Height = 13
+          Caption = '* Recomended'
+        end
         object gbpRtermDisposition: TGroupBox
           Left = 0
           Top = 0
           Width = 332
-          Height = 120
+          Height = 166
           Align = alTop
-          Caption = ' IO and Log (type and disposition) '
+          Caption = ' IO and Log (type, disposition and width) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
@@ -2442,9 +2471,9 @@ object frmAppOptions: TfrmAppOptions
             OnClick = rdgRtermTypeClick
           end
           object rdgRtermDisposition: TRadioGroup
-            Left = 8
+            Left = 7
             Top = 72
-            Width = 318
+            Width = 319
             Height = 42
             Caption = ' Disposition '
             Columns = 2
@@ -2456,10 +2485,25 @@ object frmAppOptions: TfrmAppOptions
             ParentCtl3D = False
             TabOrder = 1
           end
+          object rdgRtermWidth: TRadioGroup
+            Left = 7
+            Top = 115
+            Width = 319
+            Height = 42
+            Caption = ' Automatically adjust options (width)* '
+            Columns = 2
+            Ctl3D = False
+            ItemIndex = 0
+            Items.Strings = (
+              'Yes'
+              'no')
+            ParentCtl3D = False
+            TabOrder = 2
+          end
         end
         object gbRtermSyntax: TGroupBox
           Left = 0
-          Top = 120
+          Top = 166
           Width = 332
           Height = 106
           Align = alTop
@@ -2500,7 +2544,7 @@ object frmAppOptions: TfrmAppOptions
         end
         object rdgRtermClose: TRadioGroup
           Left = 0
-          Top = 226
+          Top = 272
           Width = 332
           Height = 41
           Align = alTop
@@ -2520,8 +2564,8 @@ object frmAppOptions: TfrmAppOptions
         ImageIndex = 13
         TabVisible = False
         object Label1: TLabel
-          Left = 3
-          Top = 89
+          Left = 2
+          Top = 91
           Width = 208
           Height = 13
           Caption = '* Valid only to: en, de, fr, es and po locale!'
@@ -2559,8 +2603,8 @@ object frmAppOptions: TfrmAppOptions
           TabOrder = 1
         end
       end
-      object tbsAppReformatR: TTabSheet
-        Caption = 'R (reformat)'
+      object tbsAppFormatR: TTabSheet
+        Caption = 'R (format)'
         ImageIndex = 6
         TabVisible = False
         object GroupBox13: TGroupBox
@@ -2569,11 +2613,11 @@ object frmAppOptions: TfrmAppOptions
           Width = 332
           Height = 91
           Align = alTop
-          Caption = ' Arguments (no default to formatR/tidy.source) '
+          Caption = ' Arguments (no default to formatR/tidy_source) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
-          object edReformatR: TEditAlign
+          object edFormatR: TEditAlign
             Left = 7
             Top = 18
             Width = 318
@@ -2596,11 +2640,11 @@ object frmAppOptions: TfrmAppOptions
           Width = 332
           Height = 143
           Align = alTop
-          Caption = ' Remember (default to formatR/tidy.source) '
+          Caption = ' Remember (default to formatR/tidy_source) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
-          object memReformat: TMemo
+          object memFormatR: TMemo
             Left = 7
             Top = 17
             Width = 319
@@ -2608,13 +2652,14 @@ object frmAppOptions: TfrmAppOptions
             BorderStyle = bsNone
             Ctl3D = False
             Lines.Strings = (
-              'keep.comment=TRUE, '
-              'keep.blank.line=TRUE, '
-              'keep.space=FALSE, '
-              'replace.assign=FALSE, '
-              'left.brace.newline=FALSE, '
-              'reindent.spaces=4, '
-              'width.cutoff=getOption('#39'width'#39'),'
+              'comment=getOption('#39'formatR.comment'#39',  TRUE),'
+              'blank=getOption('#39'formatR.blank'#39', TRUE),'
+              'arrow=getOption('#39'formatR.arrow'#39', FALSE),'
+              'brace.newline=getOption('#39'formatR.brace.newline'#39', FALSE),'
+              'indent=getOption('#39'formatR.indent'#39', 4),'
+              'output=TRUE,'
+              'text = NULL,'
+              'width.cutoff=getOption('#39'width'#39')'
               '...')
             ParentCtl3D = False
             ReadOnly = True
@@ -2649,8 +2694,8 @@ object frmAppOptions: TfrmAppOptions
           end
         end
       end
-      object tbsAppReformatRd: TTabSheet
-        Caption = 'Rd (reformat)'
+      object tbsAppFormatRd: TTabSheet
+        Caption = 'Rd (format)'
         ImageIndex = 7
         TabVisible = False
         object GroupBox12: TGroupBox
@@ -2663,7 +2708,7 @@ object frmAppOptions: TfrmAppOptions
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
-          object edReformatRd: TEditAlign
+          object edFormatRd: TEditAlign
             Left = 7
             Top = 18
             Width = 318
@@ -2709,7 +2754,7 @@ object frmAppOptions: TfrmAppOptions
               Top = 14
               Width = 193
               Height = 66
-              ActivePage = tbsIPRemote
+              ActivePage = tbsIPLocal
               Align = alClient
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
@@ -2717,6 +2762,8 @@ object frmAppOptions: TfrmAppOptions
               Font.Name = 'MS Sans Serif'
               Font.Style = []
               ParentFont = False
+              Style = tsFlatButtons
+              TabHeight = 18
               TabOrder = 0
               TabStop = False
               TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
@@ -2851,7 +2898,7 @@ object frmAppOptions: TfrmAppOptions
             Left = 13
             Top = 16
             Width = 108
-            Height = 80
+            Height = 81
             Caption = ' Connection (type ) '
             Items.Strings = (
               'Local'
@@ -3416,7 +3463,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 0
           object cbLatexVisible: TCheckBox
-            Left = 10
+            Left = 11
             Top = 24
             Width = 145
             Height = 18
@@ -3439,7 +3486,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 1
           object cbCloseDVIViewer: TCheckBox
-            Left = 10
+            Left = 11
             Top = 22
             Width = 302
             Height = 18
@@ -3449,7 +3496,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 0
           end
           object cbClosePDFViewer: TCheckBox
-            Left = 10
+            Left = 11
             Top = 42
             Width = 302
             Height = 18
@@ -3472,7 +3519,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 2
           object cbDOSMinimizedAlways: TCheckBox
-            Left = 10
+            Left = 11
             Top = 24
             Width = 138
             Height = 18
@@ -3495,7 +3542,7 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 3
           object cbPDFOpenAlways: TCheckBox
-            Left = 10
+            Left = 11
             Top = 24
             Width = 107
             Height = 18
@@ -3507,7 +3554,7 @@ object frmAppOptions: TfrmAppOptions
             TabOrder = 0
           end
           object cbDVIOpenAlways: TCheckBox
-            Left = 10
+            Left = 11
             Top = 44
             Width = 107
             Height = 18
@@ -3719,6 +3766,7 @@ object frmAppOptions: TfrmAppOptions
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
+    Options = [fdTrueTypeOnly, fdFixedPitchOnly]
     Left = 99
     Top = 493
   end

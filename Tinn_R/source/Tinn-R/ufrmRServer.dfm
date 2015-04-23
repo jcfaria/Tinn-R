@@ -7,7 +7,7 @@ object frmRServer: TfrmRServer
   Caption = 'R server: conections and tests'
   ClientHeight = 543
   ClientWidth = 501
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -26,6 +26,8 @@ object frmRServer: TfrmRServer
     Height = 39
     Align = alBottom
     BevelOuter = bvNone
+    Color = 16250871
+    ParentBackground = False
     TabOrder = 0
     object bbtRServerSave: TBitBtn
       Left = 325
@@ -89,6 +91,10 @@ object frmRServer: TfrmRServer
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsTCPIP: TTabSheet
       Caption = 'TCP/IP'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 436
@@ -96,6 +102,8 @@ object frmRServer: TfrmRServer
         Height = 40
         Align = alBottom
         BevelOuter = bvNone
+        Color = 16250871
+        ParentBackground = False
         TabOrder = 0
         object btnConnectTCPIP: TButton
           Left = 151
@@ -301,6 +309,10 @@ object frmRServer: TfrmRServer
           object tbsIPRemote: TTabSheet
             Caption = 'Remote'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label14: TLabel
               Left = 6
               Top = 3

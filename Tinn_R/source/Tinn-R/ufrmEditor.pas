@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -58,7 +57,7 @@ uses
   SynEditMiscClasses, SynEditSearch, SynExportTeX, SynExportRTF,
   SynEditExport, SynExportHTML, ClipBrd, SynCompletionProposal, DdeMan,
   ShellCtrls, ComCtrls, Httpapp, SynHighlighterURI, ShellAPI,
-  JvDriveCtrls, JvExStdCtrls, SynUnicode, SynEditTextBuffer;
+  JvDriveCtrls, JvExStdCtrls, SynUnicode, SynEditTextBuffer, ATFileNotificationSimple;
 
 type
   TfrmEditor = class(TForm)
@@ -86,6 +85,7 @@ type
     procedure synEditorMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure synEditorReplaceText(Sender: TObject; const ASearch, AReplace: WideString; Line, Column: Integer; var Action: TSynReplaceAction);
     procedure synEditorStatusChange(Sender: TObject; Changes: TSynStatusChanges);
+    procedure synEditorKeyPress(Sender: TObject; var Key: WideChar);
 
   private
     { Private declarations }
@@ -120,6 +120,7 @@ type
     sRtip               : string;
     sSearchText         : string;
     synEditor2          : TSynEdit;
+    fNotif              : TATFileNotificationSimple;
 
     //procedure MatchBracket;
     //procedure RtermSplit(bSplitHoriz: boolean = True);
@@ -141,6 +142,7 @@ type
     procedure EditorRemoveSplit;
     procedure EditorSplit(bSplitHoriz: boolean = True);
     procedure EnableSave;
+    procedure FileChanged(Sender: TObject);
     procedure FileClose;
     procedure FileSave(Sender: TObject);
     procedure FileSaveAs(Sender: TObject);
@@ -171,6 +173,9 @@ type
     procedure UnindentBlock;
     procedure UpperCaseSelection;
     procedure UpperCaseWord;
+    procedure NotifyFile_Start(sTmp: string);
+    procedure NotifyFile_Stop;
+
 
    protected
     procedure Loaded; override;
@@ -203,6 +208,41 @@ uses
   ufrmTools;
 
 {$R *.DFM}
+
+procedure TfrmEditor.NotifyFile_Start(sTmp: string);
+begin
+  with fNotif do begin
+    Timer.Enabled:= False;
+    Timer.Interval:= 100;
+    FileName:= sTmp;
+    Timer.Enabled:= True;
+  end;
+end;
+
+procedure TfrmEditor.NotifyFile_Stop;
+begin
+  with fNotif do begin
+    Timer.Enabled:= False;
+  end;
+end;
+
+procedure TfrmEditor.FileChanged(Sender: TObject);
+begin
+  // If not totification: remove any prior notification and nothing to do.
+  if not frmTinnMain.actNotification.Checked then begin
+    frmTinnMain.slFileNotify.Clear;
+    Exit;
+  end;
+
+  // If the application does not has focus
+  // it will store the changes (related to open files) made by another programs.
+  if (FindControl(GetForegroundWindow()) = nil) then
+    with frmTinnMain.slFileNotify do begin
+      BeginUpdate;
+      Add(fNotif.FileName);
+      EndUpdate;
+    end;
+end;
 
 procedure TfrmEditor.WMMDIActivate;
 var
@@ -268,100 +308,100 @@ begin
     if (pgFiles.PageCount = 0) then begin
       ClearStatusBar;
       // The below is alphabetically ordered
-      actBlockMark.Enabled               := False;
-      actBlockUnmark.Enabled             := False;
-      actColumnSelect.Enabled            := False;
-      actComment.Enabled                 := False;
-      actCompletion.Enabled              := False;
-      actCompletionInsert.Enabled        := False;
-      actDateStamp.Enabled               := False;
-      actFileClose.Enabled               := False;
-      actFileSave.Enabled                := False;
-      actFileSave.Enabled                := False;
-      actFileSaveAll.Enabled             := False;
-      actFileSaveAs.Enabled              := False;
-      actFind.Enabled                    := False;
-      actFindAgain.Enabled               := False;
-      actFullPathUnix.Enabled            := False;
-      actFullPathWindows.Enabled         := False;
-      actGotoLine.Enabled                := False;
-      actIndentBlock.Enabled             := False;
-      actInvertCaseWord.Enabled          := False;
-      actInvertSelection.Enabled         := False;
-      actLatexAlgebricFrac.Enabled       := False;
-      actLatexAlgebricSqrt.Enabled       := False;
-      actLatexAlgebricSqrtN.Enabled      := False;
-      actLatexDimensional.Enabled        := False;
-      actLatexFontBold.Enabled           := False;
-      actLatexFontEnphase.Enabled        := False;
-      actLatexFontFootnote.Enabled       := False;
-      actLatexFontHuge.Enabled           := False;
-      actLatexFontHuger.Enabled          := False;
-      actLatexFontItalic.Enabled         := False;
-      actLatexFontLarge.Enabled          := False;
-      actLatexFontLarger.Enabled         := False;
-      actLatexFontLargest.Enabled        := False;
-      actLatexFontNormal.Enabled         := False;
-      actLatexFontScript.Enabled         := False;
-      actLatexFontSlatend.Enabled        := False;
-      actLatexFontSmall.Enabled          := False;
-      actLatexFontSmallcaps.Enabled      := False;
-      actLatexFontTiny.Enabled           := False;
-      actLatexFontTypewriter.Enabled     := False;
-      actLatexFormatCenter.Enabled       := False;
-      actLatexFormatEnumeration.Enabled  := False;
-      actLatexFormatItemization.Enabled  := False;
-      actLatexFormatLeft.Enabled         := False;
-      actLatexFormatRight.Enabled        := False;
-      actLatexHeaderChapter.Enabled      := False;
-      actLatexHeaderParagraph.Enabled    := False;
-      actLatexHeaderPart.Enabled         := False;
-      actLatexHeaderSection.Enabled      := False;
-      actLatexHeaderSubParagraph.Enabled := False;
-      actLatexHeaderSubSection.Enabled   := False;
-      actLatexHeaderSubSubSection.Enabled:= False;
-      actLineSelect.Enabled              := False;
-      actLowercaseSelection.Enabled      := False;
-      actLowerCaseWord.Enabled           := False;
-      actMacroPlay.Enabled               := False;
-      actMacroRecord.Enabled             := False;
-      actMatchBracket.Enabled            := False;
-      actNormalSelect.Enabled            := False;
-      actPrint.Enabled                   := False;
-      actRcardInsert.Enabled             := False;
-      actReadOnly.Checked                := False;
-      actReadOnly.Enabled                := False;
-      actReload.Enabled                  := False;
-      actReplace.Enabled                 := False;
-      actRSendSelection.Enabled          := False;
-      actRSendSourceSelection.Enabled    := False;
-      actSortDate.Enabled                := False;
-      actSortNumber.Enabled              := False;
-      actSortString.Enabled              := False;
-      actSpell.Enabled                   := False;
-      actSplitHorizontal.Enabled         := False;
-      actSplitRemove.Enabled             := False;
-      actSplitVertical.Enabled           := False;
-      actUncomment.Enabled               := False;
-      actUncommentFirst.Enabled          := False;
-      actUnindentBlock.Enabled           := False;
-      actUnmarkAll.Enabled               := False;
-      actUpperCaseSelection.Enabled      := False;
-      actUpperCaseWord.Enabled           := False;
-      menChaLinEndMAC.Enabled            := False;
-      menChaLinEndUNIX.Enabled           := False;
-      menChaLinEndWIN.Enabled            := False;
-      menEncConANSI.Enabled              := False;
-      menEncConUTF16BE.Enabled           := False;
-      menEncConUTF16LE.Enabled           := False;
-      menEncConUTF8.Enabled              := False;
-      menToolsConversionPandoc.Enabled   := False;
-      menWebSearchSelGoogle.Enabled      := False;
-      menWebSearchSelRArchives.Enabled   := False;
-      menWebSearchSelRSite.Enabled       := False;
-      menWebSSearchSelArchives.Enabled   := False;
-      tbFilter.Enabled                   := False;
-      tbiPandoc.Enabled                  := False;
+      actBlockMark.Enabled                := False;
+      actBlockUnmark.Enabled              := False;
+      actColumnSelect.Enabled             := False;
+      actComment.Enabled                  := False;
+      actCompletion.Enabled               := False;
+      actCompletionInsert.Enabled         := False;
+      actDateStamp.Enabled                := False;
+      actFileClose.Enabled                := False;
+      actFileSave.Enabled                 := False;
+      actFileSave.Enabled                 := False;
+      actFileSaveAll.Enabled              := False;
+      actFileSaveAs.Enabled               := False;
+      actFind.Enabled                     := False;
+      actFindAgain.Enabled                := False;
+      actFullPathUnix.Enabled             := False;
+      actFullPathWindows.Enabled          := False;
+      actGotoLine.Enabled                 := False;
+      actIndentBlock.Enabled              := False;
+      actInvertCaseWord.Enabled           := False;
+      actInvertSelection.Enabled          := False;
+      actLatexAlgebricFrac.Enabled        := False;
+      actLatexAlgebricSqrt.Enabled        := False;
+      actLatexAlgebricSqrtN.Enabled       := False;
+      actLatexDimensional.Enabled         := False;
+      actLatexFontBold.Enabled            := False;
+      actLatexFontEnphase.Enabled         := False;
+      actLatexFontFootnote.Enabled        := False;
+      actLatexFontHuge.Enabled            := False;
+      actLatexFontHuger.Enabled           := False;
+      actLatexFontItalic.Enabled          := False;
+      actLatexFontLarge.Enabled           := False;
+      actLatexFontLarger.Enabled          := False;
+      actLatexFontLargest.Enabled         := False;
+      actLatexFontNormal.Enabled          := False;
+      actLatexFontScript.Enabled          := False;
+      actLatexFontSlatend.Enabled         := False;
+      actLatexFontSmall.Enabled           := False;
+      actLatexFontSmallcaps.Enabled       := False;
+      actLatexFontTiny.Enabled            := False;
+      actLatexFontTypewriter.Enabled      := False;
+      actLatexFormatCenter.Enabled        := False;
+      actLatexFormatEnumeration.Enabled   := False;
+      actLatexFormatItemization.Enabled   := False;
+      actLatexFormatLeft.Enabled          := False;
+      actLatexFormatRight.Enabled         := False;
+      actLatexHeaderChapter.Enabled       := False;
+      actLatexHeaderParagraph.Enabled     := False;
+      actLatexHeaderPart.Enabled          := False;
+      actLatexHeaderSection.Enabled       := False;
+      actLatexHeaderSubParagraph.Enabled  := False;
+      actLatexHeaderSubSection.Enabled    := False;
+      actLatexHeaderSubSubSection.Enabled := False;
+      actLineSelect.Enabled               := False;
+      actLowercaseSelection.Enabled       := False;
+      actLowerCaseWord.Enabled            := False;
+      actMacroPlay.Enabled                := False;
+      actMacroRecord.Enabled              := False;
+      actMatchBracket.Enabled             := False;
+      actNormalSelect.Enabled             := False;
+      actPrint.Enabled                    := False;
+      actRcardInsert.Enabled              := False;
+      actReadOnly.Checked                 := False;
+      actReadOnly.Enabled                 := False;
+      actReload.Enabled                   := False;
+      actReplace.Enabled                  := False;
+      actRSendSelection.Enabled           := False;
+      actRSendSourceSelection.Enabled     := False;
+      actSortDate.Enabled                 := False;
+      actSortNumber.Enabled               := False;
+      actSortString.Enabled               := False;
+      actSpell.Enabled                    := False;
+      actSplitHorizontal.Enabled          := False;
+      actSplitRemove.Enabled              := False;
+      actSplitVertical.Enabled            := False;
+      actUncomment.Enabled                := False;
+      actUncommentFirst.Enabled           := False;
+      actUnindentBlock.Enabled            := False;
+      actUnmarkAll.Enabled                := False;
+      actUpperCaseSelection.Enabled       := False;
+      actUpperCaseWord.Enabled            := False;
+      menChaLinEndMAC.Enabled             := False;
+      menChaLinEndUNIX.Enabled            := False;
+      menChaLinEndWIN.Enabled             := False;
+      menEncConANSI.Enabled               := False;
+      menEncConUTF16BE.Enabled            := False;
+      menEncConUTF16LE.Enabled            := False;
+      menEncConUTF8.Enabled               := False;
+      menToolsConversionPandoc.Enabled    := False;
+      menWebSearchSelGoogle.Enabled       := False;
+      menWebSearchSelRArchives.Enabled    := False;
+      menWebSearchSelRSite.Enabled        := False;
+      menWebSSearchSelArchives.Enabled    := False;
+      tbFilter.Enabled                    := False;
+      tbiPandoc.Enabled                   := False;
       MinimizeTinnAfterLastFile;
 
       with tUpdateOptions do
@@ -369,6 +409,11 @@ begin
 
       SetToolbarProcessing('fileAllClosed.disableAll');  // will disable all Deplate, Txt2tags and MikTeX options
       pgFiles.Refresh;
+
+      with frmTools do begin
+        ATBinHex.OpenStream(nil);
+        rgHexViewerMode.ItemIndex:= -1;
+      end;
     end;
 
     for i:= 1 to (frmTools.tvProject.Items.Count -1) do begin
@@ -522,6 +567,7 @@ begin
 
         with frmTinnMain do begin
           SetFileSize_StatusBar(sActiveFile);
+
           GetFile_Info(sActiveFile,
                        synEditor.Lines);
         end;
@@ -549,7 +595,8 @@ end;
 
 procedure TfrmEditor.FileSaveAs(Sender: TObject);
 var
-  sFile   : string;
+  sFile: string;
+
   wFileAtt: word;
 
 begin
@@ -633,6 +680,7 @@ var
 
 begin
   EnableSave;
+
   if Assigned(synEditor2) then begin
     if (sActiveEditor = 'synEditor') then begin
       synEditor2.BeginUpdate;
@@ -649,6 +697,8 @@ begin
       synEditor.EndUpdate;
     end;
   end;
+
+  frmTinnMain.UpdateHexViewer;
 end;
 
 procedure TfrmEditor.FormCreate(Sender: TObject);
@@ -670,91 +720,92 @@ begin
 
   with frmTinnMain do begin
     // The below is alphabetically ordered
-    actBlockMark.Enabled               := True;
-    actBlockUnmark.Enabled             := True;
-    actColumnSelect.Enabled            := True;
-    actComment.Enabled                 := True;
-    actCompletion.Enabled              := True;
-    actCompletionInsert.Enabled        := True;
-    actDateStamp.Enabled               := True;
-    actFileClose.Enabled               := True;
-    actFileSaveAs.Enabled              := True;
-    actFind.Enabled                    := True;
-    actFindAgain.Enabled               := True;
-    actFullPathUnix.Enabled            := True;
-    actFullPathWindows.Enabled         := True;
-    actGotoLine.Enabled                := True;
-    actInvertCaseWord.Enabled          := True;
-    actLatexAlgebricFrac.Enabled       := True;
-    actLatexAlgebricSqrt.Enabled       := True;
-    actLatexAlgebricSqrtN.Enabled      := True;
-    actLatexDimensional.Enabled        := True;
-    actLatexFontBold.Enabled           := True;
-    actLatexFontEnphase.Enabled        := True;
-    actLatexFontFootnote.Enabled       := True;
-    actLatexFontHuge.Enabled           := True;
-    actLatexFontHuger.Enabled          := True;
-    actLatexFontItalic.Enabled         := True;
-    actLatexFontLarge.Enabled          := True;
-    actLatexFontLarger.Enabled         := True;
-    actLatexFontLargest.Enabled        := True;
-    actLatexFontNormal.Enabled         := True;
-    actLatexFontScript.Enabled         := True;
-    actLatexFontSlatend.Enabled        := True;
-    actLatexFontSmall.Enabled          := True;
-    actLatexFontSmallcaps.Enabled      := True;
-    actLatexFontTiny.Enabled           := True;
-    actLatexFontTypewriter.Enabled     := True;
-    actLatexFormatCenter.Enabled       := True;
-    actLatexFormatEnumeration.Enabled  := True;
-    actLatexFormatItemization.Enabled  := True;
-    actLatexFormatLeft.Enabled         := True;
-    actLatexFormatRight.Enabled        := True;
-    actLatexHeaderChapter.Enabled      := True;
-    actLatexHeaderParagraph.Enabled    := True;
-    actLatexHeaderPart.Enabled         := True;
-    actLatexHeaderSection.Enabled      := True;
-    actLatexHeaderSubParagraph.Enabled := True;
-    actLatexHeaderSubSection.Enabled   := True;
-    actLatexHeaderSubSubSection.Enabled:= True;
-    actLineSelect.Enabled              := True;
-    actLowerCaseWord.Enabled           := True;
-    actMacroPlay.Enabled               := True;
-    actMacroRecord.Enabled             := True;
-    actMatchBracket.Enabled            := True;
-    actNormalSelect.Enabled            := True;
-    actPrint.Enabled                   := True;
-    actRcardInsert.Enabled             := True;
-    actReadOnly.Enabled                := True;
-    actReload.Enabled                  := True;
-    actReplace.Enabled                 := True;
-    actSortDate.Enabled                := True;
-    actSortNumber.Enabled              := True;
-    actSortString.Enabled              := True;
-    actSpell.Enabled                   := True;
-    actSplitHorizontal.Enabled         := True;
-    actSplitRemove.Enabled             := True;
-    actSplitVertical.Enabled           := True;
-    actUncomment.Enabled               := True;
-    actUncommentFirst.Enabled          := True;
-    actUnmarkAll.Enabled               := True;
-    actUpperCaseWord.Enabled           := True;
-    menChaLinEndMAC.Enabled            := True;
-    menChaLinEndUNIX.Enabled           := True;
-    menChaLinEndWIN.Enabled            := True;
-    menEncConANSI.Enabled              := True;
-    menEncConUTF16BE.Enabled           := True;
-    menEncConUTF16LE.Enabled           := True;
-    menEncConUTF8.Enabled              := True;
-    menToolsConversionPandoc.Enabled   := True;
-    menWebSearchSelGoogle.Enabled      := True;
-    menWebSearchSelRArchives.Enabled   := True;
-    menWebSearchSelRSite.Enabled       := True;
-    menWebSSearchSelArchives.Enabled   := True;
-    synMR.Editor                       := synEditor;
-    tbFilter.Enabled                   := True;
-    tbiPandoc.Enabled                  := True;
-    iSynWithFocus                      := 1;
+    actBlockMark.Enabled                := True;
+    actBlockUnmark.Enabled              := True;
+    actColumnSelect.Enabled             := True;
+    actComment.Enabled                  := True;
+    actCompletion.Enabled               := True;
+    actCompletionInsert.Enabled         := True;
+    actDateStamp.Enabled                := True;
+    actFileClose.Enabled                := True;
+    actFileSaveAs.Enabled               := True;
+    actFind.Enabled                     := True;
+    actFindAgain.Enabled                := True;
+    actFullPathUnix.Enabled             := True;
+    actFullPathWindows.Enabled          := True;
+    actGotoLine.Enabled                 := True;
+    actInvertCaseWord.Enabled           := True;
+    actLatexAlgebricFrac.Enabled        := True;
+    actLatexAlgebricSqrt.Enabled        := True;
+    actLatexAlgebricSqrtN.Enabled       := True;
+    actLatexDimensional.Enabled         := True;
+    actLatexFontBold.Enabled            := True;
+    actLatexFontEnphase.Enabled         := True;
+    actLatexFontFootnote.Enabled        := True;
+    actLatexFontHuge.Enabled            := True;
+    actLatexFontHuger.Enabled           := True;
+    actLatexFontItalic.Enabled          := True;
+    actLatexFontLarge.Enabled           := True;
+    actLatexFontLarger.Enabled          := True;
+    actLatexFontLargest.Enabled         := True;
+    actLatexFontNormal.Enabled          := True;
+    actLatexFontScript.Enabled          := True;
+    actLatexFontSlatend.Enabled         := True;
+    actLatexFontSmall.Enabled           := True;
+    actLatexFontSmallcaps.Enabled       := True;
+    actLatexFontTiny.Enabled            := True;
+    actLatexFontTypewriter.Enabled      := True;
+    actLatexFormatCenter.Enabled        := True;
+    actLatexFormatEnumeration.Enabled   := True;
+    actLatexFormatItemization.Enabled   := True;
+    actLatexFormatLeft.Enabled          := True;
+    actLatexFormatRight.Enabled         := True;
+    actLatexHeaderChapter.Enabled       := True;
+    actLatexHeaderParagraph.Enabled     := True;
+    actLatexHeaderPart.Enabled          := True;
+    actLatexHeaderSection.Enabled       := True;
+    actLatexHeaderSubParagraph.Enabled  := True;
+    actLatexHeaderSubSection.Enabled    := True;
+    actLatexHeaderSubSubSection.Enabled := True;
+    actLineSelect.Enabled               := True;
+    actLowerCaseWord.Enabled            := True;
+    actMacroPlay.Enabled                := True;
+    actMacroRecord.Enabled              := True;
+    actMatchBracket.Enabled             := True;
+    actNormalSelect.Enabled             := True;
+    actPrint.Enabled                    := True;
+    actRcardInsert.Enabled              := True;
+    actReadOnly.Enabled                 := True;
+    actReload.Enabled                   := True;
+    actReplace.Enabled                  := True;
+    actSortDate.Enabled                 := True;
+    actSortNumber.Enabled               := True;
+    actSortString.Enabled               := True;
+    actSpell.Enabled                    := True;
+    actSplitHorizontal.Enabled          := True;
+    actSplitRemove.Enabled              := True;
+    actSplitVertical.Enabled            := True;
+    actUncomment.Enabled                := True;
+    actUncommentFirst.Enabled           := True;
+    actUnmarkAll.Enabled                := True;
+    actUpperCaseWord.Enabled            := True;
+    menChaLinEndMAC.Enabled             := True;
+    menChaLinEndUNIX.Enabled            := True;
+    menChaLinEndWIN.Enabled             := True;
+    menEncConANSI.Enabled               := True;
+    menEncConUTF16BE.Enabled            := True;
+    menEncConUTF16LE.Enabled            := True;
+    menEncConUTF8.Enabled               := True;
+    menToolsConversionPandoc.Enabled    := True;
+    menWebSearchSelGoogle.Enabled       := True;
+    menWebSearchSelRArchives.Enabled    := True;
+    menWebSearchSelRSite.Enabled        := True;
+    menWebSSearchSelArchives.Enabled    := True;
+    synMR.Editor                        := synEditor;
+    tbFilter.Enabled                    := True;
+    tbiPandoc.Enabled                   := True;
+
+    iSynWithFocus                       := 1;
 
     if (synEditor.ReadOnly = False) then actFileSave.Enabled:= True;
 
@@ -780,10 +831,13 @@ end;
 
 procedure TfrmEditor.FormActivate(Sender: TObject);
 var
-  bDone    : boolean;
-  i        : integer;
+  bDone: boolean;
+
+  i: integer;
+
   slSynName: TStringList;
-  sTmp     : string;
+
+  sTmp: string;
 
 begin
   sTmp:= sActiveFile;
@@ -796,6 +850,7 @@ begin
     else begin
       if (frmTinnMain.pgFiles.Pages[i].Hint = ScrubCaption(Caption)) then begin
         frmTinnMain.pgFiles.ActivePageIndex:= i;
+
         bDone:= True;
       end;
 
@@ -820,18 +875,21 @@ begin
       slSynName.Text:= dmSyn.SynAll.GetFriendlyLanguageName;
 
     SetHighlighterStatus(slSynName);
+
     FreeAndNil(slSynName)
   end;
 
   if not synEditor.ReadOnly then begin
     with frmTinnMain do begin
       stbMain.Panels[3].Text:= 'Editing';
+
       actReadOnly.Checked:= False;
     end;
   end
   else begin
     with frmTinnMain do begin
       stbMain.Panels[3].Text:= 'Read only';
+
       actReadOnly.Checked:= True;
     end;
   end;
@@ -840,9 +898,11 @@ begin
 
   with frmTinnMain do begin
     SetFileSize_StatusBar(sActiveFile);
+
     GetFile_Info(sActiveFile,
                  synEditor.Lines);
     //DrawSelectionMode(0);
+
     stbMain.Panels[4].Text:= 'Normal';
   end;
 end;
@@ -921,12 +981,13 @@ procedure TfrmEditor.DoTipInsert;
 var
   seEditor: TSynEdit;
 
-  sOldSearchText,
-    sFunction,
-    sTip        : string;
+  sTip,
+   sFunction,
+   sOldSearchText: string;
 
   slTmp: TStringList;
-  iPos : integer;
+
+  iPos: integer;
 
 begin
   //Define the active editor
@@ -972,10 +1033,12 @@ var
   iPosY: integer;
 
   seEditor: TSynEdit;
-  sOldSearchText,
-    sCompletion : string;
 
-  bcPos   : TBufferCoord;
+  sCompletion,
+    sOldSearchText: string;
+
+  bcPos: TBufferCoord;
+
   pPointer: TBookMark;
 
 begin
@@ -1095,15 +1158,27 @@ begin
   if (Shift = [ssCtrl]) then
     case Key of
       VK_RETURN  : begin //Send current line to R when editing
+
+                     if not frmTinnMain.ValidRRunning then begin
+                       Key:= VK_PAUSE;
+                       Exit;
+                     end;
+
                      bSendToREditing:= True;
-                     with seEditor do begin
-                       frmTinnMain.actRSendLineExecute(nil);
+                     with seEditor do begin  // The below is redundant (but low cust) and avoid send intermitent final character! 
                        ExecuteCommand(ecLineEnd,
                                       #0,
                                       nil);
+
                        ExecuteCommand(ecLineBreak,
                                      #0,
                                      nil);
+
+                       CaretY:= CaretY - 1;
+
+                       frmTinnMain.actRSendLineExecute(nil);
+
+                       CaretY:= CaretY + 1;
                      end;
                      bSendToREditing:= False;
                      EnableSave;
@@ -1120,37 +1195,120 @@ begin
                      EnableSave;
                    end;
 
-      VK_ADD     : begin //Add or replace text by attribution symbol: ->
-                     seEditor.SelText:= ' -> ';
-                     EnableSave;
+      // The below avoid problens with undo/redo and eoScrollPastEol (in or not in options)
+      VK_ADD     : with seEditor do begin //Add or replace text by attribution symbol: ->
+                     SelText:= ' ->';
+
+                     ExecuteCommand(ecChar,
+                                    ' ',
+                                    nil);
                    end;
+      
+      // The below avoid problens with undo/redo and eoScrollPastEol (in or not in options)
+      VK_SUBTRACT: with seEditor do begin //Add or replace text by attribution symbol: <-
+                     SelText:= ' <-';
 
-      VK_SUBTRACT: begin //Add or replace text by attribution symbol: <-
-                     seEditor.SelText:= ' <- ';
-                     EnableSave;
+                     ExecuteCommand(ecChar,
+                                    ' ',
+                                    nil);
                    end;
+      48         : with seEditor do
+                     SelText:= '()';       // )
 
-      48         : seEditor.SelText:= '()';  // )
-
-      57         : with seEditor do begin    // (
+      57         : with seEditor do begin  // (
                      SelText:= '()';
                      CaretX := CaretX - 1;
                    end;
     end;
+end;
 
-{
-    case key of
-      57 :  with seEditor do begin    // (
-              SelText:= '()';
-              CaretX := CaretX - 1;
-            end;
+procedure TfrmEditor.synEditorKeyPress(Sender: TObject;
+                                       var Key: WideChar);
 
-      192 : with seEditor do begin    // (
-              SelText:= '"';
-              CaretX := CaretX - 1;
-            end;
+  function sFormat(sTmp: string;
+                   cTmp: char): string;
+  begin
+    Result:= key +
+             sTmp +
+             cTmp;
+  end;
+
+var
+  seEditor: TSynEdit;
+
+  procedure InsertText(seEdt: TSynEdit;
+                       sTmp: string;
+                       i: integer);
+  begin
+    with seEdt do begin
+      SelText:= sTmp;
+      CaretX := CaretX - i;
     end;
-}
+
+    key:= #0;  // make nul the key pressed
+  end;
+
+begin
+  if frmTinnMain.actReadOnly.Checked then Exit;
+
+  // Define the active editor
+  if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                   else seEditor:= synEditor2;
+
+  if frmTinnMain.actAutoCompletion.Checked then
+    with seEditor do
+      case key of
+         '(': if SelAvail then
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   ')'),
+                           0)
+              else
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   ')'),
+                           1);
+         '[': if SelAvail then
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   ']'),
+                           0)
+              else
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   ']'),
+                           1);
+         '{': if SelAvail then
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   '}'),
+                           0)
+              else
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   '}'),
+                           1);
+        '''': if SelAvail then
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   ''''),
+                           0)
+              else
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   ''''),
+                           1);
+         '"': if SelAvail then
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   '"'),
+                           0)
+              else
+                InsertText(seEditor,
+                           sFormat(SelText,
+                                   '"'),
+                           1);
+      end;
 end;
 
 procedure TfrmEditor.synEditorKeyUp(Sender: TObject;
@@ -1159,6 +1317,7 @@ procedure TfrmEditor.synEditorKeyUp(Sender: TObject;
 begin
   if (Sender = synEditor) then frmTinnMain.iSynWithFocus:= 1
                           else frmTinnMain.iSynWithFocus:= 2;
+
 end;
 
 procedure TfrmEditor.synEditorMouseUp(Sender: TObject;
@@ -1179,7 +1338,9 @@ procedure TfrmEditor.synEditorReplaceText(Sender: TObject;
                                           var Action: TSynReplaceAction);
 var
   editRect: TRect;
-  pPos    : TPoint;
+
+  pPos: TPoint;
+
   seEditor: TSynEdit;
 
 begin
@@ -1231,11 +1392,11 @@ var
    iDelimiter,
    iLenFilter: integer;
 
-  slFilters      : TStringList;
+  slFilters: TStringList;
 
   sLine,
-   sDefaultFilter,
-   SValidFilters : string;
+   sValidFilters,
+   sDefaultFilter: string;
 
   slSynName: TStringlist;
 
@@ -1363,9 +1524,11 @@ end;
 
 procedure TfrmEditor.GotoLine;
 var
-  gotoBox    : TfrmGotoBox;
+  gotoBox: TfrmGotoBox;
+
   pLineNumber: TPoint;
-  seEditor   : TSynEdit;
+
+  seEditor: TSynEdit;
 
 begin
   try
@@ -1390,7 +1553,8 @@ end;
 
 procedure TfrmEditor.ShowSearchReplaceDialog(bReplace: boolean);
 var
-  dlg     : TfrmSearchDialog;
+  dlg: TfrmSearchDialog;
+
   seEditor: TSynEdit;
 
 begin
@@ -1411,7 +1575,7 @@ begin
                                      else seEditor:= synEditor2;
 
     with seEditor do begin
-      SearchInSelectionOnly   := SelAvail;
+      SearchInSelectionOnly:= SelAvail;
 
       if SelAvail then begin
         rgSearchOrigin.Enabled:= False;
@@ -1421,7 +1585,8 @@ begin
       end
       else begin
         rgSearchOrigin.Enabled:= True;
-        SearchText            := GetWordAtRowCol(CaretXY);
+
+        SearchText:= GetWordAtRowCol(WordStartEx(CaretXY));  // Avoid return empty wheter cursor is at the end of word
       end;
     end;
 
@@ -1441,12 +1606,12 @@ begin
       sSearchText                     := SearchText;
 
       if bReplace then with dlg as TfrmReplaceDialog do begin
-        sReplaceText                  := ReplaceText;
-        sReplaceTextHistory           := ReplaceTextHistory;
+        sReplaceText       := ReplaceText;
+        sReplaceTextHistory:= ReplaceTextHistory;
       end;
 
       if (sSearchText <> EmptyStr) then DoSearchReplaceText(bReplace,
-                                                      False);
+                                                            False);
     end;
 
   finally
@@ -1457,7 +1622,8 @@ end;
 procedure TfrmEditor.SearchError(sTmp: string);
 var
   synSearchOptions: TSynSearchOptions;
-  seEditor        : TSynEdit;
+
+  seEditor: TSynEdit;
 
 begin
   synSearchOptions:= [];
@@ -1496,7 +1662,8 @@ var
   synSearchOptions: TSynSearchOptions;
 
   seEditor: TSynEdit;
-  iResult : integer;
+
+  iResult: integer;
 
 begin
   if bReplace then synSearchOptions:= [ssoPrompt,
@@ -1768,16 +1935,17 @@ begin
     HideSelection         := False;
     Highlighter           := synEditor.Highlighter;
     Lines.text            := synEditor.Lines.Text;
-    OnChange              := synEditorChange;
-    onClick               := synEditorClick;
-    onEndDrag             := synEditorEndDrag;
-    onGutterClick         := synEditorGutterClick;
-    OnKeyDown             := synEditorKeyDown;
-    OnKeyUp               := synEditor.OnKeyUp;
-    OnMouseUp             := synEditor.OnMouseUp;
+    onChange              := synEditor.onChange;
+    onClick               := synEditor.onClick;
+    onEndDrag             := synEditor.onEndDrag;
+    onEnter               := synEditor.onEnter;
+    onGutterClick         := synEditor.onGutterClick;
+    onKeyDown             := synEditor.onKeyDown;
+    onKeyUp               := synEditor.onKeyUp;
+    onMouseUp             := synEditor.onMouseUp;
     onPaintTransient      := frmTinnMain.synPaintTransient;
-    OnStatusChange        := synEditorStatusChange;
-    Options               := synEditor.Options;
+    onReplaceText         := synEditor.onReplaceText;
+    onStatusChange        := synEditor.onStatusChange;
     Options               := synEditor.Options;
     Parent                := Self;
     PopupMenu             := frmTinnMain.pmenEditor;
@@ -1821,11 +1989,13 @@ var
   pPos: TPoint;
 
 begin
-  bSizing   := True;
-  pPos      := spEditor.ClientToScreen(Point(X,
-                                             Y));
+  bSizing:= True;
+
+  pPos:= spEditor.ClientToScreen(Point(X,
+                                       Y));
   iSizeStart:= pPos.Y;
-  pLine     := pPos;
+
+  pLine:= pPos;
 end;
 
 procedure TfrmEditor.SplitMouseUp(Sender: TObject;
@@ -2506,8 +2676,8 @@ var
 
   optSelMode: TSynSelectionMode;
 
-  seEditor,
-   seTmp  : TSynEdit;
+  seTmp,
+    seEditor: TSynEdit;
 
   bcBegin,
    bcEnd : TBufferCoord;

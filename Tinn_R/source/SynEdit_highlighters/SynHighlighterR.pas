@@ -122,7 +122,6 @@ type
     FTokenID: TtkTokenKind;
 
     function IdentKind(MayBe: PWideChar): TtkTokenKind;
-
     procedure CommentProc;
     procedure CRProc;
     procedure IdentProc;
@@ -2545,142 +2544,72 @@ const
     'WWWusage'
     );
 
-
   // List of keywords: Plotting
-  Plotting_Count = 149;
+  Plotting_Count = 76;
   Plotting: array [1..Plotting_Count] of UnicodeString =
     (
-    'add',
     'adj',
-    'all.screens',
-    'angle',
     'ann',
-    'antialias',
     'ask',
     'asp',
-    'axes',
-    'axis.lty',
-    'axisnames',
-    'beside',
     'bg',
-    'border',
-    'boxwex',
-    'br',
-    'breaks',
     'bty',
-    'buffered',
-    'canvas',
     'cex',
     'cex.axis',
     'cex.lab',
-    'cex.labels',
     'cex.main',
     'cex.names',
     'cex.sub',
     'cin',
-    'clickToConfirm',
     'col',
     'col.axis',
     'col.lab',
     'col.main',
     'col.sub',
-    'colormodel',
-    'command',
     'cra',
     'crt',
     'csi',
     'cxy',
-    'default',
-    'diag.panel',
     'din',
-    'distinct',
-    'encoding',
-    'erase',
     'err',
     'fg',
     'fig',
-    'figs',
-    'fillOddEven',
     'fin',
     'font',
     'font.axis',
     'font.lab',
-    'font.labels',
     'font.main',
     'font.sub',
-    'fonts',
-    'frame.plot',
-    'freq',
-    'gap',
-    'h',
-    'heights',
-    'horiz',
-    'horizontal',
-    'include.lowest',
-    'inside',
     'lab',
-    'label.pos',
     'las',
-    'legend.text',
     'lend',
     'lheight',
-    'line.main',
     'ljoin',
     'lmitre',
-    'lower.panel',
     'lty',
     'lwd',
     'mai',
     'main',
     'mar',
-    'mat',
     'mex',
     'mfcol',
     'mfg',
     'mfrow',
     'mgp',
     'mkh',
-    'n',
-    'names.arg',
-    'nclass',
     'oma',
     'omd',
     'omi',
-    'onefile',
-    'outwex',
-    'pagecentre',
-    'panel',
-    'panel.first',
-    'panel.last',
-    'paper',
-    'pars',
     'pch',
     'pin',
     'plt',
-    'pointsize',
-    'print.it',
-    'prob',
-    'probability',
     'ps',
     'pty',
-    'rescale',
-    'respect',
-    'restoreConsole',
-    'right',
-    'row1attop',
     'smo',
-    'space',
     'srt',
-    'staplewex',
     'tck',
     'tcl',
-    'text.panel',
-    'tmag',
-    'type',
-    'upper.panel',
-    'useKerning',
     'usr',
-    'widths',
     'xaxp',
     'xaxs',
     'xaxt',
@@ -2688,17 +2617,13 @@ const
     'xlim',
     'xlog',
     'xpd',
-    'xpinch',
-    'xpos',
     'yaxp',
     'yaxs',
     'yaxt',
     'ylab',
-    'ylbias',
     'ylim',
-    'ylog',
-    'ypinch',
-    'ypos'
+    'ylbias',
+    'ylog'
     );
 
 var
@@ -2712,15 +2637,23 @@ begin
     for f:= 1 to Programing_Count do
       GlobalKeywords.AddObject(Programing[f],
                                Pointer(Ord(tkPrograming)));
+
     for f:= 1 to Functions_Count do
       GlobalKeywords.AddObject(Functions[f],
                                Pointer(Ord(tkFunctions)));
+
     for f:= 1 to Datasets_Count do
       GlobalKeywords.AddObject(Datasets[f],
                                Pointer(Ord(tkDatasets)));
     for f:= 1 to Plotting_Count do
       GlobalKeywords.AddObject(Plotting[f],
                                Pointer(Ord(tkPlotting)));
+
+{
+    // Tests: OK
+    GlobalKeywords.InsertObject(1, 'aa', Pointer(Ord(tkPlotting)));
+    GlobalKeywords.InsertObject(1, 'aa', Pointer(Ord(tkPlotting)));
+}
   end; // if
   Result:= GlobalKeywords;
 end;
@@ -2782,8 +2715,8 @@ begin
 
   FKeywords:= TUnicodeStringList.Create;
   FKeywords.Sorted:= True;
-  FKeywords.Duplicates:= dupError;
-  FKeywords.Assign (GetKeywordIdentifiers);
+  FKeywords.Duplicates:= dupIgnore; //dupError, dupIgnore, dupAccept
+  FKeywords.Assign(GetKeywordIdentifiers);
 
   fRange:= rsUnknown;
 
@@ -3332,7 +3265,7 @@ begin
       case fLine[Run] of
         '~', '$', '?', '!', '=', '|',
         '^', '*', '+', '-', '&', '<',
-        '>', ':', '/': OperatorProc;
+        '>', ':', '/', '%': OperatorProc;
 
         '{', '}', '(', ')', '[', ']',
         ';', ',': SymbolProc;
@@ -3447,7 +3380,7 @@ begin
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * / ^ = <- -> <> ~ $ ? ! & :            # Operator'#13#10 +
+    '+ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
     'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +

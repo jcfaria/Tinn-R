@@ -872,18 +872,18 @@ function TSynAllSyn.GetSampleSource: UnicodeString;
 begin
   Result:=
     '# All highlighter sample'#13#10 +
-    '# Comments, notes and observations!         #Comment'#13#10 +
-    'pB <- 3.5E2                                 #Float number'#13#10 +
-    '0 1 2 3 4 5 6 8 9                           #Numbers'#13#10 +
-                                                 #13#10 +
-    'variable_a = 1:100                          #Identifier'#13#10 +
-    'variable.b <- 1:100                         #Identifier'#13#10 +
-                                                 #13#10 +
-    '+ - * / ^ = <- -> <> ~ $ ? ! & :            #Operator'#13#10 +
-    '() {} [] ; ,                                #Symbol'#13#10 +
-                                                 #13#10 +
-    'cat(''\nI - Basics measures:''); cat(''\n\n'')  #String'#13#10 +
-    'string <- "This is" ''a string''              #String'#13#10;
+    '# Comments, notes and observations!         # Comment'#13#10 +
+    'pB <- 3.5E2                                 # Float number'#13#10 +
+    '0 1 2 3 4 5 6 8 9                           # Numbers'#13#10 +
+    #13#10 +
+    'variable_a = 1:100                          # Identifier'#13#10 +
+    'variable.b <- 1:100                         # Identifier'#13#10 +
+    #13#10 +
+    '+ - * / ^ = <- -> <> ~ $ ? ! & :            # Operator'#13#10 +
+    '() {} [] ; ,                                # Symbol'#13#10 +
+    #13#10 +
+    'cat(''\nI - Basics measures:''); cat(''\n\n'')  # String'#13#10 +
+    'string <- "This is" ''a string''              # String'#13#10;
 end;
 
 class function TSynAllSyn.GetFriendlyLanguageName: UnicodeString;

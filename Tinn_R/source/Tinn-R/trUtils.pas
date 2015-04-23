@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -71,9 +70,11 @@ type
   function GetSpecialFolder(const ASpecialFolderID: Integer): string;
   function GetWindowHandle(const chCaption: PChar; const bPartial: Boolean = False): HWND;
   function InvertString(sStr: string): string;
+  function Is64Bit_OS: Boolean;
   function IsConnected: boolean;
   function IsGuiRunning(var hRgui: HWND; var sCaption: string; var iRecognitionCaption, iRecognitionType: integer): Boolean;
   function IsValidNumber_RVersion(s: string): boolean;
+  function IsURL(s: string): Boolean;
   function OpenCmdLine(const CmdLine: string; wWindowState: Word): Boolean;
   function OpenUrl(const sURL: string): Boolean;
   function OpenUrlByIEShell(const sURL: string): Boolean;
@@ -92,6 +93,7 @@ type
   function StrippedOfNonAscii(const s: string): string;
   procedure CaptureConsoleOutput(const ACommand, AParameters: String; AMemo: TMemo);
   procedure DeleteDir(sDir: string);
+  procedure DeleteFilesOfPath(path: string);
   procedure GetRInfo(sTmp: string; var sRPackage, sRObject: string);
   procedure OpenFile(sFileName: string);
   procedure OpenProgram(sProg, sParams: string);
@@ -230,8 +232,8 @@ function FileToString(sPath: string): string;
 var
   tfTmp: TextFile;
 
-  sContent,
-   sRead  : string;
+  sRead,
+    sContent: string;
 
 begin
     AssignFile(tfTmp,
@@ -500,6 +502,7 @@ var
 begin
   StrPCopy(aTemp,
            sFileName);
+
   ShellExecute(Application.Handle,
                'open',
                aTemp,
@@ -830,123 +833,46 @@ begin
             iDest)
 end;
 
-{
-// Do not get the latest version!
-function GetRegistryValue(KeyName: string): string;
-
-  // From http://stackoverflow.com/questions/2863931/problems-reading-registry-from-delphi-7-on-windows-7-64-bit
-  function Is64BitOS: Boolean;
-  type
-    TIsWow64Process = function(Handle: THandle; var IsWow64: BOOL): BOOL; stdcall;
-  var
-    hKernel32     : Integer;
-    IsWow64Process: TIsWow64Process;
-    IsWow64       : BOOL;
-
-  begin
-    // we can check if the operating system is 64-bit by checking whether
-    // we are running under Wow64 (we are 32-bit code). We must check if this
-    // function is implemented before we call it, because some older versions
-    // of kernel32.dll (eg. Windows 2000) don't know about it.
-    // see http://msdn.microsoft.com/en-us/library/ms684139%28VS.85%29.aspx
-    Result:= False;
-    hKernel32:= LoadLibrary('kernel32.dll');
-    if (hKernel32 = 0) then RaiseLastOSError;
-    @IsWow64Process:= GetProcAddress(hkernel32, 'IsWow64Process');
-    if Assigned(IsWow64Process) then begin
-      IsWow64:= False;
-      if (IsWow64Process(GetCurrentProcess, IsWow64)) then begin
-        Result:= IsWow64;
-      end
-      else RaiseLastOSError;
-    end;
-    FreeLibrary(hKernel32);
-  end;
+// Based in http://stackoverflow.com/questions/2863931/problems-reading-registry-from-delphi-7-on-windows-7-64-bit
+function Is64Bit_OS: Boolean;
+type
+  TIsWow64Process = function(Handle: THandle;
+                             var IsWow64: BOOL): BOOL; stdcall;
 
 var
-  i,
-   iTmp,
-   iMajor,
-   iControl: integer;
-  Reg      : TRegistry;
-  sVal     : TStringList;
+  hKernel32     : Integer;
+  IsWow64Process: TIsWow64Process;
+  IsWow64       : BOOL;
 
 begin
-  Result:= '';
-  Reg   := nil;
-  sVal  := nil;
-  try
-    if Is64BitOS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
-                 else Reg:= TRegistry.Create(KEY_READ);
-    sVal:=TStringList.Create;
-    Reg.RootKey:= HKEY_LOCAL_MACHINE;
-    Reg.OpenKeyReadOnly(KeyName);
-    Reg.GetKeyNames(sVal);
-    Reg.CloseKey;
-    if (sVal.Count <> 0 ) then begin
-      sVal.CustomSort(SortInteger);
-      iControl:= 0;
-      iMajor  := 0;
-      for i:= 0 to sVal.Count - 1 do begin
-        iTmp:= StrToInt(StripNonConforming(sVal.Strings[i], ['0'..'9']));
-        if (iTmp > iControl) then begin
-          iControl:= iTmp;
-          iMajor  := i;
-        end;
-      end;
-      KeyName:= KeyName + '\' + sVal.Strings[iMajor];
-      Reg.OpenKeyReadOnly(KeyName);
-      Result:= Reg.ReadString('InstallPath');
-      Reg.CloseKey;
-    end;
-  finally
-    Reg.Free;
-    sVal.Free;
+  // we can check if the operating system is 64-bit by checking whether
+  // we are running under Wow64 (we are 32-bit code). We must check if this
+  // function is implemented before we call it, because some older versions
+  // of kernel32.dll (eg. Windows 2000) don't know about it.
+  // see http://msdn.microsoft.com/en-us/library/ms684139%28VS.85%29.aspx
+  Result:= False;
+
+  hKernel32:= LoadLibrary('kernel32.dll');
+
+  if (hKernel32 = 0) then RaiseLastOSError;
+
+  @IsWow64Process:= GetProcAddress(hkernel32,
+                                   'IsWow64Process');
+
+  if Assigned(IsWow64Process) then begin
+    IsWow64:= False;
+
+    if (IsWow64Process(GetCurrentProcess,
+                       IsWow64)) then begin
+      Result:= IsWow64;
+    end
+    else RaiseLastOSError;
   end;
+
+  FreeLibrary(hKernel32);
 end;
-}
 
 function GetRegistryValue(KeyName: string): string;
-
-  // Based in http://stackoverflow.com/questions/2863931/problems-reading-registry-from-delphi-7-on-windows-7-64-bit
-  function Is64BitOS: Boolean;
-  type
-    TIsWow64Process = function(Handle: THandle;
-                               var IsWow64: BOOL): BOOL; stdcall;
-
-  var
-    hKernel32     : Integer;
-    IsWow64Process: TIsWow64Process;
-    IsWow64       : BOOL;
-
-  begin
-    // we can check if the operating system is 64-bit by checking whether
-    // we are running under Wow64 (we are 32-bit code). We must check if this
-    // function is implemented before we call it, because some older versions
-    // of kernel32.dll (eg. Windows 2000) don't know about it.
-    // see http://msdn.microsoft.com/en-us/library/ms684139%28VS.85%29.aspx
-    Result:= False;
-
-    hKernel32:= LoadLibrary('kernel32.dll');
-
-    if (hKernel32 = 0) then RaiseLastOSError;
-
-    @IsWow64Process:= GetProcAddress(hkernel32,
-                                     'IsWow64Process');
-
-    if Assigned(IsWow64Process) then begin
-      IsWow64:= False;
-
-      if (IsWow64Process(GetCurrentProcess,
-                         IsWow64)) then begin
-        Result:= IsWow64;
-      end
-      else RaiseLastOSError;
-    end;
-
-    FreeLibrary(hKernel32);
-  end;
-
 var
   i,
    iMajor: integer;
@@ -963,8 +889,8 @@ begin
   sVal  := nil;
 
   try
-    if Is64BitOS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
-                 else Reg:= TRegistry.Create(KEY_READ);
+    if Is64Bit_OS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
+                  else Reg:= TRegistry.Create(KEY_READ);
 
     sVal:= TStringList.Create;
 
@@ -1002,27 +928,6 @@ begin
     sVal.Free;
   end;
 end;
-
-{
-procedure GetSubKeys(RootKey: HKEY; const Key: string; var SubKeys: TStringList);
-var
-  Registry: TRegistry;
-
-begin
-  Registry := TRegistry.Create;
-  try
-    Registry.RootKey := RootKey;
-    Registry.OpenKeyReadOnly(Key);
-    try
-      Registry.GetKeyNames(SubKeys);
-    except
-      ; //TODO
-    end;
-  finally
-    Registry.Free;
-  end;
-end;
-}
 
 function GetAssociation(const DocFileName: string): string;
 var
@@ -1418,124 +1323,113 @@ procedure CaptureConsoleOutput(const ACommand, AParameters: String; AMemo: TMemo
    dRunning: DWord;
  begin
    saSecurity.nLength := SizeOf(TSecurityAttributes);
-   saSecurity.bInheritHandle := True;  
-   saSecurity.lpSecurityDescriptor := nil; 
- 
+   saSecurity.bInheritHandle := True;
+   saSecurity.lpSecurityDescriptor := nil;
+
    if CreatePipe(hRead, hWrite, @saSecurity, 0) then
-   begin    
+   begin
      FillChar(suiStartup, SizeOf(TStartupInfo), #0);
      suiStartup.cb := SizeOf(TStartupInfo);
      suiStartup.hStdInput := hRead;
      suiStartup.hStdOutput := hWrite;
      suiStartup.hStdError := hWrite;
-     suiStartup.dwFlags := STARTF_USESTDHANDLES or STARTF_USESHOWWINDOW;    
-     suiStartup.wShowWindow := SW_HIDE; 
- 
+     suiStartup.dwFlags := STARTF_USESTDHANDLES or STARTF_USESHOWWINDOW;
+     suiStartup.wShowWindow := SW_HIDE;
+
      if CreateProcess(nil, PChar(ACommand + ' ' + AParameters), @saSecurity,
        @saSecurity, True, NORMAL_PRIORITY_CLASS, nil, nil, suiStartup, piProcess)
        then
      begin
        repeat
-         dRunning  := WaitForSingleObject(piProcess.hProcess, 100);        
-         Application.ProcessMessages(); 
+         dRunning  := WaitForSingleObject(piProcess.hProcess, 100);
+         Application.ProcessMessages();
          repeat
            dRead := 0;
-           ReadFile(hRead, pBuffer[0], CReadBuffer, dRead, nil);          
-           pBuffer[dRead] := #0; 
- 
+           ReadFile(hRead, pBuffer[0], CReadBuffer, dRead, nil);
+           pBuffer[dRead] := #0;
+
            OemToAnsi(pBuffer, pBuffer);
            AMemo.Lines.Add(String(pBuffer));
-         until (dRead < CReadBuffer);      
+         until (dRead < CReadBuffer);
        until (dRunning <> WAIT_TIMEOUT);
        CloseHandle(piProcess.hProcess);
-       CloseHandle(piProcess.hThread);    
-     end; 
- 
+       CloseHandle(piProcess.hThread);
+     end;
+
      CloseHandle(hRead);
      CloseHandle(hWrite);
    end;
 end;
 
-end.
-
-{
-function AppDataFolder: string;
+procedure DeleteFilesOfPath(path: string);
 var
-  malloc: IMalloc;
-  pidl  : PItemIDList;
+  SR: TSearchRec;
+  i: integer;
 
 begin
-  SHGetSpecialFolderLocation(0,
-                             CSIDL_APPDATA,
-                             pidl);
+  i:= FindFirst(path + '\*.*',
+                faAnyFile,
+                SR);
 
-  SetLength(Result,
-            MAX_PATH);
+  while i = 0 do begin
+      if (SR.Attr and faDirectory) <> faDirectory then
+        if not DeleteFile(path + '\' + SR.Name) then
+          ShowMessage('Error deleting ' + path);
 
-  SHGetPathFromIDList(pidl,
-                      pchar(Result));
-
-  SetLength(Result,
-            StrLen(pchar(Result)));
-
-  OLECheck(SHGetMalloc(malloc));
-
-  if Assigned(pidl) then Malloc.Free(pidl);
-end;
-}
-
-{
-// From: http://stackoverflow.com/questions/3684677/remove-null-characters-from-widestring-in-delphi-2006
-procedure RemoveNullCharacters(var s: string);
-var
-  i,
-   j: Integer;
-
-begin
-  j:= 0;
-
-  for i:= 1 to Length(s) do
-    if (s[i] <> #0) then begin
-      Inc(j);
-      s[j]:= s[i];
-    end;
-
-  if (j < Length(s)) then
-    SetLength(s,
-              j);
+      i:= FindNext(SR);
+  end;
 end;
 
-function LastCharPos(const S: string;
-                     const Chr: char): integer;
+function IsUrl(S: string): Boolean;
+const
+cbad = ';*<>{}[]|\()^!';
+
 var
-  i: Integer;
+  p,
+   x,
+   c,
+   count,
+   i: integer;
 
 begin
-  Result:= 0;
-  for i:= length(S) downto 1 do
-    if (S[i] = Chr) then
-    begin
-      Result:= i;
+  Result:= False;
+
+  if (Length(S) > 5) and (S[Length(S)] <> '.') and (Pos(S, '..') = 0) then begin
+    for i := Length(cbad) downto 1 do
+      if Pos(cbad[i], S) > 0 then Exit;
+
+    for i:= 1 to Length(S) do
+      if (Ord(S[i]) < 33) or (Ord(S[i]) > 126) then Exit;
+
+    if ((Pos('www.', LowerCase(S)) = 1) and (Pos('.', Copy(S, 5, Length(s))) > 0) and (Length(S) > 7)) or ((Pos('news:', LowerCase(S)) = 1) and (Length(S) > 7) and (Pos('.', Copy(S, 5, Length(S))) > 0)) then begin
+    end
+    else if ((Pos('mailto:', LowerCase(S)) = 1) and (Length(S) > 12) and (Pos('@', S) > 8) and (Pos('.', S) > 10) and (Pos('.', S) > (Pos('@', S) +1))) or ((Length(S) > 6) and (Pos('@', S) > 1) and (Pos('.', S) > 4) and (Pos('.', S) > (Pos('@', S) +1))) then begin
+      Result:= True;
       Exit;
+    end
+    else if ((Pos('http://', LowerCase(S)) = 1) and (Length(S) > 10) and (Pos('.', S) > 8)) or ((Pos('ftp://', LowerCase(S)) = 1) and (Length(S) > 9) and (Pos('.', S) > 7)) then begin
+      Result:= True;
+      Exit;
+    end
+    else Result:= True;
+
+    for Count:= 1 to 4 do begin
+      p := Pos('.', S) - 1;
+
+      if p < 0 then p := Length(S);
+
+      Val(Copy(S, 1, p), x, c);
+
+      if ((c <> 0) or (x < 0) or (x > 255) or (p > 3)) then begin
+        Result:= False;
+        Break;
+      end;
+
+      Delete(S, 1, p + 1);
     end;
+
+    if (S <> '') then Result:= False;
+  end;
 end;
-}
 
-{
-function MultiStringReplace(OldPattern,
-                            NewPattern: array of string;
-                            Flags:TReplaceFlags): string;
-var
-  i: Integer;
-
-begin
-  if (Length(OldPattern) <> Length(NewPattern)) then Exit;
-
-  for i:= Low(OldPattern) to High(OldPattern) do
-    Result:= StringReplace(Result,
-                           OldPattern[i],
-                           NewPattern[i],
-                           Flags);
-end;
-}
-
+end.

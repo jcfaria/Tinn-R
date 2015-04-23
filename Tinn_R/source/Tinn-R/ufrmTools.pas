@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -55,7 +54,7 @@ uses
   ShellCtrls, ExtCtrls, JvDockTree, JvDockControlForm, 
   JvComponentBase, SynEditKeyCmds, JvgPage, Clipbrd, JvExControls,
   JvPoweredBy, JvExComCtrls, JvHotKey, SynEditMiscClasses, JvStatusBar,
-  JvExButtons, JvBitBtn, Mask;
+  JvExButtons, JvBitBtn, Mask, ATBinHex;
 
 type
   TfrmTools = class(TForm)
@@ -296,6 +295,7 @@ type
     pmenProjectSaveAs: TTBItem;
     pmenProjNew: TTBItem;
     pmenProjOpen: TTBItem;
+    pmenProjOpenDemo: TTBItem;
     ScrollBox1: TScrollBox;
     ScrollBox2: TScrollBox;
     ScrollBox3: TScrollBox;
@@ -334,8 +334,6 @@ type
     TBItem13: TTBItem;
     TBItem14: TTBItem;
     TBItem15: TTBItem;
-    TBItem16: TTBItem;
-    TBItem17: TTBItem;
     TBItem18: TTBItem;
     TBItem19: TTBItem;
     TBItem2: TTBItem;
@@ -483,6 +481,9 @@ type
     TBToolbar4: TTBToolbar;
     tvProject: TTreeView;
     tvSearch: TTreeView;
+    tbsHexViewer: TTabSheet;
+    ATBinHex: TATBinHex;
+    rgHexViewerMode: TRadioGroup;
 
     procedure bbtExplorerAddFavoritesClick(Sender: TObject);
     procedure bbtExplorerRemoveFavoritesClick(Sender: TObject);
@@ -515,8 +516,6 @@ type
     procedure fcbbToolsWinExplorerChange(Sender: TObject);
     procedure fcbbToolsWorkExplorerChange(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure jvflbWinExplorerDblClick(Sender: TObject);
@@ -570,13 +569,18 @@ type
     procedure tvSearchDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure tvSearchEndDrag(Sender, Target: TObject; X, Y: Integer);
     procedure tvSearchStartDrag(Sender: TObject; var DragObject: TDragObject);
-    
+    procedure rgHexViewerModeClick(Sender: TObject);
+    procedure pgResultsChange(Sender: TObject);
+    procedure FormHide(Sender: TObject);
+
   private
     { Private declarations }
     procedure AdjustColumnWidths(DBGrid: TDBGrid);
 
   public
     { Public declarations }
+    iSize: integer;
+
     procedure DoProjectOpenNode;
   end;
 
@@ -637,13 +641,13 @@ end;
 
 procedure TfrmTools.bbtWinExplorerFilterRefreshClick(Sender: TObject);
 begin
-  if (trim(edWinExplorerFilter.Text) = '*.*') then jvflbWinExplorer.Mask:= ''
+  if (trim(edWinExplorerFilter.Text) = '*.*') then jvflbWinExplorer.Mask:= '*.*'
                                               else jvflbWinExplorer.Mask:= trim(edWinExplorerFilter.Text);
 end;
 
 procedure TfrmTools.bbtWorkExplorerFileterRefreshClick(Sender: TObject);
 begin
-  if (trim(edWorkExplorerFilter.Text) = '*.*') then jvflbWorkExplorer.Mask:= ''
+  if (trim(edWorkExplorerFilter.Text) = '*.*') then jvflbWorkExplorer.Mask:= '*.*'
                                                else jvflbWorkExplorer.Mask:= trim(edWorkExplorerFilter.Text);
 end;
 
@@ -833,7 +837,7 @@ procedure TfrmTools.edWinExplorerFilterKeyDown(Sender: TObject;
 begin
   case Key of
     VK_RETURN: if (trim(edWinExplorerFilter.Text) = '*.*') then
-                 jvflbWinExplorer.Mask:= ''
+                 jvflbWinExplorer.Mask:= '*.*'
                else
                  jvflbWinExplorer.Mask:= trim(edWinExplorerFilter.Text);
     VK_ESCAPE: begin
@@ -849,7 +853,7 @@ procedure TfrmTools.edWorkExplorerFilterKeyDown(Sender: TObject;
 begin
   case Key of
     VK_RETURN: if (trim(edWorkExplorerFilter.Text) = '*.*') then
-                 jvflbWorkExplorer.Mask:= ''
+                 jvflbWorkExplorer.Mask:= '*.*'
                else
                  jvflbWorkExplorer.Mask:= trim(edWorkExplorerFilter.Text);
     VK_ESCAPE: begin
@@ -864,7 +868,7 @@ begin
   with jvflbWinExplorer do begin
     Items.BeginUpdate;
     if (trim(fcbbToolsWinExplorer.Mask) = '*.*') then
-      jvflbWinExplorer.Mask:= ''
+      jvflbWinExplorer.Mask:= '*.*'
     else
       jvflbWinExplorer.Mask:= trim(fcbbToolsWinExplorer.Mask);
     Items.EndUpdate;
@@ -876,7 +880,7 @@ begin
   with jvflbWorkExplorer do begin
     Items.BeginUpdate;
     if (trim(fcbbToolsWorkExplorer.Mask) = '*.*') then
-      jvflbWorkExplorer.Mask:= ''
+      jvflbWorkExplorer.Mask:= '*.*'
     else
       jvflbWorkExplorer.Mask:= trim(fcbbToolsWorkExplorer.Mask);
     Items.EndUpdate;
@@ -891,19 +895,37 @@ begin
   bbtRFilterRefresh.Caption:= '';
 end;
 
-procedure TfrmTools.FormCloseQuery(Sender: TObject;
-                                   var CanClose: Boolean);
+procedure TfrmTools.FormHide(Sender: TObject);
 begin
-  frmTinnMain.actToolsVisibleExecute(nil);
-end;
+  with frmTinnMain do begin
+    if not actToolsVisible.Checked then Exit;  // LoadDockTreeFromAppStorage call FormHide when starting and the form is not visible.
+                                               // Do not remove from here!
 
-procedure TfrmTools.FormCreate(Sender: TObject);
-begin
-  JvDockClientTools.DockStyle:= frmTinnMain.JvDockVSNetStyle;
-  ManualDock(frmTinnMain.JvDockServer.LeftDockPanel,
-             nil,
-             AlClient);
-  ShowDockForm(Self);
+    actToolsVisible.Checked:= False;  // It is necessary here due the user can close the form manually pressing the x icon.
+
+    with JvDockServer do begin
+      with LeftDockPanel do  // Left
+        if ContainsControl(frmTools) then begin
+          iSize:= Width;
+          Exit;
+        end;
+      with TopDockPanel do  // Top
+        if ContainsControl(frmTools) then begin
+          iSize:= Height;
+          Exit;
+        end;
+      with RightDockPanel do // Right
+        if ContainsControl(frmTools) then begin
+          iSize:= Width;
+          Exit;
+        end;
+      with BottomDockPanel do // Bottom
+        if ContainsControl(frmTools) then begin
+          iSize:= Height;
+          Exit;
+        end;
+    end;
+  end;
 end;
 
 procedure TfrmTools.FormResize(Sender: TObject);
@@ -921,6 +943,8 @@ begin
   AdjustColumnWidths(dbgCompletion);
   AdjustColumnWidths(dbgComments);
 
+  frmTinnMain.UpdateHexViewer;
+  
   AlphaBlendValue:= frmTinnMain.iAlphaBlendValue;
 end;
 
@@ -1060,12 +1084,12 @@ begin
   with stbRMirrors.Canvas do begin
        case Panel.Index of
          0: begin
-              //Brush.Color:= cTmp;
+              Brush.Color:= clCream;
               Font.Color := clGreen;
               //Font.Style := [fsBold];
            end;
          1: begin
-              //Brush.Color:= clYellow;
+              Brush.Color:= clCream;
               Font.Color := clGreen;
               Font.Style := [fsBold];
            end;
@@ -1483,7 +1507,7 @@ procedure TfrmTools.lvRexplorerStartDrag(Sender: TObject;
               '''' +
               sTmp +
               '''' +
-              ', sep=''''))';
+              ', sep=''\\''))';
    end;
 
 var
@@ -1553,12 +1577,28 @@ begin
     else if (ActivePage = tbsProject)      then tvProject.SetFocus;
 end;
 
+procedure TfrmTools.pgResultsChange(Sender: TObject);
+begin
+  frmTinnMain.UpdateHexViewer;
+end;
+
 procedure TfrmTools.pgToolsChange(Sender: TObject);
 begin
   AdjustColumnWidths(dbgShortcuts);
   AdjustColumnWidths(dbgCompletion);
   AdjustColumnWidths(dbgRmirrors);
   AdjustColumnWidths(dbgComments);
+end;
+
+procedure TfrmTools.rgHexViewerModeClick(Sender: TObject);
+begin
+  case rgHexViewerMode.ItemIndex of
+    0: ATBinHex.Mode:= vbmodeText;    // Text
+    1: ATBinHex.Mode:= vbmodeBinary;  // Binary
+    2: ATBinHex.Mode:= vbmodeHex;     // Hex
+    3: ATBinHex.Mode:= vbmodeUnicode; // Unicode
+    4: ATBinHex.Mode:= vbmodeUHex;    // Unicode/Hex
+  end;
 end;
 
 procedure TfrmTools.LabelClick(Sender: TObject);

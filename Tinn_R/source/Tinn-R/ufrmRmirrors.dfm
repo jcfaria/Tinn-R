@@ -8,7 +8,7 @@ object frmRmirrors: TfrmRmirrors
   Caption = 'R mirrors (xml based)'
   ClientHeight = 376
   ClientWidth = 614
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -29,6 +29,8 @@ object frmRmirrors: TfrmRmirrors
     Height = 20
     Align = alTop
     BevelOuter = bvNone
+    Color = 16250871
+    ParentBackground = False
     TabOrder = 10
     object DBNavigator1: TDBNavigator
       Left = 0
@@ -80,7 +82,7 @@ object frmRmirrors: TfrmRmirrors
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -102,7 +104,7 @@ object frmRmirrors: TfrmRmirrors
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -124,7 +126,7 @@ object frmRmirrors: TfrmRmirrors
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -318,6 +320,7 @@ object frmRmirrors: TfrmRmirrors
     Top = 357
     Width = 614
     Height = 19
+    Color = 16250871
     Panels = <
       item
         Width = 50
@@ -405,6 +408,7 @@ object frmRmirrors: TfrmRmirrors
       item
         Expanded = False
         FieldName = 'Code'
+        Width = 64
         Visible = True
       end>
   end

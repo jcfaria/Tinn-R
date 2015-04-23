@@ -1,0 +1,21 @@
+TSpellChecker revision history
+
+ver 2.0 (30-Apr-98)
+  - component is fully rewritten to support multilanguage spelling check.
+
+ver 1.5 (23-Dec-97)
+  - non-modal behavior of dialog window support.
+  - support of MDI in non-modal mode.
+  - support for HTML (< >, <% %>, <!-- --> brackets).
+
+ver. 1.0.1 (29-Oct-97)
+  - Langs unit was introduced, which contains declaration of TLanguage,
+    property editor and some useful functions.
+  - GetSpellLanguages function added to Spellers unit to get list
+    of installed spell-checkers.
+  - errors were corrected.
+  - as many users asked, demo included.
+  - flat help included to avoid possible font problems.
+
+ver. 1.0 (19-Oct-97)
+  - original component.

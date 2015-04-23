@@ -8,7 +8,7 @@ object frmColors: TfrmColors
   Caption = 'Highlighters settings'
   ClientHeight = 537
   ClientWidth = 962
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -24,8 +24,9 @@ object frmColors: TfrmColors
   object Bevel1: TBevel
     Left = 97
     Top = 432
-    Width = 365
+    Width = 366
     Height = 65
+    Shape = bsFrame
   end
   object lWarning_1: TLabel
     Left = 103
@@ -416,6 +417,7 @@ object frmColors: TfrmColors
       Font.Style = []
       TabOrder = 0
       OnClick = synSampleClick
+      OnKeyPress = synSampleKeyPress
       BorderStyle = bsNone
       Gutter.Font.Charset = DEFAULT_CHARSET
       Gutter.Font.Color = clWindowText

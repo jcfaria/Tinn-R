@@ -7,7 +7,7 @@ object frmLatexDimensional: TfrmLatexDimensional
   Caption = 'Insert dimensional'
   ClientHeight = 190
   ClientWidth = 270
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

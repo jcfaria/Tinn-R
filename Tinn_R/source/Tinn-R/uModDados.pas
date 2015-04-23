@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -990,12 +989,12 @@ begin
         }
         with cdTmp do begin
           Append;
-          Fields[0].AsString:= slTmp2.Strings[i];
-          Fields[1].AsString:= slTmp2.Strings[i+1];
-          Fields[2].AsString:= slTmp2.Strings[i+2];
-          Fields[3].AsString:= slTmp2.Strings[i+3];
-          Fields[4].AsString:= slTmp2.Strings[i+4];
-          Fields[5].AsString:= slTmp2.Strings[i+5];
+          Fields[0].AsString:= Utf8ToAnsi(slTmp2.Strings[i]);
+          Fields[1].AsString:= Utf8ToAnsi(slTmp2.Strings[i+1]);
+          Fields[2].AsString:= Utf8ToAnsi(slTmp2.Strings[i+2]);
+          Fields[3].AsString:= Utf8ToAnsi(slTmp2.Strings[i+3]);
+          Fields[4].AsString:= Utf8ToAnsi(slTmp2.Strings[i+4]);
+          Fields[5].AsString:= Utf8ToAnsi(slTmp2.Strings[i+5]);
           Post;
         end;
 

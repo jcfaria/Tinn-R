@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -101,6 +100,7 @@ type
     cbComAutoDetect_Language: TCheckBox;
     cbCommands: TComboBox;
     cbComPriority_Line: TCheckBox;
+    cbConnectionBeepOnError: TCheckBox;
     cbDOSMinimizedAlways: TCheckBox;
     cbDVIOpenAlways: TCheckBox;
     cbGutterFont: TCheckBox;
@@ -120,6 +120,7 @@ type
     cbRestoreIniDock: TCheckBox;
     cbRExampleSelectedWord: TCheckBox;
     cbRFixVariable: TCheckBox;
+    cbRget_Info: TCheckBox;
     cbRguiOrganizeAutomatically: TCheckBox;
     cbRguiReturnFocus: TCheckBox;
     cbRGuiStartClose: TCheckBox;
@@ -128,10 +129,12 @@ type
     cbRListAllObjects: TCheckBox;
     cbRListVariableNames: TCheckBox;
     cbRListVariableStructure: TCheckBox;
+    cbRmirros_Update: TCheckBox;
     cbRPackages: TCheckBox;
     cbRPlotVariable: TCheckBox;
     cbRPrintVariableContent: TCheckBox;
     cbRRemoveAllObjects: TCheckBox;
+    cbRSendAll: TCheckBox;
     cbRSendBlockMarked: TCheckBox;
     cbRSendClipboard: TCheckBox;
     cbRSendContiguous: TCheckBox;
@@ -148,14 +151,23 @@ type
     cbRSendSourceFile: TCheckBox;
     cbRSendSourceSelection: TCheckBox;
     cbRSendSweave: TCheckBox;
+    cbRSetWorkDir_Starting: TCheckBox;
     cbRSetWorkDirectory: TCheckBox;
+    cbRSmartSend: TCheckBox;
+    cbRsvSocket_Connect: TCheckBox;
     cbRTCPConnection: TCheckBox;
     cbRTCPIPConsoleEcho: TCheckBox;
     cbRTCPIPConsoleUse: TCheckBox;
+    cbRtermCanFloat: TCheckBox;
     cbRTermStartClose: TCheckBox;
+    cbRTinnRcom_Install: TCheckBox;
+    cbRTinnRcom_Load: TCheckBox;
+    cbScrollSendingLines: TCheckBox;
+    cbToolsCanFloat: TCheckBox;
     cbUndoAfterSave: TCheckBox;
     cInsertCaret: TComboBox;
     ckAltSetsColumnMode: TCheckBox;
+    ckAutocomplete: TCheckBox;
     ckAutoIndent: TCheckBox;
     ckAutoSizeMaxWidth: TCheckBox;
     ckDisableScrollArrows: TCheckBox;
@@ -202,8 +214,8 @@ type
     edPathTinnRcom_Installed: TEditAlign;
     edPathTxt2tags_Converter: TEditAlign;
     edPathTxt2tags_Interpreter: TEditAlign;
-    edReformatR: TEditAlign;
-    edReformatRd: TEditAlign;
+    edFormatR: TEditAlign;
+    edFormatRd: TEditAlign;
     edtIPHostLocal: TEdit;
     edtIPHostRemote: TEdit;
     edtIPPortLocal: TEdit;
@@ -245,7 +257,6 @@ type
     gpbPDFParameters: TGroupBox;
     gpbPDFParametersBibtex: TGroupBox;
     gpbPDFParametersSingle: TGroupBox;
-    gpbRExplorer: TGroupBox;
     gpbRguiReturnFocus: TGroupBox;
     gpbRServerTCPIP: TGroupBox;
     gpbRTCPIPConsoleUse: TGroupBox;
@@ -253,7 +264,6 @@ type
     gpbRTriggers: TGroupBox;
     GrayText1: TMenuItem;
     GroupBox1: TGroupBox;
-    GroupBox10: TGroupBox;
     GroupBox11: TGroupBox;
     GroupBox12: TGroupBox;
     GroupBox13: TGroupBox;
@@ -266,6 +276,7 @@ type
     GroupBox2: TGroupBox;
     GroupBox20: TGroupBox;
     GroupBox21: TGroupBox;
+    GroupBox22: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
@@ -304,6 +315,8 @@ type
     Label24: TLabel;
     Label25: TLabel;
     Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -320,7 +333,7 @@ type
     lbTransparency: TLabel;
     lvKeystrokes: TListView;
     Memo1: TMemo;
-    memReformat: TMemo;
+    memFormatR: TMemo;
     Menu1: TMenuItem;
     MEnu2: TMenuItem;
     mFiles: TMemo;
@@ -341,19 +354,12 @@ type
     pmAppOptions: TPopupMenu;
     pnlCommands: TPanel;
     pRightEdgeBack: TPanel;
-    rdgConnectionBeepOnError: TRadioGroup;
     rdgDataCompletion_Pattern: TRadioGroup;
     rdgLineWraping: TRadioGroup;
     rdgRArchitecture: TRadioGroup;
-    rdgRComments: TRadioGroup;
     rdgReformatRSplit: TRadioGroup;
-    rdgRget_Info: TRadioGroup;
     rdgRguiRecognitionCaption: TRadioGroup;
     rdgRguiRecognitionType: TRadioGroup;
-    rdgRmirros_Update: TRadioGroup;
-    rdgRScrollSendingLines: TRadioGroup;
-    rdgRSmartSend: TRadioGroup;
-    rdgRsvSocketConnect: TRadioGroup;
     rdgRTCPIPType: TRadioGroup;
     rdgRtermBeepOnError: TRadioGroup;
     rdgRtermClose: TRadioGroup;
@@ -362,8 +368,7 @@ type
     rdgRtermIOSyntax: TRadioGroup;
     rdgRtermLogSyntax: TRadioGroup;
     rdgRtermType: TRadioGroup;
-    rdgRTinnRcomInstall: TRadioGroup;
-    rdgRTinnRcomLoad: TRadioGroup;
+    rdgRtermWidth: TRadioGroup;
     rdgRUseLatest: TRadioGroup;
     rgRguiTinnRDisposition: TRadioGroup;
     Scrollbar1: TMenuItem;
@@ -393,8 +398,8 @@ type
     tbsAppPathR: TTabSheet;
     tbsAppPdfLatex: TTabSheet;
     tbsAppRecognitionRgui: TTabSheet;
-    tbsAppReformatR: TTabSheet;
-    tbsAppReformatRd: TTabSheet;
+    tbsAppFormatR: TTabSheet;
+    tbsAppFormatRd: TTabSheet;
     tbsAppResourcesR: TTabSheet;
     tbsAppRTinnRcom: TTabSheet;
     tbsAppServerR: TTabSheet;
@@ -408,6 +413,9 @@ type
     Window1: TMenuItem;
     WindowFrame1: TMenuItem;
     WindowText1: TMenuItem;
+    GroupBox10: TGroupBox;
+    cbNotification: TCheckBox;
+    cbNotification_US: TCheckBox;
 
     procedure bbHelpClick(Sender: TObject);
     procedure bbtConPathDeplateClick(Sender: TObject);
@@ -460,6 +468,7 @@ type
     procedure tbLastSearchChange(Sender: TObject);
     procedure tbRguiTinnRProportionChange(Sender: TObject);
     procedure tbTransparencyPosChange(Sender: TObject);
+    procedure cbNotificationClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -579,6 +588,9 @@ end;
 
 procedure TfrmAppOptions.btnFontClick(Sender: TObject);
 begin
+  with fdAppOptions do
+    Options:= Options - [fdEffects];
+
   fdAppOptions.Font.Assign(labFont.Font);
 
   if fdAppOptions.Execute then
@@ -598,6 +610,9 @@ end;
 
 procedure TfrmAppOptions.btnGutterFontClick(Sender: TObject);
 begin
+  with fdAppOptions do
+    Options:= Options + [fdEffects];
+
   fdAppOptions.Font.Assign(lblGutterFont.Font);
 
   if fdAppOptions.Execute then
@@ -771,6 +786,26 @@ begin
 
   if (lvKeystrokes.Items.Count > 0) then lvKeystrokes.Items[0].Selected:= True;
 
+  with frmTinnMain do begin
+    // Files
+    mFiles.Color     := clBGApplication;
+    mFiles.Font.Color:= clFGApplication;
+
+    // Editor
+    lvKeystrokes.Color     := clBGApplication;
+    lvKeystrokes.Font.Color:= clFGApplication;
+
+    // Reformat
+    edFormatR.Color     := clBGApplication;
+    edFormatR.Font.Color:= clFGApplication;
+
+    memFormatR.Color     := clBGApplication;
+    memFormatR.Font.Color:= clFGApplication;
+
+    edFormatRd.Color     := clBGApplication;
+    edFormatRd.Font.Color:= clFGApplication;
+  end;
+
   AlphaBlendValue:= frmTinnMain.iAlphaBlendValue;
 
   // To avoid the function GetRegistryValue runs many times
@@ -787,7 +822,7 @@ begin
                            'R',
                            'Rgui',
                            'Rterm',
-                           'Reformat',
+                           'Format',
                            'Processing',
                            'Conversion',
                            'Latex']) of
@@ -1085,6 +1120,20 @@ begin
   if (Key = SYNEDIT_RETURN) then btnUpdateKey.Click;
 end;
 
+procedure TfrmAppOptions.cbNotificationClick(Sender: TObject);
+begin
+  with cbNotification do begin
+    if Checked then
+      with cbNotification_US do
+        Enabled:= True
+    else
+      with cbNotification_US do begin
+        Checked:= False;
+        Enabled:= False;
+      end;
+  end;
+end;
+
 procedure TfrmAppOptions.bbtPDFParSingleClick(Sender: TObject);
 begin
   edParPDFSingle.Text:= 'pdflatex -c-style-errors'
@@ -1358,18 +1407,18 @@ var
 
 begin
   // Gutter
-  coTmp.Gutter.Visible        := ckGutterVisible.Checked;
   coTmp.Gutter.AutoSize       := ckGutterAutosize.Checked;
-  coTmp.Gutter.ShowLineNumbers:= ckGutterShowLineNumbers.Checked;
-  coTmp.Gutter.LeadingZeros   := ckGutterShowLeaderZeros.Checked;
-  coTmp.Gutter.ZeroStart      := ckGutterStartAtZero.Checked;
   coTmp.Gutter.Color          := sGutterColor.Brush.Color;
+  coTmp.Gutter.LeadingZeros   := ckGutterShowLeaderZeros.Checked;
+  coTmp.Gutter.ShowLineNumbers:= ckGutterShowLineNumbers.Checked;
   coTmp.Gutter.UseFontStyle   := cbGutterFont.Checked;
+  coTmp.Gutter.Visible        := ckGutterVisible.Checked;
+  coTmp.Gutter.ZeroStart      := ckGutterStartAtZero.Checked;
   coTmp.Gutter.Font.Assign(lblGutterFont.Font);
 
   // Right Edge
-  coTmp.RightEdge     := StrToIntDef(eRightEdge.Text,
-                                     80);
+  coTmp.RightEdge:= StrToIntDef(eRightEdge.Text,
+                                80);
   coTmp.RightEdgeColor:= sRightEdgeColor.Brush.Color;
 
   // Line Spacing
@@ -1377,8 +1426,8 @@ begin
                                        0);
 
   // Tab width
-  coTmp.TabWidth        := StrToIntDef(eTabWidth.Text,
-                                       2);
+  coTmp.TabWidth:= StrToIntDef(eTabWidth.Text,
+                               2);
 
   // Bookmarks
   coTmp.BookMarkOptions.EnableKeys   := True;
@@ -1389,7 +1438,6 @@ begin
 
   // Options
   vOptions:= coTmp.Options;  // Keep old values for unsupported options
-  SetFlag(eoTabIndent, ckWantTabs.Checked);
   SetFlag(eoAltSetsColumnMode, ckAltSetsColumnMode.Checked);
   SetFlag(eoAutoIndent, ckAutoIndent.Checked);
   SetFlag(eoAutoSizeMaxScrollWidth, ckAutoSizeMaxWidth.Checked);
@@ -1410,6 +1458,7 @@ begin
   SetFlag(eoShowSpecialChars, ckShowSpecialChars.Checked);
   SetFlag(eoSmartTabDelete, ckSmartTabDelete.Checked);
   SetFlag(eoSmartTabs, ckSmartTabs.Checked);
+  SetFlag(eoTabIndent, ckWantTabs.Checked);
   SetFlag(eoTabsToSpaces, ckTabsToSpaces.Checked);
   SetFlag(eoTrimTrailingSpaces, ckTrimTrailingSpaces.Checked);
   coTmp.Options:= vOptions;

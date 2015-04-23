@@ -4,9 +4,9 @@ object frmRterm: TfrmRterm
   AlphaBlend = True
   AlphaBlendValue = 200
   Caption = 'Rterm'
-  ClientHeight = 310
-  ClientWidth = 689
-  Color = clWindow
+  ClientHeight = 359
+  ClientWidth = 408
+  Color = 16250871
   Ctl3D = False
   DefaultMonitor = dmDesktop
   DockSite = True
@@ -21,16 +21,16 @@ object frmRterm: TfrmRterm
   OldCreateOrder = False
   Position = poMainFormCenter
   Visible = True
-  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnHide = FormHide
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pgRterm: TJvgPageControl
     Left = 0
-    Top = 0
-    Width = 689
-    Height = 310
+    Top = 26
+    Width = 408
+    Height = 333
     ActivePage = tbsIO
     Align = alClient
     Anchors = []
@@ -40,7 +40,8 @@ object frmRterm: TfrmRterm
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    TabHeight = 23
+    Style = tsFlatButtons
+    TabHeight = 18
     TabOrder = 0
     TabStop = False
     OnResize = pgRtermResize
@@ -81,8 +82,8 @@ object frmRterm: TfrmRterm
       object synIO: TSynEdit
         Left = 0
         Top = 0
-        Width = 681
-        Height = 277
+        Width = 400
+        Height = 305
         Align = alClient
         Constraints.MinHeight = 20
         Constraints.MinWidth = 50
@@ -97,6 +98,7 @@ object frmRterm: TfrmRterm
         TabOrder = 0
         OnEnter = synIOEnter
         OnKeyDown = synIOKeyDown
+        OnKeyPress = synIOKeyPress
         OnKeyUp = synIOKeyUp
         OnMouseUp = synIOMouseUp
         BorderStyle = bsNone
@@ -127,8 +129,8 @@ object frmRterm: TfrmRterm
       object synLog: TSynEdit
         Left = 0
         Top = 0
-        Width = 681
-        Height = 277
+        Width = 400
+        Height = 305
         Align = alClient
         Anchors = []
         Ctl3D = False
@@ -142,6 +144,7 @@ object frmRterm: TfrmRterm
         TabOrder = 0
         OnEnter = synLogEnter
         OnKeyDown = synLogKeyDown
+        OnKeyPress = synLogKeyPress
         OnKeyUp = synLogKeyUp
         OnMouseUp = synLogMouseUp
         BorderStyle = bsNone
@@ -164,224 +167,233 @@ object frmRterm: TfrmRterm
       end
     end
   end
-  object TBToolbarRterm: TTBToolbar
-    Left = 92
-    Top = 2
-    Width = 375
-    Height = 22
-    Caption = 'TBToolbarRterm'
-    Color = clBtnHighlight
-    Images = frmTinnMain.imlTinnR
-    TabOrder = 1
-    object TBItem7: TTBItem
-      Action = frmTinnMain.actRContTermStartClose
-    end
-    object TBSeparatorItem5: TTBSeparatorItem
-    end
-    object TBItem41: TTBItem
-      Action = frmTinnMain.actRContHelpSelectedWord
-    end
-    object TBItem40: TTBItem
-      Action = frmTinnMain.actRContExampleSelectedWord
-    end
-    object TBItem42: TTBItem
-      Action = frmTinnMain.actRContHelp
-    end
-    object TBSeparatorItem2: TTBSeparatorItem
-    end
-    object TBSubmenuItem10: TTBSubmenuItem
-      Caption = 'Edit'
-      ImageIndex = 276
-      object TBItem29: TTBItem
-        Action = frmTinnMain.actEditUndo
+  object TBDock1: TTBDock
+    Left = 0
+    Top = 0
+    Width = 408
+    Height = 26
+    object TBToolbarRterm: TTBToolbar
+      Left = 0
+      Top = 0
+      Align = alClient
+      BorderStyle = bsNone
+      Caption = 'TBToolbarRterm'
+      ChevronMoveItems = False
+      Color = 16250871
+      DockMode = dmCannotFloatOrChangeDocks
+      Images = frmTinnMain.imlTinnR
+      TabOrder = 0
+      object TBItem7: TTBItem
+        Action = frmTinnMain.actRContTermStartClose
       end
-      object TBItem28: TTBItem
-        Action = frmTinnMain.actEditRedo
+      object TBSeparatorItem5: TTBSeparatorItem
       end
-      object TBSeparatorItem4: TTBSeparatorItem
+      object TBItem41: TTBItem
+        Action = frmTinnMain.actRContHelpSelectedWord
       end
-      object TBItem32: TTBItem
-        Action = frmTinnMain.actEditCopy
+      object TBItem40: TTBItem
+        Action = frmTinnMain.actRContExampleSelectedWord
       end
-      object TBItem31: TTBItem
-        Action = frmTinnMain.actEditCut
+      object TBItem42: TTBItem
+        Action = frmTinnMain.actRContHelp
       end
-      object TBItem30: TTBItem
-        Action = frmTinnMain.actEditPaste
+      object TBSeparatorItem2: TTBSeparatorItem
       end
-      object TBSeparatorItem8: TTBSeparatorItem
-      end
-      object TBItem33: TTBItem
-        Action = frmTinnMain.actEditSelectAll
-      end
-    end
-    object TBSubmenuItem11: TTBSubmenuItem
-      Caption = 'File'
-      ImageIndex = 32
-      object TBSubmenuItem13: TTBSubmenuItem
-        Caption = 'IO'
-        ImageIndex = 244
-        object TBItem1: TTBItem
-          Action = frmTinnMain.actRtermIOSave
+      object TBSubmenuItem10: TTBSubmenuItem
+        Caption = 'Edit'
+        ImageIndex = 276
+        object TBItem29: TTBItem
+          Action = frmTinnMain.actEditUndo
         end
-        object TBItem2: TTBItem
-          Action = frmTinnMain.actRtermIOSaveAs
+        object TBItem28: TTBItem
+          Action = frmTinnMain.actEditRedo
         end
-        object TBItem6: TTBItem
-          Action = frmTinnMain.actRtermIOPrint
+        object TBSeparatorItem4: TTBSeparatorItem
+        end
+        object TBItem32: TTBItem
+          Action = frmTinnMain.actEditCopy
+        end
+        object TBItem31: TTBItem
+          Action = frmTinnMain.actEditCut
+        end
+        object TBItem30: TTBItem
+          Action = frmTinnMain.actEditPaste
+        end
+        object TBSeparatorItem8: TTBSeparatorItem
+        end
+        object TBItem33: TTBItem
+          Action = frmTinnMain.actEditSelectAll
         end
       end
-      object TBSubmenuItem12: TTBSubmenuItem
-        Caption = 'Log'
-        ImageIndex = 252
-        object TBItem37: TTBItem
-          Action = frmTinnMain.actRtermLogSave
+      object TBSubmenuItem11: TTBSubmenuItem
+        Caption = 'File'
+        ImageIndex = 32
+        object TBSubmenuItem13: TTBSubmenuItem
+          Caption = 'IO'
+          ImageIndex = 244
+          object TBItem1: TTBItem
+            Action = frmTinnMain.actRtermIOSave
+          end
+          object TBItem2: TTBItem
+            Action = frmTinnMain.actRtermIOSaveAs
+          end
+          object TBItem6: TTBItem
+            Action = frmTinnMain.actRtermIOPrint
+          end
         end
-        object TBItem36: TTBItem
-          Action = frmTinnMain.actRtermLogSaveAs
-        end
-        object TBItem35: TTBItem
-          Action = frmTinnMain.actRtermLogPrint
-        end
-      end
-    end
-    object TBSeparatorItem1: TTBSeparatorItem
-    end
-    object TBSubmenuItem9: TTBSubmenuItem
-      Caption = 'Clear'
-      ImageIndex = 20
-      object TBItem24: TTBItem
-        Action = frmTinnMain.actRtermIOClear
-      end
-      object TBItem34: TTBItem
-        Action = frmTinnMain.actRtermLogClear
-      end
-      object TBItem8: TTBItem
-        Action = frmTinnMain.actRtermIOandLogClear
-      end
-    end
-    object TBSubmenuItem8: TTBSubmenuItem
-      Caption = 'Focus'
-      ImageIndex = 274
-      object TBItem27: TTBItem
-        Action = frmTinnMain.actRtermEditorSetFocus
-      end
-      object TBItem26: TTBItem
-        Action = frmTinnMain.actRtermIOSetFocus
-      end
-      object TBItem25: TTBItem
-        Action = frmTinnMain.actRtermLogSetFocus
-      end
-    end
-    object TBSubmenuItem2: TTBSubmenuItem
-      Caption = 'Visualization: size'
-      ImageIndex = 248
-      object TBItem13: TTBItem
-        Action = frmTinnMain.actRtermMaximize
-      end
-      object TBItem12: TTBItem
-        Action = frmTinnMain.actRtermDivide
-      end
-      object TBItem11: TTBItem
-        Action = frmTinnMain.actRtermMinimize
-      end
-    end
-    object TBSubmenuItem1: TTBSubmenuItem
-      Caption = 'Visualization: split'
-      ImageIndex = 255
-      object TBItem10: TTBItem
-        Action = frmTinnMain.actRtermIOSplitHorizontal
-      end
-      object TBItem9: TTBItem
-        Action = frmTinnMain.actRtermIOSplitVertical
-      end
-      object TBSeparatorItem3: TTBSeparatorItem
-      end
-      object TBItem3: TTBItem
-        Action = frmTinnMain.actRtermIOSplitRemove
-      end
-    end
-    object TBSubmenuItem4: TTBSubmenuItem
-      Caption = 'Visualization: highlighter'
-      ImageIndex = 62
-      object TBSubmenuItem15: TTBSubmenuItem
-        Caption = 'IO'
-        ImageIndex = 244
-        object TBItem17: TTBItem
-          Action = frmTinnMain.actRtermSetIOSyntaxToText
-        end
-        object TBItem16: TTBItem
-          Action = frmTinnMain.actRtermSetIOSyntaxToR
+        object TBSubmenuItem12: TTBSubmenuItem
+          Caption = 'Log'
+          ImageIndex = 252
+          object TBItem37: TTBItem
+            Action = frmTinnMain.actRtermLogSave
+          end
+          object TBItem36: TTBItem
+            Action = frmTinnMain.actRtermLogSaveAs
+          end
+          object TBItem35: TTBItem
+            Action = frmTinnMain.actRtermLogPrint
+          end
         end
       end
-      object TBSubmenuItem14: TTBSubmenuItem
-        Caption = 'Log'
-        ImageIndex = 252
-        object TBItem39: TTBItem
-          Action = frmTinnMain.actRtermSetLogSyntaxToText
+      object TBSeparatorItem1: TTBSeparatorItem
+      end
+      object TBSubmenuItem9: TTBSubmenuItem
+        Caption = 'Clear'
+        ImageIndex = 20
+        object TBItem24: TTBItem
+          Action = frmTinnMain.actRtermIOClear
         end
-        object TBItem38: TTBItem
-          Action = frmTinnMain.actRtermSetLogSyntaxToR
+        object TBItem34: TTBItem
+          Action = frmTinnMain.actRtermLogClear
+        end
+        object TBItem8: TTBItem
+          Action = frmTinnMain.actRtermIOandLogClear
         end
       end
-    end
-    object TBSubmenuItem3: TTBSubmenuItem
-      Caption = 'Visualization: line wrap'
-      ImageIndex = 101
-      object TBItem15: TTBItem
-        Action = frmTinnMain.actRtermIOLineWrap
+      object TBSubmenuItem8: TTBSubmenuItem
+        Caption = 'Focus'
+        ImageIndex = 274
+        object TBItem27: TTBItem
+          Action = frmTinnMain.actRtermEditorSetFocus
+        end
+        object TBItem26: TTBItem
+          Action = frmTinnMain.actRtermIOSetFocus
+        end
+        object TBItem25: TTBItem
+          Action = frmTinnMain.actRtermLogSetFocus
+        end
       end
-      object TBItem14: TTBItem
-        Action = frmTinnMain.actRtermLogLineWrap
+      object TBSubmenuItem2: TTBSubmenuItem
+        Caption = 'Visualization: size'
+        ImageIndex = 248
+        object TBItem13: TTBItem
+          Action = frmTinnMain.actRtermMaximize
+        end
+        object TBItem12: TTBItem
+          Action = frmTinnMain.actRtermDivide
+        end
+        object TBItem11: TTBItem
+          Action = frmTinnMain.actRtermMinimize
+        end
       end
-    end
-    object TBSeparatorItem7: TTBSeparatorItem
-    end
-    object TBSubmenuItem6: TTBSubmenuItem
-      Caption = 'IO: history'
-      ImageIndex = 272
-      object TBItem21: TTBItem
-        Action = frmTinnMain.actRtermSaveHistory
+      object TBSubmenuItem1: TTBSubmenuItem
+        Caption = 'Visualization: split'
+        ImageIndex = 255
+        object TBItem10: TTBItem
+          Action = frmTinnMain.actRtermIOSplitHorizontal
+        end
+        object TBItem9: TTBItem
+          Action = frmTinnMain.actRtermIOSplitVertical
+        end
+        object TBSeparatorItem3: TTBSeparatorItem
+        end
+        object TBItem3: TTBItem
+          Action = frmTinnMain.actRtermIOSplitRemove
+        end
       end
-      object TBItem20: TTBItem
-        Action = frmTinnMain.actRtermLoadHistory
+      object TBSubmenuItem4: TTBSubmenuItem
+        Caption = 'Visualization: highlighter'
+        ImageIndex = 163
+        object TBSubmenuItem15: TTBSubmenuItem
+          Caption = 'IO'
+          ImageIndex = 244
+          object TBItem17: TTBItem
+            Action = frmTinnMain.actRtermSetIOSyntaxToText
+          end
+          object TBItem16: TTBItem
+            Action = frmTinnMain.actRtermSetIOSyntaxToR
+          end
+        end
+        object TBSubmenuItem14: TTBSubmenuItem
+          Caption = 'Log'
+          ImageIndex = 252
+          object TBItem39: TTBItem
+            Action = frmTinnMain.actRtermSetLogSyntaxToText
+          end
+          object TBItem38: TTBItem
+            Action = frmTinnMain.actRtermSetLogSyntaxToR
+          end
+        end
       end
-      object TBSeparatorItem6: TTBSeparatorItem
+      object TBSubmenuItem3: TTBSubmenuItem
+        Caption = 'Visualization: line wrap'
+        ImageIndex = 101
+        object TBItem15: TTBItem
+          Action = frmTinnMain.actRtermIOLineWrap
+        end
+        object TBItem14: TTBItem
+          Action = frmTinnMain.actRtermLogLineWrap
+        end
       end
-      object TBItem19: TTBItem
-        Action = frmTinnMain.actRtermIOHistoryPrior
+      object TBSeparatorItem7: TTBSeparatorItem
       end
-      object TBItem18: TTBItem
-        Action = frmTinnMain.actRtermIOHistoryNext
+      object TBSubmenuItem6: TTBSubmenuItem
+        Caption = 'IO: history'
+        ImageIndex = 272
+        object TBItem21: TTBItem
+          Action = frmTinnMain.actRtermSaveHistory
+        end
+        object TBItem20: TTBItem
+          Action = frmTinnMain.actRtermLoadHistory
+        end
+        object TBSeparatorItem6: TTBSeparatorItem
+        end
+        object TBItem19: TTBItem
+          Action = frmTinnMain.actRtermIOHistoryPrior
+        end
+        object TBItem18: TTBItem
+          Action = frmTinnMain.actRtermIOHistoryNext
+        end
       end
-    end
-    object TBSubmenuItem5: TTBSubmenuItem
-      Caption = 'IO: workspace'
-      ImageIndex = 273
-      object TBItem22: TTBItem
-        Action = frmTinnMain.actRtermSaveWorkspace
+      object TBSubmenuItem5: TTBSubmenuItem
+        Caption = 'IO: workspace'
+        ImageIndex = 273
+        object TBItem22: TTBItem
+          Action = frmTinnMain.actRtermSaveWorkspace
+        end
+        object TBItem23: TTBItem
+          Action = frmTinnMain.actRtermLoadWorkspace
+        end
       end
-      object TBItem23: TTBItem
-        Action = frmTinnMain.actRtermLoadWorkspace
+      object TBSeparatorItem9: TTBSeparatorItem
       end
-    end
-    object TBSeparatorItem9: TTBSeparatorItem
-    end
-    object TBSubmenuItem7: TTBSubmenuItem
-      Caption = 'Visualization: font (not permanent)'
-      ImageIndex = 260
-      object TBItem5: TTBItem
-        Action = frmTinnMain.actFontIncrease
-      end
-      object TBItem4: TTBItem
-        Action = frmTinnMain.actFontDecrease
+      object TBSubmenuItem7: TTBSubmenuItem
+        Caption = 'Visualization: font (not permanent)'
+        ImageIndex = 260
+        object TBItem5: TTBItem
+          Action = frmTinnMain.actFontIncrease
+        end
+        object TBItem4: TTBItem
+          Action = frmTinnMain.actFontDecrease
+        end
       end
     end
   end
   object JvDockClientRterm: TJvDockClient
     DirectDrag = False
-    Left = 55
-    Top = 32
+    DockStyle = frmTinnMain.JvDockVSNetStyle
+    Left = 15
+    Top = 88
   end
   object cRTerm: TConsoleIO
     OnReceiveOutput = cRTermReceiveOutput
@@ -390,7 +402,7 @@ object frmRterm: TfrmRterm
     OnProcessStatusChange = cRTermProcessStatusChange
     TerminateCommand = 'quit'
     SplitSend = False
-    Left = 22
-    Top = 32
+    Left = 14
+    Top = 56
   end
 end

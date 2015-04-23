@@ -8,7 +8,7 @@ object frmCompletion: TfrmCompletion
   Caption = 'Completion (xml based)'
   ClientHeight = 379
   ClientWidth = 614
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -29,6 +29,8 @@ object frmCompletion: TfrmCompletion
     Height = 20
     Align = alTop
     BevelOuter = bvNone
+    Color = 16250871
+    ParentBackground = False
     TabOrder = 10
     object DBNavigator1: TDBNavigator
       Left = 0
@@ -80,7 +82,7 @@ object frmCompletion: TfrmCompletion
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -102,7 +104,7 @@ object frmCompletion: TfrmCompletion
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -124,7 +126,7 @@ object frmCompletion: TfrmCompletion
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -259,6 +261,7 @@ object frmCompletion: TfrmCompletion
     Top = 360
     Width = 614
     Height = 19
+    Color = 16250871
     Panels = <
       item
         Width = 50

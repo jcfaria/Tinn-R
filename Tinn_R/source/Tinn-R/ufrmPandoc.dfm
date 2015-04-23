@@ -7,7 +7,7 @@ object frmPandoc: TfrmPandoc
   Caption = 'Pandoc (document converter)'
   ClientHeight = 554
   ClientWidth = 535
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -221,7 +221,7 @@ object frmPandoc: TfrmPandoc
       Top = 15
       Width = 528
       Height = 21
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 0
       OnSelect = cbPandocHistorySelect
     end

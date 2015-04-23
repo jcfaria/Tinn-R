@@ -6,7 +6,7 @@ object frmPrintPreview: TfrmPrintPreview
   Caption = 'Print preview'
   ClientHeight = 238
   ClientWidth = 576
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -41,7 +41,7 @@ object frmPrintPreview: TfrmPrintPreview
     object tbPrintPreview: TToolBar
       Left = 11
       Top = 2
-      Width = 500
+      Width = 471
       Height = 22
       AutoSize = True
       DragMode = dmAutomatic
@@ -115,7 +115,7 @@ object frmPrintPreview: TfrmPrintPreview
         Top = 0
         Hint = 'Zoom'
         DropdownMenu = popZoom
-        ImageIndex = 58
+        ImageIndex = 136
         ParentShowHint = False
         ShowHint = True
         Style = tbsDropDown
@@ -163,6 +163,7 @@ object frmPrintPreview: TfrmPrintPreview
         Left = 287
         Top = 0
         Action = frmConfigurePrint.actSyntaxColor
+        ImageIndex = 163
         ParentShowHint = False
         ShowHint = True
         Style = tbsCheck

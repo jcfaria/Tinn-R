@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -64,6 +63,8 @@ type
     tbClose: TToolButton;
     tbFirstPage: TToolButton;
     tbImpressionColored: TToolButton;
+    tbImpressionFontDecrease: TToolButton;
+    tbImpressionFontIncrease: TToolButton;
     tbLastPage: TToolButton;
     tbLineNumber: TToolButton;
     tbNextPage: TToolButton;
@@ -78,11 +79,9 @@ type
     ToolButton11: TToolButton;
     ToolButton2: TToolButton;
     ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
     ToolButton9: TToolButton;
     udZoom: TUpDown;
-    tbImpressionFontDecrease: TToolButton;
-    tbImpressionFontIncrease: TToolButton;
-    ToolButton5: TToolButton;
 
     procedure actZoomPageHeightExecute(Sender: TObject);
     procedure actZoomPageWidthExecute(Sender: TObject);
@@ -95,12 +94,12 @@ type
     procedure synPPPreviewPage(Sender: TObject; PageNumber: Integer);
     procedure tbCloseClick(Sender: TObject);
     procedure tbFirstPageClick(Sender: TObject);
+    procedure tbImpressionFontDecreaseClick(Sender: TObject);
+    procedure tbImpressionFontIncreaseClick(Sender: TObject);
     procedure tbLastPageClick(Sender: TObject);
     procedure tbNextPageClick(Sender: TObject);
     procedure tbPriorPageClick(Sender: TObject);
     procedure udZoomMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure tbImpressionFontDecreaseClick(Sender: TObject);
-    procedure tbImpressionFontIncreaseClick(Sender: TObject);
 
   private
     { Private declarations }

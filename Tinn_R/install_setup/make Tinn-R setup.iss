@@ -1,6 +1,6 @@
 ; Tinn-R Inno (Installer) Setup Script
-; By: José Cláudio Faria (11/2013)
-; Tinn-R:     http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
+; By: José Cláudio Faria (04/2015)
+; Tinn-R: http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 ; INNO Setup: http://www.innosetup.com
 
 [Setup]
@@ -9,13 +9,13 @@ AppPublisher         = Tinn-R Team
 AppPublisherURL      = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppSupportURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppUpdatesURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppVerName           = Tinn-R 3.0.3.5
+AppVerName           = Tinn-R 04.00.02.00
 ChangesAssociations  = true
 Compression          = lzma
 DefaultDirName       = {sd}\Tinn-R
 DefaultGroupName     = Tinn-R
 LicenseFile          = ..\doc\licence_gpl3.txt
-OutputBaseFilename   = Tinn-R_3.0.3.5_setup
+OutputBaseFilename   = Tinn-R_04.00.02.00_setup
 OutputDir            = ..\install_setup\bin
 SolidCompression     = yes
 WizardImageFile      = ..\res\setup.bmp
@@ -50,22 +50,9 @@ Source: ..\doc\textdiff.hlp;                    DestDir: {app}\doc
 Source: ..\doc\Tinn-R_recognized words.r;       DestDir: {app}\doc
 Source: ..\doc\User guide.pdf;                  DestDir: {app}\doc
 Source: ..\latex\latex.zip;                     DestDir: {app}\latex
-Source: ..\package\TinnRcom_1.0.15.tar.gz;      DestDir: {app}\package
-Source: ..\package\TinnRcom_1.0.15.zip;         DestDir: {app}\package
-Source: ..\res\logo.jpg;                        DestDir: {app}\res
-Source: ..\res\sp_00.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_01.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_02.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_03.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_04.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_05.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_06.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_07.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_08.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_09.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_10.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_11.jpg;                       DestDir: {app}\res
-Source: ..\res\sp_12.jpg;                       DestDir: {app}\res
+Source: ..\package\TinnRcom_1.0.16.tar.gz;      DestDir: {app}\package
+Source: ..\package\TinnRcom_1.0.16.zip;         DestDir: {app}\package
+Source: ..\project\project.zip;                 DestDir: {app}\project
 Source: ..\sample\deplate.dplt;                 DestDir: {app}\sample
 Source: ..\sample\pandoc.markdown;              DestDir: {app}\sample
 Source: ..\sample\Tinn-R_example of script.r;   DestDir: {app}\sample

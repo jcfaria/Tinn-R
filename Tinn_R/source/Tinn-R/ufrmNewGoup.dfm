@@ -8,7 +8,7 @@ object frmNewGroup: TfrmNewGroup
   Caption = 'New group'
   ClientHeight = 73
   ClientWidth = 238
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

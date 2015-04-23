@@ -78,8 +78,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -113,6 +112,7 @@ ctb = TControlBar                  ex: ctbMain
 d   = Double                       ex: dMyDouble
 dc  = TDisplayCoord;               ex: dcMyDC
 dt  = TMsgDlgType                  ex: dtMyType
+f   = TFileNotification            ex: fNotif
 fd  = TFOntDialog                  ex: fdMain
 h   = handle                       ex: hMyHandle
 hk  = TfrmHotKeys                  ex: hkMyHotkeys
@@ -183,9 +183,10 @@ uses
   SynCompletionProposal, clMultiStream, SynEditAutoComplete, JvgPage,
   JvDriveCtrls, JvExStdCtrls, JvListBox, JvCombobox, JvgTypes, JvComponentBase,
   JvDockControlForm, JvDockTree, JvDockVSNetStyle,
-  JvComponent, JvAppStorage, JvAppIniStorage, JvDockVIDStyle, JvExComCtrls,
+  JvComponent, JvAppIniStorage, JvDockVIDStyle, JvExComCtrls,
   JvComCtrls, JvMenus, JvAppHotKey, JvTimer, SynUnicode, SynEditTextBuffer, DB,
-  SynEditOC;
+  SynEditOC, PngImageList, JvAppStorage, ATBinHex, ATxCodepages, ATFileNotificationSimple,
+  IdHTTP, IdException, IdStack, JvUpDown;
 
 const
   WM_OPENEDITOR = WM_USER + 1;
@@ -213,6 +214,7 @@ type
     actANSI: TAction;
     actAplicationExit: TAction;
     actAsciiChart: TAction;
+    actAutoCompletion: TAction;
     actBackupDatabase: TAction;
     actBackupSystemConfiguration: TAction;
     actBlockMark: TAction;
@@ -374,6 +376,7 @@ type
     actProjectEdit: TAction;
     actProjectNew: TAction;
     actProjectOpen: TAction;
+    actProjectOpenDemo: TAction;
     actProjectOpenNode: TAction;
     actProjectReload: TAction;
     actProjectSave: TAction;
@@ -419,7 +422,7 @@ type
     actRContTermStartClose: TAction;
     actRCurrentLineToTop: TAction;
     actReadOnly: TAction;
-    actReformatR: TAction;
+    actFormatR: TAction;
     actReload: TAction;
     actReloadLatexSymbols: TAction;
     actREnvironmentRefresh: TAction;
@@ -432,9 +435,7 @@ type
     actRExplorerEdit: TAction;
     actRExplorerExampleSelected: TAction;
     actRExplorerExpAscii: TAction;
-    actRExplorerExpHtml: TAction;
     actRExplorerExpRaw: TAction;
-    actRExplorerExpTeX: TAction;
     actRExplorerFix: TAction;
     actRExplorerHelp: TAction;
     actRExplorerHelpSelected: TAction;
@@ -587,6 +588,7 @@ type
     actWinExplVisible: TAction;
     actWorkExplVisible: TAction;
     alMain: TActionList;
+    Autocompletion1: TMenuItem;
     b1: TMenuItem;
     Bottom1: TMenuItem;
     Bottom2: TMenuItem;
@@ -630,11 +632,11 @@ type
     Help5: TMenuItem;
     Helpselected1: TMenuItem;
     Helpselected2: TMenuItem;
-    imlProject: TImageList;
-    imlRexplorer: TImageList;
-    imlSearch: TImageList;
-    imlStatusBar: TImageList;
-    imlTinnR: TImageList;
+    imlProject: TPngImageList;
+    imlRexplorer: TPngImageList;
+    imlSearch: TPngImageList;
+    imlStatusBar: TPngImageList;
+    imlTinnR: TPngImageList;
     Increase1: TMenuItem;
     Indent1: TMenuItem;
     Inilog1: TMenuItem;
@@ -744,7 +746,6 @@ type
     menFormatBlockIndent: TMenuItem;
     menFormatBlockUnident: TMenuItem;
     menFormatDelimiter: TMenuItem;
-    menFormatReformat: TMenuItem;
     menFormatSelection: TMenuItem;
     menFormatWord: TMenuItem;
     menHelAbout: TMenuItem;
@@ -851,6 +852,7 @@ type
     menProjProjectDeleteCurrent: TMenuItem;
     menProjProjectNew: TMenuItem;
     menProjProjectOpen: TMenuItem;
+    menProjProjectOpenDemo: TMenuItem;
     menProjProjectSave: TMenuItem;
     menProjProjectSaveAs: TMenuItem;
     menProjRecent: TMenuItem;
@@ -1197,7 +1199,6 @@ type
     N128: TMenuItem;
     N129: TMenuItem;
     N13: TMenuItem;
-    N130: TMenuItem;
     N131: TMenuItem;
     N132: TMenuItem;
     N133: TMenuItem;
@@ -1603,9 +1604,7 @@ type
     pmenRexplorerBasic: TMenuItem;
     pmenRexplorerContent: TMenuItem;
     pmenRexplorerContentCopyAscii: TMenuItem;
-    pmenRexplorerContentCopyHtml: TMenuItem;
     pmenRexplorerContentCopyRaw: TMenuItem;
-    pmenRexplorerContentCopyTeX: TMenuItem;
     pmenRexplorerEdit: TMenuItem;
     pmenRexplorerExample: TMenuItem;
     pmenRexplorerFix: TMenuItem;
@@ -1949,11 +1948,24 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
+    actHexViewerVisible: TAction;
+    Hewviewershowhide1: TMenuItem;
+    actNotification: TAction;
+    actNotification_US: TAction;
+    N199: TMenuItem;
+    Enablenotification1: TMenuItem;
+    Updatesilently1: TMenuItem;
+    actRtermAutoHide: TAction;
+    actToolsAutoHide: TAction;
+    Rtermautohideonoff1: TMenuItem;
+    Rtermautohideonoff2: TMenuItem;
+    N200: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
     procedure actAplicationExitExecute(Sender: TObject);
     procedure actAsciiChartExecute(Sender: TObject);
+    procedure actAutoCompletionExecute(Sender: TObject);
     procedure actBackupDatabaseExecute(Sender: TObject);
     procedure actBackupSystemConfigurationExecute(Sender: TObject);
     procedure actBlockMarkExecute(Sender: TObject);
@@ -2083,6 +2095,7 @@ type
     procedure actProjectDeleteCurrentExecute(Sender: TObject);
     procedure actProjectEditExecute(Sender: TObject);
     procedure actProjectNewExecute(Sender: TObject);
+    procedure actProjectOpenDemoExecute(Sender: TObject);
     procedure actProjectOpenExecute(Sender: TObject);
     procedure actProjectOpenNodeExecute(Sender: TObject);
     procedure actProjectReloadExecute(Sender: TObject);
@@ -2130,7 +2143,7 @@ type
     procedure actRContTermStartCloseExecute(Sender: TObject);
     procedure actRCurrentLineToTopExecute(Sender: TObject);
     procedure actReadOnlyExecute(Sender: TObject);
-    procedure actReformatRExecute(Sender: TObject);
+    procedure actFormatRExecute(Sender: TObject);
     procedure actReloadExecute(Sender: TObject);
     procedure actReloadLatexSymbolsExecute(Sender: TObject);
     procedure actREnvironmentRefreshExecute(Sender: TObject);
@@ -2143,9 +2156,7 @@ type
     procedure actRExplorerEditExecute(Sender: TObject);
     procedure actRExplorerExampleSelectedExecute(Sender: TObject);
     procedure actRExplorerExpAsciiExecute(Sender: TObject);
-    procedure actRExplorerExpHtmlExecute(Sender: TObject);
     procedure actRExplorerExpRawExecute(Sender: TObject);
-    procedure actRExplorerExpTeXExecute(Sender: TObject);
     procedure actRExplorerFixExecute(Sender: TObject);
     procedure actRExplorerHelpExecute(Sender: TObject);
     procedure actRExplorerHelpSelectedExecute(Sender: TObject);
@@ -2483,6 +2494,13 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
+    procedure actHexViewerVisibleExecute(Sender: TObject);
+    procedure actNotificationExecute(Sender: TObject);
+    procedure actNotification_USExecute(Sender: TObject);
+    procedure pgFilesMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure pgFilesMouseLeave(Sender: TObject);
+    procedure actRtermAutoHideExecute(Sender: TObject);
+    procedure actToolsAutoHideExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2506,8 +2524,10 @@ type
     bRmirros_Update                : boolean;
     bRRequireKnitr                 : boolean;
     bRSendAll                      : boolean;
+    bRSetWorkDir_Starting          : boolean;
     bRSmartSend                    : boolean;
     bRsvSocket_Connect             : boolean;  // Variáveis de controle do TinnRcom e dependências
+    bRtermCanFloat                 : boolean;
     bRtermCloseWithoutAsk          : boolean;
     bRtermHorizontal               : boolean;  // IO disposition for IO and Log in the same view
     bRtermOptionCancel             : boolean;
@@ -2528,10 +2548,12 @@ type
     bStartOptionsWithRPage         : boolean;
     bSyntax_OldVersion             : boolean;
     bTCPIPRunning                  : boolean;
+    bToolsCanFloat                 : boolean;
     bUpdate_Cache                  : boolean;
     bUpdate_Comments               : boolean;
     bUpdate_Completion             : boolean;
     bUpdate_Latex                  : boolean;
+    bUpdate_Project                : boolean;
     bUpdate_Rcard                  : boolean;
     bUpdate_Rmirrors               : boolean;
     bUpdate_Shortcuts              : boolean;
@@ -2547,28 +2569,22 @@ type
     iLatexDimensionalElement       : integer;
     iLogSyntax                     : integer;
     iMaxDeparseLength              : integer;
-    iOldHeight                     : integer;
-    iOldLeft                       : integer;
-    iOldTop                        : integer;
-    iOldWidth                      : integer;
     iReformatRSplit                : integer;
     iRFormatted                    : integer;
     iRguiTinnRDisposition          : integer;
     iRguiTinnRProportion           : integer;
     iRows                          : integer;
-    iRtermDockHeight               : integer;
-    iRtermDockWidth                : integer;
     iTimerCounter                  : integer;
-    iToolsDockHeight               : integer;
-    iToolsDockWidth                : integer;
     iViewStyleRExplorer            : integer;
     mrTinnRcom_Install             : TModalResult;
+    msHexViewer                    : TMemoryStream;
     rsSearch                       : TRegExpr;
     sAppData                       : string;
     sCurrentVersion_Cache          : string;
     sCurrentVersion_Comments       : string;
     sCurrentVersion_Completion     : string;
     sCurrentVersion_Latex          : string;
+    sCurrentVersion_Project        : string;
     sCurrentVersion_Rcard          : string;
     sCurrentVersion_Rmirrors       : string;
     sCurrentVersion_Shortcuts      : string;
@@ -2576,6 +2592,7 @@ type
     sDataCompletion                : string;
     sEncodingDefault               : string;
     sFileLatexOrigin               : string;
+    sFileProjectOrigin             : string;
     sGuiRRunning                   : string;
     sIniDockFilePath               : string;
     slFileMRU                      : TStringList;
@@ -2602,6 +2619,7 @@ type
     sPathIniEditor_Tmp             : string;
     sPathIniTinn_Tmp               : string;
     sPathLatex                     : string;
+    sPathProject                   : string;
     sPathR                         : string;
     sPathR_Connected               : string;
     sPathRgui                      : string;
@@ -2610,8 +2628,8 @@ type
     sPathTxt2tags_Converter        : string;
     sPathTxt2tags_Interpreter      : string;
     sProjectName                   : string;
-    sReformatR                     : string;
-    sReformatRd                    : string;
+    sformatR                       : string;
+    sformatRd                      : string;
     sRIOSaved                      : string;
     sRLogSaved                     : string;
     sSearchDirHistory              : string;
@@ -2624,13 +2642,14 @@ type
     sVersion_Completion            : string;
     sVersion_Ini                   : string;
     sVersion_Latex                 : string;
+    sVersion_Project               : string;
     sVersion_Rcard                 : string;
     sVersion_Rmirrors              : string;
     sVersion_Shortcuts             : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
-    
+
     function ActivePanel: integer;
     function CheckConnection: boolean;
     function CloseAllFilesOfProject: boolean;
@@ -2649,10 +2668,12 @@ type
     function GetLine(bGoToNextValidLine: boolean): string;
     function GetLinesToEndPage(var bSingleLine: boolean): string;
     function GetPathFile(bFull: boolean = False): string;
+    function GetSaveFormat(usTmp: TUnicodeStrings): string;
     function GetSelection(var bSingleLine: boolean): string;
     function GetSelectionToReformat(sSel: string): string;
     function GroupExistsAsNode(sGroupName: string): boolean;
     function MessageDlg(const sMsg: string; mdType: TMsgDlgType; mdButtons: TMsgDlgButtons; iHelp: Integer): Integer;
+    function RWorkDir: string;
     function SingleLine(sTmp: string): boolean;
     function StripRegExPower(sSearchText: string): string;
     procedure AddFile(iFile: string);
@@ -2667,6 +2688,7 @@ type
     procedure CheckLatex(bReload: boolean);
     procedure CheckOrigin;
     procedure CheckProcessingPath(sPath: string);
+    procedure CheckProject;
     procedure CheckTinnRcom_Package;
     procedure CheckTop;
     procedure CheckVersion;
@@ -2679,10 +2701,7 @@ type
     procedure DatasetToActionList(Sender: TObject);
     procedure DoClearConsole;
     procedure DoIPConnection(sIPHost: string; iIPPort: integer; bActive: boolean);
-    procedure DoShowHide(iTmp1, iTmp2: integer; bShow: boolean = True);
     procedure DoTxt2Tag(iButton: integer);
-    procedure DoUndoAutoHideRterm;
-    procedure DoUndoAutoHideTools;
     procedure FileConversion(sParameter, sExtension, sPathConversor: string; sPathInterpreter: string = ''; bWait: boolean = True);
     procedure FileSaveGeneric(sFile: string; synEditor: TSynEdit);
     procedure GetCallTip(var sRObject, sRPackage, sRTip: string; var bTipFound: boolean);
@@ -2710,8 +2729,6 @@ type
     procedure RemoveLine_Empty(var sTmp: string);
     procedure RMenu(bOption: boolean);
     procedure RmirrorsInterface_Update;
-    procedure RtermHide;
-    procedure RtermShow;
     procedure RToolbar(bOption: boolean);
     procedure SaveEditorKeystrokes;
     procedure SaveNewIni_Application;
@@ -2789,6 +2806,7 @@ type
     bRTCPIPConsoleUse         : boolean;
     bRtermBeepOnError         : boolean;
     bRtermFindError           : boolean;
+    bRtermWidth               : boolean;
     bSearchBackwards          : boolean;
     bSearchCaseSensitive      : boolean;
     bSearchFromCursor         : boolean;
@@ -2876,6 +2894,8 @@ type
     sTipToWrite               : string;
     sUtilsOrigin              : string;
     sWorkingDir               : string;
+    slFileNotify              : TStringList;
+    //iRtermSize                : integer;
 
     function FindTopWindow: integer;
     function GetBuildInfo: string;
@@ -2883,6 +2903,7 @@ type
     function Rterm_Running: boolean;
     function UseTCPIP: boolean;
     function ValidRRunning: boolean;
+    procedure AppActivate(Sender: TObject);
     procedure CheckIfFileFromDvi(sFile: string);
     procedure CheckRterm;
     procedure ClearMRU;
@@ -2916,7 +2937,9 @@ type
     procedure SetToolbarProcessing(sFileExtension: string);
     procedure UpdateAppearance(bFontSize: boolean = True);
     procedure UpdateCursorPos(Sender: TSynEdit);
+    procedure UpdateHexViewer;
     procedure UpdateMRU(var miItem: TMenuItem; sFileName: string);
+
 
 end;
 
@@ -2967,13 +2990,14 @@ begin
 (*
 ----------------------------------------------------------------------------------------------
   Will update (from dataset shortcut.xml) all actions inside of alMain:
-   1- Comment the line below (DatasetToActionList(nil)) when was done any change in the alMain
-   2- Run Tinn-R
-   3- Generate a new Dataset: Tools/Utils/Actionlist to dataset (menu visible only when compiled in debug mode)
-   4- Close Tinn-R
+   1- Comment the line below (DatasetToActionList(nil)) when was done any change in the alMain;
+   2- Run Tinn-R;
+   3- Generate a new Dataset: Tools/Utils/Actionlist to dataset
+      (This menu is visible only when compiled in debug mode and running under the IDE);
+   4- Close Tinn-R;
    5- Change the version of sCurrentVersion_Shortcuts in procedure TfrmTinnMain.CheckVersion
-      (It is very important to the user version be updated!)
-   6- Uncomment this line newly (DatasetToActionList(nil))
+      (It is very important to the user version be updated!);
+   6- Uncomment this line newly (DatasetToActionList(nil));
    7- It is all!
 ----------------------------------------------------------------------------------------------
 *)
@@ -3002,6 +3026,7 @@ begin
   sVersion_Completion:= ifTinn.ReadString('App', 'sCompletionVersion', '0.0.0.0');
   sVersion_Ini       := ifTinn.ReadString('App', 'sIniVersion'       , '0.0.0.0');
   sVersion_Latex     := ifTinn.ReadString('App', 'sLatexVersion'     , '0.0.0.0');
+  sVersion_Project   := ifTinn.ReadString('App', 'sProjectVersion'   , '0.0.0.0');
   sVersion_Rcard     := ifTinn.ReadString('App', 'sRcardVersion'     , '0.0.0.0');
   sVersion_Rmirrors  := ifTinn.ReadString('App', 'sRmirrorsVersion'  , '0.0.0.0');
   sVersion_Shortcuts := ifTinn.ReadString('App', 'sShortcutsVersion' , '0.0.0.0');
@@ -3009,12 +3034,13 @@ begin
   // Current versions
   sCurrentVersion_Cache     := '2.03.02.04';
   sCurrentVersion_Comments  := '3.00.02.01';
-  sCurrentVersion_Completion:= '3.00.01.01';
+  sCurrentVersion_Completion:= '4.00.00.04';
   sCurrentVersion_Latex     := '2.01.01.01';
+  sCurrentVersion_Project   := '4.00.00.02';
   sCurrentVersion_Rcard     := '2.03.00.00';
-  sCurrentVersion_Rmirrors  := '3.00.02.06';
-  sCurrentVersion_Shortcuts := '3.00.02.09';
-  sCurrentVersion_TinnRcom  := '1.0.15';  // Released joinly with Tinn-R setup program
+  sCurrentVersion_Rmirrors  := '4.00.01.02';
+  sCurrentVersion_Shortcuts := '4.00.02.00';
+  sCurrentVersion_TinnRcom  := '1.0.16';  // Released joinly with Tinn-R setup program
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3042,6 +3068,13 @@ begin
                      sCurrentVersion_Latex) < 0) then begin
     bUpdate_Latex := True;
     sVersion_Latex:= sCurrentVersion_Latex;
+  end;
+
+  // Project
+  if (AnsiCompareStr(sVersion_Project,
+                     sCurrentVersion_Project) < 0) then begin
+    bUpdate_Project := True;
+    sVersion_Project:= sCurrentVersion_Project;
   end;
 
   // Rcard
@@ -3082,10 +3115,12 @@ procedure TfrmTinnMain.synPaintTransient(Sender: TObject;
                                          Canvas: TCanvas;
                                          TransientType: TTransientType);
 var
-  seEditor   : TSynEdit;
+  seEditor: TSynEdit;
+
   aOpenChar,
    aCloseChar: Array of WideChar;
-  Attri      : TSynHighlighterAttributes;
+
+  Attri: TSynHighlighterAttributes;
 
   procedure SetCanvasFont;
   begin
@@ -3189,11 +3224,11 @@ begin
      (Length(seEditor.Lines[seEditor.CaretXY.Line - 1]) > 0) then wcCharB:= seEditor.Lines[seEditor.CaretXY.Line - 1][seEditor.CaretXY.Char]
   else wcCharB:= #0;
 
-  if not(wcCharA in AllBrackets) and
-     not(wcCharB in AllBrackets) then Exit;
+  if not(CharInSet(wcCharA, AllBrackets)) and
+     not(CharInSet(wcCharB, AllBrackets)) then Exit;
 
   sTmp:= wcCharB;
-  if not(wcCharB in AllBrackets) then begin
+  if not(CharInSet(wcCharB, AllBrackets)) then begin
     bcP.Char:= bcP.Char - 1;
     sTmp:= wcCharA;
   end;
@@ -3262,22 +3297,92 @@ var
 
   i,
    j,
-   iTopLine,
    iCaretX,
-   iCaretY   : integer;
-  iLineNumber: TPoint;
-  seEditor   : TSynEdit;
-  slNewFile  : TUnicodeStringList;
-  slTmp1,
-   slTmp2    : TStringList;
-  sTmp,
-   sFileExt,
-   sMarks    : string;
-  userOption : TModalResult;
-  cTmp       : char;
+   iCaretY,
+   iTopLine: integer;
 
+  iLineNumber: TPoint;
+
+  seEditor: TSynEdit;
+
+  slNewFile: TUnicodeStringList;
+
+  slTmp1,
+   slTmp2: TStringList;
+
+  sTmp,
+   sMarks,
+   sFileExt: string;
+
+  userOption: TModalResult;
+
+  cTmp: char;
+
+  IdHTTP: TIdHTTP;
 
 begin
+  // Check if sFile is a valid url
+  // If yes will open the url content
+  if IsURL(sFile) then begin
+    IdHTTP:= TIdHTTP.Create;
+    try
+      try
+        if (CheckConnection = False) then Exit;
+
+        sTmp:= IdHTTP.Get(sFile);
+
+        actFileNewExecute(nil);
+
+        sFileExt:= ExtractFileExt(sFile);
+
+        i:= FindTopWindow;
+        with (Self.MDIChildren[i] as TfrmEditor) do begin
+          synEditor.Text:= sTmp;
+          synEditor.Modified:= True;
+          SetHighlighterFromFileExt(sFileExt);
+        end;
+
+        with pgFiles.ActivePage do
+          Tag:= (Self.MDIChildren[i] as TfrmEditor).SetHighlighterID;
+      except
+        // this exception class covers the HTTP protocol errors; you may read the
+        // response code using ErrorCode property of the exception object, or the
+        // same you can read from the ResponseCode property of the TIdHTTP object
+        on E: EIdHTTPProtocolException do
+          ShowMessage('Indy raised a protocol error!' + sLineBreak +
+                      'HTTP status code: ' + IntToStr(E.ErrorCode) + sLineBreak +
+                      'Error message' + E.Message);
+
+        // this exception class covers the cases when the server side closes the
+        // connection with a client in a "peaceful" way
+        on E: EIdConnClosedGracefully do
+          ShowMessage('Indy reports, that connection was closed gracefully!');
+
+        // this exception class covers all the low level socket exceptions
+        on E: EIdSocketError do
+          ShowMessage('Indy raised a socket error!' + sLineBreak +
+                      'Error code: ' + IntToStr(E.LastError) + sLineBreak +
+                      'Error message' + E.Message);
+
+        // this exception class covers all exceptions thrown by Indy library
+        on E: EIdException do
+          ShowMessage('Indy raised an exception!' + sLineBreak +
+                      'Exception class: ' + E.ClassName + sLineBreak +
+                      'Error message: ' + E.Message);
+
+        // this exception class is a base Delphi exception class and covers here
+        // all exceptions different from those listed above
+        on E: Exception do
+          ShowMessage('A non-Indy related exception has been raised!');
+      end;
+    finally
+        IdHTTP.Free;
+    end;
+    sWorkingDir:= EmptyStr;
+    UpdateHexViewer;
+    Exit;
+  end;
+
   // Check if is *.tps file, if yes, open it in the project interface
   sFileExt:= lowerCase(ExtractFileExt(sFile));
 
@@ -3315,7 +3420,9 @@ begin
     if bUpdateMRU then UpdateMRU(menFileRecentFiles,
                                  sTmp);
 
-    seEditor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
+    with (Self.MDIChildren[i] as TfrmEditor) do
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
 
     // !! set after the calls to Self.MDIChildren[i] because the bring to front changes the order of the MDIChildren
     Self.MDIChildren[i].BringToFront;
@@ -3378,6 +3485,7 @@ begin
     else LoadFile(sTmp,
                   not bOverwriteCurrentContents,
                   bUpdateMRU); // Boolean added
+
     cTmp:= sFile[1];
     sTmp:= ExtractFilePath(sFile);
 
@@ -3386,7 +3494,7 @@ begin
     if (frmTools.jvdlbWorkExplorer.Directory <> sTmp) then begin
       frmTools.jvdlbWorkExplorer.Directory:= sTmp;
 
-      if (trim(frmTools.edWorkExplorerFilter.Text) = '*.*') then frmTools.jvflbWorkExplorer.Mask:= EmptyStr
+      if (trim(frmTools.edWorkExplorerFilter.Text) = '*.*') then frmTools.jvflbWorkExplorer.Mask:= '*.*'
                                                             else frmTools.jvflbWorkExplorer.Mask:= trim(frmTools.edWorkExplorerFilter.Text);
     end;
   end;
@@ -3395,7 +3503,11 @@ begin
     iLineNumber.y:= iLineNumberJump;
     iLineNumber.x:= 1;
 
-    with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor do begin
+    with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
+
+    with seEditor do begin
       TopLine:= iLineNumberJump;
 
       ExecuteCommand(ecGotoXY,
@@ -3403,6 +3515,7 @@ begin
                      @iLineNumber);
     end;
   end;
+
   i:= FindTopWindow;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
 
@@ -3609,7 +3722,13 @@ begin
     synEditor.Modified:= False;
     UpdateCursorPos(synEditor);
 
-    synEditor.SetFocus;
+    with synEditor do
+      if CanFocus then SetFocus;
+
+    // File notify: Start
+    fNotif:= TATFileNotificationSimple.Create(Self);
+    fNotif.OnChanged:= FileChanged;
+    NotifyFile_Start(sFileName);
   end;
 
   sTmp:= StringReplace(sFileName,
@@ -3617,7 +3736,6 @@ begin
                        '&&',
                        [rfReplaceAll]);
 
-  pgFiles.Hint           := sTmp;
   pgFiles.ActivePage.Hint:= sTmp;
 
   if actReadOnly.Checked then pgFiles.ActivePage.Caption:= '<' +
@@ -3629,6 +3747,8 @@ begin
 
   if bUpdateMRU then UpdateMRU(menFileRecentFiles,
                                sFileName);
+
+  UpdateHexViewer;
 end;
 
 procedure TfrmTinnMain.SaveNewIni_Application;
@@ -3673,24 +3793,10 @@ begin
     WriteString('App', 'sCompletionVersion', sVersion_Completion);
     WriteString('App', 'sIniVersion'       , GetBuildInfo);
     WriteString('App', 'sLatexVersion'     , sVersion_Latex);
+    WriteString('App', 'sProjectVersion'   , sVersion_Project);
     WriteString('App', 'sRcardVersion'     , sVersion_Rcard);
     WriteString('App', 'sRmirrosVersion'   , sVersion_Rmirrors);
     WriteString('App', 'sShortcutsVersion' , sVersion_Shortcuts);
-
-    // Form state and position
-    if (WindowState = wsNormal) then begin
-      WriteInteger('Form', 'iHeight', Self.Height);
-      WriteInteger('Form', 'iLeft', Self.Left);
-      WriteInteger('Form', 'iTop', Self.Top);
-      WriteInteger('Form', 'iWidth', Self.Width);
-    end
-    else begin
-      WriteInteger('Form', 'iHeight', iOldHeight);
-      WriteInteger('Form', 'iLeft', iOldLeft);
-      WriteInteger('Form', 'iTop', iOldTop);
-      WriteInteger('Form', 'iWidth', iOldWidth);
-    end;
-    WriteInteger('Form', 'iWindowState', integer(WindowState));
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -3702,67 +3808,66 @@ begin
     WriteInteger('App', 'iLastFile', iLastFile);
 
     // Toolbars
-    WriteBool('App', 'bEdit.Visible', tobEdit.Visible);
-    WriteBool('App', 'bFile.Visible', tobFile.Visible);
-    WriteBool('App', 'bFilter.Visible', tobFilter.Visible);
-    WriteBool('App', 'bFormat.Visible', tobFormat.Visible);
-    WriteBool('App', 'bMacro.Visible', tobMacro.Visible);
-    WriteBool('App', 'bMisc.Visible', tobMisc.Visible);
-    WriteBool('App', 'bProcessing.Visible', tobProcessing.Visible);
-    WriteBool('App', 'bRterm.Visible', actRtermVisible.Checked);
-    WriteBool('App', 'bSearch.Visible', tobSearch.Visible);
-    WriteBool('App', 'bSpell.Visible', tobSpell.Visible);
-    WriteBool('App', 'bSyntax.Visible', tobSyntax.Visible);
-    WriteBool('App', 'bTools.Visible', frmTools.Visible);
-    WriteBool('App', 'bView.Visible', tobView.Visible);
-    WriteBool('TBRMain', 'bVisible', actTobRVisible.Checked);
+    WriteBool('App', 'bTobEdit.Visible', tobEdit.Visible);
+    WriteBool('App', 'bTobFile.Visible', tobFile.Visible);
+    WriteBool('App', 'bTobFilter.Visible', tobFilter.Visible);
+    WriteBool('App', 'bTobFormat.Visible', tobFormat.Visible);
+    WriteBool('App', 'bTobMacro.Visible', tobMacro.Visible);
+    WriteBool('App', 'bTobMisc.Visible', tobMisc.Visible);
+    WriteBool('App', 'bTobProcessing.Visible', tobProcessing.Visible);
+    WriteBool('App', 'bTobSearch.Visible', tobSearch.Visible);
+    WriteBool('App', 'bTobSpell.Visible', tobSpell.Visible);
+    WriteBool('App', 'bTobSyntax.Visible', tobSyntax.Visible);
+    WriteBool('App', 'bTobView.Visible', tobView.Visible);
+    WriteBool('TBRMain', 'bTobVisible', actTobRVisible.Checked);
     WriteInteger('App', 'iCompletion.Height', frmTools.panCompletion.Height);
     WriteInteger('App', 'iCompletion.ItemIndex', frmTools.lbCompletion.ItemIndex);
     WriteInteger('App', 'iCountries.Height', frmTools.panCountries.Height);
     WriteInteger('App', 'iCountries.ItemIndex', frmTools.lbCountries.ItemIndex);
-    WriteInteger('App', 'iEdit.Left', tobEdit.Left);
-    WriteInteger('App', 'iEdit.Top', tobEdit.Top);
-    WriteInteger('App', 'iFile.Left', tobFile.Left);
-    WriteInteger('App', 'iFile.Top', tobFile.Top);
-    WriteInteger('App', 'iFilter.Left', tobFilter.Left);
-    WriteInteger('App', 'iFilter.Top', tobFilter.Top);
-    WriteInteger('App', 'iFormat.Left', tobFormat.Left);
-    WriteInteger('App', 'iFormat.Top', tobFormat.Top);
-    WriteInteger('App', 'iMacro.Left', tobMacro.Left);
-    WriteInteger('App', 'iMacro.Top', tobMacro.Top);
-    WriteInteger('App', 'iMisc.Left', tobMisc.Left);
-    WriteInteger('App', 'iMisc.Top', tobMisc.Top);
-    WriteInteger('App', 'iProcessing.Left', tobProcessing.Left);
-    WriteInteger('App', 'iProcessing.Top', tobProcessing.Top);
     WriteInteger('App', 'iRcard.Height', frmTools.panRcard.Height);
     WriteInteger('App', 'iRcard.ItemIndex', frmTools.lbRcard.ItemIndex);
     WriteInteger('App', 'iRExplorer.Width', frmTools.panRExplorer.Width);
-    WriteInteger('App', 'iSearch.Left', tobSearch.Left);
-    WriteInteger('App', 'iSearch.Top', tobSearch.Top);
     WriteInteger('App', 'iShortcuts.Height', frmTools.panShortcuts.Height);
     WriteInteger('App', 'iShortcuts.ItemIndex', frmTools.lbShortcuts.ItemIndex);
-    WriteInteger('App', 'iSpell.Left', tobSpell.Left);
-    WriteInteger('App', 'iSpell.Top', tobSpell.Top);
     WriteInteger('App', 'iSpellLanguage.ItemIndex', cbSpellLanguage.ItemIndex);
-    WriteInteger('App', 'iSyntax.Left', tobSyntax.Left);
-    WriteInteger('App', 'iSyntax.Top', tobSyntax.Top);
-    WriteInteger('App', 'iView.Left', tobView.Left);
-    WriteInteger('App', 'iView.Top', tobView.Top);
+    WriteInteger('App', 'iTobEdit.Left', tobEdit.Left);
+    WriteInteger('App', 'iTobEdit.Top', tobEdit.Top);
+    WriteInteger('App', 'iTobFile.Left', tobFile.Left);
+    WriteInteger('App', 'iTobFile.Top', tobFile.Top);
+    WriteInteger('App', 'iTobFilter.Left', tobFilter.Left);
+    WriteInteger('App', 'iTobFilter.Top', tobFilter.Top);
+    WriteInteger('App', 'iTobFormat.Left', tobFormat.Left);
+    WriteInteger('App', 'iTobFormat.Top', tobFormat.Top);
+    WriteInteger('App', 'iTobMacro.Left', tobMacro.Left);
+    WriteInteger('App', 'iTobMacro.Top', tobMacro.Top);
+    WriteInteger('App', 'iTobMisc.Left', tobMisc.Left);
+    WriteInteger('App', 'iTobMisc.Top', tobMisc.Top);
+    WriteInteger('App', 'iTobProcessing.Left', tobProcessing.Left);
+    WriteInteger('App', 'iTobProcessing.Top', tobProcessing.Top);
+    WriteInteger('App', 'iTobSearch.Left', tobSearch.Left);
+    WriteInteger('App', 'iTobSearch.Top', tobSearch.Top);
+    WriteInteger('App', 'iTobSpell.Left', tobSpell.Left);
+    WriteInteger('App', 'iTobSpell.Top', tobSpell.Top);
+    WriteInteger('App', 'iTobSyntax.Left', tobSyntax.Left);
+    WriteInteger('App', 'iTobSyntax.Top', tobSyntax.Top);
+    WriteInteger('App', 'iTobView.Left', tobView.Left);
+    WriteInteger('App', 'iTobView.Top', tobView.Top);
     WriteInteger('App', 'iWinExplorer.Height', frmTools.panWinExplorer.Height);
     WriteInteger('App', 'iWorkExplorer.Height', frmTools.panWorkExplorer.Height);
 
     // Rterm
+    WriteBool('App', 'bRtermCanFloat', bRtermCanFloat);
     WriteBool('App', 'bRtermCloseWithoutAsk', bRtermCloseWithoutAsk);
     WriteBool('App', 'bRtermHorizontal', bRtermHorizontal);
     WriteBool('App', 'bRtermSimple', bRtermSimple);
     WriteInteger('App', 'iIOSyntax', iIOSyntax);
     WriteInteger('App', 'iLogSyntax', iLogSyntax);
-    WriteInteger('App', 'iRtermDock.Height', iRtermDockHeight);
-    WriteInteger('App', 'iRtermDock.Width', iRtermDockWidth);
     WriteInteger('App', 'iSynLog2.Height', frmRterm.iSynLog2Height);
     WriteInteger('App', 'iSynLog2.Width', frmRterm.iSynLog2Width);
+    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
 
     // Tools
+    WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
     WriteInteger('App', 'iDatabase.TabIndex', frmTools.pgDatabase.TabIndex);
     WriteInteger('App', 'iLatex.TabIndex', frmTools.pgLatex.TabIndex);
     WriteInteger('App', 'iMarkup.TabIndex', frmTools.pgMarkup.TabIndex);
@@ -3770,9 +3875,30 @@ begin
     WriteInteger('App', 'iR.TabIndex', frmTools.pgR.TabIndex);
     WriteInteger('App', 'iResults.TabIndex', frmTools.pgResults.TabIndex);
     WriteInteger('App', 'iTools.TabIndex', frmTools.pgTools.TabIndex);
-    WriteInteger('App', 'iToolsDock.Height', iToolsDockHeight);
-    WriteInteger('App', 'iToolsDock.Width', iToolsDockWidth);
     WriteInteger('App', 'iTxt2tags.TabIndex', frmTools.pgTxt2tags.TabIndex);
+    WriteInteger('App', 'iTools.Size', frmTools.iSize);
+
+    // Tools visibility
+    WriteBool('App', 'bDatabase.Visible', actDatabaseVisible.Checked);
+    WriteBool('App', 'bDataComments.Visible', actDataCommentsVisible.Checked);
+    WriteBool('App', 'bDataCompletion.Visible', actDataCompletionVisible.Checked);
+    WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
+    WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
+    WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
+    WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
+    WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
+    WriteBool('App', 'bMarkup.Visible', actMarkupVisible.Checked);
+    WriteBool('App', 'bMisc.Visible', actMiscVisible.Checked);
+    WriteBool('App', 'bProject.Visible', actProjectVisible.Checked);
+    WriteBool('App', 'bR.Visible', actRVisible.Checked);
+    WriteBool('App', 'bResults.Visible', actResultsVisible.Checked);
+    WriteBool('App', 'bRExplorer.Visible', actRExplorerVisible.Checked);
+    WriteBool('App', 'bTxt2tags.Visible', actTxt2tagsVisible.Checked);
+    WriteBool('App', 'bWinExpl.Visible', actWinExplVisible.Checked);
+    WriteBool('App', 'bWorkExpl.Visible', actWorkExplVisible.Checked);
+    WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
+    WriteBool('App', 'bSearch.Visible', actSearchVisible.Checked);
+    WriteBool('App', 'bSpell.Visible', actSpellVisible.Checked);
 
     // Misc
     WriteBool('App', 'bActiveLine', bActiveLine);
@@ -3782,44 +3908,33 @@ begin
     WriteBool('App', 'bComAutoDetect_Language', frmTools.cbComAutoDetect_Language.Checked);
     WriteBool('App', 'bComPriority_Line', frmTools.cbComPriority_Line.Checked);
     WriteBool('App', 'bConnectionBeepOnError', bConnectionBeepOnError);
-    WriteBool('App', 'bDatabase.Visible', actDatabaseVisible.Checked);
-    WriteBool('App', 'bDataComments.Visible', actDataCommentsVisible.Checked);
-    WriteBool('App', 'bDataCompletion.Visible', actDataCompletionVisible.Checked);
     WriteBool('App', 'bDataCompletionAnywhere', bDataCompletionAnywhere);
-    WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
-    WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
-    WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
     WriteBool('App', 'bDosMinimizedAlways', actDosMinimizedAlways.Checked);
     WriteBool('App', 'bDviOpenAlways', actDviOpenAlways.Checked);
     WriteBool('App', 'bEditorLineWrap', actEditorLineWrap.Checked);
     WriteBool('App', 'bHtmlOpenAlways', actHtmlOpenAlways.Checked);
-    WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
     WriteBool('App', 'bIOLineWrap', actRtermIOLineWrap.Checked);
     WriteBool('App', 'bIPLocal', bIPLocal);
-    WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
     WriteBool('App', 'bLogLineWrap', actRtermLogLineWrap.Checked);
-    WriteBool('App', 'bMarkup.Visible', actMarkupVisible.Checked);
     WriteBool('App', 'bMinimizeTinnAfterLastFile', bMinimizeTinnAfterLastFile);
-    WriteBool('App', 'bMisc.Visible', actMiscVisible.Checked);
+    WriteBool('App', 'bNotification', actNotification.Checked);
+    WriteBool('App', 'bNotification_US', actNotification_US.Checked);
     WriteBool('App', 'bOpenMaximized', actOpenMaximized.Checked);
     WriteBool('App', 'bOrganizeAutomatically', bOrganizeAutomatically);
     WriteBool('App', 'bPdfOpenAlways', actPdfOpenAlways.Checked);
     WriteBool('App', 'bPgFiles.Visible', actPgFilesVisible.Checked);
-    WriteBool('App', 'bProject.Visible', actProjectVisible.Checked);
-    WriteBool('App', 'bR.Visible', actRVisible.Checked);
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
     WriteBool('App', 'bRAsServer', bRAsServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bReformatR', actReformatR.Visible);
+    WriteBool('App', 'bFormatR', actFormatR.Visible);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
-    WriteBool('App', 'bResults.Visible', actResultsVisible.Checked);
-    WriteBool('App', 'bRExplorer.Visible', actRExplorerVisible.Checked);
     WriteBool('App', 'bRget_Info', bRget_Info);
     WriteBool('App', 'bRguiReturnFocus', bRguiReturnFocus);
     WriteBool('App', 'bRmirros_Update', bRmirros_Update);
     WriteBool('App', 'bRSendAll', bRSendAll);
+    WriteBool('App', 'bRSetWorkDir_Starting', bRSetWorkDir_Starting);
     WriteBool('App', 'bRSimpleDefault', actRSimpleDefault.Checked);
     WriteBool('App', 'bRSmartSend', bRSmartSend);
     WriteBool('App', 'bRsvSocketConnect', bRsvSocket_Connect);
@@ -3827,6 +3942,7 @@ begin
     WriteBool('App', 'bRTCPIPConsoleUse', bRTCPIPConsoleUse);
     WriteBool('App', 'bRtermBeepOnError', bRtermBeepOnError);
     WriteBool('App', 'bRtermFindError', bRtermFindError);
+    WriteBool('App', 'bRtermWidth', bRtermWidth);
     WriteBool('App', 'bRTinnRcomInstall', bRTinnRcom_Install);
     WriteBool('App', 'bRTinnRcomLoad', bRTinnRcom_Load);
     WriteBool('App', 'bRUseLatest', bRUseLatest);
@@ -3835,10 +3951,7 @@ begin
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
     WriteBool('App', 'bTinnRHotKeysActive', bTinnRHotKeysActive);
-    WriteBool('App', 'bTxt2tags.Visible', actTxt2tagsVisible.Checked);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
-    WriteBool('App', 'bWinExpl.Visible', actWinExplVisible.Checked);
-    WriteBool('App', 'bWorkExpl.Visible', actWorkExplVisible.Checked);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
     WriteInteger('App', 'clBGApplication', Tcolor(clBGApplication));
     WriteInteger('App', 'clBGForAllHighlighters', Tcolor(clBGForAllHighlighters));
@@ -3882,8 +3995,8 @@ begin
     WriteString('App', 'sPathRterm', sPathRterm);
     WriteString('App', 'sPathTxt2tags_Converter', sPathTxt2tags_Converter);
     WriteString('App', 'sPathTxt2tags_Interpreter', sPathTxt2tags_Interpreter);
-    WriteString('App', 'sReformatR', sReformatR);
-    WriteString('App', 'sReformatRd', sReformatRd);
+    WriteString('App', 'sFormatR', sFormatR);
+    WriteString('App', 'sFormatRd', sFormatRd);
     WriteString('App', 'sRmirror', sRmirror);
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
     WriteString('App', 'sTriggerRDataCompletion', sTriggerRDataCompletion);
@@ -4149,6 +4262,7 @@ begin
     WriteString('Gutter', 'sFont.Name', coEditor.Gutter.Font.Name);
 
     // Editor settings
+    WriteBool('Editor', 'bAutocompletion', actAutoCompletion.Checked);
     WriteBool('Editor', 'bHideSelection', coEditor.HideSelection);
     WriteBool('Editor', 'bWantTabs', coEditor.WantTabs);
     WriteInteger('Editor', 'iExtraLineSpacing', coEditor.ExtraLineSpacing);
@@ -4203,21 +4317,6 @@ begin
     WriteString('App', 'sRmirrorsVersion'  , sVersion_Rmirrors);
     WriteString('App', 'sShortcutsVersion' , sVersion_Shortcuts);
 
-    // Form state and position
-    if (WindowState = wsNormal) then begin
-      WriteInteger('Form', 'iHeight', Height);
-      WriteInteger('Form', 'iLeft', Left);
-      WriteInteger('Form', 'iTop', Top);
-      WriteInteger('Form', 'iWidth', Width);
-    end
-    else begin
-      WriteInteger('Form', 'iHeight', iOldHeight);
-      WriteInteger('Form', 'iLeft', iOldLeft);
-      WriteInteger('Form', 'iTop', iOldTop);
-      WriteInteger('Form', 'iWidth', iOldWidth);
-    end;
-    WriteInteger('Form', 'iWindowState', integer(WindowState));
-
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
 
@@ -4228,67 +4327,66 @@ begin
     WriteInteger('App', 'iLastFile', iLastFile);
 
     // Toolbars
-    WriteBool('App', 'bEdit.Visible', tobEdit.Visible);
-    WriteBool('App', 'bFile.Visible', tobFile.Visible);
-    WriteBool('App', 'bFilter.Visible', tobFilter.Visible);
-    WriteBool('App', 'bFormat.Visible', tobFormat.Visible);
-    WriteBool('App', 'bMacro.Visible', tobMacro.Visible);
-    WriteBool('App', 'bMisc.Visible', tobMisc.Visible);
-    WriteBool('App', 'bProcessing.Visible', tobProcessing.Visible);
-    WriteBool('App', 'bRterm.Visible', actRtermVisible.Checked);
-    WriteBool('App', 'bSearch.Visible', tobSearch.Visible);
-    WriteBool('App', 'bSpell.Visible', tobSpell.Visible);
-    WriteBool('App', 'bSyntax.Visible', tobSyntax.Visible);
-    WriteBool('App', 'bTools.Visible', frmTools.Visible);
-    WriteBool('App', 'bView.Visible', tobView.Visible);
-    WriteBool('TBRMain', 'bVisible', actTobRVisible.Checked);
+    WriteBool('App', 'bTobEdit.Visible', tobEdit.Visible);
+    WriteBool('App', 'bTobFile.Visible', tobFile.Visible);
+    WriteBool('App', 'bTobFilter.Visible', tobFilter.Visible);
+    WriteBool('App', 'bTobFormat.Visible', tobFormat.Visible);
+    WriteBool('App', 'bTobMacro.Visible', tobMacro.Visible);
+    WriteBool('App', 'bTobMisc.Visible', tobMisc.Visible);
+    WriteBool('App', 'bTobProcessing.Visible', tobProcessing.Visible);
+    WriteBool('App', 'bTobSearch.Visible', tobSearch.Visible);
+    WriteBool('App', 'bTobSpell.Visible', tobSpell.Visible);
+    WriteBool('App', 'bTobSyntax.Visible', tobSyntax.Visible);
+    WriteBool('App', 'bTobView.Visible', tobView.Visible);
+    WriteBool('TBRMain', 'bTobVisible', actTobRVisible.Checked);
     WriteInteger('App', 'iCompletion.Height', frmTools.panCompletion.Height);
     WriteInteger('App', 'iCompletion.ItemIndex', frmTools.lbCompletion.ItemIndex);
     WriteInteger('App', 'iCountries.Height', frmTools.panCountries.Height);
     WriteInteger('App', 'iCountries.ItemIndex', frmTools.lbCountries.ItemIndex);
-    WriteInteger('App', 'iEdit.Left', tobEdit.Left);
-    WriteInteger('App', 'iEdit.Top', tobEdit.Top);
-    WriteInteger('App', 'iFile.Left', tobFile.Left);
-    WriteInteger('App', 'iFile.Top', tobFile.Top);
-    WriteInteger('App', 'iFilter.Left', tobFilter.Left);
-    WriteInteger('App', 'iFilter.Top', tobFilter.Top);
-    WriteInteger('App', 'iFormat.Left', tobFormat.Left);
-    WriteInteger('App', 'iFormat.Top', tobFormat.Top);
-    WriteInteger('App', 'iMacro.Left', tobMacro.Left);
-    WriteInteger('App', 'iMacro.Top', tobMacro.Top);
-    WriteInteger('App', 'iMisc.Left', tobMisc.Left);
-    WriteInteger('App', 'iMisc.Top', tobMisc.Top);
-    WriteInteger('App', 'iProcessing.Left', tobProcessing.Left);
-    WriteInteger('App', 'iProcessing.Top', tobProcessing.Top);
     WriteInteger('App', 'iRcard.Height', frmTools.panRcard.Height);
     WriteInteger('App', 'iRcard.ItemIndex', frmTools.lbRcard.ItemIndex);
     WriteInteger('App', 'iRExplorer.Width', frmTools.panRExplorer.Width);
-    WriteInteger('App', 'iSearch.Left', tobSearch.Left);
-    WriteInteger('App', 'iSearch.Top', tobSearch.Top);
     WriteInteger('App', 'iShortcuts.Height', frmTools.panShortcuts.Height);
     WriteInteger('App', 'iShortcuts.ItemIndex', frmTools.lbShortcuts.ItemIndex);
-    WriteInteger('App', 'iSpell.Left', tobSpell.Left);
-    WriteInteger('App', 'iSpell.Top', tobSpell.Top);
     WriteInteger('App', 'iSpellLanguage.ItemIndex', cbSpellLanguage.ItemIndex);
-    WriteInteger('App', 'iSyntax.Left', tobSyntax.Left);
-    WriteInteger('App', 'iSyntax.Top', tobSyntax.Top);
-    WriteInteger('App', 'iView.Left', tobView.Left);
-    WriteInteger('App', 'iView.Top', tobView.Top);
+    WriteInteger('App', 'iTobEdit.Left', tobEdit.Left);
+    WriteInteger('App', 'iTobEdit.Top', tobEdit.Top);
+    WriteInteger('App', 'iTobFile.Left', tobFile.Left);
+    WriteInteger('App', 'iTobFile.Top', tobFile.Top);
+    WriteInteger('App', 'iTobFilter.Left', tobFilter.Left);
+    WriteInteger('App', 'iTobFilter.Top', tobFilter.Top);
+    WriteInteger('App', 'iTobFormat.Left', tobFormat.Left);
+    WriteInteger('App', 'iTobFormat.Top', tobFormat.Top);
+    WriteInteger('App', 'iTobMacro.Left', tobMacro.Left);
+    WriteInteger('App', 'iTobMacro.Top', tobMacro.Top);
+    WriteInteger('App', 'iTobMisc.Left', tobMisc.Left);
+    WriteInteger('App', 'iTobMisc.Top', tobMisc.Top);
+    WriteInteger('App', 'iTobProcessing.Left', tobProcessing.Left);
+    WriteInteger('App', 'iTobProcessing.Top', tobProcessing.Top);
+    WriteInteger('App', 'iTobSearch.Left', tobSearch.Left);
+    WriteInteger('App', 'iTobSearch.Top', tobSearch.Top);
+    WriteInteger('App', 'iTobSpell.Left', tobSpell.Left);
+    WriteInteger('App', 'iTobSpell.Top', tobSpell.Top);
+    WriteInteger('App', 'iTobSyntax.Left', tobSyntax.Left);
+    WriteInteger('App', 'iTobSyntax.Top', tobSyntax.Top);
+    WriteInteger('App', 'iTobView.Left', tobView.Left);
+    WriteInteger('App', 'iTobView.Top', tobView.Top);
     WriteInteger('App', 'iWinExplorer.Height', frmTools.panWinExplorer.Height);
     WriteInteger('App', 'iWorkExplorer.Height', frmTools.panWorkExplorer.Height);
 
     // Rterm
+    WriteBool('App', 'bRtermCanFloat', bRtermCanFloat);
     WriteBool('App', 'bRtermCloseWithoutAsk', bRtermCloseWithoutAsk);
     WriteBool('App', 'bRtermHorizontal', bRtermHorizontal);
     WriteBool('App', 'bRtermSimple', bRtermSimple);
     WriteInteger('App', 'iIOSyntax', iIOSyntax);
     WriteInteger('App', 'iLogSyntax', iLogSyntax);
-    WriteInteger('App', 'iRtermDock.Height', iRtermDockHeight);
-    WriteInteger('App', 'iRtermDock.Width', iRtermDockWidth);
     WriteInteger('App', 'iSynLog2.Height', frmRterm.iSynLog2Height);
     WriteInteger('App', 'iSynLog2.Width', frmRterm.iSynLog2Width);
+    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
 
     // Tools
+    WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
     WriteInteger('App', 'iDatabase.TabIndex', frmTools.pgDatabase.TabIndex);
     WriteInteger('App', 'iLatex.TabIndex', frmTools.pgLatex.TabIndex);
     WriteInteger('App', 'iMarkup.TabIndex', frmTools.pgMarkup.TabIndex);
@@ -4296,9 +4394,30 @@ begin
     WriteInteger('App', 'iR.TabIndex', frmTools.pgR.TabIndex);
     WriteInteger('App', 'iResults.TabIndex', frmTools.pgResults.TabIndex);
     WriteInteger('App', 'iTools.TabIndex', frmTools.pgTools.TabIndex);
-    WriteInteger('App', 'iToolsDock.Height', iToolsDockHeight);
-    WriteInteger('App', 'iToolsDock.Width', iToolsDockWidth);
     WriteInteger('App', 'iTxt2tags.TabIndex', frmTools.pgTxt2tags.TabIndex);
+    WriteInteger('App', 'iTools.Size', frmTools.iSize);
+
+    // Tools visibility
+    WriteBool('App', 'bDatabase.Visible', actDatabaseVisible.Checked);
+    WriteBool('App', 'bDataComments.Visible', actDataCommentsVisible.Checked);
+    WriteBool('App', 'bDataCompletion.Visible', actDataCompletionVisible.Checked);
+    WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
+    WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
+    WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
+    WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
+    WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
+    WriteBool('App', 'bMarkup.Visible', actMarkupVisible.Checked);
+    WriteBool('App', 'bMisc.Visible', actMiscVisible.Checked);
+    WriteBool('App', 'bProject.Visible', actProjectVisible.Checked);
+    WriteBool('App', 'bR.Visible', actRVisible.Checked);
+    WriteBool('App', 'bResults.Visible', actResultsVisible.Checked);
+    WriteBool('App', 'bRExplorer.Visible', actRExplorerVisible.Checked);
+    WriteBool('App', 'bTxt2tags.Visible', actTxt2tagsVisible.Checked);
+    WriteBool('App', 'bWinExpl.Visible', actWinExplVisible.Checked);
+    WriteBool('App', 'bWorkExpl.Visible', actWorkExplVisible.Checked);
+    WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
+    WriteBool('App', 'bSearch.Visible', actSearchVisible.Checked);
+    WriteBool('App', 'bSpell.Visible', actSpellVisible.Checked);
 
     // Misc
     WriteBool('App', 'bActiveLine', bActiveLine);
@@ -4308,44 +4427,33 @@ begin
     WriteBool('App', 'bComAutoDetect_Language', frmTools.cbComAutoDetect_Language.Checked);
     WriteBool('App', 'bComPriority_Line', frmTools.cbComPriority_Line.Checked);
     WriteBool('App', 'bConnectionBeepOnError', bConnectionBeepOnError);
-    WriteBool('App', 'bDatabase.Visible', actDatabaseVisible.Checked);
-    WriteBool('App', 'bDataComments.Visible', actDataCommentsVisible.Checked);
-    WriteBool('App', 'bDataCompletion.Visible', actDataCompletionVisible.Checked);
     WriteBool('App', 'bDataCompletionAnywhere', bDataCompletionAnywhere);
-    WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
-    WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
-    WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
     WriteBool('App', 'bDosMinimizedAlways', actDosMinimizedAlways.Checked);
     WriteBool('App', 'bDviOpenAlways', actDviOpenAlways.Checked);
     WriteBool('App', 'bEditorLineWrap', actEditorLineWrap.Checked);
     WriteBool('App', 'bHtmlOpenAlways', actHtmlOpenAlways.Checked);
-    WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
     WriteBool('App', 'bIOLineWrap', actRtermIOLineWrap.Checked);
     WriteBool('App', 'bIPLocal', bIPLocal);
-    WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
     WriteBool('App', 'bLogLineWrap', actRtermLogLineWrap.Checked);
-    WriteBool('App', 'bMarkup.Visible', actMarkupVisible.Checked);
     WriteBool('App', 'bMinimizeTinnAfterLastFile', bMinimizeTinnAfterLastFile);
-    WriteBool('App', 'bMisc.Visible', actMiscVisible.Checked);
+    WriteBool('App', 'bNotification', actNotification.Checked);
+    WriteBool('App', 'bNotification_US', actNotification_US.Checked);
     WriteBool('App', 'bOpenMaximized', actOpenMaximized.Checked);
     WriteBool('App', 'bOrganizeAutomatically', bOrganizeAutomatically);
     WriteBool('App', 'bPdfOpenAlways', actPdfOpenAlways.Checked);
     WriteBool('App', 'bPgFiles.Visible', actPgFilesVisible.Checked);
-    WriteBool('App', 'bProject.Visible', actProjectVisible.Checked);
-    WriteBool('App', 'bR.Visible', actRVisible.Checked);
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
     WriteBool('App', 'bRAsServer', bRAsServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bReformatR', actReformatR.Visible);
+    WriteBool('App', 'bFormatR', actFormatR.Visible);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
-    WriteBool('App', 'bResults.Visible', actResultsVisible.Checked);
-    WriteBool('App', 'bRExplorer.Visible', actRExplorerVisible.Checked);
     WriteBool('App', 'bRget_Info', bRget_Info);
     WriteBool('App', 'bRguiReturnFocus', bRguiReturnFocus);
-    WriteBool('App', 'bRmirros_update', bRmirros_update);
+    WriteBool('App', 'bRmirros_Update', bRmirros_Update);
     WriteBool('App', 'bRSendAll', bRSendAll);
+    WriteBool('App', 'bRSetWorkDir_Starting', bRSetWorkDir_Starting);
     WriteBool('App', 'bRSimpleDefault', actRSimpleDefault.Checked);
     WriteBool('App', 'bRSmartSend', bRSmartSend);
     WriteBool('App', 'bRsvSocketConnect', bRsvSocket_Connect);
@@ -4353,6 +4461,7 @@ begin
     WriteBool('App', 'bRTCPIPConsoleUse', bRTCPIPConsoleUse);
     WriteBool('App', 'bRtermBeepOnError', bRtermBeepOnError);
     WriteBool('App', 'bRtermFindError', bRtermFindError);
+    WriteBool('App', 'bRtermWidth', bRtermWidth);
     WriteBool('App', 'bRTinnRcomInstall', bRTinnRcom_Install);
     WriteBool('App', 'bRTinnRcomLoad', bRTinnRcom_Load);
     WriteBool('App', 'bRUseLatest', bRUseLatest);
@@ -4361,10 +4470,7 @@ begin
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
     WriteBool('App', 'bTinnRHotKeysActive', bTinnRHotKeysActive);
-    WriteBool('App', 'bTxt2tags.Visible', actTxt2tagsVisible.Checked);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
-    WriteBool('App', 'bWinExpl.Visible', actWinExplVisible.Checked);
-    WriteBool('App', 'bWorkExpl.Visible', actWorkExplVisible.Checked);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
     WriteInteger('App', 'clBGApplication', Tcolor(clBGApplication));
     WriteInteger('App', 'clBGForAllHighlighters', Tcolor(clBGForAllHighlighters));
@@ -4372,7 +4478,7 @@ begin
     WriteInteger('App', 'clBGTabSelectedNew', Tcolor(clBGTabSelectedNew));
     WriteInteger('App', 'clBrackets', Tcolor(clBrackets));
     WriteInteger('App', 'clFGApplication', Tcolor(clFGApplication));
-    WriteInteger('App', 'iDelay', iDelay);
+    WriteInteger('App', 'Delay', iDelay);
     WriteInteger('App', 'iIPPortLocal', iIPPortLocal);
     WriteInteger('App', 'iIPPortRemote', iIPPortRemote);
     WriteInteger('App', 'iMaxDeparseLength', iMaxDeparseLength);
@@ -4408,8 +4514,8 @@ begin
     WriteString('App', 'sPathRterm', sPathRterm);
     WriteString('App', 'sPathTxt2tags_Converter', sPathTxt2tags_Converter);
     WriteString('App', 'sPathTxt2tags_Interpreter', sPathTxt2tags_Interpreter);
-    WriteString('App', 'sReformatR', sReformatR);
-    WriteString('App', 'sReformatRd', sReformatRd);
+    WriteString('App', 'sFormatR', sFormatR);
+    WriteString('App', 'sFormatRd', sFormatRd);
     WriteString('App', 'sRmirror', sRmirror);
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
     WriteString('App', 'sTriggerRDataCompletion', sTriggerRDataCompletion);
@@ -4683,6 +4789,7 @@ begin
     WriteString('Gutter', 'sFont.Name', coEditor.Gutter.Font.Name);
 
     // Editor settings
+    WriteBool('Editor', 'bAutocompletion', actAutoCompletion.Checked);
     WriteBool('Editor', 'bHideSelection', coEditor.HideSelection);
     WriteBool('Editor', 'bWantTabs', coEditor.WantTabs);
     WriteInteger('Editor', 'iExtraLineSpacing', coEditor.ExtraLineSpacing);
@@ -4739,15 +4846,32 @@ begin
   end;
 end;
 
+function TfrmTinnMain.GetSaveFormat(usTmp: TUnicodeStrings): string;
+var
+  sf: TSaveFormat;
+  
+begin
+  sf:= TSynEditStringList(usTmp).SaveFormat;
+
+  case sf of
+    sfANSI:     Result:= 'ANSI';
+    sfUTF8:     Result:= 'UTF-8';
+    sfUTF16LSB: Result:= 'UTF16-LE';
+    sfUTF16MSB: Result:= 'UTF16-BE';
+  end;
+end;
+
 procedure TfrmTinnMain.GetFile_Info(sFileName: string;
                                     usTmp: TUnicodeStrings;
                                     bConverting: boolean = False);
 var
-  ff  : TSynEditFileFormat;
-  sf  : TSaveFormat;
+  ff: TSynEditFileFormat;
+
+  //sf: TSaveFormat;
+
   sff,
    ssf: string;
-
+{
   function GetSaveFormat: string;
   begin
     sf:= TSynEditStringList(usTmp).SaveFormat;
@@ -4759,12 +4883,12 @@ var
     end;
     Result:= ssf;
   end;
-
+}
 begin
   if (ExtractFileExt(sFileName) = EmptyStr) and
      (pos('Untitled',
           sFileName) > 0) then begin // The file does not exist (physically in the HD) yet!
-    GetSaveFormat;
+    ssf:= GetSaveFormat(usTmp);
 
     with stbMain do begin
       Panels[0].Text:= ssf;
@@ -4779,7 +4903,7 @@ begin
     seeEncoding:= GetEncoding(sFileName,
                               bbBOM);
 
-    GetSaveFormat;
+    ssf:= GetSaveFormat(usTmp);
 
     ff:= TSynEditStringList(usTmp).FileFormat;
     case ff of
@@ -4873,91 +4997,78 @@ begin
                      EmptyStr);
 
   actTobRVisible.Checked:= ifTinn.ReadBool('TBRMain',
-                                           'bVisible',
+                                           'bTobVisible',
                                            True);
 
-  // Will always preserve the last position (not maximized) when closing
-  iOldHeight:= ifTinn.ReadInteger('Form', 'iHeight', 2 * Screen.Height div 3);
-  iOldLeft  := ifTinn.ReadInteger('Form', 'iLeft', 0);
-  iOldTop   := ifTinn.ReadInteger('Form', 'iTop', 0);
-  iOldWidth := ifTinn.ReadInteger('Form', 'iWidth', Screen.Width);
-  
-  // My preferred
-  Height     := ifTinn.ReadInteger('Form', 'iHeight', 2 * Screen.Height div 3);
-  Left       := ifTinn.ReadInteger('Form', 'iLeft', 0);
-  Top        := ifTinn.ReadInteger('Form', 'iTop', 0);
-  Width      := ifTinn.ReadInteger('Form', 'iWidth', Screen.Width);
-  WindowState:= TWindowState(ifTinn.ReadInteger('Form', 'iWindowState', 0));
-  
   // Dir and Top
   bTop       := ifTinn.ReadBool('App', 'bAlwaysOnTop', False);
   sWorkingDir:= trim(ifTinn.ReadString('App', 'sWorkingDir', EmptyStr));
   if (bTop) then actOnTopExecute(nil);
 
   // File Bar
-  tobFile.Left   := ifTinn.ReadInteger('App', 'iFile.Left', tobFile.Left);
-  tobFile.Top    := ifTinn.ReadInteger('App', 'iFile.Top', tobFile.Top);
-  tobFile.Visible:= ifTinn.ReadBool('App', 'bFile.Visible', True);
+  tobFile.Left   := ifTinn.ReadInteger('App', 'iTobFile.Left', tobFile.Left);
+  tobFile.Top    := ifTinn.ReadInteger('App', 'iTobFile.Top', tobFile.Top);
+  tobFile.Visible:= ifTinn.ReadBool('App', 'bTobFile.Visible', True);
   actTobFilesVisible.Checked:= tobFile.Visible;
 
   // Edit Bar
-  tobEdit.Left   := ifTinn.ReadInteger('App', 'iEdit.Left', tobEdit.Left);
-  tobEdit.Top    := ifTinn.ReadInteger('App', 'iEdit.Top', tobEdit.Top);
-  tobEdit.Visible:= ifTinn.ReadBool('App', 'bEdit.Visible', True);
+  tobEdit.Left   := ifTinn.ReadInteger('App', 'iTobEdit.Left', tobEdit.Left);
+  tobEdit.Top    := ifTinn.ReadInteger('App', 'iTobEdit.Top', tobEdit.Top);
+  tobEdit.Visible:= ifTinn.ReadBool('App', 'bTobEdit.Visible', True);
   actTobEditVisible.Checked:= tobEdit.Visible;
 
   // Search Bar
-  tobSearch.Left   := ifTinn.ReadInteger('App', 'iSearch.Left', tobSearch.Left);
-  tobSearch.Top    := ifTinn.ReadInteger('App', 'iSearch.Top', tobSearch.Top);
-  tobSearch.Visible:= ifTinn.ReadBool('App', 'bSearch.Visible', True);
+  tobSearch.Left   := ifTinn.ReadInteger('App', 'iTobSearch.Left', tobSearch.Left);
+  tobSearch.Top    := ifTinn.ReadInteger('App', 'iTobSearch.Top', tobSearch.Top);
+  tobSearch.Visible:= ifTinn.ReadBool('App', 'bTobSearch.Visible', True);
   actTobSearchVisible.Checked:= tobSearch.Visible;
 
   // Misc Bar
-  tobMisc.Left   := ifTinn.ReadInteger('App', 'iMisc.Left', tobMisc.Left);
-  tobMisc.Top    := ifTinn.ReadInteger('App', 'iMisc.Top', tobMisc.Top);
-  tobMisc.Visible:= ifTinn.ReadBool('App', 'bMisc.Visible', True);
+  tobMisc.Left   := ifTinn.ReadInteger('App', 'iTobMisc.Left', tobMisc.Left);
+  tobMisc.Top    := ifTinn.ReadInteger('App', 'iTobMisc.Top', tobMisc.Top);
+  tobMisc.Visible:= ifTinn.ReadBool('App', 'bTobMisc.Visible', True);
   actTobMiscVisible.Checked:= tobMisc.Visible;
 
   // Processing Bar
-  tobProcessing.Left   := ifTinn.ReadInteger('App', 'iProcessing.Left', tobProcessing.Left);
-  tobProcessing.Top    := ifTinn.ReadInteger('App', 'iProcessing.Top', tobProcessing.Top);
-  tobProcessing.Visible:= ifTinn.ReadBool('App', 'bProcessing.Visible', True);
+  tobProcessing.Left   := ifTinn.ReadInteger('App', 'iTobProcessing.Left', tobProcessing.Left);
+  tobProcessing.Top    := ifTinn.ReadInteger('App', 'iTobProcessing.Top', tobProcessing.Top);
+  tobProcessing.Visible:= ifTinn.ReadBool('App', 'bTobProcessing.Visible', True);
   actTobProcessingVisible.Checked:= tobProcessing.Visible;
 
   // Format Bar
-  tobFormat.Left   := ifTinn.ReadInteger('App', 'iFormat.Left', tobFormat.Left);
-  tobFormat.Top    := ifTinn.ReadInteger('App', 'iFormat.Top', tobFormat.Top);
-  tobFormat.Visible:= ifTinn.ReadBool('App', 'bFormat.Visible', True);
+  tobFormat.Left   := ifTinn.ReadInteger('App', 'iTobFormat.Left', tobFormat.Left);
+  tobFormat.Top    := ifTinn.ReadInteger('App', 'iTobFormat.Top', tobFormat.Top);
+  tobFormat.Visible:= ifTinn.ReadBool('App', 'bTobFormat.Visible', True);
   actTobFormatVisible.Checked:= tobFormat.Visible;
 
   // View Bar
-  tobView.Left   := ifTinn.ReadInteger('App', 'iView.Left', tobView.Left);
-  tobView.Top    := ifTinn.ReadInteger('App', 'iView.Top', tobView.Top);
-  tobView.Visible:= ifTinn.ReadBool('App', 'bView.Visible', True);
+  tobView.Left   := ifTinn.ReadInteger('App', 'iTobView.Left', tobView.Left);
+  tobView.Top    := ifTinn.ReadInteger('App', 'iTobView.Top', tobView.Top);
+  tobView.Visible:= ifTinn.ReadBool('App', 'bTobView.Visible', True);
   actTobViewVisible.Checked:= tobView.Visible;
 
   // Macro Bar
-  tobMacro.Left   := ifTinn.ReadInteger('App', 'iMacro.Left', tobMacro.Left);
-  tobMacro.Top    := ifTinn.ReadInteger('App', 'iMacro.Top', tobMacro.Top);
-  tobMacro.Visible:= ifTinn.ReadBool('App', 'bMacro.Visible', False);
+  tobMacro.Left   := ifTinn.ReadInteger('App', 'iTobMacro.Left', tobMacro.Left);
+  tobMacro.Top    := ifTinn.ReadInteger('App', 'iTobMacro.Top', tobMacro.Top);
+  tobMacro.Visible:= ifTinn.ReadBool('App', 'bTobMacro.Visible', False);
   actTobMacroVisible.Checked:= tobMacro.Visible;
 
   // Filter Bar
-  tobFilter.Left   := ifTinn.ReadInteger('App', 'iFilter.Left', tobFilter.Left);
-  tobFilter.Top    := ifTinn.ReadInteger('App', 'iFilter.Top', tobFilter.Top);
-  tobFilter.Visible:= ifTinn.ReadBool('App', 'bFilter.Visible', False);
+  tobFilter.Left   := ifTinn.ReadInteger('App', 'iTobFilter.Left', tobFilter.Left);
+  tobFilter.Top    := ifTinn.ReadInteger('App', 'iTobFilter.Top', tobFilter.Top);
+  tobFilter.Visible:= ifTinn.ReadBool('App', 'bTobFilter.Visible', False);
   actTobFilterVisible.Checked:= tobFilter.Visible;
 
   // Syntax Bar
-  tobSyntax.Left   := ifTinn.ReadInteger('App', 'iSyntax.Left', tobSyntax.Left);
-  tobSyntax.Top    := ifTinn.ReadInteger('App', 'iSyntax.Top', tobSyntax.Top);
-  tobSyntax.Visible:= ifTinn.ReadBool('App', 'bSyntax.Visible', True);
+  tobSyntax.Left   := ifTinn.ReadInteger('App', 'iTobSyntax.Left', tobSyntax.Left);
+  tobSyntax.Top    := ifTinn.ReadInteger('App', 'iTobSyntax.Top', tobSyntax.Top);
+  tobSyntax.Visible:= ifTinn.ReadBool('App', 'bTobSyntax.Visible', True);
   actTobSyntaxVisible.Checked:= tobSyntax.Visible;
 
   // Spell Bar
-  tobSpell.Left   := ifTinn.ReadInteger('App', 'iSpell.Left', tobSpell.Left);
-  tobSpell.Top    := ifTinn.ReadInteger('App', 'iSpell.Top', tobSpell.Top);
-  tobSpell.Visible:= ifTinn.ReadBool('App', 'bSpell.Visible', False);
+  tobSpell.Left   := ifTinn.ReadInteger('App', 'iTobSpell.Left', tobSpell.Left);
+  tobSpell.Top    := ifTinn.ReadInteger('App', 'iTobSpell.Top', tobSpell.Top);
+  tobSpell.Visible:= ifTinn.ReadBool('App', 'bTobSpell.Visible', False);
   actTobSpellVisible.Checked:= tobSpell.Visible;
 
   // Misc
@@ -4978,12 +5089,15 @@ begin
   actMarkupVisible.Checked           := ifTinn.ReadBool('App', 'bMarkup.Visible', True);
   actMiscVisible.Checked             := ifTinn.ReadBool('App', 'bMisc.Visible', True);
   actProjectVisible.Checked          := ifTinn.ReadBool('App', 'bProject.Visible', True);
+  actRVisible.Checked                := ifTinn.ReadBool('App', 'bR.Visible', True);
   actResultsVisible.Checked          := ifTinn.ReadBool('App', 'bResults.Visible', True);
   actRExplorerVisible.Checked        := ifTinn.ReadBool('App', 'bRExplorer.Visible', True);
-  actRVisible.Checked                := ifTinn.ReadBool('App', 'bR.Visible', True);
   actTxt2tagsVisible.Checked         := ifTinn.ReadBool('App', 'bTxt2tags.Visible', True);
   actWinExplVisible.Checked          := ifTinn.ReadBool('App', 'bWinExpl.Visible', True);
   actWorkExplVisible.Checked         := ifTinn.ReadBool('App', 'bWorkExpl.Visible', True);
+  actHexViewerVisible.Checked        := ifTinn.ReadBool('App', 'bHexViewer.Visible', True);
+  actSearchVisible.Checked           := ifTinn.ReadBool('App', 'bSearch.Visible', True);
+  actSpellVisible.Checked            := ifTinn.ReadBool('App', 'bSpell.Visible', True);
 
   frmTools.tbsComments.TabVisible    := actDataCommentsVisible.Checked;
   frmTools.tbsCompletion.TabVisible  := actDataCompletionVisible.Checked;
@@ -4999,6 +5113,7 @@ begin
   frmTools.tbsRExplorer.TabVisible   := actRExplorerVisible.Checked;
   frmTools.tbsRmirrors.TabVisible    := actDataRmirrorsVisible.Checked;
   frmTools.tbsSearch.TabVisible      := actSearchVisible.Checked;
+  frmTools.tbsHexViewer.TabVisible   := actHexViewerVisible.Checked;
   frmTools.tbsShortcuts.TabVisible   := actDataShortcutsVisible.Checked;
   frmTools.tbsSpell.TabVisible       := actSpellVisible.Checked;
   frmTools.tbsTxt2tags.TabVisible    := actTxt2tagsVisible.Checked;
@@ -5044,8 +5159,8 @@ begin
   sPathDeplate_Interpreter := trim(ifTinn.ReadString('App', 'sPathDeplate_Interpreter', EmptyStr));
   sPathTxt2tags_Converter  := trim(ifTinn.ReadString('App', 'sPathTxt2tags_Converter', EmptyStr));
   sPathTxt2tags_Interpreter:= trim(ifTinn.ReadString('App', 'sPathTxt2tags_Interpreter', EmptyStr));
-  sReformatR               := trim(ifTinn.ReadString('App', 'sReformatR', EmptyStr));
-  sReformatRd              := trim(ifTinn.ReadString('App', 'sReformatRd', 'Sorry, this feature is not available yet!'));
+  sFormatR                 := trim(ifTinn.ReadString('App', 'sFormatR', EmptyStr));
+  sFormatRd                := trim(ifTinn.ReadString('App', 'sFormatRd', 'Sorry, this feature is not available yet!'));
 
   actCloseDVIViewer.Checked    := ifTinn.ReadBool('App', 'bCloseDVIViewer', False);
   actClosePDFViewer.Checked    := ifTinn.ReadBool('App', 'bClosePDFViewer', True);
@@ -5061,19 +5176,26 @@ begin
   bConnectionBeepOnError := ifTinn.ReadBool('App', 'bConnectionBeepOnError', True);
   bDataCompletionAnywhere:= ifTinn.ReadBool('App', 'bDataCompletionAnywhere', True);
   bOrganizeAutomatically := ifTinn.ReadBool('App', 'bOrganizeAutomatically', False);
-  bRArchitecture64       := ifTinn.ReadBool('App', 'bRArchitecture64', True);
+
+  // There is still some 32 bit computer in use today!
+  if (Is64Bit_OS) and
+     ifTinn.ReadBool('App', 'bRArchitecture64', True) then bRArchitecture64:= True
+                                                      else bRArchitecture64:= False;
+
   bRAsServer             := ifTinn.ReadBool('App', 'bRAsServer', True);
   bRestoreIniDock        := ifTinn.ReadBool('App', 'bRestoreIniDock', False);
   bRget_Info             := ifTinn.ReadBool('App', 'bRget_Info', True);
   bRguiReturnFocus       := ifTinn.ReadBool('App', 'bRguiReturnFocus', True);
   bRmirros_Update        := ifTinn.ReadBool('App', 'bRmirros_Update', False);
   bRSendAll              := ifTinn.ReadBool('App', 'bRSendAll', False);
+  bRSetWorkDir_Starting  := ifTinn.ReadBool('App', 'bRSetWorkDir_Starting', True);
   bRSmartSend            := ifTinn.ReadBool('App', 'bRSmartSend', True);
   bRsvSocket_Connect     := ifTinn.ReadBool('App', 'bRsvSocketConnect', True);
   bRTCPIPConsoleEcho     := ifTinn.ReadBool('App', 'bRTCPIPConsoleEcho', False);
   bRTCPIPConsoleUse      := ifTinn.ReadBool('App', 'bRTCPIPConsoleUse', False);
   bRtermBeepOnError      := ifTinn.ReadBool('App', 'bRtermBeepOnError', True);
   bRtermFindError        := ifTinn.ReadBool('App', 'bRtermFindError', False);
+  bRtermWidth            := ifTinn.ReadBool('App', 'bRtermWidth', True);
   bRTinnRcom_Install     := ifTinn.ReadBool('App', 'bRTinnRcomInstall', True);
   bRTinnRcom_Load        := ifTinn.ReadBool('App', 'bRTinnRcomLoad', True);
   bRUseLatest            := ifTinn.ReadBool('App', 'bRUseLatest', True);
@@ -5089,7 +5211,6 @@ begin
 
   actPgFilesVisible.Checked                := ifTinn.ReadBool('App', 'bPgFiles.Visible', True);
   actStatusBarVisible.Checked              := ifTinn.ReadBool('App','bStatusBar', True);
-  frmRterm.Visible                         := ifTinn.ReadBool('App', 'bRterm.Visible', True);
   frmTools.cbComAutoDetect_Language.Checked:= ifTinn.ReadBool('App', 'bComAutoDetect_Language', True);
   frmTools.cbComPriority_Line.Checked      := ifTinn.ReadBool('App', 'bComPriority_Line', True);
   frmTools.panCompletion.Height            := ifTinn.ReadInteger('App', 'iCompletion.Height', 41);
@@ -5099,10 +5220,9 @@ begin
   frmTools.panShortcuts.Height             := ifTinn.ReadInteger('App', 'iShortcuts.Height', 79);
   frmTools.panWinExplorer.Height           := ifTinn.ReadInteger('App', 'iWinExplorer.Height', 75);
   frmTools.panWorkExplorer.Height          := ifTinn.ReadInteger('App', 'iWorkExplorer.Height', 75);
-  frmTools.Visible                         := ifTinn.ReadBool('App', 'bTools.Visible', True);
 
-  if (trim(sReformatRd) <> 'Sorry, this feature is not available yet!') then
-    sReformatRd:= 'Sorry, this feature is not available yet!';
+  if (trim(sFormatRd) <> 'Sorry, this feature is not available yet!') then
+    sFormatRd:= 'Sorry, this feature is not available yet!';
 
   // pgFiles
   iTmp:= ifTinn.ReadInteger('App', 'iPgFiles.TabsPosition', 1);
@@ -5133,12 +5253,10 @@ begin
   end;
 
   pgFiles.Visible:= actPgFilesVisible.Checked;
-
-  actToolsVisible.Checked:= frmTools.Visible;
-  actRtermVisible.Checked:= frmRterm.Visible;
-  stbMain.Visible        := actStatusBarVisible.Checked;
+  stbMain.Visible:= actStatusBarVisible.Checked;
 
   // Tools
+  bToolsCanFloat              := ifTinn.ReadBool('App', 'bToolsCanFloat', False);
   frmTools.pgDatabase.TabIndex:= ifTinn.ReadInteger('App', 'iDatabase.TabIndex', 0);
   frmTools.pgLatex.TabIndex   := ifTinn.ReadInteger('App', 'iLatex.TabIndex', 0);
   frmTools.pgMarkup.TabIndex  := ifTinn.ReadInteger('App', 'iMarkup.TabIndex', 0);
@@ -5147,8 +5265,7 @@ begin
   frmTools.pgResults.TabIndex := ifTinn.ReadInteger('App', 'iResults.TabIndex', 0);
   frmTools.pgTools.TabIndex   := ifTinn.ReadInteger('App', 'iTools.TabIndex', 0);
   frmTools.pgTxt2tags.TabIndex:= ifTinn.ReadInteger('App', 'iTxt2tags.TabIndex', 0);
-  iToolsDockHeight            := ifTinn.ReadInteger('App', 'iToolsDock.Height', 200);
-  iToolsDockWidth             := ifTinn.ReadInteger('App', 'iToolsDock.Width', 100);
+  frmTools.iSize              := ifTinn.ReadInteger('App', 'iTools.Size', 310);
 
   cbSpellLanguage.ItemIndex:= ifTinn.ReadInteger('App', 'iSpellLanguage.ItemIndex', -1);
   iCompletionFilter        := ifTinn.ReadInteger('App', 'iCompletion.ItemIndex', 0);
@@ -5163,15 +5280,15 @@ begin
   // Rterm
   bIOLineWrap            := ifTinn.ReadBool('App', 'bIOLineWrap', True);
   bLogLineWrap           := ifTinn.ReadBool('App', 'bLogLineWrap', True);
+  bRtermCanFloat         := ifTinn.ReadBool('App', 'bRtermCanFloat', False);
   bRtermCloseWithoutAsk  := ifTinn.ReadBool('App', 'bRtermCloseWithoutAsk', False);
   bRtermHorizontal       := ifTinn.ReadBool('App', 'bRtermHorizontal', True);
   bRtermSimple           := ifTinn.ReadBool('App', 'bRtermSimple', True);
   frmRterm.iSynLog2Height:= ifTinn.ReadInteger('App', 'iSynLog2.Height', 90);
   frmRterm.iSynLog2Width := ifTinn.ReadInteger('App', 'iSynLog2.Width', 140);
+  frmRterm.iSize         := ifTinn.ReadInteger('App', 'iRterm.Size', 480);
   iIOSyntax              := ifTinn.ReadInteger('App', 'iIOSyntax', 1);   // .R
   iLogSyntax             := ifTinn.ReadInteger('App', 'iLogSyntax', 0);  // .txt
-  iRtermDockHeight       := ifTinn.ReadInteger('App', 'iRtermDock.Height', 200);
-  iRtermDockWidth        := ifTinn.ReadInteger('App', 'iRtermDock.Width', 100);
 
   with frmRterm do begin
     synIO.WordWrap := bIOLineWrap;
@@ -5532,8 +5649,14 @@ begin
     end;
   end;
 
+  actNotification.Checked   := ifTinn.ReadBool('App', 'bNotification', True);
+  actNotification_US.Checked:= ifTinn.ReadBool('App', 'bNotification_US', False);
+
   sRmirror:= trim(ifTinn.ReadString('App', 'sRmirror', 'http://cran.at.r-project.org/'));
   frmTools.stbRMirrors.Panels[1].Text:= sRmirror;
+
+  frmTools.JvDockClientTools.CanFloat:= bToolsCanFloat;
+  frmRterm.JvDockClientRterm.CanFloat:= bRtermCanFloat;
 
   iAlphaBlendValue:= 255 - (255 * iTransparency) Div 100;
 end;
@@ -5559,20 +5682,21 @@ begin
 
   // Editor Options
   with coEditor do begin
-    ExtraLineSpacing        := ifEditor.ReadInteger('Editor', 'iExtraLineSpacing', 0);
-    Font.Color              := ifEditor.ReadInteger('Editor', 'iFont.Color', 0);
-    Font.Name               := ifEditor.ReadString('Editor', 'sFont.Name', 'Courier New');
-    Font.Size               := ifEditor.ReadInteger('Editor', 'iFont.Size', 11);
-    HideSelection           := ifEditor.ReadBool('Editor', 'bHideSelection', False);
-    InsertCaret             := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iInsertCaret', 0));
-    Options                 := TSynEditorOptions(ifEditor.ReadInteger('Editor', 'iOptions', 124618775));  // My basic preferences!
-    OverWriteCaret          := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iOverWriteCaret', 3));
-    RightEdge               := ifEditor.ReadInteger('Editor', 'iRightEdge', 80);
-    RightEdgeColor          := ifEditor.ReadInteger('Editor', 'iRightEdgeColor', coEditor.RightEdgeColor);
-    SelectedColor.Background:= ifEditor.ReadInteger('Editor', 'iSelectedColor.Background', coEditor.SelectedColor.Background);
-    SelectedColor.Foreground:= ifEditor.ReadInteger('Editor', 'iSelectedColor.Foreground', coEditor.SelectedColor.Foreground);
-    TabWidth                := ifEditor.ReadInteger('Editor', 'iTab.Width', 2);
-    WantTabs                := ifEditor.ReadBool('Editor', 'bWantTabs', True);
+    actAutoCompletion.Checked:= ifEditor.ReadBool('Editor', 'bAutocompletion', True);
+    ExtraLineSpacing         := ifEditor.ReadInteger('Editor', 'iExtraLineSpacing', 0);
+    Font.Color               := ifEditor.ReadInteger('Editor', 'iFont.Color', 0);
+    Font.Name                := ifEditor.ReadString('Editor', 'sFont.Name', 'Courier New');
+    Font.Size                := ifEditor.ReadInteger('Editor', 'iFont.Size', 11);
+    HideSelection            := ifEditor.ReadBool('Editor', 'bHideSelection', False);
+    InsertCaret              := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iInsertCaret', 0));
+    Options                  := TSynEditorOptions(ifEditor.ReadInteger('Editor', 'iOptions', 124618775));  // My basic preferences!
+    OverWriteCaret           := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iOverWriteCaret', 3));
+    RightEdge                := ifEditor.ReadInteger('Editor', 'iRightEdge', 80);
+    RightEdgeColor           := ifEditor.ReadInteger('Editor', 'iRightEdgeColor', coEditor.RightEdgeColor);
+    SelectedColor.Background := ifEditor.ReadInteger('Editor', 'iSelectedColor.Background', coEditor.SelectedColor.Background);
+    SelectedColor.Foreground := ifEditor.ReadInteger('Editor', 'iSelectedColor.Foreground', coEditor.SelectedColor.Foreground);
+    TabWidth                 := ifEditor.ReadInteger('Editor', 'iTab.Width', 2);
+    WantTabs                 := ifEditor.ReadBool('Editor', 'bWantTabs', True);
   end;
 
   // These options tend to be changed very often.
@@ -5695,7 +5819,8 @@ var
 
   sLocline,
    sRClassFor: string;
-  seEditor   : TSynEdit;
+
+  seEditor: TSynEdit;
 
   procedure GetLocLine(se: TSynEdit);
   begin
@@ -6273,16 +6398,20 @@ var
 begin
   VerInfoSize:= GetFileVersionInfoSize(PChar(ParamStr(0)),
                                        Dummy);
+
   GetMem(VerInfo,
          VerInfoSize);
+
   GetFileVersionInfo(PChar(ParamStr(0)),
                      0,
                      VerInfoSize,
                      VerInfo);
+
   VerQueryValue(VerInfo,
                 '\',
                 Pointer(VerValue),
                 VerValueSize);
+
   with VerValue^ do begin
     wV1:= dwFileVersionMS shr 16;
     wV2:= dwFileVersionMS and $FFFF;
@@ -6295,11 +6424,14 @@ begin
 
   Result:= InttoStr(wV1) +
                     '.' +
-                    InttoStr(wV2) +
+                    //InttoStr(wV2) +
+                    Format('%.*d', [2, wV2]) +
                     '.' +
-                    InttoStr(wV3) +
+                    //InttoStr(wV3) +
+                    Format('%.*d', [2, wV3]) +
                     '.' +
-                    InttoStr(wV4);
+                    //InttoStr(wV4);
+                    Format('%.*d', [2, wV4]);
 end;
 
 procedure TfrmTinnMain.actFileNewExecute(Sender: TObject);
@@ -6316,6 +6448,8 @@ begin
     SetDataCompletion(synEditorDataCompletion,
                       (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor,
                       sTriggerRDataCompletion);
+
+    (Self.MDIChildren[FindTopWindow] as tfrmEditor).ToogleWordWrap(actEditorLineWrap.Checked);
 
     synEditor.ReadOnly:= False;
 
@@ -6339,6 +6473,8 @@ begin
 
   pgFiles.ActivePageIndex:= pgFiles.PageCount - 1;
   pgFiles.ActivePage.Tag := -1;
+
+  UpdateHexViewer;
 end;
 
 procedure TfrmTinnMain.actFileOpenExecute(Sender: TObject);
@@ -6449,8 +6585,10 @@ end;
 
 procedure TfrmTinnMain.SendResources(bOption: boolean);
 var
-  bMark   : boolean;
-  i       : integer;
+  bMark: boolean;
+
+  i: integer;
+
   seEditor: TSynEdit;
 
 begin
@@ -6468,14 +6606,14 @@ begin
 // Alphabetically ordered
   actRContSetWorkDirectory.Enabled     := bOption and FileExists((Self.MDIChildren[i] as TfrmEditor).sActiveFile);
   actRCurrentLineToTop.Enabled         := bOption;
-  actReformatR.Enabled                 := bOption;
+  actFormatR.Enabled                   := bOption;
   actRSendBlockMarked.Enabled          := bOption and bMark;
   actRSendContiguous.Enabled           := bOption;
   actRSendCursorToBeginningLine.Enabled:= bOption;
   actRSendCursorToEndLine.Enabled      := bOption;
   actRSendFile.Enabled                 := bOption;
-  actRSendKnitPdf.Enabled              := bOption;
   actRSendKnitHtml.Enabled             := bOption;
+  actRSendKnitPdf.Enabled              := bOption;
   actRSendLine.Enabled                 := bOption;
   actRSendLinesToEndPage.Enabled       := bOption;
   actRSendSourceBlockMarked.Enabled    := bOption and bMark;
@@ -6558,9 +6696,11 @@ begin
   sFile:= sPathTinnR +
           '\doc\User guide.pdf';
 
-  sParameter:= '-reuse-instance ' +
+  sParameter:= '-view "continuous single page" ' + 
+               '-reuse-instance ' +
                '-named-dest ' +
                sWhere;
+
   try
     sViewerDefault:= GetAssociation('.pdf');
 
@@ -6581,7 +6721,7 @@ begin
       OpenCmdLine(sPathSumatra +
                   ' "' +
                   sFile +
-                  '"' +
+                  '" ' +
                   sParameter,
                   sw_shownormal);
     end;
@@ -6983,16 +7123,27 @@ var
   procedure UpdateSplash(sTmp: string);
   begin
     with frmSplash do begin
+{
       imSplash.Picture.LoadFromFile(sPathRes +
                                     'sp_' +
                                     sTmp +
                                     '.jpg');
+}
+{
+      imSplash.Picture.LoadFromFile(sPathRes +
+                                    sTmp +
+                                    '.gif');
+}
+      //(imSplash.Picture.Graphic as TGIFImage).Animate:= True;
+      //(imSplash.Picture.Graphic as TGIFImage).AnimationSpeed:= 1000;
+
       Update;
+      //DoubleBuffered := True;// stops flickering
     end;
   end;
 
 begin
-(*
+  (*
   // The below controls (automatically) the visibility of the menu Tools/Utils on build!
   {$IFDEF DEBUG}
     menToolsUtils.Visible:= True;
@@ -7004,6 +7155,8 @@ begin
 
   GetPathRes;
   UpdateSplash('00');
+  //UpdateSplash('startup');
+  frmSplash.pb.Position:= 0;
 
   // Initial status
   ToolsProjectControls(False);
@@ -7025,15 +7178,19 @@ begin
   bStartingUp := True;
   slFileMRU   := TStringList.Create;
   slprojectMRU:= TStringList.Create;
-  UpdateSplash('01');
+  //UpdateSplash('01');
+  frmSplash.pb.Position:= 1;
+
   try
     frmTools:= TfrmTools.Create(nil);
-    UpdateSplash('02');
+    //UpdateSplash('02');
+    frmSplash.pb.Position:= 2;
 
     CheckOrigin;
 
     SetIniStructure;
-    UpdateSplash('03');
+    //UpdateSplash('03');
+    frmSplash.pb.Position:= 3;
 
     CheckVersion;
 
@@ -7043,7 +7200,8 @@ begin
     SavePreferencesOfOldVersion;
 
     frmRterm:= TfrmRterm.Create(nil);
-    UpdateSplash('04');
+    //UpdateSplash('04');
+    frmSplash.pb.Position:= 4;
 
     SetPreferences_Application;
     SetPreferences_Editor;
@@ -7059,28 +7217,35 @@ begin
                       sTriggerRDataCompletion);
 
     CheckIniDock;
-    UpdateSplash('05');
+    //UpdateSplash('05');
+    frmSplash.pb.Position:= 5;
 
     CheckData;
 
     Application.CreateForm(TmodDados,
                            modDados);
-    UpdateSplash('06');
+    //UpdateSplash('06');
+    frmSplash.pb.Position:= 6;
 
     SetRcard;
-    UpdateSplash('07');
+    //UpdateSplash('07');
+    frmSplash.pb.Position:= 7;
 
     SetCompletion;
     SetRmirrors;
-    UpdateSplash('08');
+    //UpdateSplash('08');
+    frmSplash.pb.Position:= 8;
 
     SetShortcuts;
 
     frmTools.tbsLatex.TabVisible:= actLatexVisible.Checked;
     CheckLatex(False);
 
+    CheckProject;
+
     CheckEditorOptions;
-    UpdateSplash('09');
+    //UpdateSplash('09');
+    frmSplash.pb.Position:= 9;
 
     DeleteDir(sOldPreferencesTmp);
     if bColors_OldVersion or
@@ -7095,23 +7260,25 @@ begin
                            dmSyn);
 
     synURIOpener.URIHighlighter:= dmSyn.synURI;
-    UpdateSplash('10');
+    //UpdateSplash('10');
+    frmSplash.pb.Position:= 10;
 
     // Application
     SaveNewIni_Application;                                                   // Will create a new and clean Tinn.tmp
     if FileExists(sPathIniTinn_File) then DeleteFile(sPathIniTinn_File);      // Delete old Tinn.ini
 
+    RenameFile(sPathIniTinn_Tmp,
+               sPathIniTinn_File);                                            // Set the new Tinn.ini
+
     // Editor
     SaveNewIni_Editor;                                                        // Will create a new and clean Tinn.tmp
     if FileExists(sPathIniEditor_File) then DeleteFile(sPathIniEditor_File);  // Delete old Tinn.ini
 
-    RenameFile(sPathIniTinn_Tmp,
-               sPathIniTinn_File);                                            // Set the new Tinn.ini
-
     RenameFile(sPathIniEditor_Tmp,
                sPathIniEditor_File);                                          // Set the new Editor.ini
 
-    UpdateSplash('11');
+    //UpdateSplash('11');
+    frmSplash.pb.Position:= 11;
   except
     MessageDlg(sPathIni + #13 + #13 +
                'Serious problem reading ini files!' + #13 +
@@ -7144,7 +7311,8 @@ begin
     end;
   end;
 
-  UpdateSplash('12');
+  //UpdateSplash('12');
+  frmSplash.pb.Position:= 12;
 
   //cbSyntax.Sorted:= True; // It is important!!!
   i:= 0;
@@ -7181,14 +7349,15 @@ begin
     AddObject('All'       , aImg[0]);
     AddObject('All [- fx]', aImg[1]);
     AddObject('Function'  , aImg[2]);
-    AddObject('Frame'     , aImg[3]);
-    AddObject('Array'     , aImg[4]);
-    AddObject('Matrix'    , aImg[5]);
-    AddObject('Table'     , aImg[6]);
-    AddObject('Vector'    , aImg[7]);
-    AddObject('List'      , aImg[8]);
+    AddObject('Vector'    , aImg[3]);
+    AddObject('Matrix'    , aImg[4]);
+    AddObject('Frame'     , aImg[5]);
+    AddObject('Array'     , aImg[6]);
+    AddObject('List'      , aImg[7]);
+    AddObject('Table'     , aImg[8]);
     AddObject('Other'     , aImg[9]);
   end;
+
   frmTools.cbbToolsRExplorer.ItemIndex   := 0;
   frmTools.cbbToolsREnvironment.ItemIndex:= 0;
 
@@ -7203,6 +7372,50 @@ begin
   end;
 
   iRFormatted:= -1;
+
+  Application.OnActivate:= AppActivate; // It controls when the application receives the focus.
+                                        // It is necessary to procedure TfrmEditor.FileChanged
+  slFileNotify:= TStringList.Create;
+
+  with slFileNotify do begin
+    Sorted:= True;
+    Duplicates:= dupIgnore;
+  end;
+end;
+
+procedure TfrmTinnMain.AppActivate(Sender: TObject);
+var
+  i,
+   j: integer;
+
+  sTmp: string;
+
+begin
+  if (slFileNotify.Count <= 0) then Exit;
+
+  for i:= 0 to slFileNotify.Count - 1 do begin
+    sTmp:= slFileNotify.Strings[i];
+
+    for j:= 0 to pgFiles.PageCount - 1 do
+      if (pgFiles.Pages[j].Hint = sTmp) then begin
+
+        pgFiles.ActivePageIndex:= j;
+
+        pgFilesChange(nil);
+
+        if actNotification_US.Checked then actReloadExecute(nil)
+        else
+          if MessageDlg(sTmp + #13 + #13 +
+                        'This file has been modified by another program.' + #13 +
+                        'Do you want to reload it?',
+                        mtConfirmation,
+                        [mbYes, mbNo],
+                        0) = mrYes then actReloadExecute(nil);
+      end;
+  end;
+
+  // Clear all prior file notification
+  slFileNotify.Clear;
 end;
 
 procedure TfrmTinnMain.LoadEditorKeystrokes;
@@ -7295,6 +7508,9 @@ begin
   sFileLatexOrigin:= sPathTinnR +
                      '\latex\latex.zip';
 
+  sFileProjectOrigin:= sPathTinnR +
+                       '\project\project.zip';
+
   with frmTools.memIniLog.Lines do begin
     Add('  data          - ' +
         sFileDataOrigin);
@@ -7357,10 +7573,10 @@ begin
   if not DirectoryExists(sOldPreferencesTmp) then CreateDir(sOldPreferencesTmp);
 
   // Colors of old version
-  if not FileExists(sPathApp +
+  if not FileExists(sPathIni +
                     '\colors\Custom_colors.ini') then Exit;
 
-  sPathColors_OldVersion:= sPathApp +
+  sPathColors_OldVersion:= sPathIni +
                            '\colors';
 
   if DirectoryExists(sPathColors_OldVersion) then begin
@@ -7371,7 +7587,7 @@ begin
   end;
 
   // Syntax of old version
-  sPathSyntax_OldVersion:= sPathApp +
+  sPathSyntax_OldVersion:= sPathIni +
                            '\syntax';
 
   if DirectoryExists(sPathSyntax_OldVersion) then begin
@@ -7384,7 +7600,6 @@ end;
 
 procedure TfrmTinnMain.SetIniStructure;
 begin
-  //sAppData      := DataFolder;
   sAppData      := GetSpecialFolder(CSIDL_APPDATA);
   sPathIni      := sAppData + '\Tinn-R';
   sPathApp      := sPathIni + '\app';
@@ -7393,6 +7608,7 @@ begin
   sPathData     := sPathIni + '\data';
   sPathEditor   := sPathIni + '\editor';
   sPathLatex    := sPathIni + '\latex';
+  sPathProject  := sPathIni + '\project';
   sPathSyntax   := sPathIni + '\syntax';
   sPathSyntaxBKP:= sPathIni + '\syntax bkp';
   sPathTmp      := sPathIni + '\tmp';
@@ -7417,13 +7633,12 @@ begin
     Add('  \' + ExtractFileName(sPathColor));
     Add('  \' + ExtractFileName(sPathData));
     Add('  \' + ExtractFileName(sPathEditor));
+    Add('  \' + ExtractFileName(sPathProject));
     Add('  \' + ExtractFileName(sPathLatex));
     Add('  \' + ExtractFileName(sPathSyntax));
     Add('  \' + ExtractFileName(sPathSyntaxBKP));
     Add('  \' + ExtractFileName(sPathTmp));
   end;
-
-
 end;
 
 procedure TfrmTinnMain.CheckIni;
@@ -7564,16 +7779,18 @@ begin
 
   Application.ProcessMessages;
 
-
   // Main ini
+  DeleteFilesOfPath(sPathIni);  // Necessary to remove trashes from previous versions related
+                                // to fixed bug in drang and drop from R explorer interface.
+  
   sPathReadme_User:= sPathIni +
                      '\Readme.txt';
   AssignFile(tfTmp,
              sPathReadme_User);
   Rewrite(tfTmp);
     WriteLn(tfTmp, 'This main folder stores:' + #13 +
-                   '''app'', ''bkp'', ''colors'', ''data'', ''editor'', ''latex'', ''syntax'', ''syntax bkp'' and ''tmp'' sub-folders.' + #13 +
-                   'The latest, ''tmp'', only if Tinn-R is running.');
+                   '''app'', ''bkp'', ''colors'', ''data'', ''editor'', ''project'', ''latex'', ''syntax'', ''syntax bkp'' and ''tmp'' sub-folders.' + #13 +
+                   'The latest, ''tmp'', only if only, Tinn-R is running.');
   CloseFile(tfTmp);
 
 
@@ -7997,7 +8214,8 @@ procedure TfrmTinnMain.CheckLatex(bReload: boolean);
 
 var
   sPathReadmeLatex: string;
-  tfTmp           : TextFile;
+
+  tfTmp: TextFile;
 
 begin
   try
@@ -8164,16 +8382,118 @@ begin
   end;
   sPathReadmeLatex:= sPathLatex +
                      '\Readme.txt';
-  
+
   AssignFile(tfTmp,
              sPathReadmeLatex);
-  
+
   Rewrite(tfTmp);
     WriteLn(tfTmp,
             'This folder stores:' + #13 +
             'All LaTeX symbols of Tinn-R.' + #13 +
             'It is user customizable!');
-  
+
+  CloseFile(tfTmp);
+end;
+
+procedure TfrmTinnMain.CheckProject;
+var
+  tfTmp: TextFile;
+
+  procedure CreateProjectDemo;
+  begin
+    AssignFile(tfTmp,
+               sPathProject +
+               '\pDemo.tps');
+
+    Rewrite(tfTmp);
+      WriteLn(tfTmp,
+              '\1. doc'                                           + #13 +
+              '  ' + sPathProject + '\licence_gpl2.txt'           + #13 +
+              '  ' + sPathProject + '\licence_gpl3.txt'           + #13 +
+              '  ' + sPathProject + '\Tinn-R_recognized words.R'  + #13 +
+              '\2. sample'                                        + #13 +
+              '  ' + sPathProject + '\deplate.dplt'               + #13 +
+              '  ' + sPathProject + '\pandoc.markdown'            + #13 +
+              '  ' + sPathProject + '\Tinn-R_example of script.R' + #13 +
+              '  ' + sPathProject + '\txt2tags.t2t'               + #13 +
+              '\3. templates'                                     + #13 +
+              '  ' + sPathProject + '\R doc_dataset.Rd'           + #13 +
+              '  ' + sPathProject + '\R doc_empty.Rd'             + #13 +
+              '  ' + sPathProject + '\R doc_function.Rd'          + #13 +
+              '  ' + sPathProject + '\R html.Rhtml'               + #13 +
+              '  ' + sPathProject + '\R markdown.Rmd'             + #13 +
+              '  ' + sPathProject + '\R script.R'                 + #13 +
+              '  ' + sPathProject + '\R_noweb.Rnw'                + #13 +
+              '\4. utils'                                         + #13 +
+              '  ' + sPathProject + '\Rinfo_b.R'                  + #13 +
+              '  ' + sPathProject + '\Rinfo_c.R'                  + #13 +
+              '  ' + sPathProject + '\Rinfo_load_b.R'             + #13 +
+              '  ' + sPathProject + '\Rinfo_load_c.R'             + #13 +
+              '  ' + sPathProject + '\Rinstall.R'                 + #13
+              );
+
+    CloseFile(tfTmp);
+  end;
+
+  procedure CreateProjectDir;
+  begin
+    CreateDir(sPathProject);
+    zipKit.FileName:= sFileProjectOrigin;
+    zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
+
+    with zipKit do begin
+      BaseDirectory:= sPathProject;
+      ExtractFiles('*.*');
+    end;
+
+    zipKit.CloseArchive;
+    frmTools.memIniLog.Lines.Add('  Folder - ' +
+                                 sPathProject +
+                                 ': CREATED');
+  end;
+
+begin
+  try
+    with frmTools.memIniLog.Lines do begin
+      Add(EmptyStr);
+      Add('3.4. Project' +
+          ' (version = ' +
+          sVersion_Project +
+          ')');
+    end;
+
+    // Will delete the entire project folder and creates a new fresh
+    if (bUpdate_Project) then begin
+      DeleteDir(sPathProject);
+      CreateProjectDir;
+      CreateProjectDemo;
+    end
+    else
+      if DirectoryExists(sPathProject) then frmTools.memIniLog.Lines.Add('  Main folder - ' +
+                                                                         sPathProject +
+                                                                         ': OK')
+                                       else begin  // User may have removed manually!
+                                         CreateProjectDir;
+                                         CreateProjectDemo;
+                                       end;
+      if not FileExists(sPathProject +            // User may have removed manually or with remove project!
+                        '\pDemo.tps') then
+        CreateProjectDemo;
+  except
+    raise;
+    Exit;
+  end;
+
+  AssignFile(tfTmp,
+             sPathProject +
+             '\Readme.txt');
+
+  Rewrite(tfTmp);
+    WriteLn(tfTmp,
+            'This folder stores:' + #13 +
+            'All files related to project demo of Tinn-R.' + #13 +
+            'It is user customizable!');
+
   CloseFile(tfTmp);
 end;
 
@@ -8198,7 +8518,7 @@ begin
   try
     with frmTools.memIniLog.Lines do begin
       Add(EmptyStr);
-      Add('3.4. Editor options');
+      Add('3.5. Editor options');
     end;
 
     LoadEditorKeystrokes;
@@ -8700,6 +9020,7 @@ procedure TfrmTinnMain.FormCloseQuery(Sender: TObject;
                                       var bCanClose: Boolean);
 begin
   bRtermOptionCancel:= False;
+
   if Rterm_Running then actRContTermStartCloseExecute(nil);
   bCanClose:= not bRtermOptionCancel;  // If the choice is 'Cancel' don't close
 
@@ -8707,14 +9028,20 @@ begin
     CheckIfProjectWasChanged;
     Application.ProcessMessages;
 
-    // Save layout
-    SaveDockTreeToAppStorage(JvAppIniFileStorage);
-
     DeleteDir(sPathTmp);
 
-    if not bRestored then begin
+    if not bRestored then begin  // If it was made a restore will not save to ini!
       WriteIniFile_Application(False);
+
       WriteIniFile_Editor(False);
+
+      // Save layout
+      JvAppIniFileStorage.BeginUpdate;
+      try
+        SaveDockTreeToAppStorage(JvAppIniFileStorage);
+      finally
+        JvAppIniFileStorage.EndUpdate;
+      end;
     end;
 
     FreeAndNil(slProject);
@@ -8753,6 +9080,12 @@ begin
     FreeAndNil(slFilters);
     FreeAndNil(slRLibPaths);
 
+    // Destroy Stream
+    FreeAndNil(msHexViewer);
+
+    // Destriy TStrings
+    FreeAndNil(slFileNotify);
+
     // Terminate
     Application.Terminate;
   end;
@@ -8784,12 +9117,13 @@ procedure TfrmTinnMain.pgFilesChange(Sender: TObject);
 var
   i: integer;
 
-  sNodeToSelect,
-   sPageSelected,
-   sTmp         : string;
+  sTmp,
+   sNodeToSelect,
+   sPageSelected : string;
 
 begin
   sPageSelected:= pgFiles.ActivePage.Hint;
+
   with frmTools.tvProject do begin
     for i:= 1 to (Items.Count -1) do begin
       if Items[i].Level = 2 then begin
@@ -8827,7 +9161,7 @@ begin
 
     with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do begin
       case synEDitor.SelectionMode of
-        {smNormal: DrawSelectionMode(0);
+       {smNormal: DrawSelectionMode(0);
         smLine  : DrawSelectionMode(1);
         smColumn: DrawSelectionMode(2);}
         smNormal: stbMain.Panels[4].Text:= 'Normal';
@@ -8837,7 +9171,6 @@ begin
     end;
   end;
 
-  pgFiles.Hint:= sTmp;
   i:= FindTopWindow;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
 
@@ -8856,6 +9189,8 @@ begin
   SetDataCompletion(synEditor2DataCompletion,
                     (Self.MDIChildren[i] as TfrmEditor).synEditor2,
                     sTriggerRDataCompletion);
+
+  UpdateHexViewer;
 end;
 
 procedure TfrmTinnMain.actPrintExecute(Sender: TObject);
@@ -8997,6 +9332,8 @@ begin
     MDIChildren[iChildID].BringToFront;
   end;
   actFileSaveAll.Enabled:= False;
+
+  UpdateHexViewer;
 end;
 
 procedure TfrmTinnMain.tbFilterClick(Sender: TObject);
@@ -9062,7 +9399,8 @@ end;
 procedure TfrmTinnMain.actColorsPreferenceExecute(Sender: TObject);
 var
   dlg: TfrmColors;
-  i  : integer;
+
+  i: integer;
 
   sSyntaxBackupFile : string;
 
@@ -9705,6 +10043,25 @@ begin
   end;
 end;
 
+procedure TfrmTinnMain.actProjectOpenDemoExecute(Sender: TObject);
+var
+  fTmp: string;
+
+begin
+  fTmp:= sPathProject +
+         '\pDemo.tps';
+
+  if FileExists(fTmp) then
+    OpenFileIntoTinn(fTmp)
+  else
+    MessageDlg(fTmp + #13 + #13 +
+               'The file was not found.' + #13 +
+               'Please, contact developers!',
+               mtWarning,
+               [mbOk],
+               0);
+end;
+
 procedure TfrmTinnMain.actProjectOpenExecute(Sender: TObject);
 var
   od   : TOpenDialog;
@@ -9989,6 +10346,28 @@ begin
                                                      Y);
 end;
 
+procedure TfrmTinnMain.pgFilesMouseLeave(Sender: TObject);
+begin
+  with pgFiles do begin
+    Hint:= '';
+    ShowHint:= false;
+  end;
+end;
+
+procedure TfrmTinnMain.pgFilesMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+var
+  i: integer;
+
+begin
+  i:= pgFiles.IndexOfTabAt(X, Y);
+
+  if (i >= 0) and (pgFiles.Hint <> pgFiles.Pages[i].Hint) then begin
+    Application.CancelHint;
+    pgFiles.Hint:= pgFiles.Pages[i].Hint;
+    pgFiles.ShowHint:= true;
+  end;
+end;
+
 procedure TfrmTinnMain.pgFilesDragDrop(Sender,
                                        Source: TObject;
                                        X,
@@ -10119,7 +10498,8 @@ procedure TfrmTinnMain.menToolsUtilsActionlistToDatasetClick(Sender: TObject);
     try
       DeleteFile(sBackup);
 
-      zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
+      zipKit.StoreOptions:= [soRecurse,     // soRecurse: will include all files of all folders and sub-folders!
+                             soStripPath];  // soStripPath: the new data.zip generated should not (in any way) preserve the information of the original path!
       with zipKit do begin
         FileName:= sBackup;
 
@@ -10297,7 +10677,7 @@ begin
   with seTmp do
     if SelAvail and
       (BlockBegin.Line = BlockEnd.Line) then Result:= SelText
-                                        else Result:= GetWordAtRowCol(CaretXY);
+                                        else Result:= GetWordAtRowCol(WordStartEx(CaretXY));  // Avoid return empty wheter cursor is at the end of word
 end;
 
 procedure TfrmTinnMain.menRget_InfoClick(Sender: TObject);
@@ -10438,6 +10818,7 @@ begin
               WM_SETFOCUS,
               0,
               0);
+
   iRFormatted:= -1;
 end;
 
@@ -10455,7 +10836,7 @@ var
   mrOption: TModalResult;
 
 begin
-  // Without Internet it will no be possible to install TinnRcom dependencies
+  // Without Internet it will no be possible to install TinnRcom dependencies from CRAN repositories!
   if (CheckConnection = False) then Exit;
 
   if (mrTinnRcom_Install = mrNo) then Exit;
@@ -10464,42 +10845,44 @@ begin
 
   if (bMessageDlg) then
     mrTinnRcom_Install:= MessageDlg('Tinn-R requires the R package TinnRcom to be installed!' + #13 +
-                                    'Do you want to install it now?',
+                                    'It will be installed now.',
                                     mtConfirmation,
-                                    [mbYes, mbNo],
+                                    [mbOK, mbCancel],
                                     0);
 
   case mrTinnRcom_Install of
-    mrYes: begin
-             Screen.Cursor:= crHourglass;
-             actRContPacInstTinnRcomExecute(nil);
+    mrOK: begin
+            Screen.Cursor:= crHourglass;
+            actRContPacInstTinnRcomExecute(nil);
 
-             if (not bRTinnRcom_Installed) then begin
-               mrOption:= MessageDlg('The TinnRcom package (and its dependencies)' + #13 +
-                                     'apparently was not installed successfully!' + #13 +
-                                     'Do you like to repeat the installation?',
-                                     mtWarning,
-                                     [mbYes, mbNo],
-                                     0);
+            if (not bRTinnRcom_Installed) then begin
+              mrOption:= MessageDlg('The TinnRcom package (and its dependencies)' + #13 +
+                                    'apparently was not installed successfully!' + #13 +
+                                    'Do you like to repeat the installation?',
+                                    mtWarning,
+                                    [mbYes, mbNo],
+                                    0);
 
-               if (mrOption = mrYes) then TinnRcomInstall_AskUser(False)
-                                     else begin
-                                       mrTinnRcom_Install:= mrNo;
-                                       CheckTinnRcom_Package;
-                                     end;
-             end;
+              if (mrOption = mrYes) then TinnRcomInstall_AskUser(False)
+                                    else begin
+                                      mrTinnRcom_Install:= mrNo;
+                                      CheckTinnRcom_Package;
+                                    end;
+            end;
 
-             Screen.Cursor:= crDefault;
-           end;
-    mrNo: begin
-            MessageDlg('Some important resources of Tinn-R editor related to R' + #13 +
-                       'provided by TinnRcom package' + #13 +
-                       'will not be available in the current session!',
-                       mtWarning,
-                       [mbOk],
-                       0);
-            tRRuning.Enabled:= True;
+            Screen.Cursor:= crDefault;
           end;
+
+    mrCancel: begin
+                MessageDlg('Some important resources of Tinn-R editor related to R' + #13 +
+                           'provided by TinnRcom package' + #13 +
+                           'will not be available in the current session!',
+                           mtWarning,
+                           [mbOk],
+                           0);
+
+                tRRuning.Enabled:= True;
+              end;
   end;
 end;
 
@@ -10815,6 +11198,7 @@ procedure TfrmTinnMain.tRRuningTimer(Sender: TObject);
     sVersion_TinnRcomInstalled     := 'UNKNOWN';
     if Assigned(slRLibPaths) then
       FreeAndNil(slRLibPaths);
+    actRContTCPConnection.ImageIndex:= 168;  
   end;
 
 begin
@@ -11793,11 +12177,8 @@ begin
                                      // and to be a small value.
 
     // Options
-    Options:= Options - [
-                         //eoScrollPastEol,  // It is more confortable, but not allow insert ' -> ' and ' <- '.
-                                             // Only ' ->' and ' <-'
-                         eoShowSpecialChars
-                        ];
+    Options:= Options - [eoScrollPastEol,      // It is more confortable
+                         eoShowSpecialChars];  // Not necessary
 
     // Appearance
     if bActiveLine then ActiveLineColor:= clActiveLine
@@ -11813,9 +12194,7 @@ begin
     Gutter.Width          := 15;     // Fixed vaule!
 
     // Options
-    Options:= Options - [
-                         eoShowSpecialChars
-                        ];
+    Options:= Options - [eoShowSpecialChars];
 
     // Appearance
     if bActiveLine then ActiveLineColor:= clActiveLine
@@ -11832,9 +12211,7 @@ begin
       Gutter.Width          := 15;     // Fixed vaule!
 
       // Options
-      Options:= Options - [
-                           eoShowSpecialChars
-                          ];
+      Options:= Options - [eoShowSpecialChars];
 
       // Appearance
       if bActiveLine then ActiveLineColor:= clActiveLine
@@ -11923,10 +12300,12 @@ begin
   // Results - BG
   frmTools.memIniLog.Color:= clBGApplication;
   frmTools.tvSearch.Color := clBGApplication;
+  frmTools.ATBinHex.Color := clBGApplication;
 
   // Results - FG
   frmTools.memIniLog.Font.Color:= clFGApplication;
   frmTools.tvSearch.Font.Color := clFGApplication;
+  frmTools.ATBinHex.Font.Color := clFGApplication;
 
   // Spell - BG
   frmTools.memSpell.Color:= clBGApplication;
@@ -12021,6 +12400,7 @@ begin
   end;
   if (frmTools.pgTools.ActivePage = frmTools.tbsMisc) and
      (frmTools.pgMisc.ActivePage = frmTools.tbsRcard) then frmTools.lbRcard.SetFocus;
+
   ctbMain.Realign;  // Don't remove!
   UpdateAppearance;
 
@@ -12035,10 +12415,52 @@ begin
     bRestoreIniDock:= False;
   end;
 
-  // Load the dock satus from the Tinn_doc.ini file
-  if FileExists(sIniDockFilePath) then
-    //LoadDockTreeFromAppStorage(JvAppIniFileStorage, JvAppIniFileStorage.FileName); // Released in the version 2.1.1.1
-    LoadDockTreeFromAppStorage(JvAppIniFileStorage);
+  // The below is a bit strange but is necessary to show the forms (Rterm and Rtools)
+  // when it is float and visible (restarting).
+  //--------------------------------------
+  with frmTools do
+    ManualDock(JvDockServer.LeftDockPanel,
+               nil,
+               AlClient);
+
+  with frmRterm do
+    ManualDock(JvDockServer.RightDockPanel,
+               nil,
+               AlClient);
+  //--------------------------------------
+
+  // Load the layout from the Tinn_doc.ini file
+  if FileExists(sIniDockFilePath) then begin
+    JvAppIniFileStorage.BeginUpdate;
+    try
+      LoadDockTreeFromAppStorage(JvAppIniFileStorage);
+    finally
+      JvAppIniFileStorage.EndUpdate;
+    end;
+  end
+  else begin
+    actToolsVisible.Checked:= True;
+    actRtermVisible.Checked:= True;
+
+    ShowDockForm(frmTools);
+    ShowDockForm(frmRterm);
+
+    actRtermDivideExecute(nil);
+    SetInterfaceSize(frmTools,
+                     350);
+  end;
+
+{ // For tests only!
+  ifTinn_Tmp:= TIniFile.create(sPathApp + '\Tinn_dock.ini');
+  ShowMessage(ifTinn_Tmp.ReadString('Forms\frmTools', 'ParentName', ''));
+  ShowMessage(IntToStr(ifTinn_Tmp.ReadInteger('Forms\frmTools', 'DockTop', 0)));
+  ShowMessage(IntToStr(ifTinn_Tmp.ReadInteger('Forms\frmTools', 'DockRight', 0)));
+  ShowMessage(IntToStr(ifTinn_Tmp.ReadInteger('Forms\frmTools', 'DockBottom', 0)));
+  ShowMessage(BoolToStr(ifTinn_Tmp.ReadBool('Forms\frmTools', 'Visible', False)));
+  FreeAndNil(ifTinn_Tmp);
+}
+  actToolsVisible.Checked:= GetFormVisible(frmTools);
+  actRtermVisible.Checked:= GetFormVisible(frmRterm);
 
   with frmRterm.pgRterm do
     ActivePage:= frmRterm.tbsIO;
@@ -12393,12 +12815,12 @@ end;
 
 procedure TfrmTinnMain.menHelExampleOfScriptClick(Sender: TObject);
 begin
-  OpenHelpFile('\sample\Tinn-R_example of script.r');
+  OpenHelpFile('\sample\Tinn-R_example of script.R');
 end;
 
 procedure TfrmTinnMain.menHelpRecognizedWordsClick(Sender: TObject);
 begin
-  OpenHelpFile('\doc\Tinn-R_recognized words.r');
+  OpenHelpFile('\doc\Tinn-R_recognized words.R');
 end;
 
 procedure TfrmTinnMain.menOptionsShortcutsClick(Sender: TObject);
@@ -12515,7 +12937,7 @@ end;
 
 procedure TfrmTinnMain.menHelCitationClick(Sender: TObject);
 begin
-  Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E. (2014). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
+  Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E. (2015). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
                      ' URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
 
   MessageDlg('Many thanks for cite Tinn-R.' + #13 + #13 +
@@ -12552,19 +12974,33 @@ begin
       cbClosePDFViewer.Checked           := actClosePDFViewer.Checked;
       cbComAutoDetect_Language.Checked   := frmTools.cbComAutoDetect_Language.Checked;
       cbComPriority_Line.Checked         := frmTools.cbComPriority_Line.Checked;
+      cbConnectionBeepOnError.Checked    := bConnectionBeepOnError;
       cbDosMinimizedAlways.Checked       := actDosMinimizedAlways.Checked;
       cbDviOpenAlways.Checked            := actDviOpenAlways.Checked;
       cbHtmlOpenAlways.Checked           := actHtmlOpenAlways.Checked;
       cbLatexVisible.Checked             := actLatexVisible.Checked;
       cbMinimizeTinn.Checked             := bMinimizeTinnAfterLastFile;
+      cbNotification.Checked             := actNotification.Checked;
+      cbNotification_US.Checked          := actNotification_US.Checked;
       cbPdfOpenAlways.Checked            := actPdfOpenAlways.Checked;
       cbRememberFileState.Checked        := bRememberFileState;
       cbRememberSearchList.Checked       := bRememberSearchList;
       cbRemoveExtension.Checked          := bRemoveExtension;
+      cbRget_Info.Checked                := bRget_Info;
       cbRguiOrganizeAutomatically.Checked:= bOrganizeAutomatically;
       cbRguiReturnFocus.Checked          := bRguiReturnFocus;
+      cbRmirros_Update.Checked           := bRmirros_Update;
+      cbRSendAll.Checked                 := bRSendAll;
+      cbRSetWorkDir_Starting.Checked     := bRSetWorkDir_Starting;
+      cbRSmartSend.Checked               := bRSmartSend;
+      cbRsvSocket_Connect.Checked        := bRsvSocket_Connect;
       cbRTCPIPConsoleEcho.Checked        := bRTCPIPConsoleEcho;
       cbRTCPIPConsoleUse.Checked         := bRTCPIPConsoleUse;
+      cbRtermCanFloat.Checked            := bRtermCanFloat;
+      cbRTinnRcom_Install.Checked        := bRTinnRcom_Install;
+      cbRTinnRcom_Load.Checked           := bRTinnRcom_Load;
+      cbScrollSendingLines.Checked       := bScrollSendingLines;
+      cbToolsCanFloat.Checked            := bToolsCanFloat;
       cbUndoAfterSave.Checked            := bUndoAfterSave;
       edMaxDeparseLength.Text            := IntToStr(iMaxDeparseLength);
       edParDeplate.Text                  := sParDeplate;
@@ -12578,19 +13014,19 @@ begin
       edPath_Pandoc.Text                 := sPath_Pandoc;
       edPathDeplate_Converter.Text       := sPathDeplate_Converter;
       edPathDeplate_Interpreter.Text     := sPathDeplate_Interpreter;
+      edPathR_Connected.Text             := sPathR_Connected;
       edPathRgui.Text                    := sPathRgui;
       edPathRterm.Text                   := sPathRterm;
+      edPathTinnRcom_Installed.Text      := sPathTinnRcom_Installed;
       edPathTxt2tags_Converter.Text      := sPathTxt2tags_Converter;
       edPathTxt2tags_Interpreter.Text    := sPathTxt2tags_Interpreter;
-      edPathR_Connected.Text             := sPathR_Connected;
-      edReformatR.Text                   := sReformatR;
-      edReformatRd.Text                  := sReformatRd;
-      edPathTinnRcom_Installed.Text      := sPathTinnRcom_Installed;
-      edVersion_TinnRcomInstalled.Text   := sVersion_TinnRcomInstalled;
+      edFormatR.Text                     := sFormatR;
+      edFormatRd.Text                    := sFormatRd;
       edtIPHostLocal.Text                := sIPHostLocal;
       edtIPHostRemote.Text               := sIPHostRemote;
       edtIPPortLocal.Text                := intToStr(iIPPortLocal);
       edtIPPortRemote.Text               := intToStr(iIPPortRemote);
+      edVersion_TinnRcomInstalled.Text   := sVersion_TinnRcomInstalled;
       rgRguiTinnRDisposition.ItemIndex   := iRguiTinnRDisposition;
       shBGApplication.Brush.Color        := clBGApplication;
       shBGApplication.Font.Color         := ContrastColor(clBGApplication);
@@ -12619,8 +13055,8 @@ begin
       cbRSendLinesToEndPage.Checked       := actRSendLinesToEndPage.Visible;
       cbRSendSelection.Checked            := actRSendSelection.Visible;
       cbRSendSourceBlockMarked.Checked    := actRSendSourceBlockMarked.Visible;
-      cbRSendSOurceClipboard.Checked      := actRSendSourceClipboard.Visible;
       cbRSendSourceClipboard.Checked      := actRSendSourceClipboard.Visible;
+      cbRSendSOurceClipboard.Checked      := actRSendSourceClipboard.Visible;
       cbRSendSourceContiguous.Checked     := actRSendSourceContiguous.Visible;
       cbRSendSourceFile.Checked           := actRSendSourceFile.Visible;
       cbRSendSourceSelection.Checked      := actRSendSourceSelection.Visible;
@@ -12662,39 +13098,20 @@ begin
         else ItemIndex:= -1;
       end;
 
-      if bRSmartSend then rdgRSmartSend.ItemIndex:= 0
-                     else rdgRSmartSend.ItemIndex:= 1;
-
-      if bRSendAll then rdgRComments.ItemIndex:= 0
-                   else rdgRComments.ItemIndex:= 1;
-
       if bRUseLatest then rdgRUseLatest.ItemIndex:= 0
                      else rdgRUseLatest.ItemIndex:= 1;
 
       if bRArchitecture64 then rdgRArchitecture.ItemIndex:= 1
                           else rdgRArchitecture.ItemIndex:= 0;
 
-      if bScrollSendingLines then rdgRScrollSendingLines.ItemIndex:= 0
-                             else rdgRScrollSendingLines.ItemIndex:= 1;
-
       if bDataCompletionAnywhere then rdgDataCompletion_Pattern.ItemIndex:= 0
                                  else rdgDataCompletion_Pattern.ItemIndex:= 1;
-
-      if bRget_Info then rdgRget_Info.ItemIndex:= 0
-                    else rdgRget_Info.ItemIndex:= 1;
-
-
-      if bRmirros_Update then rdgRmirros_Update.ItemIndex:= 0
-                         else rdgRmirros_Update.ItemIndex:= 1;
 
       if bRtermFindError then rdgRtermFindError.ItemIndex:= 0
                          else rdgRtermFindError.ItemIndex:= 1;
 
       if bRtermBeepOnError then rdgRtermBeepOnError.ItemIndex:= 0
                            else rdgRtermBeepOnError.ItemIndex:= 1;
-
-      if bConnectionBeepOnError then rdgConnectionBeepOnError.ItemIndex:= 0
-                                else rdgConnectionBeepOnError.ItemIndex:= 1;
 
       rdgRguiRecognitionCaption.ItemIndex:= iRguiRecognitionCaption;
       rdgRguiRecognitionType.ItemIndex   := iRguiRecognitionType;
@@ -12710,32 +13127,26 @@ begin
 
       rdgRtermDisposition.Enabled:= bRtermSimple;
 
+      with rdgRtermWidth do
+        if bRtermWidth then ItemIndex:= 0
+                       else ItemIndex:= 1;
+
       with rdgRtermDisposition do
         if bRtermHorizontal then ItemIndex:= 0
                             else ItemIndex:= 1;
 
       with rdgRtermIOSyntax do
-        if (frmRterm.synIO.Highlighter = dmSyn.synText) then ItemIndex:= 0
-                                                        else ItemIndex:= 1;
+        if (frmRterm.synIO.Highlighter = dmSyn.synText_term) then ItemIndex:= 0
+                                                             else ItemIndex:= 1;
       with rdgRtermLogSyntax do
-        if (frmRterm.synLog.Highlighter = dmSyn.synText) then ItemIndex:= 0
-                                                         else ItemIndex:= 1;
+        if (frmRterm.synLog.Highlighter = dmSyn.synText_term) then ItemIndex:= 0
+                                                              else ItemIndex:= 1;
 
       with rdgRtermClose do
         if bRtermCloseWithoutAsk then ItemIndex:= 0
                                  else ItemIndex:= 1;
 
-      with rdgRsvSocketConnect do
-        if bRsvSocket_Connect then ItemIndex:= 0
-                              else ItemIndex:= 1;
-
-      with rdgRTinnRcomInstall do
-        if bRTinnRcom_Install then ItemIndex:= 0
-                              else ItemIndex:= 1;
-
-      with rdgRTinnRcomLoad do
-        if bRTinnRcom_Load then ItemIndex:= 0
-                           else ItemIndex:= 1;
+      ckAutocomplete.Checked:= actAutoCompletion.Checked;
 
       if Assigned(slRLibPaths) then mRLibPaths.Lines.Assign(slRLibPaths);
 
@@ -12768,7 +13179,6 @@ begin
         actRSendCursorToBeginningLine.Visible:= cbRSendCursorToBeginningLine.Checked;
         actRSendCursorToEndLine.Visible      := cbRSendCursorToEndLine.Checked;
         actRSendFile.Visible                 := cbRSendFile.Checked;
-        bRKnitr                              := cbRSendKnitr.Checked;
         actRSendLine.Visible                 := cbRSendLine.Checked;
         actRSendLinesToEndPage.Visible       := cbRSendLinesToEndPage.Checked;
         actRSendSelection.Visible            := cbRSendSelection.Checked;
@@ -12779,6 +13189,7 @@ begin
         actRSendSourceFile.Visible           := cbRSendSourceFile.Checked;
         actRSendSourceSelection.Visible      := cbRSendSourceSelection.Checked;
         actRSendSweave.Visible               := cbRSendSweave.Checked;
+        bRKnitr                              := cbRSendKnitr.Checked;
 
         pmemRResCurrentLineToTop.Checked         := cbRCurrentLineToTop.Checked;
         pmemRResSendBlockMarked.Checked          := cbRSendBlockMarked.Checked;
@@ -12847,17 +13258,31 @@ begin
         actDviOpenAlways.Checked      := cbDviOpenAlways.Checked;
         actHtmlOpenAlways.Checked     := cbHtmlOpenAlways.Checked;
         actLatexVisible.Checked       := cbLatexVisible.Checked;
+        actNotification.Checked       := cbNotification.Checked;
+        actNotification_US.Checked    := cbNotification_US.Checked;
         actPdfOpenAlways.Checked      := cbPdfOpenAlways.Checked;
         bAllNames                     := cbAllNames.Checked;
+        bConnectionBeepOnError        := cbConnectionBeepOnError.Checked;
         bMinimizeTinnAfterLastFile    := cbMinimizeTinn.Checked;
         bOrganizeAutomatically        := cbRguiOrganizeAutomatically.Checked;
         bRememberFileState            := cbRememberFileState.Checked;
         bRememberSearchList           := cbRememberSearchList.Checked;
         bRemoveExtension              := cbRemoveExtension.Checked;
         bRestoreIniDock               := cbRestoreIniDock.Checked;
+        bRget_Info                    := cbRget_Info.Checked;
         bRguiReturnFocus              := cbRguiReturnFocus.Checked;
+        bRmirros_Update               := cbRmirros_Update.Checked;
+        bRSendAll                     := cbRSendAll.Checked;
+        bRSetWorkDir_Starting         := cbRSetWorkDir_Starting.Checked;
+        bRSmartSend                   := cbRSmartSend.Checked;
+        bRsvSocket_Connect            := cbRsvSocket_Connect.Checked;
         bRTCPIPConsoleEcho            := cbRTCPIPConsoleEcho.Checked;
         bRTCPIPConsoleUse             := cbRTCPIPConsoleUse.Checked;
+        bRtermCanFloat                := cbRtermCanFloat.Checked;
+        bRTinnRcom_Install            := cbRTinnRcom_Install.Checked;
+        bRTinnRcom_Load               := cbRTinnRcom_Load.Checked;
+        bScrollSendingLines           := cbScrollSendingLines.Checked;
+        bToolsCanFloat                := cbToolsCanFloat.Checked;
         bUndoAfterSave                := cbUndoAfterSave.Checked;
         clBGApplication               := shSampleApplication.Brush.Color;
         clFGApplication               := shSampleApplication.Font.Color;
@@ -12886,8 +13311,8 @@ begin
         sPathRterm                    := edPathRterm.Text;
         sPathTxt2tags_Converter       := edPathTxt2tags_Converter.Text;
         sPathTxt2tags_Interpreter     := edPathTxt2tags_Interpreter.Text;
-        sReformatR                    := edReformatR.Text;
-        sReformatRd                   := edReformatRd.Text;
+        sFormatR                      := edFormatR.Text;
+        sFormatRd                     := edFormatRd.Text;
 
         frmTools.cbComPriority_Line.Checked      := cbComPriority_Line.Checked;
         frmTools.cbComAutoDetect_Language.Checked:= cbComAutoDetect_Language.Checked;
@@ -12941,12 +13366,6 @@ begin
         if (rdgLineWraping.ItemIndex = 0) then actEditorLineWrap.Checked:= True
                                           else actEditorLineWrap.Checked:= False;
 
-        if (rdgRSmartSend.ItemIndex = 0) then bRSmartSend:= True
-                                         else bRSmartSend:= False;
-
-        if (rdgRComments.ItemIndex = 0) then bRSendAll:= True
-                                        else bRSendAll:= False;
-
         if (rdgRUseLatest.ItemIndex = 0) then bRUseLatest:= True
                                          else bRUseLatest:= False;
 
@@ -12962,26 +13381,11 @@ begin
         if (rdgRtermClose.ItemIndex = 0) then bRtermCloseWithoutAsk:= True
                                          else bRtermCloseWithoutAsk:= False;
 
-        if (rdgRsvSocketConnect.ItemIndex = 0) then bRsvSocket_Connect:= True
-                                               else bRsvSocket_Connect:= False;
-
-        if (rdgRTinnRcomInstall.ItemIndex = 0) then bRTinnRcom_Install:= True
-                                               else bRTinnRcom_Install:= False;
-
-        if (rdgRTinnRcomLoad.ItemIndex = 0) then bRTinnRcom_Load:= True
-                                            else bRTinnRcom_Load:= False;
-
-        if (rdgRScrollSendingLines.ItemIndex = 0) then bScrollSendingLines:= True
-                                                  else bScrollSendingLines:= False;
-
         if (rdgDataCompletion_Pattern.ItemIndex = 0) then bDataCompletionAnywhere:= True
                                                      else bDataCompletionAnywhere:= False;
 
-        if (rdgRget_Info.ItemIndex = 0) then bRget_Info:= True
-                                        else bRget_Info:= False;
-
-        if (rdgRmirros_Update.ItemIndex = 0) then bRmirros_Update:= True
-                                              else bRmirros_Update:= False;
+        if (rdgRtermWidth.ItemIndex = 0) then bRtermWidth:= True
+                                         else bRtermWidth:= False;
 
         iRguiRecognitionCaption:= rdgRguiRecognitionCaption.ItemIndex;
         iRguiRecognitionType   := rdgRguiRecognitionType.ItemIndex;
@@ -13005,6 +13409,8 @@ begin
           0: actRtermSetLogSyntaxToTextExecute(nil);
           1: actRtermSetLogSyntaxToRExecute(nil);
         end;
+
+        actAutoCompletion.Checked:= ckAutocomplete.Checked;
 
         actRguiReturnFocus.Checked:= bRguiReturnFocus;
         iDelay:= tbDelay.Position;
@@ -13039,8 +13445,17 @@ begin
         (Self.MDIChildren[i] as TfrmEditor).Repaint;
       end;
 
+      frmTools.JvDockClientTools.CanFloat:= bToolsCanFloat;
+      frmRterm.JvDockClientRterm.CanFloat:= bRtermCanFloat;
+
+      // Update General
+      UpdateAppearance;
+
       // Update Rterm
       UpdateRterm_Appearance;
+
+      // Update hex viewer
+      UpdateHexViewer;
     end;
   finally
     FreeAndNil(dlg);
@@ -13060,9 +13475,9 @@ begin
   actRExplorerEdit.Enabled               := bOption;
   actRExplorerExampleSelected.Enabled    := bOption;
   actRExplorerExpAscii.Enabled           := bOption;
-  actRExplorerExpHtml.Enabled            := bOption;
+  //actRExplorerExpHtml.Enabled            := bOption;
   actRExplorerExpRaw.Enabled             := bOption;
-  actRExplorerExpTeX.Enabled             := bOption;
+  //actRExplorerExpTeX.Enabled             := bOption;
   actRExplorerFix.Enabled                := bOption;
   actRExplorerHelpSelected.Enabled       := bOption;
   actRExplorerNames.Enabled              := bOption;
@@ -13129,102 +13544,105 @@ begin
   {
     cbbToolsRExplorer.Items:
     0: All
-    1: All (- Functions)
-    2: Functions
-    3: Data frames
-    4: Arrays
-    5: Matrice
-    6: Tables
-    7: Vectors
-    8: Lists
-    9: Others
+    1: All (- F)
+    2: Function
+    3: Vector
+    4: Matrix
+    5: Frame
+    6: Array
+    7: List
+    8: Table
+    9: Other
   }
-  if (sRObjGroup = 'function') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 2) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               2);
-    end;
-  end
-  else if (sRObjGroup = 'data.frame') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 3) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               3);
-    end;
-  end
-  else if (sRObjGroup = 'array') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 4) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               4);
-    end;
-  end
-  else if (sRObjGroup = 'matrix') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 5) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               5);
-    end;
-  end
-  else if (sRObjGroup = 'table') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 6) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               6);
-    end;
-  end
-  else if (sRObjGroup = 'vector') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 7) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               7);
-    end;
-  end
-  else if (sRObjGroup = 'list') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 8) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               8);
-    end;
-  end
-  else if (sRObjGroup = 'other') then begin
-    if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
-       (frmTools.cbbToolsRExplorer.ItemIndex = 9) then begin
-      MakeItem(sRObjName,
-               sRObjDim,
-               sRObjGroup,
-               sRObjClass,
-               9);
-    end;
+
+  case StringToCaseSelect(sRObjGroup,
+                          ['function',
+                           'vector',
+                           'matrix',
+                           'data.frame',
+                           'array',
+                           'list',
+                           'table',
+                           'other']) of
+    0: begin  // function
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 2) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    2);
+       end;
+    1: begin  // vector
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 3) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    3);
+       end;
+    2: begin  // matrix
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 4) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    4);
+       end;
+    3: begin  // data.frame
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 5) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    5);
+       end;
+    4: begin  // array
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 6) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    6);
+       end;
+    5: begin  // list
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 7) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    7);
+       end;
+    6: begin  // table
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 8) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    8);
+       end;
+    7: begin  // other
+         if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
+            (frmTools.cbbToolsRExplorer.ItemIndex = 9) then
+           MakeItem(sRObjName,
+                    sRObjDim,
+                    sRObjGroup,
+                    sRObjClass,
+                    9);
+       end;
   end;
 end;
 
@@ -14012,7 +14430,8 @@ end;
 procedure TfrmTinnMain.actRExplorerSendNameToEditorExecute(Sender: TObject);
 var
   seEditor: TSynEdit;
-  i       : integer;
+
+  i: integer;
 
 begin
   if Assigned(frmTools.lvRexplorer.Selected) then begin
@@ -14063,34 +14482,6 @@ begin
          '''' +
          ', ' +
          'type=''ascii'')';
-  DoSend(sTmp);
-end;
-
-procedure TfrmTinnMain.actRExplorerExpHtmlExecute(Sender: TObject);
-var
-  sTmp: string;
-
-begin
-  if (frmTools.lvRexplorer.Selected = nil) then Exit;
-  sTmp:= 'trExport(''' +
-         frmTools.lvRexplorer.Selected.Caption +
-         '''' +
-         ', ' +
-         'type=''html'')';
-  DoSend(sTmp);
-end;
-
-procedure TfrmTinnMain.actRExplorerExpTeXExecute(Sender: TObject);
-var
-  sTmp: string;
-
-begin
-  if (frmTools.lvRexplorer.Selected = nil) then Exit;
-  sTmp:= 'trExport(''' +
-         frmTools.lvRexplorer.Selected.Caption +
-         '''' +
-         ', ' +
-         'type=''latex'')';
   DoSend(sTmp);
 end;
 
@@ -14325,6 +14716,8 @@ var
    sSearchDirectoryText,
    sSearchFileMask     : string;
 
+  seEditor: TSynEdit;
+
 begin
   dlg:= TfrmSearchInFiles.Create(Self);
 
@@ -14344,11 +14737,17 @@ begin
   iMatchCount    := 0;
   iFoundFileCount:= 0;
 
-  if (Self.MDIChildCount > 0) then
+  if (Self.MDIChildCount > 0) then begin
     with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
-      if synEditor.SelAvail and
-        (synEditor.BlockBegin.Line = synEditor.BlockEnd.Line) then dlg.SearchText:= synEditor.SelText
-                                                              else dlg.SearchText:= synEditor.GetWordAtRowCol(synEditor.CaretXY);
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
+
+    with seEditor do
+      if SelAvail and
+        (BlockBegin.Line = BlockEnd.Line) then dlg.SearchText:= SelText
+                                          else dlg.SearchText:= GetWordAtRowCol(WordStartEx(CaretXY));  // Avoid return empty wheter cursor is at the end of word
+  end;
+
   if (dlg.ShowModal = mrOK) then begin
     // Set cursor to 'busy'
     if (MDIChildCount > 0) then begin
@@ -14490,11 +14889,9 @@ end;
 
 procedure TfrmTinnMain.CheckRterm;
 begin
-  DoUndoAutoHideRterm;
-  if not frmRterm.Visible then begin
-    actRtermVisibleExecute(nil);
-    actRtermDivideExecute(nil);
-  end;
+  if not GetFormVisible(frmRterm) then ShowDockForm(frmRterm);
+
+  actRtermVisible.Checked:= GetFormVisible(frmRterm);
 end;
 
 procedure TfrmTinnMain.DoSend(var sTmp: string;
@@ -16278,13 +16675,13 @@ begin
       case iFocus of
          // synEditor1
          1: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor do
-              SetFocus;
+              if CanFocus then SetFocus;
          // synEditor2
          2: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor2 do
-              SetFocus;
+              if CanFocus then SetFocus;
          // synIO
          3: with (frmRterm.synIO as TSynEdit) do
-              SetFocus;
+              if CanFocus then SetFocus;
       end;
     end;
   except
@@ -16336,31 +16733,33 @@ var
 
 begin
   iFocus:= GetFocus;
-  
+
   try
     case frmTools.cbbToolsRExplorer.ItemIndex of
       { ***Options of the cbbToolsRExplorer***
       All
       All [- fx]
-      Functions
-      Data frames
-      Arrays
-      Matrice
-      Tables
-      Vectors
-      Lists
-      Others
+      Function
+      Vector
+      Matrix
+      Frame
+      Array
+      List
+      Table
+      Other
       }
-      0: sGroup:= EmptyStr;      // All
-      1: sGroup:= 'data';        // All [-fx]
-      2: sGroup:= 'function';    // Functions
-      3: sGroup:= 'data.frame';  // Data frames
-      4: sGroup:= 'array';       // Arrays
-      5: sGroup:= 'matrix';      // Matrice
-      6: sGroup:= 'table';       // Table
-      7: sGroup:= 'vector';      // Vectors
-      8: sGroup:= 'list';        // Lists
-      9: sGroup:= 'other';       // Others
+
+      0: sGroup:= EmptyStr;  // All
+      1: sGroup:= 'data';    // All [-fx]
+      2: sGroup:= 'function';
+      3: sGroup:= 'vector';
+      4: sGroup:= 'matrix';
+      5: sGroup:= 'data.frame';
+      6: sGroup:= 'array';
+      7: sGroup:= 'list';
+      8: sGroup:= 'table';
+      9: sGroup:= 'other';       
+
     end;
 
     frmTools.lvRExplorer.Clear;
@@ -16429,13 +16828,13 @@ begin
       case iFocus of
          // synEditor1
          1: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor do
-              SetFocus;
+              if CanFocus then SetFocus;
          // synEditor2
          2: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor2 do
-              SetFocus;
+              if CanFocus then SetFocus;
          // synIO
          3: with (frmRterm.synIO as TSynEdit) do
-              SetFocus;
+              if CanFocus then SetFocus;
       end;
     end;
   except
@@ -16472,7 +16871,8 @@ end;
 procedure TfrmTinnMain.BackupSystemConfiguration(bStarting: boolean);
 var
   sBackup: string;
-  sd     : TSaveDialog;
+
+  sd: TSaveDialog;
 
 begin
   sd:= TSaveDialog.Create(Self);
@@ -16503,13 +16903,14 @@ begin
           WriteIniFile_Application(True);
           WriteIniFile_Editor(True);
         end;
-        zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
 
         with zipKit do begin
+          StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
           FileName:= sBackup;
-          AddFiles(sPathIni + '\*.*',
-                   0);
-          CloseArchive;
+          BaseDirectory:= sPathIni;
+          AddFiles('*.*',
+                   faAnyFile);
+          Save;
         end;
 
         if not bStarting then
@@ -16583,7 +16984,8 @@ begin
       end;
 
       try
-        zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
+        zipKit.StoreOptions:= [soRecurse,     // soRecurse: will include all files of all folders and sub-folders!
+                               soStripPath];  // soStripPath: the new .zip generated should not (in any way) preserve the information of the original path!
         with zipKit do begin
           FileName:= sBackup;
 
@@ -16674,6 +17076,7 @@ begin
     if od.Execute then begin
       frmTinnMain.Refresh;
       sBackup:= od.FileName;
+
       if FileExists(sBackup) then begin
         zipKit.FileName:= sBackup;
 
@@ -16696,30 +17099,48 @@ begin
                      0);
           Exit;
         end;
+
+        stbMain.Panels[7].Text:= 'Please, wait...';
+        stbMain.Panels[8].Text:= 'Restoring ' + sBackup;
+        Application.ProcessMessages;
+
         try
-          DeleteDir(sPathApp); // Will remove all ini files and subfolders
-          zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
+          //DeleteDir(sPathIni); // Will remove all ini files and subfolders
+          DeleteFilesOfPath(sPathIni);
+          DeleteFilesOfPath(sPathApp);
+          DeleteFilesOfPath(sPathBkp);
+          DeleteFilesOfPath(sPathColor);
+          DeleteFilesOfPath(sPathData);
+          DeleteFilesOfPath(sPathEditor);
+          DeleteFilesOfPath(sPathLatex);
+          DeleteFilesOfPath(sPathProject);
+          DeleteFilesOfPath(sPathSyntax);
+          DeleteFilesOfPath(sPathSyntaxBKP);
+          DeleteFilesOfPath(sPathTmp);
 
           with zipKit do begin
-            BaseDirectory:= ExtractFileDrive(sPathIni) + '\';
+            ExtractOptions:= [eoRestorePath];
+            BaseDirectory:= sPathIni;
             ExtractFiles('*.*');
+            CloseArchive;
             bRestart:= True;
           end;
-          zipKit.CloseArchive;
 
           if bRestart then begin
+          bRestored:= True;  // Will be used in OnCloseQuery event
+
           with ModDados do
             DataModuleCreate(nil);
-            if (MessageDlg('The Tinn-R INI was successfully restored.' + #13 +
-                           'Please, Tinn-R must be restarted!' + #13 + #13 +
-                           'Do you want to do it now?' + #13 + #13 +
-                           'PS: If nothing happens, please, restart it manually!',
+            if (MessageDlg('The full Tinn-R INI was successfully restored.' + #13 +
+                           'Tinn-R must be restarted for the changes to take effect!' + #13 + #13 +
+                           'Do you want to do it just now?' + #13 + #13 +
+                           'P.S: If Tinn-R does not restart automatically, please, do it manually!',
                            mtConfirmation,
                            [mbYes, mbNo],
                            0) = mrYes) then begin
 
               cTinnR:= PChar(Application.ExeName);
-              bRestored:= True;  // Will be used in OnCloseQuery event
+
               Close;  // Check for unsaved files and project
 
               ShellExecute(handle,
@@ -16750,6 +17171,8 @@ begin
     end;  // if (od.Execute)
   finally
     FreeAndNil(od);
+    stbMain.Panels[7].Text:= '';
+    stbMain.Panels[8].Text:= '';
   end;
 end;
 
@@ -16780,15 +17203,21 @@ begin
         j:= 0;
         for i:= 0 to (zipKit.Count - 1) do begin
           sTmp:= zipKit.Items[i].FileName;
-          if (pos('Rtip.xml',
+          if (pos('Cache.xml',
                   sTmp) > 0)  or
-             (pos('Rcard.xml',
+             (pos('Comments.xml',
                   sTmp) > 0) or
              (pos('Completion.xml',
+                  sTmp) > 0) or
+             (pos('Rcard.xml',
+                  sTmp) > 0) or
+             (pos('Rmirrors.xml',
+                  sTmp) > 0) or
+             (pos('Shortcuts.xml',
                   sTmp) > 0) then inc(j);
         end;
 
-        if (j < 2) then begin
+        if (j < 6) then begin
           MessageDlg(sBackup + #13 + #13 +
                      'Restore of DATABASE:' + #13 +
                      'The file above isn''t a valid backup of the Tinn-R!' + #13 +
@@ -16800,14 +17229,19 @@ begin
         end;
 
         with ModDados do begin
-          cdRcard.Close;
+          cdCache.Close;
+          cdComments.Close;
           cdCompletion.Close;
+          cdRcard.Close;
+          cdRmirrors.Close;
+          cdShortcuts.Close;
         end;
         DeleteDir(sPathData);
+        CreateDir(sPathData);
 
-        zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
+        zipKit.ExtractOptions:= [];
         with zipKit do begin
-          BaseDirectory:= ExtractFileDrive(sPathIni) + '\';
+          BaseDirectory:= sPathData + '\';
           ExtractFiles('*.*');
         end;
         zipKit.CloseArchive;
@@ -16870,6 +17304,11 @@ var
 begin
   dlgAscii:= TfrmAsciiChart.Create(Self);
   dlgAscii.Show;
+end;
+
+procedure TfrmTinnMain.actAutoCompletionExecute(Sender: TObject);
+begin
+  actAutoCompletion.Checked:= not actAutoCompletion.Checked;
 end;
 
 procedure TfrmTinnMain.actDifferencesExecute(Sender: TObject);
@@ -17645,6 +18084,9 @@ begin
   end;
 
   with (Self.MDIChildren[i] as TfrmEditor) do begin
+    // File notify: Stop
+    if Assigned(fNotif) then NotifyFile_Stop;
+
     synEditor.BeginUpdate;
     iTopLine:= synEditor.TopLine;
     bcPos:= synEditor.CaretXY;
@@ -17669,7 +18111,17 @@ begin
                              @bcPos);
     synEditor.TopLine:= iTopLine;
     synEditor.EndUpdate;
+
+    // File notify: Start
+    fNotif:= TATFileNotificationSimple.Create(Self);
+    fNotif.OnChanged:= FileChanged;
+    NotifyFile_Start(sActiveFile);
+
+    stbMain.Panels[7].Text:= 'Reloaded file';
+    stbMain.Panels[8].Text:= sActiveFile;
   end;
+
+  UpdateHexViewer;
 end;
 
 (*
@@ -17811,6 +18263,14 @@ begin
   actPdfOpenAlways.Checked:= not actPdfOpenAlways.Checked;
 end;
 
+procedure TfrmTinnMain.actHexViewerVisibleExecute(Sender: TObject);
+begin
+  with frmTools.tbsHexViewer do begin
+    TabVisible:= not TabVisible;
+    actHexViewerVisible.Checked:= TabVisible;
+  end;
+end;
+
 procedure TfrmTinnMain.actHtmlOpenAlwaysExecute(Sender: TObject);
 begin
   actHtmlOpenAlways.Checked:= not actHtmlOpenAlways.Checked;
@@ -17915,19 +18375,15 @@ begin
                      aBrowser)) then SetBrowser(True)
                                 else SetBrowser(False);
 
-(*
   // Deplate
   if (MatchExtension(sExt, aDeplate)) then SetDeplate(True)
                                       else SetDeplate(False);
-*)
-  SetDeplate(True);   // any file extension
+  //SetDeplate(True);   // any file extension
 
-(*
   // Txt2tags
   if (MatchExtension(sExt, aTxt2tags)) then SetTxt2tags(True)
                                        else SetTxt2tags(False);
-*)
-  SetTxt2tags(True);  // any file extension
+  //SetTxt2tags(True);  // any file extension
 
   // MikTeX
   if (sExt = '.tex') then SetTex(True)
@@ -18481,19 +18937,48 @@ end;
 procedure TfrmTinnMain.actFileSaveExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do begin
+    // File notify: Stop
+    if Assigned(fNotif) then NotifyFile_Stop;
+
     FileSave(Self);
+
     GetFile_Info(sActiveFile,
                  synEditor.Lines);
+
+    // File notify: Start
+    if (ExtractFileExt(sActiveFile) = EmptyStr) and
+       ExecRegExpr('^Untitled',
+                   sActiveFile) then Exit;  // The file wasn't saved: cancel in save dlg
+
+    fNotif:= TATFileNotificationSimple.Create(Self);
+    fNotif.OnChanged:= FileChanged;
+    NotifyFile_Start(sActiveFile);
   end;
+  UpdateHexViewer;
 end;
 
 procedure TfrmTinnMain.actFileSaveAsExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do begin
+    // File notify: Stop
+    if Assigned(fNotif) then NotifyFile_Stop;
+
     FileSaveAs(Self);
+
     GetFile_Info(sActiveFile,
                  synEditor.Lines);
+
+    // File notify: Start
+    if (ExtractFileExt(sActiveFile) = EmptyStr) and
+       ExecRegExpr('^Untitled',
+                   sActiveFile) then Exit;  // The file wasn't saved: cancel in save dlg
+
+    fNotif:= TATFileNotificationSimple.Create(Self);
+    fNotif.OnChanged:= FileChanged;
+    NotifyFile_Start(sActiveFile);
   end;
+
+  UpdateHexViewer;
 end;
 
 procedure TfrmTinnMain.actFullPathUnixExecute(Sender: TObject);
@@ -18950,6 +19435,28 @@ begin
     NormalSelect;
 end;
 
+procedure TfrmTinnMain.actNotificationExecute(Sender: TObject);
+begin
+  with actNotification do begin
+    Checked:= Not Checked;
+
+    if Checked then
+      with actNotification_US do
+        Enabled:= True
+    else
+      with actNotification_US do begin
+        Checked:= False;
+        Enabled:= False;
+      end;
+  end;
+end;
+
+procedure TfrmTinnMain.actNotification_USExecute(Sender: TObject);
+begin
+  with actNotification_US do
+    Checked:= Not Checked;
+end;
+
 procedure TfrmTinnMain.actLineSelectExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
@@ -19374,8 +19881,11 @@ procedure TfrmTinnMain.MySort(iSort: integer);
 
 var
   bSorted : boolean;
-  meTmp   : TMemo;
+
+  meTmp: TMemo;
+
   seEditor: TSynEdit;
+
   slTmp   : TStringList;
 
   function SortMemo: boolean;
@@ -19677,7 +20187,7 @@ begin
         DoRConnection(sStart,
                       True,
                       True);
-
+        actRContTCPConnection.ImageIndex:= 293;
         Exit;
       end;
 
@@ -19687,12 +20197,16 @@ begin
                       True,
                       False);
         if (RHistory = nil) then RHistory:= TRHistory.Create;
+        actRContTCPConnection.ImageIndex:= 293;
         Exit;
       end;
 
       // Related to Rgui local
-      if Rgui_Running then DoRguiConnection(sStart,
-                                            True);
+      if Rgui_Running then begin
+        DoRguiConnection(sStart,
+                         True);
+        actRContTCPConnection.ImageIndex:= 293;
+      end;
     end
     // It will disconnect
     else begin
@@ -19704,6 +20218,7 @@ begin
         DoRConnection(sStop,
                       False,
                       True);
+        actRContTCPConnection.ImageIndex:= 168;
         Exit;
       end;
 
@@ -19712,30 +20227,32 @@ begin
         DoRConnection(sStop,
                       False,
                       False);
+        actRContTCPConnection.ImageIndex:= 168;
         Exit;
       end;
 
       // Related to Rgui local
-      if Rgui_Running then DoRguiConnection(sStop,
-                                            False);
+      if Rgui_Running then begin
+        DoRguiConnection(sStop,
+                         False);
+        actRContTCPConnection.ImageIndex:= 168;
+      end;
     end;
   except
     // TODO
   end
 end;
 
-procedure TfrmTinnMain.actRContGuiStartCloseExecute(Sender: TObject);
-var
-  resShellExecute: HINST;
-  sTmp           : string;
+function TfrmTinnMain.RWorkDir: string;
+begin
+  with pgFiles do
+    if (PageCount > 0) and
+       FileExists(ActivePage.Hint) and
+       bRSetWorkDir_Starting then Result:= ExtractFilePath(ActivePage.Hint)
+                             else Result:= ExtractFilePath(sPathRgui);
+end;
 
-  procedure DefineRWorkDir;
-  begin
-    with pgFiles do
-      if (PageCount > 0) and
-         FileExists(ActivePage.Hint) then sTmp:= ExtractFilePath(ActivePage.Hint)
-                                     else sTmp:= ExtractFilePath(sPathRgui);
-  end;
+procedure TfrmTinnMain.actRContGuiStartCloseExecute(Sender: TObject);
 
   function IsRQuestionRunning(sCaption: string): Boolean;
   var
@@ -19768,6 +20285,11 @@ var
     else actRguiReturnFocus.Checked:= False;
   end;
 
+var
+  resShellExecute: HINST;
+
+  sTmp: string;
+
 begin
   if (actRContGuiStartClose.Caption = 'Rgui (start)') then begin
     // Will check the path of Rgui executable
@@ -19777,7 +20299,9 @@ begin
                      mtConfirmation,
                      [mbYes, mbNo],
                      0) = mrYes) then begin
+
         bStartOptionsWithRPage:= True;
+
         actShowAppOptionsExecute(Self);
       end
       else Exit;
@@ -19786,7 +20310,9 @@ begin
     if not FileExists(sPathRgui) or
        (ExtractFileExt(sPathRgui) <> '.exe') then begin
       sTmp:= sPathRgui;
+
       if (sTmp = EmptyStr) then sTmp:= 'Empty';
+
       MessageDlg(sTmp + #13 + #13 +
                  'The file above is not executable!' + #13 +
                  'Please, set Rgui path at: Options/Application/R/Path (R)/Rgui',
@@ -19797,12 +20323,14 @@ begin
     end;
 
     // Will open preferred Rgui
-    DefineRWorkDir;
     resShellExecute:= RunFile(sPathRgui,
                               sParRgui,
-                              sTmp);
+                              RWorkDir);
+
     if (resShellExecute <= 32) then PSendMessage(resShellExecute); // function fail
+
     if (RHistory = nil) then RHistory:= TRHistory.Create;
+
     bRRequireKnitr:= True;
   end
   else begin // Close preferred Rgui
@@ -19828,14 +20356,18 @@ begin
 
     if UseTCPIP then begin
       sTmp:= 'q()' + #13#10;
+
       PrintMessage(sTmp,
                    True);
+
       csRGeneral.Socket.SendText(sTmp)
     end
     else if Rgui_Running then begin
       sTmp:= 'q()';
+
       fCodeSender.SendChar(sTmp,
                            hRgui);
+
       bRRequireKnitr   := False;
     end;
 
@@ -19853,7 +20385,7 @@ var
 begin
   with frmTools.tvProject do begin
     SetFocus;
-    
+
     if (Selected.Level = 2) then begin
       sFilePath:= trim(string(Selected.Data));
       if FileExists(sFilePath) then ClipBoard.AsText:= DosPathToUnixPath(sFilePath)
@@ -19878,7 +20410,7 @@ var
 begin
   with frmTools.tvProject do begin
     SetFocus;
-    
+
     if (Selected.Level = 2) then begin
       sFilePath:= trim(string(Selected.Data));
       if FileExists(sFilePath) then ClipBoard.AsText:= sFilePath
@@ -20679,27 +21211,27 @@ begin
   with stbMain.Canvas do begin
        case Panel.Index of
          0: begin
-              //Brush.Color:= clRed;
+              Brush.Color:= clCream;
               Font.Color := clMaroon;
               //Font.Style := [fsBold];
            end;
          1: begin
-              //Brush.Color:= clYellow;
+              Brush.Color:= clCream;
               Font.Color := clMaroon;
               //Font.Style := [fsBold];
            end;
          6: begin
-              //Brush.Color:= clYellow;
+              Brush.Color:= clCream;
               Font.Color := cTmp;
               //Font.Style := [fsItalic];
            end;
          7: begin
-              //Brush.Color:= clYellow;
+              Brush.Color:= clCream;
               Font.Color := clGreen;
               //Font.Style := [fsItalic];
            end;
          8: begin
-              //Brush.Color:= clYellow;
+              Brush.Color:= clCream;
               Font.Color := clNavy;
               //Font.Style := [fsItalic];
            end;
@@ -20759,7 +21291,8 @@ procedure TfrmTinnMain.InsertLatexSymbol(sSymbol: string;
                                          iCaretControl: integer);
 var
   seEditor: TSynEdit;
-  i       : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -20815,9 +21348,11 @@ procedure TfrmTinnMain.LatexAccents(Sender: TObject;
                                     X,
                                     Y: Integer);
 var
-  i       : integer;
+  i: integer;
+
   seEditor: TSynEdit;
-  sAccent : string;
+
+  sAccent: string;
 
   procedure SetEditor;
   begin
@@ -21675,7 +22210,8 @@ procedure TfrmTinnMain.InsertLatexMath(sFunction: string;
                                        iCaretControl: integer);
 var
   seEditor: TSynEdit;
-  i       : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -21747,7 +22283,8 @@ procedure TfrmTinnMain.actLatexAlgebricFracExecute(Sender: TObject);
 
 var
   seEditor: TSynEdit;
-  i       : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -21760,21 +22297,18 @@ begin
   with seEditor do
     if SelAvail then begin
       if (CountStrings(SelText) = 2) then
-        with actLatexAlgebricFrac do
-          InsertLatexMath('\frac' +
-                          FormatFrac(SelText),
-                          0)
+        InsertLatexMath('\frac' +
+                        FormatFrac(SelText),
+                        0)
       else
-        with actLatexAlgebricFrac do
-          InsertLatexMath('\frac' +
-                          FormatFrac(SelText),
-                          -3);
+        InsertLatexMath('\frac' +
+                        FormatFrac(SelText),
+                        -3);
     end
     else
-      with actLatexAlgebricFrac do
-        InsertLatexMath('\frac' +
-                        FormatFrac(EmptyStr),
-                        -3);
+      InsertLatexMath('\frac' +
+                      FormatFrac(EmptyStr),
+                      -3);
 end;
 
 procedure TfrmTinnMain.actLatexAlgebricSqrtExecute(Sender: TObject);
@@ -21788,7 +22322,8 @@ procedure TfrmTinnMain.actLatexAlgebricSqrtExecute(Sender: TObject);
 
 var
   seEditor: TSynEdit;
-  i       : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -21800,15 +22335,13 @@ begin
 
   with seEditor do
     if SelAvail then
-      with actLatexAlgebricSqrt do
-        InsertLatexMath('\sqrt' +
-                        FormatSqrt(SelText),
-                        0)
+      InsertLatexMath('\sqrt' +
+                      FormatSqrt(SelText),
+                      0)
     else
-      with actLatexAlgebricSqrt do
-        InsertLatexMath('\sqrt' +
-                        FormatSqrt(EmptyStr),
-                        -1);
+      InsertLatexMath('\sqrt' +
+                      FormatSqrt(EmptyStr),
+                      -1);
 end;
 
 procedure TfrmTinnMain.actLatexAlgebricSqrtNExecute(Sender: TObject);
@@ -21861,7 +22394,8 @@ procedure TfrmTinnMain.actLatexAlgebricSqrtNExecute(Sender: TObject);
 
 var
   seEditor: TSynEdit;
-  i       : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -21874,21 +22408,18 @@ begin
   with seEditor do
     if SelAvail then begin
       if (CountStrings(SelText) = 2) then
-        with actLatexAlgebricSqrtN do
-          InsertLatexMath('\sqrt' +
-                          FormatSqrtN(SelText),
-                          0)
+        InsertLatexMath('\sqrt' +
+                        FormatSqrtN(SelText),
+                        0)
       else
-        with actLatexAlgebricSqrtN do
-          InsertLatexMath('\sqrt' +
-                          FormatSqrtN(SelText),
-                          -3);
+        InsertLatexMath('\sqrt' +
+                        FormatSqrtN(SelText),
+                        -3);
     end
     else
-      with actLatexAlgebricSqrtN do
-        InsertLatexMath('\sqrt' +
-                        FormatSqrtN(EmptyStr),
-                        -3);
+      InsertLatexMath('\sqrt' +
+                      FormatSqrtN(EmptyStr),
+                      -3);
 end;
 
 procedure TfrmTinnMain.actRContTermStartCloseExecute(Sender: TObject);
@@ -21897,10 +22428,10 @@ procedure TfrmTinnMain.actRContTermStartCloseExecute(Sender: TObject);
   begin
     if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Clear
                                   else frmRterm.synLog.Clear;
-    
+
     stbMain.Panels[8].Text:= EmptyStr;
 
-    
+
     with actRtermWarningError do begin
       Visible:= False;
       Checked:= False;
@@ -21912,7 +22443,8 @@ procedure TfrmTinnMain.actRContTermStartCloseExecute(Sender: TObject);
   end;
 
 var
-  sTmp      : string;
+  sTmp: string;
+
   userOption: TModalResult;
 
 begin
@@ -21957,10 +22489,13 @@ begin
 
     with frmRterm do begin
       synIO.Clear;
+
       iSynWithFocus:= 3;
+
       cRterm.RunProcess(sPathRterm +
                         ' ' +
-                        sParRterm);
+                        sParRterm,
+                        RWorkDir);
     end;
 
     bRRequireKnitr:= True;
@@ -22024,98 +22559,134 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.DoUndoAutoHideRterm;
-begin
-  with JvDockVSNetStyle do
-    if GetDockFormVisible(frmRterm.JvDockClientRterm) then
-      DoUnAutoHideDockForm(frmRterm);
-end;
-
-procedure TfrmTinnMain.DoUndoAutoHideTools;
-begin
-  with JvDockVSNetStyle do
-    if GetDockFormVisible(frmTools.JvDockClientTools) then
-      DoUnAutoHideDockForm(frmTools);
-end;
-
 procedure TfrmTinnMain.actRtermMaximizeExecute(Sender: TObject);
+const
+  iW = 13;   // experimental
+  iH = 143;
+
 begin
-  actToolsMinimizeExecute(nil);
-  if not actRtermVisible.Checked then actRtermVisibleExecute(nil);
-  DoUndoAutoHideRterm;
+  if not GetFormVisible(frmRterm) then Exit;
+
+  if GetFormVisible(frmTools) then HideDockForm(frmTools);
+  actToolsVisible.Checked:= GetFormVisible(frmTools);
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then SetInterfaceSize(frmRterm, frmTinnMain.Width  - 100)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height - 100)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  - 100)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height - 100); // Bottom
+    if      LeftDockPanel.ContainsControl(frmRterm)   then SetInterfaceSize(frmRterm, frmTinnMain.Width  - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height - iH); // Bottom
 
-  SetFocus_Main;    
+  SetFocus_Main;
+end;
+
+procedure TfrmTinnMain.actRtermAutoHideExecute(Sender: TObject);
+begin
+  if not actRtermVisible.Checked then Exit;  // Nothing to do
+
+  if frmRterm.CanFocus then begin  // Toogles to auto hide on
+    with JvDockServer do
+      if      LeftDockPanel.ContainsControl(frmRterm)   then TJvDockVSNETPanel(JvDockServer.LeftDockPanel).DoAutoHideControl(frmRterm)    // Left
+      else if TopDockPanel.ContainsControl(frmRterm)    then TJvDockVSNETPanel(JvDockServer.TopDockPanel).DoAutoHideControl(frmRterm)     // Top
+      else if RightDockPanel.ContainsControl(frmRterm)  then TJvDockVSNETPanel(JvDockServer.RightDockPanel).DoAutoHideControl(frmRterm)   // Right
+      else if BottomDockPanel.ContainsControl(frmRterm) then TJvDockVSNETPanel(JvDockServer.BottomDockPanel).DoAutoHideControl(frmRterm); // Bottom
+  end
+  else  // Toogles to auto hide off
+    JvDockVSNetStyle.DoUnAutoHideDockForm(frmRterm);
 end;
 
 procedure TfrmTinnMain.actRtermDivideExecute(Sender: TObject);
+const
+  iW = 20;   // experimental
+  iH = 74;
+
 begin
-  if not actRtermVisible.Checked then actRtermVisibleExecute(nil);
-  DoUndoAutoHideRterm;
+  if not GetFormVisible(frmRterm) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 2 - 20)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height div 2 - 20)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 2 - 20)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height div 2 - 20); // Bottom
+    if      LeftDockPanel.ContainsControl(frmRterm)   then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 2 - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height div 2 - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 2 - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height div 2 - iH); // Bottom
 
-  SetFocus_Main;    
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actRtermMinimizeExecute(Sender: TObject);
+const
+  iK = 20;
+
 begin
-  if not actRtermVisible.Checked then actRtermVisibleExecute(nil);
-  DoUndoAutoHideRterm;
+  if not GetFormVisible(frmRterm) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 20)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height div 20)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  div 20)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height div 20); // Bottom
+    if      LeftDockPanel.ContainsControl(frmRterm)   then SetInterfaceSize(frmRterm, frmTinnMain.Width  div iK)  // Left
+    else if TopDockPanel.ContainsControl(frmRterm)    then SetInterfaceSize(frmRterm, frmTinnMain.Height div iK)  // Top
+    else if RightDockPanel.ContainsControl(frmRterm)  then SetInterfaceSize(frmRterm, frmTinnMain.Width  div iK)  // Right
+    else if BottomDockPanel.ContainsControl(frmRterm) then SetInterfaceSize(frmRterm, frmTinnMain.Height div iK); // Bottom
 
-  SetFocus_Main;    
+  SetFocus_Main;
 end;
 
 procedure TfrmTinnMain.actToolsMaximizeExecute(Sender: TObject);
+const
+  iW = 13;   // experimental
+  iH = 143;
+
 begin
-  actRtermMinimizeExecute(nil);
-  if not actToolsVisible.Checked then actToolsVisibleExecute(nil);
-  DoUndoAutoHideTools;
+  if not GetFormVisible(frmTools) then Exit;
+
+  if GetFormVisible(frmRterm) then HideDockForm(frmRterm);
+  actRtermVisible.Checked:= GetFormVisible(frmRterm);
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmTools)   then SetInterfaceSize(frmTools, frmTinnMain.Width  - 100)  // Left
-    else if TopDockPanel.ContainsControl(frmTools)    then SetInterfaceSize(frmTools, frmTinnMain.Height - 100)  // Top
-    else if RightDockPanel.ContainsControl(frmTools)  then SetInterfaceSize(frmTools, frmTinnMain.Width  - 100)  // Right
-    else if BottomDockPanel.ContainsControl(frmTools) then SetInterfaceSize(frmTools, frmTinnMain.Height - 100); // Bottom
+    if      LeftDockPanel.ContainsControl(frmTools)   then SetInterfaceSize(frmTools, frmTinnMain.Width  - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmTools)    then SetInterfaceSize(frmTools, frmTinnMain.Height - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmTools)  then SetInterfaceSize(frmTools, frmTinnMain.Width  - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmTools) then SetInterfaceSize(frmTools, frmTinnMain.Height - iH); // Bottom
+end;
+
+procedure TfrmTinnMain.actToolsAutoHideExecute(Sender: TObject);
+begin
+  if not actToolsVisible.Checked then Exit;  // Nothing to do
+
+  if frmTools.CanFocus then begin  // Toogles to auto hide on
+    with JvDockServer do
+      if      LeftDockPanel.ContainsControl(frmTools)   then TJvDockVSNETPanel(JvDockServer.LeftDockPanel).DoAutoHideControl(frmTools)    // Left
+      else if TopDockPanel.ContainsControl(frmTools)    then TJvDockVSNETPanel(JvDockServer.TopDockPanel).DoAutoHideControl(frmTools)     // Top
+      else if RightDockPanel.ContainsControl(frmTools)  then TJvDockVSNETPanel(JvDockServer.RightDockPanel).DoAutoHideControl(frmTools)   // Right
+      else if BottomDockPanel.ContainsControl(frmTools) then TJvDockVSNETPanel(JvDockServer.BottomDockPanel).DoAutoHideControl(frmTools); // Bottom
+  end
+  else  // Toogles to auto hide off
+    JvDockVSNetStyle.DoUnAutoHideDockForm(frmTools);
 end;
 
 procedure TfrmTinnMain.actToolsDivideExecute(Sender: TObject);
+const
+  iW = 20;   // experimental
+  iH = 74;
+
 begin
-  if not actToolsVisible.Checked then actToolsVisibleExecute(nil);
-  DoUndoAutoHideTools;
+  if not GetFormVisible(frmTools) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmTools)   then SetInterfaceSize(frmTools, frmTinnMain.Width  div 2 - 20)  // Left
-    else if TopDockPanel.ContainsControl(frmTools)    then SetInterfaceSize(frmTools, frmTinnMain.Height div 2 - 20)  // Top
-    else if RightDockPanel.ContainsControl(frmTools)  then SetInterfaceSize(frmTools, frmTinnMain.Width  div 2 - 20)  // Right
-    else if BottomDockPanel.ContainsControl(frmTools) then SetInterfaceSize(frmTools, frmTinnMain.Height div 2 - 20); // Bottom
+    if      LeftDockPanel.ContainsControl(frmTools)   then SetInterfaceSize(frmTools, frmTinnMain.Width  div 2 - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmTools)    then SetInterfaceSize(frmTools, frmTinnMain.Height div 2 - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmTools)  then SetInterfaceSize(frmTools, frmTinnMain.Width  div 2 - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmTools) then SetInterfaceSize(frmTools, frmTinnMain.Height div 2 - iH); // Bottom
 end;
 
 procedure TfrmTinnMain.actToolsMinimizeExecute(Sender: TObject);
+const
+  iK = 20;
+
 begin
-  if not actToolsVisible.Checked then actToolsVisibleExecute(nil);
-  DoUndoAutoHideTools;
+  if not GetFormVisible(frmTools) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmTools)   then SetInterfaceSize(frmTools, frmTinnMain.Width  div 20)  // Left
-    else if TopDockPanel.ContainsControl(frmTools)    then SetInterfaceSize(frmTools, frmTinnMain.Height div 20)  // Top
-    else if RightDockPanel.ContainsControl(frmTools)  then SetInterfaceSize(frmTools, frmTinnMain.Width  div 20)  // Right
-    else if BottomDockPanel.ContainsControl(frmTools) then SetInterfaceSize(frmTools, frmTinnMain.Height div 20); // Bottom
+    if      LeftDockPanel.ContainsControl(frmTools)   then SetInterfaceSize(frmTools, frmTinnMain.Width  div iK)  // Left
+    else if TopDockPanel.ContainsControl(frmTools)    then SetInterfaceSize(frmTools, frmTinnMain.Height div iK)  // Top
+    else if RightDockPanel.ContainsControl(frmTools)  then SetInterfaceSize(frmTools, frmTinnMain.Width  div iK)  // Right
+    else if BottomDockPanel.ContainsControl(frmTools) then SetInterfaceSize(frmTools, frmTinnMain.Height div iK); // Bottom
 end;
 
 procedure TfrmTinnMain.CheckIfFileFromDvi(sFile: string);
@@ -22131,7 +22702,7 @@ begin
     sLineNumber:= copy(sFile,
                        iPos + 1,
                        Length(sFile));
-    
+
     sFile:= copy(sFile,
                  0,
                  iPos - 1);
@@ -22144,7 +22715,7 @@ begin
       sTmp := copy(sTmp,
                    0,
                    iPos + 1);
-    
+
       sFile:= InvertString(sTmp);
     end;
 
@@ -22179,17 +22750,19 @@ var
    sTmp,
    sLineNumber: string;
 
+  seEditor: TSynEdit;
+  
 begin
   with frmTools.tvSearch do begin
     if (Selected = nil) or
        (Selected.Level < 2) then Exit;
     
-    sTmp := Selected.Text;
+    sTmp:= Selected.Text;
     
     sFile:= Selected.Parent.Text;
     
-    iPos := pos('(',
-                sTmp);
+    iPos:= pos('(',
+               sTmp);
     
     if (iPos > 0) then begin
       iEnd:= pos('):',
@@ -22200,6 +22773,7 @@ begin
                          ((iEnd - iPos) - 1));
     end;
   end;
+
   if FileExists(trim(sFile)) then OpenFileIntoTinn(sFile,
                                                    StrToIntDef(sLineNumber,
                                                                0))
@@ -22211,12 +22785,20 @@ begin
 
   Sleep(iDelay div 2);
 
+  seEditor:= nil;
+
   if (pgFiles.PageCount > 0) then
-    with TfrmEditor(MDIChildren[0]).synEditor do begin
+    with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
+
+    with seEditor do begin
       TopLine:= StrToInt(sLineNumber);
+
       ExecuteCommand(ecLineEnd,
                      #0,
                      nil);
+
       ExecuteCommand(ecSelLineStart,
                      #0,
                      nil);
@@ -22328,213 +22910,34 @@ begin
     CaretX:= CaretX;
 end;
 
-procedure TfrmTinnMain.DoShowHide(iTmp1,
-                                  iTmp2: integer;
-                                  bShow: boolean = True);
-const
-  iSide: array [0..3] of TJvDockPosition = (dpLeft,
-                                            dpTop,
-                                            dpRight,
-                                            dpBottom);
-
-begin
-  if bShow then
-    with JvDockServer do begin
-      DockPanel[iSide[iTmp1]].Show;
-      Splitter[iSide[iTmp1]].Show;
-      case iTmp1 of
-        0: DockPanel[iSide[iTmp1]].Width := iTmp2;  // Left
-        1: DockPanel[iSide[iTmp1]].Height:= iTmp2;  // Top
-        2: DockPanel[iSide[iTmp1]].Width := iTmp2;  // Right
-        3: DockPanel[iSide[iTmp1]].Height:= iTmp2;  // Bottom
-      end;
-    end
-  else
-    with JvDockServer do begin
-      Splitter[iSide[iTmp1]].Hide;
-      DockPanel[iSide[iTmp1]].Hide;
-    end;
-end;
-
-procedure TfrmTinnMain.RtermShow;
-begin
-  // Do not change the order below!
-  frmRterm.Visible:= True;
-  
-  with JvDockServer do begin
-    if LeftDockPanel.ContainsControl(frmRterm)        then DoShowHide(0, iRtermDockWidth)   // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then DoShowHide(1, iRtermDockHeight)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then DoShowHide(2, iRtermDockWidth)   // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then DoShowHide(3, iRtermDockHeight)  // Bottom
-  end;
-  
-  actRtermVisible.Checked:= True;
-end;
-
-procedure TfrmTinnMain.RtermHide;
-begin
-  // The below, related to docking, is not smart, but I didn't find nothing better yet!
-  with JvDockServer do begin
-    if LeftDockPanel.ContainsControl(frmRterm) then  // Left
-      if LeftDockPanel.ContainsControl(frmTools) then
-        if not frmTools.Visible then begin
-          iRtermDockWidth:= LeftDockPanel.Width;
-          DoShowHide(0,
-                     0,
-                     False)
-        end
-        else {Do nothing}
-      else begin
-        iRtermDockWidth:= LeftDockPanel.Width;
-        DoShowHide(0,
-                   0,
-                   False)
-      end
-    else if TopDockPanel.ContainsControl(frmRterm) then  // Top
-      if TopDockPanel.ContainsControl(frmTools) then
-        if not frmTools.Visible then begin
-          iRtermDockHeight:= TopDockPanel.Height;
-          DoShowHide(1,
-                     0,
-                     False)
-        end
-        else {Do nothing}
-      else begin
-        iRtermDockHeight:= TopDockPanel.Height;
-        DoShowHide(1,
-                   0,
-                   False)
-      end
-    else if RightDockPanel.ContainsControl(frmRterm) then  // Right
-      if RightDockPanel.ContainsControl(frmTools) then
-        if not frmTools.Visible then begin
-          iRtermDockWidth:= RightDockPanel.Width;
-          DoShowHide(2,
-                     0,
-                     False)
-        end
-        else {Do nothing}
-      else begin
-        iRtermDockWidth:= RightDockPanel.Width;
-        DoShowHide(2,
-                   0,
-                   False)
-      end
-    else if BottomDockPanel.ContainsControl(frmRterm) then // Bottom
-      if BottomDockPanel.ContainsControl(frmTools) then
-        if not frmTools.Visible then begin
-          iRtermDockHeight:= BottomDockPanel.Height;
-          DoShowHide(3,
-                     0,
-                     False)
-        end
-        else {Do nothing}
-      else begin
-        iRtermDockHeight:= BottomDockPanel.Height;
-        DoShowHide(3,
-                   0,
-                   False);
-      end;
-  end;
-  frmRterm.Visible       := False;
-  actRtermVisible.Checked:= False;
-end;
-
 procedure TfrmTinnMain.actRtermVisibleExecute(Sender: TObject);
 begin
   if not Assigned(frmRterm) then Exit;
-  DoUndoAutoHideRterm;
-  if frmRterm.Visible then RtermHide
-                      else RtermShow;
-  SetFocus_Main;                      
+  
+  if GetFormVisible(frmRterm) then HideDockForm(frmRterm)
+                              else begin
+                                ShowDockForm(frmRterm);
+
+                                SetInterfaceSize(frmRterm,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
+                                                 frmRterm.iSize);  // http://stackoverflow.com/questions/27696359/delphi-jedi-docking-storage-remember
+                              end;
+
+  actRtermVisible.Checked:= GetFormVisible(frmRterm);
 end;
 
 procedure TfrmTinnMain.actToolsVisibleExecute(Sender: TObject);
 begin
   if not Assigned(frmTools) then Exit;
 
-  DoUndoAutoHideTools;
+  if GetFormVisible(frmTools) then HideDockForm(frmTools)
+                              else begin
+                                ShowDockForm(frmTools);
 
-  // The below, related to docking, is not smart, but I didn't find nothing better yet!
-  if frmTools.Visible then begin
-    with JvDockServer do begin
-      if LeftDockPanel.ContainsControl(frmTools) then  // Left
-        if LeftDockPanel.ContainsControl(frmRterm) then
-          if not frmRterm.Visible then begin
-            iToolsDockWidth:= LeftDockPanel.Width;
-            DoShowHide(0,
-                       0,
-                       False)
-          end
-          else {Do nothing}
-        else begin
-          iToolsDockWidth:= LeftDockPanel.Width;
-          DoShowHide(0,
-                     0,
-                     False)
-        end
-      else if TopDockPanel.ContainsControl(frmTools) then  // Right
-        if TopDockPanel.ContainsControl(frmRterm) then
-          if not frmRterm.Visible then begin
-            iToolsDockHeight:= TopDockPanel.Height;
-            DoShowHide(1,
-                       0,
-                       False)
-          end
-          else {Do nothing}
-        else begin
-          iToolsDockHeight:= TopDockPanel.Height;
-          DoShowHide(1,
-                     0,
-                     False)
-        end
-      else if RightDockPanel.ContainsControl(frmTools) then  // Top
-        if RightDockPanel.ContainsControl(frmRterm) then
-          if not frmRterm.Visible then begin
-            iToolsDockWidth:= RightDockPanel.Width;
-            DoShowHide(2,
-                       0,
-                       False)
-          end
-          else {Do nothing}
-        else begin
-          iToolsDockWidth:= RightDockPanel.Width;
-          DoShowHide(2,
-                     0,
-                     False)
-        end
-      else if BottomDockPanel.ContainsControl(frmTools) then  // Bottom
-        if BottomDockPanel.ContainsControl(frmRterm) then
-          if not frmRterm.Visible then begin
-            iToolsDockHeight:= BottomDockPanel.Height;
-            DoShowHide(3,
-                       0,
-                       False)
-          end
-          else {Do nothing}
-        else begin
-          iToolsDockHeight:= BottomDockPanel.Height;
-          DoShowHide(3,
-                     0,
-                     False);
-        end;
-    end;
-    frmTools.Visible:= False;
-  end
-  else begin
-    frmTools.Visible:= True;
-    with JvDockServer do begin
-      if LeftDockPanel.ContainsControl(frmTools)        then DoShowHide(0, iToolsDockWidth)   // Left
-      else if TopDockPanel.ContainsControl(frmTools)    then DoShowHide(1, iToolsDockHeight)  // Top
-      else if RightDockPanel.ContainsControl(frmTools)  then DoShowHide(2, iToolsDockWidth)   // Right
-      else if BottomDockPanel.ContainsControl(frmTools) then DoShowHide(3, iToolsDockHeight)  // Bottom
-    end;
-    with frmTools do
-    if (pgTools.ActivePage = tbsRcard) then lbRcard.SetFocus;
-  end;
+                                SetInterfaceSize(frmTools,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
+                                                 frmTools.iSize);  // http://stackoverflow.com/questions/27696359/delphi-jedi-docking-storage-remember
+                              end;
 
-  actToolsVisible.Checked:= frmTools.Visible;
-  SetFocus_Main;
+  actToolsVisible.Checked:= GetFormVisible(frmTools);
 end;
 
 procedure TfrmTinnMain.actRtermTabsBottomExecute(Sender: TObject);
@@ -22571,12 +22974,16 @@ end;
 
 procedure TfrmTinnMain.actRtermWarningErrorExecute(Sender: TObject);
 begin
-  with actRtermWarningError do
-    Checked:= not Checked;
-  if actRtermVisible.Checked and
-     actRtermWarningError.Checked and
-     actRtermIOSplitRemove.Checked then frmRterm.pgRterm.ActivePage:= frmRterm.tbsLog
+  if not Assigned(frmRterm) then Exit;
+
+  actRtermWarningError.Visible:= False;
+  stbMain.Panels[8].Text:= EmptyStr; 
+
+  ShowDockForm(frmRterm);
+  if actRtermIOSplitRemove.Checked then frmRterm.pgRterm.ActivePage:= frmRterm.tbsLog
                                    else frmRterm.pgRterm.ActivePage:= frmRterm.tbsIO;
+
+  actRtermVisible.Checked:= GetFormVisible(frmRterm);
 end;
 
 procedure TfrmTinnMain.actRtipInsertExecute(Sender: TObject);
@@ -22586,10 +22993,10 @@ var
 begin
   if (pgFiles.PageCount = 0) then Exit;
   i:= FindTopWindow;
-  
+
   with (MDIChildren[i] as TfrmEditor) do
     DoTipInsert;
-  
+
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
               0,
@@ -22607,8 +23014,17 @@ end;
 procedure TfrmTinnMain.actRtermIOSetFocusExecute(Sender: TObject);
 begin
   if not frmRterm.Visible then Exit;
-  frmRterm.pgRterm.ActivePage:= frmRterm.tbsIO;
-  frmRterm.synIO.SetFocus;
+
+  with frmRterm do
+    try
+      pgRterm.ActivePage:= tbsIO;
+      with synIO do
+        if CanFocus then SetFocus;
+    except
+      on E: Exception do
+        ShowMessage('Please, be sure the Rterm panel is visible before that!');
+    end;
+
   actRtermIOSetFocus.Checked:= True;
 end;
 
@@ -22641,10 +23057,13 @@ begin
     end;
 
   frmRterm.tbsLog.TabVisible:= False;
+  if frmRterm.Visible then
+    with frmRterm.synIO do
+        if Parent.CanFocus then SetFocus;
+
   actRtermIOSplitHorizontal.Checked:= Assigned(frmRterm.synLog2);
   bRtermSimple    := True;
   bRtermHorizontal:= True;
-  frmRterm.TBToolbarRterm.Left:= 52;
 end;
 
 procedure TfrmTinnMain.actRtermIOSplitVerticalExecute(Sender: TObject);
@@ -22676,10 +23095,13 @@ begin
     end;
 
   frmRterm.tbsLog.TabVisible:= False;
+  if frmRterm.Visible then
+    with frmRterm.synIO do
+        if Parent.CanFocus then SetFocus;
+
   actRtermIOSplitVertical.Checked:= Assigned(frmRterm.synLog2);
   bRtermSimple    := True;
   bRtermHorizontal:= False;
-  frmRterm.TBToolbarRterm.Left:= 52;
 end;
 
 procedure TfrmTinnMain.actRtermIOSplitRemoveExecute(Sender: TObject);
@@ -22692,7 +23114,12 @@ begin
 
   if Assigned(frmRterm.splRIO) then FreeAndNil(frmRterm.splRIO);
 
-  if Assigned(frmRterm.synLog2) then FreeAndNil(frmRterm.synLog2);
+  if Assigned(frmRterm.synLog2) then begin
+    with frmRterm.synIO do
+      if CanFocus then SetFocus;
+    Application.ProcessMessages;
+    FreeAndNil(frmRterm.synLog2);
+  end;
 
   with frmRterm.synLog do begin
     BeginUpdate;
@@ -22718,17 +23145,30 @@ begin
   actRtermIOSplitRemove.Checked:= (frmRterm.synLog2 = nil);
   bRtermSimple:= False;
   UpdateRterm_Appearance;
-  frmRterm.TBToolbarRterm.Left:= 92;
+  //frmRterm.TBToolbarRterm.Left:= 92;
 end;
 
 procedure TfrmTinnMain.actRtermLogSetFocusExecute(Sender: TObject);
 begin
   if not frmRterm.Visible then Exit;
-  if Assigned(frmRterm.synLog2) then frmRterm.synLog2.SetFocus
-  else begin
-    frmRterm.pgRterm.ActivePage:= frmRterm.tbsLog;
-    frmRterm.synLog.SetFocus;
-  end;
+
+  with frmRterm do
+    try
+      if Assigned(synLog2) then begin
+        pgRterm.ActivePage:= frmRterm.tbsIO;
+        with synLog2 do
+          if CanFocus then SetFocus;
+      end
+      else begin
+        pgRterm.ActivePage:= frmRterm.tbsLog;
+        with synLog do
+          if CanFocus then SetFocus;
+      end;
+    except
+      on E: Exception do
+        ShowMessage('Please, be sure the Rterm panel is visible before that!');
+    end;
+
   actRtermLogSetFocus.Checked:= True;
 end;
 
@@ -23143,7 +23583,9 @@ begin
                           WM_SETFOCUS,
                           0,
                           0);
-          end
+          end;
+  end;
+(*
     else
       {
       PostMessage(TWinControl(frmRTerm.synIO).Handle,
@@ -23152,8 +23594,9 @@ begin
                   0);
       }
       if frmRTerm.Visible then
-        frmRterm.synIO.SetFocus;
+        //frmRterm.synIO.SetFocus;  // Problem if autohide os on!
     end;
+*)    
 end;
 
 function TfrmTinnMain.GetFocus: integer;
@@ -23238,10 +23681,16 @@ begin  // Font.Size < 50
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor do
-          if (Font.Size < 50) then Font.Size:= Font.Size + 1;
+          if (Font.Size < 50) then begin
+            Font.Size:= Font.Size + 1;
+            UpdateHexViewer;
+          end;
      // synEditor2
      2: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor2 do
-          if (Font.Size < 50) then Font.Size:= Font.Size + 1;
+          if (Font.Size < 50) then begin
+            Font.Size:= Font.Size + 1;
+            UpdateHexViewer;
+          end;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do begin
           if (Font.Size < 50) then Font.Size:= Font.Size + 1;
@@ -23331,10 +23780,16 @@ begin  //Font.Size > 02
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor do
-          if (Font.Size > 02) then Font.Size:= Font.Size - 1;
+          if (Font.Size > 02) then begin
+            Font.Size:= Font.Size - 1;
+            UpdateHexViewer;
+          end;
      // synEditor2
      2: with (Self.MDIChildren[FindTopWindow] as TfrmEditor).synEditor2 do
-          if (Font.Size > 02) then Font.Size:= Font.Size - 1;
+          if (Font.Size > 02) then begin
+            Font.Size:= Font.Size - 1;
+            UpdateHexViewer;
+          end;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do begin
           if (Font.Size > 02) then Font.Size:= Font.Size - 1;
@@ -23412,7 +23867,7 @@ begin  //Font.Size > 02
   end;
 end;
 
-procedure TfrmTinnMain.actReformatRExecute(Sender: TObject);
+procedure TfrmTinnMain.actFormatRExecute(Sender: TObject);
 var
   seEditor : TSynEdit;
 
@@ -23424,13 +23879,13 @@ var
 
   procedure SendToRReformat(bFile: boolean);
   begin
-    sTmp:= 'tidy.source(' +
+    sTmp:= 'tidy_source(' +
            sToSend +
            ', ' +
            'file=' +
            '.trPaths[9]' +
            ', ' +
-           sReformatR +
+           sFormatR +
            ')';
 
     DoSend(sTmp);
@@ -23490,8 +23945,103 @@ begin
       Panels[8].Text:= 'Please, check your internet connection!';
     end;
     Application.ProcessMessages;
-  
+
     Result:= False;
+  end;
+end;
+
+procedure TfrmTinnMain.UpdateHexViewer;
+
+  procedure SetMode(sMode: string);
+  begin
+    with frmTools do begin
+      if (sMode = 'ANSI') or
+         (sMode = 'UTF-8') then begin
+        with rgHexViewerMode do begin
+          Controls[0].Enabled:= True;
+          Controls[1].Enabled:= True;
+          Controls[2].Enabled:= True;
+          Controls[3].Enabled:= False;
+          Controls[4].Enabled:= False;
+          ItemIndex:= 2;
+        end;
+
+        ATBinHex.Mode:= vbmodeHex;
+      end
+      else begin
+        with rgHexViewerMode do begin
+          Controls[0].Enabled:= False;
+          Controls[1].Enabled:= False;
+          Controls[2].Enabled:= False;
+          Controls[3].Enabled:= True;
+          Controls[4].Enabled:= True;
+          ItemIndex:= 4;
+        end;
+
+        ATBinHex.Mode:= vbmodeUHex;
+      end;
+    end;
+  end;
+
+var
+  seTmp: TSynEdit;
+
+  sTmp: string;
+
+begin
+  // Low cost
+  if (pgFiles.PageCount = 0) or
+  not frmTools.Visible or
+  (frmTools.pgResults.ActivePage <> frmTools.tbsHexViewer) then Exit;
+
+  try
+    // low cost
+    if Assigned(msHexViewer) then FreeAndNil(msHexViewer);
+
+    msHexViewer:= TMemoryStream.Create;
+
+    with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
+      seTmp:= SynEditor;
+
+    seTmp.Lines.SaveToStream(msHexViewer);
+
+    with frmTools.ATBinHex do begin
+      // Appearance
+      Font      := seTmp.Font;
+      FontGutter:= seTmp.Gutter.Font;
+
+      // It is necessary to know the file encoding
+      sTmp:= GetSaveFormat(seTmp.Lines);
+
+      // It is necessary some retriction in the interface
+      case StringToCaseSelect(sTmp,
+                              ['ANSI',
+                               'UTF-8',
+                               'UTF16-LE',
+                               'UTF16-BE']) of
+        0: begin
+             TextEncoding:= vEncANSI;
+             SetMode('ANSI');
+           end;
+        1: begin
+             TextEncoding:= vEncUTF8;
+             SetMode('UTF-8');
+           end;
+        2: begin
+             TextEncoding:= vEncUnicodeLE;
+             SetMode('UTF16-LE');
+           end;
+        3: begin
+             TextEncoding:= vEncUnicodeBE;
+             SetMode('UTF16-BE');
+           end;
+      end;
+
+      // Load
+      OpenStream(msHexViewer);
+    end;
+  except
+    //TODO
   end;
 end;
 
@@ -23958,5 +24508,34 @@ begin
     Screen.Cursor:= crDefault;
     Application.ProcessMessages;
   end;
+end;
+
+
+procedure TfrmTinnMain.actRExplorerExpHtmlExecute(Sender: TObject);
+var
+  sTmp: string;
+
+begin
+  if (frmTools.lvRexplorer.Selected = nil) then Exit;
+  sTmp:= 'trExport(''' +
+         frmTools.lvRexplorer.Selected.Caption +
+         '''' +
+         ', ' +
+         'type=''html'')';
+  DoSend(sTmp);
+end;
+
+procedure TfrmTinnMain.actRExplorerExpTeXExecute(Sender: TObject);
+var
+  sTmp: string;
+
+begin
+  if (frmTools.lvRexplorer.Selected = nil) then Exit;
+  sTmp:= 'trExport(''' +
+         frmTools.lvRexplorer.Selected.Caption +
+         '''' +
+         ', ' +
+         'type=''latex'')';
+  DoSend(sTmp);
 end;
 *)

@@ -10,7 +10,7 @@ object frmShortcuts: TfrmShortcuts
     'ar an assigned shortcut'
   ClientHeight = 395
   ClientWidth = 613
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -31,6 +31,8 @@ object frmShortcuts: TfrmShortcuts
     Height = 20
     Align = alTop
     BevelOuter = bvNone
+    Color = 16250871
+    ParentBackground = False
     TabOrder = 10
     object DBNavigator1: TDBNavigator
       Left = 0
@@ -83,7 +85,7 @@ object frmShortcuts: TfrmShortcuts
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -105,7 +107,7 @@ object frmShortcuts: TfrmShortcuts
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -127,7 +129,7 @@ object frmShortcuts: TfrmShortcuts
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -278,6 +280,7 @@ object frmShortcuts: TfrmShortcuts
     Top = 376
     Width = 613
     Height = 19
+    Color = 16250871
     Panels = <
       item
         Width = 100

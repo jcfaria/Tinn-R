@@ -8,7 +8,7 @@ object frmRCard: TfrmRCard
   Caption = 'R card database (xml based)'
   ClientHeight = 387
   ClientWidth = 619
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -29,6 +29,8 @@ object frmRCard: TfrmRCard
     Height = 20
     Align = alTop
     BevelOuter = bvNone
+    Color = 16250871
+    ParentBackground = False
     TabOrder = 10
     object DBNavigator1: TDBNavigator
       Left = 0
@@ -80,7 +82,7 @@ object frmRCard: TfrmRCard
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -102,7 +104,7 @@ object frmRCard: TfrmRCard
       Width = 37
       Height = 13
       Caption = 'Search:'
-      Color = clBtnFace
+      Color = 16250871
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clMaroon
       Font.Height = -11
@@ -206,6 +208,7 @@ object frmRCard: TfrmRCard
     Top = 368
     Width = 619
     Height = 19
+    Color = 16250871
     Panels = <
       item
         Width = 50

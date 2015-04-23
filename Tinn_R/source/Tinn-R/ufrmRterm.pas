@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -59,92 +58,95 @@ type
     pgRterm: TJvgPageControl;
     synIO: TSynEdit;
     synLog: TSynEdit;
-    TBItem1: TTBItem;
-    TBItem10: TTBItem;
-    TBItem11: TTBItem;
-    TBItem12: TTBItem;
-    TBItem13: TTBItem;
-    TBItem14: TTBItem;
-    TBItem15: TTBItem;
-    TBItem16: TTBItem;
-    TBItem17: TTBItem;
-    TBItem18: TTBItem;
-    TBItem19: TTBItem;
-    TBItem2: TTBItem;
-    TBItem20: TTBItem;
-    TBItem21: TTBItem;
-    TBItem22: TTBItem;
-    TBItem23: TTBItem;
-    TBItem24: TTBItem;
-    TBItem25: TTBItem;
-    TBItem26: TTBItem;
-    TBItem27: TTBItem;
-    TBItem28: TTBItem;
-    TBItem29: TTBItem;
-    TBItem3: TTBItem;
-    TBItem30: TTBItem;
-    TBItem31: TTBItem;
-    TBItem32: TTBItem;
-    TBItem33: TTBItem;
-    TBItem34: TTBItem;
-    TBItem35: TTBItem;
-    TBItem36: TTBItem;
-    TBItem37: TTBItem;
-    TBItem38: TTBItem;
-    TBItem39: TTBItem;
-    TBItem4: TTBItem;
-    TBItem40: TTBItem;
-    TBItem41: TTBItem;
-    TBItem42: TTBItem;
-    TBItem5: TTBItem;
-    TBItem6: TTBItem;
-    TBItem7: TTBItem;
-    TBItem8: TTBItem;
-    TBItem9: TTBItem;
-    TBSeparatorItem1: TTBSeparatorItem;
-    TBSeparatorItem2: TTBSeparatorItem;
-    TBSeparatorItem3: TTBSeparatorItem;
-    TBSeparatorItem4: TTBSeparatorItem;
-    TBSeparatorItem5: TTBSeparatorItem;
-    TBSeparatorItem6: TTBSeparatorItem;
-    TBSeparatorItem7: TTBSeparatorItem;
-    TBSeparatorItem8: TTBSeparatorItem;
-    TBSeparatorItem9: TTBSeparatorItem;
     tbsIO: TTabSheet;
     tbsLog: TTabSheet;
-    TBSubmenuItem1: TTBSubmenuItem;
-    TBSubmenuItem10: TTBSubmenuItem;
-    TBSubmenuItem11: TTBSubmenuItem;
-    TBSubmenuItem12: TTBSubmenuItem;
-    TBSubmenuItem13: TTBSubmenuItem;
-    TBSubmenuItem14: TTBSubmenuItem;
-    TBSubmenuItem15: TTBSubmenuItem;
-    TBSubmenuItem2: TTBSubmenuItem;
-    TBSubmenuItem3: TTBSubmenuItem;
-    TBSubmenuItem4: TTBSubmenuItem;
-    TBSubmenuItem5: TTBSubmenuItem;
-    TBSubmenuItem6: TTBSubmenuItem;
-    TBSubmenuItem7: TTBSubmenuItem;
-    TBSubmenuItem8: TTBSubmenuItem;
-    TBSubmenuItem9: TTBSubmenuItem;
+    TBDock1: TTBDock;
     TBToolbarRterm: TTBToolbar;
+    TBItem7: TTBItem;
+    TBSeparatorItem5: TTBSeparatorItem;
+    TBItem41: TTBItem;
+    TBItem40: TTBItem;
+    TBItem42: TTBItem;
+    TBSeparatorItem2: TTBSeparatorItem;
+    TBSubmenuItem10: TTBSubmenuItem;
+    TBItem29: TTBItem;
+    TBItem28: TTBItem;
+    TBSeparatorItem4: TTBSeparatorItem;
+    TBItem32: TTBItem;
+    TBItem31: TTBItem;
+    TBItem30: TTBItem;
+    TBSeparatorItem8: TTBSeparatorItem;
+    TBItem33: TTBItem;
+    TBSubmenuItem11: TTBSubmenuItem;
+    TBSubmenuItem13: TTBSubmenuItem;
+    TBItem1: TTBItem;
+    TBItem2: TTBItem;
+    TBItem6: TTBItem;
+    TBSubmenuItem12: TTBSubmenuItem;
+    TBItem37: TTBItem;
+    TBItem36: TTBItem;
+    TBItem35: TTBItem;
+    TBSeparatorItem1: TTBSeparatorItem;
+    TBSubmenuItem9: TTBSubmenuItem;
+    TBItem24: TTBItem;
+    TBItem34: TTBItem;
+    TBItem8: TTBItem;
+    TBSubmenuItem8: TTBSubmenuItem;
+    TBItem27: TTBItem;
+    TBItem26: TTBItem;
+    TBItem25: TTBItem;
+    TBSubmenuItem2: TTBSubmenuItem;
+    TBItem13: TTBItem;
+    TBItem12: TTBItem;
+    TBItem11: TTBItem;
+    TBSubmenuItem1: TTBSubmenuItem;
+    TBItem10: TTBItem;
+    TBItem9: TTBItem;
+    TBSeparatorItem3: TTBSeparatorItem;
+    TBItem3: TTBItem;
+    TBSubmenuItem4: TTBSubmenuItem;
+    TBSubmenuItem15: TTBSubmenuItem;
+    TBItem17: TTBItem;
+    TBItem16: TTBItem;
+    TBSubmenuItem14: TTBSubmenuItem;
+    TBItem39: TTBItem;
+    TBItem38: TTBItem;
+    TBSubmenuItem3: TTBSubmenuItem;
+    TBItem15: TTBItem;
+    TBItem14: TTBItem;
+    TBSeparatorItem7: TTBSeparatorItem;
+    TBSubmenuItem6: TTBSubmenuItem;
+    TBItem21: TTBItem;
+    TBItem20: TTBItem;
+    TBSeparatorItem6: TTBSeparatorItem;
+    TBItem19: TTBItem;
+    TBItem18: TTBItem;
+    TBSubmenuItem5: TTBSubmenuItem;
+    TBItem22: TTBItem;
+    TBItem23: TTBItem;
+    TBSeparatorItem9: TTBSeparatorItem;
+    TBSubmenuItem7: TTBSubmenuItem;
+    TBItem5: TTBItem;
+    TBItem4: TTBItem;
 
     procedure cRTermError(Sender: TObject; const Cmd: string);
     procedure cRTermProcessStatusChange(Sender: TObject; IsRunning: Boolean);
     procedure cRTermReceiveError(Sender: TObject; const Cmd: string);
     procedure cRTermReceiveOutput(Sender: TObject; const Cmd: string);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pgRtermResize(Sender: TObject);
     procedure synIOEnter(Sender: TObject);
     procedure synIOKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure synIOKeyPress(Sender: TObject; var Key: WideChar);
     procedure synIOKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synIOMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure synLogEnter(Sender: TObject);
     procedure synLogKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synLogKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synLogMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure synLogKeyPress(Sender: TObject; var Key: WideChar);
+    procedure FormHide(Sender: TObject);
 
   private
     { Private declarations }
@@ -164,6 +166,7 @@ type
     bRUnderDebug_Package : boolean;
     iSynLog2Height       : integer;
     iSynLog2Width        : integer;
+    iSize                : integer;
     splRIO               : TSplitter;
     sRDebugPrefix        : string;
     synLog2              : TSynEdit;
@@ -180,7 +183,7 @@ uses
   ufrmMain,
   ufrmEditor,
   ufrmTools,
-  trUtils;
+  trUtils, udmSyn;
 
 {$R *.dfm}
 
@@ -334,6 +337,8 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
 
    begin
      try
+       if (Cmd = '') then Exit;
+       
        slTmp:= TStringList.Create;
 
        slTmp.Text:= StringReplace(Cmd,
@@ -431,7 +436,7 @@ begin
 
   with frmTinnMain do
     if (pgFiles.PageCount > 0) then SetFocus_Main
-                               else synIO.SetFocus;
+                               //else synIO.SetFocus;   // Problem if autohide os on!
 end;
 
 procedure TfrmRterm.cRTermError(Sender: TObject;
@@ -440,7 +445,8 @@ begin
   with synIO do begin
     BeginUpdate;
     Lines.Add(Cmd);
-    if not frmTinnMain.bRguiReturnFocus then SetFocus;
+    if not frmTinnMain.bRguiReturnFocus then
+      if CanFocus then SetFocus;
     EndUpdate;
   end;
 
@@ -512,8 +518,8 @@ begin
     end;
   end;
 
-  if Assigned(synLog2) then seLog:= synLog2 {synIO}
-                       else seLog:= synLog {synIO};
+  if Assigned(synLog2) then seLog:= synLog2
+                       else seLog:= synLog;
 
   with seLog do begin
     BeginUpdate;
@@ -546,12 +552,6 @@ begin
   frmTinnMain.SetFocus_Main;
 end;
 
-procedure TfrmRterm.FormCloseQuery(Sender: TObject;
-                                   var CanClose: Boolean);
-begin
-  frmTinnMain.actRtermVisibleExecute(nil);
-end;
-
 procedure TfrmRterm.FormCreate(Sender: TObject);
 begin
   with synIO do
@@ -559,14 +559,39 @@ begin
 
   with synLog do
     OnPaintTransient:= frmTinnMain.synPaintTransient;
+end;
 
-  JvDockClientRterm.DockStyle:= frmTinnMain.JvDockVSNetStyle;
+procedure TfrmRterm.FormHide(Sender: TObject);
+begin
+  with frmTinnMain do begin
+    if not actRtermVisible.Checked then Exit;  // LoadDockTreeFromAppStorage call FormHide when starting and the form is not visible.
+                                               // Do not remove from here!
 
-  ManualDock(frmTinnMain.JvDockServer.RightDockPanel,
-             nil,
-             AlClient);
+    actRtermVisible.Checked:= False;  // It is necessary here due the user can close the form manually pressing the x icon.
 
-  ShowDockForm(Self);
+    with JvDockServer do begin
+      with LeftDockPanel do  // Left
+        if ContainsControl(frmRterm) then begin
+          iSize:= Width;
+          Exit;
+        end;
+      with TopDockPanel do  // Top
+        if ContainsControl(frmRterm) then begin
+          iSize:= Height;
+          Exit;
+        end;
+      with RightDockPanel do // Right
+        if ContainsControl(frmRterm) then begin
+          iSize:= Width;
+          Exit;
+        end;
+      with BottomDockPanel do // Bottom
+        if ContainsControl(frmRterm) then begin
+          iSize:= Height;
+          Exit;
+        end;
+    end;
+  end;
 end;
 
 procedure TfrmRterm.FormShow(Sender: TObject);
@@ -580,7 +605,8 @@ var
   iWidth: integer;
 
 begin
-  if (not bRterm_Running) then Exit;
+  if (not bRterm_Running) or
+     not frmTinnMain.bRtermWidth then Exit;
 
   iWidth:= (synIO.Width - synIO.Gutter.Width - 20) div synIO.CharWidth;
 
@@ -606,8 +632,9 @@ procedure TfrmRterm.synIOKeyDown(Sender: TObject;
 
   function ConsoleGetCursorTo(sWay: string): string;
   var
-    iPos           : integer;
-    smOption       : TSynSelectionMode;
+    iPos: integer;
+
+    smOption: TSynSelectionMode;
 
   begin
     Result:= '';
@@ -696,15 +723,23 @@ begin
     end;
   end;
 
-
   if (Shift = [ssCtrl]) then
     case Key of
       VK_TAB: begin
                 if not frmTinnMain.actRtermVisible.Checked then Exit;
-                if Assigned(synLog2) then synLog2.SetFocus
-                else begin
-                  pgRterm.ActivePageIndex:= 1;
-                  synLog.SetFocus;
+
+                try
+                  if Assigned(synLog2) then
+                    with synLog2 do
+                      if CanFocus then SetFocus
+                  else begin
+                    pgRterm.ActivePageIndex:= 1;
+                    with synLog do
+                      if CanFocus then SetFocus;
+                  end;
+                except
+                  on E: Exception do
+                    ShowMessage('Please, be sure the Rterm panel is visible before that!');
                 end;
               end;
   end;
@@ -825,6 +860,26 @@ begin
       89: with synIO do // CTRL+Y
             if (CaretY = Lines.Count) then Key:= VK_PAUSE;
 
+      VK_BACK: with synIO do begin  // CTRL+BACK
+                 if (CaretY = Lines.Count) then begin
+                   sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
+
+                   if (sPrior = '>') or
+                      (sPrior = '+') or
+                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
+                 end;
+               end;
+
+      VK_LEFT: with synIO do begin  // CTRL+LEFT
+                 if (CaretY = Lines.Count) then begin
+                   sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
+
+                   if (sPrior = '>') or
+                      (sPrior = '+') or
+                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
+                 end;
+               end;
+
       VK_RETURN: with synIO do begin // Send prior lines
                    BeginUpdate;
                    sTmp:= Trim(LineText);
@@ -859,11 +914,23 @@ begin
                      frmTinnMain.sTipToWrite:= '';
                    end;
 
-      VK_ADD: with synIO do // Add or replace text by attribution symbol: ->
-                SelText:= ' -> ';
+      // The below avoid problens with undo/redo and eoScrollPastEol (in or not in options)
+      VK_ADD: with synIO do begin// Add or replace text by attribution symbol: ->
+                SelText:= ' ->';
 
-      VK_SUBTRACT: with synIO do // Add or replace text by attribution symbol: <-
-                     SelText:= ' <- ';
+                ExecuteCommand(ecChar,
+                               ' ',
+                               nil);
+              end;
+
+      // The below avoid problens with undo/redo and eoScrollPastEol (in or not in options)
+      VK_SUBTRACT: with synIO do begin// Add or replace text by attribution symbol: <-
+                     SelText:= ' <-';
+
+                     ExecuteCommand(ecChar,
+                                    ' ',
+                                    nil);
+                   end;
 
       48: with synIO do // Add or replace text by attribution symbol: ()
             SelText:= '()';
@@ -891,13 +958,7 @@ begin
       else if (CaretY <> Lines.Count) then Exit;
     end;
   end;
-{
-  with synIO do
-    if not SelAvail then
-      if (LineText <> '') then
-        if (LineText[1] in cOk) and
-           (CaretX <= 3) then CaretX:= 3;
-}
+
   if (Key = VK_RETURN) then begin // Send latest line to R when editing related to Rterm
     if not frmTinnMain.Rterm_Running then Exit;
 
@@ -917,6 +978,20 @@ begin
       if (sTmp[1] in cOk) then Delete(sTmp,
                                       1,
                                       1);
+
+      // Necessary to clear the intruction to be send in case of be result of cat('x'): x>
+      // The user can also add some thing, for example: x> sd
+      iPos:= Pos('>',
+                 sTmp);
+      if (iPos > 0) and                      // LineText has >
+         (sTmp[iPos - 1] <> '-') then begin  // LineText <> -> (single atribuition: 1 -> x)
+        Delete(sTmp,
+               1,
+               iPos);
+
+        sTmp:= Trim(sTmp);
+      end;
+
       if (sTmp <> '') and
          (sTmp <> '> ') then begin
 
@@ -979,7 +1054,8 @@ begin
 
                    if (sPrior = '>') or
                       (sPrior = '+') or
-                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
+                      (sPrior = sRDebugPrefix) then
+                     key:= VK_PAUSE;
                  end
                  else begin
                    if (CaretY = Lines.Count) and
@@ -994,11 +1070,10 @@ begin
                end;
              end;
 
-    // Necessary to cotrol "Ctrl + A" or selection in the last line (prompt)
+    // Necessary to cotrol "Ctrl + A" or selection in the last line: prompt line
     VK_DELETE: begin
                  with synIO do begin
                    if not SelAvail then begin
-
                      sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
 
                      sAfter:= Trim(ConsoleGetCursorTo('EndLine'));
@@ -1006,15 +1081,21 @@ begin
                      if (sPrior = '>') or
                         (sPrior = '+') or
                         (sPrior = sRDebugPrefix) then
-                       if (sAfter = '')  then begin
+                       if (sAfter = '')  then
                          key:= VK_PAUSE;
-
-                         ExecuteCommand(ecLineEnd,
-                                        #0,
-                                        nil);
-                       end;
                    end
                    else begin
+                     if (CaretY = 1) then begin
+                       with cRterm do begin
+                         if (SelText = Text) then synIO.Clear;
+
+                         if IsRunning then SendInput('' +
+                                                     #13#10);
+                       end;
+                       
+                       Exit;
+                     end;
+
                      if (CaretY = Lines.Count) and
                         (BlockBegin.Line <> BlockEnd.Line) then
                        with cRterm do begin
@@ -1046,6 +1127,75 @@ begin
   end;
 end;
 
+procedure TfrmRterm.synIOKeyPress(Sender: TObject;
+                                  var Key: WideChar);
+
+  function sFormat(sTmp: string;
+                   cTmp: char): string;
+  begin
+    Result:= key +
+             sTmp +
+             cTmp;
+  end;
+
+  procedure InsertText(sTmp: string;
+                       i: integer);
+  begin
+    with synIO do begin
+      SelText:= sTmp;
+      CaretX := CaretX - i;
+    end;
+
+    key:= #0;  // make nul the key pressed
+  end;
+
+begin
+  if frmTinnMain.actAutoCompletion.Checked then
+    with synIO do
+      case key of
+         '(': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ')'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ')'),
+                           1);
+         '[': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ']'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ']'),
+                           1);
+         '{': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   '}'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   '}'),
+                           1);
+        '''': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ''''),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ''''),
+                           1);
+         '"': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   '"'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   '"'),
+                           1);
+      end;
+end;
+
 procedure TfrmRterm.synIOKeyUp(Sender: TObject;
                                var Key: Word;
                                Shift: TShiftState);
@@ -1071,7 +1221,15 @@ end;
 procedure TfrmRterm.synLogKeyDown(Sender: TObject;
                                   var Key: Word;
                                   Shift: TShiftState);
+var
+  seEditor: TSynEdit;
+
 begin
+  seEditor:= TSynEdit(Sender);
+
+  if (seEditor.Text = EmptyStr) and
+     (Key = 35) then key:= VK_PAUSE;  // To avoid a exception when Log/Log2 is empty and user press End.
+
   case Key of
     1..15,
     18..31,
@@ -1098,13 +1256,96 @@ begin
     case Key of
       VK_TAB: begin
                 if not frmTinnMain.actRtermVisible.Checked then Exit;
-                if not assigned(synLog2) then
-                  pgRterm.ActivePageIndex:= 0;
-                synIO.SetFocus;
+
+                try
+                  if Assigned(synLog2) then
+                    with synLog2 do
+                      if CanFocus then SetFocus
+                  else begin
+                    pgRterm.ActivePageIndex:= 0;
+                    with synIO do
+                      if CanFocus then SetFocus;
+                  end;
+                except
+                  on E: Exception do
+                    ShowMessage('Please, be sure the Rterm panel is visible before that!');
+                end;
               end;
   end;
+end;
 
-  if not bRterm_Running then Exit;
+procedure TfrmRterm.synLogKeyPress(Sender: TObject;
+                                   var Key: WideChar);
+var
+  seLog: TSynEdit;
+
+  function sFormat(sTmp: string;
+                   cTmp: char): string;
+  begin
+    Result:= key +
+             sTmp +
+             cTmp;
+  end;
+
+  procedure InsertText(sTmp: string;
+                       i: integer);
+  begin
+    with seLog do begin
+      SelText:= sTmp;
+      CaretX := CaretX - i;
+    end;
+
+    key:= #0;  // make nul the key pressed
+  end;
+
+begin
+  if Assigned(synLog2) then seLog:= synLog2
+                       else seLog:= synLog;
+
+  if frmTinnMain.actAutoCompletion.Checked then
+    with seLog do
+      case key of
+         '(': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ')'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ')'),
+                           1);
+         '[': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ']'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ']'),
+                           1);
+         '{': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   '}'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   '}'),
+                           1);
+        '''': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ''''),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ''''),
+                           1);
+         '"': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   '"'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   '"'),
+                           1);
+      end;
 end;
 
 procedure TfrmRterm.synLogKeyUp(Sender: TObject;
@@ -1131,8 +1372,14 @@ end;
 
 procedure TfrmRterm.RtermSplit(bSplitHorizontal: boolean = True);
 begin
+
   if Assigned(splRIO) then FreeAndNil(splRIO);
-  if Assigned(synLog2) then FreeAndNil(synLog2);
+  if Assigned(synLog2) then begin
+    with synIO do
+      if CanFocus then SetFocus;
+    Application.ProcessMessages;
+    FreeAndNil(synLog2);
+  end;  
 
   synLog2:= TSynEdit.Create(Self);
   with synLog2 do begin
@@ -1157,9 +1404,7 @@ begin
     Gutter                := synIO.Gutter;
     Gutter.ShowlineNumbers:= synIO.Gutter.ShowlineNumbers;
     Font                  := synIO.Font;
-    Highlighter           := synIO.Highlighter;
     SelectionMode         := synIO.SelectionMode;
-    Options               := synIO.Options;
     WantTabs              := synIO.WantTabs;
     ActiveLineColor       := synIO.ActiveLineColor;
     Color                 := synIO.Color;
@@ -1168,10 +1413,16 @@ begin
     RightEdgeColor        := synIO.RightEdgeColor;
     OnKeyUp               := synLog.OnKeyUp;
     OnMouseUp             := synLog.OnMouseUp;
+    OnKeyPress            := synLog.OnKeyPress;
+
     with Constraints do begin
       MinHeight:= 20;
       MinWidth := 30;
     end;
+
+    with frmTinnMain do
+      if actRtermSetLogSyntaxToR.Checked then Highlighter:= dmSyn.synR_term
+                                         else Highlighter:= dmSyn.synText_term;
   end;
 
   splRIO:= TSplitter.Create(nil);

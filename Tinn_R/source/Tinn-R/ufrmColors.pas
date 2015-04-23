@@ -24,8 +24,7 @@
  debugging of R code.
 
  Copyright
-  Tinn-R team October/2005
-  Tinn-R team October/2013
+  Tinn-R team - http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -63,6 +62,7 @@ type
     bbtOK: TBitBtn;
     bbtSetBGForAllIdentifiers: TBitBtn;
     bbtSetBGForAllIHighlighters: TBitBtn;
+    Bevel1: TBevel;
     cbActiveLineBG: TCheckBox;
     cbBold: TCheckBox;
     cbItalic: TCheckBox;
@@ -80,6 +80,10 @@ type
     GroupBox6: TGroupBox;
     lbHighlighters: TListBox;
     lbIdentifiers: TListBox;
+    lHighlighters: TLabel;
+    lWarning_1: TLabel;
+    lWarning_2: TLabel;
+    lWarning_3: TLabel;
     shActiveLine: TtrShape;
     shBG: TtrShape;
     shBGAllHighlighters: TtrShape;
@@ -87,11 +91,6 @@ type
     shBrackets: TtrShape;
     shFG: TtrShape;
     synSample: TSynEdit;
-    Bevel1: TBevel;
-    lWarning_1: TLabel;
-    lHighlighters: TLabel;
-    lWarning_3: TLabel;
-    lWarning_2: TLabel;
 
     procedure actTextAttributesExecute(Sender: TObject);
     procedure bbHelpClick(Sender: TObject);
@@ -114,6 +113,7 @@ type
     procedure shFGMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure synSampleChange(Sender: TObject);
     procedure synSampleClick(Sender: TObject);
+    procedure synSampleKeyPress(Sender: TObject; var Key: WideChar);
 
   private
     { Private declarations }
@@ -153,17 +153,21 @@ end;
 
 procedure TfrmColors.StructureIniSyntaxFiles(clPreferred: TColor);
 var
-  att            : TSynHighlighterAttributes;
+  att: TSynHighlighterAttributes;
+
   clFG,
-   clBG          : TColor;
+   clBG: TColor;
+
   i,
    j,
    k,
    iHighlighterID: integer;
-  oldAttrStyle,
-   attrStyle     : TFontStyles;
+
+  attrStyle,
+   oldAttrStyle: TFontStyles;
+
   sName,
-   sHighlighter  : string;
+   sHighlighter: string;
 
 begin
   lbHighlighters.Items.BeginUpdate;
@@ -214,12 +218,28 @@ begin
         att:= TSynHighlighterAttributes.Create(lbIdentifiers.Items[lbIdentifiers.ItemIndex],
                                                sFriendlyName);
         oldAttrStyle:= synSample.Highlighter.Attribute[lbIdentifiers.ItemIndex].Style;
+
         try
           attrStyle:= [];
           att.ForegRound:= clFG;
           att.Background:= clBG;
           att.Style:= oldAttrStyle;
           synSample.Highlighter.Attribute[lbIdentifiers.ItemIndex].Assign(att);
+
+        if (synSample.Highlighter.GetFriendlyLanguageName = 'R') then
+          with dmSyn.synR_term do begin     // synR_term is related to synR, but is a bit different
+            BeginUpdate;
+            Attribute[lbIdentifiers.ItemIndex].Assign(att);
+            EndUpdate;
+          end;
+
+        if (synSample.Highlighter.GetFriendlyLanguageName = 'Text') then
+          with dmSyn.synText_term do begin  // synText_term is related to synText, but is a bit different
+            BeginUpdate;
+            Attribute[lbIdentifiers.ItemIndex].Assign(att);
+            EndUpdate;
+          end;
+
         finally
           FreeAndNil(att);
         end;
@@ -230,6 +250,7 @@ begin
 
     lbHighlighters.ItemIndex:= (i + 1);
   end;
+
   lbHighlighters.Items.EndUpdate;
 
   lbIdentifiers.Items.EndUpdate;
@@ -281,11 +302,15 @@ begin
                  clBGForAllHighlighters);
 
     cbActiveLineBG.Checked:= bActiveLine;
+
     with synSample do begin
       OnPaintTransient:= synPaintTransient;
       if bActiveLine then ActiveLineColor:= TColor(clActiveLine)
                      else ActiveLineColor:= TColor(clNone);
     end;
+
+    // Update the appearance based in the editor
+    coEditor.AssignTo(synSample);
   end;
 
   // Do a prior backup of all syntax files of ini
@@ -531,6 +556,7 @@ begin
   except
     //todo
   end;
+
   SavePreferences;
 end;
 
@@ -810,12 +836,15 @@ end;
 
 procedure TfrmColors.bbtSetBGForAllIdentifiersClick(Sender: TObject);
 var
-  att          : TSynHighlighterAttributes;
+  att: TSynHighlighterAttributes;
+
   i,
-   iOldIndex   : integer;
-  oldAttrStyle,
-   attrStyle   : TFontStyles;
-  clOldFG      : TColor;
+   iOldIndex: integer;
+
+  attrStyle,
+   oldAttrStyle: TFontStyles;
+
+  clOldFG: TColor;
 
 begin
   iOldIndex:= lbIdentifiers.ItemIndex;
@@ -843,16 +872,14 @@ begin
         end;
 
         if (synSample.Highlighter.GetFriendlyLanguageName = 'R') then
-          // SynR_term has no multline
-          with dmSyn.synR_term do begin
+          with dmSyn.synR_term do begin     // synR_term is related to synR, but is a bit different
             BeginUpdate;
             Attribute[lbIdentifiers.ItemIndex].Assign(att);
             EndUpdate;
           end;
 
         if (synSample.Highlighter.GetFriendlyLanguageName = 'Text') then
-          // SynText_term has no multline
-          with dmSyn.synR_term do begin
+          with dmSyn.synText_term do begin  // synText_term is related to synText, but is a bit different
             BeginUpdate;
             Attribute[lbIdentifiers.ItemIndex].Assign(att);
             EndUpdate;
@@ -878,6 +905,75 @@ end;
 procedure TfrmColors.synSampleClick(Sender: TObject);
 begin
   frmTinnMain.synURIOpener.Editor:= synSample;
+end;
+
+procedure TfrmColors.synSampleKeyPress(Sender: TObject;
+                                       var Key: WideChar);
+
+  function sFormat(sTmp: string;
+                   cTmp: char): string;
+  begin
+    Result:= key +
+             sTmp +
+             cTmp;
+  end;
+
+  procedure InsertText(sTmp: string;
+                       i: integer);
+  begin
+    with synSample do begin
+      SelText:= sTmp;
+      CaretX := CaretX - i;
+    end;
+
+    key:= #0;  // make nul the key pressed
+  end;
+
+begin
+  if frmTinnMain.actAutoCompletion.Checked then
+    with synSample do
+      case key of
+         '(': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ')'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ')'),
+                           1);
+         '[': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ']'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ']'),
+                           1);
+         '{': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   '}'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   '}'),
+                           1);
+        '''': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   ''''),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   ''''),
+                           1);
+         '"': if SelAvail then
+                InsertText(sFormat(SelText,
+                                   '"'),
+                           0)
+              else
+                InsertText(sFormat(SelText,
+                                   '"'),
+                           1);
+      end;
 end;
 
 procedure TfrmColors.synSampleChange(Sender: TObject);

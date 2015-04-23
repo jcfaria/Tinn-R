@@ -8,7 +8,7 @@ object frmGroupRename: TfrmGroupRename
   Caption = 'Group rename'
   ClientHeight = 99
   ClientWidth = 239
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

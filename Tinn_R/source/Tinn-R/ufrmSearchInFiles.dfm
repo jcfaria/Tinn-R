@@ -7,7 +7,7 @@ object frmSearchInFiles: TfrmSearchInFiles
   Caption = 'Search in files'
   ClientHeight = 249
   ClientWidth = 331
-  Color = clBtnFace
+  Color = 16250871
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -34,7 +34,7 @@ object frmSearchInFiles: TfrmSearchInFiles
     Height = 21
     BevelInner = bvNone
     BevelOuter = bvNone
-    ItemHeight = 13
+    ItemHeight = 0
     TabOrder = 0
   end
   object gbSearchOptions: TGroupBox
@@ -150,7 +150,7 @@ object frmSearchInFiles: TfrmSearchInFiles
       BevelInner = bvNone
       BevelOuter = bvNone
       Enabled = False
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 0
     end
     object comboFileMasks: TComboBox

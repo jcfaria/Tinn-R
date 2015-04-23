@@ -6,7 +6,7 @@ object frmEditor: TfrmEditor
   Caption = 'frmEditor'
   ClientHeight = 220
   ClientWidth = 460
-  Color = clBtnFace
+  Color = 16250871
   DragMode = dmAutomatic
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -91,6 +91,7 @@ object frmEditor: TfrmEditor
     OnEndDrag = synEditorEndDrag
     OnEnter = synEditorEnter
     OnKeyDown = synEditorKeyDown
+    OnKeyPress = synEditorKeyPress
     OnKeyUp = synEditorKeyUp
     OnMouseUp = synEditorMouseUp
     BorderStyle = bsNone
