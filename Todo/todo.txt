@@ -16,3 +16,5 @@ TODO
 6- Opção para remoção automática de arquivos auxiliares do LaTeX.
 
 7- Check for update no menu Help.
+
+8- Possibilitar ser portável para rodar em memória flash.
