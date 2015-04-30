@@ -537,9 +537,9 @@ object frmAbout: TfrmAbout
       object Label6: TLabel
         Left = 190
         Top = 21
-        Width = 255
+        Width = 259
         Height = 13
-        Caption = 'Editor - GUI for R language and Environment'
+        Caption = 'Editor - GUI for R Language and Environment'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -2658,10 +2658,6 @@ object frmAbout: TfrmAbout
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synAboutProject: TSynEdit
         Left = 0
         Top = 0
@@ -2712,10 +2708,6 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synAboutAknowledgments: TSynEdit
         Left = 0
         Top = 0
@@ -2778,10 +2770,6 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synAboutCredits: TSynEdit
         Left = 0
         Top = 0
@@ -2848,10 +2836,6 @@ object frmAbout: TfrmAbout
     object TabSheet1: TTabSheet
       Caption = 'Donation'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synAboutDonation: TSynEdit
         Left = 0
         Top = 0

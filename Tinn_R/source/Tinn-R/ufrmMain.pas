@@ -3040,7 +3040,7 @@ begin
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '4.00.01.02';
   sCurrentVersion_Shortcuts := '4.00.02.00';
-  sCurrentVersion_TinnRcom  := '1.0.16';  // Released joinly with Tinn-R setup program
+  sCurrentVersion_TinnRcom  := '1.0.17';  // Released joinly with Tinn-R setup program
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -20895,10 +20895,14 @@ procedure TfrmTinnMain.actRContPacInstTinnRcomExecute(Sender: TObject);
 
   begin
     // Will install the package
+    // This instruction was changed to be compatible with old and new version of R (3.2.0)
+    // Thanks to Duncam Murdoch for the tip
     sTmp:= 'install.packages(' +
            '''' +
            sName +
            '''' +
+           ', ' +
+           'type=''binary''' +
            ', ' +
            'repos=NULL' +
            ')';

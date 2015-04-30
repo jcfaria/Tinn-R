@@ -4,7 +4,7 @@
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 31/01/2014 19:42:36
+# 28/04/2015 07:34:01
 #------------------------------------------------------------------------
 
 # Try to detach
@@ -17,9 +17,7 @@ try(remove.packages('TinnRcom'),
 
 # Check packages TinnRcom depends
 depends <- c('svSocket',
-             'formatR',
-             'R2HTML',
-             'Hmisc')
+             'formatR')
 
 installed <- depends %in%
              installed.packages()[, 'Package']

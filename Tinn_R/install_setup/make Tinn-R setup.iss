@@ -9,13 +9,13 @@ AppPublisher         = Tinn-R Team
 AppPublisherURL      = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppSupportURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppUpdatesURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppVerName           = Tinn-R 04.00.02.00
+AppVerName           = Tinn-R 04.00.02.01
 ChangesAssociations  = true
 Compression          = lzma
 DefaultDirName       = {sd}\Tinn-R
 DefaultGroupName     = Tinn-R
 LicenseFile          = ..\doc\licence_gpl3.txt
-OutputBaseFilename   = Tinn-R_04.00.02.00_setup
+OutputBaseFilename   = Tinn-R_04.00.02.01_setup
 OutputDir            = ..\install_setup\bin
 SolidCompression     = yes
 WizardImageFile      = ..\res\setup.bmp
@@ -50,8 +50,8 @@ Source: ..\doc\textdiff.hlp;                    DestDir: {app}\doc
 Source: ..\doc\Tinn-R_recognized words.r;       DestDir: {app}\doc
 Source: ..\doc\User guide.pdf;                  DestDir: {app}\doc
 Source: ..\latex\latex.zip;                     DestDir: {app}\latex
-Source: ..\package\TinnRcom_1.0.16.tar.gz;      DestDir: {app}\package
-Source: ..\package\TinnRcom_1.0.16.zip;         DestDir: {app}\package
+Source: ..\package\TinnRcom_1.0.17.tar.gz;      DestDir: {app}\package
+Source: ..\package\TinnRcom_1.0.17.zip;         DestDir: {app}\package
 Source: ..\project\project.zip;                 DestDir: {app}\project
 Source: ..\sample\deplate.dplt;                 DestDir: {app}\sample
 Source: ..\sample\pandoc.markdown;              DestDir: {app}\sample
