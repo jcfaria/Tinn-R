@@ -4,7 +4,7 @@
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 28/04/2015 07:34:01
+# 02/05/2015 00:24:12
 #------------------------------------------------------------------------
 
 # Try to detach
@@ -31,7 +31,7 @@ if (length(depends[!installed]) >= 1)
   cat('Installing TinnRcom dependences. Please, wait...')
   cat('\n')
   install.packages(depends[!installed])
-}  
+}
 
 rm(depends,
    installed)

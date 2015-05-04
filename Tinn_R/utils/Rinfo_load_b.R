@@ -6,7 +6,7 @@
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 31/01/2014 19:41:30
+# 02/05/2015 00:24:12
 #------------------------------------------------------------------------
 
 # Set repos: Rterm does not always shows the dialog to choose the repository
@@ -15,10 +15,9 @@ options('repos'='%repos')
 # Necessary to package "debug" under Rterm interface
 options(debug.catfile="stdout")
 
-# Tinn-R/tmp/R_info.txt
-tr_info <- paste(Sys.getenv('APPDATA'),
+# Temp/Tinn-R/Rmirros.txt
+tr_info <- paste(Sys.getenv('TEMP'),
                  'Tinn-R',
-                 'tmp',
                  'Rinfo.txt',
                  sep='\\')
 

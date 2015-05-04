@@ -3040,7 +3040,7 @@ begin
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '4.00.01.02';
   sCurrentVersion_Shortcuts := '4.00.02.00';
-  sCurrentVersion_TinnRcom  := '1.0.17';  // Released joinly with Tinn-R setup program
+  sCurrentVersion_TinnRcom  := '1.0.18';  // Released joinly with Tinn-R setup program
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -7611,7 +7611,7 @@ begin
   sPathProject  := sPathIni + '\project';
   sPathSyntax   := sPathIni + '\syntax';
   sPathSyntaxBKP:= sPathIni + '\syntax bkp';
-  sPathTmp      := sPathIni + '\tmp';
+  sPathTmp      := GetEnvironmentVariable('TEMP') + '\Tinn-R';
 
   // Ini files
   sPathIniTinn_File  := sPathApp + '\Tinn.ini';
@@ -7781,7 +7781,7 @@ begin
 
   // Main ini
   DeleteFilesOfPath(sPathIni);  // Necessary to remove trashes from previous versions related
-                                // to fixed bug in drang and drop from R explorer interface.
+                                // to fixed bug in drag and drop from R explorer interface.
   
   sPathReadme_User:= sPathIni +
                      '\Readme.txt';
@@ -7789,8 +7789,7 @@ begin
              sPathReadme_User);
   Rewrite(tfTmp);
     WriteLn(tfTmp, 'This main folder stores:' + #13 +
-                   '''app'', ''bkp'', ''colors'', ''data'', ''editor'', ''project'', ''latex'', ''syntax'', ''syntax bkp'' and ''tmp'' sub-folders.' + #13 +
-                   'The latest, ''tmp'', only if only, Tinn-R is running.');
+                   '''app'', ''bkp'', ''colors'', ''data'', ''editor'', ''project'', ''latex'', ''syntax'' and ''syntax bkp.''');
   CloseFile(tfTmp);
 
 
