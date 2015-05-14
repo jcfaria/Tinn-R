@@ -347,9 +347,13 @@ begin
   J.C.Faria
   The below it is important due that some times,
   according with the packages loaded,
-  R changes all messages received:
+  R changes all pathern messages received:
   - from the default Windows -> string#13#10
   - to default Linux         -> string#10
+
+  The pacakes are:
+  - car
+  - rms
   *)
 
   if (Pos(#13#10,
@@ -394,7 +398,7 @@ begin
       sOutput:= sOutput +
                 Copy(OutputBuffer,
                      1,
-                     iPos+1);
+                     iPos);  // Before Tinn version 4.0.2.1 it was wrong: iPos + 1
 
       OutputBuffer:= Copy(OutputBuffer,
                           iPos + 1,
@@ -416,8 +420,9 @@ begin
   if (length(OutputBuffer) >=2) then
     if (OutputBuffer = '> ') or
        (Pos('> ',
-          OutputBuffer) = length(OutputBuffer) - 1) or  //cat('x')
+            OutputBuffer) = length(OutputBuffer) - 1) or  //cat('x')
        bUnderDebug then begin
+
       FOnReceiveOutput(Self,
                        OutputBuffer);
 
@@ -474,10 +479,15 @@ begin
                     Copy(Cmd,
                          1,
                          iPos - 1));
-
+{
     Cmd:= Copy(Cmd,
                iPos + 2,
                Length(Cmd));
+}
+    Cmd:= Copy(Cmd,
+               iPos + length(sSplit),
+               Length(Cmd));
+
   until False;
 end;
 

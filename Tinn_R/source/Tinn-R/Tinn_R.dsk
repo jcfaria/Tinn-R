@@ -1,29 +1,36 @@
 [Closed Files]
-File_0=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAbout.pas',0,1,1,1,1,0,0,,
-File_1=TSourceModule,'D:\GitHub\Tinn-R_port\Tinn_R\source\Tinn-R\ufrmMain.pas',0,1,20895,1,20924,0,0,,
-File_2=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmAppOptions.pas',0,1,816,30,825,0,0,,
-File_3=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmTools.pas',0,1,898,1,901,0,0,,
-File_4=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmRterm.pas',0,1,597,1,599,0,0,,{1
-File_5=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',0,1,307,1,339,0,0,,
-File_6=TSourceModule,'D:\GitHub\jvcl\jvcl\run\JvDockControlForm.pas',0,1,1845,1,1863,0,0,,
-File_7=TSourceModule,'D:\GitHub\jvcl\jvcl\run\JvDockVSNetStyle.pas',0,1,288,29,303,0,0,,
-File_8=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\components\tb2k\Source\TB2Hook.pas',0,1,65,1,99,0,0,,
-File_9=TSourceModule,'c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN32\VCL\Dialogs.pas',0,1,1322,47,1341,0,0,,
+File_0=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmRterm.pas',0,1,498,16,511,0,0,,
+File_1=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAbout.pas',0,1,1,1,1,0,0,,
+File_2=TSourceModule,'D:\GitHub\Tinn-R_port\Tinn_R\source\Tinn-R\ufrmMain.pas',0,1,20895,1,20924,0,0,,
+File_3=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmAppOptions.pas',0,1,816,30,825,0,0,,
+File_4=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmTools.pas',0,1,898,1,901,0,0,,
+File_5=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmRterm.pas',0,1,597,1,599,0,0,,{1
+File_6=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',0,1,307,1,339,0,0,,
+File_7=TSourceModule,'D:\GitHub\jvcl\jvcl\run\JvDockControlForm.pas',0,1,1845,1,1863,0,0,,
+File_8=TSourceModule,'D:\GitHub\jvcl\jvcl\run\JvDockVSNetStyle.pas',0,1,288,29,303,0,0,,
+File_9=TSourceModule,'D:\GitHub\Tinn-R_des\Tinn_R\source\components\tb2k\Source\TB2Hook.pas',0,1,65,1,99,0,0,,
 
 [Modules]
-Module0=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
-Count=1
+Module0=D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas
+Module1=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+Count=2
 EditWindowCount=1
+
+[D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [EditWindow0]
-ViewCount=1
-CurrentEditView=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+ViewCount=2
+CurrentEditView=D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas
 View0=0
+View1=1
 PercentageSizes=1
 Create=1
 Visible=1
@@ -41,12 +48,12 @@ DockedToMainForm=1
 MessageView=MessageView@EditWindow0
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
-LeftPanelSize=0
+LeftPanelSize=1664
 LeftPanelClients=StructureView,PropertyInspector
-LeftPanelData=000008000100020000001100000053747275637475726556696577466F726D1100000050726F7065727479496E73706563746F723A2200000000000000670A00000000000001000000003A2200001100000050726F7065727479496E73706563746F72FFFFFFFF
-RightPanelSize=0
+LeftPanelData=000008000100010000001100000053747275637475726556696577466F726D3A2200000000000000670A00000000000001000000003A2200001100000050726F7065727479496E73706563746F72FFFFFFFF
+RightPanelSize=1398
 RightPanelClients=DockSite2,ToolForm
-RightPanelData=0000080001020200000009000000446F636B536974653208000000546F6F6C466F726DBE0800000000000002141E0000000000000100000000BE08000008000000546F6F6C466F726DFFFFFFFF
+RightPanelData=0000080001020100000009000000446F636B5369746532BE0800000000000002141E0000000000000100000000BE08000008000000546F6F6C466F726DFFFFFFFF
 BottomPanelSize=1025
 BottomPanelClients=MessageView@EditWindow0,DockSite1
 BottomPanelData=0000080001020100000009000000446F636B5369746531803E0000000000000201040000000000000100000000803E00000B0000004D65737361676556696577FFFFFFFF
@@ -58,12 +65,23 @@ BottomMiddelPanelData=0000080001000100000009000000446F636B5369746530321900000000
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
 CursorX=1
-CursorY=1
-TopLine=1
+CursorY=3005
+TopLine=3006
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+Bookmarks={1,3005,1}
+EditViewName=Borland.FormDesignerView
+
+[View1]
+CustomEditViewType=TEditView
+Module=D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas
+CursorX=77
+CursorY=351
+TopLine=339
+LeftCol=1
+Elisions=
+Bookmarks={1,488,29}
+EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas
 
 [Watches]
 Count=0
@@ -90,11 +108,13 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=4
-Breakpoint0='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22646,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint1='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22993,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint2='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',12412,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint3='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',23104,'',0,1,'',1,0,0,'',1,'','','',0
+Count=6
+Breakpoint0='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22645,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint1='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22992,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint2='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',12411,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint3='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',23103,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint4='D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',483,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint5='D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',487,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -141,7 +161,7 @@ StayOnTop=0
 [ToolForm]
 PercentageSizes=1
 Create=1
-Visible=0
+Visible=1
 Docked=1
 State=0
 Left=0
@@ -460,7 +480,7 @@ StayOnTop=0
 [PropertyInspector]
 PercentageSizes=1
 Create=1
-Visible=0
+Visible=1
 Docked=1
 State=0
 Left=0
@@ -476,6 +496,11 @@ LRDockWidth=1664
 Dockable=1
 StayOnTop=0
 SplitPos=97
+
+[PropInspDesignerSelection]
+ArrangeBy=Category
+SelectedItem=Miscellaneous.Name,
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Linkage.Images=0,Miscellaneous.ImageMargin=0,Miscellaneous.ImageSize=0
 
 [BreakpointWindow]
 PercentageSizes=1

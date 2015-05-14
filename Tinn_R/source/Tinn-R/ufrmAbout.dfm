@@ -82,8 +82,8 @@ object frmAbout: TfrmAbout
     object tbsAboutVersion: TTabSheet
       Caption = 'Version'
       object lVersion: TLabel
-        Left = 190
-        Top = 40
+        Left = 203
+        Top = 34
         Width = 47
         Height = 13
         Caption = 'Version '
@@ -97,8 +97,8 @@ object frmAbout: TfrmAbout
         IsControl = True
       end
       object lblURLSourceforge: TLabel
-        Left = 190
-        Top = 78
+        Left = 203
+        Top = 72
         Width = 61
         Height = 13
         Caption = 'SourceForge'
@@ -113,8 +113,8 @@ object frmAbout: TfrmAbout
         OnMouseMove = lblURLSourceforgeMouseMove
       end
       object lblURLWebPage: TLabel
-        Left = 190
-        Top = 59
+        Left = 203
+        Top = 53
         Width = 50
         Height = 13
         Caption = 'Web page'
@@ -129,8 +129,8 @@ object frmAbout: TfrmAbout
         OnMouseMove = lblURLWebPageMouseMove
       end
       object Copyright: TLabel
-        Left = 190
-        Top = 97
+        Left = 203
+        Top = 91
         Width = 118
         Height = 13
         Caption = 'Copyright 2001-2016'
@@ -144,8 +144,8 @@ object frmAbout: TfrmAbout
         IsControl = True
       end
       object Label1: TLabel
-        Left = 190
-        Top = 116
+        Left = 203
+        Top = 110
         Width = 259
         Height = 13
         Caption = 'Under the GNU General Public License - GPL'
@@ -159,7 +159,7 @@ object frmAbout: TfrmAbout
         IsControl = True
       end
       object imgDonation: TImage
-        Left = 234
+        Left = 247
         Top = 136
         Width = 175
         Height = 90
@@ -479,8 +479,8 @@ object frmAbout: TfrmAbout
         OnMouseMove = imgDonationMouseMove
       end
       object Label3: TLabel
-        Left = 190
-        Top = 231
+        Left = 203
+        Top = 236
         Width = 185
         Height = 13
         Caption = 'Physical memory available to Windows:'
@@ -493,8 +493,8 @@ object frmAbout: TfrmAbout
         Transparent = True
       end
       object PhysMem: TLabel
-        Left = 378
-        Top = 231
+        Left = 391
+        Top = 236
         Width = 6
         Height = 13
         Caption = '0'
@@ -507,8 +507,8 @@ object frmAbout: TfrmAbout
         Transparent = True
       end
       object Label4: TLabel
-        Left = 304
-        Top = 244
+        Left = 317
+        Top = 249
         Width = 71
         Height = 13
         Caption = 'Memory in use:'
@@ -521,8 +521,8 @@ object frmAbout: TfrmAbout
         Transparent = True
       end
       object FreeRes: TLabel
-        Left = 378
-        Top = 244
+        Left = 391
+        Top = 249
         Width = 6
         Height = 13
         Caption = '0'
@@ -535,8 +535,8 @@ object frmAbout: TfrmAbout
         Transparent = True
       end
       object Label6: TLabel
-        Left = 190
-        Top = 21
+        Left = 203
+        Top = 15
         Width = 259
         Height = 13
         Caption = 'Editor - GUI for R Language and Environment'
@@ -549,7 +549,7 @@ object frmAbout: TfrmAbout
         Transparent = True
       end
       object imAbout: TJvImage
-        Left = 2
+        Left = 7
         Top = 16
         Width = 184
         Height = 246
