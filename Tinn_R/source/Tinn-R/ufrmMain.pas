@@ -10842,10 +10842,10 @@ begin
   tRRuning.Enabled:= False;  // It is important!
 
   if (bMessageDlg) then
-    mrTinnRcom_Install:= MessageDlg('Tinn-R requires the R package TinnRcom to be installed!' + #13 +
-                                    'It will be installed now.',
+    mrTinnRcom_Install:= MessageDlg('Tinn-R requires the R package TinnRcom to be installed.' + #13#13 +
+                                    'It will be installed now!',
                                     mtConfirmation,
-                                    [mbOK, mbCancel],
+                                    [mbOK],
                                     0);
 
   case mrTinnRcom_Install of
@@ -10855,10 +10855,10 @@ begin
 
             if (not bRTinnRcom_Installed) then begin
               mrOption:= MessageDlg('The TinnRcom package (and its dependencies)' + #13 +
-                                    'apparently was not installed successfully!' + #13 +
-                                    'Do you like to repeat the installation?',
+                                    'apparently was not installed successfully!' + #13 + #13 +
+                                    'Do you like to repeat the automatic installation?',
                                     mtWarning,
-                                    [mbYes, mbNo],
+                                    [mbYes, mbCancel],
                                     0);
 
               if (mrOption = mrYes) then TinnRcomInstall_AskUser(False)
@@ -10872,9 +10872,11 @@ begin
           end;
 
     mrCancel: begin
-                MessageDlg('Some important resources of Tinn-R editor related to R' + #13 +
-                           'provided by TinnRcom package' + #13 +
-                           'will not be available in the current session!',
+                MessageDlg('Some important resources of Tinn-R related to R' + #13 +
+                           'are provided by TinnRcom package!' + #13 + #13 +
+                           'The package is provided at ' +
+                           sPathTinnR + '\package\' + 'TinnRcom_' + sCurrentVersion_TinnRcom + '.zip' + #13 + #13 +
+                           'It is really important to install it!',
                            mtWarning,
                            [mbOk],
                            0);
