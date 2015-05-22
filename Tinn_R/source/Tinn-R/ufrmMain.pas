@@ -13786,9 +13786,8 @@ var
   
 begin
 
-sTinnRPaths:= '.trPaths <- file.path(Sys.getenv(''APPDATA''), ' +
+sTinnRPaths:= '.trPaths <- file.path(Sys.getenv(''TEMP''), ' +
                              '''Tinn-R'', ' +
-                             '''tmp'', ' +
                              'c('''', ' +
                              '''search.txt'', ' +
                              '''objects.txt'', ' +

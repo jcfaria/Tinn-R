@@ -12,8 +12,9 @@ File_9=TSourceModule,'D:\GitHub\jvcl\jvcl\run\JvDockVSNetStyle.pas',0,1,288,29,3
 
 [Modules]
 Module0=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
-Module1=D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas
-Count=2
+Module1=default.htm
+Module2=D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas
+Count=3
 EditWindowCount=1
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas]
@@ -21,16 +22,20 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
+[default.htm]
+ModuleType=TURLModule
+
 [D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=2
+ViewCount=3
 CurrentEditView=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
 View0=0
 View1=1
+View2=2
 PercentageSizes=1
 Create=1
 Visible=1
@@ -51,9 +56,9 @@ TopPanelSize=0
 LeftPanelSize=1664
 LeftPanelClients=StructureView,PropertyInspector
 LeftPanelData=000008000100010000001100000053747275637475726556696577466F726D3A2200000000000000670A00000000000001000000003A2200001100000050726F7065727479496E73706563746F72FFFFFFFF
-RightPanelSize=0
+RightPanelSize=1398
 RightPanelClients=DockSite2,ToolForm
-RightPanelData=0000080001020200000009000000446F636B536974653208000000546F6F6C466F726DBE0800000000000002141E0000000000000100000000BE08000008000000546F6F6C466F726DFFFFFFFF
+RightPanelData=0000080001020100000009000000446F636B5369746532BE0800000000000002141E0000000000000100000000BE08000008000000546F6F6C466F726DFFFFFFFF
 BottomPanelSize=1025
 BottomPanelClients=MessageView@EditWindow0,DockSite1
 BottomPanelData=0000080001020100000009000000446F636B5369746531803E0000000000000201040000000000000100000000803E00000B0000004D65737361676556696577FFFFFFFF
@@ -62,17 +67,21 @@ BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303219000000000000007E1B000000000000FFFFFFFF
 
 [View0]
-CustomEditViewType=TEditView
-Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
-CursorX=54
-CursorY=10848
-TopLine=10831
-LeftCol=1
-Elisions=
-Bookmarks={1,10875,22}
-EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+CustomEditViewType=TWelcomePageView
+WelcomePageURL=bds:/default.htm
 
 [View1]
+CustomEditViewType=TEditView
+Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+CursorX=79
+CursorY=13787
+TopLine=13771
+LeftCol=1
+Elisions=
+Bookmarks={1,13789,8}{2,7613,22}
+EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+
+[View2]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas
 CursorX=42
@@ -109,10 +118,10 @@ StayOnTop=0
 
 [Breakpoints]
 Count=5
-Breakpoint0='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22649,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint1='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22996,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint0='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22648,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint1='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',22995,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',12415,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint3='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',23107,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint3='D:\GitHub\Tinn-R_des\Tinn_R\source\Tinn-R\ufrmMain.pas',23106,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint4='D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',483,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
@@ -160,7 +169,7 @@ StayOnTop=0
 [ToolForm]
 PercentageSizes=1
 Create=1
-Visible=0
+Visible=1
 Docked=1
 State=0
 Left=0
@@ -172,7 +181,7 @@ MaxTop=-1
 ClientWidth=1398
 ClientHeight=7694
 TBDockHeight=7694
-LRDockWidth=1398
+LRDockWidth=1297
 Dockable=1
 StayOnTop=0
 
@@ -306,11 +315,11 @@ State=0
 Left=0
 Top=0
 Width=2336
-Height=920
+Height=1153
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2336
-ClientHeight=920
+ClientHeight=1153
 TBDockHeight=2319
 LRDockWidth=2828
 Dockable=1
@@ -527,8 +536,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=79
-Top=52
+Left=0
+Top=0
 Width=1891
 Height=3679
 MaxLeft=-1
@@ -614,7 +623,7 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=22
+Top=0
 Width=3828
 Height=777
 MaxLeft=-1
@@ -637,8 +646,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=1280
-Top=71
+Left=0
+Top=0
 Width=2000
 Height=6140
 MaxLeft=-1
