@@ -2518,7 +2518,7 @@ type
     bOrganizeAutomatically         : boolean;
     bRestored                      : boolean;
     bRestoreIniDock                : boolean;
-    bRget_Info                     : boolean;
+    bRsetget_Info                  : boolean;
     bRKnitr                        : boolean;
     bRmirros_Update                : boolean;
     bRRequireKnitr                 : boolean;
@@ -2688,7 +2688,7 @@ type
     procedure CheckOrigin;
     procedure CheckProcessingPath(sPath: string);
     procedure CheckProject;
-    procedure CheckTinnRcom_Package;
+    procedure RSetGet_Info;
     procedure CheckTop;
     procedure CheckVersion;
     procedure ClearStatusBarProject;
@@ -3929,7 +3929,7 @@ begin
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
-    WriteBool('App', 'bRget_Info', bRget_Info);
+    WriteBool('App', 'bRsetget_Info', bRsetget_Info);
     WriteBool('App', 'bRguiReturnFocus', bRguiReturnFocus);
     WriteBool('App', 'bRmirros_Update', bRmirros_Update);
     WriteBool('App', 'bRSendAll', bRSendAll);
@@ -4448,7 +4448,7 @@ begin
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
-    WriteBool('App', 'bRget_Info', bRget_Info);
+    WriteBool('App', 'bRsetget_Info', bRsetget_Info);
     WriteBool('App', 'bRguiReturnFocus', bRguiReturnFocus);
     WriteBool('App', 'bRmirros_Update', bRmirros_Update);
     WriteBool('App', 'bRSendAll', bRSendAll);
@@ -5183,7 +5183,7 @@ begin
 
   bRAsServer             := ifTinn.ReadBool('App', 'bRAsServer', True);
   bRestoreIniDock        := ifTinn.ReadBool('App', 'bRestoreIniDock', False);
-  bRget_Info             := ifTinn.ReadBool('App', 'bRget_Info', True);
+  bRsetget_Info          := ifTinn.ReadBool('App', 'bRsetget_Info', True);
   bRguiReturnFocus       := ifTinn.ReadBool('App', 'bRguiReturnFocus', True);
   bRmirros_Update        := ifTinn.ReadBool('App', 'bRmirros_Update', False);
   bRSendAll              := ifTinn.ReadBool('App', 'bRSendAll', False);
@@ -10864,7 +10864,7 @@ begin
               if (mrOption = mrYes) then TinnRcomInstall_AskUser(False)
                                     else begin
                                       mrTinnRcom_Install:= mrNo;
-                                      CheckTinnRcom_Package;
+                                      RSetGet_Info;
                                     end;
             end;
 
@@ -10886,7 +10886,7 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.CheckTinnRcom_Package;
+procedure TfrmTinnMain.RSetGet_Info;
 begin
   // Get Info
   if (not bRTinnRcom_Info) then
@@ -11165,7 +11165,7 @@ procedure TfrmTinnMain.tRRuningTimer(Sender: TObject);
     TBRClearConsole.Enabled        := True;
     TBRRHelp.Enabled               := True;
 
-    if bRget_Info then CheckTinnRcom_package;
+    if bRsetget_Info then RSetGet_Info;
 
     case iRFormatted of
       -1: Exit;
@@ -12986,7 +12986,7 @@ begin
       cbRememberFileState.Checked        := bRememberFileState;
       cbRememberSearchList.Checked       := bRememberSearchList;
       cbRemoveExtension.Checked          := bRemoveExtension;
-      cbRget_Info.Checked                := bRget_Info;
+      cbRsetget_Info.Checked             := bRsetget_Info;
       cbRguiOrganizeAutomatically.Checked:= bOrganizeAutomatically;
       cbRguiReturnFocus.Checked          := bRguiReturnFocus;
       cbRmirros_Update.Checked           := bRmirros_Update;
@@ -13269,7 +13269,7 @@ begin
         bRememberSearchList           := cbRememberSearchList.Checked;
         bRemoveExtension              := cbRemoveExtension.Checked;
         bRestoreIniDock               := cbRestoreIniDock.Checked;
-        bRget_Info                    := cbRget_Info.Checked;
+        bRsetget_Info                 := cbRsetget_Info.Checked;
         bRguiReturnFocus              := cbRguiReturnFocus.Checked;
         bRmirros_Update               := cbRmirros_Update.Checked;
         bRSendAll                     := cbRSendAll.Checked;

@@ -6,7 +6,7 @@ object frmAppOptions: TfrmAppOptions
   BorderStyle = bsDialog
   Caption = 'Application options'
   ClientHeight = 525
-  ClientWidth = 532
+  ClientWidth = 545
   Color = 16250871
   ParentFont = True
   OldCreateOrder = False
@@ -18,7 +18,7 @@ object frmAppOptions: TfrmAppOptions
   PixelsPerInch = 96
   TextHeight = 13
   object bbtOK: TBitBtn
-    Left = 382
+    Left = 398
     Top = 494
     Width = 70
     Height = 25
@@ -29,7 +29,7 @@ object frmAppOptions: TfrmAppOptions
     NumGlyphs = 2
   end
   object bbtCancel: TBitBtn
-    Left = 451
+    Left = 467
     Top = 494
     Width = 70
     Height = 25
@@ -42,16 +42,17 @@ object frmAppOptions: TfrmAppOptions
   object panAppOptions: TPanel
     Left = 0
     Top = 0
-    Width = 532
+    Width = 545
     Height = 489
     Align = alTop
     Color = 16250871
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 530
     object jtvAppOptions: TJvTreeView
       Left = 1
       Top = 1
-      Width = 190
+      Width = 201
       Height = 487
       Align = alLeft
       Indent = 17
@@ -116,11 +117,11 @@ object frmAppOptions: TfrmAppOptions
       PageControl = pgApp
     end
     object pgApp: TJvgPageControl
-      Left = 191
+      Left = 202
       Top = 1
-      Width = 340
+      Width = 342
       Height = 487
-      ActivePage = tbsAppFormatRd
+      ActivePage = tbsAppBasicR
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -162,16 +163,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'General'
         ImageIndex = 3
         TabVisible = False
+        ExplicitWidth = 332
         object GroupBox4: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 102
           Align = alTop
           Caption = ' Remember '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object lblLastFile: TLabel
             Left = 52
             Top = 21
@@ -199,8 +202,8 @@ object frmAppOptions: TfrmAppOptions
             ParentFont = False
           end
           object btnMRUClear: TButton
-            Left = 203
-            Top = 15
+            Left = 250
+            Top = 11
             Width = 78
             Height = 22
             Caption = 'Clear history'
@@ -257,13 +260,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox5: TGroupBox
           Left = 0
           Top = 102
-          Width = 332
+          Width = 334
           Height = 113
           Align = alTop
           Caption = ' Settings '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object cbRemoveExtension: TCheckBox
             Left = 11
             Top = 34
@@ -325,9 +329,9 @@ object frmAppOptions: TfrmAppOptions
           object cbConnectionBeepOnError: TCheckBox
             Left = 11
             Top = 89
-            Width = 305
+            Width = 316
             Height = 18
-            Caption = 'Beep if no internet connection (procedures important olnly)'
+            Caption = 'Beep if no internet connection (to important procedures only)'
             Ctl3D = True
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -342,13 +346,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox3: TGroupBox
           Left = 0
           Top = 215
-          Width = 332
+          Width = 334
           Height = 62
           Align = alTop
           Caption = ' Comments (language that have options) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
           object cbComPriority_Line: TCheckBox
             Left = 11
             Top = 38
@@ -375,15 +380,16 @@ object frmAppOptions: TfrmAppOptions
         object gpbDelay: TGroupBox
           Left = 0
           Top = 339
-          Width = 332
+          Width = 334
           Height = 70
           Align = alTop
           Caption = ' Computational synchronization (delay) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 3
+          ExplicitWidth = 332
           object lbDelay: TLabel
-            Left = 244
+            Left = 292
             Top = 37
             Width = 13
             Height = 13
@@ -392,7 +398,7 @@ object frmAppOptions: TfrmAppOptions
           object tbDelay: TJvColorTrackBar
             Left = 9
             Top = 24
-            Width = 229
+            Width = 276
             Height = 30
             ArrowColor = clNavy
             BorderStyle = bsNone
@@ -407,13 +413,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox10: TGroupBox
           Left = 0
           Top = 277
-          Width = 332
+          Width = 334
           Height = 62
           Align = alTop
           Caption = ' File status/changes (made by external) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 4
+          ExplicitWidth = 332
           object cbNotification_US: TCheckBox
             Left = 11
             Top = 38
@@ -446,16 +453,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Appearance'
         ImageIndex = 24
         TabVisible = False
+        ExplicitWidth = 332
         object GroupBox20: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 163
           Align = alTop
           Caption = ' Colors '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object GroupBox1: TGroupBox
             Left = 7
             Top = 14
@@ -515,15 +524,16 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox21: TGroupBox
           Left = 0
           Top = 163
-          Width = 332
+          Width = 334
           Height = 70
           Align = alTop
           Caption = ' Transparency (%) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object lbTransparency: TLabel
-            Left = 244
+            Left = 300
             Top = 37
             Width = 11
             Height = 13
@@ -533,7 +543,7 @@ object frmAppOptions: TfrmAppOptions
             Tag = 20
             Left = 9
             Top = 24
-            Width = 229
+            Width = 284
             Height = 30
             ArrowColor = clNavy
             BorderStyle = bsNone
@@ -547,16 +557,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Dock/Float (Tools and Rterm)'
         ImageIndex = 5
         TabVisible = False
+        ExplicitWidth = 332
         object GroupBox8: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 219
           Align = alTop
           Caption = ' Restore (default disposition) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object cbRestoreIniDock: TCheckBox
             Left = 11
             Top = 18
@@ -598,13 +610,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox22: TGroupBox
           Left = 0
           Top = 219
-          Width = 332
+          Width = 334
           Height = 61
           Align = alTop
           Caption = ' Enable float (interface/panel) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object cbToolsCanFloat: TCheckBox
             Left = 11
             Top = 18
@@ -627,16 +640,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Files (extensions)'
         ImageIndex = 21
         TabVisible = False
+        ExplicitWidth = 332
         object GroupBox18: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 477
           Align = alClient
           Caption = ' Files (extensions recognized) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object mFiles: TMemo
             Left = 4
             Top = 16
@@ -653,16 +668,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Display'
         ImageIndex = 21
         TabVisible = False
+        ExplicitWidth = 332
         object gbRightEdge: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 170
           Align = alTop
           Caption = ' General '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object Label11: TLabel
             Left = 141
             Top = 27
@@ -762,23 +779,25 @@ object frmAppOptions: TfrmAppOptions
           object btnFont: TButton
             Left = 1
             Top = 84
-            Width = 330
+            Width = 332
             Height = 25
             Align = alBottom
             Caption = 'Select editor font'
             TabOrder = 4
             OnClick = btnFontClick
+            ExplicitWidth = 330
           end
           object panLabFont: TPanel
             Left = 1
             Top = 109
-            Width = 330
+            Width = 332
             Height = 60
             Align = alBottom
             BevelOuter = bvLowered
             Color = 16250871
             ParentBackground = False
             TabOrder = 5
+            ExplicitWidth = 330
             object labFont: TLabel
               Left = 83
               Top = 23
@@ -800,13 +819,14 @@ object frmAppOptions: TfrmAppOptions
         object gbGutter: TGroupBox
           Left = 0
           Top = 170
-          Width = 332
+          Width = 334
           Height = 201
           Align = alTop
           Caption = ' Gutter '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object Label17: TLabel
             Left = 136
             Top = 23
@@ -867,12 +887,13 @@ object frmAppOptions: TfrmAppOptions
           object btnGutterFont: TButton
             Left = 1
             Top = 115
-            Width = 330
+            Width = 332
             Height = 25
             Align = alBottom
             Caption = 'Select gutter font'
             TabOrder = 7
             OnClick = btnGutterFontClick
+            ExplicitWidth = 330
           end
           object pGutterBack: TPanel
             Left = 200
@@ -916,13 +937,14 @@ object frmAppOptions: TfrmAppOptions
           object panGutterFont: TPanel
             Left = 1
             Top = 140
-            Width = 330
+            Width = 332
             Height = 60
             Align = alBottom
             BevelOuter = bvLowered
             Color = 16250871
             ParentBackground = False
             TabOrder = 8
+            ExplicitWidth = 330
             object lblGutterFont: TLabel
               Left = 107
               Top = 24
@@ -944,7 +966,7 @@ object frmAppOptions: TfrmAppOptions
         object rdgLineWraping: TRadioGroup
           Left = 0
           Top = 371
-          Width = 332
+          Width = 334
           Height = 43
           Align = alTop
           Caption = ' Line wraping '
@@ -956,12 +978,14 @@ object frmAppOptions: TfrmAppOptions
             'No')
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
         end
       end
       object tbsEditorAdvanced: TTabSheet
         Caption = 'Advanced'
         ImageIndex = 22
         TabVisible = False
+        ExplicitWidth = 332
         object Label23: TLabel
           Left = 0
           Top = 321
@@ -972,13 +996,14 @@ object frmAppOptions: TfrmAppOptions
         object gbOptions: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 247
           Align = alTop
           Caption = ' Options '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object ckAutoIndent: TCheckBox
             Left = 11
             Top = 15
@@ -1227,13 +1252,14 @@ object frmAppOptions: TfrmAppOptions
         object gbCaret: TGroupBox
           Left = 0
           Top = 247
-          Width = 332
+          Width = 334
           Height = 70
           Align = alTop
           Caption = ' Caret* '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object Label18: TLabel
             Left = 56
             Top = 19
@@ -1282,6 +1308,7 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Keystrokes'
         ImageIndex = 23
         TabVisible = False
+        ExplicitWidth = 332
         object Label20: TLabel
           Left = 3
           Top = 363
@@ -1299,17 +1326,18 @@ object frmAppOptions: TfrmAppOptions
         object pnlCommands: TPanel
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 362
           Align = alTop
           BevelInner = bvRaised
           BevelOuter = bvLowered
           Caption = 'pnlCommands'
           TabOrder = 0
+          ExplicitWidth = 332
           object lvKeystrokes: TListView
             Left = 2
             Top = 2
-            Width = 328
+            Width = 330
             Height = 358
             Align = alClient
             BevelInner = bvNone
@@ -1332,10 +1360,11 @@ object frmAppOptions: TfrmAppOptions
             ViewStyle = vsReport
             OnChanging = lvKeystrokesChanging
             OnSelectItem = lvKeystrokesSelectItem
+            ExplicitWidth = 328
           end
         end
         object btnUpdateKey: TButton
-          Left = 262
+          Left = 264
           Top = 367
           Width = 68
           Height = 25
@@ -1346,7 +1375,7 @@ object frmAppOptions: TfrmAppOptions
         object gbKeyStrokes: TGroupBox
           Left = 1
           Top = 399
-          Width = 329
+          Width = 331
           Height = 76
           Caption = ' Options '
           Ctl3D = False
@@ -1386,16 +1415,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Path (R)'
         ImageIndex = 8
         TabVisible = False
+        ExplicitWidth = 332
         object gpbPathRTerm: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 117
           Align = alTop
           Caption = ' Parameters and path (Rterm.exe) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object edPathRTerm: TEditAlign
             Left = 13
             Top = 52
@@ -1465,13 +1496,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbPathRGui: TGroupBox
           Left = 0
           Top = 117
-          Width = 332
+          Width = 334
           Height = 117
           Align = alTop
           Caption = ' Parameters and path (Rgui.exe) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object edPathRGui: TEditAlign
             Left = 13
             Top = 52
@@ -1541,7 +1573,7 @@ object frmAppOptions: TfrmAppOptions
         object rdgRUseLatest: TRadioGroup
           Left = 0
           Top = 234
-          Width = 332
+          Width = 334
           Height = 41
           Align = alTop
           Caption = ' Use latest installed version (always) '
@@ -1553,11 +1585,12 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 2
           OnClick = rdgRUseLatestClick
+          ExplicitWidth = 332
         end
         object rdgRArchitecture: TRadioGroup
           Left = 0
           Top = 275
-          Width = 332
+          Width = 334
           Height = 41
           Align = alTop
           Caption = ' Architecture (bit) '
@@ -1569,17 +1602,19 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 3
           OnClick = rdgRArchitectureClick
+          ExplicitWidth = 332
         end
         object GroupBox16: TGroupBox
           Left = 0
           Top = 316
-          Width = 332
+          Width = 334
           Height = 55
           Align = alTop
           Caption = ' R (connected) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 4
+          ExplicitWidth = 332
           object edPathR_Connected: TEditAlign
             Left = 13
             Top = 17
@@ -1603,6 +1638,7 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Basic (R)'
         ImageIndex = 9
         TabVisible = False
+        ExplicitWidth = 332
         object Label10: TLabel
           Left = 0
           Top = 355
@@ -1627,13 +1663,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbMaxDeparseLength: TGroupBox
           Left = 0
           Top = 156
-          Width = 332
+          Width = 334
           Height = 47
           Align = alTop
           Caption = ' Option (max.deparse.length (echo=TRUE)) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object edMaxDeparseLength: TEdit
             Left = 16
             Top = 20
@@ -1646,13 +1683,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox9: TGroupBox
           Left = 0
           Top = 203
-          Width = 332
+          Width = 334
           Height = 151
           Align = alTop
           Caption = ' Tip and data completion '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object gpbRTriggers: TGroupBox
             Left = 6
             Top = 17
@@ -1725,19 +1763,20 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox19: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 156
           Align = alTop
           Caption = ' Baisc (when startup/detected) and R is running '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
-          object cbRget_Info: TCheckBox
+          ExplicitWidth = 332
+          object cbRsetget_Info: TCheckBox
             Left = 11
             Top = 18
             Width = 302
             Height = 17
-            Caption = 'Get information about the necessary TinnRcom package* '
+            Caption = 'Set R environment and get essential information about* '
             TabOrder = 0
           end
           object cbRmirros_Update: TCheckBox
@@ -1794,16 +1833,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Resources (R)'
         ImageIndex = 10
         TabVisible = False
+        ExplicitWidth = 332
         object gbSendR: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 184
           Align = alTop
           Caption = ' Send (resources visibles) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object cbRSendSourceFile: TCheckBox
             Left = 11
             Top = 15
@@ -1944,13 +1985,14 @@ object frmAppOptions: TfrmAppOptions
         object gbControlling: TGroupBox
           Left = 0
           Top = 184
-          Width = 332
+          Width = 334
           Height = 199
           Align = alTop
           Caption = ' Control (resources visibles) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object cbRSetWorkDirectory: TCheckBox
             Left = 11
             Top = 15
@@ -2117,6 +2159,7 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Packages (R)'
         ImageIndex = 7
         TabVisible = False
+        ExplicitWidth = 332
         object Label5: TLabel
           Left = 0
           Top = 325
@@ -2136,13 +2179,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox6: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 146
           Align = alTop
           Caption = ' TinnRcom (package) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object GroupBox7: TGroupBox
             Left = 6
             Top = 18
@@ -2196,13 +2240,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox11: TGroupBox
           Left = 0
           Top = 146
-          Width = 332
+          Width = 334
           Height = 46
           Align = alTop
           Caption = ' svSocket (package)** '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object cbRsvSocket_Connect: TCheckBox
             Left = 11
             Top = 19
@@ -2215,13 +2260,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox17: TGroupBox
           Left = 0
           Top = 192
-          Width = 332
+          Width = 334
           Height = 129
           Align = alTop
           Caption = ' Library trees (.libPaths())* '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
           object mRLibPaths: TMemo
             Left = 8
             Top = 16
@@ -2238,16 +2284,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Options (Rgui)'
         ImageIndex = 12
         TabVisible = False
+        ExplicitWidth = 332
         object gpbRguiReturnFocus: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 43
           Align = alTop
           Caption = ' Focus (after send/controlling) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object cbRguiReturnFocus: TCheckBox
             Left = 11
             Top = 18
@@ -2262,7 +2310,7 @@ object frmAppOptions: TfrmAppOptions
         object rgRguiTinnRDisposition: TRadioGroup
           Left = 0
           Top = 43
-          Width = 332
+          Width = 334
           Height = 66
           Align = alTop
           Caption = ' Screen (arrangement) '
@@ -2277,17 +2325,19 @@ object frmAppOptions: TfrmAppOptions
           ParentCtl3D = False
           TabOrder = 1
           OnClick = rgRguiTinnRDispositionClick
+          ExplicitWidth = 332
         end
         object gbpRguiTinnRProportion: TGroupBox
           Left = 0
           Top = 109
-          Width = 332
+          Width = 334
           Height = 196
           Align = alTop
           Caption = ' Screen (proportion used by Tinn-R) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
           object lblTinnRExpansion: TLabel
             Left = 180
             Top = 104
@@ -2378,6 +2428,7 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Recognition (Rgui)'
         ImageIndex = 11
         TabVisible = False
+        ExplicitWidth = 332
         object Label9: TLabel
           Left = 3
           Top = 160
@@ -2395,7 +2446,7 @@ object frmAppOptions: TfrmAppOptions
         object rdgRguiRecognitionCaption: TRadioGroup
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 140
           Align = alTop
           Caption = ' Window (caption)* '
@@ -2409,11 +2460,12 @@ object frmAppOptions: TfrmAppOptions
             'All')
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
         end
         object rdgRguiRecognitionType: TRadioGroup
           Left = 0
           Top = 140
-          Width = 332
+          Width = 334
           Height = 49
           Align = alTop
           Caption = ' Type (caption search)* '
@@ -2425,12 +2477,14 @@ object frmAppOptions: TfrmAppOptions
             'Partial')
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
         end
       end
       object tbsAppOptionsRterm: TTabSheet
         Caption = 'Options (Rterm)'
         ImageIndex = 14
         TabVisible = False
+        ExplicitWidth = 332
         object Label27: TLabel
           Left = 3
           Top = 89
@@ -2448,13 +2502,14 @@ object frmAppOptions: TfrmAppOptions
         object gbpRtermDisposition: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 166
           Align = alTop
           Caption = ' IO and Log (type, disposition and width) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object rdgRtermType: TRadioGroup
             Left = 7
             Top = 14
@@ -2504,13 +2559,14 @@ object frmAppOptions: TfrmAppOptions
         object gbRtermSyntax: TGroupBox
           Left = 0
           Top = 166
-          Width = 332
+          Width = 334
           Height = 106
           Align = alTop
           Caption = ' Syntax (highlighter) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object rdgRtermLogSyntax: TRadioGroup
             Left = 7
             Top = 59
@@ -2545,7 +2601,7 @@ object frmAppOptions: TfrmAppOptions
         object rdgRtermClose: TRadioGroup
           Left = 0
           Top = 272
-          Width = 332
+          Width = 334
           Height = 41
           Align = alTop
           Caption = ' Workspace image (close without ask for save) '
@@ -2557,12 +2613,14 @@ object frmAppOptions: TfrmAppOptions
             'No')
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
         end
       end
       object tbsAppErrorRterm: TTabSheet
         Caption = 'Error (Rterm)'
         ImageIndex = 13
         TabVisible = False
+        ExplicitWidth = 332
         object Label1: TLabel
           Left = 2
           Top = 91
@@ -2573,7 +2631,7 @@ object frmAppOptions: TfrmAppOptions
         object rdgRtermFindError: TRadioGroup
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 44
           Align = alTop
           Caption = ' Trying to find errors (at the editor)* '
@@ -2585,11 +2643,12 @@ object frmAppOptions: TfrmAppOptions
             'No')
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
         end
         object rdgRtermBeepOnError: TRadioGroup
           Left = 0
           Top = 44
-          Width = 332
+          Width = 334
           Height = 44
           Align = alTop
           Caption = ' Beep on error (receiving from R)* '
@@ -2601,22 +2660,25 @@ object frmAppOptions: TfrmAppOptions
             'No')
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
         end
       end
       object tbsAppFormatR: TTabSheet
         Caption = 'R (format)'
         ImageIndex = 6
         TabVisible = False
+        ExplicitWidth = 332
         object GroupBox13: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 91
           Align = alTop
           Caption = ' Arguments (no default to formatR/tidy_source) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object edFormatR: TEditAlign
             Left = 7
             Top = 18
@@ -2637,13 +2699,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox14: TGroupBox
           Left = 0
           Top = 91
-          Width = 332
+          Width = 334
           Height = 143
           Align = alTop
           Caption = ' Remember (default to formatR/tidy_source) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object memFormatR: TMemo
             Left = 7
             Top = 17
@@ -2669,13 +2732,14 @@ object frmAppOptions: TfrmAppOptions
         object GroupBox15: TGroupBox
           Left = 0
           Top = 234
-          Width = 332
+          Width = 334
           Height = 68
           Align = alTop
           Caption = ' Option '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
           object rdgReformatRSplit: TRadioGroup
             Left = 7
             Top = 15
@@ -2698,16 +2762,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Rd (format)'
         ImageIndex = 7
         TabVisible = False
+        ExplicitWidth = 332
         object GroupBox12: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 120
           Align = alTop
           Caption = ' Argument(s) no default (Rd2roxygen package) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object edFormatRd: TEditAlign
             Left = 7
             Top = 18
@@ -2732,16 +2798,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'R server'
         ImageIndex = 15
         TabVisible = False
+        ExplicitWidth = 332
         object gpbRServerTCPIP: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 176
           Align = alTop
           Caption = ' TCP/IP '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object gpbRTCPIPParameter: TGroupBox
             Left = 125
             Top = 16
@@ -2912,16 +2980,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Deplate'
         ImageIndex = 15
         TabVisible = False
+        ExplicitWidth = 332
         object gpbParDeplate: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 92
           Align = alTop
           Caption = ' Parameters (options) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object edParDeplate: TEditAlign
             Left = 12
             Top = 22
@@ -2957,13 +3027,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbIntPathDeplate: TGroupBox
           Left = 0
           Top = 92
-          Width = 332
+          Width = 334
           Height = 92
           Align = alTop
           Caption = ' Interpreter (ruby.exe) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object edPathDeplate_Interpreter: TEditAlign
             Left = 12
             Top = 22
@@ -3002,13 +3073,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbConPathDeplate: TGroupBox
           Left = 0
           Top = 184
-          Width = 332
+          Width = 334
           Height = 92
           Align = alTop
           Caption = ' Conversor (deplate ruby script) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
           object edPathDeplate_Converter: TEditAlign
             Left = 12
             Top = 22
@@ -3049,16 +3121,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Pandoc'
         ImageIndex = 19
         TabVisible = False
+        ExplicitWidth = 332
         object gpbPathPandoc: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 92
           Align = alTop
           Caption = ' Conversor (pandoc.exe) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object edPath_Pandoc: TEditAlign
             Left = 12
             Top = 22
@@ -3099,16 +3173,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Txt2tags'
         ImageIndex = 14
         TabVisible = False
+        ExplicitWidth = 332
         object gpbParTxt2tags: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 92
           Align = alTop
           Caption = ' Parameters (options) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object edParTxt2tags: TEditAlign
             Left = 12
             Top = 22
@@ -3144,13 +3220,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbIntPathTxt2tags: TGroupBox
           Left = 0
           Top = 92
-          Width = 332
+          Width = 334
           Height = 92
           Align = alTop
           Caption = ' Interpreter (python.exe) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object edPathTxt2tags_Interpreter: TEditAlign
             Left = 12
             Top = 22
@@ -3189,13 +3266,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbConPathTxt2tags: TGroupBox
           Left = 0
           Top = 184
-          Width = 332
+          Width = 334
           Height = 92
           Align = alTop
           Caption = ' Conversor (txt2tags python script) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
           object edPathTxt2tags_Converter: TEditAlign
             Left = 12
             Top = 22
@@ -3236,16 +3314,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'More (conversion)'
         ImageIndex = 16
         TabVisible = False
+        ExplicitWidth = 332
         object gpbConversionMore: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 60
           Align = alTop
           Caption = ' HTML conversion '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object cbHTMLOpenAlways: TCheckBox
             Left = 10
             Top = 24
@@ -3264,16 +3344,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'DVI (latex)'
         ImageIndex = 18
         TabVisible = False
+        ExplicitWidth = 332
         object gpbDVIParameters: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 192
           Align = alTop
           Caption = ' Parameters (options) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object gpbDVIParametersSingle: TGroupBox
             Left = 10
             Top = 14
@@ -3358,16 +3440,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'PDF (latex)'
         ImageIndex = 17
         TabVisible = False
+        ExplicitWidth = 332
         object gpbPDFParameters: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 192
           Align = alTop
           Caption = ' Parameters (options) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object gpbPDFParametersSingle: TGroupBox
             Left = 10
             Top = 14
@@ -3452,16 +3536,18 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'More (latex)'
         ImageIndex = 19
         TabVisible = False
+        ExplicitWidth = 332
         object gpbLatexOptions: TGroupBox
           Left = 0
           Top = 0
-          Width = 332
+          Width = 334
           Height = 55
           Align = alTop
           Caption = ' Latex edition (graphical interface ) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitWidth = 332
           object cbLatexVisible: TCheckBox
             Left = 11
             Top = 24
@@ -3478,13 +3564,14 @@ object frmAppOptions: TfrmAppOptions
         object gbpLatexCloseViewer: TGroupBox
           Left = 0
           Top = 110
-          Width = 332
+          Width = 334
           Height = 72
           Align = alTop
           Caption = ' Before compilation '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitWidth = 332
           object cbCloseDVIViewer: TCheckBox
             Left = 11
             Top = 22
@@ -3511,13 +3598,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbDOSOption: TGroupBox
           Left = 0
           Top = 55
-          Width = 332
+          Width = 334
           Height = 55
           Align = alTop
           Caption = ' Compiling (console) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
+          ExplicitWidth = 332
           object cbDOSMinimizedAlways: TCheckBox
             Left = 11
             Top = 24
@@ -3534,13 +3622,14 @@ object frmAppOptions: TfrmAppOptions
         object gpbPDFAfter: TGroupBox
           Left = 0
           Top = 182
-          Width = 332
+          Width = 334
           Height = 72
           Align = alTop
           Caption = ' After compilation (action) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 3
+          ExplicitWidth = 332
           object cbPDFOpenAlways: TCheckBox
             Left = 11
             Top = 24
@@ -3570,7 +3659,7 @@ object frmAppOptions: TfrmAppOptions
     end
   end
   object bbHelp: TBitBtn
-    Left = 307
+    Left = 323
     Top = 494
     Width = 75
     Height = 25

@@ -120,7 +120,7 @@ type
     cbRestoreIniDock: TCheckBox;
     cbRExampleSelectedWord: TCheckBox;
     cbRFixVariable: TCheckBox;
-    cbRget_Info: TCheckBox;
+    cbRsetget_Info: TCheckBox;
     cbRguiOrganizeAutomatically: TCheckBox;
     cbRguiReturnFocus: TCheckBox;
     cbRGuiStartClose: TCheckBox;
