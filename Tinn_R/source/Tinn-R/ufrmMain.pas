@@ -12938,7 +12938,7 @@ end;
 procedure TfrmTinnMain.menHelCitationClick(Sender: TObject);
 begin
   Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E.; FARIAS, P.S. (2015). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
-                     ' URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
+                     'URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
 
   MessageDlg('Many thanks for cite Tinn-R.' + #13 + #13 +
              'The citation was put on clipboard!',

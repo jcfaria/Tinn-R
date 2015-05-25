@@ -62,7 +62,7 @@ options(width=300)  # All information in sigle lines
 
 sink(tr_mirrors)
   # Write to a connection
-  write.table(mirrors, 
+  write.table(mirrors,
               row.names=FALSE, 
               col.names=FALSE, 
               sep='|')

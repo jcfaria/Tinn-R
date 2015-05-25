@@ -989,12 +989,20 @@ begin
         }
         with cdTmp do begin
           Append;
+{         // Germany, Spain and Sweden?
           Fields[0].AsString:= Utf8ToAnsi(slTmp2.Strings[i]);
           Fields[1].AsString:= Utf8ToAnsi(slTmp2.Strings[i+1]);
           Fields[2].AsString:= Utf8ToAnsi(slTmp2.Strings[i+2]);
           Fields[3].AsString:= Utf8ToAnsi(slTmp2.Strings[i+3]);
           Fields[4].AsString:= Utf8ToAnsi(slTmp2.Strings[i+4]);
           Fields[5].AsString:= Utf8ToAnsi(slTmp2.Strings[i+5]);
+}
+          Fields[0].AsString:= slTmp2.Strings[i];
+          Fields[1].AsString:= slTmp2.Strings[i+1];
+          Fields[2].AsString:= slTmp2.Strings[i+2];
+          Fields[3].AsString:= slTmp2.Strings[i+3];
+          Fields[4].AsString:= slTmp2.Strings[i+4];
+          Fields[5].AsString:= slTmp2.Strings[i+5];
           Post;
         end;
 
