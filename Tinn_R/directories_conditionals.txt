@@ -1,0 +1,4 @@
+Output directory     : ..\..\bin
+Unit output directory: ..\..\dcu
+Search path          : ..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\tb2k\Source;..\components\TSpellers;..\others;..\components\muconsole.1.00a
+Unit aliases         : WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;

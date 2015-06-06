@@ -1,0 +1,151 @@
+Estrutura (versão sem plataforma):
+    > Tinn-R
+
+      > App
+
+        > binPortable
+           . Tinn-R.exe
+           . Tinn-R.exe.manifest
+
+        > data
+           . data.zip
+
+        > doc
+           . licence_gpl2.txt
+           . licence_gpl3.txt
+           . textdiff.hlp
+           . Tinn-R_recognized words.R*
+
+        > latex
+           . latex.zip
+
+        > package
+           . TinnRcom_x.x.x.tar.gz
+           . TinnRcom_x.x.x.zip
+
+        > project
+           . project.zip
+
+        > sample
+           . deplate.dplt
+           . pandoc.markdown
+           . Tinn-R_example of script.R*
+           . txt2tags.t2t
+
+        > sumatra
+           . SumatraPDF.exe
+
+        > templates
+           . R doc_dataset.Rd
+           . R doc_empty.Rd
+           . R doc_function.Rd
+           . R html.Rhtml
+           . R markdown.Rmd
+           . R script.R
+           . R_noweb.Rnw
+
+        > utils
+           . Rinfo_b.R
+           . Rinfo_c.R
+           . Rinfo_load_b.R
+           . Rinfo_load_c.R
+           . RIstall.R
+      > Data
+          . app
+          . bkp
+          . colors
+          . data
+          . editor
+          . latex
+          . project
+          . syntax
+          . syntax bkp
+          . Readme.txt
+
+      . User guide.pdf
+      . Tinn-R.exe (bat)
+
+
+Estrutura (portableapps):
+
+    >Tinn-R
+
+      >App
+
+        >AppInfo
+           . appicon.ico
+           . appinfo.ini
+
+        >Tinn-R
+
+          > binPortableApps
+              . Tinn-R.exe
+              . Tinn-R.exe.manifest
+
+          > data
+              . data.zip
+
+          > doc
+              . licence_gpl2.txt
+              . licence_gpl3.txt
+              . textdiff.hlp
+              . Tinn-R_recognized words.R*
+              . User guide.html
+
+          > latex
+              . latex.zip
+
+          > package
+              . TinnRcom_x.x.x.tar.gz
+              . TinnRcom_x.x.x.zip
+
+          > project
+              . project.zip
+
+          > sample
+              . deplate.dplt
+              . pandoc.markdown
+              . Tinn-R_example of script.R*
+              . txt2tags.t2t
+
+          > sumatra
+              . SumatraPDF.exe
+
+          > templates
+              . R doc_dataset.Rd
+              . R doc_empty.Rd
+              . R doc_function.Rd
+              . R html.Rhtml
+              . R markdown.Rmd
+              . R script.R
+              . R_noweb.Rnw
+
+          > utils
+              . Rinfo_b.R
+              . Rinfo_c.R
+              . Rinfo_load_b.R
+              . Rinfo_load_c.R
+              . RIstall.R
+
+      > Data
+          . app
+          . bkp
+          . colors
+          . data
+          . editor
+          . latex
+          . project
+          . syntax
+          . syntax bkp
+          . Readme.txt
+
+      > Other
+          > Help
+              > Images
+                  . donation_button.png
+                  . favicon.ico
+                  . help_background_footer.png
+                  . help_background_header.png
+                  . help_logo_top.png
+      . help.html
+      . Tinn-R.exe (bat)

@@ -1,0 +1,58 @@
+<!--
+#===============================================================================
+# Name   : R markdown template
+# Author : Tinn-R Team (based on the Yihui Xie demo)
+# Date   : 31/01/2014 19:48:09
+# Version: v3
+# Aim    : Template to markdown
+# URL    : http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
+#===============================================================================
+-->
+
+# A minimal R Markdown example
+To generate the HTML output: press the **Tinn-R button knitr/knit to HTML (Rmd, Rhtml)**.
+The associated shortcut is: **SHIFT + CTRL + K**.
+
+A quote:
+> Markdown is not LaTeX.
+
+## Code chunks
+A _paragraph_ here. A code chunk below (remember the three backticks):
+
+```{r}
+1 + 1
+
+.4 - .7 + .3 # what? it is not zero!
+```
+
+## Graphics
+It is easy.
+
+```{r}
+plot(1:10)
+
+hist(rnorm(1000))
+```
+
+## Inline code
+Yes I know the value of pi is `r pi`, and 2 times pi is `r 2*pi`.
+
+## Math
+Sigh. You cannot live without math equations. OK, here we go: $\alpha+\beta=\gamma$.
+Note this is not supported by native markdown.
+You probably want to try the R package **markdown**, or the function `knitr::knit2html()`.
+
+## Nested code chunks
+You can write code within other elements, e.g. a list
+
+1. foo is good
+    ```{r}
+    strsplit('hello indented world', ' ')[[1]]
+    ```
+2. bar is better
+
+## Conclusion
+Nothing fancy. You are ready to go.
+When you become picky, go to the [knitr website](http://yihui.name/knitr/).
+
+![knitr logo](http://yihui.name/knitr/images/knit-logo.png)

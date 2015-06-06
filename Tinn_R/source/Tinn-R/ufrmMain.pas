@@ -3020,15 +3020,15 @@ end;
 
 procedure TfrmTinnMain.CheckVersion;
 begin
-  sVersion_Cache     := ifTinn.ReadString('App', 'sCacheVersion'     , '0.0.0.0');
-  sVersion_Comments  := ifTinn.ReadString('App', 'sCommentsVersion'  , '0.0.0.0');
-  sVersion_Completion:= ifTinn.ReadString('App', 'sCompletionVersion', '0.0.0.0');
-  sVersion_Ini       := ifTinn.ReadString('App', 'sIniVersion'       , '0.0.0.0');
-  sVersion_Latex     := ifTinn.ReadString('App', 'sLatexVersion'     , '0.0.0.0');
-  sVersion_Project   := ifTinn.ReadString('App', 'sProjectVersion'   , '0.0.0.0');
-  sVersion_Rcard     := ifTinn.ReadString('App', 'sRcardVersion'     , '0.0.0.0');
-  sVersion_Rmirrors  := ifTinn.ReadString('App', 'sRmirrorsVersion'  , '0.0.0.0');
-  sVersion_Shortcuts := ifTinn.ReadString('App', 'sShortcutsVersion' , '0.0.0.0');
+  sVersion_Cache     := ifTinn.ReadString('App', 'sVersion_Cache'     , '0.0.0.0');
+  sVersion_Comments  := ifTinn.ReadString('App', 'sVersion_Comments'  , '0.0.0.0');
+  sVersion_Completion:= ifTinn.ReadString('App', 'sVersion_Completion', '0.0.0.0');
+  sVersion_Ini       := ifTinn.ReadString('App', 'sVersion_Ini'       , '0.0.0.0');
+  sVersion_Latex     := ifTinn.ReadString('App', 'sVersion_Latex'     , '0.0.0.0');
+  sVersion_Project   := ifTinn.ReadString('App', 'sVersion_Project'   , '0.0.0.0');
+  sVersion_Rcard     := ifTinn.ReadString('App', 'sVersion_Rcard'     , '0.0.0.0');
+  sVersion_Rmirrors  := ifTinn.ReadString('App', 'sVersion_Rmirrors'  , '0.0.0.0');
+  sVersion_Shortcuts := ifTinn.ReadString('App', 'sVersion_Shortcuts' , '0.0.0.0');
 
   // Current versions
   sCurrentVersion_Cache     := '2.03.02.04';
@@ -3037,8 +3037,8 @@ begin
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '4.00.00.02';
   sCurrentVersion_Rcard     := '2.03.00.00';
-  sCurrentVersion_Rmirrors  := '4.00.01.02';
-  sCurrentVersion_Shortcuts := '4.00.02.00';
+  sCurrentVersion_Rmirrors  := '4.00.03.04';
+  sCurrentVersion_Shortcuts := '4.00.03.04';
   sCurrentVersion_TinnRcom  := '1.0.18';  // Released joinly with Tinn-R setup program
 
   // Cache
@@ -3787,15 +3787,15 @@ begin
 
   with ifTinn_Tmp do begin
     // Version control
-    WriteString('App', 'sCacheVersion'     , sVersion_Cache);
-    WriteString('App', 'sCommentsVersion'  , sVersion_Comments);
-    WriteString('App', 'sCompletionVersion', sVersion_Completion);
-    WriteString('App', 'sIniVersion'       , GetBuildInfo);
-    WriteString('App', 'sLatexVersion'     , sVersion_Latex);
-    WriteString('App', 'sProjectVersion'   , sVersion_Project);
-    WriteString('App', 'sRcardVersion'     , sVersion_Rcard);
-    WriteString('App', 'sRmirrosVersion'   , sVersion_Rmirrors);
-    WriteString('App', 'sShortcutsVersion' , sVersion_Shortcuts);
+    WriteString('App', 'sVersion_Cache'     , sVersion_Cache);
+    WriteString('App', 'sVersion_Comments'  , sVersion_Comments);
+    WriteString('App', 'sVersion_Completion', sVersion_Completion);
+    WriteString('App', 'sVersion_Ini'       , GetBuildInfo);
+    WriteString('App', 'sVersion_Latex'     , sVersion_Latex);
+    WriteString('App', 'sVersion_Project'   , sVersion_Project);
+    WriteString('App', 'sVersion_Rcard'     , sVersion_Rcard);
+    WriteString('App', 'sVersion_Rmirrors'  , sVersion_Rmirrors);
+    WriteString('App', 'sVersion_Shortcuts' , sVersion_Shortcuts);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -4309,12 +4309,12 @@ begin
   // Application
   with ifTinn do begin
     // Version control
-    WriteString('App', 'sCacheVersion'     , sVersion_Cache);
-    WriteString('App', 'sCommentsVersion'  , sVersion_Comments);
-    WriteString('App', 'sCompletionVersion', sVersion_Completion);
-    WriteString('App', 'sRcardVersion'     , sVersion_Rcard);
-    WriteString('App', 'sRmirrorsVersion'  , sVersion_Rmirrors);
-    WriteString('App', 'sShortcutsVersion' , sVersion_Shortcuts);
+    WriteString('App', 'sVersion_Cache'     , sVersion_Cache);
+    WriteString('App', 'sVersion_Comments'  , sVersion_Comments);
+    WriteString('App', 'sVersion_Completion', sVersion_Completion);
+    WriteString('App', 'sVersion_Rcard'     , sVersion_Rcard);
+    WriteString('App', 'sVersion_Rmirrors'  , sVersion_Rmirrors);
+    WriteString('App', 'sVersion_Shortcuts' , sVersion_Shortcuts);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -7788,7 +7788,7 @@ begin
              sPathReadme_User);
   Rewrite(tfTmp);
     WriteLn(tfTmp, 'This main folder stores:' + #13 +
-                   '''app'', ''bkp'', ''colors'', ''data'', ''editor'', ''project'', ''latex'', ''syntax'' and ''syntax bkp.''');
+                   '''app'', ''bkp'', ''colors'', ''data'', ''editor'', ''latex'', ''project'', ''syntax'' and ''syntax bkp''.');
   CloseFile(tfTmp);
 
 
