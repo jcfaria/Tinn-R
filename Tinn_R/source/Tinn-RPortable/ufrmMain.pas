@@ -5437,8 +5437,10 @@ begin
 
   // Pandoc history
   slPandocHistory:= TStringList.Create;
+
   ifTinn.ReadSectionValues('PandocHistory',
                            slPandocHistory);
+
   if (slPandocHistory.Count > 0) then begin
     for i:= 0 to (slPandocHistory.Count - 1) do begin
       sTmp:= slPandocHistory.Strings[i];
@@ -7600,16 +7602,21 @@ end;
 
 procedure TfrmTinnMain.SetIniStructure;
 begin
-  sPathIni      := sPathTinnR + '\..\Data';
-  sPathApp      := sPathIni   + '\app';
-  sPathBkp      := sPathIni   + '\bkp';
-  sPathColor    := sPathIni   + '\colors';
-  sPathData     := sPathIni   + '\data';
-  sPathEditor   := sPathIni   + '\editor';
-  sPathLatex    := sPathIni   + '\latex';
-  sPathProject  := sPathIni   + '\project';
-  sPathSyntax   := sPathIni   + '\syntax';
-  sPathSyntaxBKP:= sPathIni   + '\syntax bkp';
+  sPathIni:= copy(sPathTinnR,
+                  1,
+                  pos('\Tinn-R',
+                      sPathTinnR) + length('Tinn-R'));
+
+  sPathIni      := sPathIni + '\Data';
+  sPathApp      := sPathIni + '\app';
+  sPathBkp      := sPathIni + '\bkp';
+  sPathColor    := sPathIni + '\colors';
+  sPathData     := sPathIni + '\data';
+  sPathEditor   := sPathIni + '\editor';
+  sPathLatex    := sPathIni + '\latex';
+  sPathProject  := sPathIni + '\project';
+  sPathSyntax   := sPathIni + '\syntax';
+  sPathSyntaxBKP:= sPathIni + '\syntax bkp';
   sPathTmp      := GetEnvironmentVariable('TEMP') + '\Tinn-R';
 
   // Ini files
