@@ -62,9 +62,9 @@ BottomMiddelPanelData=0000080001000100000009000000446F636B5369746530321900000000
 [View0]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\Tinn_RPortable.dpr
-CursorX=18
-CursorY=53
-TopLine=34
+CursorX=21
+CursorY=49
+TopLine=16
 LeftCol=1
 Elisions=
 Bookmarks=
