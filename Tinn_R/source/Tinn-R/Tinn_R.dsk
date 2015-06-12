@@ -2,7 +2,7 @@
 File_0=TSourceModule,'D:\GitHub\Tinn-RPortable\Tinn_RPortable\source\Tinn-R\ufrmMain.pas',0,1,3018,1,3044,0,0,,
 File_1=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\uModDados.pas',0,1,980,13,992,0,0,,
 File_2=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas',0,1,1,1,1,0,0,,
-File_3=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',0,1,444,42,478,0,0,,{1,488,29}
+File_3=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',0,1,444,42,478,0,0,,{1
 File_4=TSourceModule,'D:\GitHub\Tinn-RPortable\Tinn_RPortable\source\Tinn-R\ufrmTools.pas',0,1,1,1,1,0,0,,
 File_5=TSourceModule,'D:\GitHub\Tinn-RPortable\Tinn_RPortable\source\Tinn-R\uModDados.pas',0,1,978,1,1008,0,0,,
 File_6=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas',0,1,948,1,953,0,0,,
@@ -11,22 +11,22 @@ File_8=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAbout.pas',0,1,1
 File_9=TSourceModule,'D:\GitHub\Tinn-R_port\Tinn_R\source\Tinn-R\ufrmMain.pas',0,1,20895,1,20924,0,0,,
 
 [Modules]
-Module0=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\Tinn_R.dproj
-Module1=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+Module0=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
+Module1=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\Tinn_R.dproj
 Count=2
 EditWindowCount=1
-
-[D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\Tinn_R.dproj]
-ModuleType=TBaseProject
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
+[D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\Tinn_R.dproj]
+ModuleType=TBaseProject
+
 [EditWindow0]
 ViewCount=2
-CurrentEditView=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\Tinn_R.dpr
+CurrentEditView=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
 View0=0
 View1=1
 PercentageSizes=1
@@ -48,10 +48,10 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1664
 LeftPanelClients=StructureView,PropertyInspector
-LeftPanelData=000008000102010000001100000053747275637475726556696577466F726D670A00000000000002141E0000000000000100000000670A00001100000050726F7065727479496E73706563746F720100000000670A00001100000053747275637475726556696577466F726DFFFFFFFF
-RightPanelSize=0
+LeftPanelData=000008000100010000001100000053747275637475726556696577466F726D3A2200000000000000670A00000000000001000000003A2200001100000050726F7065727479496E73706563746F72FFFFFFFF
+RightPanelSize=1398
 RightPanelClients=DockSite2,ToolForm
-RightPanelData=0000080001020200000009000000446F636B536974653208000000546F6F6C466F726DBE0800000000000002141E0000000000000100000000BE08000008000000546F6F6C466F726DFFFFFFFF
+RightPanelData=0000080001020100000009000000446F636B5369746532BE0800000000000002141E0000000000000100000000BE08000008000000546F6F6C466F726DFFFFFFFF
 BottomPanelSize=1025
 BottomPanelClients=MessageView@EditWindow0,DockSite1
 BottomPanelData=0000080001020100000009000000446F636B5369746531803E0000000000000201040000000000000100000000803E00000B0000004D65737361676556696577FFFFFFFF
@@ -73,9 +73,9 @@ EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
 [View1]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\Tinn_R.dpr
-CursorX=36
-CursorY=105
-TopLine=91
+CursorX=43
+CursorY=109
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -160,7 +160,7 @@ StayOnTop=0
 [ToolForm]
 PercentageSizes=1
 Create=1
-Visible=0
+Visible=1
 Docked=1
 State=0
 Left=0
@@ -490,11 +490,11 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=1664
 ClientHeight=7694
-TBDockHeight=7694
+TBDockHeight=402
 LRDockWidth=1664
 Dockable=1
 StayOnTop=0
-SplitPos=54
+SplitPos=97
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -527,15 +527,15 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=106
-Top=22
-Width=836
-Height=7694
+Left=0
+Top=0
+Width=1891
+Height=3679
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=836
-ClientHeight=7694
-TBDockHeight=7694
+ClientWidth=1891
+ClientHeight=3679
+TBDockHeight=3679
 LRDockWidth=1891
 Dockable=1
 StayOnTop=0
