@@ -3038,7 +3038,7 @@ begin
   sCurrentVersion_Project   := '4.00.00.02';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '4.00.03.04';
-  sCurrentVersion_Shortcuts := '4.00.03.04';
+  sCurrentVersion_Shortcuts := '4.00.03.05';
   sCurrentVersion_TinnRcom  := '1.0.18';  // Released joinly with Tinn-R setup program
 
   // Cache
