@@ -2689,6 +2689,7 @@ type
     procedure CheckOrigin;
     procedure CheckProcessingPath(sPath: string);
     procedure CheckProject;
+    procedure CheckTemporary;
     procedure RSetGet_Info;
     procedure CheckTop;
     procedure CheckVersion;
@@ -7106,43 +7107,10 @@ end;
 procedure TfrmTinnMain.FormCreate(Sender: TObject);
 var
   i,
-   j       : integer;
-  miItem   : TMenuItem;
+   j      : integer;
+  miItem  : TMenuItem;
   sName,
-   sFilter,
-   sPathRes: string;
-
-  procedure GetPathRes;
-  begin
-    sPathTinnR:= ExtractFilePath(Application.ExeName);
-    Delete(sPathTinnR,
-           length(sPathTinnR) - 12,
-           13);  // Exclude '\binPortable\' of Tinn-RPortable path
-    sPathRes:= sPathTinnR +
-               '\res\';
-  end;
-
-  procedure UpdateSplash(sTmp: string);
-  begin
-    with frmSplash do begin
-{
-      imSplash.Picture.LoadFromFile(sPathRes +
-                                    'sp_' +
-                                    sTmp +
-                                    '.jpg');
-}
-{
-      imSplash.Picture.LoadFromFile(sPathRes +
-                                    sTmp +
-                                    '.gif');
-}
-      //(imSplash.Picture.Graphic as TGIFImage).Animate:= True;
-      //(imSplash.Picture.Graphic as TGIFImage).AnimationSpeed:= 1000;
-
-      Update;
-      //DoubleBuffered := True;// stops flickering
-    end;
-  end;
+   sFilter: string;
 
 begin
   (*
@@ -7155,9 +7123,6 @@ begin
 *)
   if (DebugHook <> 0) then menToolsUtils.Visible:= True;
 
-  GetPathRes;
-  UpdateSplash('00');
-  //UpdateSplash('startup');
   frmSplash.pb.Position:= 0;
 
   // Initial status
@@ -7180,18 +7145,15 @@ begin
   bStartingUp := True;
   slFileMRU   := TStringList.Create;
   slprojectMRU:= TStringList.Create;
-  //UpdateSplash('01');
   frmSplash.pb.Position:= 1;
 
   try
     frmTools:= TfrmTools.Create(nil);
-    //UpdateSplash('02');
     frmSplash.pb.Position:= 2;
 
     CheckOrigin;
 
     SetIniStructure;
-    //UpdateSplash('03');
     frmSplash.pb.Position:= 3;
 
     CheckVersion;
@@ -7202,7 +7164,6 @@ begin
     SavePreferencesOfOldVersion;
 
     frmRterm:= TfrmRterm.Create(nil);
-    //UpdateSplash('04');
     frmSplash.pb.Position:= 4;
 
     SetPreferences_Application;
@@ -7219,23 +7180,19 @@ begin
                       sTriggerRDataCompletion);
 
     CheckIniDock;
-    //UpdateSplash('05');
     frmSplash.pb.Position:= 5;
 
     CheckData;
 
     Application.CreateForm(TmodDados,
                            modDados);
-    //UpdateSplash('06');
     frmSplash.pb.Position:= 6;
 
     SetRcard;
-    //UpdateSplash('07');
     frmSplash.pb.Position:= 7;
 
     SetCompletion;
     SetRmirrors;
-    //UpdateSplash('08');
     frmSplash.pb.Position:= 8;
 
     SetShortcuts;
@@ -7246,7 +7203,9 @@ begin
     CheckProject;
 
     CheckEditorOptions;
-    //UpdateSplash('09');
+
+    CheckTemporary;
+
     frmSplash.pb.Position:= 9;
 
     DeleteDir(sOldPreferencesTmp);
@@ -7262,7 +7221,6 @@ begin
                            dmSyn);
 
     synURIOpener.URIHighlighter:= dmSyn.synURI;
-    //UpdateSplash('10');
     frmSplash.pb.Position:= 10;
 
     // Application
@@ -7279,7 +7237,6 @@ begin
     RenameFile(sPathIniEditor_Tmp,
                sPathIniEditor_File);                                          // Set the new Editor.ini
 
-    //UpdateSplash('11');
     frmSplash.pb.Position:= 11;
   except
     MessageDlg(sPathIni + #13 + #13 +
@@ -7313,7 +7270,6 @@ begin
     end;
   end;
 
-  //UpdateSplash('12');
   frmSplash.pb.Position:= 12;
 
   //cbSyntax.Sorted:= True; // It is important!!!
@@ -7475,8 +7431,6 @@ end;
 
 procedure TfrmTinnMain.CheckOrigin;
 begin
-  sPathTinnR:= ExtractFilePath(Application.ExeName);
-
   with frmTools.memIniLog.Lines do begin
     Add('Version - ' +
         GetBuildInfo);
@@ -7488,15 +7442,15 @@ begin
 
     Add('1. Path of executable and sources (origin)');
 
-    //Add('=================================');
     Add('  Tinn-R        - ' +
-        sPathTinnR +
-        ExtractFileName(Application.ExeName));
+        Application.ExeName);
   end;
+
+  sPathTinnR:= ExtractFilePath(Application.ExeName);
 
   Delete(sPathTinnR,
          length(sPathTinnR) - 12,
-         13);  // Exclude '\binPortable\' of Tinn-RPortable path
+         13);  // Exclude '\binPortable\' of Tinn-R Portable path
 
   sPathTinnRcom:= sPathTinnR +
                   '\package';
@@ -7602,10 +7556,31 @@ end;
 
 procedure TfrmTinnMain.SetIniStructure;
 begin
+//{
+  // Portable simple
   sPathIni:= copy(sPathTinnR,
                   1,
                   pos('\Tinn-R',
                       sPathTinnR) + length('Tinn-R'));
+//}
+
+(*
+  // Portable to Apps platform
+  After to compile the binary file of portable simple version,
+  it is necessary to rename Tinn_RPortable to Tinn_RPortable_simple.exe.
+  After this to comment the above piece of code, uncomment the below piece of code
+  and compile newly to make the distribution for the Apps platform.
+
+  Warning: It is not possible to test the binary of the version PortableApps!
+  It will only run under the Apps structure.
+*)
+
+{
+  sPathIni:= copy(sPathTinnR,
+                  1,
+                  pos('\Tinn-RPortable',
+                      sPathTinnR) + length('Tinn-RPortable'));
+}
 
   sPathIni      := sPathIni + '\Data';
   sPathApp      := sPathIni + '\app';
@@ -7631,9 +7606,7 @@ begin
   with frmTools.memIniLog.Lines do begin
     Add(EmptyStr);
     Add('2. Path of ini folders');
-    //Add('====================');
-    Add('  User data - ' + sAppData);
-    Add('  Tinn-R    - ' + sPathIni);
+    Add('  Tinn-R - ' + sPathIni);
     Add('  \' + ExtractFileName(sPathApp));
     Add('  \' + ExtractFileName(sPathBkp));
     Add('  \' + ExtractFileName(sPathColor));
@@ -7643,7 +7616,6 @@ begin
     Add('  \' + ExtractFileName(sPathLatex));
     Add('  \' + ExtractFileName(sPathSyntax));
     Add('  \' + ExtractFileName(sPathSyntaxBKP));
-    Add('  \' + ExtractFileName(sPathTmp));
   end;
 end;
 
@@ -7677,7 +7649,6 @@ begin
   with frmTools.memIniLog.Lines do begin
     Add(EmptyStr);
     Add('3. Verification of necessary folder and files');
-    //Add('=============================================');
     Add('3.1. Tinn-R, bkp, colors, ini, syntax, syntax bkp and tmp');
   end;
 
@@ -7771,14 +7742,6 @@ begin
     else frmTools.memIniLog.Lines.Add('  \' +
                                       ExtractFileName(sPathSyntaxBKP) +
                                       ' : OK');
-
-    // Tinn-R\tmp
-    if (DirectoryExists(sPathTmp)) then DeleteDir(sPathTmp);  // Tinn-R was terminated abnormally
-    CreateDir(sPathTmp);
-    frmTools.memIniLog.Lines.Add('  \' +
-                                 ExtractFileName(sPathTmp) +
-                                 '        : CREATED');
-
   except
     raise;
     Exit;
@@ -7858,6 +7821,23 @@ begin
             'This folder stores:' + #13 +
             'Temporary backups of syntax preferences.');
   CloseFile(tfTmp);
+end;
+
+procedure TfrmTinnMain.CheckTemporary;
+begin
+  // Tinn-R: temporary folder
+  with frmTools.memIniLog.Lines do begin
+    Add(EmptyStr);
+    Add('3.6. Temporary folder');
+  end;
+
+  if (DirectoryExists(sPathTmp)) then DeleteDir(sPathTmp);  // Tinn-R was terminated abnormally
+
+  CreateDir(sPathTmp);
+
+  frmTools.memIniLog.Lines.Add(' Tinn-R - ' +
+                               sPathTmp +
+                               ': CREATED');
 end;
 
 procedure TfrmTinnMain.CheckIniDock;

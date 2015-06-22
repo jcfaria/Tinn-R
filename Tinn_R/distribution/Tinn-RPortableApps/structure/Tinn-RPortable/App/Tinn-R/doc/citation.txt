@@ -1,5 +1,0 @@
-FARIA, J.C; GROSJEAN, P; JELIHOVSCHI, E (2013). Tinn-R - GUI/Editor for R language
-and environment statistical computing. URL http://sourceforge.net/projects/tinn-r.
-
-FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E. (2013). Tinn-R - GUI/Editor for R Language
-and Environment. URL http://nbcgib.uesc.br/lec/software/desenvolvidos/editores/tinn-r/en.

@@ -27,7 +27,8 @@ md  "Tinn-R\App\utils"
 cd..\..
 
 ::Begin of file's copy
-xcopy /s binPortable distribution\"Tinn-R Portable"\Tinn-R\App\binPortable /e
+xcopy    binPortable\Tinn_RPortable_simple.exe distribution\"Tinn-R Portable"\Tinn-R\App\binPortable /e
+xcopy    binPortable\Tinn_RPortable.exe.manifest distribution\"Tinn-R Portable"\Tinn-R\App\binPortable /e
 xcopy /s data\"data.zip" distribution\"Tinn-R Portable"\Tinn-R\App\data /e 
 xcopy /s doc distribution\"Tinn-R Portable"\Tinn-R\App\doc /e
 xcopy    latex\"latex.zip" distribution\"Tinn-R Portable"\Tinn-R\App\latex 
@@ -48,7 +49,7 @@ xcopy /s utils distribution\"Tinn-R Portable"\Tinn-R\App\utils /e
 cd       distribution\"Tinn-R Portable"
 
 ::Renaming the main execution and manifest files 
-rename   Tinn-R\App\binPortable\Tinn_RPortable.exe "Tinn-R Portable.exe"
+rename   Tinn-R\App\binPortable\Tinn_RPortable_simple.exe "Tinn-R Portable.exe"
 rename   Tinn-R\App\binPortable\Tinn_RPortable.exe.manifest "Tinn-R Portable.exe.manifest"
 
 ::Copying the user guide and the launcher to the front folder
@@ -56,7 +57,7 @@ xcopy /s Tinn-R\App\doc\"User guide.pdf" Tinn-R  /e
 xcopy /s tools\launcher\"Tinn-R Portable.exe" Tinn-R  /e
 
 ::Tinn-R folder compressing procedure
-for /d %%X in (*Tinn-R) do "tools\7-Zip\7z.exe" a "Tinn-R Portable.release_number.zip" "Tinn-R\"
+for /d %%X in (*Tinn-R) do "tools\7-Zip\7z.exe" a "Tinn-R Portable_4.0.3.5.zip" "Tinn-R\"
 
 ::Deleting the not longer needed Tinn-R folder
 rmdir /s /q Tinn-R 

@@ -1,0 +1,238 @@
+Tinn_R and txt2tags introduction
+José Cláudio Faria & Aurélio Marinho Jargas
+%%mtime(%m/%d/%Y)
+
+%==============================================================================%
+%                         *** RECOMENDATIONS ***                               %
+%==============================================================================%
+% 1. IF THIS FILE IS IN A PATH WITHOUT SPACES AND SPECIAL CHARACTERS,          %
+%    (C:/Tinn-R/sample/English/txt2tags_intro.t2t)                             %
+%                                                                              %
+% 2. RUN THE TXT2TAGS TOOLS FOR FILE FORMAT CONVERSION, IT IS ALL!             %
+%==============================================================================%
+
+%!options: --css-sugar --toc --toc-level 2 --encoding iso-8859-1
+%!style: ../../doc/config.css
+
+José Cláudio Faria:
+   joseclaudio.faria@terra.com.br
+
+Aurélio Marinho Jargas:
+  verde@aurelio.net
+
+= Introduction =
+
+Introduction to the txt2tags syntax: Welcome!
+
+Here you have examples and a brief explanation of all marks.
+
+The first 3 lines of the this file are used as headers,
+on the following format:
+
+```
+line1: document title
+line2: author name, email
+line3: date, version
+```
+
+Lines with balanced equal signs ``=`` around are __titles__
+
+% A comment!
+% Nothing to do!!!
+%The same!
+%    Idem!
+
+
+= Fonts and beautifiers =
+
+We have two sets of fonts:
+
+The NORMAL type that can be improved with beautifiers.
+
+The TYPEWRITER type that uses monospaced font for preformatted text.
+
+We will now enter on a subtitle...
+
+
+== Beautifiers ==
+
+The text marks for beautifiers are simple, just as you 
+type on a plain text email message.
+
+We use double *, / and _ to represent **bold**,
+//italic// and __underline__.
+
+The **//bold italic//** style is also supported as a combination.
+
+
+== Pre-formatted text ==
+
+We can put a code sample or other preformatted text:
+
+```
+  here    is     preformatted
+//marks// are  **not**  ``interpreted``
+```
+
+Or use ``preformatted`` inside sentences.
+
+
+== More cosmetics ==
+
+Special entities like email (duh@somewhere.com) and
+URL (http://www.duh.com) are detected automagically,
+as long as the horizontal line:
+
+--------------------
+It must has **20 or more character**
+====================
+
+You can also specify an [Tinn-R home http://www.sciviews.org/Tinn-R],
+[Tinn-R on SourceForge https://sourceforge.net/projects/tinn-r] with label.
+
+And remember,
+
+	A **TAB** in front of the line does a quotation. blablabla blablabla
+	blablabla  blablabla  blablabla  blablabla  blablabla  blablabla  blablabla
+	blablabla  blablabla  blablabla  blablabla  blablabla  blablabla  blablabla
+	blablabla  blablabla  blablabla  blablabla  blablabla  blablabla  blablabla.
+
+		More **TABs**, more depth (if allowed).  blebleble blebleble  blebleble
+		blebleble  blebleble  blebleble  blebleble  blebleble  blebleble  blebleble
+		blebleble  blebleble  blebleble  blebleble  blebleble  blebleble  blebleble
+		blebleble  blebleble  blebleble  blebleble  blebleble  blebleble  blebleble.
+
+			More **TABs**, more depth (if allowed).  bliblibli bliblibli  bliblibli
+			bliblibli  bliblibli  bliblibli  bliblibli  bliblibli  bliblibli  bliblibli
+			bliblibli  bliblibli  bliblibli  bliblibli  bliblibli  bliblibli  bliblibli
+			bliblibli  bliblibli  bliblibli  bliblibli  bliblibli  bliblibli  bliblibli.
+
+Very nice, isn't it?
+
+
+= Lists =
+
+A list of items is natural, just putting a **dash** or
+a **plus** at the beginning of the line.
+
+
+== Plain list ==
+
+The dash is the default list identifier. For sublists,
+just add **spaces** at the beginning of the line. More
+spaces, more sublists.
+
+A single list:
+- Level 1
+- Level 2
+  - Level 2.1
+  - Level 2.2
+    - Level 2.2.1
+- Level 3
+- Etc
+
+
+A more complex example:
+- **SIDERAL SPACE**
+  - **//Via lactea//**
+  - **//Earth//**
+    - America
+      - South America
+        - **Brazil** (where José Cláudio Faria and Aurélio live)
+        - How deep can you go?
+    - Europe
+      - France
+      - **Belgium** (where Philippe Grosjean lives)
+  - **//Mars//**
+    - Who knows?
+- **THE INFINITE**
+
+The list ends with **two** consecutive blank lines.
+
+
+== Numbered list ==
+
+The same rules as the plain list, just a different
+identifier (plus).
+
++ One
++ Two
++ Three
+ - Mixed lists!
+ - What a mess
+  + Counting again
+  + Etc
++ Four
+
+
+== Definition list ==
+
+The definition list identifier is a colon, followed by
+the term. The term contents is placed on the next line.
+
+: Orange
+  A yellow fruit
+: Apple
+  A green or red fruit
+: Other fruits
+  - Wee!
+  - Mixing lists
+    + Again!
+    + And again!
+
+
+= Tables =
+
+Use pipes to compose table rows and cells.
+Double pipe at the line beginning starts a heading row.
+Natural spaces specify each cell alignment.
+
+ || heading 1 |  heading 2  |  heading 3 |
+  | cell 1.1  |  cell 1.2   |   cell 1.3 |
+  | cell 2.1  |  cell 2.2   |   cell 2.3 |
+
+Without the last pipe, no border:
+
+ || heading 1 |  heading 2  |  heading 3
+  | cell 1.1  |  cell 1.2   |   cell 1.3
+  | cell 2.1  |  cell 2.2   |   cell 2.3
+
+
+= Special entities =
+
+Because things were too simple.
+
+
+== Images ==
+
+The image mark is as simple as it can be: ``[filename]``.
+
+[../../res/Tinn-R_logo.jpg]
+
+The filename must end in [../../res/Tinn-R_logo.jpg]: BMP, PNG, JPG, GIF, or similar.
+
+No spaces inside the brackets!
+    
+    
+
+== Others ==
+
+The handy ``%%date`` macro expands to the current date.
+
+So today is %%date on the ISO ``YYYYMMDD`` format.
+
+You can also specify the date format with the %? flags,
+as ``%%date(%m-%d-%Y)`` which gives: %%date(%m-%d-%Y), or %%date(%m/%d/%Y).
+
+
+= Last words =
+- Once you have made the basic file with basic marks you could convert it to **html** format, after it, you cold to open it with MSWord, __for example__, and save your file in another proprietary format: **doc**, **rtf**, etc.
+
+- In another words, you will be **free and happy with your text files**!
+
+
+That's all for now!
+
+[]s,
+
+Tinn-R team
