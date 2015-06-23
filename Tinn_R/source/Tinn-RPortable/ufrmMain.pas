@@ -7556,13 +7556,13 @@ end;
 
 procedure TfrmTinnMain.SetIniStructure;
 begin
-//{
+{
   // Portable simple
   sPathIni:= copy(sPathTinnR,
                   1,
-                  pos('\Tinn-R',
-                      sPathTinnR) + length('Tinn-R'));
-//}
+                  LastPos('\Tinn-R',
+                          sPathTinnR) + length('Tinn-R'));
+}
 
 (*
   // Portable to Apps platform
@@ -7575,12 +7575,12 @@ begin
   It will only run under the Apps structure.
 *)
 
-{
+//{
   sPathIni:= copy(sPathTinnR,
                   1,
-                  pos('\Tinn-RPortable',
-                      sPathTinnR) + length('Tinn-RPortable'));
-}
+                  LastPos('\Tinn-RPortable',
+                          sPathTinnR) + length('Tinn-RPortable'));
+//}
 
   sPathIni      := sPathIni + '\Data';
   sPathApp      := sPathIni + '\app';

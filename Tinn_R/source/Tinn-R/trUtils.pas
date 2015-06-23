@@ -75,6 +75,7 @@ type
   function IsGuiRunning(var hRgui: HWND; var sCaption: string; var iRecognitionCaption, iRecognitionType: integer): Boolean;
   function IsValidNumber_RVersion(s: string): boolean;
   function IsURL(s: string): Boolean;
+  function LastPos(sSub, s: string): Integer;
   function OpenCmdLine(const CmdLine: string; wWindowState: Word): Boolean;
   function OpenUrl(const sURL: string): Boolean;
   function OpenUrlByIEShell(const sURL: string): Boolean;
@@ -1030,6 +1031,26 @@ begin
     end;
   until iPos = iLen;
 end;
+
+
+function LastPos(sSub, s: string): Integer;
+var
+  iFound, iLen, iPos: integer;
+
+begin
+  iPos:= Length(s);
+  iLen:= Length(sSub);
+  iFound:= 0;
+
+  while (iPos > 0) and (iFound = 0) do
+  begin
+    if (Copy(s, iPos, iLen) = sSub) then iFound:= iPos;
+    Dec(iPos);
+  end;
+
+  LastPos:= iFound;
+end;
+
 
 // From Marco Cantu
 function CountChar(Text,
