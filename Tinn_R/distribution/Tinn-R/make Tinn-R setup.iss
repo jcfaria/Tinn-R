@@ -1,5 +1,5 @@
 ; Tinn-R Inno (Installer) Setup Script
-; By: José Cláudio Faria (12/06/2015 06:32:24)
+; By: José Cláudio Faria (24/06/2015 12:31:24)
 ; Tinn-R: http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 ; INNO Setup: http://www.innosetup.com
 
@@ -14,12 +14,14 @@ ChangesAssociations  = true
 Compression          = lzma
 DefaultDirName       = {sd}\Tinn-R
 DefaultGroupName     = Tinn-R
-LicenseFile          = ..\..\doc\licence_gpl3.txt
+LicenseFile          = .\..\..\doc\licence_gpl3.txt
 OutputBaseFilename   = Tinn-R_04.00.03.05_setup
 OutputDir            = .\bin
 SolidCompression     = yes
-WizardImageFile      = ..\..\res\setup.bmp
-WizardSmallImageFile = ..\..\res\setup_small.bmp
+SetupIconFile        = .\..\..\res\tinn48.ico
+UninstallDisplayIcon = .\..\..\res\tinn48.ico
+WizardImageFile      = .\..\..\res\setup.bmp
+WizardSmallImageFile = .\..\..\res\setup_small.bmp
 
 [Tasks]
 Name: desktopicon;          Description: {cm:CreateDesktopIcon};                           GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
@@ -41,36 +43,36 @@ Name: txt_association;      Description: &Associate (*.txt) - Text;             
 Filename: {app}\Tinn-R.url; Section: InternetShortcut; Key: URL; String: http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 
 [Files]
-Source: ..\..\bin\Tinn-R.exe.manifest;             DestDir: {app}\bin
-Source: ..\..\bin\Tinn-R.exe;                      DestDir: {app}\bin
-Source: ..\..\data\data.zip;                       DestDir: {app}\data
-Source: ..\..\doc\licence_gpl2.txt;                DestDir: {app}\doc
-Source: ..\..\doc\licence_gpl3.txt;                DestDir: {app}\doc
-Source: ..\..\doc\textdiff.hlp;                    DestDir: {app}\doc
-Source: ..\..\doc\Tinn-R_recognized words.r;       DestDir: {app}\doc
-Source: ..\..\doc\User guide.pdf;                  DestDir: {app}\doc
-Source: ..\..\latex\latex.zip;                     DestDir: {app}\latex
-Source: ..\..\package\TinnRcom_1.0.18.tar.gz;      DestDir: {app}\package
-Source: ..\..\package\TinnRcom_1.0.18.zip;         DestDir: {app}\package
-Source: ..\..\project\project.zip;                 DestDir: {app}\project
-Source: ..\..\sample\deplate.dplt;                 DestDir: {app}\sample
-Source: ..\..\sample\pandoc.markdown;              DestDir: {app}\sample
-Source: ..\..\sample\Tinn-R_example of script.r;   DestDir: {app}\sample
-Source: ..\..\sample\txt2tags.t2t;                 DestDir: {app}\sample
-SOurce: ..\..\sumatra\SumatraPDF.exe;              DestDir: {app}\sumatra
-Source: ..\..\templates\R doc_dataset.Rd;          DestDir: {app}\templates
-Source: ..\..\templates\R doc_empty.Rd;            DestDir: {app}\templates
-Source: ..\..\templates\R doc_function.Rd;         DestDir: {app}\templates
-Source: ..\..\templates\R html.Rhtml;              DestDir: {app}\templates
-Source: ..\..\templates\R markdown.Rmd;            DestDir: {app}\templates
-Source: ..\..\templates\R script.R;                DestDir: {app}\templates
-Source: ..\..\templates\R_noweb.Rnw;               DestDir: {app}\templates
-Source: ..\..\utils\Rinfo_b.R;                     DestDir: {app}\utils
-Source: ..\..\utils\Rinfo_c.R;                     DestDir: {app}\utils
-Source: ..\..\utils\Rinfo_load_b.R;                DestDir: {app}\utils
-Source: ..\..\utils\Rinfo_load_c.R;                DestDir: {app}\utils
-Source: ..\..\utils\Rinfo_load_c.R;                DestDir: {app}\utils
-Source: ..\..\utils\Rinstall.R;                    DestDir: {app}\utils
+Source: .\..\..\bin\Tinn-R.exe.manifest;             DestDir: {app}\bin
+Source: .\..\..\bin\Tinn-R.exe;                      DestDir: {app}\bin
+Source: .\..\..\data\data.zip;                       DestDir: {app}\data
+Source: .\..\..\doc\licence_gpl2.txt;                DestDir: {app}\doc
+Source: .\..\..\doc\licence_gpl3.txt;                DestDir: {app}\doc
+Source: .\..\..\doc\textdiff.hlp;                    DestDir: {app}\doc
+Source: .\..\..\doc\Tinn-R_recognized words.r;       DestDir: {app}\doc
+Source: .\..\..\doc\User guide.pdf;                  DestDir: {app}\doc
+Source: .\..\..\latex\latex.zip;                     DestDir: {app}\latex
+Source: .\..\..\package\TinnRcom_1.0.18.tar.gz;      DestDir: {app}\package
+Source: .\..\..\package\TinnRcom_1.0.18.zip;         DestDir: {app}\package
+Source: .\..\..\project\project.zip;                 DestDir: {app}\project
+Source: .\..\..\sample\deplate.dplt;                 DestDir: {app}\sample
+Source: .\..\..\sample\pandoc.markdown;              DestDir: {app}\sample
+Source: .\..\..\sample\Tinn-R_example of script.r;   DestDir: {app}\sample
+Source: .\..\..\sample\txt2tags.t2t;                 DestDir: {app}\sample
+SOurce: .\..\..\sumatra\SumatraPDF.exe;              DestDir: {app}\sumatra
+Source: .\..\..\templates\R doc_dataset.Rd;          DestDir: {app}\templates
+Source: .\..\..\templates\R doc_empty.Rd;            DestDir: {app}\templates
+Source: .\..\..\templates\R doc_function.Rd;         DestDir: {app}\templates
+Source: .\..\..\templates\R html.Rhtml;              DestDir: {app}\templates
+Source: .\..\..\templates\R markdown.Rmd;            DestDir: {app}\templates
+Source: .\..\..\templates\R script.R;                DestDir: {app}\templates
+Source: .\..\..\templates\R_noweb.Rnw;               DestDir: {app}\templates
+Source: .\..\..\utils\Rinfo_b.R;                     DestDir: {app}\utils
+Source: .\..\..\utils\Rinfo_c.R;                     DestDir: {app}\utils
+Source: .\..\..\utils\Rinfo_load_b.R;                DestDir: {app}\utils
+Source: .\..\..\utils\Rinfo_load_c.R;                DestDir: {app}\utils
+Source: .\..\..\utils\Rinfo_load_c.R;                DestDir: {app}\utils
+Source: .\..\..\utils\Rinstall.R;                    DestDir: {app}\utils
 
 [Icons]
 Name: {group}\Tinn-R;                                                Filename: {app}\bin\Tinn-R.exe; IconIndex: 0; IconFilename: {app}\bin\Tinn-R.exe; Flags: useapppaths

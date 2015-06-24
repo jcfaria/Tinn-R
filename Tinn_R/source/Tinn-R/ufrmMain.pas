@@ -7714,13 +7714,6 @@ begin
     else frmTools.memIniLog.Lines.Add('  \' +
                                       ExtractFileName(sPathSyntaxBKP) +
                                       ' : OK');
-
-    // Tinn-R: temporary folder
-    if (DirectoryExists(sPathTmp)) then DeleteDir(sPathTmp);  // Tinn-R was terminated abnormally
-    CreateDir(sPathTmp);
-    frmTools.memIniLog.Lines.Add('  \' +
-                                 ExtractFileName(sPathTmp) +
-                                 '     : CREATED');
   except
     raise;
     Exit;
