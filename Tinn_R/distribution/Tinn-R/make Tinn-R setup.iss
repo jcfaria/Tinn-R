@@ -19,7 +19,7 @@ OutputBaseFilename   = Tinn-R_04.00.03.05_setup
 OutputDir            = .\bin
 SolidCompression     = yes
 SetupIconFile        = .\..\..\res\tinn48.ico
-UninstallDisplayIcon = .\..\..\res\tinn48.ico
+UninstallDisplayIcon = {app}\bin\Tinn-R.exe
 WizardImageFile      = .\..\..\res\setup.bmp
 WizardSmallImageFile = .\..\..\res\setup_small.bmp
 
