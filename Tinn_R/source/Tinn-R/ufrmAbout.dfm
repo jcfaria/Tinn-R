@@ -48,6 +48,7 @@ object frmAbout: TfrmAbout
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
+    ParentFont = False
     Style = tsFlatButtons
     TabHeight = 18
     TabOrder = 1
@@ -59,8 +60,8 @@ object frmAbout: TfrmAbout
     TabStyle.BackgrColor = clBtnFace
     TabStyle.Font.Charset = DEFAULT_CHARSET
     TabStyle.Font.Color = clBlack
-    TabStyle.Font.Height = -11
-    TabStyle.Font.Name = 'Arial'
+    TabStyle.Font.Height = -12
+    TabStyle.Font.Name = 'MS Sans Serif'
     TabStyle.Font.Style = []
     TabStyle.CaptionHAlign = fhaCenter
     TabStyle.Gradient.Active = False
@@ -72,8 +73,8 @@ object frmAbout: TfrmAbout
     TabSelectedStyle.BackgrColor = clBtnFace
     TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
     TabSelectedStyle.Font.Color = clBtnText
-    TabSelectedStyle.Font.Height = -11
-    TabSelectedStyle.Font.Name = 'Arial'
+    TabSelectedStyle.Font.Height = -12
+    TabSelectedStyle.Font.Name = 'MS Sans Serif'
     TabSelectedStyle.Font.Style = []
     TabSelectedStyle.CaptionHAlign = fhaCenter
     TabSelectedStyle.Gradient.Active = False
@@ -2658,6 +2659,10 @@ object frmAbout: TfrmAbout
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synAboutProject: TSynEdit
         Left = 0
         Top = 0
@@ -2708,6 +2713,10 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synAboutAknowledgments: TSynEdit
         Left = 0
         Top = 0
@@ -2770,6 +2779,10 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synAboutCredits: TSynEdit
         Left = 0
         Top = 0

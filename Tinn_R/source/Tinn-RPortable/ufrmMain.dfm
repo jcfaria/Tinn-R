@@ -2131,6 +2131,7 @@ object frmTinnMain: TfrmTinnMain
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
+    ParentFont = False
     ParentShowHint = False
     PopupMenu = pmenPgFiles
     ShowHint = False
@@ -2151,8 +2152,8 @@ object frmTinnMain: TfrmTinnMain
     TabStyle.BackgrColor = clBtnFace
     TabStyle.Font.Charset = DEFAULT_CHARSET
     TabStyle.Font.Color = clBlack
-    TabStyle.Font.Height = -11
-    TabStyle.Font.Name = 'Arial'
+    TabStyle.Font.Height = -12
+    TabStyle.Font.Name = 'MS Sans Serif'
     TabStyle.Font.Style = []
     TabStyle.CaptionHAlign = fhaCenter
     TabStyle.Gradient.Active = False
@@ -2164,8 +2165,8 @@ object frmTinnMain: TfrmTinnMain
     TabSelectedStyle.BackgrColor = clBtnFace
     TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
     TabSelectedStyle.Font.Color = clBtnText
-    TabSelectedStyle.Font.Height = -11
-    TabSelectedStyle.Font.Name = 'Arial'
+    TabSelectedStyle.Font.Height = -12
+    TabSelectedStyle.Font.Name = 'MS Sans Serif'
     TabSelectedStyle.Font.Style = []
     TabSelectedStyle.TextStyle = fstVolumetric
     TabSelectedStyle.CaptionHAlign = fhaCenter

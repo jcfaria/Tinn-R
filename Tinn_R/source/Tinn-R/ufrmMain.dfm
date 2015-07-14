@@ -1035,14 +1035,13 @@ object frmTinnMain: TfrmTinnMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 314
+    Height = 295
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 295
   end
   object Panel1: TPanel
     Left = 0
@@ -1218,7 +1217,7 @@ object frmTinnMain: TfrmTinnMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2022,14 +2021,13 @@ object frmTinnMain: TfrmTinnMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 314
+    Height = 295
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 295
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2044,7 +2042,7 @@ object frmTinnMain: TfrmTinnMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 421
+    Top = 402
     Width = 994
     Height = 20
     Anchors = [akLeft, akBottom]
@@ -2092,24 +2090,22 @@ object frmTinnMain: TfrmTinnMain
     SizeGrip = False
     OnClick = stbMainClick
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 402
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 314
+    Height = 295
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 295
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 412
+    Top = 393
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2118,7 +2114,6 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 393
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -2131,6 +2126,7 @@ object frmTinnMain: TfrmTinnMain
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
+    ParentFont = False
     ParentShowHint = False
     PopupMenu = pmenPgFiles
     ShowHint = False
@@ -2151,8 +2147,8 @@ object frmTinnMain: TfrmTinnMain
     TabStyle.BackgrColor = clBtnFace
     TabStyle.Font.Charset = DEFAULT_CHARSET
     TabStyle.Font.Color = clBlack
-    TabStyle.Font.Height = -11
-    TabStyle.Font.Name = 'Arial'
+    TabStyle.Font.Height = -12
+    TabStyle.Font.Name = 'MS Sans Serif'
     TabStyle.Font.Style = []
     TabStyle.CaptionHAlign = fhaCenter
     TabStyle.Gradient.Active = False
@@ -2164,8 +2160,8 @@ object frmTinnMain: TfrmTinnMain
     TabSelectedStyle.BackgrColor = clBtnFace
     TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
     TabSelectedStyle.Font.Color = clBtnText
-    TabSelectedStyle.Font.Height = -11
-    TabSelectedStyle.Font.Name = 'Arial'
+    TabSelectedStyle.Font.Height = -12
+    TabSelectedStyle.Font.Name = 'MS Sans Serif'
     TabSelectedStyle.Font.Style = []
     TabSelectedStyle.TextStyle = fstVolumetric
     TabSelectedStyle.CaptionHAlign = fhaCenter
