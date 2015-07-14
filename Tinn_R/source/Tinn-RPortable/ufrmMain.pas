@@ -4976,6 +4976,40 @@ procedure TfrmTinnMain.SetPreferences_Application;
    RegCloseKey(Key);
   end;
 
+  function PathRExists(var sPathR: string): boolean;
+  var
+    slDrives: TStringList;
+
+    i: integer;
+
+    sTmp: string;
+
+  begin
+    if FileExists(sPathR) then Result:= TRUE
+    else begin
+      try
+        slDrives:= TStringList.Create;
+        GetDriveLetters(slDrives);
+
+        for i:= 0 to slDrives.Count-1 do begin
+          sTmp:= RegEx(sPathR,
+                       '^[a-zA-Z]:\\', // starting by any letter, followed by : and \
+                       True,
+                       slDrives.Strings[i]);
+
+          if FileExists(sTmp) then begin
+            sPathR:= sTmp;
+            Result:= True;
+            Exit;
+          end;
+        end;
+
+      finally
+        FreeAndNil(slDrives);
+      end;
+    end;
+  end;
+
 var
   i,
    iPos,
@@ -4986,8 +5020,8 @@ var
    slSearch,
    slPandocHistory,
    slPandocHistoryFrom,
-   slPandocHistoryTo  : TStringList;
-   slSubkeys          : TStringList;
+   slPandocHistoryTo,
+   slSubkeys: TStringList;
 
   sTmp: string;
   bTop: boolean;
@@ -5636,19 +5670,17 @@ begin
   else begin
     // Will read from INI because the user choice is not to use the latest instaled version of R
     sPathRterm:= trim(ifTinn.ReadString('App', 'sPathRterm', EmptyStr));
-    if (sPathRterm = EmptyStr) or
-       not FileExists(sPathRterm) then begin
-         sPathR    := 'UNKNOWN';
-         sRversion := 'UNKNOWN';
-         sPathRterm:= 'UNKNOWN';
+    if not PathRExists(sPathRterm) then begin
+      sPathR    := 'UNKNOWN';
+      sRversion := 'UNKNOWN';
+      sPathRterm:= 'UNKNOWN';
     end;
 
     sPathRgui:= trim(ifTinn.ReadString('App', 'sPathRgui', EmptyStr));
-    if (sPathRgui = EmptyStr) or
-       not FileExists(sPathRgui) then begin
-         sPathR   := 'UNKNOWN';
-         sRversion:= 'UNKNOWN';
-         sPathRgui:= 'UNKNOWN';
+    if not PathRExists(sPathRgui) then begin
+      sPathR   := 'UNKNOWN';
+      sRversion:= 'UNKNOWN';
+      sPathRgui:= 'UNKNOWN';
     end;
   end;
 
