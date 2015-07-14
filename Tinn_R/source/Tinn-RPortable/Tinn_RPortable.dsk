@@ -11,8 +11,8 @@ File_8=TSourceModule,'D:\GitHub\Tinn-RPortable\Tinn_RPortable\source\Tinn-R\uMod
 
 [Modules]
 Module0=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
-Module1=default.htm
-Module2=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas
+Module1=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas
+Module2=default.htm
 Module3=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAbout.pas
 Module4=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas
 Count=5
@@ -23,13 +23,13 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[default.htm]
-ModuleType=TURLModule
-
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
+
+[default.htm]
+ModuleType=TURLModule
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAbout.pas]
 ModuleType=TSourceModule
@@ -70,7 +70,7 @@ DockedToMainForm=1
 MessageView=MessageView@EditWindow0
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
-LeftPanelSize=2617
+LeftPanelSize=2344
 LeftPanelClients=StructureView,PropertyInspector
 LeftPanelData=000008000100010000001100000053747275637475726556696577466F726D3A2200000000000000670A00000000000001000000003A2200001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=1398
@@ -530,17 +530,22 @@ Docked=1
 State=0
 Left=0
 Top=22
-Width=2617
+Width=2344
 Height=7694
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2617
+ClientWidth=2344
 ClientHeight=7694
 TBDockHeight=402
-LRDockWidth=2617
+LRDockWidth=2344
 Dockable=1
 StayOnTop=0
 SplitPos=137
+
+[PropInspDesignerSelection]
+ArrangeBy=Category
+SelectedItem=Action,
+ExpandedItems=Action=0,"Drag Drop/Docking=0","Help and Hints=0",Input=0,Layout=0,Legacy=1,Linkage=0,Locale=0,Localizable=0,Miscellaneous=1,Visual=1,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0,Localizable.Constraints=0,Localizable.Font=0,Miscellaneous.Options=0,Miscellaneous.TabSelectedStyle=1,Miscellaneous.TabStyle=1,Miscellaneous.Wallpaper=0,Visual.Font=1,Miscellaneous.TabSelectedStyle.Borders=0,Miscellaneous.TabSelectedStyle.Font=1,Miscellaneous.TabSelectedStyle.Gradient=0,Miscellaneous.TabSelectedStyle.Font.Style=0,Miscellaneous.TabStyle.Borders=0,Miscellaneous.TabStyle.Font=1,Miscellaneous.TabStyle.Gradient=0,Miscellaneous.TabStyle.Font.Style=0,Miscellaneous.HorzScrollBar=0,Miscellaneous.VertScrollBar=0,Visual.BorderIcons=0
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -649,7 +654,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel

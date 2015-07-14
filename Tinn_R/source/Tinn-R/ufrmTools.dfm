@@ -38,7 +38,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 320
     Height = 565
-    ActivePage = tbsMisc
+    ActivePage = tbsMarkup
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -1070,7 +1070,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsLatex
+        ActivePage = tbsTxt2tags
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1135,8 +1135,8 @@ object frmTools: TfrmTools
             TabStyle.BackgrColor = clBtnFace
             TabStyle.Font.Charset = DEFAULT_CHARSET
             TabStyle.Font.Color = clBlack
-            TabStyle.Font.Height = -11
-            TabStyle.Font.Name = 'Arial'
+            TabStyle.Font.Height = -12
+            TabStyle.Font.Name = 'MS Sans Serif'
             TabStyle.Font.Style = []
             TabStyle.CaptionHAlign = fhaCenter
             TabStyle.Gradient.Active = False
@@ -1148,8 +1148,8 @@ object frmTools: TfrmTools
             TabSelectedStyle.BackgrColor = clBtnFace
             TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
             TabSelectedStyle.Font.Color = clBtnText
-            TabSelectedStyle.Font.Height = -11
-            TabSelectedStyle.Font.Name = 'Arial'
+            TabSelectedStyle.Font.Height = -12
+            TabSelectedStyle.Font.Name = 'MS Sans Serif'
             TabSelectedStyle.Font.Style = []
             TabSelectedStyle.CaptionHAlign = fhaCenter
             TabSelectedStyle.Gradient.Active = False
@@ -1157,6 +1157,10 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsTxt2tagsMarks: TTabSheet
               Caption = 'Marks'
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label1: TLabel
                 Tag = 1
                 Left = 8
@@ -1701,6 +1705,10 @@ object frmTools: TfrmTools
             object tbsTxt2tagsMacros: TTabSheet
               Caption = 'Macros'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label31: TLabel
                 Tag = 31
                 Left = 8
@@ -1932,7 +1940,7 @@ object frmTools: TfrmTools
             Top = 26
             Width = 304
             Height = 483
-            ActivePage = tbsLatexUserCustom
+            ActivePage = tbsLatexBracket
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
