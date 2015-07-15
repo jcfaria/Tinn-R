@@ -31,7 +31,7 @@ object frmRterm: TfrmRterm
     Top = 26
     Width = 408
     Height = 333
-    ActivePage = tbsIO
+    ActivePage = tbsLog
     Align = alClient
     Anchors = []
     Font.Charset = ANSI_CHARSET
@@ -52,8 +52,8 @@ object frmRterm: TfrmRterm
     TabStyle.BackgrColor = clBtnFace
     TabStyle.Font.Charset = DEFAULT_CHARSET
     TabStyle.Font.Color = clBtnText
-    TabStyle.Font.Height = -11
-    TabStyle.Font.Name = 'Arial'
+    TabStyle.Font.Height = -12
+    TabStyle.Font.Name = 'MS Sans Serif'
     TabStyle.Font.Style = []
     TabStyle.CaptionHAlign = fhaCenter
     TabStyle.GlyphHAlign = fhaCenter
@@ -66,8 +66,8 @@ object frmRterm: TfrmRterm
     TabSelectedStyle.BackgrColor = clGray
     TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
     TabSelectedStyle.Font.Color = clBtnText
-    TabSelectedStyle.Font.Height = -11
-    TabSelectedStyle.Font.Name = 'Arial'
+    TabSelectedStyle.Font.Height = -12
+    TabSelectedStyle.Font.Name = 'MS Sans Serif'
     TabSelectedStyle.Font.Style = []
     TabSelectedStyle.CaptionHAlign = fhaCenter
     TabSelectedStyle.Gradient.Active = False
@@ -75,10 +75,6 @@ object frmRterm: TfrmRterm
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsIO: TTabSheet
       Caption = 'IO'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synIO: TSynEdit
         Left = 0
         Top = 0
@@ -120,12 +116,8 @@ object frmRterm: TfrmRterm
       end
     end
     object tbsLog: TTabSheet
-      Caption = 'Log'
+      Caption = 'LOG'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synLog: TSynEdit
         Left = 0
         Top = 0
@@ -242,16 +234,16 @@ object frmRterm: TfrmRterm
           end
         end
         object TBSubmenuItem12: TTBSubmenuItem
-          Caption = 'Log'
+          Caption = 'LOG'
           ImageIndex = 252
           object TBItem37: TTBItem
-            Action = frmTinnMain.actRtermLogSave
+            Action = frmTinnMain.actRtermLOGSave
           end
           object TBItem36: TTBItem
-            Action = frmTinnMain.actRtermLogSaveAs
+            Action = frmTinnMain.actRtermLOGSaveAs
           end
           object TBItem35: TTBItem
-            Action = frmTinnMain.actRtermLogPrint
+            Action = frmTinnMain.actRtermLOGPrint
           end
         end
       end
@@ -264,10 +256,10 @@ object frmRterm: TfrmRterm
           Action = frmTinnMain.actRtermIOClear
         end
         object TBItem34: TTBItem
-          Action = frmTinnMain.actRtermLogClear
+          Action = frmTinnMain.actRtermLOGClear
         end
         object TBItem8: TTBItem
-          Action = frmTinnMain.actRtermIOandLogClear
+          Action = frmTinnMain.actRtermIOandLOGClear
         end
       end
       object TBSubmenuItem8: TTBSubmenuItem
@@ -280,7 +272,7 @@ object frmRterm: TfrmRterm
           Action = frmTinnMain.actRtermIOSetFocus
         end
         object TBItem25: TTBItem
-          Action = frmTinnMain.actRtermLogSetFocus
+          Action = frmTinnMain.actRtermLOGSetFocus
         end
       end
       object TBSubmenuItem2: TTBSubmenuItem
@@ -325,13 +317,13 @@ object frmRterm: TfrmRterm
           end
         end
         object TBSubmenuItem14: TTBSubmenuItem
-          Caption = 'Log'
+          Caption = 'LOG'
           ImageIndex = 252
           object TBItem39: TTBItem
-            Action = frmTinnMain.actRtermSetLogSyntaxToText
+            Action = frmTinnMain.actRtermSetLOGSyntaxToText
           end
           object TBItem38: TTBItem
-            Action = frmTinnMain.actRtermSetLogSyntaxToR
+            Action = frmTinnMain.actRtermSetLOGSyntaxToR
           end
         end
       end
@@ -342,7 +334,7 @@ object frmRterm: TfrmRterm
           Action = frmTinnMain.actRtermIOLineWrap
         end
         object TBItem14: TTBItem
-          Action = frmTinnMain.actRtermLogLineWrap
+          Action = frmTinnMain.actRtermLOGLineWrap
         end
       end
       object TBSeparatorItem7: TTBSeparatorItem

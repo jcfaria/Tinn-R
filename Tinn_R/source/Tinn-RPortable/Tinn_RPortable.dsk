@@ -11,10 +11,10 @@ File_8=TSourceModule,'D:\GitHub\Tinn-RPortable\Tinn_RPortable\source\Tinn-R\uMod
 
 [Modules]
 Module0=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
-Module1=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas
-Module2=default.htm
-Module3=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAbout.pas
-Module4=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas
+Module1=default.htm
+Module2=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAbout.pas
+Module3=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas
+Module4=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas
 Count=5
 EditWindowCount=1
 
@@ -22,11 +22,6 @@ EditWindowCount=1
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
-
-[D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
 
 [default.htm]
 ModuleType=TURLModule
@@ -37,6 +32,11 @@ FormState=1
 FormOnTop=0
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -70,7 +70,7 @@ DockedToMainForm=1
 MessageView=MessageView@EditWindow0
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
-LeftPanelSize=2344
+LeftPanelSize=1664
 LeftPanelClients=StructureView,PropertyInspector
 LeftPanelData=000008000100010000001100000053747275637475726556696577466F726D3A2200000000000000670A00000000000001000000003A2200001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=1398
@@ -91,11 +91,11 @@ WelcomePageURL=bds:/default.htm
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
 CursorX=1
-CursorY=7615
-TopLine=7583
+CursorY=3007
+TopLine=2989
 LeftCol=1
 Elisions=
-Bookmarks={1,7147,1}{2,7483,19}{3,7589,30}{4,7777,1}{5,7237,23}{6,7858,5}{7,5663,21}{8,10737,1}{9,4995,24}
+Bookmarks={1,7147,1}{2,7483,19}{3,7589,30}{4,7778,1}{5,7237,23}{6,7859,5}{7,5663,21}{8,10738,1}{9,4995,24}
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
 
 [View2]
@@ -157,8 +157,8 @@ StayOnTop=0
 
 [Breakpoints]
 Count=3
-Breakpoint0='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7617,'',0,0,'',1,0,0,'',1,'','','',0
-Breakpoint1='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7692,'',0,0,'',1,0,0,'',1,'','','',0
+Breakpoint0='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7618,'',0,0,'',1,0,0,'',1,'','','',0
+Breakpoint1='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7693,'',0,0,'',1,0,0,'',1,'','','',0
 Breakpoint2='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',5000,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
@@ -530,22 +530,17 @@ Docked=1
 State=0
 Left=0
 Top=22
-Width=2344
+Width=1664
 Height=7694
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=2344
+ClientWidth=1664
 ClientHeight=7694
 TBDockHeight=402
-LRDockWidth=2344
+LRDockWidth=1664
 Dockable=1
 StayOnTop=0
-SplitPos=137
-
-[PropInspDesignerSelection]
-ArrangeBy=Category
-SelectedItem=Action,
-ExpandedItems=Action=0,"Drag Drop/Docking=0","Help and Hints=0",Input=0,Layout=0,Legacy=1,Linkage=0,Locale=0,Localizable=0,Miscellaneous=1,Visual=1,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0,Localizable.Constraints=0,Localizable.Font=0,Miscellaneous.Options=0,Miscellaneous.TabSelectedStyle=1,Miscellaneous.TabStyle=1,Miscellaneous.Wallpaper=0,Visual.Font=1,Miscellaneous.TabSelectedStyle.Borders=0,Miscellaneous.TabSelectedStyle.Font=1,Miscellaneous.TabSelectedStyle.Gradient=0,Miscellaneous.TabSelectedStyle.Font.Style=0,Miscellaneous.TabStyle.Borders=0,Miscellaneous.TabStyle.Font=1,Miscellaneous.TabStyle.Gradient=0,Miscellaneous.TabStyle.Font.Style=0,Miscellaneous.HorzScrollBar=0,Miscellaneous.VertScrollBar=0,Visual.BorderIcons=0
+SplitPos=97
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -654,7 +649,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
