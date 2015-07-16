@@ -41,13 +41,14 @@ object frmAbout: TfrmAbout
     Top = 0
     Width = 513
     Height = 312
-    ActivePage = tbsAboutVersion
+    ActivePage = tbsAboutAcknowledgments
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
+    ParentFont = False
     Style = tsFlatButtons
     TabHeight = 18
     TabOrder = 1
@@ -59,8 +60,8 @@ object frmAbout: TfrmAbout
     TabStyle.BackgrColor = clBtnFace
     TabStyle.Font.Charset = DEFAULT_CHARSET
     TabStyle.Font.Color = clBlack
-    TabStyle.Font.Height = -11
-    TabStyle.Font.Name = 'Arial'
+    TabStyle.Font.Height = -12
+    TabStyle.Font.Name = 'MS Sans Serif'
     TabStyle.Font.Style = []
     TabStyle.CaptionHAlign = fhaCenter
     TabStyle.Gradient.Active = False
@@ -72,8 +73,8 @@ object frmAbout: TfrmAbout
     TabSelectedStyle.BackgrColor = clBtnFace
     TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
     TabSelectedStyle.Font.Color = clBtnText
-    TabSelectedStyle.Font.Height = -11
-    TabSelectedStyle.Font.Name = 'Arial'
+    TabSelectedStyle.Font.Height = -12
+    TabSelectedStyle.Font.Name = 'MS Sans Serif'
     TabSelectedStyle.Font.Style = []
     TabSelectedStyle.CaptionHAlign = fhaCenter
     TabSelectedStyle.Gradient.Active = False
@@ -2684,13 +2685,12 @@ object frmAbout: TfrmAbout
           ' Santa Cruz - UESC/BA/BRASIL'#13#10'   Departamento de Ci'#234'ncias Exatas' +
           ' e Tecnol'#243'gicas - DCET'#13#10#13#10'AUTHORS (historic order)'#13#10' - Jos'#233' Cl'#225'u' +
           'dio Faria'#13#10'   email: joseclaudio.faria@gmail.com'#13#10#13#10' - Philippe ' +
-          'Grosjean'#13#10'   email: phgrosjean@sciviews.org'#13#10#13#10' - Enio Galinkin ' +
-          'Jelihovschi (documentation in English)'#13#10'   email: eniojelihovs@g' +
-          'mail.com'#13#10#13#10' - Philipe Silva Farias'#13#10'   email: philfarias@gmail.' +
-          'com'#13#10#13#10'CONTRIBUTORS (with the source code)'#13#10' - Marco de Groot'#13#10' ' +
-          '  email: m.h.de.groot@mattic.com'#13#10#13#10' - Huashan Chen:'#13#10'   email: ' +
-          'chenhuashan@baidao.net'#13#10#13#10'Tinn-R would not be what it is without' +
-          ' all contributors, '#13#10'thanks very much! Tinn-R team'
+          'Grosjean'#13#10'   email: phgrosjean@sciviews.org'#13#10#13#10' - Philipe Silva ' +
+          'Farias'#13#10'   email: philfarias@gmail.com'#13#10#13#10'CONTRIBUTORS (with the' +
+          ' source code)'#13#10' - Marco de Groot'#13#10'   email: m.h.de.groot@mattic.' +
+          'com'#13#10#13#10' - Huashan Chen:'#13#10'   email: chenhuashan@baidao.net'#13#10#13#10'Tin' +
+          'n-R would not be what it is without all contributors, '#13#10'thanks v' +
+          'ery much! Tinn-R team'
         ReadOnly = True
         FontSmoothing = fsmNone
         RemovedKeystrokes = <
@@ -2737,22 +2737,22 @@ object frmAbout: TfrmAbout
           'y of the project)'#13#10'   http://www.carolinasartorio.com.br/Site_Ca' +
           'rolina_Sartorio_2013/Home.html'#13#10' - Douglas Federman'#13#10' - Diethelm' +
           ' Wuertz (editor of 1ed. Tinn-R ebook)'#13#10'   https://www.rmetrics.o' +
-          'rg'#13#10' - Duncan Murdoch'#13#10' - Eric Lacoutre'#13#10' - Frank R. Lawrence'#13#10' ' +
-          '- Gabor Grothendieck'#13#10' - Gabriel Moreno'#13#10' - Hiroyuki Kawakatsu'#13#10 +
-          ' - Igor Kojanov'#13#10' - Ivan B. Allaman'#13#10' - Jairo Cugliari'#13#10' - Jan F' +
-          'iala (PSPad editor for share code and helps)'#13#10' - Jens Oehlschl'#228'g' +
-          'el'#13#10' - John (JJ)'#13#10' - John Cotter'#13#10' - John Fox'#13#10' - John Hathaway'#13 +
-          #10' - Jorge Alexandre Wiendl (for a lot of good ideas and works)'#13#10 +
-          ' - Kelly Hildner'#13#10' - Leon Barmuta'#13#10' - Manuel Salamero'#13#10' - Michae' +
-          'l Pomada'#13#10' - Mike Prager'#13#10' - Ricardo Pietrobon (for making the T' +
-          'inn-R User Guide more readable and intelligible)'#13#10' - Russel May ' +
-          '(founder of the Tinn project)'#13#10' - Savano S. Pereira'#13#10' - S'#248'ren H'#248 +
-          'jsgaard'#13#10' - Stefan Ascher'#13#10' - Steven Novick'#13#10' - Suresh Krishna'#13#10 +
-          ' - Teresa Gra'#231'a (for making the Tinn-R User Guide more readable ' +
-          'and intelligible)'#13#10' - Thomas Petzoldt'#13#10' - Uwe Ligges'#13#10' - Victor ' +
-          'Moreno'#13#10' - Wenping Wang'#13#10' - Yves Brostaux'#13#10#13#10'Tinn-R would not be' +
-          ' what it is without all suggestions and works, '#13#10'thanks very muc' +
-          'h! Tinn-R team'
+          'rg'#13#10' - Duncan Murdoch'#13#10' - Enio G. Jelihovschi (for the work with' +
+          ' the User Guide and Ebook)'#13#10' - Eric Lacoutre'#13#10' - Frank R. Lawren' +
+          'ce'#13#10' - Gabor Grothendieck'#13#10' - Gabriel Moreno'#13#10' - Hiroyuki Kawaka' +
+          'tsu'#13#10' - Igor Kojanov'#13#10' - Ivan B. Allaman'#13#10' - Jairo Cugliari'#13#10' - ' +
+          'Jan Fiala (PSPad editor for share code and helps)'#13#10' - Jens Oehls' +
+          'chl'#228'gel'#13#10' - John (JJ)'#13#10' - John Cotter'#13#10' - John Fox'#13#10' - John Hath' +
+          'away'#13#10' - Jorge Alexandre Wiendl (for a lot of good ideas and wor' +
+          'ks)'#13#10' - Kelly Hildner'#13#10' - Leon Barmuta'#13#10' - Manuel Salamero'#13#10' - M' +
+          'ichael Pomada'#13#10' - Mike Prager'#13#10' - Ricardo Pietrobon (for the wor' +
+          'k with the User Guide and Ebook)'#13#10' - Russel May (founder of the ' +
+          'Tinn project)'#13#10' - Savano S. Pereira'#13#10' - S'#248'ren H'#248'jsgaard'#13#10' - Stef' +
+          'an Ascher'#13#10' - Steven Novick'#13#10' - Suresh Krishna'#13#10' - Teresa Gra'#231'a ' +
+          '(for making the Tinn-R User Guide more readable and intelligible' +
+          ')'#13#10' - Thomas Petzoldt'#13#10' - Uwe Ligges'#13#10' - Victor Moreno'#13#10' - Wenpi' +
+          'ng Wang'#13#10' - Yves Brostaux'#13#10#13#10'Tinn-R would not be what it is with' +
+          'out all suggestions and works, '#13#10'thanks very much! Tinn-R team'
         ReadOnly = True
         FontSmoothing = fsmNone
         RemovedKeystrokes = <

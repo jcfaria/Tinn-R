@@ -480,7 +480,7 @@ type
     actRSimpleDefault: TAction;
     actRtermDivide: TAction;
     actRtermEditorSetFocus: TAction;
-    actRtermIOandLogClear: TAction;
+    actRtermIOandLOGClear: TAction;
     actRtermIOClear: TAction;
     actRtermIOHistoryNext: TAction;
     actRtermIOHistoryPrior: TAction;
@@ -494,20 +494,20 @@ type
     actRtermIOSplitVertical: TAction;
     actRtermLoadHistory: TAction;
     actRtermLoadWorkspace: TAction;
-    actRtermLogClear: TAction;
-    actRtermLogLineWrap: TAction;
-    actRtermLogPrint: TAction;
-    actRtermLogSave: TAction;
-    actRtermLogSaveAs: TAction;
-    actRtermLogSetFocus: TAction;
+    actRtermLOGClear: TAction;
+    actRtermLOGLineWrap: TAction;
+    actRtermLOGPrint: TAction;
+    actRtermLOGSave: TAction;
+    actRtermLOGSaveAs: TAction;
+    actRtermLOGSetFocus: TAction;
     actRtermMaximize: TAction;
     actRtermMinimize: TAction;
     actRtermSaveHistory: TAction;
     actRtermSaveWorkspace: TAction;
     actRtermSetIOSyntaxToR: TAction;
     actRtermSetIOSyntaxToText: TAction;
-    actRtermSetLogSyntaxToR: TAction;
-    actRtermSetLogSyntaxToText: TAction;
+    actRtermSetLOGSyntaxToR: TAction;
+    actRtermSetLOGSyntaxToText: TAction;
     actRtermTabsBottom: TAction;
     actRtermTabsLeft: TAction;
     actRtermTabsRight: TAction;
@@ -2201,7 +2201,7 @@ type
     procedure actRSimpleDefaultExecute(Sender: TObject);
     procedure actRtermDivideExecute(Sender: TObject);
     procedure actRtermEditorSetFocusExecute(Sender: TObject);
-    procedure actRtermIOandLogClearExecute(Sender: TObject);
+    procedure actRtermIOandLOGClearExecute(Sender: TObject);
     procedure actRtermIOClearExecute(Sender: TObject);
     procedure actRtermIOHistoryNextExecute(Sender: TObject);
     procedure actRtermIOHistoryPriorExecute(Sender: TObject);
@@ -2215,20 +2215,20 @@ type
     procedure actRtermIOSplitVerticalExecute(Sender: TObject);
     procedure actRtermLoadHistoryExecute(Sender: TObject);
     procedure actRtermLoadWorkspaceExecute(Sender: TObject);
-    procedure actRtermLogClearExecute(Sender: TObject);
-    procedure actRtermLogLineWrapExecute(Sender: TObject);
-    procedure actRtermLogPrintExecute(Sender: TObject);
-    procedure actRtermLogSaveAsExecute(Sender: TObject);
-    procedure actRtermLogSaveExecute(Sender: TObject);
-    procedure actRtermLogSetFocusExecute(Sender: TObject);
+    procedure actRtermLOGClearExecute(Sender: TObject);
+    procedure actRtermLOGLineWrapExecute(Sender: TObject);
+    procedure actRtermLOGPrintExecute(Sender: TObject);
+    procedure actRtermLOGSaveAsExecute(Sender: TObject);
+    procedure actRtermLOGSaveExecute(Sender: TObject);
+    procedure actRtermLOGSetFocusExecute(Sender: TObject);
     procedure actRtermMaximizeExecute(Sender: TObject);
     procedure actRtermMinimizeExecute(Sender: TObject);
     procedure actRtermSaveHistoryExecute(Sender: TObject);
     procedure actRtermSaveWorkspaceExecute(Sender: TObject);
     procedure actRtermSetIOSyntaxToRExecute(Sender: TObject);
     procedure actRtermSetIOSyntaxToTextExecute(Sender: TObject);
-    procedure actRtermSetLogSyntaxToRExecute(Sender: TObject);
-    procedure actRtermSetLogSyntaxToTextExecute(Sender: TObject);
+    procedure actRtermSetLOGSyntaxToRExecute(Sender: TObject);
+    procedure actRtermSetLOGSyntaxToTextExecute(Sender: TObject);
     procedure actRtermTabsBottomExecute(Sender: TObject);
     procedure actRtermTabsLeftExecute(Sender: TObject);
     procedure actRtermTabsRightExecute(Sender: TObject);
@@ -3040,7 +3040,7 @@ begin
   sCurrentVersion_Project   := '4.00.00.02';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '4.00.03.04';
-  sCurrentVersion_Shortcuts := '4.00.03.05';
+  sCurrentVersion_Shortcuts := '4.00.03.06';
   sCurrentVersion_TinnRcom  := '1.0.18';  // Released joinly with Tinn-R setup program
 
   // Cache
@@ -4976,6 +4976,40 @@ procedure TfrmTinnMain.SetPreferences_Application;
    RegCloseKey(Key);
   end;
 
+  function PathRExists(var sPathR: string): boolean;
+  var
+    slDrives: TStringList;
+
+    i: integer;
+
+    sTmp: string;
+
+  begin
+    if FileExists(sPathR) then Result:= TRUE
+    else begin
+      try
+        slDrives:= TStringList.Create;
+        GetDriveLetters(slDrives);
+
+        for i:= 0 to slDrives.Count-1 do begin
+          sTmp:= RegEx(sPathR,
+                       '^[a-zA-Z]:\\', // starting by any letter, followed by : and \
+                       True,
+                       slDrives.Strings[i]);
+
+          if FileExists(sTmp) then begin
+            sPathR:= sTmp;
+            Result:= True;
+            Exit;
+          end;
+        end;
+
+      finally
+        FreeAndNil(slDrives);
+      end;
+    end;
+  end;
+
 var
   i,
    iPos,
@@ -4986,8 +5020,8 @@ var
    slSearch,
    slPandocHistory,
    slPandocHistoryFrom,
-   slPandocHistoryTo  : TStringList;
-   slSubkeys          : TStringList;
+   slPandocHistoryTo,
+   slSubkeys: TStringList;
 
   sTmp: string;
   bTop: boolean;
@@ -5636,19 +5670,17 @@ begin
   else begin
     // Will read from INI because the user choice is not to use the latest instaled version of R
     sPathRterm:= trim(ifTinn.ReadString('App', 'sPathRterm', EmptyStr));
-    if (sPathRterm = EmptyStr) or
-       not FileExists(sPathRterm) then begin
-         sPathR    := 'UNKNOWN';
-         sRversion := 'UNKNOWN';
-         sPathRterm:= 'UNKNOWN';
+    if not PathRExists(sPathRterm) then begin
+      sPathR    := 'UNKNOWN';
+      sRversion := 'UNKNOWN';
+      sPathRterm:= 'UNKNOWN';
     end;
 
     sPathRgui:= trim(ifTinn.ReadString('App', 'sPathRgui', EmptyStr));
-    if (sPathRgui = EmptyStr) or
-       not FileExists(sPathRgui) then begin
-         sPathR   := 'UNKNOWN';
-         sRversion:= 'UNKNOWN';
-         sPathRgui:= 'UNKNOWN';
+    if not PathRExists(sPathRgui) then begin
+      sPathR   := 'UNKNOWN';
+      sRversion:= 'UNKNOWN';
+      sPathRgui:= 'UNKNOWN';
     end;
   end;
 
@@ -7556,13 +7588,14 @@ end;
 
 procedure TfrmTinnMain.SetIniStructure;
 begin
-{
+//{
   // Portable simple
   sPathIni:= copy(sPathTinnR,
                   1,
                   LastPos('\Tinn-R',
                           sPathTinnR) + length('Tinn-R'));
-}
+//}
+
 
 (*
   // Portable to Apps platform
@@ -7575,12 +7608,12 @@ begin
   It will only run under the Apps structure.
 *)
 
-//{
+{
   sPathIni:= copy(sPathTinnR,
                   1,
                   LastPos('\Tinn-RPortable',
                           sPathTinnR) + length('Tinn-RPortable'));
-//}
+}
 
   sPathIni      := sPathIni + '\Data';
   sPathApp      := sPathIni + '\app';
@@ -12925,7 +12958,7 @@ end;
 
 procedure TfrmTinnMain.menHelCitationClick(Sender: TObject);
 begin
-  Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; JELIHOVSCHI, E.; FARIAS, P.S. (2015). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
+  Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; FARIAS, P.S. (2015). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
                      'URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
 
   MessageDlg('Many thanks for cite Tinn-R.' + #13 + #13 +
@@ -19432,7 +19465,7 @@ begin
     UpperCaseSelection;
 end;
 
-procedure TfrmTinnMain.actRtermLogLineWrapExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermLOGLineWrapExecute(Sender: TObject);
 var
   seLog: TSynEdit;
 
@@ -23109,7 +23142,7 @@ begin
   //frmRterm.TBToolbarRterm.Left:= 92;
 end;
 
-procedure TfrmTinnMain.actRtermLogSetFocusExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermLOGSetFocusExecute(Sender: TObject);
 begin
   if not frmRterm.Visible then Exit;
 
@@ -23166,7 +23199,7 @@ begin
   actRtermSetIOSyntaxToText.Checked:= True;
 end;
 
-procedure TfrmTinnMain.actRtermSetLogSyntaxToTextExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermSetLOGSyntaxToTextExecute(Sender: TObject);
 begin
   if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Highlighter:= dmSyn.synText_term;
   frmRterm.synLog.Highlighter:= dmSyn.synText_term;
@@ -23181,7 +23214,7 @@ begin
   actRtermSetIOSyntaxToR.Checked:= True;
 end;
 
-procedure TfrmTinnMain.actRtermSetLogSyntaxToRExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermSetLOGSyntaxToRExecute(Sender: TObject);
 begin
   if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Highlighter:= dmSyn.synR_term;
   frmRterm.synLog.Highlighter:= dmSyn.synR_term;
@@ -23251,7 +23284,7 @@ begin
    end;
 end;
 
-procedure TfrmTinnMain.actRtermLogClearExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermLOGClearExecute(Sender: TObject);
 var
   i    : integer;
   seLog: TSynEdit;
@@ -23273,7 +23306,7 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.actRtermIOandLogClearExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermIOandLOGClearExecute(Sender: TObject);
 begin
   actRtermIOClearExecute(nil);
   actRtermLogClearExecute(nil);
@@ -23298,7 +23331,7 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.actRtermLogPrintExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermLOGPrintExecute(Sender: TObject);
 var
   seLog: TSynEdit;
 
@@ -23329,7 +23362,7 @@ begin
                            else actRtermIOSaveAsExecute(nil);
 end;
 
-procedure TfrmTinnMain.actRtermLogSaveExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermLOGSaveExecute(Sender: TObject);
 begin
   if FileExists(sRLogSaved) then frmRterm.synIO.Lines.SaveToFile(sRLogSaved)
                             else actRtermLogSaveAsExecute(nil);
@@ -23347,7 +23380,7 @@ begin
                   frmRterm.synIO);
 end;
 
-procedure TfrmTinnMain.actRtermLogSaveAsExecute(Sender: TObject);
+procedure TfrmTinnMain.actRtermLOGSaveAsExecute(Sender: TObject);
 var
   sTmp : string;
   seLog: TSynEdit;

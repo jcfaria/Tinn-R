@@ -1379,7 +1379,7 @@ begin
       if CanFocus then SetFocus;
     Application.ProcessMessages;
     FreeAndNil(synLog2);
-  end;  
+  end;
 
   synLog2:= TSynEdit.Create(Self);
   with synLog2 do begin

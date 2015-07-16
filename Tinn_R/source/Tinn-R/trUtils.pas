@@ -95,6 +95,7 @@ type
   procedure CaptureConsoleOutput(const ACommand, AParameters: String; AMemo: TMemo);
   procedure DeleteDir(sDir: string);
   procedure DeleteFilesOfPath(path: string);
+  procedure GetDriveLetters(slTmp: TStringList);
   procedure GetRInfo(sTmp: string; var sRPackage, sRObject: string);
   procedure OpenFile(sFileName: string);
   procedure OpenProgram(sProg, sParams: string);
@@ -1450,6 +1451,34 @@ begin
     end;
 
     if (S <> '') then Result:= False;
+  end;
+end;
+
+// Adapted from: http://forum.codecall.net/topic/61197-delphihow-to-get-windows-drives-list/
+procedure GetDriveLetters(slTmp: TStringList);
+var
+  vDrivesSize: Cardinal;
+
+  vDrives: array[0..128] of Char;
+
+  vDrive: PChar;
+
+begin
+  slTmp.BeginUpdate;
+
+  try
+    // Clear the list from possible leftover from prior operations
+    slTmp.Clear;
+    vDrivesSize := GetLogicalDriveStrings(SizeOf(vDrives), vDrives);
+    if vDrivesSize=0 then Exit; // no drive found, no further processing needed
+
+    vDrive := vDrives;
+    while vDrive^ <> #0 do begin
+      slTmp.Add(StrPas(vDrive));
+      Inc(vDrive, SizeOf(vDrive));
+    end;
+  finally
+    slTmp.EndUpdate;
   end;
 end;
 

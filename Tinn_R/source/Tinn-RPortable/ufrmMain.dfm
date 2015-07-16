@@ -1685,7 +1685,7 @@ object frmTinnMain: TfrmTinnMain
             Action = actRtermIOLineWrap
           end
           object TBItem59: TTBItem
-            Action = actRtermLogLineWrap
+            Action = actRtermLOGLineWrap
           end
         end
       end
@@ -2131,6 +2131,7 @@ object frmTinnMain: TfrmTinnMain
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
+    ParentFont = False
     ParentShowHint = False
     PopupMenu = pmenPgFiles
     ShowHint = False
@@ -2151,8 +2152,8 @@ object frmTinnMain: TfrmTinnMain
     TabStyle.BackgrColor = clBtnFace
     TabStyle.Font.Charset = DEFAULT_CHARSET
     TabStyle.Font.Color = clBlack
-    TabStyle.Font.Height = -11
-    TabStyle.Font.Name = 'Arial'
+    TabStyle.Font.Height = -12
+    TabStyle.Font.Name = 'MS Sans Serif'
     TabStyle.Font.Style = []
     TabStyle.CaptionHAlign = fhaCenter
     TabStyle.Gradient.Active = False
@@ -2164,8 +2165,8 @@ object frmTinnMain: TfrmTinnMain
     TabSelectedStyle.BackgrColor = clBtnFace
     TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
     TabSelectedStyle.Font.Color = clBtnText
-    TabSelectedStyle.Font.Height = -11
-    TabSelectedStyle.Font.Name = 'Arial'
+    TabSelectedStyle.Font.Height = -12
+    TabSelectedStyle.Font.Name = 'MS Sans Serif'
     TabSelectedStyle.Font.Style = []
     TabSelectedStyle.TextStyle = fstVolumetric
     TabSelectedStyle.CaptionHAlign = fhaCenter
@@ -4752,15 +4753,15 @@ object frmTinnMain: TfrmTinnMain
       ShortCut = 49192
       OnExecute = actRtermIOSetFocusExecute
     end
-    object actRtermLogSetFocus: TAction
+    object actRtermLOGSetFocus: TAction
       Category = 'Rterm'
       AutoCheck = True
-      Caption = 'Log'
+      Caption = 'LOG'
       GroupIndex = 3
-      Hint = 'Rterm: Log (set focus)'
+      Hint = 'Rterm: LOG (set focus)'
       ImageIndex = 252
       ShortCut = 49191
-      OnExecute = actRtermLogSetFocusExecute
+      OnExecute = actRtermLOGSetFocusExecute
     end
     object actRtermWarningError: TAction
       Category = 'Rterm'
@@ -4785,21 +4786,21 @@ object frmTinnMain: TfrmTinnMain
       Hint = 'Rterm: IO (set R syntax)'
       OnExecute = actRtermSetIOSyntaxToRExecute
     end
-    object actRtermSetLogSyntaxToText: TAction
+    object actRtermSetLOGSyntaxToText: TAction
       Category = 'Rterm'
       AutoCheck = True
       Caption = 'Text'
       GroupIndex = 5
       Hint = 'Rterm: LOG (set text syntax)'
-      OnExecute = actRtermSetLogSyntaxToTextExecute
+      OnExecute = actRtermSetLOGSyntaxToTextExecute
     end
-    object actRtermSetLogSyntaxToR: TAction
+    object actRtermSetLOGSyntaxToR: TAction
       Category = 'Rterm'
       AutoCheck = True
       Caption = 'R'
       GroupIndex = 5
       Hint = 'Rterm: LOG (set R syntax)'
-      OnExecute = actRtermSetLogSyntaxToRExecute
+      OnExecute = actRtermSetLOGSyntaxToRExecute
     end
     object actRtermIOSave: TAction
       Category = 'Rterm'
@@ -4815,19 +4816,19 @@ object frmTinnMain: TfrmTinnMain
       ImageIndex = 93
       OnExecute = actRtermIOSaveAsExecute
     end
-    object actRtermLogSave: TAction
+    object actRtermLOGSave: TAction
       Category = 'Rterm'
       Caption = 'Save'
       Hint = 'Rterm: LOG (save)'
       ImageIndex = 96
-      OnExecute = actRtermLogSaveExecute
+      OnExecute = actRtermLOGSaveExecute
     end
-    object actRtermLogSaveAs: TAction
+    object actRtermLOGSaveAs: TAction
       Category = 'Rterm'
       Caption = 'Save as'
       Hint = 'Rterm: LOG (save as)'
       ImageIndex = 93
-      OnExecute = actRtermLogSaveAsExecute
+      OnExecute = actRtermLOGSaveAsExecute
     end
     object actRtermIOPrint: TAction
       Category = 'Rterm'
@@ -4836,12 +4837,12 @@ object frmTinnMain: TfrmTinnMain
       ImageIndex = 153
       OnExecute = actRtermIOPrintExecute
     end
-    object actRtermLogPrint: TAction
+    object actRtermLOGPrint: TAction
       Category = 'Rterm'
       Caption = 'Print'
       Hint = 'Rterm: LOG (print)'
       ImageIndex = 153
-      OnExecute = actRtermLogPrintExecute
+      OnExecute = actRtermLOGPrintExecute
     end
     object actRtermIOClear: TAction
       Category = 'Rterm'
@@ -4851,21 +4852,21 @@ object frmTinnMain: TfrmTinnMain
       ShortCut = 16460
       OnExecute = actRtermIOClearExecute
     end
-    object actRtermLogClear: TAction
+    object actRtermLOGClear: TAction
       Category = 'Rterm'
-      Caption = 'Log'
+      Caption = 'LOG'
       Hint = 'Rterm: LOG (clear)'
       ImageIndex = 20
       ShortCut = 32844
-      OnExecute = actRtermLogClearExecute
+      OnExecute = actRtermLOGClearExecute
     end
-    object actRtermIOandLogClear: TAction
+    object actRtermIOandLOGClear: TAction
       Category = 'Rterm'
-      Caption = 'IO and Log'
+      Caption = 'IO and LOG'
       Hint = 'Rterm: IO and LOG (clear)'
       ImageIndex = 275
       ShortCut = 24642
-      OnExecute = actRtermIOandLogClearExecute
+      OnExecute = actRtermIOandLOGClearExecute
     end
     object actRtermSaveHistory: TAction
       Category = 'Rterm'
@@ -5787,12 +5788,12 @@ object frmTinnMain: TfrmTinnMain
       ImageIndex = 101
       OnExecute = actRtermIOLineWrapExecute
     end
-    object actRtermLogLineWrap: TAction
+    object actRtermLOGLineWrap: TAction
       Category = 'Visualization'
-      Caption = 'Log (show/hide)'
-      Hint = 'Visualization: Rterm/Log line wrap (show/hide)'
+      Caption = 'LOG (show/hide)'
+      Hint = 'Visualization: Rterm/LOG line wrap (show/hide)'
       ImageIndex = 101
-      OnExecute = actRtermLogLineWrapExecute
+      OnExecute = actRtermLOGLineWrapExecute
     end
     object actPgFilesVisible: TAction
       Category = 'Visualization'
@@ -6506,7 +6507,7 @@ object frmTinnMain: TfrmTinnMain
         Action = actRtermIOClear
       end
       object pmemIOClearIOLog: TMenuItem
-        Action = actRtermIOandLogClear
+        Action = actRtermIOandLOGClear
       end
     end
     object pmemIOFocus: TMenuItem
@@ -6521,7 +6522,7 @@ object frmTinnMain: TfrmTinnMain
         AutoCheck = True
       end
       object pmemIOSetFocusLog: TMenuItem
-        Action = actRtermLogSetFocus
+        Action = actRtermLOGSetFocus
         AutoCheck = True
       end
     end
@@ -6681,13 +6682,13 @@ object frmTinnMain: TfrmTinnMain
       Caption = 'File'
       ImageIndex = 32
       object pmemLogFileSave: TMenuItem
-        Action = actRtermLogSave
+        Action = actRtermLOGSave
       end
       object pmemLogFileSaveAs: TMenuItem
-        Action = actRtermLogSaveAs
+        Action = actRtermLOGSaveAs
       end
       object pmemLogFilePrint: TMenuItem
-        Action = actRtermLogPrint
+        Action = actRtermLOGPrint
       end
     end
     object N146: TMenuItem
@@ -6697,10 +6698,10 @@ object frmTinnMain: TfrmTinnMain
       Caption = 'Clear'
       ImageIndex = 20
       object pmemLogClearLog: TMenuItem
-        Action = actRtermLogClear
+        Action = actRtermLOGClear
       end
       object pmemLogClearIOLog: TMenuItem
-        Action = actRtermIOandLogClear
+        Action = actRtermIOandLOGClear
       end
     end
     object pmemLogFocus: TMenuItem
@@ -6715,7 +6716,7 @@ object frmTinnMain: TfrmTinnMain
         AutoCheck = True
       end
       object pmemLogFocusLog: TMenuItem
-        Action = actRtermLogSetFocus
+        Action = actRtermLOGSetFocus
         AutoCheck = True
       end
     end
@@ -6755,16 +6756,16 @@ object frmTinnMain: TfrmTinnMain
       Caption = 'Highlighter'
       ImageIndex = 163
       object pmemLogSyntaxText: TMenuItem
-        Action = actRtermSetLogSyntaxToText
+        Action = actRtermSetLOGSyntaxToText
         AutoCheck = True
       end
       object pmemLogSyntaxR: TMenuItem
-        Action = actRtermSetLogSyntaxToR
+        Action = actRtermSetLOGSyntaxToR
         AutoCheck = True
       end
     end
     object pmemLogLineWrap: TMenuItem
-      Action = actRtermLogLineWrap
+      Action = actRtermLOGLineWrap
       Caption = 'Line wrap (show/hide)'
     end
     object MenuItem14: TMenuItem
@@ -8039,16 +8040,16 @@ object frmTinnMain: TfrmTinnMain
             end
           end
           object menRtermFileLog: TMenuItem
-            Caption = 'Log'
+            Caption = 'LOG'
             ImageIndex = 252
             object menRtermFileLogSave: TMenuItem
-              Action = actRtermLogSave
+              Action = actRtermLOGSave
             end
             object menRtermFileLogSaveAs: TMenuItem
-              Action = actRtermLogSaveAs
+              Action = actRtermLOGSaveAs
             end
             object menRtermFileLogPrint: TMenuItem
-              Action = actRtermLogPrint
+              Action = actRtermLOGPrint
             end
           end
         end
@@ -8062,10 +8063,10 @@ object frmTinnMain: TfrmTinnMain
             Action = actRtermIOClear
           end
           object Log1: TMenuItem
-            Action = actRtermLogClear
+            Action = actRtermLOGClear
           end
           object IOandLog4: TMenuItem
-            Action = actRtermIOandLogClear
+            Action = actRtermIOandLOGClear
           end
         end
         object menRtermFocus: TMenuItem
@@ -8080,7 +8081,7 @@ object frmTinnMain: TfrmTinnMain
             AutoCheck = True
           end
           object menRtermFocusLog: TMenuItem
-            Action = actRtermLogSetFocus
+            Action = actRtermLOGSetFocus
             AutoCheck = True
           end
         end
@@ -8132,14 +8133,14 @@ object frmTinnMain: TfrmTinnMain
             end
           end
           object menRtermSyntaxLog: TMenuItem
-            Caption = 'Log'
+            Caption = 'LOG'
             ImageIndex = 252
             object menRtermSyntaxLogText: TMenuItem
-              Action = actRtermSetLogSyntaxToText
+              Action = actRtermSetLOGSyntaxToText
               AutoCheck = True
             end
             object menRtermSyntaxLogR: TMenuItem
-              Action = actRtermSetLogSyntaxToR
+              Action = actRtermSetLOGSyntaxToR
               AutoCheck = True
             end
           end
@@ -8151,7 +8152,7 @@ object frmTinnMain: TfrmTinnMain
             Action = actRtermIOLineWrap
           end
           object Log2: TMenuItem
-            Action = actRtermLogLineWrap
+            Action = actRtermLOGLineWrap
           end
         end
         object N66: TMenuItem
@@ -8481,14 +8482,14 @@ object frmTinnMain: TfrmTinnMain
               end
             end
             object menViewRtermSyntaxLog: TMenuItem
-              Caption = 'Log'
+              Caption = 'LOG'
               ImageIndex = 252
               object menViewRtermSyntaxLogText: TMenuItem
-                Action = actRtermSetLogSyntaxToText
+                Action = actRtermSetLOGSyntaxToText
                 AutoCheck = True
               end
               object menViewRtermSyntaxLogR: TMenuItem
-                Action = actRtermSetLogSyntaxToR
+                Action = actRtermSetLOGSyntaxToR
                 AutoCheck = True
               end
             end
@@ -8500,7 +8501,7 @@ object frmTinnMain: TfrmTinnMain
               Action = actRtermIOLineWrap
             end
             object RtermLogLinewrapshowhide2: TMenuItem
-              Action = actRtermLogLineWrap
+              Action = actRtermLOGLineWrap
             end
           end
           object N150: TMenuItem
@@ -8819,7 +8820,7 @@ object frmTinnMain: TfrmTinnMain
           Action = actRtermIOLineWrap
         end
         object RtermLogLinewrapshowhide1: TMenuItem
-          Action = actRtermLogLineWrap
+          Action = actRtermLOGLineWrap
         end
       end
       object menViewGutter: TMenuItem

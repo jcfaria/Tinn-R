@@ -38,12 +38,12 @@ object frmTools: TfrmTools
     Top = 0
     Width = 320
     Height = 565
-    ActivePage = tbsMisc
+    ActivePage = tbsSpell
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
-    Font.Name = 'Tahoma'
+    Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
     Style = tsFlatButtons
@@ -58,8 +58,8 @@ object frmTools: TfrmTools
     TabStyle.BackgrColor = clBtnFace
     TabStyle.Font.Charset = DEFAULT_CHARSET
     TabStyle.Font.Color = clBlack
-    TabStyle.Font.Height = -11
-    TabStyle.Font.Name = 'Arial'
+    TabStyle.Font.Height = -12
+    TabStyle.Font.Name = 'MS Sans Serif'
     TabStyle.Font.Style = []
     TabStyle.CaptionHAlign = fhaCenter
     TabStyle.Gradient.Active = False
@@ -71,8 +71,8 @@ object frmTools: TfrmTools
     TabSelectedStyle.BackgrColor = clBtnFace
     TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
     TabSelectedStyle.Font.Color = clBtnText
-    TabSelectedStyle.Font.Height = -11
-    TabSelectedStyle.Font.Name = 'Arial'
+    TabSelectedStyle.Font.Height = -12
+    TabSelectedStyle.Font.Name = 'MS Sans Serif'
     TabSelectedStyle.Font.Style = []
     TabSelectedStyle.CaptionHAlign = fhaCenter
     TabSelectedStyle.Gradient.Active = False
@@ -85,13 +85,14 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsProject
+        ActivePage = tbsWinExplorer
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
         Style = tsFlatButtons
         TabHeight = 18
         TabOrder = 0
@@ -104,8 +105,8 @@ object frmTools: TfrmTools
         TabStyle.BackgrColor = clBtnFace
         TabStyle.Font.Charset = DEFAULT_CHARSET
         TabStyle.Font.Color = clBlack
-        TabStyle.Font.Height = -11
-        TabStyle.Font.Name = 'Arial'
+        TabStyle.Font.Height = -12
+        TabStyle.Font.Name = 'MS Sans Serif'
         TabStyle.Font.Style = []
         TabStyle.CaptionHAlign = fhaCenter
         TabStyle.Gradient.Active = False
@@ -117,8 +118,8 @@ object frmTools: TfrmTools
         TabSelectedStyle.BackgrColor = clBtnFace
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
-        TabSelectedStyle.Font.Height = -11
-        TabSelectedStyle.Font.Name = 'Arial'
+        TabSelectedStyle.Font.Height = -12
+        TabSelectedStyle.Font.Name = 'MS Sans Serif'
         TabSelectedStyle.Font.Style = []
         TabSelectedStyle.CaptionHAlign = fhaCenter
         TabSelectedStyle.Gradient.Active = False
@@ -126,10 +127,6 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsWinExplorer: TTabSheet
           Caption = 'Windows expl.'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splWindows: TSplitter
             Left = 0
             Top = 130
@@ -159,6 +156,12 @@ object frmTools: TfrmTools
               BevelOuter = bvNone
               DriveTypes = [dtUnknown, dtRemovable, dtFixed, dtRemote, dtCDROM, dtRamDisk]
               Offset = 1
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 0
               Constraints.MinHeight = 22
             end
@@ -174,7 +177,13 @@ object frmTools: TfrmTools
               Directory = 'C:\'
               FileList = jvflbWinExplorer
               DriveCombo = jvdcWinExplorer
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
               ItemHeight = 17
+              ParentFont = False
               PopupMenu = frmTinnMain.pmenWinExplorerFolders
               ShowAllFolders = True
               ScrollBars = ssBoth
@@ -276,8 +285,14 @@ object frmTools: TfrmTools
               Constraints.MinHeight = 30
               DragMode = dmAutomatic
               FileType = [ftReadOnly, ftHidden, ftSystem, ftVolumeID, ftArchive, ftNormal]
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
               IntegralHeight = True
               ItemHeight = 16
+              ParentFont = False
               PopupMenu = frmTinnMain.pmenWinExplorerFiles
               ShowGlyphs = True
               TabOrder = 1
@@ -412,8 +427,14 @@ object frmTools: TfrmTools
                 Anchors = [akLeft, akRight]
                 Ctl3D = False
                 DropDownCount = 10
-                ItemHeight = 0
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ItemHeight = 13
                 ParentCtl3D = False
+                ParentFont = False
                 Sorted = True
                 TabOrder = 2
                 OnChange = cbExplorerFavoritesChange
@@ -490,7 +511,13 @@ object frmTools: TfrmTools
                 BevelKind = bkSoft
                 BevelOuter = bvRaised
                 Ctl3D = False
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
                 ParentCtl3D = False
+                ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 1
@@ -502,10 +529,6 @@ object frmTools: TfrmTools
         object tbsWorkExplorer: TTabSheet
           Caption = 'Work expl.'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splWork: TSplitter
             Left = 0
             Top = 103
@@ -613,8 +636,14 @@ object frmTools: TfrmTools
               Constraints.MinHeight = 30
               DragMode = dmAutomatic
               FileType = [ftReadOnly, ftHidden, ftSystem, ftVolumeID, ftArchive, ftNormal]
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
               IntegralHeight = True
               ItemHeight = 16
+              ParentFont = False
               PopupMenu = frmTinnMain.pmenWorkExplorerFiles
               ShowGlyphs = True
               TabOrder = 1
@@ -643,6 +672,12 @@ object frmTools: TfrmTools
               BevelOuter = bvNone
               DriveTypes = [dtUnknown, dtRemovable, dtFixed, dtRemote, dtCDROM, dtRamDisk]
               Offset = 1
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 0
               Constraints.MinHeight = 22
             end
@@ -658,7 +693,13 @@ object frmTools: TfrmTools
               Directory = 'C:\'
               FileList = jvflbWorkExplorer
               DriveCombo = jvdcWorkExplorer
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
               ItemHeight = 17
+              ParentFont = False
               PopupMenu = frmTinnMain.pmenWorkExplorerFolders
               ShowAllFolders = True
               ScrollBars = ssBoth
@@ -745,7 +786,13 @@ object frmTools: TfrmTools
                 BevelKind = bkSoft
                 BevelOuter = bvRaised
                 Ctl3D = False
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
                 ParentCtl3D = False
+                ParentFont = False
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 1
@@ -770,10 +817,16 @@ object frmTools: TfrmTools
             BorderStyle = bsNone
             Ctl3D = False
             DragMode = dmAutomatic
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
             Images = frmTinnMain.imlProject
             Indent = 19
             ParentBiDiMode = False
             ParentCtl3D = False
+            ParentFont = False
             PopupMenu = frmTinnMain.pmenProjects
             ReadOnly = True
             RightClickSelect = True
@@ -1012,10 +1065,6 @@ object frmTools: TfrmTools
     object tbsMarkup: TTabSheet
       Caption = 'Markup'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgMarkup: TJvgPageControl
         Left = 0
         Top = 0
@@ -1026,9 +1075,10 @@ object frmTools: TfrmTools
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
         MultiLine = True
+        ParentFont = False
         Style = tsFlatButtons
         TabHeight = 18
         TabOrder = 0
@@ -1040,8 +1090,8 @@ object frmTools: TfrmTools
         TabStyle.BackgrColor = clBtnFace
         TabStyle.Font.Charset = DEFAULT_CHARSET
         TabStyle.Font.Color = clBlack
-        TabStyle.Font.Height = -11
-        TabStyle.Font.Name = 'Arial'
+        TabStyle.Font.Height = -12
+        TabStyle.Font.Name = 'MS Sans Serif'
         TabStyle.Font.Style = []
         TabStyle.CaptionHAlign = fhaCenter
         TabStyle.Gradient.Active = False
@@ -1053,8 +1103,8 @@ object frmTools: TfrmTools
         TabSelectedStyle.BackgrColor = clBtnFace
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
-        TabSelectedStyle.Font.Height = -11
-        TabSelectedStyle.Font.Name = 'Arial'
+        TabSelectedStyle.Font.Height = -12
+        TabSelectedStyle.Font.Name = 'MS Sans Serif'
         TabSelectedStyle.Font.Style = []
         TabSelectedStyle.CaptionHAlign = fhaCenter
         TabSelectedStyle.Gradient.Active = False
@@ -1062,21 +1112,17 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsTxt2tags: TTabSheet
           Caption = 'Txt2tags'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgTxt2tags: TJvgPageControl
             Left = 0
             Top = 0
             Width = 304
             Height = 509
-            ActivePage = tbsTxt2tagsMacros
+            ActivePage = tbsTxt2tagsSettings
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
-            Font.Name = 'Tahoma'
+            Font.Name = 'MS Sans Serif'
             Font.Style = []
             Style = tsFlatButtons
             TabHeight = 18
@@ -1089,8 +1135,8 @@ object frmTools: TfrmTools
             TabStyle.BackgrColor = clBtnFace
             TabStyle.Font.Charset = DEFAULT_CHARSET
             TabStyle.Font.Color = clBlack
-            TabStyle.Font.Height = -11
-            TabStyle.Font.Name = 'Arial'
+            TabStyle.Font.Height = -12
+            TabStyle.Font.Name = 'MS Sans Serif'
             TabStyle.Font.Style = []
             TabStyle.CaptionHAlign = fhaCenter
             TabStyle.Gradient.Active = False
@@ -1102,8 +1148,8 @@ object frmTools: TfrmTools
             TabSelectedStyle.BackgrColor = clBtnFace
             TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
             TabSelectedStyle.Font.Color = clBtnText
-            TabSelectedStyle.Font.Height = -11
-            TabSelectedStyle.Font.Name = 'Arial'
+            TabSelectedStyle.Font.Height = -12
+            TabSelectedStyle.Font.Name = 'MS Sans Serif'
             TabSelectedStyle.Font.Style = []
             TabSelectedStyle.CaptionHAlign = fhaCenter
             TabSelectedStyle.Gradient.Active = False
@@ -1775,10 +1821,6 @@ object frmTools: TfrmTools
             object tbsTxt2tagsSettings: TTabSheet
               Caption = 'Settings'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Label37: TLabel
                 Tag = 37
                 Left = 8
@@ -1902,13 +1944,14 @@ object frmTools: TfrmTools
             Top = 26
             Width = 304
             Height = 483
-            ActivePage = tbsLatexUserCustom
+            ActivePage = tbsLatexBracket
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
-            Font.Name = 'Tahoma'
+            Font.Name = 'MS Sans Serif'
             Font.Style = []
+            ParentFont = False
             Style = tsFlatButtons
             TabHeight = 18
             TabOrder = 0
@@ -1920,8 +1963,8 @@ object frmTools: TfrmTools
             TabStyle.BackgrColor = clBtnFace
             TabStyle.Font.Charset = DEFAULT_CHARSET
             TabStyle.Font.Color = clBlack
-            TabStyle.Font.Height = -11
-            TabStyle.Font.Name = 'Arial'
+            TabStyle.Font.Height = -12
+            TabStyle.Font.Name = 'MS Sans Serif'
             TabStyle.Font.Style = []
             TabStyle.CaptionHAlign = fhaCenter
             TabStyle.Gradient.Active = False
@@ -1933,8 +1976,8 @@ object frmTools: TfrmTools
             TabSelectedStyle.BackgrColor = clBtnFace
             TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
             TabSelectedStyle.Font.Color = clBtnText
-            TabSelectedStyle.Font.Height = -11
-            TabSelectedStyle.Font.Name = 'Arial'
+            TabSelectedStyle.Font.Height = -12
+            TabSelectedStyle.Font.Name = 'MS Sans Serif'
             TabSelectedStyle.Font.Style = []
             TabSelectedStyle.CaptionHAlign = fhaCenter
             TabSelectedStyle.Gradient.Active = False
@@ -3953,10 +3996,6 @@ object frmTools: TfrmTools
     object tbsResults: TTabSheet
       Caption = 'Results'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgResults: TJvgPageControl
         Left = 0
         Top = 0
@@ -3967,8 +4006,9 @@ object frmTools: TfrmTools
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
         Style = tsFlatButtons
         TabHeight = 18
         TabOrder = 0
@@ -3981,8 +4021,8 @@ object frmTools: TfrmTools
         TabStyle.BackgrColor = clBtnFace
         TabStyle.Font.Charset = DEFAULT_CHARSET
         TabStyle.Font.Color = clBlack
-        TabStyle.Font.Height = -11
-        TabStyle.Font.Name = 'Arial'
+        TabStyle.Font.Height = -12
+        TabStyle.Font.Name = 'MS Sans Serif'
         TabStyle.Font.Style = []
         TabStyle.CaptionHAlign = fhaCenter
         TabStyle.Gradient.Active = False
@@ -3994,8 +4034,8 @@ object frmTools: TfrmTools
         TabSelectedStyle.BackgrColor = clBtnFace
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
-        TabSelectedStyle.Font.Height = -11
-        TabSelectedStyle.Font.Name = 'Arial'
+        TabSelectedStyle.Font.Height = -12
+        TabSelectedStyle.Font.Name = 'MS Sans Serif'
         TabSelectedStyle.Font.Style = []
         TabSelectedStyle.CaptionHAlign = fhaCenter
         TabSelectedStyle.Gradient.Active = False
@@ -4028,10 +4068,6 @@ object frmTools: TfrmTools
         object tbsSearch: TTabSheet
           Caption = 'Search'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -4212,10 +4248,6 @@ object frmTools: TfrmTools
     object tbsSpell: TTabSheet
       Caption = 'Spell'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memSpell: TMemo
         Left = 0
         Top = 0
@@ -4241,10 +4273,6 @@ object frmTools: TfrmTools
     object tbsDatabase: TTabSheet
       Caption = 'Database'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
@@ -4255,8 +4283,9 @@ object frmTools: TfrmTools
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
         Style = tsFlatButtons
         TabHeight = 18
         TabOrder = 0
@@ -4269,8 +4298,8 @@ object frmTools: TfrmTools
         TabStyle.BackgrColor = clBtnFace
         TabStyle.Font.Charset = DEFAULT_CHARSET
         TabStyle.Font.Color = clBlack
-        TabStyle.Font.Height = -11
-        TabStyle.Font.Name = 'Arial'
+        TabStyle.Font.Height = -12
+        TabStyle.Font.Name = 'MS Sans Serif'
         TabStyle.Font.Style = []
         TabStyle.CaptionHAlign = fhaCenter
         TabStyle.Gradient.Active = False
@@ -4282,8 +4311,8 @@ object frmTools: TfrmTools
         TabSelectedStyle.BackgrColor = clGray
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
-        TabSelectedStyle.Font.Height = -11
-        TabSelectedStyle.Font.Name = 'Arial'
+        TabSelectedStyle.Font.Height = -12
+        TabSelectedStyle.Font.Name = 'MS Sans Serif'
         TabSelectedStyle.Font.Style = []
         TabSelectedStyle.CaptionHAlign = fhaCenter
         TabSelectedStyle.Gradient.Active = False
@@ -4292,10 +4321,6 @@ object frmTools: TfrmTools
         object tbsShortcuts: TTabSheet
           Caption = 'Shortcuts'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splShortcuts: TSplitter
             Left = 0
             Top = 113
@@ -4488,10 +4513,6 @@ object frmTools: TfrmTools
         end
         object tbsCompletion: TTabSheet
           Caption = 'Completion'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splCompletion: TSplitter
             Left = 0
             Top = 113
@@ -4832,8 +4853,14 @@ object frmTools: TfrmTools
               Align = alClient
               Caption = ' Options '
               Color = 16250871
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Microsoft Sans Serif'
+              Font.Style = []
               ParentBackground = False
               ParentColor = False
+              ParentFont = False
               TabOrder = 1
               object cbComAutoDetect_Language: TCheckBox
                 Left = 9
@@ -4864,13 +4891,14 @@ object frmTools: TfrmTools
         Top = 0
         Width = 312
         Height = 537
-        ActivePage = tbsRMirrors
+        ActivePage = tbsRCard
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Name = 'MS Sans Serif'
         Font.Style = []
+        ParentFont = False
         Style = tsFlatButtons
         TabHeight = 18
         TabOrder = 0
@@ -4882,8 +4910,8 @@ object frmTools: TfrmTools
         TabStyle.BackgrColor = clBtnFace
         TabStyle.Font.Charset = DEFAULT_CHARSET
         TabStyle.Font.Color = clBlack
-        TabStyle.Font.Height = -11
-        TabStyle.Font.Name = 'Arial'
+        TabStyle.Font.Height = -12
+        TabStyle.Font.Name = 'MS Sans Serif'
         TabStyle.Font.Style = []
         TabStyle.CaptionHAlign = fhaCenter
         TabStyle.Gradient.Active = False
@@ -4895,8 +4923,8 @@ object frmTools: TfrmTools
         TabSelectedStyle.BackgrColor = clBtnFace
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
-        TabSelectedStyle.Font.Height = -11
-        TabSelectedStyle.Font.Name = 'Arial'
+        TabSelectedStyle.Font.Height = -12
+        TabSelectedStyle.Font.Name = 'MS Sans Serif'
         TabSelectedStyle.Font.Style = []
         TabSelectedStyle.CaptionHAlign = fhaCenter
         TabSelectedStyle.Gradient.Active = False
@@ -4905,10 +4933,6 @@ object frmTools: TfrmTools
         object tbsRExplorer: TTabSheet
           Caption = 'Explorer'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -5220,7 +5244,7 @@ object frmTools: TfrmTools
                 Style = csDropDownList
                 Anchors = [akLeft, akRight]
                 Ctl3D = False
-                ItemHeight = 0
+                ItemHeight = 13
                 ItemIndex = 0
                 ParentCtl3D = False
                 ParentShowHint = False
@@ -5366,10 +5390,6 @@ object frmTools: TfrmTools
         end
         object tbsRCard: TTabSheet
           Caption = 'Card'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splRCard: TSplitter
             Left = 0
             Top = 113
@@ -5715,6 +5735,7 @@ object frmTools: TfrmTools
                 item
                   Expanded = False
                   FieldName = 'City'
+                  Width = 64
                   Visible = True
                 end>
             end
