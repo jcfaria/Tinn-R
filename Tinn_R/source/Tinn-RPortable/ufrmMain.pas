@@ -3037,7 +3037,7 @@ begin
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '4.00.00.04';
   sCurrentVersion_Latex     := '2.01.01.01';
-  sCurrentVersion_Project   := '4.00.00.02';
+  sCurrentVersion_Project   := '4.00.03.06';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '4.00.03.04';
   sCurrentVersion_Shortcuts := '4.00.03.06';
@@ -12958,7 +12958,7 @@ end;
 
 procedure TfrmTinnMain.menHelCitationClick(Sender: TObject);
 begin
-  Clipboard.AsText:= 'FARIA, J.C.; GROSJEAN, P.; FARIAS, P.S. (2015). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
+  Clipboard.AsText:= 'Tinn-R Team (2015). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
                      'URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
 
   MessageDlg('Many thanks for cite Tinn-R.' + #13 + #13 +

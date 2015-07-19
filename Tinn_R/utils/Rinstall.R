@@ -4,8 +4,12 @@
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 02/05/2015 00:24:12
+# 18/07/2015 12:15:45
 #------------------------------------------------------------------------
+
+# By default it will install/update only binary packages
+options(pkgType='binary')
+options(install.packages.check.source='no')
 
 # Try to detach
 try(detach(package:TinnRcom),

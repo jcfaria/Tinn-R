@@ -17,4 +17,4 @@ TODO
 
 7- Check for update no menu Help.
 
-8- Possibilitar ser portável para rodar em memória flash.
+8- Script do setup não está adicionando o picone na barra de inicialização rápida.

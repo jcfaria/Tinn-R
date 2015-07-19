@@ -41,7 +41,7 @@ object frmAbout: TfrmAbout
     Top = 0
     Width = 513
     Height = 312
-    ActivePage = tbsAboutAcknowledgments
+    ActivePage = tbsAboutVersion
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
@@ -2683,14 +2683,12 @@ object frmAbout: TfrmAbout
         Lines.UnicodeStrings = 
           'COORDINATION'#13#10' - Jos'#233' Cl'#225'udio Faria'#13#10'   Universidade Estadual de' +
           ' Santa Cruz - UESC/BA/BRASIL'#13#10'   Departamento de Ci'#234'ncias Exatas' +
-          ' e Tecnol'#243'gicas - DCET'#13#10#13#10'AUTHORS (historic order)'#13#10' - Jos'#233' Cl'#225'u' +
-          'dio Faria'#13#10'   email: joseclaudio.faria@gmail.com'#13#10#13#10' - Philippe ' +
-          'Grosjean'#13#10'   email: phgrosjean@sciviews.org'#13#10#13#10' - Philipe Silva ' +
-          'Farias'#13#10'   email: philfarias@gmail.com'#13#10#13#10'CONTRIBUTORS (with the' +
-          ' source code)'#13#10' - Marco de Groot'#13#10'   email: m.h.de.groot@mattic.' +
-          'com'#13#10#13#10' - Huashan Chen:'#13#10'   email: chenhuashan@baidao.net'#13#10#13#10'Tin' +
-          'n-R would not be what it is without all contributors, '#13#10'thanks v' +
-          'ery much! Tinn-R team'
+          ' e Tecnol'#243'gicas - DCET'#13#10#13#10'ACTIVE DEVELOPERS'#13#10' - Jos'#233' Cl'#225'udio Far' +
+          'ia'#13#10'   email: joseclaudio.faria@gmail.com'#13#10#13#10' - Philipe Silva Fa' +
+          'rias'#13#10'   email: philfarias@gmail.com'#13#10#13#10'CONTRIBUTORS'#13#10' - Marco d' +
+          'e Groot'#13#10' - Philippe Grosjean'#13#10' - Huashan Chen'#13#10' - Enio Galinkin' +
+          ' Jelihovschi'#13#10' - Ricardo Pietrobon'#13#10#13#10'Tinn-R would not be what i' +
+          't is without all contributors, '#13#10'thanks very much!'
         ReadOnly = True
         FontSmoothing = fsmNone
         RemovedKeystrokes = <
@@ -2752,7 +2750,7 @@ object frmAbout: TfrmAbout
           '(for making the Tinn-R User Guide more readable and intelligible' +
           ')'#13#10' - Thomas Petzoldt'#13#10' - Uwe Ligges'#13#10' - Victor Moreno'#13#10' - Wenpi' +
           'ng Wang'#13#10' - Yves Brostaux'#13#10#13#10'Tinn-R would not be what it is with' +
-          'out all suggestions and works, '#13#10'thanks very much! Tinn-R team'
+          'out all suggestions and works, '#13#10'thanks very much! Tinn-R Team'
         ReadOnly = True
         FontSmoothing = fsmNone
         RemovedKeystrokes = <
@@ -2818,7 +2816,7 @@ object frmAbout: TfrmAbout
           ' Ss, http://www.ntwind.com/'#13#10#13#10'NOTE'#13#10' Cp: Compilation'#13#10' Dc: Delp' +
           'hi component'#13#10' Fc: File conversor'#13#10' Is: Install setup'#13#10' Ss: Scre' +
           'enshots'#13#10' Te: Text editor project'#13#10#13#10#13#10'Tinn-R would not be what ' +
-          'it is without all, '#13#10'thanks very much! Tinn-R team'#13#10
+          'it is without all, '#13#10'thanks very much! Tinn-R Team'
         ReadOnly = True
         FontSmoothing = fsmNone
         RemovedKeystrokes = <

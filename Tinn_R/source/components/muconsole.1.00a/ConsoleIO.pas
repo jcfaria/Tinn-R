@@ -375,7 +375,16 @@ begin
                  OutputBuffer);
 
       if (iPos = 0) then Break;
-
+{
+      if (iPos = 0) and
+         (OutputBuffer = 'y/n: ') then begin // Needs of confirmation, i.e, y/n:
+        sOutput:= sOutput + OutputBuffer;
+        OutputBuffer:= '';
+        Break;
+      end
+      else
+        if (iPos = 0) then Break;
+}
       sOutput:= sOutput +
                 Copy(OutputBuffer,
                      1,
