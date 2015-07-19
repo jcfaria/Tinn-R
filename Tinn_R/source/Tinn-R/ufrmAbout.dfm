@@ -41,7 +41,7 @@ object frmAbout: TfrmAbout
     Top = 0
     Width = 513
     Height = 312
-    ActivePage = tbsAboutVersion
+    ActivePage = tbsAboutAcknowledgments
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
@@ -2735,22 +2735,20 @@ object frmAbout: TfrmAbout
           'y of the project)'#13#10'   http://www.carolinasartorio.com.br/Site_Ca' +
           'rolina_Sartorio_2013/Home.html'#13#10' - Douglas Federman'#13#10' - Diethelm' +
           ' Wuertz (editor of 1ed. Tinn-R ebook)'#13#10'   https://www.rmetrics.o' +
-          'rg'#13#10' - Duncan Murdoch'#13#10' - Enio G. Jelihovschi (for the work with' +
-          ' the User Guide and Ebook)'#13#10' - Eric Lacoutre'#13#10' - Frank R. Lawren' +
-          'ce'#13#10' - Gabor Grothendieck'#13#10' - Gabriel Moreno'#13#10' - Hiroyuki Kawaka' +
-          'tsu'#13#10' - Igor Kojanov'#13#10' - Ivan B. Allaman'#13#10' - Jairo Cugliari'#13#10' - ' +
-          'Jan Fiala (PSPad editor for share code and helps)'#13#10' - Jens Oehls' +
-          'chl'#228'gel'#13#10' - John (JJ)'#13#10' - John Cotter'#13#10' - John Fox'#13#10' - John Hath' +
-          'away'#13#10' - Jorge Alexandre Wiendl (for a lot of good ideas and wor' +
-          'ks)'#13#10' - Kelly Hildner'#13#10' - Leon Barmuta'#13#10' - Manuel Salamero'#13#10' - M' +
-          'ichael Pomada'#13#10' - Mike Prager'#13#10' - Ricardo Pietrobon (for the wor' +
-          'k with the User Guide and Ebook)'#13#10' - Russel May (founder of the ' +
-          'Tinn project)'#13#10' - Savano S. Pereira'#13#10' - S'#248'ren H'#248'jsgaard'#13#10' - Stef' +
-          'an Ascher'#13#10' - Steven Novick'#13#10' - Suresh Krishna'#13#10' - Teresa Gra'#231'a ' +
-          '(for making the Tinn-R User Guide more readable and intelligible' +
-          ')'#13#10' - Thomas Petzoldt'#13#10' - Uwe Ligges'#13#10' - Victor Moreno'#13#10' - Wenpi' +
-          'ng Wang'#13#10' - Yves Brostaux'#13#10#13#10'Tinn-R would not be what it is with' +
-          'out all suggestions and works, '#13#10'thanks very much! Tinn-R Team'
+          'rg'#13#10' - Duncan Murdoch'#13#10' - Eric Lacoutre'#13#10' - Frank R. Lawrence'#13#10' ' +
+          '- Gabor Grothendieck'#13#10' - Gabriel Moreno'#13#10' - Hiroyuki Kawakatsu'#13#10 +
+          ' - Igor Kojanov'#13#10' - Ivan B. Allaman'#13#10' - Jairo Cugliari'#13#10' - Jan F' +
+          'iala (PSPad editor for share code and helps)'#13#10' - Jens Oehlschl'#228'g' +
+          'el'#13#10' - John (JJ)'#13#10' - John Cotter'#13#10' - John Fox'#13#10' - John Hathaway'#13 +
+          #10' - Jorge Alexandre Wiendl (for a lot of good ideas and works)'#13#10 +
+          ' - Kelly Hildner'#13#10' - Leon Barmuta'#13#10' - Manuel Salamero'#13#10' - Michae' +
+          'l Pomada'#13#10' - Mike Prager'#13#10' - Russel May (founder of the Tinn pro' +
+          'ject)'#13#10' - Savano S. Pereira'#13#10' - S'#248'ren H'#248'jsgaard'#13#10' - Stefan Asche' +
+          'r'#13#10' - Steven Novick'#13#10' - Suresh Krishna'#13#10' - Teresa Gra'#231'a (for mak' +
+          'ing the Tinn-R User Guide more readable and intelligible)'#13#10' - Th' +
+          'omas Petzoldt'#13#10' - Uwe Ligges'#13#10' - Victor Moreno'#13#10' - Wenping Wang'#13 +
+          #10' - Yves Brostaux'#13#10#13#10'Tinn-R would not be what it is without all ' +
+          'suggestions and works, '#13#10'thanks very much! Tinn-R Team'
         ReadOnly = True
         FontSmoothing = fsmNone
         RemovedKeystrokes = <

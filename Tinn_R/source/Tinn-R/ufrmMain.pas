@@ -3038,7 +3038,7 @@ begin
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '4.00.03.06';
   sCurrentVersion_Rcard     := '2.03.00.00';
-  sCurrentVersion_Rmirrors  := '4.00.03.04';
+  sCurrentVersion_Rmirrors  := '4.00.03.06';
   sCurrentVersion_Shortcuts := '4.00.03.06';
   sCurrentVersion_TinnRcom  := '1.0.18';  // Released joinly with Tinn-R setup program
 
