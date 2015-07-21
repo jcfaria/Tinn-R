@@ -3325,12 +3325,16 @@ begin
   // If yes will open the url content
   if IsURL(sFile) then begin
     IdHTTP:= TIdHTTP.Create;
+
     try
       try
         if (CheckConnection = False) then Exit;
 
-        sTmp:= IdHTTP.Get(sFile);
+        // Avoid error message: HTTP/1.1 403 Forbidden
+        // From http://stackoverflow.com/questions/10870730/why-do-i-get-403-forbidden-when-i-connect-to-whatismyip-com
+        IdHTTP.Request.UserAgent:= 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0';
 
+        sTmp:= IdHTTP.Get(sFile);
         actFileNewExecute(nil);
 
         sFileExt:= ExtractFileExt(sFile);
@@ -3344,6 +3348,7 @@ begin
 
         with pgFiles.ActivePage do
           Tag:= (Self.MDIChildren[i] as TfrmEditor).SetHighlighterID;
+      // From: http://stackoverflow.com/questions/13950676/how-to-check-url-with-idhttp
       except
         // this exception class covers the HTTP protocol errors; you may read the
         // response code using ErrorCode property of the exception object, or the
@@ -3376,8 +3381,9 @@ begin
           ShowMessage('A non-Indy related exception has been raised!');
       end;
     finally
-        IdHTTP.Free;
+        FreeAndNil(IdHTTP);
     end;
+
     sWorkingDir:= EmptyStr;
     UpdateHexViewer;
     Exit;
