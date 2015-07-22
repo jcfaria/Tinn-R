@@ -186,7 +186,7 @@ uses
   JvComponent, JvAppIniStorage, JvDockVIDStyle, JvExComCtrls,
   JvComCtrls, JvMenus, JvAppHotKey, JvTimer, SynUnicode, SynEditTextBuffer, DB,
   SynEditOC, PngImageList, JvAppStorage, ATBinHex, ATxCodepages, ATFileNotificationSimple,
-  IdHTTP, IdException, IdStack, JvUpDown;
+  IdHTTP, IdException, IdStack, JvUpDown{, IdSSLOpenSSL};
 
 const
   WM_OPENEDITOR = WM_USER + 1;
@@ -3320,6 +3320,7 @@ var
 
   IdHTTP: TIdHTTP;
 
+  //IOHandler: TIdSSLIOHandlerSocketOpenSSL;  // To open https:/
 begin
   // Check if sFile is a valid url
   // If yes will open the url content
@@ -3327,21 +3328,30 @@ begin
     IdHTTP:= TIdHTTP.Create;
 
     try
+      //IOHandler:= TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+
       try
         if (CheckConnection = False) then Exit;
 
         // Avoid error message: HTTP/1.1 403 Forbidden
         // From http://stackoverflow.com/questions/10870730/why-do-i-get-403-forbidden-when-i-connect-to-whatismyip-com
-        IdHTTP.Request.UserAgent:= 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0';
+        with IdHTTP do begin
+          Request.UserAgent:= 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0';
+          //IOHandler:= IOHandler;  // To avoid exception related to https
+          ReadTimeout:= 0;
+          ConnectTimeout:= 30000;
+        end;
 
         sTmp:= IdHTTP.Get(sFile);
+        //if (Trim(sTmp) = EmptyStr) then Exit;
+
         actFileNewExecute(nil);
 
         sFileExt:= ExtractFileExt(sFile);
 
         i:= FindTopWindow;
         with (Self.MDIChildren[i] as TfrmEditor) do begin
-          synEditor.Text:= sTmp;
+          synEditor.Text:= UTF8Decode(sTmp);  // Most web site are done in UTF-8
           synEditor.Modified:= True;
           SetHighlighterFromFileExt(sFileExt);
         end;
@@ -3382,6 +3392,7 @@ begin
       end;
     finally
         FreeAndNil(IdHTTP);
+        //FreeAndNil(IOHandler);
     end;
 
     sWorkingDir:= EmptyStr;

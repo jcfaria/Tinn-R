@@ -3334,7 +3334,8 @@ begin
         // Avoid error message: HTTP/1.1 403 Forbidden
         // From http://stackoverflow.com/questions/10870730/why-do-i-get-403-forbidden-when-i-connect-to-whatismyip-com
         IdHTTP.Request.UserAgent:= 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0';
-
+        IdHTTP.ConnectTimeout:= 30000;
+        
         sTmp:= IdHTTP.Get(sFile);
         actFileNewExecute(nil);
 
@@ -3342,7 +3343,7 @@ begin
 
         i:= FindTopWindow;
         with (Self.MDIChildren[i] as TfrmEditor) do begin
-          synEditor.Text:= sTmp;
+          synEditor.Text:= UTF8Decode(sTmp);  // Most web site are done in UTF-8
           synEditor.Modified:= True;
           SetHighlighterFromFileExt(sFileExt);
         end;

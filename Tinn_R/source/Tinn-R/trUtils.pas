@@ -1433,6 +1433,10 @@ begin
       Result:= True;
       Exit;
     end
+    else if ((Pos('https://', LowerCase(S)) = 1) and (Length(S) > 10) and (Pos('.', S) > 8)) or ((Pos('ftp://', LowerCase(S)) = 1) and (Length(S) > 9) and (Pos('.', S) > 7)) then begin
+      Result:= True;
+      Exit;
+    end
     else Result:= True;
 
     for Count:= 1 to 4 do begin

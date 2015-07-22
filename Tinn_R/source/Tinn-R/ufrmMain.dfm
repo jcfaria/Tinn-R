@@ -1217,7 +1217,7 @@ object frmTinnMain: TfrmTinnMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -1576,7 +1576,7 @@ object frmTinnMain: TfrmTinnMain
           Font.Style = []
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
-          ItemHeight = 13
+          ItemHeight = 0
           ItemIndex = 0
           ParentFont = False
           Style = csDropDownList
