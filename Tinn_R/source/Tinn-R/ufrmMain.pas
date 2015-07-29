@@ -3314,17 +3314,20 @@ procedure TfrmTinnMain.OpenFileIntoTinn(sFile: string;
                   '^\w+',
                   False);
 
+    if (sName = EmptyStr) then sName:= 'Temporary';
+
     // It is only for security
     sName:= SanitizeFileName(sName);
+
 
     // It will get possible file extension
     sExtension:= RegEx(sTmp,
                        '[.]\w+',
                        False);
 
-    // Do not have a recognized extension
+    // It will check if sExtension has a recognized extension
     if pos(sExtension,
-           slFilters.Text) = 0 then sExtension:= '.html';
+           slFilters.Text) = 0 then sExtension:= EmptyStr;
 
     result:= sPathTmp +
              '\' +
