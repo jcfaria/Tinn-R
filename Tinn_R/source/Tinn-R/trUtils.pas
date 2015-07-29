@@ -53,10 +53,12 @@ type
   TCharSet = set of Char;
   TGuiType = (gtJGR, gtUnknown);
 
+
   function ClipboardTxtToFile (sFileTXT: string): boolean;
   function ContrastColor(FontC: TColor): TColor;
   function CountChar(Text, Sub: string): Integer;
   function DataFolder: string;
+  function DownloadFile(const url: string; const sFileName: string): boolean;
   function ExecAndWait(const sFileName, sParams: string; wWindowState: Word): Boolean;
   function ExecCmdLineAndWait(const CmdLine: string; wWindowState: Word): Boolean;
   function FileSaveFast(sFilePath, sContent: string): boolean;
@@ -84,6 +86,7 @@ type
   function RegEx_Multiline(sSubject, sRegEx: string): string;
   function RemoveFileExtension(sFile: string): string;
   function RunFile(const sName: string = ''; const sPar1: string = '';  const sPar2: string = ''): Integer;
+  function SanitizeFileName(const sInputString: string): string;
   function SavePriorClipboardText: Boolean;
   function SortDate(List: TStringList; Index1, Index2: Integer): Integer;
   function SortInteger(List: TStringList; Index1, Index2: Integer): Integer;
@@ -1403,8 +1406,10 @@ begin
 end;
 
 function IsUrl(S: string): Boolean;
+(*
 const
 cbad = ';*<>{}[]|\()^!';
+*)
 
 var
   p,
@@ -1417,9 +1422,10 @@ begin
   Result:= False;
 
   if (Length(S) > 5) and (S[Length(S)] <> '.') and (Pos(S, '..') = 0) then begin
+{
     for i := Length(cbad) downto 1 do
       if Pos(cbad[i], S) > 0 then Exit;
-
+}
     for i:= 1 to Length(S) do
       if (Ord(S[i]) < 33) or (Ord(S[i]) > 126) then Exit;
 
@@ -1433,14 +1439,14 @@ begin
       Result:= True;
       Exit;
     end
-    else if ((Pos('https://', LowerCase(S)) = 1) and (Length(S) > 10) and (Pos('.', S) > 8)) or ((Pos('ftp://', LowerCase(S)) = 1) and (Length(S) > 9) and (Pos('.', S) > 7)) then begin
+    else if ((Pos('https://', LowerCase(S)) = 1) and (Length(S) > 12) and (Pos('.', S) > 9)) or ((Pos('ftp://', LowerCase(S)) = 1) and (Length(S) > 9) and (Pos('.', S) > 7)) then begin
       Result:= True;
       Exit;
     end
     else Result:= True;
 
     for Count:= 1 to 4 do begin
-      p := Pos('.', S) - 1;
+      p:= Pos('.', S) - 1;
 
       if p < 0 then p := Length(S);
 
@@ -1483,6 +1489,101 @@ begin
     end;
   finally
     slTmp.EndUpdate;
+  end;
+end;
+
+// Adapted from: http://www.cryer.co.uk/brian/delphi/wininet/example_download_file_http.htm
+function DownloadFile(const url: string;
+                      const sFileName: string): boolean;
+var
+  hInet,
+   hFile: HINTERNET;
+
+  localFile: File;
+
+  buffer: array[1..1024] of byte;
+
+  bytesRead: DWORD;
+
+begin
+  result:= False;
+
+  hInet:= InternetOpen(PChar(application.title),
+                       INTERNET_OPEN_TYPE_PRECONFIG,
+                       nil,
+                       nil,
+                       0);
+
+  hFile:= InternetOpenURL(hInet,
+                          PChar(url),
+                          nil,
+                          0,
+                          0,
+                          0);
+
+  if Assigned(hFile) then
+  begin
+    AssignFile(localFile,
+               sFileName);
+
+    Rewrite(localFile,
+            1);
+    repeat
+      InternetReadFile(hFile,
+                       @buffer,
+                       SizeOf(buffer),
+                       bytesRead);
+
+      BlockWrite(localFile,
+                 buffer,
+                 bytesRead);
+
+    until bytesRead = 0;
+
+    CloseFile(localFile);
+    result:= true;
+    InternetCloseHandle(hFile);
+  end;
+  InternetCloseHandle(hInet);
+end;
+
+// Adapted from: http://stackoverflow.com/questions/960772/how-can-i-sanitize-a-string-for-use-as-a-filename
+function SanitizeFileName(const sInputString: string): string;
+var
+  i: integer;
+
+  sTmp: string;
+
+begin
+  sTmp:= sInputString;
+
+  for i:= 1 to Length(sTmp) do
+  begin
+    // These chars are invalid in file names.
+    case sTmp[i] of
+      '/', '\', ':', '*', '?', '"', '<', '>', '|', ' ', #$D, #$A, #9:
+        // Use a * to indicate a duplicate space so we can remove
+        // them at the end.
+        {$WARNINGS OFF} // W1047 Unsafe code 'String index to var param'
+        if (i > 1) and
+          ((sTmp[i - 1] = ' ') or
+          (sTmp[i - 1] = '*')) then sTmp[i] := '*'
+        else
+          sTmp[i] := '_';
+        {$WARNINGS ON}
+    end;
+  end;
+
+  // A * indicates duplicate spaces.  Remove them.
+  result:= ReplaceStr(sTmp, '*', '_');
+
+  // Also trim any leading or trailing spaces
+  result:= Trim(result);
+
+  if (result = '') then
+  begin
+    raise(Exception.Create('Resulting FileName was empty Input string was: '
+      + sInputString));
   end;
 end;
 

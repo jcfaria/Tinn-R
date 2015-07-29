@@ -1,4 +1,6 @@
-TODO
+#-------
+# TODO
+#-------
 
 1- Corrigir bug do Hex viewer quando o arquivo é UTF-8 BOM e tenta obter a associação (caracter <-> hexa) na primeira linha.
    Não está respeitando os carateres BOM.
@@ -19,8 +21,6 @@ TODO
 
 8- Script do setup não está adicionando o ícone na barra de inicialização rápida.
 
-9- Não está abrindo URL https.
+9- Salvar arquivos UTF-8 sem BOM.
 
-10- Salvar arquivos UTF-8 sem BOM.
-
-11- Verificar possibilidade de reinstalar o aplicativo sem desisntalar previa versão (InnoSetup).
+10- Verificar possibilidade de reinstalar o aplicativo sem desisntalar previa versão (InnoSetup).

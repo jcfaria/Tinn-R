@@ -1035,13 +1035,14 @@ object frmTinnMain: TfrmTinnMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 390
+    Height = 409
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
+    ExplicitHeight = 390
   end
   object Panel1: TPanel
     Left = 0
@@ -1576,7 +1577,7 @@ object frmTinnMain: TfrmTinnMain
           Font.Style = []
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
-          ItemHeight = 0
+          ItemHeight = 13
           ItemIndex = 0
           ParentFont = False
           Style = csDropDownList
@@ -2021,13 +2022,14 @@ object frmTinnMain: TfrmTinnMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 390
+    Height = 409
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
+    ExplicitHeight = 390
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2042,7 +2044,7 @@ object frmTinnMain: TfrmTinnMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 497
+    Top = 516
     Width = 994
     Height = 20
     Anchors = [akLeft, akBottom]
@@ -2090,22 +2092,24 @@ object frmTinnMain: TfrmTinnMain
     SizeGrip = False
     OnClick = stbMainClick
     OnDrawPanel = stbMainDrawPanel
+    ExplicitTop = 497
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 390
+    Height = 409
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
+    ExplicitHeight = 390
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 488
+    Top = 507
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2114,6 +2118,7 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
+    ExplicitTop = 488
   end
   object pgFiles: TJvgPageControl
     Left = 0

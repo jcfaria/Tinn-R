@@ -186,7 +186,7 @@ uses
   JvComponent, JvAppIniStorage, JvDockVIDStyle, JvExComCtrls,
   JvComCtrls, JvMenus, JvAppHotKey, JvTimer, SynUnicode, SynEditTextBuffer, DB,
   SynEditOC, PngImageList, JvAppStorage, ATBinHex, ATxCodepages, ATFileNotificationSimple,
-  IdHTTP, IdException, IdStack, JvUpDown{, IdSSLOpenSSL};
+  IdHTTP, IdException, IdStack, JvUpDown;
 
 const
   WM_OPENEDITOR = WM_USER + 1;
@@ -3290,6 +3290,52 @@ procedure TfrmTinnMain.OpenFileIntoTinn(sFile: string;
                                         iLineNumberJump: integer = 0;
                                         bOpenProjetcText: boolean = False;
                                         bUpdateMRU: boolean = True);
+
+  function GetFileNameFromURL(sFile: string): string;
+  var
+    sTmp,
+     sName,
+     sExtension: string;
+
+  begin
+    // Delete '/' if latest character on sFile
+    if (LastPos('/',
+                sFile) = length(sFile)) then delete(sFile,
+                                                    length(sFile),
+                                                    1);
+
+    // Get all from latest '/' to the end of string
+    sTmp:= RegEx(sFile,
+                 '[^\/]+$',
+                 False);
+
+    // Get any word character (letter, number, underscore) until a possible '.'
+    sName:= RegEx(sTmp,
+                  '^\w+',
+                  False);
+
+    // It is only for security
+    sName:= SanitizeFileName(sName);
+
+    // It will get possible file extension
+    sExtension:= RegEx(sTmp,
+                       '[.]\w+',
+                       False);
+
+    // Do not have a recognized extension
+    if pos(sExtension,
+           slFilters.Text) = 0 then sExtension:= '.html';
+
+    result:= sPathTmp +
+             '\' +
+             sName +
+             '[' +
+             FormatDateTime('hh_mm_ss',
+                            now) +
+             ']' +
+             sExtension;
+  end;
+
 var
   bFileExists,
    bLoadFileFromDisk,
@@ -3312,92 +3358,33 @@ var
 
   sTmp,
    sMarks,
-   sFileExt: string;
+   sFileExt,
+   sFileName: string;
 
   userOption: TModalResult;
 
   cTmp: char;
 
-  IdHTTP: TIdHTTP;
-
-  //IOHandler: TIdSSLIOHandlerSocketOpenSSL;  // To open https:/
 begin
-  // Check if sFile is a valid url
-  // If yes will open the url content
+  // Check if sFile is a valid URL
   if IsURL(sFile) then begin
-    IdHTTP:= TIdHTTP.Create;
+    sFileName:= GetFileNameFromURL(sFile);
 
-    try
-      //IOHandler:= TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+    if DownloadFile(sFile,
+                    sFileName) then
+      if FileExists(sFileName) then begin
+        OpenFileIntoTinn(sFileName);
+        Exit;
+      end
+      else begin
+        MessageDlg(sFile + #13 + #13 +
+                   'Sorry, it was not possible to open the file above!',
+                   mtWarning,
+                   [mbOk],
+                   0);
 
-      try
-        if (CheckConnection = False) then Exit;
-
-        // Avoid error message: HTTP/1.1 403 Forbidden
-        // From http://stackoverflow.com/questions/10870730/why-do-i-get-403-forbidden-when-i-connect-to-whatismyip-com
-        with IdHTTP do begin
-          Request.UserAgent:= 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:12.0) Gecko/20100101 Firefox/12.0';
-          //IOHandler:= IOHandler;  // To avoid exception related to https
-          ReadTimeout:= 0;
-          ConnectTimeout:= 30000;
-        end;
-
-        sTmp:= IdHTTP.Get(sFile);
-        //if (Trim(sTmp) = EmptyStr) then Exit;
-
-        actFileNewExecute(nil);
-
-        sFileExt:= ExtractFileExt(sFile);
-
-        i:= FindTopWindow;
-        with (Self.MDIChildren[i] as TfrmEditor) do begin
-          synEditor.Text:= UTF8Decode(sTmp);  // Most web site are done in UTF-8
-          synEditor.Modified:= True;
-          SetHighlighterFromFileExt(sFileExt);
-        end;
-
-        with pgFiles.ActivePage do
-          Tag:= (Self.MDIChildren[i] as TfrmEditor).SetHighlighterID;
-      // From: http://stackoverflow.com/questions/13950676/how-to-check-url-with-idhttp
-      except
-        // this exception class covers the HTTP protocol errors; you may read the
-        // response code using ErrorCode property of the exception object, or the
-        // same you can read from the ResponseCode property of the TIdHTTP object
-        on E: EIdHTTPProtocolException do
-          ShowMessage('Indy raised a protocol error!' + sLineBreak +
-                      'HTTP status code: ' + IntToStr(E.ErrorCode) + sLineBreak +
-                      'Error message' + E.Message);
-
-        // this exception class covers the cases when the server side closes the
-        // connection with a client in a "peaceful" way
-        on E: EIdConnClosedGracefully do
-          ShowMessage('Indy reports, that connection was closed gracefully!');
-
-        // this exception class covers all the low level socket exceptions
-        on E: EIdSocketError do
-          ShowMessage('Indy raised a socket error!' + sLineBreak +
-                      'Error code: ' + IntToStr(E.LastError) + sLineBreak +
-                      'Error message' + E.Message);
-
-        // this exception class covers all exceptions thrown by Indy library
-        on E: EIdException do
-          ShowMessage('Indy raised an exception!' + sLineBreak +
-                      'Exception class: ' + E.ClassName + sLineBreak +
-                      'Error message: ' + E.Message);
-
-        // this exception class is a base Delphi exception class and covers here
-        // all exceptions different from those listed above
-        on E: Exception do
-          ShowMessage('A non-Indy related exception has been raised!');
+        Exit;
       end;
-    finally
-        FreeAndNil(IdHTTP);
-        //FreeAndNil(IOHandler);
-    end;
-
-    sWorkingDir:= EmptyStr;
-    UpdateHexViewer;
-    Exit;
   end;
 
   // Check if is *.tps file, if yes, open it in the project interface
@@ -3411,6 +3398,7 @@ begin
     Application.ProcessMessages;
 
     sProjectName:= sFile;
+
     // Bring to front the textual project, if it is opened
     i:= FindWindowByName(sProjectName);
 
