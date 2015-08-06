@@ -426,7 +426,7 @@ type
     actRContTermStartClose: TAction;
     actRCurrentLineToTop: TAction;
     actReadOnly: TAction;
-    actRecho: TAction;
+    actREcho: TAction;
     actReload: TAction;
     actReloadLatexSymbols: TAction;
     actREnvironmentRefresh: TAction;
@@ -2129,7 +2129,7 @@ type
     procedure actRContTermStartCloseExecute(Sender: TObject);
     procedure actRCurrentLineToTopExecute(Sender: TObject);
     procedure actReadOnlyExecute(Sender: TObject);
-    procedure actRechoExecute(Sender: TObject);
+    procedure actREchoExecute(Sender: TObject);
     procedure actReloadExecute(Sender: TObject);
     procedure actReloadLatexSymbolsExecute(Sender: TObject);
     procedure actREnvironmentRefreshExecute(Sender: TObject);
@@ -2491,7 +2491,7 @@ type
     bMinimizeTinnAfterLastFile     : boolean;
     bOnTop                         : boolean;
     bOrganizeAutomatically         : boolean;
-    bRecho                         : boolean;
+    bREcho                         : boolean;
     bRestored                      : boolean;
     bRestoreIniDock                : boolean;
     bRKnitr                        : boolean;
@@ -2664,6 +2664,7 @@ type
     procedure CheckOrigin;
     procedure CheckProcessingPath(sPath: string);
     procedure CheckProject;
+    procedure CheckREcho;
     procedure CheckTemporary;
     procedure CheckTop;
     procedure CheckVersion;
@@ -2699,8 +2700,6 @@ type
     procedure OpenProjectIntoTinn(sProjectName: string);
     procedure PandocConversion(sPandocInstruction, sPandocFrom, sPandocTo: string; bWait: boolean = True);
     procedure RecentProjectFileClick(Sender: TObject);
-    procedure Recho_False;
-    procedure Recho_True;
     procedure RecordActions(baAction: TBasicAction; var bHandled: Boolean);
     procedure RemoveLine_Commented(var sTmp: string);
     procedure RemoveLine_Empty(var sTmp: string);
@@ -2725,6 +2724,8 @@ type
     procedure SetPreferences_Application;
     procedure SetPreferences_Editor;
     procedure SetRcard;
+    procedure SetREcho_False;
+    procedure SetREcho_True;
     procedure SetRExplorer(bOption: boolean);
     procedure SetRmirrors;
     procedure SetShortcuts;
@@ -2993,6 +2994,20 @@ begin
   if (iShortcutsFilter < 0) then iShortcutsFilter:= 0;
   frmTools.lbShortcuts.Selected[iShortcutsFilter]:= True;
   frmTools.lbShortcutsClick(Self);
+end;
+
+procedure TfrmTinnMain.CheckREcho;
+begin
+  bREcho:= ifTinn.ReadBool('App', 'bREcho', True);
+
+  if bREcho then begin
+    actREcho.Checked:= True;
+    SetREcho_True;
+  end
+  else begin
+    actREcho.Checked:= False;
+    SetREcho_False;
+  end;
 end;
 
 procedure TfrmTinnMain.CheckVersion;
@@ -3920,7 +3935,7 @@ begin
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
     WriteBool('App', 'bRAsServer', bRAsServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bRecho', actRecho.Checked);
+    WriteBool('App', 'bREcho', actREcho.Checked);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
@@ -4435,7 +4450,7 @@ begin
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
     WriteBool('App', 'bRAsServer', bRAsServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bRecho', actRecho.Checked);
+    WriteBool('App', 'bREcho', actREcho.Checked);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
@@ -5205,7 +5220,6 @@ begin
                                                       else bRArchitecture64:= False;
 
   bRAsServer             := ifTinn.ReadBool('App', 'bRAsServer', True);
-  bRecho                 := ifTinn.ReadBool('App', 'bRecho', True);
   bRestoreIniDock        := ifTinn.ReadBool('App', 'bRestoreIniDock', False);
   bRguiReturnFocus       := ifTinn.ReadBool('App', 'bRguiReturnFocus', True);
   bRmirros_Update        := ifTinn.ReadBool('App', 'bRmirros_Update', False);
@@ -5244,13 +5258,13 @@ begin
   frmTools.panWinExplorer.Height           := ifTinn.ReadInteger('App', 'iWinExplorer.Height', 75);
   frmTools.panWorkExplorer.Height          := ifTinn.ReadInteger('App', 'iWorkExplorer.Height', 75);
 
-  if bRecho then begin
-    actRecho.Checked:= True;
-    Recho_True;
+  if bREcho then begin
+    actREcho.Checked:= True;
+    SetREcho_True;
   end
   else begin
-    actRecho.Checked:= False;
-    Recho_False;
+    actREcho.Checked:= False;
+    SetREcho_False;
   end;
 
   if (trim(sFormatRd) <> 'Sorry, this feature is not available yet!') then
@@ -7003,7 +7017,7 @@ begin
   end;
 end;
 
-procedure TfrmTinnMain.Recho_True;
+procedure TfrmTinnMain.SetREcho_True;
 begin
   // File
   actRSendFile.Caption   := 'File (echo=TRUE)';
@@ -7036,7 +7050,7 @@ begin
   actRSendLinesToEndPage.ImageIndex:= 8;
 end;
 
-procedure TfrmTinnMain.Recho_False;
+procedure TfrmTinnMain.SetREcho_False;
 begin
   // File
   actRSendFile.Caption   := 'File';
@@ -7069,17 +7083,17 @@ begin
   actRSendLinesToEndPage.ImageIndex:= 298;
 end;
 
-procedure TfrmTinnMain.actRechoExecute(Sender: TObject);
+procedure TfrmTinnMain.actREchoExecute(Sender: TObject);
 begin
-  if not actRecho.Checked then begin
-    bRecho:= True;
-    actREcho.Checked:= bRecho;
-    Recho_True;
+  if not actREcho.Checked then begin
+    bREcho:= True;
+    actREcho.Checked:= bREcho;
+    SetREcho_True;
   end
   else begin
-    bRecho:= False;
-    actRecho.Checked:= bRecho;
-    Recho_False;
+    bREcho:= False;
+    actREcho.Checked:= bREcho;
+    SetREcho_False;
   end;
 end;
 
@@ -7314,6 +7328,8 @@ begin
     frmSplash.pb.Position:= 8;
 
     SetShortcuts;
+
+    CheckREcho;  // Must be after SetShortcuts!
 
     frmTools.tbsLatex.TabVisible:= actLatexVisible.Checked;
     CheckLatex(False);
@@ -15822,7 +15838,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bRecho then
+    if bREcho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -15851,7 +15867,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bRecho then
+    if bREcho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -15880,7 +15896,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bRecho then
+    if bREcho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -15909,7 +15925,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bRecho then
+    if bREcho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -15961,7 +15977,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bRecho then
+    if bREcho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -16009,7 +16025,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bRecho then
+    if bREcho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +

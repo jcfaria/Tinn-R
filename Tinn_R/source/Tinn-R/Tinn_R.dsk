@@ -1,5 +1,5 @@
 [Closed Files]
-File_0=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',0,1,15917,30,15927,0,0,,
+File_0=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',0,1,7072,8,7095,0,0,,
 File_1=TSourceModule,'D:\GitHub\jvcl\jvcl\run\JvTypes.pas',0,1,619,18,657,0,0,,
 File_2=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\components\muconsole.1.00a\ConsoleIO.pas',0,1,370,2,391,0,0,,
 File_3=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmTools.pas',0,1,1,1,1,0,0,,
@@ -11,28 +11,24 @@ File_7=TSourceModule,'D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.dfm',
 [Modules]
 Module0=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
 Module1=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas
-Module2=default.htm
-Module3=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmHotKeys.pas
-Module4=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmEditor.pas
-Module5=c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas
-Module6=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trUtils.pas
-Module7=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trCodeSender.pas
-Module8=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\codeEditor.pas
-Count=9
+Module2=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmHotKeys.pas
+Module3=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmEditor.pas
+Module4=c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas
+Module5=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trUtils.pas
+Module6=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trCodeSender.pas
+Module7=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\codeEditor.pas
+Count=8
 EditWindowCount=1
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
-
-[default.htm]
-ModuleType=TURLModule
 
 [D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmHotKeys.pas]
 ModuleType=TSourceModule
@@ -65,7 +61,7 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=9
+ViewCount=8
 CurrentEditView=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
 View0=0
 View1=1
@@ -75,7 +71,6 @@ View4=4
 View5=5
 View6=6
 View7=7
-View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -93,7 +88,7 @@ DockedToMainForm=1
 MessageView=MessageView@EditWindow0
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
-LeftPanelSize=1633
+LeftPanelSize=1664
 LeftPanelClients=StructureView,PropertyInspector
 LeftPanelData=000008000100010000001100000053747275637475726556696577466F726D3A2200000000000000670A00000000000001000000003A2200001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=0
@@ -107,10 +102,6 @@ BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303219000000000000007E1B000000000000FFFFFFFF
 
 [View0]
-CustomEditViewType=TWelcomePageView
-WelcomePageURL=bds:/default.htm
-
-[View1]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmAppOptions.pas
 CursorX=1
@@ -121,18 +112,18 @@ Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
 
-[View2]
+[View1]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
-CursorX=3
-CursorY=2983
-TopLine=2966
+CursorX=21
+CursorY=7037
+TopLine=7028
 LeftCol=1
 Elisions=
-Bookmarks=
-EditViewName=Borland.FormDesignerView
+Bookmarks={1,2965,3}{2,2999,1}
+EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmMain.pas
 
-[View3]
+[View2]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmEditor.pas
 CursorX=14
@@ -143,7 +134,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmEditor.pas
 
-[View4]
+[View3]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmHotKeys.pas
 CursorX=43
@@ -154,7 +145,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\ufrmHotKeys.pas
 
-[View5]
+[View4]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\codeEditor.pas
 CursorX=1
@@ -165,7 +156,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\codeEditor.pas
 
-[View6]
+[View5]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trCodeSender.pas
 CursorX=1
@@ -176,7 +167,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trCodeSender.pas
 
-[View7]
+[View6]
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trUtils.pas
 CursorX=26
@@ -187,7 +178,7 @@ Elisions=
 Bookmarks=
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-R\trUtils.pas
 
-[View8]
+[View7]
 CustomEditViewType=TEditView
 Module=c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas
 CursorX=14
@@ -279,14 +270,14 @@ Docked=1
 State=0
 Left=1087
 Top=335
-Width=1398
+Width=1297
 Height=7694
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1398
+ClientWidth=1297
 ClientHeight=7694
 TBDockHeight=7694
-LRDockWidth=1398
+LRDockWidth=1297
 Dockable=1
 StayOnTop=0
 
@@ -520,7 +511,7 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=-212
+Left=-216
 Top=-687
 Width=3562
 Height=4819
@@ -539,7 +530,7 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=-212
+Left=-216
 Top=-687
 Width=13602
 Height=207
@@ -558,7 +549,7 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=-212
+Left=-216
 Top=-687
 Width=3562
 Height=4819
@@ -577,7 +568,7 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=-212
+Left=-216
 Top=-687
 Width=3562
 Height=2306
@@ -598,22 +589,22 @@ Docked=1
 State=0
 Left=0
 Top=22
-Width=1633
+Width=1664
 Height=7694
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1633
+ClientWidth=1664
 ClientHeight=7694
 TBDockHeight=402
-LRDockWidth=1633
+LRDockWidth=1664
 Dockable=1
 StayOnTop=0
-SplitPos=79
+SplitPos=97
 
 [PropInspDesignerSelection]
 ArrangeBy=Category
-SelectedItem=Action.Caption,
-ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Linkage.Images=0,Miscellaneous.ImageMargin=0,Miscellaneous.ImageSize=0,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0
+SelectedItem=,
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0,Layout.Padding=0
 
 [BreakpointWindow]
 PercentageSizes=1

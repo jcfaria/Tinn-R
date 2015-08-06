@@ -66,11 +66,11 @@ WelcomePageURL=bds:/default.htm
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
 CursorX=3
-CursorY=7685
-TopLine=7676
+CursorY=7701
+TopLine=7690
 LeftCol=1
 Elisions=
-Bookmarks={1,7677,11}
+Bookmarks={1,7693,11}
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
 
 [Watches]
@@ -99,8 +99,8 @@ StayOnTop=0
 
 [Breakpoints]
 Count=2
-Breakpoint0='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7656,'',0,0,'',1,0,0,'',1,'','','',0
-Breakpoint1='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',4977,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint0='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7657,'',0,0,'',1,0,0,'',1,'','','',0
+Breakpoint1='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',4978,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -590,7 +590,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
