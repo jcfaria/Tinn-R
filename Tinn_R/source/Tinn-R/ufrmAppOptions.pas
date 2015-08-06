@@ -145,11 +145,6 @@ type
     cbRSendLine: TCheckBox;
     cbRSendLinesToEndPage: TCheckBox;
     cbRSendSelection: TCheckBox;
-    cbRSendSourceBlockMarked: TCheckBox;
-    cbRSendSourceClipboard: TCheckBox;
-    cbRSendSourceContiguous: TCheckBox;
-    cbRSendSourceFile: TCheckBox;
-    cbRSendSourceSelection: TCheckBox;
     cbRSendSweave: TCheckBox;
     cbRSetWorkDir_Starting: TCheckBox;
     cbRSetWorkDirectory: TCheckBox;

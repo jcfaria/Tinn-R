@@ -135,7 +135,7 @@ var
   i: integer;
 
 begin
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
     with frmTinnMain do begin
       if Assigned(ajavHK[i]) then ajavHK[i].Active:= bStatus;
       if Assigned(ajavHKC[i]) then ajavHKC[i].Active:= bStatus;
@@ -185,7 +185,7 @@ procedure TfrmHotKeys.FormCreate(Sender: TObject);
 var
   ifHotKeys: TIniFile;
   sTmp     : string;
-  aHK      : array[1..20] of string;
+  aHK      : array[1..15] of string;
   i        : integer;
 
 begin
@@ -194,7 +194,7 @@ begin
 
   // R Hotkeys
   with strgDefault do begin
-    for i:= 1 to 20 do begin
+    for i:= 1 to 15 do begin
       aHK[i]:= ifHotKeys.ReadString('R Hotkeys',
                                     'RHK' + IntToStr(i),
                                     '');
@@ -209,7 +209,7 @@ begin
 
   // R Custom
   with strgCustom do begin
-    for i:= 1 to 20 do begin
+    for i:= 1 to 15 do begin
       aHK[i]:= ifHotKeys.ReadString('R Custom',
                                     'RC' + IntToStr(i),
                                     '');
@@ -224,7 +224,7 @@ begin
 
   // R Custom Hotkeys
   with strgCustom do begin
-    for i:= 1 to 20 do begin
+    for i:= 1 to 15 do begin
       aHK[i]:= ifHotKeys.ReadString('R Hotkeys Custom',
                                     'RHKC' + IntToStr(i),
                                     '');
@@ -241,28 +241,23 @@ begin
 
   Application.OnMessage:= AppMessage;
   with strgDefault do begin
-    Cells[0,0] := 'Action';
-    Cells[1,0] := 'Hotkey';
-    Cells[0,1] := 'Send: file';
-    Cells[0,2] := 'Send: file (echo=TRUE)';
-    Cells[0,3] := 'Send: selection';
-    Cells[0,4] := 'Send: selection (echo=TRUE)';
-    Cells[0,5] := 'Send: clipboard';
-    Cells[0,6] := 'Send: clipboard (echo=TRUE)';
-    Cells[0,7] := 'Send: marked block';
-    Cells[0,8] := 'Send: marked block (echo=TRUE)';
-    Cells[0,9] := 'Send: continguous';
-    Cells[0,10]:= 'Send: contiguous (echo=TRUE)';
-    Cells[0,11]:= 'Send: line';
-    Cells[0,12]:= 'Send: lines to end page (echo=TRUE)';
-    Cells[0,13]:= 'Editor: line below and top';
-    Cells[0,14]:= 'Control: print content (selected)';
-    Cells[0,15]:= 'Control: list names (selected)';
-    Cells[0,16]:= 'Control: list structure (selected)';
-    Cells[0,17]:= 'Control: list all objects';
-    Cells[0,18]:= 'Control: clear console';
-    Cells[0,19]:= 'Control: close all graphic devices';
-    Cells[0,20]:= 'Control: help (selected)';
+     Cells[0,0]:= 'Action';
+     Cells[1,0]:= 'Hotkey';
+     Cells[0,1]:= 'Send: file';
+     Cells[0,2]:= 'Send: selection';
+     Cells[0,3]:= 'Send: clipboard';
+     Cells[0,4]:= 'Send: marked block';
+     Cells[0,5]:= 'Send: continguous';
+     Cells[0,6]:= 'Send: line';
+     Cells[0,7]:= 'Send: lines to end page';
+     Cells[0,8]:= 'Editor: line below and top';
+     Cells[0,9]:= 'Control: print content (selected)';
+    Cells[0,10]:= 'Control: list names (selected)';
+    Cells[0,11]:= 'Control: list structure (selected)';
+    Cells[0,12]:= 'Control: list all objects';
+    Cells[0,13]:= 'Control: clear console';
+    Cells[0,14]:= 'Control: close all graphic devices';
+    Cells[0,15]:= 'Control: help (selected)';
   end;
 
   with strgCustom do begin
@@ -374,7 +369,7 @@ begin
 
   case pgHotkeys.TabIndex of
     0: begin
-         for i:= 1 to 20 do begin
+         for i:= 1 to 15 do begin
            with frmTinnMain do begin
              if Assigned(ajavHK[i]) then begin
                ajavHK[i].WindowsKey:= True;
@@ -385,7 +380,7 @@ begin
          end;
        end;
     1: begin
-         for i:= 1 to 20 do begin
+         for i:= 1 to 15 do begin
            with frmTinnMain do begin
              if Assigned(ajavHKC[i]) then begin
                ajavHKC[i].WindowsKey:= True;
@@ -406,58 +401,49 @@ end;
 procedure TfrmHotKeys.DoHotKeyDefault(Sender: TObject);
 var
   sTmp: string;
-  i   : integer;
+
+  i: integer;
 
 begin
   //SetForegroundWindow(Application.Handle);
   sTmp:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
   begin
     if (lowercase(strgDefault.Cells[1,i]) = lowercase(sTmp)) then begin
       with frmTinnMain do begin
         (* The below is to see only
-          Cells[0,1] := 'Send: file';
-          Cells[0,2] := 'Send: file (echo=T)';
-          Cells[0,3] := 'Send: selection';
-          Cells[0,4] := 'Send: selection (echo=T)';
-          Cells[0,5] := 'Send: clipboard';
-          Cells[0,6] := 'Send: clipboard (echo=T)';
-          Cells[0,7] := 'Send: marked block';
-          Cells[0,8] := 'Send: marked block (echo=T)';
-          Cells[0,9] := 'Send: contiguous';
-          Cells[0,10] := 'Send: contiguous (echo=T)';
-          Cells[0,11]:= 'Send: line';
-          Cells[0,12]:= 'Send: lines to end page (echo=T)';
-          Cells[0,13]:= 'Editor: line below and top';
-          Cells[0,14]:= 'Controlling: print content (selected)';
-          Cells[0,15]:= 'Control: list names (selected)';
-          Cells[0,16]:= 'Control: list structure (selected)';
-          Cells[0,17]:= 'Control: list all objects';
-          Cells[0,18]:= 'Control: clear console';
-          Cells[0,19]:= 'Control: close all graphic devices';
-          Cells[0,20]:= 'Control: help (selected)';
+           Cells[0,1]:= 'Send: file';
+           Cells[0,2]:= 'Send: selection';
+           Cells[0,3]:= 'Send: clipboard';
+           Cells[0,4]:= 'Send: marked block';
+           Cells[0,5]:= 'Send: contiguous';
+           Cells[0,6]:= 'Send: line';
+           Cells[0,7]:= 'Send: lines to end page (echo=T)';
+           Cells[0,8]:= 'Editor: line below and top';
+           Cells[0,9]:= 'Controlling: print content (selected)';
+          Cells[0,10]:= 'Control: list names (selected)';
+          Cells[0,11]:= 'Control: list structure (selected)';
+          Cells[0,12]:= 'Control: list all objects';
+          Cells[0,13]:= 'Control: clear console';
+          Cells[0,14]:= 'Control: close all graphic devices';
+          Cells[0,15]:= 'Control: help (selected)';
         *)
         case i of
-           1: if actRSendSourceFile.Enabled            then actRSendSourceFileExecute(nil);
-           2: if actRSendFile.Enabled                  then actRSendFileExecute(nil);
-           3: if actRSendSourceSelection.Enabled       then actRSendSourceSelectionExecute(nil);
-           4: if actRSendSelection.Enabled             then actRSendSelectionExecute(nil);
-           5: if actRSendSourceClipboard.Enabled       then actRSendSourceClipboardExecute(nil);
-           6: if actRSendClipboard.Enabled             then actRSendClipboardExecute(nil);
-           7: if actRSendSourceBlockMarked.Enabled     then actRSendSourceBlockMarkedExecute(nil);
-           8: if actRSendBlockMarked.Enabled           then actRSendBlockMarkedExecute(nil);
-           9: if actRSendSourceContiguous.Enabled      then actRSendSourceContiguousExecute(nil);
-          10: if actRSendContiguous.Enabled            then actRSendContiguousExecute(nil);
-          11: if actRSendLine.Enabled                  then actRSendLineExecute(nil);
-          12: if actRSendLinesToEndPage.Enabled        then actRSendLinesToEndPageExecute(nil);
-          13: if actRCurrentLineToTop.Enabled          then actRCurrentLineToTopExecute(nil);
-          14: if actRContPrintVariableContent.Enabled  then actRContPrintVariableContentExecute(nil);
-          15: if actRContListVariableNames.Enabled     then actRContListVariableNamesExecute(nil);
-          16: if actRContListVariableStructure.Enabled then actRContListVariableStructureExecute(nil);
-          17: actRContListAllObjectsExecute(nil);
-          18: actRContClearConsoleExecute(nil);
-          19: actRContCloseAllGraphicsExecute(nil);
-          20: if actRContHelpSelectedWord.Enabled      then actRContHelpSelectedWordExecute(nil);
+           1: if actRSendFile.Enabled                  then actRSendFileExecute(nil);
+           2: if actRSendSelection.Enabled             then actRSendSelectionExecute(nil);
+           3: if actRSendClipboard.Enabled             then actRSendClipboardExecute(nil);
+           4: if actRSendBlockMarked.Enabled           then actRSendBlockMarkedExecute(nil);
+           5: if actRSendContiguous.Enabled            then actRSendContiguousExecute(nil);
+           6: if actRSendLine.Enabled                  then actRSendLineExecute(nil);
+           7: if actRSendLinesToEndPage.Enabled        then actRSendLinesToEndPageExecute(nil);
+           8: if actRCurrentLineToTop.Enabled          then actRCurrentLineToTopExecute(nil);
+           9: if actRContPrintVariableContent.Enabled  then actRContPrintVariableContentExecute(nil);
+          10: if actRContListVariableNames.Enabled     then actRContListVariableNamesExecute(nil);
+          11: if actRContListVariableStructure.Enabled then actRContListVariableStructureExecute(nil);
+          12: actRContListAllObjectsExecute(nil);
+          13: actRContClearConsoleExecute(nil);
+          14: actRContCloseAllGraphicsExecute(nil);
+          15: if actRContHelpSelectedWord.Enabled      then actRContHelpSelectedWordExecute(nil);
         end;
       end;
     end;
@@ -467,12 +453,13 @@ end;
 procedure TfrmHotKeys.DoHotKeyCustom(Sender: TObject);
 var
   sHKC,
-   sRC : string;
-  i    : integer;
+   sRC: string;
+
+  i: integer;
 
 begin
   sHKC:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
-  for i:= 1 to 20 do begin
+  for i:= 1 to 15 do begin
     if (lowercase(strgCustom.Cells[1,i]) = lowercase(sHKC)) then begin
       sRC:= trim(strgCustom.Cells[0,i]);
       frmTinnMain.SendRCustom(sRC);

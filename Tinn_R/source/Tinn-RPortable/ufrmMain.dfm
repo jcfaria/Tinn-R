@@ -2,7 +2,7 @@ object frmTinnMain: TfrmTinnMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 468
+  Height = 563
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,14 +1035,14 @@ object frmTinnMain: TfrmTinnMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 314
+    Height = 409
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 295
+    ExplicitHeight = 390
   end
   object Panel1: TPanel
     Left = 0
@@ -1810,40 +1810,25 @@ object frmTinnMain: TfrmTinnMain
         TabOrder = 0
         Visible = False
         OnMove = TBRMainMove
-        object TBItem29: TTBItem
-          Action = actRSendSourceFile
-        end
         object TBRSendAll: TTBItem
           Action = actRSendFile
         end
         object TBSeparatorItem10: TTBSeparatorItem
-        end
-        object TBRSendSourceSelection: TTBItem
-          Action = actRSendSourceSelection
         end
         object TBRSendSelection: TTBItem
           Action = actRSendSelection
         end
         object TBSeparatorItem20: TTBSeparatorItem
         end
-        object TBItem27: TTBItem
-          Action = actRSendSourceClipboard
-        end
         object TBItem26: TTBItem
           Action = actRSendClipboard
         end
         object TBSeparatorItem1: TTBSeparatorItem
         end
-        object TBRSendSourceBlockMarked: TTBItem
-          Action = actRSendSourceBlockMarked
-        end
         object TBRSendBlockMarked: TTBItem
           Action = actRSendBlockMarked
         end
         object TBSeparatorItem21: TTBSeparatorItem
-        end
-        object TBItem47: TTBItem
-          Action = actRSendSourceContiguous
         end
         object TBItem46: TTBItem
           Action = actRSendContiguous
@@ -2022,14 +2007,14 @@ object frmTinnMain: TfrmTinnMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 314
+    Height = 409
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 295
+    ExplicitHeight = 390
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2044,7 +2029,7 @@ object frmTinnMain: TfrmTinnMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 421
+    Top = 516
     Width = 994
     Height = 20
     Anchors = [akLeft, akBottom]
@@ -2092,24 +2077,24 @@ object frmTinnMain: TfrmTinnMain
     SizeGrip = False
     OnClick = stbMainClick
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 402
+    ExplicitTop = 497
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 314
+    Height = 409
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 295
+    ExplicitHeight = 390
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 412
+    Top = 507
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2118,7 +2103,7 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 393
+    ExplicitTop = 488
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -2821,66 +2806,46 @@ object frmTinnMain: TfrmTinnMain
     object pmenRResSend: TMenuItem
       Caption = 'Send to R'
       ImageIndex = 0
-      object pmemRResSendSourceFile: TMenuItem
-        Caption = 'File'
-        ImageIndex = 1
-        OnClick = pmemRResSendSourceFileClick
-      end
       object pmemRResSendFile: TMenuItem
-        Caption = 'File (echo=TRUE)'
-        ImageIndex = 2
+        Caption = 'File'
+        Hint = 'R send: file'
+        ImageIndex = 1
         OnClick = pmemRResSendFileClick
       end
       object N78: TMenuItem
         Caption = '-'
       end
-      object pmemRResSendSourceSelection: TMenuItem
-        Caption = 'Selection'
-        ImageIndex = 3
-        OnClick = pmemRResSendSourceSelectionClick
-      end
       object pmemRResSendSelection: TMenuItem
-        Caption = 'Selection (echo=TRUE)'
-        ImageIndex = 4
+        Caption = 'Selection'
+        Hint = 'R send: selection'
+        ImageIndex = 3
         OnClick = pmemRResSendSelectionClick
       end
       object N172: TMenuItem
         Caption = '-'
       end
-      object pmemRResSendSourceClipboard: TMenuItem
-        Caption = 'Clipboard'
-        ImageIndex = 268
-        OnClick = pmemRResSendSourceClipboardClick
-      end
       object pmemRResSendClipboard: TMenuItem
-        Caption = 'Clipboard (echo=TRUE)'
-        ImageIndex = 269
+        Caption = 'Clipboard'
+        Hint = 'R send: clipboard'
+        ImageIndex = 268
         OnClick = pmemRResSendClipboardClick
       end
       object N79: TMenuItem
         Caption = '-'
       end
-      object pmemRResSendSourceBlockMarked: TMenuItem
-        Caption = 'Marked block'
-        ImageIndex = 5
-        OnClick = pmemRResSendSourceBlockMarkedClick
-      end
       object pmemRResSendBlockMarked: TMenuItem
-        Caption = 'Marked block (echo=TRUE)'
-        ImageIndex = 6
+        Caption = 'Marked block'
+        Hint = 'R send: marked block'
+        ImageIndex = 5
         OnClick = pmemRResSendBlockMarkedClick
       end
       object N143: TMenuItem
         Caption = '-'
       end
-      object pmemRResSendSourceContiguous: TMenuItem
-        Caption = 'Contiguous'
-        ImageIndex = 270
-        OnClick = pmemRResSendSourceContiguousClick
-      end
       object pmemRResSendContiguous: TMenuItem
-        Caption = 'Contiguous (echo=TRUE)'
-        ImageIndex = 271
+        Caption = 'Contiguous'
+        Hint = 'R send: contiguous'
+        ImageIndex = 270
         OnClick = pmemRResSendContiguousClick
       end
       object N80: TMenuItem
@@ -2900,8 +2865,8 @@ object frmTinnMain: TfrmTinnMain
         OnClick = pmemRResCurrentLineToTopClick
       end
       object pmemRResSendLinesToEndPage: TMenuItem
-        Caption = 'Lines to end page (echo=TRUE)'
-        ImageIndex = 8
+        Caption = 'Lines to end page'
+        ImageIndex = 298
         OnClick = pmemRResSendLinesToEndPageClick
       end
       object N81: TMenuItem
@@ -3968,6 +3933,14 @@ object frmTinnMain: TfrmTinnMain
       ImageIndex = 87
       OnExecute = actRguiReturnFocusExecute
     end
+    object actRecho: TAction
+      Category = 'Options'
+      Caption = 'Echo (R send)'
+      Hint = 'Options: echo (toogle)'
+      ImageIndex = 297
+      ShortCut = 32837
+      OnExecute = actRechoExecute
+    end
     object actReadOnly: TAction
       Category = 'Options'
       Caption = 'Read only'
@@ -4603,14 +4576,6 @@ object frmTinnMain: TfrmTinnMain
       ShortCut = 24645
       OnExecute = actRFilterRefreshExecute
     end
-    object actRSendSourceFile: TAction
-      Category = 'R send'
-      Caption = 'File'
-      Enabled = False
-      Hint = 'R send: file'
-      ImageIndex = 1
-      OnExecute = actRSendSourceFileExecute
-    end
     object actRSendFile: TAction
       Category = 'R send'
       Caption = 'File (echo=TRUE)'
@@ -4618,14 +4583,6 @@ object frmTinnMain: TfrmTinnMain
       Hint = 'R send: file (echo=TRUE)'
       ImageIndex = 2
       OnExecute = actRSendFileExecute
-    end
-    object actRSendSourceSelection: TAction
-      Category = 'R send'
-      Caption = 'Selection'
-      Enabled = False
-      Hint = 'R send: selection'
-      ImageIndex = 3
-      OnExecute = actRSendSourceSelectionExecute
     end
     object actRSendSelection: TAction
       Category = 'R send'
@@ -4635,31 +4592,14 @@ object frmTinnMain: TfrmTinnMain
       ImageIndex = 4
       OnExecute = actRSendSelectionExecute
     end
-    object actRSendSourceClipboard: TAction
-      Category = 'R send'
-      Caption = 'Clipboard'
-      Enabled = False
-      Hint = 'R send: clipboard'
-      ImageIndex = 268
-      ShortCut = 16465
-      OnExecute = actRSendSourceClipboardExecute
-    end
     object actRSendClipboard: TAction
       Category = 'R send'
       Caption = 'Clipboard (echo=TRUE)'
       Enabled = False
       Hint = 'R send: clipboard (echo=TRUE)'
       ImageIndex = 269
-      ShortCut = 24657
+      ShortCut = 16465
       OnExecute = actRSendClipboardExecute
-    end
-    object actRSendSourceBlockMarked: TAction
-      Category = 'R send'
-      Caption = 'Marked block'
-      Enabled = False
-      Hint = 'R send: marked block'
-      ImageIndex = 5
-      OnExecute = actRSendSourceBlockMarkedExecute
     end
     object actRSendBlockMarked: TAction
       Category = 'R send'
@@ -4668,14 +4608,6 @@ object frmTinnMain: TfrmTinnMain
       Hint = 'R send: marked block (echo=TRUE)'
       ImageIndex = 6
       OnExecute = actRSendBlockMarkedExecute
-    end
-    object actRSendSourceContiguous: TAction
-      Category = 'R send'
-      Caption = 'Contiguous'
-      Enabled = False
-      Hint = 'R send: contiguous'
-      ImageIndex = 270
-      OnExecute = actRSendSourceContiguousExecute
     end
     object actRSendContiguous: TAction
       Category = 'R send'
@@ -6620,7 +6552,7 @@ object frmTinnMain: TfrmTinnMain
       end
     end
   end
-  object pmenLog: TJvPopupMenu
+  object pmenLOG: TJvPopupMenu
     Images = imlTinnR
     Style = msOffice
     ImageMargin.Left = 0
@@ -7135,7 +7067,7 @@ object frmTinnMain: TfrmTinnMain
       end
     end
     object menEdit: TMenuItem
-      Caption = '&Edit'
+      Caption = 'E&dit'
       GroupIndex = 6
       object menEditUndo: TMenuItem
         Action = actEditUndo
@@ -7503,12 +7435,20 @@ object frmTinnMain: TfrmTinnMain
         Caption = '-'
         GroupIndex = 1
       end
-      object menOptionStartupFileMaximized: TMenuItem
-        Action = actOpenMaximized
-        GroupIndex = 1
-      end
       object menOptionGoBack: TMenuItem
         Action = actRguiReturnFocus
+        GroupIndex = 1
+      end
+      object menOptionEcho: TMenuItem
+        Action = actRecho
+        GroupIndex = 1
+      end
+      object N130: TMenuItem
+        Caption = '-'
+        GroupIndex = 1
+      end
+      object menOptionStartupFileMaximized: TMenuItem
+        Action = actOpenMaximized
         GroupIndex = 1
       end
       object menOptionAlwaysOnTop: TMenuItem
@@ -7557,7 +7497,7 @@ object frmTinnMain: TfrmTinnMain
       end
     end
     object menEncoding: TMenuItem
-      Caption = 'Enco&ding'
+      Caption = 'Encodi&ng'
       GroupIndex = 7
       object menEncDefault: TMenuItem
         Caption = 'Default (creating new files)'
@@ -8207,17 +8147,11 @@ object frmTinnMain: TfrmTinnMain
       object menSendToR: TMenuItem
         Caption = 'Send'
         ImageIndex = 0
-        object menSendToRFile: TMenuItem
-          Action = actRSendSourceFile
-        end
         object menSendToRAll: TMenuItem
           Action = actRSendFile
         end
         object N60: TMenuItem
           Caption = '-'
-        end
-        object menSendToRSourceSelection: TMenuItem
-          Action = actRSendSourceSelection
         end
         object menSendToRSelection: TMenuItem
           Action = actRSendSelection
@@ -8225,26 +8159,17 @@ object frmTinnMain: TfrmTinnMain
         object N173: TMenuItem
           Caption = '-'
         end
-        object Clipboard2: TMenuItem
-          Action = actRSendSourceClipboard
-        end
         object Clipboard1: TMenuItem
           Action = actRSendClipboard
         end
         object N18: TMenuItem
           Caption = '-'
         end
-        object menSendToRSourceBlockMarked: TMenuItem
-          Action = actRSendSourceBlockMarked
-        end
         object menSendToRBlockMarked: TMenuItem
           Action = actRSendBlockMarked
         end
         object N137: TMenuItem
           Caption = '-'
-        end
-        object Contiguous1: TMenuItem
-          Action = actRSendSourceContiguous
         end
         object ContiguousechoTRUE1: TMenuItem
           Action = actRSendContiguous
@@ -9179,6 +9104,12 @@ object frmTinnMain: TfrmTinnMain
         Caption = '-'
         GroupIndex = 1
       end
+      object menHelIniFiles: TMenuItem
+        Caption = 'Ini files (path information)'
+        GroupIndex = 1
+        ImageIndex = 211
+        OnClick = menHelIniFilesClick
+      end
       object menHelExampleOfScript: TMenuItem
         Caption = 'Example of script (R)'
         GroupIndex = 1
@@ -9220,21 +9151,11 @@ object frmTinnMain: TfrmTinnMain
         Caption = '-'
         GroupIndex = 1
       end
-      object menHelIniFiles: TMenuItem
-        Caption = 'Ini files (path information)'
-        GroupIndex = 1
-        ImageIndex = 211
-        OnClick = menHelIniFilesClick
-      end
       object menHelCitation: TMenuItem
         Caption = 'Citation (put on clipboard)'
         GroupIndex = 1
         ImageIndex = 156
         OnClick = menHelCitationClick
-      end
-      object N189: TMenuItem
-        Caption = '-'
-        GroupIndex = 1
       end
       object menHelAbout: TMenuItem
         Action = actAbout
@@ -9884,75 +9805,81 @@ object frmTinnMain: TfrmTinnMain
       end
       item
         PngImage.Data = {
-          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
-          610000001974455874536F6674776172650041646F626520496D616765526561
+          89504E470D0A1A0A0000000D494844520000001000000010080600000168F4CF
+          F70000001974455874536F6674776172650041646F626520496D616765526561
           647971C9653C0000032269545874584D4C3A636F6D2E61646F62652E786D7000
           000000003C3F787061636B657420626567696E3D22EFBBBF222069643D225735
           4D304D7043656869487A7265537A4E54637A6B633964223F3E203C783A786D70
           6D65746120786D6C6E733A783D2261646F62653A6E733A6D6574612F2220783A
-          786D70746B3D2241646F626520584D5020436F726520352E302D633036312036
-          342E3134303934392C20323031302F31322F30372D31303A35373A3031202020
+          786D70746B3D2241646F626520584D5020436F726520352E352D633031342037
+          392E3135313438312C20323031332F30332F31332D31323A30393A3135202020
           2020202020223E203C7264663A52444620786D6C6E733A7264663D2268747470
           3A2F2F7777772E77332E6F72672F313939392F30322F32322D7264662D73796E
           7461782D6E7323223E203C7264663A4465736372697074696F6E207264663A61
-          626F75743D222220786D6C6E733A786D703D22687474703A2F2F6E732E61646F
-          62652E636F6D2F7861702F312E302F2220786D6C6E733A786D704D4D3D226874
-          74703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F6D6D2F222078
-          6D6C6E733A73745265663D22687474703A2F2F6E732E61646F62652E636F6D2F
-          7861702F312E302F73547970652F5265736F75726365526566232220786D703A
-          43726561746F72546F6F6C3D2241646F62652050686F746F73686F7020435335
-          2E312057696E646F77732220786D704D4D3A496E7374616E636549443D22786D
-          702E6969643A3042414143444430384134383131453438384641463134353033
-          3841443643302220786D704D4D3A446F63756D656E7449443D22786D702E6469
-          643A304241414344443138413438313145343838464146313435303338414436
-          4330223E203C786D704D4D3A4465726976656446726F6D2073745265663A696E
-          7374616E636549443D22786D702E6969643A3042414143444345384134383131
+          626F75743D222220786D6C6E733A786D704D4D3D22687474703A2F2F6E732E61
+          646F62652E636F6D2F7861702F312E302F6D6D2F2220786D6C6E733A73745265
+          663D22687474703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F73
+          547970652F5265736F75726365526566232220786D6C6E733A786D703D226874
+          74703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F2220786D704D
+          4D3A446F63756D656E7449443D22786D702E6469643A44443334333136303343
+          343131314535393431364239423936353946444132332220786D704D4D3A496E
+          7374616E636549443D22786D702E6969643A4444333433313546334334313131
+          4535393431364239423936353946444132332220786D703A43726561746F7254
+          6F6F6C3D2241646F62652050686F746F73686F70204353352E312057696E646F
+          7773223E203C786D704D4D3A4465726976656446726F6D2073745265663A696E
+          7374616E636549443D22786D702E6969643A3042414143444430384134383131
           453438384641463134353033384144364330222073745265663A646F63756D65
-          6E7449443D22786D702E6469643A304241414344434638413438313145343838
+          6E7449443D22786D702E6469643A304241414344443138413438313145343838
           4641463134353033384144364330222F3E203C2F7264663A4465736372697074
           696F6E3E203C2F7264663A5244463E203C2F783A786D706D6574613E203C3F78
-          7061636B657420656E643D2272223F3E4D7C6E75000000514944415478DA63FC
-          FFFF3F032580916A06C4C6C6926A12E3E2C58B510C20D9767403E8EB0290668A
-          C200680023DC80750FB3C98A8A20F9A98C70035A123791A4B966BE1FAA01A32E
-          A0D00594008A0D00002FDC66E1ACA8A1800000000049454E44AE426082}
+          7061636B657420656E643D2272223F3E72C35B91000000D14944415478DA63FC
+          FFFF3F0308308218464EB2FF19E122868E32FFE152B1B1B1106198C0BA87D960
+          8196C44D0C703D7015313131C8228C8C6B1F64C195D7CCF743980E026001745B
+          D000235E058B172F66447116CC2E0C2B807E0471FE07C94F65C4B003DD1F5815
+          107403E50A4011814DC1B97D8F1941210762FF87790BD99B300538BD0156806C
+          054880E4702004E006007D0AF1D99225107E4C0C41CDC050C034805800D28CE2
+          02E404412C00A50D140360A91646136D002CB551640010FC47D6448C21285E00
+          019841D8E21B1700004BACB7A4B9EDE7E90000000049454E44AE426082}
         Name = 'PngImage8'
         Background = clWindow
       end
       item
         PngImage.Data = {
-          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
-          610000001974455874536F6674776172650041646F626520496D616765526561
+          89504E470D0A1A0A0000000D494844520000001000000010080600000168F4CF
+          F70000001974455874536F6674776172650041646F626520496D616765526561
           647971C9653C0000032269545874584D4C3A636F6D2E61646F62652E786D7000
           000000003C3F787061636B657420626567696E3D22EFBBBF222069643D225735
           4D304D7043656869487A7265537A4E54637A6B633964223F3E203C783A786D70
           6D65746120786D6C6E733A783D2261646F62653A6E733A6D6574612F2220783A
-          786D70746B3D2241646F626520584D5020436F726520352E302D633036312036
-          342E3134303934392C20323031302F31322F30372D31303A35373A3031202020
+          786D70746B3D2241646F626520584D5020436F726520352E352D633031342037
+          392E3135313438312C20323031332F30332F31332D31323A30393A3135202020
           2020202020223E203C7264663A52444620786D6C6E733A7264663D2268747470
           3A2F2F7777772E77332E6F72672F313939392F30322F32322D7264662D73796E
           7461782D6E7323223E203C7264663A4465736372697074696F6E207264663A61
-          626F75743D222220786D6C6E733A786D703D22687474703A2F2F6E732E61646F
-          62652E636F6D2F7861702F312E302F2220786D6C6E733A786D704D4D3D226874
-          74703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F6D6D2F222078
-          6D6C6E733A73745265663D22687474703A2F2F6E732E61646F62652E636F6D2F
-          7861702F312E302F73547970652F5265736F75726365526566232220786D703A
-          43726561746F72546F6F6C3D2241646F62652050686F746F73686F7020435335
-          2E312057696E646F77732220786D704D4D3A496E7374616E636549443D22786D
-          702E6969643A4636313541393433384133303131453441313331464243454331
-          4545444531342220786D704D4D3A446F63756D656E7449443D22786D702E6469
-          643A463631354139343438413330313145344131333146424345433145454445
-          3134223E203C786D704D4D3A4465726976656446726F6D2073745265663A696E
-          7374616E636549443D22786D702E6969643A4636313541393431384133303131
+          626F75743D222220786D6C6E733A786D704D4D3D22687474703A2F2F6E732E61
+          646F62652E636F6D2F7861702F312E302F6D6D2F2220786D6C6E733A73745265
+          663D22687474703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F73
+          547970652F5265736F75726365526566232220786D6C6E733A786D703D226874
+          74703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F2220786D704D
+          4D3A446F63756D656E7449443D22786D702E6469643A45324238443331413343
+          343131314535384342423832324235393245413030342220786D704D4D3A496E
+          7374616E636549443D22786D702E6969643A4532423844333139334334313131
+          4535384342423832324235393245413030342220786D703A43726561746F7254
+          6F6F6C3D2241646F62652050686F746F73686F70204353352E312057696E646F
+          7773223E203C786D704D4D3A4465726976656446726F6D2073745265663A696E
+          7374616E636549443D22786D702E6969643A4636313541393433384133303131
           453441313331464243454331454544453134222073745265663A646F63756D65
-          6E7449443D22786D702E6469643A463631354139343238413330313145344131
+          6E7449443D22786D702E6469643A463631354139343438413330313145344131
           3331464243454331454544453134222F3E203C2F7264663A4465736372697074
           696F6E3E203C2F7264663A5244463E203C2F783A786D706D6574613E203C3F78
-          7061636B657420656E643D2272223F3ED4A4333F000000754944415478DA63FC
-          FFFF3F03258071D4008401B1B1B1A49AC4B878F1621403B0AA022922D605040D
-          3072920529663CB7EF31E96100D25C33DF8FA125711303B221441900D30C03C8
-          86103400EA6C3040720118000D6024C6001813EE0520CD08A2897501860120E7
-          435D40A740440F0BB20CC0050089866EE15BE183BA0000000049454E44AE4260
-          82}
+          7061636B657420656E643D2272223F3EB0947671000000BE4944415478DA63FC
+          FFFF3F0308308218464EB21006B2C87F302336369661F1E2C5A84A6000532026
+          2606CC00694151013210C4C76E06D016545124790C1D20B0EE613658B0257113
+          760550FB18CEED7B8C5D015E7F605580CB9140BF32C2C30A4910EC0690FD58AD
+          0049D6CCF703F900BB2341210E54000EB520F9A90C38C3011406401388F40545
+          0A0801B801C841811656D4710172F081F4810280280360090304900C0003A212
+          0B285EA000C505500348F302B2D789F6022140B101000EE6A4B064797EDE0000
+          000049454E44AE426082}
         Name = 'PngImage9'
         Background = clWindow
       end
@@ -21465,6 +21392,92 @@ object frmTinnMain: TfrmTinnMain
           C8253112E07F04F9932FAE37165C8D7F935C13F08D46B12B0000000049454E44
           AE426082}
         Name = 'PngImage296'
+        Background = clWindow
+      end
+      item
+        PngImage.Data = {
+          89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+          610000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C0000032069545874584D4C3A636F6D2E61646F62652E786D7000
+          000000003C3F787061636B657420626567696E3D22EFBBBF222069643D225735
+          4D304D7043656869487A7265537A4E54637A6B633964223F3E203C783A786D70
+          6D65746120786D6C6E733A783D2261646F62653A6E733A6D6574612F2220783A
+          786D70746B3D2241646F626520584D5020436F726520352E302D633036302036
+          312E3133343737372C20323031302F30322F31322D31373A33323A3030202020
+          2020202020223E203C7264663A52444620786D6C6E733A7264663D2268747470
+          3A2F2F7777772E77332E6F72672F313939392F30322F32322D7264662D73796E
+          7461782D6E7323223E203C7264663A4465736372697074696F6E207264663A61
+          626F75743D222220786D6C6E733A786D703D22687474703A2F2F6E732E61646F
+          62652E636F6D2F7861702F312E302F2220786D6C6E733A786D704D4D3D226874
+          74703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F6D6D2F222078
+          6D6C6E733A73745265663D22687474703A2F2F6E732E61646F62652E636F6D2F
+          7861702F312E302F73547970652F5265736F75726365526566232220786D703A
+          43726561746F72546F6F6C3D2241646F62652050686F746F73686F7020435335
+          2057696E646F77732220786D704D4D3A496E7374616E636549443D22786D702E
+          6969643A34394636373437363342373031314535414138324137363742343436
+          364641442220786D704D4D3A446F63756D656E7449443D22786D702E6469643A
+          3439463637343737334237303131453541413832413736374234343636464144
+          223E203C786D704D4D3A4465726976656446726F6D2073745265663A696E7374
+          616E636549443D22786D702E6969643A34394636373437343342373031314535
+          41413832413736374234343636464144222073745265663A646F63756D656E74
+          49443D22786D702E6469643A3439463637343735334237303131453541413832
+          413736374234343636464144222F3E203C2F7264663A4465736372697074696F
+          6E3E203C2F7264663A5244463E203C2F783A786D706D6574613E203C3F787061
+          636B657420656E643D2272223F3E270C91430000016D4944415478DAA593CF2B
+          445114C7DF45FE008DEC6624C58E280B0B5616522FC9CF4CC92862349385AC78
+          DE8E8D8C69A851D632D9C86E84D534D9B0B29F6CA514B6CFE74CF7EAF93178CD
+          D467CE3933EFFB7DF79E7BAEF23CCFAAE6A37E328838B906C2218C40B2E48EED
+          0532D0268384637882182657FF3240F8407843D0469E204FC13E75DCB2DD9036
+          ED831EEBCCB92B1BF060841F5AE42DE40EF92664A897A98BE44D102DDDDEB78B
+          194C410D2C188324C5AE4F7441DE491EF2192E6230497C852528405E85374E6A
+          65E57004BD88EA8D21B9D2DB927D6E63304B9C833A38806E3190260D40176445
+          846088FCFC8B4156AF40FA300133724A410DA6898D300AE36214740BF3C40EE8
+          87F5F21674135728762A34511AE8E826CA737990C1CAC196310853B422B8345D
+          F7BDFD462F5B8E7158A25E450CD6FE1A2473BC66904428ABBB86B83454FD7699
+          3078FE36CAB61BD527B0FA318915C4A7FA322510A73FFD69BBCD7C3F62F0A2AA
+          BDCEEFD89DDB32C26D749F0000000049454E44AE426082}
+        Name = 'PngImage297'
+        Background = clWindow
+      end
+      item
+        PngImage.Data = {
+          89504E470D0A1A0A0000000D494844520000001000000010080600000168F4CF
+          F70000001974455874536F6674776172650041646F626520496D616765526561
+          647971C9653C0000032269545874584D4C3A636F6D2E61646F62652E786D7000
+          000000003C3F787061636B657420626567696E3D22EFBBBF222069643D225735
+          4D304D7043656869487A7265537A4E54637A6B633964223F3E203C783A786D70
+          6D65746120786D6C6E733A783D2261646F62653A6E733A6D6574612F2220783A
+          786D70746B3D2241646F626520584D5020436F726520352E352D633031342037
+          392E3135313438312C20323031332F30332F31332D31323A30393A3135202020
+          2020202020223E203C7264663A52444620786D6C6E733A7264663D2268747470
+          3A2F2F7777772E77332E6F72672F313939392F30322F32322D7264662D73796E
+          7461782D6E7323223E203C7264663A4465736372697074696F6E207264663A61
+          626F75743D222220786D6C6E733A786D704D4D3D22687474703A2F2F6E732E61
+          646F62652E636F6D2F7861702F312E302F6D6D2F2220786D6C6E733A73745265
+          663D22687474703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F73
+          547970652F5265736F75726365526566232220786D6C6E733A786D703D226874
+          74703A2F2F6E732E61646F62652E636F6D2F7861702F312E302F2220786D704D
+          4D3A446F63756D656E7449443D22786D702E6469643A46433831464332363343
+          343131314535383235464336344637363037434335462220786D704D4D3A496E
+          7374616E636549443D22786D702E6969643A4643383146433235334334313131
+          4535383235464336344637363037434335462220786D703A43726561746F7254
+          6F6F6C3D2241646F62652050686F746F73686F70204353352E312057696E646F
+          7773223E203C786D704D4D3A4465726976656446726F6D2073745265663A696E
+          7374616E636549443D22786D702E6969643A3042414143444430384134383131
+          453438384641463134353033384144364330222073745265663A646F63756D65
+          6E7449443D22786D702E6469643A304241414344443138413438313145343838
+          4641463134353033384144364330222F3E203C2F7264663A4465736372697074
+          696F6E3E203C2F7264663A5244463E203C2F783A786D706D6574613E203C3F78
+          7061636B657420656E643D2272223F3EEB0B1FC3000000E24944415478DA63FC
+          FFFF3F0308308218B1B1B1FF19E122868E32FFB5A51D10520C50001658F730FB
+          FFFA9A4F8C403E420F5C454C4C0CB20823C8308673FB1E83CD59BC78315800AC
+          0264035800DD1634805F01DC04232759869AF97EFF5B123731028DFE8F534190
+          FC54460C3BD0FD815501413750AE00E84878E0602800052528D4616EC2F0262C
+          686100D9140C2B8091427A3810027003803E8558BB6409841F13435033D08998
+          06100B409AA9EB0550820182FFC044C3004C55F000C3E532141740531B4823DC
+          00901C88408F5C9C06C06C870142AEC01A063083B0C5372E0000A656BB4BF812
+          48DE0000000049454E44AE426082}
+        Name = 'PngImage298'
         Background = clWindow
       end>
     Left = 176

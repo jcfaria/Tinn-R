@@ -374,7 +374,6 @@ begin
       actReload.Enabled                   := False;
       actReplace.Enabled                  := False;
       actRSendSelection.Enabled           := False;
-      actRSendSourceSelection.Enabled     := False;
       actSortDate.Enabled                 := False;
       actSortNumber.Enabled               := False;
       actSortString.Enabled               := False;

@@ -4,8 +4,12 @@
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 28/04/2015 07:34:01
+# 18/07/2015 12:15:45
 #------------------------------------------------------------------------
+
+# By default it will install/update only binary packages
+options(pkgType='binary')
+options(install.packages.check.source='no')
 
 # Try to detach
 try(detach(package:TinnRcom),
@@ -31,7 +35,7 @@ if (length(depends[!installed]) >= 1)
   cat('Installing TinnRcom dependences. Please, wait...')
   cat('\n')
   install.packages(depends[!installed])
-}  
+}
 
 rm(depends,
    installed)

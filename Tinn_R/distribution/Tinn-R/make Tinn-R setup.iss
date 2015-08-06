@@ -1,5 +1,5 @@
 ; Tinn-R Inno (Installer) Setup Script
-; By: José Cláudio Faria (24/06/2015 12:31:24)
+; By: José Cláudio Faria (2015/08/05 10:40hs)
 ; Tinn-R: http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 ; INNO Setup: http://www.innosetup.com
 
@@ -49,7 +49,7 @@ Source: .\..\..\data\data.zip;                       DestDir: {app}\data
 Source: .\..\..\doc\licence_gpl2.txt;                DestDir: {app}\doc
 Source: .\..\..\doc\licence_gpl3.txt;                DestDir: {app}\doc
 Source: .\..\..\doc\textdiff.hlp;                    DestDir: {app}\doc
-Source: .\..\..\doc\Tinn-R_recognized words.r;       DestDir: {app}\doc
+Source: .\..\..\doc\Tinn-R_recognized words.R;       DestDir: {app}\doc
 Source: .\..\..\doc\User guide.pdf;                  DestDir: {app}\doc
 Source: .\..\..\latex\latex.zip;                     DestDir: {app}\latex
 Source: .\..\..\package\TinnRcom_1.0.18.tar.gz;      DestDir: {app}\package
@@ -57,7 +57,7 @@ Source: .\..\..\package\TinnRcom_1.0.18.zip;         DestDir: {app}\package
 Source: .\..\..\project\project.zip;                 DestDir: {app}\project
 Source: .\..\..\sample\deplate.dplt;                 DestDir: {app}\sample
 Source: .\..\..\sample\pandoc.markdown;              DestDir: {app}\sample
-Source: .\..\..\sample\Tinn-R_example of script.r;   DestDir: {app}\sample
+Source: .\..\..\sample\Tinn-R_example of script.R;   DestDir: {app}\sample
 Source: .\..\..\sample\txt2tags.t2t;                 DestDir: {app}\sample
 SOurce: .\..\..\sumatra\SumatraPDF.exe;              DestDir: {app}\sumatra
 Source: .\..\..\templates\R doc_dataset.Rd;          DestDir: {app}\templates
@@ -81,15 +81,19 @@ Name: {group}\{cm:UninstallProgram,Tinn-R};                          Filename: {
 Name: {userdesktop}\Tinn-R;                                          Filename: {app}\bin\Tinn-R.exe; Tasks: desktopicon; IconIndex: 0; IconFilename: {app}\bin\Tinn-R.exe; Flags: useapppaths
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Tinn-R; Filename: {app}\bin\Tinn-R.exe; Tasks: quicklaunchicon; IconIndex: 0; IconFilename: {app}\bin\Tinn-R.exe; Flags: useapppaths
 
+[InstallDelete]
+; Removing all from the install folder
+Type: filesandordirs; Name: {app}\*.*
+
 [UninstallDelete]
-Type: files; Name: {app}\Tinn-R.url
-Type: filesandordirs; Name: {app}\data
+; Removing all from the install folder
+Type: filesandordirs; Name: {app}\*.*
 
 [Run]
 Filename: {app}\bin\Tinn-R.exe; Description: {cm:LaunchProgram,Tinn-R}; Flags: nowait PostInstall unchecked SkipIfSilent
 
 [Registry]
-; extensions
+; Extensions
 Root: HKCR; Subkey: .Q;        ValueType: string; ValueData: Tinn-R; Flags: uninsdeleteValue uninsdeletekeyifempty; Tasks: q_association
 Root: HKCR; Subkey: .R;        ValueType: string; ValueData: Tinn-R; Flags: uninsdeleteValue uninsdeletekeyifempty; Tasks: r_association
 Root: HKCR; Subkey: .Rd;       ValueType: string; ValueData: Tinn-R; Flags: uninsdeleteValue uninsdeletekeyifempty; Tasks: rd_association
@@ -102,19 +106,20 @@ Root: HKCR; Subkey: .sty;      ValueType: string; ValueData: Tinn-R; Flags: unin
 Root: HKCR; Subkey: .tex;      ValueType: string; ValueData: Tinn-R; Flags: uninsdeleteValue;                       Tasks: tex_association
 Root: HKCR; Subkey: .tps;      ValueType: string; ValueData: Tinn-R; Flags: uninsdeleteValue uninsdeletekeyifempty; Tasks: tps_association
 Root: HKCR; Subkey: .txt;      ValueType: string; ValueData: Tinn-R; Flags: uninsdeleteValue;                       Tasks: txt_association
-;program
+
+; Program
 Root: HKCR; Subkey: Tinn-R; ValueType: string; ValueData: Tinn-R; Flags: uninsdeletekey deletekey
 Root: HKCR; Subkey: Tinn-R\DefaultIcon;        ValueType: string; ValueData: {app}\bin\Tinn-R.exe,0; Flags: uninsdeletekey deletekey
 Root: HKCR; Subkey: Tinn-R\shell\open\command; ValueType: string; ValueData: """{app}\bin\Tinn-R.exe"" ""%1"""; Flags: uninsdeletekey deletekey
 
 [Code]
-//About
+// About
 Procedure AboutButtonOnClick(Sender: TObject);
 Begin
   MsgBox('Tinn-R is a open source project under the GNU General Public License versions 2 and 3.', mbInformation, mb_Ok);
 End;
 
-//URL link
+// URL link
 Procedure URLLabelOnClick(Sender: TObject);
 Var
   ErrorCode: Integer;

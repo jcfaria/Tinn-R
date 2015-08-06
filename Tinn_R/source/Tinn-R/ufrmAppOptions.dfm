@@ -120,7 +120,7 @@ object frmAppOptions: TfrmAppOptions
       Top = 1
       Width = 342
       Height = 487
-      ActivePage = tbsAppOptionsRterm
+      ActivePage = tbsAppResourcesR
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -162,10 +162,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'General'
         ImageIndex = 3
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GroupBox4: TGroupBox
           Left = 0
           Top = 0
@@ -450,10 +446,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Appearance'
         ImageIndex = 24
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GroupBox20: TGroupBox
           Left = 0
           Top = 0
@@ -555,10 +547,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Dock/Float (Tools and Rterm)'
         ImageIndex = 5
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GroupBox8: TGroupBox
           Left = 0
           Top = 0
@@ -639,10 +627,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Files (extensions)'
         ImageIndex = 21
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GroupBox18: TGroupBox
           Left = 0
           Top = 0
@@ -669,10 +653,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Display'
         ImageIndex = 21
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gbRightEdge: TGroupBox
           Left = 0
           Top = 0
@@ -982,10 +962,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Advanced'
         ImageIndex = 22
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label23: TLabel
           Left = 0
           Top = 321
@@ -1278,7 +1254,7 @@ object frmAppOptions: TfrmAppOptions
             Width = 205
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 0
             Items.Strings = (
               'Vertical Line'
@@ -1292,7 +1268,7 @@ object frmAppOptions: TfrmAppOptions
             Width = 205
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 1
             Items.Strings = (
               'Vertical Line'
@@ -1397,7 +1373,7 @@ object frmAppOptions: TfrmAppOptions
             Height = 21
             BevelInner = bvNone
             BevelOuter = bvNone
-            ItemHeight = 0
+            ItemHeight = 13
             Sorted = True
             TabOrder = 0
             OnExit = cbCommandsExit
@@ -1410,10 +1386,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Path (R)'
         ImageIndex = 8
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbPathRTerm: TGroupBox
           Left = 0
           Top = 0
@@ -1631,10 +1603,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Basic (R)'
         ImageIndex = 9
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label10: TLabel
           Left = 0
           Top = 355
@@ -1716,7 +1684,7 @@ object frmAppOptions: TfrmAppOptions
               BevelInner = bvNone
               BevelOuter = bvNone
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               Sorted = True
               TabOrder = 0
               Items.Strings = (
@@ -1731,7 +1699,7 @@ object frmAppOptions: TfrmAppOptions
               BevelInner = bvNone
               BevelOuter = bvNone
               Style = csDropDownList
-              ItemHeight = 0
+              ItemHeight = 13
               Sorted = True
               TabOrder = 1
               Items.Strings = (
@@ -1826,160 +1794,116 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Resources (R)'
         ImageIndex = 10
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gbSendR: TGroupBox
           Left = 0
           Top = 0
           Width = 334
-          Height = 184
+          Height = 139
           Align = alTop
           Caption = ' Send (resources visibles) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
-          object cbRSendSourceFile: TCheckBox
-            Left = 11
-            Top = 15
-            Width = 79
-            Height = 17
-            Caption = 'File (source)'
-            TabOrder = 0
-          end
-          object cbRSendSourceSelection: TCheckBox
-            Left = 11
-            Top = 33
-            Width = 107
-            Height = 17
-            Caption = 'Selection (source)'
-            TabOrder = 2
-          end
-          object cbRSendSourceBlockMarked: TCheckBox
-            Left = 11
-            Top = 69
-            Width = 128
-            Height = 17
-            Caption = 'Marked block (source)'
-            TabOrder = 6
-          end
           object cbRSendLine: TCheckBox
-            Left = 11
-            Top = 105
+            Left = 163
+            Top = 56
             Width = 43
             Height = 17
             Caption = 'Line'
-            TabOrder = 10
+            TabOrder = 5
           end
           object cbRSendCursorToEndLine: TCheckBox
-            Left = 164
-            Top = 141
+            Left = 163
+            Top = 94
             Width = 108
             Height = 17
             Caption = 'Cursor to end line'
-            TabOrder = 14
+            TabOrder = 9
           end
           object cbRSendFile: TCheckBox
-            Left = 164
+            Left = 11
             Top = 16
             Width = 40
             Height = 17
             Caption = 'File'
-            TabOrder = 1
+            TabOrder = 0
           end
           object cbRSendSelection: TCheckBox
-            Left = 164
-            Top = 33
+            Left = 163
+            Top = 18
             Width = 66
             Height = 17
             Caption = 'Selection'
-            TabOrder = 3
+            TabOrder = 1
           end
           object cbRSendBlockMarked: TCheckBox
-            Left = 164
-            Top = 69
+            Left = 163
+            Top = 37
             Width = 87
             Height = 17
             Caption = 'Marked block'
-            TabOrder = 7
+            TabOrder = 3
           end
           object cbRSendLinesToEndPage: TCheckBox
-            Left = 164
-            Top = 122
+            Left = 163
+            Top = 75
             Width = 108
             Height = 17
             Caption = 'Lines to end page'
-            TabOrder = 12
+            TabOrder = 7
           end
           object cbRSendCursorToBeginningLine: TCheckBox
             Left = 11
-            Top = 141
+            Top = 92
             Width = 133
             Height = 17
             Caption = 'Cursor to beginning line'
-            TabOrder = 13
+            TabOrder = 8
           end
           object cbRSendSweave: TCheckBox
             Left = 11
-            Top = 159
+            Top = 112
             Width = 62
             Height = 17
             Caption = 'Sweave'
-            TabOrder = 15
+            TabOrder = 10
           end
           object cbRSendClipboard: TCheckBox
-            Left = 164
-            Top = 51
+            Left = 11
+            Top = 35
             Width = 70
             Height = 17
             Caption = 'Clipboard'
-            TabOrder = 5
-          end
-          object cbRSendSourceClipboard: TCheckBox
-            Left = 11
-            Top = 51
-            Width = 107
-            Height = 17
-            Caption = 'Clipboard (source)'
-            TabOrder = 4
-          end
-          object cbRSendSourceContiguous: TCheckBox
-            Left = 11
-            Top = 87
-            Width = 121
-            Height = 17
-            Caption = 'Contiguous (source)'
-            TabOrder = 8
+            TabOrder = 2
           end
           object cbRSendContiguous: TCheckBox
-            Left = 164
-            Top = 87
+            Left = 11
+            Top = 54
             Width = 78
             Height = 17
             Caption = 'Contiguous'
-            TabOrder = 9
+            TabOrder = 4
           end
           object cbRCurrentLineToTop: TCheckBox
             Left = 11
-            Top = 122
+            Top = 73
             Width = 112
             Height = 17
             Caption = 'Current line to top'
-            TabOrder = 11
+            TabOrder = 6
           end
           object cbRSendKnitr: TCheckBox
-            Left = 164
-            Top = 160
+            Left = 163
+            Top = 114
             Width = 45
             Height = 17
             Caption = 'Knitr'
-            TabOrder = 16
+            TabOrder = 11
           end
         end
         object gbControlling: TGroupBox
           Left = 0
-          Top = 184
+          Top = 139
           Width = 334
           Height = 199
           Align = alTop
@@ -1987,6 +1911,7 @@ object frmAppOptions: TfrmAppOptions
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitTop = 184
           object cbRSetWorkDirectory: TCheckBox
             Left = 11
             Top = 15
@@ -2153,10 +2078,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Packages (R)'
         ImageIndex = 7
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label5: TLabel
           Left = 0
           Top = 325
@@ -2278,10 +2199,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Options (Rgui)'
         ImageIndex = 12
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbRguiReturnFocus: TGroupBox
           Left = 0
           Top = 0
@@ -2422,10 +2339,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Recognition (Rgui)'
         ImageIndex = 11
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label9: TLabel
           Left = 3
           Top = 160
@@ -2843,10 +2756,6 @@ object frmAppOptions: TfrmAppOptions
               Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
               object tbsIPLocal: TTabSheet
                 Caption = 'Local'
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 0
-                ExplicitHeight = 0
                 object Label2: TLabel
                   Left = 5
                   Top = 3
@@ -2964,10 +2873,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Deplate'
         ImageIndex = 15
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbParDeplate: TGroupBox
           Left = 0
           Top = 0
@@ -3105,10 +3010,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Pandoc'
         ImageIndex = 19
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbPathPandoc: TGroupBox
           Left = 0
           Top = 0
@@ -3159,10 +3060,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'Txt2tags'
         ImageIndex = 14
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbParTxt2tags: TGroupBox
           Left = 0
           Top = 0
@@ -3300,10 +3197,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'More (conversion)'
         ImageIndex = 16
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbConversionMore: TGroupBox
           Left = 0
           Top = 0
@@ -3332,10 +3225,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'DVI (latex)'
         ImageIndex = 18
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbDVIParameters: TGroupBox
           Left = 0
           Top = 0
@@ -3430,10 +3319,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'PDF (latex)'
         ImageIndex = 17
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbPDFParameters: TGroupBox
           Left = 0
           Top = 0
@@ -3528,10 +3413,6 @@ object frmAppOptions: TfrmAppOptions
         Caption = 'More (latex)'
         ImageIndex = 19
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gpbLatexOptions: TGroupBox
           Left = 0
           Top = 0

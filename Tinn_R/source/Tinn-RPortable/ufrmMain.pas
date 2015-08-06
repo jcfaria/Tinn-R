@@ -1,4 +1,4 @@
-ï»¿{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
+{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
 {$MINSTACKSIZE $00004000}
 {$MAXSTACKSIZE $00100000}
 {$IMAGEBASE $00400000}
@@ -69,7 +69,7 @@
   Russell May - http://www.solarvoid.com
 
  Tinn-R is an extension of Tinn that provides additional tools to control R
- (http://cran.r-project.org). The project is coordened by JosÃ© ClÃ¡udio Faria
+ (http://cran.r-project.org). The project is coordened by José Cláudio Faria
  (joseclaudio.faria@gmail.com).
 
  As such, Tinn-R is a feature-rich replacement of the basic script editor
@@ -298,6 +298,7 @@ type
     actFindAgain: TAction;
     actFontDecrease: TAction;
     actFontIncrease: TAction;
+    actFormatR: TAction;
     actFullPathUnix: TAction;
     actFullPathWindows: TAction;
     actGotoLine: TAction;
@@ -308,6 +309,7 @@ type
     actGroupRename: TAction;
     actGrouptNew: TAction;
     actGutterVisible: TAction;
+    actHexViewerVisible: TAction;
     actHtmlOpenAlways: TAction;
     actHtmlOpenCurrentFile: TAction;
     actHtmlOpenFile: TAction;
@@ -363,6 +365,8 @@ type
     actMatchBracket: TAction;
     actMiscVisible: TAction;
     actNormalSelect: TAction;
+    actNotification: TAction;
+    actNotification_US: TAction;
     actOnTop: TAction;
     actOpenMaximized: TAction;
     actOpenMRU: TAction;
@@ -422,7 +426,7 @@ type
     actRContTermStartClose: TAction;
     actRCurrentLineToTop: TAction;
     actReadOnly: TAction;
-    actFormatR: TAction;
+    actRecho: TAction;
     actReload: TAction;
     actReloadLatexSymbols: TAction;
     actREnvironmentRefresh: TAction;
@@ -471,13 +475,9 @@ type
     actRSendLine: TAction;
     actRSendLinesToEndPage: TAction;
     actRSendSelection: TAction;
-    actRSendSourceBlockMarked: TAction;
-    actRSendSourceClipboard: TAction;
-    actRSendSourceContiguous: TAction;
-    actRSendSourceFile: TAction;
-    actRSendSourceSelection: TAction;
     actRSendSweave: TAction;
     actRSimpleDefault: TAction;
+    actRtermAutoHide: TAction;
     actRtermDivide: TAction;
     actRtermEditorSetFocus: TAction;
     actRtermIOandLOGClear: TAction;
@@ -548,6 +548,7 @@ type
     actTobSpellVisible: TAction;
     actTobSyntaxVisible: TAction;
     actTobViewVisible: TAction;
+    actToolsAutoHide: TAction;
     actToolsDivide: TAction;
     actToolsMaximize: TAction;
     actToolsMinimize: TAction;
@@ -599,11 +600,9 @@ type
     cdMain: TColorDialog;
     Clear3: TMenuItem;
     Clipboard1: TMenuItem;
-    Clipboard2: TMenuItem;
     Closeallselectedgroup2: TMenuItem;
     Commentsshowhide1: TMenuItem;
     Completionshowhide1: TMenuItem;
-    Contiguous1: TMenuItem;
     ContiguousechoTRUE1: TMenuItem;
     Copyhost1: TMenuItem;
     CopyURL1: TMenuItem;
@@ -619,6 +618,7 @@ type
     edFilter: TEdit;
     Edit1: TMenuItem;
     Editorshowhide1: TMenuItem;
+    Enablenotification1: TMenuItem;
     ESS1: TMenuItem;
     Exampleselected1: TMenuItem;
     Exampleselected2: TMenuItem;
@@ -632,6 +632,7 @@ type
     Help5: TMenuItem;
     Helpselected1: TMenuItem;
     Helpselected2: TMenuItem;
+    Hewviewershowhide1: TMenuItem;
     imlProject: TPngImageList;
     imlRexplorer: TPngImageList;
     imlSearch: TPngImageList;
@@ -812,6 +813,7 @@ type
     menMarksUnmarkAll: TMenuItem;
     menOptionAlwaysOnTop: TMenuItem;
     menOptionColorPreference: TMenuItem;
+    menOptionEcho: TMenuItem;
     menOptionGoBack: TMenuItem;
     menOptionReadOnlyToggle: TMenuItem;
     menOptions: TMenuItem;
@@ -927,13 +929,10 @@ type
     menSendToRBlockMarked: TMenuItem;
     menSendToRCursorToBegginingLine: TMenuItem;
     menSendToRCursorToEndLine: TMenuItem;
-    menSendToRFile: TMenuItem;
     menSendToRKnitr: TMenuItem;
     menSendToRLine: TMenuItem;
     menSendToRLinesToEndPage: TMenuItem;
     menSendToRSelection: TMenuItem;
-    menSendToRSourceBlockMarked: TMenuItem;
-    menSendToRSourceSelection: TMenuItem;
     menTools: TMenuItem;
     menToolsAsciiChart: TMenuItem;
     menToolsBackup: TMenuItem;
@@ -1199,6 +1198,7 @@ type
     N128: TMenuItem;
     N129: TMenuItem;
     N13: TMenuItem;
+    N130: TMenuItem;
     N131: TMenuItem;
     N132: TMenuItem;
     N133: TMenuItem;
@@ -1262,7 +1262,6 @@ type
     N186: TMenuItem;
     N187: TMenuItem;
     N188: TMenuItem;
-    N189: TMenuItem;
     N19: TMenuItem;
     N190: TMenuItem;
     N191: TMenuItem;
@@ -1273,8 +1272,10 @@ type
     N196: TMenuItem;
     N197: TMenuItem;
     N198: TMenuItem;
+    N199: TMenuItem;
     N2: TMenuItem;
     N20: TMenuItem;
+    N200: TMenuItem;
     N21: TMenuItem;
     N22: TMenuItem;
     N23: TMenuItem;
@@ -1472,11 +1473,6 @@ type
     pmemRResSendLine: TMenuItem;
     pmemRResSendLinesToEndPage: TMenuItem;
     pmemRResSendSelection: TMenuItem;
-    pmemRResSendSourceBlockMarked: TMenuItem;
-    pmemRResSendSourceClipboard: TMenuItem;
-    pmemRResSendSourceContiguous: TMenuItem;
-    pmemRResSendSourceFile: TMenuItem;
-    pmemRResSendSourceSelection: TMenuItem;
     pmemRResSendSweave: TMenuItem;
     pmemSpellClearAll: TMenuItem;
     pmemSpellCopy: TMenuItem;
@@ -1555,7 +1551,7 @@ type
     pmenGroupNew_OLD: TMenuItem;
     pmenGroupRename_OLD: TMenuItem;
     pmenIO: TJvPopupMenu;
-    pmenLog: TJvPopupMenu;
+    pmenLOG: TJvPopupMenu;
     pmenLogFont: TMenuItem;
     pmenLogFontDecrease: TMenuItem;
     pmenLogFontIncrease: TMenuItem;
@@ -1695,6 +1691,8 @@ type
     Right1: TMenuItem;
     Right2: TMenuItem;
     Rshowhide1: TMenuItem;
+    Rtermautohideonoff1: TMenuItem;
+    Rtermautohideonoff2: TMenuItem;
     Rtermdivide1: TMenuItem;
     RtermIOLinewrapshowhide1: TMenuItem;
     RtermIOshowhide1: TMenuItem;
@@ -1755,9 +1753,7 @@ type
     TBItem24: TTBItem;
     TBItem25: TTBItem;
     TBItem26: TTBItem;
-    TBItem27: TTBItem;
     TBItem28: TTBItem;
-    TBItem29: TTBItem;
     TBItem3: TTBItem;
     TBItem30: TTBItem;
     TBItem31: TTBItem;
@@ -1777,7 +1773,6 @@ type
     TBItem44: TTBItem;
     TBItem45: TTBItem;
     TBItem46: TTBItem;
-    TBItem47: TTBItem;
     TBItem48: TTBItem;
     TBItem49: TTBItem;
     TBItem5: TTBItem;
@@ -1853,8 +1848,6 @@ type
     TBRSendLine: TTBItem;
     TBRSendLineToEndPage: TTBItem;
     TBRSendSelection: TTBItem;
-    TBRSendSourceBlockMarked: TTBItem;
-    TBRSendSourceSelection: TTBItem;
     TBRSetWorkDir: TTBItem;
     tbSave: TToolButton;
     tbSaveAll: TToolButton;
@@ -1937,6 +1930,7 @@ type
     tRRuning: TJvTimer;
     tUpdateOptions: TJvTimer;
     Unindent1: TMenuItem;
+    Updatesilently1: TMenuItem;
     UpperCaseSelection1: TMenuItem;
     Uppercaseselection2: TMenuItem;
     UppercaseWord1: TMenuItem;
@@ -1948,18 +1942,6 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    actHexViewerVisible: TAction;
-    Hewviewershowhide1: TMenuItem;
-    actNotification: TAction;
-    actNotification_US: TAction;
-    N199: TMenuItem;
-    Enablenotification1: TMenuItem;
-    Updatesilently1: TMenuItem;
-    actRtermAutoHide: TAction;
-    actToolsAutoHide: TAction;
-    Rtermautohideonoff1: TMenuItem;
-    Rtermautohideonoff2: TMenuItem;
-    N200: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actANSIExecute(Sender: TObject);
@@ -2046,6 +2028,7 @@ type
     procedure actFindExecute(Sender: TObject);
     procedure actFontDecreaseExecute(Sender: TObject);
     procedure actFontIncreaseExecute(Sender: TObject);
+    procedure actFormatRExecute(Sender: TObject);
     procedure actFullPathUnixExecute(Sender: TObject);
     procedure actFullPathWindowsExecute(Sender: TObject);
     procedure actGotoLineExecute(Sender: TObject);
@@ -2056,6 +2039,7 @@ type
     procedure actGroupRenameExecute(Sender: TObject);
     procedure actGrouptNewExecute(Sender: TObject);
     procedure actGutterVisibleExecute(Sender: TObject);
+    procedure actHexViewerVisibleExecute(Sender: TObject);
     procedure actHtmlOpenAlwaysExecute(Sender: TObject);
     procedure actHtmlOpenCurrentFileExecute(Sender: TObject);
     procedure actHtmlOpenFileExecute(Sender: TObject);
@@ -2083,6 +2067,8 @@ type
     procedure actMatchBracketExecute(Sender: TObject);
     procedure actMiscVisibleExecute(Sender: TObject);
     procedure actNormalSelectExecute(Sender: TObject);
+    procedure actNotification_USExecute(Sender: TObject);
+    procedure actNotificationExecute(Sender: TObject);
     procedure actOnTopExecute(Sender: TObject);
     procedure actOpenMaximizedExecute(Sender: TObject);
     procedure actOpenMRUExecute(Sender: TObject);
@@ -2143,7 +2129,7 @@ type
     procedure actRContTermStartCloseExecute(Sender: TObject);
     procedure actRCurrentLineToTopExecute(Sender: TObject);
     procedure actReadOnlyExecute(Sender: TObject);
-    procedure actFormatRExecute(Sender: TObject);
+    procedure actRechoExecute(Sender: TObject);
     procedure actReloadExecute(Sender: TObject);
     procedure actReloadLatexSymbolsExecute(Sender: TObject);
     procedure actREnvironmentRefreshExecute(Sender: TObject);
@@ -2192,13 +2178,10 @@ type
     procedure actRSendLineExecute(Sender: TObject);
     procedure actRSendLinesToEndPageExecute(Sender: TObject);
     procedure actRSendSelectionExecute(Sender: TObject);
-    procedure actRSendSourceBlockMarkedExecute(Sender: TObject);
-    procedure actRSendSourceClipboardExecute(Sender: TObject);
     procedure actRSendSourceContiguousExecute(Sender: TObject);
-    procedure actRSendSourceFileExecute(Sender: TObject);
-    procedure actRSendSourceSelectionExecute(Sender: TObject);
     procedure actRSendSweaveExecute(Sender: TObject);
     procedure actRSimpleDefaultExecute(Sender: TObject);
+    procedure actRtermAutoHideExecute(Sender: TObject);
     procedure actRtermDivideExecute(Sender: TObject);
     procedure actRtermEditorSetFocusExecute(Sender: TObject);
     procedure actRtermIOandLOGClearExecute(Sender: TObject);
@@ -2271,6 +2254,7 @@ type
     procedure actTobSpellVisibleExecute(Sender: TObject);
     procedure actTobSyntaxVisibleExecute(Sender: TObject);
     procedure actTobViewVisibleExecute(Sender: TObject);
+    procedure actToolsAutoHideExecute(Sender: TObject);
     procedure actToolsDivideExecute(Sender: TObject);
     procedure actToolsMaximizeExecute(Sender: TObject);
     procedure actToolsMinimizeExecute(Sender: TObject);
@@ -2424,6 +2408,8 @@ type
     procedure pgFilesDragDrop(Sender, Source: TObject; X, Y: Integer);
     procedure pgFilesDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure pgFilesMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure pgFilesMouseLeave(Sender: TObject);
+    procedure pgFilesMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure pmemRResCurrentLineToTopClick(Sender: TObject);
     procedure pmemRResSendBlockMarkedClick(Sender: TObject);
     procedure pmemRResSendClipboardClick(Sender: TObject);
@@ -2435,11 +2421,6 @@ type
     procedure pmemRResSendLineClick(Sender: TObject);
     procedure pmemRResSendLinesToEndPageClick(Sender: TObject);
     procedure pmemRResSendSelectionClick(Sender: TObject);
-    procedure pmemRResSendSourceBlockMarkedClick(Sender: TObject);
-    procedure pmemRResSendSourceClipboardClick(Sender: TObject);
-    procedure pmemRResSendSourceContiguousClick(Sender: TObject);
-    procedure pmemRResSendSourceFileClick(Sender: TObject);
-    procedure pmemRResSendSourceSelectionClick(Sender: TObject);
     procedure pmemRResSendSweaveClick(Sender: TObject);
     procedure pmemSpellClearAllClick(Sender: TObject);
     procedure pmemSpellCopyClick(Sender: TObject);
@@ -2494,13 +2475,6 @@ type
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
     procedure VimRplugin1Click(Sender: TObject);
-    procedure actHexViewerVisibleExecute(Sender: TObject);
-    procedure actNotificationExecute(Sender: TObject);
-    procedure actNotification_USExecute(Sender: TObject);
-    procedure pgFilesMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure pgFilesMouseLeave(Sender: TObject);
-    procedure actRtermAutoHideExecute(Sender: TObject);
-    procedure actToolsAutoHideExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2517,16 +2491,17 @@ type
     bMinimizeTinnAfterLastFile     : boolean;
     bOnTop                         : boolean;
     bOrganizeAutomatically         : boolean;
+    bRecho                         : boolean;
     bRestored                      : boolean;
     bRestoreIniDock                : boolean;
-    bRsetget_Info                  : boolean;
     bRKnitr                        : boolean;
     bRmirros_Update                : boolean;
     bRRequireKnitr                 : boolean;
     bRSendAll                      : boolean;
+    bRsetget_Info                  : boolean;
     bRSetWorkDir_Starting          : boolean;
     bRSmartSend                    : boolean;
-    bRsvSocket_Connect             : boolean;  // VariÃ¡veis de controle do TinnRcom e dependÃªncias
+    bRsvSocket_Connect             : boolean;  // Variáveis de controle do TinnRcom e dependências
     bRtermCanFloat                 : boolean;
     bRtermCloseWithoutAsk          : boolean;
     bRtermHorizontal               : boolean;  // IO disposition for IO and Log in the same view
@@ -2593,6 +2568,8 @@ type
     sEncodingDefault               : string;
     sFileLatexOrigin               : string;
     sFileProjectOrigin             : string;
+    sformatR                       : string;
+    sformatRd                      : string;
     sGuiRRunning                   : string;
     sIniDockFilePath               : string;
     slFileMRU                      : TStringList;
@@ -2628,8 +2605,6 @@ type
     sPathTxt2tags_Converter        : string;
     sPathTxt2tags_Interpreter      : string;
     sProjectName                   : string;
-    sformatR                       : string;
-    sformatRd                      : string;
     sRIOSaved                      : string;
     sRLogSaved                     : string;
     sSearchDirHistory              : string;
@@ -2690,7 +2665,6 @@ type
     procedure CheckProcessingPath(sPath: string);
     procedure CheckProject;
     procedure CheckTemporary;
-    procedure RSetGet_Info;
     procedure CheckTop;
     procedure CheckVersion;
     procedure ClearStatusBarProject;
@@ -2725,11 +2699,14 @@ type
     procedure OpenProjectIntoTinn(sProjectName: string);
     procedure PandocConversion(sPandocInstruction, sPandocFrom, sPandocTo: string; bWait: boolean = True);
     procedure RecentProjectFileClick(Sender: TObject);
+    procedure Recho_False;
+    procedure Recho_True;
     procedure RecordActions(baAction: TBasicAction; var bHandled: Boolean);
     procedure RemoveLine_Commented(var sTmp: string);
     procedure RemoveLine_Empty(var sTmp: string);
     procedure RMenu(bOption: boolean);
     procedure RmirrorsInterface_Update;
+    procedure RSetGet_Info;
     procedure RToolbar(bOption: boolean);
     procedure SaveEditorKeystrokes;
     procedure SaveNewIni_Application;
@@ -2778,9 +2755,9 @@ type
 
   public
     { Public declarations }
-    ajavHK                    : array[1..20] of TJvApplicationHotKey;  // R Hotkeys
-    ajavHKC                   : array[1..20] of TJvApplicationHotKey;  // R Hotkeys Custom
-    aRC                       : array[1..20] of string;                // R Custom
+    ajavHK                    : array[1..15] of TJvApplicationHotKey;  // R Hotkeys
+    ajavHKC                   : array[1..15] of TJvApplicationHotKey;  // R Hotkeys Custom
+    aRC                       : array[1..15] of string;                // R Custom
     bActiveLine               : boolean;
     bAllNames                 : boolean;
     bbBOM                     : boolean;
@@ -2868,6 +2845,7 @@ type
     sFileExtensions           : string;
     sIPHostLocal              : string;
     sIPHostRemote             : string;
+    slFileNotify              : TStringList;
     slFilters                 : TStringList;
     sLineComment              : string;
     sPandocHistory            : string;
@@ -2895,8 +2873,6 @@ type
     sTipToWrite               : string;
     sUtilsOrigin              : string;
     sWorkingDir               : string;
-    slFileNotify              : TStringList;
-    //iRtermSize                : integer;
 
     function FindTopWindow: integer;
     function GetBuildInfo: string;
@@ -2940,7 +2916,6 @@ type
     procedure UpdateCursorPos(Sender: TSynEdit);
     procedure UpdateHexViewer;
     procedure UpdateMRU(var miItem: TMenuItem; sFileName: string);
-
 
 end;
 
@@ -3039,8 +3014,8 @@ begin
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '4.00.03.06';
   sCurrentVersion_Rcard     := '2.03.00.00';
-  sCurrentVersion_Rmirrors  := '4.00.03.04';
-  sCurrentVersion_Shortcuts := '4.00.03.06';
+  sCurrentVersion_Rmirrors  := '4.00.03.06';
+  sCurrentVersion_Shortcuts := '4.00.03.07';
   sCurrentVersion_TinnRcom  := '1.0.18';  // Released joinly with Tinn-R setup program
 
   // Cache
@@ -3165,12 +3140,16 @@ var
 var
   bcP,
    bcMatchBracketPos: TBufferCoord;
+
   wcCharA,
-   wcCharB          : WideChar;
+   wcCharB: WideChar;
+
   i,
-   iArrayLength     : integer;
-  pP                : TPoint;
-  sTmp              : WideString;
+   iArrayLength: integer;
+
+  pP: TPoint;
+
+  sTmp: WideString;
 
 const
   AllBrackets = ['{',
@@ -3580,11 +3559,15 @@ var
    bOverwriteCurrentContents: boolean;
 
   i,
-   j         : integer;
+   j: integer;
+
   pLineNumber: TPoint;
-  seEditor   : TSynEdit;
-  slNewFile  : TUnicodeStringList;
-  sTmp       : string;
+
+  seEditor: TSynEdit;
+
+  slNewFile: TUnicodeStringList;
+
+  sTmp: string;
 
 begin
   ControlResources(False);
@@ -3671,7 +3654,8 @@ procedure TfrmTinnMain.LoadFile(sFileName: string;
                                 bCreateNewChild: boolean = True;
                                 bUpdateMRU: boolean = True);
 var
-  sTmp       : string;
+  sTmp: string;
+
   wAttributes: word;
 
 begin
@@ -3765,7 +3749,7 @@ var
   slSearch,
    slPandocHistory,
    slPandocHistoryFrom,
-   slPandocHistoryTo  : TStringList;
+   slPandocHistoryTo: TStringList;
 
   i: integer;
 
@@ -3871,9 +3855,9 @@ begin
     WriteBool('App', 'bRtermSimple', bRtermSimple);
     WriteInteger('App', 'iIOSyntax', iIOSyntax);
     WriteInteger('App', 'iLogSyntax', iLogSyntax);
+    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
     WriteInteger('App', 'iSynLog2.Height', frmRterm.iSynLog2Height);
     WriteInteger('App', 'iSynLog2.Width', frmRterm.iSynLog2Width);
-    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
 
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
@@ -3883,9 +3867,9 @@ begin
     WriteInteger('App', 'iMisc.TabIndex', frmTools.pgMisc.TabIndex);
     WriteInteger('App', 'iR.TabIndex', frmTools.pgR.TabIndex);
     WriteInteger('App', 'iResults.TabIndex', frmTools.pgResults.TabIndex);
+    WriteInteger('App', 'iTools.Size', frmTools.iSize);
     WriteInteger('App', 'iTools.TabIndex', frmTools.pgTools.TabIndex);
     WriteInteger('App', 'iTxt2tags.TabIndex', frmTools.pgTxt2tags.TabIndex);
-    WriteInteger('App', 'iTools.Size', frmTools.iSize);
 
     // Tools visibility
     WriteBool('App', 'bDatabase.Visible', actDatabaseVisible.Checked);
@@ -3894,6 +3878,7 @@ begin
     WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
     WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
     WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
+    WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
     WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
     WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
     WriteBool('App', 'bMarkup.Visible', actMarkupVisible.Checked);
@@ -3902,12 +3887,11 @@ begin
     WriteBool('App', 'bR.Visible', actRVisible.Checked);
     WriteBool('App', 'bResults.Visible', actResultsVisible.Checked);
     WriteBool('App', 'bRExplorer.Visible', actRExplorerVisible.Checked);
+    WriteBool('App', 'bSearch.Visible', actSearchVisible.Checked);
+    WriteBool('App', 'bSpell.Visible', actSpellVisible.Checked);
     WriteBool('App', 'bTxt2tags.Visible', actTxt2tagsVisible.Checked);
     WriteBool('App', 'bWinExpl.Visible', actWinExplVisible.Checked);
     WriteBool('App', 'bWorkExpl.Visible', actWorkExplVisible.Checked);
-    WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
-    WriteBool('App', 'bSearch.Visible', actSearchVisible.Checked);
-    WriteBool('App', 'bSpell.Visible', actSpellVisible.Checked);
 
     // Misc
     WriteBool('App', 'bActiveLine', bActiveLine);
@@ -3921,6 +3905,7 @@ begin
     WriteBool('App', 'bDosMinimizedAlways', actDosMinimizedAlways.Checked);
     WriteBool('App', 'bDviOpenAlways', actDviOpenAlways.Checked);
     WriteBool('App', 'bEditorLineWrap', actEditorLineWrap.Checked);
+    WriteBool('App', 'bFormatR', actFormatR.Visible);
     WriteBool('App', 'bHtmlOpenAlways', actHtmlOpenAlways.Checked);
     WriteBool('App', 'bIOLineWrap', actRtermIOLineWrap.Checked);
     WriteBool('App', 'bIPLocal', bIPLocal);
@@ -3935,14 +3920,14 @@ begin
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
     WriteBool('App', 'bRAsServer', bRAsServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bFormatR', actFormatR.Visible);
+    WriteBool('App', 'bRecho', actRecho.Checked);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
-    WriteBool('App', 'bRsetget_Info', bRsetget_Info);
     WriteBool('App', 'bRguiReturnFocus', bRguiReturnFocus);
     WriteBool('App', 'bRmirros_Update', bRmirros_Update);
     WriteBool('App', 'bRSendAll', bRSendAll);
+    WriteBool('App', 'bRsetget_Info', bRsetget_Info);
     WriteBool('App', 'bRSetWorkDir_Starting', bRSetWorkDir_Starting);
     WriteBool('App', 'bRSimpleDefault', actRSimpleDefault.Checked);
     WriteBool('App', 'bRSmartSend', bRSmartSend);
@@ -3987,6 +3972,8 @@ begin
     WriteString('App', 'sAppSelected', sAppSelected);
     WriteString('App', 'sEncodingDefault', GetEncodingDefault);
     WriteString('App', 'sEndComment', sEndComment);
+    WriteString('App', 'sFormatR', sFormatR);
+    WriteString('App', 'sFormatRd', sFormatRd);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
     WriteString('App', 'sParDeplate', sParDeplate);
@@ -4004,8 +3991,6 @@ begin
     WriteString('App', 'sPathRterm', sPathRterm);
     WriteString('App', 'sPathTxt2tags_Converter', sPathTxt2tags_Converter);
     WriteString('App', 'sPathTxt2tags_Interpreter', sPathTxt2tags_Interpreter);
-    WriteString('App', 'sFormatR', sFormatR);
-    WriteString('App', 'sFormatRd', sFormatRd);
     WriteString('App', 'sRmirror', sRmirror);
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
     WriteString('App', 'sTriggerRDataCompletion', sTriggerRDataCompletion);
@@ -4045,11 +4030,6 @@ begin
     WriteBool('Roptions', 'bRSendLine', actRSendLine.Visible);
     WriteBool('Roptions', 'bRSendLinesToEndPage', actRSendLinesToEndPage.Visible);
     WriteBool('Roptions', 'bRSendSelection', actRSendSelection.Visible);
-    WriteBool('Roptions', 'bRSendSourceBlockMarked', actRSendSourceBlockMarked.Visible);
-    WriteBool('Roptions', 'bRSendSourceClipboard', actRSendSourceClipboard.Visible);
-    WriteBool('Roptions', 'bRSendSourceContiguous', actRSendSourceContiguous.Visible);
-    WriteBool('Roptions', 'bRSendSourceFile', actRSendSourceFile.Visible);
-    WriteBool('Roptions', 'bRSendSourceSelection', actRSendSourceSelection.Visible);
     WriteBool('Roptions', 'bRSweave', actRSendSweave.Visible);
 
     // Controlling R alphabetically ordered
@@ -4218,17 +4198,17 @@ begin
     FreeAndNil(slTextDiff);
   end;
 
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
     ifTinn_Tmp.WriteString('R Hotkeys',
                            ('RHK' + IntToStr(i)),
                            hkTinnR.strgDefault.Cells[1, i]);
 
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
     ifTinn_Tmp.WriteString('R Custom',
                            ('RC' + IntToStr(i)),
                            hkTinnR.strgCustom.Cells[0, i]);
 
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
     ifTinn_Tmp.WriteString('R Hotkeys Custom',
                            ('RHKC' + IntToStr(i)),
                            hkTinnR.strgCustom.Cells[1, i]);
@@ -4296,7 +4276,7 @@ var
   slSearch,
    slPandocHistory,
     slPandocHistoryFrom,
-    slPandocHistoryTo  : TStringList;
+    slPandocHistoryTo: TStringList;
 
   i: integer;
 
@@ -4390,9 +4370,9 @@ begin
     WriteBool('App', 'bRtermSimple', bRtermSimple);
     WriteInteger('App', 'iIOSyntax', iIOSyntax);
     WriteInteger('App', 'iLogSyntax', iLogSyntax);
+    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
     WriteInteger('App', 'iSynLog2.Height', frmRterm.iSynLog2Height);
     WriteInteger('App', 'iSynLog2.Width', frmRterm.iSynLog2Width);
-    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
 
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
@@ -4402,9 +4382,9 @@ begin
     WriteInteger('App', 'iMisc.TabIndex', frmTools.pgMisc.TabIndex);
     WriteInteger('App', 'iR.TabIndex', frmTools.pgR.TabIndex);
     WriteInteger('App', 'iResults.TabIndex', frmTools.pgResults.TabIndex);
+    WriteInteger('App', 'iTools.Size', frmTools.iSize);
     WriteInteger('App', 'iTools.TabIndex', frmTools.pgTools.TabIndex);
     WriteInteger('App', 'iTxt2tags.TabIndex', frmTools.pgTxt2tags.TabIndex);
-    WriteInteger('App', 'iTools.Size', frmTools.iSize);
 
     // Tools visibility
     WriteBool('App', 'bDatabase.Visible', actDatabaseVisible.Checked);
@@ -4413,6 +4393,7 @@ begin
     WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
     WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
     WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
+    WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
     WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
     WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
     WriteBool('App', 'bMarkup.Visible', actMarkupVisible.Checked);
@@ -4421,12 +4402,11 @@ begin
     WriteBool('App', 'bR.Visible', actRVisible.Checked);
     WriteBool('App', 'bResults.Visible', actResultsVisible.Checked);
     WriteBool('App', 'bRExplorer.Visible', actRExplorerVisible.Checked);
+    WriteBool('App', 'bSearch.Visible', actSearchVisible.Checked);
+    WriteBool('App', 'bSpell.Visible', actSpellVisible.Checked);
     WriteBool('App', 'bTxt2tags.Visible', actTxt2tagsVisible.Checked);
     WriteBool('App', 'bWinExpl.Visible', actWinExplVisible.Checked);
     WriteBool('App', 'bWorkExpl.Visible', actWorkExplVisible.Checked);
-    WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
-    WriteBool('App', 'bSearch.Visible', actSearchVisible.Checked);
-    WriteBool('App', 'bSpell.Visible', actSpellVisible.Checked);
 
     // Misc
     WriteBool('App', 'bActiveLine', bActiveLine);
@@ -4440,6 +4420,7 @@ begin
     WriteBool('App', 'bDosMinimizedAlways', actDosMinimizedAlways.Checked);
     WriteBool('App', 'bDviOpenAlways', actDviOpenAlways.Checked);
     WriteBool('App', 'bEditorLineWrap', actEditorLineWrap.Checked);
+    WriteBool('App', 'bFormatR', actFormatR.Visible);
     WriteBool('App', 'bHtmlOpenAlways', actHtmlOpenAlways.Checked);
     WriteBool('App', 'bIOLineWrap', actRtermIOLineWrap.Checked);
     WriteBool('App', 'bIPLocal', bIPLocal);
@@ -4454,14 +4435,14 @@ begin
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
     WriteBool('App', 'bRAsServer', bRAsServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bFormatR', actFormatR.Visible);
+    WriteBool('App', 'bRecho', actRecho.Checked);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
-    WriteBool('App', 'bRsetget_Info', bRsetget_Info);
     WriteBool('App', 'bRguiReturnFocus', bRguiReturnFocus);
     WriteBool('App', 'bRmirros_Update', bRmirros_Update);
     WriteBool('App', 'bRSendAll', bRSendAll);
+    WriteBool('App', 'bRsetget_Info', bRsetget_Info);
     WriteBool('App', 'bRSetWorkDir_Starting', bRSetWorkDir_Starting);
     WriteBool('App', 'bRSimpleDefault', actRSimpleDefault.Checked);
     WriteBool('App', 'bRSmartSend', bRSmartSend);
@@ -4506,6 +4487,8 @@ begin
     WriteString('App', 'sAppSelected', sAppSelected);
     WriteString('App', 'sEncodingDefault', GetEncodingDefault);
     WriteString('App', 'sEndComment', sEndComment);
+    WriteString('App', 'sFormatR', sFormatR);
+    WriteString('App', 'sFormatRd', sFormatRd);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
     WriteString('App', 'sParDeplate', sParDeplate);
@@ -4523,8 +4506,6 @@ begin
     WriteString('App', 'sPathRterm', sPathRterm);
     WriteString('App', 'sPathTxt2tags_Converter', sPathTxt2tags_Converter);
     WriteString('App', 'sPathTxt2tags_Interpreter', sPathTxt2tags_Interpreter);
-    WriteString('App', 'sFormatR', sFormatR);
-    WriteString('App', 'sFormatRd', sFormatRd);
     WriteString('App', 'sRmirror', sRmirror);
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
     WriteString('App', 'sTriggerRDataCompletion', sTriggerRDataCompletion);
@@ -4569,11 +4550,6 @@ begin
     WriteBool('Roptions', 'bRSendLine', actRSendLine.Visible);
     WriteBool('Roptions', 'bRSendLinesToEndPage', actRSendLinesToEndPage.Visible);
     WriteBool('Roptions', 'bRSendSelection', actRSendSelection.Visible);
-    WriteBool('Roptions', 'bRSendSourceBlockMarked', actRSendSourceBlockMarked.Visible);
-    WriteBool('Roptions', 'bRSendSourceClipboard', actRSendSourceClipboard.Visible);
-    WriteBool('Roptions', 'bRSendSourceContiguous', actRSendSourceContiguous.Visible);
-    WriteBool('Roptions', 'bRSendSourceFile', actRSendSourceFile.Visible);
-    WriteBool('Roptions', 'bRSendSourceSelection', actRSendSourceSelection.Visible);
     WriteBool('Roptions', 'bRSweave', actRSendSweave.Visible);
 
     // Controlling R alphabetically ordered
@@ -4742,19 +4718,19 @@ begin
     if not bMakingBackup then slprojectMRU.Delete(0);
   end;
 
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
     ifTinn.WriteString('R Hotkeys',
                        ('RHK' +
                         IntToStr(i)),
                        hkTinnR.strgDefault.Cells[1, i]);
 
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
     ifTinn.WriteString('R Custom',
                        ('RC' +
                         IntToStr(i)),
                        hkTinnR.strgCustom.Cells[0, i]);
 
-  for i:= 1 to 20 do
+  for i:= 1 to 15 do
     ifTinn.WriteString('R Hotkeys Custom',
                        ('RHKC' +
                         IntToStr(i)),
@@ -4961,9 +4937,11 @@ procedure TfrmTinnMain.SetPreferences_Application;
   function ReadRegEntry(strSubKey,
                         strValueName: string): string;
   var
-   Key   : HKey;
+   Key: HKey;
+
    Buffer: array[0..255] of char;
-   Size  : cardinal;
+
+   Size: cardinal;
 
   begin
    Result:= 'ERROR';
@@ -5032,6 +5010,7 @@ var
    slSubkeys: TStringList;
 
   sTmp: string;
+
   bTop: boolean;
 
 begin
@@ -5127,24 +5106,25 @@ begin
   actDataRcardVisible.Checked        := ifTinn.ReadBool('App', 'bDataRcard.Visible', True);
   actDataRmirrorsVisible.Checked     := ifTinn.ReadBool('App', 'bDataRmirrors.Visible', True);
   actDataShortcutsVisible.Checked    := ifTinn.ReadBool('App', 'bDataShortcuts.Visible', True);
+  actHexViewerVisible.Checked        := ifTinn.ReadBool('App', 'bHexViewer.Visible', True);
   actIniLogVisible.Checked           := ifTinn.ReadBool('App', 'bIniLog.Visible', True);
   actLatexVisible.Checked            := ifTinn.ReadBool('App', 'bLatex.Visible', True);
   actMarkupVisible.Checked           := ifTinn.ReadBool('App', 'bMarkup.Visible', True);
   actMiscVisible.Checked             := ifTinn.ReadBool('App', 'bMisc.Visible', True);
   actProjectVisible.Checked          := ifTinn.ReadBool('App', 'bProject.Visible', True);
-  actRVisible.Checked                := ifTinn.ReadBool('App', 'bR.Visible', True);
   actResultsVisible.Checked          := ifTinn.ReadBool('App', 'bResults.Visible', True);
   actRExplorerVisible.Checked        := ifTinn.ReadBool('App', 'bRExplorer.Visible', True);
+  actRVisible.Checked                := ifTinn.ReadBool('App', 'bR.Visible', True);
+  actSearchVisible.Checked           := ifTinn.ReadBool('App', 'bSearch.Visible', True);
+  actSpellVisible.Checked            := ifTinn.ReadBool('App', 'bSpell.Visible', True);
   actTxt2tagsVisible.Checked         := ifTinn.ReadBool('App', 'bTxt2tags.Visible', True);
   actWinExplVisible.Checked          := ifTinn.ReadBool('App', 'bWinExpl.Visible', True);
   actWorkExplVisible.Checked         := ifTinn.ReadBool('App', 'bWorkExpl.Visible', True);
-  actHexViewerVisible.Checked        := ifTinn.ReadBool('App', 'bHexViewer.Visible', True);
-  actSearchVisible.Checked           := ifTinn.ReadBool('App', 'bSearch.Visible', True);
-  actSpellVisible.Checked            := ifTinn.ReadBool('App', 'bSpell.Visible', True);
 
   frmTools.tbsComments.TabVisible    := actDataCommentsVisible.Checked;
   frmTools.tbsCompletion.TabVisible  := actDataCompletionVisible.Checked;
   frmTools.tbsDatabase.TabVisible    := actDatabaseVisible.Checked;
+  frmTools.tbsHexViewer.TabVisible   := actHexViewerVisible.Checked;
   frmTools.tbsIniLog.TabVisible      := actIniLogVisible.Checked;
   frmTools.tbsLatex.TabVisible       := actLatexVisible.Checked;
   frmTools.tbsMarkup.TabVisible      := actMarkupVisible.Checked;
@@ -5156,7 +5136,6 @@ begin
   frmTools.tbsRExplorer.TabVisible   := actRExplorerVisible.Checked;
   frmTools.tbsRmirrors.TabVisible    := actDataRmirrorsVisible.Checked;
   frmTools.tbsSearch.TabVisible      := actSearchVisible.Checked;
-  frmTools.tbsHexViewer.TabVisible   := actHexViewerVisible.Checked;
   frmTools.tbsShortcuts.TabVisible   := actDataShortcutsVisible.Checked;
   frmTools.tbsSpell.TabVisible       := actSpellVisible.Checked;
   frmTools.tbsTxt2tags.TabVisible    := actTxt2tagsVisible.Checked;
@@ -5189,6 +5168,8 @@ begin
   sIPHostLocal := ifTinn.ReadString('App', 'sIPHostLocal', '127.0.0.1');
   sIPHostRemote:= ifTinn.ReadString('App', 'sIPHostRemote', '000.000.000.000');
 
+  sFormatR                 := trim(ifTinn.ReadString('App', 'sFormatR', EmptyStr));
+  sFormatRd                := trim(ifTinn.ReadString('App', 'sFormatRd', 'Sorry, this feature is not available yet!'));
   sParDeplate              := trim(ifTinn.ReadString('App', 'sParDeplate', '-f'));
   sParDviBibtex            := trim(ifTinn.ReadString('App', 'sParDviBibtex', 'bibtex --src-specials'));
   sParDviSingle            := trim(ifTinn.ReadString('App', 'sParDviSingle', 'latex -c-style-errors --src-specials'));
@@ -5202,8 +5183,6 @@ begin
   sPathDeplate_Interpreter := trim(ifTinn.ReadString('App', 'sPathDeplate_Interpreter', EmptyStr));
   sPathTxt2tags_Converter  := trim(ifTinn.ReadString('App', 'sPathTxt2tags_Converter', EmptyStr));
   sPathTxt2tags_Interpreter:= trim(ifTinn.ReadString('App', 'sPathTxt2tags_Interpreter', EmptyStr));
-  sFormatR                 := trim(ifTinn.ReadString('App', 'sFormatR', EmptyStr));
-  sFormatRd                := trim(ifTinn.ReadString('App', 'sFormatRd', 'Sorry, this feature is not available yet!'));
 
   actCloseDVIViewer.Checked    := ifTinn.ReadBool('App', 'bCloseDVIViewer', False);
   actClosePDFViewer.Checked    := ifTinn.ReadBool('App', 'bClosePDFViewer', True);
@@ -5226,11 +5205,12 @@ begin
                                                       else bRArchitecture64:= False;
 
   bRAsServer             := ifTinn.ReadBool('App', 'bRAsServer', True);
+  bRecho                 := ifTinn.ReadBool('App', 'bRecho', True);
   bRestoreIniDock        := ifTinn.ReadBool('App', 'bRestoreIniDock', False);
-  bRsetget_Info          := ifTinn.ReadBool('App', 'bRsetget_Info', True);
   bRguiReturnFocus       := ifTinn.ReadBool('App', 'bRguiReturnFocus', True);
   bRmirros_Update        := ifTinn.ReadBool('App', 'bRmirros_Update', False);
   bRSendAll              := ifTinn.ReadBool('App', 'bRSendAll', False);
+  bRsetget_Info          := ifTinn.ReadBool('App', 'bRsetget_Info', True);
   bRSetWorkDir_Starting  := ifTinn.ReadBool('App', 'bRSetWorkDir_Starting', True);
   bRSmartSend            := ifTinn.ReadBool('App', 'bRSmartSend', True);
   bRsvSocket_Connect     := ifTinn.ReadBool('App', 'bRsvSocketConnect', True);
@@ -5263,6 +5243,15 @@ begin
   frmTools.panShortcuts.Height             := ifTinn.ReadInteger('App', 'iShortcuts.Height', 79);
   frmTools.panWinExplorer.Height           := ifTinn.ReadInteger('App', 'iWinExplorer.Height', 75);
   frmTools.panWorkExplorer.Height          := ifTinn.ReadInteger('App', 'iWorkExplorer.Height', 75);
+
+  if bRecho then begin
+    actRecho.Checked:= True;
+    Recho_True;
+  end
+  else begin
+    actRecho.Checked:= False;
+    Recho_False;
+  end;
 
   if (trim(sFormatRd) <> 'Sorry, this feature is not available yet!') then
     sFormatRd:= 'Sorry, this feature is not available yet!';
@@ -5300,6 +5289,7 @@ begin
 
   // Tools
   bToolsCanFloat              := ifTinn.ReadBool('App', 'bToolsCanFloat', False);
+  frmTools.iSize              := ifTinn.ReadInteger('App', 'iTools.Size', 310);
   frmTools.pgDatabase.TabIndex:= ifTinn.ReadInteger('App', 'iDatabase.TabIndex', 0);
   frmTools.pgLatex.TabIndex   := ifTinn.ReadInteger('App', 'iLatex.TabIndex', 0);
   frmTools.pgMarkup.TabIndex  := ifTinn.ReadInteger('App', 'iMarkup.TabIndex', 0);
@@ -5308,7 +5298,6 @@ begin
   frmTools.pgResults.TabIndex := ifTinn.ReadInteger('App', 'iResults.TabIndex', 0);
   frmTools.pgTools.TabIndex   := ifTinn.ReadInteger('App', 'iTools.TabIndex', 0);
   frmTools.pgTxt2tags.TabIndex:= ifTinn.ReadInteger('App', 'iTxt2tags.TabIndex', 0);
-  frmTools.iSize              := ifTinn.ReadInteger('App', 'iTools.Size', 310);
 
   cbSpellLanguage.ItemIndex:= ifTinn.ReadInteger('App', 'iSpellLanguage.ItemIndex', -1);
   iCompletionFilter        := ifTinn.ReadInteger('App', 'iCompletion.ItemIndex', 0);
@@ -5327,9 +5316,9 @@ begin
   bRtermCloseWithoutAsk  := ifTinn.ReadBool('App', 'bRtermCloseWithoutAsk', False);
   bRtermHorizontal       := ifTinn.ReadBool('App', 'bRtermHorizontal', True);
   bRtermSimple           := ifTinn.ReadBool('App', 'bRtermSimple', True);
+  frmRterm.iSize         := ifTinn.ReadInteger('App', 'iRterm.Size', 480);
   frmRterm.iSynLog2Height:= ifTinn.ReadInteger('App', 'iSynLog2.Height', 90);
   frmRterm.iSynLog2Width := ifTinn.ReadInteger('App', 'iSynLog2.Width', 140);
-  frmRterm.iSize         := ifTinn.ReadInteger('App', 'iRterm.Size', 480);
   iIOSyntax              := ifTinn.ReadInteger('App', 'iIOSyntax', 1);   // .R
   iLogSyntax             := ifTinn.ReadInteger('App', 'iLogSyntax', 0);  // .txt
 
@@ -5393,11 +5382,6 @@ begin
   pmemRResSendLine.Checked                 := ifTinn.ReadBool('Roptions', 'bRSendLine', True);
   pmemRResSendLinesToEndPage.Checked       := ifTinn.ReadBool('Roptions', 'bRSendLinesToEndPage', True);
   pmemRResSendSelection.Checked            := ifTinn.ReadBool('Roptions', 'bRSendSelection', True);
-  pmemRResSendSourceBlockMarked.Checked    := ifTinn.ReadBool('Roptions', 'bRSendSourceBlockMarked', True);
-  pmemRResSendSourceClipboard.Checked      := ifTinn.ReadBool('Roptions', 'bRSendSourceClipboard', True);
-  pmemRResSendSourceContiguous.Checked     := ifTinn.ReadBool('Roptions', 'bRSendSourceContiguous', True);
-  pmemRResSendSourceFile.Checked           := ifTinn.ReadBool('Roptions', 'bRSendSourceFile', True);
-  pmemRResSendSourceSelection.Checked      := ifTinn.ReadBool('Roptions', 'bRSendSourceSelection', True);
   pmemRResSendSweave.Checked               := ifTinn.ReadBool('Roptions', 'bRSweave', True);
 
   actRCurrentLineToTop.Visible         := ifTinn.ReadBool('Roptions', 'bRCurrentLineToTop', True);
@@ -5410,11 +5394,6 @@ begin
   actRSendLine.Visible                 := ifTinn.ReadBool('Roptions', 'bRSendLine', True);
   actRSendLinesToEndPage.Visible       := ifTinn.ReadBool('Roptions', 'bRSendLinesToEndPage', True);
   actRSendSelection.Visible            := ifTinn.ReadBool('Roptions', 'bRSendSelection', True);
-  actRSendSourceBlockMarked.Visible    := ifTinn.ReadBool('Roptions', 'bRSendSourceBlockMarked', True);
-  actRSendSourceClipboard.Visible      := ifTinn.ReadBool('Roptions', 'bRSendSourceClipboard', True);
-  actRSendSourceContiguous.Visible     := ifTinn.ReadBool('Roptions', 'bRSendSourceContiguous', True);
-  actRSendSourceFile.Visible           := ifTinn.ReadBool('Roptions', 'bRSendSourceFile', True);
-  actRSendSourceSelection.Visible      := ifTinn.ReadBool('Roptions', 'bRSendSourceSelection', True);
   actRSendSweave.Visible               := ifTinn.ReadBool('Roptions', 'bRSweave', True);
   bRKnitr                              := ifTinn.ReadBool('Roptions', 'bRKnitr', True);
 
@@ -5480,10 +5459,8 @@ begin
 
   // Pandoc history
   slPandocHistory:= TStringList.Create;
-
   ifTinn.ReadSectionValues('PandocHistory',
                            slPandocHistory);
-
   if (slPandocHistory.Count > 0) then begin
     for i:= 0 to (slPandocHistory.Count - 1) do begin
       sTmp:= slPandocHistory.Strings[i];
@@ -5682,6 +5659,7 @@ begin
       sPathR    := 'UNKNOWN';
       sRversion := 'UNKNOWN';
       sPathRterm:= 'UNKNOWN';
+
     end;
 
     sPathRgui:= trim(ifTinn.ReadString('App', 'sPathRgui', EmptyStr));
@@ -5689,6 +5667,7 @@ begin
       sPathR   := 'UNKNOWN';
       sRversion:= 'UNKNOWN';
       sPathRgui:= 'UNKNOWN';
+
     end;
   end;
 
@@ -5758,7 +5737,8 @@ procedure TfrmTinnMain.GetCallTip(var sRObject,
   function ReceiveTipFromTCPIP(): string;
   var
     iPosDoubleCote: integer;
-    sRes          : string;
+
+    sRes: string;
 
   begin
     sRes:= csRtip.Socket.ReceiveText;
@@ -5799,7 +5779,8 @@ procedure TfrmTinnMain.GetCallTip(var sRObject,
   procedure GetTipFrom_TCPIP(sRClassFor: string);
   var
     sCmd: string;
-    i   : integer;
+
+    i: integer;
 
   begin
     // Try to find tip from TCPIP
@@ -6076,11 +6057,13 @@ procedure TfrmTinnMain.synRtipExecute(Kind: SynCompletionType;
 
 var
   bTipFound : boolean;
+
   sRObject,
    sRPackage,
    sRTip,
-   sTip     : string;
-  slTmp     : TStringList;
+   sTip: string;
+
+  slTmp: TStringList;
 
 const
   NMC_RServer = '"[..] NOT MATCHED: Check integrity of the parameter(s) for this function in the R Server!"';
@@ -6264,15 +6247,18 @@ procedure TfrmTinnMain.GetCompletion(var sRObject,
   end;
 
 var
-  bFound   : Boolean;
+  bFound: Boolean;
+
   i,
    iX,
    iSavepos,
-   iStartX : Integer;
+   iStartX: Integer;
+
   sTmp,
   sLocline,
    sPattern: string;
-  seEditor : TSynEdit;
+
+  seEditor: TSynEdit;
 
   procedure GetLocLine(se: TSynEdit);
   begin
@@ -6371,7 +6357,8 @@ var
   sRObject,
    sRPackage,
    sCompletion: string;
-  slTmp       : TStringList;
+
+  slTmp: TStringList;
 
 begin
   sRObject   := EmptyStr;
@@ -6428,9 +6415,9 @@ function TfrmTinnMain.GetBuildInfo: string;
 var
   VerInfoSize,
    VerValueSize,
-   Dummy       : DWORD;
+   Dummy: DWORD;
 
-  VerInfo : Pointer;
+  VerInfo: Pointer;
   VerValue: PVSFixedFileInfo;
 
   wV1,
@@ -6583,7 +6570,6 @@ begin
   actRContRemoveAllObjects.Enabled     := bOption;
   actRContTCPConnection.Enabled        := bOption or not bIPLocal;
   actRSendClipboard.Enabled            := bOption;
-  actRSendSourceClipboard.Enabled      := bOption;
 
   // Rterm
   actRtermIOHistoryNext.Enabled := bOption and Rterm_Running;
@@ -6647,9 +6633,9 @@ begin
   end;
 
 // Alphabetically ordered
+  actFormatR.Enabled                   := bOption;
   actRContSetWorkDirectory.Enabled     := bOption and FileExists((Self.MDIChildren[i] as TfrmEditor).sActiveFile);
   actRCurrentLineToTop.Enabled         := bOption;
-  actFormatR.Enabled                   := bOption;
   actRSendBlockMarked.Enabled          := bOption and bMark;
   actRSendContiguous.Enabled           := bOption;
   actRSendCursorToBeginningLine.Enabled:= bOption;
@@ -6659,9 +6645,6 @@ begin
   actRSendKnitPdf.Enabled              := bOption;
   actRSendLine.Enabled                 := bOption;
   actRSendLinesToEndPage.Enabled       := bOption;
-  actRSendSourceBlockMarked.Enabled    := bOption and bMark;
-  actRSendSourceContiguous.Enabled     := bOption;
-  actRSendSourceFile.Enabled           := bOption;
   actRSendSweave.Enabled               := bOption;
 end;
 
@@ -6703,7 +6686,8 @@ end;
 
 procedure TfrmTinnMain.HighlighterSelection(Sender: TObject);
 var
-  i   : integer;
+  i: integer;
+
   sTmp: string;
 
 begin
@@ -6828,11 +6812,13 @@ end;
 
 procedure TfrmTinnMain.WMDropFiles(var Msg: TWMDropFiles);
 var
-  chTmp  : PChar;
+  chTmp: PChar;
+
   i,
    iSize,
    iCount: integer;
-  slFile : TStringList;
+
+  slFile: TStringList;
 
 begin
   try
@@ -6875,7 +6861,8 @@ end;
 
 procedure TfrmTinnMain.WMCopyData(var msg: TWMCopyData);
 var
-  chReceived   : PChar;
+  chReceived: PChar;
+
   sPathReceived: string;
 
 begin
@@ -6920,7 +6907,9 @@ procedure TfrmTinnMain.SetFileSize_StatusBar(sFileName: string);
 
   var
     i: Integer;
+
     r: Real;
+
     s: string;
 
   begin
@@ -6941,6 +6930,7 @@ procedure TfrmTinnMain.SetFileSize_StatusBar(sFileName: string);
 
 var
   dSize: double; // Int64
+
   sSize: string;
 
 begin
@@ -6964,7 +6954,8 @@ end;
 procedure TfrmTinnMain.actReadOnlyExecute(Sender: TObject);
 var
   bReadOnly: boolean;
-  i        : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -7012,10 +7003,91 @@ begin
   end;
 end;
 
+procedure TfrmTinnMain.Recho_True;
+begin
+  // File
+  actRSendFile.Caption   := 'File (echo=TRUE)';
+  actRSendFile.Hint      := 'R send: file (echo=TRUE)';
+  actRSendFile.ImageIndex:= 2;
+
+  // Selection
+  actRSendSelection.Caption   := 'Selection (echo=TRUE)';
+  actRSendSelection.Hint      := 'R send: selection (echo=TRUE)';
+  actRSendSelection.ImageIndex:= 4;
+
+  // Clipboard
+  actRSendClipboard.Caption   := 'Clipboard (echo=TRUE)';
+  actRSendClipboard.Hint      := 'R send: clipboard (echo=TRUE)';
+  actRSendClipboard.ImageIndex:= 269;
+
+  // Block
+  actRSendBlockMarked.Caption   := 'Marked block (echo=TRUE)';
+  actRSendBlockMarked.Hint      := 'R send: marked block (echo=TRUE)';
+  actRSendBlockMarked.ImageIndex:= 6;
+
+  // Contiguous
+  actRSendContiguous.Caption   := 'Contiguous (echo=TRUE)';
+  actRSendContiguous.Hint      := 'R send: contiguous (echo=TRUE)';
+  actRSendContiguous.ImageIndex:= 271;
+
+  // Lines to EndPage
+  actRSendLinesToEndPage.Caption   := 'Lines to end page (echo=TRUE)';
+  actRSendLinesToEndPage.Hint      := 'R send: lines to end page (echo=TRUE)';
+  actRSendLinesToEndPage.ImageIndex:= 8;
+end;
+
+procedure TfrmTinnMain.Recho_False;
+begin
+  // File
+  actRSendFile.Caption   := 'File';
+  actRSendFile.Hint      := 'R send: file';
+  actRSendFile.ImageIndex:= 1;
+
+  // Selection
+  actRSendSelection.Caption   := 'Selection';
+  actRSendSelection.Hint      := 'R send: selection';
+  actRSendSelection.ImageIndex:= 3;
+
+  // Clipboard
+  actRSendClipboard.Caption   := 'Clipboard';
+  actRSendClipboard.Hint      := 'R send: clipboard';
+  actRSendClipboard.ImageIndex:= 268;
+
+  // Block
+  actRSendBlockMarked.Caption   := 'Marked block';
+  actRSendBlockMarked.Hint      := 'R send: marked block';
+  actRSendBlockMarked.ImageIndex:= 5;
+
+  // Contiguous
+  actRSendContiguous.Caption   := 'Contiguous';
+  actRSendContiguous.Hint      := 'R send: contiguous';
+  actRSendContiguous.ImageIndex:= 270;
+
+  // Lines to EndPage
+  actRSendLinesToEndPage.Caption   := 'Lines to end page';
+  actRSendLinesToEndPage.Hint      := 'R send: lines to end page';
+  actRSendLinesToEndPage.ImageIndex:= 298;
+end;
+
+procedure TfrmTinnMain.actRechoExecute(Sender: TObject);
+begin
+  if not actRecho.Checked then begin
+    bRecho:= True;
+    actREcho.Checked:= bRecho;
+    Recho_True;
+  end
+  else begin
+    bRecho:= False;
+    actRecho.Checked:= bRecho;
+    Recho_False;
+  end;
+end;
+
 procedure TfrmTinnMain.actEditCopyExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin
   iFocus:= GetFocus;
@@ -7040,7 +7112,8 @@ end;
 procedure TfrmTinnMain.actEditCutExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin
   iFocus:= GetFocus;
@@ -7065,7 +7138,8 @@ end;
 procedure TfrmTinnMain.actEditPasteExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin
   iFocus:= GetFocus;
@@ -7090,7 +7164,8 @@ end;
 procedure TfrmTinnMain.actEditRedoExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin
   iFocus:= GetFocus;
@@ -7115,7 +7190,8 @@ end;
 procedure TfrmTinnMain.actEditSelectAllExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin
   iFocus:= GetFocus;
@@ -7147,8 +7223,10 @@ end;
 procedure TfrmTinnMain.FormCreate(Sender: TObject);
 var
   i,
-   j      : integer;
-  miItem  : TMenuItem;
+   j: integer;
+
+  miItem: TMenuItem;
+
   sName,
    sFilter: string;
 
@@ -7245,7 +7323,7 @@ begin
     CheckEditorOptions;
 
     CheckTemporary;
-
+    
     frmSplash.pb.Position:= 9;
 
     DeleteDir(sOldPreferencesTmp);
@@ -7419,7 +7497,8 @@ end;
 procedure TfrmTinnMain.LoadEditorKeystrokes;
 var
   sEditor: string;
-  stream : TStream;
+
+  stream: TStream;
 
 begin
   sEditor:= (sPathEditor +
@@ -7439,7 +7518,8 @@ end;
 procedure TfrmTinnMain.SaveEditorKeystrokes;
 var
   sEditor: string;
-  stream : TStream;
+
+  stream: TStream;
 
 begin
   sEditor:= sPathEditor +
@@ -7937,7 +8017,7 @@ var
    sFileComments,
    sFileCompletion,
    sFileShortcuts,
-   sFileCache     : string;
+   sFileCache: string;
 
   tfTmp: TextFile;
 
@@ -8539,7 +8619,8 @@ procedure TfrmTinnMain.CheckEditorOptions;
 
 var
   sPathReadmeEditor: string;
-  tfTmp            : TextFile;
+
+  tfTmp: TextFile;
 
 begin
   try
@@ -8655,8 +8736,10 @@ end;
 
 procedure TfrmTinnMain.BuildMRU(var miItem: TMenuItem);
 var
-  i    : integer;
+  i: integer;
+
   miMRU: TMenuItem;
+
   sFile: string;
 
 begin
@@ -8696,9 +8779,11 @@ procedure TfrmTinnMain.UpdateMRU(var miItem: TMenuItem;
                                  sFileName: string);
 var
   i,
-   j   : integer;
+   j: integer;
+
   slTmp: TStringList;
-  sTmp : string;
+
+  sTmp: string;
 
 begin
   slTmp:= TStringList.create;
@@ -8760,8 +8845,10 @@ end;
 
 function TfrmTinnMain.FindWindowByName(sName: string): integer;
 var
-  i       : integer;
-  bFound  : boolean;
+  i: integer;
+
+  bFound: boolean;
+
   sCaption: string;
 
 begin
@@ -8781,7 +8868,8 @@ end;
 
 function TfrmTinnMain.FindTopWindow: integer;
 var
-  i     : integer;
+  i: integer;
+
   bFound: boolean;
 
 begin
@@ -8915,7 +9003,8 @@ end;
 
 procedure TfrmTinnMain.actRmirrorsUpdateExecute(Sender: TObject);
 var
-  i    : integer;
+  i: integer;
+
   sPath,
    sTmp: string;
 
@@ -9001,8 +9090,10 @@ end;
 
 procedure TfrmTinnMain.UpdateCursorPos(Sender: TSynEdit);
 var
-  bcCol     : TDisplayCoord;
-  bcLin     : TBufferCoord;
+  bcCol: TDisplayCoord;
+
+  bcLin: TBufferCoord;
+
   iLineCount: Integer;
 
 begin
@@ -9016,7 +9107,8 @@ end;
 
 procedure TfrmTinnMain.SetSyntaxMenuItem(sSynName: string);
 var
-  i   : integer;
+  i: integer;
+
   sTmp: string;
 
 begin
@@ -9146,7 +9238,7 @@ var
 
   sTmp,
    sNodeToSelect,
-   sPageSelected : string;
+   sPageSelected: string;
 
 begin
   sPageSelected:= pgFiles.ActivePage.Hint;
@@ -9332,7 +9424,8 @@ var
   i,
    iChildID,
    iActivePage: integer;
-  sTmp        : string;
+
+  sTmp: string;
 
 begin
   if (pgFiles.PageCount > 0) then begin
@@ -9370,8 +9463,10 @@ var
     iNewFile  : integer;
 
   rsGrep: TRegExpr;
-  slTmp : TStringList;
-  sTmp  : string;
+
+  slTmp: TStringList;
+
+  sTmp: string;
 
 begin
   if (pgFiles.PageCount = 0) then begin
@@ -9429,7 +9524,7 @@ var
 
   i: integer;
 
-  sSyntaxBackupFile : string;
+  sSyntaxBackupFile: string;
 
 begin
   try
@@ -9554,7 +9649,8 @@ end;
 
 procedure TfrmTinnMain.actOpenMRUExecute(Sender: TObject);
 var
-  i    : integer;
+  i: integer;
+
   slTmp: TStringList;
 
 begin
@@ -9692,20 +9788,21 @@ procedure TfrmTinnMain.SearchInDirectories(const sDir,
                                                iMatchCount,
                                                iTotFileCount: integer);
 var
-  bFileFind   : boolean;
+  bFileFind: boolean;
 
   i,
    j,
    iPosSlash,
    iDirLen,
-   iLinePos : integer;
+   iLinePos: integer;
 
-  seTmp : TSynEdit;
+  seTmp: TSynEdit;
+
   slFile: TStringList;
 
   sPath,
    lastChar,
-   tmpLine : string;
+   tmpLine: string;
 
   tnSearch,
    tnFile,
@@ -9818,7 +9915,7 @@ var
   i: integer;
 
   seEditor,
-   seTmp  : TSynEdit;
+   seTmp: TSynEdit;
 
 begin
   i:= FindTopWindow;
@@ -9889,14 +9986,17 @@ procedure TfrmTinnMain.TraverseDir(sPath: string;
                                    sMask: string);
 var
   curFile: WIN32_FIND_DATA;
+
   hHandle: THandle;
 
   i,
    iDirFound: integer;
 
   slPath: TStringList;
-  srDir : TSearchRec;
-  sTmp  : string;
+
+  srDir: TSearchRec;
+
+  sTmp: string;
 
 begin
   // Get the files for the current directory
@@ -10091,7 +10191,8 @@ end;
 
 procedure TfrmTinnMain.actProjectOpenExecute(Sender: TObject);
 var
-  od   : TOpenDialog;
+  od: TOpenDialog;
+
   sFile: string;
 
 begin
@@ -10246,8 +10347,10 @@ end;
 
 procedure TfrmTinnMain.BuildProjectMRU(var miItem: TMenuItem);
 var
-  i     : integer;
-  miMRU : TMenuItem;
+  i: integer;
+
+  miMRU: TMenuItem;
+
   prjTmp: string;
 
 begin
@@ -10293,7 +10396,8 @@ var
    j: integer;
 
   slTmp: TStringList;
-  sTmp : string;
+
+  sTmp: string;
 
 begin
   slTmp:= TStringList.create;
@@ -10404,6 +10508,7 @@ const
 
 var
   i: integer;
+
   r: TRect;
 
 begin
@@ -10448,7 +10553,7 @@ end;
 procedure TfrmTinnMain.menToolsUtilsActionlistToClipboardClick(Sender: TObject);
 var
   i,
-   iImage  : integer;
+   iImage: integer;
 
   sShortcut,
    sGroup,
@@ -10457,7 +10562,7 @@ var
    sTmp1,
    sTmp2,
    sBegin,
-   sEnd    : string;
+   sEnd: string;
 
   aTmp: TAction;
   
@@ -10632,7 +10737,7 @@ var
   sShortcut,
    sGroup,
    sCaption,
-   sHint   :string;
+   sHint: string;
 
 begin
   alMain.State:= asSuspended;
@@ -10754,9 +10859,10 @@ end;
 procedure TfrmTinnMain.UpdateRFileReformatted(sTmp: string);
 var
   i,
-    iTopLine : Integer;
+    iTopLine: Integer;
 
-  bcPos   : TBufferCoord;
+  bcPos: TBufferCoord;
+
   seEditor: TSynEdit;
 
   sPrior,
@@ -10988,7 +11094,7 @@ var
   sInfo,
    sToSend,
    sFilePath,
-   sPath    : string;
+   sPath: string;
 
   slTmp: TStringList;
 
@@ -11182,7 +11288,6 @@ procedure TfrmTinnMain.tRRuningTimer(Sender: TObject);
                                          else seEditor:= synEditor2;
       with seEditor do begin
         actRSendSelection.Enabled      := SelAvail;
-        actRSendSourceSelection.Enabled:= SelAvail;
       end;
     end;
 
@@ -11217,7 +11322,6 @@ procedure TfrmTinnMain.tRRuningTimer(Sender: TObject);
     if (stbMain.Panels[6].Text <> EmptyStr) then stbMain.Panels[6].Text:= EmptyStr;
 
     actRSendSelection.Enabled      := False;
-    actRSendSourceSelection.Enabled:= False;
     bAlreadyOrganized              := False;
     bTCPIPRunning                  := False;
     bRTinnRcom_Loaded              := False;
@@ -11286,10 +11390,10 @@ procedure TfrmTinnMain.sdMainTypeChange(Sender: TObject);
 var
   iSelectedIndex,
    iPeriodPos,
-   iEndPos      : integer;
+   iEndPos: integer;
 
   sFileName,
-   sTmp    : string;
+   sTmp: string;
 
 begin
   // This is a good place to ReGex!
@@ -11669,9 +11773,11 @@ end;
 {$WARNINGS OFF}
 function TfrmTinnMain.GenericGroupExists: boolean;
 var
-  i    : integer;
+  i: integer;
+
   meTmp: TMemo;
-  sTmp : string;
+
+  sTmp: string;
 
 begin
   meTmp:= TMemo.Create(nil);
@@ -11825,7 +11931,8 @@ procedure TfrmTinnMain.AddFile(iFile: string);
   end;
 
 var
-  iGroupPos  : integer;
+  iGroupPos: integer;
+
   tnChildNode: TTreeNode;
 
 begin
@@ -12032,7 +12139,8 @@ var
 
   sTmp: string;
 
-  tnCurNode : TTreeNode;
+  tnCurNode: TTreeNode;
+
   userOption: TModalResult;
 
 begin
@@ -12613,7 +12721,7 @@ var
    sTmpData,
    sTmpText: string;
 
-  wFileAtt : word;
+  wFileAtt: word;
 
 begin
   sdMain.InitialDir:= sWorkingDir;
@@ -12981,7 +13089,8 @@ end;
 procedure TfrmTinnMain.actShowAppOptionsExecute(Sender: TObject);
 var
   dlg: TfrmAppOptions;
-  i  : integer;
+
+  i: integer;
 
 begin
   coEditor.Gutter.Visible        := actGutterVisible.Checked;
@@ -13015,11 +13124,11 @@ begin
       cbRememberFileState.Checked        := bRememberFileState;
       cbRememberSearchList.Checked       := bRememberSearchList;
       cbRemoveExtension.Checked          := bRemoveExtension;
-      cbRsetget_Info.Checked             := bRsetget_Info;
       cbRguiOrganizeAutomatically.Checked:= bOrganizeAutomatically;
       cbRguiReturnFocus.Checked          := bRguiReturnFocus;
       cbRmirros_Update.Checked           := bRmirros_Update;
       cbRSendAll.Checked                 := bRSendAll;
+      cbRsetget_Info.Checked             := bRsetget_Info;
       cbRSetWorkDir_Starting.Checked     := bRSetWorkDir_Starting;
       cbRSmartSend.Checked               := bRSmartSend;
       cbRsvSocket_Connect.Checked        := bRsvSocket_Connect;
@@ -13031,6 +13140,8 @@ begin
       cbScrollSendingLines.Checked       := bScrollSendingLines;
       cbToolsCanFloat.Checked            := bToolsCanFloat;
       cbUndoAfterSave.Checked            := bUndoAfterSave;
+      edFormatR.Text                     := sFormatR;
+      edFormatRd.Text                    := sFormatRd;
       edMaxDeparseLength.Text            := IntToStr(iMaxDeparseLength);
       edParDeplate.Text                  := sParDeplate;
       edParDviBibtex.Text                := sParDviBibtex;
@@ -13049,8 +13160,6 @@ begin
       edPathTinnRcom_Installed.Text      := sPathTinnRcom_Installed;
       edPathTxt2tags_Converter.Text      := sPathTxt2tags_Converter;
       edPathTxt2tags_Interpreter.Text    := sPathTxt2tags_Interpreter;
-      edFormatR.Text                     := sFormatR;
-      edFormatRd.Text                    := sFormatRd;
       edtIPHostLocal.Text                := sIPHostLocal;
       edtIPHostRemote.Text               := sIPHostRemote;
       edtIPPortLocal.Text                := intToStr(iIPPortLocal);
@@ -13083,12 +13192,6 @@ begin
       cbRSendLine.Checked                 := actRSendLine.Visible;
       cbRSendLinesToEndPage.Checked       := actRSendLinesToEndPage.Visible;
       cbRSendSelection.Checked            := actRSendSelection.Visible;
-      cbRSendSourceBlockMarked.Checked    := actRSendSourceBlockMarked.Visible;
-      cbRSendSourceClipboard.Checked      := actRSendSourceClipboard.Visible;
-      cbRSendSOurceClipboard.Checked      := actRSendSourceClipboard.Visible;
-      cbRSendSourceContiguous.Checked     := actRSendSourceContiguous.Visible;
-      cbRSendSourceFile.Checked           := actRSendSourceFile.Visible;
-      cbRSendSourceSelection.Checked      := actRSendSourceSelection.Visible;
       cbRSendSweave.Checked               := actRSendSweave.Visible;
 
       // Controlling R
@@ -13211,12 +13314,6 @@ begin
         actRSendLine.Visible                 := cbRSendLine.Checked;
         actRSendLinesToEndPage.Visible       := cbRSendLinesToEndPage.Checked;
         actRSendSelection.Visible            := cbRSendSelection.Checked;
-        actRSendSourceBlockMarked.Visible    := cbRSendSourceBlockMarked.Checked;
-        actRSendSourceClipboard.Visible      := cbRSendSourceClipboard.Checked;
-        actRSendSourceClipboard.Visible      := cbRSendSourceClipboard.Checked;
-        actRSendSourceContiguous.Visible     := cbRSendSourceContiguous.Checked;
-        actRSendSourceFile.Visible           := cbRSendSourceFile.Checked;
-        actRSendSourceSelection.Visible      := cbRSendSourceSelection.Checked;
         actRSendSweave.Visible               := cbRSendSweave.Checked;
         bRKnitr                              := cbRSendKnitr.Checked;
 
@@ -13231,11 +13328,6 @@ begin
         pmemRResSendLine.Checked                 := cbRSendLine.Checked;
         pmemRResSendLinesToEndPage.Checked       := cbRSendLinesToEndPage.Checked;
         pmemRResSendSelection.Checked            := cbRSendSelection.Checked;
-        pmemRResSendSourceBlockMarked.Checked    := cbRSendSourceBlockMarked.Checked;
-        pmemRResSendSourceClipboard.Checked      := cbRSendSourceClipboard.Checked;
-        pmemRResSendSOurceContiguous.Checked     := cbRSendSourceContiguous.Checked;
-        pmemRResSendSourceFile.Checked           := cbRSendSourceFile.Checked;
-        pmemRResSendSourceSelection.Checked      := cbRSendSourceSelection.Checked;
         pmemRResSendSweave.Checked               := cbRSendSweave.Checked;
 
         // Controlling R alphabetically ordered
@@ -13298,10 +13390,10 @@ begin
         bRememberSearchList           := cbRememberSearchList.Checked;
         bRemoveExtension              := cbRemoveExtension.Checked;
         bRestoreIniDock               := cbRestoreIniDock.Checked;
-        bRsetget_Info                 := cbRsetget_Info.Checked;
         bRguiReturnFocus              := cbRguiReturnFocus.Checked;
         bRmirros_Update               := cbRmirros_Update.Checked;
         bRSendAll                     := cbRSendAll.Checked;
+        bRsetget_Info                 := cbRsetget_Info.Checked;
         bRSetWorkDir_Starting         := cbRSetWorkDir_Starting.Checked;
         bRSmartSend                   := cbRSmartSend.Checked;
         bRsvSocket_Connect            := cbRsvSocket_Connect.Checked;
@@ -13323,6 +13415,8 @@ begin
         iMaxDeparseLength             := StrToInt(edMaxDeparseLength.Text);
         iRguiTinnRDisposition         := rgRguiTinnRDisposition.ItemIndex;
         iRguiTinnRProportion          := tbRguiTinnRProportion.Position;
+        sFormatR                      := edFormatR.Text;
+        sFormatRd                     := edFormatRd.Text;
         sIPHostLocal                  := edtIPHostLocal.Text;
         sIPHostRemote                 := edtIPHostRemote.Text;
         sParDeplate                   := edParDeplate.Text;
@@ -13340,8 +13434,6 @@ begin
         sPathRterm                    := edPathRterm.Text;
         sPathTxt2tags_Converter       := edPathTxt2tags_Converter.Text;
         sPathTxt2tags_Interpreter     := edPathTxt2tags_Interpreter.Text;
-        sFormatR                      := edFormatR.Text;
-        sFormatRd                     := edFormatRd.Text;
 
         frmTools.cbComPriority_Line.Checked      := cbComPriority_Line.Checked;
         frmTools.cbComAutoDetect_Language.Checked:= cbComAutoDetect_Language.Checked;
@@ -13500,13 +13592,13 @@ end;
 
 procedure TfrmTinnMain.SetRExplorer(bOption: boolean);
 begin
+  //actRExplorerExpHtml.Enabled            := bOption;
+  //actRExplorerExpTeX.Enabled             := bOption;
   actRExplorerContent.Enabled            := bOption;
   actRExplorerEdit.Enabled               := bOption;
   actRExplorerExampleSelected.Enabled    := bOption;
   actRExplorerExpAscii.Enabled           := bOption;
-  //actRExplorerExpHtml.Enabled            := bOption;
   actRExplorerExpRaw.Enabled             := bOption;
-  //actRExplorerExpTeX.Enabled             := bOption;
   actRExplorerFix.Enabled                := bOption;
   actRExplorerHelpSelected.Enabled       := bOption;
   actRExplorerNames.Enabled              := bOption;
@@ -13525,7 +13617,8 @@ var
    j: integer;
 
   slTmp: TStringList;
-  sTmp : string;
+
+  sTmp: string;
 
 begin
   frmTools.cbbToolsREnvironment.Clear;
@@ -13913,7 +14006,8 @@ end;
 procedure TfrmTinnMain.csRGeneralDisconnect(Sender: TObject;
                                             Socket: TCustomWinSocket);
 var
-  i   : integer;
+  i: integer;
+
   sTmp: string;
 
 begin
@@ -14007,8 +14101,10 @@ procedure TfrmTinnMain.csREnvironmentRead(Sender: TObject;
 var
   iRemoteIP,
    iPriorMessage: integer;
-  slFromRServer : TStringList;
-  sTmp          : string;
+
+  slFromRServer: TStringList;
+
+  sTmp: string;
 
 begin
   sTmp:= trim(Socket.ReceiveText);
@@ -14038,8 +14134,10 @@ end;
 procedure TfrmTinnMain.csRGeneralRead(Sender: TObject;
                                       Socket: TCustomWinSocket);
 var
-  aBuffer  : array [0..4095] of char;
-  buf      : PChar;
+  aBuffer: array [0..4095] of char;
+
+  buf: PChar;
+
   iReceived: integer;
 
   muStream_1,
@@ -14186,12 +14284,13 @@ var
   bIgnoreAll: boolean;
 
   j,
-   iFiles   : integer;
+   iFiles: integer;
 
   sFilePath,
-    sTmp    : string;
+    sTmp: string;
 
-  tnCurNode : TTreeNode;
+  tnCurNode: TTreeNode;
+
   userOption: TModalResult;
 
 begin
@@ -14272,7 +14371,7 @@ procedure TfrmTinnMain.pmenProjRSetWorkDirClick(Sender: TObject);
   procedure SendToR(filePath: string);
   var
     unixPath,
-     sToSend : string;
+     sToSend: string;
 
   begin
     unixPath:= DosPathToUnixPath(filePath);
@@ -14283,7 +14382,7 @@ procedure TfrmTinnMain.pmenProjRSetWorkDirClick(Sender: TObject);
   end;
 
 var
-  sFilePath : string;
+  sFilePath: string;
 
 begin
   with frmTools.tvProject do begin
@@ -14523,6 +14622,7 @@ procedure TfrmTinnMain.actRCardHelpSelectedExecute(Sender: TObject);
   function GetWord: string;
   var
     iPos: integer;
+
     sTmp: string;
 
   begin
@@ -14580,6 +14680,7 @@ procedure TfrmTinnMain.actRCardExampleSelectedExecute(Sender: TObject);
   function GetWord: string;
   var
     iPos: integer;
+
     sTmp: string;
 
   begin
@@ -14736,13 +14837,13 @@ var
 
   iMatchCount,
    iFoundFileCount,
-   iTotFileCount  : integer;
+   iTotFileCount: integer;
 
   lSavedCursor: TCursor;
 
   sSearchText,
    sSearchDirectoryText,
-   sSearchFileMask     : string;
+   sSearchFileMask: string;
 
   seEditor: TSynEdit;
 
@@ -14871,7 +14972,8 @@ end;
 
 procedure TfrmTinnMain.SendToConsole(sTmp: string);
 var
-  iPos     : integer;
+  iPos: integer;
+
   sTmpPrior: string;
   
 begin
@@ -14999,7 +15101,6 @@ begin
   end;
 
   sFilePath:= sPathTmp + '\file.r';
-
   if FileSaveFast(sFilePath,
                   sTmp) then Result:= '.trPaths[4]';
 end;
@@ -15117,7 +15218,7 @@ var
   i,
    iLine,
    iLineBlockBegin,
-   iLineBlockEnd  : integer;
+   iLineBlockEnd: integer;
 
   seEditor: TSynEdit;
   smOption: TSynSelectionMode;
@@ -15198,7 +15299,7 @@ function TfrmTinnMain.GetContiguous(var bSingleLine: boolean): string;
 var
   bEmptyLine,
    bEndOfChunk,
-   bValidLine : boolean;
+   bValidLine: boolean;
 
   cTmp: char;
 
@@ -15206,7 +15307,7 @@ var
    iLines,
    iResult,
    iLineContiguousBegin,
-   iLineContiguousEnd  : integer;
+   iLineContiguousEnd: integer;
 
   seEditor: TSynEdit;
 
@@ -15585,6 +15686,7 @@ end;
 function TfrmTinnMain.GetLinesToEndPage(var bSingleLine: boolean): string;
 var
   seEditor: TSynEdit;
+
   smOption: TSynSelectionMode;
 
   sTmp,
@@ -15690,7 +15792,8 @@ end;
 function TfrmTinnMain.GetPathFile(bFull: boolean = False): string;
 var
   sDos: string;
-  i   : integer;
+
+  i: integer;
 
 begin
   Result:= EmptyStr;
@@ -15705,30 +15808,11 @@ begin
            else Result:= DosPathToUnixPath(ExtractFilePath(sDos));
 end;
 
-procedure TfrmTinnMain.actRSendSourceFileExecute(Sender: TObject);
-var
-  sTmp,
-   sToSend   : string;
-  bSingleLine: boolean;
-
-begin
-  sToSend:= GetFile(bSingleLine);
-  if (sToSend = EmptyStr) then Exit;
-
-  if bSingleLine then
-    sTmp:= sToSend
-  else
-    sTmp:= 'source(' +
-           sToSend +
-           ')';
-
-  DoSend(sTmp);
-end;
-
 procedure TfrmTinnMain.actRSendFileExecute(Sender: TObject);
 var
   sTmp,
-   sToSend   : string;
+   sToSend: string;
+
   bSingleLine: boolean;
 
 begin
@@ -15738,32 +15822,17 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    sTmp:= 'source(' +
-           sToSend +
-           ', echo=TRUE' +
-           ', max.deparse.length=' +
-           IntToStr(iMaxDeparseLength) +
-           ')';
-
-  DoSend(sTmp);
-end;
-
-procedure TfrmTinnMain.actRSendSourceSelectionExecute(Sender: TObject);
-var
-  sTmp,
-   sToSend   : string;
-  bSingleLine: boolean;
-
-begin
-  sToSend:= GetSelection(bSingleLine);
-  if (sToSend = EmptyStr) then Exit;
-
-  if bSingleLine then
-    sTmp:= sToSend
-  else
-    sTmp:= 'source(' +
-           sToSend +
-           ')';
+    if bRecho then
+      sTmp:= 'source(' +
+             sToSend +
+             ', echo=TRUE' +
+             ', max.deparse.length=' +
+             IntToStr(iMaxDeparseLength) +
+             ')'
+    else
+      sTmp:= 'source(' +
+             sToSend +
+             ')';
 
   DoSend(sTmp);
 end;
@@ -15772,6 +15841,7 @@ procedure TfrmTinnMain.actRSendSelectionExecute(Sender: TObject);
 var
   sTmp,
    sToSend: string;
+
   bSingleLine: boolean;
 
 begin
@@ -15781,32 +15851,17 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    sTmp:= 'source(' +
-           sToSend +
-           ', echo=TRUE' +
-           ', max.deparse.length=' +
-           IntToStr(iMaxDeparseLength) +
-           ')';
-
-  DoSend(sTmp);
-end;
-
-procedure TfrmTinnMain.actRSendSourceClipboardExecute(Sender: TObject);
-var
-  sTmp,
-   sToSend   : string;
-  bSingleLine: boolean;
-
-begin
-  sToSend:= GetClipboard(bSingleLine);
-  if (sToSend = EmptyStr) then Exit;
-
-  if bSingleLine then
-    sTmp:= sToSend
-  else
-    sTmp:= 'source(' +
-           sToSend +
-           ')';
+    if bRecho then
+      sTmp:= 'source(' +
+             sToSend +
+             ', echo=TRUE' +
+             ', max.deparse.length=' +
+             IntToStr(iMaxDeparseLength) +
+             ')'
+    else
+      sTmp:= 'source(' +
+             sToSend +
+             ')';
 
   DoSend(sTmp);
 end;
@@ -15814,7 +15869,8 @@ end;
 procedure TfrmTinnMain.actRSendClipboardExecute(Sender: TObject);
 var
   sTmp,
-   sToSend   : string;
+   sToSend: string;
+
   bSingleLine: boolean;
 
 begin
@@ -15824,32 +15880,17 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    sTmp:= 'source(' +
-           sToSend +
-           ', echo=TRUE' +
-           ', max.deparse.length=' +
-           IntToStr(iMaxDeparseLength) +
-           ')';
-
-  DoSend(sTmp);
-end;
-
-procedure TfrmTinnMain.actRSendSourceBlockMarkedExecute(Sender: TObject);
-var
-  sTmp,
-   sToSend   : string;
-  bSingleLine: boolean;
-
-begin
-  sToSend:= GetBlockMarked(bSingleLine);
-  if (sToSend = EmptyStr) then Exit;
-
-  if bSingleLine then
-    sTmp:= sToSend
-  else
-    sTmp:= 'source(' +
-           sToSend +
-           ')';
+    if bRecho then
+      sTmp:= 'source(' +
+             sToSend +
+             ', echo=TRUE' +
+             ', max.deparse.length=' +
+             IntToStr(iMaxDeparseLength) +
+             ')'
+    else
+      sTmp:= 'source(' +
+             sToSend +
+             ')';
 
   DoSend(sTmp);
 end;
@@ -15857,7 +15898,8 @@ end;
 procedure TfrmTinnMain.actRSendBlockMarkedExecute(Sender: TObject);
 var
   sTmp,
-   sToSend   : string;
+   sToSend: string;
+
   bSingleLine: boolean;
 
 begin
@@ -15867,23 +15909,30 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    sTmp:= 'source(' +
-           sToSend +
-           ', echo=TRUE' +
-           ', max.deparse.length=' +
-           IntToStr(iMaxDeparseLength) +
-           ')';
+    if bRecho then
+      sTmp:= 'source(' +
+             sToSend +
+             ', echo=TRUE' +
+             ', max.deparse.length=' +
+             IntToStr(iMaxDeparseLength) +
+             ')'
+    else
+      sTmp:= 'source(' +
+             sToSend +
+             ')';
 
   DoSend(sTmp);
 end;
 
 procedure TfrmTinnMain.actRSendSourceContiguousExecute(Sender: TObject);
+{
 var
   sTmp,
-   sToSend   : string;
+   sToSend: string;
   bSingleLine: boolean;
-
+}
 begin
+{
   sToSend:= GetContiguous(bSingleLine);
   if (sToSend = EmptyStr) then Exit;
 
@@ -15895,12 +15944,14 @@ begin
            ')';
 
   DoSend(sTmp);
+}  
 end;
 
 procedure TfrmTinnMain.actRSendContiguousExecute(Sender: TObject);
 var
   sTmp,
-   sToSend   : string;
+   sToSend: string;
+
   bSingleLine: boolean;
 
 begin
@@ -15910,12 +15961,18 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    sTmp:= 'source(' +
-           sToSend +
-           ', echo=TRUE' +
-           ', max.deparse.length=' +
-           IntToStr(iMaxDeparseLength) +
-           ')';
+    if bRecho then
+      sTmp:= 'source(' +
+             sToSend +
+             ', echo=TRUE' +
+             ', max.deparse.length=' +
+             IntToStr(iMaxDeparseLength) +
+             ')'
+    else
+      sTmp:= 'source(' +
+             sToSend +
+             ')';
+
   DoSend(sTmp);
 end;
 
@@ -15924,7 +15981,8 @@ var
   bGoToNextValidLine: boolean;
 
   sTmp: string;
-  i   : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -15951,12 +16009,17 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    sTmp:= 'source(' +
-           sToSend +
-           ', echo=TRUE' +
-           ', max.deparse.length=' +
-           IntToStr(iMaxDeparseLength) +
-           ')';
+    if bRecho then
+      sTmp:= 'source(' +
+             sToSend +
+             ', echo=TRUE' +
+             ', max.deparse.length=' +
+             IntToStr(iMaxDeparseLength) +
+             ')'
+    else
+      sTmp:= 'source(' +
+             sToSend +
+             ')';
 
   DoSend(sTmp);
 end;
@@ -16764,7 +16827,6 @@ begin
                  else sAllNames:= ', all.names=F';
 
     sRFile:= sPathTmp + '\objects.txt';
-
     sTmp  := 'trObjList(' +
              'envir=''' +
              frmTools.cbbToolsREnvironment.Text +
@@ -17063,7 +17125,7 @@ var
   od: TOpenDialog;
 
   sBackup,
-   sTmp   : string;
+   sTmp: string;
 
 begin
   od           := TOpenDialog.Create(Self);
@@ -17182,7 +17244,7 @@ var
   od: TOpenDialog;
 
   sBackup,
-   sTmp  : string;
+   sTmp: string;
 
 begin
   try
@@ -17396,7 +17458,7 @@ var
   sTmpFile,
    sTmpPar,
    sLatexFile,
-   sNewFile  : string;
+   sNewFile: string;
 
   i: integer;
 
@@ -18168,7 +18230,8 @@ end;
 procedure TfrmTinnMain.OpenFileWithViewer(sFilter,
                                           sDefaultExt: string);
 var
-  od   : TOpenDialog;
+  od: TOpenDialog;
+
   sFile: string;
 
 begin
@@ -18227,7 +18290,8 @@ end;
 procedure TfrmTinnMain.actHtmlOpenCurrentFileExecute(Sender: TObject);
 var
   sFile: string;
-  i    : integer;
+
+  i: integer;
 
 begin
   i:= FindTopWindow;
@@ -18439,39 +18503,11 @@ begin
                             else pmenResultsOpenLink.Enabled:= True;
 end;
 
-procedure TfrmTinnMain.pmemRResSendSourceFileClick(Sender: TObject);
+procedure TfrmTinnMain.pmemRResSendBlockMarkedClick(Sender: TObject);
 begin
-  with actRSendSourceFile do
+  with actRSendBlockMarked do
     Visible:= not Visible;
-  pmemRResSendSourceFile.Checked:= actRSendSourceFile.Visible;
-end;
-
-procedure TfrmTinnMain.pmemRResSendFileClick(Sender: TObject);
-begin
-  with actRSendFile do
-    Visible:= not Visible;
-  pmemRResSendFile.Checked:= actRSendFile.Visible;
-end;
-
-procedure TfrmTinnMain.pmemRResSendSourceSelectionClick(Sender: TObject);
-begin
-  with actRSendSourceSelection do
-    Visible:= not Visible;
-  pmemRResSendSourceSelection.Checked:= actRSendSourceSelection.Visible;
-end;
-
-procedure TfrmTinnMain.pmemRResSendSelectionClick(Sender: TObject);
-begin
-  with actRSendSelection do
-    Visible:= not Visible;
-  pmemRResSendSelection.Checked:= actRSendSelection.Visible;
-end;
-
-procedure TfrmTinnMain.pmemRResSendSourceClipboardClick(Sender: TObject);
-begin
-  with actRSendSourceClipboard do
-    Visible:= not Visible;
-  pmemRResSendSourceClipboard.Checked:= actRSendSourceClipboard.Visible;
+  pmemRResSendBlockMarked.Checked:= actRSendBlockMarked.Visible;
 end;
 
 procedure TfrmTinnMain.pmemRResSendClipboardClick(Sender: TObject);
@@ -18481,11 +18517,25 @@ begin
   pmemRResSendClipboard.Checked:= actRSendClipboard.Visible;
 end;
 
-procedure TfrmTinnMain.pmemRResSendSourceBlockMarkedClick(Sender: TObject);
+procedure TfrmTinnMain.pmemRResSendContiguousClick(Sender: TObject);
 begin
-  with actRSendSourceBlockMarked do
+  with actRSendContiguous do
     Visible:= not Visible;
-  pmemRResSendSourceBlockMarked.Checked:= actRSendSourceBlockMarked.Visible;
+  pmemRResSendContiguous.Checked:= actRSendContiguous.Visible;
+end;
+
+procedure TfrmTinnMain.pmemRResSendFileClick(Sender: TObject);
+begin
+  with actRSendFile do
+    Visible:= not Visible;
+  pmemRResSendFile.Checked:= actRSendFile.Visible;
+end;
+
+procedure TfrmTinnMain.pmemRResSendSelectionClick(Sender: TObject);
+begin
+  with actRSendSelection do
+    Visible:= not Visible;
+  pmemRResSendSelection.Checked:= actRSendSelection.Visible;
 end;
 
 procedure TfrmTinnMain.pmemRResCurrentLineToTopClick(Sender: TObject);
@@ -18493,27 +18543,6 @@ begin
   with actRCurrentLineToTop do
     Visible:= not Visible;
   pmemRResCurrentLineToTop.Checked:= actRCurrentLineToTop.Visible;
-end;
-
-procedure TfrmTinnMain.pmemRResSendBlockMarkedClick(Sender: TObject);
-begin
-  with actRSendBlockMarked do
-    Visible:= not Visible;
-  pmemRResSendBlockMarked.Checked:= actRSendBlockMarked.Visible;
-end;
-
-procedure TfrmTinnMain.pmemRResSendSourceContiguousClick(Sender: TObject);
-begin
-  with actRSendSourceContiguous do
-    Visible:= not Visible;
-  pmemRResSendSourceContiguous.Checked:= actRSendSourceContiguous.Visible;
-end;
-
-procedure TfrmTinnMain.pmemRResSendContiguousClick(Sender: TObject);
-begin
-  with actRSendContiguous do
-    Visible:= not Visible;
-  pmemRResSendContiguous.Checked:= actRSendContiguous.Visible;
 end;
 
 procedure TfrmTinnMain.pmemRResSendLineClick(Sender: TObject);
@@ -18703,7 +18732,9 @@ procedure TfrmTinnMain.UpdateFile(var seEditor: TSynEdit;
                                   var smOption: TSynSelectionMode);
 var
   bcPos: TBufferCoord;
+
   iLine: integer;
+
   pMemo: Tpoint;
 
 begin
@@ -18755,6 +18786,7 @@ end;
 procedure TfrmTinnMain.actSpellExecute(Sender: TObject);
 var
   seEditor: TSynEdit;
+
   smOption: TSynSelectionMode;
 
 begin
@@ -18814,7 +18846,8 @@ procedure TfrmTinnMain.TabMenuPopup(pcTmp: TPageControl;
                                     Y: Integer);
 var
   hi: TTCHitTestInfo;
-  p : TPoint;
+
+  p: TPoint;
 
 begin
   hi.pt.x := X;
@@ -18840,7 +18873,8 @@ end;
 procedure TfrmTinnMain.actShortcutsEditExecute(Sender: TObject);
 var
   pTmp: pointer;
-  n   : integer;
+
+  n: integer;
 
   sShortcuts: array of string;
   
@@ -19018,7 +19052,8 @@ end;
 procedure TfrmTinnMain.actEditUndoExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin
   iFocus:= GetFocus;
@@ -19104,9 +19139,12 @@ const
                  '>'];
 
 var
-  att : TSynHighlighterAttributes;
-  bc  : TBufferCoord;
+  att: TSynHighlighterAttributes;
+
+  bc: TBufferCoord;
+
   cTmp: WideChar;
+
   iPos: integer;
 
   sAtCursor: WideString;
@@ -19236,7 +19274,7 @@ end;
 procedure TfrmTinnMain.actMatchBracketExecute(Sender: TObject);
 var
   seEditor,
-   seLog   : TSynEdit;
+   seLog: TSynEdit;
 
 begin
   with (Self.MDIChildren[FindTopWindow] as TfrmEditor) do
@@ -19301,6 +19339,7 @@ procedure TfrmTinnMain.actCompletionExampleSelectedExecute(Sender: TObject);
   function GetWord: string;
   var
     iPos: integer;
+
     sTmp: string;
 
   begin
@@ -19360,6 +19399,7 @@ procedure TfrmTinnMain.actCompletionHelpSelectedExecute(Sender: TObject);
   function GetWord: string;
   var
     iPos: integer;
+
     sTmp: string;
 
   begin
@@ -19630,7 +19670,8 @@ end;
 procedure TfrmTinnMain.actFileCloseAllExecute(Sender: TObject);
 var
   iChildID: integer;
-  sTmp    : string;
+
+  sTmp: string;
 
 begin
   while (pgFiles.PageCount > 0) do begin
@@ -19653,8 +19694,9 @@ var
   iTotPages,
    iPos,
    iNumToClose,
-   iChildID   : integer;
-  sTmp        : string;
+   iChildID: integer;
+
+  sTmp: string;
 
 begin
   iPos       := pgFiles.ActivePageIndex;
@@ -19680,7 +19722,8 @@ procedure TfrmTinnMain.actFileCloseLeftExecute(Sender: TObject);
 var
   iPos,
    iChildID: integer;
-  sTmp     : string;
+
+  sTmp: string;
 
 begin
   iPos:= pgFiles.ActivePageIndex;
@@ -19861,7 +19904,8 @@ procedure TfrmTinnMain.MySort(iSort: integer);
   procedure UpdateSort;
   var
     tmpTopLine: integer;
-    seEditor  : TSynEdit;
+
+    seEditor: TSynEdit;
     
   begin
     if (pgFiles.PageCount < 1) then Exit;
@@ -19878,20 +19922,20 @@ procedure TfrmTinnMain.MySort(iSort: integer);
   end;
 
 var
-  bSorted : boolean;
+  bSorted: boolean;
 
   meTmp: TMemo;
 
   seEditor: TSynEdit;
 
-  slTmp   : TStringList;
+  slTmp: TStringList;
 
   function SortMemo: boolean;
   var
     sStructure: string;
     wYear,
      wMonth,
-     wDay     : Word;
+     wDay: Word;
 
   begin
     Result := False;
@@ -20889,7 +20933,7 @@ procedure TfrmTinnMain.actRContPacInstTinnRcomExecute(Sender: TObject);
      sDepends,
      sFull,
      sFilePath,
-     sToSend  : string;
+     sToSend: string;
 
   begin
     // Will install the package
@@ -20939,11 +20983,13 @@ var
   i: integer;
 
   sToInstall,
-   sLatest  : string;
+   sLatest: string;
 
   uOption: TModalResult;
-  srTmp  : TSearchRec;
-  bNot   : boolean;
+
+  srTmp: TSearchRec;
+
+  bNot: boolean;
 
 const
   sName = '\TinnRcom';
@@ -21141,7 +21187,8 @@ end;
 function TfrmTinnMain.ActivePanel: integer;
 var
   x,
-   i : integer;
+   i: integer;
+
   mpt: TPoint;
 
 begin
@@ -21431,6 +21478,7 @@ end;
 procedure TfrmTinnMain.actLatexDimensionalExecute(Sender: TObject);
 var
   seEditor: TSynEdit;
+
   bcCurPos: TBufferCoord;
 
   synSearchOptions: TSynSearchOptions;
@@ -21448,7 +21496,7 @@ var
      sLine,
      sCab,
      sPrior,
-     sFill : string;
+     sFill: string;
 
   begin
     case StringToCaseSelect(sType,
@@ -21780,7 +21828,7 @@ procedure TfrmTinnMain.LatexFont(Sender: TObject);
     seEditor: TSynEdit;
 
     sPrior,
-     sFont  : string;
+     sFont: string;
 
     i: integer;
 
@@ -21835,7 +21883,7 @@ procedure TfrmTinnMain.LatexFontSize(Sender: TObject);
     seEditor: TSynEdit;
 
     sPrior,
-     sSize  : string;
+     sSize: string;
 
     i: integer;
 
@@ -22255,7 +22303,8 @@ procedure TfrmTinnMain.actLatexAlgebricFracExecute(Sender: TObject);
 
   function FormatFrac(sTmp: string): string;
   var
-    slTmp : TStringList;
+    slTmp: TStringList;
+
     sArg1,
      sArg2: string;
 
@@ -22366,7 +22415,8 @@ procedure TfrmTinnMain.actLatexAlgebricSqrtNExecute(Sender: TObject);
 
   function FormatSqrtN(sTmp: string): string;
   var
-    slTmp : TStringList;
+    slTmp: TStringList;
+
     sArg1,
      sArg2: string;
 
@@ -22693,9 +22743,10 @@ end;
 
 procedure TfrmTinnMain.CheckIfFileFromDvi(sFile: string);
 var
-  iPos       : integer;
+  iPos: integer;
+
   sLineNumber,
-   sTmp      : string;
+   sTmp: string;
 
 begin
   iPos:= pos(';',
@@ -23294,7 +23345,8 @@ end;
 
 procedure TfrmTinnMain.actRtermLOGClearExecute(Sender: TObject);
 var
-  i    : integer;
+  i: integer;
+
   seLog: TSynEdit;
 
 begin
@@ -23390,7 +23442,8 @@ end;
 
 procedure TfrmTinnMain.actRtermLOGSaveAsExecute(Sender: TObject);
 var
-  sTmp : string;
+  sTmp: string;
+
   seLog: TSynEdit;
 
 begin
@@ -23525,7 +23578,7 @@ end;
 procedure TfrmTinnMain.actRtermLoadWorkspaceExecute(Sender: TObject);
 var
   sFile,
-   sTmp : string;
+   sTmp: string;
 
 begin
   odMain.InitialDir:= sWorkingDir;
@@ -23672,7 +23725,8 @@ end;
 procedure TfrmTinnMain.actFontIncreaseExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin  // Font.Size < 50
   iFocus:= GetFocus;
@@ -23773,7 +23827,8 @@ end;
 procedure TfrmTinnMain.actFontDecreaseExecute(Sender: TObject);
 var
   iFocus: integer;
-  seLog : TSynEdit;
+
+  seLog: TSynEdit;
 
 begin  //Font.Size > 02
   iFocus:= GetFocus;
@@ -23871,11 +23926,11 @@ end;
 
 procedure TfrmTinnMain.actFormatRExecute(Sender: TObject);
 var
-  seEditor : TSynEdit;
+  seEditor: TSynEdit;
 
   sTmp,
    sToSend,
-   sSel    : string;
+   sSel: string;
 
   i: integer;
 
