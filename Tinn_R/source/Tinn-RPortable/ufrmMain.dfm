@@ -3928,15 +3928,15 @@ object frmTinnMain: TfrmTinnMain
     end
     object actRguiReturnFocus: TAction
       Category = 'Options'
-      Caption = 'Return focus to editor (after send/control Rgui)'
+      Caption = 'Rgui focus (return to editor)'
       Hint = 'Options: return focus after send/control Rgui'
       ImageIndex = 87
       OnExecute = actRguiReturnFocusExecute
     end
     object actRecho: TAction
       Category = 'Options'
-      Caption = 'Echo (R send)'
-      Hint = 'Options: echo (toogle)'
+      Caption = 'R echo (on/off)'
+      Hint = 'Options: R echo (on/off)'
       ImageIndex = 297
       ShortCut = 32837
       OnExecute = actRechoExecute
@@ -7435,12 +7435,12 @@ object frmTinnMain: TfrmTinnMain
         Caption = '-'
         GroupIndex = 1
       end
-      object menOptionGoBack: TMenuItem
-        Action = actRguiReturnFocus
-        GroupIndex = 1
-      end
       object menOptionEcho: TMenuItem
         Action = actRecho
+        GroupIndex = 1
+      end
+      object menOptionGoBack: TMenuItem
+        Action = actRguiReturnFocus
         GroupIndex = 1
       end
       object N130: TMenuItem

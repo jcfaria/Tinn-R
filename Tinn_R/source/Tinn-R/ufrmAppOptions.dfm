@@ -120,7 +120,7 @@ object frmAppOptions: TfrmAppOptions
       Top = 1
       Width = 342
       Height = 487
-      ActivePage = tbsAppResourcesR
+      ActivePage = tbsAppBasicR
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1605,28 +1605,28 @@ object frmAppOptions: TfrmAppOptions
         TabVisible = False
         object Label10: TLabel
           Left = 0
-          Top = 355
+          Top = 375
           Width = 120
           Height = 13
           Caption = '*     Highly recommended'
         end
         object Label4: TLabel
           Left = 0
-          Top = 385
+          Top = 405
           Width = 170
           Height = 13
           Caption = '*** Remember: R is case sensitive!'
         end
         object Label6: TLabel
           Left = 0
-          Top = 370
+          Top = 390
           Width = 117
           Height = 13
           Caption = '**   Changes are sparse'
         end
         object gpbMaxDeparseLength: TGroupBox
           Left = 0
-          Top = 156
+          Top = 174
           Width = 334
           Height = 47
           Align = alTop
@@ -1634,6 +1634,7 @@ object frmAppOptions: TfrmAppOptions
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
+          ExplicitTop = 156
           object edMaxDeparseLength: TEdit
             Left = 16
             Top = 20
@@ -1645,7 +1646,7 @@ object frmAppOptions: TfrmAppOptions
         end
         object GroupBox9: TGroupBox
           Left = 0
-          Top = 203
+          Top = 221
           Width = 334
           Height = 151
           Align = alTop
@@ -1653,6 +1654,7 @@ object frmAppOptions: TfrmAppOptions
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
+          ExplicitTop = 203
           object gpbRTriggers: TGroupBox
             Left = 6
             Top = 17
@@ -1726,7 +1728,7 @@ object frmAppOptions: TfrmAppOptions
           Left = 0
           Top = 0
           Width = 334
-          Height = 156
+          Height = 174
           Align = alTop
           Caption = ' Baisc (when startup/detected) and R is running '
           Ctl3D = False
@@ -1787,6 +1789,14 @@ object frmAppOptions: TfrmAppOptions
             Height = 18
             Caption = 'Scroll automatically (send line)'
             TabOrder = 6
+          end
+          object cbREcho: TCheckBox
+            Left = 11
+            Top = 150
+            Width = 58
+            Height = 18
+            Caption = 'R echo'
+            TabOrder = 7
           end
         end
       end
@@ -1911,7 +1921,6 @@ object frmAppOptions: TfrmAppOptions
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
-          ExplicitTop = 184
           object cbRSetWorkDirectory: TCheckBox
             Left = 11
             Top = 15

@@ -411,6 +411,7 @@ type
     GroupBox10: TGroupBox;
     cbNotification: TCheckBox;
     cbNotification_US: TCheckBox;
+    cbREcho: TCheckBox;
 
     procedure bbHelpClick(Sender: TObject);
     procedure bbtConPathDeplateClick(Sender: TObject);

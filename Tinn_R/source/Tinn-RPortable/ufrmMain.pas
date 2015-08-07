@@ -3030,7 +3030,7 @@ begin
   sCurrentVersion_Project   := '4.00.03.06';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '4.00.03.06';
-  sCurrentVersion_Shortcuts := '4.00.03.07';
+  sCurrentVersion_Shortcuts := '4.00.03.08';
   sCurrentVersion_TinnRcom  := '1.0.18';  // Released joinly with Tinn-R setup program
 
   // Cache
@@ -7692,13 +7692,13 @@ end;
 
 procedure TfrmTinnMain.SetIniStructure;
 begin
-//{
+{
   // Portable simple
   sPathIni:= copy(sPathTinnR,
                   1,
                   LastPos('\Tinn-R',
                           sPathTinnR) + length('Tinn-R'));
-//}
+}
 
 
 (*
@@ -7712,12 +7712,12 @@ begin
   It will only run under the Apps structure.
 *)
 
-{
+//{
   sPathIni:= copy(sPathTinnR,
                   1,
                   LastPos('\Tinn-RPortable',
                           sPathTinnR) + length('Tinn-RPortable'));
-}
+//}
 
   sPathIni      := sPathIni + '\Data';
   sPathApp      := sPathIni + '\app';
@@ -13137,6 +13137,7 @@ begin
       cbNotification.Checked             := actNotification.Checked;
       cbNotification_US.Checked          := actNotification_US.Checked;
       cbPdfOpenAlways.Checked            := actPdfOpenAlways.Checked;
+      cbREcho.Checked                    := bREcho;
       cbRememberFileState.Checked        := bRememberFileState;
       cbRememberSearchList.Checked       := bRememberSearchList;
       cbRemoveExtension.Checked          := bRemoveExtension;
@@ -13402,6 +13403,7 @@ begin
         bConnectionBeepOnError        := cbConnectionBeepOnError.Checked;
         bMinimizeTinnAfterLastFile    := cbMinimizeTinn.Checked;
         bOrganizeAutomatically        := cbRguiOrganizeAutomatically.Checked;
+        bREcho                        := cbREcho.Checked;
         bRememberFileState            := cbRememberFileState.Checked;
         bRememberSearchList           := cbRememberSearchList.Checked;
         bRemoveExtension              := cbRemoveExtension.Checked;
@@ -13453,6 +13455,15 @@ begin
 
         frmTools.cbComPriority_Line.Checked      := cbComPriority_Line.Checked;
         frmTools.cbComAutoDetect_Language.Checked:= cbComAutoDetect_Language.Checked;
+
+        if bREcho then begin
+          actREcho.Checked:= True;
+          SetREcho_True;
+        end
+        else begin
+          actREcho.Checked:= False;
+          SetREcho_False;
+        end;
 
         if (rdgRTCPIPType.ItemIndex = 0) then bIPLocal:= True
                                          else bIPLocal:= False;
