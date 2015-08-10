@@ -1,5 +1,5 @@
 ::  Author: Philipe Silva Farias 
-:: 	File Version: 1.0
+:: 	File Version: 1.1
 ::  Date: 2015/06/29
 ::	Description: This script file was developed to automate PortableApps release structure
 
@@ -67,6 +67,10 @@ xcopy /s source\other\Source structure\Tinn-RPortable\Other\Source /e
 xcopy /s source\appinfo structure\Tinn-RPortable\App\AppInfo /e
 xcopy /s source\defaultdata structure\Tinn-RPortable\App\DefaultData
 xcopy source\"help.html" structure\Tinn-RPortable
+
+
+::Moving the folder created to bin folder
+move "structure\Tinn-RPortable" "bin"
 
 
 ::Script's pause
