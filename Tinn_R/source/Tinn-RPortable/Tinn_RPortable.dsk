@@ -66,11 +66,11 @@ WelcomePageURL=bds:/default.htm
 CustomEditViewType=TEditView
 Module=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
 CursorX=3
-CursorY=7720
-TopLine=7690
+CursorY=7691
+TopLine=7680
 LeftCol=1
 Elisions=
-Bookmarks={1,7693,11}
+Bookmarks={1,7683,11}
 EditViewName=D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas
 
 [Watches]
@@ -99,8 +99,8 @@ StayOnTop=0
 
 [Breakpoints]
 Count=2
-Breakpoint0='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7657,'',0,0,'',1,0,0,'',1,'','','',0
-Breakpoint1='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',4978,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint0='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',7647,'',0,0,'',1,0,0,'',1,'','','',0
+Breakpoint1='D:\GitHub\Tinn-R\Tinn_R\source\Tinn-RPortable\ufrmMain.pas',4968,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -483,6 +483,11 @@ Dockable=1
 StayOnTop=0
 SplitPos=97
 
+[PropInspDesignerSelection]
+ArrangeBy=Category
+SelectedItem=Action,
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0
+
 [BreakpointWindow]
 PercentageSizes=1
 Create=1
@@ -590,7 +595,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel

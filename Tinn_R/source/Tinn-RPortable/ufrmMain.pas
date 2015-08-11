@@ -1205,7 +1205,6 @@ type
     N134: TMenuItem;
     N135: TMenuItem;
     N136: TMenuItem;
-    N137: TMenuItem;
     N138: TMenuItem;
     N139: TMenuItem;
     N14: TMenuItem;
@@ -1245,14 +1244,12 @@ type
     N170: TMenuItem;
     N171: TMenuItem;
     N172: TMenuItem;
-    N173: TMenuItem;
     N174: TMenuItem;
     N175: TMenuItem;
     N176: TMenuItem;
     N177: TMenuItem;
     N178: TMenuItem;
     N179: TMenuItem;
-    N18: TMenuItem;
     N180: TMenuItem;
     N181: TMenuItem;
     N182: TMenuItem;
@@ -1324,11 +1321,9 @@ type
     N56: TMenuItem;
     N56_OLD: TMenuItem;
     N57: TMenuItem;
-    N58: TMenuItem;
     N59: TMenuItem;
     N59_OLD: TMenuItem;
     N6: TMenuItem;
-    N60: TMenuItem;
     N61: TMenuItem;
     N62: TMenuItem;
     N63: TMenuItem;
@@ -1852,9 +1847,6 @@ type
     tbSave: TToolButton;
     tbSaveAll: TToolButton;
     TBSConvertion: TTBSubmenuItem;
-    TBSeparatorItem1: TTBSeparatorItem;
-    TBSeparatorItem10: TTBSeparatorItem;
-    TBSeparatorItem11: TTBSeparatorItem;
     TBSeparatorItem12: TTBSeparatorItem;
     TBSeparatorItem13: TTBSeparatorItem;
     TBSeparatorItem14: TTBSeparatorItem;
@@ -1864,8 +1856,6 @@ type
     TBSeparatorItem18: TTBSeparatorItem;
     TBSeparatorItem19: TTBSeparatorItem;
     TBSeparatorItem2: TTBSeparatorItem;
-    TBSeparatorItem20: TTBSeparatorItem;
-    TBSeparatorItem21: TTBSeparatorItem;
     TBSeparatorItem22: TTBSeparatorItem;
     TBSeparatorItem23: TTBSeparatorItem;
     TBSeparatorItem24: TTBSeparatorItem;
@@ -7692,13 +7682,13 @@ end;
 
 procedure TfrmTinnMain.SetIniStructure;
 begin
-{
+//{
   // Portable simple
   sPathIni:= copy(sPathTinnR,
                   1,
                   LastPos('\Tinn-R',
                           sPathTinnR) + length('Tinn-R'));
-}
+//}
 
 
 (*
@@ -7712,12 +7702,12 @@ begin
   It will only run under the Apps structure.
 *)
 
-//{
+{
   sPathIni:= copy(sPathTinnR,
                   1,
                   LastPos('\Tinn-RPortable',
                           sPathTinnR) + length('Tinn-RPortable'));
-//}
+}
 
   sPathIni      := sPathIni + '\Data';
   sPathApp      := sPathIni + '\app';

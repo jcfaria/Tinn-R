@@ -1812,27 +1812,17 @@ object frmTinnMain: TfrmTinnMain
         object TBRSendAll: TTBItem
           Action = actRSendFile
         end
-        object TBSeparatorItem10: TTBSeparatorItem
-        end
         object TBRSendSelection: TTBItem
           Action = actRSendSelection
-        end
-        object TBSeparatorItem20: TTBSeparatorItem
         end
         object TBItem26: TTBItem
           Action = actRSendClipboard
         end
-        object TBSeparatorItem1: TTBSeparatorItem
-        end
         object TBRSendBlockMarked: TTBItem
           Action = actRSendBlockMarked
         end
-        object TBSeparatorItem21: TTBSeparatorItem
-        end
         object TBItem46: TTBItem
           Action = actRSendContiguous
-        end
-        object TBSeparatorItem11: TTBSeparatorItem
         end
         object TBRSendLine: TTBItem
           Action = actRSendLine
@@ -8145,32 +8135,17 @@ object frmTinnMain: TfrmTinnMain
         object menSendToRAll: TMenuItem
           Action = actRSendFile
         end
-        object N60: TMenuItem
-          Caption = '-'
-        end
         object menSendToRSelection: TMenuItem
           Action = actRSendSelection
-        end
-        object N173: TMenuItem
-          Caption = '-'
         end
         object Clipboard1: TMenuItem
           Action = actRSendClipboard
         end
-        object N18: TMenuItem
-          Caption = '-'
-        end
         object menSendToRBlockMarked: TMenuItem
           Action = actRSendBlockMarked
         end
-        object N137: TMenuItem
-          Caption = '-'
-        end
         object ContiguousechoTRUE1: TMenuItem
           Action = actRSendContiguous
-        end
-        object N58: TMenuItem
-          Caption = '-'
         end
         object menSendToRLine: TMenuItem
           Action = actRSendLine
