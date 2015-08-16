@@ -1035,14 +1035,13 @@ object frmTinnMain: TfrmTinnMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 409
+    Height = 390
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 390
   end
   object Panel1: TPanel
     Left = 0
@@ -1218,7 +1217,7 @@ object frmTinnMain: TfrmTinnMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -1813,27 +1812,17 @@ object frmTinnMain: TfrmTinnMain
         object TBRSendAll: TTBItem
           Action = actRSendFile
         end
-        object TBSeparatorItem10: TTBSeparatorItem
-        end
         object TBRSendSelection: TTBItem
           Action = actRSendSelection
-        end
-        object TBSeparatorItem20: TTBSeparatorItem
         end
         object TBItem26: TTBItem
           Action = actRSendClipboard
         end
-        object TBSeparatorItem1: TTBSeparatorItem
-        end
         object TBRSendBlockMarked: TTBItem
           Action = actRSendBlockMarked
         end
-        object TBSeparatorItem21: TTBSeparatorItem
-        end
         object TBItem46: TTBItem
           Action = actRSendContiguous
-        end
-        object TBSeparatorItem11: TTBSeparatorItem
         end
         object TBRSendLine: TTBItem
           Action = actRSendLine
@@ -2007,14 +1996,13 @@ object frmTinnMain: TfrmTinnMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 409
+    Height = 390
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 390
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2029,7 +2017,7 @@ object frmTinnMain: TfrmTinnMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 516
+    Top = 497
     Width = 994
     Height = 20
     Anchors = [akLeft, akBottom]
@@ -2077,24 +2065,22 @@ object frmTinnMain: TfrmTinnMain
     SizeGrip = False
     OnClick = stbMainClick
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 497
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 409
+    Height = 390
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 390
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 507
+    Top = 488
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2103,7 +2089,6 @@ object frmTinnMain: TfrmTinnMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 488
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -8150,32 +8135,17 @@ object frmTinnMain: TfrmTinnMain
         object menSendToRAll: TMenuItem
           Action = actRSendFile
         end
-        object N60: TMenuItem
-          Caption = '-'
-        end
         object menSendToRSelection: TMenuItem
           Action = actRSendSelection
-        end
-        object N173: TMenuItem
-          Caption = '-'
         end
         object Clipboard1: TMenuItem
           Action = actRSendClipboard
         end
-        object N18: TMenuItem
-          Caption = '-'
-        end
         object menSendToRBlockMarked: TMenuItem
           Action = actRSendBlockMarked
         end
-        object N137: TMenuItem
-          Caption = '-'
-        end
         object ContiguousechoTRUE1: TMenuItem
           Action = actRSendContiguous
-        end
-        object N58: TMenuItem
-          Caption = '-'
         end
         object menSendToRLine: TMenuItem
           Action = actRSendLine
