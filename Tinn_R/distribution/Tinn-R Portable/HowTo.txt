@@ -1,0 +1,17 @@
+::  Author: Philipe Silva Farias 
+:: 	File Version: 1.0
+::  Date: 2015/08/13
+::	Description: That's a document to help anyone who wants to know how to 
+	generate a Tinn-R Portable Version.
+
+-----------------------------------------------------------------------------------
+
+:: 	First of all, open the structure folder located in the same folder
+    you found that "how-to" file, there you'll find a bash script called
+    "structure.bat", run it. That script will create a new compressed file
+    inside "zip" folder called "Tinn-R Portable_version_number"
+		
+::	If you want to change release's version, open "structure.bat" in some
+	text editor like notepad or notepad++, and follow the 5 line instructions
+	
+::  That'all
