@@ -60,7 +60,7 @@ xcopy /s Tinn-R\App\doc\"User guide.pdf" Tinn-R  /e
 xcopy /s ..\tools\launcher\"Tinn-R Portable.exe" Tinn-R  /e
 
 ::Tinn-R folder compressing procedure
-for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R Portable_release_number.zip" "Tinn-R\"
+for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R Portable_04.00.03.08.zip" "Tinn-R\"
 
 ::Deleting the not longer needed Tinn-R folder
 rmdir /s /q Tinn-R
