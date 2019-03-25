@@ -1,0 +1,35 @@
+------------------------------------------
+GroupIndex   Action
+------------------------------------------
+         1   actANSI
+         1   actUTF16BE
+         1   actUTF16LE
+         1   actUTF8
+         2   actMAC
+         2   actUNIX
+         2   actWIN
+         3   actRtermEditorSetFocus
+         3   actRtermIOSetFocus
+         3   actRtermLOGSetFocus
+         4   actRtermSetIOSyntaxToR
+         4   actRtermSetIOSyntaxToText
+         5   actRtermSetLOGSyntaxToR
+         5   actRtermSetLOGSyntaxToText
+         6   actRtermIOSplitHorizontal
+         6   actRtermIOSplitRemove
+         6   actRtermIOSplitVertical
+         7   actFilesTabsBottom
+         7   actFilesTabsTop
+         8   actToolsTabsBottom
+         8   actToolsTabsLeft
+         8   actToolsTabsRight
+         8   actToolsTabsTop
+         9   actRtermTabsBottom
+         9   actRtermTabsLeft
+         9   actRtermTabsRight
+         9   actRtermTabsTop
+        10   actRComplexDefault
+        10   actRSimpleDefault
+        10   actTextDefault
+------------------------------------------
+         

@@ -1,2 +1,0 @@
-This is a test document
-To make sure InfateStream and Deflate Stream work correctly.

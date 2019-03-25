@@ -1,0 +1,476 @@
+<HTML>
+<HEAD>
+  <TITLE> Generic Diff Format Specification </TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+<P align=right>
+<B><BIG>NOTE-GDIFF</BIG></B>
+<H1 ALIGN="CENTER">
+  Generic Diff Format Specification
+</H1>
+<H3>
+  <A href="/Submission/">Submitted to W3C August 21, 1997</A>
+</H3>
+<DL>
+  <DT>
+    This document is available at:
+  <DD>
+    <A HREF="http://www.w3.org/TR/NOTE-gdiff-19970901">http://www.w3.org/TR/NOTE-gdiff-19970901</A>
+  <DT>
+    Editors:
+  <DD>
+    <A HREF="mailto:avh@marimba.com">Arthur van Hoff</A>,
+    <A HREF="http://www.marimba.com/">Marimba Inc</A>.
+  <DD>
+    <A HREF="mailto:jpayne@marimba.com">Jonathan Payne</A>,
+    <A HREF="http://www.marimba.com/">Marimba Inc</A>.
+</DL>
+<P>
+  <HR>
+<H2>
+  Status of this Document
+</H2>
+<P>
+This document is a NOTE made available by the W3 Consortium for discussion
+only. This indicates no endorsement of its content, nor that the Consortium
+has, is, or will be allocating any resources to the issues addressed by the
+NOTE.
+<P>
+This document is a submission to W3C from Marimba. Please see
+<A href="http://www.w3.org/Submission/#s1997-8">Acknowledged Submissions
+to W3C </A> regarding its disposition.
+<H2>
+  Abstract
+</H2>
+<P>
+This document provides a specification of a generic file format for representing
+the differences between two files.
+<H2>
+  Table of Contents
+</H2>
+<P>
+1. Introduction
+<P>
+2. The Generic Diff Format
+<P>
+3. Conclusion
+<P>
+3.1 References
+<H2>
+  1. Introduction
+</H2>
+<P>
+This document describes the Generic Diff Format (GDIFF). The GDIFF format
+can be used to efficiently describe the differences between two arbirary
+files. The format does not make any assumptions about the type or contents
+of the files, and thus can be used to describe the differences between text
+files as well as binary files. The GDIFF format is itself a binary file format.
+<P>
+This proposal does not describe how to compute the differences between two
+files. It only defines how the resulting differences can be described in
+an efficient and generic manner. The proposal describes the GDIFF file format
+and how to interpret it.
+<H2>
+  2. The Generic Diff Format
+</H2>
+<P>
+The GDIFF format is primarily useful in applications which compute the
+differences between two versions of a file. The resulting differences can
+be stored in a file using the GDIFF format. The differences described by
+the GDIFF file can later be applied to the old file to obtain the new file.
+<P>
+The GDIFF format is particularly useful in situations where it is more efficient
+to distribute the differences between two versions of a file, rather than
+the entire new version of the file.
+<P>
+Any file differencing algorithm can be used to compute the differences between
+the old and new versions of a file. An example is the
+<A href="http://cs.anu.edu.au/techreports/1996/TR-CS-96-05.html">rsync</A>
+algorithm. The result can be expressed using the GDIFF format that is described
+here.
+<P>
+To apply a GDIFF file, you need random access to the old version of the file,
+and sequential access to the GDIFF file. The new version of the file is produced
+on the output stream.
+<H3>
+  File Format
+</H3>
+<P>
+The GDIFF format is a binary format. The mime type of a GDIFF file is
+"application/gdiff". All binary numbers in a GDIFF file are stored in big
+endian format (most significant byte first).
+<P>
+Each diff stream starts with the 4-byte magic number (value
+<CODE>0xd1ffd1ff</CODE>), followed by a 1-byte version number (value 4).
+The version number is followed by a sequence of 1 byte commands which are
+interpreted in order. The last command in the stream is the end-of-file command
+(value 0).
+<P>
+The GDIFF commands are listed in the table below.
+<P>
+<TABLE BORDER CELLSPACING=2 BORDERCOLOR="#000000" CELLPADDING=2 WIDTH=100%>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><B>Name</B></TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><B></B>
+      <P>
+      Cmd</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><B></B>
+      <P>
+      Followed By</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><B></B>
+      <P>
+      Action</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      EOF</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      0</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      &nbsp;</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      End of File</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      DATA</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      1</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      1 byte</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      append 1 data byte</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      DATA</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      2</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      2 bytes</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      append 2 data bytes</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      DATA</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      &lt;n&gt;</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      &lt;n&gt; bytes</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      append &lt;n&gt; data bytes</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      DATA</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      246</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      246 bytes</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      append 246 data bytes</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      DATA</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      247</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      ushort, &lt;n&gt; bytes</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      append &lt;n&gt; data bytes</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      DATA</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      248</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      int, &lt;n&gt; bytes</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      append &lt;n&gt; data bytes</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      COPY</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      249</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      ushort, ubyte</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      copy &lt;position&gt;, &lt;length&gt;</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      COPY</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      250</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      ushort, ushort</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      copy &lt;position&gt;, &lt;length&gt;</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      COPY</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      251</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      ushort, int</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      copy &lt;position&gt;, &lt;length&gt;</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      COPY</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      252</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      int, ubyte</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      copy &lt;position&gt;, &lt;length&gt;</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      COPY</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      253</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      int, ushort</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      copy &lt;position&gt;, &lt;length&gt;</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      COPY</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      254</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      int, int</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      copy &lt;position&gt;, &lt;length&gt;</TD>
+  </TR>
+  <TR>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      COPY</TD>
+    <TD WIDTH="9%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      255</TD>
+    <TD WIDTH="39%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      long, int</TD>
+    <TD WIDTH="42%" VALIGN="TOP" BGCOLOR="#e0e0e0"><FONT FACE="Courier New" SIZE=2></FONT>
+      <P>
+      copy &lt;position&gt;, &lt;length&gt;</TD>
+  </TR>
+</TABLE>
+<P>
+There are two kinds of GDIFF commands. The first kind is the DATA command
+(1 through 248). Each data command is followed by a number of data bytes
+which are copied onto the output stream.
+<P>
+The second kind of GDIFF command is the COPY command (249 through 255). Each
+COPY command is followed by two arguments: position and length. The arguments
+specify the portion of the old file that must be copied onto the output stream.
+<P>
+If a number larger than <CODE>1^31-1</CODE> bytes is needed for a command
+that takes only <CODE>int</CODE> arguments, the command must be split into
+multiple commands. This may be necessary when dealing with very large files.
+<H3>
+  Types
+</H3>
+<UL>
+  <LI>
+    <B>byte</B> - 8 bit signed
+  <LI>
+    <B>ubyte</B> - 8 bit unsigned
+  <LI>
+    <B>ushort</B> - 16 bit unsigned, most significant byte first
+  <LI>
+    <B>int</B> - 32 bit signed, most significant byte first
+  <LI>
+    <B>long</B> - 64 bit signed, most significant byte first
+</UL>
+<H3>
+  Example
+</H3>
+<P>
+To illustrate the use of the GDIFF format we will use two input streams
+<B>old</B> and <B>new</B> as an example and prepare a simple GDIFF file by
+hand:
+<P>
+<TABLE BORDER BORDERCOLOR="#000000" WIDTH=100%>
+  <TR>
+    <TD VALIGN="TOP" BGCOLOR="#e0e0e0" HEIGHT=34><PRE>  
+
+           0   1   2   3   4   5   6   7   8   9
+
+  -----------------------------------------------
+
+   old:    A   B   C   D   E   F   G
+
+   new:    A   B   X   Y   C   D   B   C   D   E
+
+</PRE>
+    </TD>
+  </TR>
+</TABLE>
+<P>
+A diff algorithm can be used to discover patterns which occur in both the
+old and new files, and a set of GDIFF commands can be computed:
+<P>
+<TABLE BORDER BORDERCOLOR="#000000" WIDTH=100% BGCOLOR="#e0e0e0">
+  <TR>
+    <TD ALIGN="CENTER" HEIGHT=20 WIDTH="33%"><B>Comments</B></TD>
+    <TD ALIGN="CENTER" HEIGHT=20 WIDTH="33%"><B>GDIFF</B></TD>
+    <TD ALIGN="CENTER" HEIGHT=20 WIDTH="34%"><B>Output</B></TD>
+  </TR>
+  <TR>
+    <TD VALIGN="TOP" HEIGHT=34><PRE>  
+
+   magic
+
+   version
+
+   COPY 0, 2
+
+   DATA "XY"
+
+   COPY 2, 2
+
+   COPY 1, 4
+
+   EOF
+
+</PRE>
+    </TD>
+    <TD VALIGN="TOP" HEIGHT=34><PRE>  
+
+   0xd1, 0xff, 0xd1, 0xff
+
+   4
+
+   249, 0, 0, 2
+
+   2, 'X', 'Y'
+
+   249, 0, 2, 2
+
+   249, 0, 1, 4
+
+   0
+
+</PRE>
+    </TD>
+    <TD VALIGN="TOP" HEIGHT=34><PRE>  
+
+   
+
+   
+
+   A, B
+
+   X, Y
+
+   C, D
+
+   B, C, D, E
+
+
+
+</PRE>
+    </TD>
+  </TR>
+</TABLE>
+<P>
+Note that in this case the resulting GDIFF file is larger than the new file.
+This is not normally the case when the files get larger. Also note that there
+can be many different GDIFF files which produce the same result. The size
+of the resulting GDIFF file largely depends on the similarity between the
+two input files, and the ability of the diff algorithm to find the most optimal
+set of differences.
+<H2>
+  3. Conclusion
+</H2>
+<P>
+The GDIFF format is a simple diff format that can efficiently describe the
+differences between a two files of any type. It is defined in this proposal
+to provide a simple interoperability format for binary differencing.
+<H2>
+  3.1 References
+</H2>
+<UL>
+  <LI>
+    "SunOS diff.1"<BR>
+    <A href="http://www.uwaterloo.ca/man/sunos/diff.1.html">http://www.uwaterloo.ca/man/sunos/diff.1.html</A>
+  <LI>
+    "The rsync algorithm" by Andrew Tridgell and Paul Mackerras. <BR>
+    <A href="http://cs.anu.edu.au/techreports/1996/TR-CS-96-05.html">http://cs.anu.edu.au/techreports/1996/TR-CS-96-05.html</A>
+  <LI>
+    "HTTP: Delta-Encoding Notes" by Stephen Williams. <BR>
+    <A href="http://ei.cs.vt.edu/~williams/DIFF/prelim.html">
+    http://ei.cs.vt.edu/~williams/DIFF/prelim.html </A>
+  <LI>
+    "Potential benefits of delta encoding and data compression for HTTP" Jeffrey
+    C. Mogul, Fred Douglis, Anja Feldmann, and Balachander Krishnamurthy. Proceedings
+    SIGCOMM '97, Cannes, France <BR>
+    <A href="http://ftp.digital.com/%7emogul/sigcomm97.ps">http://ftp.digital.com/%7emogul/sigcomm97.ps
+    </A> <BR>
+    <A href="http://www.research.digital.com/wrl/techreports/abstracts/97.4.html">
+    http://www.research.digital.com/wrl/techreports/abstracts/97.4.html </A>
+</UL>
+</BODY></HTML>

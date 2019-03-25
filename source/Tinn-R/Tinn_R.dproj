@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{fcaa4792-2d68-496b-b932-0330d11ee09b}</ProjectGuid>
+    <MainSource>Tinn_R.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\..\bin\Tinn_R.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
+    <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\..\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\tb2k\Source;..\components\TSpellers;..\components\muconsole.1.00a</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\tb2k\Source;..\components\TSpellers;..\components\muconsole.1.00a</DCC_ResourcePath>
+    <DCC_ObjPath>..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\tb2k\Source;..\components\TSpellers;..\components\muconsole.1.00a</DCC_ObjPath>
+    <DCC_IncludePath>..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\tb2k\Source;..\components\TSpellers;..\components\muconsole.1.00a</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+    <DCC_UNIT_PLATFORM>False</DCC_UNIT_PLATFORM>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
+    <DCC_DcuOutput>..\..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\..\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\synEdit changed;..\synEdit added;..\unihighlighter added;..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\HotKeyManager;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\SynEdit\Source;..\components\tb2k\Source;..\components\xpmenu;..\components\TSpellers;..\components\unihighlighter\Component Source;..\others;..\components\rmControls;..\components\muconsole.1.00a</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\synEdit changed;..\synEdit added;..\unihighlighter added;..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\HotKeyManager;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\SynEdit\Source;..\components\tb2k\Source;..\components\xpmenu;..\components\TSpellers;..\components\unihighlighter\Component Source;..\others;..\components\rmControls;..\components\muconsole.1.00a</DCC_ResourcePath>
+    <DCC_ObjPath>..\synEdit changed;..\synEdit added;..\unihighlighter added;..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\HotKeyManager;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\SynEdit\Source;..\components\tb2k\Source;..\components\xpmenu;..\components\TSpellers;..\components\unihighlighter\Component Source;..\others;..\components\rmControls;..\components\muconsole.1.00a</DCC_ObjPath>
+    <DCC_IncludePath>..\synEdit changed;..\synEdit added;..\unihighlighter added;..\components\abbrevia\source;..\components\EditAlign;..\components\FindFile;..\components\HotKeyManager;..\components\mxWebUpdate;..\components\SMDBGrid\Sources;..\components\SMDBNav;..\components\SynEdit\Source;..\components\tb2k\Source;..\components\xpmenu;..\components\TSpellers;..\components\unihighlighter\Component Source;..\others;..\components\rmControls;..\components\muconsole.1.00a</DCC_IncludePath>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+    <DCC_UNIT_PLATFORM>False</DCC_UNIT_PLATFORM>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="DebugSourceDirs">...\source\;F:\$tinn-r\$tinn-r_2.0.0.2\source\components\muconsole.1.00a\;F:\$tinn-r\$tinn-r_2.0.0.2\source\components\SynEdit\Source\</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Language><Language Name="ProjectLang">$00000416</Language></Language><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">5</VersionInfo><VersionInfo Name="MinorVer">3</VersionInfo><VersionInfo Name="Release">3</VersionInfo><VersionInfo Name="Build">1</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1033</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName">Tinn-R Team</VersionInfoKeys><VersionInfoKeys Name="FileDescription">Tinn-R Editor</VersionInfoKeys><VersionInfoKeys Name="FileVersion">5.3.3.1</VersionInfoKeys><VersionInfoKeys Name="InternalName">Tinn-R</VersionInfoKeys><VersionInfoKeys Name="LegalCopyright">Under GPL (GNU Public License)</VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks">Under GPL (GNU Public License)</VersionInfoKeys><VersionInfoKeys Name="OriginalFilename">Tinn</VersionInfoKeys><VersionInfoKeys Name="ProductName">Tinn-R Editor</VersionInfoKeys><VersionInfoKeys Name="ProductVersion">5.03.03.01</VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">Tinn_R.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="Tinn_R.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\diff\ufrmDiffMain.pas">
+      <Form>frmDiffMain</Form>
+    </DCCReference>
+    <DCCReference Include="..\SynEdit_adapted\SynCompletionProposal.pas" />
+    <DCCReference Include="..\SynEdit_adapted\SynEditOC.pas" />
+    <DCCReference Include="..\SynEdit_adapted\SynEditPrintPreview.pas" />
+    <DCCReference Include="..\SynEdit_adapted\SynEditStrConst.pas" />
+    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterAll.pas" />
+    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterR.pas" />
+    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterR_term.pas" />
+    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterTeX.pas" />
+    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterText.pas" />
+    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterText_term.pas" />
+    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterURI.pas" />
+    <DCCReference Include="..\thirdy\ATxCodepages.pas" />
+    <DCCReference Include="..\thirdy\clMultiStream.pas" />
+    <DCCReference Include="..\thirdy\codeEditor.pas" />
+    <DCCReference Include="..\thirdy\diffUnit.pas" />
+    <DCCReference Include="..\thirdy\dirWatch.pas" />
+    <DCCReference Include="..\thirdy\fileView.pas">
+      <Form>frmFilesFrame</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\thirdy\findReplace.pas" />
+    <DCCReference Include="..\thirdy\folderView.pas">
+      <Form>frmFoldersFrame</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\thirdy\hashUnit.pas" />
+    <DCCReference Include="..\thirdy\searches.pas" />
+    <DCCReference Include="..\thirdy\sndkey32.pas" />
+    <DCCReference Include="..\thirdy\Split.pas" />
+    <DCCReference Include="..\thirdy\uActionMacro.pas" />
+    <DCCReference Include="..\thirdy\ufrmAsciiChart.pas">
+      <Form>frmAsciiChart</Form>
+    </DCCReference>
+    <DCCReference Include="trCodeSender.pas" />
+    <DCCReference Include="trHistory.pas" />
+    <DCCReference Include="trRHistory.pas" />
+    <DCCReference Include="trRutils.pas" />
+    <DCCReference Include="trSendSmart.pas" />
+    <DCCReference Include="trSendSmart_OK.pas" />
+    <DCCReference Include="trSynUtils.pas" />
+    <DCCReference Include="trUtils.pas" />
+    <DCCReference Include="udmSyn.pas">
+      <Form>dmSyn</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="ufrmAbout.pas">
+      <Form>frmAbout</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmAppOptions.pas">
+      <Form>frmAppOptionsDlg</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmColors.pas">
+      <Form>frmColors</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmComments.pas">
+      <Form>frmComments</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmCompletion.pas">
+      <Form>frmCompletion</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmConfigurePrint.pas">
+      <Form>frmConfigurePrint</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmConfirmReplace.pas">
+      <Form>frmConfirmReplaceDlg</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmCount.pas">
+      <Form>frmCount</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmEditor.pas">
+      <Form>frmEditor</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmGotoBox.pas">
+      <Form>frmGotoBox</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmGroupRename.pas">
+      <Form>frmGroupRename</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmHotKeys.pas">
+      <Form>frmHotKeys</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmLatexDimensional.pas">
+      <Form>frmLatexDimensional</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmNewGoup.pas">
+      <Form>frmNewGroup</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmPandoc.pas">
+      <Form>frmPandoc</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmPrintPreview.pas">
+      <Form>frmPrintPreview</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmRcard.pas">
+      <Form>frmRcard</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmReplace.pas">
+      <Form>frmReplaceDlg</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmRmirrors.pas">
+      <Form>frmRmirrors</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmRServer.pas">
+      <Form>frmRServer</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmRterm.pas">
+      <Form>frmRterm</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmSearch.pas">
+      <Form>frmSearchDlg</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmSearchInFiles.pas">
+      <Form>frmSearchInFilesDlg</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmShortcuts.pas">
+      <Form>frmShortcuts</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmSplash.pas">
+      <Form>frmSplash</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmTools.pas">
+      <Form>frmTools</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmUpdater.pas">
+      <Form>frmUpdater</Form>
+    </DCCReference>
+    <DCCReference Include="uModDados.pas">
+      <Form>modDados</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+  </ItemGroup>
+</Project>

@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<TgConfig Version="3" SubLevelDisabled="False">
-  <Option Name="namespaceFolder.ufrmMain" Type="System.String" Value="" Category="General" IsBrowsable="False" />
-  <Option Name="namespaceFolder.Tinn_R" Type="System.String" Value="" Category="General" IsBrowsable="False" />
-</TgConfig>

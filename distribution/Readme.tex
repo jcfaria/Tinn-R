@@ -1,0 +1,29 @@
+\subsection*{5.3.3.1 (fev/25/2019)}
+\begin{itemize}
+  \item Bug(s) fixed:
+    \begin{itemize}
+      \item A bug associated to the procedure \texttt{Help/Check for update} and the prior
+        \texttt{5.3.2.1 (fev/12/2019) portable} version was fixed.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{5.3.2.1 (fev/12/2019)}
+\begin{itemize}
+  \item The recognition of complex R object names for \texttt{print}, \texttt{plot}, \texttt{names}
+    \texttt{structure}, \texttt{edit}, \texttt{fix}, \texttt{help}, \texttt{example} and \texttt{open example}
+      were improved. For example, to all cases:
+    \begin{itemize}
+      \item iris
+      \item iris[1]
+      \item iris[c(1, 2)]
+      \item iris3(1, 1, 3)
+      \item iris\$Sepal.Length
+      \item iris['Sepal.Length']
+      \item iris[["Sepal.Length"]]
+    \end{itemize}
+    that it will be correctly recognized.
+  \item The \texttt{Replace} procedure was improved. From now it will remember, for all files, the same
+    word list used to replacement.
+  \item The \htmladdnormallink{Tinn-R web site}{https://nbcgib.uesc.br/tinnr/en/} was updated,
+    the new URL is: \textbf{https://nbcgib.uesc.br/tinnr/en/}.
+\end{itemize}

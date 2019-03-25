@@ -19,5 +19,5 @@ To download do the following in a terminal emulator:
 > git clone https://jcfaria@github.com/jcfaria/Tinn-R.git
 
 The stable version of this software is available at:
-- http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
+- https://nbcgib.uesc.br/tinnr/en/
 - https://sourceforge.net/projects/tinn-r/

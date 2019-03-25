@@ -1,0 +1,21 @@
+Check list before to release:
+-----------------------------
+
+01- IDE Delphi Project -> Options/Version
+02- IDE Delphi Project -> compiler set to release
+03- /packages          -> update packages and check if all packages are in
+04- /utils             -> check all version of the packages in the scripts: 'info.R' and 'install.R'
+05- /project           -> If some content file of '\utils' was changed:
+                          - Increase variable sCurrentVersion_Project
+                          - make a new zip from the folder '/project'
+06- /sumatra           -> upgrade to the latest
+07- ufrTinnMain        -> TinnRcom package
+08- ufrTinnMain        -> citation (year)
+09- User Guide         -> update 'What is new'
+10- /doc               -> replace the new 'User_guide.pdf'
+11- /distribution      -> double click in 'rename.bat'
+12- Inno Setup script  -> Update the version number in the script
+
+Servidor do LEC
+
+Renomear o antigo para patch_notes_xx-xx-xxx.html, para manter um histórico

@@ -1,0 +1,38 @@
+package SpellersD_5;
+
+{$R *.RES}
+{$R 'SpellLanguageComboBox.dcr'}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'LS Speller: Components for common spell checking'}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl50,
+  SpellersRT_5;
+
+contains
+  SpellersReg in 'SpellersReg.pas',
+  SpellLanguageComboBox in 'SpellLanguageComboBox.pas',
+  LangsReg in 'LangsReg.pas';
+
+end.
