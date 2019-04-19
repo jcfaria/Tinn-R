@@ -120,6 +120,8 @@ const
   SYNS_AttrNamespaceAttrValue   =  'NamespaceAttributeValue';
   SYNS_AttrNonReservedKeyword   =  'NonreservedKeyword';
   SYNS_AttrNote                 =  'Note';  //J.C.Faria
+  SYNS_AttrNote_1               =  'Note_1';  //J.C.Faria
+  SYNS_AttrNote_2               =  'Note_2';  //J.C.Faria
   SYNS_AttrNull                 =  'Null';
   SYNS_AttrNumber               =  'Number';
   SYNS_AttrOctal                =  'Octal';
@@ -345,6 +347,8 @@ resourcestring
   SYNS_FriendlyAttrNamespaceAttrValue   =  'Namespace Attribute Value';
   SYNS_FriendlyAttrNonReservedKeyword   =  'Non-reserved Keyword';
   SYNS_FriendlyAttrNote                 =  'Note';  //J.C.Faria
+  SYNS_FriendlyAttrNote_1               =  'Note_1';  //J.C.Faria
+  SYNS_FriendlyAttrNote_2               =  'Note_2';  //J.C.Faria
   SYNS_FriendlyAttrNull                 =  'Null';
   SYNS_FriendlyAttrNumber               =  'Number';
   SYNS_FriendlyAttrOctal                =  'Octal';

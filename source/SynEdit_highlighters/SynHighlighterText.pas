@@ -1,4 +1,4 @@
-ï»¿{-------------------------------------------------------------------------------
+{-------------------------------------------------------------------------------
 The contents of this file are subject to the Mozilla Public License
 Version 1.1 (the "License"); you may not use this file except in compliance
 with the License. You may obtain a copy of the License at
@@ -13,8 +13,8 @@ The Original Code is based on the odPySyn.pas file from the
 mwEdit component suite by Martin Waldenburg and other developers, the Initial
 Author of this file is Olivier Deckmyn.
 Portions created by M.Utku Karatas and Dennis Chuah.
-Unicode translation by MaÃ«l HÃ¶rz.
-Adapted to R language by JosÃ© ClÃ¡udio Faria (Tinn-R Team)
+Unicode translation by Maël Hörz.
+Adapted to R language by José Cláudio Faria (Tinn-R Team)
 
 All Rights Reserved.
 
@@ -75,6 +75,8 @@ type
   TtkTokenKind = (
                   tkComment,
                   tkNote,
+                  tkNote_1,
+                  tkNote_2,
                   tkFloat,
                   tkHex,
                   tkIdentifier,
@@ -102,6 +104,8 @@ type
     fStringStarter: WideChar;  // used only for rsMultilineString stuff
     fCommentAttri: TSynHighlighterAttributes;
     fNoteAttri: TSynHighlighterAttributes;
+    fNote_1Attri: TSynHighlighterAttributes;
+    fNote_2Attri: TSynHighlighterAttributes;
     fFloatAttri: TSynHighlighterAttributes;
     fHexAttri: TSynHighlighterAttributes;
     fIdentifierAttri: TSynHighlighterAttributes;
@@ -161,6 +165,8 @@ type
   published
     property CommentAttri: TSynHighlighterAttributes read fCommentAttri write fCommentAttri;
     property NoteAttri: TSynHighlighterAttributes read fNoteAttri write fNoteAttri;
+    property Note_1Attri: TSynHighlighterAttributes read fNote_1Attri write fNote_1Attri;
+    property Note_2Attri: TSynHighlighterAttributes read fNote_2Attri write fNote_2Attri;
     property FloatAttri: TSynHighlighterAttributes read fFloatAttri write fFloatAttri;
     property HexAttri: TSynHighlighterAttributes read fHexAttri write fHexAttri;
     property IdentifierAttri: TSynHighlighterAttributes read fIdentifierAttri write fIdentifierAttri;
@@ -185,7 +191,7 @@ uses
 function TSynTextSyn.IsIdentChar(AChar: WideChar): Boolean;
 begin
   case AChar of
-    'A'..'Z', 'a'..'z', '_', '-', '0'..'9', 'Ã€'..'Ã–', 'Ã˜'..'Ã¶', 'Ã¸'..'Ã¿':
+    'A'..'Z', 'a'..'z', '_', '-', '0'..'9', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ':
       Result := True;
     else
       Result := False;
@@ -262,8 +268,20 @@ begin
   fNoteAttri:= TSynHighlighterAttributes.Create(SYNS_AttrNote,
                                                 SYNS_FriendlyAttrNote);
   fNoteAttri.Foreground:= clRed;
-  fNoteAttri.Style:= [fsItalic, fsUnderline];
+  fNoteAttri.Style:= [fsItalic, fsUnderline, fsBold];
   AddAttribute(fNoteAttri);
+
+  fNote_1Attri:= TSynHighlighterAttributes.Create(SYNS_AttrNote_1,
+                                                  SYNS_FriendlyAttrNote_1);
+  fNote_1Attri.Foreground:= clBlue;
+  fNote_1Attri.Style:= [fsItalic, fsBold];
+  AddAttribute(fNote_1Attri);
+
+  fNote_2Attri:= TSynHighlighterAttributes.Create(SYNS_AttrNote_2,
+                                                  SYNS_FriendlyAttrNote_2);
+  fNote_2Attri.Foreground:= clGreen;
+  fNote_2Attri.Style:= [fsItalic];
+  AddAttribute(fNote_2Attri);
 
   fIdentifierAttri:= TSynHighlighterAttributes.Create(SYNS_AttrIdentifier,
                                                       SYNS_FriendlyAttrIdentifier);
@@ -350,7 +368,11 @@ begin
 }
   // J.C.Faria
   if (FLine[Run+1] = '!') then
-    fTokenID:= tkNote
+  begin
+    fTokenID:= tkNote;
+    if (FLine[Run+2] = '.') then fTokenID:= tkNote_1;
+    if (FLine[Run+3] = '.') then fTokenID:= tkNote_2;
+  end
   else
     fTokenID:= tkComment;
 
@@ -863,7 +885,7 @@ begin
 
         '#': CommentProc;
 
-        'A'..'Z', 'a'..'z', '_', 'Ã€'..'Ã–', 'Ã˜'..'Ã¶', 'Ã¸'..'Ã¿': IdentProc;
+        'A'..'Z', 'a'..'z', '_', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
 
         '.', '0'..'9': NumberProc;
 
@@ -916,6 +938,8 @@ begin
   case fTokenID of
     tkComment:             Result:= fCommentAttri;
     tkNote:                Result:= fNoteAttri;
+    tkNote_1:              Result:= fNote_1Attri;
+    tkNote_2:              Result:= fNote_2Attri;
     tkIdentifier:          Result:= fIdentifierAttri;
     tkNumber:              Result:= fNumberAttri;
     tkHex:                 Result:= fHexAttri;
@@ -960,6 +984,8 @@ begin
   Result:=
     '# Text highlighter sample'#13#10 +
     '#! Note                                     # Note'#13#10 +
+    '#!. Note_1                                  # Note_1'#13#10 +
+    '#!.. Note_2                                 # Note_2'#13#10 +
     '# Notes and observations!                   # Comment'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
     '0 1 2 3 4 5 6 8 9                           # Numbers'#13#10 +
