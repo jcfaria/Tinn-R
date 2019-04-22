@@ -62,7 +62,8 @@ rename   Tinn-R\bin\Tinn_R_portable.exe.manifest "Tinn-R_portable.exe.manifest"
 ::for /d %X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.02.03.00_portable.zip" "Tinn-R\"
 ::for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.01.01_portable.zip" "Tinn-R\"
 ::for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.02.01_portable.zip" "Tinn-R\"
-for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.03.01_portable.zip" "Tinn-R\"
+::for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.03.01_portable.zip" "Tinn-R\"
+for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.04.01_portable.zip" "Tinn-R\"
 
 ::Deleting the not longer needed Tinn-R folder
 rmdir /s /q Tinn-R

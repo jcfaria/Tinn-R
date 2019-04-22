@@ -230,8 +230,7 @@ const
   sSampleRcomplex: string =
     '# R complex highlighter sample'#13#10 +
     '<<< joseclaudio.faria@gmail.com >>>'#13#10 +
-    '<<< www.uesc.br >>>'#13#10 +
-    ''#13#10 +
+    '<<< www.uesc.br >>>'#13#10 + #13#10 +
     '#! Note                                     # Note'#13#10 +
     '#!. Note_1                                  # Note_1'#13#10 +
     '#!.. Note_2                                 # Note_2'#13#10 +
@@ -241,12 +240,12 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
+    '+ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
-    'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
+    'NA  NULL  TRUE  T  FALSE  F  if  tryCatch   # Programing'#13#10 +
     #13#10 +
-    'mean(Y); var(Y); sd(Y)                      # Function'#13#10 +
+    'mean(Y)  var(Y)  sd(Y)                      # Function'#13#10 +
     'xtfrm.numeric_version                       # Function'#13#10 +
     'as.data.frame.model.matrix                  # Function'#13#10 +
     'as.character.numeric_version                # Function'#13#10 +
@@ -254,10 +253,11 @@ const
     'plot(Y ~ X, ylab = ''Y'', xlab = ''X'',         # Plotting'#13#10 +
     '     col = ''blue'', cex = 0.5, pch = ''*'')'#13#10 +
     #13#10 +
-    'airquality; iris; Harman74.cor              # Datasets'#13#10 +
+    'airquality  iris  Harman74.cor mtcars       # Datasets'#13#10 +
     #13#10 +
     'cat(''\nI - Basics measures:''); cat(''\n\n'')  # String'#13#10 +
-    'string <- "This is" ''a string''              # String'#13#10;
+    'he''s isn''t we''ve they''d (''all not string'')  # Shorttned forms'#13#10 +
+    'string <- "This is" ''a string''              # String';
 
   sSampleRdoc: string =
     '% R doc highlighter sample'#13#10 +
@@ -321,12 +321,12 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
+    '+ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
-    'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
+    'NA  NULL  TRUE  T  FALSE  F  if  tryCatch   # Programing'#13#10 +
     #13#10 +
-    'mean(Y); var(Y); sd(Y)                      # Function'#13#10 +
+    'mean(Y)  var(Y)  sd(Y)                      # Function'#13#10 +
     'xtfrm.numeric_version                       # Function'#13#10 +
     'as.data.frame.model.matrix                  # Function'#13#10 +
     'as.character.numeric_version                # Function'#13#10 +
@@ -334,9 +334,10 @@ const
     'plot(Y ~ X, ylab = ''Y'', xlab = ''X'',         # Plotting'#13#10 +
     '     col = ''blue'', cex = 0.5, pch = ''*'')'#13#10 +
     #13#10 +
-    'airquality; iris; Harman74.cor              # Datasets'#13#10 +
+    'airquality  iris  Harman74.cor mtcars       # Datasets'#13#10 +
     #13#10 +
     'cat(''\nI - Basics measures:''); cat(''\n\n'')  # String'#13#10 +
+    'he''s isn''t we''ve they''d (''all not string'')  # Shorttned forms'#13#10 +
     'string <- "This is" ''a string''              # String'#13#10 +
     'end.rcode-->'#13#10 +
     '</body>'#13#10 +
@@ -362,12 +363,12 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
+    '+ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
-    'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
+    'NA  NULL  TRUE  T  FALSE  F  if  tryCatch   # Programing'#13#10 +
     #13#10 +
-    'mean(Y); var(Y); sd(Y)                      # Function'#13#10 +
+    'mean(Y)  var(Y)  sd(Y)                      # Function'#13#10 +
     'xtfrm.numeric_version                       # Function'#13#10 +
     'as.data.frame.model.matrix                  # Function'#13#10 +
     'as.character.numeric_version                # Function'#13#10 +
@@ -375,9 +376,10 @@ const
     'plot(Y ~ X, ylab = ''Y'', xlab = ''X'',         # Plotting'#13#10 +
     '     col = ''blue'', cex = 0.5, pch = ''*'')'#13#10 +
     #13#10 +
-    'airquality; iris; Harman74.cor              # Datasets'#13#10 +
+    'airquality  iris  Harman74.cor mtcars       # Datasets'#13#10 +
     #13#10 +
     'cat(''\nI - Basics measures:''); cat(''\n\n'')  # String'#13#10 +
+    'he''s isn''t we''ve they''d (''all not string'')  # Shorttned forms'#13#10 +
     'string <- "This is" ''a string''              # String'#13#10 +
     '```'#13#10;
 
@@ -403,12 +405,12 @@ const
     'variable_a = 1:100                          # Identifier'#13#10 +
     'variable.b <- 1:100                         # Identifier'#13#10 +
     #13#10 +
-    '+ - * %*% / ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
+    '+ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
-    'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
+    'NA  NULL  TRUE  T  FALSE  F  if  tryCatch   # Programing'#13#10 +
     #13#10 +
-    'mean(Y); var(Y); sd(Y)                      # Function'#13#10 +
+    'mean(Y)  var(Y)  sd(Y)                      # Function'#13#10 +
     'xtfrm.numeric_version                       # Function'#13#10 +
     'as.data.frame.model.matrix                  # Function'#13#10 +
     'as.character.numeric_version                # Function'#13#10 +
@@ -416,9 +418,10 @@ const
     'plot(Y ~ X, ylab = ''Y'', xlab = ''X'',         # Plotting'#13#10 +
     '     col = ''blue'', cex = 0.5, pch = ''*'')'#13#10 +
     #13#10 +
-    'airquality; iris; Harman74.cor              # Datasets'#13#10 +
+    'airquality  iris  Harman74.cor mtcars       # Datasets'#13#10 +
     #13#10 +
     'cat(''\nI - Basics measures:''); cat(''\n\n'')  # String'#13#10 +
+    'he''s isn''t we''ve they''d (''all not string'')  # Shorttned forms'#13#10 +
     'string <- "This is" ''a string''              # String'#13#10 +
     '@'#13#10 +
     '\end{document}';

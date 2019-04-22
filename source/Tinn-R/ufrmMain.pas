@@ -12302,7 +12302,8 @@ end;
 
 procedure TfrmMain.menWebRGuiRTVSClick(Sender: TObject);
 begin
-  pOpen_Url('http://microsoft.github.io/RTVS-docs/')
+//  pOpen_Url('http://microsoft.github.io/RTVS-docs/')
+  pOpen_Url('https://docs.microsoft.com/pt-br/visualstudio/rtvs/?view=vs-2017')
 end;
 
 procedure TfrmMain.menWebRSearchMailingListArchivesClick(Sender: TObject);

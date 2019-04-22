@@ -1,32 +1,45 @@
 [Closed Files]
-File_0=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterText.pas',0,1,969,12,989,0,0,,
-File_1=TSourceModule,'C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynHighlighterURI.pas',0,1,667,65,667,0,0,,
-File_2=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR.pas',0,1,3653,1,3665,0,0,,{1
-File_3=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas',0,1,428,21,441,0,0,,
-File_4=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_adapted\SynEditStrConst.pas',0,1,339,1,352,0,0,,
-File_5=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR_term.pas',0,1,2846,1,2869,0,0,,
-File_6=TSourceModule,'C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas',0,1,348,4,362,0,0,,{1
-File_7=TSourceModule,'C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmRterm.pas',0,1,199,1,201,0,0,,
-File_8=TSourceModule,'C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmTools.pas',0,1,894,10,911,0,0,,
-File_9=TSourceModule,'C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmAppOptions.pas',0,1,1130,27,1146,0,0,,
+File_0=TSourceModule,'C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\udmSyn.pas',0,1,400,33,416,0,0,,
+File_1=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterURI.pas',0,1,160,1,182,0,0,,{1
+File_2=TSourceModule,'C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynEditHighlighter.pas',0,1,1155,1,1169,0,0,,
+File_3=TSourceModule,'C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynEdit.pas',0,1,5474,1,5488,0,0,,
+File_4=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR - Copia_2.pas',0,1,2875,1,2882,0,0,,
+File_5=TSourceModule,'C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynHighlighterURI.pas',0,1,438,1,466,0,0,,{2
+File_6=TSourceModule,'C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynUnicode.pas',0,1,1319,1,1333,0,0,,
+File_7=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterText.pas',0,1,969,12,989,0,0,,
+File_8=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_adapted\SynEditStrConst.pas',0,1,339,1,352,0,0,,
 
 [Modules]
-Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
-Module1=default.htm
-Count=2
+Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
+Module2=default.htm
+Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
+Count=4
 EditWindowCount=1
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
-ModuleType=TBaseProject
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
 
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
+ModuleType=TBaseProject
+
 [EditWindow0]
-ViewCount=2
-CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dpr
+ViewCount=4
+CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 View0=0
 View1=1
+View2=2
+View3=3
 PercentageSizes=1
 Create=1
 Visible=1
@@ -52,7 +65,7 @@ RightPanelClients=DockSite2,ToolForm
 RightPanelData=0000080001010200000009000000446F636B536974653208000000546F6F6C466F726D9E1200000000000001CF07000000000000FFFFFFFF
 BottomPanelSize=0
 BottomPanelClients=DockSite1
-BottomPanelData=0000080001000100000009000000446F636B53697465312C0A000000000000007A45000000000000FFFFFFFF
+BottomPanelData=0000080001000100000009000000446F636B5369746531280C000000000000007A45000000000000FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465302D1900000000000000771B000000000000FFFFFFFF
@@ -64,13 +77,35 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dpr
-CursorX=47
-CursorY=155
-TopLine=44
+CursorX=1
+CursorY=255
+TopLine=241
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dpr
+
+[View2]
+CustomEditViewType=TEditView
+Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
+CursorX=69
+CursorY=270
+TopLine=238
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
+
+[View3]
+CustomEditViewType=TEditView
+Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+CursorX=33
+CursorY=9447
+TopLine=9430
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 
 [Watches]
 Count=0
@@ -97,7 +132,7 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=9
+Count=11
 Breakpoint0='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmMain.pas',17497,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\trSynUtils.pas',439,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmMain.pas',18204,'',0,1,'',1,0,0,'',1,'','','',0
@@ -107,6 +142,8 @@ Breakpoint5='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\sourc
 Breakpoint6='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmEditor.pas',1625,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint7='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmReplace.pas',105,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint8='C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynEdit.pas',6219,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint9='C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynHighlighterURI.pas',469,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint10='C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynEditHighlighter.pas',1092,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -489,6 +526,11 @@ Dockable=1
 StayOnTop=0
 SplitPos=111
 
+[PropInspDesignerSelection]
+ArrangeBy=Category
+SelectedItem=Linkage,
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Linkage.Images=0
+
 [BreakpointWindow]
 PercentageSizes=1
 Create=1
@@ -539,15 +581,15 @@ Create=1
 Visible=1
 Docked=0
 State=0
-Left=10015
-Top=8550
+Left=10007
+Top=6152
 Width=10000
-Height=3631
+Height=6057
 MaxLeft=-7
 MaxTop=-14
 ClientWidth=9941
-ClientHeight=3211
-TBDockHeight=2398
+ClientHeight=5637
+TBDockHeight=2927
 LRDockWidth=4327
 Dockable=1
 StayOnTop=0

@@ -1,40 +1,44 @@
 #! Recognized words for the R Highlight of the Tinn-R
 
-#! Topic                     Line
-#! R sample                    10
-#! Programing                  36
-#! Function                    71
-#! Plotting                  2217
-#! Datasets                  2295
+#!..._______________________________
+#!. Topic                     Line
+#!. R sample                    12
+#!. Programing                  41
+#!. Function                    76
+#!. Plotting                  2222
+#!. Datasets                  2300
+#!..._______________________________
 
-#! R sample
-# Notes and observations!                      # Comment
-pB <- 3.5E2                                    # Float number
-0 1 2 3 4 5 6 8 9                              # Numbers
+#!. ___R sample___
+#! Note                                     # Note
+#!. Note_1                                  # Note_1
+#!.. Note_2                                 # Note_2
+pB <- 3.5E2                                 # Float number
+0 1 2 3 4 5 6 8 9                           # Numbers
 
-variable_a = 1:100                             # Identifier
-variable.b <- 1:100                            # Identifier
+variable_a = 1:100                          # Identifier
+variable.b <- 1:100                         # Identifier
 
-+ - * / ^ = <- -> <> ~ $ ? ! & :               # Operator
-() {} [] ; ,                                   # Symbol
++ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator
+() {} [] ; ,                                # Symbol
 
-NA; NULL; TRUE; T; FALSE; F; if; tryCatch      # Programing
+NA  NULL  TRUE  T  FALSE  F  if  tryCatch   # Programing
 
-mean(Y); var(Y); sd(Y)                         # Function
-xtfrm.numeric_version                          # Function
-as.data.frame.model.matrix                     # Function
-as.character.numeric_version                   # Function
+mean(Y)  var(Y)  sd(Y)                      # Function
+xtfrm.numeric_version                       # Function
+as.data.frame.model.matrix                  # Function
+as.character.numeric_version                # Function
 
-plot(Y ~ X, ylab = 'Y', xlab = 'X',            # Plotting
-     col = 'blue', cex = 0.5, pch = '*')  
+plot(Y ~ X, ylab = 'Y', xlab = 'X',         # Plotting
+     col = 'blue', cex = 0.5, pch = '*')
 
-airquality; iris; Harman74.cor; InsectSprays   # Datasets
+airquality  iris  Harman74.cor mtcars       # Datasets
 
-cat('\nI - Basics measures:'); cat('\n\n')     # String
-he's isn't we've they'd ('all not string')     # Shorttned forms
-string <- "This is" 'a string'                 # String
+cat('\nI - Basics measures:'); cat('\n\n')  # String
+he's isn't we've they'd ('all not string')  # Shorttned forms
+string <- "This is" 'a string'              # String
 
-#! Programing
+#!. ___Programing___
 break
 class
 do
@@ -69,7 +73,7 @@ warning
 warnings
 while
 
-#! Function
+#!. ___Function___
 abline
 abs
 acf
@@ -2215,7 +2219,7 @@ zapsmall
 zip
 zip.unpack
 
-#! Plotting
+#!. ___Plotting___
 adj
 ann
 ask
@@ -2293,7 +2297,7 @@ ylbias
 ylim
 ylog
 
-#! Datasets
+#!. ___Datasets___
 ability.cov
 airmiles
 AirPassengers

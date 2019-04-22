@@ -3671,9 +3671,9 @@ begin
     '+ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator'#13#10 +
     '() {} [] ; ,                                # Symbol'#13#10 +
     #13#10 +
-    'NA; NULL; TRUE; T; FALSE; F; if; tryCatch   # Programing'#13#10 +
+    'NA  NULL  TRUE  T  FALSE  F  if  tryCatch   # Programing'#13#10 +
     #13#10 +
-    'mean(Y); var(Y); sd(Y)                      # Function'#13#10 +
+    'mean(Y)  var(Y)  sd(Y)                      # Function'#13#10 +
     'xtfrm.numeric_version                       # Function'#13#10 +
     'as.data.frame.model.matrix                  # Function'#13#10 +
     'as.character.numeric_version                # Function'#13#10 +
@@ -3681,7 +3681,7 @@ begin
     'plot(Y ~ X, ylab = ''Y'', xlab = ''X'',         # Plotting'#13#10 +
     '     col = ''blue'', cex = 0.5, pch = ''*'')'#13#10 +
     #13#10 +
-    'airquality; iris; Harman74.cor              # Datasets'#13#10 +
+    'airquality  iris  Harman74.cor mtcars       # Datasets'#13#10 +
     #13#10 +
     'cat(''\nI - Basics measures:''); cat(''\n\n'')  # String'#13#10 +
     'he''s isn''t we''ve they''d (''all not string'')  # Shorttned forms'#13#10 +
