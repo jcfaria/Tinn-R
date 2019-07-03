@@ -6394,11 +6394,11 @@ begin
 end;
 
 procedure TfrmMain.synCompletion(Kind: SynCompletionType;
-                                     Sender: TObject;
-                                     var CurrentInput: WideString;
-                                     var x,
-                                         y: Integer;
-                                     var CanExecute: Boolean);
+                                 Sender: TObject;
+                                 var CurrentInput: WideString;
+                                 var x,
+                                     y: Integer;
+                                 var CanExecute: Boolean);
 
   procedure pGetLocLine(se: TSynEdit;
                         var sLocLine: string);
@@ -11757,7 +11757,7 @@ begin
 end;
 
 procedure TfrmMain.pRSetSend_Info(var sInfo,
-                                          sFileInfo: string);
+                                      sFileInfo: string);
 
   procedure pSet_Repos(var sInfo: string);
   begin
@@ -18004,7 +18004,7 @@ begin
     Checked:= False;
   end;
 
-  if not (fRgui_Running) then Exit;
+  //if not (fRgui_Running) then Exit;
   //if fUseTCPIP then Exit;
   sTmp:= '{ESC}';
   fCodeSender.pDoPrepare;

@@ -727,7 +727,7 @@ begin
                                                 MessageCode,
                                                 Integer(@Buf),
                                                 BytesRead);
-    //ShowMessage(Buf);  // To debug only
+//    ShowMessage(Buf);  // To debug only
   until False;
 end;
 

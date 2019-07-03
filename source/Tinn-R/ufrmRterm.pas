@@ -476,6 +476,7 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
                                   #13#10,
                                   [rfReplaceAll]);
 
+       //ShowMessage(slTmp.Text);
        with synIO do
          if bRUnderDebug_Function or
             bRUnderDebug_Package then begin

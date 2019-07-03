@@ -127,8 +127,8 @@ const
   R: array[0..3] of string = ('R Console (32-bit)',             // R: 32 SDI mode (0)
                               'R Console (64-bit)',             // R: 64 SDI mode (1)
                               'R Console - Microsoft R Open',   // MRO (2) - The first release of 3.3.1 has double space: R Console..-..Microsoft R Open version 3.3 (64-bit)
-                              ' - PuTTY');                      // R running in remote server under PuTTY
-
+                              ' - PuTTY'                      // R running in remote server under PuTTY
+                              );
 var
   preRegEx: TPerlRegEx;
 
