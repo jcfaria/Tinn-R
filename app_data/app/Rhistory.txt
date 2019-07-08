@@ -1,0 +1,19 @@
+lm
+debug(var)
+tb <- fdt(iris)
+tb
+mean(tb)
+var(1:10)
+median(tb)
+av <- aov(Sepal.Length ~ Species, data=iris)
+summary(av)
+plot(av)
+demo(graphics)
+rnorm(1e4)
+source('C:/Users/jcfaria/AppData/Local/Temp/Tinn-R/info.R')
+startSocketServer(port=8889)
+var
+sd
+read.table
+search()
+library(fdth)

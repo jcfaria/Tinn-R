@@ -456,6 +456,9 @@ type
     GroupBox29: TGroupBox;
     rdgRtermClose: TRadioGroup;
     rdgRtermSend_Plus: TRadioGroup;
+    GroupBox30: TGroupBox;
+    Edit2: TEdit;
+    Label3: TLabel;
 
     procedure bbHelpClick(Sender: TObject);
     procedure bbtConPathDeplateClick(Sender: TObject);

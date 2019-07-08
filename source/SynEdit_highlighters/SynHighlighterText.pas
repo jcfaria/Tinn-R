@@ -147,6 +147,8 @@ type
     class function GetLanguageName: string; override;
 
   public
+    bEditor : boolean;
+
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
@@ -158,6 +160,7 @@ type
     function GetTokenKind: integer; override;
     function IsIdentChar(AChar: WideChar): Boolean; override;
 
+    procedure SetType(bToEditor: boolean = True);
     procedure Next; override;
     procedure ResetRange; override;
     procedure SetRange(Value: Pointer); override;
@@ -871,40 +874,85 @@ procedure TSynTextSyn.Next;
 begin
   fTokenPos:= Run;
 
-  case fRange of
-    rsMultilineString: StringEndProc(fStringStarter);
-    else
-      case fLine[Run] of
-        '~', '$', '?', '!', '=', '|',
-        '^', '*', '+', '-', '&', '<',
-        '>', ':', '/': OperatorProc;
+  // SynHglighterR used in Editor
+  if bEditor then begin
+    case fRange of
+      rsMultilineString: StringEndProc(fStringStarter);
+      else
+        case fLine[Run] of
+          '~', '$', '?', '!', '=', '|',
+          '^', '*', '+', '-', '&', '<',
+          '>', ':', '/': OperatorProc;
 
-        '{', '}', '(', ')', '[', ']',
-        ';', ',': SymbolProc;
+          '{', '}', '(', ')', '[', ']',
+          ';', ',': SymbolProc;
 
 
-        '#': CommentProc;
+          '#': CommentProc;
 
-        'A'..'Z', 'a'..'z', '_', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
+          'A'..'Z', 'a'..'z', '_', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
 
-        '.', '0'..'9': NumberProc;
+          '.', '0'..'9': NumberProc;
 
-        #0: NullProc;
+          #0: NullProc;
 
-        #1..#9, #11, #12, #14..#32: SpaceProc;
+          #1..#9, #11, #12, #14..#32: SpaceProc;
 
-        #10: LFProc;
+          #10: LFProc;
 
-        #13: CRProc;
+          #13: CRProc;
 
-        #34: String34Proc;  // double quote
+          #34: String34Proc;  // double quote
 
-        #39: String39Proc;  // single quote
+          #39: String39Proc;  // single quote
 
-        else UnknownProc;
-      end;
+          else UnknownProc;
+        end;
+    end;
+  end
+  else begin
+    case fLine[Run] of
+      '~', '$', '?', '!', '=', '|',
+      '^', '*', '+', '-', '&', '<',
+      '>', ':', '/': OperatorProc;
+
+      '{', '}', '(', ')', '[', ']',
+      ';', ',': SymbolProc;
+
+
+      '#': CommentProc;
+
+      'A'..'Z', 'a'..'z', '_', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
+
+      '.', '0'..'9': NumberProc;
+
+      #0: NullProc;
+
+      #1..#9, #11, #12, #14..#32: SpaceProc;
+
+      #10: LFProc;
+
+      #13: CRProc;
+
+      #34: String34Proc;  // double quote
+
+      #39: String39Proc;  // single quote
+
+      else UnknownProc;
+    end;
   end;
   inherited;
+end;
+
+// rsMultilineString is not a good option to Rterm!
+// After to criate (in run time) set the propertie of the instance of the class to False
+// To use as Rterm:
+//synRterm: TSynRSyn
+//synRterm := TSynRSyn.Create(Self);
+//synRterm.SetType(False);
+procedure TSynTextSyn.SetType(bToEditor: boolean = True);
+begin
+  bEditor := bToEditor;
 end;
 
 function TSynTextSyn.GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;

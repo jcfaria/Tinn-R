@@ -1716,14 +1716,14 @@ type
     SpellChecker: TSpellChecker;
     stbMain: TStatusBar;
     Sweave1: TMenuItem;
-    synEditor2Tip: TSynCompletionProposal;
-    synEditorTip: TSynCompletionProposal;
+    synEditor2_Tip: TSynCompletionProposal;
+    synEditor_Tip: TSynCompletionProposal;
     synEditPrint: TSynEditPrint;
     SynEditSearch: TSynEditSearch;
     synExporterHtml: TSynExporterHtml;
     synExporterRtf: TSynExporterRtf;
     synExporterTeX: TSynExporterTeX;
-    synIOTip: TSynCompletionProposal;
+    synIO_Tip: TSynCompletionProposal;
     synMR: TSynMacroRecorder;
     synURIOpener: TSynURIOpener;
     TBDockBottom: TTBDock;
@@ -1986,6 +1986,7 @@ type
     extnomultlinestring5: TMenuItem;
     Rnomultlinestring6: TMenuItem;
     imlRSend_Plus: TPngImageList;
+    synIO_History: TSynCompletionProposal;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2532,6 +2533,8 @@ type
     procedure actRSendSmartExecute(Sender: TObject);
     procedure pmemRResSendSmartClick(Sender: TObject);
     procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x,
+      y: Integer; var CanExecute: Boolean);
 
   private
     { Private declarations }
@@ -3615,7 +3618,7 @@ begin
 
     synEditor.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
 
-    pSetDataCompletion(synEditorTip,
+    pSetDataCompletion(synEditor_Tip,
                        synEditor,
                        'CTRL+SPACE');
 
@@ -6869,7 +6872,7 @@ begin
 
     with TSynCompletionProposal(Sender) do begin
       ClearList;
-      NbLinesInWindow:= slTmp.Count;
+      NbLinesInWindow:= 12;
       ItemList.AddStrings(slTmp);
     end;
   finally
@@ -6965,7 +6968,7 @@ begin
   with TfrmEditor.Create(Self) do begin
     synEditor.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
 
-    pSetDataCompletion(synEditorTip,
+    pSetDataCompletion(synEditor_Tip,
                        (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor,
                        'CTRL+SPACE');
 
@@ -8028,9 +8031,17 @@ begin
     Duplicates:= dupIgnore;
   end;
 
-  pSetDataCompletion(synIOTip,
+  pSetDataCompletion(synIO_Tip,
                      frmRterm.synIO,
                      'CTRL+SPACE');
+
+
+  if FileExists(sPath_App + '\Rhistory.txt') then
+    RHistory.fLoadFromFile(sPath_App + '\Rhistory.txt');
+
+  pSetDataCompletion(synIO_History,
+                     frmRterm.synIO,
+                     'CTRL+ALT+SPACE');
 end;
 
 procedure TfrmMain.pAppActivate(Sender: TObject);
@@ -9811,6 +9822,8 @@ begin
     // Destriy TStrings
     FreeAndNil(slFileNotify);
 
+    RHistory.fSaveToFile(sPath_App + '\Rhistory.txt');
+
     // Terminate
     Application.Terminate;
   end;
@@ -9940,11 +9953,11 @@ begin
   i:= fFindTopWindow;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
 
-  pSetDataCompletion(synEditorTip,
+  pSetDataCompletion(synEditor_Tip,
                      (Self.MDIChildren[i] as TfrmEditor).synEditor,
                      'CTRL+SPACE');
 
-  pSetDataCompletion(synEditor2Tip,
+  pSetDataCompletion(synEditor2_Tip,
                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
                      'CTRL+SPACE');
 
@@ -11565,15 +11578,15 @@ var
   res: string;
 
 begin
-  res:= fRegEx('Teste,,,',
-               'Teste[,]+$',
+  res:= fRegEx('The test,,,',
+               'test[,]+$',
                True,
-               'The PCRE RegEx is OK!');
+               'PCRE RegEx is OK!');
 
-  fMessageDlg('Teste,,,' + #13 + #13 +
-              'RegEx = ''Teste[,]+$''' + #13 +
+  fMessageDlg('The test,,,' + #13 + #13 +
+              'RegEx = ''test[,]+$''' + #13 +
               'Replace = True ' + #13 +
-              'Replacement = ''The replacement PCRE RegEx is OK!''' + #13 + #13 +
+              'Replacement = ''replacement PCRE RegEx is OK!''' + #13 + #13 +
               res,
               mtInformation,
               [mbOK],
@@ -15809,7 +15822,7 @@ begin
   with (Self.MDIChildren[i] as TfrmEditor) do
     pEditorSplit(False);
 
-  pSetDataCompletion(synEditor2Tip,
+  pSetDataCompletion(synEditor2_Tip,
                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
                      'CTRL+SPACE');
 
@@ -15827,7 +15840,7 @@ begin
   with (Self.MDIChildren[i] as TfrmEditor) do
     pEditorSplit;
 
-  pSetDataCompletion(synEditor2Tip,
+  pSetDataCompletion(synEditor2_Tip,
                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
                      'CTRL+SPACE');
 
@@ -15841,7 +15854,7 @@ begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
     pEditorRemoveSplit;
 
-  with synEditor2Tip do begin
+  with synEditor2_Tip do begin
     Editor       := nil;
     EndOfTokenChr:= EmptyStr;
     ShortCut     := TextToShortCut(EmptyStr);
@@ -20501,16 +20514,16 @@ procedure TfrmMain.actShortcutsEditExecute(Sender: TObject);
     i:= fFindTopWindow;
 
     if Assigned(Self.MDIChildren[i] as TfrmEditor) then begin
-      pSetDataCompletion(synEditorTip,
+      pSetDataCompletion(synEditor_Tip,
                          (Self.MDIChildren[i] as TfrmEditor).synEditor,
                          'CTRL+SPACE');
 
-      pSetDataCompletion(synEditor2Tip,
+      pSetDataCompletion(synEditor2_Tip,
                          (Self.MDIChildren[i] as TfrmEditor).synEditor2,
                          'CTRL+SPACE');
     end;
 
-    pSetDataCompletion(synIOTip,
+    pSetDataCompletion(synIO_Tip,
                        frmRterm.synIO,
                        'CTRL+SPACE');
   end;
@@ -25193,6 +25206,15 @@ begin
   actRtermIOSetFocus.Checked:= True;
 end;
 
+procedure TfrmMain.synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
+begin
+  with TSynCompletionProposal(Sender) do begin
+    ClearList;
+    NbLinesInWindow:= 12;
+    ItemList.AddStrings(RHistory.Itens);
+  end;
+end;
+
 procedure TfrmMain.actRtermIO_TextExecute(Sender: TObject);
 begin
   frmRterm.synIO.Highlighter:= dmSyn.synText;
@@ -25742,7 +25764,7 @@ begin
       DeleteFile(sFile);
     end;
 
-    if RHistory.SaveToFile(sFile) then
+    if RHistory.fSaveToFile(sFile) then
       fMessageDlg(sFile + #13 + #13 +
                   'The R history was saved to the file above!',
                   mtInformation,

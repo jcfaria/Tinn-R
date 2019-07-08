@@ -58,21 +58,42 @@ EnableTeXEnhancements = false
 DefaultDisplayMode = automatic
 DefaultZoom = fit page
 WindowState = 2
-WindowPos = -7 0 697 745
+WindowPos = 1718 96 697 738
 ShowToc = true
-SidebarDx = 223
+SidebarDx = 377
 TocDy = 0
 ShowStartPage = true
 UseTabs = true
 
 FileStates [
 	[
+		FilePath = C:\Users\jcfaria\Documents\GitHub\Tinn-R\doc\User_guide.pdf
+		Favorites [
+		]
+		IsPinned = false
+		IsMissing = false
+		OpenCount = 1
+		UseDefaultState = false
+		DisplayMode = continuous
+		ScrollPos = -1 441
+		PageNo = 190
+		Zoom = fit page
+		Rotation = 0
+		WindowState = 2
+		WindowPos = 1718 96 697 738
+		ShowToc = true
+		SidebarDx = 377
+		DisplayR2L = false
+		ReparseIdx = 0
+		TocState = 16 17 53
+	]
+	[
 		FilePath = C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\doc\User_guide.pdf
 		Favorites [
 		]
 		IsPinned = false
 		IsMissing = false
-		OpenCount = 2
+		OpenCount = 0
 		UseDefaultState = false
 		DisplayMode = continuous
 		ScrollPos = -1 -1
@@ -89,7 +110,7 @@ FileStates [
 ]
 SessionData [
 ]
-TimeOfLastUpdateCheck = 30723573 -1878715539
-OpenCountWeek = 425
+TimeOfLastUpdateCheck = 30750006 1682909633
+OpenCountWeek = 444
 
 # Settings after this line have not been recognized by the current version

@@ -49,7 +49,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, ComCtrls, JvgPage, JvDockTree, JvDockControlForm,
   JvComponentBase, SynEditTypes, SynEditKeyCmds, ExtCtrls, ConsoleIO,
-  ToolWin, TB2Item, TB2Dock, TB2Toolbar;
+  ToolWin, TB2Item, TB2Dock, TB2Toolbar, ActnList;
 
 type
   TfrmRterm = class(TForm)
@@ -166,6 +166,7 @@ type
     procedure pSetCursorRestriction;
     procedure psplRIOMoved(Sender: TObject);
     procedure pCtrl_Tab(bNext: boolean = True);
+    procedure pCR;
 
   public
     { Public declarations }
@@ -810,6 +811,249 @@ begin
   end;
 end;
 
+procedure TfrmRterm.pCR;
+//const
+//  cOk = ['>',
+//         '+'];
+//
+//var
+//  sTmp,
+//    sToSend: string;
+//
+//begin
+//  with synIO do begin
+//    BeginUpdate;
+//    sTmp:= Trim(LineText);
+//    ExecuteCommand(ecEditorBottom,
+//                   #0,
+//                   nil);
+//    LineText:= sTmp;
+//    ExecuteCommand(ecEditorBottom,
+//                   #0,
+//                   nil);
+//    if (sTmp = '') then sTmp:= '> ';
+//    if (sTmp[1] in cOk) then Delete(sTmp,
+//                                    1,
+//                                    1);
+//    if (sTmp <> '') then RHistory.Add(Trim(sTmp));
+//    sToSend    := sTmp;
+//    bRterm_Sent:= True;
+//    bRterm_Plus:= False;
+//    frmMain.pDoSend(sToSend,
+//                    False);
+//    EndUpdate;
+//    Exit;
+//  end;
+
+//  with synIO do begin
+//    BeginUpdate;
+//
+//    ExecuteCommand(ecLineEnd,
+//                   #0,
+//                   nil);
+//
+//    sTmp:= Trim(LineText);
+//
+//    // https://regex101.com/r/kY6rL3/1
+//    //$re = '/(?<=(>|\+|:)).+/';
+//    //$str = '> sd(1:4)
+//    //xxx> sd
+//    //+ )
+//    //xxx yyy> sd
+//    //D(1)> sd (1:4)
+//    //D(24)> sd
+//    //> av <- aov(Sepal.Length ~ Species, data=iris)
+//    //> 2 -> x
+//    //> 4<3
+//    //> 3>4
+//    //
+//    //# a <- scan()
+//    //1: 1
+//    //2: 2 3 4
+//    //5:
+//    //';
+//    //
+//    //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+//    //
+//    //// Print the entire match result
+//    //var_dump($matches);
+//
+//    // by J.C.Faria
+//    sTmp:= fRegEx(sTmp,
+//                  '(?<=(>|\+|:)).+',
+//                  False);
+//
+//    if (sTmp <> '') then RHistory.Add(Trim(sTmp));
+//
+//    sToSend:= Trim(sTmp);
+//
+//    bRterm_Sent:= True;
+//
+//    bRterm_Plus:= False;
+//
+//    frmMain.pDoSend(sToSend,
+//                    False);
+//
+//    EndUpdate;
+//  end;
+
+// Get the user option (y/n/c) in the prompt message whem R is ready to quit
+  function fCheckQuit(var sT: string): boolean;
+  begin
+    Result := False;
+
+    if (fRegEx(sT,
+               '\?[ ]+\[y\/n\/c\]:') <> '') then
+    begin
+      //https://regex101.com/r/mcqIse/4
+      sT := fRegEx(sT,
+                   '(.+\[y\/n\/c\]:)[ ]*',
+                   True);
+
+      Result := True;
+    end;
+  end;
+
+  // It is necessary to clean the sToSend string.
+  function fCheck_Debug(var sT: string): boolean;
+  begin
+    Result := False;
+
+    // Empty string
+    if (sT = '') then
+      Exit;
+
+    if (fRegEx(sT, '^Browse\[[0-9]+\]>') <> '') then
+    begin // STDin and STDout of IO are under the function debug
+      sT := fRegEx(sT,
+                   '^Browse\[[0-9]+\]>',
+                   True);
+
+      Result := True;
+    end;
+
+    // https://regex101.com/r/sT5eI9/1
+    // by J.C.Faria
+    if (fRegEx(sT,
+               '^D[\(\)0-9]*>') <> '') then
+    begin // STDin and STDout of IO are under the package debug
+      sT := fRegEx(sT,
+                   '^D[\(\)0-9]*>',
+                   True);
+
+      Result := True;
+    end;
+
+    RHistory.Add(Trim(sT));
+  end;  // pCheck_RHistory
+
+  procedure pProcessCR(var sTmp, sPre, sSend: string);
+  begin
+    // Remove space(s) after '>'
+    if (fRegEx(sTmp,
+               '^>[ ]+') <> '') then
+      sTmp := fRegEx(sTmp,
+                     '^>[ ]+',
+                     True,
+                     '> ');
+
+    // Remove space(s) after '+'
+    if (fRegEx(sTmp,
+               '^[+][ ]+') <> '') then
+      sTmp := fRegEx(sTmp,
+                     '^[+][ ]+',
+                     True,
+                     '+ ');
+
+    // Get the prefix
+    if (fRegEx(sTmp,
+               '^>') <> '') then
+      sPre := '>'
+    else if (fRegEx(sTmp,
+                    '^[+]') <> '') then
+      sPre := '+';
+
+    // Remove prefix and spaces before the command
+    case fStringToCase_Select(sPre,
+                              ['>',
+                               '+']) of
+
+      0: sTmp := fRegEx(sTmp, '^>[ ]*', True);
+      1: sTmp := fRegEx(sTmp, '^[+][ ]*', True);
+    end;
+
+    sSend := sTmp;
+
+    with synIO do
+    begin
+      ExecuteCommand(ecEditorBottom,
+        #0,
+        nil);
+
+      // It will checks if is under debug
+      if fCheck_Debug(sSend) then
+      begin
+        LineText := sRDebugPrefix + sSend;
+      end
+      else
+      // result of cat('something')
+      if (sSend = sTmp) and (fRegEx(sTmp, '>$') <> '') and (sPre = '') then
+        sSend := ''
+      else
+        case fStringToCase_Select(sPre,
+                                  ['>',
+                                   '+',
+                                   '']) of
+          0: LineText := sPre + ' ' + sSend;
+          1: LineText := sPre + ' ' + sSend;
+          2: if (sSend <> '') then
+                LineText := '>' + ' ' + sSend;
+        end;
+
+      frmMain.pDoSend(sSend,
+                      False);
+
+      ExecuteCommand(ecPageLeft,
+        #0,
+        nil);
+
+      ExecuteCommand(ecLineStart,
+        #0,
+        nil);
+    end;  // with syn_Rio
+  end;  // procedure pProcessCR
+
+var
+  sTmp, sPre, sSend: string;
+
+begin
+  sTmp := '';
+  sPre := '';
+  sSend := '';
+
+  with synIO do
+  begin
+    BeginUpdate;
+
+    // User selection has priority
+    if SelAvail then
+      sTmp := Trim(SelText)
+    else
+      sTmp := Trim(LineText);
+
+    if fCheckQuit(sTmp) then
+    begin
+      frmMain.pDoSend(sSend,
+                      False);
+    end
+    else
+      pProcessCR(sTmp, sPre, sSend);
+
+    EndUpdate;
+  end;
+
+end;
+
 procedure TfrmRterm.synIOKeyDown(Sender: TObject;
                                  var Key: Word;
                                  Shift: TShiftState);
@@ -1052,29 +1296,31 @@ begin
                  end;
                end;
 
-      VK_RETURN: with synIO do begin // CTRL+ENTER -> Send prior lines
-                   BeginUpdate;
-                   sTmp:= Trim(LineText);
-                   ExecuteCommand(ecEditorBottom,
-                                  #0,
-                                  nil);
-                   LineText:= sTmp;
-                   ExecuteCommand(ecEditorBottom,
-                                  #0,
-                                  nil);
-                   if (sTmp = '') then sTmp:= '> ';
-                   if (sTmp[1] in cOk) then Delete(sTmp,
-                                                   1,
-                                                   1);
-                   if (sTmp <> '') then RHistory.Add(Trim(sTmp));
-                   sToSend    := sTmp;
-                   bRterm_Sent:= True;
-                   bRterm_Plus:= False;
-                   frmMain.pDoSend(sToSend,
-                                   False);
-                   EndUpdate;
-                   Exit;
-                 end;
+//      VK_RETURN: with synIO do begin // CTRL+ENTER -> Send prior lines
+//                   BeginUpdate;
+//                   sTmp:= Trim(LineText);
+//                   ExecuteCommand(ecEditorBottom,
+//                                  #0,
+//                                  nil);
+//                   LineText:= sTmp;
+//                   ExecuteCommand(ecEditorBottom,
+//                                  #0,
+//                                  nil);
+//                   if (sTmp = '') then sTmp:= '> ';
+//                   if (sTmp[1] in cOk) then Delete(sTmp,
+//                                                   1,
+//                                                   1);
+//                   if (sTmp <> '') then RHistory.Add(Trim(sTmp));
+//                   sToSend    := sTmp;
+//                   bRterm_Sent:= True;
+//                   bRterm_Plus:= False;
+//                   frmMain.pDoSend(sToSend,
+//                                   False);
+//                   EndUpdate;
+//                   Exit;
+//                 end;
+
+      VK_RETURN: pCR;
 
       VK_MULTIPLY: begin // Add or replace text by tip: R server or database
                      with synIO do begin
@@ -1114,164 +1360,164 @@ begin
     end;
   end;
 
-  // All below will make restrictions and special features to the keystrokes on the last line (prompt)
-  with synIO do begin
-    if not SelAvail then begin
-      if (CaretY = Lines.Count - 1) and
-         (Key = VK_DOWN) then begin
-        key:= VK_PAUSE;
+//  // All below will make restrictions and special features to the keystrokes on the last line (prompt)
+//  with synIO do begin
+//    if not SelAvail then begin
+//      if (CaretY = Lines.Count - 1) and
+//         (Key = VK_DOWN) then begin
+//        key:= VK_PAUSE;
+//
+//        CaretY:= Lines.Count;
+//
+//        ExecuteCommand(ecLineEnd,
+//                       #0,
+//                       nil);
+//      end
+//      else if (CaretY <> Lines.Count) then Exit;
+//    end;
+//  end;
 
-        CaretY:= Lines.Count;
+//  if (Key = VK_RETURN) then begin // Send latest line to R when editing related to Rterm
+//    if not frmMain.fRterm_Running then Exit;
+//
+//    with synIO do begin
+//      key:= VK_PAUSE;  // Avoid a blank line below the instruction
+//
+//      BeginUpdate;
+//
+//      ExecuteCommand(ecLineEnd,
+//                     #0,
+//                     nil);
+//
+//      sTmp:= Trim(LineText);
+//
+//      // https://regex101.com/r/kY6rL3/1
+//      //$re = '/(?<=(>|\+|:)).+/';
+//      //$str = '> sd(1:4)
+//      //xxx> sd
+//      //+ )
+//      //xxx yyy> sd
+//      //D(1)> sd (1:4)
+//      //D(24)> sd
+//      //> av <- aov(Sepal.Length ~ Species, data=iris)
+//      //> 2 -> x
+//      //> 4<3
+//      //> 3>4
+//      //
+//      //# a <- scan()
+//      //1: 1
+//      //2: 2 3 4
+//      //5:
+//      //';
+//      //
+//      //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+//      //
+//      //// Print the entire match result
+//      //var_dump($matches);
+//
+//      // by J.C.Faria
+//      sTmp:= fRegEx(sTmp,
+//                    '(?<=(>|\+|:)).+',
+//                    False);
+//
+//      if (sTmp <> '') then RHistory.Add(Trim(sTmp));
+//
+//      sToSend:= Trim(sTmp);
+//
+//      bRterm_Sent:= True;
+//
+//      bRterm_Plus:= False;
+//
+//      frmMain.pDoSend(sToSend,
+//                      False);
+//
+//      EndUpdate;
+//    end;
+//  end;
 
-        ExecuteCommand(ecLineEnd,
-                       #0,
-                       nil);
-      end
-      else if (CaretY <> Lines.Count) then Exit;
-    end;
-  end;
-
-  if (Key = VK_RETURN) then begin // Send latest line to R when editing related to Rterm
-    if not frmMain.fRterm_Running then Exit;
-
-    with synIO do begin
-      key:= VK_PAUSE;  // Avoid a blank line below the instruction
-
-      BeginUpdate;
-
-      ExecuteCommand(ecLineEnd,
-                     #0,
-                     nil);
-
-      sTmp:= Trim(LineText);
-
-      // https://regex101.com/r/kY6rL3/1
-      //$re = '/(?<=(>|\+|:)).+/';
-      //$str = '> sd(1:4)
-      //xxx> sd
-      //+ )
-      //xxx yyy> sd
-      //D(1)> sd (1:4)
-      //D(24)> sd
-      //> av <- aov(Sepal.Length ~ Species, data=iris)
-      //> 2 -> x
-      //> 4<3
-      //> 3>4
-      //
-      //# a <- scan()
-      //1: 1
-      //2: 2 3 4
-      //5:
-      //';
-      //
-      //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
-      //
-      //// Print the entire match result
-      //var_dump($matches);
-
-      // by J.C.Faria
-      sTmp:= fRegEx(sTmp,
-                    '(?<=(>|\+|:)).+',
-                    False);
-
-      if (sTmp <> '') then RHistory.Add(Trim(sTmp));
-
-      sToSend:= Trim(sTmp);
-
-      bRterm_Sent:= True;
-
-      bRterm_Plus:= False;
-
-      frmMain.pDoSend(sToSend,
-                      False);
-
-      EndUpdate;
-    end;
-  end;
-
-  // The below will avoid the user to type any not desired keys in the prompt: '>' or '+' signal
-  if (Shift <> [ssCtrl]) and
-     (key   <> VK_RETURN) then begin
-    case Key of
-      VK_BACK: begin
-                 with synIO do begin
-                   if not SelAvail then begin
-                     sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
-
-                     if (sPrior = '>') or
-                        (sPrior = '+') or
-                        (sPrior = sRDebugPrefix) then
-                       key:= VK_PAUSE;
-                   end
-                   else begin
-                     if (CaretY = Lines.Count) and
-                        (BlockBegin.Line <> BlockEnd.Line) then
-                       with cRterm do begin
-                         if (SelText = Text) then synIO.Clear;
-
-                         if IsRunning then SendInput('' +
-                                                     #13#10);
-                       end;
-                   end;
-                 end;
-               end;
-
-      // Necessary to cotrol "Ctrl + A" or selection in the last line: prompt line
-      VK_DELETE: begin
-                   with synIO do begin
-                     if not SelAvail then begin
-                       sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
-
-                       sAfter:= Trim(ConsoleGetCursorTo('EndLine'));
-
-                       if (sPrior = '>') or
-                          (sPrior = '+') or
-                          (sPrior = sRDebugPrefix) then
-                         if (sAfter = '')  then
-                           key:= VK_PAUSE;
-                     end
-                     else begin
-                       if (CaretY = 1) then begin
-                         with cRterm do begin
-                           if (SelText = Text) then synIO.Clear;
-
-                           if IsRunning then SendInput('' +
-                                                       #13#10);
-                         end;
-
-                         Exit;
-                       end;
-
-                       if (CaretY = Lines.Count) and
-                          (BlockBegin.Line <> BlockEnd.Line) then
-                         with cRterm do begin
-                           if (SelText = Text) then synIO.Clear;
-
-                           if IsRunning then SendInput('' +
-                                                       #13#10);
-                         end;
-                     end;
-                   end;
-                 end;
-
-      VK_LEFT: with synIO do begin
-                 if not SelAvail then begin
-                   sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
-
-                   if (sPrior = '>') or
-                      (sPrior = '+') or
-                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
-                 end;
-               end;
-
-      VK_HOME: with synIO do begin
-                 if (sRDebugPrefix <> '') then CaretX:= length(sRDebugPrefix) + 2
-                                          else CaretX:= 3;
-
-                 key:= VK_PAUSE;
-               end;
-    end;
-  end;
+//  // The below will avoid the user to type any not desired keys in the prompt: '>' or '+' signal
+//  if (Shift <> [ssCtrl]) and
+//     (key   <> VK_RETURN) then begin
+//    case Key of
+//      VK_BACK: begin
+//                 with synIO do begin
+//                   if not SelAvail then begin
+//                     sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
+//
+//                     if (sPrior = '>') or
+//                        (sPrior = '+') or
+//                        (sPrior = sRDebugPrefix) then
+//                       key:= VK_PAUSE;
+//                   end
+//                   else begin
+//                     if (CaretY = Lines.Count) and
+//                        (BlockBegin.Line <> BlockEnd.Line) then
+//                       with cRterm do begin
+//                         if (SelText = Text) then synIO.Clear;
+//
+//                         if IsRunning then SendInput('' +
+//                                                     #13#10);
+//                       end;
+//                   end;
+//                 end;
+//               end;
+//
+//      // Necessary to cotrol "Ctrl + A" or selection in the last line: prompt line
+//      VK_DELETE: begin
+//                   with synIO do begin
+//                     if not SelAvail then begin
+//                       sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+//
+//                       sAfter:= Trim(ConsoleGetCursorTo('EndLine'));
+//
+//                       if (sPrior = '>') or
+//                          (sPrior = '+') or
+//                          (sPrior = sRDebugPrefix) then
+//                         if (sAfter = '')  then
+//                           key:= VK_PAUSE;
+//                     end
+//                     else begin
+//                       if (CaretY = 1) then begin
+//                         with cRterm do begin
+//                           if (SelText = Text) then synIO.Clear;
+//
+//                           if IsRunning then SendInput('' +
+//                                                       #13#10);
+//                         end;
+//
+//                         Exit;
+//                       end;
+//
+//                       if (CaretY = Lines.Count) and
+//                          (BlockBegin.Line <> BlockEnd.Line) then
+//                         with cRterm do begin
+//                           if (SelText = Text) then synIO.Clear;
+//
+//                           if IsRunning then SendInput('' +
+//                                                       #13#10);
+//                         end;
+//                     end;
+//                   end;
+//                 end;
+//
+//      VK_LEFT: with synIO do begin
+//                 if not SelAvail then begin
+//                   sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+//
+//                   if (sPrior = '>') or
+//                      (sPrior = '+') or
+//                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
+//                 end;
+//               end;
+//
+//      VK_HOME: with synIO do begin
+//                 if (sRDebugPrefix <> '') then CaretX:= length(sRDebugPrefix) + 2
+//                                          else CaretX:= 3;
+//
+//                 key:= VK_PAUSE;
+//               end;
+//    end;
+//  end;
 end;
 
 procedure TfrmRterm.synIOKeyPress(Sender: TObject;
@@ -1422,7 +1668,7 @@ procedure TfrmRterm.synIOKeyUp(Sender: TObject;
                                Shift: TShiftState);
 begin
   frmMain.iSynWithFocus:= 3;
-  pSetCursorRestriction;
+//  pSetCursorRestriction;
 end;
 
 procedure TfrmRterm.synIOMouseUp(Sender: TObject;

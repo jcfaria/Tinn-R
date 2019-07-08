@@ -6338,9 +6338,9 @@ object frmMain: TfrmMain
     Left = 272
     Top = 272
   end
-  object synIOTip: TSynCompletionProposal
-    Options = [scoConsiderWordBreakChars, scoCompleteWithEnter]
-    NbLinesInWindow = 10
+  object synIO_Tip: TSynCompletionProposal
+    Options = [scoLimitToMatchedText, scoConsiderWordBreakChars, scoCompleteWithEnter]
+    NbLinesInWindow = 12
     ClBackground = clInfoBk
     Width = 200
     EndOfTokenChr = '()[]. '
@@ -6364,9 +6364,9 @@ object frmMain: TfrmMain
     EndOfTokenChrW = '()[]. '
     TriggerCharsW = '.'
   end
-  object synEditorTip: TSynCompletionProposal
-    Options = [scoConsiderWordBreakChars, scoCompleteWithEnter]
-    NbLinesInWindow = 10
+  object synEditor_Tip: TSynCompletionProposal
+    Options = [scoLimitToMatchedText, scoConsiderWordBreakChars, scoCompleteWithEnter]
+    NbLinesInWindow = 12
     ClBackground = clInfoBk
     Width = 200
     EndOfTokenChr = '()[]. '
@@ -6390,9 +6390,9 @@ object frmMain: TfrmMain
     EndOfTokenChrW = '()[]. '
     TriggerCharsW = '.'
   end
-  object synEditor2Tip: TSynCompletionProposal
-    Options = [scoConsiderWordBreakChars, scoCompleteWithEnter]
-    NbLinesInWindow = 10
+  object synEditor2_Tip: TSynCompletionProposal
+    Options = [scoLimitToMatchedText, scoConsiderWordBreakChars, scoCompleteWithEnter]
+    NbLinesInWindow = 12
     ClBackground = clInfoBk
     Width = 200
     EndOfTokenChr = '()[]. '
@@ -22715,5 +22715,29 @@ object frmMain: TfrmMain
     Left = 176
     Top = 307
     Bitmap = {}
+  end
+  object synIO_History: TSynCompletionProposal
+    Options = [scoLimitToMatchedText, scoUsePrettyText, scoConsiderWordBreakChars, scoCompleteWithEnter]
+    NbLinesInWindow = 12
+    ClBackground = clInfoBk
+    Width = 200
+    TriggerChars = '.'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clBtnText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = [fsBold]
+    Columns = <>
+    OnExecute = synIO_HistoryExecute
+    ShortCut = 0
+    TimerInterval = 100
+    Left = 402
+    Top = 240
+    TriggerCharsW = '.'
   end
 end

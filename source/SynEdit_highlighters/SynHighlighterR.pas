@@ -114,7 +114,7 @@ type
     fFunctionsAttri: TSynHighlighterAttributes;
     fHexAttri: TSynHighlighterAttributes;
     fIdentifierAttri: TSynHighlighterAttributes;
-    FKeywords: TUnicodeStringList;
+    FKeywords: TStringList;
     fNumberAttri: TSynHighlighterAttributes;
     fOctalAttri: TSynHighlighterAttributes;
     fOperatorAttri: TSynHighlighterAttributes;
@@ -143,11 +143,11 @@ type
     procedure UnknownProc;
 
   protected
-    function GetKeywordIdentifiers: TUnicodeStringList;
+    function GetKeywordIdentifiers: TStringList;
     function GetSampleSource: UnicodeString; override;
     function IsFilterStored: Boolean; override;
 
-    property Keywords: TUnicodeStringList read FKeywords;
+    property Keywords: TStringList read FKeywords;
     property TokenID: TtkTokenKind read FTokenID;
 
   public
@@ -155,6 +155,8 @@ type
     class function GetLanguageName: string; override;
 
   public
+    bEditor : boolean;
+
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
 
@@ -166,6 +168,7 @@ type
     function GetTokenKind: integer; override;
     function IsIdentChar(AChar: WideChar): Boolean; override;
 
+    procedure SetType(bToEditor: boolean = True);
     procedure Next; override;
     procedure ResetRange; override;
     procedure SetRange(Value: Pointer); override;
@@ -200,7 +203,7 @@ uses
 {$ENDIF}
 
 var
-  GlobalKeywords: TUnicodeStringList;
+  GlobalKeywords: TStringList;
 
 function TSynRSyn.IsIdentChar(AChar: WideChar): Boolean;
 begin
@@ -212,12 +215,10 @@ begin
   end;
 end;
 
-function TSynRSyn.GetKeywordIdentifiers: TUnicodeStringList;
+function TSynRSyn.GetKeywordIdentifiers: TStringList;
 const
-  // No need to localise keywords!
-
- (*
-  The keywords is related only to the R packages below:
+  (*
+    The keywords is related only to the R packages below:
     1 - stats
     2 - graphics
     3 - grDevices
@@ -226,41 +227,11 @@ const
     6 - utils
     7 - methods
     8 - base
-
-  The keywords below are special cases (duplicated differing only in case):
-    ----------------------------------------------
-    Not Contemplated           Contemplated
-    ----------------------------------------------
-    as.POSIXct.Date            as.POSIXct.date
-    as.POSIXlt.Date            as.POSIXlt.date
-    Axis                       axis
-    C                          c
-    co2                        CO2
-    Complex                    complex
-    Encoding                   encoding
-    Filter                     filter
-    Find                       find
-    Gamma                      gamma
-    LETTERS                    letters
-    NCOL                       ncol
-    NROW                       nrow
-    Quote                      quote
-    R.Version                  R.version
-    Summary                    summary
-    Summary.data.frame         summary.data.frame
-    Summary.Date               summary.Date
-    Summary.factor             summary.factor
-    Summary.POSIXct            summary.POSIXct
-    Summary.POSIXlt            summary.POSIXlt
-    t                          T
-    X11                        x11
-    ----------------------------------------------
- *)
+  *)
 
   // List of keywords: Programing
   Programing_Count = 33;
-  Programing: array [1..Programing_Count] of UnicodeString =
-    (
+  Programing: array [1 .. Programing_Count] of UnicodeString = (
     'break',
     'class',
     'do',
@@ -297,9 +268,9 @@ const
     );
 
   // List of keywords: Functions
-  Functions_Count = 2144;
-  Functions: array [1..Functions_Count] of UnicodeString =
-    (
+  Functions_Count = 2248;
+  Functions: array [1 .. Functions_Count] of UnicodeString = (
+    'abbreviate',
     'abline',
     'abs',
     'acf',
@@ -319,6 +290,7 @@ const
     'aggregate.default',
     'aggregate.ts',
     'agrep',
+    'agrepl',
     'AIC',
     'alarm',
     'alias',
@@ -327,17 +299,21 @@ const
     'all.equal',
     'all.equal.character',
     'all.equal.default',
+    'all.equal.environment',
+    'all.equal.envRefClass',
     'all.equal.factor',
     'all.equal.formula',
     'all.equal.language',
     'all.equal.list',
     'all.equal.numeric',
     'all.equal.POSIXct',
+    'all.equal.POSIXt',
     'all.equal.raw',
     'all.names',
     'all.vars',
     'allGenerics',
     'allNames',
+    'allowInterrupts',
     'anova',
     'anova.glm',
     'anova.glmlist',
@@ -351,6 +327,9 @@ const
     'anyDuplicated.data.frame',
     'anyDuplicated.default',
     'anyDuplicated.matrix',
+    'anyNA',
+    'anyNA.numeric_version',
+    'anyNA.POSIXlt',
     'aov',
     'aperm',
     'aperm.default',
@@ -411,6 +390,7 @@ const
     'as.data.frame.logical',
     'as.data.frame.matrix',
     'as.data.frame.model.matrix',
+    'as.data.frame.noquote',
     'as.data.frame.numeric',
     'as.data.frame.numeric_version',
     'as.data.frame.ordered',
@@ -455,6 +435,7 @@ const
     'as.list.function',
     'as.list.numeric_version',
     'as.list.POSIXct',
+    'as.list.POSIXlt',
     'as.logical',
     'as.logical.factor',
     'as.matrix',
@@ -475,6 +456,7 @@ const
     'as.personList',
     'as.POSIXct',
     'as.POSIXct.date',
+    'as.POSIXct.Date',
     'as.POSIXct.dates',
     'as.POSIXct.default',
     'as.POSIXct.numeric',
@@ -482,6 +464,7 @@ const
     'as.POSIXlt',
     'as.POSIXlt.character',
     'as.POSIXlt.date',
+    'as.POSIXlt.Date',
     'as.POSIXlt.dates',
     'as.POSIXlt.default',
     'as.POSIXlt.factor',
@@ -501,8 +484,10 @@ const
     'as.ts',
     'as.vector',
     'as.vector.factor',
+    'asDateBuilt',
     'asin',
     'asinh',
+    'askYesNo',
     'asMethodDefinition',
     'asNamespace',
     'asOneSidedFormula',
@@ -512,6 +497,7 @@ const
     'aspell_package_Rd_files',
     'aspell_package_vignettes',
     'aspell_write_personal_dictionary_file',
+    'asplit',
     'asS3',
     'asS4',
     'assign',
@@ -533,6 +519,7 @@ const
     'available.packages',
     'ave',
     'axis',
+    'Axis',
     'axis.Date',
     'axis.POSIXct',
     'axisTicks',
@@ -595,12 +582,15 @@ const
     'by.data.frame',
     'by.default',
     'bzfile',
+    'C',
     'c',
     'c.Date',
+    'c.difftime',
     'c.noquote',
     'c.numeric_version',
     'c.POSIXct',
     'c.POSIXlt',
+    'c.warnings',
     'cacheGenericsMetaData',
     'cacheMetaData',
     'cacheMethod',
@@ -623,6 +613,7 @@ const
     'ccf',
     'cdplot',
     'ceiling',
+    'changedFiles',
     'char.expand',
     'character',
     'charmatch',
@@ -634,6 +625,7 @@ const
     'checkCRAN',
     'checkSlotAssignment',
     'chisq.test',
+    'chkDots',
     'chol',
     'chol.default',
     'chol2inv',
@@ -668,9 +660,11 @@ const
     'cm.colors',
     'cmdscale',
     'co.intervals',
+    'co2',
     'coef',
     'coefficients',
     'coerce',
+    'col',
     'col2rgb',
     'colMeans',
     'colnames',
@@ -691,6 +685,7 @@ const
     'completeExtends',
     'completeSubclasses',
     'complex',
+    'Complex',
     'computeRestarts',
     'conditionCall',
     'conditionCall.condition',
@@ -698,6 +693,7 @@ const
     'conditionMessage.condition',
     'confint',
     'confint.default',
+    'confint.lm',
     'conflicts',
     'conformMethod',
     'Conj',
@@ -722,6 +718,7 @@ const
     'cor.test',
     'cos',
     'cosh',
+    'cospi',
     'count.fields',
     'cov',
     'cov.wt',
@@ -736,6 +733,7 @@ const
     'cummin',
     'cumprod',
     'cumsum',
+    'curlGetHeaders',
     'curve',
     'cut',
     'cut.Date',
@@ -760,7 +758,9 @@ const
     'de.restore',
     'de.setup',
     'debug',
+    'debugcall',
     'debugger',
+    'debuggingState',
     'debugonce',
     'decompose',
     'default.stringsAsFactors',
@@ -822,6 +822,7 @@ const
     'diff',
     'diff.Date',
     'diff.default',
+    'diff.difftime',
     'diff.POSIXt',
     'diff.ts',
     'diffinv',
@@ -833,6 +834,7 @@ const
     'dimnames.data.frame',
     'dir',
     'dir.create',
+    'dir.exists',
     'dirname',
     'dist',
     'DLL.version',
@@ -842,6 +844,7 @@ const
     'dnbinom',
     'dnorm',
     'do.call',
+    'dontCheck',
     'doPrimitiveMethod',
     'dotchart',
     'double',
@@ -860,6 +863,7 @@ const
     'dsignrank',
     'dt',
     'dummy.coef',
+    'dummy.coef.lm',
     'dump',
     'dump.frames',
     'dumpMethod',
@@ -872,10 +876,12 @@ const
     'duplicated.matrix',
     'duplicated.numeric_version',
     'duplicated.POSIXlt',
+    'duplicated.warnings',
     'dweibull',
     'dwilcox',
     'dyn.load',
     'dyn.unload',
+    'dynGet',
     'eapply',
     'ecdf',
     'edit',
@@ -893,13 +899,17 @@ const
     'enc2native',
     'enc2utf8',
     'encodeString',
+    'encoding',
+    'Encoding',
     'end',
+    'endsWith',
     'enquote',
     'env.profile',
     'environment',
     'environmentIsLocked',
     'environmentName',
     'erase.screen',
+    'errorCondition',
     'estVar',
     'eval',
     'eval.parent',
@@ -919,7 +929,9 @@ const
     'expression',
     'extendrange',
     'extends',
+    'externalRefMethod',
     'extractAIC',
+    'extSoftVersion',
     'factanal',
     'factor',
     'factor.scope',
@@ -937,16 +949,22 @@ const
     'file.exists',
     'file.info',
     'file.link',
+    'file.mode',
+    'file.mtime',
     'file.path',
     'file.remove',
     'file.rename',
     'file.show',
+    'file.size',
     'file.symlink',
     'file_test',
+    'fileSnapshot',
     'filled.contour',
     'filter',
+    'Filter',
     'Filters',
     'finalDefaultMethod',
+    'Find',
     'find',
     'find.package',
     'findClass',
@@ -972,6 +990,7 @@ const
     'flush.connection',
     'flush.console',
     'force',
+    'forceAndCall',
     'formalArgs',
     'formals',
     'format',
@@ -1003,6 +1022,7 @@ const
     'friedman.test',
     'ftable',
     'functionBody',
+    'Gamma',
     'gamma',
     'gaussian',
     'gc',
@@ -1013,6 +1033,7 @@ const
     'generic.skeleton',
     'get',
     'get_all_vars',
+    'get0',
     'getAccess',
     'getAllConnections',
     'getAllMethods',
@@ -1112,6 +1133,8 @@ const
     'grey',
     'grey.colors',
     'grid',
+    'grouping',
+    'grSoftVersion',
     'gsub',
     'gzcon',
     'gzfile',
@@ -1119,6 +1142,7 @@ const
     'hasLoadAction',
     'hasMethod',
     'hasMethods',
+    'hasName',
     'hasTsp',
     'hat',
     'hatvalues',
@@ -1138,12 +1162,17 @@ const
     'hist.default',
     'history',
     'HoltWinters',
+    'hsearch_db',
+    'hsearch_db_concepts',
+    'hsearch_db_keywords',
     'hsv',
     'I',
     'iconv',
     'iconvlist',
+    'icuGetCollate',
     'icuSetCollate',
     'identical',
+    'identify',
     'identity',
     'Im',
     'image',
@@ -1237,16 +1266,21 @@ const
     'isClassDef',
     'isClassUnion',
     'isdebugged',
+    'isFALSE',
     'isGeneric',
     'isGrammarSymbol',
     'isGroup',
     'isIncomplete',
     'isNamespace',
+    'isNamespaceLoaded',
     'ISOdate',
     'ISOdatetime',
     'isOpen',
     'isoreg',
+    'isRematched',
     'isRestart',
+    'isS3method',
+    'isS3stdGeneric',
     'isS4',
     'isSealedClass',
     'isSealedMethod',
@@ -1274,17 +1308,21 @@ const
     'kmeans',
     'knots',
     'kronecker',
+    'kronecker',
     'kruskal.test',
     'ks.test',
     'ksmooth',
     'l10n_info',
     'La.svd',
+    'La_library',
+    'La_version',
     'labels',
     'labels.default',
     'lag',
     'lag.plot',
     'languageEl',
     'lapply',
+    'last.warning',
     'layout',
     'layout.show',
     'lazyLoad',
@@ -1296,11 +1334,14 @@ const
     'legend',
     'length',
     'length.POSIXlt',
+    'lengths',
+    'LETTERS',
     'letters',
     'levels',
     'levels.default',
     'lfactorial',
     'lgamma',
+    'libcurlVersion',
     'library',
     'library.dynam',
     'library.dynam.unload',
@@ -1311,7 +1352,6 @@ const
     'linearizeMlist',
     'lines',
     'lines.default',
-    'lines.ts',
     'list',
     'list.dirs',
     'list.files',
@@ -1410,6 +1450,8 @@ const
     'median.default',
     'medpolish',
     'mem.limits',
+    'mem.maxNSize',
+    'mem.maxVSize',
     'memCompress',
     'memDecompress',
     'memory.limit',
@@ -1486,6 +1528,7 @@ const
     'nclass.scott',
     'nclass.Sturges',
     'ncol',
+    'NCOL',
     'necessary',
     'Negate',
     'new',
@@ -1511,7 +1554,10 @@ const
     'noquote',
     'norm',
     'normalizePath',
+    'npk',
     'nrow',
+    'NROW',
+    'nullfile',
     'numeric',
     'numeric_version',
     'numericDeriv',
@@ -1522,6 +1568,7 @@ const
     'old.packages',
     'old.path',
     'oldClass',
+    'OlsonNames',
     'on.exit',
     'oneway.test',
     'open',
@@ -1545,16 +1592,19 @@ const
     'order',
     'order.dendrogram',
     'ordered',
+    'osVersion',
     'outer',
     'p.adjust',
     'p.adjust.methods',
     'pacf',
     'package.skeleton',
     'package_version',
+    'packageDate',
     'packageDescription',
     'packageEvent',
     'packageHasNamespace',
     'packageName',
+    'packageNotFoundError',
     'packageSlot',
     'packageStartupMessage',
     'packageStatus',
@@ -1578,7 +1628,6 @@ const
     'parSocket',
     'paste',
     'paste0',
-    'paths',
     'path.expand',
     'path.package',
     'pbeta',
@@ -1586,6 +1635,7 @@ const
     'pbirthday',
     'pcauchy',
     'pchisq',
+    'pcre_config',
     'pdf',
     'pdf.options',
     'pdfFonts',
@@ -1674,9 +1724,11 @@ const
     'print.default',
     'print.density',
     'print.difftime',
+    'print.Dlist',
     'print.DLLInfo',
     'print.DLLInfoList',
     'print.DLLRegisteredRoutines',
+    'print.eigen',
     'print.factor',
     'print.family',
     'print.formula',
@@ -1704,6 +1756,7 @@ const
     'print.srcfile',
     'print.srcref',
     'print.summary.table',
+    'print.summary.warnings',
     'print.summaryDefault',
     'print.table',
     'print.terms',
@@ -1722,6 +1775,7 @@ const
     'prompt',
     'promptClass',
     'promptData',
+    'promptImport',
     'promptMethods',
     'promptPackage',
     'prop.table',
@@ -1784,11 +1838,13 @@ const
     'quasipoisson',
     'quit',
     'qunif',
+    'Quote',
     'quote',
     'qweibull',
     'qwilcox',
     'R.home',
     'R.version',
+    'R.Version',
     'R.version.string',
     'R_system_version',
     'r2dtable',
@@ -1893,6 +1949,7 @@ const
     'restartDescription',
     'restartFormals',
     'retracemem',
+    'returnValue',
     'rev',
     'rev.default',
     'rexp',
@@ -2044,6 +2101,7 @@ const
     'showMethods',
     'showMlist',
     'shQuote',
+    'sigma',
     'sign',
     'signalCondition',
     'signature',
@@ -2061,6 +2119,7 @@ const
     'sinh',
     'sink',
     'sink.number',
+    'sinpi',
     'slice.index',
     'slot',
     'slotNames',
@@ -2119,7 +2178,7 @@ const
     'Stangle',
     'stars',
     'start',
-    'startSocketServer',
+    'startsWith',
     'stat.anova',
     'stderr',
     'stdin',
@@ -2128,14 +2187,15 @@ const
     'step',
     'stepfun',
     'stl',
-    'stopSocketServer',
     'storage.mode',
     'str',
+    'strcapture',
     'strftime',
     'strheight',
     'stripchart',
     'strOptions',
     'strptime',
+    'strrep',
     'strsplit',
     'strtoi',
     'strtrim',
@@ -2155,14 +2215,17 @@ const
     'substring',
     'sum',
     'summary',
+    'Summary',
     'summary.aov',
-    'summary.aovlist',
     'summary.connection',
     'summary.data.frame',
+    'Summary.data.frame',
+    'Summary.Date',
     'summary.Date',
     'summary.default',
     'Summary.difftime',
     'summary.factor',
+    'Summary.factor',
     'summary.glm',
     'summary.infl',
     'summary.lm',
@@ -2171,20 +2234,25 @@ const
     'summary.mlm',
     'Summary.numeric_version',
     'Summary.ordered',
+    'Summary.POSIXct',
     'summary.POSIXct',
+    'Summary.POSIXlt',
     'summary.POSIXlt',
     'summary.proc_time',
     'summary.srcfile',
     'summary.srcref',
     'summary.stepfun',
     'summary.table',
+    'summary.warnings',
     'summaryRprof',
     'sunflowerplot',
     'superClassDepth',
+    'suppressForeignCheck',
     'suppressMessages',
     'suppressPackageStartupMessages',
     'suppressWarnings',
     'supsmu',
+    'suspendInterrupts',
     'svd',
     'svg',
     'Sweave',
@@ -2231,6 +2299,7 @@ const
     'system.file',
     'system.time',
     'system2',
+    't',
     't.data.frame',
     't.default',
     't.test',
@@ -2240,6 +2309,7 @@ const
     'tail.matrix',
     'tan',
     'tanh',
+    'tanpi',
     'tapply',
     'tar',
     'taskCallbackManager',
@@ -2287,13 +2357,8 @@ const
     'transform',
     'transform.data.frame',
     'transform.default',
-    'trArgs',
-    'trComplete',
-    'trExport',
     'trigamma',
-    'trObjList',
-    'trObjSearch',
-    'trStartIDEabbreviate',
+    'trimws',
     'trunc',
     'trunc.Date',
     'trunc.POSIXt',
@@ -2313,6 +2378,7 @@ const
     'Type1Font',
     'typeof',
     'undebug',
+    'undebugcall',
     'union',
     'unique',
     'unique.array',
@@ -2321,6 +2387,7 @@ const
     'unique.matrix',
     'unique.numeric_version',
     'unique.POSIXlt',
+    'unique.warnings',
     'uniroot',
     'units',
     'units.difftime',
@@ -2351,10 +2418,13 @@ const
     'URLdecode',
     'URLencode',
     'usage',
+    'UScitiesD',
     'UseMethod',
     'utf8ToInt',
+    'validEnc',
     'validObject',
     'validSlotNames',
+    'validUTF8',
     'vapply',
     'var',
     'var.test',
@@ -2367,6 +2437,8 @@ const
     'vi',
     'View',
     'vignette',
+    'warnErrList',
+    'warningCondition',
     'weekdays',
     'weekdays.Date',
     'weekdays.POSIXt',
@@ -2397,6 +2469,7 @@ const
     'winProgressBar',
     'with',
     'with.default',
+    'withAutoprint',
     'withCallingHandlers',
     'within',
     'within.data.frame',
@@ -2414,6 +2487,7 @@ const
     'writeChar',
     'writeClipboard',
     'writeLines',
+    'X11',
     'x11',
     'xedit',
     'xemacs',
@@ -2447,9 +2521,8 @@ const
     );
 
   // List of keywords: Datasets
-  Datasets_Count = 101;
-  Datasets: array [1..Datasets_Count] of UnicodeString =
-    (
+  Datasets_Count = 102;
+  Datasets: array [1 .. Datasets_Count] of UnicodeString = (
     'ability.cov',
     'airmiles',
     'AirPassengers',
@@ -2467,6 +2540,7 @@ const
     'ChickWeight',
     'chickwts',
     'CO2',
+    'co2',
     'crimtab',
     'discoveries',
     'DNase',
@@ -2554,49 +2628,113 @@ const
     );
 
   // List of keywords: Plotting
-  Plotting_Count = 76;
-  Plotting: array [1..Plotting_Count] of UnicodeString =
-    (
+  Plotting_Count = 210;
+  Plotting: array [1 .. Plotting_Count] of UnicodeString = (
+    'a.name',
     'adj',
+    'all.screens',
+    'angle',
     'ann',
+    'args.legend',
     'ask',
     'asp',
+    'at',
+    'axes',
+    'axis.lty',
+    'axisnames',
+    'axlabels',
+    'bandwidth',
+    'bar.bg',
+    'beside',
     'bg',
+    'border',
+    'box.col',
+    'box.lty',
+    'box.lwd',
+    'boxplots',
+    'boxwex',
+    'breaks',
     'bty',
     'cex',
     'cex.axis',
     'cex.lab',
+    'cex.labels',
     'cex.main',
     'cex.names',
     'cex.sub',
     'cin',
+    'circles',
+    'clockwise',
     'col',
     'col.axis',
     'col.lab',
+    'col.lines',
     'col.main',
+    'col.segments',
+    'col.smooth',
+    'col.stars',
     'col.sub',
+    'col.ticks',
+    'color.palette',
+    'colramp',
     'cra',
     'crt',
     'csi',
     'cxy',
+    'diag.panel',
     'din',
+    'draw',
+    'draw.segments',
+    'drawlabels',
+    'edges',
+    'erase',
     'err',
+    'expr',
     'fg',
     'fig',
+    'figs',
+    'fillOddEven',
     'fin',
+    'flip.labels',
     'font',
     'font.axis',
     'font.lab',
+    'font.labels',
     'font.main',
     'font.sub',
+    'frame.plot',
+    'frame.plot',
+    'gap',
+    'gap.axis',
+    'given.values',
+    'gpch',
+    'hadj',
+    'horInd',
+    'horOdd',
+    'horiz',
+    'horiz',
+    'inches',
+    'include.lowest',
+    'init.angle',
+    'iter',
+    'key.axes',
+    'key.labels',
+    'key.title',
     'lab',
+    'labcex',
+    'label.pos',
     'las',
+    'legend.text',
     'lend',
+    'length.out',
     'lheight',
+    'line.main',
     'ljoin',
     'lmitre',
+    'lower.panel',
     'lty',
     'lwd',
+    'lwd.ticks',
     'mai',
     'main',
     'mar',
@@ -2606,65 +2744,125 @@ const
     'mfrow',
     'mgp',
     'mkh',
+    'names.arg',
+    'nbin',
+    'notch',
+    'notch.frac',
+    'nrpoints',
+    'oldstyle',
     'oma',
     'omd',
     'omi',
+    'outline',
+    'outwex',
+    'overlap',
+    'padj',
+    'panel',
+    'panel.first',
+    'panel.last',
     'pch',
     'pin',
+    'plot.axes',
+    'plot.title',
     'plt',
+    'postPlotHook',
     'ps',
+    'pt.bg',
+    'pt.cex',
+    'pt.lwd',
     'pty',
+    'radius',
+    'rectangles',
+    'repEnds',
+    'ret.selection',
+    'row1attop',
+    'seg.len',
+    'shape',
+    'show.given',
+    'show.names',
+    'side',
     'smo',
+    'span',
+    'squares',
     'srt',
+    'staplewex',
+    'subscripts',
     'tck',
     'tcl',
+    'text.col',
+    'text.font',
+    'text.panel',
+    'text.width',
+    'thermometers',
+    'tick',
+    'ticksize',
+    'title.adj',
+    'title.col',
+    'upper.panel',
+    'useRaster',
     'usr',
+    'varwidth',
+    'verInd',
+    'verOdd',
+    'vfont',
+    'warn.log',
+    'warn.unused',
+    'x.intersp',
+    'x0',
+    'x1',
     'xaxp',
     'xaxs',
     'xaxt',
+    'xgap.axis',
+    'xjust',
     'xlab',
+    'xleft',
     'xlim',
     'xlog',
+    'xname',
     'xpd',
+    'xright',
+    'xtick',
+    'xy',
+    'y.intersp',
+    'y.name',
+    'y0',
+    'y1',
     'yaxp',
     'yaxs',
     'yaxt',
+    'ybottom',
+    'ygap.axis',
+    'yjust',
     'ylab',
-    'ylim',
     'ylbias',
-    'ylog'
+    'ylim',
+    'ylog',
+    'ytop',
+    'zlim'
     );
 
 var
-  f: Integer;
+  f: integer;
 
 begin
-  if not Assigned (GlobalKeywords) then begin
+  if not Assigned(GlobalKeywords) then
+  begin
     // Create the string list of keywords - only once
-    GlobalKeywords:= TUnicodeStringList.Create;
+    GlobalKeywords := TStringList.Create;
 
-    for f:= 1 to Programing_Count do
-      GlobalKeywords.AddObject(Programing[f],
-                               Pointer(Ord(tkPrograming)));
+    for f := 1 to Programing_Count do
+      GlobalKeywords.AddObject(Programing[f], TObject(Ord(tkPrograming)));
 
-    for f:= 1 to Functions_Count do
-      GlobalKeywords.AddObject(Functions[f],
-                               Pointer(Ord(tkFunctions)));
+    for f := 1 to Functions_Count do
+      GlobalKeywords.AddObject(Functions[f], TObject(Ord(tkFunctions)));
 
-    for f:= 1 to Datasets_Count do
-      GlobalKeywords.AddObject(Datasets[f],
-                               Pointer(Ord(tkDatasets)));
-    for f:= 1 to Plotting_Count do
-      GlobalKeywords.AddObject(Plotting[f],
-                               Pointer(Ord(tkPlotting)));
-
-{
-    // Tests: OK
-    GlobalKeywords.InsertObject(1, 'aa', Pointer(Ord(tkPlotting)));
-    GlobalKeywords.InsertObject(1, 'aa', Pointer(Ord(tkPlotting)));
-}
+    for f := 1 to Datasets_Count do
+      GlobalKeywords.AddObject(Datasets[f], TObject(Ord(tkDatasets)));
+    for f := 1 to Plotting_Count do
+      GlobalKeywords.AddObject(Plotting[f], TObject(Ord(tkPlotting)));
   end; // if
-  Result:= GlobalKeywords;
+  Result := GlobalKeywords;
 end;
 
 function TSynRSyn.IdentKind(MayBe: PWideChar): TtkTokenKind;
@@ -2703,7 +2901,7 @@ begin
             fStringLen);
   if FKeywords.Find(s,
                     i) then begin
-    // TUnicodeStringList is not case sensitive!
+    // TStringList is not case sensitive!
     if s <> FKeywords[i] then
       i:= -1;
   end
@@ -2722,9 +2920,10 @@ begin
 
   fCaseSensitive:= True;
 
-  FKeywords:= TUnicodeStringList.Create;
+  FKeywords:= TStringList.Create;
+  FKeywords.CaseSensitive:= True;
   FKeywords.Sorted:= True;
-  FKeywords.Duplicates:= dupIgnore; //dupError, dupIgnore, dupAccept
+  FKeywords.Duplicates:= dupAccept;
   FKeywords.Assign(GetKeywordIdentifiers);
 
   fRange:= rsUnknown;
@@ -3543,39 +3742,85 @@ procedure TSynRSyn.Next;
 begin
   fTokenPos:= Run;
 
-  case fRange of
-    rsMultilineString: StringEndProc(fStringStarter);
-    else
-      case fLine[Run] of
-        '~', '$', '?', '!', '=', '|',
-        '^', '*', '+', '-', '&', '<',
-        '>', ':', '/', '%': OperatorProc;
+  // SynHglighterR used in Editor
+  if bEditor then begin
+    case fRange of
+      rsMultilineString: StringEndProc(fStringStarter);
+      else
+        case fLine[Run] of
+          '~', '$', '?', '!', '=', '|',
+          '^', '*', '+', '-', '&', '<',
+          '>', ':', '/', '%': OperatorProc;
 
-        '{', '}', '(', ')', '[', ']',
-        ';', ',': SymbolProc;
+          '{', '}', '(', ')', '[', ']',
+          ';', ',': SymbolProc;
 
-        '#': CommentProc;
+          '#': CommentProc;
 
-        'A'..'Z', 'a'..'z', '_', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
+          'A'..'Z', 'a'..'z', '_', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
 
-        '.', '0'..'9': NumberProc;
+          '.', '0'..'9': NumberProc;
 
-        #0: NullProc;
+          #0: NullProc;
 
-        #1..#9, #11, #12, #14..#32: SpaceProc;
+          #1..#9, #11, #12, #14..#32: SpaceProc;
 
-        #10: LFProc;
+          #10: LFProc;
 
-        #13: CRProc;
+          #13: CRProc;
 
-        #34: String34Proc;  // double quote
+          #34: String34Proc;  // double quote
 
-        #39: String39Proc;  // single quote
+          #39: String39Proc;  // single quote
 
-        else UnknownProc;
-      end;
+          else UnknownProc;
+        end;
+    end;
+  end
+  // SynHglighterR used in Rterm
+  // Multiline is not suitable for Rterm!
+  else begin
+    case fLine[Run] of
+      '~', '$', '?', '!', '=', '|',
+      '^', '*', '+', '-', '&', '<',
+      '>', ':', '/', '%': OperatorProc;
+
+      '{', '}', '(', ')', '[', ']',
+      ';', ',': SymbolProc;
+
+      '#': CommentProc;
+
+      'A'..'Z', 'a'..'z', '_', 'À'..'Ö', 'Ø'..'ö', 'ø'..'ÿ': IdentProc;
+
+      '.', '0'..'9': NumberProc;
+
+      #0: NullProc;
+
+      #1..#9, #11, #12, #14..#32: SpaceProc;
+
+      #10: LFProc;
+
+      #13: CRProc;
+
+      #34: String34Proc;  // double quote
+
+      #39: String39Proc;  // single quote
+
+      else UnknownProc;
+    end;
   end;
   inherited;
+end;
+
+// rsMultilineString is not a good option to Rterm!
+// After to criate (in run time) set the propertie of the instance of the class to False
+// To use as Rterm:
+//synRterm: TSynRSyn
+//synRterm := TSynRSyn.Create(Self);
+//synRterm.SetType(False);
+procedure TSynRSyn.SetType(bToEditor: boolean = True);
+begin
+  bEditor := bToEditor;
 end;
 
 function TSynRSyn.GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;

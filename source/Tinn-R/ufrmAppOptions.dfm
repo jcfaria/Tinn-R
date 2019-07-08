@@ -105,7 +105,7 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
       Top = 1
       Width = 341
       Height = 487
-      ActivePage = tbsMain_General
+      ActivePage = tbsR_Basic
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -233,7 +233,6 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
-          ExplicitTop = 102
           object cbRemoveExtension: TCheckBox
             Left = 11
             Top = 34
@@ -319,7 +318,6 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 2
-          ExplicitTop = 215
           object cbComPriority_Line: TCheckBox
             Left = 11
             Top = 38
@@ -353,7 +351,6 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 3
-          ExplicitTop = 339
           object lbDelay: TLabel
             Left = 292
             Top = 37
@@ -386,7 +383,6 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 4
-          ExplicitTop = 277
           object cbNotification_US: TCheckBox
             Left = 11
             Top = 38
@@ -1820,9 +1816,9 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
           Left = 0
           Top = 221
           Width = 333
-          Height = 130
+          Height = 178
           Align = alTop
-          Caption = ' Tip and data completion '
+          Caption = ' Completion proposal (visual window) '
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 1
@@ -1831,16 +1827,16 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
             Top = 17
             Width = 320
             Height = 45
-            Caption = ' Trigger**** '
+            Caption = ' Tip and data completion**** '
             Ctl3D = False
             ParentCtl3D = False
             TabOrder = 0
             object Label8: TLabel
               Left = 154
               Top = 13
-              Width = 127
+              Width = 89
               Height = 26
-              Caption = 'Tip after '#39'('#39' symbol and completion after '#39'$'#39' symbol'
+              Caption = 'Tip after ( Completion after $'
               WordWrap = True
             end
             object Edit1: TEdit
@@ -1856,7 +1852,7 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
           end
           object rdgDataCompletion_Pattern: TRadioGroup
             Left = 6
-            Top = 67
+            Top = 116
             Width = 320
             Height = 55
             Caption = ' Data completion (partial pattern after $X + Trigger)***** '
@@ -1867,6 +1863,33 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
               'Just starting by the pattern X')
             ParentCtl3D = False
             TabOrder = 1
+          end
+          object GroupBox30: TGroupBox
+            Left = 6
+            Top = 65
+            Width = 320
+            Height = 45
+            Caption = ' R history**** '
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 2
+            object Label3: TLabel
+              Left = 155
+              Top = 17
+              Width = 67
+              Height = 13
+              Caption = 'Rterm IO only'
+            end
+            object Edit2: TEdit
+              Left = 10
+              Top = 17
+              Width = 117
+              Height = 19
+              Enabled = False
+              TabOrder = 0
+              Text = 'ALT+CTRL+SPACE'
+              OnKeyPress = edMaxDeparseLengthKeyPress
+            end
           end
         end
         object GroupBox19: TGroupBox
@@ -1946,9 +1969,9 @@ object frmAppOptionsDlg: TfrmAppOptionsDlg
         end
         object Memo3: TMemo
           Left = 0
-          Top = 357
+          Top = 405
           Width = 333
-          Height = 76
+          Height = 72
           BevelEdges = []
           BevelInner = bvNone
           BevelOuter = bvNone

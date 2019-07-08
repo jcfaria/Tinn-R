@@ -67,14 +67,20 @@ type
     function fGetEmpty: integer;
     function fGetFirstNoEmpty(sDirection: string): integer;
     procedure pRestructure;
+    procedure pReorder(iPos, iEmpty: integer; sInstruction: string);
+
 
   public
+    Itens: TStringList;
+
     constructor Create;
     destructor Free;
+
     function fGetNext: string;
     function fGetPrior: string;
     function fLoadFromFile(sPath: string): boolean;
-    function SaveToFile(sPath: string): boolean;
+    function fSaveToFile(sPath: string): boolean;
+
     procedure Add(sInstruction: string);
   end;
 
@@ -82,6 +88,10 @@ implementation
 
 constructor TRHistory.Create;
 begin
+  Itens := TStringList.Create();
+  Itens.CaseSensitive := False;
+  Itens.Duplicates := dupIgnore;
+  Itens.Sorted := True;
 end;
 
 destructor TRHistory.Free;
@@ -89,12 +99,46 @@ begin
 end;
 
 procedure TRHistory.Add(sInstruction: string);
+var
+  i,
+   iPos: integer;
+
 begin
   iCur:= fGetEmpty;
+
+  iPos:= -1;
+  // Try to find a prior occurence of sInstruction in the array aRHistory
+  for i:= 0 to 99 do begin
+    if (aRHistory[i] = sInstruction) then begin
+      iPos:= i;
+      Break;
+    end;
+  end;
+
+  if (iPos <> -1) then
+  begin  // It was found a prior occurence of sInstruction in the array aRHistory
+    if (iPos < (iCur -1)) then pReorder(iPos, iCur, sInstruction);  // It will reorder the array aRHistory
+    sLatest:= 'Reorder';
+    Exit;
+  end;
 
   sLatest:= 'Add';
 
   aRHistory[iCur]:= sInstruction;
+
+  Itens.Add(sInstruction);
+end;
+
+// It will reorder the array aRHistory
+procedure TRHistory.pReorder(iPos, iEmpty: integer; sInstruction: string);
+var
+  i: integer;
+
+begin
+  for i:= iPos to (iEmpty-2) do
+    aRHistory[i]:= aRHistory[i + 1];
+
+  aRHistory[iEmpty-1]:= sInstruction;
 end;
 
 procedure TRHistory.pRestructure;
@@ -186,7 +230,7 @@ begin
   Result:= aRHistory[iCur];
 end;
 
-function TRHistory.SaveToFile(sPath: string): boolean;
+function TRHistory.fSaveToFile(sPath: string): boolean;
 var
   tfTmp: TextFile;
 

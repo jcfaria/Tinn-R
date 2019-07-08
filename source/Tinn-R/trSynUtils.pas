@@ -68,8 +68,7 @@ type
   function fSelect_Trigger(seTmp: TSynEdit): boolean;
 
   procedure pInsertText_Smart(seEditor: TSynEdit; sText: string; iLen: integer = 0);
-  procedure pSetDataCompletion(synDataCompletion: TSynCompletionProposal; synTmp: TSynEdit; sTmp: string);
-
+  procedure pSetDataCompletion(synDC: TSynCompletionProposal; synTmp: TSynEdit; sTmp: string);
 
 implementation
 
@@ -582,13 +581,13 @@ begin
   end;
 end;
 
-procedure pSetDataCompletion(synDataCompletion: TSynCompletionProposal;
+procedure pSetDataCompletion(synDC: TSynCompletionProposal;
                              synTmp: TSynEdit;
                              sTmp: string);
 begin
   // Don't use 'with synDataCompletion' here!
-  synDataCompletion.Editor:= synTmp;
-  synDataCompletion.ShortCut:= TextToShortCut(sTmp);
+  synDC.Editor:= synTmp;
+  synDC.ShortCut:= TextToShortCut(sTmp);
 end;
 
 procedure pInsertText_Smart(seEditor: TSynEdit;

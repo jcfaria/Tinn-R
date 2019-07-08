@@ -85,9 +85,7 @@ uses
   }
   SynHighlighterAll,
   SynHighlighterR,
-  SynHighlighterR_term,
-  SynHighlighterText,
-  SynHighlighterText_term
+  SynHighlighterText
   ;
 
 type
@@ -122,7 +120,7 @@ type
     synPHPcomplex : TSynMultiSyn;
     synPython     : TSynPythonSyn;
     synR          : TSynRSyn;
-    synR_term     : TSynR_termSyn;
+    synR_term     : TSynRSyn;
     synRcomplex   : TSynMultiSyn;
     synRdoc       : TSynMultiSyn;
     synRhtml      : TSynMultiSyn;
@@ -134,7 +132,7 @@ type
     synTclTk      : TSynTclTkSyn;
     synTeX        : TSynTeXSyn;
     synText       : TSynTextSyn;
-    synText_term  : TSynText_termSyn;
+    synText_term  : TSynTextSyn;
     synURI        : TSynURISyn;
     synVB         : TSynVBSyn;
     synVBScript   : TSynVBScriptSyn;
@@ -607,7 +605,9 @@ begin
   synPHPcomplex := TSynMultiSyn.Create(Self);
   synPython     := TSynPythonSyn.Create(Self);
   synR          := TSynRSyn.Create(Self);
-  synR_term     := TSynR_termSyn.Create(Self);     // Special case used only in Rterm interface!
+  synR.SetType();
+  synR_term     := TSynRSyn.Create(Self);
+  synR_term.SetType(False);
   synRcomplex   := TSynMultiSyn.Create(Self);
   synRdoc       := TSynMultiSyn.Create(Self);
   synRhtml      := TSynMultiSyn.Create(Self);
@@ -619,7 +619,9 @@ begin
   synTclTk      := TSynTclTkSyn.Create(Self);
   synTeX        := TSynTeXSyn.Create(Self);
   synText       := TSynTextSyn.Create(Self);
-  synText_term  := TSynText_termSyn.Create(Self);  // Special case used only in Rterm interface!
+  synText.SetType();
+  synText_term  := TSynTextSyn.Create(Self);
+  synText_term.SetType(False);
   synURI        := TSynURISyn.Create(Self);
   synVB         := TSynVBSyn.Create(Self);
   synVBScript   := TSynVBScriptSyn.Create(Self);
