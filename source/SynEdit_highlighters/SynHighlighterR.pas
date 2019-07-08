@@ -268,7 +268,7 @@ const
     );
 
   // List of keywords: Functions
-  Functions_Count = 2248;
+  Functions_Count = 2246;
   Functions: array [1 .. Functions_Count] of UnicodeString = (
     'abbreviate',
     'abline',
@@ -660,11 +660,9 @@ const
     'cm.colors',
     'cmdscale',
     'co.intervals',
-    'co2',
     'coef',
     'coefficients',
     'coerce',
-    'col',
     'col2rgb',
     'colMeans',
     'colnames',

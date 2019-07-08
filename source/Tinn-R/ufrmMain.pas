@@ -3110,7 +3110,7 @@ begin
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '5.02.03.00';
   sCurrentVersion_Latex     := '2.01.01.01';
-  sCurrentVersion_Project   := '5.03.01.01';
+  sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.02.02.00';
   sCurrentVersion_Shortcuts := '5.03.00.00';
@@ -15896,7 +15896,7 @@ var
   sTmpPrior: string;
 
 begin
-  RHistory.Add(trim(sTmp));
+  //RHistory.Add(trim(sTmp));
   with frmRterm.synIO do begin
     ExecuteCommand(ecEditorBottom,
                    #0,
@@ -16104,8 +16104,8 @@ begin
   if fFile_Save_Fast(sFilePath,
                      sTmp) then begin
     Result:= '.paths[5]';
-    RHistory.fLoadFromFile(sFilePath);
-  end;  
+    //RHistory.fLoadFromFile(sFilePath);
+  end;
 end;
 
 function TfrmMain.fGetSelection(var bSingleLine: boolean): string;
@@ -16147,7 +16147,7 @@ begin
   if fFile_Save_Fast(sFilePath,
                      sTmp) then begin
     Result:= '.paths[5]';
-    RHistory.fLoadFromFile(sFilePath);
+    //RHistory.fLoadFromFile(sFilePath);
   end;
 end;
 
@@ -16239,7 +16239,7 @@ begin
   if fFile_Save_Fast(sFilePath,
                      sTmp) then begin
     Result:= '.paths[6]';
-    RHistory.fLoadFromFile(sFilePath);
+    //RHistory.fLoadFromFile(sFilePath);
   end;
 end;
 
@@ -16460,7 +16460,7 @@ begin
   if fFile_Save_Fast(sFilePath,
                      sTmp) then begin
     Result:= '.paths[5]';
-    RHistory.fLoadFromFile(sFilePath);
+    //RHistory.fLoadFromFile(sFilePath);
   end;
 end;
 
@@ -16696,7 +16696,7 @@ begin
   if fFile_Save_Fast(sFilePath,
                      sTmp) then begin
     Result:= '.paths[7]';
-    RHistory.fLoadFromFile(sFilePath);
+    //RHistory.fLoadFromFile(sFilePath);
   end;
 end;
 

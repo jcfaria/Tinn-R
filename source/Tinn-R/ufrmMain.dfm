@@ -1035,13 +1035,14 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 485
+    Height = 505
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
+    ExplicitHeight = 485
   end
   object Panel1: TPanel
     Left = 0
@@ -1217,7 +1218,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2010,13 +2011,14 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 485
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
+    ExplicitHeight = 485
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2031,7 +2033,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 592
+    Top = 612
     Width = 994
     Height = 20
     AutoHint = True
@@ -2086,22 +2088,24 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
+    ExplicitTop = 592
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 485
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
+    ExplicitHeight = 485
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 583
+    Top = 603
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2110,6 +2114,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
+    ExplicitTop = 583
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -6798,18 +6803,14 @@ object frmMain: TfrmMain
     LeftSplitterStyle.Color = clActiveCaption
     LeftSplitterStyle.Cursor = crHSplit
     LeftSplitterStyle.ParentColor = False
-    LeftSplitterStyle.Size = 2
     RightSplitterStyle.Color = clActiveCaption
     RightSplitterStyle.Cursor = crHSplit
     RightSplitterStyle.ParentColor = False
-    RightSplitterStyle.Size = 2
     TopSplitterStyle.Color = clActiveCaption
     TopSplitterStyle.Cursor = crVSplit
     TopSplitterStyle.ParentColor = False
-    TopSplitterStyle.Size = 2
     BottomSplitterStyle.Cursor = crVSplit
     BottomSplitterStyle.ParentColor = False
-    BottomSplitterStyle.Size = 2
     DockStyle = JvDockVSNetStyle
     Left = 144
     Top = 144
@@ -22721,6 +22722,7 @@ object frmMain: TfrmMain
     NbLinesInWindow = 12
     ClBackground = clInfoBk
     Width = 200
+    EndOfTokenChr = '()[]. '
     TriggerChars = '.'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -22738,6 +22740,7 @@ object frmMain: TfrmMain
     TimerInterval = 100
     Left = 402
     Top = 240
+    EndOfTokenChrW = '()[]. '
     TriggerCharsW = '.'
   end
 end

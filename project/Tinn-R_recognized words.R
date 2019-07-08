@@ -1,39 +1,44 @@
 #! Recognized words for the R Highlight of the Tinn-R
 
-#! Topic                     Line
-#! R sample                    10
-#! Programing                  36
-#! Function                    71
-#! Plotting                  2217
-#! Datasets                  2295
+#!..._______________________________
+#!. Topic                     Line
+#!. R sample                    12
+#!. Programing                  41
+#!. Function                    76
+#!. Plotting                  2324
+#!. Datasets                  2536
+#!..._______________________________
 
-#! R sample
-# Notes and observations!                      # Comment
-pB <- 3.5E2                                    # Float number
-0 1 2 3 4 5 6 8 9                              # Numbers
+#!. ___R sample___
+#! Note                                     # Note
+#!. Note_1                                  # Note_1
+#!.. Note_2                                 # Note_2
+pB <- 3.5E2                                 # Float number
+0 1 2 3 4 5 6 8 9                           # Numbers
 
-variable_a = 1:100                             # Identifier
-variable.b <- 1:100                            # Identifier
+variable_a = 1:100                          # Identifier
+variable.b <- 1:100                         # Identifier
 
-+ - * / ^ = <- -> <> ~ $ ? ! & :               # Operator
-() {} [] ; ,                                   # Symbol
++ - * / %*% ^ = <- -> <> ~ $ ? ! & :        # Operator
+() {} [] ; ,                                # Symbol
 
-NA; NULL; TRUE; T; FALSE; F; if; tryCatch      # Programing
+NA  NULL  TRUE  T  FALSE  F  if  tryCatch   # Programing
 
-mean(Y); var(Y); sd(Y)                         # Function
-xtfrm.numeric_version                          # Function
-as.data.frame.model.matrix                     # Function
-as.character.numeric_version                   # Function
+mean(Y)  var(Y)  sd(Y)                      # Function
+NROW nrow                                   # Function
+all.equal.language                          # Function
+as.character.numeric_version                # Function
 
-plot(Y ~ X, ylab = 'Y', xlab = 'X',            # Plotting
-     col = 'blue', cex = 0.5, pch = '*')  
+plot(Y ~ X, ylab = 'Y', xlab = 'X',         # Plotting
+ col = 'blue', cex = 0.5, pch = '*')
 
-airquality; iris; Harman74.cor; InsectSprays   # Datasets
+airquality  iris  Harman74.cor mtcars       # Datasets
 
-cat('\nI - Basics measures:'); cat('\n\n')     # String
-string <- "This is" 'a string'                 # String
+cat('\nI - Basics measures:'); cat('\n\n')  # String
+he's isn't we've they'd ('all not string')  # Shorttned forms
+string <- "This is" 'a string'              # String
 
-#! Programing
+#!. ___Programing___
 break
 class
 do
@@ -68,7 +73,8 @@ warning
 warnings
 while
 
-#! Function
+#!. ___Function___
+abbreviate
 abline
 abs
 acf
@@ -88,6 +94,7 @@ aggregate.data.frame
 aggregate.default
 aggregate.ts
 agrep
+agrepl
 AIC
 alarm
 alias
@@ -96,17 +103,21 @@ all
 all.equal
 all.equal.character
 all.equal.default
+all.equal.environment
+all.equal.envRefClass
 all.equal.factor
 all.equal.formula
 all.equal.language
 all.equal.list
 all.equal.numeric
 all.equal.POSIXct
+all.equal.POSIXt
 all.equal.raw
 all.names
 all.vars
 allGenerics
 allNames
+allowInterrupts
 anova
 anova.glm
 anova.glmlist
@@ -120,6 +131,9 @@ anyDuplicated.array
 anyDuplicated.data.frame
 anyDuplicated.default
 anyDuplicated.matrix
+anyNA
+anyNA.numeric_version
+anyNA.POSIXlt
 aov
 aperm
 aperm.default
@@ -180,6 +194,7 @@ as.data.frame.list
 as.data.frame.logical
 as.data.frame.matrix
 as.data.frame.model.matrix
+as.data.frame.noquote
 as.data.frame.numeric
 as.data.frame.numeric_version
 as.data.frame.ordered
@@ -224,6 +239,7 @@ as.list.factor
 as.list.function
 as.list.numeric_version
 as.list.POSIXct
+as.list.POSIXlt
 as.logical
 as.logical.factor
 as.matrix
@@ -244,6 +260,7 @@ as.person
 as.personList
 as.POSIXct
 as.POSIXct.date
+as.POSIXct.Date
 as.POSIXct.dates
 as.POSIXct.default
 as.POSIXct.numeric
@@ -251,6 +268,7 @@ as.POSIXct.POSIXlt
 as.POSIXlt
 as.POSIXlt.character
 as.POSIXlt.date
+as.POSIXlt.Date
 as.POSIXlt.dates
 as.POSIXlt.default
 as.POSIXlt.factor
@@ -270,8 +288,10 @@ as.table.default
 as.ts
 as.vector
 as.vector.factor
+asDateBuilt
 asin
 asinh
+askYesNo
 asMethodDefinition
 asNamespace
 asOneSidedFormula
@@ -281,6 +301,7 @@ aspell_package_R_files
 aspell_package_Rd_files
 aspell_package_vignettes
 aspell_write_personal_dictionary_file
+asplit
 asS3
 asS4
 assign
@@ -302,6 +323,7 @@ autoloader
 available.packages
 ave
 axis
+Axis
 axis.Date
 axis.POSIXct
 axisTicks
@@ -364,12 +386,15 @@ by
 by.data.frame
 by.default
 bzfile
+C
 c
 c.Date
+c.difftime
 c.noquote
 c.numeric_version
 c.POSIXct
 c.POSIXlt
+c.warnings
 cacheGenericsMetaData
 cacheMetaData
 cacheMethod
@@ -392,6 +417,7 @@ cbind2
 ccf
 cdplot
 ceiling
+changedFiles
 char.expand
 character
 charmatch
@@ -403,6 +429,7 @@ checkAtAssignment
 checkCRAN
 checkSlotAssignment
 chisq.test
+chkDots
 chol
 chol.default
 chol2inv
@@ -460,6 +487,7 @@ completeClassDefinition
 completeExtends
 completeSubclasses
 complex
+Complex
 computeRestarts
 conditionCall
 conditionCall.condition
@@ -467,6 +495,7 @@ conditionMessage
 conditionMessage.condition
 confint
 confint.default
+confint.lm
 conflicts
 conformMethod
 Conj
@@ -491,6 +520,7 @@ cor
 cor.test
 cos
 cosh
+cospi
 count.fields
 cov
 cov.wt
@@ -505,6 +535,7 @@ cummax
 cummin
 cumprod
 cumsum
+curlGetHeaders
 curve
 cut
 cut.Date
@@ -529,7 +560,9 @@ de.ncols
 de.restore
 de.setup
 debug
+debugcall
 debugger
+debuggingState
 debugonce
 decompose
 default.stringsAsFactors
@@ -591,6 +624,7 @@ diag
 diff
 diff.Date
 diff.default
+diff.difftime
 diff.POSIXt
 diff.ts
 diffinv
@@ -602,6 +636,7 @@ dimnames
 dimnames.data.frame
 dir
 dir.create
+dir.exists
 dirname
 dist
 DLL.version
@@ -611,6 +646,7 @@ dmultinom
 dnbinom
 dnorm
 do.call
+dontCheck
 doPrimitiveMethod
 dotchart
 double
@@ -629,6 +665,7 @@ droplevels.factor
 dsignrank
 dt
 dummy.coef
+dummy.coef.lm
 dump
 dump.frames
 dumpMethod
@@ -641,10 +678,12 @@ duplicated.default
 duplicated.matrix
 duplicated.numeric_version
 duplicated.POSIXlt
+duplicated.warnings
 dweibull
 dwilcox
 dyn.load
 dyn.unload
+dynGet
 eapply
 ecdf
 edit
@@ -662,13 +701,17 @@ emptyMethodsList
 enc2native
 enc2utf8
 encodeString
+encoding
+Encoding
 end
+endsWith
 enquote
 env.profile
 environment
 environmentIsLocked
 environmentName
 erase.screen
+errorCondition
 estVar
 eval
 eval.parent
@@ -688,7 +731,9 @@ expm1
 expression
 extendrange
 extends
+externalRefMethod
 extractAIC
+extSoftVersion
 factanal
 factor
 factor.scope
@@ -706,16 +751,22 @@ file.edit
 file.exists
 file.info
 file.link
+file.mode
+file.mtime
 file.path
 file.remove
 file.rename
 file.show
+file.size
 file.symlink
 file_test
+fileSnapshot
 filled.contour
 filter
+Filter
 Filters
 finalDefaultMethod
+Find
 find
 find.package
 findClass
@@ -741,6 +792,7 @@ flush
 flush.connection
 flush.console
 force
+forceAndCall
 formalArgs
 formals
 format
@@ -772,6 +824,7 @@ frequency
 friedman.test
 ftable
 functionBody
+Gamma
 gamma
 gaussian
 gc
@@ -782,6 +835,7 @@ gctorture2
 generic.skeleton
 get
 get_all_vars
+get0
 getAccess
 getAllConnections
 getAllMethods
@@ -881,6 +935,8 @@ grepRaw
 grey
 grey.colors
 grid
+grouping
+grSoftVersion
 gsub
 gzcon
 gzfile
@@ -888,6 +944,7 @@ hasArg
 hasLoadAction
 hasMethod
 hasMethods
+hasName
 hasTsp
 hat
 hatvalues
@@ -907,12 +964,17 @@ hist
 hist.default
 history
 HoltWinters
+hsearch_db
+hsearch_db_concepts
+hsearch_db_keywords
 hsv
 I
 iconv
 iconvlist
+icuGetCollate
 icuSetCollate
 identical
+identify
 identity
 Im
 image
@@ -1006,16 +1068,21 @@ isClass
 isClassDef
 isClassUnion
 isdebugged
+isFALSE
 isGeneric
 isGrammarSymbol
 isGroup
 isIncomplete
 isNamespace
+isNamespaceLoaded
 ISOdate
 ISOdatetime
 isOpen
 isoreg
+isRematched
 isRestart
+isS3method
+isS3stdGeneric
 isS4
 isSealedClass
 isSealedMethod
@@ -1043,17 +1110,21 @@ kernel
 kmeans
 knots
 kronecker
+kronecker
 kruskal.test
 ks.test
 ksmooth
 l10n_info
 La.svd
+La_library
+La_version
 labels
 labels.default
 lag
 lag.plot
 languageEl
 lapply
+last.warning
 layout
 layout.show
 lazyLoad
@@ -1065,11 +1136,14 @@ lcm
 legend
 length
 length.POSIXlt
+lengths
+LETTERS
 letters
 levels
 levels.default
 lfactorial
 lgamma
+libcurlVersion
 library
 library.dynam
 library.dynam.unload
@@ -1080,7 +1154,6 @@ line
 linearizeMlist
 lines
 lines.default
-lines.ts
 list
 list.dirs
 list.files
@@ -1179,6 +1252,8 @@ median
 median.default
 medpolish
 mem.limits
+mem.maxNSize
+mem.maxVSize
 memCompress
 memDecompress
 memory.limit
@@ -1255,6 +1330,7 @@ nclass.FD
 nclass.scott
 nclass.Sturges
 ncol
+NCOL
 necessary
 Negate
 new
@@ -1280,7 +1356,10 @@ nobs
 noquote
 norm
 normalizePath
+npk
 nrow
+NROW
+nullfile
 numeric
 numeric_version
 numericDeriv
@@ -1291,6 +1370,7 @@ offset
 old.packages
 old.path
 oldClass
+OlsonNames
 on.exit
 oneway.test
 open
@@ -1314,16 +1394,19 @@ options
 order
 order.dendrogram
 ordered
+osVersion
 outer
 p.adjust
 p.adjust.methods
 pacf
 package.skeleton
 package_version
+packageDate
 packageDescription
 packageEvent
 packageHasNamespace
 packageName
+packageNotFoundError
 packageSlot
 packageStartupMessage
 packageStatus
@@ -1354,6 +1437,7 @@ pbinom
 pbirthday
 pcauchy
 pchisq
+pcre_config
 pdf
 pdf.options
 pdfFonts
@@ -1442,9 +1526,11 @@ print.Date
 print.default
 print.density
 print.difftime
+print.Dlist
 print.DLLInfo
 print.DLLInfoList
 print.DLLRegisteredRoutines
+print.eigen
 print.factor
 print.family
 print.formula
@@ -1472,6 +1558,7 @@ print.simple.list
 print.srcfile
 print.srcref
 print.summary.table
+print.summary.warnings
 print.summaryDefault
 print.table
 print.terms
@@ -1490,6 +1577,7 @@ promax
 prompt
 promptClass
 promptData
+promptImport
 promptMethods
 promptPackage
 prop.table
@@ -1552,11 +1640,13 @@ quasibinomial
 quasipoisson
 quit
 qunif
+Quote
 quote
 qweibull
 qwilcox
 R.home
 R.version
+R.Version
 R.version.string
 R_system_version
 r2dtable
@@ -1661,6 +1751,7 @@ residuals.lm
 restartDescription
 restartFormals
 retracemem
+returnValue
 rev
 rev.default
 rexp
@@ -1812,6 +1903,7 @@ showExtends
 showMethods
 showMlist
 shQuote
+sigma
 sign
 signalCondition
 signature
@@ -1829,6 +1921,7 @@ single
 sinh
 sink
 sink.number
+sinpi
 slice.index
 slot
 slotNames
@@ -1887,7 +1980,7 @@ standardGeneric
 Stangle
 stars
 start
-startSocketServer
+startsWith
 stat.anova
 stderr
 stdin
@@ -1896,14 +1989,15 @@ stem
 step
 stepfun
 stl
-stopSocketServer
 storage.mode
 str
+strcapture
 strftime
 strheight
 stripchart
 strOptions
 strptime
+strrep
 strsplit
 strtoi
 strtrim
@@ -1923,14 +2017,17 @@ substr
 substring
 sum
 summary
+Summary
 summary.aov
-summary.aovlist
 summary.connection
 summary.data.frame
+Summary.data.frame
+Summary.Date
 summary.Date
 summary.default
 Summary.difftime
 summary.factor
+Summary.factor
 summary.glm
 summary.infl
 summary.lm
@@ -1939,20 +2036,25 @@ summary.matrix
 summary.mlm
 Summary.numeric_version
 Summary.ordered
+Summary.POSIXct
 summary.POSIXct
+Summary.POSIXlt
 summary.POSIXlt
 summary.proc_time
 summary.srcfile
 summary.srcref
 summary.stepfun
 summary.table
+summary.warnings
 summaryRprof
 sunflowerplot
 superClassDepth
+suppressForeignCheck
 suppressMessages
 suppressPackageStartupMessages
 suppressWarnings
 supsmu
+suspendInterrupts
 svd
 svg
 Sweave
@@ -1999,6 +2101,7 @@ system
 system.file
 system.time
 system2
+t
 t.data.frame
 t.default
 t.test
@@ -2008,6 +2111,7 @@ tail
 tail.matrix
 tan
 tanh
+tanpi
 tapply
 tar
 taskCallbackManager
@@ -2055,14 +2159,8 @@ trans3d
 transform
 transform.data.frame
 transform.default
-trArgs
-trComplete
-trExport
 trigamma
-trObjList
-trObjSearch
-trPaths
-trStartIDEabbreviate
+trimws
 trunc
 trunc.Date
 trunc.POSIXt
@@ -2082,6 +2180,7 @@ type.convert
 Type1Font
 typeof
 undebug
+undebugcall
 union
 unique
 unique.array
@@ -2090,6 +2189,7 @@ unique.default
 unique.matrix
 unique.numeric_version
 unique.POSIXlt
+unique.warnings
 uniroot
 units
 units.difftime
@@ -2120,10 +2220,13 @@ url.show
 URLdecode
 URLencode
 usage
+UScitiesD
 UseMethod
 utf8ToInt
+validEnc
 validObject
 validSlotNames
+validUTF8
 vapply
 var
 var.test
@@ -2136,6 +2239,8 @@ version
 vi
 View
 vignette
+warnErrList
+warningCondition
 weekdays
 weekdays.Date
 weekdays.POSIXt
@@ -2166,6 +2271,7 @@ winMenuNames
 winProgressBar
 with
 with.default
+withAutoprint
 withCallingHandlers
 within
 within.data.frame
@@ -2183,6 +2289,7 @@ writeBin
 writeChar
 writeClipboard
 writeLines
+X11
 x11
 xedit
 xemacs
@@ -2214,47 +2321,112 @@ zapsmall
 zip
 zip.unpack
 
-#! Plotting
+#!. ___Plotting___
+a.name
 adj
+all.screens
+angle
 ann
+args.legend
 ask
 asp
+at
+axes
+axis.lty
+axisnames
+axlabels
+bandwidth
+bar.bg
+beside
 bg
+border
+box.col
+box.lty
+box.lwd
+boxplots
+boxwex
+breaks
 bty
 cex
 cex.axis
 cex.lab
+cex.labels
 cex.main
 cex.names
 cex.sub
 cin
+circles
+clockwise
 col
 col.axis
 col.lab
+col.lines
 col.main
+col.segments
+col.smooth
+col.stars
 col.sub
+col.ticks
+color.palette
+colramp
 cra
 crt
 csi
 cxy
+diag.panel
 din
+draw
+draw.segments
+drawlabels
+edges
+erase
 err
+expr
 fg
 fig
+figs
+fillOddEven
 fin
+flip.labels
 font
 font.axis
 font.lab
+font.labels
 font.main
 font.sub
+frame.plot
+frame.plot
+gap
+gap.axis
+given.values
+gpch
+hadj
+horInd
+horOdd
+horiz
+horiz
+inches
+include.lowest
+init.angle
+iter
+key.axes
+key.labels
+key.title
 lab
+labcex
+label.pos
 las
+legend.text
 lend
+length.out
 lheight
+line.main
 ljoin
 lmitre
+lower.panel
 lty
 lwd
+lwd.ticks
 mai
 main
 mar
@@ -2264,35 +2436,104 @@ mfg
 mfrow
 mgp
 mkh
+names.arg
+nbin
+notch
+notch.frac
+nrpoints
+oldstyle
 oma
 omd
 omi
+outline
+outwex
+overlap
+padj
+panel
+panel.first
+panel.last
 pch
 pin
+plot.axes
+plot.title
 plt
+postPlotHook
 ps
+pt.bg
+pt.cex
+pt.lwd
 pty
+radius
+rectangles
+repEnds
+ret.selection
+row1attop
+seg.len
+shape
+show.given
+show.names
+side
 smo
+span
+squares
 srt
+staplewex
+subscripts
 tck
 tcl
+text.col
+text.font
+text.panel
+text.width
+thermometers
+tick
+ticksize
+title.adj
+title.col
+upper.panel
+useRaster
 usr
+varwidth
+verInd
+verOdd
+vfont
+warn.log
+warn.unused
+x.intersp
+x0
+x1
 xaxp
 xaxs
 xaxt
+xgap.axis
+xjust
 xlab
+xleft
 xlim
 xlog
+xname
 xpd
+xright
+xtick
+xy
+y.intersp
+y.name
+y0
+y1
 yaxp
 yaxs
 yaxt
+ybottom
+ygap.axis
+yjust
 ylab
 ylbias
 ylim
 ylog
+ytop
+zlim
 
-#! Datasets
+#!. ___Datasets___
 ability.cov
 airmiles
 AirPassengers
@@ -2310,6 +2551,7 @@ cars
 ChickWeight
 chickwts
 CO2
+co2
 crimtab
 discoveries
 DNase
