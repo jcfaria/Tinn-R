@@ -10,7 +10,7 @@
 #!..._______________________________
 
 #!. ___R sample___
-#! Note                                     # Note
+#! Note_0                                   # Note_0
 #!. Note_1                                  # Note_1
 #!.. Note_2                                 # Note_2
 pB <- 3.5E2                                 # Float number

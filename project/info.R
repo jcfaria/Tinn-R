@@ -7,12 +7,19 @@
 #------------------------------------------------------------------------
 # Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 26/11/2018 08:12:20
+# 08/07/2019 13:31:13
 #------------------------------------------------------------------------
+
+# the tcltk packges is necessary to show messages inside a TK windows
+# mainly to choose the R repository
+options(defaultPackages=c(getOption("defaultPackages"), "tcltk"))
 
 # Set repos: Rterm does not always shows the dialog to choose the repository
 # The 'repos' will be set by Tinn-R according to user preference
 options('repos'='%repos')
+
+# Limitation of the max.print
+options('max.print'=1e4)
 
 # Default: if under Windows OS it will install/update only binary packages
 if(Sys.info()[['sysname']] == 'Windows'){

@@ -119,7 +119,7 @@ const
   SYNS_AttrNamespaceAttrName    =  'NamespaceAttributeName';
   SYNS_AttrNamespaceAttrValue   =  'NamespaceAttributeValue';
   SYNS_AttrNonReservedKeyword   =  'NonreservedKeyword';
-  SYNS_AttrNote                 =  'Note';  //J.C.Faria
+  SYNS_AttrNote_0               =  'Note_0';  //J.C.Faria
   SYNS_AttrNote_1               =  'Note_1';  //J.C.Faria
   SYNS_AttrNote_2               =  'Note_2';  //J.C.Faria
   SYNS_AttrNull                 =  'Null';
@@ -346,7 +346,7 @@ resourcestring
   SYNS_FriendlyAttrNamespaceAttrName    =  'Namespace Attribute Name';
   SYNS_FriendlyAttrNamespaceAttrValue   =  'Namespace Attribute Value';
   SYNS_FriendlyAttrNonReservedKeyword   =  'Non-reserved Keyword';
-  SYNS_FriendlyAttrNote                 =  'Note';  //J.C.Faria
+  SYNS_FriendlyAttrNote_0               =  'Note_0';  //J.C.Faria
   SYNS_FriendlyAttrNote_1               =  'Note_1';  //J.C.Faria
   SYNS_FriendlyAttrNote_2               =  'Note_2';  //J.C.Faria
   SYNS_FriendlyAttrNull                 =  'Null';
@@ -581,10 +581,10 @@ resourcestring
   //-----------------------------------------------------
   // Specif to the project Tinn-R project: J.C.Faria
   SYNS_FriendlyLangR                    = 'R';
-  SYNS_FriendlyLangR_term               = 'R term';
+//  SYNS_FriendlyLangR_term               = 'R term';
   SYNS_FriendlyLangAll                  = 'All';
   SYNS_FriendlyLangText                 = 'Text';
-  SYNS_FriendlyLangText_term            = 'Text term';
+//  SYNS_FriendlyLangText_term            = 'Text term';
   //-----------------------------------------------------
 
 implementation

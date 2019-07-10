@@ -1035,14 +1035,13 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 505
+    Height = 485
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 485
   end
   object Panel1: TPanel
     Left = 0
@@ -1218,7 +1217,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2011,14 +2010,13 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 505
+    Height = 485
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 485
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2033,7 +2031,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 612
+    Top = 592
     Width = 994
     Height = 20
     AutoHint = True
@@ -2088,24 +2086,22 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 592
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 505
+    Height = 485
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 485
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 603
+    Top = 583
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2114,7 +2110,6 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 583
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -8039,7 +8034,7 @@ object frmMain: TfrmMain
       Caption = '&R'
       GroupIndex = 8
       object menRSet_trPaths: TMenuItem
-        Caption = 'Set .trPaths (temporarily)'
+        Caption = 'Set .paths (temporarily)'
         Enabled = False
         ImageIndex = 286
         OnClick = menRSet_trPathsClick

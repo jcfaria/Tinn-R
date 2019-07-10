@@ -3,7 +3,7 @@
 #  More: <<< http://zoonek2.free.fr/UNIX/48_R/all.html >>>
 # ===================================//==========================================
 
-#!.. help.start() start the html interface to on-line help (using a web browser available at
+#!.. help.start() starts the html interface to on-line help (using a web browser available at
 #!.. your machine). You should briefly explore the features of this facility with the mouse.
 #!.. Iconify the help window and move on to the next part.
 

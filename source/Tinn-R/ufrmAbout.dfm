@@ -86,13 +86,13 @@ object frmAbout: TfrmAbout
       object lVersion: TLabel
         Left = 372
         Top = 156
-        Width = 61
-        Height = 18
+        Width = 59
+        Height = 21
         Caption = 'Version '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -15
-        Font.Name = 'Tahoma'
+        Font.Name = 'Comic Sans MS'
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
@@ -101,13 +101,13 @@ object frmAbout: TfrmAbout
       object lblURLSourceforge: TLabel
         Left = 372
         Top = 95
-        Width = 119
-        Height = 16
+        Width = 125
+        Height = 18
         Caption = 'SourceForge (repos)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clTeal
         Font.Height = -13
-        Font.Name = 'Tahoma'
+        Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
         Transparent = True
@@ -117,13 +117,13 @@ object frmAbout: TfrmAbout
       object lblURLWebPage: TLabel
         Left = 372
         Top = 71
-        Width = 100
-        Height = 16
+        Width = 101
+        Height = 18
         Caption = 'Web page (main)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clTeal
         Font.Height = -13
-        Font.Name = 'Tahoma'
+        Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
         Transparent = True
@@ -133,13 +133,13 @@ object frmAbout: TfrmAbout
       object Copyright: TLabel
         Left = 298
         Top = 221
-        Width = 119
-        Height = 13
+        Width = 118
+        Height = 16
         Caption = 'Copyright 2001-2020'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
-        Font.Name = 'Tahoma'
+        Font.Name = 'Comic Sans MS'
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
@@ -148,13 +148,13 @@ object frmAbout: TfrmAbout
       object Label1: TLabel
         Left = 298
         Top = 240
-        Width = 275
-        Height = 16
+        Width = 291
+        Height = 19
         Caption = 'Under the GNU General Public License - GPL'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -13
-        Font.Name = 'Tahoma'
+        Font.Name = 'Comic Sans MS'
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
@@ -163,19 +163,19 @@ object frmAbout: TfrmAbout
       object Label6: TLabel
         Left = 275
         Top = 29
-        Width = 334
-        Height = 18
+        Width = 339
+        Height = 21
         Caption = 'Editor - GUI for R Language and Environment'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -15
-        Font.Name = 'Tahoma'
+        Font.Name = 'Comic Sans MS'
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = True
       end
       object imAbout: TJvImage
-        Left = 48
+        Left = 40
         Top = 20
         Width = 184
         Height = 246

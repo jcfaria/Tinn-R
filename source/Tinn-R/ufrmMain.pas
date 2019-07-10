@@ -7945,12 +7945,13 @@ begin
     Sorted:= True;
   end;
 
+  // Load the highlighters names into the listbox
   for j:= 0 to (dmSyn.iHigCount - 1) do begin
     sName:= (dmSyn.Components[j] as TSynCustomHighlighter).GetFriendlyLanguageName;
-    if (sName = 'General_Multi-Highlighter') then sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
+    if (sName = 'General_Multi-Highlighter') then
+      sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
 
-    if (sName <> 'R term') and
-       (sName <> 'Text term') then begin
+    if ((dmSyn.Components[j] as TSynCustomHighlighter).Tag <> 99) then begin
       cbSyntax.Items.Add(sName);
       sFilter:= trim((dmSyn.Components[j] as TSynCustomHighlighter).DefaultFilter);
       slFilters.Add(sFilter);

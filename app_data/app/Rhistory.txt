@@ -10,10 +10,20 @@ summary(av)
 plot(av)
 demo(graphics)
 rnorm(1e4)
-source('C:/Users/jcfaria/AppData/Local/Temp/Tinn-R/info.R')
-startSocketServer(port=8889)
 var
-sd
 read.table
 search()
 library(fdth)
+plot(gexp(type='FE', des='CRD'))
+plot(gexp(type='FE', des='RCBD'))
+plot(gexp(type='FE', des='LSD'))
+plot(gexp(type='SPE', des='CRD'))
+plot(gexp(type='SPE', des='RCBD'))
+plot(gexp(type='SPE', des='LSD'))
+library(gexp)
+library(bpca)
+library(matrix)
+library(Matrix)
+sd
+sqrt
+file.show('C:/Users/jcfaria/AppData/Local/Temp/Tinn-R/info.R')

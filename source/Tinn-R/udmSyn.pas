@@ -229,7 +229,7 @@ const
     '# R complex highlighter sample'#13#10 +
     '<<< joseclaudio.faria@gmail.com >>>'#13#10 +
     '<<< www.uesc.br >>>'#13#10 + #13#10 +
-    '#! Note                                     # Note'#13#10 +
+    '#! Note_0                                   # Note_0'#13#10 +
     '#!. Note_1                                  # Note_1'#13#10 +
     '#!.. Note_2                                 # Note_2'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
@@ -310,7 +310,7 @@ const
     ''#13#10 +
     'You can embed an R code chunk like this:'#13#10 +
     '<!--begin.rcode'#13#10 +
-    '#! Note                                     # Note'#13#10 +
+    '#! Note_0                                   # Note_0'#13#10 +
     '#!. Note_1                                  # Note_1'#13#10 +
     '#!.. Note_2                                 # Note_2'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
@@ -352,7 +352,7 @@ const
     ''#13#10 +
     'You can embed an R code chunk like this:'#13#10 +
     '```{r}'#13#10 +
-    '#! Note                                     # Note'#13#10 +
+    '#! Note_0                                   # Note_0'#13#10 +
     '#!. Note_1                                  # Note_1'#13#10 +
     '#!.. Note_2                                 # Note_2'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
@@ -394,7 +394,7 @@ const
     ''#13#10 +
     'This is a demo for using the \verb@R noweb@ command in R.'#13#10 +
     '<<echo=FALSE>>='#13#10 +
-    '#! Note                                     # Note'#13#10 +
+    '#! Note_0                                   # Note_0'#13#10 +
     '#!. Note_1                                  # Note_1'#13#10 +
     '#!.. Note_2                                 # Note_2'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
@@ -608,6 +608,7 @@ begin
   synR.SetType();
   synR_term     := TSynRSyn.Create(Self);
   synR_term.SetType(False);
+  synR_term.Tag:= 99;
   synRcomplex   := TSynMultiSyn.Create(Self);
   synRdoc       := TSynMultiSyn.Create(Self);
   synRhtml      := TSynMultiSyn.Create(Self);
@@ -622,6 +623,7 @@ begin
   synText.SetType();
   synText_term  := TSynTextSyn.Create(Self);
   synText_term.SetType(False);
+  synText_term.Tag:= 99;
   synURI        := TSynURISyn.Create(Self);
   synVB         := TSynVBSyn.Create(Self);
   synVBScript   := TSynVBScriptSyn.Create(Self);
@@ -793,12 +795,12 @@ begin
     if (sSyntax = 'C/C++') then
       (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
                                                             '\C++.ini')
-    else if (sSyntax = 'R term') then
-      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
-                                                            '\R.ini')
-    else if (sSyntax = 'Text term') then
-      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
-                                                            '\Text.ini')
+//    else if (sSyntax = 'R term') then
+//      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
+//                                                            '\R.ini')
+//    else if (sSyntax = 'Text term') then
+//      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
+//                                                            '\Text.ini')
     else
       (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
                                                             '\' +

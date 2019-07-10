@@ -340,16 +340,11 @@ begin
   // Load the highlighters names into the listbox
   for j:= 0 to (dmSyn.iHigCount - 1) do begin
     sName:= (dmSyn.Components[j] as TSynCustomHighlighter).GetFriendlyLanguageName;
-
-    if (sName <> 'General_Multi-Highlighter') then begin
-      if (sName <> 'R term') and
-         (sName <> 'Text term') then
-        lbHighlighters.Items.Add(sName)
-    end
-    else begin
+    if (sName = 'General_Multi-Highlighter') then
       sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
+
+    if ((dmSyn.Components[j] as TSynCustomHighlighter).Tag <> 99) then
       lbHighlighters.Items.Add(sName)
-    end;
   end;
 
   iIniSyntaxFiles:= CountFiles(frmMain.sPath_Syntax +

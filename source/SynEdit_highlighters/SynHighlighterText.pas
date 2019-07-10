@@ -268,8 +268,8 @@ begin
   fCommentAttri.Style:= [fsItalic];
   AddAttribute(fCommentAttri);
 
-  fNoteAttri:= TSynHighlighterAttributes.Create(SYNS_AttrNote,
-                                                SYNS_FriendlyAttrNote);
+  fNoteAttri:= TSynHighlighterAttributes.Create(SYNS_AttrNote_0,
+                                                SYNS_FriendlyAttrNote_0);
   fNoteAttri.Foreground:= clRed;
   fNoteAttri.Style:= [fsItalic, fsUnderline, fsBold];
   AddAttribute(fNoteAttri);

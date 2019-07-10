@@ -74,7 +74,7 @@ uses
 type
   TtkTokenKind = (
                   tkComment,
-                  tkNote,
+                  tkNote_0,
                   tkNote_1,
                   tkNote_2,
                   tkDatasets,
@@ -106,7 +106,7 @@ type
 
   private
     fCommentAttri: TSynHighlighterAttributes;
-    fNoteAttri: TSynHighlighterAttributes;
+    fNote_0Attri: TSynHighlighterAttributes;
     fNote_1Attri: TSynHighlighterAttributes;
     fNote_2Attri: TSynHighlighterAttributes;
     fDatasetsAttri: TSynHighlighterAttributes;
@@ -175,7 +175,7 @@ type
 
   published
     property CommentAttri: TSynHighlighterAttributes read fCommentAttri write fCommentAttri;
-    property NoteAttri: TSynHighlighterAttributes read fNoteAttri write fNoteAttri;
+    property Note_0Attri: TSynHighlighterAttributes read fNote_0Attri write fNote_0Attri;
     property Note_1Attri: TSynHighlighterAttributes read fNote_1Attri write fNote_1Attri;
     property Note_2Attri: TSynHighlighterAttributes read fNote_2Attri write fNote_2Attri;
     property DatasetsAttri: TSynHighlighterAttributes read fDatasetsAttri write fDatasetsAttri;
@@ -2932,11 +2932,11 @@ begin
   fCommentAttri.Style:= [fsItalic];
   AddAttribute(fCommentAttri);
 
-  fNoteAttri:= TSynHighlighterAttributes.Create(SYNS_AttrNote,
-                                                SYNS_FriendlyAttrNote);
-  fNoteAttri.Foreground:= clRed;
-  fNoteAttri.Style:= [fsItalic, fsUnderline, fsBold];
-  AddAttribute(fNoteAttri);
+  fNote_0Attri:= TSynHighlighterAttributes.Create(SYNS_AttrNote_0,
+                                                  SYNS_FriendlyAttrNote_0);
+  fNote_0Attri.Foreground:= clRed;
+  fNote_0Attri.Style:= [fsItalic, fsUnderline, fsBold];
+  AddAttribute(fNote_0Attri);
 
   fNote_1Attri:= TSynHighlighterAttributes.Create(SYNS_AttrNote_1,
                                                   SYNS_FriendlyAttrNote_1);
@@ -3060,7 +3060,7 @@ begin
   // J.C.Faria
   if (FLine[Run+1] = '!') then
   begin
-    fTokenID:= tkNote;
+    fTokenID:= tkNote_0;
     if (FLine[Run+2] = '.') then fTokenID:= tkNote_1;
     if (FLine[Run+3] = '.') then fTokenID:= tkNote_2;
   end
@@ -3852,7 +3852,7 @@ function TSynRSyn.GetTokenAttribute: TSynHighlighterAttributes;
 begin
   case fTokenID of
     tkComment:             Result:= fCommentAttri;
-    tkNote:              Result:= fNoteAttri;
+    tkNote_0:              Result:= fNote_0Attri;
     tkNote_1:              Result:= fNote_1Attri;
     tkNote_2:              Result:= fNote_2Attri;
     tkIdentifier:          Result:= fIdentifierAttri;
@@ -3902,7 +3902,7 @@ function TSynRSyn.GetSampleSource: UnicodeString;
 begin
   Result:=
     '# R highlighter sample                      # Comment'#13#10 +
-    '#! Note                                     # Note'#13#10 +
+    '#! Note_0                                   # Note_0'#13#10 +
     '#!. Note_1                                  # Note_1'#13#10 +
     '#!.. Note_2                                 # Note_2'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
