@@ -6,7 +6,7 @@
 #!. Programing                  41
 #!. Function                    76
 #!. Plotting                  2324
-#!. Datasets                  2536
+#!. Datasets                  2532
 #!..._______________________________
 
 #!. ___R sample___
@@ -2500,8 +2500,6 @@ vfont
 warn.log
 warn.unused
 x.intersp
-x0
-x1
 xaxp
 xaxs
 xaxt
@@ -2518,8 +2516,6 @@ xtick
 xy
 y.intersp
 y.name
-y0
-y1
 yaxp
 yaxs
 yaxt

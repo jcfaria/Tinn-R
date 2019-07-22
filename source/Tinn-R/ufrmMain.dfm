@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 663
+  Height = 683
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,7 +1035,7 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 485
+    Height = 505
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
@@ -2010,7 +2010,7 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 485
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
@@ -2031,7 +2031,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 592
+    Top = 612
     Width = 994
     Height = 20
     AutoHint = True
@@ -2091,7 +2091,7 @@ object frmMain: TfrmMain
     Left = 985
     Top = 98
     Width = 9
-    Height = 485
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
@@ -2101,7 +2101,7 @@ object frmMain: TfrmMain
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 583
+    Top = 603
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -7573,10 +7573,16 @@ object frmMain: TfrmMain
       object menOptionsApplication: TMenuItem
         Action = actShowAppOptions
       end
+      object menShortcuts_Hotkeys: TMenuItem
+        Caption = 'Shortcuts/Hotkeys (map)'
+        ImageIndex = 119
+        OnClick = menShortcuts_HotkeysClick
+      end
       object menOptionsShortcuts: TMenuItem
         Caption = 'Shortcuts'
         Hint = 'Shortcuts: edit'
         ImageIndex = 119
+        Visible = False
         OnClick = menOptionsShortcutsClick
       end
       object N119: TMenuItem
@@ -7676,8 +7682,51 @@ object frmMain: TfrmMain
     object menTools: TMenuItem
       Caption = '&Tools'
       GroupIndex = 7
+      object menToolsUtils: TMenuItem
+        Caption = 'Utils (visible in debug mode and runtime only)'
+        GroupIndex = 12
+        Visible = False
+        object menToolsUtilsActionlistToClipboard: TMenuItem
+          Caption = 'Actionlist to clipboard'
+          GroupIndex = 12
+          OnClick = menToolsUtilsActionlistToClipboardClick
+        end
+        object menToolsUtilsActionlistToDataset: TMenuItem
+          Caption = 'Actionlist to dataset'
+          GroupIndex = 12
+          OnClick = menToolsUtilsActionlistToDatasetClick
+        end
+        object menToolsUtilsDatasetToActionlist: TMenuItem
+          Caption = 'Dataset to Actionlist'
+          GroupIndex = 12
+          OnClick = menToolsUtilsDatasetToActionlistClick
+        end
+        object N182: TMenuItem
+          Caption = '-'
+          GroupIndex = 12
+        end
+        object menToolsUtilsTesteRegex: TMenuItem
+          Caption = 'Test: RegEx'
+          GroupIndex = 12
+          OnClick = menToolsUtilsTesteRegexClick
+        end
+        object N185: TMenuItem
+          Caption = '-'
+          GroupIndex = 12
+        end
+        object menToolsUtilsStringReplace: TMenuItem
+          Caption = 'StringReplace'
+          GroupIndex = 12
+          OnClick = menToolsUtilsStringReplaceClick
+        end
+        object N54: TMenuItem
+          Caption = '-'
+          GroupIndex = 12
+        end
+      end
       object menToolsProcessing: TMenuItem
         Caption = 'Processing'
+        GroupIndex = 12
         object menToolsConversion: TMenuItem
           Caption = 'Conversion'
           ImageIndex = 129
@@ -7868,10 +7917,11 @@ object frmMain: TfrmMain
       end
       object N20: TMenuItem
         Caption = '-'
+        GroupIndex = 12
       end
       object menToolsDatabase: TMenuItem
         Caption = 'Database'
-        GroupIndex = 1
+        GroupIndex = 12
         object menToolsDatabaseShortcuts: TMenuItem
           Caption = 'Shortcuts'
           ImageIndex = 119
@@ -7902,11 +7952,11 @@ object frmMain: TfrmMain
       end
       object N2: TMenuItem
         Caption = '-'
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object menToolsBackup: TMenuItem
         Caption = 'Backup'
-        GroupIndex = 1
+        GroupIndex = 12
         ImageIndex = 121
         object menToolsBackupSystem: TMenuItem
           Action = actBackupSystemConfiguration
@@ -7917,7 +7967,7 @@ object frmMain: TfrmMain
       end
       object menToolsRestore: TMenuItem
         Caption = 'Restore'
-        GroupIndex = 1
+        GroupIndex = 12
         ImageIndex = 124
         object menToolsRestoreSystem: TMenuItem
           Action = actRestoreSystemConfiguration
@@ -7928,11 +7978,11 @@ object frmMain: TfrmMain
       end
       object N109: TMenuItem
         Caption = '-'
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object menToolsMacro: TMenuItem
         Caption = 'Macro'
-        GroupIndex = 1
+        GroupIndex = 12
         object menToolsMacroRecord: TMenuItem
           Action = actMacroRecord
         end
@@ -7942,27 +7992,27 @@ object frmMain: TfrmMain
       end
       object N27: TMenuItem
         Caption = '-'
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object menToolsASCIIChart: TMenuItem
         Action = actAsciiChart
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object menToolsDifferences: TMenuItem
         Action = actDifferences
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object N87: TMenuItem
         Caption = '-'
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object menToolsSpell: TMenuItem
         Action = actSpell
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object menToolsSort: TMenuItem
         Caption = 'Sort'
-        GroupIndex = 1
+        GroupIndex = 12
         Hint = 'Sort (all or selection)'
         ImageIndex = 205
         object menToolsSortString: TMenuItem
@@ -7977,57 +8027,15 @@ object frmMain: TfrmMain
       end
       object actCount1: TMenuItem
         Action = actCount
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object N128: TMenuItem
         Caption = '-'
-        GroupIndex = 1
+        GroupIndex = 12
       end
       object menToolsMatchBracket: TMenuItem
         Action = actMatchBracket
-        GroupIndex = 1
-      end
-      object menToolsUtils: TMenuItem
-        Caption = 'Utils'
         GroupIndex = 12
-        Visible = False
-        object menToolsUtilsActionlistToClipboard: TMenuItem
-          Caption = 'Actionlist to clipboard'
-          GroupIndex = 12
-          OnClick = menToolsUtilsActionlistToClipboardClick
-        end
-        object menToolsUtilsActionlistToDataset: TMenuItem
-          Caption = 'Actionlist to dataset'
-          GroupIndex = 12
-          OnClick = menToolsUtilsActionlistToDatasetClick
-        end
-        object menToolsUtilsDatasetToActionlist: TMenuItem
-          Caption = 'Dataset to Actionlist'
-          GroupIndex = 12
-          OnClick = menToolsUtilsDatasetToActionlistClick
-        end
-        object N182: TMenuItem
-          Caption = '-'
-          GroupIndex = 12
-        end
-        object menToolsUtilsTesteRegex: TMenuItem
-          Caption = 'Test: RegEx'
-          GroupIndex = 12
-          OnClick = menToolsUtilsTesteRegexClick
-        end
-        object N185: TMenuItem
-          Caption = '-'
-          GroupIndex = 12
-        end
-        object menToolsUtilsStringReplace: TMenuItem
-          Caption = 'StringReplace'
-          GroupIndex = 12
-          OnClick = menToolsUtilsStringReplaceClick
-        end
-        object N54: TMenuItem
-          Caption = '-'
-          GroupIndex = 12
-        end
       end
     end
     object menR: TMenuItem

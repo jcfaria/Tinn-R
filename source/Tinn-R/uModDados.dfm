@@ -2,8 +2,8 @@ object modDados: TmodDados
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 343
-  Width = 234
+  Height = 326
+  Width = 154
   object dsRcard: TDataSource
     DataSet = cdRcard
     Left = 89

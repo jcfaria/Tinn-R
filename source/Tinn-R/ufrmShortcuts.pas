@@ -48,7 +48,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Db, DBTables,
-  Buttons, ComCtrls, JvExComCtrls, JvHotKey, JvDBControls;
+  Buttons, ComCtrls, JvExComCtrls, JvHotKey, JvDBControls, SynEditMiscClasses;
 
 type
   TfrmShortcuts = class(TForm)
@@ -67,10 +67,10 @@ type
     dbmHint: TDBMemo;
     edtCaptionSearch: TEdit;
     edtGroupSearch: TEdit;
-    GroupBox1: TGroupBox;
+    gbKeystrokes: TGroupBox;
     imgShortcut: TImage;
-    jvhkShortcut: TJvHotKey;
-    jvhkShortcutSearch: TJvHotKey;
+    eKeyShort: TJvHotKey;
+    eKeyShortcut_Search: TJvHotKey;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -107,11 +107,12 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
-    procedure jvhkShortcutEnter(Sender: TObject);
-    procedure jvhkShortcutKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure jvhkShortcutKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure jvhkShortcutSearchChange(Sender: TObject);
-    procedure jvhkShortcutSearchEnter(Sender: TObject);
+    procedure eKeyShortEnter(Sender: TObject);
+    procedure eKeyShortKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure eKeyShortKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure eKeyShortcut_SearchChange(Sender: TObject);
+    procedure eKeyShortcut_SearchEnter(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
 
   private
     { Private declarations }
@@ -120,9 +121,10 @@ type
 
     procedure pActualizeGroups;
     procedure pClearWarnings;
-    
+
   public
     { Public declarations }
+//    eKeyShort: TSynHotKey;
     bLocating: boolean;
 
   end;
@@ -234,9 +236,9 @@ begin
       Font.Color:= clFGApplication;
     end;
 
-    with jvhkShortcut do begin
-      //Color     := clBGApplication;
-      //Font.Color:= clFGApplication;
+    with eKeyShort do begin
+      Color     := clBGApplication;
+      Font.Color:= clFGApplication;
     end;
 
     with dbgShortcuts do begin
@@ -306,25 +308,44 @@ begin
   pActualizeGroups;
 end;
 
+procedure TfrmShortcuts.FormCreate(Sender: TObject);
+begin
+//  eKeyShort:= TSynHotKey.Create(Self);
+//  with eKeyShort do
+//  begin
+//    Parent     := gbKeystrokes;
+//    Left       := jvhkShortcutSearch.Left;
+//    Top        := jvhkShortcutSearch.Top +
+//                  jvhkShortcutSearch.Height;
+//    Width      := jvhkShortcutSearch.Width;
+//    Height     := jvhkShortcutSearch.Height;
+//    HotKey     := 0;
+//    InvalidKeys:= [];
+//    Modifiers  := [];
+//    TabOrder   := 1;
+//    BorderStyle:= bsSingle;
+//  end;
+end;
+
 procedure TfrmShortcuts.FormShow(Sender: TObject);
 begin
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
 end;
 
-procedure TfrmShortcuts.jvhkShortcutKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfrmShortcuts.eKeyShortKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if (Key = VK_BACK)   or
-     (Key = VK_DELETE) or 
+     (Key = VK_DELETE) or
      (Key = VK_SPACE) then begin
     Key:= 0;
     bNothing:= True
   end;
 end;
 
-procedure TfrmShortcuts.jvhkShortcutKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfrmShortcuts.eKeyShortKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 var
   pTmp:  pointer;
-  
+
 begin
   if bNothing then begin
     bNothing:= False;
@@ -335,7 +356,7 @@ begin
      (Key = VK_MENU) or
      (Key = VK_SHIFT) or
      (Key = VK_SPACE) then begin
-    jvhkShortcut.HotKey:= TextToShortcut(modDados.cdShortcuts.FieldByName('Shortcut').Value);
+    eKeyShort.HotKey:= TextToShortcut(modDados.cdShortcuts.FieldByName('Shortcut').Value);
     Exit;
   end;
 
@@ -346,23 +367,23 @@ begin
 
   bLocating:= True;
   if (modDados.cdShortcuts.Locate('Shortcut',
-                                   StringReplace(ShortcutToText(jvhkShortcut.Hotkey), ' ', '', []),
+                                   StringReplace(ShortcutToText(eKeyShort.Hotkey), ' ', '', []),
                                    []) = True) then begin
-    
+
     bShortcutInUse:= True;
 
     with modDados.cdShortcuts do begin
       if BookmarkValid(pTmp) then begin
         GoToBookmark(pTmp);
         FreeBookmark(pTmp);
-      end;  
+      end;
       Cancel;
       Edit;
     end;
 
     stbShortcuts.Panels[3].Text:= 'Keyboard shortcut already in use';
-    stbShortcuts.Panels[4].Text:= '<' + 
-                                  StringReplace(ShortcutToText(jvhkShortcut.Hotkey), ' ', '', []) +
+    stbShortcuts.Panels[4].Text:= '<' +
+                                  StringReplace(ShortcutToText(eKeyShort.Hotkey), ' ', '', []) +
                                   '>';
     bLocating:= False;
   end
@@ -373,25 +394,25 @@ begin
     with modDados.cdShortcuts do begin
       Edit;
       if (Key = VK_ESCAPE) then FieldByName('Shortcut').Value:= 'None'
-                           else FieldByName('Shortcut').Value:= ShortcutToText(jvhkShortcut.HotKey);
+                           else FieldByName('Shortcut').Value:= ShortcutToText(eKeyShort.HotKey);
     end;
   end;
 end;
 
-procedure TfrmShortcuts.jvhkShortcutEnter(Sender: TObject);
+procedure TfrmShortcuts.eKeyShortEnter(Sender: TObject);
 begin
   pClearWarnings;
   with modDados.cdShortcuts do
     Edit;
 end;
 
-procedure TfrmShortcuts.jvhkShortcutSearchChange(Sender: TObject);
+procedure TfrmShortcuts.eKeyShortcut_SearchChange(Sender: TObject);
 var
   sTmp: string;
 
 begin
   pClearWarnings;
-  with jvhkShortcutSearch do begin
+  with eKeyShortcut_Search do begin
     sTmp:= StringReplace(ShortcutToText(Hotkey), ' ', '', []);
 
     if (sTmp = '') then begin
@@ -416,7 +437,7 @@ begin
   end;
 end;
 
-procedure TfrmShortcuts.jvhkShortcutSearchEnter(Sender: TObject);
+procedure TfrmShortcuts.eKeyShortcut_SearchEnter(Sender: TObject);
 begin
   pClearWarnings;
 end;
@@ -433,7 +454,8 @@ end;
 
 procedure TfrmShortcuts.bbtShortcutsLoadClick(Sender: TObject);
 var
-  od       : TOpenDialog;
+  od: TOpenDialog;
+
   sFile,
    sOldFile: string;
 
@@ -518,6 +540,7 @@ begin
       SaveToFile();
       frmMain.iShortcutsBeforeChanges:= SavePoint;
     except
+      //TODO
     end;
   end;
 end;
@@ -525,7 +548,8 @@ end;
 procedure TfrmShortcuts.bbtShortcutsSaveDefaultClick(Sender: TObject);
 var
   sFile: string;
-  sd   : TSaveDialog;
+
+  sd: TSaveDialog;
 
 begin
   pClearWarnings;

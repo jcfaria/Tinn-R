@@ -138,12 +138,14 @@ type
     function fGetCurrentHighLighter: TSynCustomHighlighter;
     function fScrubCaption(sCap: string): string;
     function fSetHighlighterID: integer;
+
     procedure pCheckSaveStatus;
     procedure pColumnSelect;
     procedure pComment(sStartComment, sEndComment: string);
     procedure pCopyFormattedHTML;
     procedure pCopyFormattedRTF;
     procedure pCopyFormattedTeX;
+    procedure pCR;
     procedure pDateStamp;
     procedure pDoCardInsert;
     procedure pDoCompletionInsert(bSearch: boolean = False);
@@ -947,7 +949,7 @@ var
    iPriPos: integer;
 
 begin
-  //Define the active editor
+  // Define the active editor
   if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
@@ -1016,7 +1018,7 @@ var
   iPos: integer;
 
 begin
-  //Define the active editor
+  // Define the active editor
   if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
@@ -1068,7 +1070,7 @@ var
 begin
   if not fSave_PriorClipboard_Text then Exit;
 
-  //Define the active editor
+  // Define the active editor
   if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
@@ -1132,6 +1134,39 @@ begin
   pEnableSave;
 end;
 
+// Send current line to R when editing
+procedure TfrmEditor.pCR;
+var
+  seEditor: TSynEdit;
+  
+begin
+  if not frmMain.fValidRRunning then
+    Exit;
+
+  // Define the active editor
+  if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                   else seEditor:= synEditor2;
+
+  bSendToREditing:= True;
+  with seEditor do begin  // The below is redundant (but low cust) and avoid send intermitent final character!
+    ExecuteCommand(ecLineEnd,
+                   #0,
+                   nil);
+
+    ExecuteCommand(ecLineBreak,
+                  #0,
+                  nil);
+
+    CaretY:= CaretY - 1;
+
+    frmMain.actRSendLineExecute(nil);
+
+    CaretY:= CaretY + 1;
+  end;
+  bSendToREditing:= False;
+  pEnableSave;
+end;
+
 procedure TfrmEditor.synEditorKeyDown(Sender: TObject;
                                       var Key: Word;
                                       Shift: TShiftState);
@@ -1180,32 +1215,7 @@ begin
 
   if (Shift = [ssCtrl]) then
     case Key of
-      VK_RETURN  : begin //Send current line to R when editing
-
-                     if not frmMain.fValidRRunning then begin
-                       Key:= VK_PAUSE;
-                       Exit;
-                     end;
-
-                     bSendToREditing:= True;
-                     with seEditor do begin  // The below is redundant (but low cust) and avoid send intermitent final character! 
-                       ExecuteCommand(ecLineEnd,
-                                      #0,
-                                      nil);
-
-                       ExecuteCommand(ecLineBreak,
-                                     #0,
-                                     nil);
-
-                       CaretY:= CaretY - 1;
-
-                       frmMain.actRSendLineExecute(nil);
-
-                       CaretY:= CaretY + 1;
-                     end;
-                     bSendToREditing:= False;
-                     pEnableSave;
-                   end;
+      VK_RETURN  : pCR;
 
       VK_MULTIPLY: begin //Add or replace text by tip: R server or database
                      with seEditor do begin
@@ -1382,8 +1392,8 @@ begin
     editRect.TopLeft    := ClientToScreen(editRect.TopLeft);
     editRect.BottomRight:= ClientToScreen(editRect.BottomRight);
 
-    if (frmConfirmReplaceDlg = nil) then
-      frmConfirmReplaceDlg:= TfrmConfirmReplaceDlg.Create(Application);
+    if (frmConfirm_Replace_Dlg = nil) then
+      frmConfirm_Replace_Dlg:= TfrmConfirm_Replace_Dlg.Create(Application);
 
     {
     // The dialog stay alway near of the ASearch: fine but a bit tired!
@@ -1396,13 +1406,13 @@ begin
 
 
     // The dialog will stay on top and right aligned
-    with frmConfirmReplaceDlg do
+    with frmConfirm_Replace_Dlg do
       pPrepareShow(editRect,
                    pPos.X,
                    pPos.Y,
                    ASearch);
 
-    case frmConfirmReplaceDlg.ShowModal of
+    case frmConfirm_Replace_Dlg.ShowModal of
       mrYes     : Action:= raReplace;
       mrYesToAll: Action:= raReplaceAll;
       mrNo      : Action:= raSkip;
@@ -1563,7 +1573,7 @@ begin
       pLineNumber.y:= gotoBox.spLine.AsInteger;
       pLineNumber.x:= 1;
 
-      //Define the active editor
+      // Define the active editor
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                        else seEditor:= synEditor2;
 
@@ -1737,7 +1747,7 @@ begin
     end;
 
   end;
-  if Assigned(frmConfirmReplaceDlg) then FreeAndNil(frmConfirmReplaceDlg);
+  if Assigned(frmConfirm_Replace_Dlg) then FreeAndNil(frmConfirm_Replace_Dlg);
 end;
 
 procedure TfrmEditor.pFindAgain;
@@ -1812,7 +1822,7 @@ var
   seEditor: TSynEdit;
 
 begin
-  //Define the active editor
+  // Define the active editor
   if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
@@ -1963,17 +1973,17 @@ begin
     HideSelection         := False;
     Highlighter           := synEditor.Highlighter;
     Lines.text            := synEditor.Lines.Text;
-    onChange              := synEditor.onChange;
-    onClick               := synEditor.onClick;
-    onEndDrag             := synEditor.onEndDrag;
-    onEnter               := synEditor.onEnter;
-    onGutterClick         := synEditor.onGutterClick;
-    onKeyDown             := synEditor.onKeyDown;
-    onKeyUp               := synEditor.onKeyUp;
-    onMouseUp             := synEditor.onMouseUp;
-    onPaintTransient      := TSyn_Transient.pSynPaintTransient;
-    onReplaceText         := synEditor.onReplaceText;
-    onStatusChange        := synEditor.onStatusChange;
+    OnChange              := synEditor.onChange;
+    OnClick               := synEditor.onClick;
+    OnEndDrag             := synEditor.onEndDrag;
+    OnEnter               := synEditor.onEnter;
+    OnGutterClick         := synEditor.onGutterClick;
+    OnKeyDown             := synEditor.onKeyDown;
+    OnKeyUp               := synEditor.onKeyUp;
+    OnMouseUp             := synEditor.onMouseUp;
+    OnPaintTransient      := TSyn_Transient.pSynPaintTransient;
+    OnReplaceText         := synEditor.onReplaceText;
+    OnStatusChange        := synEditor.onStatusChange;
     Options               := synEditor.Options;
     Parent                := Self;
     PopupMenu             := frmMain.pmenEditor;

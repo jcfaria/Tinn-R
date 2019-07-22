@@ -86,12 +86,12 @@ uses
   trUtils in 'trUtils.pas',
   udmSyn in 'udmSyn.pas' {dmSyn: TDataModule},
   ufrmAbout in 'ufrmAbout.pas' {frmAbout},
-  ufrmAppOptions in 'ufrmAppOptions.pas' {frmAppOptionsDlg},
+  ufrmAppOptions in 'ufrmAppOptions.pas' {frmApp_Options_Dlg},
   ufrmColors in 'ufrmColors.pas' {frmColors},
   ufrmComments in 'ufrmComments.pas' {frmComments},
   ufrmCompletion in 'ufrmCompletion.pas' {frmCompletion},
   ufrmConfigurePrint in 'ufrmConfigurePrint.pas' {frmConfigurePrint},
-  ufrmConfirmReplace in 'ufrmConfirmReplace.pas' {frmConfirmReplaceDlg},
+  ufrmConfirmReplace in 'ufrmConfirmReplace.pas' {frmConfirm_Replace_Dlg},
   ufrmCount in 'ufrmCount.pas' {frmCount},
   ufrmEditor in 'ufrmEditor.pas' {frmEditor},
   ufrmGotoBox in 'ufrmGotoBox.pas' {frmGotoBox},
@@ -107,13 +107,15 @@ uses
   ufrmRmirrors in 'ufrmRmirrors.pas' {frmRmirrors},
   ufrmRServer in 'ufrmRServer.pas' {frmRServer},
   ufrmRterm in 'ufrmRterm.pas' {frmRterm},
-  ufrmSearchInFiles in 'ufrmSearchInFiles.pas' {frmSearchInFilesDlg},
+  ufrmSearchInFiles in 'ufrmSearchInFiles.pas' {frmSearch_InFiles_Dlg},
   ufrmSearch in 'ufrmSearch.pas' {frmSearchDlg},
   ufrmShortcuts in 'ufrmShortcuts.pas' {frmShortcuts},
   ufrmSplash in 'ufrmSplash.pas' {frmSplash},
   ufrmTools in 'ufrmTools.pas' {frmTools},
   ufrmUpdater in 'ufrmUpdater.pas' {frmUpdater},
-  uModDados in 'uModDados.pas' {modDados: TDataModule};
+  uModDados in 'uModDados.pas' {modDados: TDataModule},
+  ufrmSH_map in 'ufrmSH_map.pas' {frmSH_Map_Dlg},
+  ufrmSH_Manager in 'ufrmSH_Manager.pas' {frmSH_Manager_Dlg};
 
 {$R Tinn_R.KLR}
 {$R *.RES}

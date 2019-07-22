@@ -195,7 +195,7 @@ uses
   JvComCtrls, JvMenus, JvAppHotKey, JvTimer, SynUnicode, SynEditTextBuffer, DB,
   SynEditOC, PngImageList, JvAppStorage, ATBinHex, ATxCodepages, ATFileNotificationSimple,
   IdHTTP, IdException, IdStack, JvUpDown, PerlRegEx, UrlMon,
-  trRUtils;
+  trRUtils, ufrmSH_map;
 
 const
   WM_OPENEDITOR = WM_USER + 1;
@@ -1987,6 +1987,7 @@ type
     Rnomultlinestring6: TMenuItem;
     imlRSend_Plus: TPngImageList;
     synIO_History: TSynCompletionProposal;
+    menShortcuts_Hotkeys: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2535,6 +2536,7 @@ type
     procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x,
       y: Integer; var CanExecute: Boolean);
+    procedure menShortcuts_HotkeysClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -2551,16 +2553,13 @@ type
     bMinimizeTinnAfterLastFile     : boolean;
     bOnTop                         : boolean;
     bOrganizeAutomatically         : boolean;
-    bREcho                         : boolean;
     bRestored                      : boolean;
     bRestoreIniDock                : boolean;
     bRKnitr                        : boolean;
     bRMirros_Update                : boolean;
     bRRequireKnitr                 : boolean;
-    bRSendAll                      : boolean;
     bRSetget_Info                  : boolean;
     bRSetWorkDir_Starting          : boolean;
-    bRSmart                        : boolean;
     bRsvSocket_Connect             : boolean;
     bRtermCanFloat                 : boolean;
     bRtermCloseWithoutAsk          : boolean;
@@ -2603,7 +2602,6 @@ type
     iLastSearch                    : integer;
     iLatexDimensionalElement       : integer;
     iLOG_Syntax                    : integer;
-    iMaxDeparseLength              : integer;
     iReformatRSplit                : integer;
     iRFormatted                    : integer;
     iRguiTinnR_Disposition         : integer;
@@ -2713,7 +2711,6 @@ type
     function fMessageDlg(const sMsg: string; mdType: TMsgDlgType; mdButtons: TMsgDlgButtons; iHelp: Integer): Integer;
     function fREnvironment: string;
     //function fRWorkDir: string;
-    function fSingleLine(sTmp: string): boolean;
     function fStripRegExPower(sSearchText: string): string;
 
     procedure pAddFile(iFile: string);
@@ -2739,7 +2736,6 @@ type
     procedure pControlResources(bOption: boolean);
     procedure pCreateGroup(sGroupName: string);
     procedure pCreateProject;
-    procedure pDatasetToActionList(Sender: TObject);
     procedure pDoClearConsole;
     procedure pDoIPConnection(sIPHost: string; iIPPort: integer; bActive: boolean);
     procedure pDoTxt2Tag(iButton: integer);
@@ -2765,8 +2761,6 @@ type
     procedure pPandocConversion(sPandocInstruction, sPandocFrom, sPandocTo: string; bWait: boolean = True);
     procedure pRecentProjectFileClick(Sender: TObject);
     procedure pRecordActions(baAction: TBasicAction; var bHandled: Boolean);
-    procedure pRemoveLine_Commented(var sTmp: string);
-    procedure pRemoveLine_Empty(var sTmp: string);
     procedure pRMenu(bOption: boolean);
     procedure pRmirrorsInterface_Update;
     procedure pRSetGet_Info;
@@ -2853,21 +2847,24 @@ type
     bProjectChanged              : boolean;
     bRArchitecture64             : boolean;
     bRAsServer                   : boolean;
+    bREcho                       : boolean;
     bRememberFileState           : boolean;
     bRemoveExtension             : boolean;
     bRguiReturnFocus             : boolean;
+    bRSendAll                    : boolean;
     bRTCPIPConsoleEcho           : boolean;
     bRTCPIPConsoleUse            : boolean;
     bRtermBeepOnError            : boolean;
     bRtermFindError              : boolean;
     bRtermWidth                  : boolean;
+    bRSmart                      : boolean;
     bSearchBackwards             : boolean;
     bSearchCaseSensitive         : boolean;
     bSearchFromCursor            : boolean;
     bSearchRegExp                : boolean;
     bSearchWholeWords            : boolean;
     bselectedToPreview           : boolean;
-    bTinnRHotKeys                : boolean;
+    bHotKeys_On                  : boolean;
     bUndoAfterSave               : boolean;
     bUpdating                    : boolean;
     clActiveLine                 : TColor;
@@ -2878,6 +2875,7 @@ type
     clBrackets                   : TColor;
     clFGApplication              : TColor;
     coEditor                     : TSynEditorOC;
+    dlgSH_Map                    : TfrmSH_Map_Dlg;
     ffDefault                    : TSynEditFileFormat;
     hRgui                        : HWND;
     iAlphaBlendValue             : integer;
@@ -2892,6 +2890,7 @@ type
     iIPPortLocal                 : integer;
     iIPPortRemote                : integer;
     iLatexDimensionalAlign       : integer;
+    iMaxDeparseLength            : integer;
     iPandocFrom                  : integer;
     iPandocTo                    : integer;
     iProjecSelected              : integer;
@@ -2968,6 +2967,7 @@ type
     procedure pCheckRterm;
     procedure pClearMRU;
     procedure pClearStatusBar;
+    procedure pDatasetToActionList;
     procedure pDoRConnection(sTmp: string; bActive, bSendTask: boolean);
     procedure pDoRguiConnection(sTmp: string; bActive: boolean);
     procedure pDoSend(var sTmp: string; bSendToSynIO: boolean = True);
@@ -3049,20 +3049,20 @@ begin
 (*
 ----------------------------------------------------------------------------------------------
   It will update (from dataset shortcut.xml) all actions inside of alMain:
-   1- Comment the line below (pDatasetToActionList(nil)) when was done any change in the alMain;
+   1- Comment the line below (pDatasetToActionList) when was done any change in the alMain;
    2- Run Tinn-R ;
    3- Generate a new Dataset: Tools/Utils/Actionlist to dataset
       (This menu is visible only when running the project under the IDE);
    4- Close Tinn-R;
    5- Change the version of sCurrentVersion_Shortcuts in procedure TfrmMain.pCheckVersion
       (It is very important to the user version be updated!);
-   6- Uncomment this line newly (pDatasetToActionList(nil));
+   6- Uncomment this line newly (pDatasetToActionList);
    7- It is all!
 ----------------------------------------------------------------------------------------------
 *)
 
 (*-------------------------*)
-  pDatasetToActionList(nil);
+  pDatasetToActionList;
 (*-------------------------*)
 
   // Create items in lbShortcuts from strListShortcutsGroups create in uModDados
@@ -3105,7 +3105,7 @@ begin
   sVersion_Rmirrors  := ifTinn.ReadString('App', 'sVersion_Rmirrors'  , '0.0.0.0');
   sVersion_Shortcuts := ifTinn.ReadString('App', 'sVersion_Shortcuts' , '0.0.0.0');
 
-  // Version of the main resources: database and TinnRcom packages 
+  // Version of the main resources: database and TinnRcom packages
   sCurrentVersion_Cache     := '5.02.02.00';
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '5.02.03.00';
@@ -3113,7 +3113,7 @@ begin
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.02.02.00';
-  sCurrentVersion_Shortcuts := '5.03.00.00';
+  sCurrentVersion_Shortcuts := '5.03.03.00';
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3866,7 +3866,7 @@ begin
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
-    WriteBool('App', 'bTinnRHotKeys', bTinnRHotKeys);
+    WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
     WriteInteger('App', 'clBGApplication', Tcolor(clBGApplication));
@@ -4427,7 +4427,7 @@ begin
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
-    WriteBool('App', 'bTinnRHotKeys', bTinnRHotKeys);
+    WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
     WriteInteger('App', 'clBGApplication', Tcolor(clBGApplication));
@@ -5164,6 +5164,7 @@ begin
   bAllNames              := ifTinn.ReadBool('App', 'bAllNames', True);
   bConnectionBeepOnError := ifTinn.ReadBool('App', 'bConnectionBeepOnError', True);
   bDataCompletionAnywhere:= ifTinn.ReadBool('App', 'bDataCompletionAnywhere', True);
+  bHotKeys_On            := ifTinn.ReadBool('App', 'bHotKeys_On', True);
   bOrganizeAutomatically := ifTinn.ReadBool('App', 'bOrganizeAutomatically', False);
 
   // There is still some 32 bit computer in use today!
@@ -5189,7 +5190,6 @@ begin
   bRTinnRcom_Load              := ifTinn.ReadBool('App', 'bRTinnRcomLoad', True);
   bRUseLatest                  := ifTinn.ReadBool('App', 'bRUseLatest', True);
   bScrollSendingLines          := ifTinn.ReadBool('App', 'bScrollSendingLines', True);
-  bTinnRHotKeys                := ifTinn.ReadBool('App', 'bTinnRHotKeys', True);
   iRecognition_Caption         := ifTinn.ReadInteger('App', 'iRecognition_Caption', 2);
   iReformatRSplit              := ifTinn.ReadInteger('App', 'iReformatRSPlit', 1);
   iRguiTinnR_Disposition       := ifTinn.ReadInteger('App', 'iRguiTinnR_Disposition', 0);
@@ -7033,6 +7033,16 @@ begin
 end;
 
 procedure TfrmMain.pControlResources(bOption: boolean);
+
+  // Return True if R is selected from frmTools.lbCompletion
+  function fIsRSelected: boolean;
+  begin
+    Result:= False;
+    with frmTools.lbCompletion do
+      if (Items.Strings[ItemIndex] = 'R') then
+        Result:= True;
+  end;
+
 begin
   // Main R menu and R toolbar alphabetically ordered
   actRContClearAll.Enabled               := bOption;
@@ -7080,8 +7090,8 @@ begin
   actRcardHelpSelected.Enabled       := bOption;
 
   // Rcompletion
-  actCompletionExampleSelected.Enabled:= bOption;
-  actCompletionHelpSelected.Enabled   := bOption;
+  actCompletionHelpSelected.Enabled   := bOption and fIsRSelected;
+  actCompletionExampleSelected.Enabled:= bOption and fIsRSelected;
 
   // Mirrors
   actRmirrorsSetRepos.Enabled:= bOption;
@@ -11402,7 +11412,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pDatasetToActionList(Sender: TObject);
+procedure TfrmMain.pDatasetToActionList;
 
   procedure pUpdate_Action(i: integer;
                            sGroup,
@@ -11472,7 +11482,7 @@ end;
 
 procedure TfrmMain.menToolsUtilsDatasetToActionlistClick(Sender: TObject);
 begin
-  pDatasetToActionList(nil);
+  pDatasetToActionList;
   stbMain.Panels[8].Text:= 'Done!';
 end;
 
@@ -12097,7 +12107,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
     actRContGuiPuTTYStartClose.Update;
 
     if bRunning                  and
-       (frmAppOptionsDlg = nil)  and
+       (frmApp_Options_Dlg = nil)  and
        bOrganizeAutomatically    and
        not bAlreadyOrganized  then actOrganizeScreenExecute(Self);
   end;
@@ -12138,8 +12148,8 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
       end;
     end;
 
-    if bTinnRHotKeys then stbMain.Panels[6].Text:= 'HK On'
-                     else stbMain.Panels[6].Text:= 'HK Off';
+    if bHotKeys_On then stbMain.Panels[6].Text:= 'HK On'
+                   else stbMain.Panels[6].Text:= 'HK Off';
 
     menControlRClearConsole.Enabled:= True;
     menControlRHelp.Enabled        := True;
@@ -13776,7 +13786,7 @@ end;
 
 procedure TfrmMain.menOptionsShortcutsClick(Sender: TObject);
 begin
-  actShortcutsEditExecute(nil);
+  //actShortcutsEditExecute(nil);
 end;
 
 procedure TfrmMain.actTobMiscVisibleExecute(Sender: TObject);
@@ -13944,7 +13954,7 @@ end;
 
 procedure TfrmMain.actShowAppOptionsExecute(Sender: TObject);
 var
-  dlg: TfrmAppOptionsDlg;
+  dlgApp_Options: TfrmApp_Options_Dlg;
 
   i: integer;
 
@@ -13958,9 +13968,9 @@ begin
                                                            [eoShowSpecialChars];
 
   try
-    dlg:= TfrmAppOptionsDlg.Create(Self);
+    dlgApp_Options:= TfrmApp_Options_Dlg.Create(Self);
 
-    with dlg do begin
+    with dlgApp_Options do begin
       if bIPLocal then rdgRTCPIPType.ItemIndex:= 0
                   else rdgRTCPIPType.ItemIndex:= 1;
 
@@ -14185,8 +14195,8 @@ begin
 //      bStartOptionsWithProcessingPage:= False;
 //    end;
 
-    if (dlg.ShowModal = mrOK) then begin
-      with dlg do begin
+    if (dlgApp_Options.ShowModal = mrOK) then begin
+      with dlgApp_Options do begin
         // Send to R alphabetically ordered
         actRCurrentLineToTop.Visible         := cbRCurrentLineToTop.Checked;
         actRSendBlockMarked.Visible          := cbRSendBlockMarked.Checked;
@@ -14469,7 +14479,7 @@ begin
       pDraw_RtermSend_Plus;
     end;
   finally
-    FreeAndNil(dlg);
+    FreeAndNil(dlgApp_Options);
     FreeAndNil(slRAvailable);
     pSetFocus_Main;
   end;
@@ -14860,10 +14870,83 @@ begin
   end;
 end;
 
+procedure TfrmMain.menShortcuts_HotkeysClick(Sender: TObject);
+//var
+//  pTmp: pointer;
+//
+//  bHotkeys_Status: boolean;
+//
+begin
+//  bHotkeys_Status:= False;
+//
+//  // Related to Shortcuts
+//  with modDados.cdShortcuts do
+//    pTmp:= GetBookmark;
+//
+//  try
+//    dlgSH_Map:= TfrmSH_Map_Dlg.Create(Self);
+//
+//    // Initial status
+//    with dlgSH_Map do begin
+//      pgShortcuts.ActivePage:= tbsAppShortcuts;
+//      pgRhotkeys.ActivePage:= tbsSend_Control;
+//    end;
+//
+//    // Stores the status of the Hotkeys and turn all off
+//    bHotkeys_Status:= bHotKeys_On;
+//    if bHotKeys_On then begin
+//      bHotKeys_On:= False;
+//      with frmHotkeys do
+//        pSetHotkeys(False);
+//    end;
+//
+//    // If OK
+//    if (dlgSH_Map.ShowModal = mrOK) then begin
+//      with modDados.cdShortcuts do begin
+//        Edit;
+//        try
+//          Post;
+//          MergeChangeLog;
+//          SaveToFile();
+//          frmMain.iShortcutsBeforeChanges:= SavePoint;
+//        except
+//          //TODO
+//        end;
+//      end;
+//
+//      with modDados.cdShortcuts do
+//        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
+//      pDatasetToActionList;
+//      pSetFocus_Main;
+//    end // if (dlgSH_Map.ShowModal = mrOK)
+//    // Else
+//    else begin
+//      with modDados do begin
+//        cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
+//        cdShortcutsAfterScroll(nil);
+//      end;
+//    end;
+//
+//  finally
+//    with modDados.cdShortcuts do begin
+//      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
+//      FreeBookmark(pTmp);
+//    end;
+//
+//    FreeAndNil(dlgSH_Map);
+//
+//    // Restore the Hotkeys status
+//    bHotKeys_On:= bHotkeys_Status;
+//    with frmHotkeys do
+//      pSetHotkeys(bHotKeys_On);
+//  end;
+  actShortcutsEditExecute(Self);
+end;
+
 procedure TfrmMain.lvRexplorerDblClick(Sender: TObject);
 var
   i: integer;
-  
+
 begin
   i:= fFindTopWindow;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
@@ -15990,19 +16073,6 @@ begin
   end;
 end;
 
-procedure TfrmMain.pRemoveLine_Commented(var sTmp: string);
-begin
-  sTmp:= fRegEx_Multiline(sTmp,
-                          //'^[ \{\}\(\)"''''_a-zA-Z0-9,.=-].*' // Get all lines not started by # (R is a language quite promiscuous!!!)
-                          '^((?!^#)).*$');                      // \o/
-end;
-
-procedure TfrmMain.pRemoveLine_Empty(var sTmp: string);
-begin
-  sTmp:= fRegEx_Multiline(sTmp,
-                          '.*$');  // \o/
-end;
-
 function TfrmMain.fGetFile(var bSingleLine: boolean): string;
 var
   sTmp,
@@ -16064,15 +16134,6 @@ begin
 
   if fFile_Save_Fast(sFilePath,
                      sTmp) then Result:= '.paths[8]';
-end;
-
-function TfrmMain.fSingleLine(sTmp: string): boolean;
-begin
-  Result:= False;
-  if (Pos(#13#10,
-          sTmp) <=0) or
-     ((length(sTmp) - 1) = Pos(#13#10,
-                               sTmp)) then Result:= True;
 end;
 
 function TfrmMain.fGetClipboard(var bSingleLine: boolean): string;
@@ -17028,7 +17089,7 @@ begin
            ')';
 
   pDoSend(sTmp);
-}  
+}
 end;
 
 procedure TfrmMain.actRSendContiguousExecute(Sender: TObject);
@@ -20506,7 +20567,7 @@ begin
 end;
 
 procedure TfrmMain.actShortcutsEditExecute(Sender: TObject);
-
+{
   procedure pUpdateCompletionArgs;
   var
     i: integer;
@@ -20556,6 +20617,7 @@ var
   end;
 
 begin
+
   with modDados.cdShortcuts do
     pTmp:= GetBookmark;
 
@@ -20573,10 +20635,81 @@ begin
     finally
       frmMain.Refresh;
       FreeAndNil(frmShortcuts);
-      pDatasetToActionList(Self);
+      pDatasetToActionList;
       pUpdateCompletionArgs;
       pSetFocus_Main;
     end;
+}
+
+var
+  pTmp: pointer;
+
+  bHotkeys_Status: boolean;
+
+begin
+  bHotkeys_Status:= False;
+
+  // Related to Shortcuts
+  with modDados.cdShortcuts do
+    pTmp:= GetBookmark;
+
+  try
+    dlgSH_Map:= TfrmSH_Map_Dlg.Create(Self);
+
+    // Initial status
+    with dlgSH_Map do begin
+      pgSH.ActivePage:= tbsAppShortcuts;
+      pgRhotkeys.ActivePage:= tbsSend_Control;
+    end;
+
+    // Stores the status of the Hotkeys and turn all off
+    bHotkeys_Status:= bHotKeys_On;
+    if bHotKeys_On then begin
+      bHotKeys_On:= False;
+      with frmHotkeys do
+        pSetHotkeys(False);
+    end;
+
+    // If OK
+    if (dlgSH_Map.ShowModal = mrOK) then begin
+      with modDados.cdShortcuts do begin
+        Edit;
+        try
+          Post;
+          MergeChangeLog;
+          SaveToFile();
+          frmMain.iShortcutsBeforeChanges:= SavePoint;
+        except
+          //TODO
+        end;
+      end;
+
+      with modDados.cdShortcuts do
+        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
+      pDatasetToActionList;
+      pSetFocus_Main;
+    end // if (dlgSH_Map.ShowModal = mrOK)
+    // Else
+    else begin
+      with modDados do begin
+        cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
+        cdShortcutsAfterScroll(nil);
+      end;
+    end;
+
+  finally
+    with modDados.cdShortcuts do begin
+      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
+      FreeBookmark(pTmp);
+    end;
+
+    FreeAndNil(dlgSH_Map);
+
+    // Restore the Hotkeys status
+    bHotKeys_On:= bHotkeys_Status;
+    with frmHotkeys do
+      pSetHotkeys(bHotKeys_On);
+  end;
 end;
 
 procedure TfrmMain.actShortcutsHelpExecute(Sender: TObject);
@@ -20605,7 +20738,7 @@ end;
 {$WARNINGS OFF}
 procedure TfrmMain.actSearchInFilesExecute(Sender: TObject);
 var
-  dlg: TfrmSearchInFilesDlg;
+  dlg: TfrmSearch_InFiles_Dlg;
 
   iMatchCount,
    iFoundFileCount,
@@ -20620,7 +20753,7 @@ var
   seEditor: TSynEdit;
 
 begin
-  dlg:= TfrmSearchInFilesDlg.Create(Self);
+  dlg:= TfrmSearch_InFiles_Dlg.Create(Self);
 
   with dlg do begin
     if (sSearchFileMaskHistory <> EmptyStr) then SearchFileMaskHistory:= sSearchFileMaskHistory;
@@ -23105,9 +23238,9 @@ begin
         end;
 
      6: begin
-          bTinnRHotKeys:= not bTinnRHotKeys;
+          bHotKeys_On:= not bHotKeys_On;
           with frmHotkeys do
-            pSetHotkeys(bTinnRHotKeys);
+            pSetHotkeys(bHotKeys_On);
         end;
 
      7: begin
@@ -23129,8 +23262,8 @@ var
   i: integer; 
 
 begin
-  if bTinnRHotKeys then cTmp:= clGreen
-                   else cTmp:= clGray;
+  if bHotKeys_On then cTmp:= clGreen
+                 else cTmp:= clGray;
 
   //cBrush:= StatusBar.Color;
 

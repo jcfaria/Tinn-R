@@ -68,12 +68,12 @@ type
     FGuiCaption: string;
     FGuiHandle: Cardinal;
 
-    procedure pSendCommand(const sValue: string; const iDelay: Integer = 0); override;
     procedure pSendEnter;
-    procedure pSendPaste;
+//    procedure pSendPaste;
 
   public
     procedure pDoPrepare;
+    procedure pSendCommand(const sValue: string; const iDelay: Integer = 0); override;
     procedure pSendChar(const sValue: string; const RHandle: HWND; const iDelay: Integer = 0);
     procedure pSendString(const sValue: string; const iDelay: Integer = 0); override;
     property pGuiCaption: string read FGuiCaption write FGuiCaption;
@@ -159,11 +159,11 @@ begin
            True);
 end;
 
-procedure TKeySender.pSendPaste;
-begin
-  SendKeys('^v',
-           True);
-end;
+//procedure TKeySender.pSendPaste;
+//begin
+//  SendKeys('^v',
+//           True);
+//end;
 
 procedure TKeySender.pSendString(const sValue: string;
                                  const iDelay: Integer = 0);

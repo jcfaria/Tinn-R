@@ -2626,7 +2626,7 @@ const
     );
 
   // List of keywords: Plotting
-  Plotting_Count = 210;
+  Plotting_Count = 206;
   Plotting: array [1 .. Plotting_Count] of UnicodeString = (
     'a.name',
     'adj',
@@ -2806,8 +2806,6 @@ const
     'warn.log',
     'warn.unused',
     'x.intersp',
-    'x0',
-    'x1',
     'xaxp',
     'xaxs',
     'xaxt',
@@ -2824,8 +2822,6 @@ const
     'xy',
     'y.intersp',
     'y.name',
-    'y0',
-    'y1',
     'yaxp',
     'yaxs',
     'yaxt',

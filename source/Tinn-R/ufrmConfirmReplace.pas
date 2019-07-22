@@ -88,7 +88,7 @@ uses
   StdCtrls, ExtCtrls;
 
 type
-  TfrmConfirmReplaceDlg = class(TForm)
+  TfrmConfirm_Replace_Dlg = class(TForm)
     btnCancel: TButton;
     btnReplace: TButton;
     btnReplaceAll: TButton;
@@ -104,7 +104,7 @@ type
   end;
 
 var
-  frmConfirmReplaceDlg: TfrmConfirmReplaceDlg;
+  frmConfirm_Replace_Dlg: TfrmConfirm_Replace_Dlg;
 
 implementation
 
@@ -117,18 +117,18 @@ resourcestring
 
 { TConfirmReplaceDialog }
 
-procedure TfrmConfirmReplaceDlg.FormCreate(Sender: TObject);
+procedure TfrmConfirm_Replace_Dlg.FormCreate(Sender: TObject);
 begin
   Image1.Picture.Icon.Handle:= LoadIcon(0,
                                         IDI_QUESTION);
 end;
 
-procedure TfrmConfirmReplaceDlg.FormDestroy(Sender: TObject);
+procedure TfrmConfirm_Replace_Dlg.FormDestroy(Sender: TObject);
 begin
-  frmConfirmReplaceDlg:= nil;
+  frmConfirm_Replace_Dlg:= nil;
 end;
 
-procedure TfrmConfirmReplaceDlg.FormShow(Sender: TObject);
+procedure TfrmConfirm_Replace_Dlg.FormShow(Sender: TObject);
 begin
   AlphaBlendValue:= (frmMain.iAlphaBlendValue * 7) Div 10;  // I want 30% more transparency!
 end;
@@ -167,7 +167,7 @@ begin
 end;
 }
 
-procedure TfrmConfirmReplaceDlg.pPrepareShow(AEditorRect: TRect;
+procedure TfrmConfirm_Replace_Dlg.pPrepareShow(AEditorRect: TRect;
                                                 iX,
                                                  iY: integer;
                                                 sReplaceText: string);

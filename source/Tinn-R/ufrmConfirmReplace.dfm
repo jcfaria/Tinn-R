@@ -1,4 +1,4 @@
-object frmConfirmReplaceDlg: TfrmConfirmReplaceDlg
+object frmConfirm_Replace_Dlg: TfrmConfirm_Replace_Dlg
   Left = 176
   Top = 158
   AlphaBlend = True

@@ -27,6 +27,7 @@ object frmAbout: TfrmAbout
     Width = 75
     Height = 25
     Caption = 'OK'
+    Default = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -35,6 +36,7 @@ object frmAbout: TfrmAbout
     ModalResult = 1
     ParentFont = False
     TabOrder = 0
+    NumGlyphs = 2
   end
   object pgAbout: TJvgPageControl
     Left = 0

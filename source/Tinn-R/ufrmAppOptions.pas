@@ -59,7 +59,7 @@ type
 
   TSynEditorOptionsAllUserCommands = procedure(ACommands: TStrings) of object;
 
-  TfrmAppOptionsDlg = class(TForm)
+  TfrmApp_Options_Dlg = class(TForm)
     ActiveBorder1: TMenuItem;
     ActiveCaption1: TMenuItem;
     ApplicationWorkspace1: TMenuItem;
@@ -575,7 +575,7 @@ type
   end;
 
 var
-  frmAppOptionsDlg: TfrmAppOptionsDlg;
+  frmApp_Options_Dlg: TfrmApp_Options_Dlg;
 
 implementation
 
@@ -610,7 +610,7 @@ begin
 end;
 
 
-procedure TfrmAppOptionsDlg.pRemoveEmpty;
+procedure TfrmApp_Options_Dlg.pRemoveEmpty;
 var
   i: integer;
 
@@ -625,7 +625,7 @@ begin
 end;
 
 
-function TfrmAppOptionsDlg.fGetEmpty: boolean;
+function TfrmApp_Options_Dlg.fGetEmpty: boolean;
 var
   i: integer;
 
@@ -646,7 +646,7 @@ begin
     end;
 end;
 
-procedure TfrmAppOptionsDlg.btnFontClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.btnFontClick(Sender: TObject);
 begin
   with fdAppOptions do
     Options:= Options - [fdEffects];
@@ -668,7 +668,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.btnGutterFontClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.btnGutterFontClick(Sender: TObject);
 begin
   with fdAppOptions do
     Options:= Options + [fdEffects];
@@ -688,12 +688,12 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.btnMRUClearClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.btnMRUClearClick(Sender: TObject);
 begin
   frmMain.pClearMRU;
 end;
 
-procedure TfrmAppOptionsDlg.btnSetToBothClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.btnSetToBothClick(Sender: TObject);
 var
   sPath: string;
 
@@ -753,7 +753,7 @@ begin
                     'Rgui.exe';
 end;
 
-procedure TfrmAppOptionsDlg.btnSetToRGuiClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.btnSetToRGuiClick(Sender: TObject);
 var
   sPath: string;
 
@@ -810,7 +810,7 @@ begin
                     'Rgui.exe';
 end;
 
-procedure TfrmAppOptionsDlg.btnSetToRTermClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.btnSetToRTermClick(Sender: TObject);
 var
   sPath: string;
 
@@ -867,7 +867,7 @@ begin
                      'Rterm.exe';
 end;
 
-procedure TfrmAppOptionsDlg.btnUpdateKeyClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.btnUpdateKeyClick(Sender: TObject);
 var
   iCmd: Integer;
 
@@ -895,21 +895,21 @@ begin
                        lvKeystrokes.Selected);
 end;
 
-procedure TfrmAppOptionsDlg.edLineWidthKeyDown(Sender: TObject;
+procedure TfrmApp_Options_Dlg.edLineWidthKeyDown(Sender: TObject;
                                             var Key: Word;
                                             Shift: TShiftState);
 begin
   // Only digits allowed
 end;
 
-procedure TfrmAppOptionsDlg.edMaxDeparseLengthKeyPress(Sender: TObject;
+procedure TfrmApp_Options_Dlg.edMaxDeparseLengthKeyPress(Sender: TObject;
                                                     var Key: Char);
 begin
   if not (Key in['0'..'9',
           Chr(8)]) then Key:= #0;
 end;
 
-procedure TfrmAppOptionsDlg.FormActivate(Sender: TObject);
+procedure TfrmApp_Options_Dlg.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
     pgIP.TabSelectedStyle.BackgrColor                   := clBGTabSelectedNew;
@@ -936,7 +936,7 @@ begin
   tbTransparencyPosChange(nil);
 end;
 
-procedure TfrmAppOptionsDlg.FormCreate(Sender: TObject);
+procedure TfrmApp_Options_Dlg.FormCreate(Sender: TObject);
 var
   i: Integer;
   C: TColor;
@@ -989,7 +989,7 @@ begin
   bFormVisible:= False;
 end;
 
-procedure TfrmAppOptionsDlg.FormClose(Sender: TObject;
+procedure TfrmApp_Options_Dlg.FormClose(Sender: TObject;
                                    var Action: TCloseAction);
 begin
   pRemoveEmpty;         // Remove any empty entry
@@ -998,7 +998,7 @@ begin
   frmMain.sAppSelected:= jtvAppOptions.Selected.Text;
 end;
 
-procedure TfrmAppOptionsDlg.FormShow(Sender: TObject);
+procedure TfrmApp_Options_Dlg.FormShow(Sender: TObject);
 var
   i         : Integer;
   slCommands: TStringList;
@@ -1080,7 +1080,7 @@ begin
   rdgRUseLatestClick(nil);
 end;
 
-procedure TfrmAppOptionsDlg.jtvAppOptionsChange(Sender: TObject;
+procedure TfrmApp_Options_Dlg.jtvAppOptionsChange(Sender: TObject;
                                              Node: TTreeNode);
 begin
 // // the below bother me with time.
@@ -1105,7 +1105,7 @@ begin
 //    ShowMessage('oi');
 end;
 
-procedure TfrmAppOptionsDlg.bbtRGuiPathClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtRGuiPathClick(Sender: TObject);
 begin
   with odAppOptions do begin
     InitialDir:= ExtractFilePath(edPathRGui.Text);
@@ -1116,7 +1116,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbtRTermPathClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtRTermPathClick(Sender: TObject);
 begin
   with odAppOptions do begin
     InitialDir:= ExtractFilePath(edPathRTerm.Text);
@@ -1127,44 +1127,44 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbttPuTTYRestoreDefaultClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbttPuTTYRestoreDefaultClick(Sender: TObject);
 begin
   edParRPuTTY.Text:= '--no-save';
 end;
 
-procedure TfrmAppOptionsDlg.bLibraryRestoreDefaultClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bLibraryRestoreDefaultClick(Sender: TObject);
 begin
   edRLibPathDefault.Text:= '.libPaths()[1L]';
 end;
 
-procedure TfrmAppOptionsDlg.tbLastFileChange(Sender: TObject);
+procedure TfrmApp_Options_Dlg.tbLastFileChange(Sender: TObject);
 begin
   lblLastFile.Caption:= intToStr(tbLastFile.Position) +
                         ' file(s)';
 end;
 
-procedure TfrmAppOptionsDlg.tbLastSearchChange(Sender: TObject);
+procedure TfrmApp_Options_Dlg.tbLastSearchChange(Sender: TObject);
 begin
   lblLastSearch.Caption:= intToStr(tbLastSearch.Position) +
                           ' search(es)';
 end;
 
-procedure TfrmAppOptionsDlg.bbtParDeplateClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtParDeplateClick(Sender: TObject);
 begin
   edParDeplate.Text:= '-f';
 end;
 
-procedure TfrmAppOptionsDlg.bbtParTxt2tagsClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtParTxt2tagsClick(Sender: TObject);
 begin
   edParTxt2tags.Text:= '-t';
 end;
 
-procedure TfrmAppOptionsDlg.bbHelpClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbHelpClick(Sender: TObject);
 begin
   frmMain.pOpenUserGuidePDF('"Application options"');
 end;
 
-procedure TfrmAppOptionsDlg.bbtConPathDeplateClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtConPathDeplateClick(Sender: TObject);
 begin
   with odAppOptions do begin
     InitialDir:= ExtractFilePath(edPathDeplate_Converter.Text);
@@ -1175,7 +1175,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbtConPathTxt2tagsClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtConPathTxt2tagsClick(Sender: TObject);
 begin
   with odAppOptions do begin
     InitialDir:= ExtractFilePath(edPathTxt2tags_Converter.Text);
@@ -1186,7 +1186,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbtIntPathDeplateClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtIntPathDeplateClick(Sender: TObject);
 begin
   with odAppOptions do begin
     InitialDir:= ExtractFilePath(edPathDeplate_Interpreter.Text);
@@ -1197,7 +1197,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbtPathPandocClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtPathPandocClick(Sender: TObject);
 begin
   with odAppOptions do begin
     InitialDir:= ExtractFilePath(edPath_Pandoc.Text);
@@ -1208,7 +1208,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbtIntPathTxt2tagsClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtIntPathTxt2tagsClick(Sender: TObject);
 begin
   with odAppOptions do begin
     InitialDir:= ExtractFilePath(edPathTxt2tags_Interpreter.Text);
@@ -1219,7 +1219,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.tbRguiTinnR_ProportionChange(Sender: TObject);
+procedure TfrmApp_Options_Dlg.tbRguiTinnR_ProportionChange(Sender: TObject);
 begin
   lblTinnRExpansion.Caption:= 'Proportion: ' +
                               intToStr(tbRguiTinnR_Proportion.Position) +
@@ -1227,7 +1227,7 @@ begin
   rgRguiTinnR_DispositionClick(nil);
 end;
 
-procedure TfrmAppOptionsDlg.tbTransparencyPosChange(Sender: TObject);
+procedure TfrmApp_Options_Dlg.tbTransparencyPosChange(Sender: TObject);
 begin
   lbTransparency.Caption:= IntToStr(tbTransparency.Position) +
                            ' %';
@@ -1235,17 +1235,17 @@ begin
   AlphaBlendValue:= 255 - (255 * tbTransparency.Position) Div 100;
 end;
 
-procedure TfrmAppOptionsDlg.tvRAVailableClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.tvRAVailableClick(Sender: TObject);
 begin
   pRAvailable_Set;
 end;
 
-procedure TfrmAppOptionsDlg.tvRAVailableKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfrmApp_Options_Dlg.tvRAVailableKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   pRAvailable_Set;
 end;
 
-procedure TfrmAppOptionsDlg.rdgRArchitectureClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.rdgRArchitectureClick(Sender: TObject);
 var
   sPathR,
     sPathRterm,
@@ -1290,7 +1290,7 @@ begin
   edPathRgui.Text := sPathRgui;
 end;
 
-procedure TfrmAppOptionsDlg.rdgRUseLatestClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.rdgRUseLatestClick(Sender: TObject);
 begin
   // To avoid the function GetRegistryValue runs many times
   if (not bFormVisible) then Exit;
@@ -1311,12 +1311,12 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.rdgRtermTypeClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.rdgRtermTypeClick(Sender: TObject);
 begin
   rdgRTermDisposition.Enabled:= rdgRTermType.ItemIndex = 0;
 end;
 
-procedure TfrmAppOptionsDlg.rgRguiTinnR_DispositionClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.rgRguiTinnR_DispositionClick(Sender: TObject);
 begin
   //0: Tinn-R on top
   //1: Tinn-R on bottom
@@ -1342,22 +1342,22 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbtRGuiDefaultClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtRGuiDefaultClick(Sender: TObject);
 begin
   edParRGui.Text:= '--sdi';
 end;
 
-procedure TfrmAppOptionsDlg.bbtRTermDefaultClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtRTermDefaultClick(Sender: TObject);
 begin
   edParRTerm.Text:= '--ess';
 end;
 
-procedure TfrmAppOptionsDlg.cbRResourcesVisibleClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.cbRResourcesVisibleClick(Sender: TObject);
 begin
   //tbsR.TabVisible:= cbRResourcesVisible.Checked;
 end;
 
-procedure TfrmAppOptionsDlg.cbCommandsExit(Sender: TObject);
+procedure TfrmApp_Options_Dlg.cbCommandsExit(Sender: TObject);
 var
   iTmp: Integer;
 
@@ -1370,7 +1370,7 @@ begin
   else cbCommands.ItemIndex:= iTmp;  // Need to force it incase they just typed something in
 end;
 
-procedure TfrmAppOptionsDlg.cbCommandsKeyPress(Sender: TObject;
+procedure TfrmApp_Options_Dlg.cbCommandsKeyPress(Sender: TObject;
                                              var Key: Char);
 var
   WorkStr: String;
@@ -1397,14 +1397,14 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.cbCommandsKeyUp(Sender: TObject;
+procedure TfrmApp_Options_Dlg.cbCommandsKeyUp(Sender: TObject;
                                           var Key: Word;
                                           Shift: TShiftState);
 begin
   if (Key = SYNEDIT_RETURN) then btnUpdateKey.Click;
 end;
 
-procedure TfrmAppOptionsDlg.cbNotificationClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.cbNotificationClick(Sender: TObject);
 begin
   with cbNotification do begin
     if Checked then
@@ -1418,27 +1418,27 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.bbtPDFParSingleClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtPDFParSingleClick(Sender: TObject);
 begin
   edParPDFSingle.Text:= 'pdflatex -c-style-errors'
 end;
 
-procedure TfrmAppOptionsDlg.bbtPDFParBibtexClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtPDFParBibtexClick(Sender: TObject);
 begin
   edParPDFBibtex.Text:= 'bibtex'
 end;
 
-procedure TfrmAppOptionsDlg.bbtDVIParametersSingleClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtDVIParametersSingleClick(Sender: TObject);
 begin
   edParDVISingle.Text:= 'latex -c-style-errors --src-specials'
 end;
 
-procedure TfrmAppOptionsDlg.bbtDVIParametersBibtexClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.bbtDVIParametersBibtexClick(Sender: TObject);
 begin
   edParDVIBibtex.Text:= 'bibtex --src-specials'
 end;
 
-procedure TfrmAppOptionsDlg.sGutterColorMouseUp(Sender: TObject;
+procedure TfrmApp_Options_Dlg.sGutterColorMouseUp(Sender: TObject;
                                              Button: TMouseButton;
                                              Shift: TShiftState;
                                              X,
@@ -1450,7 +1450,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.shBGApplicationMouseUp(Sender: TObject;
+procedure TfrmApp_Options_Dlg.shBGApplicationMouseUp(Sender: TObject;
                                                 Button: TMouseButton;
                                                 Shift: TShiftState;
                                                 X,
@@ -1475,7 +1475,7 @@ begin
     Brush.Color:= clTemp;
 end;
 
-procedure TfrmAppOptionsDlg.shFGApplicationMouseUp(Sender: TObject;
+procedure TfrmApp_Options_Dlg.shFGApplicationMouseUp(Sender: TObject;
                                                 Button: TMouseButton;
                                                 Shift: TShiftState;
                                                 X,
@@ -1500,7 +1500,7 @@ begin
     Font.Color:= clTemp;
 end;
 
-procedure TfrmAppOptionsDlg.sRightEdgeColorMouseUp(Sender: TObject;
+procedure TfrmApp_Options_Dlg.sRightEdgeColorMouseUp(Sender: TObject;
                                                 Button: TMouseButton;
                                                 Shift: TShiftState;
                                                 X,
@@ -1512,7 +1512,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.shBGTabSelectedMouseUp(Sender: TObject;
+procedure TfrmApp_Options_Dlg.shBGTabSelectedMouseUp(Sender: TObject;
                                                 Button: TMouseButton;
                                                 Shift: TShiftState;
                                                 X,
@@ -1531,7 +1531,7 @@ begin
     Brush.Color:= clTemp;
 end;
 
-procedure TfrmAppOptionsDlg.rdgRTCPIPTypeClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.rdgRTCPIPTypeClick(Sender: TObject);
 begin
   if (rdgRTCPIPType.ItemIndex = 0) then begin
     pgIP.ActivePage:= tbsIPLocal;
@@ -1545,53 +1545,53 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.tbDelayPosChange(Sender: TObject);
+procedure TfrmApp_Options_Dlg.tbDelayPosChange(Sender: TObject);
 begin
   lbDelay.Caption:= IntToStr(tbDelay.Position) +
                     ' ms';
 end;
 
-procedure TfrmAppOptionsDlg.lblURLDeplateClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.lblURLDeplateClick(Sender: TObject);
 begin
   pOpen_Url('http://deplate.sourceforge.net/index.php');
 end;
 
-procedure TfrmAppOptionsDlg.lblURLDeplateMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLDeplateMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 begin
   lblURLDeplate.Cursor:= crHandPoint;
 end;
 
-procedure TfrmAppOptionsDlg.lblURLPandocClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.lblURLPandocClick(Sender: TObject);
 begin
   pOpen_Url('http://pandoc.org');
 end;
 
-procedure TfrmAppOptionsDlg.lblURLPandocMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLPandocMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 begin
   lblURLPandoc.Cursor:= crHandPoint;
 end;
 
-procedure TfrmAppOptionsDlg.lblURLRClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.lblURLRClick(Sender: TObject);
 begin
   pOpen_Url('http://www.r-project.org');
 end;
 
-procedure TfrmAppOptionsDlg.lblURLRMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLRMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 begin
   lblURLR.Cursor:= crHandPoint;
 end;
 
-procedure TfrmAppOptionsDlg.lblURLTxt2tagsClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.lblURLTxt2tagsClick(Sender: TObject);
 begin
   pOpen_Url('http://txt2tags.org');
 end;
 
-procedure TfrmAppOptionsDlg.lblURLTxt2tagsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLTxt2tagsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 begin
   lblURLTxt2tags.Cursor:= crHandPoint;
 end;
 
-procedure TfrmAppOptionsDlg.lvKeystrokesChanging(Sender: TObject;
+procedure TfrmApp_Options_Dlg.lvKeystrokesChanging(Sender: TObject;
                                               Item: TListItem;
                                               Change: TItemChange;
                                               var AllowChange: Boolean);
@@ -1606,7 +1606,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.lvKeystrokesSelectItem(Sender: TObject;
+procedure TfrmApp_Options_Dlg.lvKeystrokesSelectItem(Sender: TObject;
                                                 Item: TListItem;
                                                 Selected: Boolean);
 begin
@@ -1620,7 +1620,7 @@ begin
   liOldSelected:= Item;
 end;
 
-procedure TfrmAppOptionsDlg.pEditStrCallback(const S: string);
+procedure TfrmApp_Options_Dlg.pEditStrCallback(const S: string);
 begin
   //Add the Item
   if bExtended then cbCommands.Items.AddObject(S,
@@ -1629,7 +1629,7 @@ begin
                                                TObject(ConvertCodeStringToCommand(S)));
 end;
 
-procedure TfrmAppOptionsDlg.pStatus_Editor(var coTmp: TSynEditorOC);
+procedure TfrmApp_Options_Dlg.pStatus_Editor(var coTmp: TSynEditorOC);
 var
   i    : integer;
   liTmp: TListItem;
@@ -1716,7 +1716,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.pNewStatus_Editor(var coTmp: TSynEditorOC);
+procedure TfrmApp_Options_Dlg.pNewStatus_Editor(var coTmp: TSynEditorOC);
 var
   vOptions: TSynEditorOptions;
 
@@ -1837,7 +1837,7 @@ begin
 *)
 end;
 
-procedure TfrmAppOptionsDlg.imGeneralMouseDown(Sender: TObject;
+procedure TfrmApp_Options_Dlg.imGeneralMouseDown(Sender: TObject;
                                             Button: TMouseButton;
                                             Shift: TShiftState;
                                             X,
@@ -1854,7 +1854,7 @@ begin
   btnRightEdge.BevelOuter:= bvNone;
 end;
 
-procedure TfrmAppOptionsDlg.imGutterMouseDown(Sender: TObject;
+procedure TfrmApp_Options_Dlg.imGutterMouseDown(Sender: TObject;
                                            Button: TMouseButton;
                                            Shift: TShiftState;
                                            X,
@@ -1871,7 +1871,7 @@ begin
   btnGutterColor.BevelOuter:= bvNone;
 end;
 
-procedure TfrmAppOptionsDlg.pFillInKeystrokeInfo(seKeystroke: TSynEditKeystroke;
+procedure TfrmApp_Options_Dlg.pFillInKeystrokeInfo(seKeystroke: TSynEditKeystroke;
                                               liTmp: TListItem);
 var
   sTmp: string;
@@ -1902,7 +1902,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.pmColorClick(Sender: TObject);
+procedure TfrmApp_Options_Dlg.pmColorClick(Sender: TObject);
 var
   C: TColor;
 
@@ -1913,7 +1913,7 @@ begin
   else if (cpFrom = cpRightEdge) then sRightEdgeColor.Brush.Color:= C;
 end;
 
-function TfrmAppOptionsDlg.fGetColor(Item: TMenuItem): TColor;
+function TfrmApp_Options_Dlg.fGetColor(Item: TMenuItem): TColor;
 begin
  if (Item.Tag = -1) or
     (Item.Tag > 24) then Result:= clNone
@@ -1921,7 +1921,7 @@ begin
 end;
 
 //J.C.Faria: perhaps it is not the best option... but it works!
-procedure TfrmAppOptionsDlg.pShowAdjustedFont(lbl: TLabel;
+procedure TfrmApp_Options_Dlg.pShowAdjustedFont(lbl: TLabel;
                                            pan: TPanel);
 var
   x: integer;
@@ -1939,7 +1939,7 @@ begin
   end;
 end;
 
-procedure TfrmAppOptionsDlg.pRAvailable_Set;
+procedure TfrmApp_Options_Dlg.pRAvailable_Set;
 var
   sPath: string;
 
@@ -2001,7 +2001,7 @@ begin
     end;
 end;
 
-procedure TfrmAppOptionsDlg.pRAvailable(var slRAvailable: TStringList);
+procedure TfrmApp_Options_Dlg.pRAvailable(var slRAvailable: TStringList);
 var
   sTmp: string;
 

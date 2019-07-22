@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{fcaa4792-2d68-496b-b932-0330d11ee09b}</ProjectGuid>
     <MainSource>Tinn_R.dpr</MainSource>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
     <DCC_DependencyCheckOutputName>..\..\bin\Tinn_R.exe</DCC_DependencyCheckOutputName>
@@ -104,7 +104,7 @@
       <Form>frmAbout</Form>
     </DCCReference>
     <DCCReference Include="ufrmAppOptions.pas">
-      <Form>frmAppOptionsDlg</Form>
+      <Form>frmApp_Options_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmColors.pas">
       <Form>frmColors</Form>
@@ -119,7 +119,7 @@
       <Form>frmConfigurePrint</Form>
     </DCCReference>
     <DCCReference Include="ufrmConfirmReplace.pas">
-      <Form>frmConfirmReplaceDlg</Form>
+      <Form>frmConfirm_Replace_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmCount.pas">
       <Form>frmCount</Form>
@@ -170,10 +170,16 @@
       <Form>frmSearchDlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmSearchInFiles.pas">
-      <Form>frmSearchInFilesDlg</Form>
+      <Form>frmSearch_InFiles_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmShortcuts.pas">
       <Form>frmShortcuts</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmSH_Manager.pas">
+      <Form>frmSH_Manager_Dlg</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmSH_map.pas">
+      <Form>frmSH_Map_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmSplash.pas">
       <Form>frmSplash</Form>

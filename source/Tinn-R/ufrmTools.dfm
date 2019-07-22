@@ -4312,16 +4312,12 @@ object frmTools: TfrmTools
     object tbsDatabase: TTabSheet
       Caption = 'Database'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
         Width = 380
         Height = 537
-        ActivePage = tbsCompletion
+        ActivePage = tbsShortcuts
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4364,10 +4360,6 @@ object frmTools: TfrmTools
         object tbsShortcuts: TTabSheet
           Caption = 'Shortcuts'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splShortcuts: TSplitter
             Left = 0
             Top = 113
@@ -4563,10 +4555,6 @@ object frmTools: TfrmTools
         end
         object tbsCompletion: TTabSheet
           Caption = 'Completion'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splCompletion: TSplitter
             Left = 0
             Top = 113
@@ -5315,7 +5303,7 @@ object frmTools: TfrmTools
                 Anchors = [akLeft, akRight]
                 Ctl3D = False
                 DropDownCount = 25
-                ItemHeight = 13
+                ItemHeight = 0
                 ItemIndex = 0
                 ParentCtl3D = False
                 ParentShowHint = False
@@ -5461,10 +5449,6 @@ object frmTools: TfrmTools
         end
         object tbsRCard: TTabSheet
           Caption = 'Card'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splRCard: TSplitter
             Left = 0
             Top = 113
@@ -5668,10 +5652,6 @@ object frmTools: TfrmTools
         object tbsRMirrors: TTabSheet
           Caption = 'Mirrors'
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Splitter1: TSplitter
             Left = 0
             Top = 113
@@ -5821,6 +5801,7 @@ object frmTools: TfrmTools
                 item
                   Expanded = False
                   FieldName = 'City'
+                  Width = 64
                   Visible = True
                 end>
             end

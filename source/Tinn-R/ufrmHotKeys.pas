@@ -160,7 +160,7 @@ begin
     ajavHK_S[i]:= TJvApplicationHotKey.Create(Self);
     with ajavHK_S[i] do begin
       HotKey  := TextToShortCut(sTmp);
-      Active  := bTinnRHotKeys;
+      Active  := bHotKeys_On;
       OnHotKey:= pDoHotKeyDefault;
     end;
   end;
@@ -174,7 +174,7 @@ begin
     ajavHK_C[i]:= TJvApplicationHotKey.Create(Self);
     with ajavHK_C[i] do begin
       HotKey  := TextToShortCut(sTmp);
-      Active  := bTinnRHotKeys;
+      Active  := bHotKeys_On;
       OnHotKey:= pDoHotKeyDefault;
     end;
   end;
@@ -204,7 +204,7 @@ begin
     ajavHK_CU1[i]:= TJvApplicationHotKey.Create(Self);
     with ajavHK_CU1[i] do begin
       HotKey  := TextToShortCut(sTmp);
-      Active  := bTinnRHotKeys;
+      Active  := bHotKeys_On;
       OnHotKey:= pDoHotKeyCustom;
     end;
   end;
@@ -218,7 +218,7 @@ begin
     ajavHK_CU2[i]:= TJvApplicationHotKey.Create(Self);
     with ajavHK_CU2[i] do begin
       HotKey  := TextToShortCut(sTmp);
-      Active  := bTinnRHotKeys;
+      Active  := bHotKeys_On;
       OnHotKey:= pDoHotKeyCustom;
     end;
   end;
@@ -797,9 +797,9 @@ procedure TfrmHotKeys.rdgTinnRHotKeysClick(Sender: TObject);
 begin
   pClearWarnings;
   with frmMain do begin
-    if (rdgTinnRHotKeys.ItemIndex = 0) then bTinnRHotKeys:= True
-                                       else bTinnRHotKeys:= False;
-    pSetHotkeys(bTinnRHotKeys);
+    if (rdgTinnRHotKeys.ItemIndex = 0) then bHotKeys_On:= True
+                                       else bHotKeys_On:= False;
+    pSetHotkeys(bHotKeys_On);
   end;
 end;
 
@@ -811,8 +811,8 @@ begin
   pClearWarnings;
 
   with rdgTinnRHotKeys do
-    if (frmMain.bTinnRHotKeys= True) then (ItemIndex:= 0)
-                                     else (ItemIndex:= 1);
+    if (frmMain.bHotKeys_On= True) then (ItemIndex:= 0)
+                                   else (ItemIndex:= 1);
 
   case pgHotkeys.TabIndex of
     // Send

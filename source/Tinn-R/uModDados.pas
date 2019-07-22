@@ -157,7 +157,8 @@ uses
   ufrmHotKeys,
   ufrmComments,
   trUtils,
-  ufrmRmirrors;
+  ufrmRmirrors,
+  ufrmSH_map;
 
 {$R *.DFM}
 
@@ -651,19 +652,31 @@ begin
   if Assigned(frmShortcuts) then
     with frmShortcuts do begin
       if bLocating then Exit;
-      jvhkShortcut.HotKey:= TextToShortcut(cdShortcuts.FieldByName('Shortcut').Value);
+      eKeyShort.HotKey:= TextToShortcut(cdShortcuts.FieldByName('Shortcut').Value);
       imgShortcut.Picture.Bitmap:= nil;
       frmMain.imlTinnR.GetBitmap(cdShortcuts.FieldByName('Image').Value,
-                                     imgShortcut.Picture.Bitmap);
+                                 imgShortcut.Picture.Bitmap);
       if Visible then stbShortcuts.Panels[0].Text:= 'Browse mode';
     end;
+
+  with frmMain do
+  if Assigned(dlgSH_Map) then
+    with dlgSH_Map do begin
+      //if bLocating then Exit;
+      //eKeyShort.HotKey:= TextToShortcut(cdShortcuts.FieldByName('Shortcut').Value);
+      imgShortcut.Picture.Bitmap:= nil;
+      imlTinnR.GetBitmap(cdShortcuts.FieldByName('Image').Value,
+                         imgShortcut.Picture.Bitmap);
+      if Visible then stbShortcuts.Panels[0].Text:= 'Browse mode';
+    end;
+
   if Assigned(frmHotkeys) then
     with frmHotkeys do
       if bLocating then Exit;
   if (cdShortcuts.State <> dsBrowse) then Exit;
   frmTools.imgShortcut.Picture.Bitmap:= nil;
   frmMain.imlTinnR.GetBitmap(cdShortcuts.FieldByName('Image').Value,
-                                 frmTools.imgShortcut.Picture.Bitmap);
+                             frmTools.imgShortcut.Picture.Bitmap);
 end;
 
 procedure TmodDados.cdShortcutsBeforeEdit(DataSet: TDataSet);
@@ -878,7 +891,7 @@ begin
           sHint    := Hint;
           sShortcut:= ShortCutToText(Shortcut);
           iImage   := ImageIndex;
-          if (sShortCut = '') then sShortCut:= 'None';
+//          if (sShortCut = '') then sShortCut:= 'None';
         end;
         Update_Dataset(i,
                        sGroup,

@@ -50,7 +50,7 @@ uses
   StdCtrls, Buttons, JvBaseDlg, JvBrowseFolder;
 
 type
-  TfrmSearchInFilesDlg = class(TForm)
+  TfrmSearch_InFiles_Dlg = class(TForm)
     //bffDSearchInFiles: TrmBrowseForFolder;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
@@ -126,7 +126,7 @@ type
   end;
 
 var
-  frmSearchInFilesDlg: TfrmSearchInFilesDlg;
+  frmSearch_InFiles_Dlg: TfrmSearch_InFiles_Dlg;
 
 implementation
 
@@ -135,22 +135,22 @@ uses ufrmMain;
 {$R *.DFM}
 
 // Getters
-function TfrmSearchInFilesDlg.fGetSearchCaseSensitive: boolean;
+function TfrmSearch_InFiles_Dlg.fGetSearchCaseSensitive: boolean;
 begin
   Result:= cbSearchCaseSensitive.Checked;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchRegularExpression: boolean;
+function TfrmSearch_InFiles_Dlg.fGetSearchRegularExpression: boolean;
 begin
   Result:= cbRegularExpression.Checked;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchText: string;
+function TfrmSearch_InFiles_Dlg.fGetSearchText: string;
 begin
   Result:= cbSearchText.Text;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchTextHistory: string;
+function TfrmSearch_InFiles_Dlg.fGetSearchTextHistory: string;
 var
   i: integer;
 
@@ -165,22 +165,22 @@ begin
   end;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchWholeWords: boolean;
+function TfrmSearch_InFiles_Dlg.fGetSearchWholeWords: boolean;
 begin
   Result:= cbSearchWholeWords.Checked;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchOpenFiles: boolean;
+function TfrmSearch_InFiles_Dlg.fGetSearchOpenFiles: boolean;
 begin
   Result:= cbOpenFiles.Checked;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchDirectory: boolean;
+function TfrmSearch_InFiles_Dlg.fGetSearchDirectory: boolean;
 begin
   Result:= cbDirectories.Checked;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchDirHistory: string;
+function TfrmSearch_InFiles_Dlg.fGetSearchDirHistory: string;
 var
   i: integer;
 
@@ -195,7 +195,7 @@ begin
   end;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchFileMaskHistory: string;
+function TfrmSearch_InFiles_Dlg.fGetSearchFileMaskHistory: string;
 var
   i: integer;
 
@@ -210,85 +210,85 @@ begin
   end;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchInSub: boolean;
+function TfrmSearch_InFiles_Dlg.fGetSearchInSub: boolean;
 begin
   Result:= cbSubdirectories.Checked;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchDirectoryText: string;
+function TfrmSearch_InFiles_Dlg.fGetSearchDirectoryText: string;
 begin
   Result:= comboDirectories.Text;
 end;
 
-function TfrmSearchInFilesDlg.fGetSearchFileMask: string;
+function TfrmSearch_InFiles_Dlg.fGetSearchFileMask: string;
 begin
   Result:= comboFileMasks.Text;
 end;
 
 // Setters
-procedure TfrmSearchInFilesDlg.pSetSearchCaseSensitive(Value: boolean);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchCaseSensitive(Value: boolean);
 begin
   cbSearchCaseSensitive.Checked:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchText(Value: string);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchText(Value: string);
 begin
   cbSearchText.Text:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchTextHistory(Value: string);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchTextHistory(Value: string);
 begin
   cbSearchText.Items.Text:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchWholeWords(Value: boolean);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchWholeWords(Value: boolean);
 begin
   cbSearchWholeWords.Checked:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchRegularExpression(
+procedure TfrmSearch_InFiles_Dlg.pSetSearchRegularExpression(
   const Value: boolean);
 begin
   cbRegularExpression.Checked:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchOpenFiles(const Value: boolean);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchOpenFiles(const Value: boolean);
 begin
   cbOpenFiles.Checked:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchDirectory(const Value: boolean);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchDirectory(const Value: boolean);
 begin
   cbDirectories.Checked:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchDirHistory(Value: string);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchDirHistory(Value: string);
 begin
   comboDirectories.Items.Text:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchFileMask(Value: string);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchFileMask(Value: string);
 begin
   comboFileMasks.Items.Text:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchInSub(const Value: boolean);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchInSub(const Value: boolean);
 begin
   cbSubdirectories.Checked:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchDirectoryText(const Value: string);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchDirectoryText(const Value: string);
 begin
   comboDirectories.Text:= Value;
 end;
 
-procedure TfrmSearchInFilesDlg.pSetSearchFileMaskHistory(Value: string);
+procedure TfrmSearch_InFiles_Dlg.pSetSearchFileMaskHistory(Value: string);
 begin
   comboFileMasks.Items.Text:= Value;
 end;
 
 // Form procedure
-procedure TfrmSearchInFilesDlg.FormCloseQuery(Sender: TObject;
+procedure TfrmSearch_InFiles_Dlg.FormCloseQuery(Sender: TObject;
                                            var CanClose: Boolean);
 var
   sTmp: string;
@@ -350,12 +350,12 @@ begin
   end
 end;
 
-procedure TfrmSearchInFilesDlg.FormShow(Sender: TObject);
+procedure TfrmSearch_InFiles_Dlg.FormShow(Sender: TObject);
 begin
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
 end;
 
-procedure TfrmSearchInFilesDlg.sbtnDirectoryClick(Sender: TObject);
+procedure TfrmSearch_InFiles_Dlg.sbtnDirectoryClick(Sender: TObject);
 begin
   with JvBrowseForFolder do begin
     Title:= 'Choose below a directory for search';
@@ -365,7 +365,7 @@ begin
   end;
 end;
 
-procedure TfrmSearchInFilesDlg.cbDirectoriesClick(Sender: TObject);
+procedure TfrmSearch_InFiles_Dlg.cbDirectoriesClick(Sender: TObject);
 var
   bVis: boolean;
 
@@ -379,7 +379,7 @@ begin
   lblFileMask.Enabled     := bVis;
 end;
 
-procedure TfrmSearchInFilesDlg.FormActivate(Sender: TObject);
+procedure TfrmSearch_InFiles_Dlg.FormActivate(Sender: TObject);
 begin
   if comboDirectories.Enabled then
     if (comboDirectories.Items.Count > 0) then comboDirectories.ItemIndex:= 0;

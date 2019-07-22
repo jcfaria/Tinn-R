@@ -22,6 +22,7 @@ object frmShortcuts: TfrmShortcuts
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -49,7 +50,7 @@ object frmShortcuts: TfrmShortcuts
       TabOrder = 0
     end
   end
-  object GroupBox1: TGroupBox
+  object gbKeystrokes: TGroupBox
     Left = 0
     Top = 0
     Width = 613
@@ -244,7 +245,7 @@ object frmShortcuts: TfrmShortcuts
       OnChange = edtGroupSearchChange
       OnEnter = edtGroupSearchEnter
     end
-    object jvhkShortcutSearch: TJvHotKey
+    object eKeyShortcut_Search: TJvHotKey
       Left = 463
       Top = 19
       Width = 140
@@ -253,14 +254,14 @@ object frmShortcuts: TfrmShortcuts
       HotKey = 0
       Modifiers = []
       TabOrder = 2
-      OnChange = jvhkShortcutSearchChange
-      OnEnter = jvhkShortcutSearchEnter
+      OnChange = eKeyShortcut_SearchChange
+      OnEnter = eKeyShortcut_SearchEnter
       BevelEdges = []
       BevelInner = bvNone
       BevelOuter = bvNone
       ParentColor = False
     end
-    object jvhkShortcut: TJvHotKey
+    object eKeyShort: TJvHotKey
       Left = 463
       Top = 37
       Width = 140
@@ -268,11 +269,11 @@ object frmShortcuts: TfrmShortcuts
       HotKey = 0
       Modifiers = []
       TabOrder = 5
-      OnEnter = jvhkShortcutEnter
+      OnEnter = eKeyShortEnter
       BevelEdges = []
       ParentColor = False
-      OnKeyDown = jvhkShortcutKeyDown
-      OnKeyUp = jvhkShortcutKeyUp
+      OnKeyDown = eKeyShortKeyDown
+      OnKeyUp = eKeyShortKeyUp
     end
   end
   object stbShortcuts: TStatusBar

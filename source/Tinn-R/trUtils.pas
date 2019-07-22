@@ -87,12 +87,13 @@ type
   function fOpen_CmdLine(const CmdLine: string; wWindowState: Word): boolean;
   function fPath_Browser: String;
   function fPathRExists(var sPathR: string): boolean;  // Portable
-  function fRegEx(sSubject, sRegEx: string; bReplace: boolean = False; sReplacement: string = ''): string;
+  function fRegEx(sSubject, sRegEx: string; bReplace: boolean = False; sReplacement: string = ''; bReplace_All: boolean = False; opOptions: TPerlRegExOptions = []): string;
   function fRegEx_Multiline(sSubject, sRegEx: string): string;
   function fRemove_FileExtension(sFile: string): string;
   function fRunFile(const sName: string = ''; const sPar1: string = '';  const sPar2: string = ''): Integer;
   function fSanitize_FileName(const sInputString: string): string;
   function fSave_PriorClipboard_Text: boolean;
+  function fSingleLine(sTmp: string): boolean;
   function fSort_Date(List: TStringList; Index1, Index2: Integer): Integer;
   function fSort_Integer(List: TStringList; Index1, Index2: Integer): Integer;
   function fStringToCase_Select(sSelector : string; aCaseList: array of string): Integer;
@@ -100,6 +101,7 @@ type
   function fStrip_NonConforming(const sTmp: string; const ValidChars: TCharSet): string;
   function fStrip_Path(sFileName: string): string;
   function fStrippedOf_NonAscii(const s: string): string;
+
   procedure pCaptureConsole_Output(const ACommand, AParameters: String; AMemo: TMemo);
   procedure pDelete_Dir(sDir: string);
   procedure pDelete_FilesOfPath(path: string);
@@ -111,6 +113,8 @@ type
   procedure pOpen_Url(const sURL: string);
   procedure pOpen_UrlByIEShell(const sURL: string);
   procedure pSend_Message(msg: HINST);
+  procedure pRemoveLine_Commented(var sTmp: string);
+  procedure pRemoveLine_Empty(var sTmp: string);
   procedure pRestore_PriorClipboard_Text;
   procedure pSet_EnvVariable(Name, Value: string; User: boolean = True);
   procedure pString_Split(const cDelimiter: Char; sInput: string; const tsStrings: TStrings);
@@ -1503,19 +1507,23 @@ end;
 function fRegEx(sSubject,
                 sRegEx: string;
                 bReplace: boolean = False;
-                sReplacement: string = ''): string;
+                sReplacement: string = '';
+                bReplace_All: boolean = False;
+                opOptions: TPerlRegExOptions = []): string;
 begin
   try
     preRegEx:= TPerlRegEx.Create;
     try
       with preRegEx do begin
+        Options:= opOptions;
         Subject:= sSubject;
         RegEx:= sRegEx;
         // Replacement
         if bReplace then begin
           Replacement:= sReplacement;
           if Match then begin
-            Replace;
+            if bReplace_All then ReplaceAll
+                            else Replace;
             Result:= Subject;
           end
           else Result:= ''
@@ -1570,6 +1578,7 @@ begin
     FreeAndNil(preRegEx);
   end;
 end;
+
 
 // Old from Tinn-R 2.4.1.7
 function fDataFolder: string;
@@ -2074,6 +2083,29 @@ begin
       FreeAndNil(slDrives);
     end;
   end;
+end;
+
+procedure pRemoveLine_Commented(var sTmp: string);
+begin
+  sTmp:= fRegEx_Multiline(sTmp,
+                          //'^[ \{\}\(\)"''''_a-zA-Z0-9,.=-].*' // Get all lines not started by # (R is a language quite promiscuous!!!)
+                          //https://regex101.com/r/0OADu3/1
+                          '^((?!^#)).*$');                      // \o/
+end;
+
+procedure pRemoveLine_Empty(var sTmp: string);
+begin
+  sTmp:= fRegEx_Multiline(sTmp,
+                          '.*$');  // \o/
+end;
+
+function fSingleLine(sTmp: string): boolean;
+begin
+  Result:= False;
+  if (Pos(#13#10,
+          sTmp) <=0) or
+     ((length(sTmp) - 1) = Pos(#13#10,
+                               sTmp)) then Result:= True;
 end;
 
 end.

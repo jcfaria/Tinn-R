@@ -101,7 +101,7 @@ object frmColors: TfrmColors
     Width = 75
     Height = 25
     Cancel = True
-    Caption = 'Cancel all'
+    Caption = 'Cancel'
     ModalResult = 2
     TabOrder = 1
     NumGlyphs = 2

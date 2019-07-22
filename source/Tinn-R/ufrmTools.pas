@@ -1399,7 +1399,7 @@ end;
 procedure TfrmTools.lbShortcutsClick(Sender: TObject);
 begin
   frmMain.iShortcutsFilter:= lbShortcuts.ItemIndex;
-  with ModDados.cdShortcuts do begin
+  with ModDados. cdShortcuts do begin
     Filter  := 'Group = ' +
                QuotedStr(lbShortcuts.Items.Strings[frmMain.iShortcutsFilter]);
     Filtered:= True;

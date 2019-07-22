@@ -70,7 +70,7 @@ type
     procedure CenterForm;
 
   public
-    constructor create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
   end;
 
   TReplaceForm = class(TForm)
@@ -85,7 +85,7 @@ type
     AllBtn: TButton;
     CancelBtn: TButton;
   public
-    constructor create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent); override;
   end;
 
 //------------------------------------------------------------------------------

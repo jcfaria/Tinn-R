@@ -1,4 +1,4 @@
-object frmSearchInFilesDlg: TfrmSearchInFilesDlg
+object frmSearch_InFiles_Dlg: TfrmSearch_InFiles_Dlg
   Left = 902
   Top = 173
   AlphaBlend = True

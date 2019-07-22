@@ -48,8 +48,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, ComCtrls, JvgPage, JvDockTree, JvDockControlForm,
-  JvComponentBase, SynEditTypes, SynEditKeyCmds, ExtCtrls, ConsoleIO,
-  ToolWin, TB2Item, TB2Dock, TB2Toolbar, ActnList;
+  JvComponentBase, SynEditTypes, SynEditKeyCmds, SynCompletionProposal,
+  ExtCtrls, ConsoleIO, ToolWin, TB2Item, TB2Dock, TB2Toolbar, ActnList,
+  PerlRegEx;
 
 type
   TfrmRterm = class(TForm)
@@ -166,7 +167,6 @@ type
     procedure pSetCursorRestriction;
     procedure psplRIOMoved(Sender: TObject);
     procedure pCtrl_Tab(bNext: boolean = True);
-    procedure pCR;
 
   public
     { Public declarations }
@@ -182,6 +182,7 @@ type
     sRDebugPrefix        : string;
     synLog2              : TSynEdit;
 
+    procedure pCR;
     procedure pRtermSplit(bSplitHorizontal: boolean = True);
   end;
 
@@ -812,92 +813,79 @@ begin
 end;
 
 procedure TfrmRterm.pCR;
-//const
-//  cOk = ['>',
-//         '+'];
-//
-//var
-//  sTmp,
-//    sToSend: string;
-//
-//begin
-//  with synIO do begin
-//    BeginUpdate;
-//    sTmp:= Trim(LineText);
-//    ExecuteCommand(ecEditorBottom,
-//                   #0,
-//                   nil);
-//    LineText:= sTmp;
-//    ExecuteCommand(ecEditorBottom,
-//                   #0,
-//                   nil);
-//    if (sTmp = '') then sTmp:= '> ';
-//    if (sTmp[1] in cOk) then Delete(sTmp,
-//                                    1,
-//                                    1);
-//    if (sTmp <> '') then RHistory.Add(Trim(sTmp));
-//    sToSend    := sTmp;
-//    bRterm_Sent:= True;
-//    bRterm_Plus:= False;
-//    frmMain.pDoSend(sToSend,
-//                    False);
-//    EndUpdate;
-//    Exit;
-//  end;
 
-//  with synIO do begin
-//    BeginUpdate;
-//
-//    ExecuteCommand(ecLineEnd,
-//                   #0,
-//                   nil);
-//
-//    sTmp:= Trim(LineText);
-//
-//    // https://regex101.com/r/kY6rL3/1
-//    //$re = '/(?<=(>|\+|:)).+/';
-//    //$str = '> sd(1:4)
-//    //xxx> sd
-//    //+ )
-//    //xxx yyy> sd
-//    //D(1)> sd (1:4)
-//    //D(24)> sd
-//    //> av <- aov(Sepal.Length ~ Species, data=iris)
-//    //> 2 -> x
-//    //> 4<3
-//    //> 3>4
-//    //
-//    //# a <- scan()
-//    //1: 1
-//    //2: 2 3 4
-//    //5:
-//    //';
-//    //
-//    //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
-//    //
-//    //// Print the entire match result
-//    //var_dump($matches);
-//
-//    // by J.C.Faria
-//    sTmp:= fRegEx(sTmp,
-//                  '(?<=(>|\+|:)).+',
-//                  False);
-//
-//    if (sTmp <> '') then RHistory.Add(Trim(sTmp));
-//
-//    sToSend:= Trim(sTmp);
-//
-//    bRterm_Sent:= True;
-//
-//    bRterm_Plus:= False;
-//
-//    frmMain.pDoSend(sToSend,
-//                    False);
-//
-//    EndUpdate;
-//  end;
+  procedure pSantize_Selection(var sTmp: string);
+  begin
+    // Search for lines starting by '> '
+    if (fRegEx(sTmp,
+               '^>[ ]+',
+               False,
+               '',
+               False,
+               [preMultiLine]) <> '') then
+      // Remove '> '
+      sTmp:= fRegEx(sTmp,
+                    '^>[ ]+',
+                    True,
+                    '',
+                    True,
+                    [preMultiLine]);
 
-// Get the user option (y/n/c) in the prompt message whem R is ready to quit
+    // Search for lines starting by '+ '
+    if (fRegEx(sTmp,
+               '^[+][ ]+',
+               False,
+               '',
+               False,
+               [preMultiLine]) <> '') then
+      // Remove '+ '
+      sTmp:= fRegEx(sTmp,
+                    '^[+][ ]+',
+                    True,
+                    '',
+                    True,
+                    [preMultiLine]);
+  end;
+
+  function fGetSelection(var bSingleLine: boolean): string;
+  var
+    sTmp,
+     sFilePath: string;
+
+  begin
+    Result:= EmptyStr;
+
+    with synIO do
+      sTmp:= SelText;
+
+    if not frmMain.bRSendAll then
+      pRemoveLine_Commented(sTmp);
+    pRemoveLine_Empty(sTmp);
+
+    // if selection is a single line and bRSmart
+    if frmMain.bRSmart and
+       fSingleLine(sTmp) then begin
+      bSingleLine:= True;
+
+      Result:= StringReplace(sTmp,
+                             #13#10,
+                             EmptyStr,
+                             [rfReplaceAll]);
+      Exit;
+    end;
+
+    pSantize_Selection(sTmp);
+    pRemoveLine_Empty(sTmp);
+
+    sFilePath:= frmMain.sPath_Tmp +
+                '\selection.r';
+
+    if fFile_Save_Fast(sFilePath,
+                       sTmp) then
+      Result:= '.paths[5]';
+  end;
+
+  // Get the user option (y/n/c) in the prompt message whem R is ready to quit
   function fCheckQuit(var sT: string): boolean;
   begin
     Result := False;
@@ -1024,7 +1012,12 @@ procedure TfrmRterm.pCR;
   end;  // procedure pProcessCR
 
 var
-  sTmp, sPre, sSend: string;
+  sTmp,
+    sPre,
+    sSend,
+    sToSend: string;
+
+  bSingleLine: boolean;    
 
 begin
   sTmp := '';
@@ -1036,8 +1029,25 @@ begin
     BeginUpdate;
 
     // User selection has priority
-    if SelAvail then
-      sTmp := Trim(SelText)
+    if SelAvail then begin
+      sToSend:= fGetSelection(bSingleLine);
+      if (sToSend = EmptyStr) then Exit;
+
+      if bSingleLine then
+        sTmp:= sToSend
+      else
+        if frmMain.bREcho then
+          sTmp:= 'source(' +
+                 sToSend +
+                 ', echo=TRUE' +
+                 ', max.deparse.length=' +
+                 IntToStr(frmMain.iMaxDeparseLength) +
+                 ')'
+        else
+          sTmp:= 'source(' +
+                 sToSend +
+                 ')';
+    end
     else
       sTmp := Trim(LineText);
 
@@ -1118,12 +1128,13 @@ const
 
 var
   iPos,
-   iPosX    : integer;
+   iPosX: integer;
+
   sTmp,
    sToSend,
-   sPrior,
-   sAfter,
-   sEfective: string;
+   sPrior: string;
+//   sAfter,
+//   sEfective: string;
 
 begin
   bIO_Keyed:= True;  // Some instruction was typed in the RTerm_IO!
@@ -1295,30 +1306,6 @@ begin
                       (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
                  end;
                end;
-
-//      VK_RETURN: with synIO do begin // CTRL+ENTER -> Send prior lines
-//                   BeginUpdate;
-//                   sTmp:= Trim(LineText);
-//                   ExecuteCommand(ecEditorBottom,
-//                                  #0,
-//                                  nil);
-//                   LineText:= sTmp;
-//                   ExecuteCommand(ecEditorBottom,
-//                                  #0,
-//                                  nil);
-//                   if (sTmp = '') then sTmp:= '> ';
-//                   if (sTmp[1] in cOk) then Delete(sTmp,
-//                                                   1,
-//                                                   1);
-//                   if (sTmp <> '') then RHistory.Add(Trim(sTmp));
-//                   sToSend    := sTmp;
-//                   bRterm_Sent:= True;
-//                   bRterm_Plus:= False;
-//                   frmMain.pDoSend(sToSend,
-//                                   False);
-//                   EndUpdate;
-//                   Exit;
-//                 end;
 
       VK_RETURN: pCR;
 
@@ -1926,3 +1913,113 @@ begin
 end;
 
 end.
+
+//      VK_RETURN: with synIO do begin // CTRL+ENTER -> Send prior lines
+//                   BeginUpdate;
+//                   sTmp:= Trim(LineText);
+//                   ExecuteCommand(ecEditorBottom,
+//                                  #0,
+//                                  nil);
+//                   LineText:= sTmp;
+//                   ExecuteCommand(ecEditorBottom,
+//                                  #0,
+//                                  nil);
+//                   if (sTmp = '') then sTmp:= '> ';
+//                   if (sTmp[1] in cOk) then Delete(sTmp,
+//                                                   1,
+//                                                   1);
+//                   if (sTmp <> '') then RHistory.Add(Trim(sTmp));
+//                   sToSend    := sTmp;
+//                   bRterm_Sent:= True;
+//                   bRterm_Plus:= False;
+//                   frmMain.pDoSend(sToSend,
+//                                   False);
+//                   EndUpdate;
+//                   Exit;
+//                 end;
+
+//const
+//  cOk = ['>',
+//         '+'];
+//
+//var
+//  sTmp,
+//    sToSend: string;
+//
+//begin
+//  with synIO do begin
+//    BeginUpdate;
+//    sTmp:= Trim(LineText);
+//    ExecuteCommand(ecEditorBottom,
+//                   #0,
+//                   nil);
+//    LineText:= sTmp;
+//    ExecuteCommand(ecEditorBottom,
+//                   #0,
+//                   nil);
+//    if (sTmp = '') then sTmp:= '> ';
+//    if (sTmp[1] in cOk) then Delete(sTmp,
+//                                    1,
+//                                    1);
+//    if (sTmp <> '') then RHistory.Add(Trim(sTmp));
+//    sToSend    := sTmp;
+//    bRterm_Sent:= True;
+//    bRterm_Plus:= False;
+//    frmMain.pDoSend(sToSend,
+//                    False);
+//    EndUpdate;
+//    Exit;
+//  end;
+
+//  with synIO do begin
+//    BeginUpdate;
+//
+//    ExecuteCommand(ecLineEnd,
+//                   #0,
+//                   nil);
+//
+//    sTmp:= Trim(LineText);
+//
+//    // https://regex101.com/r/kY6rL3/1
+//    //$re = '/(?<=(>|\+|:)).+/';
+//    //$str = '> sd(1:4)
+//    //xxx> sd
+//    //+ )
+//    //xxx yyy> sd
+//    //D(1)> sd (1:4)
+//    //D(24)> sd
+//    //> av <- aov(Sepal.Length ~ Species, data=iris)
+//    //> 2 -> x
+//    //> 4<3
+//    //> 3>4
+//    //
+//    //# a <- scan()
+//    //1: 1
+//    //2: 2 3 4
+//    //5:
+//    //';
+//    //
+//    //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+//    //
+//    //// Print the entire match result
+//    //var_dump($matches);
+//
+//    // by J.C.Faria
+//    sTmp:= fRegEx(sTmp,
+//                  '(?<=(>|\+|:)).+',
+//                  False);
+//
+//    if (sTmp <> '') then RHistory.Add(Trim(sTmp));
+//
+//    sToSend:= Trim(sTmp);
+//
+//    bRterm_Sent:= True;
+//
+//    bRterm_Plus:= False;
+//
+//    frmMain.pDoSend(sToSend,
+//                    False);
+//
+//    EndUpdate;
+//  end;
+
