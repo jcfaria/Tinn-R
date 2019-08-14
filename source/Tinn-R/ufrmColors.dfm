@@ -88,10 +88,9 @@ object frmColors: TfrmColors
     Top = 508
     Width = 75
     Height = 25
-    Caption = 'OK'
-    Default = True
+    Caption = 'O&K'
     ModalResult = 1
-    TabOrder = 0
+    TabOrder = 1
     OnClick = bbtOKClick
     NumGlyphs = 2
   end
@@ -101,9 +100,10 @@ object frmColors: TfrmColors
     Width = 75
     Height = 25
     Cancel = True
-    Caption = 'Cancel'
+    Caption = '&Cancel'
+    Default = True
     ModalResult = 2
-    TabOrder = 1
+    TabOrder = 0
     NumGlyphs = 2
   end
   object gpbHighlighters: TGroupBox

@@ -26,7 +26,7 @@ object frmAbout: TfrmAbout
     Top = 317
     Width = 75
     Height = 25
-    Caption = 'OK'
+    Caption = 'O&K'
     Default = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

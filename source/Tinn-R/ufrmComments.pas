@@ -128,7 +128,7 @@ begin
 
     if (modDados.cdComments.Locate('Language',
                                      Text,
-                                     [loPartialKey]) = True) then begin
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -153,7 +153,7 @@ begin
 
     if (modDados.cdComments.Locate('Line',
                                      Text,
-                                     [loPartialKey]) = True) then begin
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];

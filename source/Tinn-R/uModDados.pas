@@ -128,16 +128,19 @@ type
     slRmirrors_Countries: TStringList;  //Stores countries of R mirrors
     slShortcuts_Groups  : TStringList;  //Stores groups of Shortcuts
 
-    function fActionlistToDataset: boolean;
-    function fLoadFileState(sFile: string; var sMarks: string; var iTopLine: integer; var iCaretX: integer; var iCaretY: integer): boolean;
+    function fActionlist_To_Dataset: boolean;
+    function fLoad_FileState(sFile: string; var sMarks: string; var iTopLine: integer; var iCaretX: integer; var iCaretY: integer): boolean;
+    function fCheck_Hotkey_Use_App(sHotkey: string; var sBy: string; bHotkey_Clear: boolean = False): boolean;
     function fRmirrors_Update(sFile: string): boolean;
-    function fSaveFileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
-    procedure pCompletionGroupsFilter(Sender: TObject);
-    procedure pRcardGroupsFilter(Sender: TObject);
-    procedure pRmirrorsCountriesFilter(Sender: TObject);
-    procedure pSetCurrentHighlighter(sLanguage: string);
-    procedure pShortcutsGroupsFilter(Sender: TObject);
-    procedure pShortcutsValidation(sOldShortcutsFile, sNewShortcutsFile: string);
+    function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
+
+    procedure pCompletionGroups_Filter(Sender: TObject);
+    procedure pRcardGroups_Filter(Sender: TObject);
+    procedure pRmirrorsCountries_Filter(Sender: TObject);
+    procedure pSet_Current_Highlighter(sLanguage: string);
+    procedure pShortcutsGroups_Filter(Sender: TObject);
+    procedure pShortcuts_Validation(sOldShortcutsFile, sNewShortcutsFile: string);
+//    procedure mtest;
   end;
 
 var
@@ -158,13 +161,18 @@ uses
   ufrmComments,
   trUtils,
   ufrmRmirrors,
-  ufrmSH_map;
+  ufrmSKH_map;
 
 {$R *.DFM}
 
-procedure TmodDados.pSetCurrentHighlighter(sLanguage: string);
+//procedure TmodDados.mtest;
+//begin
+//  //To tests
+//end;
+
+procedure TmodDados.pSet_Current_Highlighter(sLanguage: string);
 begin
-  with modDados.cdComments do begin
+  with cdComments do begin
     DisableControls;
 
     Locate('Language',
@@ -175,11 +183,66 @@ begin
   end;
 end;
 
-function TmodDados.fSaveFileState(sFile,
-                                  sMarks: string;
-                                  iTopLine,
-                                  iCaretX,
-                                  iCaretY: integer): boolean;
+function TmodDados.fCheck_Hotkey_Use_App(sHotkey: string; var sBy: string; bHotkey_Clear: boolean = False): boolean;
+var
+  pTmp:  pointer;
+
+  bFiltered: boolean;
+
+  sTmp: string;
+
+begin
+  Result:= False;
+
+  case frmMain.dlgSKH_Map.pgSH.ActivePageIndex of
+    0: begin
+         with cdShortcuts do begin
+           pTmp:= GetBookmark;
+           DisableControls;
+           bFiltered:= Filtered;
+           if bFiltered then
+             Filtered:= False;
+
+           sTmp:= StringReplace(sHotkey,
+                                ' ',
+                                '',
+                                [rfReplaceAll]);
+
+           if (Locate('Shortcut',
+                      sTmp,
+                      []) = True) then begin
+             Result:= True;
+
+             sBy:= FieldValues['Group'] +
+                   ' | ' +
+                   FieldValues['Caption'] +
+                   ' | ' +
+                   FieldValues['Hint'];
+
+             if bHotkey_Clear then begin
+                Edit;
+                FieldByName('Shortcut').Value:= '';
+                Post;
+             end;
+           end; //if (Locate('Shortcut'...
+
+           Filtered:= bFiltered;
+
+           if BookmarkValid(pTmp) then
+             GoToBookmark(pTmp);
+           FreeBookmark(pTmp);
+
+           EnableControls;
+         end; //with cdShortcuts
+       end; //0: begin
+  end;
+end;
+
+function TmodDados.fSave_FileState(sFile,
+                                   sMarks: string;
+                                   iTopLine,
+                                   iCaretX,
+                                   iCaretY: integer): boolean;
 begin
   try
     with cdCache do begin
@@ -203,11 +266,11 @@ begin
   Result:= True
 end;
 
-function TmodDados.fLoadFileState(sFile: string;
-                                  var sMarks: string;
-                                  var iTopLine: integer;
-                                  var iCaretX: integer;
-                                  var iCaretY: integer): boolean;
+function TmodDados.fLoad_FileState(sFile: string;
+                                   var sMarks: string;
+                                   var iTopLine: integer;
+                                   var iCaretX: integer;
+                                   var iCaretY: integer): boolean;
 begin
   try
     with cdCache do begin
@@ -229,8 +292,8 @@ begin
   Result:= True
 end;
 
-procedure TmodDados.pShortcutsValidation(sOldShortcutsFile,
-                                         sNewShortcutsFile: string);
+procedure TmodDados.pShortcuts_Validation(sOldShortcutsFile,
+                                          sNewShortcutsFile: string);
 var
   cdOld,
    cdNew: TClientDataSet;
@@ -299,7 +362,7 @@ begin
   end;
 end;
 
-procedure TmodDados.pRcardGroupsFilter(Sender: TObject);
+procedure TmodDados.pRcardGroups_Filter(Sender: TObject);
 var
   i: integer;
 
@@ -323,7 +386,7 @@ begin
   end;
 end;
 
-procedure TmodDados.pCompletionGroupsFilter(Sender: TObject);
+procedure TmodDados.pCompletionGroups_Filter(Sender: TObject);
 var
   i: integer;
 
@@ -347,7 +410,7 @@ begin
   end;
 end;
 
-procedure TmodDados.pRmirrorsCountriesFilter(Sender: TObject);
+procedure TmodDados.pRmirrorsCountries_Filter(Sender: TObject);
 var
   i: integer;
 
@@ -374,7 +437,7 @@ begin
   end;
 end;
 
-procedure TmodDados.pShortcutsGroupsFilter(Sender: TObject);
+procedure TmodDados.pShortcutsGroups_Filter(Sender: TObject);
 var
   i: integer;
 
@@ -511,10 +574,10 @@ begin
     end;
   end;
 
-  pRcardGroupsFilter(self);
-  pCompletionGroupsFilter(self);
-  pRmirrorsCountriesFilter(self);
-  pShortcutsGroupsFilter(self);
+  pRcardGroups_Filter(self);
+  pCompletionGroups_Filter(self);
+  pRmirrorsCountries_Filter(self);
+  pShortcutsGroups_Filter(self);
 end;
 
 procedure TmodDados.DataModuleDestroy(Sender: TObject);
@@ -660,8 +723,8 @@ begin
     end;
 
   with frmMain do
-  if Assigned(dlgSH_Map) then
-    with dlgSH_Map do begin
+  if Assigned(dlgSKH_Map) then
+    with dlgSKH_Map do begin
       //if bLocating then Exit;
       //eKeyShort.HotKey:= TextToShortcut(cdShortcuts.FieldByName('Shortcut').Value);
       imgShortcut.Picture.Bitmap:= nil;
@@ -793,9 +856,9 @@ begin
   cdRcard.EnableControls;
 end;
 
-function TmodDados.fActionlistToDataset: boolean;
+function TmodDados.fActionlist_To_Dataset: boolean;
 
-  procedure ClientDatasetStructure(cdTmp: TClientDataset);
+  procedure pClientDataset_Structure(cdTmp: TClientDataset);
   begin
     with cdTmp do begin
       with FieldDefs.AddFieldDef do begin
@@ -855,13 +918,13 @@ var
 
   aTmp : TAction;
   cdTmp: TClientDataSet;
-  
-  procedure Update_Dataset(i: integer;
-                           sGroup,
-                           sCaption,
-                           sHint,
-                           sShortcut: string;
-                           iImage: integer);
+
+  procedure pUpdate_Dataset(i: integer;
+                            sGroup,
+                            sCaption,
+                            sHint,
+                            sShortcut: string;
+                            iImage: integer);
   begin
     with cdTmp do begin
       Append;
@@ -881,7 +944,7 @@ begin
   try
     try
       cdTmp:= TClientDataSet.Create(Self);
-      ClientDatasetStructure(cdTmp);
+      pClientDataset_Structure(cdTmp);
 
       for i:= 0 to frmMain.alMain.ActionCount -1 do begin
         aTmp  := TAction(frmMain.alMain.Actions[i]);
@@ -893,12 +956,12 @@ begin
           iImage   := ImageIndex;
 //          if (sShortCut = '') then sShortCut:= 'None';
         end;
-        Update_Dataset(i,
-                       sGroup,
-                       sCaption,
-                       sHint,
-                       sShortcut,
-                       iImage);
+        pUpdate_Dataset(i,
+                        sGroup,
+                        sCaption,
+                        sHint,
+                        sShortcut,
+                        iImage);
       end;
       frmMain.alMain.State:= asNormal;
       
@@ -917,7 +980,7 @@ end;
 
 function TmodDados.fRmirrors_Update(sFile: string): boolean;
 
-  procedure ClientDatasetStructure(cdTmp: TClientDataset);
+  procedure pClientDataset_Structure(cdTmp: TClientDataset);
   begin
     with cdTmp do begin
       with FieldDefs.AddFieldDef do begin
@@ -980,7 +1043,7 @@ begin
   try
     try
       cdTmp:= TClientDataSet.Create(Self);
-      ClientDatasetStructure(cdTmp);
+      pClientDataset_Structure(cdTmp);
 
       slTmp1:= TStringList.Create;
       slTmp2:= TStringList.Create;

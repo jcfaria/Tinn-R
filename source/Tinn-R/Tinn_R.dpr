@@ -114,8 +114,8 @@ uses
   ufrmTools in 'ufrmTools.pas' {frmTools},
   ufrmUpdater in 'ufrmUpdater.pas' {frmUpdater},
   uModDados in 'uModDados.pas' {modDados: TDataModule},
-  ufrmSH_map in 'ufrmSH_map.pas' {frmSH_Map_Dlg},
-  ufrmSH_Manager in 'ufrmSH_Manager.pas' {frmSH_Manager_Dlg};
+  ufrmSKH_map in 'ufrmSKH_map.pas' {frmSKH_Map_Dlg},
+  ufrmSKH_Manager in 'ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg};
 
 {$R Tinn_R.KLR}
 {$R *.RES}

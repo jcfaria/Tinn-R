@@ -18,25 +18,25 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
   PixelsPerInch = 96
   TextHeight = 13
   object bbtOK: TBitBtn
-    Left = 405
+    Left = 401
     Top = 494
     Width = 70
     Height = 25
-    Caption = 'OK'
-    Default = True
+    Caption = 'O&K'
     ModalResult = 1
-    TabOrder = 0
+    TabOrder = 1
     NumGlyphs = 2
   end
   object bbtCancel: TBitBtn
-    Left = 474
+    Left = 470
     Top = 494
     Width = 70
     Height = 25
     Cancel = True
-    Caption = 'Cancel'
+    Caption = '&Cancel'
+    Default = True
     ModalResult = 2
-    TabOrder = 1
+    TabOrder = 0
     NumGlyphs = 2
   end
   object panAppOptions: TPanel
@@ -47,7 +47,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
     Align = alTop
     Color = 16250871
     ParentBackground = False
-    TabOrder = 2
+    TabOrder = 3
     object jtvAppOptions: TJvTreeView
       Left = 1
       Top = 1
@@ -1262,7 +1262,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 0
             Items.Strings = (
               'Vertical Line'
@@ -1276,7 +1276,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 1
             Items.Strings = (
               'Vertical Line'
@@ -1290,6 +1290,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Keystrokes'
         ImageIndex = 23
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label20: TLabel
           Left = 0
           Top = 374
@@ -1385,7 +1389,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Height = 21
             BevelInner = bvNone
             BevelOuter = bvNone
-            ItemHeight = 13
+            ItemHeight = 0
             Sorted = True
             TabOrder = 0
             OnExit = cbCommandsExit
@@ -1829,6 +1833,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Basic'
         ImageIndex = 9
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object gpbMaxDeparseLength: TGroupBox
           Left = 0
           Top = 174
@@ -2343,6 +2351,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Rterm'
         ImageIndex = 14
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgRterm: TJvgPageControl
           Left = 0
           Top = 0
@@ -2389,6 +2401,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
           object TabSheet1: TTabSheet
             Caption = 'Options'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label28: TLabel
               Left = 0
               Top = 421
@@ -2541,6 +2557,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet2: TTabSheet
             Caption = 'Error'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label1: TLabel
               Left = 0
               Top = 93
@@ -4371,7 +4391,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
     end
   end
   object bbHelp: TBitBtn
-    Left = 330
+    Left = 326
     Top = 494
     Width = 75
     Height = 25
@@ -4382,7 +4402,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
     OnClick = bbHelpClick
     Glyph.Data = {
       36040000424D3604000000000000360000002800000010000000100000000100

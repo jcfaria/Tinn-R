@@ -105,8 +105,8 @@ type
 
   private
     { Private declarations }
-    procedure pActualizeCountries;
-    
+    procedure pCountries_Actualize;
+
   public
     { Public declarations }
   end;
@@ -135,7 +135,7 @@ begin
 
     if (modDados.cdRmirrors.Locate('Country',
                                     Text,
-                                    [loPartialKey]) = True) then begin
+                                    [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -160,7 +160,7 @@ begin
 
     if (modDados.cdRmirrors.Locate('Name',
                                    Text,
-                                   [loPartialKey]) = True) then begin
+                                   [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -185,7 +185,7 @@ begin
 
     if (modDados.cdRmirrors.Locate('city',
                                    Text,
-                                   [loPartialKey]) = True) then begin
+                                   [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -249,11 +249,11 @@ begin
   edtCountrySearch.SetFocus;
 end;
 
-procedure TfrmRmirrors.pActualizeCountries;
+procedure TfrmRmirrors.pCountries_Actualize;
 begin
   //Actualize Countries in frmTools
   with modDados do begin
-    pRmirrorsCountriesFilter(nil);
+    pRmirrorsCountries_Filter(nil);
 
     with frmMain do begin
       frmTools.lbCountries.Items:= slRmirrors_Countries;
@@ -288,7 +288,7 @@ begin
 
     IndexName:= 'RmirrorsDefaultIndex';
   end;
-  pActualizeCountries;
+  pCountries_Actualize;
 end;
 
 procedure TfrmRmirrors.FormShow(Sender: TObject);

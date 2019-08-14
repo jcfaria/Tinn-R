@@ -65,17 +65,16 @@ type
   function fFile_Save_Fast(sFile, sContent: string): boolean;
   function fFile_Save_Fast_PuTTY(sFile, sContent, sPuTTYPath, sPuTTYPassword, sPuTTYUser, sPuTTYHost: string): boolean;
   function fFile_ToString(sPath: string): string;
-  function fGetAssociation(const DocFileName: string): string;
-  function fGetEnvVariable(Name: string; User: boolean = True): string;
-  function fGetPosMatching_Backward(Str: string; parIni, parFim: string): integer;
-  function fGetPosMatching_Forward(Str: string; parIni, parFim: string): integer;
-  function fGetRegistry_InstallPath(KeyName: string): string;
-  function fGetRegistry_Key(KeyName: string): string;
-  function fGetRObject(sTmp: string): string;
-  function fGetRPackage(sTmp: string): string;
-  function fGetSpecialFolder(const ASpecialFolderID: Integer): string;
-  function fGetWindowHandle(const chCaption: PChar; const bPartial: boolean = True): HWND;
-  function fInvertString(sStr: string): string;
+  function fGet_Association(const DocFileName: string): string;
+  function fGet_EnvVariable(Name: string; User: boolean = True): string;
+  function fGet_PosMatching_Backward(Str: string; parIni, parFim: string): integer;
+  function fGet_PosMatching_Forward(Str: string; parIni, parFim: string): integer;
+  function fGet_Registry_InstallPath(KeyName: string): string;
+  function fGet_Registry_Key(KeyName: string): string;
+  function fGet_RObject(sTmp: string): string;
+  function fGet_RPackage(sTmp: string): string;
+  function fGet_SpecialFolder(const ASpecialFolderID: Integer): string;
+  function fGet_WindowHandle(const chCaption: PChar; const bPartial: boolean = True): HWND;
   function fIs64Bit_OS: boolean;
   function fIsConnected: boolean;
   function fIsGuiRunning(var hRgui: HWND; var sCaption: string; var iRecognitionCaption: integer; bFirstTime: boolean = False): boolean;
@@ -96,7 +95,8 @@ type
   function fSingleLine(sTmp: string): boolean;
   function fSort_Date(List: TStringList; Index1, Index2: Integer): Integer;
   function fSort_Integer(List: TStringList; Index1, Index2: Integer): Integer;
-  function fStringToCase_Select(sSelector : string; aCaseList: array of string): Integer;
+  function fString_Invert(sStr: string): string;
+  function fString_ToCase_Select(sSelector : string; aCaseList: array of string): Integer;
   function fStrip_FileName(sFileName: string): string;
   function fStrip_NonConforming(const sTmp: string; const ValidChars: TCharSet): string;
   function fStrip_Path(sFileName: string): string;
@@ -180,8 +180,8 @@ begin
 end;
 
 // adapted from http://www.delphipages.com/forum/showthread.php?t=120031
-function fGetWindowHandle(const chCaption: PChar;
-                          const bPartial: boolean = True): HWND;
+function fGet_WindowHandle(const chCaption: PChar;
+                           const bPartial: boolean = True): HWND;
 var
   chTmp: PChar;
 
@@ -260,7 +260,7 @@ begin
 
   if bFirstTime then  // Will search for all recognized R in the first time.
     for i:= 0 to 3 do begin
-      hTmp:= fGetWindowHandle(Pchar(R[i]));
+      hTmp:= fGet_WindowHandle(Pchar(R[i]));
       if (hTmp <> 0) then begin
         sCaption:= R[i];
         Break;
@@ -270,13 +270,13 @@ begin
     case iRecognitionCaption of
       // R Console (32-bit) --> 32 bit SDI mode
       0: begin
-           hTmp:= fGetWindowHandle(Pchar(R[0]));
+           hTmp:= fGet_WindowHandle(Pchar(R[0]));
            if (hTmp <> 0) then sCaption:= R[0];
          end;
 
       // R Console (64-bit) --> 64 bit SDI mode
       1: begin
-           hTmp:= fGetWindowHandle(Pchar(R[1]));
+           hTmp:= fGet_WindowHandle(Pchar(R[1]));
            if (hTmp <> 0) then sCaption:= R[1];
          end;
 
@@ -284,7 +284,7 @@ begin
       //                                                   64 bit SDI mode
       2: begin
            for i:= 0 to 1 do begin
-             hTmp:= fGetWindowHandle(Pchar(R[i]));
+             hTmp:= fGet_WindowHandle(Pchar(R[i]));
              if (hTmp <> 0) then begin
                sCaption:= R[i];
                Break;
@@ -294,13 +294,13 @@ begin
 
       // R Console - Microsoft R Open --> MRO
       3: begin
-           hTmp:= fGetWindowHandle(Pchar(R[2]));
+           hTmp:= fGet_WindowHandle(Pchar(R[2]));
            if (hTmp <> 0) then sCaption:= R[2];
          end;
 
       // R running in remote server under PuTTY
       4: begin
-           hTmp:= fGetWindowHandle(Pchar(R[3]));
+           hTmp:= fGet_WindowHandle(Pchar(R[3]));
            if (hTmp <> 0) then sCaption:= R[3];
          end;
     end;
@@ -359,7 +359,7 @@ var
 begin
   sTemp   := ExtractFilePath(sFile);
   sFile   := ExtractFileName(sFile);
-  sInvName:= fInvertString(sFile);
+  sInvName:= fString_Invert(sFile);
   iPos    := Pos('.',
                  sInvName);
   if (iPos > 0) then sFile:= Copy(sFile,
@@ -370,7 +370,7 @@ begin
   Result  := sFile;
 end;
 
-function fInvertString(sStr: string): string;
+function fString_Invert(sStr: string): string;
 var
  cTemp: char;
 
@@ -438,8 +438,8 @@ case fStringToCaseSelect('Delphi',
    2:ShowMessage('You''ve picked Delphi') ;
 end;
 }
-function fStringToCase_Select(sSelector: string;
-                              aCaseList: array of string): Integer;
+function fString_ToCase_Select(sSelector: string;
+                               aCaseList: array of string): Integer;
 var
   iCnt: integer;
 
@@ -982,7 +982,7 @@ begin
   FreeLibrary(hKernel32);
 end;
 
-function fGetRegistry_InstallPath(KeyName: string): string;
+function fGet_Registry_InstallPath(KeyName: string): string;
 var
   i: integer;
 
@@ -1047,7 +1047,7 @@ begin
   end;
 end;
 
-function fGetRegistry_Key(KeyName: string): string;
+function fGet_Registry_Key(KeyName: string): string;
 var
   i: integer;
 
@@ -1230,7 +1230,7 @@ begin
   end;
 end;
 
-function fGetAssociation(const DocFileName: string): string;
+function fGet_Association(const DocFileName: string): string;
 var
   FileClass: string;
   Reg: TRegistry;
@@ -1257,9 +1257,9 @@ begin
 end;
 
 // Adapted from SynEdit by JCFaria
-function fGetPosMatching_Forward(Str: string;
-                                 parIni,
-                                 parFim: string): integer;
+function fGet_PosMatching_Forward(Str: string;
+                                  parIni,
+                                  parFim: string): integer;
 var
   iPos,
    iLen,
@@ -1295,9 +1295,9 @@ begin
 end;
 
 // Adapted from SynEdit by JCFaria
-function fGetPosMatching_Backward(Str: string;
-                                  parIni,
-                                  parFim: string): integer;
+function fGet_PosMatching_Backward(Str: string;
+                                   parIni,
+                                   parFim: string): integer;
 var
   iPos,
    iLen,
@@ -1370,7 +1370,7 @@ begin
   end;
 end;
 
-function fGetRPackage(sTmp: string): string;
+function fGet_RPackage(sTmp: string): string;
 var
   iIni,
    iFim: integer;
@@ -1385,7 +1385,7 @@ begin
                 iFim - iIni + 1);
 end;
 
-function fGetRObject(sTmp: string): string;
+function fGet_RObject(sTmp: string): string;
 var
   iIni,
    iFim: integer;
@@ -1408,17 +1408,17 @@ var
    iFim: integer;
 
 begin
-  iIni:= fGetPosMatching_Backward(sTmp,
-                                  '[',
-                                  ']');
+  iIni:= fGet_PosMatching_Backward(sTmp,
+                                   '[',
+                                   ']');
   iFim:= Pos('>',
              sTmp);
   if (iIni > 0) then begin
     sTmp:= Copy(sTmp,
                 iIni,
                 iFim + 1);
-    sRpackage:= fgetRPackage(sTmp);
-    sRObject := fgetRObject(sTmp);
+    sRpackage:= fGet_RPackage(sTmp);
+    sRObject := fGet_RObject(sTmp);
   end;
 end;
 
@@ -1487,7 +1487,7 @@ end;
 
 // Function to ask Windows for a special folder and convert the "Windows string" into Delphi string
 // From: http://forum.codecall.net/topic/60120-using-special-folders-to-comply-with-uac-enabled-windows-with-delphi-code/
-function fGetSpecialFolder(const ASpecialFolderID: Integer): string;
+function fGet_SpecialFolder(const ASpecialFolderID: Integer): string;
 var
   vSFolder:  pItemIDList;
 
@@ -1894,8 +1894,8 @@ begin
 end;
 
 // Adapted from: http://delphidabbler.com/tips/64
-function fGetEnvVariable(Name: string;
-                         User: boolean = True): string;
+function fGet_EnvVariable(Name: string;
+                          User: boolean = True): string;
 var
   aTmp: array[0..255] of char;
 

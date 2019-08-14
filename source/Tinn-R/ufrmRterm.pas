@@ -962,9 +962,9 @@ procedure TfrmRterm.pCR;
       sPre := '+';
 
     // Remove prefix and spaces before the command
-    case fStringToCase_Select(sPre,
-                              ['>',
-                               '+']) of
+    case fString_ToCase_Select(sPre,
+                               ['>',
+                                '+']) of
 
       0: sTmp := fRegEx(sTmp, '^>[ ]*', True);
       1: sTmp := fRegEx(sTmp, '^[+][ ]*', True);
@@ -988,10 +988,10 @@ procedure TfrmRterm.pCR;
       if (sSend = sTmp) and (fRegEx(sTmp, '>$') <> '') and (sPre = '') then
         sSend := ''
       else
-        case fStringToCase_Select(sPre,
-                                  ['>',
-                                   '+',
-                                   '']) of
+        case fString_ToCase_Select(sPre,
+                                   ['>',
+                                    '+',
+                                    '']) of
           0: LineText := sPre + ' ' + sSend;
           1: LineText := sPre + ' ' + sSend;
           2: if (sSend <> '') then

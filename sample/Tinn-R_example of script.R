@@ -94,11 +94,11 @@ qqnorm(resid(fm),
 # A normal scores plot to check for skewness, kurtosis and outliers. (Not very useful here)
 
 rm(w,
-  fm,
-  fm1,
-  lrf,
-  x,
-  dummy)
+   fm,
+   fm1,
+   lrf,
+   x,
+   dummy)
 # Clean up again
 
 graphics.off()

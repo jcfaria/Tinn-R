@@ -165,7 +165,7 @@ begin
 
     if (modDados.cdShortcuts.Locate('Group',
                                      Text,
-                                     [loPartialKey]) = True) then begin
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -196,7 +196,7 @@ begin
 
     if (modDados.cdShortcuts.Locate('Caption',
                                      Text,
-                                     [loPartialKey]) = True) then begin
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -272,7 +272,7 @@ begin
   pClearWarnings;
   //Actualize Groups in frmMain
   with modDados do begin
-    pShortcutsGroupsFilter(nil);
+    pShortcutsGroups_Filter(nil);
 
     with frmMain do begin
       frmTools.lbShortcuts.Items:= slShortcuts_Groups;

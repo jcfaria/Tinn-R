@@ -126,7 +126,7 @@ begin
 
     if (modDados.cdRcard.Locate('Group',
                                 Text,
-                                [loPartialKey]) = True) then begin
+                                [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -151,7 +151,7 @@ begin
 
     if (modDados.cdRcard.Locate('Function',
                                 Text,
-                                [loPartialKey]) = True) then begin
+                                [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -247,7 +247,7 @@ procedure TfrmRcard.pActualizeGroups;
 begin
   //Actualize groups in frmMain
   with modDados do begin
-    pRcardGroupsFilter(self);
+    pRcardGroups_Filter(self);
 
     with frmMain do begin
       frmTools.lbRcard.Items:= slRcard_Groups;

@@ -63,9 +63,9 @@ type
 
   //procedure pGetCallTip(var sRObject, sRPackage, sRTip: string; var bTipFound: boolean);
   function fFindWord_Extended(seTmp: TSynEdit; bDocumentation: boolean = False): string;
-  function fFindTrigger(seTmp: TSynEdit): string;
-  function fGetTrigger_Left(seTmp: TSynEdit): string;
-  function fSelect_Trigger(seTmp: TSynEdit): boolean;
+  function fTrigger_Find(seTmp: TSynEdit): string;
+  function fTrigger_Get_Left(seTmp: TSynEdit): string;
+  function fTrigger_Select(seTmp: TSynEdit): boolean;
 
   procedure pInsertText_Smart(seEditor: TSynEdit; sText: string; iLen: integer = 0);
   procedure pSetDataCompletion(synDC: TSynCompletionProposal; synTmp: TSynEdit; sTmp: string);
@@ -442,13 +442,13 @@ begin
     end;
 end;
 
-// The function fGetTrigger_Left(seTmp: TSynEdit): string;
+// The function fTrigger_Get_Left(seTmp: TSynEdit): string;
 // below is better and more simple!
 
 // Get complex words at the cursor: .aa, ~bb, -cc, _dd, <ee, @ff, !gg
 // from the synEdit workaround the limitations
 // of the component by using regular expression
-function fFindTrigger(seTmp: TSynEdit): string;
+function fTrigger_Find(seTmp: TSynEdit): string;
 var
   sLine,
    sTrigger,
@@ -514,7 +514,7 @@ begin
     end;
 end;
 
-function fSelect_Trigger(seTmp: TSynEdit): boolean;
+function fTrigger_Select(seTmp: TSynEdit): boolean;
 var
   iBegin,
    iEnd: integer;
@@ -551,7 +551,7 @@ begin
     Result:= SelAvail;
 end;
 
-function fGetTrigger_Left(seTmp: TSynEdit): string;
+function fTrigger_Get_Left(seTmp: TSynEdit): string;
 var
   i: integer;
 
@@ -566,7 +566,7 @@ begin
     with seTmp do begin
       BeginUpdate;
       i:= CaretX;
-      fSelect_Trigger(seTmp);
+      fTrigger_Select(seTmp);
       EndUpdate;
     end;
   finally
@@ -669,7 +669,7 @@ begin
       smOption:= SelectionMode;
       if (SelectionMode <> smNormal) then SelectionMode:= smNormal;
 
-      if fSelect_Trigger(seEditor) then PasteFromClipboard;
+      if fTrigger_Select(seEditor) then PasteFromClipboard;
 
       CaretXY:= bcPos;
       SelectionMode:= smOption;

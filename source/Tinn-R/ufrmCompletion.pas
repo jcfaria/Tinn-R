@@ -131,7 +131,7 @@ begin
 
     if (modDados.cdCompletion.Locate('Group',
                                      Text,
-                                     [loPartialKey]) = True) then begin
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -156,7 +156,7 @@ begin
 
     if (modDados.cdCompletion.Locate('Function',
                                      Text,
-                                     [loPartialKey]) = True) then begin
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -181,7 +181,7 @@ begin
 
     if (modDados.cdCompletion.Locate('Trigger',
                                      Text,
-                                     [loPartialKey]) = True) then begin
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -241,7 +241,7 @@ procedure TfrmCompletion.pActualizeGroups;
 begin
   //Actualize Groups in frmMain
   with modDados do begin
-    pCompletionGroupsFilter(nil);
+    pCompletionGroups_Filter(nil);
 
     with frmMain do begin
       frmTools.lbCompletion.Items:= slCompletion_Groups;

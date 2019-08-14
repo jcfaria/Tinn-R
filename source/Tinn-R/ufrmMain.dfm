@@ -7573,10 +7573,10 @@ object frmMain: TfrmMain
       object menOptionsApplication: TMenuItem
         Action = actShowAppOptions
       end
-      object menShortcuts_Hotkeys: TMenuItem
-        Caption = 'Shortcuts/Hotkeys (map)'
+      object menSKH: TMenuItem
+        Caption = 'Shortcuts/keystrokes/hotkeys (map)'
         ImageIndex = 119
-        OnClick = menShortcuts_HotkeysClick
+        OnClick = menSKHClick
       end
       object menOptionsShortcuts: TMenuItem
         Caption = 'Shortcuts'

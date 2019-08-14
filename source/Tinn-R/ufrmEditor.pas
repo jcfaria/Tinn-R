@@ -103,12 +103,12 @@ type
 
 
     function fMessageDlg(const Msg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons; HelpCtx: Integer): Integer;
-    function fSaveModifiedFileQuery: boolean;
-    procedure pDoSaveFileState;
+    function fDoSave_ModifiedFileQuery: boolean;
+    procedure pDoSave_FileState;
 //    procedure pDoSearchReplaceText(bReplace, bSearchAgain: boolean; bMessage: boolean = True);
 //    procedure pFileClose;
-    procedure pSetHighlighterFromTag(iTag: integer);
-    procedure pSetSyntaxHighlighter(sSynName: string);
+    procedure pSetHighlighter_FromTag(iTag: integer);
+    procedure pSetSyntax_Highlighter(sSynName: string);
     procedure pShowSearchReplaceDialog(bReplace: boolean);
 //    procedure pToogleLineNumbers(bOption: boolean);
 //    procedure pToogleSpecialChars(bChecked: boolean);
@@ -125,60 +125,60 @@ type
     sActiveEditor       : string;
     sActiveFile         : string;
     sCompletion         : string;
-    sReplaceText        : string;
+    sReplace_Text       : string;
     sRtip               : string;
-    sSearchText         : string;
+    sSearch_Text        : string;
     synEditor2          : TSynEdit;
     fNotif              : TATFileNotificationSimple;
 
     //procedure pMatchBracket;
     //procedure RtermSplit(bSplitHoriz: boolean = True);
-    function fGetBBHighLighter: TSynCustomHighlighter;
-    function fGetBEHighLighter: TSynCustomHighlighter;
-    function fGetCurrentHighLighter: TSynCustomHighlighter;
+    function fGet_BB_HighLighter: TSynCustomHighlighter;
+    function fGet_BE_HighLighter: TSynCustomHighlighter;
+    function fGet_Current_HighLighter: TSynCustomHighlighter;
     function fScrubCaption(sCap: string): string;
     function fSetHighlighterID: integer;
 
     procedure pCheckSaveStatus;
-    procedure pColumnSelect;
+    procedure pColumn_Select;
     procedure pComment(sStartComment, sEndComment: string);
-    procedure pCopyFormattedHTML;
-    procedure pCopyFormattedRTF;
-    procedure pCopyFormattedTeX;
+    procedure pCopyFormatted_HTML;
+    procedure pCopyFormatted_RTF;
+    procedure pCopyFormatted_TeX;
     procedure pCR;
     procedure pDateStamp;
     procedure pDoCardInsert;
-    procedure pDoCompletionInsert(bSearch: boolean = False);
-    procedure pDoTipInsert;
-    procedure pEditorRemoveSplit;
-    procedure pEditorSplit(bSplitHoriz: boolean = True);
+    procedure pDoCompletion_Insert(bSearch: boolean = False);
+    procedure pDoTip_Insert;
+    procedure pEditor_RemoveSplit;
+    procedure pEditor_Split(bSplitHoriz: boolean = True);
     procedure pEnableSave;
-    procedure pFileChanged(Sender: TObject);
-    procedure pFileSave(Sender: TObject);
-    procedure pFileSaveAs(Sender: TObject);
+    procedure pFile_Changed(Sender: TObject);
+    procedure pFile_Save(Sender: TObject);
+    procedure pFile_SaveAs(Sender: TObject);
     procedure pFind;
     procedure pFindAgain;
-    procedure pFullPathUnix;
-    procedure pFullPathWindows;
+    procedure pFullPath_Unix;
+    procedure pFullPath_Windows;
     procedure pGetCursorTo(sWay: string);
     procedure pGotoLine;
-    procedure pIndentBlock;
-    procedure pInvertCase;
-    procedure pInvertSelection;
-    procedure pLineSelect;
-    procedure pLowerCaseSelection;
-    procedure pLowerCaseWord;
-    procedure pNormalSelect;
+    procedure pIndent_Block;
+    procedure pInvert_Case;
+    procedure pInvert_Selection;
+    procedure pLine_Select;
+    procedure pLowerCase_Selection;
+    procedure pLowerCase_Word;
+    procedure pNormal_Select;
     procedure pReplace;
     procedure pSearchError(sTmp: string);
-    procedure pSetHighlighterFromFileExt(sExt: string);
-    procedure pSetHighlighterStatus(Sender: TObject);
+    procedure pSetHighlighter_FromFileExt(sExt: string);
+    procedure pSetHighlighter_Status(Sender: TObject);
     procedure pSetTitle;
-    procedure pToogleWordWrap(bChecked: boolean);
+    procedure pLineWrap_Toogle(bChecked: boolean);
     procedure pUncomment(sStartComment, sEndComment: string; rfTmp: TReplaceFlags = []);
-    procedure pUnindentBlock;
-    procedure pUpperCaseSelection;
-    procedure pUpperCaseWord;
+    procedure pUnindent_Block;
+    procedure pUpperCase_Selection;
+    procedure pUpperCase_Word;
     procedure pNotifyFile_Start(sTmp: string);
     procedure pNotifyFile_Stop;
     procedure pDoSearchReplaceText(bReplace, bSearchAgain: boolean; bMessage: boolean = True);
@@ -233,7 +233,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pFileChanged(Sender: TObject);
+procedure TfrmEditor.pFile_Changed(Sender: TObject);
 begin
   // If not totification: remove any prior notification and nothing to do.
   if not frmMain.actNotification.Checked then begin
@@ -270,7 +270,7 @@ begin
 end;
 
 // Save file status in database Cache.xml
-procedure TfrmEditor.pDoSaveFileState;
+procedure TfrmEditor.pDoSave_FileState;
 var
   i       : integer;
   sMarks  : string;
@@ -291,11 +291,11 @@ begin
                                            IntToStr(Marks[i].Line);
     end;
 
-    modDados.fSaveFileState(Caption,
-                            Trim(sMarks),
-                            TopLine,
-                            CaretX,
-                            CaretY);
+    modDados.fSave_FileState(Caption,
+                             Trim(sMarks),
+                             TopLine,
+                             CaretX,
+                             CaretY);
   end;
 end;
 
@@ -466,7 +466,7 @@ end;
 procedure TfrmEditor.FormCloseQuery(Sender: TObject;
                                     var CanClose: Boolean);
 begin
-  if frmMain.bRememberFileState then pDoSaveFileState;
+  if frmMain.bRememberFileState then pDoSave_FileState;
 
   if not synEditor.Modified then begin
     CanClose:= True;
@@ -474,14 +474,14 @@ begin
   end;
 
   if synEditor.Modified and
-     not (synEditor.ReadOnly) then CanClose:= fSaveModifiedFileQuery
+     not (synEditor.ReadOnly) then CanClose:= fDoSave_ModifiedFileQuery
   else if synEditor.ReadOnly then begin
     CanClose:= False;
-    pFileSave(Sender);
+    pFile_Save(Sender);
   end;
 end;
 
-function TfrmEditor.fSaveModifiedFileQuery: boolean;
+function TfrmEditor.fDoSave_ModifiedFileQuery: boolean;
 var
   i,
    iSaveResp: Integer;
@@ -506,7 +506,7 @@ begin
 
   case iSaveResp of
     idYes   : begin
-               pFileSave(Self);
+               pFile_Save(Self);
                Result:= True;
               end;
     idNo    : Result:= True;
@@ -533,7 +533,7 @@ begin
   Result:= se;
 end;
 
-procedure TfrmEditor.pFileSave(Sender: TObject);
+procedure TfrmEditor.pFile_Save(Sender: TObject);
 var
   wFileAtt: Word;
 
@@ -542,7 +542,7 @@ begin
     if ExecRegExpr('^Untitled',
                    sActiveFile) then begin
 
-      pFileSaveAs(Sender);
+      pFile_SaveAs(Sender);
 
       frmMain.sWorkingDir:= fStrip_FileName(frmMain.sdMain.fileName);
     end
@@ -576,7 +576,7 @@ begin
         pSetTitle;
         frmMain.actFileSave.Enabled:= False;
 
-        if (frmMain.pgFiles.ActivePage.Tag = -1) then pSetHighlighterFromFileExt(ExtractFileExt(sActiveFile));
+        if (frmMain.pgFiles.ActivePage.Tag = -1) then pSetHighlighter_FromFileExt(ExtractFileExt(sActiveFile));
         frmMain.sWorkingDir:= ExtractFilePath(sActiveFile);
 
         if (frmMain.bUndoAfterSave = False) then synEditor.UndoList.Clear;
@@ -589,7 +589,7 @@ begin
                         synEditor.Lines);
         end;
 
-        if frmMain.bRememberFileState then pDoSaveFileState;
+        if frmMain.bRememberFileState then pDoSave_FileState;
       end
       else begin //if ReadOnly
         fMessageDlg(sActiveFile + #13 + #13 +
@@ -610,7 +610,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pFileSaveAs(Sender: TObject);
+procedure TfrmEditor.pFile_SaveAs(Sender: TObject);
 var
   sFile: string;
 
@@ -676,7 +676,7 @@ begin
 
     synEditor.Modified:= False;
     frmMain.sWorkingDir:= fStrip_FileName(sFile);
-    pSetHighlighterFromFileExt(ExtractFileExt(sActiveFile));
+    pSetHighlighter_FromFileExt(ExtractFileExt(sActiveFile));
 
     frmMain.actFileSave.Enabled:= False;
     pSetTitle;
@@ -693,7 +693,7 @@ begin
       pUpdateMRU(menFileRecentFiles,
                  sActiveFile);
 
-      if bRememberFileState then pDoSaveFileState;
+      if bRememberFileState then pDoSave_FileState;
     end;
   end;  //if frmMain.dlgSDMain.Execute
   frmMain.sSaveAsFileExt:= EmptyStr;
@@ -888,8 +888,8 @@ begin
   frmMain.pUpdateCursorPos(synEditor);
 
   if Assigned(frmMain.pgFiles.ActivePage) then begin
-    if (frmMain.pgFiles.ActivePage.Tag = -1) then pSetHighlighterFromFileExt(ExtractFileExt(sActiveFile))
-                                             else pSetHighlighterFromTag(frmMain.pgFiles.ActivePage.Tag);
+    if (frmMain.pgFiles.ActivePage.Tag = -1) then pSetHighlighter_FromFileExt(ExtractFileExt(sActiveFile))
+                                             else pSetHighlighter_FromTag(frmMain.pgFiles.ActivePage.Tag);
   end
   else begin  //To the first new file
     slSynName:= TStringlist.Create;
@@ -902,7 +902,7 @@ begin
     else
       slSynName.Text:= dmSyn.SynAll.GetFriendlyLanguageName;
 
-    pSetHighlighterStatus(slSynName);
+    pSetHighlighter_Status(slSynName);
 
     FreeAndNil(slSynName)
   end;
@@ -939,9 +939,9 @@ procedure TfrmEditor.pDoCardInsert;
 var
   seEditor: TSynEdit;
 
-  sOldSearchText,
+  sSearch_OldText,
    sFunction,
-   stmp         : string;
+   stmp: string;
 
   slTmp: TStringList;
 
@@ -979,10 +979,10 @@ begin
                   slTmp);
   end;
 
-  sOldSearchText:= sSearchText;
+  sSearch_OldText:= sSearch_Text;
   if Assigned(slTmp) and
      (slTmp.Count >=1) then begin
-    sSearchText    := slTmp[0];
+    sSearch_Text   := slTmp[0];
     seEditor.CaretX:= iPos;
   end
   else begin
@@ -998,20 +998,20 @@ begin
                        True,
                        False);
 
-  sSearchText:= sOldSearchText;
+  sSearch_Text:= sSearch_OldText;
 
   FreeAndNil(slTmp);
   pEnableSave;
   pRestore_PriorClipboard_Text;
 end;
 
-procedure TfrmEditor.pDoTipInsert;
+procedure TfrmEditor.pDoTip_Insert;
 var
   seEditor: TSynEdit;
 
   sTip,
    sFunction,
-   sOldSearchText: string;
+   sSearch_OldText: string;
 
   slTmp: TStringList;
 
@@ -1041,14 +1041,14 @@ begin
                 sTip,
                 slTmp);
 
-  sOldSearchText:= sSearchText;
-  sSearchText   := slTmp[0];
+  sSearch_OldText:= sSearch_Text;
+  sSearch_Text   := slTmp[0];
 
   pDoSearchReplaceText(False,
                        True,
                        False);
 
-  sSearchText:= sOldSearchText;
+  sSearch_Text:= sSearch_OldText;
 
   FreeAndNil(slTmp);
   pEnableSave;
@@ -1056,7 +1056,7 @@ begin
   pRestore_PriorClipboard_Text;
 end;
 
-procedure TfrmEditor.pDoCompletionInsert(bSearch: boolean = False);
+procedure TfrmEditor.pDoCompletion_Insert(bSearch: boolean = False);
 var
   seEditor: TSynEdit;
 
@@ -1090,7 +1090,7 @@ begin
       end;
 
       //sTrigger:= fFindTrigger(seEditor);
-      sTrigger:= fGetTrigger_Left(seEditor);
+      sTrigger:= fTrigger_Get_Left(seEditor);
 
       if cdCompletion.Locate('Trigger',
                              sTrigger,
@@ -1122,10 +1122,10 @@ begin
                     Length(sTrigger));
 
   // Will search the next '|' as part of the stop of the completion
-  sSearchText:= '|';
+  sSearch_Text:= '|';
 
   with frmMain do
-    bSearchRegExp:= False;  // Do not remove due to '|' -> or in fRegEx
+    bSearch_RegExp:= False;  // Do not remove due to '|' -> or in fRegEx
 
   pDoSearchReplaceText(False,
                        True,
@@ -1421,7 +1421,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pSetHighlighterFromFileExt(sExt: string);
+procedure TfrmEditor.pSetHighlighter_FromFileExt(sExt: string);
 var
   i,
    iDelimiter,
@@ -1492,13 +1492,13 @@ begin
   end;
 
   //ShowMessage(slSynName.Text);  //To debug
-  pSetHighlighterStatus(slSynName);
+  pSetHighlighter_Status(slSynName);
 
   FreeAndNil(slSynName);
   FreeAndNil(slFilters);
 end;
 
-procedure TfrmEditor.pSetHighlighterStatus(Sender: TObject);
+procedure TfrmEditor.pSetHighlighter_Status(Sender: TObject);
 var
   sSynName: string;
 
@@ -1516,15 +1516,15 @@ begin
   frmMain.pSetSyntaxMenuItem(sSynName);
   frmMain.pSetSyntaxComboBox(sSynName);
 
-  pSetSyntaxHighlighter(sSynName);
+  pSetSyntax_Highlighter(sSynName);
 end;
 
-procedure TfrmEditor.pSetSyntaxHighlighter(sSynName: string);
+procedure TfrmEditor.pSetSyntax_Highlighter(sSynName: string);
 var
   i: integer;
 
   sHighligh: string;
-  
+
 begin
   for i:= 0 to (dmSyn.iHigCount - 1) do begin
     sHighligh:= (dmSyn.Components[i] as TSynCustomHighlighter).GetFriendlyLanguageName;
@@ -1598,13 +1598,13 @@ begin
 
   with dlg do try
     // Assign search options
-    SearchBackwards        := frmMain.bSearchBackwards;
-    SearchCaseSensitive    := frmMain.bSearchCaseSensitive;
-    SearchFromCursor       := frmMain.bSearchFromCursor;
-    SearchRegularExpression:= frmMain.bSearchRegExp;
-    SearchText             := sSearchText; // start with last search text
-    SearchTextHistory      := frmMain.sSearchTextHistory;
-    SearchWholeWords       := frmMain.bSearchWholeWords;
+    SearchBackwards        := frmMain.bSearch_Backwards;
+    SearchCaseSensitive    := frmMain.bSearch_CaseSensitive;
+    SearchFromCursor       := frmMain.bSearch_FromCursor;
+    SearchRegularExpression:= frmMain.bSearch_RegExp;
+    SearchText             := sSearch_Text; // start with last search text
+    SearchTextHistory      := frmMain.sSearch_TextHistory;
+    SearchWholeWords       := frmMain.bSearch_WholeWords;
 
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
@@ -1628,28 +1628,28 @@ begin
 
     if bReplace then
       with dlg as TfrmReplaceDlg do begin
-        ReplaceText       := sReplaceText;
+        ReplaceText       := sReplace_Text;
         ReplaceTextHistory:= frmMain.sReplaceTextHistory;
       end;
 
     if (ShowModal = mrOK) then begin
-      bSearchSelectionOnly        := SearchInSelectionOnly;
-      frmMain.bSearchBackwards    := SearchBackwards;
-      frmMain.bSearchCaseSensitive:= SearchCaseSensitive;
-      frmMain.bSearchFromCursor   := SearchFromCursor;
-      frmMain.bSearchRegExp       := SearchRegularExpression;
-      frmMain.bSearchWholeWords   := SearchWholeWords;
-      frmMain.sSearchTextHistory  := SearchTextHistory;
-      sSearchText                 := SearchText;
+      bSearchSelectionOnly         := SearchInSelectionOnly;
+      frmMain.bSearch_Backwards    := SearchBackwards;
+      frmMain.bSearch_CaseSensitive:= SearchCaseSensitive;
+      frmMain.bSearch_FromCursor   := SearchFromCursor;
+      frmMain.bSearch_RegExp       := SearchRegularExpression;
+      frmMain.bSearch_WholeWords   := SearchWholeWords;
+      frmMain.sSearch_TextHistory  := SearchTextHistory;
+      sSearch_Text                 := SearchText;
 
       if bReplace then
         with dlg as TfrmReplaceDlg do begin
-          sReplaceText               := ReplaceText;
+          sReplace_Text              := ReplaceText;
           frmMain.sReplaceTextHistory:= ReplaceTextHistory;
         end;
 
-      if (sSearchText <> EmptyStr) then pDoSearchReplaceText(bReplace,
-                                                             False);
+      if (sSearch_Text <> EmptyStr) then pDoSearchReplaceText(bReplace,
+                                                              False);
     end;
 
   finally
@@ -1683,7 +1683,7 @@ begin
     SearchEngine:= SynEditSearch;
 
     SearchReplace(sTmp,
-                  sReplaceText,
+                  sReplace_Text,
                   synSearchOptions);
 
     EndUpdate;
@@ -1709,27 +1709,27 @@ begin
                                        ssoReplaceAll]
               else synSearchOptions:= [];
 
-  if frmMain.bSearchBackwards        then Include(synSearchOptions,
-                                                      ssoBackwards);
-  if frmMain.bSearchCaseSensitive    then Include(synSearchOptions,
-                                                      ssoMatchCase);
+  if frmMain.bSearch_Backwards        then Include(synSearchOptions,
+                                                   ssoBackwards);
+  if frmMain.bSearch_CaseSensitive    then Include(synSearchOptions,
+                                                   ssoMatchCase);
   if not bSearchAgain then
-    if not frmMain.bSearchFromCursor then Include(synSearchOptions,
-                                                      ssoEntireScope);
+    if not frmMain.bSearch_FromCursor then Include(synSearchOptions,
+                                                   ssoEntireScope);
   if bSearchSelectionOnly                then Include(synSearchOptions,
                                                       ssoSelectedOnly);
-  if frmMain.bSearchWholeWords       then Include(synSearchOptions,
-                                                      ssoWholeWord);
+  if frmMain.bSearch_WholeWords       then Include(synSearchOptions,
+                                                   ssoWholeWord);
 
   if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
   with seEditor do begin
-    if frmMain.bSearchRegExp then SearchEngine:= SynEditRegExSearch
-                                 else SearchEngine:= SynEditSearch;
+    if frmMain.bSearch_RegExp then SearchEngine:= SynEditRegExSearch
+                              else SearchEngine:= SynEditSearch;
 
-    iResult:= SearchReplace(sSearchText,
-                            sReplaceText,
+    iResult:= SearchReplace(sSearch_Text,
+                            sReplace_Text,
                             synSearchOptions);
 
     if (iResult = 0) and
@@ -1755,8 +1755,8 @@ begin
   // For while, it is impossible to search with F3 any old selection!
   bSearchSelectionOnly:= False;
 
-  if (sSearchText = EmptyStr) then pShowSearchReplaceDialog(False)
-                              else pDoSearchReplaceText(False,
+  if (sSearch_Text = EmptyStr) then pShowSearchReplaceDialog(False)
+                               else pDoSearchReplaceText(False,
                                                         True);
 end;
 
@@ -1842,7 +1842,7 @@ begin
   pEnableSave;
 end;
 
-procedure TfrmEditor.pIndentBlock;
+procedure TfrmEditor.pIndent_Block;
 begin
   if not synEditor.ReadOnly then begin
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecBlockIndent,
@@ -1862,7 +1862,7 @@ begin
                    0);
 end;
 
-procedure TfrmEditor.pUpperCaseWord;
+procedure TfrmEditor.pUpperCase_Word;
 begin
   if not synEditor.ReadOnly then begin
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecUpperCase,
@@ -1882,7 +1882,7 @@ begin
                    0);
 end;
 
-procedure TfrmEditor.pLowerCaseWord;
+procedure TfrmEditor.pLowerCase_Word;
 begin
   if not synEditor.ReadOnly then begin;
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecLowerCase,
@@ -1902,7 +1902,7 @@ begin
                    0);
 end;
 
-procedure TfrmEditor.pInvertCase;
+procedure TfrmEditor.pInvert_Case;
 begin
   if not synEditor.ReadOnly then begin
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecToggleCase,
@@ -1920,7 +1920,7 @@ begin
                    0);
 end;
 
-procedure TfrmEditor.pEditorSplit(bSplitHoriz: boolean = True);
+procedure TfrmEditor.pEditor_Split(bSplitHoriz: boolean = True);
 begin
   if Assigned(spEditor) then FreeAndNil(spEditor);
 
@@ -2002,7 +2002,7 @@ begin
   sActiveEditor:= 'synEditor';
 end;
 
-procedure TfrmEditor.pEditorRemoveSplit;
+procedure TfrmEditor.pEditor_RemoveSplit;
 begin
   if Assigned(spEditor) then FreeAndNil(spEditor);
 
@@ -2161,7 +2161,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pSetHighlighterFromTag(iTag: integer);
+procedure TfrmEditor.pSetHighlighter_FromTag(iTag: integer);
 var
   slSynName: TStringlist;
 
@@ -2173,13 +2173,13 @@ begin
     sTmp:= (dmSyn.Components[iTag] as TSynCustomHighlighter).GetFriendlyLanguageName;
     if (sTmp = 'General_Multi-Highlighter') then sTmp:= (dmSyn.Components[iTag] as TSynMultiSyn).DefaultLanguageName;
     slSynName.Text:= sTmp;
-    pSetHighlighterStatus(slSynName);
+    pSetHighlighter_Status(slSynName);
   finally
     FreeAndNil(slSynName);
   end;
 end;
 
-procedure TfrmEditor.pNormalSelect;
+procedure TfrmEditor.pNormal_Select;
 begin
   if Assigned(synEditor2) then begin
     synEditor.SelectionMode := smNormal;
@@ -2198,7 +2198,7 @@ begin
                       [eoAltSetsColumnMode];
 end;
 
-procedure TfrmEditor.pLineSelect;
+procedure TfrmEditor.pLine_Select;
 begin
   if Assigned(synEditor2) then begin
     synEditor.SelectionMode := smLine;
@@ -2217,7 +2217,7 @@ begin
                       [eoAltSetsColumnMode];
 end;
 
-procedure TfrmEditor.pColumnSelect;
+procedure TfrmEditor.pColumn_Select;
 begin
   if Assigned(synEditor2) then
   begin
@@ -2270,7 +2270,7 @@ end;
 //  end;
 //end;
 
-procedure TfrmEditor.pUpperCaseSelection;
+procedure TfrmEditor.pUpperCase_Selection;
 begin
   if not synEditor.ReadOnly then begin
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecUpperCaseBlock,
@@ -2290,7 +2290,7 @@ begin
                    0);
 end;
 
-procedure TfrmEditor.pLowercaseSelection;
+procedure TfrmEditor.pLowercase_Selection;
 begin
   if not synEditor.ReadOnly then begin
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecLowerCaseBlock,
@@ -2309,7 +2309,7 @@ begin
                    0);
 end;
 
-procedure TfrmEditor.pInvertSelection;
+procedure TfrmEditor.pInvert_Selection;
 begin
   if not synEditor.ReadOnly then begin
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecToggleCaseBlock,
@@ -2405,7 +2405,7 @@ begin
   Height:= frmMain.Height;
 end;
 
-procedure TfrmEditor.pToogleWordWrap(bChecked: boolean);
+procedure TfrmEditor.pLineWrap_Toogle(bChecked: boolean);
 begin
   if Assigned(synEditor2) then begin
     synEditor.WordWrap := bChecked;
@@ -2433,7 +2433,7 @@ begin
   end;
 end;
 
-function TfrmEditor.fGetBBHighLighter: TSynCustomHighlighter;
+function TfrmEditor.fGet_BB_HighLighter: TSynCustomHighlighter;
 var
   i: integer;
 
@@ -2458,7 +2458,7 @@ begin
       Result:= Highlighter;
 end;
 
-function TfrmEditor.fGetBEHighLighter: TSynCustomHighlighter;
+function TfrmEditor.fGet_BE_HighLighter: TSynCustomHighlighter;
 var
   i: integer;
 
@@ -2483,7 +2483,7 @@ begin
       Result:= Highlighter;
 end;
 
-function TfrmEditor.fGetCurrentHighLighter: TSynCustomHighlighter;
+function TfrmEditor.fGet_Current_HighLighter: TSynCustomHighlighter;
 var
   i: integer;
 
@@ -2882,7 +2882,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pCopyFormattedRTF;
+procedure TfrmEditor.pCopyFormatted_RTF;
 var
   bcStart,
    bcStop: TBufferCoord;
@@ -2936,7 +2936,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pCopyFormattedHTML;
+procedure TfrmEditor.pCopyFormatted_HTML;
 var
   bcStart,
    bcStop: TBufferCoord;
@@ -2990,7 +2990,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pCopyFormattedTeX;
+procedure TfrmEditor.pCopyFormatted_TeX;
 var
   bcStart,
    bcStop: TBufferCoord;
@@ -3088,7 +3088,7 @@ begin
                  Y);
 end;
 
-procedure TfrmEditor.pUnindentBlock;
+procedure TfrmEditor.pUnindent_Block;
 begin
   if not (synEditor.ReadOnly) then begin
     if (sActiveEditor = 'synEditor2') then synEditor2.ExecuteCommand(ecBlockUnindent,
@@ -3109,7 +3109,7 @@ begin
 
 end;
 
-procedure TfrmEditor.pFullPathUnix;
+procedure TfrmEditor.pFullPath_Unix;
 var
   sUnixPath: string;
 
@@ -3122,7 +3122,7 @@ begin
   Clipboard.AsText:= sUnixPath;
 end;
 
-procedure TfrmEditor.pFullPathWindows;
+procedure TfrmEditor.pFullPath_Windows;
 begin
   with Clipboard do
    if HasFormat(CF_TEXT) then Clear;

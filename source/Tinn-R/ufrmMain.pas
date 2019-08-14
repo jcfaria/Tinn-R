@@ -195,7 +195,7 @@ uses
   JvComCtrls, JvMenus, JvAppHotKey, JvTimer, SynUnicode, SynEditTextBuffer, DB,
   SynEditOC, PngImageList, JvAppStorage, ATBinHex, ATxCodepages, ATFileNotificationSimple,
   IdHTTP, IdException, IdStack, JvUpDown, PerlRegEx, UrlMon,
-  trRUtils, ufrmSH_map;
+  trRUtils, ufrmSKH_map;
 
 const
   WM_OPENEDITOR = WM_USER + 1;
@@ -1987,7 +1987,7 @@ type
     Rnomultlinestring6: TMenuItem;
     imlRSend_Plus: TPngImageList;
     synIO_History: TSynCompletionProposal;
-    menShortcuts_Hotkeys: TMenuItem;
+    menSKH: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2536,7 +2536,7 @@ type
     procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x,
       y: Integer; var CanExecute: Boolean);
-    procedure menShortcuts_HotkeysClick(Sender: TObject);
+    procedure menSKHClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -2573,10 +2573,10 @@ type
     bRTinnRcom_Loaded              : boolean;
     bRTinnRcom_Updating            : boolean;
     bRUseLatest                    : boolean;
-    bScrollSendingLines            : boolean;
-    bSearchDirectory               : boolean;
-    bSearchInSub                   : boolean;
-    bSearchOpenFiles               : boolean;
+    bScroll_SendingLines           : boolean;
+    bSearch_Directory              : boolean;
+    bSearch_InSub                  : boolean;
+    bSearch_OpenFiles              : boolean;
     bStartingUp                    : boolean;
     //bStartOptionsWithProcessingPage: boolean;
     //bStartOptionsWithRPage         : boolean;
@@ -2667,8 +2667,8 @@ type
     sRIOSaved                      : string;
     sRLibPathDefault               : string;
     sRLogSaved                     : string;
-    sSearchDirHistory              : string;
-    sSearchFileMaskHistory         : string;
+    sSearch_DirHistory             : string;
+    sSearch_FileMaskHistory        : string;
     sTipFromRServer                : string;
     sVersion_Cache                 : string;
     sVersion_Comments              : string;
@@ -2858,11 +2858,11 @@ type
     bRtermFindError              : boolean;
     bRtermWidth                  : boolean;
     bRSmart                      : boolean;
-    bSearchBackwards             : boolean;
-    bSearchCaseSensitive         : boolean;
-    bSearchFromCursor            : boolean;
-    bSearchRegExp                : boolean;
-    bSearchWholeWords            : boolean;
+    bSearch_Backwards            : boolean;
+    bSearch_CaseSensitive        : boolean;
+    bSearch_FromCursor           : boolean;
+    bSearch_RegExp               : boolean;
+    bSearch_WholeWords           : boolean;
     bselectedToPreview           : boolean;
     bHotKeys_On                  : boolean;
     bUndoAfterSave               : boolean;
@@ -2875,7 +2875,7 @@ type
     clBrackets                   : TColor;
     clFGApplication              : TColor;
     coEditor                     : TSynEditorOC;
-    dlgSH_Map                    : TfrmSH_Map_Dlg;
+    dlgSKH_Map                   : TfrmSKH_Map_Dlg;
     ffDefault                    : TSynEditFileFormat;
     hRgui                        : HWND;
     iAlphaBlendValue             : integer;
@@ -2945,7 +2945,7 @@ type
     sRmirrorsBookMark            : string;
     sRtipBookMark                : string;
     sSaveAsFileExt               : string;
-    sSearchTextHistory           : string;
+    sSearch_TextHistory          : string;
     sShortcutsInUse              : string;
     sTipToWrite                  : string;
     sUpdate                      : string;
@@ -3428,11 +3428,11 @@ begin
 
   if bRememberFileState then
     // Load file state from Cache.xml
-    if modDados.fLoadFileState(sFile,
-                               sMarks,
-                               iTopLine,
-                               iCaretX,
-                               iCaretY) then begin
+    if modDados.fLoad_FileState(sFile,
+                                sMarks,
+                                iTopLine,
+                                iCaretX,
+                                iCaretY) then begin
       // Restore all marks
       if (sMarks <> EmptyStr) then begin
         slTmp1:= TStringList.Create;
@@ -3622,7 +3622,7 @@ begin
                        synEditor,
                        'CTRL+SPACE');
 
-    pSetHighlighterFromFileExt(ExtractFileExt(sFileName));
+    pSetHighlighter_FromFileExt(ExtractFileExt(sFileName));
     pSetTitle;
 
     if bActiveLine then synEditor.ActiveLineColor:= TColor(clActiveLine)
@@ -3636,7 +3636,7 @@ begin
 
     // File notify: Start
     fNotif:= TATFileNotificationSimple.Create(Self);
-    fNotif.OnChanged:= pFileChanged;
+    fNotif.OnChanged:= pFile_Changed;
     pNotifyFile_Start(sFileName);
   end;
 
@@ -3862,7 +3862,7 @@ begin
     WriteBool('App', 'bRTinnRcomInstall', bRTinnRcom_Install);
     WriteBool('App', 'bRTinnRcomLoad', bRTinnRcom_Load);
     WriteBool('App', 'bRUseLatest', bRUseLatest);
-    WriteBool('App', 'bScrollSendingLines', bScrollSendingLines);
+    WriteBool('App', 'bScroll_SendingLines', bScroll_SendingLines);
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
@@ -3922,14 +3922,14 @@ begin
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
 
     // Search settings
-    WriteBool('Search', 'bSearchBackwards', bSearchBackwards);
-    WriteBool('Search', 'bSearchCaseSensitive', bSearchCaseSensitive);
-    WriteBool('Search', 'bSearchDirectory', bSearchDirectory);
-    WriteBool('Search', 'bSearchFromCursor', bSearchFromCursor);
-    WriteBool('Search', 'bSearchInSub', bSearchInSub);
-    WriteBool('Search', 'bSearchOpenFiles', bSearchOpenFiles);
-    WriteBool('Search', 'bSearchRegExp', bSearchRegExp);
-    WriteBool('Search', 'bSearchWholeWords', bSearchWholeWords);
+    WriteBool('Search', 'bSearch_Backwards', bSearch_Backwards);
+    WriteBool('Search', 'bSearch_CaseSensitive', bSearch_CaseSensitive);
+    WriteBool('Search', 'bSearch_Directory', bSearch_Directory);
+    WriteBool('Search', 'bSearch_FromCursor', bSearch_FromCursor);
+    WriteBool('Search', 'bSearch_InSub', bSearch_InSub);
+    WriteBool('Search', 'bSearch_OpenFiles', bSearch_OpenFiles);
+    WriteBool('Search', 'bSearch_RegExp', bSearch_RegExp);
+    WriteBool('Search', 'bSearch_WholeWords', bSearch_WholeWords);
     WriteInteger('Search', 'iLastSearch', iLastSearch);
 
     // Print settings
@@ -4047,7 +4047,7 @@ begin
 
   // Search Text History
   slSearch     := TStringList.Create;
-  slSearch.Text:= sSearchTextHistory;
+  slSearch.Text:= sSearch_TextHistory;
   i:= 0;
   while (slSearch.Count >= 1) and
         (i < iLastSearch) do begin
@@ -4079,7 +4079,7 @@ begin
 
   // Search Dir History
   slSearch     := TStringList.Create;
-  slSearch.Text:= sSearchDirHistory;
+  slSearch.Text:= sSearch_DirHistory;
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
@@ -4094,7 +4094,7 @@ begin
 
   // Search File Mask History
   slSearch     := TStringList.Create;
-  slSearch.Text:= sSearchFileMaskHistory;
+  slSearch.Text:= sSearch_FileMaskHistory;
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
@@ -4423,7 +4423,7 @@ begin
     WriteBool('App', 'bRTinnRcomInstall', bRTinnRcom_Install);
     WriteBool('App', 'bRTinnRcomLoad', bRTinnRcom_Load);
     WriteBool('App', 'bRUseLatest', bRUseLatest);
-    WriteBool('App', 'bScrollSendingLines', bScrollSendingLines);
+    WriteBool('App', 'bScroll_SendingLines', bScroll_SendingLines);
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
@@ -4483,14 +4483,14 @@ begin
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
 
     // Search settings
-    WriteBool('Search', 'bSearchBackwards', bSearchBackwards);
-    WriteBool('Search', 'bSearchCaseSensitive', bSearchCaseSensitive);
-    WriteBool('Search', 'bSearchDirectory', bSearchDirectory);
-    WriteBool('Search', 'bSearchFromCursor', bSearchFromCursor);
-    WriteBool('Search', 'bSearchInSub', bSearchInSub);
-    WriteBool('Search', 'bSearchOpenFiles', bSearchOpenFiles);
-    WriteBool('Search', 'bSearchRegExp', bSearchRegExp);
-    WriteBool('Search', 'bSearchWholeWords', bSearchWholeWords);
+    WriteBool('Search', 'bSearch_Backwards', bSearch_Backwards);
+    WriteBool('Search', 'bSearch_CaseSensitive', bSearch_CaseSensitive);
+    WriteBool('Search', 'bSearch_Directory', bSearch_Directory);
+    WriteBool('Search', 'bSearch_FromCursor', bSearch_FromCursor);
+    WriteBool('Search', 'bSearch_InSub', bSearch_InSub);
+    WriteBool('Search', 'bSearch_OpenFiles', bSearch_OpenFiles);
+    WriteBool('Search', 'bSearch_RegExp', bSearch_RegExp);
+    WriteBool('Search', 'bSearch_WholeWords', bSearch_WholeWords);
     WriteInteger('Search', 'iLastSearch', iLastSearch);
 
     // Print settings
@@ -4612,7 +4612,7 @@ begin
 
   // Search Text History
   slSearch     := TStringList.Create;
-  slSearch.Text:= sSearchTextHistory;
+  slSearch.Text:= sSearch_TextHistory;
   i:= 0;
   while (slSearch.Count >= 1) and
         (i < iLastSearch) do begin
@@ -4645,7 +4645,7 @@ begin
   // Search Dir History
   ifTinn.EraseSection('Search Dir History');
   slSearch     := TStringList.Create;
-  slSearch.Text:= sSearchDirHistory;
+  slSearch.Text:= sSearch_DirHistory;
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
@@ -4661,7 +4661,7 @@ begin
   // Search File Mask History
   ifTinn.EraseSection('Search File Mask History');
   slSearch     := TStringList.Create;
-  slSearch.Text:= sSearchFileMaskHistory;
+  slSearch.Text:= sSearch_FileMaskHistory;
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
@@ -4821,10 +4821,10 @@ end;
 
 procedure TfrmMain.pSetEOLDefault(sTmp: string);
 begin
-  case fStringToCase_Select(sTmp,
-                            ['WIN',
-                             'MAC',
-                             'UNIX']) of
+  case fString_ToCase_Select(sTmp,
+                             ['WIN',
+                              'MAC',
+                              'UNIX']) of
     0: actWINExecute(Self);   // WIN
     1: actMACExecute(Self);   // MAC
     2: actUNIXExecute(Self);  // UNIX
@@ -4833,11 +4833,11 @@ end;
 
 procedure TfrmMain.pSetEncodingDefault(sTmp: string);
 begin
-  case fStringToCase_Select(sTmp,
-                            ['ANSI',
-                             'UTF8',
-                             'UTF16LE',
-                             'UTF16BE']) of
+  case fString_ToCase_Select(sTmp,
+                             ['ANSI',
+                              'UTF8',
+                              'UTF16LE',
+                              'UTF16BE']) of
     0: actANSIExecute(Self);     // ANSI
     1: actUTF8Execute(Self);     // UTF-8
     2: actUTF16LEExecute(Self);  // UTF-16 LE
@@ -5189,7 +5189,7 @@ begin
   bRTinnRcom_Install           := ifTinn.ReadBool('App', 'bRTinnRcomInstall', True);
   bRTinnRcom_Load              := ifTinn.ReadBool('App', 'bRTinnRcomLoad', True);
   bRUseLatest                  := ifTinn.ReadBool('App', 'bRUseLatest', True);
-  bScrollSendingLines          := ifTinn.ReadBool('App', 'bScrollSendingLines', True);
+  bScroll_SendingLines         := ifTinn.ReadBool('App', 'bScroll_SendingLines', True);
   iRecognition_Caption         := ifTinn.ReadInteger('App', 'iRecognition_Caption', 2);
   iReformatRSplit              := ifTinn.ReadInteger('App', 'iReformatRSPlit', 1);
   iRguiTinnR_Disposition       := ifTinn.ReadInteger('App', 'iRguiTinnR_Disposition', 0);
@@ -5305,15 +5305,15 @@ begin
   pSetEOLDefault(sEOLDefault);
 
   // Search Settings
-  bSearchBackwards    := ifTinn.ReadBool('Search', 'bSearchBackwards', False);
-  bSearchCaseSensitive:= ifTinn.ReadBool('Search', 'bSearchCaseSensitive', False);
-  bSearchDirectory    := ifTinn.ReadBool('Search', 'bSearchDirectory', False);
-  bSearchFromCursor   := ifTinn.ReadBool('Search', 'bSearchFromCursor', False);
-  bSearchInSub        := ifTinn.ReadBool('Search', 'bSearchInSub', False);
-  bSearchOpenFiles    := ifTinn.ReadBool('Search', 'bSearchOpenFiles', True);
-  bSearchRegExp       := ifTinn.ReadBool('Search', 'bSearchRegExp', False);
-  bSearchWholeWords   := ifTinn.ReadBool('Search', 'bSearchWholeWords', False);
-  iLastSearch         := ifTinn.ReadInteger('Search', 'iLastSearch', 10);
+  bSearch_Backwards    := ifTinn.ReadBool('Search', 'bSearch_Backwards', False);
+  bSearch_CaseSensitive:= ifTinn.ReadBool('Search', 'bSearch_CaseSensitive', False);
+  bSearch_Directory    := ifTinn.ReadBool('Search', 'bSearch_Directory', False);
+  bSearch_FromCursor   := ifTinn.ReadBool('Search', 'bSearch_FromCursor', False);
+  bSearch_InSub        := ifTinn.ReadBool('Search', 'bSearch_InSub', False);
+  bSearch_OpenFiles    := ifTinn.ReadBool('Search', 'bSearch_OpenFiles', True);
+  bSearch_RegExp       := ifTinn.ReadBool('Search', 'bSearch_RegExp', False);
+  bSearch_WholeWords   := ifTinn.ReadBool('Search', 'bSearch_WholeWords', False);
+  iLastSearch          := ifTinn.ReadInteger('Search', 'iLastSearch', 10);
 
   // Print settings
   bPrintColors     := ifTinn.ReadBool('Print', 'bPrintColors', True);
@@ -5501,13 +5501,13 @@ begin
                   iPos + 1,
                   length(sTmp));
 
-      if (i = 0) then sSearchTextHistory:= sTmp
-                 else sSearchTextHistory:= sSearchTextHistory +
-                                           #10 +
-                                           sTmp;
+      if (i = 0) then sSearch_TextHistory:= sTmp
+                 else sSearch_TextHistory:= sSearch_TextHistory +
+                                            #10 +
+                                            sTmp;
     end;
   end
-  else sSearchTextHistory:= EmptyStr;
+  else sSearch_TextHistory:= EmptyStr;
 
   // Replace Text History
   slReplace:= TStringList.Create;
@@ -5534,7 +5534,7 @@ begin
 
   //Search Dir History
   slSearch:= TStringList.Create;
-  sSearchDirHistory:= EmptyStr;
+  sSearch_DirHistory:= EmptyStr;
 
   ifTinn.ReadSectionValues('Search Dir History',
                            slSearch);
@@ -5551,13 +5551,13 @@ begin
                   iPos + 1,
                   length(sTmp));
 
-      if (i = 0) then sSearchDirHistory:= sTmp
-                 else sSearchDirHistory:= sSearchDirHistory +
-                                          #10 +
-                                          sTmp;
+      if (i = 0) then sSearch_DirHistory:= sTmp
+                 else sSearch_DirHistory:= sSearch_DirHistory +
+                                           #10 +
+                                           sTmp;
     end;
   end
-  else sSearchDirHistory:= EmptyStr;
+  else sSearch_DirHistory:= EmptyStr;
 
   // Search File Mask History
   slSearch:= TStringList.Create;
@@ -5575,13 +5575,13 @@ begin
                   iPos + 1,
                   length(sTmp));
 
-      if (i = 0) then sSearchFileMaskHistory:= sTmp
-                 else sSearchFileMaskHistory:= sSearchFileMaskHistory +
-                                               #10 +
-                                               sTmp;
+      if (i = 0) then sSearch_FileMaskHistory:= sTmp
+                 else sSearch_FileMaskHistory:= sSearch_FileMaskHistory +
+                                                #10 +
+                                                sTmp;
     end;
   end
-  else sSearchFileMaskHistory:= EmptyStr;
+  else sSearch_FileMaskHistory:= EmptyStr;
 
   // Favorite Folders
   slTmpFavoriteFolders:= TStringList.Create;
@@ -5602,7 +5602,7 @@ begin
       slFavoriteFolders.Add(sTmp);
     end;
   end
-  else sSearchFileMaskHistory:= EmptyStr;
+  else sSearch_FileMaskHistory:= EmptyStr;
   frmTools.cbExplorerFavorites.Items.AddStrings(slFavoriteFolders);
   FreeAndNil(slTmpFavoriteFolders);
   FreeAndNil(slFavoriteFolders);
@@ -5621,7 +5621,7 @@ begin
   ifTinn.ReadSectionValues('Diff Options', slTextDiff);
 
   // Paths and version of R
-  sPath_R:= fGetRegistry_InstallPath('SOFTWARE\R-core\R');
+  sPath_R:= fGet_Registry_InstallPath('SOFTWARE\R-core\R');
 
   bRArchitecture64:= bRArchitecture64 and
                      DirectoryExists(sPath_R +
@@ -5814,7 +5814,7 @@ procedure TfrmMain.pGetCallTip(var sRObject,
            1,
            iPosDoubleCote);
 
-    sRes:= fInvertString(sRes);
+    sRes:= fString_Invert(sRes);
 
     iPosDoubleCote:= Pos('"',
                          sRes);
@@ -5823,7 +5823,7 @@ procedure TfrmMain.pGetCallTip(var sRObject,
            1,
            iPosDoubleCote);
 
-    sRes:= fInvertString(sRes);
+    sRes:= fString_Invert(sRes);
 
     sRes:= StringReplace(sRes,
                          '\"',
@@ -6523,7 +6523,7 @@ procedure TfrmMain.synCompletion(Kind: SynCompletionType;
              i);
 
       // Remove latest "
-      sCompletion:= fInvertString(sCompletion);
+      sCompletion:= fString_Invert(sCompletion);
 
       i:= Pos('"',
               sCompletion);
@@ -6540,7 +6540,7 @@ procedure TfrmMain.synCompletion(Kind: SynCompletionType;
              1,
              i);
 
-      sCompletion:= fInvertString(sCompletion);
+      sCompletion:= fString_Invert(sCompletion);
       sCompletion:= trim(sCompletion);
     end;
 
@@ -6972,7 +6972,7 @@ begin
                        (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor,
                        'CTRL+SPACE');
 
-    (Self.MDIChildren[fFindTopWindow] as tfrmEditor).pToogleWordWrap(actEditorLineWrap.Checked);
+    (Self.MDIChildren[fFindTopWindow] as tfrmEditor).pLineWrap_Toogle(actEditorLineWrap.Checked);
 
     synEditor.ReadOnly:= False;
 
@@ -7205,7 +7205,7 @@ begin
   if (Self.MDIChildCount > 0) then begin
     for i:= (Self.MDIChildCount - 1) downto 0 do
       if Self.MDIChildren[i].Active then break;
-    (Self.MDIChildren[i] as TfrmEditor).pSetHighlighterStatus(Sender);
+    (Self.MDIChildren[i] as TfrmEditor).pSetHighlighter_Status(Sender);
     pgFiles.ActivePage.Tag:= (Self.MDIChildren[i] as TfrmEditor).fSetHighlighterID;
   end
   else begin
@@ -7240,7 +7240,7 @@ begin
                sWhere;
 
   try
-    sViewerDefault:= fGetAssociation('.pdf');
+    sViewerDefault:= fGet_Association('.pdf');
 
     if Pos('Sumatra',
            sViewerDefault) > 0 then
@@ -7764,9 +7764,9 @@ var
   sRLibDefault: string;
 
 begin
-  sRLibDefault:= fGetSpecialFolder(CSIDL_PERSONAL) +  // The same folder created (default) by R
+  sRLibDefault:= fGet_SpecialFolder(CSIDL_PERSONAL) +  // The same folder created (default) by R
                  '\R\win-library\' +
-                 fRLibraryNumber(fGetRegistry_Key('SOFTWARE\R-core\R'));
+                 fRLibraryNumber(fGet_Registry_Key('SOFTWARE\R-core\R'));
 
   if (not DirectoryExists(sRLibDefault)) then begin
     try
@@ -8292,7 +8292,7 @@ begin
     sPath_Ini:= sPath_Ini + '\app_data';  // Portable
   end
   else begin
-    sApp_Data:= fGetSpecialFolder(CSIDL_APPDATA);
+    sApp_Data:= fGet_SpecialFolder(CSIDL_APPDATA);
     sPath_Ini:= sApp_Data + '\Tinn-R';
   end;
 
@@ -8662,10 +8662,10 @@ begin
                       'Shortcuts.xml');  // It is necessary to make a new copy from origin
 
           with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts.xml
-            pShortcutsValidation(sPath_Data +
-                                 '\OldShortcuts.xml',
-                                 sPath_Data +
-                                 '\Shortcuts.xml');
+            pShortcuts_Validation(sPath_Data +
+                                  '\OldShortcuts.xml',
+                                  sPath_Data +
+                                  '\Shortcuts.xml');
           DeleteFile(sPath_Data +
                      '\OldShortcuts.xml');
         end
@@ -8676,9 +8676,9 @@ begin
                       'Shortcuts.xml');  // It is necessary to make a new copy from origin
 
           with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts.xml
-            pShortcutsValidation(sShortcutsInUse,
-                                 sPath_Data +
-                                 '\Shortcuts.xml');
+            pShortcuts_Validation(sShortcutsInUse,
+                                  sPath_Data +
+                                  '\Shortcuts.xml');
           DeleteFile(sShortcutsInUse);
         end;
 
@@ -9599,7 +9599,7 @@ begin
 
   // TfrmRmirrors.ActualizeCountries
   with modDados do begin
-    pRmirrorsCountriesFilter(nil);
+    pRmirrorsCountries_Filter(nil);
 
     frmTools.lbCountries.Items:= slRmirrors_Countries;
     frmTools.lbCountries.Refresh;
@@ -10516,7 +10516,7 @@ begin
   tnFile:= nil;
   with frmTools.tvSearch do begin
     if (Items.Count > 0) and
-       not bSearchOpenFiles then begin
+       not bSearch_OpenFiles then begin
       Items.Clear;
       frmTools.tvSearch.Refresh;
     end;
@@ -10678,10 +10678,10 @@ procedure TfrmMain.pSetupSearchParameters(sSearchText: string);
 begin
   if rsSearch = nil then rsSearch:= TRegExpr.Create;
   if (length(trim(sSearchText)) = 0) then sSearchText:= ' ';
-  if not bSearchRegExp then sSearchText:= fStripRegExPower(sSearchText);
-  if bSearchWholeWords then sSearchText:= sSearchText +
-                                          '\W';
-  rsSearch.ModifierI := not bSearchCaseSensitive;
+  if not bSearch_RegExp then sSearchText:= fStripRegExPower(sSearchText);
+  if bSearch_WholeWords then sSearchText:= sSearchText +
+                                           '\W';
+  rsSearch.ModifierI := not bSearch_CaseSensitive;
   rsSearch.Expression:= sSearchText;
 end;
 
@@ -10718,7 +10718,7 @@ begin
                   curFile.cFilename) then tsFileList.Add(sPath +
                                                          curFile.cFilename);
 
-  if bSearchInSub then begin
+  if bSearch_InSub then begin
     // Ok to search sub directories
     slPath:= TStringList.Create;
     try
@@ -11381,7 +11381,7 @@ var
 
 begin
   with modDados do
-    if not fActionlistToDataset then Exit;
+    if not fActionlist_To_Dataset then Exit;
 
   sOrigin:= sPath_Data +
             '\' +
@@ -11574,7 +11574,7 @@ begin
 
   if (Self.MDIChildCount > 0) then
     for  i:= (Self.MDIChildCount - 1) downto 0 do
-      (Self.MDIChildren[i] as tfrmEditor).pToogleWordWrap(actEditorLineWrap.Checked);
+      (Self.MDIChildren[i] as tfrmEditor).pLineWrap_Toogle(actEditorLineWrap.Checked);
 end;
 
 procedure TfrmMain.TBRMainMove(Sender: TObject);
@@ -14004,7 +14004,7 @@ begin
       cbRtermCanFloat.Checked            := bRtermCanFloat;
       cbRTinnRcom_Install.Checked        := bRTinnRcom_Install;
       cbRTinnRcom_Load.Checked           := bRTinnRcom_Load;
-      cbScrollSendingLines.Checked       := bScrollSendingLines;
+      cbScrollSendingLines.Checked       := bScroll_SendingLines;
       cbToolsCanFloat.Checked            := bToolsCanFloat;
       cbUndoAfterSave.Checked            := bUndoAfterSave;
       edFormatR.Text                     := sFormatR;
@@ -14299,7 +14299,7 @@ begin
         bRtermCanFloat                := cbRtermCanFloat.Checked;
         bRTinnRcom_Install            := cbRTinnRcom_Install.Checked;
         bRTinnRcom_Load               := cbRTinnRcom_Load.Checked;
-        bScrollSendingLines           := cbScrollSendingLines.Checked;
+        bScroll_SendingLines          := cbScrollSendingLines.Checked;
         bToolsCanFloat                := cbToolsCanFloat.Checked;
         bUndoAfterSave                := cbUndoAfterSave.Checked;
         clBGApplication               := shSampleApplication.Brush.Color;
@@ -14452,7 +14452,7 @@ begin
       // Update all opened files
       for i:= (Self.MDIChildCount - 1) downto 0 do begin
         // Line wraping
-        (Self.MDIChildren[i] as tfrmEditor).pToogleWordWrap(actEditorLineWrap.Checked);
+        (Self.MDIChildren[i] as tfrmEditor).pLineWrap_Toogle(actEditorLineWrap.Checked);
 
         // SynEditor
         coEditor.AssignTo((Self.MDIChildren[i] as TfrmEditor).synEditor);
@@ -14579,15 +14579,15 @@ begin
     9: Other
   }
 
-  case fStringToCase_Select(sRObjGroup,
-                            ['function',
-                             'vector',
-                             'matrix',
-                             'data.frame',
-                             'array',
-                             'list',
-                             'table',
-                             'other']) of
+  case fString_ToCase_Select(sRObjGroup,
+                             ['function',
+                              'vector',
+                              'matrix',
+                              'data.frame',
+                              'array',
+                              'list',
+                              'table',
+                              'other']) of
     0: begin  // function
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 2) then
@@ -14870,76 +14870,8 @@ begin
   end;
 end;
 
-procedure TfrmMain.menShortcuts_HotkeysClick(Sender: TObject);
-//var
-//  pTmp: pointer;
-//
-//  bHotkeys_Status: boolean;
-//
+procedure TfrmMain.menSKHClick(Sender: TObject);
 begin
-//  bHotkeys_Status:= False;
-//
-//  // Related to Shortcuts
-//  with modDados.cdShortcuts do
-//    pTmp:= GetBookmark;
-//
-//  try
-//    dlgSH_Map:= TfrmSH_Map_Dlg.Create(Self);
-//
-//    // Initial status
-//    with dlgSH_Map do begin
-//      pgShortcuts.ActivePage:= tbsAppShortcuts;
-//      pgRhotkeys.ActivePage:= tbsSend_Control;
-//    end;
-//
-//    // Stores the status of the Hotkeys and turn all off
-//    bHotkeys_Status:= bHotKeys_On;
-//    if bHotKeys_On then begin
-//      bHotKeys_On:= False;
-//      with frmHotkeys do
-//        pSetHotkeys(False);
-//    end;
-//
-//    // If OK
-//    if (dlgSH_Map.ShowModal = mrOK) then begin
-//      with modDados.cdShortcuts do begin
-//        Edit;
-//        try
-//          Post;
-//          MergeChangeLog;
-//          SaveToFile();
-//          frmMain.iShortcutsBeforeChanges:= SavePoint;
-//        except
-//          //TODO
-//        end;
-//      end;
-//
-//      with modDados.cdShortcuts do
-//        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
-//      pDatasetToActionList;
-//      pSetFocus_Main;
-//    end // if (dlgSH_Map.ShowModal = mrOK)
-//    // Else
-//    else begin
-//      with modDados do begin
-//        cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
-//        cdShortcutsAfterScroll(nil);
-//      end;
-//    end;
-//
-//  finally
-//    with modDados.cdShortcuts do begin
-//      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
-//      FreeBookmark(pTmp);
-//    end;
-//
-//    FreeAndNil(dlgSH_Map);
-//
-//    // Restore the Hotkeys status
-//    bHotKeys_On:= bHotkeys_Status;
-//    with frmHotkeys do
-//      pSetHotkeys(bHotKeys_On);
-//  end;
   actShortcutsEditExecute(Self);
 end;
 
@@ -15904,7 +15836,7 @@ begin
   i:= fFindTopWindow;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
-    pEditorSplit(False);
+    pEditor_Split(False);
 
   pSetDataCompletion(synEditor2_Tip,
                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
@@ -15922,7 +15854,7 @@ begin
 
   i:= fFindTopWindow;
   with (Self.MDIChildren[i] as TfrmEditor) do
-    pEditorSplit;
+    pEditor_Split;
 
   pSetDataCompletion(synEditor2_Tip,
                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
@@ -15936,7 +15868,7 @@ begin
   synURIOpener.Editor:= nil;
 
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pEditorRemoveSplit;
+    pEditor_RemoveSplit;
 
   with synEditor2_Tip do begin
     Editor       := nil;
@@ -16659,7 +16591,7 @@ begin
     BeginUpdate;
     bLineWrap:= False;
 
-    if bScrollSendingLines then begin  // Automatize scroll!
+    if bScroll_SendingLines then begin  // Automatize scroll!
       if WordWrap then begin
         bLineWrap:= True;
         actEditorLineWrapExecute(nil);
@@ -19507,8 +19439,8 @@ var
   begin
     if (sTmp1 = sTmp2) and
        actTMp.Checked then begin          // Avoid multiple instance of viewer and break compiling Pdf files
-      tmpHandle:= fGetWindowHandle(Pchar(ChangeFileExt(sTmpFile,
-                                                       sExtension)),
+      tmpHandle:= fGet_WindowHandle(Pchar(ChangeFileExt(sTmpFile,
+                                                        sExtension)),
                                   True);  // Will close the instance of application with the opened .pdf file
 
       if not (PostMessage(tmpHandle,
@@ -19858,7 +19790,7 @@ begin
 
     // File notify: Start
     fNotif:= TATFileNotificationSimple.Create(Self);
-    fNotif.OnChanged:= pFileChanged;
+    fNotif.OnChanged:= pFile_Changed;
     pNotifyFile_Start(sActiveFile);
 
     stbMain.Panels[8].Text:= 'Reloaded file';
@@ -20567,80 +20499,6 @@ begin
 end;
 
 procedure TfrmMain.actShortcutsEditExecute(Sender: TObject);
-{
-  procedure pUpdateCompletionArgs;
-  var
-    i: integer;
-
-  begin
-    i:= fFindTopWindow;
-
-    if Assigned(Self.MDIChildren[i] as TfrmEditor) then begin
-      pSetDataCompletion(synEditor_Tip,
-                         (Self.MDIChildren[i] as TfrmEditor).synEditor,
-                         'CTRL+SPACE');
-
-      pSetDataCompletion(synEditor2_Tip,
-                         (Self.MDIChildren[i] as TfrmEditor).synEditor2,
-                         'CTRL+SPACE');
-    end;
-
-    pSetDataCompletion(synIO_Tip,
-                       frmRterm.synIO,
-                       'CTRL+SPACE');
-  end;
-
-var
-  pTmp: pointer;
-
-  n: integer;
-
-  sShortcuts: array of string;
-
-  procedure pRemoveShortcuts;
-  var
-    i: integer;
-
-  begin
-    // Reset all shortcuts
-    with alMain do begin
-      n:= ActionCount;
-      SetLength(sShortcuts,
-                n);
-
-      for i:= 0 to n - 1 do
-        If (Actions[i] is TAction) then begin
-           sShortcuts[i]:= ShortCutToText(TAction(Actions[i]).Shortcut);
-           TAction(Actions[i]).Shortcut:= TextToShortCut('None');
-        end;
-    end;
-  end;
-
-begin
-
-  with modDados.cdShortcuts do
-    pTmp:= GetBookmark;
-
-  Application.CreateForm(TfrmShortcuts,
-                         frmShortcuts);
-
-  with frmShortcuts do
-    try
-      pRemoveShortcuts;
-      ShowModal;
-      with modDados.cdShortcuts do begin
-        if BookmarkValid(pTmp) then GoToBookmark(pTmp);
-        FreeBookmark(pTmp);
-      end;
-    finally
-      frmMain.Refresh;
-      FreeAndNil(frmShortcuts);
-      pDatasetToActionList;
-      pUpdateCompletionArgs;
-      pSetFocus_Main;
-    end;
-}
-
 var
   pTmp: pointer;
 
@@ -20654,10 +20512,10 @@ begin
     pTmp:= GetBookmark;
 
   try
-    dlgSH_Map:= TfrmSH_Map_Dlg.Create(Self);
+    dlgSKH_Map:= TfrmSKH_Map_Dlg.Create(Self);
 
     // Initial status
-    with dlgSH_Map do begin
+    with dlgSKH_Map do begin
       pgSH.ActivePage:= tbsAppShortcuts;
       pgRhotkeys.ActivePage:= tbsSend_Control;
     end;
@@ -20671,7 +20529,7 @@ begin
     end;
 
     // If OK
-    if (dlgSH_Map.ShowModal = mrOK) then begin
+    if (dlgSKH_Map.ShowModal = mrOK) then begin
       with modDados.cdShortcuts do begin
         Edit;
         try
@@ -20703,7 +20561,7 @@ begin
       FreeBookmark(pTmp);
     end;
 
-    FreeAndNil(dlgSH_Map);
+    FreeAndNil(dlgSKH_Map);
 
     // Restore the Hotkeys status
     bHotKeys_On:= bHotkeys_Status;
@@ -20746,9 +20604,9 @@ var
 
   lSavedCursor: TCursor;
 
-  sSearchText,
-   sSearchDirectoryText,
-   sSearchFileMask: string;
+  sSearch_Text,
+   sSearch_DirectoryText,
+   sSearch_FileMask: string;
 
   seEditor: TSynEdit;
 
@@ -20756,16 +20614,16 @@ begin
   dlg:= TfrmSearch_InFiles_Dlg.Create(Self);
 
   with dlg do begin
-    if (sSearchFileMaskHistory <> EmptyStr) then SearchFileMaskHistory:= sSearchFileMaskHistory;
-    SearchCaseSensitive    := bSearchCaseSensitive;
-    SearchDirectory        := bSearchDirectory;
-    SearchDirectoryText    := sSearchDirectoryText;
-    SearchDirHistory       := sSearchDirHistory;
-    SearchInSub            := bSearchInSub;
-    SearchOpenFiles        := bSearchOpenFiles;
-    SearchRegularExpression:= bSearchRegExp;
-    SearchTextHistory      := sSearchTextHistory;
-    SearchWholeWords       := bSearchWholeWords;
+    if (sSearch_FileMaskHistory <> EmptyStr) then SearchFileMaskHistory:= sSearch_FileMaskHistory;
+    SearchCaseSensitive    := bSearch_CaseSensitive;
+    SearchDirectory        := bSearch_Directory;
+    SearchDirectoryText    := sSearch_DirectoryText;
+    SearchDirHistory       := sSearch_DirHistory;
+    SearchInSub            := bSearch_InSub;
+    SearchOpenFiles        := bSearch_OpenFiles;
+    SearchRegularExpression:= bSearch_RegExp;
+    SearchTextHistory      := sSearch_TextHistory;
+    SearchWholeWords       := bSearch_WholeWords;
   end;
 
   iMatchCount    := 0;
@@ -20812,36 +20670,36 @@ begin
     end;
     try
       with dlg do begin
-        bSearchCaseSensitive  := SearchCaseSensitive;
-        bSearchDirectory      := SearchDirectory;
-        bSearchInSub          := SearchInSub;
-        bSearchOpenFiles      := SearchOpenFiles;
-        bSearchRegExp         := SearchRegularExpression;
-        bSearchWholeWords     := SearchWholeWords;
-        sSearchDirectoryText  := SearchDirectoryText;
-        sSearchDirHistory     := SearchDirHistory;
-        sSearchFileMask       := SearchFileMask;
-        sSearchFileMaskHistory:= SearchFileMaskHistory;
-        sSearchText           := SearchText;
+        bSearch_CaseSensitive  := SearchCaseSensitive;
+        bSearch_Directory      := SearchDirectory;
+        bSearch_InSub          := SearchInSub;
+        bSearch_OpenFiles      := SearchOpenFiles;
+        bSearch_RegExp         := SearchRegularExpression;
+        bSearch_WholeWords     := SearchWholeWords;
+        sSearch_DirectoryText  := SearchDirectoryText;
+        sSearch_DirHistory     := SearchDirHistory;
+        sSearch_FileMask       := SearchFileMask;
+        sSearch_FileMaskHistory:= SearchFileMaskHistory;
+        sSearch_Text           := SearchText;
       end;
 
       with dlg do begin
         iTimerCounter:= 0;
         iTotFileCount:= 0;
-        pSetupSearchParameters(sSearchText);
-        if bSearchOpenFiles then begin
+        pSetupSearchParameters(sSearch_Text);
+        if bSearch_OpenFiles then begin
           pSearchInOpenFiles(iFoundFileCount,
                              iMatchCount);
           iTotFileCount:= Self.MDIChildCount;
         end;
-        if bSearchDirectory then begin
-          pSearchInDirectories(sSearchDirectoryText,
-                               sSearchFileMask,
+        if bSearch_Directory then begin
+          pSearchInDirectories(sSearch_DirectoryText,
+                               sSearch_FileMask,
                                iFoundFileCount,
                                iMatchCount,
                                iTotFileCount);
         end;
-        sSearchTextHistory:= dlg.SearchTextHistory;
+        sSearch_TextHistory:= dlg.SearchTextHistory;
       end;
     finally
       if (MDIChildCount > 0) then TfrmEditor(frmMain.MDIChildren[0]).synEditor.cursor:= lSavedCursor
@@ -20872,19 +20730,19 @@ end;
 procedure TfrmMain.actCopyFormattedRtfExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pCopyFormattedRtf;
+    pCopyFormatted_RTF;
 end;
 
 procedure TfrmMain.actCopyFormattedHtmlExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pCopyFormattedHtml;
+    pCopyFormatted_HTML;
 end;
 
 procedure TfrmMain.actCopyFormattedTeXExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pCopyFormattedTeX;
+    pCopyFormatted_TeX;
 end;
 
 procedure TfrmMain.actFileSaveExecute(Sender: TObject);
@@ -20893,7 +20751,7 @@ begin
     // File notify: Stop
     if Assigned(fNotif) then pNotifyFile_Stop;
 
-    pFileSave(Self);
+    pFile_Save(Self);
 
     pGetFile_Info(sActiveFile,
                   synEditor.Lines);
@@ -20904,7 +20762,7 @@ begin
                    sActiveFile) then Exit;  // The file wasn't saved: cancel in save dlg
 
     fNotif:= TATFileNotificationSimple.Create(Self);
-    fNotif.OnChanged:= pFileChanged;
+    fNotif.OnChanged:= pFile_Changed;
     pNotifyFile_Start(sActiveFile);
   end;
   pUpdateHexViewer;
@@ -20916,7 +20774,7 @@ begin
     // File notify: Stop
     if Assigned(fNotif) then pNotifyFile_Stop;
 
-    pFileSaveAs(Self);
+    pFile_SaveAs(Self);
 
     pGetFile_Info(sActiveFile,
                   synEditor.Lines);
@@ -20927,7 +20785,7 @@ begin
                    sActiveFile) then Exit;  // The file wasn't saved: cancel in save dlg
 
     fNotif:= TATFileNotificationSimple.Create(Self);
-    fNotif.OnChanged:= pFileChanged;
+    fNotif.OnChanged:= pFile_Changed;
     pNotifyFile_Start(sActiveFile);
   end;
 
@@ -20937,7 +20795,7 @@ end;
 procedure TfrmMain.actFullPathUnixExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pFullPathUnix;
+    pFullPath_Unix;
 
   pSetFocus_Main;
 end;
@@ -20945,7 +20803,7 @@ end;
 procedure TfrmMain.actFullPathWindowsExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pFullPathWindows;
+    pFullPath_Windows;
 
   pSetFocus_Main;
 end;
@@ -20967,7 +20825,7 @@ end;
 procedure TfrmMain.actIndentBlockExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pIndentBlock;
+    pIndent_Block;
 end;
 
 procedure TfrmMain.actEditUndoExecute(Sender: TObject);
@@ -20999,7 +20857,7 @@ end;
 procedure TfrmMain.actUnindentBlockExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pUnindentBlock;
+    pUnindent_Block;
 end;
 
 procedure TfrmMain.actUNIXExecute(Sender: TObject);
@@ -21011,7 +20869,7 @@ end;
 procedure TfrmMain.actUpperCaseWordExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pUpperCaseWord;
+    pUpperCase_Word;
 end;
 
 procedure TfrmMain.actAlwaysAddBOMExecute(Sender: TObject);
@@ -21050,13 +20908,13 @@ end;
 procedure TfrmMain.actLowerCaseWordExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pLowerCaseWord;
+    pLowerCase_Word;
 end;
 
 procedure TfrmMain.actInvertCaseWordExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pInvertCase;
+    pInvert_Case;
 end;
 
 procedure TfrmMain.pMatchBracket(seActive: TSynEdit);
@@ -21125,7 +20983,7 @@ begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
     synEditor.Text:= sContent;
     synEditor.Modified:= True;
-    pSetHighlighterFromFileExt(sFileExt);
+    pSetHighlighter_FromFileExt(sFileExt);
   end;
 
   with pgFiles.ActivePage do
@@ -21319,7 +21177,7 @@ var
 begin
   i:= fFindTopWindow;
   with (Self.MDIChildren[i] as TfrmEditor) do
-    pDoCompletionInsert(True);
+    pDoCompletion_Insert(True);
 
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
@@ -21381,7 +21239,7 @@ begin
   i:= fFindTopWindow;
 
   with (MDIChildren[i] as TfrmEditor) do
-    pDoCompletionInsert;
+    pDoCompletion_Insert;
 
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
@@ -21408,7 +21266,7 @@ end;
 procedure TfrmMain.actNormalSelectExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pNormalSelect;
+    pNormal_Select;
 end;
 
 procedure TfrmMain.actNotificationExecute(Sender: TObject);
@@ -21436,19 +21294,19 @@ end;
 procedure TfrmMain.actLineSelectExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pLineSelect;
+    pLine_Select;
 end;
 
 procedure TfrmMain.actColumnSelectExecute(Sender: TObject);
 begin
   with (MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pColumnSelect;
+    pColumn_Select;
 end;
 
 procedure TfrmMain.actUpperCaseSelectionExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pUpperCaseSelection;
+    pUpperCase_Selection;
 end;
 
 procedure TfrmMain.actRtermLOGLineWrapExecute(Sender: TObject);
@@ -21469,13 +21327,13 @@ end;
 procedure TfrmMain.actLowerCaseSelectionExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pLowerCaseSelection;
+    pLowerCase_Selection;
 end;
 
 procedure TfrmMain.actInvertSelectionExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
-    pInvertSelection;
+    pInvert_Selection;
 end;
 
 procedure TfrmMain.actRtermIOLineWrapExecute(Sender: TObject);
@@ -21490,8 +21348,8 @@ end;
 procedure TfrmMain.pGetComments;
 var
   scHighlighter,
-   scBBHighlighter,
-   scBEHighlighter: TSynCustomHighlighter;
+   scBB_Highlighter,
+   scBE_Highlighter: TSynCustomHighlighter;
 
   sLanguage: string;
 
@@ -21500,17 +21358,17 @@ begin
   if frmTools.cbComAutoDetect_Language.Checked then begin
     with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
       if (synEditor.SelText <> '') then begin
-        scBBHighlighter:= fGetBBHighLighter;                 // Highlighter of the block begin
-        scBEHighlighter:= fGetBEHighLighter;                 // Highlighter of the block end
+        scBB_Highlighter:= fGet_BB_HighLighter;                 // Highlighter of the block begin
+        scBE_Highlighter:= fGet_BE_HighLighter;                 // Highlighter of the block end
 
-        if (scBBHighlighter <> scBEHighlighter) then Exit;  // Will no be commented!
+        if (scBB_Highlighter <> scBE_Highlighter) then Exit;  // Will no be commented!
       end;
 
-      scHighlighter:= fGetCurrentHighLighter;
+      scHighlighter:= fGet_Current_HighLighter;
     end;
 
     sLanguage:= scHighlighter.GetFriendlyLanguageName;
-    modDados.pSetCurrentHighlighter(sLanguage);
+    modDados.pSet_Current_Highlighter(sLanguage);
   end;
 
   with modDados do begin
@@ -22239,7 +22097,7 @@ procedure TfrmMain.actRContGuiPuTTYStartCloseExecute(Sender: TObject);
 
   begin
     Result:= False;
-    tmpHandle:= fGetWindowHandle(Pchar(sCaption));
+    tmpHandle:= fGet_WindowHandle(Pchar(sCaption));
     if (tmpHandle <> 0) then Result:= True;
   end;
 
@@ -23574,11 +23432,11 @@ var
      sFill: string;
 
   begin
-    case fStringToCase_Select(sType,
-                              ['Array',
-                               'Matrix',
-                               'Tabular',
-                               'Tabbing']) of
+    case fString_ToCase_Select(sType,
+                               ['Array',
+                                'Matrix',
+                                'Tabular',
+                                'Tabbing']) of
       0: begin // Array
            sPrior:= ' ';
            sFill := ' | &';
@@ -23655,11 +23513,11 @@ var
       2: sAlign:= 'r';
     end;
 
-    case fStringToCase_Select(sType,
-                              ['Array',
-                               'Matrix',
-                               'Tabular',
-                               'Tabbing']) of
+    case fString_ToCase_Select(sType,
+                               ['Array',
+                                'Matrix',
+                                'Tabular',
+                                'Tabbing']) of
       0: begin // Array
            sTmp:=
              '\begin{array}{' + fMakeFormat(sAlign) + '}'  + #13 +
@@ -23790,9 +23648,9 @@ begin
 
   // Will search the next '|' as part of the stop of the completion
   with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
-    sSearchText:= '|';
+    sSearch_Text:= '|';
 
-    bSearchRegExp:= False;  // Do not remove due to '|' -> or in fRegEx
+    bSearch_RegExp:= False;  // Do not remove due to '|' -> or in fRegEx
 
     pDoSearchReplaceText(False,
                          True,
@@ -24044,12 +23902,12 @@ procedure TfrmMain.LatexFormat(Sender: TObject);
              ' ';
     until(length(sTab) = iTabWidth);
 
-    case fStringToCase_Select(sType,
-                              ['Itemization',
-                               'Enumeration',
-                               'Left',
-                               'Center',
-                               'Right']) of
+    case fString_ToCase_Select(sType,
+                               ['Itemization',
+                                'Enumeration',
+                                'Left',
+                                'Center',
+                                'Right']) of
       0: begin // Itemization
            if (sPrior = EmptyStr) then Result:= sTab +
                                                 '\item |' + #13#10
@@ -24086,12 +23944,12 @@ procedure TfrmMain.LatexFormat(Sender: TObject);
                      sPrior: string;
                      iTabWidth: integer): string;
   begin
-    case fStringToCase_Select(sType,
-                              ['Itemization',
-                               'Enumeration',
-                               'Left',
-                               'Center',
-                               'Right']) of
+    case fString_ToCase_Select(sType,
+                               ['Itemization',
+                                'Enumeration',
+                                'Left',
+                                'Center',
+                                'Right']) of
       0: begin // Itemization
            Result:=
              '\begin{itemize}' + #13 +
@@ -24850,7 +24708,7 @@ begin
                  iPos - 1);
 
     // Clear complex path
-    sTmp:= fInvertString(sFile);
+    sTmp:= fString_Invert(sFile);
     iPos := Pos(':',
                 sTmp);
     if (iPos <> 0) then begin
@@ -24858,7 +24716,7 @@ begin
                    0,
                    iPos + 1);
 
-      sFile:= fInvertString(sTmp);
+      sFile:= fString_Invert(sTmp);
     end;
 
     if FileExists(trim(sFile)) then begin
@@ -25138,7 +24996,7 @@ begin
   i:= fFindTopWindow;
 
   with (MDIChildren[i] as TfrmEditor) do
-    pDoTipInsert;
+    pDoTip_Insert;
 
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
@@ -26412,11 +26270,11 @@ begin
       sTmp:= fGetSaveFormat(seTmp.Lines);
 
       // It is necessary some retriction in the interface
-      case fStringToCase_Select(sTmp,
-                                ['ANSI',
-                                 'UTF-8',
-                                 'UTF16-LE',
-                                 'UTF16-BE']) of
+      case fString_ToCase_Select(sTmp,
+                                 ['ANSI',
+                                  'UTF-8',
+                                  'UTF16-LE',
+                                  'UTF16-BE']) of
         0: begin
              TextEncoding:= vEncANSI;
              pSetMode('ANSI');
@@ -26453,4 +26311,150 @@ Finalization
   FreeAndNil(RHistory);
   FreeAndNil(RSend_Smart);
 end.
+
+//procedure TfrmMain.menSKHClick(Sender: TObject);
+//var
+//  pTmp: pointer;
+//
+//  bHotkeys_Status: boolean;
+//
+//begin
+//  bHotkeys_Status:= False;
+//
+//  // Related to Shortcuts
+//  with modDados.cdShortcuts do
+//    pTmp:= GetBookmark;
+//
+//  try
+//    dlgSH_Map:= TfrmSH_Map_Dlg.Create(Self);
+//
+//    // Initial status
+//    with dlgSH_Map do begin
+//      pgShortcuts.ActivePage:= tbsAppShortcuts;
+//      pgRhotkeys.ActivePage:= tbsSend_Control;
+//    end;
+//
+//    // Stores the status of the Hotkeys and turn all off
+//    bHotkeys_Status:= bHotKeys_On;
+//    if bHotKeys_On then begin
+//      bHotKeys_On:= False;
+//      with frmHotkeys do
+//        pSetHotkeys(False);
+//    end;
+//
+//    // If OK
+//    if (dlgSH_Map.ShowModal = mrOK) then begin
+//      with modDados.cdShortcuts do begin
+//        Edit;
+//        try
+//          Post;
+//          MergeChangeLog;
+//          SaveToFile();
+//          frmMain.iShortcutsBeforeChanges:= SavePoint;
+//        except
+//          //TODO
+//        end;
+//      end;
+//
+//      with modDados.cdShortcuts do
+//        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
+//      pDatasetToActionList;
+//      pSetFocus_Main;
+//    end // if (dlgSH_Map.ShowModal = mrOK)
+//    // Else
+//    else begin
+//      with modDados do begin
+//        cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
+//        cdShortcutsAfterScroll(nil);
+//      end;
+//    end;
+//
+//  finally
+//    with modDados.cdShortcuts do begin
+//      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
+//      FreeBookmark(pTmp);
+//    end;
+//
+//    FreeAndNil(dlgSH_Map);
+//
+//    // Restore the Hotkeys status
+//    bHotKeys_On:= bHotkeys_Status;
+//    with frmHotkeys do
+//      pSetHotkeys(bHotKeys_On);
+//  end;
+//end;
+
+{
+  procedure pUpdateCompletionArgs;
+  var
+    i: integer;
+
+  begin
+    i:= fFindTopWindow;
+
+    if Assigned(Self.MDIChildren[i] as TfrmEditor) then begin
+      pSetDataCompletion(synEditor_Tip,
+                         (Self.MDIChildren[i] as TfrmEditor).synEditor,
+                         'CTRL+SPACE');
+
+      pSetDataCompletion(synEditor2_Tip,
+                         (Self.MDIChildren[i] as TfrmEditor).synEditor2,
+                         'CTRL+SPACE');
+    end;
+
+    pSetDataCompletion(synIO_Tip,
+                       frmRterm.synIO,
+                       'CTRL+SPACE');
+  end;
+
+var
+  pTmp: pointer;
+
+  n: integer;
+
+  sShortcuts: array of string;
+
+  procedure pRemoveShortcuts;
+  var
+    i: integer;
+
+  begin
+    // Reset all shortcuts
+    with alMain do begin
+      n:= ActionCount;
+      SetLength(sShortcuts,
+                n);
+
+      for i:= 0 to n - 1 do
+        If (Actions[i] is TAction) then begin
+           sShortcuts[i]:= ShortCutToText(TAction(Actions[i]).Shortcut);
+           TAction(Actions[i]).Shortcut:= TextToShortCut('None');
+        end;
+    end;
+  end;
+
+begin
+
+  with modDados.cdShortcuts do
+    pTmp:= GetBookmark;
+
+  Application.CreateForm(TfrmShortcuts,
+                         frmShortcuts);
+
+  with frmShortcuts do
+    try
+      pRemoveShortcuts;
+      ShowModal;
+      with modDados.cdShortcuts do begin
+        if BookmarkValid(pTmp) then GoToBookmark(pTmp);
+        FreeBookmark(pTmp);
+      end;
+    finally
+      frmMain.Refresh;
+      FreeAndNil(frmShortcuts);
+      pDatasetToActionList;
+      pUpdateCompletionArgs;
+      pSetFocus_Main;
+    end;
+}
 

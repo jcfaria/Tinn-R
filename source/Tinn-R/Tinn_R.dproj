@@ -175,11 +175,11 @@
     <DCCReference Include="ufrmShortcuts.pas">
       <Form>frmShortcuts</Form>
     </DCCReference>
-    <DCCReference Include="ufrmSH_Manager.pas">
-      <Form>frmSH_Manager_Dlg</Form>
+    <DCCReference Include="ufrmSKH_Manager.pas">
+      <Form>frmSKH_Manager_Dlg</Form>
     </DCCReference>
-    <DCCReference Include="ufrmSH_map.pas">
-      <Form>frmSH_Map_Dlg</Form>
+    <DCCReference Include="ufrmSKH_map.pas">
+      <Form>frmSKH_Map_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmSplash.pas">
       <Form>frmSplash</Form>

@@ -1276,7 +1276,7 @@ begin
 
   if (rdgRUseLatest.ItemIndex = 1) then Exit;  // In this case the user must set the path of both (Term and Rgui) manually!
 
-  sPathR:= fGetRegistry_InstallPath('SOFTWARE\R-core\R');
+  sPathR:= fGet_Registry_InstallPath('SOFTWARE\R-core\R');
 
   if (rdgRArchitecture.ItemIndex = 1) then bRArchitecture64:= True
                                       else bRArchitecture64:= False;
@@ -1300,8 +1300,8 @@ begin
 
   case rdgRUseLatest.ItemIndex of
      0: begin
-          if DirectoryExists(fGetRegistry_InstallPath('SOFTWARE\R-core\R') +
-                                                      '\bin\x64') then
+          if DirectoryExists(fGet_Registry_InstallPath('SOFTWARE\R-core\R') +
+                                                       '\bin\x64') then
             rdgRArchitecture.Enabled:= True;
           rdgRArchitectureClick(Self);
         end;

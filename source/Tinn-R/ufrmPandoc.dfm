@@ -87,10 +87,9 @@ object frmPandoc: TfrmPandoc
     Top = 521
     Width = 89
     Height = 25
-    Caption = 'OK'
-    Default = True
+    Caption = 'O&K'
     ModalResult = 1
-    TabOrder = 2
+    TabOrder = 3
     NumGlyphs = 2
   end
   object bbtCancel: TBitBtn
@@ -99,9 +98,10 @@ object frmPandoc: TfrmPandoc
     Width = 89
     Height = 25
     Cancel = True
-    Caption = 'Cancel'
+    Caption = '&Cancel'
+    Default = True
     ModalResult = 2
-    TabOrder = 3
+    TabOrder = 2
     NumGlyphs = 2
   end
   object gpbInstruction: TGroupBox
