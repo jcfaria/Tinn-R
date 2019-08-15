@@ -10,31 +10,48 @@ File_7=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\thirdy\ufr
 File_8=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmColors.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas
-Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
-Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.pas
-Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmHotKeys.pas
-Module5=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
-Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
-Module7=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
-Module8=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
-Module9=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas
-Module10=default.htm
-Count=11
+Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
+Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
+Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
+Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+Module4=default.htm
+Module5=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
+Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas
+Module7=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.pas
+Module8=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmHotKeys.pas
+Module9=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
+Module10=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
+Module11=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas
+Count=12
 EditWindowCount=1
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
+
+[default.htm]
+ModuleType=TURLModule
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
+ModuleType=TBaseProject
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -54,14 +71,6 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
-ModuleType=TBaseProject
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas]
 ModuleType=TSourceModule
 FormState=0
@@ -72,12 +81,9 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[default.htm]
-ModuleType=TURLModule
-
 [EditWindow0]
-ViewCount=11
-CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+ViewCount=12
+CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 View0=0
 View1=1
 View2=2
@@ -89,6 +95,7 @@ View7=7
 View8=8
 View9=9
 View10=10
+View11=11
 PercentageSizes=1
 Create=1
 Visible=1
@@ -108,7 +115,7 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1896
 LeftPanelClients=StructureView,PropertyInspector
-LeftPanelData=00000800010100000000E7120000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D01000000009F2100001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=00000800010100000000E7120000000000000168070000000000000100000000EF0A00001100000053747275637475726556696577466F726D01000000009F2100001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=0
 RightPanelClients=DockSite2,ToolForm
 RightPanelData=0000080001010200000009000000446F636B536974653208000000546F6F6C466F726D9E1200000000000001CF07000000000000FFFFFFFF
@@ -159,37 +166,48 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.p
 [View4]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-CursorX=1
-CursorY=12207
-TopLine=12193
+CursorX=74
+CursorY=21109
+TopLine=21101
 LeftCol=1
 Elisions=
 Bookmarks={1,14873,35}{2,20502,3}{3,20622,31}{4,20675,9}{5,14198,20}{6,14471,5}{7,3483,1}{8,2764,1}{9,20501,37}
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+EditViewName=Borland.FormDesignerView
 
 [View5]
 CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
-CursorX=33
-CursorY=523
-TopLine=506
+Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
+CursorX=3
+CursorY=785
+TopLine=783
 LeftCol=1
 Elisions=
-Bookmarks={1,354,11}
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
+Bookmarks=
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
 
 [View6]
 CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
-CursorX=26
-CursorY=175
-TopLine=158
+Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
+CursorX=68
+CursorY=357
+TopLine=339
 LeftCol=1
 Elisions=
-Bookmarks={1,151,3}{2,114,44}{3,171,3}{5,175,39}{9,213,1}
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
+Bookmarks={1,359,11}
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 
 [View7]
+CustomEditViewType=TEditView
+Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
+CursorX=1
+CursorY=172
+TopLine=192
+LeftCol=1
+Elisions=
+Bookmarks={1,147,1}{2,161,1}{3,168,3}{5,175,39}{9,214,1}
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
+
+[View8]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas
 CursorX=1
@@ -200,7 +218,7 @@ Elisions=
 Bookmarks={1,172,1}{2,186,41}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas
 
-[View8]
+[View9]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
 CursorX=9
@@ -211,7 +229,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
 
-[View9]
+[View10]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmHotKeys.pas
 CursorX=9
@@ -222,7 +240,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmHotKeys.pas
 
-[View10]
+[View11]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.pas
 CursorX=9
@@ -646,13 +664,13 @@ Visible=1
 Docked=1
 State=0
 Left=0
-Top=305
+Top=238
 Width=1896
-Height=4824
+Height=5732
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=4824
+ClientHeight=5732
 TBDockHeight=407
 LRDockWidth=1896
 Dockable=1
@@ -661,8 +679,8 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Category
-SelectedItem=Miscellaneous.Name,
-ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Linkage.Images=0,Miscellaneous.ImageMargin=0,Miscellaneous.ImageSize=0
+SelectedItem=Miscellaneous.Name,"Drag Drop/Docking"
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Database=0,Linkage.DataSource=0,Linkage.PopupMenu=0,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0,Localizable.Constraints=0,Localizable.Font=0,Visual.Font=0
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -698,11 +716,11 @@ State=0
 Left=0
 Top=23
 Width=1896
-Height=3455
+Height=2547
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=3455
+ClientHeight=2547
 TBDockHeight=3686
 LRDockWidth=1896
 Dockable=1
@@ -711,17 +729,17 @@ StayOnTop=0
 [MessageView@EditWindow0]
 PercentageSizes=1
 Create=1
-Visible=0
+Visible=1
 Docked=0
 State=0
-Left=10029
-Top=6125
+Left=10015
+Top=8997
 Width=10000
-Height=6003
+Height=3157
 MaxLeft=-7
 MaxTop=-14
 ClientWidth=9941
-ClientHeight=5583
+ClientHeight=2737
 TBDockHeight=1545
 LRDockWidth=4327
 Dockable=1

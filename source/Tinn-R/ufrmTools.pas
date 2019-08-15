@@ -574,6 +574,8 @@ type
     procedure tvSearchDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure tvSearchEndDrag(Sender, Target: TObject; X, Y: Integer);
     procedure tvSearchStartDrag(Sender: TObject; var DragObject: TDragObject);
+    procedure dbgShortcutsDblClick(Sender: TObject);
+    procedure dbgCommentsDblClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -778,10 +780,16 @@ begin
   dbeRmirrorsURL.Cursor:= crHandPoint;
 end;
 
+procedure TfrmTools.dbgCommentsDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actCommentsEditExecute(nil);
+end;
+
 procedure TfrmTools.dbgCompletionDblClick(Sender: TObject);
 begin
-//  with frmMain do
-//    actCompletionInsertExecute(nil);
+  with frmMain do
+    actCompletionEditExecute(nil);
 end;
 
 procedure TfrmTools.dbgCompletionKeyDown(Sender: TObject;
@@ -826,12 +834,19 @@ begin
   end;
 end;
 
+procedure TfrmTools.dbgShortcutsDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actShortcutsEditExecute(nil);
+end;
+
 procedure TfrmTools.edToolsRExplorerFilterKeyDown(Sender: TObject;
                                                   var Key: Word;
                                                   Shift: TShiftState);
 begin
   if (Key = VK_RETURN) then begin
-    frmMain.actRExplorerRefreshExecute(nil);
+    with frmMain do
+      actRExplorerRefreshExecute(nil);
     edToolsRExplorerFilter.SetFocus;
   end;
 end;

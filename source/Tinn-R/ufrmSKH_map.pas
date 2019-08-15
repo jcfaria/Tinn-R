@@ -347,8 +347,13 @@ begin
       sTmp:= ShortcutToText(dlgSKH_Manager.eKeyShort.HotKey);
 
       with modDados do begin
-        fCheck_Hotkey_Use_App(sTmp, sRes, True);
-        ShowMessage(sRes + ' is now empty!');
+        fCheck_Hotkey_Use_App(sTmp,
+                              sRes,
+                              True);
+        ShowMessage('The shortcut associated to [' +
+                    sRes +
+                    '] was emptied!');
+
         with cdShortcuts do begin
           Edit;
           FieldByName('Shortcut').Value:= sTmp;

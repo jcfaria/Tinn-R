@@ -144,9 +144,6 @@ begin
   sBy:= '';
   sWhere:= '';
 
-  with frmMain.dlgSKH_Map.dlgSKH_Manager do
-    bbtOK.Enabled:= True;
-
   // The below checks if the typed is a reserved shortcut
   if fCheck_Reserved then begin
     with lbInUse_Check do
@@ -171,6 +168,9 @@ begin
   with frmMain.dlgSKH_Map.pgSH do
     case ActivePageIndex of
       0: begin
+           with frmMain.dlgSKH_Map.dlgSKH_Manager do
+             bbtOK.Enabled:= True;
+
            with modDados do
              if fCheck_Hotkey_Use_App(ShortCutToText(eKeyShort.HotKey),
                                                      sBy) then begin
@@ -186,12 +186,13 @@ begin
                with lbWhere_Check do
                  Caption:= Caption + 'Aplication';
              end  //if fCheck_Hotkey_Use_App
-             else
+             else begin
                with lbInUse_Check do begin
                  Caption:= Caption + 'NO';
                  pSet_LabelColor(clGreen);
                  rgRemove_Current.Enabled:= False;
                end;
+             end;
          end;
       1:;
       2:;
@@ -257,8 +258,10 @@ end;
 // The user will type anything in eKeyShort
 procedure TfrmSKH_Manager_Dlg.gbKeystrokesEnter(Sender: TObject);
 begin
-  with frmMain.dlgSKH_Map.dlgSKH_Manager do
+  with frmMain.dlgSKH_Map.dlgSKH_Manager do begin
     bbtOK.Enabled:= False;
+    rgRemove_current.Enabled:= False;
+  end;
 end;
 
 end.
