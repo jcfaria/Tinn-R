@@ -337,22 +337,35 @@ end;
 procedure TfrmSKH_Map_Dlg.dbgShortcutsDblClick(Sender: TObject);
 var
   sTmp,
-    sRes: string;
+   sBy: string;
+
+  bShortcut_InUse,
+    bShortcut_NotRemove: boolean;
 
 begin
   try
     dlgSKH_Manager:= TfrmSKH_Manager_Dlg.Create(Self);
 
     if (dlgSKH_Manager.ShowModal = mrOK) then begin
+      with dlgSKH_Manager do begin
+        bShortcut_InUse:= (lbInUse_Check.Caption = 'In use: YES');
+        bShortcut_NotRemove:= (rgRemove_Current.ItemIndex = 0);
+
+        if bShortcut_InUse and
+           bShortcut_NotRemove then Exit; {Nothing todo!}
+      end;
+
       sTmp:= ShortcutToText(dlgSKH_Manager.eKeyShort.HotKey);
 
       with modDados do begin
         fCheck_Hotkey_Use_App(sTmp,
-                              sRes,
+                              sBy,
                               True);
-        ShowMessage('The shortcut associated to [' +
-                    sRes +
-                    '] was emptied!');
+
+        if bShortcut_InUse then
+          ShowMessage('The shortcut associated to [' +
+                      sBy +
+                      '] was emptied!');
 
         with cdShortcuts do begin
           Edit;

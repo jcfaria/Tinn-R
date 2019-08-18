@@ -188,16 +188,16 @@ object frmSKH_Manager_Dlg: TfrmSKH_Manager_Dlg
     TabOrder = 0
     object gbKeystrokes: TGroupBox
       Left = 6
-      Top = 15
-      Width = 261
+      Top = 17
+      Width = 264
       Height = 62
       Caption = ' Type (keyboard) '
       TabOrder = 0
       OnEnter = gbKeystrokesEnter
     end
-    object rgRemove_current: TRadioGroup
+    object rgRemove_Current: TRadioGroup
       Left = 276
-      Top = 15
+      Top = 17
       Width = 295
       Height = 62
       Caption = ' Set to Current and remove (if in use: see Check) '

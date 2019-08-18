@@ -33,7 +33,7 @@ FormOnTop=0
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas]
 ModuleType=TSourceModule
@@ -43,7 +43,7 @@ FormOnTop=0
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
@@ -115,7 +115,7 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1896
 LeftPanelClients=StructureView,PropertyInspector
-LeftPanelData=00000800010100000000E7120000000000000168070000000000000100000000EF0A00001100000053747275637475726556696577466F726D01000000009F2100001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=00000800010100000000E7120000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D01000000009F2100001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=0
 RightPanelClients=DockSite2,ToolForm
 RightPanelData=0000080001010200000009000000446F636B536974653208000000546F6F6C466F726D9E1200000000000001CF07000000000000FFFFFFFF
@@ -166,20 +166,20 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.p
 [View4]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-CursorX=74
-CursorY=21109
-TopLine=21101
+CursorX=46
+CursorY=9568
+TopLine=9557
 LeftCol=1
 Elisions=
 Bookmarks={1,14873,35}{2,20502,3}{3,20622,31}{4,20675,9}{5,14198,20}{6,14471,5}{7,3483,1}{8,2764,1}{9,20501,37}
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 
 [View5]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
-CursorX=3
-CursorY=785
-TopLine=783
+CursorX=5
+CursorY=825
+TopLine=822
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -188,31 +188,31 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pa
 [View6]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
-CursorX=68
-CursorY=357
-TopLine=339
+CursorX=1
+CursorY=358
+TopLine=347
 LeftCol=1
 Elisions=
-Bookmarks={1,359,11}
+Bookmarks={1,372,11}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 
 [View7]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
-CursorX=1
-CursorY=172
-TopLine=192
+CursorX=14
+CursorY=43
+TopLine=34
 LeftCol=1
 Elisions=
-Bookmarks={1,147,1}{2,161,1}{3,168,3}{5,175,39}{9,214,1}
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
+Bookmarks={1,146,1}{2,160,1}{3,167,3}{5,174,39}{9,213,1}
+EditViewName=Borland.FormDesignerView
 
 [View8]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas
-CursorX=1
-CursorY=169
-TopLine=151
+CursorX=3
+CursorY=195
+TopLine=178
 LeftCol=1
 Elisions=
 Bookmarks={1,172,1}{2,186,41}
@@ -344,8 +344,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=0
-Top=0
+Left=1161
+Top=320
 Width=1999
 Height=7276
 MaxLeft=-1
@@ -664,13 +664,13 @@ Visible=1
 Docked=1
 State=0
 Left=0
-Top=238
+Top=305
 Width=1896
-Height=5732
+Height=4824
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=5732
+ClientHeight=4824
 TBDockHeight=407
 LRDockWidth=1896
 Dockable=1
@@ -679,8 +679,8 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Category
-SelectedItem=Miscellaneous.Name,"Drag Drop/Docking"
-ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Database=0,Linkage.DataSource=0,Linkage.PopupMenu=0,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0,Localizable.Constraints=0,Localizable.Font=0,Visual.Font=0
+SelectedItem=Miscellaneous.Name,Input.OnDblClick
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Action.Action=1,Linkage.Action=0,Database=0,Layout.Anchors=0,Layout.Constraints=0,Layout.Margins=0,Localizable.Constraints=0,Localizable.Font=0
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -716,11 +716,11 @@ State=0
 Left=0
 Top=23
 Width=1896
-Height=2547
+Height=3455
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=2547
+ClientHeight=3455
 TBDockHeight=3686
 LRDockWidth=1896
 Dockable=1
@@ -732,14 +732,14 @@ Create=1
 Visible=1
 Docked=0
 State=0
-Left=10015
-Top=8997
+Left=10022
+Top=9485
 Width=10000
-Height=3157
+Height=2724
 MaxLeft=-7
 MaxTop=-14
 ClientWidth=9941
-ClientHeight=2737
+ClientHeight=2304
 TBDockHeight=1545
 LRDockWidth=4327
 Dockable=1
@@ -789,7 +789,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -800,7 +800,7 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=0
+Top=23
 Width=3829
 Height=1640
 MaxLeft=-1

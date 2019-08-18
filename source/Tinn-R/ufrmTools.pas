@@ -576,6 +576,7 @@ type
     procedure tvSearchStartDrag(Sender: TObject; var DragObject: TDragObject);
     procedure dbgShortcutsDblClick(Sender: TObject);
     procedure dbgCommentsDblClick(Sender: TObject);
+    procedure dbgRmirrorsDblClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -816,6 +817,12 @@ begin
     VK_RETURN: with frmMain do
                  actRcardInsertExecute(nil);
   end;
+end;
+
+procedure TfrmTools.dbgRmirrorsDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actRmirrorsSetReposExecute(nil);
 end;
 
 procedure TfrmTools.dbgRtipDblClick(Sender: TObject);

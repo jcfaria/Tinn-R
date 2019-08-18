@@ -15,7 +15,7 @@ type
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     gbKeystrokes: TGroupBox;
-    rgRemove_current: TRadioGroup;
+    rgRemove_Current: TRadioGroup;
     gbCurrent_info: TGroupBox;
     lbId_cur: TLabel;
     lbWhere_cur: TLabel;
@@ -40,8 +40,7 @@ type
 //    procedure pKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 
   public
-    eKeyShort : TSynHotKey;
-
+    eKeyShort: TSynHotKey;
   end;
 
 var

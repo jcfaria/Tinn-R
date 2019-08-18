@@ -38,7 +38,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 388
     Height = 565
-    ActivePage = tbsDatabase
+    ActivePage = tbsR
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -5666,6 +5666,7 @@ object frmTools: TfrmTools
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = [fsBold]
+              OnDblClick = dbgRmirrorsDblClick
               Columns = <
                 item
                   Expanded = False
