@@ -42,7 +42,7 @@ type
     bbtShortcuts_Cancel: TBitBtn;
     bbtShortcuts_Save: TBitBtn;
     dbgShortcuts: TDBGrid;
-    bbtShortcuts_Close: TBitBtn;
+    bbtShortcuts_Manager: TBitBtn;
     bbtShortcuts_CancelAll: TBitBtn;
     bbtShortcuts_RestoreDefault: TBitBtn;
     bbtShortcut_Help: TBitBtn;
@@ -75,7 +75,6 @@ type
     procedure bbtShortcut_HelpClick(Sender: TObject);
     procedure bbtShortcuts_SaveDefaultClick(Sender: TObject);
     procedure bbtShortcuts_SaveClick(Sender: TObject);
-    procedure bbtShortcuts_CloseClick(Sender: TObject);
     procedure bbtShortcuts_CancelClick(Sender: TObject);
     procedure bbtShortcuts_EditClick(Sender: TObject);
     procedure bbtShortcuts_LoadClick(Sender: TObject);
@@ -88,6 +87,7 @@ type
     procedure edtGroupSearchEnter(Sender: TObject);
     procedure edFilter_CaptionChange(Sender: TObject);
     procedure edFilter_GroupChange(Sender: TObject);
+    procedure bbtShortcuts_ManagerClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -142,13 +142,50 @@ begin
     Panels[0].Text:= 'Browse mode';
 end;
 
-procedure TfrmSKH_Map_Dlg.bbtShortcuts_CloseClick(Sender: TObject);
-begin
-  with modDados.cdShortcuts do
-    SavePoint:= frmMain.iShortcutsBeforeChanges;
+procedure TfrmSKH_Map_Dlg.bbtShortcuts_ManagerClick(Sender: TObject);
+var
+  sTmp,
+   sBy: string;
 
-  Close;
-  frmMain.Refresh;
+  bShortcut_InUse,
+    bShortcut_NotRemove: boolean;
+
+begin
+  try
+    dlgSKH_Manager:= TfrmSKH_Manager_Dlg.Create(Self);
+
+    if (dlgSKH_Manager.ShowModal = mrOK) then begin
+      with dlgSKH_Manager do begin
+        bShortcut_InUse:= (lbInUse_Check.Caption = 'In use: YES');
+        bShortcut_NotRemove:= (rgRemove_Current.ItemIndex = 0);
+
+        if bShortcut_InUse and
+           bShortcut_NotRemove then Exit; {Nothing todo!}
+      end;
+
+      sTmp:= ShortcutToText(dlgSKH_Manager.eKeyShort.HotKey);
+
+      with modDados do begin
+        fCheck_Hotkey_Use_App(sTmp,
+                              sBy,
+                              True);
+
+        if bShortcut_InUse then
+          ShowMessage('The shortcut associated to [' +
+                      sBy +
+                      '] was emptied!');
+
+        with cdShortcuts do begin
+          Edit;
+          FieldByName('Shortcut').Value:= sTmp;
+          Post;
+        end;  // with cdShortcuts
+      end;  // with modDados
+    end;  // if (dlgSH_Manager.ShowModal = mrOK)
+  finally
+    FreeAndNil(dlgSKH_Manager.eKeyShort);
+    FreeAndNil(dlgSKH_Manager);
+  end;
 end;
 
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_EditClick(Sender: TObject);
@@ -335,49 +372,8 @@ begin
 end;
 
 procedure TfrmSKH_Map_Dlg.dbgShortcutsDblClick(Sender: TObject);
-var
-  sTmp,
-   sBy: string;
-
-  bShortcut_InUse,
-    bShortcut_NotRemove: boolean;
-
 begin
-  try
-    dlgSKH_Manager:= TfrmSKH_Manager_Dlg.Create(Self);
-
-    if (dlgSKH_Manager.ShowModal = mrOK) then begin
-      with dlgSKH_Manager do begin
-        bShortcut_InUse:= (lbInUse_Check.Caption = 'In use: YES');
-        bShortcut_NotRemove:= (rgRemove_Current.ItemIndex = 0);
-
-        if bShortcut_InUse and
-           bShortcut_NotRemove then Exit; {Nothing todo!}
-      end;
-
-      sTmp:= ShortcutToText(dlgSKH_Manager.eKeyShort.HotKey);
-
-      with modDados do begin
-        fCheck_Hotkey_Use_App(sTmp,
-                              sBy,
-                              True);
-
-        if bShortcut_InUse then
-          ShowMessage('The shortcut associated to [' +
-                      sBy +
-                      '] was emptied!');
-
-        with cdShortcuts do begin
-          Edit;
-          FieldByName('Shortcut').Value:= sTmp;
-          Post;
-        end;  // with cdShortcuts
-      end;  // with modDados
-    end;  // if (dlgSH_Manager.ShowModal = mrOK)
-  finally
-    FreeAndNil(dlgSKH_Manager.eKeyShort);
-    FreeAndNil(dlgSKH_Manager);
-  end;
+  bbtShortcuts_ManagerClick(nil);
 end;
 
 procedure TfrmSKH_Map_Dlg.dbgShortcutsEnter(Sender: TObject);
@@ -605,5 +601,11 @@ begin
     FreeAndNil(dlgSKH_Manager);
   end;
 end;
+
+//  with modDados.cdShortcuts do
+//    SavePoint:= frmMain.iShortcutsBeforeChanges;
+//
+//  Close;
+//  frmMain.Refresh;
 
 end.

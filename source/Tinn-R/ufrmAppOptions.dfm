@@ -105,7 +105,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
       Top = 1
       Width = 341
       Height = 487
-      ActivePage = tbsR_Basic
+      ActivePage = tbsProcessing_DviLatex
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -4383,6 +4383,48 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
                 ShowHint = True
                 State = cbChecked
                 TabOrder = 1
+              end
+            end
+            object GroupBox31: TGroupBox
+              Left = 0
+              Top = 254
+              Width = 325
+              Height = 118
+              Align = alTop
+              Caption = ' LaTeX clear waste (comma separating values) '
+              Ctl3D = False
+              ParentCtl3D = False
+              TabOrder = 4
+              object edLatexClearWaste: TEditAlign
+                Left = 8
+                Top = 18
+                Width = 305
+                Height = 54
+                MultiLine = True
+                WordWrap = True
+                BorderStyle = bsNone
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 0
+              end
+              object bbtLatexWaste_default: TButton
+                Left = 9
+                Top = 82
+                Width = 305
+                Height = 28
+                Caption = 'Restore default'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 1
+                OnClick = bbtLatexWaste_defaultClick
               end
             end
           end

@@ -121,10 +121,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -134,7 +130,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         BevelOuter = bvNone
         Color = 16250871
         ParentBackground = False
-        TabOrder = 1
+        TabOrder = 2
         object JvDBNavigator2: TJvDBNavigator
           Left = 0
           Top = 0
@@ -348,17 +344,17 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         end
       end
       object bbtShortcuts_Load: TBitBtn
-        Left = 268
-        Top = 456
-        Width = 50
+        Left = 274
+        Top = 458
+        Width = 45
         Height = 27
         Caption = 'Load'
-        TabOrder = 7
+        TabOrder = 8
         OnClick = bbtShortcuts_LoadClick
       end
       object bbtShortcuts_SaveDefault: TBitBtn
-        Left = 178
-        Top = 456
+        Left = 184
+        Top = 458
         Width = 90
         Height = 27
         Caption = 'Save as default'
@@ -366,17 +362,17 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         OnClick = bbtShortcuts_SaveDefaultClick
       end
       object bbtShortcuts_Edit: TBitBtn
-        Left = 318
-        Top = 456
-        Width = 50
+        Left = 319
+        Top = 458
+        Width = 45
         Height = 27
         Caption = 'Edit'
-        TabOrder = 6
+        TabOrder = 7
         OnClick = bbtShortcuts_EditClick
       end
       object bbtShortcuts_Cancel: TBitBtn
-        Left = 368
-        Top = 456
+        Left = 424
+        Top = 458
         Width = 85
         Height = 27
         Caption = 'Cancel current'
@@ -384,9 +380,9 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         OnClick = bbtShortcuts_CancelClick
       end
       object bbtShortcuts_Save: TBitBtn
-        Left = 515
-        Top = 456
-        Width = 50
+        Left = 570
+        Top = 458
+        Width = 45
         Height = 27
         Caption = 'Save'
         TabOrder = 3
@@ -407,7 +403,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Font.Style = []
         Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
-        TabOrder = 8
+        TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -438,18 +434,18 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Visible = True
           end>
       end
-      object bbtShortcuts_Close: TBitBtn
-        Left = 565
-        Top = 456
-        Width = 50
+      object bbtShortcuts_Manager: TBitBtn
+        Left = 364
+        Top = 458
+        Width = 60
         Height = 27
-        Caption = 'Close'
-        TabOrder = 2
-        OnClick = bbtShortcuts_CloseClick
+        Caption = 'Manager'
+        TabOrder = 6
+        OnClick = bbtShortcuts_ManagerClick
       end
       object bbtShortcuts_CancelAll: TBitBtn
-        Left = 453
-        Top = 456
+        Left = 509
+        Top = 458
         Width = 61
         Height = 27
         Caption = 'Cancel all'
@@ -457,18 +453,18 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         OnClick = bbtShortcuts_CancelAllClick
       end
       object bbtShortcuts_RestoreDefault: TBitBtn
-        Left = 93
-        Top = 456
-        Width = 85
+        Left = 94
+        Top = 458
+        Width = 90
         Height = 27
         Caption = 'Restore default'
         TabOrder = 10
         OnClick = bbtShortcuts_RestoreDefaultClick
       end
       object bbtShortcut_Help: TBitBtn
-        Left = 18
-        Top = 456
-        Width = 75
+        Left = 29
+        Top = 458
+        Width = 65
         Height = 27
         Caption = '&Help'
         Font.Charset = DEFAULT_CHARSET
@@ -519,10 +515,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label20: TLabel
         Left = 0
         Top = 454
@@ -590,10 +582,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object GroupBox2: TGroupBox
         Left = 0
         Top = 0
@@ -772,10 +760,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsSend_Control: TTabSheet
           Caption = 'Send/Control'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object strgHK_Send: TStringGrid
             Left = 0
             Top = 0
@@ -806,10 +790,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsCustom: TTabSheet
           Caption = 'Custom'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object strgHK_CU: TStringGrid
             Left = 0
             Top = 0

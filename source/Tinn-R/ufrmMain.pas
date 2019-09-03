@@ -1988,6 +1988,9 @@ type
     imlRSend_Plus: TPngImageList;
     synIO_History: TSynCompletionProposal;
     menSKH: TMenuItem;
+    Clear1: TMenuItem;
+    actLatexClearWaste: TAction;
+    TBItem68: TTBItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2534,9 +2537,9 @@ type
     procedure actRSendSmartExecute(Sender: TObject);
     procedure pmemRResSendSmartClick(Sender: TObject);
     procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x,
-      y: Integer; var CanExecute: Boolean);
+    procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
     procedure menSKHClick(Sender: TObject);
+    procedure actLatexClearWasteExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2642,6 +2645,7 @@ type
     sParDviSingle                  : string;
     sParPdfBibtex                  : string;
     sParPdfSingle                  : string;
+    sLatexClearWaste               : string;
     sParRgui                       : string;
     sParRPuTTY                     : string;
     //sParRterm                      : string;
@@ -3113,7 +3117,7 @@ begin
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.02.02.00';
-  sCurrentVersion_Shortcuts := '5.03.03.00';
+  sCurrentVersion_Shortcuts := '5.03.05.00';
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3896,6 +3900,7 @@ begin
     WriteString('App', 'sEOLDefault', fGetEOLDefault);
     WriteString('App', 'sFormatR', sFormatR);
     WriteString('App', 'sKnit', sKnit);
+    WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
     WriteString('App', 'sParDeplate', sParDeplate);
@@ -4457,6 +4462,7 @@ begin
     WriteString('App', 'sEOLDefault', fGetEOLDefault);
     WriteString('App', 'sFormatR', sFormatR);
     WriteString('App', 'sKnit', sKnit);
+    WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
     WriteString('App', 'sParDeplate', sParDeplate);
@@ -5132,6 +5138,7 @@ begin
 
   sFormatR                 := trim(ifTinn.ReadString('App', 'sFormatR', EmptyStr));
   sKnit                    := trim(ifTinn.ReadString('App', 'sKnit', EmptyStr));
+  sLatexClearWaste         := trim(ifTinn.ReadString('App', 'sLatexClearWaste', '.aux, .log, .lof, .lot, .bbl, .blg, .out, .toc'));
   sParDeplate              := trim(ifTinn.ReadString('App', 'sParDeplate', '-f'));
   sParDviBibtex            := trim(ifTinn.ReadString('App', 'sParDviBibtex', 'bibtex --src-specials'));
   sParDviSingle            := trim(ifTinn.ReadString('App', 'sParDviSingle', 'latex -c-style-errors --src-specials'));
@@ -7261,7 +7268,7 @@ begin
                     sFile +
                     '" ' +
                     sParameter,
-                    sw_shownormal);
+                    SW_SHOWNORMAL);
     end;
   except
     fMessageDlg('PDF viewer is not accessible!',
@@ -14009,6 +14016,7 @@ begin
       cbUndoAfterSave.Checked            := bUndoAfterSave;
       edFormatR.Text                     := sFormatR;
       edKnit.Text                        := sKnit;
+      edLatexClearWaste.Text             := sLatexClearWaste;
       edMaxDeparseLength.Text            := IntToStr(iMaxDeparseLength);
       edParDeplate.Text                  := sParDeplate;
       edParDviBibtex.Text                := sParDviBibtex;
@@ -14314,6 +14322,7 @@ begin
         iRguiTinnR_Proportion         := tbRguiTinnR_Proportion.Position;
         sFormatR                      := edFormatR.Text;
         sKnit                         := edKnit.Text;
+        sLatexClearWaste              := edLatexClearWaste.Text;
         sIPHostLocal                  := edtIPHostLocal.Text;
         sIPHostRemote                 := edtIPHostRemote.Text;
         sParDeplate                   := edParDeplate.Text;
@@ -20022,6 +20031,7 @@ procedure TfrmMain.pSetToolbarProcessing(sFileExtension: string);
     actLatexToPdfSingle.Enabled:= bTmp;
     actLatexToPdfBibtex.Enabled:= bTmp;
     actLatexMakeIndex.Enabled  := bTmp;
+    actLatexClearWaste.Enabled := bTmp;
   end;
 
 const
@@ -24414,6 +24424,57 @@ begin
       pInsertLatexMath('\sqrt' +
                        fFormatSqrtN(EmptyStr),
                        -3);
+end;
+
+procedure TfrmMain.actLatexClearWasteExecute(Sender: TObject);
+
+  procedure DeleteFiles(APath,
+                        AFileSpec: string);
+  var
+    lSearchRec:TSearchRec;
+    lPath: string;
+
+  begin
+    lPath:= IncludeTrailingPathDelimiter(APath);
+    if FindFirst(lPath + AFileSpec,
+                 faAnyFile,
+                 lSearchRec) = 0 then
+    begin
+      try
+        repeat
+          SysUtils.DeleteFile(lPath +
+                              lSearchRec.Name);
+        until (SysUtils.FindNext(lSearchRec) <> 0);
+      finally
+        SysUtils.FindClose(lSearchRec);  // Free resources on successful find
+      end;
+    end;
+  end;
+
+var
+  sTmpDir: string;
+
+  slTmp: TStringList;
+
+  i: integer;
+
+begin
+  sTmpDir:= ExtractFilePath((Self.MDIChildren[fFindTopWindow] as TfrmEditor).sActiveFile);
+
+  try
+    slTmp:= TStringList.Create;
+
+    with slTmp do begin
+      Delimiter:= ',';
+      DelimitedText:= sLatexClearWaste;
+    end;
+
+    for i:= 0 to (slTmp.Count-1) do
+      DeleteFiles(sTmpDir,
+                  '*' + slTmp.Strings[i]);
+  except
+    FreeAndNil(slTmp);
+  end;
 end;
 
 procedure TfrmMain.actRContTermStartCloseExecute(Sender: TObject);

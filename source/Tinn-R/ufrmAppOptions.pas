@@ -459,6 +459,9 @@ type
     GroupBox30: TGroupBox;
     Edit2: TEdit;
     Label3: TLabel;
+    GroupBox31: TGroupBox;
+    edLatexClearWaste: TEditAlign;
+    bbtLatexWaste_default: TButton;
 
     procedure bbHelpClick(Sender: TObject);
     procedure bbtConPathDeplateClick(Sender: TObject);
@@ -527,6 +530,7 @@ type
     procedure lblURLDeplateMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure lblURLRClick(Sender: TObject);
     procedure lblURLRMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure bbtLatexWaste_defaultClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -893,6 +897,11 @@ begin
 
   pFillInKeystrokeInfo(TSynEditKeyStroke(liOldSelected.Data),
                        lvKeystrokes.Selected);
+end;
+
+procedure TfrmApp_Options_Dlg.bbtLatexWaste_defaultClick(Sender: TObject);
+begin
+  edLatexClearWaste.Text:= '.aux, .log, .lof, .lot, .bbl, .blg, .out, .toc';
 end;
 
 procedure TfrmApp_Options_Dlg.edLineWidthKeyDown(Sender: TObject;

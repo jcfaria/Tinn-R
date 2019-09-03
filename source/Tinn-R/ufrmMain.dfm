@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Width = 1002
+  Width = 1015
   Height = 683
   AlphaBlend = True
   AlphaBlendValue = 200
@@ -1046,7 +1046,7 @@ object frmMain: TfrmMain
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 994
+    Width = 1007
     Height = 80
     Align = alTop
     AutoSize = True
@@ -1057,7 +1057,7 @@ object frmMain: TfrmMain
     object ctbMain: TControlBar
       Left = 0
       Top = 0
-      Width = 994
+      Width = 1007
       Height = 52
       Align = alTop
       AutoDock = False
@@ -1189,11 +1189,12 @@ object frmMain: TfrmMain
         end
       end
       object tobSyntax: TToolBar
-        Left = 860
+        Left = 886
         Top = 2
-        Width = 102
-        Height = 22
+        Width = 100
+        Height = 21
         Align = alNone
+        AutoSize = True
         ButtonHeight = 21
         DragMode = dmAutomatic
         EdgeInner = esLowered
@@ -1349,7 +1350,7 @@ object frmMain: TfrmMain
       object tobProcessing: TTBToolbar
         Left = 779
         Top = 2
-        Width = 68
+        Width = 94
         Height = 22
         AutoResize = False
         BorderStyle = bsNone
@@ -1550,6 +1551,9 @@ object frmMain: TfrmMain
           object TBItem29: TTBItem
             Action = actOpenCurrentFile
           end
+        end
+        object TBItem68: TTBItem
+          Action = actLatexClearWaste
         end
       end
       object tobSpell: TToolBar
@@ -1790,7 +1794,7 @@ object frmMain: TfrmMain
     object TBRDockTop: TTBDock
       Left = 0
       Top = 52
-      Width = 994
+      Width = 1007
       Height = 28
       BoundLines = [blTop, blBottom, blLeft, blRight]
       Color = 16250871
@@ -2032,7 +2036,7 @@ object frmMain: TfrmMain
   object stbMain: TStatusBar
     Left = 0
     Top = 612
-    Width = 994
+    Width = 1007
     Height = 20
     AutoHint = True
     Anchors = [akLeft, akBottom]
@@ -2088,7 +2092,7 @@ object frmMain: TfrmMain
     OnDrawPanel = stbMainDrawPanel
   end
   object TBDockRight: TTBDock
-    Left = 985
+    Left = 998
     Top = 98
     Width = 9
     Height = 505
@@ -2102,7 +2106,7 @@ object frmMain: TfrmMain
   object TBDockBottom: TTBDock
     Left = 0
     Top = 603
-    Width = 994
+    Width = 1007
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
@@ -2114,7 +2118,7 @@ object frmMain: TfrmMain
   object pgFiles: TJvgPageControl
     Left = 0
     Top = 80
-    Width = 994
+    Width = 1007
     Height = 18
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -5267,6 +5271,15 @@ object frmMain: TfrmMain
       ShortCut = 49225
       OnExecute = actLatexMakeIndexExecute
     end
+    object actLatexClearWaste: TAction
+      Category = 'Tools'
+      Caption = 'LaTeX clear (waste)'
+      Enabled = False
+      Hint = 'Tools: LaTeX clear (waste)'
+      ImageIndex = 31
+      ShortCut = 24664
+      OnExecute = actLatexClearWasteExecute
+    end
     object actDVIOpenFile: TAction
       Category = 'Tools'
       Caption = 'Open file'
@@ -7871,6 +7884,9 @@ object frmMain: TfrmMain
           end
           object Makeindexmakeindex1: TMenuItem
             Action = actLatexMakeIndex
+          end
+          object Clear1: TMenuItem
+            Action = actLatexClearWaste
           end
         end
         object menToolsViewer: TMenuItem
