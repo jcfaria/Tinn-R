@@ -2,9 +2,9 @@
 # This script will install all dependencies and
 # the necessary TinnRcom package.
 #------------------------------------------------------------------------
-# Please, do not change if you do not know what you're doing!
+#.. Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 20/09/2018 19:02:01
+# 04/09/2019 09:56:06
 #------------------------------------------------------------------------
 
 # By default it will install/update only binary packages

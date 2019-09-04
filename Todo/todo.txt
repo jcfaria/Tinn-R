@@ -1,5 +1,5 @@
 #-------
-# TODO
+#. TODO
 #-------
 
 1- Corrigir bug do Hex viewer quando o arquivo é UTF-8 BOM e tenta obter a associação (caracter <-> hexa) na primeira linha.

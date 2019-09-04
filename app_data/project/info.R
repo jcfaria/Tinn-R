@@ -5,14 +5,22 @@
 # - Obtaining essential information regarding of R
 # - Install TinnRcom package and its dependencies
 #------------------------------------------------------------------------
-# Please, do not change if you do not know what you're doing!
+#.. Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 26/11/2018 08:12:20
+# 04/09/2019 09:56:06
 #------------------------------------------------------------------------
+
+# The tcltk package is necessary to show messages inside a TK windows:
+# - to choose the R repository
+# - to choice packages, ...
+options(defaultPackages=c(getOption("defaultPackages"), "tcltk"))
 
 # Set repos: Rterm does not always shows the dialog to choose the repository
 # The 'repos' will be set by Tinn-R according to user preference
 options('repos'='%repos')
+
+# Limitation of the max.print
+options('max.print'=1e4)
 
 # Default: if under Windows OS it will install/update only binary packages
 if(Sys.info()[['sysname']] == 'Windows'){
@@ -24,7 +32,7 @@ if(Sys.info()[['sysname']] == 'Windows'){
 unlockBinding("last.warning",
               baseenv())
 
-# debug package: necessary under Rterm interface
+# Debug package: necessary under Rterm interface
 options(debug.catfile="stdout")
 
 # Info: tr_info will be the file where R will save info
@@ -157,7 +165,7 @@ sink(tr_info)
       fill=1)
 sink()
 
-# TinnRcom: require
+# Package TinnRcom: require
 # The 'load' will be set to TRUE or FALSE by Tinn-R according to user preference
 if(%load) {
   if(file.exists(trc_path))
@@ -165,7 +173,7 @@ if(%load) {
             quietly=TRUE)
 }
 
-# svSocket: require and connect
+# Package svSocket: require and connect
 # The 'connect' will be set to TRUE or FALSE by Tinn-R according to user preference
 if(%connect) {
   svs_path <- try(find.package('svSocket'),

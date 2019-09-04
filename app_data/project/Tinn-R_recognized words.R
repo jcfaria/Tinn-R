@@ -5,14 +5,14 @@
 #!. R sample                    12
 #!. Programing                  41
 #!. Function                    76
-#!. Plotting                  2238
-#!. Datasets                  2316
+#!. Plotting                  2324
+#!. Datasets                  2532
 #!..._______________________________
 
 #!. ___R sample___
-#! Note                                     # Note
-#!. Note_1                                  # Note_1
-#!.. Note_2                                 # Note_2
+#. Note_1                                   # Note_1
+#.. Note_2                                  # Note_2
+#... Note_3                                 # Note_3
 pB <- 3.5E2                                 # Float number
 0 1 2 3 4 5 6 8 9                           # Numbers
 
@@ -464,11 +464,9 @@ cm
 cm.colors
 cmdscale
 co.intervals
-co2
 coef
 coefficients
 coerce
-col
 col2rgb
 colMeans
 colnames
@@ -2324,46 +2322,111 @@ zip
 zip.unpack
 
 #!. ___Plotting___
+a.name
 adj
+all.screens
+angle
 ann
+args.legend
 ask
 asp
+at
+axes
+axis.lty
+axisnames
+axlabels
+bandwidth
+bar.bg
+beside
 bg
+border
+box.col
+box.lty
+box.lwd
+boxplots
+boxwex
+breaks
 bty
 cex
 cex.axis
 cex.lab
+cex.labels
 cex.main
 cex.names
 cex.sub
 cin
+circles
+clockwise
 col
 col.axis
 col.lab
+col.lines
 col.main
+col.segments
+col.smooth
+col.stars
 col.sub
+col.ticks
+color.palette
+colramp
 cra
 crt
 csi
 cxy
+diag.panel
 din
+draw
+draw.segments
+drawlabels
+edges
+erase
 err
+expr
 fg
 fig
+figs
+fillOddEven
 fin
+flip.labels
 font
 font.axis
 font.lab
+font.labels
 font.main
 font.sub
+frame.plot
+frame.plot
+gap
+gap.axis
+given.values
+gpch
+hadj
+horInd
+horOdd
+horiz
+horiz
+inches
+include.lowest
+init.angle
+iter
+key.axes
+key.labels
+key.title
 lab
+labcex
+label.pos
 las
+legend.text
 lend
+length.out
 lheight
+line.main
 ljoin
 lmitre
+lower.panel
 lty
 lwd
+lwd.ticks
 mai
 main
 mar
@@ -2373,33 +2436,98 @@ mfg
 mfrow
 mgp
 mkh
+names.arg
+nbin
+notch
+notch.frac
+nrpoints
+oldstyle
 oma
 omd
 omi
+outline
+outwex
+overlap
+padj
+panel
+panel.first
+panel.last
 pch
 pin
+plot.axes
+plot.title
 plt
+postPlotHook
 ps
+pt.bg
+pt.cex
+pt.lwd
 pty
+radius
+rectangles
+repEnds
+ret.selection
+row1attop
+seg.len
+shape
+show.given
+show.names
+side
 smo
+span
+squares
 srt
+staplewex
+subscripts
 tck
 tcl
+text.col
+text.font
+text.panel
+text.width
+thermometers
+tick
+ticksize
+title.adj
+title.col
+upper.panel
+useRaster
 usr
+varwidth
+verInd
+verOdd
+vfont
+warn.log
+warn.unused
+x.intersp
 xaxp
 xaxs
 xaxt
+xgap.axis
+xjust
 xlab
+xleft
 xlim
 xlog
+xname
 xpd
+xright
+xtick
+xy
+y.intersp
+y.name
 yaxp
 yaxs
 yaxt
+ybottom
+ygap.axis
+yjust
 ylab
-ylim
 ylbias
+ylim
 ylog
+ytop
+zlim
 
 #!. ___Datasets___
 ability.cov

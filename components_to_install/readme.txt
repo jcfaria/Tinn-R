@@ -1,10 +1,10 @@
-#==========================================================================#
-# What  : Necessary packages and details of installation to Tinn-R project #
-# To    : Delphi 7 and CodeGear 2007                                       #
-# Who   : Jose Claudio Faria                                               #
-# When  : 2013/12/15                                                       #
-# Doubts: joseclaudio.faria@gmail.com                                      #
-#==========================================================================#
+#===========================================================================
+#. What  : Necessary packages and details of installation to Tinn-R project
+# To    : Delphi 7 and CodeGear 2007
+# Who   : Jose Claudio Faria
+# When  : 04/09/2019 10:09:24
+# Doubts: joseclaudio.faria@gmail.com
+#===========================================================================
 
 01. Abbrevia
     - Instructions: Abbrevia\readme.txt

@@ -229,9 +229,9 @@ const
     '# R complex highlighter sample'#13#10 +
     '<<< joseclaudio.faria@gmail.com >>>'#13#10 +
     '<<< www.uesc.br >>>'#13#10 + #13#10 +
-    '#! Note_0                                   # Note_0'#13#10 +
-    '#!. Note_1                                  # Note_1'#13#10 +
-    '#!.. Note_2                                 # Note_2'#13#10 +
+    '#. Note_1                                   # Note_1'#13#10 +
+    '#.. Note_2                                  # Note_2'#13#10 +
+    '#... Note_3                                 # Note_3'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
     '0 1 2 3 4 5 6 8 9                           # Numbers'#13#10 +
     #13#10 +
@@ -310,9 +310,9 @@ const
     ''#13#10 +
     'You can embed an R code chunk like this:'#13#10 +
     '<!--begin.rcode'#13#10 +
-    '#! Note_0                                   # Note_0'#13#10 +
-    '#!. Note_1                                  # Note_1'#13#10 +
-    '#!.. Note_2                                 # Note_2'#13#10 +
+    '#. Note_1                                   # Note_1'#13#10 +
+    '#.. Note_2                                  # Note_2'#13#10 +
+    '#... Note_3                                 # Note_3'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
     '0 1 2 3 4 5 6 8 9                           # Numbers'#13#10 +
     #13#10 +
@@ -352,9 +352,9 @@ const
     ''#13#10 +
     'You can embed an R code chunk like this:'#13#10 +
     '```{r}'#13#10 +
-    '#! Note_0                                   # Note_0'#13#10 +
-    '#!. Note_1                                  # Note_1'#13#10 +
-    '#!.. Note_2                                 # Note_2'#13#10 +
+    '#. Note_1                                   # Note_1'#13#10 +
+    '#.. Note_2                                  # Note_2'#13#10 +
+    '#... Note_3                                 # Note_3'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
     '0 1 2 3 4 5 6 8 9                           # Numbers'#13#10 +
     #13#10 +
@@ -394,9 +394,9 @@ const
     ''#13#10 +
     'This is a demo for using the \verb@R noweb@ command in R.'#13#10 +
     '<<echo=FALSE>>='#13#10 +
-    '#! Note_0                                   # Note_0'#13#10 +
-    '#!. Note_1                                  # Note_1'#13#10 +
-    '#!.. Note_2                                 # Note_2'#13#10 +
+    '#. Note_1                                   # Note_1'#13#10 +
+    '#.. Note_2                                  # Note_2'#13#10 +
+    '#... Note_3                                 # Note_3'#13#10 +
     'pB <- 3.5E2                                 # Float number'#13#10 +
     '0 1 2 3 4 5 6 8 9                           # Numbers'#13#10 +
     #13#10 +

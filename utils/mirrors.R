@@ -3,9 +3,9 @@
 # Aim:
 # - Obtaining essential information regarding of R mirrors
 #------------------------------------------------------------------------
-# Please, do not change if you do not know what you're doing!
+#.. Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 23/08/2016 07:51:12
+# 04/09/2019 09:56:06
 #------------------------------------------------------------------------
 
 # Temp: \Users\user\AppData\Local\Temp\Tinn-R\mirrors.txt

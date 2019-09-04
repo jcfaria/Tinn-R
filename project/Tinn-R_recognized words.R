@@ -6,13 +6,13 @@
 #!. Programing                  41
 #!. Function                    76
 #!. Plotting                  2324
-#!. Datasets                  2536
+#!. Datasets                  2532
 #!..._______________________________
 
 #!. ___R sample___
-#! Note_0                                   # Note_0
-#!. Note_1                                  # Note_1
-#!.. Note_2                                 # Note_2
+#. Note_1                                   # Note_1
+#.. Note_2                                  # Note_2
+#... Note_3                                 # Note_3
 pB <- 3.5E2                                 # Float number
 0 1 2 3 4 5 6 8 9                           # Numbers
 
@@ -2500,8 +2500,6 @@ vfont
 warn.log
 warn.unused
 x.intersp
-x0
-x1
 xaxp
 xaxs
 xaxt
@@ -2518,8 +2516,6 @@ xtick
 xy
 y.intersp
 y.name
-y0
-y1
 yaxp
 yaxs
 yaxt

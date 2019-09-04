@@ -1,21 +1,24 @@
-# ===================================//==========================================
-#  Mail: <<< joseclaudio.faria@gmail.com >>> <<< phgrosjean@sciviews.org >>>
+#===================================//==========================================
+#  Mail: <<< joseclaudio.faria@gmail.com >>>
 #  More: <<< http://zoonek2.free.fr/UNIX/48_R/all.html >>>
-# ===================================//==========================================
+#===================================//==========================================
 
-# help.start() start the html interface to on-line help (using a web browser available at
-# your machine). You should briefly explore the features of this facility with the mouse.
-# Iconify the help window and move on to the next part.
+#.. help.start() starts the html interface to on-line help (using a web browser available at
+#.. your machine). You should briefly explore the features of this facility with the mouse.
+#.. Iconify the help window and move on to the next part.
 
-x <- rnorm(50)
+set.seed(17)
+x <- rnorm(10)
 x
 
-y <- rnorm(50)
+y <- rnorm(10)
 y
 # Generate two pseudo-random normal vectors of x and y coordinates
 
 x11(w=4,
-    h=4)
+    h=4,
+    xpos=0,
+    ypos=0)
 
 bringToTop(s=T)
 
@@ -33,7 +36,7 @@ x <- 1:20
 # Make x=(1, 2, . . . , 20)
 
 w <- 1 + sqrt(x)/2
-# A ‘weight’ vector of standard deviations
+# A â€˜weightâ€™ vector of standard deviations
 
 dummy <- data.frame(x=x,
                     y=x + rnorm(x) * w)
@@ -90,11 +93,13 @@ qqnorm(resid(fm),
        main="Residuals Rankit Plot")
 # A normal scores plot to check for skewness, kurtosis and outliers. (Not very useful here)
 
-rm(w, fm, fm1, lrf, x, dummy)
+rm(w,
+   fm,
+   fm1,
+   lrf,
+   x,
+   dummy)
 # Clean up again
 
 graphics.off()
 # Close graphics
-
-# q() Quit the R program. You will be asked if you want to save the R workspace, and for an
-# exploratory session like this, you probably do not want to save it.
