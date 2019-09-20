@@ -1,0 +1,629 @@
+<!--
+===============================================================================================
+
+	Borland.Delphi.Targets
+
+	WARNING
+
+	DO NOT MODIFY unless you have made a backup of these files.  Modifying
+	this file unless you have knowledge about MSBuild you could cause problems
+	when loading or building projects in the IDE or building from the
+	command-line.
+
+===============================================================================================
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+
+	<UsingTask TaskName="DCC" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Delphi.dll"/>
+
+	<Import Project="Borland.Common.Targets"/>
+
+	<!--
+	========================================================================
+							 Static Properties
+		Override missing properties from user msbuild file with standard
+		build logic.
+	========================================================================
+	-->
+
+	<ItemGroup>
+		<_DirectoryList Include="
+			$(DCC_ExeOutput);
+			$(DCC_DcuOutput);
+			$(DCC_DcpOutput);
+			$(DCC_HppOutput);
+			$(DCC_ObjOutput);
+			$(DCC_ResourceOutput);
+			$(DCC_BplOutput);
+			$(DCC_BpiOutput)
+		"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<_MSBuildProjectFullPath Include="$(MSBuildProjectFullPath)"/>
+		<_DependencyCheckOutputName Include="$(DCC_DependencyCheckOutputName)"/>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<!-- use the correct global option depending on compiler type -->
+		<_EnvLibraryPath Condition = " '$(DCC_DCCCompiler)' == 'DCC32'">$(Win32LibraryPath)</_EnvLibraryPath>
+		<_EnvLibraryPath Condition = " '$(DCC_DCCCompiler)' == 'DCCIL'">$(DotNetLibraryPath);</_EnvLibraryPath>
+		<_EnvNamespace Condition = " '$(DCC_DCCCompiler)' == 'DCC32'">$(Win32NamespaceSearchPath)</_EnvNamespace>
+		<_EnvNamespace Condition = " '$(DCC_DCCCompiler)' == 'DCCIL'">$(DotNetNamespaceSearchPath)</_EnvNamespace>
+		<_EnvDCPOutput Condition = " '$(DCC_DCCCompiler)' == 'DCC32'">$(Win32DCPOutput)</_EnvDCPOutput>
+		<_EnvDCPOutput Condition = " '$(DCC_DCCCompiler)' == 'DCCIL'">$(DotNetDCPOutput)</_EnvDCPOutput>
+		<_EnvPackageOutput Condition = " '$(DCC_DCCCompiler)' == 'DCC32'">$(Win32DLLOutputPath)</_EnvPackageOutput>
+		<_EnvPackageOutput Condition = " '$(DCC_DCCCompiler)' == 'DCCIL'">$(DotNetDLLOutputPath)</_EnvPackageOutput>
+		<!-- OBJPath is only meaningful for DCC32 -->
+		<_ObjectPath Condition = " '$(DCC_DCCCompiler)' == 'DCC32' And '$(DCC_ObjPath)' != ''">$(DCC_ObjPath);$(_EnvLibraryPath)</_ObjectPath>
+		<_ObjectPath Condition = " '$(DCC_DCCCompiler)' == 'DCC32' And '$(DCC_ObjPath)' == ''">$(_EnvLibraryPath)</_ObjectPath>
+		<!-- default MakeModifiedUnits to true -->
+		<!-- use the global Output path only if the project does not define one  -->
+		<DCC_BplOutput Condition = " '$(DCC_BplOutput)' == ''">$(_EnvPackageOutput)</DCC_BplOutput>
+		<DCC_DcpOutput Condition = " '$(DCC_DcpOutput)' == ''">$(_EnvDCPOutput)</DCC_DcpOutput>
+		<DCC_ResourceOutput Condition = " '$(DCC_ResourceOutput)' == ''">$(Win32DCPOutput)</DCC_ResourceOutput>
+
+	<!-- Build event properties settable in the IDE -->
+		<ProjectName>$(MSBuildProjectName)</ProjectName>
+		<ProjectFilename>$(MSBuildProjectFile)</ProjectFilename>
+		<ProjectExt>$(MSBuildProjectExtension)</ProjectExt>
+		<ProjectDir>$(MSBuildProjectDirectory)</ProjectDir>
+		<ProjectPath>$(MSBuildProjectFullPath)</ProjectPath>
+
+		<InputPath>@(DelphiCompile->'%(FullPath)')</InputPath>
+		<InputDir>@(DelphiCompile->'%(RootDir)%(Directory)')</InputDir>
+		<InputName>@(DelphiCompile->'%(Filename)')</InputName>
+		<InputExt>@(DelphiCompile->'%(Extension)')</InputExt>
+		<InputFilename>@(DelphiCompile->'%(Filename)%(Extension)')</InputFilename>
+
+		<OutputPath>@(_DependencyCheckOutputName->'%(FullPath)')</OutputPath>
+		<OutputDir>@(_DependencyCheckOutputName->'%(RootDir)%(Directory)')</OutputDir>
+		<OutputName>@(_DependencyCheckOutputName->'%(Filename)')</OutputName>
+		<OutputExt>@(_DependencyCheckOutputName->'%(Extension)')</OutputExt>
+		<OutputFilename>@(_DependencyCheckOutputName->'%(Filename)%(Extension)')</OutputFilename>
+
+		<UnitSearchPath Condition="'$(DCC_UnitSearchPath)' != ''">$(DCC_UnitSearchPath);$(_EnvLibraryPath)</UnitSearchPath>
+		<UnitSearchPath Condition="'$(DCC_UnitSearchPath)' == ''">$(_EnvLibraryPath)</UnitSearchPath>
+
+                <UnitSearchPath Condition="'$(DCC_DCCCompiler)' == 'DCCIL' And '$(UnitSearchPath)' != ''">$(UnitSearchPath);$(DCC_DcpOutput)</UnitSearchPath>
+                <UnitSearchPath Condition="'$(DCC_DCCCompiler)' == 'DCCIL' And '$(UnitSearchPath)' == ''">$(DCC_DcpOutput)</UnitSearchPath>
+
+		<ResourcePath Condition="'$(DCC_ResourcePath)' != ''">$(DCC_ResourcePath);$(_EnvLibraryPath)</ResourcePath>
+		<ResourcePath Condition="'$(DCC_ResourcePath)' == ''">$(_EnvLibraryPath)</ResourcePath>
+		<NameSpace Condition="'$(DCC_NameSpace)' != ''">$(DCC_NameSpace);$(_EnvNamespace)</NameSpace>
+		<NameSpace Condition="'$(DCC_NameSpace)' == ''">$(_EnvNamespace)</NameSpace>
+		<IncludePath>$(UnitSearchPath)</IncludePath>
+		<Defines>$(DCC_Define)</Defines>
+
+		<_ProjectFiles>@(DelphiCompile)</_ProjectFiles>
+	</PropertyGroup>
+
+	<!--
+	========================================================================
+							 CoreCompile
+		Perform final dependency checking on produces resource files
+		and source, then call the compiler.
+
+	========================================================================
+	-->
+
+
+	<Target Name="CoreCompile" Condition=" '@(_ProjectFiles)'!='' ">
+		<DCC DelphiCompile="$(_ProjectFiles)"
+			DCCCompiler="$(DCC_DCCCompiler)"
+			ExeOutput="$(DCC_ExeOutput)"
+			BplOutput="$(DCC_BplOutput)"
+			DcuOutput="$(DCC_DcuOutput)"
+			DcpOutput="$(DCC_DcpOutput)"
+			HppOutput="$(DCC_HppOutput)"
+			ObjOutput="$(DCC_ObjOutput)"
+			BpiOutput="$(DCC_BpiOutput)"
+			InternalDependencyCheck="true"
+			FileReference="@(_InputFiles)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+
+			DependencyCheckOutputName = "$(DCC_DependencyCheckOutputName)"
+			UnitSearchPath="$(UnitSearchPath)"
+			ResourcePath="$(ResourcePath)"
+			IncludePath="$(IncludePath)"
+			ObjPath="$(_ObjectPath)"
+
+			UnitAlias="$(DCC_UnitAlias)"
+			ConsoleTarget="$(DCC_ConsoleTarget)"
+			Define="$(DCC_Define)"
+			FindError="$(DCC_FindError)"
+			MapFile="$(DCC_MapFile)"
+			Hints="$(DCC_Hints)"
+			CBuilderOutput="$(DCC_CBuilderOutput)"
+			BaseAddress="$(DCC_BaseAddress)"
+			UsePackage="$(_UsePackage)"
+			MakeModifiedUnits="$(DCC_MakeModifiedUnits)"
+			BuildAllUnits="$(DCC_BuildAllUnits)"
+			NameSpace="$(NameSpace)"
+			OldDosFileNames="$(DCC_OldDosFileNames)"
+			Quiet="$(DCC_Quiet)"
+			DebugInfoInExe="$(DCC_DebugInfoInExe)"
+			DebugVN="$(DCC_DebugVN)"
+			RemoteDebug="$(DCC_RemoteDebug)"
+			OutputNeverBuildDcps="$(DCC_OutputNeverBuildDcps)"
+			NoConfig="true"
+			OutputDRCFile="$(DCC_OutputDRCFile)"
+			OutputDependencies="$(DCC_OutputDependencies)"
+			OutputXMLDocumentation="$(DCC_OutputXMLDocumentation)"
+			DefaultNamespace="$(DCC_DefaultNamespace)"
+			Platform="$(DCC_Platform)"
+			UnsafeCode="$(DCC_UnsafeCode)"
+			Warnings="$(DCC_Warnings)"
+
+			Alignment="$(DCC_Alignment)"
+			MinimumEnumSize="$(DCC_MinimumEnumSize)"
+			FullBooleanEvaluations="$(DCC_FullBooleanEvaluations)"
+			AssertionsAtRuntime="$(DCC_AssertionsAtRuntime)"
+			DebugInformation="$(DCC_DebugInformation)"
+			ImportedDataReferences="$(DCC_ImportedDataReferences)"
+			LongStrings="$(DCC_LongStrings)"
+			IOChecking="$(DCC_IOChecking)"
+			WriteableConstants="$(DCC_WriteableConstants)"
+			LocalDebugSymbols="$(DCC_LocalDebugSymbols)"
+			RunTimeTypeInfo="$(DCC_RunTimeTypeInfo)"
+			Optimize="$(DCC_Optimize)"
+			OpenStringParams="$(DCC_OpenStringParams)"
+			IntegerOverflowCheck="$(DCC_IntegerOverflowCheck)"
+			RangeChecking="$(DCC_RangeChecking)"
+			TypedAtParameter="$(DCC_TypedAtParameter)"
+			PentiumSafeDivide="$(DCC_PentiumSafeDivide)"
+			StrictVarStrings="$(DCC_StrictVarStrings)"
+			GenerateStackFrames="$(DCC_GenerateStackFrames)"
+			ExtendedSyntax="$(DCC_ExtendedSyntax)"
+			SymbolReferenceInfo="$(DCC_SymbolReferenceInfo)"
+
+			StackSize="$(DCC_StackSize)"
+			ImageBase="$(DCC_ImageBase)"
+			Description="$(DCC_Description)"
+
+			DelaySign="$(DCC_DelaySign)"
+			KeyFile="$(DCC_KeyFile)"
+			KeyContainer="$(DCC_KetContainer)"
+			CodePage="$(DCC_CodePage)"
+
+			SYMBOL_DEPRECATED="$(DCC_SYMBOL_DEPRECATED)"
+			SYMBOL_LIBRARY="$(DCC_SYMBOL_LIBRARY)"
+			SYMBOL_PLATFORM="$(DCC_SYMBOL_PLATFORM)"
+			SYMBOL_EXPERIMENTAL="$(DCC_SYMBOL_EXPERIMENTAL)"
+			UNIT_LIBRARY="$(DCC_UNIT_LIBRARY)"
+			UNIT_PLATFORM="$(DCC_UNIT_PLATFORM)"
+			UNIT_DEPRECATED="$(DCC_UNIT_DEPRECATED)"
+			UNIT_EXPERIMENTAL="$(DCC_UNIT_EXPERIMENTAL)"
+			HRESULT_COMPAT="$(DCC_HRESULT_COMPAT)"
+			HIDING_MEMBER="$(DCC_HIDING_MEMBER)"
+			HIDDEN_VIRTUAL="$(DCC_HIDDEN_VIRTUAL)"
+			GARBAGE="$(DCC_GARBAGE)"
+			BOUNDS_ERROR="$(DCC_BOUNDS_ERROR)"
+			ZERO_NIL_COMPAT="$(DCC_ZERO_NIL_COMPAT)"
+			STRING_CONST_TRUNCED="$(DCC_STRING_CONST_TRUNCED)"
+			FOR_LOOP_VAR_VARPAR="$(DCC_FOR_LOOP_VAR_VARPAR)"
+			TYPED_CONST_VARPAR="$(DCC_TYPED_CONST_VARPAR)"
+			ASG_TO_TYPED_CONST="$(DCC_ASG_TO_TYPED_CONST)"
+			CASE_LABEL_RANGE="$(DCC_CASE_LABEL_RANGE)"
+			FOR_VARIABLE="$(DCC_FOR_VARIABLE)"
+			CONSTRUCTING_ABSTRACT="$(DCC_CONSTRUCTING_ABSTRACT)"
+			COMPARISON_FALSE="$(DCC_COMPARISON_FALSE)"
+			COMPARISON_TRUE="$(DCC_COMPARISON_TRUE)"
+			COMPARING_SIGNED_UNSIGNED="$(DCC_COMPARING_SIGNED_UNSIGNED)"
+			COMBINING_SIGNED_UNSIGNED="$(DCC_COMBINING_SIGNED_UNSIGNED)"
+			UNSUPPORTED_CONSTRUCT="$(DCC_UNSUPPORTED_CONSTRUCT)"
+			FILE_OPEN="$(DCC_FILE_OPEN)"
+			FILE_OPEN_UNITSRC="$(DCC_FILE_OPEN_UNITSRC)"
+			BAD_GLOBAL_SYMBOL="$(DCC_BAD_GLOBAL_SYMBOL)"
+			DUPLICATE_CTOR_DTOR="$(DCC_DUPLICATE_CTOR_DTOR)"
+			INVALID_DIRECTIVE="$(DCC_INVALID_DIRECTIVE)"
+			PACKAGE_NO_LINK="$(DCC_PACKAGE_NO_LINK)"
+			PACKAGED_THREADVAR="$(DCC_PACKAGED_THREADVAR)"
+			IMPLICIT_IMPORT="$(DCC_IMPLICIT_IMPORT)"
+			HPPEMIT_IGNORED="$(DCC_HPPEMIT_IGNORED)"
+			NO_RETVAL="$(DCC_NO_RETVAL)"
+			USE_BEFORE_DEF="$(DCC_USE_BEFORE_DEF)"
+			FOR_LOOP_VAR_UNDEF="$(DCC_FOR_LOOP_VAR_UNDEF)"
+			UNIT_NAME_MISMATCH="$(DCC_UNIT_NAME_MISMATCH)"
+			NO_CFG_FILE_FOUND="$(DCC_NO_CFG_FILE_FOUND)"
+			IMPLICIT_VARIANTS="$(DCC_IMPLICIT_VARIANTS)"
+			UNICODE_TO_LOCALE="$(DCC_UNICODE_TO_LOCALE)"
+			LOCALE_TO_UNICODE="$(DCC_LOCALE_TO_UNICODE)"
+			IMAGEBASE_MULTIPLE="$(DCC_IMAGEBASE_MULTIPLE)"
+			SUSPICIOUS_TYPECAST="$(DCC_SUSPICIOUS_TYPECAST)"
+			PRIVATE_PROPACCESSOR="$(DCC_PRIVATE_PROPACCESSOR)"
+			UNSAFE_TYPE="$(DCC_UNSAFE_TYPE)"
+			UNSAFE_CODE="$(DCC_UNSAFE_CODE)"
+			UNSAFE_CAST="$(DCC_UNSAFE_CAST)"
+			OPTION_TRUNCATED="$(DCC_OPTION_TRUNCATED)"
+			WIDECHAR_REDUCED="$(DCC_WIDECHAR_REDUCED)"
+			DUPLICATES_IGNORED="$(DCC_DUPLICATES_IGNORED)"
+			UNIT_INIT_SEQ="$(DCC_UNIT_INIT_SEQ)"
+			LOCAL_PINVOKE="$(DCC_LOCAL_PINVOKE)"
+			MESSAGE_DIRECTIVE="$(DCC_MESSAGE_DIRECTIVE)"
+			TYPEINFO_IMPLICITLY_ADDED="$(DCC_TYPEINFO_IMPLICITLY_ADDED)"
+			XML_WHITESPACE_NOT_ALLOWED="$(DCC_XML_WHITESPACE_NOT_ALLOWED)"
+			XML_UNKNOWN_ENTITY="$(DCC_XML_UNKNOWN_ENTITY)"
+			XML_INVALID_NAME_START="$(DCC_XML_INVALID_NAME_START)"
+			XML_INVALID_NAME="$(DCC_XML_INVALID_NAME)"
+			XML_EXPECTED_CHARACTER="$(DCC_XML_EXPECTED_CHARACTER)"
+			XML_CREF_NO_RESOLVE="$(DCC_XML_CREF_NO_RESOLVE)"
+			XML_NO_PARM="$(DCC_XML_NO_PARM)"
+			XML_NO_MATCHING_PARM="$(DCC_XML_NO_MATCHING_PARM)"
+
+			AdditionalSwitches="%(_ProjectFiles.CompilerOptions)"
+		/>
+
+	</Target>
+
+	<!--
+	========================================================================
+							 CoreBuild
+		Calls build events in order to prepare and clean up after each
+		build.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<BuildDependsOn>
+			SetBuildOptions;
+			CoreBuild;
+		</BuildDependsOn>
+
+		<MakeDependsOn>
+			SetMakeOptions;
+			CoreBuild;
+		</MakeDependsOn>
+
+		<CoreBuildDependsOn>
+			CreateDirectories;
+			ResolveFiles;
+			ResourceBuild;
+			$(_PreCompileTargets);
+			PreBuildEvent;
+			_PreOutputTimeStamp;
+			CoreCompile;
+			_PostOutputTimeStamp;
+			PostBuildEvent;
+			$(_PostCompileTargets);
+		</CoreBuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="SetMakeOptions">
+		<CreateProperty Value="true">
+			<Output TaskParameter="Value" PropertyName="DCC_MakeModifiedUnits" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="SetBuildOptions">
+		<CreateProperty Value="true">
+			<Output TaskParameter="Value" PropertyName="DCC_BuildAllUnits" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="default" DependsOnTargets="Make"/>
+
+	<Target Name="Make" DependsOnTargets="$(MakeDependsOn)"/>
+
+	<Target Name="CoreBuild" DependsOnTargets="$(CoreBuildDependsOn)"/>
+
+	<Target Name="Build" DependsOnTargets = "$(BuildDependsOn)"/>
+
+	<!--
+	========================================================================
+							 Clean
+		Cleans intermediates and final outputs.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<CleanDependsOn>
+			GetOutputExt;
+			GetOutputDCPFilenameWin32;
+			GetOutputDCPFilenameDotNet;
+			GetOutputDCPFilenameDCPOutput;
+			GetOutputDCPFilename;
+			ResolveFiles;
+			CleanOutputs;
+			CleanResources
+		</CleanDependsOn>
+	</PropertyGroup>
+
+
+	<Target Name="Clean" DependsOnTargets="$(CleanDependsOn)"/>
+
+	<Target Name="CleanOutputs">
+
+		<Delete Files="
+			@(_OutputFiles);
+			@(__OutputFiles);
+			@(_DeleteFiles);
+			$(DCC_DependencyCheckOutputName);
+			$(_OutputDCPFullName);
+			@(_LicenseFile)
+		"/>
+	</Target>
+
+	<Target Name="CreateDCPTarget">
+		<CreateProperty Value="%(_DependencyCheckOutputName.Extension)">
+			<Output TaskParameter="Value" PropertyName="_OutputProjectExt" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="CleanResources">
+		<Delete Files="
+			@(_ResourceFiles);
+			@(_LocalizedResources)
+		"/>
+	</Target>
+
+	<Target Name="GetOutputExt">
+		<CreateProperty Value="%(_DependencyCheckOutputName.Extension)">
+			<Output TaskParameter="Value" PropertyName="_OutputProjectExt" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="GetOutputDCPFilenameWin32">
+		<CreateProperty Value="%(_MSBuildProjectFullPath.Filename).dcp" Condition = " '$(_OutputProjectExt)' == '.bpl' And '$(DCC_DCCCompiler)' == 'DCC32'">
+			<Output TaskParameter="Value" PropertyName="_OutputDCPFilename" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="GetOutputDCPFilenameDotNet">
+		<CreateProperty Value="%(_MSBuildProjectFullPath.Filename).dcpil" Condition = " '$(_OutputProjectExt)' == '.dll' And '$(DCC_DCCCompiler)' != 'DCC32' ">
+			<Output TaskParameter="Value" PropertyName="_OutputDCPFilename" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="GetOutputDCPFilenameDCPOutput">
+		<CreateProperty Value="$(DCC_DcpOutput)\$(_OutputDCPFilename)" Condition = " '$(DCC_DcpOutput)' != '' ">
+			<Output TaskParameter="Value" PropertyName="_OutputDCPFullName" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="GetOutputDCPFilename">
+		<CreateProperty Value="$(_OutputDCPFilename)" Condition = " '$(DCC_DcpOutput)' == '' ">
+			<Output TaskParameter="Value" PropertyName="_OutputDCPFullName" />
+		</CreateProperty>
+	</Target>
+
+
+	<!--
+	========================================================================
+							 CreateDirectories
+		Create directories required to build the projects.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<CreateDirectoriesDependsOn>
+			CreateProjectDirectories;
+			CreateLocalDirectories
+		</CreateDirectoriesDependsOn>
+	</PropertyGroup>
+
+	<Target Name="CreateDirectories" DependsOnTargets="$(CreateDirectoriesDependsOn)"/>
+
+	<Target Name="CreateProjectDirectories">
+		<MakeDir Directories="
+			@(_DirectoryList)
+		"/>
+	</Target>
+
+	<Target Name="CreateLocalDirectories"/>
+
+	<!--
+	========================================================================
+							 ResourceBuild
+		Resolve non-standard resource dependencies and build resources
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<ResourceBuildDependsOn>
+			Win32ResourceDependencies;
+			BuildWin32Resources;
+			BuildLicenseFile;
+		</ResourceBuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="ResourceBuild" DependsOnTargets="$(ResourceBuildDependsOn)"/>
+
+	<Target Name="Win32ResourceDependencies" Condition=" '@(_RCFiles)'!='' ">
+		<GetResourceDependencies Files="@(_RCFiles)">
+			<Output TaskParameter="Dependencies" ItemName="_RCDependencies"/>
+		</GetResourceDependencies>
+	</Target>
+
+	<Target Name="BuildWin32Resources" Condition=" '@(_RCFiles)'!='' "
+		Inputs="@(_RCFiles);%(_RCDependencies.Dependencies)"
+		Outputs="@(_ResourceFiles)">
+			<BuildDelphiResources Files="@(_RCFiles)" OutputDir="$(ResourceOutput)"/>
+	</Target>
+
+	<Target Name="BuildLicenseFile" Condition=" '@(_LicxFiles)'!='' "
+		Inputs="@(_LicxFiles)"
+		Outputs="@(_LicenseFile)">
+        <LC
+            Sources="@(_LicxFiles)"
+            LicenseTarget="@(_DependencyCheckOutputName)"
+            OutputLicense="@(_LicenseFile)"
+            ReferencedAssemblies="@(Reference)"
+        />
+	</Target>
+
+	<!--
+	========================================================================
+							 ResolveFiles
+		Resolve source files passed in both the compile itemgroup and
+		reference itemgroup to allow the targets to determine what to
+		do with them.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<ResolveFilesDependsOn>
+			ResolveSources;
+			ResolveResources;
+			ResolveLocalResources;
+			ResolvePaths;
+			ResolveOutputs;
+			ResolveInputs;
+			ResolveReferences
+		</ResolveFilesDependsOn>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DCCPasFileOutputExt Condition = " '$(DCC_DCCCompiler)' == 'DCC32' ">.dcu</DCCPasFileOutputExt>
+		<DCCPasFileOutputExt Condition = " '$(DCC_DCCCompiler)' == 'DCCIL' ">.dcuil</DCCPasFileOutputExt>
+	</PropertyGroup>
+
+	<Target Name="ResolveFiles" DependsOnTargets="$(ResolveFilesDependsOn)"/>
+
+	<!-- Add Paths to searchpath for resources and units not in the project directory -->
+	<Target Name="ResolvePaths">
+		<RemoveDuplicates Inputs="@(Compile->'%(RelativeDir)')"
+					Condition="( ( '%(EXTENSION)'=='.dfm' or '%(EXTENSION)'=='.nfm' ) And '%(RelativeDir)'!='' ) ">
+			<Output	TaskParameter="Filtered" ItemName="ResourcePath"/>
+		</RemoveDuplicates>
+
+		<RemoveDuplicates Inputs="@(Compile->'%(RelativeDir)')"
+					Condition="( '%(EXTENSION)'=='.pas' And '%(RelativeDir)'!='' ) ">
+			<Output	TaskParameter="Filtered" ItemName="UnitPath"/>
+		</RemoveDuplicates>
+	</Target>
+
+	<Target Name="ResolveResources">
+		<!-- Source File Resolution -->
+		<CreateItem Include="@(EmbeddedResource)"
+					Condition="( '%(EXTENSION)'=='.rc' ) "
+					AdditionalMetadata="TargetExtension=%(EmbeddedResource.TargetExtension)">
+			<Output	TaskParameter="Include" ItemName="_RCFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(EmbeddedResource)"
+					Condition=" '%(EXTENSION)'=='.dfm' or '%(EXTENSION)'=='.nfm' ">
+			<Output	TaskParameter="Include" ItemName="_Forms"/>
+		</CreateItem>
+		
+		<CreateItem Include="@(EmbeddedResource)"
+					Condition="( '%(EXTENSION)'=='.licx' )">
+			<Output TaskParameter="Include" ItemName="_LicxFiles"/>
+		</CreateItem>					
+
+		<!-- Output Resolution -->
+		<CreateItem Include="@(EmbeddedResource->'$(ResourceOutput)\%(Filename)%(TargetExtension)')"
+					Condition="( '%(EXTENSION)'=='.rc' ) "
+					AdditionalMetadata="TargetExtension=%(EmbeddedResource.TargetExtension)">
+			<Output	TaskParameter="Include" ItemName="_ResourceFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(EmbeddedResource)"
+					Condition="( '%(EXTENSION)'=='.res' ) ">
+			<Output	TaskParameter="Include" ItemName="_ResourceFiles"/>
+		</CreateItem>
+		
+	</Target>
+
+	<Target Name="ResolveSources">
+		<!-- Source File Resolution -->
+		<CreateItem Include="@(Reference)"
+					Condition="( '%(EXTENSION)'=='.pas' ) ">
+			<Output	TaskParameter="Include" ItemName="_PasFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(DelphiCompile->'$(MSBuildProjectDirectory)\%(Filename)%(Extension)')">
+			<Output	TaskParameter="Include" ItemName="_ProjectFiles"/>
+		</CreateItem>
+
+		<CreateProperty Value="%(_ProjectFiles.Filename)">
+			<Output	TaskParameter="Value" PropertyName="_ProjectName"/>
+		</CreateProperty>
+	</Target>
+
+	<Target Name="ResolveLocalResources"/>
+
+	<Target Name="ResolveOutputs">
+		<CreateItem Include="@(DCCReference->'$(DCC_DcuOutput)\%(filename)$(DCCPasFileOutputExt)')"
+					Condition="('%(EXTENSION)'=='.pas' And '$(DCC_DcuOutput)'!='' ) ">
+			<Output	TaskParameter="Include"	ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(DCCReference->'%(filename)$(DCCPasFileOutputExt)')"
+					Condition="('%(EXTENSION)'=='.pas')  And '$(DCC_DcuOutput)'=='' ">
+			<Output	TaskParameter="Include"	ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ProjectFiles->'$(DCC_BplOutput)%(Filename)$(DCC_LibSuffix).bpl')"
+					Condition="( '%(EXTENSION)'=='.dpk' Or '%(EXTENSION)'=='.dpkw' ) ">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ProjectFiles->'$(DCC_ExeOutput)%(Filename)$(ProjectOutputExtension)')"
+					Condition="( '%(EXTENSION)'=='.dpr' ) ">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ResourceFiles)"
+					Condition=" '$(DependencyCheckUnits)'=='' ">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ProjectFiles->'$(DCC_DcuOutput)\%(Filename).dcu')"
+					Condition="( '%(EXTENSION)'=='.dpk' Or '%(EXTENSION)'=='.dpkw' And '$(DCC_DcuOutput)' != '') ">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ProjectFiles->'%(Filename).dcu')"
+					Condition="( '%(EXTENSION)'=='.dpk' Or '%(EXTENSION)'=='.dpkw' And '$(DCC_DcuOutput)' == '') ">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+		
+		<CreateItem Include="@(_DependencyCheckOutputName->'%(FullPath).licenses')"
+					Condition=" '@(_LicxFiles)'!='' ">
+			<Output	TaskParameter="Include" ItemName="_LicenseFile"/>
+		</CreateItem>
+		
+	</Target>
+
+	<Target Name="ResolveInputs">
+		<CreateItem Include="@(DCCReference) ">
+			<Output	TaskParameter="Include"	ItemName="_InputFiles"/>
+		</CreateItem>
+		<CreateItem Include="@(DCCReference->'%(RelativeDir)%(filename).dfm')"
+					Condition="( '%(DCCReference.Form)'!='' ) ">
+			<Output	TaskParameter="Include"	ItemName="_InputFiles"/>
+		</CreateItem>
+		<CreateItem Include="@(DCCReference->'%(RelativeDir)%(filename).nfm')"
+					Condition="( '%(DCCReference.Form)'!='' And '$(DCC_DCCCompiler)' == 'DCCIL' ) ">
+			<Output	TaskParameter="Include"	ItemName="_InputFiles"/>
+		</CreateItem>
+	</Target>
+
+	<Target Name="_ResolveReferences">
+		<CreateItem Include="@(Reference)"
+					Condition="('%(Reference.LinkUnits)'==false)">
+			<Output TaskParameter="Include" ItemName="__References"/>
+		</CreateItem>
+	</Target>
+
+	<Target Name="ResolveReferences" DependsOnTargets="_ResolveReferences">
+		<CreateProperty Value="@(__References->'%(AssemblyTag)')" Condition="'$(DCC_DCCCompiler)' == 'DCCIL'">
+			<Output TaskParameter="Value" PropertyName="_UsePackage" />
+		</CreateProperty>
+		<CreateProperty Value="$(DCC_UsePackage)"
+			Condition="'$(DCC_DCCCompiler)' != 'DCCIL' And '$(DCC_EnabledPackages)'==true">
+			<Output TaskParameter="Value" PropertyName="_UsePackage" />
+		</CreateProperty>
+	</Target>
+
+	<Target Name="_ResolveFinalOutput" DependsOnTargets="_ResolveInputFiles">
+	</Target>
+
+	<Target Name="_ResolveInputFiles">
+	</Target>
+
+
+
+</Project>

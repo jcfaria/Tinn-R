@@ -1,0 +1,1941 @@
+<!--
+===============================================================================================
+
+	Borland.Cpp.Targets
+
+	WARNING
+
+	DO NOT MODIFY unless you have made a backup of these files.  Modifying
+	this file unless you have knowledge about MSBuild you could cause problems
+	when loading or building projects in the IDE or building from the
+	command-line.
+
+===============================================================================================
+-->
+
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Make">
+
+	<Import Project="Borland.Common.Targets"/>
+	
+	<UsingTask TaskName="BCC32" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Cpp.dll"/>
+	<UsingTask TaskName="BRCC32" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+	<UsingTask TaskName="TASM32" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Cpp.dll"/>
+	<UsingTask TaskName="DCC" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Delphi.dll"/>
+	<UsingTask TaskName="ILINK32" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Cpp.dll"/>
+	<UsingTask TaskName="TLIB" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Cpp.dll"/>
+	<UsingTask TaskName="CPP32" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Cpp.dll"/>
+	<UsingTask TaskName="InvokeMSBuild" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Cpp.dll"/>
+	<UsingTask TaskName="DependencyCheck" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+	<UsingTask TaskName="BccDependencyCheck" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Cpp.dll"/>
+	<UsingTask TaskName="FindItem" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+	<UsingTask TaskName="CopyItem" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+	<UsingTask TaskName="ItemSort" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+	<UsingTask TaskName="BDSCallback" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+	
+	<PropertyGroup>
+		<DependencyCheckDependsOnTargets>
+			_PasDepCheck;
+			_TasmDepCheck;
+			_RcDepCheck;
+			_BccDepCheck;
+		</DependencyCheckDependsOnTargets>
+		<PreBuildEventDependsOn>
+			_ResolveInput;
+			_ResolveOutput;
+		</PreBuildEventDependsOn>
+		<PreLinkEventDependsOn>
+			_ResolveInput;
+			_ResolveOutput;
+		</PreLinkEventDependsOn>
+		<PostBuildEventDependsOn>
+			_ResolveInput;
+			_ResolveOutput;
+		</PostBuildEventDependsOn>
+		<MakeDependsOnTargets>
+			_MakePreReq;
+			_ResolveOutput;
+			CreateDirectories;
+			PreBuildEvent;
+			_PreOutputTimeStamp;
+			MakeObjs;
+			Link;
+			_PostOutputTimeStamp;
+			PostBuildEvent;
+		</MakeDependsOnTargets>
+		<MakeOneDependsOnTargets>
+			_MakeOnePreReq;
+			_ResolveInput;
+			_ResolveFileToCompile;
+			CreateDirectories;
+			PreBuildEvent;
+			_PreOutputTimeStamp;
+			_MakeOne;
+			_PostOutputTimeStamp;
+			PostBuildEvent;
+		</MakeOneDependsOnTargets>
+		<BuildDependsOnTargets>
+			_ForceRebuild;
+			$(MakeDependsOnTargets);
+		</BuildDependsOnTargets>
+		<LinkDependsOnTargets>
+			_ResolveOutput;
+			CreateDirectories;
+			PreLinkEvent;
+			_PerformLink;
+		</LinkDependsOnTargets>
+		<CoreCompileDependsOnTargets Condition="'$(BCC_EnableBatchCompilation)'!='true'">
+			DccCompile;
+			BccCompile;
+			TasmCompile;
+			BrccCompile;
+		</CoreCompileDependsOnTargets>
+		<CoreCompileDependsOnTargets Condition="'$(BCC_EnableBatchCompilation)'=='true'">
+			DccCompile;
+			BccBatchCompile;
+			TasmCompile;
+			BrccCompile;
+		</CoreCompileDependsOnTargets>
+		<CleanDependsOnTargets>
+			CleanOutputFiles;
+			CleanLinkOutput;
+		</CleanDependsOnTargets>
+		<_ResolveOutputDependsOn Condition="'$(FileToCompile)'==''">
+			_ResolveCompiledOutput;
+			_ResolveOther;
+		</_ResolveOutputDependsOn>
+		<_ResolveOutputDependsOn Condition="'$(FileToCompile)'!=''">
+			_ResolveFileToCompile;
+		</_ResolveOutputDependsOn>
+		<PreprocessDependsOnTargets>
+			_ResolveInput;
+		</PreprocessDependsOnTargets>
+		<_EvaluatePropertyDependsOnTargets>
+			_ResolveInput;
+			_ResolveOutput;
+			_CreatePropHolder;
+		</_EvaluatePropertyDependsOnTargets>
+		<_EvaluateItemDependsOnTargets>
+			$(_EvaluatePropertyDependsOnTargets)
+		</_EvaluateItemDependsOnTargets>
+	</PropertyGroup>	
+
+	<!-- Project invariants -->
+	
+	<Choose>
+		<When Condition="'$(ProjectType)'=='CppPackage'">
+			<PropertyGroup>
+				<ILINK_StartupObjs Condition="'$(ILINK_StartupObjs)'==''">c0pkg32.obj</ILINK_StartupObjs>
+				<BCC_GenerateDLL>true</BCC_GenerateDLL>
+				<ILINK_WinAppType>Package</ILINK_WinAppType>
+				<ILINK_AppType>Windows</ILINK_AppType>
+				<NoVCL>false</NoVCL>
+				<Multithreaded>true</Multithreaded>
+				<UsePackages>true</UsePackages>
+				<OutputExt Condition="'$(OutputExt)'==''">bpl</OutputExt>
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(ProjectType)'=='CppConsoleApplication' Or '$(ProjectType)'=='CppManagedConsoleApp'">
+			<PropertyGroup>
+				<ILINK_StartupObjs Condition="'$(ILINK_StartupObjs)'==''">c0x32.obj</ILINK_StartupObjs>
+				<BCC_GenerateConsoleApp>true</BCC_GenerateConsoleApp>
+				<ILINK_WinAppType>Executable</ILINK_WinAppType>
+				<ILINK_AppType>Console</ILINK_AppType>
+				<OutputExt Condition="'$(OutputExt)'==''">exe</OutputExt>
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(ProjectType)'=='CppDynamicLibrary' 
+			Or '$(ProjectType)'=='CppActiveLibrary'
+			Or '$(ProjectType)'=='VCppStyleDLL'
+			Or '$(ProjectType)'=='CppManagedDynamicLibrary'">
+			<PropertyGroup>
+				<ILINK_StartupObjs Condition="'$(ILINK_StartupObjs)'==''">c0d32.obj</ILINK_StartupObjs>
+				<BCC_GenerateDLL>true</BCC_GenerateDLL>
+				<ILINK_WinAppType>DLL</ILINK_WinAppType>
+				<OutputExt Condition="'$(OutputExt)'==''">dll</OutputExt>
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(ProjectType)'=='CppStaticLibrary'">
+			<PropertyGroup>
+				<ILINK_StartupObjs></ILINK_StartupObjs>
+				<ILINK_AdditionalLibs></ILINK_AdditionalLibs>
+				<BCC_GenerateWindowsApp>true</BCC_GenerateWindowsApp>
+				<OutputExt Condition="'$(OutputExt)'==''">lib</OutputExt>
+				<TLibLink>true</TLibLink>
+			</PropertyGroup>
+		</When>
+		<Otherwise> <!-- Stock VCL or Win32 application -->
+			<PropertyGroup>
+				<ILINK_StartupObjs Condition="'$(ILINK_StartupObjs)'==''">c0w32.obj</ILINK_StartupObjs>
+				<BCC_GenerateWindowsApp>true</BCC_GenerateWindowsApp>
+				<ILINK_WinAppType>Executable</ILINK_WinAppType>
+				<ILINK_AppType>Windows</ILINK_AppType>
+				<NoVCL Condition="'$(NoVCL)'==''">false</NoVCL>
+				<OutputExt Condition="'$(OutputExt)'==''">exe</OutputExt>
+			</PropertyGroup>
+		</Otherwise>
+	</Choose>
+
+	<!-- RTL, MT, VCL Settings -->
+	
+	<Choose>
+		<When Condition="'$(DynamicRTL)'=='true' And '$(NoVCL)'!='true'">
+			<PropertyGroup>
+				<ILINK_AdditionalLibs Condition="'$(ILINK_AdditionalLibs)'==''">import32.lib;cp32mti.lib</ILINK_AdditionalLibs>
+				<BCC_InternalDefines Condition="'$(BCC_InternalDefines)'!=''">$(BCC_InternalDefines);</BCC_InternalDefines>
+				<BCC_InternalDefines>$(BCC_InternalDefines)_RTLDLL</BCC_InternalDefines>
+				<BCC_GenerateMultithreaded>true</BCC_GenerateMultithreaded>
+				<ILINK_AdditionalObjs Condition="'$(ILINK_AdditionalObjs)'==''">memmgr.lib;sysinit.obj</ILINK_AdditionalObjs> 
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(DynamicRTL)'!='true' And '$(NoVCL)'!='true'">
+			<PropertyGroup>
+			  <ILINK_AdditionalLibs Condition="'$(ILINK_AdditionalLibs)'==''">import32.lib;cp32mt.lib</ILINK_AdditionalLibs>
+				<BCC_GenerateMultithreaded>true</BCC_GenerateMultithreaded>
+				<ILINK_AdditionalObjs Condition="'$(ILINK_AdditionalObjs)'==''">memmgr.lib;sysinit.obj</ILINK_AdditionalObjs> 
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(DynamicRTL)'=='true' And '$(Multithreaded)'=='true' And '$(NoVCL)'=='true'">
+			<PropertyGroup>
+				<ILINK_AdditionalLibs Condition="'$(ILINK_AdditionalLibs)'==''">import32.lib;cw32mti.lib</ILINK_AdditionalLibs>
+				<BCC_InternalDefines Condition="'$(BCC_InternalDefines)'!=''">$(BCC_InternalDefines);</BCC_InternalDefines>
+				<BCC_InternalDefines>$(BCC_InternalDefines)_RTLDLL;_NO_VCL</BCC_InternalDefines>
+				<BCC_GenerateMultithreaded>true</BCC_GenerateMultithreaded>
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(DynamicRTL)'!='true' And '$(Multithreaded)'=='true' AND '$(NoVCL)'=='true'">
+			<PropertyGroup>
+				<ILINK_AdditionalLibs Condition="'$(ILINK_AdditionalLibs)'==''">import32.lib;cw32mt.lib</ILINK_AdditionalLibs>
+				<BCC_GenerateMultithreaded>true</BCC_GenerateMultithreaded>
+				<BCC_InternalDefines Condition="'$(BCC_InternalDefines)'!=''">$(BCC_InternalDefines);</BCC_InternalDefines>
+				<BCC_InternalDefines>$(BCC_InternalDefines)_NO_VCL</BCC_InternalDefines>
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(DynamicRTL)'=='true' AND '$(Multithreaded)'!='true' AND '$(NoVCL)'=='true'">
+			<PropertyGroup>
+				<ILINK_AdditionalLibs Condition="'$(ILINK_AdditionalLibs)'==''">import32.lib;cw32i.lib</ILINK_AdditionalLibs>
+				<BCC_InternalDefines Condition="'$(BCC_InternalDefines)'!=''">$(BCC_InternalDefines);</BCC_InternalDefines>
+				<BCC_InternalDefines>$(BCC_InternalDefines)_RTLDLL;_NO_VCL</BCC_InternalDefines>
+			</PropertyGroup>
+		</When>
+		<When Condition="'$(DynamicRTL)'!='true' AND '$(Multithreaded)'!='true' AND '$(NoVCL)'=='true'">
+			<PropertyGroup>
+				<ILINK_AdditionalLibs Condition="'$(ILINK_AdditionalLibs)'==''">import32.lib;cw32.lib</ILINK_AdditionalLibs>
+				<BCC_InternalDefines Condition="'$(BCC_InternalDefines)'!=''">$(BCC_InternalDefines);</BCC_InternalDefines>
+				<BCC_InternalDefines>$(BCC_InternalDefines)_NO_VCL</BCC_InternalDefines>
+			</PropertyGroup>
+		</When>
+	</Choose>
+
+	<!-- Global Properties -->
+	
+	<PropertyGroup>
+		<BCC_NoLink>true</BCC_NoLink>
+		<DCC_GenerateCppFiles>true</DCC_GenerateCppFiles>
+		<ShowStdOut Condition="'$(ShowStdOut)'==''">$(ShowGeneralMessages)</ShowStdOut>
+		
+		<!-- Include Paths -->
+		<Win32LibraryPath Condition="'$(Win32LibraryPath)'==''">$(BDS)\lib</Win32LibraryPath>
+		<IncludePath Condition="'$(CBuilderIncludePath)'!=''">$(IncludePath);$(CBuilderIncludePath)</IncludePath>
+		<BCC_IncludePath Condition="'$(BCC_IncludePath)'!=''">$(BCC_IncludePath);$(IncludePath)</BCC_IncludePath>
+		<BCC_IncludePath Condition="'$(BCC_IncludePath)'==''">$(IncludePath)</BCC_IncludePath>
+		<BRCC_IncludePath Condition="'$(BRCC_IncludePath)'!=''">$(BRCC_IncludePath);$(IncludePath)</BRCC_IncludePath>
+		<BRCC_IncludePath Condition="'$(BRCC_IncludePath)'==''">$(IncludePath)</BRCC_IncludePath>
+		<DCC_IncludePath Condition="'$(DCC_IncludePath)'!=''">$(DCC_IncludePath);$(IncludePath)</DCC_IncludePath>
+		<DCC_IncludePath Condition="'$(DCC_IncludePath)'==''">$(IncludePath)</DCC_IncludePath>
+		<DCC_UnitSearchPath>$(DCC_IncludePath);$(Win32LibraryPath)</DCC_UnitSearchPath>
+		<DCC_ResourcePath>$(DCC_IncludePath)</DCC_ResourcePath>
+		<DCC_ObjPath>$(DCC_IncludePath)</DCC_ObjPath>
+		<TASM_IncludePath Condition="'$(TASM_IncludePath)'!=''">$(TASM_IncludePath);$(IncludePath)</TASM_IncludePath>
+		<TASM_IncludePath Condition="'$(TASM_IncludePath)'==''">$(IncludePath)</TASM_IncludePath>
+		
+		<!-- Defines -->
+		<BCC_Defines Condition="'$(BCC_Defines)'!=''">$(BCC_Defines);$(Defines)</BCC_Defines>
+		<BCC_Defines Condition="'$(BCC_Defines)'==''">$(Defines)</BCC_Defines>
+		<BCC_Defines Condition="'$(WindowsVersionDefines)'!=''">$(BCC_Defines);$(WindowsVersionDefines)</BCC_Defines>
+		<BCC_InternalDefines Condition="'$(UsePackages)'=='true'">$(BCC_InternalDefines);USEPACKAGES</BCC_InternalDefines>
+		<BRCC_Defines Condition="'$(BRCC_Defines)'!=''">$(BRCC_Defines);$(Defines)</BRCC_Defines>
+		<BRCC_Defines Condition="'$(BRCC_Defines)'==''">$(Defines)</BRCC_Defines>
+		<DCC_Define Condition="'$(DCC_Define)'!=''">$(DCC_Define);$(Defines)</DCC_Define>
+		<DCC_Define Condition="'$(DCC_Define)'==''">$(Defines)</DCC_Define>
+		<TASM_Defines Condition="'$(TASM_Defines)'!=''">$(TASM_Defines);$(Defines)</TASM_Defines>
+		<TASM_Defines Condition="'$(TASM_Defines)'==''">$(Defines)</TASM_Defines>
+	
+		<!-- Output Directories and Filenames -->
+		<OutputName Condition="'$(OutputName)'==''">$(MSBuildProjectName)</OutputName>
+		<ILINK_PackageBaseName Condition="'$(ProjectType)'=='CppPackage'">$(OutputName)</ILINK_PackageBaseName>
+		<IntermediateOutputDir Condition="'$(IntermediateOutputDir)'!='' And !HasTrailingSlash('$(IntermediateOutputDir)')">$(IntermediateOutputDir)\</IntermediateOutputDir>
+		<FinalOutputDir Condition="'$(FinalOutputDir)'=='' And '$(ProjectType)'=='CppPackage'">$(CBuilderBPLOutputPath)</FinalOutputDir>
+		<FinalOutputDir Condition="'$(FinalOutputDir)'==''">$(IntermediateOutputDir)</FinalOutputDir>
+		<FinalOutputDir Condition="'$(FinalOutputDir)'!='' And !HasTrailingSlash('$(FinalOutputDir)')">$(FinalOutputDir)\</FinalOutputDir>
+		<FinalOutput>$(FinalOutputDir)$(DllPrefix)$(OutputName)$(DllSuffix).$(OutputExt)$(DllVersion)</FinalOutput>
+		
+		<ILINK_BpiLibOutputDir Condition="'$(ILINK_BpiLibOutputDir)'=='' And '$(ProjectType)'=='CppPackage'">$(CBuilderBPIOutputPath)</ILINK_BpiLibOutputDir>
+		<ILINK_BpiLibOutputDir Condition="'$(ILINK_BpiLibOutputDir)'==''">$(FinalOutputDir)</ILINK_BpiLibOutputDir>
+		<ILINK_BpiLibOutputDir Condition="'$(ILINK_BpiLibOutputDir)'!='' And !HasTrailingSlash('$(ILINK_BpiLibOutputDir)')">$(ILINK_BpiLibOutputDir)\</ILINK_BpiLibOutputDir>
+
+		<BCC_OutputDir Condition="'$(BCC_OutputDir)'==''">$(IntermediateOutputDir)</BCC_OutputDir>
+		<BCC_OutputDir Condition="'$(BCC_OutputDir)'!='' And !HasTrailingSlash('$(BCC_OutputDir)')">$(BCC_OutputDir)\</BCC_OutputDir>
+		<BRCC_OutputDir Condition="'$(BRCC_OutputDir)'==''">$(IntermediateOutputDir)</BRCC_OutputDir>
+		<BRCC_OutputDir Condition="'$(BRCC_OutputDir)'!='' And !HasTrailingSlash('$(BRCC_OutputDir)')">$(BRCC_OutputDir)\</BRCC_OutputDir>
+		<TASM_OutputDir Condition="'$(TASM_OutputDir)'==''">$(IntermediateOutputDir)</TASM_OutputDir>
+		<TASM_OutputDir Condition="'$(TASM_OutputDir)'!='' And !HasTrailingSlash('$(TASM_OutputDir)')">$(TASM_OutputDir)\</TASM_OutputDir>
+		<DCC_ObjOutput Condition="'$(DCC_ObjOutput)'==''">$(IntermediateOutputDir)</DCC_ObjOutput>
+		<DCC_ObjOutput Condition="'$(DCC_ObjOutput)'!='' And !HasTrailingSlash('$(DCC_ObjOutput)')">$(DCC_ObjOutput)\</DCC_ObjOutput>
+		<DCC_DcuOutput>$(DCC_ObjOutput)</DCC_DcuOutput>
+		<DCC_BpiOutput>$(ILINK_BpiLibOutputDir)</DCC_BpiOutput>
+		<DCC_DcpOutput>$(ILINK_BpiLibOutputDir)</DCC_DcpOutput>
+		<DCC_BplOutput>$(FinalOutputDir)</DCC_BplOutput>
+		
+		<!-- Library search paths -->
+		<ILINK_LibraryPath Condition="'$(CBuilderLibraryPath)'!=''">$(ILINK_LibraryPath);$(CBuilderLibraryPath)</ILINK_LibraryPath>
+		<ILINK_LibraryPath Condition="'$(CBuilderBPIOutputPath)'!=''">$(ILINK_LibraryPath);$(CBuilderBPIOutputPath)</ILINK_LibraryPath>
+		<ILINK_LibraryPath Condition="'$(Win32DCPOutput)'!='' And '$(Win32DCPOutput)'!='$(CBuilderBPIOutputPath)'">$(ILINK_LibraryPath);$(Win32DCPOutput)</ILINK_LibraryPath>
+		<ILINK_LibraryPath>$(ILINK_LibraryPath);$(BCC_OutputDir)</ILINK_LibraryPath>
+		<ILINK_LibraryPath Condition="'$(DCC_ObjOutput)'!='$(BCC_OutputDir)'">$(ILINK_LibraryPath);$(DCC_ObjOutput)</ILINK_LibraryPath>
+		<ILINK_ObjectSearchPath>$(ILINK_LibraryPath)</ILINK_ObjectSearchPath>
+		<ILINK_IntermediateOutputPath Condition="'$(ILINK_IntermediateOutputPath'==''">$(IntermediateOutputDir)</ILINK_IntermediateOutputPath>
+		
+		<!-- Default Values -->
+		<BCC_PCHName Condition="'$(BCC_PCHName)'=='' And '$(BCC_PCHUsage)'!='None'">$(IntermediateOutputDir)$(OutputName).pch</BCC_PCHName>
+		<ILINK_PackageImports Condition="'$(UsePackages)'=='true' AND '$(NoVCL)'!='true' And '$(ProjectType)'!='CppPackage'">$(PackageImports)</ILINK_PackageImports>
+		<ILINK_PackageImports Condition="'$(ProjectType)'=='CppPackage'">@(PackageImport)</ILINK_PackageImports>
+		<ILINK_PackageLibs Condition="'$(UsePackages)'=='true' AND '$(NoVCL)'!='true' AND '$(ProjectType)'!='CppPackage'">$(PackageLibs)</ILINK_PackageLibs>
+		<ILINK_PackageLibs Condition="'$(UsePackages)'!='true' AND '$(NoVCL)'!='true' And '$(ProjectType)'!='CppPackage'">$(AllPackageLibs)</ILINK_PackageLibs>
+		<ILINK_MapFileName Condition="'$(ILINK_MapFileName)'=='' And '$(ILINK_MapFileType)'!='None'">$(FinalOutputDir)$(OutputName).map</ILINK_MapFileName>
+		
+		<!-- Codeguard -->
+		<CodeGuard_Lib Condition="'$(BCC_AllCodeguardOptions)'=='true' Or '$(BCC_MonitorInlinePtrAccess)'=='true' 
+			Or '$(BCC_MonitorGlobalAndStackData)'=='true' Or '$(BCC_MonitorThis)'=='true'">cg32.lib</CodeGuard_Lib>
+
+		<!-- Miscellaneous and Build Event Properties -->
+		<BCC_ReplaceHeaderName Condition="$(BCC_ReplaceHeaderName)!='' And '$(OptPCH)'!=''">$(BCC_ReplaceHeaderName);</BCC_ReplaceHeaderName>
+		<BCC_ReplaceHeaderName>$(BCC_ReplaceHeaderName)$(OptPCH)</BCC_ReplaceHeaderName>
+
+		<ProjectName>$(MSBuildProjectName)</ProjectName>
+		<ProjectFilename>$(MSBuildProjectFile)</ProjectFilename>
+		<ProjectExt>$(MSBuildProjectExtension)</ProjectExt>
+		<ProjectDir>$(MSBuildProjectDirectory)</ProjectDir>
+		<ProjectPath>$(MSBuildProjectFullPath)</ProjectPath>
+		
+		<InputPath>@(InputFile->'%(FullPath)')</InputPath>
+		<InputDir>@(InputFile->'%(RootDir)%(Directory)')</InputDir>
+		<InputName>@(InputFile->'%(Filename)')</InputName>
+		<InputExt>@(InputFile->'%(Extension)')</InputExt>
+		<InputFilename>@(InputFile->'%(Filename)%(Extension)')</InputFilename>
+		
+		<OutputPath>@(OutputFile->'%(FullPath)')</OutputPath>
+		<OutputDir>@(OutputFile->'%(RootDir)%(Directory)')</OutputDir>
+		<OutputName>@(OutputFile->'%(Filename)')</OutputName>
+		<OutputExt>@(OutputFile->'%(Extension)')</OutputExt>
+		<OutputFilename>@(OutputFile->'%(Filename)%(Extension)')</OutputFilename>
+		
+	</PropertyGroup>
+
+	<ItemGroup>
+		<_DirectoryList Include="$(BCC_OutputDir)"/>
+		<_DirectoryList Include="$(BRCC_OutputDir)"/>
+		<_DirectoryList Include="$(DCC_ObjOutput)"/>
+		<_DirectoryList Include="$(Tasm_OutputDir)"/>
+		<_DirectoryList Include="$(IntermediateOutputDir)"/>
+		<_DirectoryList Include="$(FinalOutputDir)"/>
+		<_DirectoryList Include="$(ILINK_IntermediateOutputPath)"/>
+		<_DirectoryList Include="$(ILINK_BpiLibOutputDir)"/>
+	</ItemGroup>
+	
+	<!-- 
+		***** Targets ***********************************************
+		** Targets prefixed with an underscore are not meant to be **
+		** invoked directly with MSBuild's /t switch.              **
+		*************************************************************	
+	-->
+	<PropertyGroup>
+		<_KibitzItemNames>BCC32_CmdLine;BRCC32_CmdLine;TASM32_CmdLine;BCC_CmdLine;IDEDepCheck;EvaluateProperty;EvaluateItem</_KibitzItemNames>
+		<_KibitzItemName Condition="'$(_KibitzTask)'=='BCC32_CmdLine'">CppFiles</_KibitzItemName>
+		<_KibitzItemName Condition="'$(_KibitzTask)'=='BRCC32_CmdLine'">RcFiles</_KibitzItemName>
+		<_KibitzItemName Condition="'$(_KibitzTask)'=='TASM32_CmdLine'">AsmFiles</_KibitzItemName>
+		<_KibitzItemName Condition="'$(_KibitzTask)'=='DCC_CmdLine'">PasFiles</_KibitzItemName>
+	</PropertyGroup>
+	
+	<Target Name="_SetKibitzProperties" DependsOnTargets="_ResolveInput">
+		<CreateItem 
+			Include="$(FileToCompile)"
+			Condition="'$(FileToCompile)'!='' And '$(_KibitzTask)'!='' And '$(_KibitzItemName)'!=''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="$(_KibitzItemName)"
+			/>
+		</CreateItem>
+		<CreateProperty
+			Value="true">
+			<Output
+				TaskParameter="Value"
+				PropertyName="ShowStdOut" 
+			/>
+		</CreateProperty>
+	</Target>
+	
+	<Target Name="_Kibitz" DependsOnTargets="_SetKibitzProperties">
+		<Error Condition="'$(_KibitzTask)'==''"
+			Text="'_KibitzTask' property not specified. Must be one of: $(_KibitzItemNames)"/>
+		<CallTarget Targets="BccCompile" Condition="'$(_KibitzTask)'=='BCC32_CmdLine'"/>
+		<CallTarget Targets="BrccCompile" Condition="'$(_KibitzTask)'=='BRCC32_CmdLine'"/>
+		<CallTarget Targets="TasmCompile" Condition="'$(_KibitzTask)'=='TASM32_CmdLine'"/>
+		<CallTarget Targets="DccCompile" Condition="'$(_KibitzTask)'=='DCC_CmdLine'"/>
+		<CallTarget Targets="_IDEDepCheck" Condition="'$(_KibitzTask)'=='IDEDepCheck'"/>
+		<CallTarget Targets="_EvaluateProperty" Condition="'$(_KibitzTask)'=='EvaluateProperty'"/>
+		<CallTarget Targets="_EvaluateItem" Condition="'$(_KibitzTask)'=='EvaluateItem'"/>
+	</Target>
+	
+	<Target Name="_CreatePropHolder">
+		<CreateItem 
+			Include="$(_PropName)">
+			<Output 
+				TaskParameter="Include"
+				ItemName="PropHolder"
+			/>
+		</CreateItem>
+	</Target>
+	
+	<Target Name="_EvaluateProperty" DependsOnTargets="$(_EvaluatePropertyDependsOnTargets)">
+		<BDSCallback 
+			ID="EvaluateProperty"
+			Result="$(%(PropHolder.Identity))"/>
+	</Target>
+	
+	<Target Name="_EvaluateItem" DependsOnTargets="$(_EvaluateItemDependsOnTargets)">
+		<BDSCallback 
+			ID="EvaluateItem"
+			Result="@(%(PropHolder.Identity))"/>
+	</Target>
+	
+	<Target Name="_MakePreReq">
+		<Error Condition="'$(FileToCompile)'!=''"
+			Text="Cannot specify property 'FileToCompile' for Make or Build targets. Use 'MakeOne' instead."/>
+	</Target>
+
+	<Target Name="_MakeOnePreReq">
+		<Error Condition="'$(FileToCompile)'==''"
+			Text="Must specify property 'FileToCompile' for 'MakeOne' target; i.e., /p:FileToCompile=&lt;filename&gt;."/>
+	</Target>
+	
+	<Target Name="PreLinkEvent" 
+		Condition=" '$(PreLinkEvent)'!='' "
+		DependsOnTargets="$(PreLinkEventDependsOn)">
+		<Exec Command="$(PreLinkEvent)" IgnoreExitCode="$(PreLinkEventIgnoreExitCode)" WorkingDirectory="$(FinalOutputDir)"/>
+	</Target>
+
+	<Target Name="_PasDepCheck">
+		<DependencyCheck 
+			InputFiles="@(DelphiCompile)"
+			OutputFile="$(DCC_ObjOutput)%(DelphiCompile.Filename).obj"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			Build="$(ForceRebuild)"
+			KibitzTask="$(_KibitzTask)"
+		>
+			<Output
+				TaskParameter="OutOfDate"
+				ItemName="PasOutOfDate"
+			/>
+			<Output
+				TaskParameter="Skipped"
+				ItemName="SkippedFiles"
+			/>
+		</DependencyCheck>
+	</Target>
+	
+	<Target Name="_BccDepCheck">
+		<BccDependencyCheck 
+			InputFiles="@(CppCompile)"
+			OutputFile="$(BCC_OutputDir)%(CppCompile.Filename)%(CppCompile.Suffix).obj"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			Build="$(ForceRebuild)"
+			KibitzTask="$(_KibitzTask)"
+		>
+			<Output
+				TaskParameter="OutOfDate"
+				ItemName="CppOutOfDate"
+			/>
+			<Output
+				TaskParameter="Skipped"
+				ItemName="SkippedFiles"
+			/>
+		</BccDependencyCheck>
+	</Target>
+
+	<Target Name="_TasmDepCheck">
+		<DependencyCheck 
+			InputFiles="@(AsmCompile)"
+			OutputFile="$(TASM_OutputDir)%(AsmCompile.Filename)%(AsmCompile.Suffix).obj"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			Build="$(ForceRebuild)"
+			KibitzTask="$(_KibitzTask)"
+		>
+			<Output
+				TaskParameter="OutOfDate"
+				ItemName="AsmOutOfDate"
+			/>
+			<Output
+				TaskParameter="Skipped"
+				ItemName="SkippedFiles"
+			/>
+		</DependencyCheck>
+	</Target>
+	
+	<Target Name="_RcDepCheck">
+		<DependencyCheck 
+			InputFiles="@(ResourceCompile)"
+			OutputFile="$(BRCC_OutputDir)%(ResourceCompile.Filename).res"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			Build="$(ForceRebuild)"
+			KibitzTask="$(_KibitzTask)"
+		>
+			<Output
+				TaskParameter="OutOfDate"
+				ItemName="RcOutOfDate"
+			/>
+			<Output
+				TaskParameter="Skipped"
+				ItemName="SkippedFiles"
+			/>
+		</DependencyCheck>
+	</Target>
+	
+	<Target Name="_IDEDepCheck" DependsOnTargets="_ResolveFileToCompile">
+		<CallTarget Targets="_CheckLinkDependencies" Condition="'$(_KibitzTask)'=='IDEDepCheck' And '%(InputFile.Identity)'=='$(MSBuildProjectFullPath)'"/>
+		<DependencyCheck 
+			Condition="'$(_KibitzTask)'=='IDEDepCheck' And '%(InputFile.Identity)'!='$(MSBuildProjectFullPath)'"
+			InputFiles="@(InputFile)"
+			OutputFile="@(OutputFile)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			KibitzTask="$(_KibitzTask)"
+		/>
+	</Target>
+
+	<Target Name="_CheckLinkDependencies" DependsOnTargets="_ResolveOutput">
+		<DependencyCheck 
+			Condition="'$(TLibLink)'!='true' And '$(ForceLink)'!='true'"
+			InputFiles="$(ILINK_StartupObjs);$(ILINK_AdditionalObjs);$(ILINK_PackageImports);@(CompiledObjs);@(ObjFiles);$(ILINK_PackageLibs);@(LibFiles);$(ILINK_AdditionalLibs);@(DefFile);@(CompiledResources);@(ResFiles);@(FormResources)"
+			OutputFile="@(OutputFile)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			Build="$(ForceLink)"
+			KibitzTask="$(_KibitzTask)"
+		>
+			<Output
+				TaskParameter="OutOfDate"
+				ItemName="OutputOutOfDate"
+			/>
+		</DependencyCheck>
+		<DependencyCheck
+			Condition="'$(TLibLink)'=='true' And '$(ForceLink)'!='true'"
+			InputFiles="@(CompiledObjs);@(ObjFiles)"
+			OutputFile="@(OutputFile)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			Build="$(ForceLink)"
+			KibitzTask="$(_KibitzTask)"
+		>
+			<Output
+				TaskParameter="OutOfDate"
+				ItemName="OutputOutOfDate"
+			/>
+		</DependencyCheck>
+	</Target>
+
+	<Target Name="DependencyCheck" DependsOnTargets="$(DependencyCheckDependsOnTargets)"/>
+	
+	<Target Name="_SortSourceFiles">
+		<ItemSort
+			MetaName="BuildOrder"
+			ValueIsInt="true"
+			Items="@(CppOutOfDate)"
+		>
+			<Output
+				TaskParameter="Items"
+				ItemName="CppFiles"
+			/>
+		</ItemSort>
+		<ItemSort
+			MetaName="BuildOrder"
+			ValueIsInt="true"
+			Items="@(PasOutOfDate)"
+		>
+			<Output
+				TaskParameter="Items"
+				ItemName="PasFiles"
+			/>
+		</ItemSort>
+		<ItemSort
+			MetaName="BuildOrder"
+			ValueIsInt="true"
+			Items="@(RcOutOfDate)"
+		>
+			<Output
+				TaskParameter="Items"
+				ItemName="RcFiles"
+			/>
+		</ItemSort>
+		<ItemSort
+			MetaName="BuildOrder"
+			ValueIsInt="true"
+			Items="@(AsmOutOfDate)"
+		>
+			<Output
+				TaskParameter="Items"
+				ItemName="AsmFiles"
+			/>
+		</ItemSort>
+	</Target>
+	
+	<Target Name="_ResolveCompiledOutput">
+		<!-- Results of compilation (Bcc, Brcc, Dcc, Tasm) -->
+		<CreateItem 
+			Include="@(CppCompile->'$(BCC_OutputDir)%(filename)%(Suffix).obj')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="CompiledObjs"
+			/>
+		</CreateItem>
+		<CreateItem 
+			Include="@(ResourceCompile->'$(BRCC_OutputDir)%(filename)%(Suffix).res')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="CompiledResources"
+			/>
+		</CreateItem>		
+		<CreateItem 
+			Include="@(DelphiCompile->'$(DCC_ObjOutput)%(filename)%(Suffix).obj')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="CompiledObjs"
+			/>
+		</CreateItem>
+		<CreateItem 
+			Include="@(AsmCompile->'$(TASM_OutputDir)%(filename)%(Suffix).obj')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="CompiledObjs"
+			/>
+		</CreateItem>
+		<CreateItem
+			Include="$(FinalOutput)">
+			<Output 
+				TaskParameter="Include"
+				ItemName="OutputFile"
+			/>
+		</CreateItem>
+	</Target>
+
+	<Target Name="_ResolveExternalTypesPch">
+		<CreateItem
+			Include="%(PrecompiledHeaderFile.RelativeDir)%(PrecompiledHeaderFile.Filename).#*"
+			Condition="'@(PrecompiledHeaderFile)'!=''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ExternalTypesPch"
+			/>
+		</CreateItem>
+	</Target>	
+	
+	<Target Name="_ResolveOther">
+		<!-- Link products -->
+
+		<CreateItem 
+			Include="@(OutputFile->'%(RelativeDir)%(Filename).ilc')"
+			Condition="'$(TLibLink)'!='true' And '$(FileToCompile)'==''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ILinkStateFiles"
+			/>
+		</CreateItem>
+		<CreateItem 
+			Include="@(OutputFile->'%(RelativeDir)%(Filename).ild')"
+			Condition="'$(TLibLink)'!='true' And '$(FileToCompile)'==''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ILinkStateFiles"
+			/>
+		</CreateItem>
+		<CreateItem 
+			Include="@(OutputFile->'%(RelativeDir)%(Filename).ilf')"
+			Condition="'$(TLibLink)'!='true' And '$(FileToCompile)'==''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ILinkStateFiles"
+			/>
+		</CreateItem>
+		<CreateItem 
+			Include="@(OutputFile->'%(RelativeDir)%(Filename).ils')"
+			Condition="'$(TLibLink)'!='true' And '$(FileToCompile)'==''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ILinkStateFiles"
+			/>
+		</CreateItem>
+		<CreateItem 
+			Include="@(OutputFile->'%(RelativeDir)%(Filename).tds')"
+			Condition="'$(TLibLink)'!='true' And '$(FileToCompile)'==''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ILinkSymbolFile"
+			/>
+		</CreateItem>
+		<CreateItem
+			Include="$(ILINK_MapFileName)"
+			Condition="'$(TLibLink)'!='true' And '$(FileToCompile)'==''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ILinkMapFile"
+			/>
+		</CreateItem>
+		
+		<!-- Precompiled header file -->
+		<CreateItem
+			Include="$(BCC_PCHName)"
+			Condition="('$(BCC_PCHUsage)'=='GenerateAndUse' Or '$(BCC_PCHUsage)'=='') And '$(FileToCompile)'==''">
+			<Output 
+				TaskParameter="Include"
+				ItemName="PrecompiledHeaderFile"
+			/>
+		</CreateItem>
+
+		<!-- Package / DLL libraries -->
+		<CreateItem
+			Include="$(ILINK_BpiLibOutputDir)$(ILINK_PackageBaseName).bpi"
+			Condition="'$(ProjectType)'=='CppPackage' And '$(ILINK_GenerateImportLibrary)'=='true'">
+			<Output
+				TaskParameter="Include"
+				ItemName="ImportLibrary"
+			/>
+		</CreateItem>
+		<CreateItem
+			Include="$(ILINK_BpiLibOutputDir)$(ILINK_PackageBaseName).lib"
+			Condition="'$(ProjectType)'=='CppPackage' And '$(ILINK_GenerateLibFile)'=='true'">
+			<Output 
+				TaskParameter="Include"
+				ItemName="PackageLib"
+			/>
+		</CreateItem>
+		<CreateItem
+			Include="@(OutputFile->'$(FinalOutputDir)%(Filename).lib')"
+			Condition="'$(ProjectType)'!='CppPackage' And '$(ILINK_GenerateImportLibrary)'=='true'">
+			<Output 
+				TaskParameter="Include"
+				ItemName="ImportLibrary"
+			/>
+		</CreateItem>		
+		
+		<!-- DCC32 .hpp, .dcu, .obj etc. -->
+		<CreateItem
+			Include="@(DelphiCompile->'%(RelativeDir)%(Filename).hpp')"
+			Condition="'$(DCC_CBuilderOutput)'=='JPH'
+				Or '$(DCC_CBuilderOutput)'=='JPHN'
+				Or '$(DCC_CBuilderOutput)'=='JPHNE'
+				Or '$(DCC_CBuilderOutput)'=='JPHE'
+				Or '$(DCC_CBuilderOutput)'=='All'">
+			<Output 
+				TaskParameter="Include"
+				ItemName="DCC_HppFiles"
+			/>
+		</CreateItem>
+		<CreateItem
+			Include="@(DelphiCompile->'$(DCC_DcuOutput)%(Filename).dcu')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="CompiledDcus"
+			/>
+		</CreateItem>		
+		<CreateItem
+			Include="@(DelphiCompile->'$(DCC_ObjOutput)%(Filename).obj')">
+			<Output
+				TaskParameter="Include"
+				ItemName="DCC_ObjFiles"
+			/>
+		</CreateItem>
+		
+		<!-- TASM Listing and Cross-reference files -->
+		<CreateItem
+			Include="@(AsmCompile->'$(TASM_OutputDir)%(Filename).lst')"
+			Condition="'$(TASM_GenerateListingFile)'=='true'">
+			<Output
+				TaskParameter="Include"
+				ItemName="TASM_ListingFile"
+			/>
+		</CreateItem>
+		<CreateItem
+			Include="@(AsmCompile->'$(TASM_OutputDir)%(Filename).xref')"
+			Condition="'$(TASM_GenerateCrossRefFile)'=='true'">
+			<Output 
+				TaskParameter="Include"
+				ItemName="TASM_CrossRefFile"
+			/>
+		</CreateItem>	
+	</Target>
+	
+	<Target Name="_ResolveFileToCompile" DependsOnTargets="_ResolveInput">
+		<CopyItem
+			Condition="'%(InputFile.Extension)'=='.cpp' Or '%(InputFile.Extension)'=='.c' Or '%(InputFile.Extension)'=='.cc'"
+			Source="@(InputFile)">
+			<Output 
+				TaskParameter="Dest"
+				ItemName="CppFiles"
+			/>
+		</CopyItem>
+		<CopyItem
+			Condition="'%(InputFile.Extension)'=='.rc'"
+			Source="@(InputFile)">
+			<Output 
+				TaskParameter="Dest"
+				ItemName="RcFiles"
+			/>
+		</CopyItem>
+		<CopyItem
+			Condition="'%(InputFile.Extension)'=='.asm'"
+			Source="@(InputFile)">
+			<Output 
+				TaskParameter="Dest"
+				ItemName="AsmFiles"
+			/>
+		</CopyItem>
+		<CreateItem
+			Condition="'%(InputFile.Extension)'=='.cpp' Or '%(InputFile.Extension)'=='.c' Or '%(InputFile.Extension)'=='.cc'"
+			Include="@(InputFile->'$(BCC_OutputDir)%(filename)%(Suffix).obj')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="OutputFile"
+			/>
+		</CreateItem>
+		<CreateItem
+			Condition="'%(InputFile.Extension)'=='.rc'"
+			Include="@(InputFile->'$(BRCC_OutputDir)%(Suffix)%(filename).res')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="OutputFile"
+			/>
+		</CreateItem>
+		<CreateItem
+			Condition="'%(InputFile.Extension)'=='.asm'"
+			Include="@(InputFile->'$(TASM_OutputDir)%(Suffix)%(filename).obj')">
+			<Output 
+				TaskParameter="Include"
+				ItemName="OutputFile"
+			/>
+		</CreateItem>
+	</Target>
+
+	<Target Name="_ResolveOutput" DependsOnTargets="$(_ResolveOutputDependsOn)"/>
+
+	<Target Name="_ResolveInput">
+		<CreateItem
+			Condition="'$(FileToCompile)'==''"
+			Include="$(MSBuildProjectFullPath)">
+			<Output 
+				TaskParameter="Include"
+				ItemName="InputFile"
+			/>
+		</CreateItem>		
+		<FindItem
+			Condition="'$(FileToCompile)'!=''"
+			Filename="$(FileToCompile)"
+			In="@(CppCompile);@(AsmCompile);@(ResourceCompile);@(DelphiCompile)">
+			<Output 
+				TaskParameter="Item"
+				ItemName="InputFile"
+			/>
+		</FindItem>			
+	</Target>
+
+	<Target Name="_ForceRebuild">
+		<CreateProperty
+			Value="true">
+			<Output
+				TaskParameter="Value"
+				PropertyName="ForceRebuild" 
+			/>
+		</CreateProperty>
+		<CreateProperty
+			Value="true">
+			<Output
+				TaskParameter="Value"
+				PropertyName="ForceLink" 
+			/>
+		</CreateProperty>
+	</Target>	
+	
+	<Target Name="BuildObjs" DependsOnTargets="_ForceRebuild;MakeObjs"/>
+	
+	<Target Name="MakeObjs" DependsOnTargets="DependencyCheck;_SortSourceFiles">
+		<Message 
+			Text="Skipping the following files because they are up-to-date: @(SkippedFiles)"
+			Condition="'@(SkippedFiles)'!=''"
+		/>
+		<CallTarget Targets="_CoreCompile"/>
+	</Target>
+
+	<Target Name="_CoreCompile" DependsOnTargets="$(CoreCompileDependsOnTargets)"/>
+	
+	<Target Name="_MakeOne" DependsOnTargets="_ResolveInput;_ResolveFileToCompile">
+		<CallTarget Targets="BccCompile" Condition="'@(CppFiles)'!=''"/>
+		<CallTarget Targets="BrccCompile" Condition="'@(RcFiles)'!=''"/>
+		<CallTarget Targets="TasmCompile" Condition="'@(AsmFiles)'!=''"/>
+	</Target>
+	
+	<Target Name="BccCompile" Outputs="%(CppFiles.Identity)">
+		<BCC32 
+			Condition="('@(CppFiles)'!='' And ('%(CppFiles.OptionOverrides)'!='true' And '%(CppFiles.HasBuildEvent)'!='true') Or '$(FileToCompile)'!='') Or '$(_KibitzTask)'!=''"
+			Compile="@(CppFiles)"
+			ForceExecute="true"
+			KibitzTask="$(_KibitzTask)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			AdditionalDependencies="@(CppFiles.DependentOn)"
+			AutoDepCheck="false"
+			InternalDependencyCheck="false"
+			Defines="$(BCC_Defines)"
+			InternalDefines="$(BCC_InternalDefines)"
+			Undefines="$(BCC_Undefines)"
+			TargetOutputDir="$(BCC_TargetOutputDir)"
+			OutputFilename="$(BCC_OutputDir)%(CppFiles.Filename)%(CppFiles.Suffix).obj"			
+			IncludePath="$(BCC_IncludePath)"
+			DebugLineNumbers="$(BCC_DebugLineNumbers)"
+			SourceDebuggingOn="$(BCC_SourceDebuggingOn)"
+			InlineFunctionExpansion="$(BCC_InlineFunctionExpansion)"
+			CodeView4DebugInfo="$(BCC_CodeView4DebugInfo)"
+			AllCodeguardOptions="$(BCC_AllCodeguardOptions)"
+			CodeguardDebugLevel="$(BCC_CodeguardDebugLevel)"
+			MonitorInlinePtrAccess="$(BCC_MonitorInlinePtrAccess)"
+			MonitorGlobalAndStackData="$(BCC_MonitorGlobalAndStackData)"
+			MonitorThis="$(BCC_MonitorThis)"
+			SuppressBanner="$(BCC_SuppressBanner)"
+			ExtendedErrorInfo="$(BCC_ExtendedErrorInfo)"
+			IntegerSizedEnums="$(BCC_IntegerSizedEnums)"
+			StackFrames="$(BCC_StackFrames)"
+			CPPCompileAlways="$(BCC_CPPCompileAlways)"
+			WarningIsError="$(BCC_WarningIsError)"
+			MergeDuplicateStrings="$(BCC_MergeDuplicateStrings)"
+			StringsInReadOnlyDataSeg="$(BCC_StringsInReadOnlyDataSeg)"
+			StringsInWriteableDataSeg="$(BCC_StringsInWriteableDataSeg)"
+			InstructionSet="$(BCC_InstructionSet)"
+			DataAlignment="$(BCC_DataAlignment)"
+			CallingConvention="$(BCC_CallingConvention)"
+			UseRegisterVariables="$(BCC_UseRegisterVariables)"
+			FastFloatingPoint="$(BCC_FastFloatingPoint)"
+			CorrectFDIVFlaw="$(BCC_CorrectFDIVFlaw)"
+			QuietFloatingPoint="$(BCC_QuietFloatingPoint)"
+			LanguageCompliance="$(BCC_LanguageCompliance)"
+			NestedComments="$(BCC_NestedComments)"
+			MaxIdentifierLength="$(BCC_MaxIdentifierLength)"
+			EnableCodePaging="$(BCC_EnableCodePaging)"
+			DefaultCharUnsigned="$(BCC_DefaultCharUnsigned)"
+			NoLink="$(BCC_NoLink)"
+			UserSuppliedOptions="$(BCC_UserSuppliedOptions)"
+			GenerateConsoleApp="$(BCC_GenerateConsoleApp)"
+			GenerateDLL="$(BCC_GenerateDLL)"
+			GenerateMultithreaded="$(BCC_GenerateMultithreaded)"
+			GenerateUnicode="$(BCC_GenerateUnicode)"
+			GenerateWindowsApp="$(BCC_GenerateWindowsApp)"
+			GlobalFuncsInOwnSegment="$(BCC_GlobalFuncsInOwnSegment)"
+			DontMangleCCInSymbolNames="$(BCC_DontMangleCCInSymbolNames)"
+			MSHeaderSearchAlgorithm="$(BCC_MSHeaderSearchAlgorithm)"
+			VCCompatibility="$(BCC_VCCompatibility)"
+			BackwardCompatibility="$(BCC_BackwardCompatibility)"
+			OldBorlandClassLayout="$(BCC_OldBorlandClassLayout)"
+			OldStyleVirdef="$(BCC_OldStyleVirdef)"
+			OldStyleClassArgs="$(BCC_OldStyleClassArgs)"
+			AllowNonConstCalls="$(BCC_AllowNonConstCalls)"
+			OldOverloadRules="$(BCC_OldOverloadRules)"
+			StringLiteralsNonConst="$(BCC_StringLiteralsNonConst)"
+			NonConstRefBinding="$(BCC_NonConstRefBinding)"
+			ExplicitSpecializationAsMemberFunc="$(BCC_ExplicitSpecializationAsMemberFunc)"
+			ConstructorDisplacements="$(BCC_ConstructorDisplacements)"
+			OldForStatementScoping="$(BCC_OldForStatementScoping)"
+			DisableDigraphScanner="$(BCC_DisableDigraphScanner)"
+			DOSHeaderSearchAlgorithm="$(BCC_DOSHeaderSearchAlgorithm)"
+			NewOperatorNames="$(BCC_NewOperatorNames)"
+			AllCompatibilityFlags="$(BCC_AllCompatibilityFlags)"
+			PushThisFirst="$(BCC_PushThisFirst)"
+			ReverseOrderForMultiCharConst="$(BCC_ReverseOrderForMultiCharConst)"
+			VTablePtrAtFront="$(BCC_VTablePtrAtFront)"
+			SlowVirtualBasePtrs="$(BCC_SlowVirtualBasePtrs)"
+			NativeCodeForMultiByte="$(BCC_NativeCodeForMultiByte)"
+			ZeroLengthEmptyMemberFuncs="$(BCC_ZeroLengthEmptyMemberFuncs)"
+			ZeroLengthEmptyBaseClass="$(BCC_ZeroLengthEmptyBaseClass)"
+			EnableRTTI="$(BCC_EnableRTTI)"
+			EnableExceptionHandling="$(BCC_EnableExceptionHandling)"
+			DestructorCleanup="$(BCC_DestructorCleanup)"
+			GlobalDestructorCount="$(BCC_GlobalDestructorCount)"
+			NoDllOrMTDestructorCleanup="$(BCC_NoDllOrMTDestructorCleanup)"
+			FastExceptionPrologs="$(BCC_FastExceptionPrologs)"
+			ExceptionLocationInfo="$(BCC_ExceptionLocationInfo)"
+			SlowExceptionEpilogues="$(BCC_SlowExceptionEpilogues)"
+			HideExceptionVars="$(BCC_HideExceptionVars)"
+			PCHUsage="$(BCC_PCHUsage)"
+			PCHWithExternalTypeFiles="$(BCC_PCHWithExternalTypeFiles)"
+			IncludeContentsOfHeaders="$(BCC_IncludeContentsOfHeaders)"
+			PCHName="$(BCC_PCHName)"
+			PCHCache="$(BCC_PCHCache)"
+			StopPCHAfter="$(BCC_StopPCHAfter)"
+			ReplaceHeaderName="$(BCC_ReplaceHeaderName)"
+			SmartPCHCache="$(BCC_SmartPCHCache)"
+			NoAutodependency="$(BCC_NoAutodependency)"
+			IgnoreSystemHeaders="$(BCC_IgnoreSystemHeaders)"
+			UnderscoreSymbolNames="$(BCC_UnderscoreSymbolNames)"
+			DontUnderscoreExportedSymbolNames="$(BCC_DontUnderscoreExportedSymbolNames)"
+			OutputBrowserInfo="$(BCC_OutputBrowserInfo)"
+			TemplateGeneration="$(BCC_TemplateGeneration)"
+			OldStyleTemplateSpec="$(BCC_OldStyleTemplateSpec)"
+	    	VirtualTables="$(BCC_VirtualTables)"
+			MemberPtrKind="$(BCC_MemberPtrKind)"
+			HonorMemPtrPrecision="$(BCC_HonorMemPtrPrecision)"
+			AsmToObj="$(BCC_AsmToObj)"
+			Assembler="$(BCC_Assembler)"
+			AssemblerOptions="$(BCC_AssemblerOptions)"
+			CompileToAssembly="$(BCC_CompileToAssembly)"
+			AllWarnings="$(BCC_AllWarnings)"
+			DisableWarnings="$(BCC_DisableWarnings)"
+			SelectedWarnings="$(BCC_SelectedWarnings)"
+			wamb="$(BCC_wamb)"
+			wamp="$(BCC_wamp)"
+			wasc="$(BCC_wasc)"
+			wasm="$(BCC_wasm)"
+			waus="$(BCC_waus)"
+			wbbf="$(BCC_wbbf)"
+			wbei="$(BCC_wbei)"
+			wbig="$(BCC_wbig)"
+			wccc="$(BCC_wccc)"
+			wcln="$(BCC_wcln)"
+			wcom="$(BCC_wcom)"
+			wcpt="$(BCC_wcpt)"
+			wcsu="$(BCC_wcsu)"
+			wdef="$(BCC_wdef)"
+			wdig="$(BCC_wdig)"
+			wdpu="$(BCC_wdpu)"
+			wdsz="$(BCC_wdsz)"
+			wdup="$(BCC_wdup)"
+			weas="$(BCC_weas)"
+			weff="$(BCC_weff)"
+			wext="$(BCC_wext)"
+			whch="$(BCC_whch)"
+			whid="$(BCC_whid)"
+			wias="$(BCC_wias)"
+			wibc="$(BCC_wibc)"
+			will="$(BCC_will)"
+			winl="$(BCC_winl)"
+			wlin="$(BCC_wlin)"
+			wlvc="$(BCC_wlvc)"
+			wmpc="$(BCC_wmpc)"
+			wmpd="$(BCC_wmpd)"
+			wmsg="$(BCC_wmsg)"
+			wnak="$(BCC_wnak)"
+			wncf="$(BCC_wncf)"
+			wnci="$(BCC_wnci)"
+			wncl="$(BCC_wncl)"
+			wnfd="$(BCC_wnfd)"
+			wngu="$(BCC_wngu)"
+			wnin="$(BCC_wnin)"
+			wnma="$(BCC_wnma)"
+			wnmu="$(BCC_wnmu)"
+			wnod="$(BCC_wnod)"
+			wnop="$(BCC_wnop)"
+			wnsf="$(BCC_wnsf)"
+			wnst="$(BCC_wnst)"
+			wntd="$(BCC_wntd)"
+			wnto="$(BCC_wnto)"
+			wnvf="$(BCC_wnvf)"
+			wobi="$(BCC_wobi)"
+			wobs="$(BCC_wobs)"
+			wofp="$(BCC_wofp)"
+			wosh="$(BCC_wosh)"
+			wovf="$(BCC_wovf)"
+			wpar="$(BCC_wpar)"
+			wpch="$(BCC_wpch)"
+			wpck="$(BCC_wpck)"
+			wpia="$(BCC_wpia)"
+			wpin="$(BCC_wpin)"
+			wpow="$(BCC_wpow)"
+			wpre="$(BCC_wpre)"
+			wpro="$(BCC_wpro)"
+			wrch="$(BCC_wrch)"
+			wret="$(BCC_wret)"
+			wrng="$(BCC_wrng)"
+			wrpt="$(BCC_wrpt)"
+			wrvl="$(BCC_wrvl)"
+			wsig="$(BCC_wsig)"
+			wspa="$(BCC_wspa)"
+			wstu="$(BCC_wstu)"
+			wstv="$(BCC_wstv)"
+			wsus="$(BCC_wsus)"
+			wtai="$(BCC_wtai)"
+			wtes="$(BCC_wtes)"
+			wthr="$(BCC_wthr)"
+			wucp="$(BCC_wucp)"
+			wuse="$(BCC_wuse)"
+			wvoi="$(BCC_wvoi)"
+			wzdi="$(BCC_wzdi)"
+			wnpp="$(BCC_wnpp)"
+			wprc="$(BCC_wprc)"
+			wifr="$(BCC_wifr)"
+			wali="$(BCC_wali)"
+			wstl="$(BCC_wstl)"
+			wcod="$(BCC_wcod)"
+			wpcm="$(BCC_wpcm)"
+			wmes="$(BCC_wmes)"
+			wmcs="$(BCC_wmcs)"
+			wonr="$(BCC_wonr)"
+			wmcc="$(BCC_wmcc)"
+			wpsb="$(BCC_wpsb)"
+			watr="$(BCC_watr)"
+			wexc="$(BCC_wexc)"
+			wimp="$(BCC_wimp)"
+			wptl="$(BCC_wptl)"
+			wmnc="$(BCC_wmnc)"
+			OptimizeForSize="$(BCC_OptimizeForSize)"
+			DisableOptimizations="$(BCC_DisableOptimizations)"
+			OptimizeForSpeed="$(BCC_OptimizeForSpeed)"
+			SelectedOptimizations="$(BCC_SelectedOptimizations)"
+			OptimizeJumps="$(BCC_OptimizeJumps)"
+			PentiumInstructionScheduling="$(BCC_PentiumInstructionScheduling)"
+			EliminateDeadStore="$(BCC_EliminateDeadStore)"
+			EliminateDuplicateExpressions="$(BCC_EliminateDuplicateExpressions)"
+			ExpandIntrinsics="$(BCC_ExpandIntrinsics)"
+			LoopInductionReduction="$(BCC_LoopInductionReduction)"
+			OptimizeVariables="$(BCC_OptimizeVariables)"
+			ShowStdOut="$(ShowStdOut)"
+		/>
+		<InvokeMSBuild
+			Condition="('%(CppFiles.OptionOverrides)'=='true' Or '%(CppFiles.HasBuildEvent)'=='true') And '$(FileToCompile)'==''"
+			Project="$(MSBuildProjectFullPath)"
+			Targets="MakeOne"
+			Properties="FileToCompile=%(CppFiles.Identity);Config=$(Config)"
+		/>
+	</Target>
+	
+	<Target Name="BrccCompile" Outputs="%(RcFiles.Identity)">
+		<BRCC32 Condition="('@(RcFiles)'!='' And ('%(RcFiles.OptionOverrides)'!='true' And '%(RcFiles.HasBuildEvent)'!='true') Or $(FileToCompile)!='') Or '$(_KibitzTask)'!=''"
+			Compile="%(RcFiles.Identity)"
+			ForceExecute="true"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			InternalDependencyCheck="false"
+			ResFiles="$(BRCC_OutputDir)%(RcFiles.filename)%(RcFiles.Suffix).res"
+			Language="$(BRCC_Language)"
+			ResponseFilename="$(BRCC_ResponseFilename)"
+			CodePage="$(BRCC_CodePage)"
+			UserSuppliedOptions="$(BRCC_UserSuppliedOptions)"
+			DeleteIncludePath="$(BRCC_DeleteIncludePath)"
+			Verbose="$(BRCC_Verbose)"
+			EnableMultiByte="$(BRCC_EnableMultiByte)"
+			ResourceType="$(BRCC_ResourceType)"
+			Defines="$(BRCC_Defines)"
+			OutputDir="$(BRCC_OutputDir)"
+			IncludePath="$(BRCC_IncludePath)"
+			AdditionalDependencies="@(RcFiles.DependentOn)"
+			ShowStdOut="$(ShowStdOut)"
+		/>	
+		<InvokeMSBuild 
+			Condition="('%(RcFiles.OptionOverrides)'=='true' Or '%(RcFiles.HasBuildEvent)'=='true') And '$(FileToCompile)'==''"
+			Project="$(MSBuildProjectFullPath)"
+			Targets="MakeOne"
+			Properties="FileToCompile=%(RcFiles.Identity);Config=$(Config)"
+		/>
+	</Target>
+	
+	<Target Name="DccCompile">
+		<DCC Condition="'@(PasFiles)'!='' Or '$(_KibitzTask)'!=''"
+			Compile="pasall.tmp"
+			ForceExecute="true"
+			CompileForBCB="true"
+			BCBPasFiles="@(PasFiles)"
+			KibitzTask="$(_KibitzTask)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			HppFiles="@(DCC_HppFiles)"
+			ObjFiles="@(DCC_ObjFiles)"
+			DCCCompiler="DCC32"
+			InternalDependencyCheck="false"
+			AdditionalSwitches="$(DCC_AdditionalSwitches)"
+			UnitAlias="$(DCC_UnitAlias)"
+			BuildAllUnits="$(DCC_BuildAllUnits)"
+			ConsoleTarget="$(DCC_ConsoleTarget)"
+			Define="$(DCC_Define)"
+			ExeOutput="$(DCC_ExeOutput)"
+			FindError="$(DCC_FindError)"
+			MapFile="$(DCC_MapFile)"
+			StackSize="$(DCC_StackSize)"
+			ImageBase="$(DCC_ImageBase)"
+			Description="$(DCC_Description)"
+			Hints="$(DCC_Hints)"
+			Warnings="$(DCC_Warnings)"
+			IncludePath="$(DCC_IncludePath)"
+			CodePage="$(DCC_CodePage)"
+			CBuilderOutput="$(DCC_CBuilderOutput)"
+			BaseAddress="$(DCC_BaseAddress)"
+			BplOutput="$(DCC_BplOutput)"
+			DcpOutput="$(DCC_DcpOutput)"
+			UsePackage="$(DCC_UsePackage)"
+			MakeModifiedUnits="$(DCC_MakeModifiedUnits)"
+			DcuOutput="$(DCC_DcuOutput)"
+			HppOutput="$(DCC_HppOutput)"
+			ObjOutput="$(DCC_ObjOutput)"
+			BpiOutput="$(DCC_BpiOutput)"
+			NameSpace="$(DCC_NameSpace)"
+			ObjPath="$(DCC_ObjPath)"
+			OldDosFileNames="$(DCC_OldDosFileNames)"
+			Quiet="$(DCC_Quiet)"
+			ResourcePath="$(DCC_ResourcePath)"
+			UnitSearchPath="$(DCC_UnitSearchPath)"
+			DebugInfoInExe="$(DCC_DebugInfoInExe)"
+			DebugVN="$(DCC_DebugVN)"
+			RemoteDebug="$(DCC_RemoteDebug)"
+			DefaultNamespace="$(DCC_DefaultNamespace)"
+			Platform="$(DCC_Platform)"
+			UnsafeCode="$(DCC_UnsafeCode)"
+			OutputNeverBuildDcps="$(DCC_OutputNeverBuildDcps)"
+			OutputDependencies="$(DCC_OutputDependencies)"
+			OutputXMLDocumentation="$(DCC_OutputXMLDocumentation)"
+			OutputDRCFile="$(DCC_OutputDRCFile)"
+			NoConfig="$(DCC_NoConfig)"
+			DelaySign="$(DCC_DelaySign)"
+			KeyFile="$(DCC_KeyFile)"
+			KeyContainer="$(DCC_KeyContainer)"
+			Alignment="$(DCC_Alignment)"
+			FullBooleanEvaluations="$(DCC_FullBooleanEvaluations)"
+			AssertionsAtRuntime="$(DCC_AssertionsAtRuntime)"
+			DebugInformation="$(DCC_DebugInformation)"
+			ImportedDataReferences="$(DCC_ImportedDataReferences)"
+			LongStrings="$(DCC_LongStrings)"
+			IOChecking="$(DCC_IOChecking)"
+			WriteableConstants="$(DCC_WriteableConstants)"
+			LocalDebugSymbols="$(DCC_LocalDebugSymbols)"
+			RunTimeTypeInfo="$(DCC_RunTimeTypeInfo)"
+			Optimize="$(DCC_Optimize)"
+			OpenStringParams="$(DCC_OpenStringParams)"
+			IntegerOverflowCheck="$(DCC_IntegerOverflowCheck)"
+			RangeChecking="$(DCC_RangeChecking)"
+			TypedAtParameter="$(DCC_TypedAtParameter)"
+			PentiumSafeDivide="$(DCC_PentiumSafeDivide)"
+			StrictVarStrings="$(DCC_StrictVarStrings)"
+			GenerateStackFrames="$(DCC_GenerateStackFrames)"
+			ExtendedSyntax="$(DCC_ExtendedSyntax)"
+			SymbolReferenceInfo="$(DCC_SymbolReferenceInfo)"
+			MinimumEnumSize="$(DCC_MinimumEnumSize)"
+			SYMBOL_DEPRECATED="$(DCC_SYMBOL_DEPRECATED)"
+			SYMBOL_LIBRARY="$(DCC_SYMBOL_LIBRARY)"
+			SYMBOL_PLATFORM="$(DCC_SYMBOL_PLATFORM)"
+			SYMBOL_EXPERIMENTAL="$(DCC_SYMBOL_EXPERIMENTAL)"
+			UNIT_LIBRARY="$(DCC_UNIT_LIBRARY)"
+			UNIT_PLATFORM="$(DCC_UNIT_PLATFORM)"
+			UNIT_DEPRECATED="$(DCC_UNIT_DEPRECATED)"
+			UNIT_EXPERIMENTAL="$(DCC_UNIT_EXPERIMENTAL)"
+			HRESULT_COMPAT="$(DCC_HRESULT_COMPAT)"
+			HIDING_MEMBER="$(DCC_HIDING_MEMBER)"
+			HIDDEN_VIRTUAL="$(DCC_HIDDEN_VIRTUAL)"
+			GARBAGE="$(DCC_GARBAGE)"
+			BOUNDS_ERROR="$(DCC_BOUNDS_ERROR)"
+			ZERO_NIL_COMPAT="$(DCC_ZERO_NIL_COMPAT)"
+			STRING_CONST_TRUNCED="$(DCC_STRING_CONST_TRUNCED)"
+			FOR_LOOP_VAR_VARPAR="$(DCC_FOR_LOOP_VAR_VARPAR)"
+			TYPED_CONST_VARPAR="$(DCC_TYPED_CONST_VARPAR)"
+			ASG_TO_TYPED_CONST="$(DCC_ASG_TO_TYPED_CONST)"
+			CASE_LABEL_RANGE="$(DCC_CASE_LABEL_RANGE)"
+			FOR_VARIABLE="$(DCC_FOR_VARIABLE)"
+			CONSTRUCTING_ABSTRACT="$(DCC_CONSTRUCTING_ABSTRACT)"
+			COMPARISON_FALSE="$(DCC_COMPARISON_FALSE)"
+			COMPARISON_TRUE="$(DCC_COMPARISON_TRUE)"
+			COMPARING_SIGNED_UNSIGNED="$(DCC_COMPARING_SIGNED_UNSIGNED)"
+			COMBINING_SIGNED_UNSIGNED="$(DCC_COMBINING_SIGNED_UNSIGNED)"
+			UNSUPPORTED_CONSTRUCT="$(DCC_UNSUPPORTED_CONSTRUCT)"
+			FILE_OPEN="$(DCC_FILE_OPEN)"
+			FILE_OPEN_UNITSRC="$(DCC_FILE_OPEN_UNITSRC)"
+			BAD_GLOBAL_SYMBOL="$(DCC_BAD_GLOBAL_SYMBOL)"
+			DUPLICATE_CTOR_DTOR="$(DCC_DUPLICATE_CTOR_DTOR)"
+			INVALID_DIRECTIVE="$(DCC_INVALID_DIRECTIVE)"
+			PACKAGE_NO_LINK="$(DCC_PACKAGE_NO_LINK)"
+			PACKAGED_THREADVAR="$(DCC_PACKAGED_THREADVAR)"
+			IMPLICIT_IMPORT="$(DCC_IMPLICIT_IMPORT)"
+			HPPEMIT_IGNORED="$(DCC_HPPEMIT_IGNORED)"
+			NO_RETVAL="$(DCC_NO_RETVAL)"
+			USE_BEFORE_DEF="$(DCC_USE_BEFORE_DEF)"
+			FOR_LOOP_VAR_UNDEF="$(DCC_FOR_LOOP_VAR_UNDEF)"
+			UNIT_NAME_MISMATCH="$(DCC_UNIT_NAME_MISMATCH)"
+			NO_CFG_FILE_FOUND="$(DCC_NO_CFG_FILE_FOUND)"
+			IMPLICIT_VARIANTS="$(DCC_IMPLICIT_VARIANTS)"
+			UNICODE_TO_LOCALE="$(DCC_UNICODE_TO_LOCALE)"
+			LOCALE_TO_UNICODE="$(DCC_LOCALE_TO_UNICODE)"
+			IMAGEBASE_MULTIPLE="$(DCC_IMAGEBASE_MULTIPLE)"
+			SUSPICIOUS_TYPECAST="$(DCC_SUSPICIOUS_TYPECAST)"
+			PRIVATE_PROPACCESSOR="$(DCC_PRIVATE_PROPACCESSOR)"
+			UNSAFE_TYPE="$(DCC_UNSAFE_TYPE)"
+			UNSAFE_CODE="$(DCC_UNSAFE_CODE)"
+			UNSAFE_CAST="$(DCC_UNSAFE_CAST)"
+			OPTION_TRUNCATED="$(DCC_OPTION_TRUNCATED)"
+			WIDECHAR_REDUCED="$(DCC_WIDECHAR_REDUCED)"
+			DUPLICATES_IGNORED="$(DCC_DUPLICATES_IGNORED)"
+			UNIT_INIT_SEQ="$(DCC_UNIT_INIT_SEQ)"
+			LOCAL_PINVOKE="$(DCC_LOCAL_PINVOKE)"
+			MESSAGE_DIRECTIVE="$(DCC_MESSAGE_DIRECTIVE)"
+			TYPEINFO_IMPLICITLY_ADDED="$(DCC_TYPEINFO_IMPLICITLY_ADDED)"
+			XML_WHITESPACE_NOT_ALLOWED="$(DCC_XML_WHITESPACE_NOT_ALLOWED)"
+			XML_UNKNOWN_ENTITY="$(DCC_XML_UNKNOWN_ENTITY)"
+			XML_INVALID_NAME_START="$(DCC_XML_INVALID_NAME_START)"
+			XML_INVALID_NAME="$(DCC_XML_INVALID_NAME)"
+			XML_EXPECTED_CHARACTER="$(DCC_XML_EXPECTED_CHARACTER)"
+			XML_CREF_NO_RESOLVE="$(DCC_XML_CREF_NO_RESOLVE)"
+			XML_NO_PARM="$(DCC_XML_NO_PARM)"
+			XML_NO_MATCHING_PARM="$(DCC_XML_NO_MATCHING_PARM)"
+			AdditionalDependencies="@(PasFiles.DependentOn)"
+			ShowStdOut="$(ShowStdOut)"
+		/>		
+	</Target>
+	
+	<Target Name="TasmCompile" Outputs="%(AsmFiles.Identity)">
+		<TASM32 Condition="'@(AsmFiles)'!='' And ('%(AsmFiles.OptionOverrides)'!='true' And '%(AsmFiles.HasBuildEvent)'!='true') Or '$(FileToCompile)'!=''"
+			Compile="%(AsmFiles.Identity)"
+			ForceExecute="true"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			InternalDependencyCheck="false"
+			ObjFiles="$(TASM_OutputDir)%(AsmFiles.Filename)%(AsmFiles.Suffix).obj"
+			ListingFile="@(TASM_ListingFile)"
+			CrossRefFile="@(TASM_CrossRefFile)"
+			Debugging="$(TASM_Debugging)"
+			Overlay="$(TASM_Overlay)"
+			SegmentOrdering="$(TASM_SegmentOrdering)"
+			FloatingPoint="$(TASM_FloatingPoint)"
+			CaseSensitivity="$(TASM_CaseSensitivity)"
+			Defines="$(TASM_Defines)"
+			IncludePath="$(TASM_IncludePath)"
+			Directives="$(TASM_Directives)"
+			OutputDir="$(TASM_OutputDir)"
+			HashTableCapacity="$(TASM_HashTableCapacity)"
+			MaxSymbolLength="$(TASM_MaxSymbolLength)"
+			Passes="$(TASM_Passes)"
+			ImpureCodeCheck="$(TASM_ImpureCodeCheck)"
+			SuppressObjRecords="$(TASM_SuppressObjRecords)"
+			SuppressMessages="$(TASM_SuppressMessages)"
+			VersionId="$(TASM_VersionId)"
+			DisplaySourceLines="$(TASM_DisplaySourceLines)"
+			AdditionalSwitches="$(TASM_AdditionalSwitches)"
+			AllWarnings="$(TASM_AllWarnings)"
+			DisableWarnings="$(TASM_DisableWarnings)"
+			SelectedWarnings="$(TASM_SelectedWarnings)"
+			waln="$(TASM_waln)"
+			wass="$(TASM_wass)"
+			wbrk="$(TASM_wbrk)"
+			wgtp="$(TASM_wgtp)"
+			wicg="$(TASM_wicg)"
+			wint="$(TASM_wint)"
+			wlco="$(TASM_wlco)"
+			wmcp="$(TASM_wmcp)"
+			wopi="$(TASM_wopi)"
+			wopp="$(TASM_wopp)"
+			wops="$(TASM_wops)"
+			wovf="$(TASM_wovf)"
+			wpdc="$(TASM_wpdc)"
+			wpqk="$(TASM_wpqk)"
+			wpro="$(TASM_wpro)"
+			wres="$(TASM_wres)"
+			wtpi="$(TASM_wtpi)"
+			wuni="$(TASM_wuni)"
+			GenerateCrossReferences="$(TASM_GenerateCrossReferences)"
+			GenerateCrossRefFile="$(TASM_GenerateCrossRefFile)"
+			GenerateExpandedListingFile="$(TASM_GenerateExpandedListingFile)"
+			GenerateListingFile="$(TASM_GenerateListingFile)"
+			SuppressSymbolsInListing="$(TASM_SuppressSymbolsInListing)"
+			FalseCondsInListing="$(TASM_FalseCondsInListing)"
+			CommandString="$(TASM_CommandString)"
+			AdditionalDependencies="@(AsmFiles.DependentOn)"
+			ShowStdOut="$(ShowStdOut)"
+		/>		
+		<InvokeMSBuild 
+			Condition="('%(AsmFiles.OptionOverrides)'=='true' Or '%(AsmFiles.HasBuildEvent)'=='true') And '$(FileToCompile)'==''"
+			Project="$(MSBuildProjectFullPath)"
+			Targets="MakeOne"
+			Properties="FileToCompile=%(AsmFiles.Identity);Config=$(Config)"
+		/>
+	</Target>
+
+	<Target Name="BccBatchCompile">
+		<BCC32 Condition="'@(CppFiles)'!='' Or '$(_KibitzTask)'!=''"
+			Compile="@(CppFiles)"
+			ForceExecute="true"
+			KibitzTask="$(_KibitzTask)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			AdditionalDependencies="@(CppFiles.DependentOn)"
+			AutoDepCheck="false"
+			InternalDependencyCheck="false"
+			Defines="$(BCC_Defines)"
+			InternalDefines="$(BCC_InternalDefines)"
+			Undefines="$(BCC_Undefines)"
+			TargetOutputDir="$(BCC_TargetOutputDir)"
+			OutputDir="$(BCC_OutputDir)"
+			IncludePath="$(BCC_IncludePath)"
+			DebugLineNumbers="$(BCC_DebugLineNumbers)"
+			SourceDebuggingOn="$(BCC_SourceDebuggingOn)"
+			InlineFunctionExpansion="$(BCC_InlineFunctionExpansion)"
+			CodeView4DebugInfo="$(BCC_CodeView4DebugInfo)"
+			AllCodeguardOptions="$(BCC_AllCodeguardOptions)"
+			CodeguardDebugLevel="$(BCC_CodeguardDebugLevel)"
+			MonitorInlinePtrAccess="$(BCC_MonitorInlinePtrAccess)"
+			MonitorGlobalAndStackData="$(BCC_MonitorGlobalAndStackData)"
+			MonitorThis="$(BCC_MonitorThis)"
+			SuppressBanner="$(BCC_SuppressBanner)"
+			ExtendedErrorInfo="$(BCC_ExtendedErrorInfo)"
+			IntegerSizedEnums="$(BCC_IntegerSizedEnums)"
+			StackFrames="$(BCC_StackFrames)"
+			CPPCompileAlways="$(BCC_CPPCompileAlways)"
+			WarningIsError="$(BCC_WarningIsError)"
+			MergeDuplicateStrings="$(BCC_MergeDuplicateStrings)"
+			StringsInReadOnlyDataSeg="$(BCC_StringsInReadOnlyDataSeg)"
+			StringsInWriteableDataSeg="$(BCC_StringsInWriteableDataSeg)"
+			InstructionSet="$(BCC_InstructionSet)"
+			DataAlignment="$(BCC_DataAlignment)"
+			CallingConvention="$(BCC_CallingConvention)"
+			UseRegisterVariables="$(BCC_UseRegisterVariables)"
+			FastFloatingPoint="$(BCC_FastFloatingPoint)"
+			CorrectFDIVFlaw="$(BCC_CorrectFDIVFlaw)"
+			QuietFloatingPoint="$(BCC_QuietFloatingPoint)"
+			LanguageCompliance="$(BCC_LanguageCompliance)"
+			NestedComments="$(BCC_NestedComments)"
+			MaxIdentifierLength="$(BCC_MaxIdentifierLength)"
+			EnableCodePaging="$(BCC_EnableCodePaging)"
+			DefaultCharUnsigned="$(BCC_DefaultCharUnsigned)"
+			NoLink="$(BCC_NoLink)"
+			UserSuppliedOptions="$(BCC_UserSuppliedOptions)"
+			GenerateConsoleApp="$(BCC_GenerateConsoleApp)"
+			GenerateDLL="$(BCC_GenerateDLL)"
+			GenerateMultithreaded="$(BCC_GenerateMultithreaded)"
+			GenerateUnicode="$(BCC_GenerateUnicode)"
+			GenerateWindowsApp="$(BCC_GenerateWindowsApp)"
+			GlobalFuncsInOwnSegment="$(BCC_GlobalFuncsInOwnSegment)"
+			DontMangleCCInSymbolNames="$(BCC_DontMangleCCInSymbolNames)"
+			MSHeaderSearchAlgorithm="$(BCC_MSHeaderSearchAlgorithm)"
+			VCCompatibility="$(BCC_VCCompatibility)"
+			BackwardCompatibility="$(BCC_BackwardCompatibility)"
+			OldBorlandClassLayout="$(BCC_OldBorlandClassLayout)"
+			OldStyleVirdef="$(BCC_OldStyleVirdef)"
+			OldStyleClassArgs="$(BCC_OldStyleClassArgs)"
+			AllowNonConstCalls="$(BCC_AllowNonConstCalls)"
+			OldOverloadRules="$(BCC_OldOverloadRules)"
+			StringLiteralsNonConst="$(BCC_StringLiteralsNonConst)"
+			NonConstRefBinding="$(BCC_NonConstRefBinding)"
+			ExplicitSpecializationAsMemberFunc="$(BCC_ExplicitSpecializationAsMemberFunc)"
+			ConstructorDisplacements="$(BCC_ConstructorDisplacements)"
+			OldForStatementScoping="$(BCC_OldForStatementScoping)"
+			DisableDigraphScanner="$(BCC_DisableDigraphScanner)"
+			DOSHeaderSearchAlgorithm="$(BCC_DOSHeaderSearchAlgorithm)"
+			NewOperatorNames="$(BCC_NewOperatorNames)"
+			AllCompatibilityFlags="$(BCC_AllCompatibilityFlags)"
+			PushThisFirst="$(BCC_PushThisFirst)"
+			ReverseOrderForMultiCharConst="$(BCC_ReverseOrderForMultiCharConst)"
+			VTablePtrAtFront="$(BCC_VTablePtrAtFront)"
+			SlowVirtualBasePtrs="$(BCC_SlowVirtualBasePtrs)"
+			NativeCodeForMultiByte="$(BCC_NativeCodeForMultiByte)"
+			ZeroLengthEmptyMemberFuncs="$(BCC_ZeroLengthEmptyMemberFuncs)"
+			ZeroLengthEmptyBaseClass="$(BCC_ZeroLengthEmptyBaseClass)"
+			EnableRTTI="$(BCC_EnableRTTI)"
+			EnableExceptionHandling="$(BCC_EnableExceptionHandling)"
+			DestructorCleanup="$(BCC_DestructorCleanup)"
+			GlobalDestructorCount="$(BCC_GlobalDestructorCount)"
+			NoDllOrMTDestructorCleanup="$(BCC_NoDllOrMTDestructorCleanup)"
+			FastExceptionPrologs="$(BCC_FastExceptionPrologs)"
+			ExceptionLocationInfo="$(BCC_ExceptionLocationInfo)"
+			SlowExceptionEpilogues="$(BCC_SlowExceptionEpilogues)"
+			HideExceptionVars="$(BCC_HideExceptionVars)"
+			PCHUsage="$(BCC_PCHUsage)"
+			PCHWithExternalTypeFiles="$(BCC_PCHWithExternalTypeFiles)"
+			IncludeContentsOfHeaders="$(BCC_IncludeContentsOfHeaders)"
+			PCHName="$(BCC_PCHName)"
+			PCHCache="$(BCC_PCHCache)"
+			StopPCHAfter="$(BCC_StopPCHAfter)"
+			ReplaceHeaderName="$(BCC_ReplaceHeaderName)"
+			SmartPCHCache="$(BCC_SmartPCHCache)"
+			NoAutodependency="$(BCC_NoAutodependency)"
+			IgnoreSystemHeaders="$(BCC_IgnoreSystemHeaders)"
+			UnderscoreSymbolNames="$(BCC_UnderscoreSymbolNames)"
+			DontUnderscoreExportedSymbolNames="$(BCC_DontUnderscoreExportedSymbolNames)"
+			OutputBrowserInfo="$(BCC_OutputBrowserInfo)"
+			TemplateGeneration="$(BCC_TemplateGeneration)"
+			OldStyleTemplateSpec="$(BCC_OldStyleTemplateSpec)"
+			VirtualTables="$(BCC_VirtualTables)"
+			MemberPtrKind="$(BCC_MemberPtrKind)"
+			HonorMemPtrPrecision="$(BCC_HonorMemPtrPrecision)"
+			AsmToObj="$(BCC_AsmToObj)"
+			Assembler="$(BCC_Assembler)"
+			AssemblerOptions="$(BCC_AssemblerOptions)"
+			CompileToAssembly="$(BCC_CompileToAssembly)"
+			AllWarnings="$(BCC_AllWarnings)"
+			DisableWarnings="$(BCC_DisableWarnings)"
+			SelectedWarnings="$(BCC_SelectedWarnings)"
+			wamb="$(BCC_wamb)"
+			wamp="$(BCC_wamp)"
+			wasc="$(BCC_wasc)"
+			wasm="$(BCC_wasm)"
+			waus="$(BCC_waus)"
+			wbbf="$(BCC_wbbf)"
+			wbei="$(BCC_wbei)"
+			wbig="$(BCC_wbig)"
+			wccc="$(BCC_wccc)"
+			wcln="$(BCC_wcln)"
+			wcom="$(BCC_wcom)"
+			wcpt="$(BCC_wcpt)"
+			wcsu="$(BCC_wcsu)"
+			wdef="$(BCC_wdef)"
+			wdig="$(BCC_wdig)"
+			wdpu="$(BCC_wdpu)"
+			wdsz="$(BCC_wdsz)"
+			wdup="$(BCC_wdup)"
+			weas="$(BCC_weas)"
+			weff="$(BCC_weff)"
+			wext="$(BCC_wext)"
+			whch="$(BCC_whch)"
+			whid="$(BCC_whid)"
+			wias="$(BCC_wias)"
+			wibc="$(BCC_wibc)"
+			will="$(BCC_will)"
+			winl="$(BCC_winl)"
+			wlin="$(BCC_wlin)"
+			wlvc="$(BCC_wlvc)"
+			wmpc="$(BCC_wmpc)"
+			wmpd="$(BCC_wmpd)"
+			wmsg="$(BCC_wmsg)"
+			wnak="$(BCC_wnak)"
+			wncf="$(BCC_wncf)"
+			wnci="$(BCC_wnci)"
+			wncl="$(BCC_wncl)"
+			wnfd="$(BCC_wnfd)"
+			wngu="$(BCC_wngu)"
+			wnin="$(BCC_wnin)"
+			wnma="$(BCC_wnma)"
+			wnmu="$(BCC_wnmu)"
+			wnod="$(BCC_wnod)"
+			wnop="$(BCC_wnop)"
+			wnsf="$(BCC_wnsf)"
+			wnst="$(BCC_wnst)"
+			wntd="$(BCC_wntd)"
+			wnto="$(BCC_wnto)"
+			wnvf="$(BCC_wnvf)"
+			wobi="$(BCC_wobi)"
+			wobs="$(BCC_wobs)"
+			wofp="$(BCC_wofp)"
+			wosh="$(BCC_wosh)"
+			wovf="$(BCC_wovf)"
+			wpar="$(BCC_wpar)"
+			wpch="$(BCC_wpch)"
+			wpck="$(BCC_wpck)"
+			wpia="$(BCC_wpia)"
+			wpin="$(BCC_wpin)"
+			wpow="$(BCC_wpow)"
+			wpre="$(BCC_wpre)"
+			wpro="$(BCC_wpro)"
+			wrch="$(BCC_wrch)"
+			wret="$(BCC_wret)"
+			wrng="$(BCC_wrng)"
+			wrpt="$(BCC_wrpt)"
+			wrvl="$(BCC_wrvl)"
+			wsig="$(BCC_wsig)"
+			wspa="$(BCC_wspa)"
+			wstu="$(BCC_wstu)"
+			wstv="$(BCC_wstv)"
+			wsus="$(BCC_wsus)"
+			wtai="$(BCC_wtai)"
+			wtes="$(BCC_wtes)"
+			wthr="$(BCC_wthr)"
+			wucp="$(BCC_wucp)"
+			wuse="$(BCC_wuse)"
+			wvoi="$(BCC_wvoi)"
+			wzdi="$(BCC_wzdi)"
+			wnpp="$(BCC_wnpp)"
+			wprc="$(BCC_wprc)"
+			wifr="$(BCC_wifr)"
+			wali="$(BCC_wali)"
+			wstl="$(BCC_wstl)"
+			wcod="$(BCC_wcod)"
+			wpcm="$(BCC_wpcm)"
+			wmes="$(BCC_wmes)"
+			wmcs="$(BCC_wmcs)"
+			wonr="$(BCC_wonr)"
+			wmcc="$(BCC_wmcc)"
+			wpsb="$(BCC_wpsb)"
+			watr="$(BCC_watr)"
+			wexc="$(BCC_wexc)"
+			wimp="$(BCC_wimp)"
+			wptl="$(BCC_wptl)"
+			wmnc="$(BCC_wmnc)"
+			OptimizeForSize="$(BCC_OptimizeForSize)"
+			DisableOptimizations="$(BCC_DisableOptimizations)"
+			OptimizeForSpeed="$(BCC_OptimizeForSpeed)"
+			SelectedOptimizations="$(BCC_SelectedOptimizations)"
+			OptimizeJumps="$(BCC_OptimizeJumps)"
+			PentiumInstructionScheduling="$(BCC_PentiumInstructionScheduling)"
+			EliminateDeadStore="$(BCC_EliminateDeadStore)"
+			EliminateDuplicateExpressions="$(BCC_EliminateDuplicateExpressions)"
+			ExpandIntrinsics="$(BCC_ExpandIntrinsics)"
+			LoopInductionReduction="$(BCC_LoopInductionReduction)"
+			OptimizeVariables="$(BCC_OptimizeVariables)"
+			ShowStdOut="$(ShowStdOut)"
+		/>
+	</Target>
+
+	<Target Name="Preprocess" DependsOnTargets="$(PreprocessDependsOnTargets)">
+		<CPP32 Condition="'@(InputFile)'!=''"
+			Preprocess="@(InputFile)"
+			ForceExecute="true"
+			KibitzTask="$(_KibitzTask)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			InternalDependencyCheck="false"
+			OutputFilename="%(InputFile.RelativeDir)%(InputFile.Filename).i"
+			Defines="$(BCC_Defines)"
+			InternalDefines="$(BCC_InternalDefines)"
+			Undefines="$(BCC_Undefines)"
+			TargetOutputDir="$(BCC_TargetOutputDir)"
+			IncludePath="$(BCC_IncludePath)"
+			DebugLineNumbers="$(BCC_DebugLineNumbers)"
+			SourceDebuggingOn="$(BCC_SourceDebuggingOn)"
+			InlineFunctionExpansion="$(BCC_InlineFunctionExpansion)"
+			CodeView4DebugInfo="$(BCC_CodeView4DebugInfo)"
+			AllCodeguardOptions="$(BCC_AllCodeguardOptions)"
+			CodeguardDebugLevel="$(BCC_CodeguardDebugLevel)"
+			MonitorInlinePtrAccess="$(BCC_MonitorInlinePtrAccess)"
+			MonitorGlobalAndStackData="$(BCC_MonitorGlobalAndStackData)"
+			MonitorThis="$(BCC_MonitorThis)"
+			SuppressBanner="$(BCC_SuppressBanner)"
+			ExtendedErrorInfo="$(BCC_ExtendedErrorInfo)"
+			IntegerSizedEnums="$(BCC_IntegerSizedEnums)"
+			StackFrames="$(BCC_StackFrames)"
+			CPPCompileAlways="$(BCC_CPPCompileAlways)"
+			WarningIsError="$(BCC_WarningIsError)"
+			MergeDuplicateStrings="$(BCC_MergeDuplicateStrings)"
+			StringsInReadOnlyDataSeg="$(BCC_StringsInReadOnlyDataSeg)"
+			StringsInWriteableDataSeg="$(BCC_StringsInWriteableDataSeg)"
+			InstructionSet="$(BCC_InstructionSet)"
+			DataAlignment="$(BCC_DataAlignment)"
+			CallingConvention="$(BCC_CallingConvention)"
+			UseRegisterVariables="$(BCC_UseRegisterVariables)"
+			FastFloatingPoint="$(BCC_FastFloatingPoint)"
+			CorrectFDIVFlaw="$(BCC_CorrectFDIVFlaw)"
+			QuietFloatingPoint="$(BCC_QuietFloatingPoint)"
+			LanguageCompliance="$(BCC_LanguageCompliance)"
+			NestedComments="$(BCC_NestedComments)"
+			MaxIdentifierLength="$(BCC_MaxIdentifierLength)"
+			EnableCodePaging="$(BCC_EnableCodePaging)"
+			DefaultCharUnsigned="$(BCC_DefaultCharUnsigned)"
+			NoLink="$(BCC_NoLink)"
+			UserSuppliedOptions="$(BCC_UserSuppliedOptions)"
+			GenerateConsoleApp="$(BCC_GenerateConsoleApp)"
+			GenerateDLL="$(BCC_GenerateDLL)"
+			GenerateMultithreaded="$(BCC_GenerateMultithreaded)"
+			GenerateUnicode="$(BCC_GenerateUnicode)"
+			GenerateWindowsApp="$(BCC_GenerateWindowsApp)"
+			GlobalFuncsInOwnSegment="$(BCC_GlobalFuncsInOwnSegment)"
+			DontMangleCCInSymbolNames="$(BCC_DontMangleCCInSymbolNames)"
+			MSHeaderSearchAlgorithm="$(BCC_MSHeaderSearchAlgorithm)"
+			VCCompatibility="$(BCC_VCCompatibility)"
+			BackwardCompatibility="$(BCC_BackwardCompatibility)"
+			OldBorlandClassLayout="$(BCC_OldBorlandClassLayout)"
+			OldStyleVirdef="$(BCC_OldStyleVirdef)"
+			OldStyleClassArgs="$(BCC_OldStyleClassArgs)"
+			AllowNonConstCalls="$(BCC_AllowNonConstCalls)"
+			OldOverloadRules="$(BCC_OldOverloadRules)"
+			StringLiteralsNonConst="$(BCC_StringLiteralsNonConst)"
+			NonConstRefBinding="$(BCC_NonConstRefBinding)"
+			ExplicitSpecializationAsMemberFunc="$(BCC_ExplicitSpecializationAsMemberFunc)"
+			ConstructorDisplacements="$(BCC_ConstructorDisplacements)"
+			OldForStatementScoping="$(BCC_OldForStatementScoping)"
+			DisableDigraphScanner="$(BCC_DisableDigraphScanner)"
+			DOSHeaderSearchAlgorithm="$(BCC_DOSHeaderSearchAlgorithm)"
+			NewOperatorNames="$(BCC_NewOperatorNames)"
+			AllCompatibilityFlags="$(BCC_AllCompatibilityFlags)"
+			PushThisFirst="$(BCC_PushThisFirst)"
+			ReverseOrderForMultiCharConst="$(BCC_ReverseOrderForMultiCharConst)"
+			VTablePtrAtFront="$(BCC_VTablePtrAtFront)"
+			SlowVirtualBasePtrs="$(BCC_SlowVirtualBasePtrs)"
+			NativeCodeForMultiByte="$(BCC_NativeCodeForMultiByte)"
+			ZeroLengthEmptyMemberFuncs="$(BCC_ZeroLengthEmptyMemberFuncs)"
+			ZeroLengthEmptyBaseClass="$(BCC_ZeroLengthEmptyBaseClass)"
+			EnableRTTI="$(BCC_EnableRTTI)"
+			EnableExceptionHandling="$(BCC_EnableExceptionHandling)"
+			DestructorCleanup="$(BCC_DestructorCleanup)"
+			GlobalDestructorCount="$(BCC_GlobalDestructorCount)"
+			NoDllOrMTDestructorCleanup="$(BCC_NoDllOrMTDestructorCleanup)"
+			FastExceptionPrologs="$(BCC_FastExceptionPrologs)"
+			ExceptionLocationInfo="$(BCC_ExceptionLocationInfo)"
+			SlowExceptionEpilogues="$(BCC_SlowExceptionEpilogues)"
+			HideExceptionVars="$(BCC_HideExceptionVars)"
+			PCHUsage="$(BCC_PCHUsage)"
+			PCHWithExternalTypeFiles="$(BCC_PCHWithExternalTypeFiles)"
+			IncludeContentsOfHeaders="$(BCC_IncludeContentsOfHeaders)"
+			PCHName="$(BCC_PCHName)"
+			PCHCache="$(BCC_PCHCache)"
+			StopPCHAfter="$(BCC_StopPCHAfter)"
+			ReplaceHeaderName="$(BCC_ReplaceHeaderName)"
+			SmartPCHCache="$(BCC_SmartPCHCache)"
+			NoAutodependency="$(BCC_NoAutodependency)"
+			IgnoreSystemHeaders="$(BCC_IgnoreSystemHeaders)"
+			UnderscoreSymbolNames="$(BCC_UnderscoreSymbolNames)"
+			DontUnderscoreExportedSymbolNames="$(BCC_DontUnderscoreExportedSymbolNames)"
+			OutputBrowserInfo="$(BCC_OutputBrowserInfo)"
+			TemplateGeneration="$(BCC_TemplateGeneration)"
+			OldStyleTemplateSpec="$(BCC_OldStyleTemplateSpec)"
+	    	VirtualTables="$(BCC_VirtualTables)"
+			MemberPtrKind="$(BCC_MemberPtrKind)"
+			HonorMemPtrPrecision="$(BCC_HonorMemPtrPrecision)"
+			AsmToObj="$(BCC_AsmToObj)"
+			Assembler="$(BCC_Assembler)"
+			AssemblerOptions="$(BCC_AssemblerOptions)"
+			CompileToAssembly="$(BCC_CompileToAssembly)"
+			AllWarnings="$(BCC_AllWarnings)"
+			DisableWarnings="$(BCC_DisableWarnings)"
+			SelectedWarnings="$(BCC_SelectedWarnings)"
+			wamb="$(BCC_wamb)"
+			wamp="$(BCC_wamp)"
+			wasc="$(BCC_wasc)"
+			wasm="$(BCC_wasm)"
+			waus="$(BCC_waus)"
+			wbbf="$(BCC_wbbf)"
+			wbei="$(BCC_wbei)"
+			wbig="$(BCC_wbig)"
+			wccc="$(BCC_wccc)"
+			wcln="$(BCC_wcln)"
+			wcom="$(BCC_wcom)"
+			wcpt="$(BCC_wcpt)"
+			wcsu="$(BCC_wcsu)"
+			wdef="$(BCC_wdef)"
+			wdig="$(BCC_wdig)"
+			wdpu="$(BCC_wdpu)"
+			wdsz="$(BCC_wdsz)"
+			wdup="$(BCC_wdup)"
+			weas="$(BCC_weas)"
+			weff="$(BCC_weff)"
+			wext="$(BCC_wext)"
+			whch="$(BCC_whch)"
+			whid="$(BCC_whid)"
+			wias="$(BCC_wias)"
+			wibc="$(BCC_wibc)"
+			will="$(BCC_will)"
+			winl="$(BCC_winl)"
+			wlin="$(BCC_wlin)"
+			wlvc="$(BCC_wlvc)"
+			wmpc="$(BCC_wmpc)"
+			wmpd="$(BCC_wmpd)"
+			wmsg="$(BCC_wmsg)"
+			wnak="$(BCC_wnak)"
+			wncf="$(BCC_wncf)"
+			wnci="$(BCC_wnci)"
+			wncl="$(BCC_wncl)"
+			wnfd="$(BCC_wnfd)"
+			wngu="$(BCC_wngu)"
+			wnin="$(BCC_wnin)"
+			wnma="$(BCC_wnma)"
+			wnmu="$(BCC_wnmu)"
+			wnod="$(BCC_wnod)"
+			wnop="$(BCC_wnop)"
+			wnsf="$(BCC_wnsf)"
+			wnst="$(BCC_wnst)"
+			wntd="$(BCC_wntd)"
+			wnto="$(BCC_wnto)"
+			wnvf="$(BCC_wnvf)"
+			wobi="$(BCC_wobi)"
+			wobs="$(BCC_wobs)"
+			wofp="$(BCC_wofp)"
+			wosh="$(BCC_wosh)"
+			wovf="$(BCC_wovf)"
+			wpar="$(BCC_wpar)"
+			wpch="$(BCC_wpch)"
+			wpck="$(BCC_wpck)"
+			wpia="$(BCC_wpia)"
+			wpin="$(BCC_wpin)"
+			wpow="$(BCC_wpow)"
+			wpre="$(BCC_wpre)"
+			wpro="$(BCC_wpro)"
+			wrch="$(BCC_wrch)"
+			wret="$(BCC_wret)"
+			wrng="$(BCC_wrng)"
+			wrpt="$(BCC_wrpt)"
+			wrvl="$(BCC_wrvl)"
+			wsig="$(BCC_wsig)"
+			wspa="$(BCC_wspa)"
+			wstu="$(BCC_wstu)"
+			wstv="$(BCC_wstv)"
+			wsus="$(BCC_wsus)"
+			wtai="$(BCC_wtai)"
+			wtes="$(BCC_wtes)"
+			wthr="$(BCC_wthr)"
+			wucp="$(BCC_wucp)"
+			wuse="$(BCC_wuse)"
+			wvoi="$(BCC_wvoi)"
+			wzdi="$(BCC_wzdi)"
+			wnpp="$(BCC_wnpp)"
+			wprc="$(BCC_wprc)"
+			wifr="$(BCC_wifr)"
+			wali="$(BCC_wali)"
+			wstl="$(BCC_wstl)"
+			wcod="$(BCC_wcod)"
+			wpcm="$(BCC_wpcm)"
+			wmes="$(BCC_wmes)"
+			wmcs="$(BCC_wmcs)"
+			wonr="$(BCC_wonr)"
+			wmcc="$(BCC_wmcc)"
+			wpsb="$(BCC_wpsb)"
+			watr="$(BCC_watr)"
+			wexc="$(BCC_wexc)"
+			wimp="$(BCC_wimp)"
+			wptl="$(BCC_wptl)"
+			wmnc="$(BCC_wmnc)"
+			OptimizeForSize="$(BCC_OptimizeForSize)"
+			DisableOptimizations="$(BCC_DisableOptimizations)"
+			OptimizeForSpeed="$(BCC_OptimizeForSpeed)"
+			SelectedOptimizations="$(BCC_SelectedOptimizations)"
+			OptimizeJumps="$(BCC_OptimizeJumps)"
+			PentiumInstructionScheduling="$(BCC_PentiumInstructionScheduling)"
+			EliminateDeadStore="$(BCC_EliminateDeadStore)"
+			EliminateDuplicateExpressions="$(BCC_EliminateDuplicateExpressions)"
+			ExpandIntrinsics="$(BCC_ExpandIntrinsics)"
+			LoopInductionReduction="$(BCC_LoopInductionReduction)"
+			OptimizeVariables="$(BCC_OptimizeVariables)"
+			ShowStdOut="$(ShowStdOut)"
+		/>
+	</Target>
+	
+	<Target Name="_PerformLink" DependsOnTargets="_ResolveOutput;_CheckLinkDependencies">
+		<ILINK32
+			Condition="'$(TLibLink)'!='true' And ('@(OutputOutOfDate)'!='' Or '$(ForceLink)'=='true')" 
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			InternalDependencyCheck="false"
+			KibitzTask="$(_KibitzTask)"
+			ForceExecute="$(ForceLink)"
+			LibraryPath="$(ILINK_LibraryPath)"
+			ObjectSearchPath="$(ILINK_ObjectSearchPath)"
+			IntermediateOutputPath="$(ILINK_IntermediateOutputPath)"
+			BpiLibOutputDir="$(ILINK_BpiLibOutputDir)"
+			FullDebugInfo="$(ILINK_FullDebugInfo)"
+			GenerateImportLibrary="$(ILINK_GenerateImportLibrary)"
+			GenerateDRC="$(ILINK_GenerateDRC)"
+			DisableIncrementalLinking="$(ILINK_DisableIncrementalLinking)"
+			MaxErrors="$(ILINK_MaxErrors)"
+			SuppressBanner="$(ILINK_SuppressBanner)"
+			KeepOutputFiles="$(ILINK_KeepOutputFiles)"
+			DisplayTime="$(ILINK_DisplayTime)"
+			AdditionalOptions="$(ILINK_AdditionalOptions)"
+			FilenameAlias="$(ILINK_FilenameAlias)"
+			AppType="$(ILINK_AppType)"
+			WinAppType="$(ILINK_WinAppType)"
+			MapWithMangledNames="$(ILINK_MapWithMangledNames)"
+			MapFileType="$(ILINK_MapFileType)"
+			BaseAddress="$(ILINK_BaseAddress)"
+			HeapReserveSize="$(ILINK_HeapReserveSize)"
+			HeapCommitSize="$(ILINK_HeapCommitSize)"
+			StackReserveSize="$(ILINK_StackReserveSize)"
+			StackCommitSize="$(ILINK_StackCommitSize)"
+			Description="$(ILINK_Description)"
+			SectionFlags="$(ILINK_SectionFlags)"
+			ImageFlags="$(ILINK_ImageFlags)"
+			DelayLoadDll="$(ILINK_DelayLoadDll)"
+			ClearState="$(ILINK_ClearState)"
+			CaseSensitive="$(ILINK_CaseSensitive)"
+			Verbose="$(ILINK_Verbose)"
+			FastTLS="$(ILINK_FastTLS)"
+			ImageChecksum="$(ILINK_ImageChecksum)"
+			ReplaceResources="$(ILINK_ReplaceResources)"
+			FileAlignment="$(ILINK_FileAlignment)"
+			ObjectAlignment="$(ILINK_ObjectAlignment)"
+			OSVersion="$(ILINK_OSVersion)"
+			UserVersion="$(ILINK_UserVersion)"
+			PackageType="$(ILINK_PackageType)"
+			PackageBaseName="$(ILINK_PackageBaseName)"
+			GenerateLibFile="$(ILINK_GenerateLibFile)"
+			AllWarnings="$(ILINK_AllWarnings)"
+			DisableWarnings="$(ILINK_DisableWarnings)"
+			SelectedWarnings="$(ILINK_SelectedWarnings)"
+			wexp="$(ILINK_wexp)"
+			wrty="$(ILINK_wrty)"
+			wdup="$(ILINK_wdup)"
+			wdpl="$(ILINK_wdpl)"
+			wnou="$(ILINK_wnou)"
+			wuld="$(ILINK_wuld)"
+			wsrd="$(ILINK_wsrd)"
+			wdee="$(ILINK_wdee)"
+			wsnf="$(ILINK_wsnf)"
+			ObjFiles="$(ILINK_StartupObjs);$(ILINK_PackageImports);$(ILINK_AdditionalObjs);@(CompiledObjs);@(ObjFiles)"
+			OutputFile="@(OutputFile)"
+			MapFile="@(ILinkMapFile)"
+			LibFiles="$(CodeGuard_Lib);$(ILINK_PackageLibs);@(LibFiles);$(ILINK_AdditionalLibs)"
+			DefFile="@(DefFile)"
+			ResFiles="@(CompiledResources);@(ResFiles)"
+			FormResources="@(FormResources)"
+			ShowStdOut="$(ShowStdOut)"
+			/>
+		<TLIB
+			Condition="'$(TLibLink)'=='true' And ('@(OutputOutOfDate)'!='' Or '$(ForceLink)'=='true')"
+			ObjFiles="@(CompiledObjs);@(ObjFiles)"
+			LibraryFile="@(OutputFile)"
+			ProjectFileName="$(MSBuildProjectFullPath)"
+			InternalDependencyCheck="false"
+			ListingFileName="$(TLib_ListingFileName)"
+			CaseSensitive="$(TLib_CaseSensitive)"
+			PageSize="$(TLib_PageSize)"
+			CreateExtendedDirectory="$(TLib_CreateExtendedDirectory)"
+			PurgeCommentRecords="$(TLib_PurgeCommentRecords)"
+			ShowStdOut="$(ShowStdOut)"
+		/>	
+	</Target>
+
+	<Target Name="CleanOutputFiles" DependsOnTargets="_ResolveOutput;_ResolveExternalTypesPch">
+		<Delete Files="@(CompiledObjs)"/>
+		<Delete Files="@(CompiledResources)"/>
+		<Delete Files="@(CompiledDcus)"/>
+		<Delete Files="@(DCC_HppFiles)"/>
+		<Delete Files="@(PrecompiledHeaderFile)"/>
+		<Delete Files="@(ExternalTypesPch)"/>
+	</Target>
+	
+	<Target Name="CleanLinkOutput" DependsOnTargets="_ResolveOutput">
+		<Delete Files="@(OutputFile)"/>
+		<Delete Condition="'$(ProjectType)'=='CppPackage'" Files="@(PackageLib)"/>
+		<Delete Files="@(ImportLibrary)"
+			Condition="'$(TLibLink)'!='true'"/>
+		<Delete Files="$(ILINK_MapFileName)"
+			Condition="'$(TLibLink)'!='true'"/>
+		<Delete Files="@(ILinkStateFiles)"
+			Condition="'$(TLibLink)'!='true'"/>
+		<Delete Files="@(ILinkSymbolFile)"
+			Condition="'$(TLibLink)'!='true'"/>
+	</Target>
+
+	<!-- 
+		***** Commonly Used Targets *****************************
+		** Invoke specific targets from the command-line using **
+		** MSBuild's /t: switch.                               **
+		*********************************************************
+	-->
+	
+	<Target Name="MakeAll" Outputs="%(BuildConfiguration.Identity)">
+		<MSBuild 
+			Projects="$(MSBuildProjectFullPath)"
+			Properties="Config=%(BuildConfiguration.Identity)"
+			Targets="Make"
+		/>
+	</Target>
+	
+	<Target Name="BuildAll" Outputs="%(BuildConfiguration.Identity)">
+		<MSBuild 
+			Projects="$(MSBuildProjectFullPath)"
+			Properties="Config=%(BuildConfiguration.Identity)"
+			Targets="Build"
+		/>
+	</Target>
+
+	<Target Name="CleanAll" Outputs="%(BuildConfiguration.Identity)">
+		<MSBuild 
+			Projects="$(MSBuildProjectFullPath)"
+			Properties="Config=%(BuildConfiguration.Identity)"
+			Targets="Clean"
+		/>
+	</Target>
+
+	<Target Name="Make" DependsOnTargets="$(MakeDependsOnTargets)"/>
+	<Target Name="MakeOne" DependsOnTargets="$(MakeOneDependsOnTargets)"/>
+	<Target Name="Build" DependsOnTargets="$(BuildDependsOnTargets)"/>
+	<Target Name="Link" DependsOnTargets="$(LinkDependsOnTargets)"/>
+	<Target Name="Clean" DependsOnTargets="$(CleanDependsOnTargets)"/>
+	
+	<Target Name="Default">
+		<CallTarget Targets="Make"/>
+	</Target>
+	
+</Project>

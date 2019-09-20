@@ -131,6 +131,16 @@ begin
 end;
 
 procedure TfrmSKH_Manager_Dlg.bbtCheckClick(Sender: TObject);
+
+  procedure pNot_InUse;
+  begin
+    with lbInUse_Check do begin
+      Caption:= Caption + 'NO';
+      pSet_LabelColor(clGreen);
+      rgRemove_Current.Enabled:= False;
+    end;
+  end;
+  
 var
   sBy,
    sWhere: string;
@@ -143,7 +153,7 @@ begin
   sBy:= '';
   sWhere:= '';
 
-  // The below checks if the typed is a reserved shortcut
+  // The below checks if the typed is a Reserved (fixed | not user configurable) Shortcut
   if fCheck_Reserved then begin
     with lbInUse_Check do
       Caption:= Caption + 'YES';
@@ -171,8 +181,8 @@ begin
              bbtOK.Enabled:= True;
 
            with modDados do
-             if fCheck_Hotkey_Use_App(ShortCutToText(eKeyShort.HotKey),
-                                                     sBy) then begin
+             if fCheck_Shortcut_Use_App(ShortCutToText(eKeyShort.HotKey),
+                                                       sBy) then begin
                rgRemove_Current.Enabled:= True;
                pSet_LabelColor(clRed);
 
@@ -184,15 +194,18 @@ begin
 
                with lbWhere_Check do
                  Caption:= Caption + 'Aplication';
-             end  //if fCheck_Hotkey_Use_App
-             else begin
-               with lbInUse_Check do begin
-                 Caption:= Caption + 'NO';
-                 pSet_LabelColor(clGreen);
-                 rgRemove_Current.Enabled:= False;
-               end;
-             end;
-         end;
+             end
+             else
+               pNot_InUse;
+
+           with frmMain do
+             if fCheck_Hotkey_Use_App(ShortCutToText(eKeyShort.HotKey),
+                                                     sBy) then begin
+
+             end
+             else
+               pNot_InUse;
+         end;  // 0: begin
       1:;
       2:;
     end;  //case ActivePageIndex of

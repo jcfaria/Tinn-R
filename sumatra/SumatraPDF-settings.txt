@@ -57,10 +57,10 @@ RememberOpenedFiles = true
 EnableTeXEnhancements = false
 DefaultDisplayMode = automatic
 DefaultZoom = fit page
-WindowState = 2
+WindowState = 1
 WindowPos = 1718 96 697 738
 ShowToc = true
-SidebarDx = 377
+SidebarDx = 340
 TocDy = 0
 ShowStartPage = true
 UseTabs = true
@@ -72,17 +72,17 @@ FileStates [
 		]
 		IsPinned = false
 		IsMissing = false
-		OpenCount = 1
+		OpenCount = 3
 		UseDefaultState = false
 		DisplayMode = continuous
-		ScrollPos = -1 183
-		PageNo = 4
+		ScrollPos = 36 51
+		PageNo = 124
 		Zoom = 125
 		Rotation = 0
-		WindowState = 2
+		WindowState = 1
 		WindowPos = 1718 96 697 738
 		ShowToc = true
-		SidebarDx = 377
+		SidebarDx = 340
 		DisplayR2L = false
 		ReparseIdx = 0
 		TocState = 16 17 53 88 143 156
@@ -110,7 +110,7 @@ FileStates [
 ]
 SessionData [
 ]
-TimeOfLastUpdateCheck = 30759006 442698568
-OpenCountWeek = 450
+TimeOfLastUpdateCheck = 30764961 -1654696797
+OpenCountWeek = 454
 
 # Settings after this line have not been recognized by the current version

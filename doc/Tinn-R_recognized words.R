@@ -1,15 +1,16 @@
-#! Recognized words for the R Highlight of the Tinn-R
+#. Recognized words for the R Highlight of the Tinn-R
 
-#!..._______________________________
-#!. Topic                     Line
-#!. R sample                    12
-#!. Programing                  41
-#!. Function                    76
-#!. Plotting                  2324
-#!. Datasets                  2532
-#!..._______________________________
+#..._______________________________
+#.. Topic                     Line
+#..._______________________________
+#.. R sample                    12
+#.. Programing                  41
+#.. Function                    76
+#.. Plotting                  2324
+#.. Datasets                  2532
+#..._______________________________
 
-#!. ___R sample___
+#.. ___R sample___
 #. Note_1                                   # Note_1
 #.. Note_2                                  # Note_2
 #... Note_3                                 # Note_3
@@ -38,7 +39,7 @@ cat('\nI - Basics measures:'); cat('\n\n')  # String
 he's isn't we've they'd ('all not string')  # Shorttned forms
 string <- "This is" 'a string'              # String
 
-#!. ___Programing___
+#.. ___Programing___
 break
 class
 do
@@ -73,7 +74,7 @@ warning
 warnings
 while
 
-#!. ___Function___
+#.. ___Function___
 abbreviate
 abline
 abs
@@ -2321,7 +2322,7 @@ zapsmall
 zip
 zip.unpack
 
-#!. ___Plotting___
+#.. ___Plotting___
 a.name
 adj
 all.screens
@@ -2529,7 +2530,7 @@ ylog
 ytop
 zlim
 
-#!. ___Datasets___
+#.. ___Datasets___
 ability.cov
 airmiles
 AirPassengers

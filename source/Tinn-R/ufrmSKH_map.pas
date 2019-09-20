@@ -96,7 +96,8 @@ type
 
   public
     { Public declarations }
-    dlgSKH_Manager : TfrmSKH_Manager_Dlg;
+    dlgSKH_Manager: TfrmSKH_Manager_Dlg;
+
   end;
 
 var
@@ -166,9 +167,9 @@ begin
       sTmp:= ShortcutToText(dlgSKH_Manager.eKeyShort.HotKey);
 
       with modDados do begin
-        fCheck_Hotkey_Use_App(sTmp,
-                              sBy,
-                              True);
+        fCheck_Shortcut_Use_App(sTmp,
+                                sBy,
+                                True);
 
         if bShortcut_InUse then
           ShowMessage('The shortcut associated to [' +

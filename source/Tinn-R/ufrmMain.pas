@@ -2960,12 +2960,15 @@ type
     sParRterm                    : string;
     sReplaceTextHistory          : string;
 
+    function fCheck_Hotkey_Use_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fFindTopWindow: integer;
     function fGetBuildInfo: string;
     function fRgui_Running(bFirstTime: boolean = False): boolean;
     function fRterm_Running: boolean;
+    function fRWorkDir: string;
     function fUseTCPIP: boolean;
     function fValidRRunning: boolean;
+
     procedure DefaultHandler(var message); override;
     procedure pCheckIfFileFromDvi(sFile: string);
     procedure pCheckRterm;
@@ -3000,7 +3003,6 @@ type
     procedure pUpdateCursorPos(Sender: TSynEdit);
     procedure pUpdateHexViewer;
     procedure pUpdateMRU(var miItem: TMenuItem; sFileName: string);
-    function fRWorkDir: string;
 
 end;
 
@@ -26361,6 +26363,42 @@ begin
     //TODO
   end;
 end;
+
+function TfrmMain.fCheck_Hotkey_Use_App(sShortcut: string;
+                                        var sBy: string;
+                                        bShortcut_Clear: boolean = False): boolean;
+begin
+//    case pgHotkeys.TabIndex of
+//      // Send
+//      0: begin
+//           iRow:= strgHK_Send.Row;
+//           if Assigned(ajavHK_S[iRow]) then jvhkHotkey.HotKey:= ajavHK_S[iRow].HotKey
+//                                       else jvhkHotkey.HotKey:= TextToSHortcut('None');
+//         end;
+//
+//      // Control
+//      1: begin
+//           iRow:= strgHK_Control.Row;
+//           if Assigned(ajavHK_C[iRow]) then jvhkHotkey.HotKey:= ajavHK_C[iRow].HotKey
+//                                       else jvhkHotkey.HotKey:= TextToSHortcut('None');
+//         end;
+//
+//      // R Action Custom_1
+//      2: begin
+//           iRow:= strgHK_CU1.Row;
+//           if Assigned(ajavHK_CU1[iRow]) then jvhkHotkey.HotKey:= ajavHK_CU1[iRow].HotKey
+//                                         else jvhkHotkey.HotKey:= TextToSHortcut('None');
+//         end;
+//
+//      // R Action Custom_2
+//      3: begin
+//           iRow:= strgHK_CU2.Row;
+//           if Assigned(ajavHK_CU2[iRow]) then jvhkHotkey.HotKey:= ajavHK_CU2[iRow].HotKey
+//                                         else jvhkHotkey.HotKey:= TextToSHortcut('None');
+//         end;
+//    end;
+end;
+
 
 Initialization
   WM_FINDINSTANCE:= RegisterWindowMessage('Editor: find previous instance');

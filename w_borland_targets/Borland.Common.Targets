@@ -1,0 +1,513 @@
+<!--
+===============================================================================================
+
+	Borland.Common.Targets
+
+	WARNING
+
+	DO NOT MODIFY unless you have made a backup of these files.  Modifying
+	this file unless you have knowledge about MSBuild you could cause problems
+	when loading or building projects in the IDE or building from the
+	command-line.
+
+===============================================================================================
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+
+	<PropertyGroup>
+		<BDSAppDataBaseDir Condition=" '$(BDSAppDataBaseDir)'=='' ">BDS</BDSAppDataBaseDir>
+	</PropertyGroup>
+
+	<Import Project="$(APPDATA)\borland\$(BDSAppDataBaseDir)\5.0\EnvOptions.proj" Condition="Exists('$(APPDATA)\borland\$(BDSAppDataBaseDir)\5.0\EnvOptions.proj')"/>
+
+	<!--
+	========================================================================
+							 Static Properties
+		Override missing properties from user msbuild file with standard
+		build logic.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<ResourceOutput Condition=" '$(ResourceOutput)'=='' ">$(OutputDir)</ResourceOutput>
+		<ExeOutput Condition=" '$(ExeOutput)'=='' ">$(OutputDir)</ExeOutput>
+		<DllOutput Condition=" '$(DllOutput)'=='' ">$(ExeOutput)</DllOutput>
+		<BplOutput Condition=" '$(BplOutput)'=='' ">$(ExeOutput)</BplOutput>
+		<DcuOutput Condition=" '$(DcuOutput)'=='' ">$(OutputDir)</DcuOutput>
+		<DcpOutput Condition=" '$(DcpOutput)'=='' ">$(DcuOutput)</DcpOutput>
+		<HppOutput Condition=" '$(HppOutput)'=='' ">$(DcuOutput)</HppOutput>
+		<ObjOutput Condition=" '$(ObjOutput)'=='' ">$(DcuOutput)</ObjOutput>
+		<BpiOutput Condition=" '$(BpiOutput)'=='' ">$(DcuOutput)</BpiOutput>
+
+		<ProjectOutputExtension Condition=" '$(ProjectOutputExtension)'=='' ">.exe</ProjectOutputExtension>
+
+		<_OutputDRCFiles Condition=" '$(_Locals)'!='' ">true</_OutputDRCFiles>
+		<_OutputDRCFiles Condition=" '$(_OutputDRCFiles)'=='' ">$(OutputDRCFiles)</_OutputDRCFiles>
+		<_OutputDRCFiles Condition=" '$(_OutputDRCFiles)'=='' ">false</_OutputDRCFiles>
+
+		<ProducedFileList>$(OutputDir)$(MsBuildProjectFile).filelist.txt</ProducedFileList>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<UnitPath Include="$(DcuOutput);$(SearchPath)"/>
+		<ResourcePath Include="$(ResourceOutput);$(SearchPath)"/>
+	</ItemGroup>
+
+	<!--
+	========================================================================
+							 Load Options File
+		Load a standard options file the user can define.  This allows
+		users to store common paths and compiler options in a single
+		msbuild project to simplify the building of large projects with
+		many msbuild files.
+	========================================================================
+	-->
+
+	<Import Project="$(GlobalOptionFile)" Condition=" Exists('$(GlobalOptionFile)') "/>
+
+	<!-- Ensure that all output paths have a trailing slash -->
+
+	<PropertyGroup>
+		<ResourceOutput Condition=" '$(ResourceOutput)'!='' and !HasTrailingSlash('$(ResourceOutput)') ">$(ResourceOutput)\</ResourceOutput>
+		<ExeOutput Condition=" '$(ExeOutput)'!='' and !HasTrailingSlash('$(ExeOutput)') ">$(ExeOutput)\</ExeOutput>
+		<BplOutput Condition=" '$(BplOutput)'!='' and !HasTrailingSlash('$(BplOutput)') ">$(BplOutput)\</BplOutput>
+		<DllOutput Condition=" '$(DllOutput)'!='' and !HasTrailingSlash('$(DllOutput)') ">$(DllOutput)\</DllOutput>
+		<DcuOutput Condition=" '$(DcuOutput)'!='' and !HasTrailingSlash('$(DcuOutput)') ">$(DcuOutput)\</DcuOutput>
+		<DcpOutput Condition=" '$(DcpOutput)'!='' and !HasTrailingSlash('$(DcpOutput)') ">$(DcpOutput)\</DcpOutput>
+		<HppOutput Condition=" '$(HppOutput)'!='' and !HasTrailingSlash('$(HppOutput)') ">$(HppOutput)\</HppOutput>
+		<ObjOutput Condition=" '$(ObjOutput)'!='' and !HasTrailingSlash('$(ObjOutput)') ">$(ObjOutput)\</ObjOutput>
+		<BpiOutput Condition=" '$(BpiOutput)'!='' and !HasTrailingSlash('$(CpiOutput)') ">$(BpiOutput)\</BpiOutput>
+	</PropertyGroup>
+
+	<!--
+	========================================================================
+							 CoreBuild
+		Calls build events in order to prepare and clean up after each
+		build.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<BuildDependsOn>
+			BeforeBuild;
+			CoreBuild;
+			AfterBuild
+		</BuildDependsOn>
+
+		<CoreBuildDependsOn>
+			CreateDirectories;
+			ValidateOptions;
+			PreBuildEvent;
+			ResolveFiles;
+			ResourceBuild;
+			$(_PreCompileTargets);
+			CoreCompile;
+			$(_PostCompileTargets);
+			IntermediateClean;
+			PostBuildEvent
+		</CoreBuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="default" DependsOnTargets="Build"/>
+
+	<Target Name="Build" DependsOnTargets="$(BuildDependsOn)"/>
+	
+	<Target Name="CoreBuild" DependsOnTargets="$(CoreBuildDependsOn)"/>
+
+	<!--
+	========================================================================
+							 ReBuild
+		Cleans intermediates and final outputs then rebuilds project.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<ReBuildDependsOn>
+			ResolveFiles;
+			Clean;
+			Build
+		</ReBuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="ReBuild" DependsOnTargets="$(ReBuildDependsOn)"/>
+
+	<!--
+	========================================================================
+							 PreBuildEvent
+		Execute command line prebuild event if specified by the user.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<PreBuildEventDependsOn>
+		</PreBuildEventDependsOn>
+	</PropertyGroup>
+
+	<Target Name="PreBuildEvent" 
+		Condition=" '$(PreBuildEvent)'!='' And '$(KibitzCompile)'==''"
+		DependsOnTargets="$(PreBuildEventDependsOn)">
+		<Exec Command="$(PreBuildEvent)" IgnoreExitCode="$(PreBuildEventIgnoreExitCode)" WorkingDirectory="$(OutDir)"/>
+	</Target>
+
+	<!--
+	========================================================================
+							 PostBuildEvent
+    	Execute command line postbuild event if specified by the user.
+	========================================================================
+	-->
+	
+	<Target Name="_PreOutputTimeStamp">
+		<CreateItem Include="%(OutputFile.ModifiedTime)">
+			<Output TaskParameter="Include" PropertyName="PreOutputTimeStamp"/>
+		</CreateItem>
+	</Target>
+	
+  <Target Name="_PostOutputTimeStamp">
+		<CreateItem Include="%(OutputFile.ModifiedTime)">
+			<Output TaskParameter="Include" PropertyName="PostOutputTimeStamp"/>
+		</CreateItem>
+	</Target>
+
+
+	<PropertyGroup>
+		<PostBuildEventDependsOn>
+		</PostBuildEventDependsOn>
+	</PropertyGroup>
+
+	<Target Name="PostBuildEvent" 
+		Condition=" '$(PostBuildEvent)'!=''  And '$(KibitzCompile)'==''
+			and ( '$(RunPostBuildEvent)'=='Always' or '$(RunPostBuildEvent)'=='' or '$(PreOutputTimeStamp)'!='$(PostOutputTimeStamp)' )"
+		DependsOnTargets="$(PostBuildEventDependsOn)">
+		<Exec Command="$(PostBuildEvent)"  IgnoreExitCode="$(PostBuildEventIgnoreExitCode)" WorkingDirectory="$(OutDir)"/>
+	</Target>
+
+	<!--
+	========================================================================
+							 BeforeBuild
+		Perform user tasks before the build when BeforeBuild is overridden
+		by the user.
+	========================================================================
+	-->
+
+	<Target Name="BeforeBuild"/>
+
+	<!--
+	========================================================================
+							 AfterBuild
+		Perform user tasks after the build when BeforeBuild is overridden
+		by the user.
+	========================================================================
+	-->
+
+	<Target Name="AfterBuild"/>
+
+	<!--
+	========================================================================
+							 CreateDirectories
+		Create directories required to build the projects.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<CreateDirectoriesDependsOn>
+			CreateProjectDirectories;
+			CreateLocalDirectories
+		</CreateDirectoriesDependsOn>
+	</PropertyGroup>
+
+	<Target Name="CreateDirectories" DependsOnTargets="$(CreateDirectoriesDependsOn)"/>
+
+	<Target Name="CreateProjectDirectories">
+		<MakeDir Directories="
+        	@(_DirectoryList)
+		"/>
+	</Target>
+
+	<Target Name="CreateLocalDirectories"/>
+
+	<!--
+	========================================================================
+							 ResolveFiles
+		Resolve source files passed in both the compile itemgroup and
+		reference itemgroup to allow the targets to determind what to
+		do with them.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<ResolveFilesDependsOn>
+			ResolveSources;
+			ResolveResources;
+			ResolveLocalResources;
+			ResolvePaths;
+			ResolveOutputs
+		</ResolveFilesDependsOn>
+	</PropertyGroup>
+
+	<Target Name="ResolveFiles" DependsOnTargets="$(ResolveFilesDependsOn)"/>
+
+	<!-- Add Paths to searchpath for resources and units not in the project directory -->
+	<Target Name="ResolvePaths">
+		<RemoveDuplicates Inputs="@(Compile->'%(RelativeDir)')"
+					Condition="( ( '%(EXTENSION)'=='.dfm' or '%(EXTENSION)'=='.nfm' ) And '%(RelativeDir)'!='' ) ">
+			<Output	TaskParameter="Filtered" ItemName="ResourcePath"/>
+		</RemoveDuplicates>
+
+		<RemoveDuplicates Inputs="@(Compile->'%(RelativeDir)')"
+					Condition="( '%(EXTENSION)'=='.pas' And '%(RelativeDir)'!='' ) ">
+			<Output	TaskParameter="Filtered" ItemName="UnitPath"/>
+		</RemoveDuplicates>
+	</Target>
+
+	<Target Name="ResolveResources">
+		<!-- Source File Resolution -->
+		<CreateItem Include="@(EmbeddedResource)"
+					Condition="( '%(EXTENSION)'=='.rc' ) "
+					AdditionalMetadata="TargetExtension=%(EmbeddedResource.TargetExtension)">
+			<Output	TaskParameter="Include" ItemName="_RCFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(EmbeddedResource)"
+					Condition=" '%(EXTENSION)'=='.dfm' or '%(EXTENSION)'=='.nfm' ">
+			<Output	TaskParameter="Include" ItemName="_Forms"/>
+		</CreateItem>
+
+		<!-- Output Resolution -->
+		<CreateItem Include="@(EmbeddedResource->'$(ResourceOutput)\%(Filename)%(TargetExtension)')"
+					Condition="( '%(EXTENSION)'=='.rc' ) "
+					AdditionalMetadata="TargetExtension=%(EmbeddedResource.TargetExtension)">
+			<Output	TaskParameter="Include" ItemName="_ResourceFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(EmbeddedResource)"
+					Condition="( '%(EXTENSION)'=='.res' ) ">
+			<Output	TaskParameter="Include" ItemName="_ResourceFiles"/>
+		</CreateItem>
+	</Target>
+
+	<Target Name="ResolveSources">
+		<!-- Source File Resolution -->
+		<CreateItem Include="@(Reference)"
+					Condition="( '%(EXTENSION)'=='.pas' ) ">
+			<Output	TaskParameter="Include" ItemName="_PasFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(DelphiCompile->'$(MSBuildProjectDirectory)\%(Filename)%(Extension)')">
+			<Output	TaskParameter="Include" ItemName="_ProjectFiles"/>
+		</CreateItem>
+
+		<CreateProperty Value="%(_ProjectFiles.Filename)">
+			<Output	TaskParameter="Value" PropertyName="_ProjectName"/>
+		</CreateProperty>
+	</Target>
+
+	<Target Name="ResolveLocalResources"/>
+
+	<Target Name="ResolveOutputs">
+		<CreateItem Include="@(_ProjectFiles->'$(BplOutput)%(Filename)$(LibSuffix).bpl')"
+					Condition="( '%(EXTENSION)'=='.dpk' Or
+								 '%(EXTENSION)'=='.dpkw' ) ">
+			<Output	TaskParameter="Include" ItemName="_OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ProjectFiles->'$(ExeOutput)%(Filename)$(ProjectOutputExtension)')"
+					Condition="( '%(EXTENSION)'=='.dpr' ) ">
+			<Output	TaskParameter="Include" ItemName="_OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_PasFiles->'$(DcuOutput)%(Filename).dcu')"
+					Condition=" '$(DependencyCheckUnits)'!='' ">
+			<Output	TaskParameter="Include" ItemName="_OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_PasFiles->'$(DcuOutput)%(Filename).dcu')"
+					Condition=" '$(DependencyCheckUnits)'=='' ">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ProjectFiles->'$(DcuOutput)%(Filename).dcu')">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+
+		<CreateItem Include="@(_ResourceFiles)"
+					Condition=" '$(DependencyCheckUnits)'=='' ">
+			<Output	TaskParameter="Include" ItemName="__OutputFiles"/>
+		</CreateItem>
+	</Target>
+
+	<!--
+	========================================================================
+							 ValidateOptions
+		Validate the options and paths passed in from the user msbuild
+		file.  Throws appropriate warnings and errors to indicate
+		options which are invalid or may potentially cause the project
+		to fail, such as missing paths.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<ValidateOptionsDependsOn>
+			ValidateGlobalOptions;
+			ValidateSources;
+			ValidateLocalResources;
+			ValidatePaths
+		</ValidateOptionsDependsOn>
+	</PropertyGroup>
+
+	<Target Name="ValidateOptions"
+		DependsOnTargets="$(ValidateOptionsDependsOn)"
+		Condition=" '$(SkipValidateOptions)'=='' "/>
+
+	<Target Name="ValidatePaths"
+		Condition=" '@(UnitPath)'!='' or '@(ResourcePath)'!='' or '@(IncludePath)'!='' or '@(ObjPath)'!='' ">
+		<Warning Condition=" '@(UnitPath)'!='' and !Exists('%(UnitPath.Identity)') "
+			Text="Path '%(UnitPath.Identity)' in the UnitPath ItemGroup does not exist, you could be missing referenced pas or dcu files."/>
+		<Warning Condition=" '@(ResourcePath)'!='' and !Exists('%(ResourcePath.Identity)') "
+			Text="Path '%(ResourcePath.Identity)' in the ResourcePath ItemGroup does not exist, you could be missing referenced resource files."/>
+		<Warning Condition=" '@(IncludePath)'!='' and !Exists('%(IncludePath.Identity)') "
+			Text="Path '%(IncludePath.Identity)' in the IncludePath ItemGroup does not exist."/>
+		<Warning Condition=" '@(ObjPath)'!='' and !Exists('%(ObjPath.Identity)') "
+			Text="Path '%(ObjPath.Identity)' in the ObjPath ItemGroup does not exist, you could be missing referenced object files."/>
+	</Target>
+
+	<Target Name="ValidateGlobalOptions" Condition=" '$(GlobalOptionFile)'!='' ">
+		<Warning Condition=" !Exists('$(GlobalOptionFile)') "
+			Text="Globals options file cannot be found.  Build may fail or results may be incorrect."/>
+	</Target>
+
+	<Target Name="ValidateSources" Condition=" '$(ValidateSource)'!='' ">
+		<Warning Condition=" !Exists('%(Reference.Identity)') "
+			Text="Referenced file %(Reference.Identity) cannot be found."/>
+		<Error Condition=" '%(EmbeddedResource.Extension)'=='.rc' And '%(EmbeddedResource.TargetExtension)'=='' "
+			Text="Win32 resource file requires TargetExtension metadata for file %(EmbeddedResource.Identity)"/>
+		<Error Condition=" !Exists('%(Compile.Identity)') "
+			Text="Source file %(Compile.Identity) cannot be found."/>
+		<Error Condition=" !Exists('%(EmbeddedResource.Identity)') "
+			Text="Embedded resource file %(EmbeddedResource.Identity) cannot be found."/>
+	</Target>
+
+	<Target Name="ValidateLocalResources" Condition=" '$(_Locals)'!='' "/>
+
+	<!--
+	========================================================================
+							 ResourceBuild
+		Resolve non-standard resource dependencies and build resources
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<ResourceBuildDependsOn>
+			Win32ResourceDependencies;
+			BuildWin32Resources
+		</ResourceBuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="ResourceBuild" DependsOnTargets="$(ResourceBuildDependsOn)"/>
+
+	<Target Name="Win32ResourceDependencies" Condition=" '@(_RCFiles)'!='' ">
+		<GetResourceDependencies Files="@(_RCFiles)">
+			<Output TaskParameter="Dependencies" ItemName="_RCDependencies"/>
+		</GetResourceDependencies>
+	</Target>
+
+	<Target Name="BuildWin32Resources" Condition=" '@(_RCFiles)'!='' "
+		Inputs="@(_RCFiles);%(_RCDependencies.Dependencies)"
+		Outputs="@(_ResourceFiles)">
+    		<BuildDelphiResources Files="@(_RCFiles)" OutputDir="$(ResourceOutput)"/>
+	</Target>
+
+	<!--
+	========================================================================
+							 Clean
+		Cleans intermediates and final outputs.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<CleanDependsOn>
+        	ResolveFiles;
+			CleanOutputs;
+			CleanResources
+		</CleanDependsOn>
+	</PropertyGroup>
+
+	<Target Name="Clean" DependsOnTargets="$(CleanDependsOn)"/>
+
+	<Target Name="CleanReadFiles">
+		<ReadLinesFromFile File="$(ProducedFileList)">
+			<Output TaskParameter="Lines" ItemName="_DeleteFiles"/>
+		</ReadLinesFromFile>
+	</Target>
+
+	<Target Name="CleanOutputs" DependsOnTargets="CleanReadFiles">
+		<Delete Files="
+			@(_OutputFiles);
+			@(__OutputFiles);
+			@(_DeleteFiles);
+			$(ProducedFileList)
+		"/>
+	</Target>
+
+	<Target Name="CleanResources">
+		<Delete Files="
+			@(_ResourceFiles);
+			@(_LocalizedResources)
+		"/>
+	</Target>
+
+	<!--
+	========================================================================
+							 IntermediateClean
+		Cleans files produced in previous builds but not produces
+		in the current build.
+	========================================================================
+	-->
+
+	<PropertyGroup>
+		<IntermediateCleanDependsOn>
+			CleanOrphans;
+			WriteFileList
+		</IntermediateCleanDependsOn>
+	</PropertyGroup>
+
+	<Target Name="IntermediateClean" DependsOnTargets="$(IntermediateCleanDependsOn)"/>
+
+	<Target Name="GenerateIntermediateCleanLists">
+ 		<ReadLinesFromFile File="$(ProducedFileList)">
+			<Output TaskParameter="Lines" ItemName="_OldFiles"/>
+		</ReadLinesFromFile>
+
+		<CreateItem Include="@(_OldFiles)" Exclude="@(_OutputFiles);@(__OutputFiles)">
+			<Output TaskParameter="Include" ItemName="_CleanOrphans"/>
+		</CreateItem>
+	</Target>
+
+	<Target Name="CleanOrphans" Condition=" Exists('$(ProducedFileList)')"
+		DependsOnTargets="GenerateIntermediateCleanLists">
+
+		<FindUnderPath Path="$(ExeOutput)" Files="@(_CleanOrphans)">
+			<Output TaskParameter="InPath" ItemName="_CleanOrphans"/>
+		</FindUnderPath>
+
+		<FindUnderPath Path="$(DcuOutput)" Files="@(_CleanOrphans)">
+			<Output TaskParameter="InPath" ItemName="_CleanOrphans"/>
+		</FindUnderPath>
+
+		<FindUnderPath Path="$(ResourceOutput)" Files="@(_CleanOrphans)">
+			<Output TaskParameter="InPath" ItemName="_CleanOrphans"/>
+		</FindUnderPath>
+
+		<Delete Files="@(_CleanOrphans)"/>
+	</Target>
+
+	<Target Name="WriteFileList">
+		<WriteLinesToFile
+			File="$(ProducedFileList)"
+			OverWrite="true"
+			Lines="@(_OutputFiles);@(__OutputFiles)
+		"/>
+	</Target>
+
+</Project>

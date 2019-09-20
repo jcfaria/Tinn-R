@@ -130,7 +130,7 @@ type
 
     function fActionlist_To_Dataset: boolean;
     function fLoad_FileState(sFile: string; var sMarks: string; var iTopLine: integer; var iCaretX: integer; var iCaretY: integer): boolean;
-    function fCheck_Hotkey_Use_App(sHotkey: string; var sBy: string; bHotkey_Clear: boolean = False): boolean;
+    function fCheck_Shortcut_Use_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fRmirrors_Update(sFile: string): boolean;
     function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
 
@@ -183,7 +183,9 @@ begin
   end;
 end;
 
-function TmodDados.fCheck_Hotkey_Use_App(sHotkey: string; var sBy: string; bHotkey_Clear: boolean = False): boolean;
+function TmodDados.fCheck_Shortcut_Use_App(sShortcut: string;
+                                           var sBy: string;
+                                           bShortcut_Clear: boolean = False): boolean;
 var
   pTmp:  pointer;
 
@@ -203,7 +205,7 @@ begin
            if bFiltered then
              Filtered:= False;
 
-           sTmp:= StringReplace(sHotkey,
+           sTmp:= StringReplace(sShortcut,
                                 ' ',
                                 '',
                                 [rfReplaceAll]);
@@ -219,7 +221,7 @@ begin
                    ' | ' +
                    FieldValues['Hint'];
 
-             if bHotkey_Clear then begin
+             if bShortcut_Clear then begin
                 Edit;
                 FieldByName('Shortcut').Value:= '';
                 Post;
@@ -239,10 +241,10 @@ begin
 end;
 
 function TmodDados.fSave_FileState(sFile,
-                                   sMarks: string;
+                                    sMarks: string;
                                    iTopLine,
-                                   iCaretX,
-                                   iCaretY: integer): boolean;
+                                    iCaretX,
+                                    iCaretY: integer): boolean;
 begin
   try
     with cdCache do begin

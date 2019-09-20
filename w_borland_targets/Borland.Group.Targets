@@ -1,0 +1,64 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<UsingTask TaskName="FindItem" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+	<UsingTask TaskName="GatherDependencies" AssemblyFile="$(BDS)\bin\Borland.Build.Tasks.Shared.dll"/>
+
+	<Target Name="_ResolveProject">
+		<Error 
+			Condition="!Exists('$(ProjectFilename)')"
+			Text="Project '$(ProjectFilename)' not found."/>
+		<FindItem
+			Condition="'$(ProjectFilename)'!=''"
+			Filename="$(ProjectFilename)"
+			In="@(Projects)">
+			<Output 
+				TaskParameter="Item"
+				ItemName="ProjectFile"
+			/>
+		</FindItem>			
+	</Target>
+	
+	<Target Name="_ResolveDependencies" DependsOnTargets="_ResolveProject">
+		<GatherDependencies
+			Condition="'@(ProjectFile)'!=''"
+			InProject="@(ProjectFile)"
+			AllProjects="@(Projects)"
+		>
+			<Output
+				TaskParameter="Dependencies"
+				ItemName="ProjectDependencies"
+			/>
+		</GatherDependencies>
+	</Target>
+	
+	<Target Name="ProjectTarget" DependsOnTargets="_ResolveDependencies">
+		<Message Text="@(ProjectDependencies);@(ProjectFile)"/>
+		<MSBuild
+			Projects="@(ProjectDependencies);@(ProjectFile)"
+			Targets="$(ProjectTarget)"
+		/>
+	</Target>
+	
+	<Target Name="MakeAll">
+		<MSBuild
+			Projects="@(Projects)"
+			Targets="MakeAll"
+		/>		
+	</Target>
+
+	<Target Name="BuildAll">
+		<MSBuild
+			Projects="@(Projects)"
+			Targets="BuildAll"
+		/>		
+	</Target>
+
+	<Target Name="CleanAll">
+		<MSBuild
+			Projects="@(Projects)"
+			Targets="CleanAll"
+		/>		
+	</Target>
+
+	
+</Project>

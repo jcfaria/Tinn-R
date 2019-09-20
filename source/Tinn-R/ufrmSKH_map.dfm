@@ -440,6 +440,12 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Width = 60
         Height = 27
         Caption = 'Manager'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clTeal
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 6
         OnClick = bbtShortcuts_ManagerClick
       end
@@ -515,6 +521,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label20: TLabel
         Left = 0
         Top = 454
@@ -582,6 +592,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object GroupBox2: TGroupBox
         Left = 0
         Top = 0
@@ -760,6 +774,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsSend_Control: TTabSheet
           Caption = 'Send/Control'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object strgHK_Send: TStringGrid
             Left = 0
             Top = 0
@@ -790,6 +808,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsCustom: TTabSheet
           Caption = 'Custom'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object strgHK_CU: TStringGrid
             Left = 0
             Top = 0
