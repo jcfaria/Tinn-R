@@ -179,7 +179,7 @@ uses
   SynMacroRecorder, TB2Item, TB2Dock, TB2Toolbar, Httpapp,
   SynEditKeyCmds, FileCtrl, SynExportHTML, SynEditExport, SynExportRTF,
   SynExportTeX, AppEvnts, ShellAPI, FindFile,
-  ufrmHotKeys, trRHistory, trSendSmart,
+  trRHistory, trSendSmart,
   ShellCtrls, TB2MDI, TB2ExtItems, TB2MRU, TB2ToolWindow,
   Grids, DBGrids, DBCtrls,
   ScktComp, commctrl, AbArcTyp, AbUtils, AbZipper,
@@ -888,7 +888,6 @@ type
     menR: TMenuItem;
     menRget_Info: TMenuItem;
     menRguiStartClose: TMenuItem;
-    menRHotKeys: TMenuItem;
     menRmirrors_update: TMenuItem;
     menRPackages: TMenuItem;
     menRPackagesInstall: TMenuItem;
@@ -1233,7 +1232,6 @@ type
     N147: TMenuItem;
     N148: TMenuItem;
     N149: TMenuItem;
-    N15: TMenuItem;
     N150: TMenuItem;
     N151: TMenuItem;
     N152: TMenuItem;
@@ -1991,6 +1989,7 @@ type
     Clear1: TMenuItem;
     actLatexClearWaste: TAction;
     TBItem68: TTBItem;
+    actSKH_map: TAction;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2403,9 +2402,7 @@ type
     procedure menHelSecretsClick(Sender: TObject);
     procedure menHelUserGuideClick(Sender: TObject);
     procedure menHelUserListClick(Sender: TObject);
-    procedure menOptionsShortcutsClick(Sender: TObject);
     procedure menRget_InfoClick(Sender: TObject);
-    procedure menRHotKeysClick(Sender: TObject);
     procedure menRServerClick(Sender: TObject);
     procedure menRSet_trPathsClick(Sender: TObject);
     procedure menRtermHistoryNextClick(Sender: TObject);
@@ -2538,8 +2535,8 @@ type
     procedure pmemRResSendSmartClick(Sender: TObject);
     procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
-    procedure menSKHClick(Sender: TObject);
     procedure actLatexClearWasteExecute(Sender: TObject);
+    procedure actSKH_mapExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2594,7 +2591,6 @@ type
     bUpdate_Rcard                  : boolean;
     bUpdate_Rmirrors               : boolean;
     bUpdate_Shortcuts              : boolean;
-    hkTinnR                        : TfrmHotKeys;
     iCols                          : integer;
     ifEditor                       : TIniFile;
     ifEditor_Tmp                   : TIniFile;
@@ -2827,12 +2823,10 @@ type
 
   public
     { Public declarations }
-    ajavHK_S                     : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Send
-    ajavHK_C                     : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Control
-    ajavHK_CU1                   : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Custom_1
-    ajavHK_CU2                   : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Custom_2
-    aR_CU1                       : array[1..10] of string;                // R Action Custom_1
-    aR_CU2                       : array[1..10] of string;                // R Action Custom_2
+    ajavHK_Send                  : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Send
+    ajavHK_Control               : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Control
+    ajavHK_Custom                : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Custom
+    aR_Custom                    : array[1..10] of string;                // R Action Custom
     bActiveLine                  : boolean;
     bAllNames                    : boolean;
     bBOM                         : boolean;
@@ -2994,6 +2988,7 @@ type
     procedure pSetFileSize_StatusBar(sFileName: string);
     procedure pSetFocus_Main;
     procedure pSetFocus_Rgui(iDelay: integer);
+    procedure pSetHotkeys(bStatus: boolean);
     procedure pSetPathRgui;
     procedure pSetPathRTerm;
     procedure pSetSyntaxComboBox(sSynName: string);
@@ -3119,7 +3114,7 @@ begin
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.02.02.00';
-  sCurrentVersion_Shortcuts := '5.03.05.00';
+  sCurrentVersion_Shortcuts := '5.04.00.00';
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -4150,37 +4145,25 @@ begin
   for i:= 1 to 10 do
     ifTinn_Tmp.WriteString('R Hotkeys Send',
                            'RHK' + IntToStr(i),
-                           hkTinnR.strgHK_Send.Cells[1, i]);
+                           dlgSKH_Map.strgHK_Send.Cells[1, i]);
 
   // Control
   for i:= 1 to 10 do
     ifTinn_Tmp.WriteString('R Hotkeys Control',
                            'RHK' + IntToStr(i),
-                           hkTinnR.strgHK_Control.Cells[1, i]);
+                           dlgSKH_Map.strgHK_Control.Cells[1, i]);
 
-  // R Action Custom_1
+  // R Action Custom
   for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Action Custom_1',
+    ifTinn_Tmp.WriteString('R Action Custom',
                            'RAC' + IntToStr(i),
-                           hkTinnR.strgHK_CU1.Cells[0, i]);
+                           dlgSKH_Map.strgHK_Custom.Cells[0, i]);
 
-  // R Action Custom_1 Hotkeys
+  // R Action Custom Hotkeys
   for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Hotkeys Custom_1',
+    ifTinn_Tmp.WriteString('R Hotkeys Custom',
                            'RHKC' + IntToStr(i),
-                           hkTinnR.strgHK_CU1.Cells[1, i]);
-
-  // R Action Custom_2
-  for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Action Custom_2',
-                           'RAC' + IntToStr(i),
-                           hkTinnR.strgHK_CU2.Cells[0, i]);
-
-  // R Action Custom_2 Hotkeys
-  for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Hotkeys Custom_2',
-                           'RHKC' + IntToStr(i),
-                           hkTinnR.strgHK_CU2.Cells[1, i]);
+                           dlgSKH_Map.strgHK_Custom.Cells[1, i]);
 end;
 
 procedure TfrmMain.pSaveNewIni_Editor;
@@ -4719,40 +4702,28 @@ begin
   for i:= 1 to 10 do
     ifTinn.WriteString('R Hotkeys Send',
                        'RHK' + IntToStr(i),
-                       hkTinnR.strgHK_Send.Cells[1, i]);
+                       dlgSKH_Map.strgHK_Send.Cells[1, i]);
 
   // Control
   for i:= 1 to 10 do
     ifTinn.WriteString('R Hotkeys Control',
                        'RHK' + IntToStr(i),
-                       hkTinnR.strgHK_Control.Cells[1, i]);
+                       dlgSKH_Map.strgHK_Control.Cells[1, i]);
 
-  // R Action Custom_1
+  // R Action Custom
   for i:= 1 to 10 do
-    ifTinn.WriteString('R Action Custom_1',
+    ifTinn.WriteString('R Action Custom',
                        'RAC' + IntToStr(i),
-                       hkTinnR.strgHK_CU1.Cells[0, i]);
+                       dlgSKH_Map.strgHK_Custom.Cells[0, i]);
 
-  // R Action Custom_1 Hotkeys
+  // R Action Custom Hotkeys
   for i:= 1 to 10 do
-    ifTinn.WriteString('R Hotkeys Custom_1',
+    ifTinn.WriteString('R Hotkeys Custom',
                        'RHKC' + IntToStr(i),
-                       hkTinnR.strgHK_CU1.Cells[1, i]);
-
-  // R Action Custom_2
-  for i:= 1 to 10 do
-    ifTinn.WriteString('R Action Custom_2',
-                       'RAC' + IntToStr(i),
-                       hkTinnR.strgHK_CU2.Cells[0, i]);
-
-  // R Action Custom_2 Hotkeys
-  for i:= 1 to 10 do
-    ifTinn.WriteString('R Hotkeys Custom_2',
-                       'RHKC' + IntToStr(i),
-                       hkTinnR.strgHK_CU2.Cells[1, i]);
+                       dlgSKH_Map.strgHK_Custom.Cells[1, i]);
 
   if not bMakingBackup then begin
-    if Assigned(hkTinnR) then FreeAndNil(hkTinnR);
+    if Assigned(dlgSKH_Map) then FreeAndNil(dlgSKH_Map);
     if Assigned(ifTinn) then FreeAndNil(ifTinn);
   end;
 end;
@@ -5173,7 +5144,7 @@ begin
   bAllNames              := ifTinn.ReadBool('App', 'bAllNames', True);
   bConnectionBeepOnError := ifTinn.ReadBool('App', 'bConnectionBeepOnError', True);
   bDataCompletionAnywhere:= ifTinn.ReadBool('App', 'bDataCompletionAnywhere', True);
-  bHotKeys_On            := ifTinn.ReadBool('App', 'bHotKeys_On', True);
+  bHotKeys_On            := ifTinn.ReadBool('App', 'bHotKeys_On', False);
   bOrganizeAutomatically := ifTinn.ReadBool('App', 'bOrganizeAutomatically', False);
 
   // There is still some 32 bit computer in use today!
@@ -5422,7 +5393,7 @@ begin
 
   tbKnitr.Visible:= bRKnitr;
 
-  hkTinnR:= TfrmHotKeys.Create(Self);
+  dlgSKH_Map:= TfrmSKH_Map_Dlg.Create(Self);
 
   // Pandoc history
   slPandocHistory:= TStringList.Create;
@@ -11500,6 +11471,19 @@ begin
   pOnTop(Application.Handle);
 end;
 
+procedure TfrmMain.pSetHotkeys(bStatus: boolean);
+var
+  i: integer;
+
+begin
+  for i:= 1 to 10 do
+    with frmMain do begin
+      if Assigned(ajavHK_Send[i])    then ajavHK_Send[i].Active   := bStatus;
+      if Assigned(ajavHK_Control[i]) then ajavHK_Control[i].Active:= bStatus;
+      if Assigned(ajavHK_Custom[i])  then ajavHK_Custom[i].Active := bStatus;
+    end;
+end;
+
 procedure TfrmMain.pSetFocus_Rgui(iDelay: integer);
 begin
   Sleep(iDelay);
@@ -11565,12 +11549,6 @@ end;
 procedure TfrmMain.menRget_InfoClick(Sender: TObject);
 begin
   pR_Info;
-end;
-
-procedure TfrmMain.menRHotKeysClick(Sender: TObject);
-begin
-  hkTinnR.ShowModal;
-  pSetFocus_Main;
 end;
 
 procedure TfrmMain.actEditorLineWrapExecute(Sender: TObject);
@@ -13793,11 +13771,6 @@ begin
   pOpenHelpFile('\doc\Tinn-R_recognized words.R');
 end;
 
-procedure TfrmMain.menOptionsShortcutsClick(Sender: TObject);
-begin
-  //actShortcutsEditExecute(nil);
-end;
-
 procedure TfrmMain.actTobMiscVisibleExecute(Sender: TObject);
 begin
   tobMisc.Visible          := not(tobMisc.Visible);
@@ -14496,6 +14469,61 @@ begin
   end;
 end;
 
+procedure TfrmMain.actSKH_mapExecute(Sender: TObject);
+var
+  pTmp: pointer;
+
+begin
+  // Related to Shortcuts
+  with modDados.cdShortcuts do
+    pTmp:= GetBookmark;
+
+  try
+    // Initial status
+    with dlgSKH_Map do begin
+      pgSH.ActivePage:= tbsAppShortcuts;
+      pgRH.ActivePage:= tbsRH_Send;
+    end;
+
+    // If OK
+    if (dlgSKH_Map.ShowModal = mrOK) then begin
+      bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
+      pSetHotkeys(bHotKeys_On);
+
+      with modDados.cdShortcuts do begin
+        Edit;
+        try
+          Post;
+          MergeChangeLog;
+          SaveToFile();
+          frmMain.iShortcutsBeforeChanges:= SavePoint;
+        except
+          //TODO
+        end;
+      end;
+
+      with modDados.cdShortcuts do
+        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
+
+      pDatasetToActionList;
+      pSetFocus_Main;
+    end // if (dlgSH_Map.ShowModal = mrOK)
+    // else
+    else begin
+      with modDados do begin
+        cdShortcuts.SavePoint:= iShortcutsBeforeChanges;
+        cdShortcutsAfterScroll(nil);
+      end;
+    end;
+
+  finally
+    with modDados.cdShortcuts do begin
+      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
+      FreeBookmark(pTmp);
+    end;
+  end;
+end;
+
 procedure TfrmMain.pWMSysCommand;
 begin
   inherited;
@@ -14879,11 +14907,6 @@ begin
                             #0,
                             nil);
   end;
-end;
-
-procedure TfrmMain.menSKHClick(Sender: TObject);
-begin
-  actShortcutsEditExecute(Self);
 end;
 
 procedure TfrmMain.lvRexplorerDblClick(Sender: TObject);
@@ -19544,7 +19567,7 @@ end;
 
 procedure TfrmMain.menToolsDatabaseShortcutsClick(Sender: TObject);
 begin
-  actShortcutsEditExecute(nil);
+  actSKH_mapExecute(nil);
 end;
 
 procedure TfrmMain.menToolsConversionPandocClick(Sender: TObject);
@@ -20511,75 +20534,8 @@ begin
 end;
 
 procedure TfrmMain.actShortcutsEditExecute(Sender: TObject);
-var
-  pTmp: pointer;
-
-  bHotkeys_Status: boolean;
-
 begin
-  bHotkeys_Status:= False;
-
-  // Related to Shortcuts
-  with modDados.cdShortcuts do
-    pTmp:= GetBookmark;
-
-  try
-    dlgSKH_Map:= TfrmSKH_Map_Dlg.Create(Self);
-
-    // Initial status
-    with dlgSKH_Map do begin
-      pgSH.ActivePage:= tbsAppShortcuts;
-      pgRhotkeys.ActivePage:= tbsSend_Control;
-    end;
-
-    // Stores the status of the Hotkeys and turn all off
-    bHotkeys_Status:= bHotKeys_On;
-    if bHotKeys_On then begin
-      bHotKeys_On:= False;
-      with frmHotkeys do
-        pSetHotkeys(False);
-    end;
-
-    // If OK
-    if (dlgSKH_Map.ShowModal = mrOK) then begin
-      with modDados.cdShortcuts do begin
-        Edit;
-        try
-          Post;
-          MergeChangeLog;
-          SaveToFile();
-          frmMain.iShortcutsBeforeChanges:= SavePoint;
-        except
-          //TODO
-        end;
-      end;
-
-      with modDados.cdShortcuts do
-        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
-      pDatasetToActionList;
-      pSetFocus_Main;
-    end // if (dlgSH_Map.ShowModal = mrOK)
-    // Else
-    else begin
-      with modDados do begin
-        cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
-        cdShortcutsAfterScroll(nil);
-      end;
-    end;
-
-  finally
-    with modDados.cdShortcuts do begin
-      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
-      FreeBookmark(pTmp);
-    end;
-
-    FreeAndNil(dlgSKH_Map);
-
-    // Restore the Hotkeys status
-    bHotKeys_On:= bHotkeys_Status;
-    with frmHotkeys do
-      pSetHotkeys(bHotKeys_On);
-  end;
+  actSKH_mapExecute(nil);
 end;
 
 procedure TfrmMain.actShortcutsHelpExecute(Sender: TObject);
@@ -23109,8 +23065,7 @@ begin
 
      6: begin
           bHotKeys_On:= not bHotKeys_On;
-          with frmHotkeys do
-            pSetHotkeys(bHotKeys_On);
+          pSetHotkeys(bHotKeys_On);
         end;
 
      7: begin

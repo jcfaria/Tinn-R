@@ -157,7 +157,6 @@ uses
   Variants,
   Menus,
   ActnList,
-  ufrmHotKeys,
   ufrmComments,
   trUtils,
   ufrmRmirrors,
@@ -735,9 +734,9 @@ begin
       if Visible then stbShortcuts.Panels[0].Text:= 'Browse mode';
     end;
 
-  if Assigned(frmHotkeys) then
-    with frmHotkeys do
-      if bLocating then Exit;
+//  if Assigned(frmHotkeys) then
+//    with frmHotkeys do
+//      if bLocating then Exit;
   if (cdShortcuts.State <> dsBrowse) then Exit;
   frmTools.imgShortcut.Picture.Bitmap:= nil;
   frmMain.imlTinnR.GetBitmap(cdShortcuts.FieldByName('Image').Value,

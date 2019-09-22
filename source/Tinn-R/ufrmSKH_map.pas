@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Db, DBTables, Menus,
   Dialogs, ExtCtrls, Grids, JvgPage, EditAlign, StdCtrls, ComCtrls, DBGrids, JvExComCtrls, JvHotKey, DBCtrls, Mask,
-  JvComCtrls, Buttons, JvDBControls, ufrmSKH_Manager;
+  JvComCtrls, Buttons, JvAppHotKey, JvDBControls, SynEditMiscClasses, inifiles, ufrmSKH_Manager;
 
 type
   TfrmSKH_Map_Dlg = class(TForm)
@@ -15,14 +15,12 @@ type
     tbsAppShortcuts: TTabSheet;
     tbsEditorKeystrokes: TTabSheet;
     tbsRHotkeys: TTabSheet;
-    GroupBox2: TGroupBox;
+    gbRhotkeys: TGroupBox;
     edHotkey: TEditAlign;
     rdgTinnRHotKeys: TRadioGroup;
-    btnOK: TButton;
     btnRemove: TButton;
     btnClearAllHotKeys: TButton;
     btnAddHotKey: TButton;
-    BitBtn1: TBitBtn;
     Panel2: TPanel;
     JvDBNavigator2: TJvDBNavigator;
     gbKeystrokes: TGroupBox;
@@ -42,31 +40,32 @@ type
     bbtShortcuts_Cancel: TBitBtn;
     bbtShortcuts_Save: TBitBtn;
     dbgShortcuts: TDBGrid;
-    bbtShortcuts_Manager: TBitBtn;
     bbtShortcuts_CancelAll: TBitBtn;
     bbtShortcuts_RestoreDefault: TBitBtn;
-    bbtShortcut_Help: TBitBtn;
     btnUpdateKey: TButton;
     Label20: TLabel;
     Label24: TLabel;
     pnlCommands: TPanel;
     lvKeystrokes: TListView;
-    pgRhotkeys: TJvgPageControl;
-    tbsSend_Control: TTabSheet;
-    tbsCustom: TTabSheet;
+    pgRH: TJvgPageControl;
+    tbsRH_Send: TTabSheet;
+    tbsRH_Custom: TTabSheet;
     strgHK_Send: TStringGrid;
-    strgHK_CU: TStringGrid;
+    strgHK_Custom: TStringGrid;
     stbShortcuts: TStatusBar;
     BitBtn2: TBitBtn;
     edFilter_Group: TEdit;
     edFilter_Caption: TEdit;
     Label1: TLabel;
+    bbtShortcuts_Manager: TBitBtn;
+    tbsRH_Control: TTabSheet;
+    strgHK_Control: TStringGrid;
     procedure FormShow(Sender: TObject);
     procedure dbgShortcutsDblClick(Sender: TObject);
     procedure lvKeystrokesDblClick(Sender: TObject);
     procedure strgHK_SendDblClick(Sender: TObject);
     procedure strgHK_ControlDblClick(Sender: TObject);
-    procedure strgHK_CUDblClick(Sender: TObject);
+    procedure strgHK_CustomDblClick(Sender: TObject);
     procedure strgHK_CU2DblClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -88,15 +87,28 @@ type
     procedure edFilter_CaptionChange(Sender: TObject);
     procedure edFilter_GroupChange(Sender: TObject);
     procedure bbtShortcuts_ManagerClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure btnAddHotKeyClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure rdgTinnRHotKeysClick(Sender: TObject);
 
   private
     { Private declarations }
 
+    procedure pAppMessage(var Msg: TMSG; var bHandled: Boolean);
     procedure pClearWarnings;
+    procedure pCreateHotkey_Custom(i: integer; sTmp: string);
+    procedure pCreateHotkey_Send(i: integer; sTmp: string);
+    procedure pCreateHotkey_Control(i: integer; sTmp: string);
+    procedure pCreateR_Custom(i: integer; sTmp: string);
+    procedure pDoHotKey_Custom(Sender: TObject);
+    procedure pDoHotKey_Default(Sender: TObject);
+
 
   public
     { Public declarations }
     dlgSKH_Manager: TfrmSKH_Manager_Dlg;
+    eKeyShort     : TSynHotKey;
 
   end;
 
@@ -112,6 +124,147 @@ uses
 
 {$R *.dfm}
 
+
+procedure TfrmSKH_Map_Dlg.pAppMessage(var Msg: TMSG;
+                                      var bHandled: Boolean);
+begin
+  bHandled:= False;
+  case Msg.Message of
+    WM_SYSKEYDOWN:
+      if (Msg.wParam = VK_F4) then bHandled:= True; // don't allow ALT-F4
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.pDoHotKey_Custom(Sender: TObject);
+var
+  sHKC,
+   sRC: string;
+
+  i: integer;
+
+begin
+  sHKC:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
+
+  // R Action Custom
+  for i:= 1 to 10 do begin
+    if (lowercase(strgHK_Custom.Cells[1,i]) = lowercase(sHKC)) then begin
+      sRC:= trim(strgHK_Custom.Cells[0,i]);
+      frmMain.pSendRCustom(sRC);
+      Exit;
+    end;
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.pDoHotKey_Default(Sender: TObject);
+var
+  sTmp: string;
+
+  i: integer;
+
+begin
+  //SetForegroundWindow(Application.Handle);
+  sTmp:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
+  for i:= 1 to 10 do
+    if (lowercase(strgHK_Send.Cells[1,i]) = lowercase(sTmp)) then
+      with frmMain do
+        (* The below is to see only
+           Cells[0,1]:= 'Send: file';
+           Cells[0,2]:= 'Send: selection';
+           Cells[0,3]:= 'Send: clipboard';
+           Cells[0,4]:= 'Send: marked block';
+           Cells[0,5]:= 'Send: contiguous';
+           Cells[0,6]:= 'Send: smart';
+           Cells[0,7]:= 'Send: line';
+           Cells[0,8]:= 'Send: lines to end page (echo=T)';
+        *)
+        case i of
+           1: if actRSendFile.Enabled                  then actRSendFileExecute(nil);
+           2: if actRSendSelection.Enabled             then actRSendSelectionExecute(nil);
+           3: if actRSendClipboard.Enabled             then actRSendClipboardExecute(nil);
+           4: if actRSendBlockMarked.Enabled           then actRSendBlockMarkedExecute(nil);
+           5: if actRSendContiguous.Enabled            then actRSendContiguousExecute(nil);
+           6: if actRSendSmart.Enabled                 then actRSendSmartExecute(nil);
+           7: if actRSendLine.Enabled                  then actRSendLineExecute(nil);
+           8: if actRSendLinesToEndPage.Enabled        then actRSendLinesToEndPageExecute(nil);
+        end;
+
+  for i:= 1 to 10 do
+    if (lowercase(strgHK_Control.Cells[1,i]) = lowercase(sTmp)) then
+      with frmMain do
+        (* The below is to see only
+           Cells[0,1]:= 'Controlling: print content (selected)';
+           Cells[0,2]:= 'Control: list names (selected)';
+           Cells[0,3]:= 'Control: list structure (selected)';
+           Cells[0,4]:= 'Control: list all objects';
+           Cells[0,5]:= 'Control: clear console';
+           Cells[0,6]:= 'Control: close all graphic devices';
+           Cells[0,7]:= 'Control: help (selected)';
+        *)
+        case i of
+           1: if actRContPrintVariableContent.Enabled  then actRContPrintVariableContentExecute(nil);
+           2: if actRContListVariableNames.Enabled     then actRContListVariableNamesExecute(nil);
+           3: if actRContListVariableStructure.Enabled then actRContListVariableStructureExecute(nil);
+           4: actRContListAllObjectsExecute(nil);
+           5: actRContClearConsoleExecute(nil);
+           6: actRContCloseAllGraphicsExecute(nil);
+           7: if actRContHelpSelectedWord.Enabled      then actRContHelpSelectedWordExecute(nil);
+        end;
+end;
+
+procedure TfrmSKH_Map_Dlg.rdgTinnRHotKeysClick(Sender: TObject);
+begin
+  pClearWarnings;
+end;
+
+procedure TfrmSKH_Map_Dlg.pCreateHotkey_Send(i: integer;
+                                             sTmp: string);
+begin
+  with frmMain do begin
+    ajavHK_Send[i]:= TJvApplicationHotKey.Create(Self);
+    with ajavHK_Send[i] do begin
+      HotKey  := TextToShortCut(sTmp);
+      Active  := bHotKeys_On;
+      OnHotKey:= pDoHotKey_Default;
+    end;
+  end;
+    strgHK_Send.Cells[1,i]:= sTmp;
+end;
+
+procedure TfrmSKH_Map_Dlg.pCreateHotkey_Control(i: integer;
+                                                sTmp: string);
+begin
+  with frmMain do begin
+    ajavHK_Control[i]:= TJvApplicationHotKey.Create(Self);
+    with ajavHK_Control[i] do begin
+      HotKey  := TextToShortCut(sTmp);
+      Active  := bHotKeys_On;
+      OnHotKey:= pDoHotKey_Default;
+    end;
+  end;
+    strgHK_Control.Cells[1,i]:= sTmp;
+end;
+
+procedure TfrmSKH_Map_Dlg.pCreateR_Custom(i: integer;
+                                          sTmp: string);
+begin
+  with frmMain do
+    aR_Custom[i]:= sTmp;
+  strgHK_Custom.Cells[0,i]:= sTmp;
+end;
+
+procedure TfrmSKH_Map_Dlg.pCreateHotkey_Custom(i: integer;
+                                               sTmp: string);
+begin
+  with frmMain do begin
+    ajavHK_Custom[i]:= TJvApplicationHotKey.Create(Self);
+    with ajavHK_Custom[i] do begin
+      HotKey  := TextToShortCut(sTmp);
+      Active  := bHotKeys_On;
+      OnHotKey:= pDoHotKey_Custom;
+    end;
+  end;
+  strgHK_Custom.Cells[1,i]:= sTmp;
+end;
 
 procedure TfrmSKH_Map_Dlg.pClearWarnings;
 begin
@@ -372,6 +525,69 @@ begin
   frmMain.pOpenUserGuidePDF('"Shortcuts"');
 end;
 
+procedure TfrmSKH_Map_Dlg.BitBtn1Click(Sender: TObject);
+begin
+  frmMain.pOpenUserGuidePDF('"3.5 Hotkeys (operational system)"');
+end;
+
+procedure TfrmSKH_Map_Dlg.btnAddHotKeyClick(Sender: TObject);
+var
+  sTmp: string;
+  iRow: integer;
+
+begin
+  pClearWarnings;
+
+//  case pgRHotkeys.TabIndex of
+//    // Send
+//    0: begin
+//         iRow:= strgHK_Send.Row;
+//         with frmMain do begin
+//           if Assigned(ajavHK_S[iRow]) then begin
+//             ajavHK_S[iRow].WindowsKey:= True;
+//             FreeAndNil(ajavHK_S[iRow]);
+//             strgHK_Send.Cells[1,iRow]:= '';
+//           end;
+//         end;
+//         sTmp:= ShortCutToText(jvhkHotkey.HotKey);
+//         pCreateHotkey_Send(iRow,
+//                            sTmp);
+//       end;
+//
+//    // Control
+//    1: begin
+//         iRow:= strgHK_Control.Row;
+//         with frmMain do begin
+//           if Assigned(ajavHK_Control[iRow]) then begin
+//             ajavHK_Control[iRow].WindowsKey:= True;
+//             FreeAndNil(ajavHK_Control[iRow]);
+//             strgHK_Control.Cells[1,iRow]:= '';
+//           end;
+//         end;
+//         sTmp:= ShortCutToText(jvhkHotkey.HotKey);
+//         pCreateHotkey_Control(iRow,
+//                               sTmp);
+//       end;
+//
+//    // R Action Custom
+//    2: begin
+//         iRow:= strgHK_Custom.Row;
+//         with frmMain do begin
+//           if Assigned(ajavHK_Custom[iRow]) then begin
+//             ajavHK_Custom[iRow].WindowsKey:= True;
+//             FreeAndNil(ajavHK_Custom[iRow]);
+//             strgHK_Custom.Cells[1,iRow]:= '';
+//           end;
+//         end;
+//         sTmp:= ShortCutToText(jvhkHotkey.HotKey);
+//         pCreateR_Custom(iRow,
+//                         edHotkey.Text);
+//         pCreateHotkey_Custom(iRow,
+//                              sTmp);
+//       end;
+//  end;
+end;
+
 procedure TfrmSKH_Map_Dlg.dbgShortcutsDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
@@ -496,7 +712,7 @@ var
 begin
   with frmMain do begin
     pgSH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
-    pgRHotkeys.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+    pgRH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
   end;
 
   pClearWarnings;
@@ -548,9 +764,116 @@ begin
   end;
 end;
 
+procedure TfrmSKH_Map_Dlg.FormCreate(Sender: TObject);
+var
+  ifHotKeys: TIniFile;
+  sTmp     : string;
+  aHK      : array[1..10] of string;
+  i        : integer;
+
+begin
+  // Read the ini file for settings
+  ifHotKeys:= TIniFile.Create(frmMain.sPathIniTinn_File);
+
+  // R Hotkeys Send
+  with strgHK_Send do begin
+    for i:= 1 to 10 do begin
+      aHK[i]:= ifHotKeys.ReadString('R Hotkeys Send',
+                                    'RHK' + IntToStr(i),
+                                    '');
+      if (aHK[i] <> '') then begin
+        sTmp:= aHK[i];
+        pCreateHotkey_Send(i,
+                           sTmp);
+      end;
+    end;
+  end;
+
+  // R Hotkeys Send Control
+  with strgHK_Control do begin
+    for i:= 1 to 10 do begin
+      aHK[i]:= ifHotKeys.ReadString('R Hotkeys Control',
+                                    'RHK' + IntToStr(i),
+                                    '');
+      if (aHK[i] <> '') then begin
+        sTmp:= aHK[i];
+        pCreateHotkey_Control(i,
+                              sTmp);
+      end;
+    end;
+  end;
+
+  // R Action Custom
+  with strgHK_Custom do begin
+    for i:= 1 to 10 do begin
+      aHK[i]:= ifHotKeys.ReadString('R Action Custom',
+                                    'RAC' + IntToStr(i),
+                                    '');
+      if (aHK[i] <> '') then begin
+        sTmp:= aHK[i];
+        pCreateR_Custom(i,
+                        sTmp);
+      end;
+    end;
+  end;
+
+  // R Action Custom Hotkeys
+  with strgHK_Custom do begin
+    for i:= 1 to 10 do begin
+      aHK[i]:= ifHotKeys.ReadString('R Hotkeys Custom',
+                                    'RHKC' + IntToStr(i),
+                                    '');
+      if (aHK[i] <> '') then begin
+        sTmp:= aHK[i];
+        pCreateHotkey_Custom(i,
+                             sTmp);
+      end;
+    end;
+  end;
+
+  FreeAndNil(ifHotKeys);
+
+  Application.OnMessage:= pAppMessage;
+  // Send
+  with strgHK_Send do begin
+     Cells[0,0]:= 'Action';
+     Cells[1,0]:= 'Hotkey';
+     Cells[0,1]:= 'Send: file';
+     Cells[0,2]:= 'Send: selection';
+     Cells[0,3]:= 'Send: clipboard';
+     Cells[0,4]:= 'Send: marked block';
+     Cells[0,5]:= 'Send: continguous';
+     Cells[0,6]:= 'Send: smart';
+     Cells[0,7]:= 'Send: line';
+     Cells[0,8]:= 'Send: lines to end page';
+   end;
+
+  // Control
+  with strgHK_Control do begin
+    Cells[0,0]:= 'Action';
+    Cells[1,0]:= 'Hotkey';
+    Cells[0,1]:= 'Control: print content (selected)';
+    Cells[0,2]:= 'Control: list names (selected)';
+    Cells[0,3]:= 'Control: list structure (selected)';
+    Cells[0,4]:= 'Control: list all objects';
+    Cells[0,5]:= 'Control: clear console';
+    Cells[0,6]:= 'Control: close all graphic devices';
+    Cells[0,7]:= 'Control: help (selected)';
+  end;
+
+  // R Action Custom
+  with strgHK_Custom do begin
+    Cells[0,0]:= 'Action (use %s to word/selection and %f for whole file)';
+    Cells[1,0]:= 'Hotkey';
+  end;
+
+  pgRH.TabIndex:= 0;
+end;
+
 procedure TfrmSKH_Map_Dlg.FormShow(Sender: TObject);
 begin
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
+  rdgTinnRHotKeys.ItemIndex:= Integer(frmMain.bHotKeys_On);
 end;
 
 procedure TfrmSKH_Map_Dlg.lvKeystrokesDblClick(Sender: TObject);
@@ -573,7 +896,7 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.strgHK_CUDblClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.strgHK_CustomDblClick(Sender: TObject);
 begin
   try
     dlgSKH_Manager:= TfrmSKH_Manager_Dlg.Create(Self);
@@ -608,5 +931,23 @@ end;
 //
 //  Close;
 //  frmMain.Refresh;
+
+//  eKeyShort:= TSynHotKey.Create(Self);
+//
+//  with eKeyShort do
+//  begin
+//    Parent     := gbRhotkeys;
+//    Left       := edHotkey.Width + 20;
+//    Top        := edHotkey.Top;
+//    Width      := 125;
+//    Height     := edHotkey.Height;
+//    HotKey     := 0;
+//    InvalidKeys:= [];
+//    Modifiers  := [];
+//    TabOrder   := 1;
+//    BorderStyle:= bsSingle;
+//    //OnKeyUp    := pKeyUp;  {Not Working}
+//  end;
+//  pSet_LabelColor(clBlack);
 
 end.

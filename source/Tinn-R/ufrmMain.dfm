@@ -1035,14 +1035,13 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 525
+    Height = 505
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 505
   end
   object Panel1: TPanel
     Left = 0
@@ -1219,7 +1218,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2015,14 +2014,13 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 525
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 505
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2037,7 +2035,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 632
+    Top = 612
     Width = 1007
     Height = 20
     AutoHint = True
@@ -2092,24 +2090,22 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 612
   end
   object TBDockRight: TTBDock
     Left = 998
     Top = 98
     Width = 9
-    Height = 525
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 505
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 623
+    Top = 603
     Width = 1007
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2118,7 +2114,6 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 603
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -3928,6 +3923,14 @@ object frmMain: TfrmMain
       Hint = 'Options: application'
       ImageIndex = 118
       OnExecute = actShowAppOptionsExecute
+    end
+    object actSKH_map: TAction
+      Category = 'Options'
+      Caption = 'Shortcuts/keystrokes/hotkeys (map)'
+      Hint = 'Options: shortcut/keystrokes/hotkeys (map)'
+      ImageIndex = 119
+      ShortCut = 49229
+      OnExecute = actSKH_mapExecute
     end
     object actColorsPreference: TAction
       Category = 'Options'
@@ -7592,16 +7595,13 @@ object frmMain: TfrmMain
         Action = actShowAppOptions
       end
       object menSKH: TMenuItem
-        Caption = 'Shortcuts/keystrokes/hotkeys (map)'
-        ImageIndex = 119
-        OnClick = menSKHClick
+        Action = actSKH_map
       end
       object menOptionsShortcuts: TMenuItem
         Caption = 'Shortcuts'
         Hint = 'Shortcuts: edit'
         ImageIndex = 119
         Visible = False
-        OnClick = menOptionsShortcutsClick
       end
       object N119: TMenuItem
         Caption = '-'
@@ -7945,7 +7945,7 @@ object frmMain: TfrmMain
         GroupIndex = 12
         object menToolsDatabaseShortcuts: TMenuItem
           Caption = 'Shortcuts'
-          ImageIndex = 119
+          ImageIndex = 159
           OnClick = menToolsDatabaseShortcutsClick
         end
         object menToolsDatabaseCompletion: TMenuItem
@@ -8481,14 +8481,6 @@ object frmMain: TfrmMain
         object memRTCPConnection: TMenuItem
           Action = actRContTCPConnection
         end
-      end
-      object N15: TMenuItem
-        Caption = '-'
-      end
-      object menRHotKeys: TMenuItem
-        Caption = 'Hotkeys (operational system)'
-        ImageIndex = 267
-        OnClick = menRHotKeysClick
       end
     end
     object menView: TMenuItem

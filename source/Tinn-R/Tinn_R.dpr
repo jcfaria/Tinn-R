@@ -96,7 +96,6 @@ uses
   ufrmEditor in 'ufrmEditor.pas' {frmEditor},
   ufrmGotoBox in 'ufrmGotoBox.pas' {frmGotoBox},
   ufrmGroupRename in 'ufrmGroupRename.pas' {frmGroupRename},
-  ufrmHotKeys in 'ufrmHotKeys.pas' {frmHotKeys},
   ufrmLatexDimensional in 'ufrmLatexDimensional.pas' {frmLatexDimensional},
   ufrmMain in 'ufrmMain.pas' {frmMain},
   ufrmNewGoup in 'ufrmNewGoup.pas' {frmNewGroup},
