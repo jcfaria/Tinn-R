@@ -2955,13 +2955,13 @@ type
     sReplaceTextHistory          : string;
 
     function fCheck_Hotkey_Use_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
-    function fFindTopWindow: integer;
-    function fGetBuildInfo: string;
+    function fFindTop_Window: integer;
+    function fGetBuild_Info: string;
     function fRgui_Running(bFirstTime: boolean = False): boolean;
     function fRterm_Running: boolean;
     function fRWorkDir: string;
     function fUseTCPIP: boolean;
-    function fValidRRunning: boolean;
+    function fValidR_Running: boolean;
 
     procedure DefaultHandler(var message); override;
     procedure pCheckIfFileFromDvi(sFile: string);
@@ -3381,7 +3381,7 @@ begin
     if not(bFileExists) and
           (ExecRegExpr('Untitled[1-9] + $',
                        pgFiles.ActivePage.Caption))  then begin
-      if ((Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor.Modified = False) then pLoadFile(sTmp,
+      if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Modified = False) then pLoadFile(sTmp,
                                                                                                       False,
                                                                                                       bUpdateMRU)
                                                                                       else pLoadFile(sTmp,
@@ -3409,7 +3409,7 @@ begin
     iLineNumber.y:= iLineNumberJump;
     iLineNumber.x:= 1;
 
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                        else seEditor:= synEditor2;
 
@@ -3422,7 +3422,7 @@ begin
     end;
   end;
 
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
 
   (Self.MDIChildren[i] as TfrmEditor).pCheckSaveStatus;
@@ -3537,7 +3537,7 @@ begin
     if not bFileExists and
           (ExecRegExpr('Untitled[1-9] + $',
                        pgFiles.ActivePage.Caption)) then begin
-      if ((Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor.Modified = False) then pLoadFile(sTmp,
+      if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Modified = False) then pLoadFile(sTmp,
                                                                                                       False)
                                                                                       else pLoadFile(sTmp,
                                                                                                      True);
@@ -3549,12 +3549,12 @@ begin
   if (iLineNumberJump > 0) then begin
     pLineNumber.y:= iLineNumberJump;
     pLineNumber.x:= 1;
-    (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor.ExecuteCommand(ecGotoXY,
+    (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.ExecuteCommand(ecGotoXY,
                                                                               'A',
                                                                               @pLineNumber);
   end;
 
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
   (Self.MDIChildren[i] as TfrmEditor).pCheckSaveStatus;
 end;
@@ -3586,7 +3586,7 @@ begin
     end;
   end;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     sActiveFile:= sFileName;
     sWorkingDir:= ExtractFilePath(sFileName);
     if FileExists(sFileName) then begin
@@ -3704,7 +3704,7 @@ begin
     WriteString('App', 'sVersion_Cache'     , sVersion_Cache);
     WriteString('App', 'sVersion_Comments'  , sVersion_Comments);
     WriteString('App', 'sVersion_Completion', sVersion_Completion);
-    WriteString('App', 'sVersion_Ini'       , fGetBuildInfo);
+    WriteString('App', 'sVersion_Ini'       , fGetBuild_Info);
     WriteString('App', 'sVersion_Latex'     , sVersion_Latex);
     WriteString('App', 'sVersion_Project'   , sVersion_Project);
     WriteString('App', 'sVersion_Rcard'     , sVersion_Rcard);
@@ -4882,7 +4882,7 @@ end;
 
 procedure TfrmMain.pSetBuffer_SaveFormat(sf: TSaveFormat);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     TSynEditStringList(synEditor.Lines).SaveFormat:= sf;
     synEditor.Modified:= True;
     pSetTabTitle('*');
@@ -4895,7 +4895,7 @@ end;
 
 procedure TfrmMain.pSetBuffer_FileFormat(ff: TSynEditFileFormat);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     TSynEditStringList(synEditor.Lines).FileFormat:= ff;
     synEditor.Modified:= True;
     pSetTabTitle('*');
@@ -6247,7 +6247,7 @@ begin
 
   sTipFromRServer:= EmptyStr;
 
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if Assigned(Self.MDIChildren[i] as TfrmEditor) then
     with (Self.MDIChildren[i] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
@@ -6411,7 +6411,7 @@ procedure TfrmMain.synCompletion(Kind: SynCompletionType;
   begin
     seEditor:= nil;
 
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
     if Assigned(Self.MDIChildren[i] as TfrmEditor) then
       with (Self.MDIChildren[i] as TfrmEditor) do
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
@@ -6584,7 +6584,7 @@ procedure TfrmMain.synCompletion(Kind: SynCompletionType;
     seEditor:= nil;
     sPattern:= EmptyStr;
 
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
     if Assigned(Self.MDIChildren[i] as TfrmEditor) then
       with (Self.MDIChildren[i] as TfrmEditor) do
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
@@ -6803,7 +6803,7 @@ const
   NMP_RServer = '"(..) NOT MATCHED: Check integrity of the parameter(s) for this function in the R Server!"';
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
   // Case of object$
   if fIsDataCompletionCase then begin
@@ -6888,7 +6888,7 @@ begin
     inherited DefaultHandler(TMessage(message));
 end;
 
-function TfrmMain.fGetBuildInfo: string;
+function TfrmMain.fGetBuild_Info: string;
 var
   VerInfoSize,
    VerValueSize,
@@ -6949,10 +6949,10 @@ begin
     synEditor.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
 
     pSetDataCompletion(synEditor_Tip,
-                       (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor,
+                       (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor,
                        'CTRL+SPACE');
 
-    (Self.MDIChildren[fFindTopWindow] as tfrmEditor).pLineWrap_Toogle(actEditorLineWrap.Checked);
+    (Self.MDIChildren[fFindTop_Window] as tfrmEditor).pLineWrap_Toogle(actEditorLineWrap.Checked);
 
     synEditor.ReadOnly:= False;
 
@@ -7108,7 +7108,7 @@ begin
   i:= 0;
   bMark:= False;
   if (pgFiles.PageCount > 0) then begin
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
     with (Self.MDIChildren[i] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                        else seEditor:= synEditor2;
@@ -7449,7 +7449,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   with (Self.MDIChildren[i] as tfrmEditor).synEditor do
     if ReadOnly then begin
       ReadOnly := False;
@@ -7586,10 +7586,10 @@ begin
                                 else seLog:= frmRterm.synLog;
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           CopyToClipboard;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           CopyToClipboard;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
@@ -7612,10 +7612,10 @@ begin
                                 else seLog:= frmRterm.synLog;
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           CutToClipboard;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           CutToClipboard;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
@@ -7638,10 +7638,10 @@ begin
                                 else seLog:= frmRterm.synLog;
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           PasteFromClipboard;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           PasteFromClipboard;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
@@ -7664,10 +7664,10 @@ begin
                                 else seLog:= frmRterm.synLog;
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           Redo;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           Redo;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
@@ -7690,10 +7690,10 @@ begin
                                 else seLog:= frmRterm.synLog;
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           SelectAll;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           SelectAll;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
@@ -7941,7 +7941,7 @@ begin
     if (sName = 'General_Multi-Highlighter') then
       sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
 
-    if ((dmSyn.Components[j] as TSynCustomHighlighter).Tag <> 99) then begin
+    if ((dmSyn.Components[j] as TSynCustomHighlighter).Tag <> 99) then begin  // Tag = 99 Rterm
       cbSyntax.Items.Add(sName);
       sFilter:= trim((dmSyn.Components[j] as TSynCustomHighlighter).DefaultFilter);
       slFilters.Add(sFilter);
@@ -8129,7 +8129,7 @@ procedure TfrmMain.pCheckOrigin;
 begin
   with frmTools.memIniLog.Lines do begin
     Add('Version - ' +
-        fGetBuildInfo);
+        fGetBuild_Info);
 
     Add('Started - ' +
         DateTimeToStr(Now));
@@ -9432,7 +9432,7 @@ begin
             else Result:= -1;
 end;
 
-function TfrmMain.fFindTopWindow: integer;
+function TfrmMain.fFindTop_Window: integer;
 var
   i: integer;
   
@@ -9467,8 +9467,8 @@ begin
 
   case iSynWithFocus of
     0: Exit;
-    1: seTmp:= (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor;
-    2: seTmp:= (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2;
+    1: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor;
+    2: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2;
     3: seTmp:= frmRterm.synIO;
     4: with frmRterm do
          if Assigned(synLog2) then seTmp:= synLog2
@@ -9488,8 +9488,8 @@ begin
 
   case iSynWithFocus of
     0: Exit;
-    1: seTmp:= (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor;
-    2: seTmp:= (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2;
+    1: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor;
+    2: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2;
     3: seTmp:= frmRterm.synIO;
     4: with frmRterm do
          if Assigned(synLog2) then seTmp:= synLog2
@@ -9929,7 +9929,7 @@ begin
       Self.MDIChildren[i].BringToFront;
     end;
 
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       case synEDitor.SelectionMode of
         smNormal: pDrawSelectionMode(0);
         smLine  : pDrawSelectionMode(1);
@@ -9941,7 +9941,7 @@ begin
     end;
   end;
 
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
 
   pSetDataCompletion(synEditor_Tip,
@@ -9957,7 +9957,7 @@ end;
 
 procedure TfrmMain.actPrintExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     if (sActiveEditor = 'synEditor2') then
       if (synEditor2.SelText <> EmptyStr) then bSelectedToPreview:= True
                                           else bSelectedToPreview:= False
@@ -9971,7 +9971,7 @@ begin
   with frmConfigurePrint do begin
     try
       if (pgFiles.PageCount <> 0) then begin
-        with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+        with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
           if (sActiveEditor = 'synEditor')       then ShowDialog(synEditor)
           else if (sActiveEditor = 'synEditor2') then ShowDialog(synEditor2);
         end;
@@ -10064,7 +10064,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
 
   if not Assigned(Self.MDIChildren[i] as TfrmEditor) then Exit;
   sFile:= (Self.MDIChildren[i] as TfrmEditor).sActiveFile;
@@ -10161,11 +10161,11 @@ begin
   slTmp := TStringList.Create;
   try
     // For every line in the current on top window that matches, put it into another editor window
-    iStartFile:= fFindTopWindow;
+    iStartFile:= fFindTop_Window;
     slTmp.Text:= (Self.MDIChildren[iStartFile] as tfrmEditor).synEditor.Lines.text;
     // Create new tab and window
     actFileNewExecute(Sender);
-    iNewFile         := fFindTopWindow;
+    iNewFile         := fFindTop_Window;
     rsGrep.Expression:= edFilter.Text;
  
     for i:= 0 to (slTmp.Count - 1) do begin
@@ -10194,7 +10194,6 @@ var
 
   clBrackets_Prior: TColor;
 
-
   i: integer;
 
   sSyntaxBackupFile: string;
@@ -10213,7 +10212,7 @@ begin
         bActiveLine           := cbActiveLineBG.Checked;
       end;
     end
-    else begin  // Cancel: will restore a prior backup o all ini syntax files
+    else begin  // Cancel: it will restore a prior backup o all ini syntax files
       sSyntaxBackupFile:= sPath_SyntaxBKP +
                           '\syntax_bkp.zip';
 
@@ -10251,7 +10250,7 @@ begin
   end;
 
   // It is necessary to update pSynPaintTransient in cases where the brackets are selected!
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if Assigned(Self.MDIChildren[i] as TfrmEditor) then
     with (Self.MDIChildren[i] as TfrmEditor) do begin
       if Assigned(synEditor) then synEditor.Repaint;
@@ -10602,7 +10601,7 @@ var
    seTmp: TSynEdit;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if not Assigned(Self.MDIChildren[i] as TfrmEditor) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -10731,7 +10730,7 @@ end;
 
 procedure TfrmMain.synMRStateChange(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (synMR.State = msRecording) then alMain.OnExecute:= pRecordActions
     else if Assigned(alMain.OnExecute) then alMain.OnExecute:= nil;
 end;
@@ -10751,7 +10750,7 @@ begin
       aEvent:= TActionMacroEvent.Create;
       aEvent.ActionName:= baAction.Name;
 
-      with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+      with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
         aEvent.ActionLists.Add(alMain);
       AddCustomEvent(TSynMacroEvent(aEvent));
       bInExecute:= True;
@@ -10845,7 +10844,7 @@ begin
      (frmTools.tvProject.Selected.Level = 2) then begin
     if (slProjectChanges = nil) then slProjectChanges:= TStringList.Create;
 
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       slProjectChanges.Add(sActiveFile);
       i:= slProjectChanges.IndexOf(sActiveFile);
     end;
@@ -11498,7 +11497,7 @@ end;
 //
 //begin
 //  seTmp:= nil;
-//  i:= fFindTopWindow;
+//  i:= fFindTop_Window;
 //
 //  case iSynWithFocus of
 //    0: Exit;
@@ -11530,7 +11529,7 @@ begin
   seTmp:= nil;
   Result:= nil;
 
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   case iSynWithFocus of
     0: Exit;
  1..2: if Assigned(Self.MDIChildren[i] as TfrmEditor) then
@@ -11671,7 +11670,7 @@ begin
     2: actSplitHorizontalExecute(nil);  // Horizontal
   end;
 
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -11719,7 +11718,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
 
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
@@ -12127,7 +12126,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
     if (pgFiles.PageCount = 0) then pSendResources(False)
     else begin
       pSendResources(True);
-      with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+      with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                          else seEditor:= synEditor2;
       with seEditor do begin
@@ -12481,7 +12480,7 @@ var
 begin
   // The below will avoid to try to open file (and related error message)
   // when dragging any selection inside of the editor
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if Assigned(Self.MDIChildren[i] as TfrmEditor) then
     if (Source = (Self.MDIChildren[i] as TfrmEditor).synEditor) or
        (Source = (Self.MDIChildren[i] as TfrmEditor).synEditor2) then Exit;
@@ -12924,7 +12923,7 @@ begin
                                    [mbYes, mbYesToAll, mbCancel],
                                    0);
 
-          i:= fFindTopWindow;
+          i:= fFindTop_Window;
           if Assigned(Self.MDIChildren[i] as TfrmEditor) then
             (Self.MDIChildren[i] as TfrmEditor).Refresh;
 
@@ -12973,7 +12972,7 @@ begin
                                  mtConfirmation,
                                  [mbYes, mbYesToAll, mbCancel],
                                  0);
-        i:= fFindTopWindow;
+        i:= fFindTop_Window;
         if Assigned(Self.MDIChildren[i] as TfrmEditor) then
           (Self.MDIChildren[i] as TfrmEditor).Refresh;
 
@@ -13801,7 +13800,7 @@ var
   seEditor: TSynEdit;
 
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
@@ -13826,7 +13825,7 @@ var
   seEditor: TSynEdit;
 
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
   end;
@@ -13843,7 +13842,7 @@ var
   i: integer;
 
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
   end;
@@ -14481,6 +14480,10 @@ begin
   try
     // Initial status
     with dlgSKH_Map do begin
+      edFilter_Group.Text:= '';
+      edtSearch_Group.Text:= '';
+      edFilter_Caption.Text:= '';
+      edtSearch_Caption.Text:= '';
       pgSH.ActivePage:= tbsAppShortcuts;
       pgRH.ActivePage:= tbsRH_Send;
     end;
@@ -14914,7 +14917,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   actRExplorerSendNameToEditorExecute(nil);
@@ -15668,7 +15671,7 @@ begin
     if not fSave_PriorClipboard_Text then Exit;
     Clipboard.AsText:= frmTools.lvRexplorer.Selected.Caption;
 
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
     if Assigned(Self.MDIChildren[i] as TfrmEditor) then begin
       with (Self.MDIChildren[i] as TfrmEditor) do begin
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
@@ -15768,7 +15771,7 @@ var
 
 begin
   if (pgFiles.PageCount = 0) then Exit;
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
 
   with (MDIChildren[i] as TfrmEditor) do
     pDoCardInsert;
@@ -15845,7 +15848,7 @@ var
   seEditor: TSynEdit;
 
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
   with seEditor do begin
@@ -15867,7 +15870,7 @@ var
 
 begin
   synURIOpener.Editor:= nil;
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
     pEditor_Split(False);
@@ -15886,7 +15889,7 @@ var
 begin
   synURIOpener.Editor:= nil;
 
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   with (Self.MDIChildren[i] as TfrmEditor) do
     pEditor_Split;
 
@@ -15901,7 +15904,7 @@ procedure TfrmMain.actSplitRemoveExecute(Sender: TObject);
 begin
   synURIOpener.Editor:= nil;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pEditor_RemoveSplit;
 
   with synEditor2_Tip do begin
@@ -15926,7 +15929,7 @@ begin
 end;
 
 
-function TfrmMain.fValidRRunning: boolean;
+function TfrmMain.fValidR_Running: boolean;
 begin
   Result:= True;
   if not fRterm_Running and
@@ -16046,8 +16049,8 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
-  sTmp:= (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor.Text;
+  if not fValidR_Running then Exit;
+  sTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Text;
   if not bRSendAll then pRemoveLine_Commented(sTmp);
   pRemoveLine_Empty(sTmp);
 
@@ -16075,7 +16078,7 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
   sFilePath:= sPath_Tmp +
               '\reformat-input.r';
@@ -16091,9 +16094,9 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
-  sTmp:= (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor.Text;
+  sTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Text;
 
   sFilePath:= sPath_Tmp +
               '\reformat-input.r';
@@ -16109,7 +16112,7 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
   sTmp:= Clipboard.AsText;
   if not bRSendAll then pRemoveLine_Commented(sTmp);
@@ -16145,9 +16148,9 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -16198,9 +16201,9 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -16427,9 +16430,9 @@ var
 begin
   Result:= EmptyStr;
   bEndOfChunk:= False;
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -16619,7 +16622,7 @@ var
 begin
   Result:= EmptyStr;
 
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
   with seEditor do begin
     BeginUpdate;
@@ -16681,9 +16684,9 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -16740,8 +16743,8 @@ var
 
 begin
   Result:= EmptyStr;
-  if not fValidRRunning then Exit;
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  if not fValidR_Running then Exit;
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
   with seEditor do begin
@@ -16790,8 +16793,8 @@ var
 begin
   Result:= EmptyStr;
 
-  if not fValidRRunning then Exit;
-  i:= fFindTopWindow;
+  if not fValidR_Running then Exit;
+  i:= fFindTop_Window;
 
   if ((Self.MDIChildren[i] as TfrmEditor).synEditor.Modified = True) then actFileSaveExecute(Self);
   sDos:= (Self.MDIChildren[i] as TfrmEditor).sActiveFile;
@@ -16915,7 +16918,7 @@ begin
               0);
   Exit;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     bGoToNextValidLine:= not bSendToREditing;
 
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
@@ -17098,7 +17101,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if not Assigned(Self.MDIChildren[i] as TfrmEditor) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do begin
@@ -17156,7 +17159,7 @@ var
   seEditor: TSynEdit;
 
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -17506,7 +17509,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= 'ls()';
   pDoSend(sTmp);
 end;
@@ -17516,7 +17519,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= fFindWord_Extended(fGet_Syn);
 
   if (sTmp = EmptyStr) then begin
@@ -17535,7 +17538,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= fFindWord_Extended(fGet_Syn);
 
   if (sTmp = EmptyStr) then begin
@@ -17557,7 +17560,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= fFindWord_Extended(fGet_Syn);
 
   if (sTmp = EmptyStr) then begin
@@ -17584,7 +17587,7 @@ procedure TfrmMain.actRContOpenExampleSelectedWordExecute(Sender: TObject);
   begin
     Result:= False;
 
-    if not fValidRRunning then Exit;
+    if not fValidR_Running then Exit;
 
     sTmp:= fFindWord_Extended(fGet_Syn,
                               True);
@@ -17776,7 +17779,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= fFindWord_Extended(fGet_Syn);
 
   if (sTmp = EmptyStr) then begin
@@ -17798,7 +17801,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= fFindWord_Extended(fGet_Syn);
 
   if (sTmp = EmptyStr) then begin
@@ -17820,7 +17823,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= fFindWord_Extended(fGet_Syn);
 
   if (sTmp = EmptyStr) then begin
@@ -17845,14 +17848,14 @@ var
    sToSend: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
   if (Pos('%f',
           sRC) > 0) then begin
     if (pgFiles.PageCount = 0) then Exit;
 
     sToSend:= '''' +
-              (Self.MDIChildren[fFindTopWindow] as TfrmEditor).sActiveFile +
+              (Self.MDIChildren[fFindTop_Window] as TfrmEditor).sActiveFile +
               '''';
 
     sTmp:= StringReplace(sRC,
@@ -17891,7 +17894,7 @@ var
   sToSend: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
   // Rterm: priority 1
   if fRterm_Running then begin
@@ -17944,7 +17947,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= 'graphics.off()';
   pDoSend(sTmp);
 end;
@@ -17954,7 +17957,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= 'rm(list=ls())';
   pDoSend(sTmp);
 end;
@@ -17969,7 +17972,7 @@ var
   seLog: TSynEdit;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
 
   // Rterm: priority 1
   if fRterm_Running then begin
@@ -18064,7 +18067,7 @@ procedure TfrmMain.actRContHelpSelectedWordExecute(Sender: TObject);
 
   begin
     Result:= EmptyStr;
-    if not fValidRRunning then Exit;
+    if not fValidR_Running then Exit;
     sTmp:= fFindWord_Extended(fGet_Syn,
                               True);
 
@@ -18161,7 +18164,7 @@ procedure TfrmMain.actRContExampleSelectedWordExecute(Sender: TObject);
 
   begin
     Result:= EmptyStr;
-    if not fValidRRunning then Exit;
+    if not fValidR_Running then Exit;
     sTmp:= fFindWord_Extended(fGet_Syn,
                               True);
 
@@ -18253,7 +18256,7 @@ var
   sTmp: string;
 
 begin
-  if not fValidRRunning then Exit;
+  if not fValidR_Running then Exit;
   sTmp:= 'help.start(update=FALSE)';
   pDoSend(sTmp);
 end;
@@ -18348,10 +18351,10 @@ begin
     else begin
       case iFocus of
          // synEditor1
-         1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+         1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
               if CanFocus then SetFocus;
          // synEditor2
-         2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+         2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
               if CanFocus then SetFocus;
          // synIO
          3: with (frmRterm.synIO as TSynEdit) do
@@ -18501,10 +18504,10 @@ begin
     else begin
       case iFocus of
          // synEditor1
-         1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+         1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
               if CanFocus then SetFocus;
          // synEditor2
-         2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+         2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
               if CanFocus then SetFocus;
          // synIO
          3: with (frmRterm.synIO as TSynEdit) do
@@ -18553,7 +18556,7 @@ begin
 
   with sd do begin
     InitialDir:= sWorkingDir;
-    if not bStarting then FileName:= 'Tinn-R_' + fGetBuildInfo + '_full_bkp'
+    if not bStarting then FileName:= 'Tinn-R_' + fGetBuild_Info + '_full_bkp'
                      else FileName:= 'Tinn-R_prior_to2_bkp';
     Filter    := 'Tinn backup (*.zip)|*.zip';
     DefaultExt:= '.zip';
@@ -18639,7 +18642,7 @@ var
 begin
   sd           := TSaveDialog.Create(Self);
   sd.InitialDir:= sWorkingDir;
-  sd.FileName  := 'Tinn-R_' + fGetBuildInfo + '_database_bkp';
+  sd.FileName  := 'Tinn-R_' + fGetBuild_Info + '_database_bkp';
   sd.Filter    := 'Tinn backup (*.zip)|*.zip';
   sd.DefaultExt:= '.zip';
 
@@ -18949,7 +18952,7 @@ var
   
 begin
   synMR.Editor:= frmRterm.synIO;
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   with (Self.MDIChildren[i] as TfrmEditor) do
     if (sActiveEditor = 'synEditor2') then synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor2
                                       else synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
@@ -19093,7 +19096,7 @@ var
  end;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   sTmpFile:= (Self.MDIChildren[i] as TfrmEditor).sActiveFile;
 
   oldCursor:= (Self.MDIChildren[i] as TfrmEditor).Cursor;
@@ -19164,7 +19167,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   oldCursor:= (Self.MDIChildren[i] as TfrmEditor).Cursor;
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
   actFileSaveExecute(Self);
@@ -19449,7 +19452,7 @@ var
 
   procedure pCloseCompileLaTeX;
   begin
-    (Self.MDIChildren[fFindTopWindow] as TfrmEditor).Cursor:= oldCursor;
+    (Self.MDIChildren[fFindTop_Window] as TfrmEditor).Cursor:= oldCursor;
     fMessageDlg('Sorry, it wasn''t possible to do the compilation!',
                 mtInformation,
                 [mbOk],
@@ -19488,7 +19491,7 @@ var
   end;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   sTmpFile:= ExtractFileName((Self.MDIChildren[i] as TfrmEditor).sActiveFile);;
   if (LowerCase(ExtractFileExt(sTmpFile)) <> '.tex') then Exit;
   oldCursor:= (Self.MDIChildren[i] as TfrmEditor).Cursor;
@@ -19581,7 +19584,7 @@ procedure TfrmMain.menToolsConversionPandocClick(Sender: TObject);
   begin
     Result:= '';
 
-    with (MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+    with (MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       //if (seUsed = seUTF8) then Result:= True;
       seTmp:= SynEditor;
       sTmp:= fGetSaveFormat(seTmp.Lines)
@@ -19779,7 +19782,7 @@ var
 
 begin
   // Check for modification
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor).synEditor.Modified) then begin
     iResp:= fMessageDlg((Self.MDIChildren[i] as TfrmEditor).sActiveFile + #13 + #13 +
                         'If you reload this file, you will loose all changes.' + #13 +
@@ -19944,7 +19947,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
 
   if not Assigned(Self.MDIChildren[i] as TfrmEditor) then Exit;
   sFile:= (Self.MDIChildren[i] as TfrmEditor).sActiveFile;
@@ -20452,7 +20455,7 @@ begin
   if not actSpellVisible.Checked then actSpellVisibleExecute(nil);
   frmTools.pgTools.ActivePage:= frmTools.tbsSpell;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -20545,19 +20548,19 @@ end;
 
 procedure TfrmMain.actFindExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFind;
 end;
 
 procedure TfrmMain.actFindAgainExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFindAgain;
 end;
 
 procedure TfrmMain.actReplaceExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pReplace;
 end;
 
@@ -20598,7 +20601,7 @@ begin
   iFoundFileCount:= 0;
 
   if (Self.MDIChildCount > 0) then begin
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                        else seEditor:= synEditor2;
 
@@ -20691,31 +20694,31 @@ end;
 
 procedure TfrmMain.actGotoLineExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pGotoLine;
 end;
 
 procedure TfrmMain.actCopyFormattedRtfExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pCopyFormatted_RTF;
 end;
 
 procedure TfrmMain.actCopyFormattedHtmlExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pCopyFormatted_HTML;
 end;
 
 procedure TfrmMain.actCopyFormattedTeXExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pCopyFormatted_TeX;
 end;
 
 procedure TfrmMain.actFileSaveExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     // File notify: Stop
     if Assigned(fNotif) then pNotifyFile_Stop;
 
@@ -20738,7 +20741,7 @@ end;
 
 procedure TfrmMain.actFileSaveAsExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     // File notify: Stop
     if Assigned(fNotif) then pNotifyFile_Stop;
 
@@ -20762,7 +20765,7 @@ end;
 
 procedure TfrmMain.actFullPathUnixExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFullPath_Unix;
 
   pSetFocus_Main;
@@ -20770,7 +20773,7 @@ end;
 
 procedure TfrmMain.actFullPathWindowsExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFullPath_Windows;
 
   pSetFocus_Main;
@@ -20786,13 +20789,13 @@ end;
 
 procedure TfrmMain.actDateStampExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pDateStamp;
 end;
 
 procedure TfrmMain.actIndentBlockExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pIndent_Block;
 end;
 
@@ -20808,10 +20811,10 @@ begin
                                 else seLog:= frmRterm.synLog;
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           Undo;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           Undo;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
@@ -20824,7 +20827,7 @@ end;
 
 procedure TfrmMain.actUnindentBlockExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pUnindent_Block;
 end;
 
@@ -20836,7 +20839,7 @@ end;
 
 procedure TfrmMain.actUpperCaseWordExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pUpperCase_Word;
 end;
 
@@ -20875,13 +20878,13 @@ end;
 
 procedure TfrmMain.actLowerCaseWordExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pLowerCase_Word;
 end;
 
 procedure TfrmMain.actInvertCaseWordExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pInvert_Case;
 end;
 
@@ -20947,8 +20950,8 @@ begin
   sContent:= fFile_ToString(sFile);
   sFileExt:= ExtractFileExt(sFile);
 
-  i:= fFindTopWindow;
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  i:= fFindTop_Window;
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     synEditor.Text:= sContent;
     synEditor.Modified:= True;
     pSetHighlighter_FromFileExt(sFileExt);
@@ -21041,7 +21044,7 @@ var
    seLog: TSynEdit;
 
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -21143,7 +21146,7 @@ var
   i: integer;
   
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   with (Self.MDIChildren[i] as TfrmEditor) do
     pDoCompletion_Insert(True);
 
@@ -21204,7 +21207,7 @@ var
 
 begin
   if (pgFiles.PageCount = 0) then Exit;
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
 
   with (MDIChildren[i] as TfrmEditor) do
     pDoCompletion_Insert;
@@ -21233,7 +21236,7 @@ end;
 
 procedure TfrmMain.actNormalSelectExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pNormal_Select;
 end;
 
@@ -21261,19 +21264,19 @@ end;
 
 procedure TfrmMain.actLineSelectExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pLine_Select;
 end;
 
 procedure TfrmMain.actColumnSelectExecute(Sender: TObject);
 begin
-  with (MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (MDIChildren[fFindTop_Window] as TfrmEditor) do
     pColumn_Select;
 end;
 
 procedure TfrmMain.actUpperCaseSelectionExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pUpperCase_Selection;
 end;
 
@@ -21294,13 +21297,13 @@ end;
 
 procedure TfrmMain.actLowerCaseSelectionExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pLowerCase_Selection;
 end;
 
 procedure TfrmMain.actInvertSelectionExecute(Sender: TObject);
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pInvert_Selection;
 end;
 
@@ -21324,7 +21327,7 @@ var
 begin
   // Get Highlighter (and check for mistake selection in multisyn case)
   if frmTools.cbComAutoDetect_Language.Checked then begin
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       if (synEditor.SelText <> '') then begin
         scBB_Highlighter:= fGet_BB_HighLighter;                 // Highlighter of the block begin
         scBE_Highlighter:= fGet_BE_HighLighter;                 // Highlighter of the block end
@@ -21370,7 +21373,7 @@ begin
   sBeginComment:= EmptyStr;  // Initial status
 
   pGetComments;
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pComment(sBeginComment,
              sEndComment);
 end;
@@ -21380,7 +21383,7 @@ begin
   sBeginComment:= EmptyStr;  // Initial status
 
   pGetComments;
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pUncomment(sBeginComment,
                sEndComment);
 end;
@@ -21390,7 +21393,7 @@ begin
   sBeginComment:= EmptyStr;  // Initial status
 
   pGetComments;
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pUncomment(sBeginComment,
                sEndComment,
                [rfReplaceAll]);
@@ -21398,7 +21401,7 @@ end;
 
 procedure TfrmMain.actFileCloseExecute(Sender: TObject);
 begin
-  (Self.MDIChildren[fFindTopWindow] as TfrmEditor).Close;
+  (Self.MDIChildren[fFindTop_Window] as TfrmEditor).Close;
   if (pgFiles.PageCount > 0) then pgFilesChange(nil);
 end;
 
@@ -21673,7 +21676,7 @@ procedure TfrmMain.pMySort(iSort: integer);
     
   begin
     if (pgFiles.PageCount < 1) then Exit;
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -21745,7 +21748,7 @@ begin
     meTmp       := TMemo.Create(nil);
     meTmp.Parent:= panInvisibleParent;
     
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                        else seEditor:= synEditor2;
     
@@ -22293,7 +22296,7 @@ var
   seEditor: TSynEdit;
 
 begin
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
@@ -22526,7 +22529,7 @@ var
   i: integer;
   
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
   pDoTxt2Tag((Sender as TLabel).Tag);
   PostMessage(TWinControl(Self.MDIChildren[i] as TfrmEditor).Handle,
@@ -23040,7 +23043,7 @@ procedure TfrmMain.stbMainClick(Sender: TObject);
   function fOpenedFile: boolean;
   begin
     Result:= True;
-    if ((Self.MDIChildren[fFindTopWindow] as TfrmEditor) = nil) then Result:= False;
+    if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor) = nil) then Result:= False;
   end;
 
 begin
@@ -23055,7 +23058,7 @@ begin
 
      4: begin
           if fOpenedFile then begin
-            with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+            with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
               if actNormalSelect.Checked      then actLineSelectExecute(nil)
               else if actLineSelect.Checked   then actColumnSelectExecute(nil)
               else if actColumnSelect.Checked then actNormalSelectExecute(nil)
@@ -23103,7 +23106,7 @@ begin
               //Font.Style := [fsBold];
             end;
          4: begin
-              i:= fFindTopWindow;
+              i:= fFindTop_Window;
               if Assigned(Self.MDIChildren[i] as TfrmEditor) then
                 with (Self.MDIChildren[i] as TfrmEditor) do begin
                   case synEDitor.SelectionMode of
@@ -23246,7 +23249,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -23307,7 +23310,7 @@ var
 
   procedure pSetEditor;
   begin
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                      else seEditor:= synEditor2;
   end;
@@ -23339,7 +23342,7 @@ var
       else pInsertAccentSimple;
     end;
 
-    PostMessage(TWinControl(Self.MDIChildren[fFindTopWindow] as TfrmEditor).Handle,
+    PostMessage(TWinControl(Self.MDIChildren[fFindTop_Window] as TfrmEditor).Handle,
                 WM_SETFOCUS,
                 0,
                 0);
@@ -23364,7 +23367,7 @@ var
   end;
 
 begin
-  if ((Self.MDIChildren[fFindTopWindow] as TfrmEditor) = nil) then Exit;
+  if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor) = nil) then Exit;
   
   pSetEditor;
   
@@ -23519,7 +23522,7 @@ var
 begin
   if not fSave_PriorClipboard_Text then Exit;
 
-  if ((Self.MDIChildren[fFindTopWindow] as TfrmEditor) = nil) then Exit;
+  if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor) = nil) then Exit;
 
   dlg:= TfrmLatexDimensional.Create(Self);
 
@@ -23551,7 +23554,7 @@ begin
     if (iRows <= 0) or
        (iCols <= 0) then Exit;
 
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
@@ -23614,7 +23617,7 @@ begin
     CaretXY:= bcCurPos;
 
   // Will search the next '|' as part of the stop of the completion
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     sSearch_Text:= '|';
 
     bSearch_RegExp:= False;  // Do not remove due to '|' -> or in fRegEx
@@ -23640,7 +23643,7 @@ var
   wOption: word;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   sTmpFile:= ExtractFileName((Self.MDIChildren[i] as TfrmEditor).sActiveFile);;
 
   if (LowerCase(ExtractFileExt(sTmpFile)) <> '.tex') then Exit;
@@ -23685,7 +23688,7 @@ procedure TfrmMain.LatexHeader(Sender: TObject);
     i: integer;
 
   begin
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
     if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
     case iHeader of
@@ -23742,7 +23745,7 @@ procedure TfrmMain.LatexFont(Sender: TObject);
     i: integer;
 
   begin
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
     if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
     case iFont of
@@ -23797,7 +23800,7 @@ procedure TfrmMain.LatexFontSize(Sender: TObject);
     i: integer;
 
   begin
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
     if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
     case iSize of
@@ -23973,7 +23976,7 @@ procedure TfrmMain.LatexFormat(Sender: TObject);
     synSearchOptions: TSynSearchOptions;
 
   begin
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
 
     if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
@@ -24102,9 +24105,9 @@ var
    dCharsStripSpaces: double;
 
 begin
-  if ((Self.MDIChildren[fFindTopWindow] as TfrmEditor) = nil) then Exit;
+  if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor) = nil) then Exit;
 
-  with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
 
@@ -24173,7 +24176,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -24247,7 +24250,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -24286,7 +24289,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -24359,7 +24362,7 @@ var
   i: integer;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -24416,7 +24419,7 @@ var
   i: integer;
 
 begin
-  sTmpDir:= ExtractFilePath((Self.MDIChildren[fFindTopWindow] as TfrmEditor).sActiveFile);
+  sTmpDir:= ExtractFilePath((Self.MDIChildren[fFindTop_Window] as TfrmEditor).sActiveFile);
 
   try
     slTmp:= TStringList.Create;
@@ -24806,7 +24809,7 @@ begin
   seEditor:= nil;
 
   if (pgFiles.PageCount > 0) then
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                        else seEditor:= synEditor2;
 
@@ -25011,7 +25014,7 @@ var
 
 begin
   if (pgFiles.PageCount = 0) then Exit;
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
 
   with (MDIChildren[i] as TfrmEditor) do
     pDoTip_Insert;
@@ -25195,7 +25198,7 @@ var
   i: integer;
   
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   PostMessage(TWinControl(Self.MDIChildren[i] as TfrmEditor).Handle,
@@ -25502,7 +25505,7 @@ end;
 procedure TfrmMain.actRSimpleDefaultExecute(Sender: TObject);
 begin
   actRSimpleDefault.Checked:= True;
-  if (pgFiles.PageCount > 0) then (Self.MDIChildren[fFindTopWindow] as tfrmEditor).FormActivate(nil);
+  if (pgFiles.PageCount > 0) then (Self.MDIChildren[fFindTop_Window] as tfrmEditor).FormActivate(nil);
 end;
 
 procedure TfrmMain.actRCardOpenExampleSelectedExecute(Sender: TObject);
@@ -25517,7 +25520,7 @@ procedure TfrmMain.actRCardOpenExampleSelectedExecute(Sender: TObject);
   begin
     Result:= False;
 
-    if not fValidRRunning then Exit;
+    if not fValidR_Running then Exit;
 
     sTmp:= modDados.cdRcardFunction.Value;
 
@@ -25713,13 +25716,13 @@ end;
 procedure TfrmMain.actRComplexDefaultExecute(Sender: TObject);
 begin
   actRComplexDefault.Checked:= True;
-  if (pgFiles.PageCount > 0) then (Self.MDIChildren[fFindTopWindow] as tfrmEditor).FormActivate(nil);
+  if (pgFiles.PageCount > 0) then (Self.MDIChildren[fFindTop_Window] as tfrmEditor).FormActivate(nil);
 end;
 
 procedure TfrmMain.actTextDefaultExecute(Sender: TObject);
 begin
   actTextDefault.Checked:= True;
-  if (pgFiles.PageCount > 0) then (Self.MDIChildren[fFindTopWindow] as tfrmEditor).FormActivate(nil);
+  if (pgFiles.PageCount > 0) then (Self.MDIChildren[fFindTop_Window] as tfrmEditor).FormActivate(nil);
 end;
 
 procedure TfrmMain.actRtermSaveWorkspaceExecute(Sender: TObject);
@@ -25841,7 +25844,7 @@ var
 begin
   case iSynWithFocus of
     1..2: begin
-            i:= fFindTopWindow;
+            i:= fFindTop_Window;
             if Assigned(Self.MDIChildren[i] as TfrmEditor) then
               PostMessage(TWinControl(Self.MDIChildren[i] as TfrmEditor).Handle,
                           WM_SETFOCUS,
@@ -25873,7 +25876,7 @@ begin
                                 else seLog:= frmRterm.synLog;
   // Editors
   if (pgFiles.PageCount <> 0) then
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do begin
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       // synEditor1
       if sActiveEditor = 'synEditor' then
         if synEditor.Focused then Result:= 1;
@@ -25945,13 +25948,13 @@ begin  // Font.Size < 50
   
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           if (Font.Size < 50) then begin
             Font.Size:= Font.Size + 1;
             pUpdateHexViewer;
           end;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           if (Font.Size < 50) then begin
             Font.Size:= Font.Size + 1;
             pUpdateHexViewer;
@@ -26045,13 +26048,13 @@ begin  //Font.Size > 02
                                 else seLog:= frmRterm.synLog;
   case iFocus of
      // synEditor1
-     1: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor do
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           if (Font.Size > 02) then begin
             Font.Size:= Font.Size - 1;
             pUpdateHexViewer;
           end;
      // synEditor2
-     2: with (Self.MDIChildren[fFindTopWindow] as TfrmEditor).synEditor2 do
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           if (Font.Size > 02) then begin
             Font.Size:= Font.Size - 1;
             pUpdateHexViewer;
@@ -26197,7 +26200,7 @@ var
   end;
 
 begin
-  i:= fFindTopWindow;
+  i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
@@ -26274,7 +26277,7 @@ begin
 
     msHexViewer:= TMemoryStream.Create;
 
-    with (Self.MDIChildren[fFindTopWindow] as TfrmEditor) do
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       seTmp:= SynEditor;
 
     seTmp.Lines.SaveToStream(msHexViewer);
@@ -26444,7 +26447,7 @@ end.
     i: integer;
 
   begin
-    i:= fFindTopWindow;
+    i:= fFindTop_Window;
 
     if Assigned(Self.MDIChildren[i] as TfrmEditor) then begin
       pSetDataCompletion(synEditor_Tip,

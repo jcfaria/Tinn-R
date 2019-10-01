@@ -119,8 +119,8 @@ type
     bNothing      : boolean;
     bShortcutInUse: boolean;
 
-    procedure pActualizeGroups;
-    procedure pClearWarnings;
+    procedure pActualize_Groups;
+    procedure pClear_Warnings;
 
   public
     { Public declarations }
@@ -144,7 +144,7 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmShortcuts.pClearWarnings;
+procedure TfrmShortcuts.pClear_Warnings;
 begin
   with stbShortcuts do begin
     Panels[3].Text:= '';
@@ -154,7 +154,7 @@ end;
 
 procedure TfrmShortcuts.edtGroupSearchChange(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
   with edtGroupSearch do begin
     if (Text = '') then begin
       Color     := clWindow;
@@ -180,12 +180,12 @@ end;
 
 procedure TfrmShortcuts.edtGroupSearchEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.edtCaptionSearchChange(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
   with edtCaptionSearch do begin
     if (Text = '') then begin
       Color     := clWindow;
@@ -211,7 +211,7 @@ end;
 
 procedure TfrmShortcuts.edtCaptionSearchEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.FormActivate(Sender: TObject);
@@ -219,7 +219,7 @@ var
   pTmp: pointer;
 
 begin
-  pClearWarnings;
+  pClear_Warnings;
   with frmMain do begin
     with dbeGroup do begin
       Color     := clBGApplication;
@@ -267,9 +267,9 @@ begin
   edtGroupSearch.SetFocus;
 end;
 
-procedure TfrmShortcuts.pActualizeGroups;
+procedure TfrmShortcuts.pActualize_Groups;
 begin
-  pClearWarnings;
+  pClear_Warnings;
   //Actualize Groups in frmMain
   with modDados do begin
     pShortcutsGroups_Filter(nil);
@@ -305,7 +305,7 @@ begin
 
     IndexName:= 'ShortcutsDefaultIndex';
   end;
-  pActualizeGroups;
+  pActualize_Groups;
 end;
 
 procedure TfrmShortcuts.FormCreate(Sender: TObject);
@@ -388,7 +388,7 @@ begin
     bLocating:= False;
   end
   else begin
-    pClearWarnings;
+    pClear_Warnings;
     bLocating:= False;
 
     with modDados.cdShortcuts do begin
@@ -401,7 +401,7 @@ end;
 
 procedure TfrmShortcuts.eKeyShortEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
   with modDados.cdShortcuts do
     Edit;
 end;
@@ -411,7 +411,7 @@ var
   sTmp: string;
 
 begin
-  pClearWarnings;
+  pClear_Warnings;
   with eKeyShortcut_Search do begin
     sTmp:= StringReplace(ShortcutToText(Hotkey), ' ', '', []);
 
@@ -439,12 +439,12 @@ end;
 
 procedure TfrmShortcuts.eKeyShortcut_SearchEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.bbtShortcutsEditClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
   with modDados.cdShortcuts do
     Edit;
   dbeGroup.SetFocus;
@@ -460,7 +460,7 @@ var
    sOldFile: string;
 
 begin
-  pClearWarnings;
+  pClear_Warnings;
   bbtShortcutsCancelAllClick(nil);
   od:= TOpenDialog.Create(Self);
 
@@ -518,7 +518,7 @@ end;
 
 procedure TfrmShortcuts.bbtShortcutsCancelClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados do begin
     cdShortcuts.Cancel;
@@ -530,7 +530,7 @@ end;
 
 procedure TfrmShortcuts.bbtShortcutsSaveClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados.cdShortcuts do begin
     Edit;
@@ -552,7 +552,7 @@ var
   sd: TSaveDialog;
 
 begin
-  pClearWarnings;
+  pClear_Warnings;
   bbtShortcutsSaveClick(nil);
   sd:= TSaveDialog.Create(Self);
   try
@@ -603,27 +603,27 @@ end;
 
 procedure TfrmShortcuts.dbeCaptionEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.dbeGroupEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.dbgShortcutsEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.dbgShortcutsKeyPress(Sender: TObject; var Key: Char);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.dbgShortcutsTitleClick(Column: TColumn);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados do begin
     cdShortcuts.IndexFieldNames:= Column.FieldName;
@@ -633,12 +633,12 @@ end;
 
 procedure TfrmShortcuts.dbmHintEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.DBNavigator1Click(Sender: TObject; Button: TNavigateBtn);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmShortcuts.bbHelpClick(Sender: TObject);
@@ -648,7 +648,7 @@ end;
 
 procedure TfrmShortcuts.bbtShortcutsCancelAllClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados do begin
     cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
@@ -658,7 +658,7 @@ end;
 
 procedure TfrmShortcuts.bbtShortcutsRestoreDefaultClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
   bbtShortcutsCancelAllClick(nil);
   if not FileExists(frmMain.sFileDataOrigin) then Exit;
 

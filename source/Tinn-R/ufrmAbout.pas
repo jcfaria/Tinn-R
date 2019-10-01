@@ -137,7 +137,7 @@ begin
 
   lVersion.Caption:= lVersion.Caption +
                      ' ' +
-                     frmMain.fGetBuildInfo;
+                     frmMain.fGetBuild_Info;
                      //' ' +
                      //'RC';
 

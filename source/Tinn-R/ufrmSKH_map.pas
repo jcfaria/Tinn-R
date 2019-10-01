@@ -15,8 +15,6 @@ type
     tbsAppShortcuts: TTabSheet;
     tbsEditorKeystrokes: TTabSheet;
     tbsRHotkeys: TTabSheet;
-    gbRhotkeys: TGroupBox;
-    edHotkey: TEditAlign;
     rdgTinnRHotKeys: TRadioGroup;
     btnRemove: TButton;
     btnClearAllHotKeys: TButton;
@@ -30,10 +28,10 @@ type
     Label5: TLabel;
     imgShortcut: TImage;
     dbeCaption: TDBEdit;
-    edtCaptionSearch: TEdit;
+    edtSearch_Caption: TEdit;
     dbeGroup: TDBEdit;
     dbmHint: TDBMemo;
-    edtGroupSearch: TEdit;
+    edtSearch_Group: TEdit;
     bbtShortcuts_Load: TBitBtn;
     bbtShortcuts_SaveDefault: TBitBtn;
     bbtShortcuts_Edit: TBitBtn;
@@ -80,10 +78,10 @@ type
     procedure dbgShortcutsTitleClick(Column: TColumn);
     procedure dbgShortcutsEnter(Sender: TObject);
     procedure dbgShortcutsKeyPress(Sender: TObject; var Key: Char);
-    procedure edtCaptionSearchChange(Sender: TObject);
-    procedure edtCaptionSearchEnter(Sender: TObject);
-    procedure edtGroupSearchChange(Sender: TObject);
-    procedure edtGroupSearchEnter(Sender: TObject);
+    procedure edtSearch_CaptionChange(Sender: TObject);
+    procedure edtSearch_CaptionEnter(Sender: TObject);
+    procedure edtSearch_GroupChange(Sender: TObject);
+    procedure edtSearch_GroupEnter(Sender: TObject);
     procedure edFilter_CaptionChange(Sender: TObject);
     procedure edFilter_GroupChange(Sender: TObject);
     procedure bbtShortcuts_ManagerClick(Sender: TObject);
@@ -91,19 +89,24 @@ type
     procedure btnAddHotKeyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure rdgTinnRHotKeysClick(Sender: TObject);
+    procedure btnRemoveClick(Sender: TObject);
+    procedure btnClearAllHotKeysClick(Sender: TObject);
+    procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+    procedure strgHK_SendDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+    procedure strgHK_ControlDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+    procedure strgHK_CustomDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
 
   private
     { Private declarations }
 
     procedure pAppMessage(var Msg: TMSG; var bHandled: Boolean);
-    procedure pClearWarnings;
+    procedure pClear_Warnings;
     procedure pCreateHotkey_Custom(i: integer; sTmp: string);
     procedure pCreateHotkey_Send(i: integer; sTmp: string);
     procedure pCreateHotkey_Control(i: integer; sTmp: string);
     procedure pCreateR_Custom(i: integer; sTmp: string);
     procedure pDoHotKey_Custom(Sender: TObject);
     procedure pDoHotKey_Default(Sender: TObject);
-
 
   public
     { Public declarations }
@@ -213,7 +216,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.rdgTinnRHotKeysClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmSKH_Map_Dlg.pCreateHotkey_Send(i: integer;
@@ -266,7 +269,7 @@ begin
   strgHK_Custom.Cells[1,i]:= sTmp;
 end;
 
-procedure TfrmSKH_Map_Dlg.pClearWarnings;
+procedure TfrmSKH_Map_Dlg.pClear_Warnings;
 begin
   with stbShortcuts do begin
     Panels[3].Text:= '';
@@ -276,7 +279,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_CancelAllClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados do begin
     cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
@@ -286,7 +289,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_CancelClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados do begin
     cdShortcuts.Cancel;
@@ -344,7 +347,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_EditClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
   with modDados.cdShortcuts do
     Edit;
   dbeGroup.SetFocus;
@@ -360,7 +363,7 @@ var
    sOldFile: string;
 
 begin
-  pClearWarnings;
+  pClear_Warnings;
   bbtShortcuts_CancelAllClick(nil);
   od:= TOpenDialog.Create(Self);
 
@@ -418,7 +421,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_RestoreDefaultClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
   bbtShortcuts_CancelAllClick(nil);
   if not FileExists(frmMain.sFileDataOrigin) then Exit;
 
@@ -458,7 +461,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_SaveClick(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados.cdShortcuts do begin
     Edit;
@@ -480,7 +483,7 @@ var
   sd: TSaveDialog;
 
 begin
-  pClearWarnings;
+  pClear_Warnings;
   bbtShortcuts_SaveClick(nil);
   sd:= TSaveDialog.Create(Self);
   try
@@ -536,7 +539,7 @@ var
   iRow: integer;
 
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
 //  case pgRHotkeys.TabIndex of
 //    // Send
@@ -588,6 +591,117 @@ begin
 //  end;
 end;
 
+procedure TfrmSKH_Map_Dlg.btnClearAllHotKeysClick(Sender: TObject);
+var
+  i: Integer;
+
+begin
+  pClear_Warnings;
+
+  case pgRH.TabIndex of
+    // Send
+    0: begin
+         for i:= 1 to 10 do begin
+           with frmMain do begin
+             if Assigned(ajavHK_Send[i]) then begin
+               ajavHK_Send[i].WindowsKey:= True;
+               FreeAndNil(ajavHK_Send[i]);
+               strgHK_Send.Cells[1,i]:= '';
+             end;
+           end;
+         end;
+       end;
+
+    // Control
+    1: begin
+         for i:= 1 to 10 do begin
+           with frmMain do begin
+             if Assigned(ajavHK_Control[i]) then begin
+               ajavHK_Control[i].WindowsKey:= True;
+               FreeAndNil(ajavHK_Control[i]);
+               strgHK_Send.Cells[1,i]:= '';
+             end;
+           end;
+         end;
+       end;
+
+    // R Action Custom
+    2: begin
+         for i:= 1 to 10 do begin
+           with frmMain do begin
+             if Assigned(ajavHK_Custom[i]) then begin
+               ajavHK_Custom[i].WindowsKey:= True;
+               FreeAndNil(ajavHK_Custom[i]);
+               strgHK_Custom.Cells[1,i]:= '';
+             end;
+           end;
+         end;
+       end;
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.btnRemoveClick(Sender: TObject);
+var
+  iRow: integer;
+
+begin
+  pClear_Warnings;
+
+  case pgRH.TabIndex of
+    // Send
+    0: begin
+         iRow:= strgHK_Send.Row;
+         try
+           with frmMain do begin
+             ajavHK_Send[iRow].WindowsKey:= True;
+             FreeAndNil(ajavHK_Send[iRow]);
+           end;
+           strgHK_Send.Cells[1,iRow]:= '';
+         except
+           MessageDlg('Hotkey not defined yet!',
+                  mtInformation,
+                  [MBOK],
+                  0);
+         end;
+       end;
+
+    // Control
+    1: begin
+         iRow:= strgHK_Control.Row;
+         try
+           with frmMain do begin
+             ajavHK_Control[iRow].WindowsKey:= True;
+             FreeAndNil(ajavHK_Control[iRow]);
+           end;
+           strgHK_Control.Cells[1,iRow]:= '';
+         except
+           MessageDlg('Hotkey not defined yet!',
+                  mtInformation,
+                  [MBOK],
+                  0);
+         end;
+       end;
+
+    // R Action Custom
+    2: begin
+         iRow:= strgHK_Custom.Row;
+         try
+           strgHK_Custom.Cells[0,iRow]:= '';
+           with frmMain do begin
+             ajavHK_Custom[iRow].WindowsKey:= True;
+             FreeAndNil(ajavHK_Custom[iRow]);
+           end;
+           strgHK_Custom.Cells[1,iRow]:= '';
+         except
+           MessageDlg('Hotkey not defined yet!',
+                  mtInformation,
+                  [MBOK],
+                  0);
+         end;
+       end;
+  end;
+end;
+
 procedure TfrmSKH_Map_Dlg.dbgShortcutsDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
@@ -595,17 +709,17 @@ end;
 
 procedure TfrmSKH_Map_Dlg.dbgShortcutsEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmSKH_Map_Dlg.dbgShortcutsKeyPress(Sender: TObject; var Key: Char);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmSKH_Map_Dlg.dbgShortcutsTitleClick(Column: TColumn);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 
   with modDados do begin
     cdShortcuts.IndexFieldNames:= Column.FieldName;
@@ -643,10 +757,10 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtCaptionSearchChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edtSearch_CaptionChange(Sender: TObject);
 begin
-  pClearWarnings;
-  with edtCaptionSearch do begin
+  pClear_Warnings;
+  with edtSearch_Caption do begin
     if (Text = '') then begin
       Color     := clWindow;
       Font.Color:= clBlack;
@@ -669,15 +783,15 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtCaptionSearchEnter(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edtSearch_CaptionEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtGroupSearchChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edtSearch_GroupChange(Sender: TObject);
 begin
-  pClearWarnings;
-  with edtGroupSearch do begin
+  pClear_Warnings;
+  with edtSearch_Group do begin
     if (Text = '') then begin
       Color     := clWindow;
       Font.Color:= clBlack;
@@ -700,9 +814,9 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtGroupSearchEnter(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edtSearch_GroupEnter(Sender: TObject);
 begin
-  pClearWarnings;
+  pClear_Warnings;
 end;
 
 procedure TfrmSKH_Map_Dlg.FormActivate(Sender: TObject);
@@ -715,7 +829,7 @@ begin
     pgRH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
   end;
 
-  pClearWarnings;
+  pClear_Warnings;
   with frmMain do begin
     with dbeGroup do begin
       Color     := clBGApplication;
@@ -896,6 +1010,25 @@ begin
   end;
 end;
 
+procedure TfrmSKH_Map_Dlg.strgHK_ControlDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+  if (ARow >= strgHK_Control.FixedRows) then Exit;
+
+  // Set font to bold
+  strgHK_Control.Canvas.Font.Style := [fsBold];  // must come before the TextWidth & TextHeight
+
+//  // Paint the cell background
+//  if ACol = 1 then  // column 2 background is red - if you want that
+//    strgHK_Control.Canvas.Brush.Color := clRed;
+
+  strgHK_Control.Canvas.FillRect(Rect);
+
+  // Draw the text
+  strgHK_Control.Canvas.TextOut(Rect.Left,
+                                Rect.Top,
+                                strgHK_Control.Cells[ACol, ARow]);
+end;
+
 procedure TfrmSKH_Map_Dlg.strgHK_CustomDblClick(Sender: TObject);
 begin
   try
@@ -903,6 +1036,33 @@ begin
     dlgSKH_Manager.ShowModal;
   finally
     FreeAndNil(dlgSKH_Manager);
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.strgHK_CustomDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+  if (ARow >= strgHK_Custom.FixedRows) then Exit;
+
+  // Set font to bold
+  strgHK_Custom.Canvas.Font.Style := [fsBold];  // must come before the TextWidth & TextHeight
+
+//  // Paint the cell background
+//  if ACol = 1 then  // column 2 background is red - if you want that
+//    strgHK_Custom.Canvas.Brush.Color := clRed;
+
+  strgHK_Custom.Canvas.FillRect(Rect);
+
+  // Draw the text
+  strgHK_Custom.Canvas.TextOut(Rect.Left,
+                               Rect.Top,
+                               strgHK_Custom.Cells[ACol, ARow]);
+end;
+
+procedure TfrmSKH_Map_Dlg.strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+begin
+  if (aCol <> 0) then begin
+     CanSelect:= FALSE;
+     Exit;
   end;
 end;
 
@@ -924,6 +1084,25 @@ begin
   finally
     FreeAndNil(dlgSKH_Manager);
   end;
+end;
+
+procedure TfrmSKH_Map_Dlg.strgHK_SendDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+  if (ARow >= strgHK_Send.FixedRows) then Exit;
+
+  // Set font to bold
+  strgHK_Send.Canvas.Font.Style := [fsBold];  // must come before the TextWidth & TextHeight
+
+//  // Paint the cell background
+//  if ACol = 1 then  // column 2 background is red - if you want that
+//    strgHK_Send.Canvas.Brush.Color := clRed;
+
+  strgHK_Send.Canvas.FillRect(Rect);
+
+  // Draw the text
+  strgHK_Send.Canvas.TextOut(Rect.Left,
+                             Rect.Top,
+                             strgHK_Send.Cells[ACol, ARow]);
 end;
 
 //  with modDados.cdShortcuts do

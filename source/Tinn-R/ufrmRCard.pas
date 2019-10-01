@@ -96,7 +96,7 @@ type
 
   private
     { Private declarations }
-    procedure pActualizeGroups;
+    procedure pActualize_Groups;
 
   public
     { Public declarations }
@@ -243,7 +243,7 @@ begin
   end;
 end;
 
-procedure TfrmRcard.pActualizeGroups;
+procedure TfrmRcard.pActualize_Groups;
 begin
   //Actualize groups in frmMain
   with modDados do begin
@@ -296,7 +296,7 @@ begin
     IndexName:= 'RcardDefaultIndex';
   end;
 
-  pActualizeGroups;
+  pActualize_Groups;
   Close;
   frmMain.Refresh;
 end;

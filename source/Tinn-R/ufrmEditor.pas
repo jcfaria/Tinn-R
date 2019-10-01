@@ -1140,7 +1140,7 @@ var
   seEditor: TSynEdit;
   
 begin
-  if not frmMain.fValidRRunning then
+  if not frmMain.fValidR_Running then
     Exit;
 
   // Define the active editor
@@ -1528,14 +1528,17 @@ var
 begin
   for i:= 0 to (dmSyn.iHigCount - 1) do begin
     sHighligh:= (dmSyn.Components[i] as TSynCustomHighlighter).GetFriendlyLanguageName;
+
     if (sSynName = 'Text') then
       synEditor.Highlighter:= dmSyn.SynText;
 
-    if (sHighligh = sSynName) then
+    if (sHighligh = sSynName) and
+      ((dmSyn.Components[i] as TSynCustomHighlighter).Tag <> 99) then // Tag = 99 is atribute of Rterm
       synEditor.Highlighter:= (dmSyn.Components[i] as TSynCustomHighlighter);
 
     if (sHighligh = 'General_Multi-Highlighter') then begin
       sHighligh:= (dmSyn.Components[i] as TSynMultiSyn).DefaultLanguageName;
+
       if (sHighligh = sSynName) then
         synEditor.Highlighter:= (dmSyn.Components[i] as TSynMultiSyn);
     end;

@@ -2286,6 +2286,10 @@ object frmAbout: TfrmAbout
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synAboutProject: TSynEdit
         Left = 0
         Top = 0
@@ -2336,6 +2340,10 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synAboutAknowledgments: TSynEdit
         Left = 0
         Top = 0
@@ -2398,6 +2406,10 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synAboutCredits: TSynEdit
         Left = 0
         Top = 0
@@ -2468,6 +2480,10 @@ object frmAbout: TfrmAbout
     object tbsDonation: TTabSheet
       Caption = 'Donation'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synAboutDonation: TSynEdit
         Left = 0
         Top = 0

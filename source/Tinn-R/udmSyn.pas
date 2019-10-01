@@ -605,7 +605,7 @@ begin
   synPHPcomplex := TSynMultiSyn.Create(Self);
   synPython     := TSynPythonSyn.Create(Self);
   synR          := TSynRSyn.Create(Self);
-  synR.SetType();
+  synR.SetType(True);
   synR_term     := TSynRSyn.Create(Self);
   synR_term.SetType(False);
   synR_term.Tag:= 99;

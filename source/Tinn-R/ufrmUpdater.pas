@@ -351,7 +351,7 @@ begin
   end;
 
 //  sCurrent_Version:= '1.00.00.00';
-  sCurrent_Version:= frmMain.fGetBuildInfo;
+  sCurrent_Version:= frmMain.fGetBuild_Info;
 
   edCurrent.Text  := sCurrent_Version;
   edAvailable.Text:= sNew_Version;

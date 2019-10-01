@@ -302,7 +302,7 @@ procedure TfrmPandoc.pPandocDefaultInstruction(iFrom,
 
   begin
     with frmMain do
-      with (MDIChildren[fFindTopWindow] as TfrmEditor) do
+      with (MDIChildren[fFindTop_Window] as TfrmEditor) do
         sTmp:= sActiveFile;
     Result:= sTmp;
   end;

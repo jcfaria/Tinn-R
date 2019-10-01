@@ -221,7 +221,7 @@ object frmPandoc: TfrmPandoc
       Top = 15
       Width = 528
       Height = 21
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 0
       OnSelect = cbPandocHistorySelect
     end

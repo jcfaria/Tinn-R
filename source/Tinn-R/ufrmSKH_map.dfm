@@ -3,7 +3,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
   Top = 0
   BorderStyle = bsDialog
   Caption = 'S/K/H map'
-  ClientHeight = 562
+  ClientHeight = 557
   ClientWidth = 623
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
   TextHeight = 13
   object bbHelp: TBitBtn
     Left = 319
-    Top = 516
+    Top = 507
     Width = 75
     Height = 25
     Caption = '&Help'
@@ -70,7 +70,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
   end
   object bbtOK: TBitBtn
     Left = 469
-    Top = 516
+    Top = 507
     Width = 75
     Height = 25
     Caption = 'O&K'
@@ -82,7 +82,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Left = 0
     Top = 0
     Width = 623
-    Height = 516
+    Height = 502
     ActivePage = tbsRHotkeys
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -240,7 +240,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ParentFont = False
           TabOrder = 5
         end
-        object edtCaptionSearch: TEdit
+        object edtSearch_Caption: TEdit
           Left = 295
           Top = 40
           Width = 304
@@ -255,8 +255,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 3
-          OnChange = edtCaptionSearchChange
-          OnEnter = edtCaptionSearchEnter
+          OnChange = edtSearch_CaptionChange
+          OnEnter = edtSearch_CaptionEnter
         end
         object dbeGroup: TDBEdit
           Left = 52
@@ -291,7 +291,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           DataSource = modDados.dsShortcuts
           TabOrder = 6
         end
-        object edtGroupSearch: TEdit
+        object edtSearch_Group: TEdit
           Left = 52
           Top = 40
           Width = 170
@@ -306,8 +306,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 2
-          OnChange = edtGroupSearchChange
-          OnEnter = edtGroupSearchEnter
+          OnChange = edtSearch_GroupChange
+          OnEnter = edtSearch_GroupEnter
         end
         object edFilter_Group: TEdit
           Left = 52
@@ -346,7 +346,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object bbtShortcuts_Load: TBitBtn
         Left = 334
-        Top = 458
+        Top = 444
         Width = 45
         Height = 27
         Caption = 'Load'
@@ -355,7 +355,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object bbtShortcuts_SaveDefault: TBitBtn
         Left = 244
-        Top = 458
+        Top = 444
         Width = 90
         Height = 27
         Caption = 'Save as default'
@@ -364,7 +364,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object bbtShortcuts_Edit: TBitBtn
         Left = 379
-        Top = 458
+        Top = 444
         Width = 45
         Height = 27
         Caption = 'Edit'
@@ -373,7 +373,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object bbtShortcuts_Cancel: TBitBtn
         Left = 424
-        Top = 458
+        Top = 444
         Width = 85
         Height = 27
         Caption = 'Cancel current'
@@ -382,7 +382,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object bbtShortcuts_Save: TBitBtn
         Left = 570
-        Top = 458
+        Top = 444
         Width = 45
         Height = 27
         Caption = 'Save'
@@ -393,7 +393,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Left = 0
         Top = 146
         Width = 615
-        Height = 306
+        Height = 292
         Align = alTop
         BorderStyle = bsNone
         DataSource = modDados.dsShortcuts
@@ -437,7 +437,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object bbtShortcuts_CancelAll: TBitBtn
         Left = 509
-        Top = 458
+        Top = 444
         Width = 61
         Height = 27
         Caption = 'Cancel all'
@@ -446,7 +446,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object bbtShortcuts_RestoreDefault: TBitBtn
         Left = 154
-        Top = 458
+        Top = 444
         Width = 90
         Height = 27
         Caption = 'Restore default'
@@ -459,7 +459,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       ImageIndex = 1
       object Label20: TLabel
         Left = 0
-        Top = 454
+        Top = 450
         Width = 127
         Height = 13
         Caption = '*   ec = execute command'
@@ -475,7 +475,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
       end
       object btnUpdateKey: TButton
         Left = 511
-        Top = 457
+        Top = 447
         Width = 104
         Height = 25
         Caption = 'Update'
@@ -485,7 +485,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Left = 0
         Top = 0
         Width = 615
-        Height = 454
+        Height = 444
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvLowered
@@ -496,7 +496,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Left = 5
           Top = 5
           Width = 605
-          Height = 444
+          Height = 434
           Align = alClient
           BevelInner = bvNone
           BorderStyle = bsNone
@@ -524,42 +524,9 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
-      object gbRhotkeys: TGroupBox
-        Left = 0
-        Top = 0
-        Width = 615
-        Height = 52
-        Align = alTop
-        Caption = ' Set (hotkey) '
-        Ctl3D = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        ParentCtl3D = False
-        ParentFont = False
-        TabOrder = 0
-        object edHotkey: TEditAlign
-          Left = 9
-          Top = 21
-          Width = 596
-          Height = 19
-          MultiLine = True
-          WordWrap = True
-          BorderStyle = bsNone
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 0
-        end
-      end
       object rdgTinnRHotKeys: TRadioGroup
         Left = 4
-        Top = 445
+        Top = 432
         Width = 243
         Height = 37
         Caption = ' Option (all hotkeys) '
@@ -575,39 +542,41 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           'On')
         ParentCtl3D = False
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 0
         OnClick = rdgTinnRHotKeysClick
       end
       object btnRemove: TButton
         Left = 484
-        Top = 456
+        Top = 443
         Width = 65
         Height = 25
         Caption = 'Remove'
-        TabOrder = 2
+        TabOrder = 1
+        OnClick = btnRemoveClick
       end
       object btnClearAllHotKeys: TButton
         Left = 549
-        Top = 456
+        Top = 443
         Width = 65
         Height = 25
         Caption = 'Clear all'
-        TabOrder = 3
+        TabOrder = 2
+        OnClick = btnClearAllHotKeysClick
       end
       object btnAddHotKey: TButton
         Left = 419
-        Top = 456
+        Top = 443
         Width = 65
         Height = 25
         Caption = 'Add'
-        TabOrder = 4
+        TabOrder = 3
         OnClick = btnAddHotKeyClick
       end
       object pgRH: TJvgPageControl
         Left = 0
-        Top = 52
+        Top = 0
         Width = 615
-        Height = 393
+        Height = 432
         ActivePage = tbsRH_Custom
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
@@ -616,7 +585,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Font.Name = 'Tahoma'
         Font.Style = []
         Style = tsFlatButtons
-        TabOrder = 5
+        TabOrder = 4
         TabStop = False
         TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
         TabStyle.BevelInner = bvNone
@@ -651,14 +620,14 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Left = 0
             Top = 0
             Width = 607
-            Height = 362
+            Height = 401
             Align = alClient
             BorderStyle = bsNone
             ColCount = 2
             DefaultColWidth = 230
             DefaultRowHeight = 18
             FixedCols = 0
-            RowCount = 20
+            RowCount = 21
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -669,6 +638,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             ScrollBars = ssVertical
             TabOrder = 0
             OnDblClick = strgHK_SendDblClick
+            OnDrawCell = strgHK_SendDrawCell
             ColWidths = (
               467
               260)
@@ -681,14 +651,14 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Left = 0
             Top = 0
             Width = 607
-            Height = 362
+            Height = 401
             Align = alClient
             BorderStyle = bsNone
             ColCount = 2
             DefaultColWidth = 230
             DefaultRowHeight = 18
             FixedCols = 0
-            RowCount = 20
+            RowCount = 21
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -699,6 +669,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             ScrollBars = ssVertical
             TabOrder = 0
             OnDblClick = strgHK_SendDblClick
+            OnDrawCell = strgHK_ControlDrawCell
             ColWidths = (
               467
               260)
@@ -711,24 +682,26 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Left = 0
             Top = 0
             Width = 607
-            Height = 362
+            Height = 401
             Align = alClient
             BorderStyle = bsNone
             ColCount = 2
             DefaultColWidth = 230
             DefaultRowHeight = 18
             FixedCols = 0
-            RowCount = 20
+            RowCount = 21
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            Options = [goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goColMoving, goRowSelect]
+            Options = [goVertLine, goHorzLine, goDrawFocusSelected, goColMoving, goEditing]
             ParentFont = False
             ScrollBars = ssVertical
             TabOrder = 0
             OnDblClick = strgHK_CustomDblClick
+            OnDrawCell = strgHK_CustomDrawCell
+            OnSelectCell = strgHK_CustomSelectCell
             ColWidths = (
               467
               265)
@@ -739,7 +712,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
   end
   object stbShortcuts: TStatusBar
     Left = 0
-    Top = 543
+    Top = 538
     Width = 623
     Height = 19
     Color = 16250871
@@ -764,7 +737,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
   end
   object BitBtn2: TBitBtn
     Left = 544
-    Top = 516
+    Top = 507
     Width = 75
     Height = 25
     Cancel = True
@@ -776,7 +749,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
   end
   object bbtShortcuts_Manager: TBitBtn
     Left = 394
-    Top = 516
+    Top = 507
     Width = 75
     Height = 25
     Caption = '&Manager'

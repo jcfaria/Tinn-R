@@ -101,7 +101,7 @@ type
 
   private
     { Private declarations }
-    procedure pActualizeGroups;
+    procedure pActualize_Groups;
     
   public
     { Public declarations }
@@ -237,7 +237,7 @@ begin
   edtGroupSearch.SetFocus;
 end;
 
-procedure TfrmCompletion.pActualizeGroups;
+procedure TfrmCompletion.pActualize_Groups;
 begin
   //Actualize Groups in frmMain
   with modDados do begin
@@ -276,7 +276,7 @@ begin
 
     IndexName:= 'CompletionDefaultIndex';
   end;
-  pActualizeGroups;
+  pActualize_Groups;
 end;
 
 procedure TfrmCompletion.FormShow(Sender: TObject);
@@ -328,7 +328,7 @@ begin
     except
     end;
   end;
-  //pActualizeGroups;
+  //pActualize_Groups;
 end;
 
 procedure TfrmCompletion.bbtCompletionCloseClick(Sender: TObject);

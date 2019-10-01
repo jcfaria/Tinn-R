@@ -211,7 +211,7 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
   begin
     with frmMain do
       if (pgFiles.PageCount > 0) then begin
-        i:= fFindTopWindow;
+        i:= fFindTop_Window;
         with (MDIChildren[i] as TfrmEditor) do
           pSearchError(sTmp)
       end;
@@ -1076,7 +1076,7 @@ procedure TfrmRterm.synIOKeyDown(Sender: TObject;
 
   begin
     Result:= '';
-    if not frmMain.fValidRRunning then Exit;
+    if not frmMain.fValidR_Running then Exit;
     with synIO do begin
       beginUpdate;
       smOption:= SelectionMode;

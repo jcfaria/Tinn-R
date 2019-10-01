@@ -210,6 +210,10 @@ type
     property SpaceAttri: TSynHighlighterAttributes read fSpaceAttri
                                                    write fSpaceAttri;
 
+    // J.C.Faria
+    property IdentifierAttri: TSynHighlighterAttributes read fIdentifierAttri
+                                                        write fIdentifierAttri;
+
     property URIAttri: TSynHighlighterAttributes read fURIAttri
                                                  write SetURIAttri;
 
@@ -325,6 +329,7 @@ begin
   AddAttribute(fSpaceAttri);
   
   fIdentifierAttri := TSynHighlighterAttributes.Create(SYNS_AttrIdentifier, SYNS_FriendlyAttrIdentifier);
+  AddAttribute(fIdentifierAttri);  //J.C.Faria
 
   fURIAttri := TSynHighlighterAttributes.Create(SYNS_AttrURI, SYNS_FriendlyAttrURI);
   fURIAttri.Foreground := clBlue;
@@ -355,7 +360,7 @@ begin
   inherited;
   //the other attributes are automatically freed because of AddAttribute()
   //fSpaceAttri.Free;  // J.C.Faria (It generates a pointer bug!)
-  fIdentifierAttri.Free;
+  //fIdentifierAttri.Free;
 end;
 
 procedure TSynURISyn.CRProc;
@@ -520,7 +525,7 @@ var
 begin
   case GetTokenID of
     tkComment: Result:= fCommentAttri;  // J.C.Faria
-    tkSpace: Result := fSpaceAttri;
+    tkSpace: Result := fSpaceAttri;     // J.C.Faria
     tkFtpLink,
     tkGopherLink,
     tkHttpLink,
@@ -703,7 +708,6 @@ begin
   else
     Result := tkUnknown;
 end;
-
 
 function TSynURISyn.IsAlphaNum(AChar: WideChar): Boolean;
 begin
