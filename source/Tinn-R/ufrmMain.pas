@@ -7941,7 +7941,8 @@ begin
     if (sName = 'General_Multi-Highlighter') then
       sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
 
-    if ((dmSyn.Components[j] as TSynCustomHighlighter).Tag <> 99) then begin  // Tag = 99 Rterm
+    // It is necessary to distinguish R from Rterm (and both have name R)
+    if ((dmSyn.Components[j] as TSynCustomHighlighter).Tag <> 99) then begin  // Tag = 99 is an atribute of Rterm Highlighter
       cbSyntax.Items.Add(sName);
       sFilter:= trim((dmSyn.Components[j] as TSynCustomHighlighter).DefaultFilter);
       slFilters.Add(sFilter);

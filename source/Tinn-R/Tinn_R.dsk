@@ -1,57 +1,34 @@
 [Closed Files]
-File_0=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmComments.pas',0,1,1,1,1,0,0,,
-File_1=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.pas',0,1,276,20,308,0,0,,{1
-File_2=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRCard.pas',0,1,267,20,299,0,0,,
-File_3=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmCompletion.pas',0,1,299,22,331,0,0,,
-File_4=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas',0,1,123,40,140,0,0,,
-File_5=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterText.pas',0,1,983,57,997,0,0,,{1
-File_6=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterURI.pas',0,1,349,5,363,0,0,,
-File_7=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_adapted\SynEditStrConst.pas',0,1,287,1,304,0,0,,
-File_8=TSourceModule,'C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynTextDrawer.pas',0,1,389,1,403,0,0,,
+File_0=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas',0,1,827,21,844,0,0,,
+File_1=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPandoc.pas',0,1,288,34,305,0,0,,
+File_2=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmColors.pas',0,1,329,119,347,0,0,,
+File_3=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas',0,1,337,40,354,0,0,,
+File_4=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas',0,1,591,3,608,0,0,,{1
+File_5=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR.pas',0,1,3809,3,3826,0,0,,
+File_6=TSourceModule,'c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas',0,1,2600,18,2611,0,0,,
+File_7=TSourceModule,'c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN32\RTL\SYS\Types.pas',0,1,45,1,62,0,0,,
+File_8=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmComments.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
-Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
-Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR.pas
-Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
-Module5=default.htm
-Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
-Module7=c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN32\RTL\SYS\Types.pas
-Module8=c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas
-Module9=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas
-Module10=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\w_waste\ufrmHotKeys.pas
-Module11=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas
-Module12=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
-Module13=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPandoc.pas
-Module14=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
-Module15=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas
-Module16=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
-Module17=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
-Count=18
+Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
+Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
+Module2=default.htm
+Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
+Module5=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
+Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\w_waste\ufrmHotKeys.pas
+Module7=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
+Module8=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas
+Module9=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
+Module10=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas
+Module11=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
+Count=12
 EditWindowCount=1
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
+ModuleType=TBaseProject
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -59,20 +36,17 @@ FormOnTop=0
 [default.htm]
 ModuleType=TURLModule
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
-ModuleType=TBaseProject
-
-[c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN32\RTL\SYS\Types.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
-[c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas]
 ModuleType=TSourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
@@ -82,19 +56,14 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas]
 ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPandoc.pas]
-ModuleType=TSourceModule
-FormState=1
+FormState=0
 FormOnTop=0
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas]
@@ -112,18 +81,13 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas]
 FormState=1
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=18
-CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
+ViewCount=12
+CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dpr
 View0=0
 View1=1
 View2=2
@@ -136,12 +100,6 @@ View8=8
 View9=9
 View10=10
 View11=11
-View12=12
-View13=13
-View14=14
-View15=15
-View16=16
-View17=17
 PercentageSizes=1
 Create=1
 Visible=1
@@ -161,13 +119,13 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1896
 LeftPanelClients=StructureView,PropertyInspector
-LeftPanelData=00000800010100000000E7120000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D01000000009F2100001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=00000800010100000000E60E0000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D0100000000801A00001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=0
 RightPanelClients=DockSite2,ToolForm
 RightPanelData=0000080001010200000009000000446F636B536974653208000000546F6F6C466F726D9E1200000000000001CF07000000000000FFFFFFFF
-BottomPanelSize=0
-BottomPanelClients=DockSite1
-BottomPanelData=0000080001000100000009000000446F636B5369746531F806000000000000007A45000000000000FFFFFFFF
+BottomPanelSize=1784
+BottomPanelClients=MessageView@EditWindow0,DockSite1
+BottomPanelData=0000080001020100000009000000446F636B53697465317A4500000000000002F80600000000000001000000007A4500000B0000004D65737361676556696577FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465302D1900000000000000771B000000000000FFFFFFFF
@@ -179,9 +137,9 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dpr
-CursorX=3
-CursorY=118
-TopLine=97
+CursorX=53
+CursorY=95
+TopLine=72
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -212,70 +170,48 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.p
 [View4]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-CursorX=96
-CursorY=7944
-TopLine=7925
+CursorX=4
+CursorY=7939
+TopLine=7922
 LeftCol=1
 Elisions=
-Bookmarks={1,7939,4}{2,14471,23}{3,14340,13}{4,2648,1}{5,19571,26}{6,14547,5}{7,6703,1}{8,5425,1}{9,3067,1}
+Bookmarks={1,7939,4}{2,14472,23}{3,14341,13}{4,2648,1}{5,19572,26}{6,14548,5}{7,6703,1}{8,5425,1}{9,3067,1}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 
 [View5]
 CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas
-CursorX=40
-CursorY=354
-TopLine=337
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas
-
-[View6]
-CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
-CursorX=5
-CursorY=1530
+CursorX=53
+CursorY=1533
 TopLine=1521
 LeftCol=1
 Elisions=
 Bookmarks={8,1535,30}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
 
+[View6]
+CustomEditViewType=TEditView
+Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
+CursorX=6
+CursorY=433
+TopLine=430
+LeftCol=1
+Elisions=
+Bookmarks={1,433,6}
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
+
 [View7]
 CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPandoc.pas
-CursorX=34
-CursorY=305
-TopLine=288
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPandoc.pas
-
-[View8]
-CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
-CursorX=28
-CursorY=1079
-TopLine=1062
+CursorX=1
+CursorY=1077
+TopLine=1057
 LeftCol=1
 Elisions=
-Bookmarks=
+Bookmarks={1,1054,5}{2,1077,7}{3,907,2}{5,1010,7}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
 
-[View9]
-CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
-CursorX=21
-CursorY=844
-TopLine=827
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
-
-[View10]
+[View8]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas
 CursorX=1
@@ -286,7 +222,7 @@ Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
 
-[View11]
+[View9]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 CursorX=22
@@ -297,51 +233,7 @@ Elisions=
 Bookmarks={1,1089,17}{2,1015,1}{3,1044,1}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 
-[View12]
-CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
-CursorX=3
-CursorY=608
-TopLine=591
-LeftCol=1
-Elisions=
-Bookmarks={1,608,3}
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
-
-[View13]
-CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR.pas
-CursorX=3
-CursorY=3826
-TopLine=3809
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR.pas
-
-[View14]
-CustomEditViewType=TEditView
-Module=c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas
-CursorX=18
-CursorY=2611
-TopLine=2600
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=c:\program files (x86)\codegear\rad studio\5.0\source\Win32\rtl\win\Windows.pas
-
-[View15]
-CustomEditViewType=TEditView
-Module=c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN32\RTL\SYS\Types.pas
-CursorX=1
-CursorY=62
-TopLine=45
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN32\RTL\SYS\Types.pas
-
-[View16]
+[View10]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
 CursorX=1
@@ -352,7 +244,7 @@ Elisions=
 Bookmarks={1,184,17}{9,226,1}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
 
-[View17]
+[View11]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\w_waste\ufrmHotKeys.pas
 CursorX=1
@@ -394,7 +286,7 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=17
+Count=18
 Breakpoint0='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmMain.pas',17497,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\trSynUtils.pas',439,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmMain.pas',18204,'',0,1,'',1,0,0,'',1,'','','',0
@@ -405,13 +297,14 @@ Breakpoint6='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\sourc
 Breakpoint7='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmReplace.pas',105,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint8='C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynHighlighterURI.pas',469,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint9='C:\Users\jcfaria\Documents\RAD Studio\components\SynEdit\Source\SynEditHighlighter.pas',1092,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint10='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas',18088,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint11='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas',1943,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint10='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas',18089,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint11='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas',1944,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint12='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas',663,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint13='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas',23071,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint13='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas',23072,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint14='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas',7185,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint15='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas',1506,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint16='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas',1519,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint17='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas',1075,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -461,8 +354,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=1161
-Top=320
+Left=0
+Top=0
 Width=1999
 Height=7276
 MaxLeft=-1
@@ -783,21 +676,16 @@ State=0
 Left=0
 Top=305
 Width=1896
-Height=4824
+Height=2927
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=4824
+ClientHeight=2927
 TBDockHeight=407
 LRDockWidth=1896
 Dockable=1
 StayOnTop=0
 SplitPos=111
-
-[PropInspDesignerSelection]
-ArrangeBy=Category
-SelectedItem=Action,Miscellaneous.OnChange
-ExpandedItems=Legacy=1,Miscellaneous=1,Action=0,"Drag Drop/Docking=0","Help and Hints=0",Input=0,Layout=0,Linkage=0,Locale=0,Localizable=0
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -847,16 +735,16 @@ StayOnTop=0
 PercentageSizes=1
 Create=1
 Visible=1
-Docked=0
+Docked=1
 State=0
-Left=10037
-Top=6301
+Left=0
+Top=23
 Width=10000
-Height=5854
-MaxLeft=-7
-MaxTop=-14
-ClientWidth=9941
-ClientHeight=5434
+Height=1545
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=10000
+ClientHeight=1545
 TBDockHeight=1545
 LRDockWidth=4327
 Dockable=1
@@ -906,7 +794,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -917,7 +805,7 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=23
+Top=0
 Width=3829
 Height=1640
 MaxLeft=-1

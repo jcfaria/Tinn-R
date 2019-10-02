@@ -1533,7 +1533,8 @@ begin
       synEditor.Highlighter:= dmSyn.SynText;
 
     if (sHighligh = sSynName) and
-      ((dmSyn.Components[i] as TSynCustomHighlighter).Tag <> 99) then // Tag = 99 is atribute of Rterm
+      // It is necessary to distinguish R from Rterm (and both have name R)
+      ((dmSyn.Components[i] as TSynCustomHighlighter).Tag <> 99) then  // Tag = 99 is an atribute of Rterm Highlighter
       synEditor.Highlighter:= (dmSyn.Components[i] as TSynCustomHighlighter);
 
     if (sHighligh = 'General_Multi-Highlighter') then begin

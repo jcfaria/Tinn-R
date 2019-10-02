@@ -812,6 +812,7 @@ begin
   end;
 end;
 
+// CTRL + Carriage Return (CTRL + ENTER)
 procedure TfrmRterm.pCR;
 
   procedure pSantize_Selection(var sTmp: string);
@@ -847,7 +848,7 @@ procedure TfrmRterm.pCR;
                     [preMultiLine]);
   end;
 
-  function fGetSelection(var bSingleLine: boolean): string;
+  function fGet_Selection(var bSingleLine: boolean): string;
   var
     sTmp,
      sFilePath: string;
@@ -886,7 +887,7 @@ procedure TfrmRterm.pCR;
   end;
 
   // Get the user option (y/n/c) in the prompt message whem R is ready to quit
-  function fCheckQuit(var sT: string): boolean;
+  function fCheck_Quit(var sT: string): boolean;
   begin
     Result := False;
 
@@ -899,6 +900,26 @@ procedure TfrmRterm.pCR;
                    True);
 
       Result := True;
+    end;
+  end;
+
+  // It check if under interactive funcion scan()
+  procedure pCheck_Scan(var sTmp, sPre: string);
+  var
+    sRex: string;
+
+  begin
+    // If under scan() function - ^[0-9]+:X
+    sRex := fRegEx(sTmp,
+                   '^[0-9]+:');
+
+    if (sRex <> '') then begin
+      sTmp := fRegEx(sTmp,
+                     '^[0-9]:',
+                     True,
+                     '');
+
+      sPre := sRex;
     end;
   end;
 
@@ -935,7 +956,7 @@ procedure TfrmRterm.pCR;
     RHistory.Add(Trim(sT));
   end;  // pCheck_RHistory
 
-  procedure pProcessCR(var sTmp, sPre, sSend: string);
+  procedure pProcess_CR(var sTmp, sPre, sSend: string);
   begin
     // Remove space(s) after '>'
     if (fRegEx(sTmp,
@@ -984,6 +1005,7 @@ procedure TfrmRterm.pCR;
         LineText := sRDebugPrefix + sSend;
       end
       else
+
       // result of cat('something')
       if (sSend = sTmp) and (fRegEx(sTmp, '>$') <> '') and (sPre = '') then
         sSend := ''
@@ -1017,7 +1039,7 @@ var
     sSend,
     sToSend: string;
 
-  bSingleLine: boolean;    
+  bSingleLine: boolean;
 
 begin
   sTmp := '';
@@ -1030,34 +1052,41 @@ begin
 
     // User selection has priority
     if SelAvail then begin
-      sToSend:= fGetSelection(bSingleLine);
+      sToSend:= fGet_Selection(bSingleLine);
+
       if (sToSend = EmptyStr) then Exit;
 
       if bSingleLine then
         sTmp:= sToSend
       else
         if frmMain.bREcho then
-          sTmp:= 'source(' +
-                 sToSend +
-                 ', echo=TRUE' +
-                 ', max.deparse.length=' +
-                 IntToStr(frmMain.iMaxDeparseLength) +
-                 ')'
+          sTmp := 'source(' +
+                  sToSend +
+                  ', echo=TRUE' +
+                  ', max.deparse.length=' +
+                  IntToStr(frmMain.iMaxDeparseLength) +
+                  ')'
         else
-          sTmp:= 'source(' +
-                 sToSend +
-                 ')';
+          sTmp := 'source(' +
+                  sToSend +
+                  ')';
     end
-    else
+    else begin
       sTmp := Trim(LineText);
 
-    if fCheckQuit(sTmp) then
+      pCheck_Scan(sTmp,
+                  sPre);
+    end;
+
+    if fCheck_Quit(sTmp) then
     begin
       frmMain.pDoSend(sSend,
                       False);
     end
     else
-      pProcessCR(sTmp, sPre, sSend);
+      pProcess_CR(sTmp,
+                  sPre,
+                  sSend);
 
     EndUpdate;
   end;

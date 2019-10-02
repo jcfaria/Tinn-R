@@ -1,4 +1,4 @@
-﻿(*
+(*
  Tinn is a ASCII file editor primarily intended as a better replacement
  of the default Notepad.exe under Windows.
 
@@ -96,7 +96,7 @@ uses
   ufrmEditor in '..\Tinn-R\ufrmEditor.pas' {frmEditor},
   ufrmGotoBox in '..\Tinn-R\ufrmGotoBox.pas' {frmGotoBox},
   ufrmGroupRename in '..\Tinn-R\ufrmGroupRename.pas' {frmGroupRename},
-  ufrmHotKeys in '..\Tinn-R\ufrmHotKeys.pas' {frmHotKeys},
+//  ufrmHotKeys in '..\Tinn-R\ufrmHotKeys.pas' {frmHotKeys},
   ufrmLatexDimensional in '..\Tinn-R\ufrmLatexDimensional.pas' {frmLatexDimensional},
   ufrmMain in '..\Tinn-R\ufrmMain.pas' {frmMain},
   ufrmNewGoup in '..\Tinn-R\ufrmNewGoup.pas' {frmNewGroup},
