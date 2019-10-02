@@ -11,13 +11,18 @@ File_8=TSourceModule,'c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN3
 File_9=TSourceModule,'C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmSearchInFiles.pas',0,1,358,1,366,0,0,,
 
 [Modules]
-Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dproj
-Module1=default.htm
-Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
-Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dproj
+Module2=default.htm
+Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
 Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 Count=5
 EditWindowCount=1
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dproj]
 ModuleType=TBaseProject
@@ -26,11 +31,6 @@ ModuleType=TBaseProject
 ModuleType=TURLModule
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -46,7 +46,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=5
-CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dpr
+CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 View0=0
 View1=1
 View2=2
@@ -76,8 +76,8 @@ RightPanelSize=0
 RightPanelClients=DockSite2,ToolForm
 RightPanelData=0000080001010200000009000000446F636B536974653208000000546F6F6C466F726D9E1200000000000001CF07000000000000FFFFFFFF
 BottomPanelSize=0
-BottomPanelClients=MessageView@EditWindow0,DockSite1
-BottomPanelData=000008000102020000000B0000004D6573736167655669657709000000446F636B53697465317A45000000000000023907000000000000FFFFFFFF
+BottomPanelClients=DockSite1
+BottomPanelData=0000080001000100000009000000446F636B5369746531F806000000000000007A45000000000000FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465302D1900000000000000771B000000000000FFFFFFFF
@@ -90,7 +90,7 @@ WelcomePageURL=bds:/default.htm
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dpr
 CursorX=1
-CursorY=22
+CursorY=1
 TopLine=1
 LeftCol=1
 Elisions=
@@ -98,6 +98,17 @@ Bookmarks=
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dpr
 
 [View2]
+CustomEditViewType=TEditView
+Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+CursorX=1
+CursorY=3106
+TopLine=3087
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+
+[View3]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
 CursorX=1
@@ -107,17 +118,6 @@ LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
-
-[View3]
-CustomEditViewType=TEditView
-Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-CursorX=23
-CursorY=198
-TopLine=185
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 
 [View4]
 CustomEditViewType=TEditView
@@ -217,8 +217,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=0
-Top=0
+Left=1161
+Top=320
 Width=1999
 Height=7276
 MaxLeft=-1
@@ -597,18 +597,18 @@ StayOnTop=0
 [MessageView@EditWindow0]
 PercentageSizes=1
 Create=1
-Visible=0
-Docked=1
+Visible=1
+Docked=0
 State=0
-Left=0
-Top=0
-Width=4327
-Height=1640
-MaxLeft=-1
-MaxTop=-1
-ClientWidth=4327
-ClientHeight=1640
-TBDockHeight=1640
+Left=10044
+Top=8564
+Width=10000
+Height=3618
+MaxLeft=-7
+MaxTop=-14
+ClientWidth=9941
+ClientHeight=3198
+TBDockHeight=1545
 LRDockWidth=4327
 Dockable=1
 StayOnTop=0
@@ -668,7 +668,7 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=0
+Top=23
 Width=3829
 Height=1640
 MaxLeft=-1

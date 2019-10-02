@@ -15,7 +15,7 @@
   Russell May - http://www.solarvoid.com
 
  Tinn-R is an extension of Tinn that provides additional tools to control R
- (http://cran.r-project.org). The project is coordened by Josï¿½ Clï¿½udio Faria
+ (http://cran.r-project.org). The project is coordened by José Cláudio Faria
  (joseclaudio.faria@gmail.com).
 
  As such, Tinn-R is a feature-rich replacement of the basic script editor
@@ -96,7 +96,6 @@ uses
   ufrmEditor in '..\Tinn-R\ufrmEditor.pas' {frmEditor},
   ufrmGotoBox in '..\Tinn-R\ufrmGotoBox.pas' {frmGotoBox},
   ufrmGroupRename in '..\Tinn-R\ufrmGroupRename.pas' {frmGroupRename},
-//  ufrmHotKeys in '..\Tinn-R\ufrmHotKeys.pas' {frmHotKeys},
   ufrmLatexDimensional in '..\Tinn-R\ufrmLatexDimensional.pas' {frmLatexDimensional},
   ufrmMain in '..\Tinn-R\ufrmMain.pas' {frmMain},
   ufrmNewGoup in '..\Tinn-R\ufrmNewGoup.pas' {frmNewGroup},
