@@ -170,17 +170,19 @@ type
 
   public
     { Public declarations }
-    bIO_Keyed            :boolean;
-    bRterm_Plus          : boolean;
-    bRterm_Running       : boolean;
-    bRUnderDebug_Function: boolean;
-    bRUnderDebug_Package : boolean;
-    iSynLog2Height       : integer;
-    iSynLog2Width        : integer;
-    iSize                : integer;
-    splRIO               : TSplitter;
-    sRDebugPrefix        : string;
-    synLog2              : TSynEdit;
+    bIO_Keyed             :boolean;
+    bRterm_Plus           : boolean;
+    bRterm_Running        : boolean;
+    bRUnderDebug_Function : boolean;
+    bRUnderDebug_Package  : boolean;
+    bRUnderScan_Function  : boolean; // 1:
+    iSynLog2Height        : integer;
+    iSynLog2Width         : integer;
+    iSize                 : integer;
+    splRIO                : TSplitter;
+    sRDebug_Prefix        : string;
+    sRScan_Prefix         : string;  // X:
+    synLog2               : TSynEdit;
 
     procedure pCR;
     procedure pRtermSplit(bSplitHorizontal: boolean = True);
@@ -224,8 +226,8 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
     iPos: integer;
 
   begin
-    iPos:= Pos('''',
-               sTmp);
+    iPos := Pos('''',
+                sTmp);
 
     if (iPos <> 0) then begin
       Delete(sTmp,
@@ -299,6 +301,28 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
     end;
   end;
 
+  procedure pCheckIfUnderScan_Function;
+  var
+    sRex : string;
+
+  begin
+    // If under scan() function - ^[0-9]+:X
+    sRex:= fRegEx(Cmd,
+                  '^[0-9]+:');
+
+    if (sRex <> EmptyStr) then
+      with frmRterm do begin
+        bRUnderScan_Function:= True;
+
+        sRScan_Prefix:= sRex;
+      end
+    else
+      with frmRterm do begin
+        bRUnderScan_Function:= False;
+        if not bRUnderScan_Function then sRScan_Prefix:= '';
+      end;
+  end;
+
   procedure pCheckIfUnderDebug_Function;
   var
     iPosDbg1,
@@ -317,9 +341,9 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
         (iPosDbg1 < iPosDbg2) then begin
        bRUnderDebug_Function:= True;
 
-       sRDebugPrefix:= Trim(Copy(Cmd,
-                                 iPosDbg1,
-                                 iPosDbg2 - iPosDbg1 + 2));
+       sRDebug_Prefix:= Trim(Copy(Cmd,
+                                  iPosDbg1,
+                                  iPosDbg2 - iPosDbg1 + 2));
      end
      else bRUnderDebug_Function:= False;
    end;
@@ -342,13 +366,13 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
         (iPosDbg1 < iPosDbg2) then begin
          bRUnderDebug_Package:= True;
 
-         sRDebugPrefix:= Trim(Copy(Cmd,
-                                   iPosDbg1,
-                                   iPosDbg2 - iPosDbg1 + 2));
+         sRDebug_Prefix:= Trim(Copy(Cmd,
+                                    iPosDbg1,
+                                    iPosDbg2 - iPosDbg1 + 2));
      end
      else begin
        bRUnderDebug_Package:= False;
-       if not bRUnderDebug_Function then sRDebugPrefix:= '';
+       if not bRUnderDebug_Function then sRDebug_Prefix:= '';
      end;
    end;
 
@@ -514,6 +538,7 @@ begin
   end;
 
   pgRterm.ActivePage:= tbsIO;
+  pCheckIfUnderScan_Function;
   pCheckIfUnderDebug_Function;
   pCheckIfUnderDebug_Package;
 
@@ -1002,7 +1027,7 @@ procedure TfrmRterm.pCR;
       // It will checks if is under debug
       if fCheck_Debug(sSend) then
       begin
-        LineText := sRDebugPrefix + sSend;
+        LineText := sRDebug_Prefix + sSend;
       end
       else
 
@@ -1322,7 +1347,7 @@ begin
 
                    if (sPrior = '>') or
                       (sPrior = '+') or
-                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
+                      (sPrior = sRDebug_Prefix) then key:= VK_PAUSE;
                  end;
                end;
 
@@ -1332,7 +1357,7 @@ begin
 
                    if (sPrior = '>') or
                       (sPrior = '+') or
-                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
+                      (sPrior = sRDebug_Prefix) then key:= VK_PAUSE;
                  end;
                end;
 

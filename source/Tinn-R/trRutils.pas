@@ -58,10 +58,10 @@ type
   private
 
   public
-    bIncomplete: boolean;
-    cRTerm_RU  : TConsoleIO;
-    synIO_RU   : TSynEdit;
-    synLog_RU  : TSynEdit;
+    bIncomplete : boolean;
+    cRTerm_RU   : TConsoleIO;
+    synIO_RU    : TSynEdit;
+    synLog_RU   : TSynEdit;
 
     constructor Create;//(AOwner: TComponent);
     destructor Free;
@@ -82,7 +82,7 @@ uses
 constructor TR_Useful.Create;//(AOwner: TComponent);
 begin
   cRTerm_RU:= TConsoleIO.Create(nil);
-  synIO_RU := TSynEdit.Create(nil);
+  synIO_RU:= TSynEdit.Create(nil);
   synLog_RU:= TSynEdit.Create(nil);
 
   with cRTerm_RU do begin
@@ -114,172 +114,194 @@ end;
 procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
                                             const Cmd: string);
 
+  procedure pCheckIfUnderScan_Function;
+  var
+    sRex : string;
+
+  begin
+    // If under scan() function - ^[0-9]+:X
+    sRex:= fRegEx(Cmd,
+                  '^[0-9]+:');
+
+    if (sRex <> EmptyStr) then
+      with frmRterm do begin
+        bRUnderScan_Function:= True;
+
+        sRScan_Prefix:= sRex;
+      end
+    else
+      with frmRterm do begin
+        bRUnderScan_Function:= False;
+        if not bRUnderScan_Function then sRScan_Prefix:= '';
+      end;
+  end;
+
   procedure pCheckIfUnderDebug_Function;
   var
     iPosDbg1,
      iPosDbg2 : integer;
 
-   begin
-     // It is necessary due the use of function debug: Browser[number]>
-     iPosDbg1:= Pos('Browse[',
-                    Cmd);
+  begin
+    // It is necessary due the use of function debug: Browser[number]>
+    iPosDbg1:= Pos('Browse[',
+                   Cmd);
 
-     iPosDbg2:= Pos(']>',
-                    Cmd);
+    iPosDbg2:= Pos(']>',
+                   Cmd);
 
-     with frmRterm do
-       if (iPosDbg1 <> 0) and
-          (iPosDbg2 <> 0) and
-          (iPosDbg1 < iPosDbg2) then begin
-           bRUnderDebug_Function:= True;
+    with frmRterm do
+      if (iPosDbg1 <> 0) and
+         (iPosDbg2 <> 0) and
+         (iPosDbg1 < iPosDbg2) then begin
+          bRUnderDebug_Function:= True;
 
-           sRDebugPrefix:= Trim(Copy(Cmd,
+          sRDebug_Prefix:= Trim(Copy(Cmd,
                                      iPosDbg1,
                                      iPosDbg2 - iPosDbg1 + 2));
-       end
-       else bRUnderDebug_Function:= False;
-   end;
+      end
+      else bRUnderDebug_Function:= False;
+  end;
 
   procedure pCheckIfUnderDebug_Package;
   var
     iPosDbg1,
      iPosDbg2 : integer;
 
-   begin
-     // It is necessary due the use of package debug: D(number)>
-     iPosDbg1:= Pos('D(',
-                    Cmd);
+  begin
+    // It is necessary due the use of package debug: D(number)>
+    iPosDbg1:= Pos('D(',
+                   Cmd);
 
-     iPosDbg2:= Pos(')>',
-                    Cmd);
+    iPosDbg2:= Pos(')>',
+                   Cmd);
 
-     with frmRterm do
-       if (iPosDbg1 <> 0) and
-          (iPosDbg2 <> 0) and
-          (iPosDbg1 < iPosDbg2) then begin
-           bRUnderDebug_Package:= True;
+    with frmRterm do
+      if (iPosDbg1 <> 0) and
+         (iPosDbg2 <> 0) and
+         (iPosDbg1 < iPosDbg2) then begin
+          bRUnderDebug_Package:= True;
 
-           sRDebugPrefix:= Trim(Copy(Cmd,
+          sRDebug_Prefix:= Trim(Copy(Cmd,
                                      iPosDbg1,
                                      iPosDbg2 - iPosDbg1 + 2));
-       end
-       else begin
-         bRUnderDebug_Package:= False;
-         if not bRUnderDebug_Function then sRDebugPrefix:= '';
-       end;
-   end;
+      end
+      else begin
+        bRUnderDebug_Package:= False;
+        if not bRUnderDebug_Function then sRDebug_Prefix:= '';
+      end;
+  end;
 
-   function fIsUnder_txtPB: boolean;
-   var
-     sTmp: string;
+  function fIsUnder_txtPB: boolean;
+  var
+    sTmp: string;
 
-   begin
-     Result:= False;
+  begin
+    Result:= False;
 
-     // Case: use of 'txtProgressBar' function with the argument style=1
-     // by J.C.Faria
-     if (fRegEx(Cmd,
-                '^[=]+',  // style=1, it was possible to detect the pattern only using show message in the output
-                False) <> '') then begin
+    // Case: use of 'txtProgressBar' function with the argument style=1
+    // by J.C.Faria
+    if (fRegEx(Cmd,
+               '^[=]+',  // style=1, it was possible to detect the pattern only using show message in the output
+               False) <> '') then begin
 
-       with synIO_RU do
-         // Check if already exists a last one progress char '=' in the LineText
-         if (fRegEx(LineText,
-                    '^[=]+',
-                    False) = '') then Lines.Add(Cmd)              // if not -> It will be the first   '='
-                                 else LineText:= LineText + Cmd;  // else   -> add the received '=' to LineText
+      with synIO_RU do
+        // Check if already exists a last one progress char '=' in the LineText
+        if (fRegEx(LineText,
+                   '^[=]+',
+                   False) = '') then Lines.Add(Cmd)              // if not -> It will be the first   '='
+                                else LineText:= LineText + Cmd;  // else   -> add the received '=' to LineText
 
-       Result:= True;
-     end;
+      Result:= True;
+    end;
 
-     // Case: use of 'txtProgressBar' function with the argument style=2
-     // by J.C.Faria
-     if (fRegEx(Cmd,
-                '^(\r){1,3}[=]+',  // style=2, it was possible to detect the pattern only using show message in the output
-                False) <> '') then begin
+    // Case: use of 'txtProgressBar' function with the argument style=2
+    // by J.C.Faria
+    if (fRegEx(Cmd,
+               '^(\r){1,3}[=]+',  // style=2, it was possible to detect the pattern only using show message in the output
+               False) <> '') then begin
 
-       with synIO_RU do
-         // Check if already exists a last one progress char '=' in the LineText
-         if (fRegEx(LineText,
-                    '^[=]+',
-                    False) = '') then Lines.Add(Trim(Cmd))   // if not -> It will be the first   '='
-                                 else LineText:= Trim(Cmd);  // else   -> add the received '=' to LineText
+      with synIO_RU do
+        // Check if already exists a last one progress char '=' in the LineText
+        if (fRegEx(LineText,
+                   '^[=]+',
+                   False) = '') then Lines.Add(Trim(Cmd))   // if not -> It will be the first   '='
+                                else LineText:= Trim(Cmd);  // else   -> add the received '=' to LineText
 
-       Result:= True;
-     end;
+      Result:= True;
+    end;
 
-     // Case: use of 'txtProgressBar' function with the argument style=3
-     // by J.C.Faria
-     if (fRegEx(Cmd,
-                '^(\r)[ ]{1,3}\|[ =]*[|]?[ ]*[0-9]*%?',  // style=3
-                False) <> '') then begin
-       if (fRegEx(Cmd,
-                  '(label:|ordinary text [a-zA-Z ]+)',  // style=3 and receiving output of 'knitr' package
-                  False) <> '') then begin
-         Result:= False;
+    // Case: use of 'txtProgressBar' function with the argument style=3
+    // by J.C.Faria
+    if (fRegEx(Cmd,
+               '^(\r)[ ]{1,3}\|[ =]*[|]?[ ]*[0-9]*%?',  // style=3
+               False) <> '') then begin
+      if (fRegEx(Cmd,
+                 '(label:|ordinary text [a-zA-Z ]+)',  // style=3 and receiving output of 'knitr' package
+                 False) <> '') then begin
+        Result:= False;
 
-         Exit
-       end;
+        Exit
+      end;
 
-       // The beow is very nice to pure txtProgressBar, not to knitr functions.
-       // The knitr progress bar is very polluted!
-       // I think, impossible to filter.
-       // So, it will be a task to 'pAddROutput' procedure below.
+      // The beow is very nice to pure txtProgressBar, not to knitr functions.
+      // The knitr progress bar is very polluted!
+      // I think, impossible to filter.
+      // So, it will be a task to 'pAddROutput' procedure below.
 
-       //https://regex101.com/r/zA6jX2/1
-       //$re = '/\|[ =]*\|[ ]*[0-9]*%/';
-       //$str = '|
-       //|                                 |   0%
-       //|
-       //|========                         |  25%
-       //|
-       //|================                 |  50%
-       //|
-       //|=========================        |  75%
-       //|
-       //|=================================| 100%';
-       //
-       //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+      //https://regex101.com/r/zA6jX2/1
+      //$re = '/\|[ =]*\|[ ]*[0-9]*%/';
+      //$str = '|
+      //|                                 |   0%
+      //|
+      //|========                         |  25%
+      //|
+      //|================                 |  50%
+      //|
+      //|=========================        |  75%
+      //|
+      //|=================================| 100%';
+      //
+      //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
 
-       //// Print the entire match result
-       //var_dump($matches);
+      //// Print the entire match result
+      //var_dump($matches);
 
-       // by J.C.Faria
-       sTmp:= fRegEx(Cmd,
-                     '\|[ =]*\|[ ]*[0-9]*%',
-                     False);
+      // by J.C.Faria
+      sTmp:= fRegEx(Cmd,
+                    '\|[ =]*\|[ ]*[0-9]*%',
+                    False);
 
-       with synIO_RU do
-         // Check if already exists a last one progress structure '|  | 0%' in the LineText
-         // https://regex101.com/r/uJ4oN6/1
-         //$re = '/\|[ =]*[|]?[ ]*[0-9]*%?/';
-         //$str = '|
-         //|                                 |   0%
-         //|
-         //|========                         |  25%
-         //|
-         //|================                 |  50%
-         //|
-         //|=========================        |  75%
-         //|
-         //|=================================| 100%';
-         //
-         //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
-         //
-         //// Print the entire match result
-         //var_dump($matches);
+      with synIO_RU do
+        // Check if already exists a last one progress structure '|  | 0%' in the LineText
+        // https://regex101.com/r/uJ4oN6/1
+        //$re = '/\|[ =]*[|]?[ ]*[0-9]*%?/';
+        //$str = '|
+        //|                                 |   0%
+        //|
+        //|========                         |  25%
+        //|
+        //|================                 |  50%
+        //|
+        //|=========================        |  75%
+        //|
+        //|=================================| 100%';
+        //
+        //preg_match_all($re, $str, $matches, PREG_SET_ORDER, 0);
+        //
+        //// Print the entire match result
+        //var_dump($matches);
 
-         // by J.C.Faria
-         if (fRegEx(LineText,
-                    '\|[ =]*[|]?[ ]*[0-9]*%?',
-                    False) = '') then
-           Lines.Add(sTmp)   // if not -> It will be the first   '|  | 0%'
-                                else
-           LineText:= sTmp;  // else   -> add the received ''|  | X%'' to LineText
+        // by J.C.Faria
+        if (fRegEx(LineText,
+                   '\|[ =]*[|]?[ ]*[0-9]*%?',
+                   False) = '') then
+          Lines.Add(sTmp)   // if not -> It will be the first   '|  | 0%'
+                               else
+          LineText:= sTmp;  // else   -> add the received ''|  | X%'' to LineText
 
-       Result:= True;
-     end;
-   end;
+      Result:= True;
+    end;
+  end;
 
 //   procedure pAddROutput;
 //   var
@@ -310,6 +332,7 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
 //   end;
 
 begin
+  pCheckIfUnderScan_Function;
   pCheckIfUnderDebug_Function;
   pCheckIfUnderDebug_Package;
 

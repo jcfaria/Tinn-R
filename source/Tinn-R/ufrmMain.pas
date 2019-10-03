@@ -14873,21 +14873,27 @@ procedure TfrmMain.menRtermHistoryNextClick(Sender: TObject);
 begin
   if not fRterm_Running then Exit;
 
-  with frmRterm.synIO do begin
-       CaretY:= Lines.Count;
-       if (SelText <> EmptyStr) then Exit;
-       if frmRterm.bRterm_Plus then LineText:= '+ ' +
-                                               RHistory.fGetNext
-       else
-         if frmRterm.bRUnderDebug_Function or
-            frmRterm.bRUnderDebug_Package then LineText:= frmRterm.sRDebugPrefix +
-                                                          ' ' +
-                                                          RHistory.fGetNext
-                                 else LineText:= '> ' +
-                                                 RHistory.fGetNext;
-       ExecuteCommand(ecLineEnd,
-                      #0,
-                      nil);
+  with frmRterm do begin
+    synIO.CaretY:= synIO.Lines.Count;
+    if (synIO.SelText <> EmptyStr) then Exit;
+    if frmRterm.bRterm_Plus then synIO.LineText:= '+ ' +
+                                                  RHistory.fGetNext
+    else begin
+      if frmRterm.bRUnderDebug_Function or
+         frmRterm.bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
+                                                             ' ' +
+                                                             RHistory.fGetNext
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.fGetNext;
+
+      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+                                                    RHistory.fGetNExt
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.fGetNext;
+    end;
+    synIO.ExecuteCommand(ecLineEnd,
+                         #0,
+                         nil);
   end;
 end;
 
@@ -14896,20 +14902,26 @@ begin
   if not fRterm_Running then Exit;
 
   with frmRterm do begin
-       synIO.CaretY:= synIO.Lines.Count;
-       if (synIO.SelText <> EmptyStr) then Exit;
-       if bRterm_Plus then synIO.LineText:= '+ ' +
-                                            RHistory.fGetPrior
-       else
-         if bRUnderDebug_Function or
-            bRUnderDebug_Package then synIO.LineText:= sRDebugPrefix +
-                                                       ' ' +
-                                                       RHistory.fGetPrior
-                                 else synIO.LineText:= '> ' +
-                                                       RHistory.fGetPrior;
-       synIO.ExecuteCommand(ecLineEnd,
-                            #0,
-                            nil);
+    synIO.CaretY:= synIO.Lines.Count;
+    if (synIO.SelText <> EmptyStr) then Exit;
+    if bRterm_Plus then synIO.LineText:= '+ ' +
+                                         RHistory.fGetPrior
+    else begin
+      if bRUnderDebug_Function or
+         bRUnderDebug_Package then synIO.LineText:= sRDebug_Prefix +
+                                                    ' ' +
+                                                    RHistory.fGetPrior
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.fGetPrior;
+
+      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+                                                    RHistory.fGetPrior
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.fGetPrior;
+    end;
+    synIO.ExecuteCommand(ecLineEnd,
+                         #0,
+                         nil);
   end;
 end;
 
@@ -17905,7 +17917,7 @@ begin
        frmRterm.bRUnderDebug_Package then begin
 
       with frmRterm do begin
-        synIO.LineText:= sRDebugPrefix +
+        synIO.LineText:= sRDebug_Prefix +
                          ' ';
         synIO.ExecuteCommand(ecLineEnd,
                              #0,
@@ -25310,18 +25322,25 @@ end;
 procedure TfrmMain.actRtermIOHistoryNextExecute(Sender: TObject);
 begin
   if not fRterm_Running then Exit;
+
   with frmRterm do begin
     synIO.CaretY:= synIO.Lines.Count;
     if (synIO.SelText <> EmptyStr) then Exit;
     if bRterm_Plus then synIO.LineText:= '+ ' +
                                          RHistory.fGetNext
-    else
+    else begin
       if bRUnderDebug_Function or
-         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebugPrefix +
+         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
                                                     ' ' +
                                                     RHistory.fGetNext
                               else synIO.LineText:= '> ' +
                                                     RHistory.fGetNext;
+
+      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+                                                    RHistory.fGetNext
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.fGetNext;
+    end;
     synIO.ExecuteCommand(ecLineEnd,
                          #0,
                          nil);
@@ -25337,18 +25356,23 @@ begin
     if (synIO.SelText <> EmptyStr) then Exit;
     if bRterm_Plus then synIO.LineText:= '+ ' +
                                          RHistory.fGetPrior
-    else
+    else begin
       if bRUnderDebug_Function or
-         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebugPrefix +
+         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
                                                     ' ' +
                                                     RHistory.fGetPrior
                               else synIO.LineText:= '> ' +
                                                     RHistory.fGetPrior;
 
+      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+                                                    RHistory.fGetPrior
+                              else synIO.LineText:= '> ' +
+                                                    RHistory.fGetPrior;
+    end;
     synIO.ExecuteCommand(ecLineEnd,
                          #0,
                          nil);
-   end;
+  end;
 end;
 
 procedure TfrmMain.actRtermLOGClearExecute(Sender: TObject);

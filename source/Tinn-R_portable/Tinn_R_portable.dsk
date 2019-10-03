@@ -12,8 +12,8 @@ File_9=TSourceModule,'C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tin
 
 [Modules]
 Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dproj
-Module2=default.htm
+Module1=default.htm
+Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dproj
 Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
 Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 Count=5
@@ -24,11 +24,11 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dproj]
-ModuleType=TBaseProject
-
 [default.htm]
 ModuleType=TURLModule
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R_portable\Tinn_R_portable.dproj]
+ModuleType=TBaseProject
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas]
 ModuleType=TSourceModule
@@ -600,14 +600,14 @@ Create=1
 Visible=1
 Docked=0
 State=0
-Left=10044
-Top=8564
+Left=10029
+Top=8848
 Width=10000
-Height=3618
+Height=3279
 MaxLeft=-7
 MaxTop=-14
 ClientWidth=9941
-ClientHeight=3198
+ClientHeight=2859
 TBDockHeight=1545
 LRDockWidth=4327
 Dockable=1
@@ -657,7 +657,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
