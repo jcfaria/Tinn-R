@@ -103,7 +103,6 @@ type
     sDownload_Save  : string;
     sFileName       : string;
     sNew_Version    : string;
-    sPath_Updater   : string;  // Can be set external to the unit!
   end;
 
 var
@@ -377,18 +376,17 @@ var
   jpg: TJPegImage;
 
 begin
-  sPath_Updater:= frmMain.sPath_TinnR +
-                  '\updater\';
-
   jpg:= TJPegImage.Create;
-  jpg.LoadFromFile(sPath_Updater +
-                   'logo-update2.jpg');
+  jpg.LoadFromFile(frmMain.sPath_TinnR +
+                   '\res\' +
+                   'logo_long.jpg');
 
   im1.Canvas.Draw(0, 0, jpg);
   jpg.Free;
 
   jpg:= TJPegImage.Create;
-  jpg.LoadFromFile(sPath_Updater +
+  jpg.LoadFromFile(frmMain.sPath_TinnR +
+                   '\res\' +
                    'footer.jpg');
 
   im2.Canvas.Draw(0, 0, jpg);

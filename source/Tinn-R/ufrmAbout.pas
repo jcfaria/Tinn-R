@@ -70,7 +70,8 @@ type
     synAboutAknowledgments: TSynEdit;
     synAboutCredits: TSynEdit;
     synAboutDonation: TSynEdit;
-    imAbout: TJvImage;
+    im1: TImage;
+    im2: TImage;
 
     procedure bbHelpClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -124,7 +125,8 @@ uses
 
 {$R *.DFM}
 procedure TfrmAbout.FormCreate(Sender: TObject);
-//var
+var
+  jpg: TJPegImage;
 //  MS: TMemoryStatus;
 
 begin
@@ -134,6 +136,22 @@ begin
 
 //  FreeRes.Caption := Format('%d %%',
 //                            [MS.dwMemoryLoad]);
+
+  jpg:= TJPegImage.Create;
+  jpg.LoadFromFile(frmMain.sPath_TinnR +
+                   '\res\' +
+                   'logo_long.jpg');
+
+  im1.Canvas.Draw(0, 0, jpg);
+  jpg.Free;
+
+  jpg:= TJPegImage.Create;
+  jpg.LoadFromFile(frmMain.sPath_TinnR +
+                   '\res\' +
+                   'footer_long.jpg');
+
+  im2.Canvas.Draw(0, 0, jpg);
+  jpg.Free;
 
   lVersion.Caption:= lVersion.Caption +
                      ' ' +

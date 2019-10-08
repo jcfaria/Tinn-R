@@ -74,10 +74,6 @@ object frmRterm: TfrmRterm
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsIO: TTabSheet
       Caption = 'IO'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synIO: TSynEdit
         Left = 0
         Top = 0

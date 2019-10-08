@@ -5,12 +5,12 @@ object frmUpdater: TfrmUpdater
   AlphaBlendValue = 200
   BorderStyle = bsDialog
   Caption = 'Tinn-R updater'
-  ClientHeight = 371
-  ClientWidth = 494
+  ClientHeight = 396
+  ClientWidth = 504
   Color = clBtnFace
-  Constraints.MaxHeight = 400
-  Constraints.MaxWidth = 500
-  Constraints.MinHeight = 400
+  Constraints.MaxHeight = 425
+  Constraints.MaxWidth = 510
+  Constraints.MinHeight = 425
   Constraints.MinWidth = 500
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,13 +25,13 @@ object frmUpdater: TfrmUpdater
   PixelsPerInch = 96
   TextHeight = 13
   object im2: TImage
-    Left = 0
+    Left = 4
     Top = 351
-    Width = 500
+    Width = 495
     Height = 10
   end
   object im1: TImage
-    Left = 0
+    Left = 4
     Top = 0
     Width = 97
     Height = 361
@@ -91,8 +91,8 @@ object frmUpdater: TfrmUpdater
     ParentFont = False
   end
   object btCancel: TButton
-    Left = 376
-    Top = 320
+    Left = 400
+    Top = 366
     Width = 100
     Height = 25
     Caption = 'Cancel'
@@ -113,8 +113,8 @@ object frmUpdater: TfrmUpdater
     TabOrder = 1
   end
   object btDownload: TButton
-    Left = 276
-    Top = 320
+    Left = 300
+    Top = 366
     Width = 100
     Height = 25
     Caption = 'Download'
@@ -128,8 +128,8 @@ object frmUpdater: TfrmUpdater
     OnClick = btDownloadClick
   end
   object btInstall: TButton
-    Left = 376
-    Top = 320
+    Left = 400
+    Top = 366
     Width = 100
     Height = 25
     Caption = 'Install'

@@ -789,7 +789,7 @@ end;
 procedure TfrmRterm.synIOEnter(Sender: TObject);
 begin
   with frmMain do
-    actRtermIOSetFocus.Checked := True;
+    actRtermIOSetFocus.Checked:= True;
 end;
 
 procedure TfrmRterm.pCtrl_Tab(bNext: boolean = True);
@@ -914,17 +914,17 @@ procedure TfrmRterm.pCR;
   // Get the user option (y/n/c) in the prompt message whem R is ready to quit
   function fCheck_Quit(var sT: string): boolean;
   begin
-    Result := False;
+    Result:= False;
 
     if (fRegEx(sT,
                '\?[ ]+\[y\/n\/c\]:') <> '') then
     begin
       //https://regex101.com/r/mcqIse/4
-      sT := fRegEx(sT,
-                   '(.+\[y\/n\/c\]:)[ ]*',
-                   True);
+      sT:= fRegEx(sT,
+                  '(.+\[y\/n\/c\]:)[ ]*',
+                  True);
 
-      Result := True;
+      Result:= True;
     end;
   end;
 
@@ -935,23 +935,23 @@ procedure TfrmRterm.pCR;
 
   begin
     // If under scan() function - ^[0-9]+:X
-    sRex := fRegEx(sTmp,
-                   '^[0-9]+:');
+    sRex:= fRegEx(sTmp,
+                  '^[0-9]+:');
 
     if (sRex <> '') then begin
-      sTmp := fRegEx(sTmp,
-                     '^[0-9]:',
-                     True,
-                     '');
+      sTmp:= fRegEx(sTmp,
+                    '^[0-9]:',
+                    True,
+                    '');
 
-      sPre := sRex;
+      sPre:= sRex;
     end;
   end;
 
   // It is necessary to clean the sToSend string.
   function fCheck_Debug(var sT: string): boolean;
   begin
-    Result := False;
+    Result:= False;
 
     // Empty string
     if (sT = '') then
@@ -959,23 +959,23 @@ procedure TfrmRterm.pCR;
 
     if (fRegEx(sT, '^Browse\[[0-9]+\]>') <> '') then
     begin // STDin and STDout of IO are under the function debug
-      sT := fRegEx(sT,
-                   '^Browse\[[0-9]+\]>',
-                   True);
+      sT:= fRegEx(sT,
+                  '^Browse\[[0-9]+\]>',
+                  True);
 
-      Result := True;
+      Result:= True;
     end;
 
-    // https://regex101.com/r/sT5eI9/1
+    // https//regex101.com/r/sT5eI9/1
     // by J.C.Faria
     if (fRegEx(sT,
                '^D[\(\)0-9]*>') <> '') then
     begin // STDin and STDout of IO are under the package debug
-      sT := fRegEx(sT,
-                   '^D[\(\)0-9]*>',
-                   True);
+      sT:= fRegEx(sT,
+                  '^D[\(\)0-9]*>',
+                  True);
 
-      Result := True;
+      Result:= True;
     end;
 
     RHistory.Add(Trim(sT));
@@ -986,37 +986,37 @@ procedure TfrmRterm.pCR;
     // Remove space(s) after '>'
     if (fRegEx(sTmp,
                '^>[ ]+') <> '') then
-      sTmp := fRegEx(sTmp,
-                     '^>[ ]+',
-                     True,
-                     '> ');
+      sTmp:= fRegEx(sTmp,
+                    '^>[ ]+',
+                    True,
+                    '> ');
 
     // Remove space(s) after '+'
     if (fRegEx(sTmp,
                '^[+][ ]+') <> '') then
-      sTmp := fRegEx(sTmp,
-                     '^[+][ ]+',
-                     True,
-                     '+ ');
+      sTmp:= fRegEx(sTmp,
+                    '^[+][ ]+',
+                    True,
+                    '+ ');
 
     // Get the prefix
     if (fRegEx(sTmp,
                '^>') <> '') then
-      sPre := '>'
+      sPre:= '>'
     else if (fRegEx(sTmp,
                     '^[+]') <> '') then
-      sPre := '+';
+      sPre:= '+';
 
     // Remove prefix and spaces before the command
     case fString_ToCase_Select(sPre,
                                ['>',
                                 '+']) of
 
-      0: sTmp := fRegEx(sTmp, '^>[ ]*', True);
-      1: sTmp := fRegEx(sTmp, '^[+][ ]*', True);
+      0: sTmp:= fRegEx(sTmp, '^>[ ]*', True);
+      1: sTmp:= fRegEx(sTmp, '^[+][ ]*', True);
     end;
 
-    sSend := sTmp;
+    sSend:= sTmp;
 
     with synIO do
     begin
@@ -1027,22 +1027,22 @@ procedure TfrmRterm.pCR;
       // It will checks if is under debug
       if fCheck_Debug(sSend) then
       begin
-        LineText := sRDebug_Prefix + sSend;
+        LineText:= sRDebug_Prefix + sSend;
       end
       else
 
       // result of cat('something')
       if (sSend = sTmp) and (fRegEx(sTmp, '>$') <> '') and (sPre = '') then
-        sSend := ''
+        sSend:= ''
       else
         case fString_ToCase_Select(sPre,
                                    ['>',
                                     '+',
                                     '']) of
-          0: LineText := sPre + ' ' + sSend;
-          1: LineText := sPre + ' ' + sSend;
+          0: LineText:= sPre + ' ' + sSend;
+          1: LineText:= sPre + ' ' + sSend;
           2: if (sSend <> '') then
-                LineText := '>' + ' ' + sSend;
+                LineText:= '>' + ' ' + sSend;
         end;
 
       frmMain.pDoSend(sSend,
@@ -1069,7 +1069,7 @@ var
 begin
   sTmp := '';
   sPre := '';
-  sSend := '';
+  sSend:= '';
 
   with synIO do
   begin
@@ -1085,19 +1085,19 @@ begin
         sTmp:= sToSend
       else
         if frmMain.bREcho then
-          sTmp := 'source(' +
-                  sToSend +
-                  ', echo=TRUE' +
-                  ', max.deparse.length=' +
-                  IntToStr(frmMain.iMaxDeparseLength) +
-                  ')'
+          sTmp:= 'source(' +
+                 sToSend +
+                 ', echo=TRUE' +
+                 ', max.deparse.length=' +
+                 IntToStr(frmMain.iMaxDeparseLength) +
+                 ')'
         else
-          sTmp := 'source(' +
-                  sToSend +
-                  ')';
+          sTmp:= 'source(' +
+                 sToSend +
+                 ')';
     end
     else begin
-      sTmp := Trim(LineText);
+      sTmp:= Trim(LineText);
 
       pCheck_Scan(sTmp,
                   sPre);
@@ -1153,15 +1153,15 @@ procedure TfrmRterm.synIOKeyDown(Sender: TObject;
 
       if SelAvail then Result:= SelText
       else begin
-        Result       := '';
+        Result:= '';
         SelectionMode:= smOption;
-        CaretX       := iPos;
+        CaretX:= iPos;
         EndUpdate;
         Exit;
       end;
 
       SelectionMode:= smOption;
-      CaretX       := iPos;
+      CaretX:= iPos;
       EndUpdate;
     end;
   end;
@@ -1725,7 +1725,7 @@ end;
 procedure TfrmRterm.synLogEnter(Sender: TObject);
 begin
   with frmMain do
-    actRtermLogSetFocus.Checked := True;
+    actRtermLogSetFocus.Checked:= True;
 end;
 
 procedure TfrmRterm.synLogKeyDown(Sender: TObject;
@@ -1931,14 +1931,14 @@ begin
     Color  := clActiveCaption;
     Beveled:= True;
     if bSplitHorizontal then begin
-      Align  := alBottom;
-      Height := 3;
-      Cursor := crVSplit;
+      Align := alBottom;
+      Height:= 3;
+      Cursor:= crVSplit;
     end
     else begin
-      Align  := alRight;
-      Width  := 3;
-      Cursor := crHSplit;
+      Align := alRight;
+      Width := 3;
+      Cursor:= crHSplit;
     end;
   end;
   tbsIO.Visible:= True;

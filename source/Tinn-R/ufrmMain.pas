@@ -25319,41 +25319,15 @@ begin
   pDoClearConsole;
 end;
 
-procedure TfrmMain.actRtermIOHistoryNextExecute(Sender: TObject);
-begin
-  if not fRterm_Running then Exit;
-
-  with frmRterm do begin
-    synIO.CaretY:= synIO.Lines.Count;
-    if (synIO.SelText <> EmptyStr) then Exit;
-    if bRterm_Plus then synIO.LineText:= '+ ' +
-                                         RHistory.fGetNext
-    else begin
-      if bRUnderDebug_Function or
-         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
-                                                    ' ' +
-                                                    RHistory.fGetNext
-                              else synIO.LineText:= '> ' +
-                                                    RHistory.fGetNext;
-
-      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
-                                                    RHistory.fGetNext
-                              else synIO.LineText:= '> ' +
-                                                    RHistory.fGetNext;
-    end;
-    synIO.ExecuteCommand(ecLineEnd,
-                         #0,
-                         nil);
-   end;
-end;
-
 procedure TfrmMain.actRtermIOHistoryPriorExecute(Sender: TObject);
 begin
   if not fRterm_Running then Exit;
   
   with frmRterm do begin
     synIO.CaretY:= synIO.Lines.Count;
+
     if (synIO.SelText <> EmptyStr) then Exit;
+
     if bRterm_Plus then synIO.LineText:= '+ ' +
                                          RHistory.fGetPrior
     else begin
@@ -25361,18 +25335,44 @@ begin
          bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
                                                     ' ' +
                                                     RHistory.fGetPrior
-                              else synIO.LineText:= '> ' +
-                                                    RHistory.fGetPrior;
-
-      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
-                                                    RHistory.fGetPrior
-                              else synIO.LineText:= '> ' +
-                                                    RHistory.fGetPrior;
+      else if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+                                                         RHistory.fGetPrior
+                                   else synIO.LineText:= '> ' +
+                                                         RHistory.fGetPrior;
     end;
+
     synIO.ExecuteCommand(ecLineEnd,
                          #0,
                          nil);
   end;
+end;
+
+procedure TfrmMain.actRtermIOHistoryNextExecute(Sender: TObject);
+begin
+  if not fRterm_Running then Exit;
+
+  with frmRterm do begin
+    synIO.CaretY:= synIO.Lines.Count;
+
+    if (synIO.SelText <> EmptyStr) then Exit;
+
+    if bRterm_Plus then synIO.LineText:= '+ ' +
+                                         RHistory.fGetNext
+    else begin
+      if bRUnderDebug_Function or
+         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
+                                                    ' ' +
+                                                    RHistory.fGetNext
+      else if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+                                                         RHistory.fGetNext
+                                   else synIO.LineText:= '> ' +
+                                                         RHistory.fGetNext;
+    end;
+
+    synIO.ExecuteCommand(ecLineEnd,
+                         #0,
+                         nil);
+   end;
 end;
 
 procedure TfrmMain.actRtermLOGClearExecute(Sender: TObject);
