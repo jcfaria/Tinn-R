@@ -25877,18 +25877,16 @@ begin
                           0);
           end;
   end;
-(*
-    else
-      {
-      PostMessage(TWinControl(frmRTerm.synIO).Handle,
-                  WM_SETFOCUS,
-                  0,
-                  0);
-      }
-      if frmRTerm.Visible then
-        //frmRterm.synIO.SetFocus;  // Problem if autohide os on!
-    end;
-*)
+//  else
+//    {
+//    PostMessage(TWinControl(frmRTerm.synIO).Handle,
+//                WM_SETFOCUS,
+//                0,
+//                0);
+//    }
+//    if frmRTerm.Visible then
+//      frmRterm.synIO.SetFocus;  // Problem if autohide os on!
+//  end;
 end;
 
 function TfrmMain.fGetFocus: integer;

@@ -1188,8 +1188,8 @@ var
    sToSend,
    sPrior,
    sAfter: string;
-//   sAfter,
-//   sEfective: string;
+
+//  sEfective: string;
 
 begin
   bIO_Keyed:= True;  // Some instruction was typed in the RTerm_IO!
@@ -1661,8 +1661,6 @@ var
 
 begin
   with synIO do begin
-    if (CaretY <> Lines.Count) then Exit;
-
     BeginUpdate;
     s1:= Trim(LineText);
 
@@ -1729,7 +1727,14 @@ procedure TfrmRterm.synIOKeyUp(Sender: TObject;
                                Shift: TShiftState);
 begin
   frmMain.iSynWithFocus:= 3;
-//  pSetCursorRestriction;
+
+  if not frmMain.fRterm_Running then Exit;
+
+  with synIO do
+    if SelAvail or
+       (CaretY <> Lines.Count) then Exit;
+
+  pSetCursorRestriction;
 end;
 
 procedure TfrmRterm.synIOMouseUp(Sender: TObject;
@@ -1739,6 +1744,13 @@ procedure TfrmRterm.synIOMouseUp(Sender: TObject;
                                  Y: Integer);
 begin
   frmMain.iSynWithFocus:= 3;
+
+  if not frmMain.fRterm_Running then Exit;
+
+  with synIO do
+    if SelAvail or
+       (CaretY <> Lines.Count) then Exit;
+
   pSetCursorRestriction;
 end;
 
