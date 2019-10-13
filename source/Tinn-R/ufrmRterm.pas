@@ -1186,7 +1186,8 @@ var
 
   sTmp,
    sToSend,
-   sPrior: string;
+   sPrior,
+   sAfter: string;
 //   sAfter,
 //   sEfective: string;
 
@@ -1361,7 +1362,10 @@ begin
                  end;
                end;
 
-      VK_RETURN: pCR;
+      VK_RETURN: begin
+                   pCR;
+                   key:= VK_PAUSE;
+                 end;
 
       VK_MULTIPLY: begin // Add or replace text by tip: R server or database
                      with synIO do begin
@@ -1400,6 +1404,14 @@ begin
           end;
     end;
   end;
+
+  if (Key = VK_RETURN) then
+    with synIO do
+      if not SelAvail then
+        if (CaretY = Lines.Count) then begin
+          pCR;
+          key:= VK_PAUSE;
+        end;
 
 //  // All below will make restrictions and special features to the keystrokes on the last line (prompt)
 //  with synIO do begin
@@ -1476,89 +1488,97 @@ begin
 //    end;
 //  end;
 
-//  // The below will avoid the user to type any not desired keys in the prompt: '>' or '+' signal
-//  if (Shift <> [ssCtrl]) and
-//     (key   <> VK_RETURN) then begin
-//    case Key of
-//      VK_BACK: begin
-//                 with synIO do begin
-//                   if not SelAvail then begin
-//                     sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
-//
-//                     if (sPrior = '>') or
-//                        (sPrior = '+') or
-//                        (sPrior = sRDebugPrefix) then
-//                       key:= VK_PAUSE;
-//                   end
-//                   else begin
-//                     if (CaretY = Lines.Count) and
-//                        (BlockBegin.Line <> BlockEnd.Line) then
-//                       with cRterm do begin
-//                         if (SelText = Text) then synIO.Clear;
-//
-//                         if IsRunning then SendInput('' +
-//                                                     #13#10);
-//                       end;
-//                   end;
-//                 end;
-//               end;
-//
-//      // Necessary to cotrol "Ctrl + A" or selection in the last line: prompt line
-//      VK_DELETE: begin
-//                   with synIO do begin
-//                     if not SelAvail then begin
-//                       sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
-//
-//                       sAfter:= Trim(ConsoleGetCursorTo('EndLine'));
-//
-//                       if (sPrior = '>') or
-//                          (sPrior = '+') or
-//                          (sPrior = sRDebugPrefix) then
-//                         if (sAfter = '')  then
-//                           key:= VK_PAUSE;
-//                     end
-//                     else begin
-//                       if (CaretY = 1) then begin
-//                         with cRterm do begin
-//                           if (SelText = Text) then synIO.Clear;
-//
-//                           if IsRunning then SendInput('' +
-//                                                       #13#10);
-//                         end;
-//
-//                         Exit;
-//                       end;
-//
-//                       if (CaretY = Lines.Count) and
-//                          (BlockBegin.Line <> BlockEnd.Line) then
-//                         with cRterm do begin
-//                           if (SelText = Text) then synIO.Clear;
-//
-//                           if IsRunning then SendInput('' +
-//                                                       #13#10);
-//                         end;
-//                     end;
-//                   end;
-//                 end;
-//
-//      VK_LEFT: with synIO do begin
-//                 if not SelAvail then begin
-//                   sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
-//
-//                   if (sPrior = '>') or
-//                      (sPrior = '+') or
-//                      (sPrior = sRDebugPrefix) then key:= VK_PAUSE;
-//                 end;
-//               end;
-//
-//      VK_HOME: with synIO do begin
-//                 if (sRDebugPrefix <> '') then CaretX:= length(sRDebugPrefix) + 2
-//                                          else CaretX:= 3;
-//
-//                 key:= VK_PAUSE;
-//               end;
-//    end;
-//  end;
+  // The below impuse restrictions related to (VK_BACK, VK_DELETE, VK_LEFT, VK_HOME) in the latest line (the prompt)
+  if (Shift <> [ssCtrl]) and
+     (key   <> VK_RETURN) then begin
+
+    with synIO do
+      if not (CaretY = Lines.Count) then Exit;
+
+    case Key of
+      VK_BACK: begin
+                 with synIO do begin
+                   if not SelAvail then begin
+                     sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
+
+                     if (sPrior = '>') or
+                        (sPrior = '+') or
+                        (sPrior = sRDebug_Prefix) then
+                       key:= VK_PAUSE;
+                   end
+                   else begin
+                     if (CaretY = Lines.Count) and
+                        (BlockBegin.Line <> BlockEnd.Line) then
+                       with cRterm do begin
+                         if (SelText = Text) then synIO.Clear;
+
+                         if IsRunning then SendInput('' +
+                                                     #13#10);
+                       end;
+                   end;
+                 end;
+               end;
+
+      // Necessary to cotrol "Ctrl + A" or selection in the last line: prompt line
+      VK_DELETE: begin
+                   with synIO do begin
+                     if not SelAvail then begin
+                       sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+
+                       sAfter:= Trim(ConsoleGetCursorTo('EndLine'));
+
+                       if (sPrior = '>') or
+                          (sPrior = '+') or
+                          (sPrior = sRDebug_Prefix) then
+                         if (sAfter = '')  then
+                           key:= VK_PAUSE;
+                     end
+                     else begin
+                       if (CaretY = 1) then begin
+                         with cRterm do begin
+                           if (SelText = Text) then synIO.Clear;
+
+                           if IsRunning then SendInput('' +
+                                                       #13#10);
+                         end;
+
+                         Exit;
+                       end;
+
+                       if (CaretY = Lines.Count) and
+                          (BlockBegin.Line <> BlockEnd.Line) then
+                         with cRterm do begin
+                           if (SelText = Text) then synIO.Clear;
+
+                           if IsRunning then SendInput('' +
+                                                       #13#10);
+                         end;
+                     end;
+                   end;
+                 end;
+
+      VK_LEFT: with synIO do begin
+                 if not SelAvail then begin
+                   sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
+
+                   if (sPrior = '>') or
+                      (sPrior = '+') or
+                      (sPrior = sRDebug_Prefix) then
+                     if (sAfter = '')  then begin
+                       CaretX:= Length(sPrior) + 2;
+                       key:= VK_PAUSE;
+                     end;
+                 end;
+               end;
+
+      VK_HOME: with synIO do begin
+                 if (sRDebug_Prefix <> '') then CaretX:= length(sRDebug_Prefix) + 2
+                                           else CaretX:= 3;
+
+                 key:= VK_PAUSE;
+               end;
+    end;
+  end;
 end;
 
 procedure TfrmRterm.synIOKeyPress(Sender: TObject;

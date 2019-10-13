@@ -9,30 +9,46 @@ File_6=TSourceModule,'c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN3
 File_7=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmComments.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas
-Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas
+Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
+Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
+Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 Module3=default.htm
 Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
-Module5=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
-Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSplash.pas
-Module7=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas
-Module8=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
-Module9=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRutils.pas
-Module10=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
-Module11=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
-Module12=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas
-Module13=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
+Module5=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas
+Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas
+Module7=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
+Module8=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSplash.pas
+Module9=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas
+Module10=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRutils.pas
+Module11=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
+Module12=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
+Module13=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas
 Module14=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\w_waste\ufrmHotKeys.pas
 Module15=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 Module16=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
 Count=17
 EditWindowCount=1
 
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
+ModuleType=TBaseProject
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas]
 ModuleType=TSourceModule
@@ -42,13 +58,7 @@ FormOnTop=0
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
-
-[default.htm]
-ModuleType=TURLModule
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
-ModuleType=TBaseProject
+FormOnTop=0
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas]
 ModuleType=TSourceModule
@@ -61,11 +71,6 @@ FormState=1
 FormOnTop=0
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -86,11 +91,6 @@ FormState=1
 FormOnTop=0
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
@@ -116,7 +116,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=17
-CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
 View0=0
 View1=1
 View2=2
@@ -281,9 +281,9 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.p
 [View11]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
-CursorX=1
-CursorY=145
-TopLine=77
+CursorX=59
+CursorY=427
+TopLine=416
 LeftCol=1
 Elisions=
 Bookmarks={1,433,6}
@@ -292,12 +292,12 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsol
 [View12]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
-CursorX=20
-CursorY=2019
-TopLine=2006
+CursorX=1
+CursorY=1491
+TopLine=1482
 LeftCol=1
 Elisions=
-Bookmarks={1,304,1}{2,1102,7}{3,932,2}{5,1035,7}
+Bookmarks={1,1365,13}{2,1408,28}{3,1582,1}{5,1035,7}
 EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
 
 [View13]
@@ -364,11 +364,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1206
+Height=1301
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1206
+ClientHeight=1301
 TBDockHeight=203
 LRDockWidth=13602
 Dockable=1
@@ -449,8 +449,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=1161
-Top=320
+Left=0
+Top=0
 Width=1999
 Height=7276
 MaxLeft=-1
@@ -493,11 +493,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1206
+Height=1301
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1206
+ClientHeight=1301
 TBDockHeight=407
 LRDockWidth=4949
 Dockable=1
@@ -512,11 +512,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1206
+Height=1301
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1206
+ClientHeight=1301
 TBDockHeight=203
 LRDockWidth=7408
 Dockable=1
@@ -535,11 +535,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1206
+Height=1301
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1206
+ClientHeight=1301
 TBDockHeight=1545
 LRDockWidth=3485
 Dockable=1
@@ -554,11 +554,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1206
+Height=1301
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1206
+ClientHeight=1301
 TBDockHeight=2060
 LRDockWidth=3485
 Dockable=1
@@ -693,7 +693,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-598
+Top=-738
 Width=3565
 Height=4824
 MaxLeft=-1
@@ -712,7 +712,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-598
+Top=-738
 Width=13602
 Height=203
 MaxLeft=-1
@@ -731,7 +731,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-598
+Top=-738
 Width=3565
 Height=4824
 MaxLeft=-1
@@ -750,7 +750,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-598
+Top=-738
 Width=3565
 Height=2290
 MaxLeft=-1
@@ -784,8 +784,8 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Category
-SelectedItem=Action,
-ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Layout.Anchors=0,Layout.Constraints=1,Layout.Margins=0,Layout.Padding=0
+SelectedItem=Miscellaneous.Name,"Help and Hints"
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Miscellaneous.BookMarkOptions=0,Miscellaneous.Gutter=0
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -796,11 +796,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1206
+Height=1301
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1206
+ClientHeight=1301
 TBDockHeight=1558
 LRDockWidth=8741
 Dockable=1
@@ -905,14 +905,14 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=23
+Top=0
 Width=3829
-Height=1545
+Height=1640
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1545
-TBDockHeight=1545
+ClientHeight=1640
+TBDockHeight=1640
 LRDockWidth=3829
 Dockable=1
 StayOnTop=0
