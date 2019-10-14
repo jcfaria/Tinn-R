@@ -10,13 +10,13 @@ File_7=TSourceModule,'c:\program files (x86)\codegear\rad studio\5.0\SOURCE\WIN3
 File_8=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmComments.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
-Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
-Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas
-Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
-Module5=default.htm
-Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
+Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
+Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas
+Module2=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+Module3=default.htm
+Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
+Module5=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
+Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsole.1.00a\ConsoleIO.pas
 Module7=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas
 Module8=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
 Module9=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSplash.pas
@@ -30,10 +30,26 @@ Module16=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.
 Count=17
 EditWindowCount=1
 
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
+
+[default.htm]
+ModuleType=TURLModule
+
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
+ModuleType=TBaseProject
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas]
 ModuleType=TSourceModule
@@ -44,22 +60,6 @@ FormOnTop=0
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
-
-[default.htm]
-ModuleType=TURLModule
-
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
-ModuleType=TBaseProject
 
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas]
 ModuleType=TSourceModule
@@ -117,7 +117,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=17
-CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
 View0=0
 View1=1
 View2=2
@@ -154,13 +154,13 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1896
 LeftPanelClients=StructureView,PropertyInspector
-LeftPanelData=00000800010100000000E7120000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D01000000009F2100001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=00000800010100000000E60E0000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D0100000000801A00001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=0
 RightPanelClients=DockSite2,ToolForm
 RightPanelData=0000080001010200000009000000446F636B536974653208000000546F6F6C466F726D9E1200000000000001CF07000000000000FFFFFFFF
-BottomPanelSize=0
-BottomPanelClients=DockSite1
-BottomPanelData=0000080001000100000009000000446F636B5369746531F806000000000000007A45000000000000FFFFFFFF
+BottomPanelSize=1784
+BottomPanelClients=MessageView@EditWindow0,DockSite1
+BottomPanelData=0000080001020100000009000000446F636B53697465317A4500000000000002F80600000000000001000000007A4500000B0000004D65737361676556696577FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465302D1900000000000000771B000000000000FFFFFFFF
@@ -217,19 +217,19 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.p
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 CursorX=1
-CursorY=24530
+CursorY=24518
 TopLine=24506
 LeftCol=1
 Elisions=
 Bookmarks={1,25322,1}{2,25350,39}{4,14900,1}{5,25865,26}{6,2408,11}{7,6703,1}{8,5425,1}{9,3067,1}
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 
 [View6]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas
 CursorX=1
-CursorY=160
-TopLine=146
+CursorY=138
+TopLine=124
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -293,13 +293,13 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\components\muconsol
 [View12]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
-CursorX=112
-CursorY=1734
-TopLine=1720
+CursorX=1
+CursorY=1106
+TopLine=1092
 LeftCol=1
 Elisions=
-Bookmarks={1,1365,13}{2,1408,28}{3,1582,1}{4,1737,15}{5,1664,1}
-EditViewName=Borland.FormDesignerView
+Bookmarks={1,1102,22}{2,1408,28}{3,1582,1}{4,1737,15}{5,1664,1}
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
 
 [View13]
 CustomEditViewType=TEditView
@@ -365,18 +365,18 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1301
+Height=1206
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1301
+ClientHeight=1206
 TBDockHeight=203
 LRDockWidth=13602
 Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=22
+Count=20
 Breakpoint0='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmMain.pas',17497,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint1='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\trSynUtils.pas',439,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint2='C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\source\Tinn-R\ufrmMain.pas',18204,'',0,1,'',1,0,0,'',1,'','','',0
@@ -396,9 +396,7 @@ Breakpoint15='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.
 Breakpoint16='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas',1519,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint17='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas',196,'',0,1,'',1,0,0,'',1,'','','',0
 Breakpoint18='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas',219,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint19='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas',138,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint20='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas',178,'',0,1,'',1,0,0,'',1,'','','',0
-Breakpoint21='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas',24518,'',0,1,'',1,0,0,'',1,'','','',0
+Breakpoint19='C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas',178,'',0,1,'',1,0,0,'',1,'','','',0
 
 [AddressBreakpoints]
 Count=0
@@ -492,11 +490,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1301
+Height=1206
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1301
+ClientHeight=1206
 TBDockHeight=407
 LRDockWidth=4949
 Dockable=1
@@ -511,11 +509,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1301
+Height=1206
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1301
+ClientHeight=1206
 TBDockHeight=203
 LRDockWidth=7408
 Dockable=1
@@ -534,11 +532,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1301
+Height=1206
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1301
+ClientHeight=1206
 TBDockHeight=1545
 LRDockWidth=3485
 Dockable=1
@@ -553,11 +551,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1301
+Height=1206
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1301
+ClientHeight=1206
 TBDockHeight=2060
 LRDockWidth=3485
 Dockable=1
@@ -692,7 +690,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-738
+Top=-598
 Width=3565
 Height=4824
 MaxLeft=-1
@@ -711,7 +709,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-738
+Top=-598
 Width=13602
 Height=203
 MaxLeft=-1
@@ -730,7 +728,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-738
+Top=-598
 Width=3565
 Height=4824
 MaxLeft=-1
@@ -749,7 +747,7 @@ Visible=0
 Docked=1
 State=0
 Left=-262
-Top=-738
+Top=-598
 Width=3565
 Height=2290
 MaxLeft=-1
@@ -770,11 +768,11 @@ State=0
 Left=0
 Top=305
 Width=1896
-Height=4824
+Height=2927
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=4824
+ClientHeight=2927
 TBDockHeight=407
 LRDockWidth=1896
 Dockable=1
@@ -783,8 +781,8 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Category
-SelectedItem=Miscellaneous.Name,"Drag Drop/Docking"
-ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Miscellaneous.BookMarkOptions=0,Miscellaneous.Gutter=0,Linkage.PopupMenu=0
+SelectedItem=Action,Linkage
+ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1,Linkage.Images=0
 
 [BreakpointWindow]
 PercentageSizes=1
@@ -795,11 +793,11 @@ State=0
 Left=0
 Top=0
 Width=3829
-Height=1301
+Height=1206
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1301
+ClientHeight=1206
 TBDockHeight=1558
 LRDockWidth=8741
 Dockable=1
@@ -834,16 +832,16 @@ StayOnTop=0
 PercentageSizes=1
 Create=1
 Visible=1
-Docked=0
+Docked=1
 State=0
-Left=10044
-Top=7805
+Left=0
+Top=23
 Width=10000
-Height=4282
-MaxLeft=-7
-MaxTop=-14
-ClientWidth=9941
-ClientHeight=3862
+Height=1545
+MaxLeft=-1
+MaxTop=-1
+ClientWidth=10000
+ClientHeight=1545
 TBDockHeight=1545
 LRDockWidth=4327
 Dockable=1
@@ -893,7 +891,7 @@ Dockable=1
 StayOnTop=0
 TabPosition=1
 ActiveTabID=RefactoringForm
-TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,QAView,MetricsView,UsagesView,RefactoringsView
+TabDockClients=RefactoringForm,FindReferencsForm,ToDo List,UsagesView,RefactoringsView,QAView,MetricsView
 
 [DockSite1]
 HostDockSite=DockBottomPanel
@@ -906,12 +904,12 @@ State=0
 Left=0
 Top=23
 Width=3829
-Height=1640
+Height=1545
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3829
-ClientHeight=1640
-TBDockHeight=1640
+ClientHeight=1545
+TBDockHeight=1545
 LRDockWidth=3829
 Dockable=1
 StayOnTop=0

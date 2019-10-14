@@ -940,7 +940,7 @@ procedure TfrmRterm.pCR;
 
     if (sRex <> '') then begin
       sTmp:= fRegEx(sTmp,
-                    '^[0-9]:',
+                    '^[0-9]+:',
                     True,
                     '');
 
