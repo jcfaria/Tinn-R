@@ -457,6 +457,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label20: TLabel
         Left = 0
         Top = 450
@@ -577,7 +581,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 0
         Width = 615
         Height = 432
-        ActivePage = tbsRH_Custom
+        ActivePage = tbsRH_Send
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

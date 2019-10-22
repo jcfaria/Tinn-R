@@ -106,7 +106,7 @@ object frmSKH_Manager_Dlg: TfrmSKH_Manager_Dlg
     Width = 576
     Height = 163
     Align = alTop
-    Caption = ' Info (Group | Caption | Hint) '
+    Caption = ' Info (Group | Identification | Hint) '
     Ctl3D = False
     ParentCtl3D = False
     TabOrder = 5
@@ -125,21 +125,19 @@ object frmSKH_Manager_Dlg: TfrmSKH_Manager_Dlg
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      object lbId_cur: TLabel
+      object lbId_Cur: TLabel
         Left = 11
         Top = 19
-        Width = 17
+        Width = 3
         Height = 13
-        Caption = 'Id: '
         Color = clBtnFace
         ParentColor = False
       end
-      object lbWhere_cur: TLabel
+      object lbWhere_Cur: TLabel
         Left = 11
         Top = 40
-        Width = 39
+        Width = 3
         Height = 13
-        Caption = 'Where: '
       end
     end
     object gbCheck_Info: TGroupBox
@@ -147,32 +145,29 @@ object frmSKH_Manager_Dlg: TfrmSKH_Manager_Dlg
       Top = 76
       Width = 565
       Height = 78
-      Caption = ' Check '
+      Caption = ' Check (if in use) '
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
       object lbInUse_Check: TLabel
         Left = 11
         Top = 16
-        Width = 37
+        Width = 3
         Height = 13
-        Caption = 'In use: '
         Color = clBtnFace
         ParentColor = False
       end
       object lbId_Check: TLabel
         Left = 11
         Top = 37
-        Width = 17
+        Width = 3
         Height = 13
-        Caption = 'Id: '
       end
       object lbWhere_Check: TLabel
         Left = 11
         Top = 58
-        Width = 39
+        Width = 3
         Height = 13
-        Caption = 'Where: '
       end
     end
   end

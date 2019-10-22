@@ -700,7 +700,7 @@ begin
   pClearWarnings;
   with frmMain do
     if Assigned(ajavHK_Control[ARow]) then jvhkHotkey.HotKey:= ajavHK_Control[ARow].HotKey
-                                else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                      else jvhkHotkey.HotKey:= TextToSHortcut('None');
   edHotkey.Text:= strgHK_Control.Cells[0,ARow];
 end;
 
@@ -759,7 +759,7 @@ begin
   pClearWarnings;
   with frmMain do
     if Assigned(ajavHK_Custom[ARow]) then jvhkHotkey.HotKey:= ajavHK_Custom[ARow].HotKey
-                                  else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                     else jvhkHotkey.HotKey:= TextToSHortcut('None');
   edHotkey.Text:= strgHK_CU1.Cells[0,ARow];
 end;
 
@@ -789,7 +789,7 @@ begin
   pClearWarnings;
   with frmMain do
     if Assigned(ajavHK_Send[ARow]) then jvhkHotkey.HotKey:= ajavHK_Send[ARow].HotKey
-                                else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                   else jvhkHotkey.HotKey:= TextToSHortcut('None');
   edHotkey.Text:= strgHK_Send.Cells[0,ARow];
 end;
 
@@ -920,21 +920,21 @@ begin
       0: begin
            iRow:= strgHK_Send.Row;
            if Assigned(frmMain.ajavHK_Send[iRow]) then jvhkHotkey.HotKey:= frmMain.ajavHK_Send[iRow].HotKey
-                                               else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                                  else jvhkHotkey.HotKey:= TextToSHortcut('None');
          end;
 
       // Control
       1: begin
            iRow:= strgHK_Control.Row;
            if Assigned(frmMain.ajavHK_Control[iRow]) then jvhkHotkey.HotKey:= frmMain.ajavHK_Control[iRow].HotKey
-                                               else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                                     else jvhkHotkey.HotKey:= TextToSHortcut('None');
          end;
 
       // R Action Custom_1
       2: begin
            iRow:= strgHK_CU1.Row;
            if Assigned(frmMain.ajavHK_Custom[iRow]) then jvhkHotkey.HotKey:= frmMain.ajavHK_Custom[iRow].HotKey
-                                                 else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                                    else jvhkHotkey.HotKey:= TextToSHortcut('None');
          end;
 
 //      // R Action Custom_2
@@ -963,7 +963,7 @@ begin
          edHotkey.Text:= strgHK_Send.Cells[0,iRow];
          with frmMain do
            if Assigned(ajavHK_Send[iRow]) then jvhkHotkey.HotKey:= ajavHK_Send[iRow].HotKey
-                                       else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                          else jvhkHotkey.HotKey:= TextToSHortcut('None');
        end;
 
     // Control
@@ -974,7 +974,7 @@ begin
          edHotkey.Text:= strgHK_Control.Cells[0,iRow];
          with frmMain do
            if Assigned(ajavHK_Control[iRow]) then jvhkHotkey.HotKey:= ajavHK_Control[iRow].HotKey
-                                       else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                             else jvhkHotkey.HotKey:= TextToSHortcut('None');
        end;
 
     // R Action Custom_1
@@ -985,7 +985,7 @@ begin
          edHotkey.Text:= strgHK_CU1.Cells[0,iRow];
          with frmMain do
            if Assigned(ajavHK_Custom[iRow]) then jvhkHotkey.HotKey:= ajavHK_Custom[iRow].HotKey
-                                         else jvhkHotkey.HotKey:= TextToSHortcut('None');
+                                            else jvhkHotkey.HotKey:= TextToSHortcut('None');
        end;
 
 //    // R Action Custom_2

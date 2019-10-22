@@ -313,7 +313,7 @@ begin
 
     if (dlgSKH_Manager.ShowModal = mrOK) then begin
       with dlgSKH_Manager do begin
-        bShortcut_InUse:= (lbInUse_Check.Caption = 'In use: YES');
+        bShortcut_InUse:= (lbInUse_Check.Caption = 'YES');
         bShortcut_NotRemove:= (rgRemove_Current.ItemIndex = 0);
 
         if bShortcut_InUse and

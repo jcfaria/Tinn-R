@@ -2954,7 +2954,6 @@ type
     sParRterm                    : string;
     sReplaceTextHistory          : string;
 
-    function fCheck_Hotkey_Use_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fFindTop_Window: integer;
     function fGetBuild_Info: string;
     function fRgui_Running(bFirstTime: boolean = False): boolean;
@@ -2988,7 +2987,7 @@ type
     procedure pSetFileSize_StatusBar(sFileName: string);
     procedure pSetFocus_Main;
     procedure pSetFocus_Rgui(iDelay: integer);
-    procedure pSetHotkeys(bStatus: boolean);
+    procedure pSetHotkeys_Status(bStatus: boolean);
     procedure pSetPathRgui;
     procedure pSetPathRTerm;
     procedure pSetSyntaxComboBox(sSynName: string);
@@ -11471,7 +11470,7 @@ begin
   pOnTop(Application.Handle);
 end;
 
-procedure TfrmMain.pSetHotkeys(bStatus: boolean);
+procedure TfrmMain.pSetHotkeys_Status(bStatus: boolean);
 var
   i: integer;
 
@@ -14492,7 +14491,7 @@ begin
     // If OK
     if (dlgSKH_Map.ShowModal = mrOK) then begin
       bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
-      pSetHotkeys(bHotKeys_On);
+      pSetHotkeys_Status(False);  // Set temporarily pSetHotkeys_Status to False: it is necessary to manager Hotkeys!
 
       with modDados.cdShortcuts do begin
         Edit;
@@ -23081,7 +23080,7 @@ begin
 
      6: begin
           bHotKeys_On:= not bHotKeys_On;
-          pSetHotkeys(bHotKeys_On);
+          pSetHotkeys_Status(bHotKeys_On);
         end;
 
      7: begin
@@ -26344,42 +26343,6 @@ begin
     //TODO
   end;
 end;
-
-function TfrmMain.fCheck_Hotkey_Use_App(sShortcut: string;
-                                        var sBy: string;
-                                        bShortcut_Clear: boolean = False): boolean;
-begin
-//    case pgHotkeys.TabIndex of
-//      // Send
-//      0: begin
-//           iRow:= strgHK_Send.Row;
-//           if Assigned(ajavHK_S[iRow]) then jvhkHotkey.HotKey:= ajavHK_S[iRow].HotKey
-//                                       else jvhkHotkey.HotKey:= TextToSHortcut('None');
-//         end;
-//
-//      // Control
-//      1: begin
-//           iRow:= strgHK_Control.Row;
-//           if Assigned(ajavHK_C[iRow]) then jvhkHotkey.HotKey:= ajavHK_C[iRow].HotKey
-//                                       else jvhkHotkey.HotKey:= TextToSHortcut('None');
-//         end;
-//
-//      // R Action Custom_1
-//      2: begin
-//           iRow:= strgHK_CU1.Row;
-//           if Assigned(ajavHK_CU1[iRow]) then jvhkHotkey.HotKey:= ajavHK_CU1[iRow].HotKey
-//                                         else jvhkHotkey.HotKey:= TextToSHortcut('None');
-//         end;
-//
-//      // R Action Custom_2
-//      3: begin
-//           iRow:= strgHK_CU2.Row;
-//           if Assigned(ajavHK_CU2[iRow]) then jvhkHotkey.HotKey:= ajavHK_CU2[iRow].HotKey
-//                                         else jvhkHotkey.HotKey:= TextToSHortcut('None');
-//         end;
-//    end;
-end;
-
 
 Initialization
   WM_FINDINSTANCE:= RegisterWindowMessage('Editor: find previous instance');
