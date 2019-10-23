@@ -3113,7 +3113,7 @@ begin
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.02.02.00';
-  sCurrentVersion_Shortcuts := '5.04.00.00';
+  sCurrentVersion_Shortcuts := '5.04.01.00';
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,

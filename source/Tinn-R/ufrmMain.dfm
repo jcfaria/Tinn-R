@@ -1035,14 +1035,13 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 525
+    Height = 505
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 505
   end
   object Panel1: TPanel
     Left = 0
@@ -1219,7 +1218,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2015,14 +2014,13 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 525
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 505
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2037,7 +2035,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 632
+    Top = 612
     Width = 1007
     Height = 20
     AutoHint = True
@@ -2092,24 +2090,22 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 612
   end
   object TBDockRight: TTBDock
     Left = 998
     Top = 98
     Width = 9
-    Height = 525
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 505
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 623
+    Top = 603
     Width = 1007
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2118,7 +2114,6 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 603
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -3452,6 +3447,7 @@ object frmMain: TfrmMain
       Enabled = False
       Hint = 'File: save as'
       ImageIndex = 93
+      ShortCut = 24659
       OnExecute = actFileSaveAsExecute
     end
     object actFileClose: TAction
@@ -5054,7 +5050,6 @@ object frmMain: TfrmMain
       Caption = 'Latex'
       Enabled = False
       Hint = 'Tools: convert Txt2tags to Latex'
-      ShortCut = 24660
       OnExecute = actTxt2tagsToLatexExecute
     end
     object actTxt2tagsToSweave: TAction
@@ -5062,7 +5057,6 @@ object frmMain: TfrmMain
       Caption = 'Sweave'
       Enabled = False
       Hint = 'Tools: convert Txt2tags to Sweave'
-      ShortCut = 24659
       OnExecute = actTxt2tagsToSweaveExecute
     end
     object actTxt2tagsToTxt: TAction
@@ -5077,7 +5071,6 @@ object frmMain: TfrmMain
       Caption = 'HTML'
       Enabled = False
       Hint = 'Tools: convert Txt2tags to HTML'
-      ShortCut = 24648
       OnExecute = actTxt2tagsToHtmlExecute
     end
     object actTxt2tagsToXhtml: TAction
@@ -5155,7 +5148,6 @@ object frmMain: TfrmMain
       Caption = 'LaTeX'
       Enabled = False
       Hint = 'Tools: convert Deplate to Latex'
-      ShortCut = 57428
       OnExecute = actDeplateToLaTeXExecute
     end
     object actDeplateToLaTeXDramatist: TAction
@@ -5170,7 +5162,6 @@ object frmMain: TfrmMain
       Caption = 'Sweave'
       Enabled = False
       Hint = 'Tools: convert Deplate to Sweave'
-      ShortCut = 57427
       OnExecute = actDeplateToSweaveExecute
     end
     object actDeplateToPlain: TAction
@@ -5185,7 +5176,6 @@ object frmMain: TfrmMain
       Caption = 'HTML'
       Enabled = False
       Hint = 'Tools: convert Deplate to HTML'
-      ShortCut = 57416
       OnExecute = actDeplateToHtmlExecute
     end
     object actDeplateToHtmlSite: TAction

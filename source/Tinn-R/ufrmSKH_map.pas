@@ -1031,12 +1031,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.strgHK_CustomDblClick(Sender: TObject);
 begin
-  try
-    dlgSKH_Manager:= TfrmSKH_Manager_Dlg.Create(Self);
-    dlgSKH_Manager.ShowModal;
-  finally
-    FreeAndNil(dlgSKH_Manager);
-  end;
+  bbtShortcuts_ManagerClick(nil);
 end;
 
 procedure TfrmSKH_Map_Dlg.strgHK_CustomDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
@@ -1078,12 +1073,7 @@ end;
 
 procedure TfrmSKH_Map_Dlg.strgHK_SendDblClick(Sender: TObject);
 begin
-  try
-    dlgSKH_Manager:= TfrmSKH_Manager_Dlg.Create(Self);
-    dlgSKH_Manager.ShowModal;
-  finally
-    FreeAndNil(dlgSKH_Manager);
-  end;
+  bbtShortcuts_ManagerClick(nil);
 end;
 
 procedure TfrmSKH_Map_Dlg.strgHK_SendDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);

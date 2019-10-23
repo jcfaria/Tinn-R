@@ -198,7 +198,7 @@ begin
   // Application shortcut
   with modDados do
     if fCheck_Shortcut_Use_App(ShortCutToText(eKeyShort.HotKey),
-                                                       sBy) then begin
+                               sBy) then begin
       pSetYes_inUse(sBy,
                     'Application');
       Exit;
@@ -309,7 +309,9 @@ begin
                      if Assigned(ajavHK_Send[i]) then begin
                        sTmp:= dlgSKH_Map.strgHK_Send.Cells[0, i];
                        eKeyShort.HotKey:= ajavHK_Send[i].HotKey;
-                     end;
+                     end
+                     else
+                       Exit;
                    end;
 
                    with lbId_Cur do
@@ -331,7 +333,9 @@ begin
                      if Assigned(ajavHK_Control[i]) then begin
                        sTmp:= dlgSKH_Map.strgHK_Control.Cells[0, i];
                        eKeyShort.HotKey:= ajavHK_Control[i].HotKey;
-                     end;
+                     end
+                     else
+                       Exit;
                    end;
 
                    with lbId_Cur do
@@ -353,7 +357,9 @@ begin
                      if Assigned(ajavHK_Custom[i]) then begin
                        sTmp:= dlgSKH_Map.strgHK_Custom.Cells[0, i];
                        eKeyShort.HotKey:= ajavHK_Custom[i].HotKey;
-                     end;
+                     end
+                     else
+                       Exit;
                    end;
 
                    with lbId_Cur do

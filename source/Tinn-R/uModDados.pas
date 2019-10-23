@@ -195,48 +195,44 @@ var
 begin
   Result:= False;
 
-  case frmMain.dlgSKH_Map.pgSH.ActivePageIndex of
-    0: begin
-         with cdShortcuts do begin
-           pTmp:= GetBookmark;
-           DisableControls;
-           bFiltered:= Filtered;
-           if bFiltered then
-             Filtered:= False;
+  with cdShortcuts do begin
+    pTmp:= GetBookmark;
+    DisableControls;
+    bFiltered:= Filtered;
+    if bFiltered then
+      Filtered:= False;
 
-           sTmp:= StringReplace(sShortcut,
-                                ' ',
-                                '',
-                                [rfReplaceAll]);
+    sTmp:= StringReplace(sShortcut,
+                         ' ',
+                         '',
+                         [rfReplaceAll]);
 
-           if (Locate('Shortcut',
-                      sTmp,
-                      []) = True) then begin
-             Result:= True;
+    if (Locate('Shortcut',
+               sTmp,
+               []) = True) then begin
+      Result:= True;
 
-             sBy:= FieldValues['Group'] +
-                   ' | ' +
-                   FieldValues['Caption'] +
-                   ' | ' +
-                   FieldValues['Hint'];
+      sBy:= FieldValues['Group'] +
+            ' | ' +
+            FieldValues['Caption'] +
+            ' | ' +
+            FieldValues['Hint'];
 
-             if bShortcut_Clear then begin
-                Edit;
-                FieldByName('Shortcut').Value:= '';
-                Post;
-             end;
-           end; //if (Locate('Shortcut'...
+      if bShortcut_Clear then begin
+         Edit;
+         FieldByName('Shortcut').Value:= '';
+         Post;
+      end;
+    end; //if (Locate('Shortcut'...
 
-           Filtered:= bFiltered;
+    Filtered:= bFiltered;
 
-           if BookmarkValid(pTmp) then
-             GoToBookmark(pTmp);
-           FreeBookmark(pTmp);
+    if BookmarkValid(pTmp) then
+      GoToBookmark(pTmp);
+    FreeBookmark(pTmp);
 
-           EnableControls;
-         end; //with cdShortcuts
-       end; //0: begin
-  end;
+    EnableControls;
+  end; //with cdShortcuts
 end;
 
 function TmodDados.fSave_FileState(sFile,

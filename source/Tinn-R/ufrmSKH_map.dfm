@@ -581,7 +581,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 0
         Width = 615
         Height = 432
-        ActivePage = tbsRH_Send
+        ActivePage = tbsRH_Custom
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
