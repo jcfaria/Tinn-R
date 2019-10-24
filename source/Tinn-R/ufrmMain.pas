@@ -14488,11 +14488,9 @@ begin
       pgRH.ActivePage:= tbsRH_Send;
     end;
 
+    pSetHotkeys_Status(False);  // Set temporarily pSetHotkeys_Status to False: it is necessary to manager Hotkeys!
     // If OK
     if (dlgSKH_Map.ShowModal = mrOK) then begin
-      bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
-      pSetHotkeys_Status(False);  // Set temporarily pSetHotkeys_Status to False: it is necessary to manager Hotkeys!
-
       with modDados.cdShortcuts do begin
         Edit;
         try
@@ -14508,6 +14506,8 @@ begin
       with modDados.cdShortcuts do
         IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
 
+      bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
+
       pDatasetToActionList;
       pSetFocus_Main;
     end // if (dlgSH_Map.ShowModal = mrOK)
@@ -14520,6 +14520,8 @@ begin
     end;
 
   finally
+    pSetHotkeys_Status(bHotKeys_On);
+
     with modDados.cdShortcuts do begin
       if BookmarkValid(pTmp) then GoToBookmark(pTmp);
       FreeBookmark(pTmp);
