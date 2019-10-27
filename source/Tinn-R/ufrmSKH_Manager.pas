@@ -12,7 +12,7 @@ type
     bbtOK: TBitBtn;
     bbtCancel: TBitBtn;
     bbtCheck: TBitBtn;
-    GroupBox1: TGroupBox;
+    gbInfo: TGroupBox;
     GroupBox2: TGroupBox;
     gbKeystrokes: TGroupBox;
     rgRemove_Current: TRadioGroup;
@@ -157,22 +157,8 @@ procedure TfrmSKH_Manager_Dlg.bbtCheckClick(Sender: TObject);
     end;
   end;
 
-var
-  sBy,
-   sWhere: string;
-
-  i: integer;
-
-begin
-  lbInUse_Check.Caption:= '';
-  lbId_Check.Caption:= '';
-  lbWhere_Check.Caption:= '';
-
-  sBy:= '';
-  sWhere:= '';
-
-  // The below checks if the typed is a Reserved (fixed | not user configurable) Shortcut
-  if fCheck_Reserved then begin
+  procedure pNotify_Reserved;
+  begin
     with lbInUse_Check do
       Caption:= 'YES';
 
@@ -188,54 +174,106 @@ begin
 
     with frmMain.dlgSKH_Map.dlgSKH_Manager do
       eKeyShort.SetFocus;
+  end;
 
+var
+  sBy,
+   sWhere: string;
+
+  i: integer;
+
+begin
+  lbInUse_Check.Caption:= '';
+  lbId_Check.Caption:= '';
+  lbWhere_Check.Caption:= '';
+
+  sBy:= '';
+  sWhere:= '';
+
+  with frmMain.dlgSKH_Map do
+    iSKH_Used_By:= -1;
+
+  // The below checks if the typed is a Reserved (fixed | not user configurable) Shortcut
+  if fCheck_Reserved then begin
+    pNotify_Reserved;
     Exit;
   end;
 
   with frmMain.dlgSKH_Map.dlgSKH_Manager do
     bbtOK.Enabled:= True;
 
+  with frmMain.dlgSKH_Map do
+    iSKH_Used_By:= 0;
+
   // Application shortcut
   with modDados do
-    if fCheck_Shortcut_Use_App(ShortCutToText(eKeyShort.HotKey),
-                               sBy) then begin
+    if fCheck_Shortcut_App(ShortCutToText(eKeyShort.HotKey),
+                           sBy) then begin
       pSetYes_inUse(sBy,
                     'Application');
+
+      with frmMain.dlgSKH_Map do
+        iSKH_Used_By:= 1;
+
       Exit;
     end;
 
-  // Send HK
+//  // Editor
+//    with frmMain.dlgSKH_Map do
+//      iSKH_Used_By:= 2;
+
+  // RHK Send
   with frmMain do begin
     for i:= 1 to 10 do
       if Assigned(ajavHK_Send[i]) then
         if (ajavHK_Send[i].HotKey = eKeyShort.HotKey) then begin
           pSetYes_inUse(dlgSKH_Map.strgHK_Send.Cells[0, i],
                         'R hotkeys');
+
+          with dlgSKH_Map do
+            iSKH_Used_By:= 3;
+
           Exit;
         end;
   end;
 
-  // Control HK
+  // RHK Control
   with frmMain do begin
     for i:= 1 to 10 do
       if Assigned(ajavHK_Control[i]) then
         if (ajavHK_Control[i].HotKey = eKeyShort.HotKey) then begin
           pSetYes_inUse(dlgSKH_Map.strgHK_Control.Cells[0, i],
                         'R hotkeys');
+
+          with dlgSKH_Map do
+            iSKH_Used_By:= 4;
+
           Exit;
         end;
   end;
 
-  // Custom HK
+  // RHK Custom
   with frmMain do begin
     for i:= 1 to 10 do
       if Assigned(ajavHK_Custom[i]) then
         if (ajavHK_Custom[i].HotKey = eKeyShort.HotKey) then begin
           pSetYes_inUse('Custom: ' + dlgSKH_Map.strgHK_Custom.Cells[0, i],
                         'R hotkeys');
+
+          with dlgSKH_Map do
+            iSKH_Used_By:= 5;
+
           Exit;
         end;
   end;
+
+  {Map of iSKH_Used_By
+   iSKH_Used_By:= 0; Not used
+   iSKH_Used_By:= 1; Application
+   iSKH_Used_By:= 2; Editor
+   iSKH_Used_By:= 3; RHK Send
+   iSKH_Used_By:= 4; RHK Control
+   iSKH_Used_By:= 5; RHK Custom}
 
   pSetNot_InUse;  // It was not found in any prior
 end;
@@ -277,103 +315,128 @@ var
   i: integer;
 
 begin
-  with frmMain.dlgSKH_Map.pgSH do
-    case ActivePageIndex of
-      // Application
-      0: begin
-           with modDados.cdShortcuts do begin
-             eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+  with frmMain.dlgSKH_Map do
+    iSKH_Assign_To:= 0;  // Not usd
 
-             with lbId_Cur do
-               Caption:= FieldValues['Group'] +
-                         ' | ' +
-                         FieldValues['Caption'] +
-                         ' | ' +
-                         FieldValues['Hint'];
+  case frmMain.dlgSKH_Map.pgSKH.ActivePageIndex of
+    // Application
+    0: begin
+         gbInfo.Caption:= ' Info (Group | Identification | Hint) ';
+         with modDados.cdShortcuts do begin
+           eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
 
-             with lbWhere_Cur do
-               Caption:= 'Aplication';
-           end;  //with modDados.cdShortcuts
-         end;  //0:
+           with lbId_Cur do
+             Caption:= FieldValues['Group'] +
+                       ' | ' +
+                       FieldValues['Caption'] +
+                       ' | ' +
+                       FieldValues['Hint'];
 
-      1: ;//TODO   
+           with lbWhere_Cur do
+             Caption:= 'Aplication';
+         end;  //with modDados.cdShortcuts
 
-      // R Hotkeys
-      2:  with frmMain.dlgSKH_Map.pgRH do
-            case ActivePageIndex of
-              0: begin
-                   // Send HK
-                   with frmMain do begin
-                     i:= dlgSKH_Map.strgHK_Send.Row;
+      with frmMain.dlgSKH_Map do
+        iSKH_Assign_To:= 1;
 
-                     if Assigned(ajavHK_Send[i]) then begin
-                       sTmp:= dlgSKH_Map.strgHK_Send.Cells[0, i];
-                       eKeyShort.HotKey:= ajavHK_Send[i].HotKey;
-                     end
-                     else
-                       Exit;
-                   end;
+      Exit;
+    end;  //0:
 
-                   with lbId_Cur do
-                     Caption:= 'Hotkeys'+
-                               ' | ' +
-                               sTmp+
-                               ' | ' +
-                               'Not hint';
+    1: begin
+       //TODO
+//       with frmMain.dlgSKH_Map do begin
+//         iSKH_Assign_To:= 2;
+//         iDx:= i;
+//       end;
+    end;
 
-                   with lbWhere_Cur do
-                     Caption:= 'R hotkeys';
-                 end;  // 0: begin
+    // R Hotkeys
+    2: begin
+         gbInfo.Caption:= ' Info (Group | Identification) ';
+         case frmMain.dlgSKH_Map.pgRH.ActivePageIndex of
+           0: begin
+                // RHK Send
+                with frmMain do begin
+                  i:= dlgSKH_Map.strgHK_Send.Row;
 
-              1: begin
-                   // Control HK
-                   with frmMain do begin
-                     i:= dlgSKH_Map.strgHK_Control.Row;
+                  if Assigned(ajavHK_Send[i]) then begin
+                    sTmp:= dlgSKH_Map.strgHK_Send.Cells[0, i];
+                    eKeyShort.HotKey:= ajavHK_Send[i].HotKey;
 
-                     if Assigned(ajavHK_Control[i]) then begin
-                       sTmp:= dlgSKH_Map.strgHK_Control.Cells[0, i];
-                       eKeyShort.HotKey:= ajavHK_Control[i].HotKey;
-                     end
-                     else
-                       Exit;
-                   end;
+                    with frmMain.dlgSKH_Map do begin
+                      iSKH_Assign_To:= 3;
+                      iDx:= i;
+                    end;
+                  end
+                  else
+                    Exit;
+                end;
 
-                   with lbId_Cur do
-                     Caption:= 'Hotkeys'+
-                               ' | ' +
-                               sTmp+
-                               ' | ' +
-                               'Not hint';
+                with lbId_Cur do
+                  Caption:= 'Hotkeys'+
+                            ' | ' +
+                            sTmp;
 
-                   with lbWhere_Cur do
-                     Caption:= 'R hotkeys';
-                 end;  // 1: begin
+                with lbWhere_Cur do
+                  Caption:= 'R hotkeys';
+           end;  // 0: begin
 
-              2: begin
-                   // Custom HK
-                   with frmMain do begin
-                     i:= dlgSKH_Map.strgHK_Custom.Row;
+           1: begin
+                // RHK Control
+                with frmMain do begin
+                  i:= dlgSKH_Map.strgHK_Control.Row;
 
-                     if Assigned(ajavHK_Custom[i]) then begin
-                       sTmp:= dlgSKH_Map.strgHK_Custom.Cells[0, i];
-                       eKeyShort.HotKey:= ajavHK_Custom[i].HotKey;
-                     end
-                     else
-                       Exit;
-                   end;
+                  if Assigned(ajavHK_Control[i]) then begin
+                    sTmp:= dlgSKH_Map.strgHK_Control.Cells[0, i];
+                    eKeyShort.HotKey:= ajavHK_Control[i].HotKey;
 
-                   with lbId_Cur do
-                     Caption:= 'Hotkeys'+
-                               ' | ' +
-                               sTmp+
-                               ' | ' +
-                               'Not hint';
+                    with frmMain.dlgSKH_Map do begin
+                      iSKH_Assign_To:= 4;
+                      iDx:= i;
+                    end;
+                  end
+                  else
+                    Exit;
+                end;
 
-                   with lbWhere_Cur do
-                     Caption:= 'R hotkeys';
-                 end;  // 2: begin
-              end;
-    end;  //case ActivePageIndex
+                with lbId_Cur do
+                  Caption:= 'Hotkeys'+
+                            ' | ' +
+                            sTmp;
+
+                with lbWhere_Cur do
+                  Caption:= 'R hotkeys';
+           end;  // 1: begin
+
+           2: begin
+                // RHK Custom
+                with frmMain do begin
+                  i:= dlgSKH_Map.strgHK_Custom.Row;
+
+                  if Assigned(ajavHK_Custom[i]) then begin
+                    sTmp:= dlgSKH_Map.strgHK_Custom.Cells[0, i];
+                    eKeyShort.HotKey:= ajavHK_Custom[i].HotKey;
+
+                    with frmMain.dlgSKH_Map do begin
+                      iSKH_Assign_To:= 5;
+                      iDx:= i;
+                    end;
+                  end
+                  else
+                    Exit;
+                end;
+
+                with lbId_Cur do
+                  Caption:= 'Hotkeys'+
+                            ' | ' +
+                            sTmp;
+
+                with lbWhere_Cur do
+                  Caption:= 'R hotkeys';
+           end;  // 2: begin
+         end;  //case frmMain.dlgSKH_Map.pgRH.ActivePageIndex
+       end;  //2: begin (R Hotkeys)
+  end;  //case frmMain.dlgSKH_Map.pgSH.ActivePageIndex
 end;
 
 // The user will type anything in eKeyShort

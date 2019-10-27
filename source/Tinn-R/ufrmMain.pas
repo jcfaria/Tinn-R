@@ -3112,7 +3112,7 @@ begin
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
-  sCurrentVersion_Rmirrors  := '5.02.02.00';
+  sCurrentVersion_Rmirrors  := '5.04.01.00';
   sCurrentVersion_Shortcuts := '5.04.01.00';
 
   // Cache
@@ -14484,7 +14484,7 @@ begin
       edtSearch_Group.Text:= '';
       edFilter_Caption.Text:= '';
       edtSearch_Caption.Text:= '';
-      pgSH.ActivePage:= tbsAppShortcuts;
+      pgSKH.ActivePage:= tbsAppShortcuts;
       pgRH.ActivePage:= tbsRH_Send;
     end;
 
@@ -14511,7 +14511,7 @@ begin
       pDatasetToActionList;
       pSetFocus_Main;
     end // if (dlgSH_Map.ShowModal = mrOK)
-    // else
+    // else (dlgSH_Map.ShowModal <> mrOK)
     else begin
       with modDados do begin
         cdShortcuts.SavePoint:= iShortcutsBeforeChanges;
@@ -17883,7 +17883,7 @@ begin
     sToSend:= fGetSelection(bSingleLine);  // Get slection
 
     if (sToSend = EmptyStr) then begin
-      sToSend:= fFindWord_Extended(fGet_Syn);        // Get word
+      sToSend:= fFindWord_Extended(fGet_Syn);  // Get word
 
       if (sToSend = EmptyStr) then begin
         fMessageDlg('No valid word selected!',

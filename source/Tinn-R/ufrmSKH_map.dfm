@@ -19,6 +19,14 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object lblCustom: TLabel
+    Left = 8
+    Top = 512
+    Width = 236
+    Height = 13
+    Caption = '* Use %s to word/selection and %f for whole file'
+    Visible = False
+  end
   object bbHelp: TBitBtn
     Left = 319
     Top = 507
@@ -78,7 +86,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     TabOrder = 1
     NumGlyphs = 2
   end
-  object pgSH: TJvgPageControl
+  object pgSKH: TJvgPageControl
     Left = 0
     Top = 0
     Width = 623
@@ -93,6 +101,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Style = tsFlatButtons
     TabOrder = 3
     TabStop = False
+    OnChange = pgSKHChange
     TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
     TabStyle.BevelInner = bvNone
     TabStyle.BevelOuter = bvNone
@@ -122,6 +131,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -581,7 +594,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 0
         Width = 615
         Height = 432
-        ActivePage = tbsRH_Custom
+        ActivePage = tbsRH_Send
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -591,6 +604,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Style = tsFlatButtons
         TabOrder = 4
         TabStop = False
+        OnChange = pgRHChange
         TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
         TabStyle.BevelInner = bvNone
         TabStyle.BevelOuter = bvNone
@@ -643,6 +657,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             TabOrder = 0
             OnDblClick = strgHK_SendDblClick
             OnDrawCell = strgHK_SendDrawCell
+            OnSelectCell = strgHK_SendSelectCell
             ColWidths = (
               467
               260)
@@ -651,6 +666,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Control: TTabSheet
           Caption = 'Control'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object strgHK_Control: TStringGrid
             Left = 0
             Top = 0
@@ -682,6 +701,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Custom: TTabSheet
           Caption = 'Custom'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object strgHK_Custom: TStringGrid
             Left = 0
             Top = 0

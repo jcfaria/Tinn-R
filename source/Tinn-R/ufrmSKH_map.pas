@@ -11,7 +11,7 @@ type
   TfrmSKH_Map_Dlg = class(TForm)
     bbHelp: TBitBtn;
     bbtOK: TBitBtn;
-    pgSH: TJvgPageControl;
+    pgSKH: TJvgPageControl;
     tbsAppShortcuts: TTabSheet;
     tbsEditorKeystrokes: TTabSheet;
     tbsRHotkeys: TTabSheet;
@@ -58,6 +58,7 @@ type
     bbtShortcuts_Manager: TBitBtn;
     tbsRH_Control: TTabSheet;
     strgHK_Control: TStringGrid;
+    lblCustom: TLabel;
     procedure FormShow(Sender: TObject);
     procedure dbgShortcutsDblClick(Sender: TObject);
     procedure lvKeystrokesDblClick(Sender: TObject);
@@ -95,6 +96,9 @@ type
     procedure strgHK_SendDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure strgHK_ControlDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure strgHK_CustomDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+    procedure pgRHChange(Sender: TObject);
+    procedure pgSKHChange(Sender: TObject);
+    procedure strgHK_SendSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
 
   private
     { Private declarations }
@@ -107,12 +111,16 @@ type
     procedure pCreateR_Custom(i: integer; sTmp: string);
     procedure pDoHotKey_Custom(Sender: TObject);
     procedure pDoHotKey_Default(Sender: TObject);
+    procedure pSKR_Clear_From(iSKH_Used_By: integer; sSHK: string);
+    procedure pSKR_Assign_To(iSKH_Assign_To, iDx: integer; sSHK: string);
 
   public
     { Public declarations }
-    dlgSKH_Manager: TfrmSKH_Manager_Dlg;
-    eKeyShort     : TSynHotKey;
-
+    dlgSKH_Manager   : TfrmSKH_Manager_Dlg;
+    eKeyShort        : TSynHotKey;
+    iSKH_Used_By     : integer;
+    iSKH_Assign_To   : integer;
+    iDx              : integer  // índice of the editor keystrokes/R hotkey in their respective stringGrid
   end;
 
 var
@@ -167,6 +175,7 @@ var
 begin
   //SetForegroundWindow(Application.Handle);
   sTmp:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
+
   for i:= 1 to 10 do
     if (lowercase(strgHK_Send.Cells[1,i]) = lowercase(sTmp)) then
       with frmMain do
@@ -212,6 +221,23 @@ begin
            6: actRContCloseAllGraphicsExecute(nil);
            7: if actRContHelpSelectedWord.Enabled      then actRContHelpSelectedWordExecute(nil);
         end;
+end;
+
+procedure TfrmSKH_Map_Dlg.pgRHChange(Sender: TObject);
+begin
+  with frmMain.dlgSKH_Map do begin
+    lblCustom.Visible:= (pgSKH.ActivePageIndex = 2) and
+                        (pgRH.ActivePageIndex = 2);
+
+//    ShowMessage(IntToStr(strgHK_Send.Row));
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.pgSKHChange(Sender: TObject);
+begin
+  with frmMain.dlgSKH_Map do
+    lblCustom.Visible:= (pgSKH.ActivePageIndex = 2) and
+                        (pgRH.ActivePageIndex = 2)
 end;
 
 procedure TfrmSKH_Map_Dlg.rdgTinnRHotKeysClick(Sender: TObject);
@@ -299,13 +325,118 @@ begin
     Panels[0].Text:= 'Browse mode';
 end;
 
+procedure TfrmSKH_Map_Dlg.pSKR_Assign_To(iSKH_Assign_To,
+                                          iDx: integer;
+                                         sSHK: string);
+begin
+  case iSKH_Assign_To of
+    // Application
+    1: with modDados do
+         with cdShortcuts do begin
+           Edit;
+           FieldByName('Shortcut').Value:= sSHK;
+           Post;
+         end;
+
+    // Editor
+    2: begin
+         //TODO
+    end;
+
+    // RHK Send
+    3: strgHK_Send.Cells[1,iDx]:= sSHK;
+
+    // RHK Control
+    4: strgHK_Custom.Cells[1,iDx]:= sSHK;
+
+    // RHK Custom
+    5: strgHK_Custom.Cells[1,iDx]:= sSHK;
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.pSKR_Clear_From(iSKH_Used_By: integer;
+                                          sSHK: string);
+var
+  sBy: string;
+
+  i: integer;
+
+begin
+  case iSKH_Used_By of
+    1: begin
+      // Application
+      with modDados do begin
+        fCheck_Shortcut_App(sSHK,
+                            sBy,
+                            True);
+      end;  // with modDados
+
+      ShowMessage('The S/K/H associated to [' +
+                  sBy +
+                  '] was emptied!');
+    end;
+
+    // Editor
+    2: begin
+       // TODO
+    end;
+
+    // RHK Send
+    3: begin
+         with frmMain do begin
+           for i:= 1 to 10 do
+             if Assigned(ajavHK_Send[i]) then
+               if (ajavHK_Send[i].HotKey = dlgSKH_Manager.eKeyShort.HotKey) then begin
+                 dlgSKH_Map.strgHK_Send.Cells[1,i]:= '';
+                 ajavHK_Send[i].HotKey := TextToShortCut('');
+
+                 ShowMessage('The S/K/H associated to [' +
+                             'RHK Send | ' + strgHK_Send.Cells[0,i] +
+                             '] was emptied!');
+               end;
+         end;
+    end;
+
+    // RHK Control
+    4: begin
+         with frmMain do begin
+           for i:= 1 to 10 do
+             if Assigned(ajavHK_Control[i]) then
+               if (ajavHK_Control[i].HotKey = dlgSKH_Manager.eKeyShort.HotKey) then begin
+                 dlgSKH_Map.strgHK_Control.Cells[1,i]:= '';
+                 ajavHK_Control[i].HotKey := TextToShortCut('');
+
+                 ShowMessage('The S/K/H associated to [' +
+                             'RHK Control | ' + strgHK_Control.Cells[0,i] +
+                             '] was emptied!');
+               end;
+         end;
+    end;
+
+    // RHK Custom
+    5: begin
+         with frmMain do begin
+           for i:= 1 to 10 do
+             if Assigned(ajavHK_Custom[i]) then
+               if (ajavHK_Custom[i].HotKey = dlgSKH_Manager.eKeyShort.HotKey) then begin
+                 dlgSKH_Map.strgHK_Custom.Cells[1,i]:= '';
+                 ajavHK_Custom[i].HotKey := TextToShortCut('');
+
+                 ShowMessage('The S/K/H associated to [' +
+                             'RHK Custom | ' + strgHK_Custom.Cells[0,i] +
+                             '] was emptied!');
+               end;
+         end;
+    end;
+  end;  // case iWhere
+end;
+
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_ManagerClick(Sender: TObject);
 var
-  sTmp,
-   sBy: string;
+  sSKH: string;
 
-  bShortcut_InUse,
-    bShortcut_NotRemove: boolean;
+  bSKH_InUse,
+    bSKH_NoRemove: boolean;
 
 begin
   try
@@ -313,32 +444,25 @@ begin
 
     if (dlgSKH_Manager.ShowModal = mrOK) then begin
       with dlgSKH_Manager do begin
-        bShortcut_InUse:= (lbInUse_Check.Caption = 'YES');
-        bShortcut_NotRemove:= (rgRemove_Current.ItemIndex = 0);
+        bSKH_InUse   := (lbInUse_Check.Caption = 'YES');
+        bSKH_NoRemove:= (rgRemove_Current.ItemIndex = 0);
 
-        if bShortcut_InUse and
-           bShortcut_NotRemove then Exit; {Nothing todo!}
+        if bSKH_InUse and
+           bSKH_NoRemove then Exit;  // Nothing todo!
       end;
 
-      sTmp:= ShortcutToText(dlgSKH_Manager.eKeyShort.HotKey);
+      sSKH:= ShortcutToText(dlgSKH_Manager.eKeyShort.HotKey);
 
-      with modDados do begin
-        fCheck_Shortcut_Use_App(sTmp,
-                                sBy,
-                                True);
+      // Clear
+      pSKR_Clear_From(iSKH_Used_By,   // Identify the S|K|H
+                      sSKH);          // The shorcut to be clean
 
-        if bShortcut_InUse then
-          ShowMessage('The shortcut associated to [' +
-                      sBy +
-                      '] was emptied!');
-
-        with cdShortcuts do begin
-          Edit;
-          FieldByName('Shortcut').Value:= sTmp;
-          Post;
-        end;  // with cdShortcuts
-      end;  // with modDados
+      // Assign
+      pSKR_Assign_To(iSKH_Assign_To,  // Identify the S|K|H
+                     iDx,             // Index of K|H
+                     sSKH);           // The shorcut to be assigned
     end;  // if (dlgSH_Manager.ShowModal = mrOK)
+
   finally
     FreeAndNil(dlgSKH_Manager.eKeyShort);
     FreeAndNil(dlgSKH_Manager);
@@ -534,9 +658,9 @@ begin
 end;
 
 procedure TfrmSKH_Map_Dlg.btnAddHotKeyClick(Sender: TObject);
-var
-  sTmp: string;
-  iRow: integer;
+//var
+//  sTmp: string;
+//  iRow: integer;
 
 begin
   pClear_Warnings;
@@ -825,8 +949,8 @@ var
 
 begin
   with frmMain do begin
-    pgSH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
-    pgRH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+    pgSKH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+    pgRH.TabSelectedStyle.BackgrColor := clBGTabSelectedNew;
   end;
 
   pClear_Warnings;
@@ -886,6 +1010,40 @@ var
   i        : integer;
 
 begin
+  Application.OnMessage:= pAppMessage;
+  // Send
+  with strgHK_Send do begin
+     Cells[0,0]:= 'Action';
+     Cells[1,0]:= 'Hotkey';
+     Cells[0,1]:= 'File';
+     Cells[0,2]:= 'Selection';
+     Cells[0,3]:= 'Clipboard';
+     Cells[0,4]:= 'Marked block';
+     Cells[0,5]:= 'Continguous';
+     Cells[0,6]:= 'Smart';
+     Cells[0,7]:= 'Line';
+     Cells[0,8]:= 'Lines to end page';
+   end;
+
+  // Control
+  with strgHK_Control do begin
+    Cells[0,0]:= 'Action';
+    Cells[1,0]:= 'Hotkey';
+    Cells[0,1]:= 'Print content (selected)';
+    Cells[0,2]:= 'List names (selected)';
+    Cells[0,3]:= 'List structure (selected)';
+    Cells[0,4]:= 'List all objects';
+    Cells[0,5]:= 'Clear console';
+    Cells[0,6]:= 'Close all graphic devices';
+    Cells[0,7]:= 'Help (selected)';
+  end;
+
+  // R Action Custom
+  with strgHK_Custom do begin
+    Cells[0,0]:= 'Action*';
+    Cells[1,0]:= 'Hotkey';
+  end;
+
   // Read the ini file for settings
   ifHotKeys:= TIniFile.Create(frmMain.sPathIniTinn_File);
 
@@ -895,7 +1053,8 @@ begin
       aHK[i]:= ifHotKeys.ReadString('R Hotkeys Send',
                                     'RHK' + IntToStr(i),
                                     '');
-      if (aHK[i] <> '') then begin
+      //if (aHK[i] <> '') then begin
+      if (Cells[0,i] <> '') then begin
         sTmp:= aHK[i];
         pCreateHotkey_Send(i,
                            sTmp);
@@ -909,7 +1068,8 @@ begin
       aHK[i]:= ifHotKeys.ReadString('R Hotkeys Control',
                                     'RHK' + IntToStr(i),
                                     '');
-      if (aHK[i] <> '') then begin
+      //if (aHK[i] <> '') then begin
+      if (Cells[0,i] <> '') then begin
         sTmp:= aHK[i];
         pCreateHotkey_Control(i,
                               sTmp);
@@ -924,6 +1084,7 @@ begin
                                     'RAC' + IntToStr(i),
                                     '');
       if (aHK[i] <> '') then begin
+//      if (Cells[0,i] <> '') then begin
         sTmp:= aHK[i];
         pCreateR_Custom(i,
                         sTmp);
@@ -938,6 +1099,7 @@ begin
                                     'RHKC' + IntToStr(i),
                                     '');
       if (aHK[i] <> '') then begin
+//      if (Cells[0,i] <> '') then begin
         sTmp:= aHK[i];
         pCreateHotkey_Custom(i,
                              sTmp);
@@ -947,39 +1109,39 @@ begin
 
   FreeAndNil(ifHotKeys);
 
-  Application.OnMessage:= pAppMessage;
-  // Send
-  with strgHK_Send do begin
-     Cells[0,0]:= 'Action';
-     Cells[1,0]:= 'Hotkey';
-     Cells[0,1]:= 'Send: file';
-     Cells[0,2]:= 'Send: selection';
-     Cells[0,3]:= 'Send: clipboard';
-     Cells[0,4]:= 'Send: marked block';
-     Cells[0,5]:= 'Send: continguous';
-     Cells[0,6]:= 'Send: smart';
-     Cells[0,7]:= 'Send: line';
-     Cells[0,8]:= 'Send: lines to end page';
-   end;
-
-  // Control
-  with strgHK_Control do begin
-    Cells[0,0]:= 'Action';
-    Cells[1,0]:= 'Hotkey';
-    Cells[0,1]:= 'Control: print content (selected)';
-    Cells[0,2]:= 'Control: list names (selected)';
-    Cells[0,3]:= 'Control: list structure (selected)';
-    Cells[0,4]:= 'Control: list all objects';
-    Cells[0,5]:= 'Control: clear console';
-    Cells[0,6]:= 'Control: close all graphic devices';
-    Cells[0,7]:= 'Control: help (selected)';
-  end;
-
-  // R Action Custom
-  with strgHK_Custom do begin
-    Cells[0,0]:= 'Action (use %s to word/selection and %f for whole file)';
-    Cells[1,0]:= 'Hotkey';
-  end;
+//  Application.OnMessage:= pAppMessage;
+//  // Send
+//  with strgHK_Send do begin
+//     Cells[0,0]:= 'Action';
+//     Cells[1,0]:= 'Hotkey';
+//     Cells[0,1]:= 'Send: file';
+//     Cells[0,2]:= 'Send: selection';
+//     Cells[0,3]:= 'Send: clipboard';
+//     Cells[0,4]:= 'Send: marked block';
+//     Cells[0,5]:= 'Send: continguous';
+//     Cells[0,6]:= 'Send: smart';
+//     Cells[0,7]:= 'Send: line';
+//     Cells[0,8]:= 'Send: lines to end page';
+//   end;
+//
+//  // Control
+//  with strgHK_Control do begin
+//    Cells[0,0]:= 'Action';
+//    Cells[1,0]:= 'Hotkey';
+//    Cells[0,1]:= 'Control: print content (selected)';
+//    Cells[0,2]:= 'Control: list names (selected)';
+//    Cells[0,3]:= 'Control: list structure (selected)';
+//    Cells[0,4]:= 'Control: list all objects';
+//    Cells[0,5]:= 'Control: clear console';
+//    Cells[0,6]:= 'Control: close all graphic devices';
+//    Cells[0,7]:= 'Control: help (selected)';
+//  end;
+//
+//  // R Action Custom
+//  with strgHK_Custom do begin
+//    Cells[0,0]:= 'Action*';
+//    Cells[1,0]:= 'Hotkey';
+//  end;
 
   pgRH.TabIndex:= 0;
 end;
@@ -1093,6 +1255,11 @@ begin
   strgHK_Send.Canvas.TextOut(Rect.Left,
                              Rect.Top,
                              strgHK_Send.Cells[ACol, ARow]);
+end;
+
+procedure TfrmSKH_Map_Dlg.strgHK_SendSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+begin
+//  ShowMessage('RHK Send: ' + IntToStr(ARow));
 end;
 
 //  with modDados.cdShortcuts do

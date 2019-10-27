@@ -130,7 +130,7 @@ type
 
     function fActionlist_To_Dataset: boolean;
     function fLoad_FileState(sFile: string; var sMarks: string; var iTopLine: integer; var iCaretX: integer; var iCaretY: integer): boolean;
-    function fCheck_Shortcut_Use_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_Shortcut_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fRmirrors_Update(sFile: string): boolean;
     function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
 
@@ -182,9 +182,9 @@ begin
   end;
 end;
 
-function TmodDados.fCheck_Shortcut_Use_App(sShortcut: string;
-                                           var sBy: string;
-                                           bShortcut_Clear: boolean = False): boolean;
+function TmodDados.fCheck_Shortcut_App(sShortcut: string;
+                                       var sBy: string;
+                                       bShortcut_Clear: boolean = False): boolean;
 var
   pTmp:  pointer;
 

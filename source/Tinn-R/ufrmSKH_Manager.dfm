@@ -100,7 +100,7 @@ object frmSKH_Manager_Dlg: TfrmSKH_Manager_Dlg
     OnClick = bbtCheckClick
     NumGlyphs = 2
   end
-  object GroupBox1: TGroupBox
+  object gbInfo: TGroupBox
     Left = 0
     Top = 0
     Width = 576
@@ -145,7 +145,7 @@ object frmSKH_Manager_Dlg: TfrmSKH_Manager_Dlg
       Top = 76
       Width = 565
       Height = 78
-      Caption = ' Check (if in use) '
+      Caption = ' Prior (if this is beig used) '
       Ctl3D = False
       ParentCtl3D = False
       TabOrder = 1
@@ -195,7 +195,7 @@ object frmSKH_Manager_Dlg: TfrmSKH_Manager_Dlg
       Top = 17
       Width = 295
       Height = 62
-      Caption = ' Set to Current and remove (if in use: see Check) '
+      Caption = ' Set to Current removing from Prior (see Prior result) '
       Columns = 2
       Enabled = False
       ItemIndex = 0
