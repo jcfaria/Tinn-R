@@ -281,12 +281,12 @@ begin
 
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'RmirrorsDefaultIndex';
+      Name   := 'Rmirrors_Idx';
       Fields := 'Country;Name;URL';
       Options:= [ixPrimary, ixUnique];
     end;
 
-    IndexName:= 'RmirrorsDefaultIndex';
+    IndexName:= 'Rmirrors_Idx';
   end;
   pCountries_Actualize;
 end;
@@ -335,7 +335,7 @@ begin
       Post;
       MergeChangeLog;
       SaveToFile();
-      frmMain.iRmirrorsBeforeChanges:= SavePoint;
+      frmMain.iRmirrors_SavePoint:= SavePoint;
     except
     end;
   end;
@@ -345,7 +345,7 @@ end;
 procedure TfrmRmirrors.bbtRmirrorsCloseClick(Sender: TObject);
 begin
   with modDados.cdRmirrors do
-    SavePoint:= frmMain.iRmirrorsBeforeChanges;
+    SavePoint:= frmMain.iRmirrors_SavePoint;
 
   Close;
   frmMain.Refresh;
@@ -365,7 +365,7 @@ end;
 procedure TfrmRmirrors.bbtRmirrorsCancelAllClick(Sender: TObject);
 begin
   with modDados.cdRmirrors do
-    SavePoint:= frmMain.iRmirrorsBeforeChanges;
+    SavePoint:= frmMain.iRmirrors_SavePoint;
 end;
 
 procedure TfrmRmirrors.bbtRmirrorsRestoreDefaultClick(Sender: TObject);
@@ -383,7 +383,7 @@ begin
 
     with modDados do begin
       cdRmirrors.Active:= True;
-      frmMain.iRmirrorsBeforeChanges:= cdRmirrors.SavePoint;
+      frmMain.iRmirrors_SavePoint:= cdRmirrors.SavePoint;
     end;  
 
     MessageDlg('The original ''Rmirrors.xml'' was successfully restored.',

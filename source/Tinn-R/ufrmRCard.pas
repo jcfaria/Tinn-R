@@ -237,7 +237,7 @@ begin
       Post;
       MergeChangeLog;
       SaveToFile();
-      frmMain.iRcardBeforeChanges:= SavePoint;
+      frmMain.iRcard_SavePoint:= SavePoint;
     except
     end;
   end;
@@ -275,12 +275,12 @@ begin
 
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'RcardDefaultIndex';
+      Name   := 'Rcard_Idx';
       Fields := 'Group;Function';
       Options:= [ixPrimary, ixUnique];
     end;
 
-    IndexName:= 'RcardDefaultIndex';
+    IndexName:= 'Rcard_Idx';
   end;
 end;
 
@@ -292,8 +292,8 @@ end;
 procedure TfrmRcard.bbtRcardCloseClick(Sender: TObject);
 begin
   with modDados.cdRcard do begin
-    SavePoint:= frmMain.iRcardBeforeChanges;
-    IndexName:= 'RcardDefaultIndex';
+    SavePoint:= frmMain.iRcard_SavePoint;
+    IndexName:= 'Rcard_Idx';
   end;
 
   pActualize_Groups;
@@ -316,7 +316,7 @@ end;
 procedure TfrmRcard.bbtRcardCancelAllClick(Sender: TObject);
 begin
   with modDados.cdRcard do
-    SavePoint:= frmMain.iRcardBeforeChanges;
+    SavePoint:= frmMain.iRcard_SavePoint;
 end;
 
 procedure TfrmRcard.bbtRcardRestoreDefaultClick(Sender: TObject);
@@ -334,7 +334,7 @@ begin
 
     with modDados do begin
       cdRcard.Active:= True;
-      frmMain.iRcardBeforeChanges:= cdRcard.SavePoint;
+      frmMain.iRcard_SavePoint:= cdRcard.SavePoint;
     end;  
 
     MessageDlg('The original ''Rcard.xml'' was successfully restored!',

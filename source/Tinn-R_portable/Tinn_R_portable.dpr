@@ -108,7 +108,6 @@ uses
   ufrmRterm in '..\Tinn-R\ufrmRterm.pas' {frmRterm},
   ufrmSearchInFiles in '..\Tinn-R\ufrmSearchInFiles.pas' {frmSearchInFilesDlg},
   ufrmSearch in '..\Tinn-R\ufrmSearch.pas' {frmSearchDlg},
-  ufrmShortcuts in '..\Tinn-R\ufrmShortcuts.pas' {frmShortcuts},
   ufrmSplash in '..\Tinn-R\ufrmSplash.pas' {frmSplash},
   ufrmTools in '..\Tinn-R\ufrmTools.pas' {frmTools},
   ufrmUpdater in '..\Tinn-R\ufrmUpdater.pas' {frmUpdater},

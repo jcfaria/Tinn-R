@@ -1,1 +1,1 @@
-This folder stores:'Tinn.ini' and 'Tinn_dock.ini' files.
+This folder stores the files:Tinn.ini and Tinn_dock.ini.

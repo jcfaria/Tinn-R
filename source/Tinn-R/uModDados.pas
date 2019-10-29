@@ -91,6 +91,24 @@ type
     dsRcard: TDataSource;
     dsRmirrors: TDataSource;
     dsShortcuts: TDataSource;
+    cdRH_Send: TClientDataSet;
+    IntegerField1: TIntegerField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField4: TStringField;
+    dsRH_Send: TDataSource;
+    cdRH_Control: TClientDataSet;
+    IntegerField2: TIntegerField;
+    StringField3: TStringField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    dsRH_Control: TDataSource;
+    cdRH_Custom: TClientDataSet;
+    IntegerField3: TIntegerField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    StringField9: TStringField;
+    dsRH_Custom: TDataSource;
 
     procedure cdCommentsAfterPost(DataSet: TDataSet);
     procedure cdCommentsAfterScroll(DataSet: TDataSet);
@@ -131,6 +149,9 @@ type
     function fActionlist_To_Dataset: boolean;
     function fLoad_FileState(sFile: string; var sMarks: string; var iTopLine: integer; var iCaretX: integer; var iCaretY: integer): boolean;
     function fCheck_Shortcut_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_Hotkey_RH_Send(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_Hotkey_RH_Control(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_Hotkey_RH_Custom(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fRmirrors_Update(sFile: string): boolean;
     function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
 
@@ -153,7 +174,6 @@ uses
   ufrmRcard,
   ufrmCompletion,
   ufrmTools,
-  ufrmShortcuts,
   Variants,
   Menus,
   ActnList,
@@ -163,11 +183,6 @@ uses
   ufrmSKH_map;
 
 {$R *.DFM}
-
-//procedure TmodDados.mtest;
-//begin
-//  //To tests
-//end;
 
 procedure TmodDados.pSet_Current_Highlighter(sLanguage: string);
 begin
@@ -217,6 +232,159 @@ begin
             FieldValues['Caption'] +
             ' | ' +
             FieldValues['Hint'];
+
+      if bShortcut_Clear then begin
+         Edit;
+         FieldByName('Shortcut').Value:= '';
+         Post;
+      end;
+    end; //if (Locate('Shortcut'...
+
+    Filtered:= bFiltered;
+
+    if BookmarkValid(pTmp) then
+      GoToBookmark(pTmp);
+    FreeBookmark(pTmp);
+
+    EnableControls;
+  end; //with cdShortcuts
+end;
+
+function TmodDados.fCheck_Hotkey_RH_Send(sShortcut: string;
+                                         var sBy: string;
+                                         bShortcut_Clear: boolean = False): boolean;
+var
+  pTmp:  pointer;
+
+  bFiltered: boolean;
+
+  sTmp: string;
+
+begin
+  Result:= False;
+
+  with cdRH_Send do begin
+    pTmp:= GetBookmark;
+    DisableControls;
+    bFiltered:= Filtered;
+    if bFiltered then
+      Filtered:= False;
+
+    sTmp:= StringReplace(sShortcut,
+                         ' ',
+                         '',
+                         [rfReplaceAll]);
+
+    if (Locate('Shortcut',
+               sTmp,
+               []) = True) then begin
+      Result:= True;
+
+      sBy:= FieldValues['Group'] +
+            ' | ' +
+            FieldValues['Caption'];
+
+      if bShortcut_Clear then begin
+         Edit;
+         FieldByName('Shortcut').Value:= '';
+         Post;
+      end;
+    end; //if (Locate('Shortcut'...
+
+    Filtered:= bFiltered;
+
+    if BookmarkValid(pTmp) then
+      GoToBookmark(pTmp);
+    FreeBookmark(pTmp);
+
+    EnableControls;
+  end; //with cdShortcuts
+end;
+
+function TmodDados.fCheck_Hotkey_RH_Control(sShortcut: string;
+                                            var sBy: string;
+                                            bShortcut_Clear: boolean = False): boolean;
+var
+  pTmp:  pointer;
+
+  bFiltered: boolean;
+
+  sTmp: string;
+
+begin
+  Result:= False;
+
+  with cdRH_Control do begin
+    pTmp:= GetBookmark;
+    DisableControls;
+    bFiltered:= Filtered;
+    if bFiltered then
+      Filtered:= False;
+
+    sTmp:= StringReplace(sShortcut,
+                         ' ',
+                         '',
+                         [rfReplaceAll]);
+
+    if (Locate('Shortcut',
+               sTmp,
+               []) = True) then begin
+      Result:= True;
+
+      sBy:= FieldValues['Group'] +
+            ' | ' +
+            FieldValues['Caption'];
+
+      if bShortcut_Clear then begin
+         Edit;
+         FieldByName('Shortcut').Value:= '';
+         Post;
+      end;
+    end; //if (Locate('Shortcut'...
+
+    Filtered:= bFiltered;
+
+    if BookmarkValid(pTmp) then
+      GoToBookmark(pTmp);
+    FreeBookmark(pTmp);
+
+    EnableControls;
+  end; //with cdShortcuts
+end;
+
+function TmodDados.fCheck_Hotkey_RH_Custom(sShortcut: string;
+                                           var sBy: string;
+                                           bShortcut_Clear: boolean = False): boolean;
+var
+  pTmp:  pointer;
+
+  bFiltered: boolean;
+
+  sTmp: string;
+
+begin
+  Result:= False;
+
+  with cdRH_Custom do begin
+    pTmp:= GetBookmark;
+    DisableControls;
+    bFiltered:= Filtered;
+    if bFiltered then
+      Filtered:= False;
+
+    sTmp:= StringReplace(sShortcut,
+                         ' ',
+                         '',
+                         [rfReplaceAll]);
+
+    if (Locate('Shortcut',
+               sTmp,
+               []) = True) then begin
+      Result:= True;
+
+      sBy:= FieldValues['Group'] +
+            ' | ' +
+            FieldValues['Caption'];
 
       if bShortcut_Clear then begin
          Edit;
@@ -311,11 +479,11 @@ begin
       IndexDefs.Clear;
       with IndexDefs.AddIndexDef do
       begin
-        Name   := 'ShortcutsDefaultIndex';
+        Name   := 'Shortcuts_Idx';
         Fields := 'Index';
         Options:= [ixPrimary, ixUnique];
       end;
-      IndexName:= 'ShortcutsDefaultIndex';
+      IndexName:= 'Shortcuts_Idx';
     end;
 
     with cdNew do begin
@@ -326,11 +494,11 @@ begin
       IndexDefs.Clear;
       with IndexDefs.AddIndexDef do
       begin
-        Name   := 'ShortcutsDefaultIndex';
+        Name   := 'Shortcuts_Idx';
         Fields := 'Index';
         Options:= [ixPrimary, ixUnique];
       end;
-      IndexName:= 'ShortcutsDefaultIndex';
+      IndexName:= 'Shortcuts_Idx';
     end;
 
     cdOld.First;
@@ -418,7 +586,6 @@ begin
     FreeAndNil(slRmirrors_Countries);
 
   slRmirrors_Countries:= TStringList.Create;
-  //slRmirrors_Countries.CaseSensitive:= True;
 
   with cdRmirrors do begin
     DisableControls;
@@ -469,11 +636,11 @@ begin
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'RcardDefaultIndex';
+      Name   := 'Rcard_Idx';
       Fields := 'Group;Function';
       Options:= [ixPrimary, ixUnique];
     end;
-    IndexName:= 'RcardDefaultIndex';
+    IndexName:= 'Rcard_Idx';
   end;
 
   // R Mirrors
@@ -485,11 +652,11 @@ begin
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'RmirrorsDefaultIndex';
+      Name   := 'Rmirrors_Idx';
       Fields := 'Country;Name;URL';
       Options:= [ixPrimary, ixUnique];
     end;
-    IndexName:= 'RmirrorsDefaultIndex';
+    IndexName:= 'Rmirrors_Idx';
   end;
 
   // Completion
@@ -501,11 +668,11 @@ begin
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'CompletionDefaultIndex';
+      Name   := 'Completion_Idx';
       Fields := 'Trigger';
       Options:= [ixPrimary, ixUnique];
     end;
-    IndexName:= 'CompletionDefaultIndex';
+    IndexName:= 'Completion_Idx';
   end;
 
   // Shortcuts
@@ -516,11 +683,11 @@ begin
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'ShortcutsDefaultIndex';
+      Name   := 'Shortcuts_Idx';
       Fields := 'Index';
       Options:= [ixPrimary, ixUnique];
     end;
-    IndexName:= 'ShortcutsDefaultIndex';
+    IndexName:= 'Shortcuts_Idx';
   end;
 
   // Cache
@@ -532,11 +699,11 @@ begin
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'CacheDefaultIndex';
+      Name   := 'Cache_Idx';
       Fields := 'File';
       Options:= [ixPrimary, ixUnique];
     end;
-    IndexName:= 'CacheDefaultIndex';
+    IndexName:= 'Cache_Idx';
   end;
 
   // Comments
@@ -548,26 +715,80 @@ begin
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'CommentsDefaultIndex';
+      Name   := 'Comments_Idx';
       Fields := 'Language';
       Options:= [ixPrimary, ixUnique];
     end;
-    IndexName:= 'CommentsDefaultIndex';
+    IndexName:= 'Comments_Idx';
+  end;
+
+  // RH_Send
+  with cdRH_Send do begin
+    Active   := False;
+    FileName := frmMain.sPath_Data +
+                '\RH_Send.xml';
+    Active   := True;
+    IndexDefs.Clear;
+    with IndexDefs.AddIndexDef do
+    begin
+      Name   := 'RH_Send_Idx';
+      Fields := 'Index';
+      Options:= [ixPrimary, ixUnique];
+    end;
+    IndexName:= 'RH_Send_Idx';
+  end;
+
+  // RH_Control
+  with cdRH_Control do begin
+    Active   := False;
+    FileName := frmMain.sPath_Data +
+                '\RH_Control.xml';
+    Active   := True;
+    IndexDefs.Clear;
+    with IndexDefs.AddIndexDef do
+    begin
+      Name   := 'RH_Control_Idx';
+      Fields := 'Index';
+      Options:= [ixPrimary, ixUnique];
+    end;
+    IndexName:= 'RH_Control_Idx';
+  end;
+
+  // RH_Custom
+  with cdRH_Custom do begin
+    Active   := False;
+    FileName := frmMain.sPath_Data +
+                '\RH_Custom.xml';
+    Active   := True;
+    IndexDefs.Clear;
+    with IndexDefs.AddIndexDef do
+    begin
+      Name   := 'RH_Custom_Idx';
+      Fields := 'Index';
+      Options:= [ixPrimary, ixUnique];
+    end;
+    IndexName:= 'RH_Custom_Idx';
   end;
 
   with frmMain do begin
     if not bDatabaseRestored then begin
-      cdRcard.SavePoint     := iRcardBeforeChanges;
-      cdRmirrors.SavePoint  := iRmirrorsBeforeChanges;
-      cdCompletion.SavePoint:= iCompletionBeforeChanges;
-      cdShortcuts.SavePoint := iShortcutsBeforeChanges;
+      cdRcard.SavePoint     := iRcard_SavePoint;
+      cdRmirrors.SavePoint  := iRmirrors_SavePoint;
+      cdCompletion.SavePoint:= iCompletion_SavePoint;
+      cdShortcuts.SavePoint := iShortcuts_SavePoint;
+      cdRH_Send.SavePoint   := iRH_Send_SavePoint;
+      cdRH_Control.SavePoint:= iRH_Control_SavePoint;
+      cdRH_Custom.SavePoint := iRH_Custom_SavePoint;
     end
     else begin
-      iRcardBeforeChanges     := cdRcard.SavePoint;
-      iRmirrorsBeforeChanges  := cdRmirrors.SavePoint;
-      iCompletionBeforeChanges:= cdCompletion.SavePoint;
-      iShortcutsBeforeChanges := cdShortcuts.SavePoint;
-      bDatabaseRestored       := False
+      iRcard_SavePoint     := cdRcard.SavePoint;
+      iRmirrors_SavePoint  := cdRmirrors.SavePoint;
+      iCompletion_SavePoint:= cdCompletion.SavePoint;
+      iShortcuts_SavePoint := cdShortcuts.SavePoint;
+      iRH_Send_SavePoint   := cdRH_Send.SavePoint;
+      iRH_Control_SavePoint:= cdRH_Control.SavePoint;
+      iRH_Custom_SavePoint := cdRH_Custom.SavePoint;
+      bDatabaseRestored    := False
     end;
   end;
 
@@ -595,6 +816,15 @@ begin
     Close; //Will also save to file whether any change was made!
 
   with cdComments do
+    Close; //Will also save to file whether any change was made!
+
+  with cdRH_Send do
+    Close; //Will also save to file whether any change was made!
+
+  with cdRH_Control do
+    Close; //Will also save to file whether any change was made!
+
+  with cdRH_Custom do
     Close; //Will also save to file whether any change was made!
 end;
 
@@ -700,19 +930,16 @@ end;
 
 procedure TmodDados.cdShortcutsAfterPost(DataSet: TDataSet);
 begin
-  if Assigned(frmShortcuts) then
-    with frmShortcuts do begin
+  if Assigned(frmMain.dlgSKH_Map) then
+    with frmMain.dlgSKH_Map do begin
       stbShortcuts.Panels[0].Text:= 'Browse mode';
-      frmShortcuts.bbtShortcutsClose.Enabled:= True;
     end;
 end;
 
 procedure TmodDados.cdShortcutsAfterScroll(DataSet: TDataSet);
 begin
-  if Assigned(frmShortcuts) then
-    with frmShortcuts do begin
-      if bLocating then Exit;
-      eKeyShort.HotKey:= TextToShortcut(cdShortcuts.FieldByName('Shortcut').Value);
+  if Assigned(frmMain.dlgSKH_Map) then
+    with frmMain.dlgSKH_Map do begin
       imgShortcut.Picture.Bitmap:= nil;
       frmMain.imlTinnR.GetBitmap(cdShortcuts.FieldByName('Image').Value,
                                  imgShortcut.Picture.Bitmap);
@@ -722,17 +949,12 @@ begin
   with frmMain do
   if Assigned(dlgSKH_Map) then
     with dlgSKH_Map do begin
-      //if bLocating then Exit;
-      //eKeyShort.HotKey:= TextToShortcut(cdShortcuts.FieldByName('Shortcut').Value);
       imgShortcut.Picture.Bitmap:= nil;
       imlTinnR.GetBitmap(cdShortcuts.FieldByName('Image').Value,
                          imgShortcut.Picture.Bitmap);
       if Visible then stbShortcuts.Panels[0].Text:= 'Browse mode';
     end;
 
-//  if Assigned(frmHotkeys) then
-//    with frmHotkeys do
-//      if bLocating then Exit;
   if (cdShortcuts.State <> dsBrowse) then Exit;
   frmTools.imgShortcut.Picture.Bitmap:= nil;
   frmMain.imlTinnR.GetBitmap(cdShortcuts.FieldByName('Image').Value,
@@ -741,8 +963,8 @@ end;
 
 procedure TmodDados.cdShortcutsBeforeEdit(DataSet: TDataSet);
 begin
-  if Assigned(frmShortcuts) then
-    with frmShortcuts.stbShortcuts do
+  if Assigned(frmMain.dlgSKH_Map) then
+    with frmMain.dlgSKH_Map.stbShortcuts do
       Panels[0].Text:= 'Edit mode';
 end;
 
@@ -893,7 +1115,7 @@ function TmodDados.fActionlist_To_Dataset: boolean;
       end;
 
       with IndexDefs.AddIndexDef do begin
-        Name   := 'ShortcutsDefaultIndex';
+        Name   := 'Shortcuts_Idx';
         Fields := 'Index';
         Options:= [ixPrimary, ixUnique];
       end;
@@ -1017,7 +1239,7 @@ function TmodDados.fRmirrors_Update(sFile: string): boolean;
       end;
 
       with IndexDefs.AddIndexDef do begin
-        Name   := 'RtipDefaultIndex';
+        Name   := 'Rtip_Idx';
         Fields := 'Country;Name;URL';
         Options:= [ixPrimary, ixUnique];
       end;
@@ -1107,8 +1329,6 @@ begin
     FreeAndNil(slTmp2);
   end;
 end;
-
-end.
 
 (*
 if not FileExists(frmMain.sFileDataOrigin) then Exit;
@@ -1246,3 +1466,7 @@ begin
   end;
 end;
 *)
+
+end.
+
+

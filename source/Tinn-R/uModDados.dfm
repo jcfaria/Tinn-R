@@ -2,11 +2,11 @@ object modDados: TmodDados
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 326
-  Width = 154
+  Height = 482
+  Width = 189
   object dsRcard: TDataSource
     DataSet = cdRcard
-    Left = 89
+    Left = 118
     Top = 12
   end
   object cdRcard: TClientDataSet
@@ -17,7 +17,7 @@ object modDados: TmodDados
     AfterScroll = cdRcardAfterScroll
     OnFilterRecord = cdRcardFilterRecord
     OnPostError = cdRcardPostError
-    Left = 22
+    Left = 31
     Top = 12
     object cdRcardGroup: TStringField
       FieldName = 'Group'
@@ -41,7 +41,7 @@ object modDados: TmodDados
     AfterPost = cdCompletionAfterPost
     AfterScroll = cdCompletionAfterScroll
     OnPostError = cdCompletionPostError
-    Left = 22
+    Left = 31
     Top = 67
     object cdCompletionGroup: TStringField
       FieldName = 'Group'
@@ -64,7 +64,7 @@ object modDados: TmodDados
   end
   object dsCompletion: TDataSource
     DataSet = cdCompletion
-    Left = 89
+    Left = 118
     Top = 67
   end
   object cdShortcuts: TClientDataSet
@@ -75,7 +75,7 @@ object modDados: TmodDados
     AfterScroll = cdShortcutsAfterScroll
     OnNewRecord = cdShortcutsNewRecord
     OnPostError = cdShortcutsPostError
-    Left = 22
+    Left = 31
     Top = 117
     object cdShortcutsIndex: TIntegerField
       FieldName = 'Index'
@@ -103,19 +103,19 @@ object modDados: TmodDados
   end
   object dsShortcuts: TDataSource
     DataSet = cdShortcuts
-    Left = 88
+    Left = 117
     Top = 115
   end
   object dsCache: TDataSource
     DataSet = cdCache
-    Left = 89
+    Left = 118
     Top = 166
   end
   object cdCache: TClientDataSet
     Aggregates = <>
     Params = <>
     OnFilterRecord = cdRcardFilterRecord
-    Left = 22
+    Left = 31
     Top = 166
     object cdCacheFile: TStringField
       FieldName = 'File'
@@ -143,7 +143,7 @@ object modDados: TmodDados
     AfterPost = cdCommentsAfterPost
     AfterScroll = cdCommentsAfterScroll
     OnPostError = cdCommentsPostError
-    Left = 22
+    Left = 31
     Top = 215
     object cdCommentsLanguage: TStringField
       FieldName = 'Language'
@@ -173,7 +173,7 @@ object modDados: TmodDados
   end
   object dsComments: TDataSource
     DataSet = cdComments
-    Left = 89
+    Left = 118
     Top = 215
   end
   object cdRmirrors: TClientDataSet
@@ -183,7 +183,7 @@ object modDados: TmodDados
     AfterPost = cdRmirrorsAfterPost
     AfterScroll = cdRmirrorsAfterScroll
     OnPostError = cdRmirrorsPostError
-    Left = 22
+    Left = 31
     Top = 264
     object cdRmirrorsName: TStringField
       FieldName = 'Name'
@@ -210,7 +210,103 @@ object modDados: TmodDados
   end
   object dsRmirrors: TDataSource
     DataSet = cdRmirrors
-    Left = 89
+    Left = 118
     Top = 264
+  end
+  object cdRH_Send: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    BeforeEdit = cdShortcutsBeforeEdit
+    AfterPost = cdShortcutsAfterPost
+    AfterScroll = cdShortcutsAfterScroll
+    OnNewRecord = cdShortcutsNewRecord
+    OnPostError = cdShortcutsPostError
+    Left = 31
+    Top = 315
+    object IntegerField1: TIntegerField
+      FieldName = 'Index'
+      Required = True
+    end
+    object StringField1: TStringField
+      FieldName = 'Group'
+      Size = 50
+    end
+    object StringField2: TStringField
+      FieldName = 'Caption'
+      Size = 50
+    end
+    object StringField4: TStringField
+      Alignment = taRightJustify
+      FieldName = 'Shortcut'
+    end
+  end
+  object dsRH_Send: TDataSource
+    DataSet = cdRH_Send
+    Left = 117
+    Top = 315
+  end
+  object cdRH_Control: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    BeforeEdit = cdShortcutsBeforeEdit
+    AfterPost = cdShortcutsAfterPost
+    AfterScroll = cdShortcutsAfterScroll
+    OnNewRecord = cdShortcutsNewRecord
+    OnPostError = cdShortcutsPostError
+    Left = 31
+    Top = 367
+    object IntegerField2: TIntegerField
+      FieldName = 'Index'
+      Required = True
+    end
+    object StringField3: TStringField
+      FieldName = 'Group'
+      Size = 50
+    end
+    object StringField5: TStringField
+      FieldName = 'Caption'
+      Size = 50
+    end
+    object StringField6: TStringField
+      Alignment = taRightJustify
+      FieldName = 'Shortcut'
+    end
+  end
+  object dsRH_Control: TDataSource
+    DataSet = cdRH_Control
+    Left = 117
+    Top = 367
+  end
+  object cdRH_Custom: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    BeforeEdit = cdShortcutsBeforeEdit
+    AfterPost = cdShortcutsAfterPost
+    AfterScroll = cdShortcutsAfterScroll
+    OnNewRecord = cdShortcutsNewRecord
+    OnPostError = cdShortcutsPostError
+    Left = 31
+    Top = 422
+    object IntegerField3: TIntegerField
+      FieldName = 'Index'
+      Required = True
+    end
+    object StringField7: TStringField
+      FieldName = 'Group'
+      Size = 50
+    end
+    object StringField8: TStringField
+      FieldName = 'Caption'
+      Size = 100
+    end
+    object StringField9: TStringField
+      Alignment = taRightJustify
+      FieldName = 'Shortcut'
+    end
+  end
+  object dsRH_Custom: TDataSource
+    DataSet = cdRH_Custom
+    Left = 117
+    Top = 422
   end
 end

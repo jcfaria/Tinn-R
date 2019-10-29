@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATAPACKET Version="2.0">
+  <METADATA>
+    <FIELDS>
+      <FIELD attrname="Index" fieldtype="i4"/>
+      <FIELD attrname="Group" fieldtype="string" WIDTH="50"/>
+      <FIELD attrname="Caption" fieldtype="string" WIDTH="50"/>
+      <FIELD attrname="Shortcut" fieldtype="string" WIDTH="50"/>
+    </FIELDS>
+    <PARAMS/>
+  </METADATA>
+  <ROWDATA>
+    <ROW Index="0" Group="Control" Caption="Set work directory (curretn file path)" Shortcut=""/>
+    <ROW Index="1" Group="Control" Caption="List all objetcs" Shortcut="Alt+S"/>
+    <ROW Index="2" Group="Control" Caption="Print content (selected)" Shortcut="Alt+P"/>
+    <ROW Index="3" Group="Control" Caption="Plot (selected)" Shortcut=""/>
+    <ROW Index="4" Group="Control" Caption="List names (selected)" Shortcut=""/>
+    <ROW Index="5" Group="Control" Caption="List structure (selected)" Shortcut="Alt+T"/>
+    <ROW Index="6" Group="Control" Caption="Edit (selected)" Shortcut=""/>
+    <ROW Index="7" Group="Control" Caption="Fix (selected)" Shortcut=""/>
+    <ROW Index="8" Group="Control" Caption="Clear console" Shortcut=""/>
+    <ROW Index="9" Group="Control" Caption="Close all graphics devices" Shortcut=""/>
+    <ROW Index="10" Group="Control" Caption="Help (selected)" Shortcut=""/>
+    <ROW Index="11" Group="Control" Caption="Example (selected)" Shortcut=""/>
+    <ROW Index="12" Group="Control" Caption="Open example (selected)" Shortcut=""/>
+    <ROW Index="13" Group="Control" Caption="Help" Shortcut=""/>
+    <ROW Index="14" Group="Control" Caption="Rgui|PuTTY (start/close)" Shortcut=""/>
+    <ROW Index="15" Group="Control" Caption="Rterm (start/close)" Shortcut=""/>
+  </ROWDATA>
+</DATAPACKET>
