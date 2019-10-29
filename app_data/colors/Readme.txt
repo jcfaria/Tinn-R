@@ -1,1 +1,1 @@
-This folder stores:The 'Custom.txt' file.
+This folder stores the file:Custom.txt.

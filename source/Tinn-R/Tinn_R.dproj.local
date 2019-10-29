@@ -22,5 +22,7 @@
     <Transaction>2019/08/11 23:00:13.704.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSH_map.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.dfm</Transaction>
     <Transaction>2019/08/11 23:06:03.765.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSH_Manager.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas</Transaction>
     <Transaction>2019/08/11 23:06:03.765.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSH_Manager.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.dfm</Transaction>
+    <Transaction>2019/10/28 20:07:35.796.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.pas=</Transaction>
+    <Transaction>2019/10/28 20:07:35.796.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.dfm=</Transaction>
   </Transactions>
 </BorlandProject>

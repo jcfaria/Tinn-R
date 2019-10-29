@@ -99,20 +99,14 @@ type
     pLine              : TPoint;
     seSaveFormat       : TSynEncoding;
     spEditor           : TSplitter;
-    //sReplaceTextHistory: string;
 
 
     function fMessageDlg(const Msg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons; HelpCtx: Integer): Integer;
     function fDoSave_ModifiedFileQuery: boolean;
     procedure pDoSave_FileState;
-//    procedure pDoSearchReplaceText(bReplace, bSearchAgain: boolean; bMessage: boolean = True);
-//    procedure pFileClose;
     procedure pSetHighlighter_FromTag(iTag: integer);
     procedure pSetSyntax_Highlighter(sSynName: string);
     procedure pShowSearchReplaceDialog(bReplace: boolean);
-//    procedure pToogleLineNumbers(bOption: boolean);
-//    procedure pToogleSpecialChars(bChecked: boolean);
-
 
     // not rename the two below!
     procedure WMMDIActivate(var Msg: TWMMDIActivate); message WM_MDIACTIVATE;
@@ -131,8 +125,6 @@ type
     synEditor2          : TSynEdit;
     fNotif              : TATFileNotificationSimple;
 
-    //procedure pMatchBracket;
-    //procedure RtermSplit(bSplitHoriz: boolean = True);
     function fGet_BB_HighLighter: TSynCustomHighlighter;
     function fGet_BE_HighLighter: TSynCustomHighlighter;
     function fGet_Current_HighLighter: TSynCustomHighlighter;
@@ -404,7 +396,6 @@ begin
       menForEncConUTF8.Enabled            := False;
       menToolsConversionPandoc.Enabled    := False;
       menWebSearchSelGoogle.Enabled       := False;
-      menWebSearchSelRArchives.Enabled    := False;
       menWebSearchSelRSite.Enabled        := False;
       tbFilter.Enabled                    := False;
       tbiPandoc.Enabled                   := False;
@@ -827,7 +818,6 @@ begin
     menForEncConUTF8.Enabled            := True;
     menToolsConversionPandoc.Enabled    := True;
     menWebSearchSelGoogle.Enabled       := True;
-    menWebSearchSelRArchives.Enabled    := True;
     menWebSearchSelRSite.Enabled        := True;
     synMR.Editor                        := synEditor;
     tbFilter.Enabled                    := True;
@@ -1178,25 +1168,6 @@ begin
   with frmMain do
     actRtermEditorSetFocus.Checked:= True;
 
-//  case Key of
-//    1..15,
-//    18..31,
-//    33..36,
-//    38,
-//    40..44,
-//    46..67,
-//    69..105,
-//    108,
-//    110..300:
-//    begin
-//      with frmMain do begin
-//        stbMain.Panels[8].Text:= EmptyStr;
-//        stbMain.Panels[9].Text:= EmptyStr;
-//        actRtermWarningError.Visible:= False;
-//      end;
-//    end;
-//  end;
-
    with frmMain do begin
      stbMain.Panels[8].Text:= EmptyStr;
      stbMain.Panels[9].Text:= EmptyStr;
@@ -1245,15 +1216,6 @@ begin
                                     ' ',
                                     nil);
                    end;
-     {// After autocompletion resource the below it is no more necessary !
-      48         : with seEditor do
-                     SelText:= '()';       // )
-
-      57         : with seEditor do begin  // (
-                     SelText:= '()';
-                     CaretX := CaretX - 1;
-                   end;
-     }
     end;
 end;
 
@@ -2195,7 +2157,6 @@ begin
   frmMain.actLineSelect.Checked  := False;
   frmMain.actColumnSelect.Checked:= False;
 
-  //frmMain.stbMain.Panels[4].Text:= 'Normal';
   frmMain.pDrawSelectionMode(0);
 
   synEditor.Options:= synEditor.Options +
@@ -2214,7 +2175,6 @@ begin
   frmMain.actLineSelect.Checked  := True;
   frmMain.actColumnSelect.Checked:= False;
 
-  //frmMain.stbMain.Panels[4].Text:= 'Line';
   frmMain.pDrawSelectionMode(1);
 
   synEditor.Options:= synEditor.Options +
@@ -2234,45 +2194,11 @@ begin
   frmMain.actLineSelect.Checked  := False;
   frmMain.actColumnSelect.Checked:= True;
 
-  //frmMain.stbMain.Panels[4].Text:= 'Column';
   frmMain.pDrawSelectionMode(2);
 
   synEditor.Options:= synEditor.Options -
                       [eoAltSetsColumnMode];
 end;
-
-//procedure TfrmEditor.pToogleLineNumbers(bOption: boolean);
-//begin
-//  if Assigned(synEditor2) then begin
-//    synEditor.Gutter.ShowlineNumbers := bOption;
-//    synEditor2.Gutter.ShowlineNumbers:= bOption;
-//  end
-//  else synEditor.Gutter.ShowlineNumbers:= bOption;
-//end;
-
-//procedure TfrmEditor.pToogleSpecialChars(bChecked: boolean);
-//begin
-//  if Assigned(synEditor2) then begin
-//    if bChecked then begin
-//      synEditor.Options := synEditor.Options +
-//                           [eoShowSpecialChars];
-//      synEditor2.Options:= synEditor2.Options +
-//                           [eoShowSpecialChars];
-//    end
-//    else begin
-//      synEditor.Options := synEditor.Options -
-//                           [eoShowSpecialChars];
-//      synEditor2.Options:= synEditor2.Options -
-//                           [eoShowSpecialChars];
-//    end;
-//  end
-//  else begin
-//    if bChecked then synEditor.Options:= synEditor.Options +
-//                                         [eoShowSpecialChars]
-//                else synEditor.Options:= synEditor.Options -
-//                                         [eoShowSpecialChars];
-//  end;
-//end;
 
 procedure TfrmEditor.pUpperCase_Selection;
 begin
@@ -3133,11 +3059,6 @@ begin
 
   Clipboard.AsText:= sActiveFile;
 end;
-
-//procedure TfrmEditor.pFileClose;
-//begin
-//  Close;
-//end;
 
 procedure TfrmEditor.synEditorEnter(Sender: TObject);
 begin

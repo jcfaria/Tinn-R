@@ -91,7 +91,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsRHotkeys
+    ActivePage = tbsAppShortcuts
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -165,7 +165,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Width = 615
         Height = 123
         Align = alTop
-        Caption = ' Search/Edit Shortcut '
+        Caption = ' Search/Edit '
         Ctl3D = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -541,6 +541,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object rdgTinnRHotKeys: TRadioGroup
         Left = 4
         Top = 432
@@ -594,7 +598,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 0
         Width = 615
         Height = 432
-        ActivePage = tbsRH_Send
+        ActivePage = tbsRH_Custom
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -634,33 +638,197 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
-          object strgHK_Send: TStringGrid
+          ExplicitLeft = 0
+          ExplicitTop = 25
+          ExplicitWidth = 0
+          ExplicitHeight = 0
+          object GroupBox1: TGroupBox
             Left = 0
             Top = 0
             Width = 607
-            Height = 401
-            Align = alClient
-            BorderStyle = bsNone
-            ColCount = 2
-            DefaultColWidth = 230
-            DefaultRowHeight = 18
-            FixedCols = 0
-            RowCount = 21
+            Height = 83
+            Align = alTop
+            Caption = ' Search/Edit '
+            Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            Options = [goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goColMoving, goRowSelect]
+            ParentCtl3D = False
             ParentFont = False
-            ScrollBars = ssVertical
             TabOrder = 0
-            OnDblClick = strgHK_SendDblClick
-            OnDrawCell = strgHK_SendDrawCell
-            OnSelectCell = strgHK_SendSelectCell
-            ColWidths = (
-              467
-              260)
+            object Label6: TLabel
+              Left = 252
+              Top = 59
+              Width = 39
+              Height = 13
+              Caption = 'Caption:'
+            end
+            object Label8: TLabel
+              Left = 15
+              Top = 59
+              Width = 32
+              Height = 13
+              Caption = 'Group:'
+            end
+            object Label9: TLabel
+              Left = 254
+              Top = 42
+              Width = 37
+              Height = 13
+              Caption = 'Search:'
+              Color = 16250871
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label15: TLabel
+              Left = 266
+              Top = 24
+              Width = 25
+              Height = 13
+              Caption = 'Filter:'
+              Color = 16250871
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+            end
+            object DBEdit1: TDBEdit
+              Left = 295
+              Top = 58
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              DataField = 'Caption'
+              DataSource = modDados.dsRH_Send
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 3
+            end
+            object Edit1: TEdit
+              Left = 295
+              Top = 40
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
+              OnChange = edtSearch_CaptionChange
+              OnEnter = edtSearch_CaptionEnter
+            end
+            object DBEdit2: TDBEdit
+              Left = 52
+              Top = 58
+              Width = 170
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Ctl3D = False
+              DataField = 'Group'
+              DataSource = modDados.dsRH_Send
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentCtl3D = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+            end
+            object Edit4: TEdit
+              Left = 295
+              Top = 22
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              OnChange = edFilter_CaptionChange
+            end
+          end
+          object JvDBNavigator1: TJvDBNavigator
+            Left = 0
+            Top = 83
+            Width = 607
+            Height = 22
+            DataSource = modDados.dsRH_Send
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            Align = alTop
+            Flat = True
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 1
+          end
+          object DBGrid1: TDBGrid
+            Left = 0
+            Top = 105
+            Width = 607
+            Height = 292
+            Align = alTop
+            BorderStyle = bsNone
+            DataSource = modDados.dsRH_Send
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 2
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = [fsBold]
+            OnDblClick = dbgShortcutsDblClick
+            OnEnter = dbgShortcutsEnter
+            OnKeyPress = dbgShortcutsKeyPress
+            OnTitleClick = dbgShortcutsTitleClick
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'Caption'
+                Width = 458
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Shortcut'
+                Title.Alignment = taRightJustify
+                Width = 120
+                Visible = True
+              end>
           end
         end
         object tbsRH_Control: TTabSheet
@@ -670,32 +838,193 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ExplicitTop = 0
           ExplicitWidth = 0
           ExplicitHeight = 0
-          object strgHK_Control: TStringGrid
+          object GroupBox2: TGroupBox
             Left = 0
             Top = 0
             Width = 607
-            Height = 401
-            Align = alClient
-            BorderStyle = bsNone
-            ColCount = 2
-            DefaultColWidth = 230
-            DefaultRowHeight = 18
-            FixedCols = 0
-            RowCount = 21
+            Height = 83
+            Align = alTop
+            Caption = ' Search/Edit '
+            Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            Options = [goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goColMoving, goRowSelect]
+            ParentCtl3D = False
             ParentFont = False
-            ScrollBars = ssVertical
             TabOrder = 0
-            OnDblClick = strgHK_SendDblClick
-            OnDrawCell = strgHK_ControlDrawCell
-            ColWidths = (
-              467
-              260)
+            object Label7: TLabel
+              Left = 252
+              Top = 59
+              Width = 39
+              Height = 13
+              Caption = 'Caption:'
+            end
+            object Label10: TLabel
+              Left = 15
+              Top = 59
+              Width = 32
+              Height = 13
+              Caption = 'Group:'
+            end
+            object Label11: TLabel
+              Left = 266
+              Top = 24
+              Width = 25
+              Height = 13
+              Caption = 'Filter:'
+              Color = 16250871
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label16: TLabel
+              Left = 254
+              Top = 42
+              Width = 37
+              Height = 13
+              Caption = 'Search:'
+              Color = 16250871
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+            end
+            object DBEdit3: TDBEdit
+              Left = 295
+              Top = 58
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              DataField = 'Caption'
+              DataSource = modDados.dsRH_Control
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 3
+            end
+            object Edit5: TEdit
+              Left = 295
+              Top = 40
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
+              OnChange = edtSearch_CaptionChange
+              OnEnter = edtSearch_CaptionEnter
+            end
+            object DBEdit4: TDBEdit
+              Left = 52
+              Top = 58
+              Width = 170
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Ctl3D = False
+              DataField = 'Group'
+              DataSource = modDados.dsRH_Control
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentCtl3D = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+            end
+            object Edit8: TEdit
+              Left = 295
+              Top = 22
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              OnChange = edFilter_CaptionChange
+            end
+          end
+          object JvDBNavigator3: TJvDBNavigator
+            Left = 0
+            Top = 83
+            Width = 607
+            Height = 22
+            DataSource = modDados.dsRH_Control
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            Align = alTop
+            Flat = True
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 1
+          end
+          object DBGrid2: TDBGrid
+            Left = 0
+            Top = 105
+            Width = 607
+            Height = 292
+            Align = alTop
+            BorderStyle = bsNone
+            DataSource = modDados.dsRH_Control
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 2
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = [fsBold]
+            OnDblClick = dbgShortcutsDblClick
+            OnEnter = dbgShortcutsEnter
+            OnKeyPress = dbgShortcutsKeyPress
+            OnTitleClick = dbgShortcutsTitleClick
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'Caption'
+                Width = 458
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Shortcut'
+                Title.Alignment = taRightJustify
+                Width = 120
+                Visible = True
+              end>
           end
         end
         object tbsRH_Custom: TTabSheet
@@ -705,33 +1034,193 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ExplicitTop = 0
           ExplicitWidth = 0
           ExplicitHeight = 0
-          object strgHK_Custom: TStringGrid
+          object GroupBox3: TGroupBox
             Left = 0
             Top = 0
             Width = 607
-            Height = 401
-            Align = alClient
-            BorderStyle = bsNone
-            ColCount = 2
-            DefaultColWidth = 230
-            DefaultRowHeight = 18
-            FixedCols = 0
-            RowCount = 21
+            Height = 83
+            Align = alTop
+            Caption = ' Search/Edit '
+            Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            Options = [goVertLine, goHorzLine, goDrawFocusSelected, goColMoving, goEditing]
+            ParentCtl3D = False
             ParentFont = False
-            ScrollBars = ssVertical
             TabOrder = 0
-            OnDblClick = strgHK_CustomDblClick
-            OnDrawCell = strgHK_CustomDrawCell
-            OnSelectCell = strgHK_CustomSelectCell
-            ColWidths = (
-              467
-              265)
+            object Label12: TLabel
+              Left = 252
+              Top = 59
+              Width = 39
+              Height = 13
+              Caption = 'Caption:'
+            end
+            object Label13: TLabel
+              Left = 15
+              Top = 59
+              Width = 32
+              Height = 13
+              Caption = 'Group:'
+            end
+            object Label14: TLabel
+              Left = 266
+              Top = 24
+              Width = 25
+              Height = 13
+              Caption = 'Filter:'
+              Color = 16250871
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label17: TLabel
+              Left = 254
+              Top = 42
+              Width = 37
+              Height = 13
+              Caption = 'Search:'
+              Color = 16250871
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentColor = False
+              ParentFont = False
+            end
+            object DBEdit5: TDBEdit
+              Left = 295
+              Top = 58
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              DataField = 'Caption'
+              DataSource = modDados.dsRH_Custom
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 3
+            end
+            object Edit9: TEdit
+              Left = 295
+              Top = 40
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
+              OnChange = edtSearch_CaptionChange
+              OnEnter = edtSearch_CaptionEnter
+            end
+            object DBEdit6: TDBEdit
+              Left = 52
+              Top = 58
+              Width = 170
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Ctl3D = False
+              DataField = 'Group'
+              DataSource = modDados.dsRH_Custom
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentCtl3D = False
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 2
+            end
+            object Edit12: TEdit
+              Left = 295
+              Top = 22
+              Width = 304
+              Height = 16
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clRed
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              OnChange = edFilter_CaptionChange
+            end
+          end
+          object JvDBNavigator4: TJvDBNavigator
+            Left = 0
+            Top = 83
+            Width = 607
+            Height = 22
+            DataSource = modDados.dsRH_Custom
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            Align = alTop
+            Flat = True
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 1
+          end
+          object DBGrid3: TDBGrid
+            Left = 0
+            Top = 105
+            Width = 607
+            Height = 292
+            Align = alTop
+            BorderStyle = bsNone
+            DataSource = modDados.dsRH_Custom
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 2
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = [fsBold]
+            OnDblClick = dbgShortcutsDblClick
+            OnEnter = dbgShortcutsEnter
+            OnKeyPress = dbgShortcutsKeyPress
+            OnTitleClick = dbgShortcutsTitleClick
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'Caption'
+                Width = 458
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Shortcut'
+                Title.Alignment = taRightJustify
+                Width = 120
+                Visible = True
+              end>
           end
         end
       end

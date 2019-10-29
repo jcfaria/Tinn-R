@@ -48,8 +48,6 @@ type
     pgRH: TJvgPageControl;
     tbsRH_Send: TTabSheet;
     tbsRH_Custom: TTabSheet;
-    strgHK_Send: TStringGrid;
-    strgHK_Custom: TStringGrid;
     stbShortcuts: TStatusBar;
     BitBtn2: TBitBtn;
     edFilter_Group: TEdit;
@@ -57,8 +55,40 @@ type
     Label1: TLabel;
     bbtShortcuts_Manager: TBitBtn;
     tbsRH_Control: TTabSheet;
-    strgHK_Control: TStringGrid;
     lblCustom: TLabel;
+    GroupBox1: TGroupBox;
+    Label6: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    DBEdit1: TDBEdit;
+    Edit1: TEdit;
+    DBEdit2: TDBEdit;
+    Edit4: TEdit;
+    JvDBNavigator1: TJvDBNavigator;
+    GroupBox2: TGroupBox;
+    Label7: TLabel;
+    Label10: TLabel;
+    DBEdit3: TDBEdit;
+    Edit5: TEdit;
+    DBEdit4: TDBEdit;
+    Edit8: TEdit;
+    GroupBox3: TGroupBox;
+    Label12: TLabel;
+    Label13: TLabel;
+    DBEdit5: TDBEdit;
+    Edit9: TEdit;
+    DBEdit6: TDBEdit;
+    Edit12: TEdit;
+    JvDBNavigator3: TJvDBNavigator;
+    JvDBNavigator4: TJvDBNavigator;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
+    DBGrid3: TDBGrid;
+    Label15: TLabel;
+    Label11: TLabel;
+    Label16: TLabel;
+    Label14: TLabel;
+    Label17: TLabel;
     procedure FormShow(Sender: TObject);
     procedure dbgShortcutsDblClick(Sender: TObject);
     procedure lvKeystrokesDblClick(Sender: TObject);
@@ -93,12 +123,8 @@ type
     procedure btnRemoveClick(Sender: TObject);
     procedure btnClearAllHotKeysClick(Sender: TObject);
     procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
-    procedure strgHK_SendDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
-    procedure strgHK_ControlDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
-    procedure strgHK_CustomDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
     procedure pgRHChange(Sender: TObject);
     procedure pgSKHChange(Sender: TObject);
-    procedure strgHK_SendSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
 
   private
     { Private declarations }
@@ -108,9 +134,9 @@ type
     procedure pCreateHotkey_Custom(i: integer; sTmp: string);
     procedure pCreateHotkey_Send(i: integer; sTmp: string);
     procedure pCreateHotkey_Control(i: integer; sTmp: string);
-    procedure pCreateR_Custom(i: integer; sTmp: string);
     procedure pDoHotKey_Custom(Sender: TObject);
-    procedure pDoHotKey_Default(Sender: TObject);
+    procedure pDoHotKey_Send(Sender: TObject);
+    procedure pDoHotKey_Control(Sender: TObject);
     procedure pSKR_Clear_From(iSKH_Used_By: integer; sSHK: string);
     procedure pSKR_Assign_To(iSKH_Assign_To, iDx: integer; sSHK: string);
 
@@ -148,79 +174,149 @@ end;
 
 procedure TfrmSKH_Map_Dlg.pDoHotKey_Custom(Sender: TObject);
 var
-  sHKC,
-   sRC: string;
-
-  i: integer;
+  sRH_Custom: string;
 
 begin
-  sHKC:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
+  sRH_Custom:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
 
-  // R Action Custom
-  for i:= 1 to 10 do begin
-    if (lowercase(strgHK_Custom.Cells[1,i]) = lowercase(sHKC)) then begin
-      sRC:= trim(strgHK_Custom.Cells[0,i]);
-      frmMain.pSendRCustom(sRC);
-      Exit;
-    end;
+  // RH Custom
+  with modDados.cdRH_Custom do begin
+    DisableControls;
+
+    Locate('Shortcut',
+           sRH_Custom,
+           []);
+
+    frmMain.pSendRCustom(Fields[2].AsString);
+
+    EnableControls;
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.pDoHotKey_Default(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.pDoHotKey_Send(Sender: TObject);
 var
-  sTmp: string;
+  sRH_Send: string;
 
   i: integer;
 
 begin
   //SetForegroundWindow(Application.Handle);
-  sTmp:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
+  sRH_Send:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
 
-  for i:= 1 to 10 do
-    if (lowercase(strgHK_Send.Cells[1,i]) = lowercase(sTmp)) then
-      with frmMain do
-        (* The below is to see only
-           Cells[0,1]:= 'Send: file';
-           Cells[0,2]:= 'Send: selection';
-           Cells[0,3]:= 'Send: clipboard';
-           Cells[0,4]:= 'Send: marked block';
-           Cells[0,5]:= 'Send: contiguous';
-           Cells[0,6]:= 'Send: smart';
-           Cells[0,7]:= 'Send: line';
-           Cells[0,8]:= 'Send: lines to end page (echo=T)';
-        *)
-        case i of
-           1: if actRSendFile.Enabled                  then actRSendFileExecute(nil);
-           2: if actRSendSelection.Enabled             then actRSendSelectionExecute(nil);
-           3: if actRSendClipboard.Enabled             then actRSendClipboardExecute(nil);
-           4: if actRSendBlockMarked.Enabled           then actRSendBlockMarkedExecute(nil);
-           5: if actRSendContiguous.Enabled            then actRSendContiguousExecute(nil);
-           6: if actRSendSmart.Enabled                 then actRSendSmartExecute(nil);
-           7: if actRSendLine.Enabled                  then actRSendLineExecute(nil);
-           8: if actRSendLinesToEndPage.Enabled        then actRSendLinesToEndPageExecute(nil);
-        end;
+  // RH Send
+  with modDados.cdRH_Send do begin
+    DisableControls;
 
-  for i:= 1 to 10 do
-    if (lowercase(strgHK_Control.Cells[1,i]) = lowercase(sTmp)) then
-      with frmMain do
-        (* The below is to see only
-           Cells[0,1]:= 'Controlling: print content (selected)';
-           Cells[0,2]:= 'Control: list names (selected)';
-           Cells[0,3]:= 'Control: list structure (selected)';
-           Cells[0,4]:= 'Control: list all objects';
-           Cells[0,5]:= 'Control: clear console';
-           Cells[0,6]:= 'Control: close all graphic devices';
-           Cells[0,7]:= 'Control: help (selected)';
-        *)
-        case i of
-           1: if actRContPrintVariableContent.Enabled  then actRContPrintVariableContentExecute(nil);
-           2: if actRContListVariableNames.Enabled     then actRContListVariableNamesExecute(nil);
-           3: if actRContListVariableStructure.Enabled then actRContListVariableStructureExecute(nil);
-           4: actRContListAllObjectsExecute(nil);
-           5: actRContClearConsoleExecute(nil);
-           6: actRContCloseAllGraphicsExecute(nil);
-           7: if actRContHelpSelectedWord.Enabled      then actRContHelpSelectedWordExecute(nil);
-        end;
+    Locate('Shortcut',
+           sRH_Send,
+           []);
+
+    i:= Fields[0].AsInteger;
+
+    EnableControls;
+  end;
+
+  with frmMain do
+    (* The below is to see only
+    <ROWDATA>
+      <ROW Index="0" Group="Send" Caption="File" Shortcut="Ctrl+."/>
+      <ROW Index="1" Group="Send" Caption="Selection" Shortcut="Ctrl+,"/>
+      <ROW Index="2" Group="Send" Caption="Clipboard" Shortcut="Ctrl+;"/>
+      <ROW Index="3" Group="Send" Caption="Marked block" Shortcut="Ctrl+["/>
+      <ROW Index="4" Group="Send" Caption="Contiguous" Shortcut="Ctrl+]"/>
+      <ROW Index="5" Group="Send" Caption="Smart" Shortcut="Shift+Ctrl+\"/>
+      <ROW Index="6" Group="Send" Caption="Line" Shortcut="Ctrl+\"/>
+      <ROW Index="7" Group="Send" Caption="Current line to top" Shortcut="Ctrl+D"/>
+      <ROW Index="8" Group="Send" Caption="Lines to end page" Shortcut="Ctrl+D"/>
+      <ROW Index="9" Group="Send" Caption="Cursor to beggining line" Shortcut="Ctrl+D"/>
+      <ROW Index="10" Group="Send" Caption="Cursor to end line" Shortcut="Ctrl+D"/>
+      <ROW Index="11" Group="Send" Caption="Sweave (.Rnw)" Shortcut="Ctrl+D"/>
+      <ROW Index="12" Group="Send" Caption="Knit to LaTeX (.Rnw)" Shortcut="Ctrl+D"/>
+      <ROW Index="13" Group="Send" Caption="Knit to HTML (.Rmd, Rhtml)" Shortcut="Ctrl+D"/>
+    </ROWDATA>
+    *)
+
+    case i of
+        0: if actRSendFile.Enabled                   then actRSendFileExecute(nil);
+        1: if actRSendSelection.Enabled              then actRSendSelectionExecute(nil);
+        2: if actRSendClipboard.Enabled              then actRSendClipboardExecute(nil);
+        3: if actRSendBlockMarked.Enabled            then actRSendBlockMarkedExecute(nil);
+        4: if actRSendContiguous.Enabled             then actRSendContiguousExecute(nil);
+        5: if actRSendSmart.Enabled                  then actRSendSmartExecute(nil);
+        6: if actRSendLine.Enabled                   then actRSendLineExecute(nil);
+        7: if actRCurrentLineToTop.Enabled           then actRCurrentLineToTopExecute(nil);
+        8: if actRSendLinesToEndPage.Enabled         then actRSendLinesToEndPageExecute(nil);
+        9: if actRSendCursorToBeginningLine.Enabled  then actRSendCursorToBeginningLineExecute(nil);
+       10: if actRSendCursorToEndLine.Enabled        then actRSendCursorToEndLineExecute(nil);
+       11: if actRSendSweave.Enabled                 then actRSendSweaveExecute(nil);
+       12: if actRSendKnitPdf.Enabled                then actRSendKnitPdfExecute(nil);
+       13: if actRSendKnitHtml.Enabled               then actRSendKnitHtmlExecute(nil);
+    end;
+end;
+
+procedure TfrmSKH_Map_Dlg.pDoHotKey_Control(Sender: TObject);
+var
+  sRH_Control: string;
+
+  i: integer;
+
+begin
+  //SetForegroundWindow(Application.Handle);
+  sRH_Control:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
+
+  // RH Control
+  with modDados.cdRH_Control do begin
+    DisableControls;
+
+    Locate('Shortcut',
+           sRH_Control,
+           []);
+
+    i:= Fields[0].AsInteger;
+
+    EnableControls;
+  end;
+
+  with frmMain do
+    (* The below is to see only
+     <ROWDATA>
+       <ROW Index="0" Group="Control" Caption="Set work directory (curretn file path)" Shortcut=""/>
+       <ROW Index="1" Group="Control" Caption="List all objetcs" Shortcut="Alt+S"/>
+       <ROW Index="2" Group="Control" Caption="Print content (selected)" Shortcut="Alt+P"/>
+       <ROW Index="3" Group="Control" Caption="Plot (selected)" Shortcut=""/>
+       <ROW Index="4" Group="Control" Caption="List names (selected)" Shortcut=""/>
+       <ROW Index="5" Group="Control" Caption="List structure (selected)" Shortcut="Alt+T"/>
+       <ROW Index="6" Group="Control" Caption="Edit (selected)" Shortcut=""/>
+       <ROW Index="7" Group="Control" Caption="Fix (selected)" Shortcut=""/>
+       <ROW Index="8" Group="Control" Caption="Clear console" Shortcut=""/>
+       <ROW Index="9" Group="Control" Caption="Close all graphics devices" Shortcut=""/>
+       <ROW Index="10" Group="Control" Caption="Help (selected)" Shortcut=""/>
+       <ROW Index="11" Group="Control" Caption="Example (selected)" Shortcut=""/>
+       <ROW Index="12" Group="Control" Caption="Open example (selected)" Shortcut=""/>
+       <ROW Index="13" Group="Control" Caption="Help" Shortcut=""/>
+       <ROW Index="14" Group="Control" Caption="Rgui|PuTTY (start/close)" Shortcut=""/>
+       <ROW Index="15" Group="Control" Caption="Rterm (start/close)" Shortcut=""/>
+     </ROWDATA>
+      *)
+
+    case i of
+        0: if actRContSetWorkDirectory.Enabled        then actRContSetWorkDirectoryExecute(nil);
+        1: if actRContListAllObjects.Enabled          then actRContListAllObjectsExecute(nil);
+        2: if actRContPrintVariableContent.Enabled    then actRContPrintVariableContentExecute(nil);
+        3: if actRContPlotVariable.Enabled            then actRContPlotVariableExecute(nil);
+        4: if actRContListVariableNames.Enabled       then actRContListVariableNamesExecute(nil);
+        5: if actRContListVariableStructure.Enabled   then actRContListVariableStructureExecute(nil);
+        6: if actRContEditVariable.Enabled            then actRContEditVariableExecute(nil);
+        7: if actRContFixVariable.Enabled             then actRContFixVariableExecute(nil);
+        8: if actRContClearConsole.Enabled            then actRContClearConsoleExecute(nil);
+        9: if actRContCloseAllGraphics.Enabled        then actRContCloseAllGraphicsExecute(nil);
+       10: if actRContHelpSelectedWord.Enabled        then actRContHelpSelectedWordExecute(nil);
+       11: if actRContExampleSelectedWord.Enabled     then actRContExampleSelectedWordExecute(nil);
+       12: if actRContOpenExampleSelectedWord.Enabled then actRContOpenExampleSelectedWordExecute(nil);
+       13: if actRContHelp.Enabled                    then actRContHelpExecute(nil);
+       14: if actRContGuiPuTTYStartClose.Enabled      then actRContGuiPuTTYStartCloseExecute(nil);
+       15: if actRContTermStartClose.Enabled          then actRContTermStartCloseExecute(nil);
+    end;
 end;
 
 procedure TfrmSKH_Map_Dlg.pgRHChange(Sender: TObject);
@@ -253,10 +349,9 @@ begin
     with ajavHK_Send[i] do begin
       HotKey  := TextToShortCut(sTmp);
       Active  := bHotKeys_On;
-      OnHotKey:= pDoHotKey_Default;
+      OnHotKey:= pDoHotKey_Send;
     end;
   end;
-    strgHK_Send.Cells[1,i]:= sTmp;
 end;
 
 procedure TfrmSKH_Map_Dlg.pCreateHotkey_Control(i: integer;
@@ -267,18 +362,9 @@ begin
     with ajavHK_Control[i] do begin
       HotKey  := TextToShortCut(sTmp);
       Active  := bHotKeys_On;
-      OnHotKey:= pDoHotKey_Default;
+      OnHotKey:= pDoHotKey_Control;
     end;
   end;
-    strgHK_Control.Cells[1,i]:= sTmp;
-end;
-
-procedure TfrmSKH_Map_Dlg.pCreateR_Custom(i: integer;
-                                          sTmp: string);
-begin
-  with frmMain do
-    aR_Custom[i]:= sTmp;
-  strgHK_Custom.Cells[0,i]:= sTmp;
 end;
 
 procedure TfrmSKH_Map_Dlg.pCreateHotkey_Custom(i: integer;
@@ -292,7 +378,6 @@ begin
       OnHotKey:= pDoHotKey_Custom;
     end;
   end;
-  strgHK_Custom.Cells[1,i]:= sTmp;
 end;
 
 procedure TfrmSKH_Map_Dlg.pClear_Warnings;
@@ -308,7 +393,7 @@ begin
   pClear_Warnings;
 
   with modDados do begin
-    cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
+    cdShortcuts.SavePoint:= frmMain.iShortcuts_SavePoint;
     cdShortcutsAfterScroll(nil);
   end;
 end;
@@ -343,14 +428,29 @@ begin
          //TODO
     end;
 
-    // RHK Send
-    3: strgHK_Send.Cells[1,iDx]:= sSHK;
+    // RH Send
+    3: with modDados do
+         with cdRH_Send do begin
+           Edit;
+           FieldByName('Shortcut').Value:= sSHK;
+           Post;
+         end;
 
-    // RHK Control
-    4: strgHK_Custom.Cells[1,iDx]:= sSHK;
+    // RH Control
+    4: with modDados do
+         with cdRH_Control do begin
+           Edit;
+           FieldByName('Shortcut').Value:= sSHK;
+           Post;
+         end;
 
-    // RHK Custom
-    5: strgHK_Custom.Cells[1,iDx]:= sSHK;
+    // RH Custom
+    5: with modDados do
+         with cdRH_Custom do begin
+           Edit;
+           FieldByName('Shortcut').Value:= sSHK;
+           Post;
+         end;
   end;
 end;
 
@@ -359,21 +459,19 @@ procedure TfrmSKH_Map_Dlg.pSKR_Clear_From(iSKH_Used_By: integer;
 var
   sBy: string;
 
-  i: integer;
-
 begin
   case iSKH_Used_By of
+    // Application
     1: begin
-      // Application
-      with modDados do begin
-        fCheck_Shortcut_App(sSHK,
-                            sBy,
-                            True);
-      end;  // with modDados
+         with modDados do begin
+           fCheck_Shortcut_App(sSHK,
+                               sBy,
+                               True);
+         end;  // with modDados
 
-      ShowMessage('The S/K/H associated to [' +
-                  sBy +
-                  '] was emptied!');
+         ShowMessage('The S/K/H associated to [' +
+                     sBy +
+                     '] was emptied!');
     end;
 
     // Editor
@@ -383,50 +481,41 @@ begin
 
     // RHK Send
     3: begin
-         with frmMain do begin
-           for i:= 1 to 10 do
-             if Assigned(ajavHK_Send[i]) then
-               if (ajavHK_Send[i].HotKey = dlgSKH_Manager.eKeyShort.HotKey) then begin
-                 dlgSKH_Map.strgHK_Send.Cells[1,i]:= '';
-                 ajavHK_Send[i].HotKey := TextToShortCut('');
+         with modDados do begin
+           fCheck_Hotkey_RH_Send(sSHK,
+                                 sBy,
+                                 True);
+         end;  // with modDados
 
-                 ShowMessage('The S/K/H associated to [' +
-                             'RHK Send | ' + strgHK_Send.Cells[0,i] +
-                             '] was emptied!');
-               end;
-         end;
+         ShowMessage('The S/K/H associated to [' +
+                     sBy +
+                     '] was emptied!');
     end;
 
     // RHK Control
     4: begin
-         with frmMain do begin
-           for i:= 1 to 10 do
-             if Assigned(ajavHK_Control[i]) then
-               if (ajavHK_Control[i].HotKey = dlgSKH_Manager.eKeyShort.HotKey) then begin
-                 dlgSKH_Map.strgHK_Control.Cells[1,i]:= '';
-                 ajavHK_Control[i].HotKey := TextToShortCut('');
+         with modDados do begin
+           fCheck_Hotkey_RH_Control(sSHK,
+                                    sBy,
+                                    True);
+         end;  // with modDados
 
-                 ShowMessage('The S/K/H associated to [' +
-                             'RHK Control | ' + strgHK_Control.Cells[0,i] +
-                             '] was emptied!');
-               end;
-         end;
+         ShowMessage('The S/K/H associated to [' +
+                     sBy +
+                     '] was emptied!');
     end;
 
     // RHK Custom
     5: begin
-         with frmMain do begin
-           for i:= 1 to 10 do
-             if Assigned(ajavHK_Custom[i]) then
-               if (ajavHK_Custom[i].HotKey = dlgSKH_Manager.eKeyShort.HotKey) then begin
-                 dlgSKH_Map.strgHK_Custom.Cells[1,i]:= '';
-                 ajavHK_Custom[i].HotKey := TextToShortCut('');
+         with modDados do begin
+           fCheck_Hotkey_RH_Custom(sSHK,
+                                   sBy,
+                                   True);
+         end;  // with modDados
 
-                 ShowMessage('The S/K/H associated to [' +
-                             'RHK Custom | ' + strgHK_Custom.Cells[0,i] +
-                             '] was emptied!');
-               end;
-         end;
+         ShowMessage('The S/K/H associated to [' +
+                     sBy +
+                     '] was emptied!');
     end;
   end;  // case iWhere
 end;
@@ -523,8 +612,8 @@ begin
         end; 
 
         with frmMain do begin
-          iShortcutsBeforeChanges:= modDados.cdShortcuts.SavePoint;
-          sShortcutsInUse        := sFile;
+          iShortcuts_SavePoint:= modDados.cdShortcuts.SavePoint;
+          sShortcutsInUse     := sFile;
         end;
 
         with stbShortcuts do
@@ -566,8 +655,8 @@ begin
     end;
 
     with frmMain do begin
-      iShortcutsBeforeChanges:= modDados.cdShortcuts.SavePoint;
-      sShortcutsInUse        := frmMain.sPath_Data + '\Shortcuts.xml';
+      iShortcuts_SavePoint:= modDados.cdShortcuts.SavePoint;
+      sShortcutsInUse     := frmMain.sPath_Data + '\Shortcuts.xml';
     end;
 
     with stbShortcuts do
@@ -594,7 +683,7 @@ begin
       MergeChangeLog;
       SaveToFile();
       with frmMain do
-        iShortcutsBeforeChanges:= SavePoint;
+        iShortcuts_SavePoint:= SavePoint;
     except
     end;
   end;
@@ -723,106 +812,90 @@ begin
   pClear_Warnings;
 
   case pgRH.TabIndex of
-    // Send
+    // RH Send
     0: begin
-         for i:= 1 to 10 do begin
-           with frmMain do begin
-             if Assigned(ajavHK_Send[i]) then begin
-               ajavHK_Send[i].WindowsKey:= True;
-               FreeAndNil(ajavHK_Send[i]);
-               strgHK_Send.Cells[1,i]:= '';
-             end;
-           end;
-         end;
-       end;
+         with modDados.cdRH_Send do begin
+           DisableControls;
+           First;
+           Edit;
 
-    // Control
+           for i:=1 to RecordCount do begin
+             FieldByName('Shortcut').Value:= '';
+             Next;
+           end;
+
+           Post;
+           EnableControls;
+         end;
+    end;
+
+    // RH Control
     1: begin
-         for i:= 1 to 10 do begin
-           with frmMain do begin
-             if Assigned(ajavHK_Control[i]) then begin
-               ajavHK_Control[i].WindowsKey:= True;
-               FreeAndNil(ajavHK_Control[i]);
-               strgHK_Send.Cells[1,i]:= '';
-             end;
-           end;
-         end;
-       end;
+         with modDados.cdRH_Control do begin
+           DisableControls;
+           First;
+           Edit;
 
-    // R Action Custom
-    2: begin
-         for i:= 1 to 10 do begin
-           with frmMain do begin
-             if Assigned(ajavHK_Custom[i]) then begin
-               ajavHK_Custom[i].WindowsKey:= True;
-               FreeAndNil(ajavHK_Custom[i]);
-               strgHK_Custom.Cells[1,i]:= '';
-             end;
+           for i:=1 to RecordCount do begin
+             FieldByName('Shortcut').Value:= '';
+             Next;
            end;
+
+           Post;
+           EnableControls;
          end;
-       end;
+    end;
+
+    // RH Custom
+    2: begin
+         with modDados.cdRH_Custom do begin
+           DisableControls;
+           First;
+           Edit;
+
+           for i:=1 to RecordCount do begin
+             FieldByName('Shortcut').Value:= '';
+             Next;
+           end;
+
+           Post;
+           EnableControls;
+         end;
+    end;
   end;
 end;
 
 procedure TfrmSKH_Map_Dlg.btnRemoveClick(Sender: TObject);
-var
-  iRow: integer;
-
 begin
   pClear_Warnings;
 
   case pgRH.TabIndex of
-    // Send
+    // RH Send
     0: begin
-         iRow:= strgHK_Send.Row;
-         try
-           with frmMain do begin
-             ajavHK_Send[iRow].WindowsKey:= True;
-             FreeAndNil(ajavHK_Send[iRow]);
-           end;
-           strgHK_Send.Cells[1,iRow]:= '';
-         except
-           MessageDlg('Hotkey not defined yet!',
-                  mtInformation,
-                  [MBOK],
-                  0);
+         with modDados.cdRH_Send do begin
+           Edit;
+           FieldByName('Shortcut').Value:= '';
+           Post;
          end;
-       end;
+    end;
 
-    // Control
+    // RH Control
     1: begin
-         iRow:= strgHK_Control.Row;
-         try
-           with frmMain do begin
-             ajavHK_Control[iRow].WindowsKey:= True;
-             FreeAndNil(ajavHK_Control[iRow]);
-           end;
-           strgHK_Control.Cells[1,iRow]:= '';
-         except
-           MessageDlg('Hotkey not defined yet!',
-                  mtInformation,
-                  [MBOK],
-                  0);
+         with modDados.cdRH_Control do begin
+           Edit;
+           FieldByName('Shortcut').Value:= '';
+           Post;
          end;
-       end;
+    end;
 
-    // R Action Custom
+    // RH Custom
     2: begin
-         iRow:= strgHK_Custom.Row;
-         try
-           strgHK_Custom.Cells[0,iRow]:= '';
-           with frmMain do begin
-             ajavHK_Custom[iRow].WindowsKey:= True;
-             FreeAndNil(ajavHK_Custom[iRow]);
-           end;
-           strgHK_Custom.Cells[1,iRow]:= '';
-         except
-           MessageDlg('Hotkey not defined yet!',
-                  mtInformation,
-                  [MBOK],
-                  0);
+         with modDados.cdRH_Custom do begin
+           Edit;
+           FieldByName('Shortcut').Value:= '';
+           Post;
          end;
-       end;
+    end;
   end;
 end;
 
@@ -1004,146 +1077,56 @@ end;
 
 procedure TfrmSKH_Map_Dlg.FormCreate(Sender: TObject);
 var
-  ifHotKeys: TIniFile;
-  sTmp     : string;
-  aHK      : array[1..10] of string;
-  i        : integer;
+  i: integer;
 
 begin
-  Application.OnMessage:= pAppMessage;
-  // Send
-  with strgHK_Send do begin
-     Cells[0,0]:= 'Action';
-     Cells[1,0]:= 'Hotkey';
-     Cells[0,1]:= 'File';
-     Cells[0,2]:= 'Selection';
-     Cells[0,3]:= 'Clipboard';
-     Cells[0,4]:= 'Marked block';
-     Cells[0,5]:= 'Continguous';
-     Cells[0,6]:= 'Smart';
-     Cells[0,7]:= 'Line';
-     Cells[0,8]:= 'Lines to end page';
-   end;
-
-  // Control
-  with strgHK_Control do begin
-    Cells[0,0]:= 'Action';
-    Cells[1,0]:= 'Hotkey';
-    Cells[0,1]:= 'Print content (selected)';
-    Cells[0,2]:= 'List names (selected)';
-    Cells[0,3]:= 'List structure (selected)';
-    Cells[0,4]:= 'List all objects';
-    Cells[0,5]:= 'Clear console';
-    Cells[0,6]:= 'Close all graphic devices';
-    Cells[0,7]:= 'Help (selected)';
-  end;
-
-  // R Action Custom
-  with strgHK_Custom do begin
-    Cells[0,0]:= 'Action*';
-    Cells[1,0]:= 'Hotkey';
-  end;
-
-  // Read the ini file for settings
-  ifHotKeys:= TIniFile.Create(frmMain.sPathIniTinn_File);
-
-  // R Hotkeys Send
-  with strgHK_Send do begin
-    for i:= 1 to 10 do begin
-      aHK[i]:= ifHotKeys.ReadString('R Hotkeys Send',
-                                    'RHK' + IntToStr(i),
-                                    '');
-      //if (aHK[i] <> '') then begin
-      if (Cells[0,i] <> '') then begin
-        sTmp:= aHK[i];
-        pCreateHotkey_Send(i,
-                           sTmp);
-      end;
-    end;
-  end;
-
-  // R Hotkeys Send Control
-  with strgHK_Control do begin
-    for i:= 1 to 10 do begin
-      aHK[i]:= ifHotKeys.ReadString('R Hotkeys Control',
-                                    'RHK' + IntToStr(i),
-                                    '');
-      //if (aHK[i] <> '') then begin
-      if (Cells[0,i] <> '') then begin
-        sTmp:= aHK[i];
-        pCreateHotkey_Control(i,
-                              sTmp);
-      end;
-    end;
-  end;
-
-  // R Action Custom
-  with strgHK_Custom do begin
-    for i:= 1 to 10 do begin
-      aHK[i]:= ifHotKeys.ReadString('R Action Custom',
-                                    'RAC' + IntToStr(i),
-                                    '');
-      if (aHK[i] <> '') then begin
-//      if (Cells[0,i] <> '') then begin
-        sTmp:= aHK[i];
-        pCreateR_Custom(i,
-                        sTmp);
-      end;
-    end;
-  end;
-
-  // R Action Custom Hotkeys
-  with strgHK_Custom do begin
-    for i:= 1 to 10 do begin
-      aHK[i]:= ifHotKeys.ReadString('R Hotkeys Custom',
-                                    'RHKC' + IntToStr(i),
-                                    '');
-      if (aHK[i] <> '') then begin
-//      if (Cells[0,i] <> '') then begin
-        sTmp:= aHK[i];
-        pCreateHotkey_Custom(i,
-                             sTmp);
-      end;
-    end;
-  end;
-
-  FreeAndNil(ifHotKeys);
-
-//  Application.OnMessage:= pAppMessage;
-//  // Send
-//  with strgHK_Send do begin
-//     Cells[0,0]:= 'Action';
-//     Cells[1,0]:= 'Hotkey';
-//     Cells[0,1]:= 'Send: file';
-//     Cells[0,2]:= 'Send: selection';
-//     Cells[0,3]:= 'Send: clipboard';
-//     Cells[0,4]:= 'Send: marked block';
-//     Cells[0,5]:= 'Send: continguous';
-//     Cells[0,6]:= 'Send: smart';
-//     Cells[0,7]:= 'Send: line';
-//     Cells[0,8]:= 'Send: lines to end page';
-//   end;
-//
-//  // Control
-//  with strgHK_Control do begin
-//    Cells[0,0]:= 'Action';
-//    Cells[1,0]:= 'Hotkey';
-//    Cells[0,1]:= 'Control: print content (selected)';
-//    Cells[0,2]:= 'Control: list names (selected)';
-//    Cells[0,3]:= 'Control: list structure (selected)';
-//    Cells[0,4]:= 'Control: list all objects';
-//    Cells[0,5]:= 'Control: clear console';
-//    Cells[0,6]:= 'Control: close all graphic devices';
-//    Cells[0,7]:= 'Control: help (selected)';
-//  end;
-//
-//  // R Action Custom
-//  with strgHK_Custom do begin
-//    Cells[0,0]:= 'Action*';
-//    Cells[1,0]:= 'Hotkey';
-//  end;
-
   pgRH.TabIndex:= 0;
+  Application.OnMessage:= pAppMessage;
+
+  // RH Send
+  with modDados.cdRH_Send do begin
+    SetLength(frmMain.ajavHK_Send,
+              RecordCount);
+    DisableControls;
+    First;
+    for i:= 0 to (RecordCount - 1) do begin
+      pCreateHotkey_Send(i,
+                         Fields[3].AsString);
+      Next;
+    end;
+    First;
+    EnableControls;
+  end;
+
+  // RH Control
+  with modDados.cdRH_Control do begin
+    SetLength(frmMain.ajavHK_Control,
+              RecordCount);
+    DisableControls;
+    First;
+    for i:= 0 to (RecordCount - 1) do begin
+      pCreateHotkey_Control(i,
+                            Fields[3].AsString);
+      Next;
+    end;
+    First;
+    EnableControls;
+  end;
+
+  // RH Custom
+  with modDados.cdRH_Custom do begin
+    SetLength(frmMain.ajavHK_Custom,
+              RecordCount);
+    DisableControls;
+    First;
+    for i:= 0 to (RecordCount - 1) do begin
+      pCreateHotkey_Custom(i,
+                           Fields[3].AsString);
+      Next;
+    end;
+    First;
+    EnableControls;
+  end;
 end;
 
 procedure TfrmSKH_Map_Dlg.FormShow(Sender: TObject);
@@ -1172,47 +1155,9 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.strgHK_ControlDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
-begin
-  if (ARow >= strgHK_Control.FixedRows) then Exit;
-
-  // Set font to bold
-  strgHK_Control.Canvas.Font.Style := [fsBold];  // must come before the TextWidth & TextHeight
-
-//  // Paint the cell background
-//  if ACol = 1 then  // column 2 background is red - if you want that
-//    strgHK_Control.Canvas.Brush.Color := clRed;
-
-  strgHK_Control.Canvas.FillRect(Rect);
-
-  // Draw the text
-  strgHK_Control.Canvas.TextOut(Rect.Left,
-                                Rect.Top,
-                                strgHK_Control.Cells[ACol, ARow]);
-end;
-
 procedure TfrmSKH_Map_Dlg.strgHK_CustomDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
-end;
-
-procedure TfrmSKH_Map_Dlg.strgHK_CustomDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
-begin
-  if (ARow >= strgHK_Custom.FixedRows) then Exit;
-
-  // Set font to bold
-  strgHK_Custom.Canvas.Font.Style := [fsBold];  // must come before the TextWidth & TextHeight
-
-//  // Paint the cell background
-//  if ACol = 1 then  // column 2 background is red - if you want that
-//    strgHK_Custom.Canvas.Brush.Color := clRed;
-
-  strgHK_Custom.Canvas.FillRect(Rect);
-
-  // Draw the text
-  strgHK_Custom.Canvas.TextOut(Rect.Left,
-                               Rect.Top,
-                               strgHK_Custom.Cells[ACol, ARow]);
 end;
 
 procedure TfrmSKH_Map_Dlg.strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
@@ -1237,53 +1182,5 @@ procedure TfrmSKH_Map_Dlg.strgHK_SendDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
 end;
-
-procedure TfrmSKH_Map_Dlg.strgHK_SendDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
-begin
-  if (ARow >= strgHK_Send.FixedRows) then Exit;
-
-  // Set font to bold
-  strgHK_Send.Canvas.Font.Style := [fsBold];  // must come before the TextWidth & TextHeight
-
-//  // Paint the cell background
-//  if ACol = 1 then  // column 2 background is red - if you want that
-//    strgHK_Send.Canvas.Brush.Color := clRed;
-
-  strgHK_Send.Canvas.FillRect(Rect);
-
-  // Draw the text
-  strgHK_Send.Canvas.TextOut(Rect.Left,
-                             Rect.Top,
-                             strgHK_Send.Cells[ACol, ARow]);
-end;
-
-procedure TfrmSKH_Map_Dlg.strgHK_SendSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
-begin
-//  ShowMessage('RHK Send: ' + IntToStr(ARow));
-end;
-
-//  with modDados.cdShortcuts do
-//    SavePoint:= frmMain.iShortcutsBeforeChanges;
-//
-//  Close;
-//  frmMain.Refresh;
-
-//  eKeyShort:= TSynHotKey.Create(Self);
-//
-//  with eKeyShort do
-//  begin
-//    Parent     := gbRhotkeys;
-//    Left       := edHotkey.Width + 20;
-//    Top        := edHotkey.Top;
-//    Width      := 125;
-//    Height     := edHotkey.Height;
-//    HotKey     := 0;
-//    InvalidKeys:= [];
-//    Modifiers  := [];
-//    TabOrder   := 1;
-//    BorderStyle:= bsSingle;
-//    //OnKeyUp    := pKeyUp;  {Not Working}
-//  end;
-//  pSet_LabelColor(clBlack);
 
 end.

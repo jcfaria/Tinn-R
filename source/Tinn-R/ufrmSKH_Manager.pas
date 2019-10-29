@@ -33,11 +33,8 @@ type
   private
     { Private declarations }
 
-//    function fCheck_Use_App(var sBy: string): boolean;
     function fCheck_Reserved: boolean;
     procedure pSet_LabelColor(clTmp: TColor);
-
-//    procedure pKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 
   public
     eKeyShort: TSynHotKey;
@@ -60,55 +57,6 @@ procedure TfrmSKH_Manager_Dlg.pSet_LabelColor(clTmp: TColor);
 begin
   gbCheck_Info.Font.Color:= clTmp;
 end;
-
-//function TfrmSH_Manager_Dlg.fCheck_Use_App(var sBy: string): boolean;
-//var
-//  pTmp:  pointer;
-//
-//  bFiltered: boolean;
-//
-//  sTmp: string;
-//
-//begin
-//  Result:= False;
-//
-//  with frmMain.dlgSH_Map.pgSH do
-//    case ActivePageIndex of
-//      0: begin
-//           with modDados.cdShortcuts do begin
-//             pTmp:= GetBookmark;
-//             DisableControls;
-//             bFiltered:= Filtered;
-//             if bFiltered then
-//               Filtered:= False;
-//
-//             sTmp:= StringReplace(ShortcutToText(eKeyShort.Hotkey),
-//                                  ' ',
-//                                  '',
-//                                  [rfReplaceAll]);
-//
-//             if (Locate('Shortcut',
-//                        sTmp,
-//                        []) = True) then begin
-//               Result:= True;
-//
-//               sBy:= FieldValues['Group'] +
-//                     ' | ' +
-//                     FieldValues['Caption'] +
-//                     ' | ' +
-//                     FieldValues['Hint'];
-//
-//               if BookmarkValid(pTmp) then begin
-//                 GoToBookmark(pTmp);
-//                 FreeBookmark(pTmp);
-//               end; //if BookmarkValid(pTmp)
-//               Filtered:= bFiltered;
-//             end; //if (Locate('Shortcut'
-//             EnableControls;
-//           end; //with modDados.cdShortcuts
-//         end; //0: begin
-//    end;
-//end;
 
 function TfrmSKH_Manager_Dlg.fCheck_Reserved: boolean;
 const
@@ -180,8 +128,6 @@ var
   sBy,
    sWhere: string;
 
-  i: integer;
-
 begin
   lbInUse_Check.Caption:= '';
   lbId_Check.Caption:= '';
@@ -218,54 +164,44 @@ begin
       Exit;
     end;
 
-//  // Editor
-//    with frmMain.dlgSKH_Map do
-//      iSKH_Used_By:= 2;
+  // RH Send
+  with modDados do
+    if fCheck_Hotkey_RH_Send(ShortCutToText(eKeyShort.HotKey),
+                             sBy) then begin
+      pSetYes_inUse(sBy,
+                    'RH Send');
 
-  // RHK Send
-  with frmMain do begin
-    for i:= 1 to 10 do
-      if Assigned(ajavHK_Send[i]) then
-        if (ajavHK_Send[i].HotKey = eKeyShort.HotKey) then begin
-          pSetYes_inUse(dlgSKH_Map.strgHK_Send.Cells[0, i],
-                        'R hotkeys');
+      with frmMain.dlgSKH_Map do
+        iSKH_Used_By:= 3;
 
-          with dlgSKH_Map do
-            iSKH_Used_By:= 3;
+      Exit;
+    end;
 
-          Exit;
-        end;
-  end;
+  // RH Control
+  with modDados do
+    if fCheck_Hotkey_RH_Control(ShortCutToText(eKeyShort.HotKey),
+                                sBy) then begin
+      pSetYes_inUse(sBy,
+                    'RH Control');
 
-  // RHK Control
-  with frmMain do begin
-    for i:= 1 to 10 do
-      if Assigned(ajavHK_Control[i]) then
-        if (ajavHK_Control[i].HotKey = eKeyShort.HotKey) then begin
-          pSetYes_inUse(dlgSKH_Map.strgHK_Control.Cells[0, i],
-                        'R hotkeys');
+      with frmMain.dlgSKH_Map do
+        iSKH_Used_By:= 4;
 
-          with dlgSKH_Map do
-            iSKH_Used_By:= 4;
+      Exit;
+    end;
 
-          Exit;
-        end;
-  end;
+  // RH Custom
+  with modDados do
+    if fCheck_Hotkey_RH_Custom(ShortCutToText(eKeyShort.HotKey),
+                               sBy) then begin
+      pSetYes_inUse(sBy,
+                    'RH Custom');
 
-  // RHK Custom
-  with frmMain do begin
-    for i:= 1 to 10 do
-      if Assigned(ajavHK_Custom[i]) then
-        if (ajavHK_Custom[i].HotKey = eKeyShort.HotKey) then begin
-          pSetYes_inUse('Custom: ' + dlgSKH_Map.strgHK_Custom.Cells[0, i],
-                        'R hotkeys');
+      with frmMain.dlgSKH_Map do
+        iSKH_Used_By:= 5;
 
-          with dlgSKH_Map do
-            iSKH_Used_By:= 5;
-
-          Exit;
-        end;
-  end;
+      Exit;
+    end;
 
   {Map of iSKH_Used_By
    iSKH_Used_By:= 0; Not used
@@ -309,11 +245,6 @@ begin
 end;
 
 procedure TfrmSKH_Manager_Dlg.FormShow(Sender: TObject);
-var
-  sTmp: string;
-
-  i: integer;
-
 begin
   with frmMain.dlgSKH_Map do
     iSKH_Assign_To:= 0;  // Not usd
@@ -354,85 +285,64 @@ begin
     2: begin
          gbInfo.Caption:= ' Info (Group | Identification) ';
          case frmMain.dlgSKH_Map.pgRH.ActivePageIndex of
+           // RH Send
            0: begin
-                // RHK Send
-                with frmMain do begin
-                  i:= dlgSKH_Map.strgHK_Send.Row;
+                with modDados.cdRH_Send do begin
+                  eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
 
-                  if Assigned(ajavHK_Send[i]) then begin
-                    sTmp:= dlgSKH_Map.strgHK_Send.Cells[0, i];
-                    eKeyShort.HotKey:= ajavHK_Send[i].HotKey;
+                  with lbId_Cur do
+                    Caption:= FieldValues['Group'] +
+                              ' | ' +
+                              FieldValues['Caption'];
 
-                    with frmMain.dlgSKH_Map do begin
-                      iSKH_Assign_To:= 3;
-                      iDx:= i;
-                    end;
-                  end
-                  else
-                    Exit;
-                end;
+                  with lbWhere_Cur do
+                    Caption:= 'RH Send';
+                end;  //with modDados
 
-                with lbId_Cur do
-                  Caption:= 'Hotkeys'+
-                            ' | ' +
-                            sTmp;
+             with frmMain.dlgSKH_Map do
+               iSKH_Assign_To:= 3;
 
-                with lbWhere_Cur do
-                  Caption:= 'R hotkeys';
+             Exit;
            end;  // 0: begin
 
+           // RH Control
            1: begin
-                // RHK Control
-                with frmMain do begin
-                  i:= dlgSKH_Map.strgHK_Control.Row;
+                with modDados.cdRH_Control do begin
+                  eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
 
-                  if Assigned(ajavHK_Control[i]) then begin
-                    sTmp:= dlgSKH_Map.strgHK_Control.Cells[0, i];
-                    eKeyShort.HotKey:= ajavHK_Control[i].HotKey;
+                  with lbId_Cur do
+                    Caption:= FieldValues['Group'] +
+                              ' | ' +
+                              FieldValues['Caption'];
 
-                    with frmMain.dlgSKH_Map do begin
-                      iSKH_Assign_To:= 4;
-                      iDx:= i;
-                    end;
-                  end
-                  else
-                    Exit;
-                end;
+                  with lbWhere_Cur do
+                    Caption:= 'RH Control';
+                end;  //with modDados
 
-                with lbId_Cur do
-                  Caption:= 'Hotkeys'+
-                            ' | ' +
-                            sTmp;
+             with frmMain.dlgSKH_Map do
+               iSKH_Assign_To:= 4;
 
-                with lbWhere_Cur do
-                  Caption:= 'R hotkeys';
+             Exit;
            end;  // 1: begin
 
+           // RH Custom
            2: begin
-                // RHK Custom
-                with frmMain do begin
-                  i:= dlgSKH_Map.strgHK_Custom.Row;
+                with modDados.cdRH_Custom do begin
+                  eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
 
-                  if Assigned(ajavHK_Custom[i]) then begin
-                    sTmp:= dlgSKH_Map.strgHK_Custom.Cells[0, i];
-                    eKeyShort.HotKey:= ajavHK_Custom[i].HotKey;
+                  with lbId_Cur do
+                    Caption:= FieldValues['Group'] +
+                              ' | ' +
+                              FieldValues['Caption'];
 
-                    with frmMain.dlgSKH_Map do begin
-                      iSKH_Assign_To:= 5;
-                      iDx:= i;
-                    end;
-                  end
-                  else
-                    Exit;
-                end;
+                  with lbWhere_Cur do
+                    Caption:= 'RH Custom';
+                end;  //with modDados.cdShortcuts
 
-                with lbId_Cur do
-                  Caption:= 'Hotkeys'+
-                            ' | ' +
-                            sTmp;
+             with frmMain.dlgSKH_Map do
+               iSKH_Assign_To:= 3;
 
-                with lbWhere_Cur do
-                  Caption:= 'R hotkeys';
+             Exit;
            end;  // 2: begin
          end;  //case frmMain.dlgSKH_Map.pgRH.ActivePageIndex
        end;  //2: begin (R Hotkeys)
@@ -450,125 +360,3 @@ end;
 
 end.
 
-(*
-procedure TfrmSKH_Manager_Dlg.bbtCheckClick(Sender: TObject);
-
-  procedure pSetYes_InUse(sBy, sWhere: string);
-  begin
-    rgRemove_Current.Enabled:= True;
-
-    pSet_LabelColor(clRed);
-
-    with lbInUse_Check do
-      Caption:= Caption + 'YES';
-
-    with lbId_Check do
-      Caption:= Caption + sBy;
-
-    with lbWhere_Check do
-      Caption:= Caption + sWhere;
-  end;
-
-  procedure pSetNot_InUse;
-  begin
-    with lbInUse_Check do begin
-      Caption:= Caption + 'NO';
-      pSet_LabelColor(clGreen);
-      rgRemove_Current.Enabled:= False;
-    end;
-  end;
-
-var
-  sBy,
-   sWhere: string;
-
-  i: integer;
-
-begin
-  lbInUse_Check.Caption:= 'In use: ';
-  lbId_Check.Caption:= 'Id: ';
-  lbWhere_Check.Caption:= 'Where: ';
-
-  sBy:= '';
-  sWhere:= '';
-
-  // The below checks if the typed is a Reserved (fixed | not user configurable) Shortcut
-  if fCheck_Reserved then begin
-    with lbInUse_Check do
-      Caption:= Caption + 'YES';
-
-    with lbId_Check do
-      Caption:= Caption + 'Reserved | Not user configurable';
-
-    with lbWhere_Check do
-      Caption:= Caption + 'Reserved | Not user configurable';
-
-    pSet_LabelColor(clRed);
-    with frmMain.dlgSKH_Map.dlgSKH_Manager do
-      bbtOK.Enabled:= False;
-
-    with frmMain.dlgSKH_Map.dlgSKH_Manager do
-      eKeyShort.SetFocus;
-
-    Exit;
-  end;
-
-  with frmMain.dlgSKH_Map.pgSH do
-    case ActivePageIndex of
-      0: begin
-           with frmMain.dlgSKH_Map.dlgSKH_Manager do
-             bbtOK.Enabled:= True;
-
-           with modDados do
-             if fCheck_Shortcut_Use_App(ShortCutToText(eKeyShort.HotKey),
-                                                       sBy) then
-               pSetYes_inUse(sBy,
-                             'Application')
-             else
-               pSetNot_InUse;
-
-           with frmMain do
-             if fCheck_Hotkey_Use_App(ShortCutToText(eKeyShort.HotKey),
-                                                     sBy) then begin
-
-             end
-             else
-               pSetNot_InUse;
-         end;  // 0: begin
-      1:;
-      2: begin
-           with frmMain do begin
-             for i:= 1 to 10 do
-               // Send HK
-               if Assigned(ajavHK_Send[i]) then
-                 if (ajavHK_Send[i].HotKey = eKeyShort.HotKey) then begin
-                   pSetYes_inUse(dlgSKH_Map.strgHK_Send.Cells[0, i],
-                                 'R hotkeys');
-                   Exit;
-                 end
-                 else
-               // Control HK
-               if Assigned(ajavHK_Control[i]) then
-                 if (ajavHK_Control[i].HotKey = eKeyShort.HotKey) then begin
-                   pSetYes_inUse(dlgSKH_Map.strgHK_Control.Cells[0, i],
-                                 'R hotkeys');
-                   Exit;
-                 end
-                 else
-               // Custom HK
-               if Assigned(ajavHK_Custom[i]) then
-                 if (ajavHK_Custom[i].HotKey = eKeyShort.HotKey) then begin
-                   pSetYes_inUse(dlgSKH_Map.strgHK_Custom.Cells[0, i],
-                                 'R hotkeys');
-                   Exit;
-                 end
-                 else
-                   pSetNot_InUse;
-           end;
-         end;
-    end;  //case ActivePageIndex of
-
-//    with frmMain.dlgSH_Map.dlgSH_Manager do
-//      eKeyShort.SetFocus;
-end;
-*)

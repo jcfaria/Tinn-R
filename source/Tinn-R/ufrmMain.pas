@@ -848,7 +848,6 @@ type
     menOptionsSelectionColumn: TMenuItem;
     menOptionsSelectionLine: TMenuItem;
     menOptionsSelectionNormal: TMenuItem;
-    menOptionsShortcuts: TMenuItem;
     menOptionStartupFileMaximized: TMenuItem;
     menOptionSyntax: TMenuItem;
     menOptionSyntaxDefault: TMenuItem;
@@ -1154,7 +1153,6 @@ type
     menWebRSearchSel: TMenuItem;
     menWebRSearchSite: TMenuItem;
     menWebSearchSelGoogle: TMenuItem;
-    menWebSearchSelRArchives: TMenuItem;
     menWebSearchSelRSite: TMenuItem;
     menWebStat: TMenuItem;
     menWebStatVirtualLab: TMenuItem;
@@ -2231,7 +2229,6 @@ type
     procedure actRSendLineExecute(Sender: TObject);
     procedure actRSendLinesToEndPageExecute(Sender: TObject);
     procedure actRSendSelectionExecute(Sender: TObject);
-    procedure actRSendSourceContiguousExecute(Sender: TObject);
     procedure actRSendSweaveExecute(Sender: TObject);
     procedure actRSimpleDefaultExecute(Sender: TObject);
     procedure actRtermAutoHideExecute(Sender: TObject);
@@ -2439,7 +2436,6 @@ type
     procedure menWebRSearchRseekClick(Sender: TObject);
     procedure menWebRSearchSiteClick(Sender: TObject);
     procedure menWebSearchSelGoogleClick(Sender: TObject);
-    procedure menWebSearchSelRArchivesClick(Sender: TObject);
     procedure menWebSearchSelRSiteClick(Sender: TObject);
     procedure menWebStatVirtualLabRiceClick(Sender: TObject);
     procedure menWebStatVirtualLabVESTACClick(Sender: TObject);
@@ -2591,6 +2587,9 @@ type
     bUpdate_Rcard                  : boolean;
     bUpdate_Rmirrors               : boolean;
     bUpdate_Shortcuts              : boolean;
+    bUpdate_RH_Send                : boolean;
+    bUpdate_RH_Control             : boolean;
+    bUpdate_RH_Custom              : boolean;
     iCols                          : integer;
     ifEditor                       : TIniFile;
     ifEditor_Tmp                   : TIniFile;
@@ -2619,6 +2618,9 @@ type
     sCurrentVersion_Rcard          : string;
     sCurrentVersion_Rmirrors       : string;
     sCurrentVersion_Shortcuts      : string;
+    sCurrentVersion_RH_Send        : string;
+    sCurrentVersion_RH_Control     : string;
+    sCurrentVersion_RH_Custom      : string;
     seTmp                          : TSynEdit;
     sEncodingDefault               : string;
     sEOLDefault                    : string;
@@ -2679,6 +2681,9 @@ type
     sVersion_Rcard                 : string;
     sVersion_Rmirrors              : string;
     sVersion_Shortcuts             : string;
+    sVersion_RH_Send               : string;
+    sVersion_RH_Control            : string;
+    sVersion_RH_Custom             : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
@@ -2785,6 +2790,7 @@ type
     procedure pSetPreferences_Application;
     procedure pSetPreferences_Editor;
     procedure pSetRcard;
+    procedure pSetSKH;
     procedure pSetREcho_False;
     procedure pSetREcho_True;
     procedure pSetRExplorer(bOption: boolean);
@@ -2823,10 +2829,9 @@ type
 
   public
     { Public declarations }
-    ajavHK_Send                  : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Send
-    ajavHK_Control               : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Control
-    ajavHK_Custom                : array[1..10] of TJvApplicationHotKey;  // R Hotkeys_Custom
-    aR_Custom                    : array[1..10] of string;                // R Action Custom
+    ajavHK_Send                  : array of TJvApplicationHotKey;  // RH_Send: dynamic
+    ajavHK_Control               : array of TJvApplicationHotKey;  // RH_Control: dynamic
+    ajavHK_Custom                : array of TJvApplicationHotKey;  // RH_Custom: dynamic
     bActiveLine                  : boolean;
     bAllNames                    : boolean;
     bBOM                         : boolean;
@@ -2877,8 +2882,8 @@ type
     ffDefault                    : TSynEditFileFormat;
     hRgui                        : HWND;
     iAlphaBlendValue             : integer;
-    iCommentsBeforeChanges       : integer;
-    iCompletionBeforeChanges     : integer;
+    iComments_SavePoint          : integer;
+    iCompletion_SavePoint        : integer;
     iCompletionFilter            : integer;
     iCountriesFilter             : integer;
     iDelay                       : integer;
@@ -2893,13 +2898,16 @@ type
     iPandocTo                    : integer;
     iProjecSelected              : integer;
     iRecognition_Caption         : integer;
-    iRcardBeforeChanges          : integer;
+    iRcard_SavePoint             : integer;
+    iRH_Send_SavePoint           : integer;
+    iRH_Control_SavePoint        : integer;
+    iRH_Custom_SavePoint         : integer;
     iRcardFilter                 : integer;
-    iRmirrorsBeforeChanges       : integer;
-    iRtipBeforeChanges           : integer;
+    iRmirrors_SavePoint          : integer;
+    iRtip_SavePoint              : integer;
     iRtipFilter                  : integer;
     iScaleMode                   : integer;
-    iShortcutsBeforeChanges      : integer;
+    iShortcuts_SavePoint         : integer;
     iShortcutsFilter             : integer;
     iSynWithFocus                : integer;
     iTransparency                : integer;
@@ -3031,7 +3039,6 @@ uses
   ufrmTools,
   uModDados,
   ufrmCompletion,
-  ufrmShortcuts,
   ufrmPandoc,
   ufrmComments,
   ufrmRmirrors,
@@ -3104,6 +3111,9 @@ begin
   sVersion_Rcard     := ifTinn.ReadString('App', 'sVersion_Rcard'     , '0.0.0.0');
   sVersion_Rmirrors  := ifTinn.ReadString('App', 'sVersion_Rmirrors'  , '0.0.0.0');
   sVersion_Shortcuts := ifTinn.ReadString('App', 'sVersion_Shortcuts' , '0.0.0.0');
+  sVersion_RH_Send   := ifTinn.ReadString('App', 'sVersion_RH_Send'   , '0.0.0.0');
+  sVersion_RH_Control:= ifTinn.ReadString('App', 'sVersion_RH_Control', '0.0.0.0');
+  sVersion_RH_Custom := ifTinn.ReadString('App', 'sVersion_RH_Custom' , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
   sCurrentVersion_Cache     := '5.02.02.00';
@@ -3114,6 +3124,9 @@ begin
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.04.01.00';
   sCurrentVersion_Shortcuts := '5.04.01.00';
+  sCurrentVersion_RH_Send   := '5.04.01.00';
+  sCurrentVersion_RH_Control:= '5.04.01.00';
+  sCurrentVersion_RH_Custom := '5.04.01.00';
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3172,6 +3185,34 @@ begin
                   '\Shortcuts.xml') then
       bUpdate_Shortcuts:= True;
   end;
+
+  // RH_Send
+  if (AnsiCompareStr(sVersion_RH_Send,
+                     sCurrentVersion_RH_Send) < 0) then begin
+    sVersion_RH_Send:= sCurrentVersion_RH_Send;
+    if FileExists(sPath_Data +
+                  '\RH_Send.xml') then
+      bUpdate_RH_Send:= True;
+  end;
+
+  // RH_Control
+  if (AnsiCompareStr(sVersion_RH_Control,
+                     sCurrentVersion_RH_Control) < 0) then begin
+    sVersion_RH_Control:= sCurrentVersion_RH_Control;
+    if FileExists(sPath_Data +
+                  '\RH_Control.xml') then
+      bUpdate_RH_Control:= True;
+  end;
+
+  // RH_Custom
+  if (AnsiCompareStr(sVersion_RH_Custom,
+                     sCurrentVersion_RH_Custom) < 0) then begin
+    sVersion_RH_Custom:= sCurrentVersion_RH_Custom;
+    if FileExists(sPath_Data +
+                  '\RH_Custom.xml') then
+      bUpdate_RH_Custom:= True;
+  end;
+
 
   // SynUnihighlighter: It was removed from the project!
   if DirectoryExists(sPath_Ini +
@@ -3558,15 +3599,6 @@ begin
   (Self.MDIChildren[i] as TfrmEditor).pCheckSaveStatus;
 end;
 
-//procedure pSetDataCompletion(synDataCompletion: TSynCompletionProposal;
-//                             synTmp: TSynEdit;
-//                             sTmp: string);
-//begin
-//  // Don't use 'with synDataCompletion' where!
-//  synDataCompletion.Editor:= synTmp;
-//  synDataCompletion.ShortCut:= TextToShortCut(sTmp);
-//end;
-
 procedure TfrmMain.pLoadFile(sFileName: string;
                                  bCreateNewChild: boolean = True;
                                  bUpdateMRU: boolean = True);
@@ -3709,6 +3741,9 @@ begin
     WriteString('App', 'sVersion_Rcard'     , sVersion_Rcard);
     WriteString('App', 'sVersion_Rmirrors'  , sVersion_Rmirrors);
     WriteString('App', 'sVersion_Shortcuts' , sVersion_Shortcuts);
+    WriteString('App', 'sVersion_RH_Send'   , sVersion_RH_Send);
+    WriteString('App', 'sVersion_RH_Control', sVersion_RH_Control);
+    WriteString('App', 'sVersion_RH_Custom' , sVersion_RH_Custom);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -3982,10 +4017,13 @@ begin
     WriteBool('R Options', 'bRtermStartClose', actRContTermStartClose.Visible);
 
     // Database status
-    WriteInteger('Database', 'iCompletionBeforeChanges', iCompletionBeforeChanges);
-    WriteInteger('Database', 'iRcardBeforeChanges', iRcardBeforeChanges);
-    WriteInteger('Database', 'iRtipBeforeChanges', iRtipBeforeChanges);
-    WriteInteger('Database', 'iShortcutsBeforeChanges', iShortcutsBeforeChanges);
+    WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
+    WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
+    WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
+    WriteInteger('Database', 'iShortcuts_SavePoint', iShortcuts_SavePoint);
+    WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
+    WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
+    WriteInteger('Database', 'iRH_Custom_SavePoint', iRH_Custom_SavePoint);
 
     // Latex Dimensional
     WriteInteger('Latex', 'iCols', iCols);
@@ -4139,30 +4177,6 @@ begin
                                ValueFromIndex[i]);
     FreeAndNil(slTextDiff);
   end;
-
-  // Send
-  for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Hotkeys Send',
-                           'RHK' + IntToStr(i),
-                           dlgSKH_Map.strgHK_Send.Cells[1, i]);
-
-  // Control
-  for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Hotkeys Control',
-                           'RHK' + IntToStr(i),
-                           dlgSKH_Map.strgHK_Control.Cells[1, i]);
-
-  // R Action Custom
-  for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Action Custom',
-                           'RAC' + IntToStr(i),
-                           dlgSKH_Map.strgHK_Custom.Cells[0, i]);
-
-  // R Action Custom Hotkeys
-  for i:= 1 to 10 do
-    ifTinn_Tmp.WriteString('R Hotkeys Custom',
-                           'RHKC' + IntToStr(i),
-                           dlgSKH_Map.strgHK_Custom.Cells[1, i]);
 end;
 
 procedure TfrmMain.pSaveNewIni_Editor;
@@ -4259,6 +4273,9 @@ begin
     WriteString('App', 'sVersion_Rcard'     , sVersion_Rcard);
     WriteString('App', 'sVersion_Rmirrors'  , sVersion_Rmirrors);
     WriteString('App', 'sVersion_Shortcuts' , sVersion_Shortcuts);
+    WriteString('App', 'sVersion_RH_Send'   , sVersion_RH_Send);
+    WriteString('App', 'sVersion_RH_Control', sVersion_RH_Control);
+    WriteString('App', 'sVersion_RH_Custom' , sVersion_RH_Custom);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -4512,7 +4529,7 @@ begin
     WriteBool('R Options', 'bRSendSelection', actRSendSelection.Visible);
     WriteBool('R Options', 'bRSendSmart', actRSendSmart.Visible);
     WriteBool('R Options', 'bRSweave', actRSendSweave.Visible);
-   WriteBool('R Options', 'bRCurrentLineToTop', actRCurrentLineToTop.Visible);
+    WriteBool('R Options', 'bRCurrentLineToTop', actRCurrentLineToTop.Visible);
 
     // Controlling R alphabetically ordered
     WriteBool('R Options', 'bRClearAll', actRContClearAll.Visible);
@@ -4538,10 +4555,13 @@ begin
     WriteBool('R Options', 'bRtermStartClose', actRContTermStartClose.Visible);
 
     // Database status
-    WriteInteger('Database', 'iCompletionBeforeChanges', iCompletionBeforeChanges);
-    WriteInteger('Database', 'iRcardBeforeChanges', iRcardBeforeChanges);
-    WriteInteger('Database', 'iRtipBeforeChanges', iRtipBeforeChanges);
-    WriteInteger('Database', 'iShortcutsBeforeChanges', iShortcutsBeforeChanges);
+    WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
+    WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
+    WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
+    WriteInteger('Database', 'iShortcuts_SavePoint', iShortcuts_SavePoint);
+    WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
+    WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
+    WriteInteger('Database', 'iRH_Custom_SavePoint', iRH_Custom_SavePoint);
 
     // Latex Dimensional
     WriteInteger('Latex', 'iCols', iCols);
@@ -4696,30 +4716,6 @@ begin
     inc(i);
     if not bMakingBackup then slprojectMRU.Delete(0);
   end;
-
-  // Send
-  for i:= 1 to 10 do
-    ifTinn.WriteString('R Hotkeys Send',
-                       'RHK' + IntToStr(i),
-                       dlgSKH_Map.strgHK_Send.Cells[1, i]);
-
-  // Control
-  for i:= 1 to 10 do
-    ifTinn.WriteString('R Hotkeys Control',
-                       'RHK' + IntToStr(i),
-                       dlgSKH_Map.strgHK_Control.Cells[1, i]);
-
-  // R Action Custom
-  for i:= 1 to 10 do
-    ifTinn.WriteString('R Action Custom',
-                       'RAC' + IntToStr(i),
-                       dlgSKH_Map.strgHK_Custom.Cells[0, i]);
-
-  // R Action Custom Hotkeys
-  for i:= 1 to 10 do
-    ifTinn.WriteString('R Hotkeys Custom',
-                       'RHKC' + IntToStr(i),
-                       dlgSKH_Map.strgHK_Custom.Cells[1, i]);
 
   if not bMakingBackup then begin
     if Assigned(dlgSKH_Map) then FreeAndNil(dlgSKH_Map);
@@ -5379,10 +5375,13 @@ begin
   actRSendSweave.Visible                 := ifTinn.ReadBool('R Options', 'bRSweave', True);
 
   // Database status
-  iCompletionBeforeChanges:= ifTinn.ReadInteger('Database', 'iCompletionBeforeChanges', 0);
-  iRcardBeforeChanges     := ifTinn.ReadInteger('Database', 'iRcardBeforeChanges', 0);
-  iRtipBeforeChanges      := ifTinn.ReadInteger('Database', 'iRtipBeforeChanges', 0);
-  iShortcutsBeforeChanges := ifTinn.ReadInteger('Database', 'iShortcutsBeforeChanges', 0);
+  iCompletion_SavePoint:= ifTinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
+  iRcard_SavePoint     := ifTinn.ReadInteger('Database', 'iRcard_SavePoint', 0);
+  iRtip_SavePoint      := ifTinn.ReadInteger('Database', 'iRtip_SavePoint', 0);
+  iShortcuts_SavePoint := ifTinn.ReadInteger('Database', 'iShortcuts_SavePoint', 0);
+  iRH_Send_SavePoint   := ifTinn.ReadInteger('Database', 'iRH_Send_SavePoint', 0);
+  iRH_Control_SavePoint:= ifTinn.ReadInteger('Database', 'iRH_Control_SavePoint', 0);
+  iRH_Custom_SavePoint := ifTinn.ReadInteger('Database', 'iRH_Custom_SavePoint', 0);
 
   // Latex Dimensional element
   iCols                   := ifTinn.ReadInteger('Latex', 'iCols', 2);
@@ -5391,8 +5390,6 @@ begin
   iRows                   := ifTinn.ReadInteger('Latex', 'iRows', 2);
 
   tbKnitr.Visible:= bRKnitr;
-
-  dlgSKH_Map:= TfrmSKH_Map_Dlg.Create(Self);
 
   // Pandoc history
   slPandocHistory:= TStringList.Create;
@@ -5932,25 +5929,6 @@ var
         aOcc_Open_Brk[j]:= i;
       end;
   end;
-
-  {
-  procedure GetOcc_Close_Brk(const S: string);
-  var
-    i,
-     j: integer;
-
-  begin
-    j:= 0;
-    for i:= 1 to length(S) do
-      if (S[i] = ')') then begin
-        Inc(j);
-        SetLength(aOcc_Close,
-                  j);
-
-        aOcc_Close[j-1]:= i;
-      end;
-  end;
-  }
 
   procedure pGetObject;
   begin
@@ -6930,13 +6908,10 @@ begin
 
   Result:= InttoStr(wV1) +
                     '.' +
-                    //InttoStr(wV2) +
                     Format('%.*d', [2, wV2]) +
                     '.' +
-                    //InttoStr(wV3) +
                     Format('%.*d', [2, wV3]) +
                     '.' +
-                    //InttoStr(wV4);
                     Format('%.*d', [2, wV4]);
 end;
 
@@ -7759,26 +7734,6 @@ begin
       Exit;
     end;
   end;
-
-{ Dev version: it was aborted!
-  sRLibPath:= fGetSpecialFolder(CSIDL_PERSONAL) +
-              '\R-packages';
-
-  if (not DirectoryExists(sRLibPath)) then begin
-    while fRgui_Running(True) do  // R is already running prior to Tinn-R be started. To create R_LIBS it is necessary to close R.
-      fMessageDlg('It is the first time Tinn-R is used and there is an instance o R running!' + #13 + #13 +
-                  'Because the need to create and configure the R_LIBS environment variable, it is necessary to close R.' + #13 +
-                  'Please, save your work and close R just now!',
-                  mtWarning,
-                  [mbOk],
-                  0);
-
-    CreateDir(sRLibPath);
-  end;
-
-  pSetEnvVariable('R_LIBS',
-                 sRLibPath);
-}                 
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -7861,6 +7816,7 @@ begin
                            modDados);
     frmSplash.pb.Position:= 6;
 
+    pSetSKH;  // Dlg to unified manager of: Shortcuts|Keystrokes|Hotkeys
     pSetRcard;
     frmSplash.pb.Position:= 7;
 
@@ -7869,7 +7825,6 @@ begin
     frmSplash.pb.Position:= 8;
 
     pSetShortcuts;
-
     pCheckREcho;  // Must be after pSetShortcuts!
 
     frmTools.tbsLatex.TabVisible:= actLatexVisible.Checked;
@@ -8460,8 +8415,8 @@ begin
   AssignFile(tfTmp,
              sPathReadme_User);
   Rewrite(tfTmp);
-    WriteLn(tfTmp, 'This main folder stores:' + #13 +
-                   '''app'', ''bkp'', ''colors'', ''data'', ''editor'', ''latex'', ''project'', ''syntax'' and ''syntax bkp''.');
+    WriteLn(tfTmp, 'This main folder stores the folders:' + #13 +
+                   'app, bkp, colors, data, editor, latex, project, syntax and syntax bkp.');
   CloseFile(tfTmp);
 
 
@@ -8472,8 +8427,8 @@ begin
              sPathReadme_App);
   Rewrite(tfTmp);
     WriteLn(tfTmp,
-            'This folder stores:' + #13 +
-            '''Tinn.ini'' and ''Tinn_dock.ini'' files.');
+            'This folder stores the files:' + #13 +
+            'Tinn.ini and Tinn_dock.ini.');
   CloseFile(tfTmp);
 
 
@@ -8496,8 +8451,8 @@ begin
              sPathReadme_Color);
   Rewrite(tfTmp);
     WriteLn(tfTmp,
-            'This folder stores:' + #13 +
-            'The ''Custom.txt'' file.');
+            'This folder stores the file:' + #13 +
+            'Custom.txt.');
   CloseFile(tfTmp);
 
 
@@ -8598,6 +8553,9 @@ var
    sFileComments,
    sFileCompletion,
    sFileShortcuts,
+   sFileRH_Send,
+   sFileRH_Control,
+   sFIleRH_Custom,
    sFileCache: string;
 
   tfTmp: TextFile;
@@ -8609,6 +8567,9 @@ begin
   sFileComments  := sPath_Data + '\Comments.xml';
   sFileCompletion:= sPath_Data + '\Completion.xml';
   sFileShortcuts := sPath_Data + '\Shortcuts.xml';
+  sFileRH_Send   := sPath_Data + '\RH_Send.xml';
+  sFileRH_Control:= sPath_Data + '\RH_Control.xml';
+  sFIleRH_Custom := sPath_Data + '\RH_Custom.xml';
 
   try
     with frmTools.memIniLog.Lines do begin
@@ -8627,6 +8588,7 @@ begin
       if (bUpdate_Rmirrors)   then pMakeDataBackup('\Rmirrors.xml');
       if (bUpdate_Comments)   then pMakeDataBackup('\Comments.xml');
       if (bUpdate_Completion) then pMakeDataBackup('\Completion.xml');
+
       if (bUpdate_Shortcuts)  then begin
         pMakeDataBackup('\Shortcuts.xml');
         // Shortcuts in use: = Shortcuts.xml
@@ -8830,6 +8792,88 @@ begin
                                    ')' +
                                    ': OK');
     end;
+
+    // RH_Send
+    if not FileExists(sFileRH_Send) then begin
+      pUnpackFile(sFileDataOrigin,
+                  sPath_Data,
+                  'RH_Send.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Send) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Send +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_RH_Send then
+        pUnpackFile(sFileDataOrigin,
+                    sPath_Data,
+                    'RH_Send.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Send) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Send +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // RH_Control
+    if not FileExists(sFileRH_Control) then begin
+      pUnpackFile(sFileDataOrigin,
+                  sPath_Data,
+                  'RH_Control.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Control) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Control +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_RH_Control then
+        pUnpackFile(sFileDataOrigin,
+                    sPath_Data,
+                    'RH_Control.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Control) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Control +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // RH_Custom
+    if not FileExists(sFileRH_Custom) then begin
+      pUnpackFile(sFileDataOrigin,
+                  sPath_Data,
+                  'RH_Custom.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Custom) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Custom +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_RH_Custom then
+        pUnpackFile(sFileDataOrigin,
+                    sPath_Data,
+                    'RH_Custom.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Custom) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Custom +
+                                   ')' +
+                                   ': OK');
+    end;
+
   except
     raise;
     Exit;
@@ -8843,7 +8887,7 @@ begin
   Rewrite(tfTmp);
     WriteLn(tfTmp,
             'This folder stores (by default):' + #13 +
-            'The XML files ''Cache.xml'', ''Comments.xml'', ''Completion.xml'', ''Rcard.xlm'',  ''Rmirrors.xml'' and ''Shortcuts.xml''.');
+            'The XML files: Cache.xml, Comments.xml, Completion.xml, Rcard.xlm, Rmirrors.xml, Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
   CloseFile(tfTmp);
 end;
 
@@ -9230,8 +9274,8 @@ begin
 
   Rewrite(tfTmp);
     WriteLn(tfTmp,
-            'This folder stores:' + #13 +
-            '''Editor.ini'' and ''Editor.kst'' files.'+ #13 +
+            'This folder stores the files:' + #13 +
+            'Editor.ini and Editor.kst.'+ #13 +
             'Notice: the latest is always deleted when Tinn-R starts and recreated (storing the user preferences) when the application finishes.');
 
   CloseFile(tfTmp);
@@ -9266,6 +9310,11 @@ begin
   if (iRcardFilter < 0) then iRcardFilter:= 0;
   frmTools.lbRcard.Selected[iRcardFilter]:= True;
   frmTools.lbRcardClick(Self);
+end;
+
+procedure TfrmMain.pSetSKH;
+begin
+  dlgSKH_Map:= TfrmSKH_Map_Dlg.Create(Self);
 end;
 
 procedure TfrmMain.pSetCompletion;
@@ -9569,12 +9618,12 @@ begin
 
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'RmirrorsDefaultIndex';
+      Name   := 'Rmirrors_Idx';
       Fields := 'Country;Name;URL';
       Options:= [ixPrimary, ixUnique];
     end;
 
-    IndexName:= 'RmirrorsDefaultIndex';
+    IndexName:= 'Rmirrors_Idx';
   end;
 
   // TfrmRmirrors.ActualizeCountries
@@ -9934,9 +9983,6 @@ begin
         smNormal: pDrawSelectionMode(0);
         smLine  : pDrawSelectionMode(1);
         smColumn: pDrawSelectionMode(2);
-        {smNormal: stbMain.Panels[4].Text:= 'Normal';
-        smLine  : stbMain.Panels[4].Text:= 'Line';
-        smColumn: stbMain.Panels[4].Text:= 'Column';}
       end;
     end;
   end;
@@ -10265,7 +10311,6 @@ procedure TfrmMain.actStatusBarVisibleExecute(Sender: TObject);
 begin
   stbMain.Visible            := not(stbMain.Visible);
   actStatusBarVisible.Checked:= stbMain.Visible;
-  //iConsoleHeight:= frmConsole.pgConsole.Height;
 end;
 
 procedure TfrmMain.actSpecialCharVisibleExecute(Sender: TObject);
@@ -10339,7 +10384,7 @@ var
 begin
   // Open all files in File MRU
   slTmp:= TStringList.Create;
- 
+
   for i:= 0 to (menFileRecentFiles.Count - 1) do
     slTmp.Add(menFileRecentFiles.Items[i].Caption);
  
@@ -10782,7 +10827,6 @@ procedure TfrmMain.panProjectDockSiteDockDrop(Sender: TObject;
 begin
   panProjectDockSite.Constraints.MinWidth:= 20;
   panProjectDockSite.Width               := 150;
-  //splTools.Visible                       := True;
 end;
 
 procedure TfrmMain.actProjectNewExecute(Sender: TObject);
@@ -11475,12 +11519,34 @@ var
   i: integer;
 
 begin
-  for i:= 1 to 10 do
-    with frmMain do begin
-      if Assigned(ajavHK_Send[i])    then ajavHK_Send[i].Active   := bStatus;
-      if Assigned(ajavHK_Control[i]) then ajavHK_Control[i].Active:= bStatus;
-      if Assigned(ajavHK_Custom[i])  then ajavHK_Custom[i].Active := bStatus;
+  with modDados do begin
+    with cdRH_Send do begin
+      SetLength(frmMain.ajavHK_Send,
+                RecordCount);
+
+      for i:= 0 to (RecordCount-1) do
+        with frmMain do
+          if Assigned(ajavHK_Send[i]) then ajavHK_Send[i].Active:= bStatus;
     end;
+
+    with cdRH_Control do begin
+      SetLength(frmMain.ajavHK_Control,
+                RecordCount);
+
+      for i:= 0 to (RecordCount-1) do
+        with frmMain do
+          if Assigned(ajavHK_Control[i]) then ajavHK_Control[i].Active:= bStatus;
+    end;
+
+    with cdRH_Custom do begin
+      SetLength(frmMain.ajavHK_Custom,
+                RecordCount);
+
+      for i:= 0 to (RecordCount-1) do
+        with frmMain do
+          if Assigned(ajavHK_Custom[i])  then ajavHK_Custom[i].Active := bStatus;
+    end;
+  end;  // with modDados
 end;
 
 procedure TfrmMain.pSetFocus_Rgui(iDelay: integer);
@@ -11488,36 +11554,6 @@ begin
   Sleep(iDelay);
   if bRguiReturnFocus then SetForegroundWindow(Application.Handle);
 end;
-
-//function TfrmMain.fFindWord: string;
-//var
-//  seTmp: TSynEdit;
-//
-//  i: integer;
-//
-//begin
-//  seTmp:= nil;
-//  i:= fFindTop_Window;
-//
-//  case iSynWithFocus of
-//    0: Exit;
-// 1..2: if Assigned(Self.MDIChildren[i] as TfrmEditor) then
-//         with (Self.MDIChildren[i] as TfrmEditor) do
-//           if (sActiveEditor = 'synEditor') then seTmp:= (Self.MDIChildren[i] as TfrmEditor).synEditor
-//                                            else seTmp:= (Self.MDIChildren[i] as TfrmEditor).synEditor2;
-//    3: seTmp:= frmRterm.synIO;
-//    4: with frmRterm do
-//         if Assigned(synLog2) then seTmp:= synLog2
-//                              else seTmp:= synLog;
-//  end;
-//
-//  if (seTmp = nil) then Exit;  // It is important, do not remove!
-//
-//  with seTmp do
-//    if SelAvail and
-//      (BlockBegin.Line = BlockEnd.Line) then Result:= SelText
-//                                        else Result:= GetWordAtRowCol(WordStartEx(CaretXY));  // Avoid return empty wheter cursor is at the end of word
-//end;
 
 function TfrmMain.fGet_Syn: TSynEdit;
 var
@@ -12312,7 +12348,6 @@ end;
 
 procedure TfrmMain.menWebRGuiRTVSClick(Sender: TObject);
 begin
-//  pOpen_Url('http://microsoft.github.io/RTVS-docs/')
   pOpen_Url('https://docs.microsoft.com/pt-br/visualstudio/rtvs/?view=vs-2017')
 end;
 
@@ -12402,29 +12437,6 @@ begin
          sWord +
          '&domains=r-project.org&sitesearch=r-project.org&btnG=Google+Search';
   pOpen_Url(sTmp);
-end;
-
-procedure TfrmMain.menWebSearchSelRArchivesClick(Sender: TObject);
-//var
-//  sTmp,
-//   sSelWord: string;
-
-begin
-//  if (pgFiles.PageCount = 0) then Exit;
-//  sSelWord:= fFindWord_Extended(fGet_Syn);
-//
-//  if (sSelWord = EmptyStr) then begin
-//    fMessageDlg('No valid word selected from the file!',
-//                mtInformation,
-//                [mbOk],
-//                0);
-//    Exit;
-//  end;
-//
-//  sTmp:= 'www.google.com/u/newcastlemaths?q=' +
-//         sSelWord +
-//         '&sa=Google+Search';
-//  pOpen_Url(sTmp);
 end;
 
 procedure TfrmMain.menWebSearchSelRSiteClick(Sender: TObject);
@@ -14168,15 +14180,6 @@ begin
       iAlphaBlendValue:= 255 - (255 * tbTransparency.Position) Div 100;
     end;
 
-//    if bStartOptionsWithRPage then begin
-//      sAppSelected:= 'Path (R)';
-//      bStartOptionsWithRPage:= False;
-//    end
-//    else if bStartOptionsWithProcessingPage then begin
-//      sAppSelected:= 'Processing';
-//      bStartOptionsWithProcessingPage:= False;
-//    end;
-
     if (dlgApp_Options.ShowModal = mrOK) then begin
       with dlgApp_Options do begin
         // Send to R alphabetically ordered
@@ -14491,13 +14494,14 @@ begin
     pSetHotkeys_Status(False);  // Set temporarily pSetHotkeys_Status to False: it is necessary to manager Hotkeys!
     // If OK
     if (dlgSKH_Map.ShowModal = mrOK) then begin
+      // Application
       with modDados.cdShortcuts do begin
         Edit;
         try
           Post;
           MergeChangeLog;
           SaveToFile();
-          frmMain.iShortcutsBeforeChanges:= SavePoint;
+          frmMain.iShortcuts_SavePoint:= SavePoint;
         except
           //TODO
         end;
@@ -14509,12 +14513,55 @@ begin
       bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
 
       pDatasetToActionList;
+
+      // RH_Send
+      with modDados.cdRH_Send do begin
+        Edit;
+        try
+          Post;
+          MergeChangeLog;
+          SaveToFile();
+          frmMain.iRH_Send_SavePoint:= SavePoint;
+        except
+          //TODO
+        end;
+      end;
+
+      // RH_Control
+      with modDados.cdRH_Control do begin
+        Edit;
+        try
+          Post;
+          MergeChangeLog;
+          SaveToFile();
+          frmMain.iRH_Control_SavePoint:= SavePoint;
+        except
+          //TODO
+        end;
+      end;
+
+      // RH_Custom
+      with modDados.cdRH_Custom do begin
+        Edit;
+        try
+          Post;
+          MergeChangeLog;
+          SaveToFile();
+          frmMain.iRH_Custom_SavePoint:= SavePoint;
+        except
+          //TODO
+        end;
+      end;
+
       pSetFocus_Main;
     end // if (dlgSH_Map.ShowModal = mrOK)
     // else (dlgSH_Map.ShowModal <> mrOK)
     else begin
       with modDados do begin
-        cdShortcuts.SavePoint:= iShortcutsBeforeChanges;
+        cdShortcuts.SavePoint := iShortcuts_SavePoint;
+        cdRH_Send.SavePoint   := iRH_Send_SavePoint;
+        cdRH_Control.SavePoint:= iRH_Control_SavePoint;
+        cdRH_Custom.SavePoint := iRH_Custom_SavePoint;
         cdShortcutsAfterScroll(nil);
       end;
     end;
@@ -15393,7 +15440,7 @@ begin
             cbbToolsREnvironment.Text) > 0) then Result:= fRegEx(cbbToolsREnvironment.Text, // It will get all from latest ':' to the end of string
                                                                  '[^:]+$',
                                                                  False) +
-                                                          '::';      
+                                                          '::';
 end;
 
 procedure TfrmMain.actRExplorerHelpSelectedExecute(Sender: TObject);
@@ -17052,29 +17099,6 @@ begin
   pDoSend(sTmp);
 end;
 
-procedure TfrmMain.actRSendSourceContiguousExecute(Sender: TObject);
-{
-var
-  sTmp,
-   sToSend: string;
-  bSingleLine: boolean;
-}
-begin
-{
-  sToSend:= fGetContiguous(bSingleLine);
-  if (sToSend = EmptyStr) then Exit;
-
-  if bSingleLine then
-    sTmp:= sToSend
-  else
-    sTmp:= 'source(' +
-           sToSend +
-           ')';
-
-  pDoSend(sTmp);
-}
-end;
-
 procedure TfrmMain.actRSendContiguousExecute(Sender: TObject);
 var
   sTmp,
@@ -18408,7 +18432,6 @@ var
           Sleep(iDelay);
           pReadTmpFile(sRFile);
         end;
-        //strlFromRServer.Delete(0);
         pMakeTreeRExplorer_TmpFile(strlFromR);
       except
        on EFOpenError do begin
@@ -18688,7 +18711,7 @@ begin
                 Post;
                 MergeChangeLog;
                 SaveToFile();
-                iRcardBeforeChanges:= SavePoint;
+                iRcard_SavePoint:= SavePoint;
               except
               end;
             end;
@@ -18699,7 +18722,7 @@ begin
                 Post;
                 MergeChangeLog;
                 SaveToFile();
-                iCompletionBeforeChanges:= SavePoint;
+                iCompletion_SavePoint:= SavePoint;
               except
               end;
             end;
@@ -18710,7 +18733,7 @@ begin
                 Post;
                 MergeChangeLog;
                 SaveToFile();
-                iShortcutsBeforeChanges:= SavePoint;
+                iShortcuts_SavePoint:= SavePoint;
               except
               end;
             end;
@@ -19851,49 +19874,6 @@ begin
   pUpdateHexViewer;
 end;
 
-(*
-// It is not working nice for PDF under Windows 7 -> replaced for the below
-procedure TfrmMain.pOpenFileWithViewer(sFilter, sDefaultExt, sPathViewer: string);
-var
-  od         : TOpenDialog;
-  sFile,
-   sParameter: string;
-
-begin
-  od           := TOpenDialog.Create(Self);
-  od.InitialDir:= sWorkingDir;
-  od.FileName  := EmptyStr;
-  od.Filter    := sFilter;
-  od.DefaultExt:= sDefaultExt;
-  try
-    if od.Execute then begin
-      frmMain.Refresh;
-      sFile:= od.FileName;
-      if FileExists(sFile) then begin
-        try
-          pCheckProcessingPath(sPathViewer);
-          if (ExtractFileExt(sFile)= '.pdf') then begin
-            sParameter:= sPathViewer + ' ' + sFile;
-            fOpenCmdLine(sParameter, SW_SHOWNORMAL);
-          end
-          else begin
-            sParameter:= sPathViewer + ' --single-instance ' + sFile;
-            fOpenCmdLine(sParameter, SW_HIDE);
-          end;
-        except
-          fMessageDlg(sFile + #13 + #13 +
-                      'It wasn''t possible to open the file above!',
-                      mtError, [mbOk], 0);
-          Exit;
-        end;  // try
-      end;  // if (od.Execute)
-    end;
-  finally
-    FreeAndNil(od);
-  end;
-end;
-*)
-
 procedure TfrmMain.pOpenFileWithViewer(sFilter,
                                            sDefaultExt: string);
 var
@@ -20622,7 +20602,6 @@ begin
     with seEditor do
       if SelAvail and
         (BlockBegin.Line = BlockEnd.Line) then dlg.SearchText:= SelText
-//                                          else dlg.SearchText:= GetWordAtRowCol(WordStartEx(CaretXY));  // Avoid return empty wheter cursor is at the end of word
                                           else dlg.SearchText:= fFindWord_Extended(seEditor);
   end;
 
@@ -24241,7 +24220,7 @@ procedure TfrmMain.actLatexAlgebricFracExecute(Sender: TObject);
       pString_Split(' ',
                     sTmp,
                     slTmp);
-      
+
       if (slTmp.Count >= 2) then begin
         sArg1:= slTmp[0];
         sArg2:= slTmp[1];
@@ -24802,7 +24781,7 @@ begin
     if (iPos > 0) then begin
       iEnd:= Pos('):',
                  sTmp);
-    
+
       sLineNumber:= Copy(sTmp,
                          iPos + 1,
                          ((iEnd - iPos) - 1));
@@ -24933,18 +24912,6 @@ begin
     Items.EndUpdate;
   end;
 end;
-
-{
-procedure TfrmMain.synEditorDataCompletionCodeCompletion(Sender: TObject;
-                                                             var Value: string;
-                                                             Shift: TShiftState;
-                                                             Index: Integer;
-                                                             EndToken: Char);
-begin
-  with TSynCompletionProposal(Sender).Editor do
-    CaretX:= CaretX;
-end;
-}
 
 procedure TfrmMain.actRtermVisibleExecute(Sender: TObject);
 begin
@@ -25180,7 +25147,6 @@ begin
   actRtermIOSplitRemove.Checked:= (frmRterm.synLog2 = nil);
   bRtermSingle:= False;
   pUpdateRterm_Appearance;
-  //frmRterm.TBToolbarRterm.Left:= 92;
 end;
 
 procedure TfrmMain.actRtermLOGSetFocusExecute(Sender: TObject);
@@ -26355,7 +26321,6 @@ Initialization
 Finalization
   FreeAndNil(RHistory);
   FreeAndNil(RSend_Smart);
-end.
 
 //procedure TfrmMain.menSKHClick(Sender: TObject);
 //var
@@ -26502,4 +26467,7 @@ begin
       pSetFocus_Main;
     end;
 }
+
+end.
+
 

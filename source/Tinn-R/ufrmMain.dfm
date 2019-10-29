@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Width = 1015
+  Width = 1002
   Height = 683
   AlphaBlend = True
   AlphaBlendValue = 200
@@ -1035,19 +1035,18 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 525
+    Height = 505
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 505
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1007
+    Width = 994
     Height = 80
     Align = alTop
     AutoSize = True
@@ -1058,7 +1057,7 @@ object frmMain: TfrmMain
     object ctbMain: TControlBar
       Left = 0
       Top = 0
-      Width = 1007
+      Width = 994
       Height = 52
       Align = alTop
       AutoDock = False
@@ -1219,7 +1218,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -1795,7 +1794,7 @@ object frmMain: TfrmMain
     object TBRDockTop: TTBDock
       Left = 0
       Top = 52
-      Width = 1007
+      Width = 994
       Height = 28
       BoundLines = [blTop, blBottom, blLeft, blRight]
       Color = 16250871
@@ -2015,14 +2014,13 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 525
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 505
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2037,8 +2035,8 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 632
-    Width = 1007
+    Top = 612
+    Width = 994
     Height = 20
     AutoHint = True
     Anchors = [akLeft, akBottom]
@@ -2092,25 +2090,23 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 612
   end
   object TBDockRight: TTBDock
-    Left = 998
+    Left = 985
     Top = 98
     Width = 9
-    Height = 525
+    Height = 505
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 505
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 623
-    Width = 1007
+    Top = 603
+    Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
@@ -2118,12 +2114,11 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 603
   end
   object pgFiles: TJvgPageControl
     Left = 0
     Top = 80
-    Width = 1007
+    Width = 994
     Height = 18
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
@@ -7597,12 +7592,6 @@ object frmMain: TfrmMain
       object menSKH: TMenuItem
         Action = actSKH_map
       end
-      object menOptionsShortcuts: TMenuItem
-        Caption = 'Shortcuts'
-        Hint = 'Shortcuts: edit'
-        ImageIndex = 119
-        Visible = False
-      end
       object N119: TMenuItem
         Caption = '-'
       end
@@ -8980,12 +8969,6 @@ object frmMain: TfrmMain
         object menWebRSearchSel: TMenuItem
           Caption = 'Selected text'
           ImageIndex = 55
-          object menWebSearchSelRArchives: TMenuItem
-            Caption = 'Archives'
-            Enabled = False
-            Visible = False
-            OnClick = menWebSearchSelRArchivesClick
-          end
           object menWebSearchSelGoogle: TMenuItem
             Caption = 'Google'
             Enabled = False

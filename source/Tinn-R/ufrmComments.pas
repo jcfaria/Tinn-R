@@ -233,11 +233,11 @@ begin
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'CommentsDefaultIndex';
+      Name   := 'Comments_Idx';
       Fields := 'Language';
       Options:= [ixPrimary, ixUnique];
     end;
-    IndexName:= 'CommentsDefaultIndex';
+    IndexName:= 'Comments_Idx';
   end;
 end;
 
@@ -269,7 +269,7 @@ begin
       Post;
       MergeChangeLog;
       SaveToFile();
-      frmMain.iCommentsBeforeChanges:= SavePoint;
+      frmMain.iComments_SavePoint:= SavePoint;
     except
     end;
   end;
@@ -279,7 +279,7 @@ end;
 procedure TfrmComments.bbtCommentsCloseClick(Sender: TObject);
 begin
   with modDados.cdComments do
-    SavePoint:= frmMain.iCommentsBeforeChanges;
+    SavePoint:= frmMain.iComments_SavePoint;
   Close;
   frmMain.Refresh;
 end;
@@ -298,7 +298,7 @@ end;
 procedure TfrmComments.bbtCommentsCancelAllClick(Sender: TObject);
 begin
   with modDados.cdComments do
-    SavePoint:= frmMain.iCommentsBeforeChanges;
+    SavePoint:= frmMain.iComments_SavePoint;
 end;
 
 procedure TfrmComments.bbtCommentsRestoreDefaultClick(Sender: TObject);
@@ -313,7 +313,7 @@ begin
       CloseArchive;
     end;
     modDados.cdComments.Active:= True;
-    frmMain.iCommentsBeforeChanges:= modDados.cdComments.SavePoint;
+    frmMain.iComments_SavePoint:= modDados.cdComments.SavePoint;
 
     MessageDlg('The original ''Comments.xml'' was successfully restored.',
                mtInformation,

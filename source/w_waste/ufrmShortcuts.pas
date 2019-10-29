@@ -298,12 +298,12 @@ begin
 
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'ShortcutsDefaultIndex';
+      Name   := 'Shortcuts_Idx';
       Fields := 'Index';
       Options:= [ixPrimary, ixUnique];
     end;
 
-    IndexName:= 'ShortcutsDefaultIndex';
+    IndexName:= 'Shortcuts_Idx';
   end;
   pActualize_Groups;
 end;
@@ -496,8 +496,8 @@ begin
         end; 
 
         with frmMain do begin
-          iShortcutsBeforeChanges:= modDados.cdShortcuts.SavePoint;
-          sShortcutsInUse        := sFile;
+          iShortcuts_SavePoint:= modDados.cdShortcuts.SavePoint;
+          sShortcutsInUse     := sFile;
         end;
 
         with stbShortcuts do
@@ -538,7 +538,7 @@ begin
       Post;
       MergeChangeLog;
       SaveToFile();
-      frmMain.iShortcutsBeforeChanges:= SavePoint;
+      frmMain.iShortcuts_SavePoint:= SavePoint;
     except
       //TODO
     end;
@@ -595,7 +595,7 @@ end;
 procedure TfrmShortcuts.bbtShortcutsCloseClick(Sender: TObject);
 begin
   with modDados.cdShortcuts do
-    SavePoint:= frmMain.iShortcutsBeforeChanges;
+    SavePoint:= frmMain.iShortcuts_SavePoint;
 
   Close;
   frmMain.Refresh;
@@ -651,7 +651,7 @@ begin
   pClear_Warnings;
 
   with modDados do begin
-    cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
+    cdShortcuts.SavePoint:= frmMain.iShortcuts_SavePoint;
     cdShortcutsAfterScroll(nil);
   end;
 end;
@@ -679,8 +679,8 @@ begin
     end;
 
     with frmMain do begin
-      iShortcutsBeforeChanges:= modDados.cdShortcuts.SavePoint;
-      sShortcutsInUse        := frmMain.sPath_Data + '\Shortcuts.xml';
+      iShortcuts_SavePoint:= modDados.cdShortcuts.SavePoint;
+      sShortcutsInUse     := frmMain.sPath_Data + '\Shortcuts.xml';
     end;
 
     with stbShortcuts do

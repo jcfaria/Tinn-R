@@ -269,12 +269,12 @@ begin
 
     with IndexDefs.AddIndexDef do
     begin
-      Name   := 'CompletionDefaultIndex';
+      Name   := 'Completion_Idx';
       Fields := 'Trigger';
       Options:= [ixPrimary, ixUnique];
     end;
 
-    IndexName:= 'CompletionDefaultIndex';
+    IndexName:= 'Completion_Idx';
   end;
   pActualize_Groups;
 end;
@@ -324,7 +324,7 @@ begin
       Post;
       MergeChangeLog;
       SaveToFile();
-      frmMain.iCompletionBeforeChanges:= SavePoint;
+      frmMain.iCompletion_SavePoint:= SavePoint;
     except
     end;
   end;
@@ -334,7 +334,7 @@ end;
 procedure TfrmCompletion.bbtCompletionCloseClick(Sender: TObject);
 begin
   with modDados.cdCompletion do
-    SavePoint:= frmMain.iCompletionBeforeChanges;
+    SavePoint:= frmMain.iCompletion_SavePoint;
 
   Close;
   frmMain.Refresh;
@@ -354,7 +354,7 @@ end;
 procedure TfrmCompletion.bbtCompletionCancelAllClick(Sender: TObject);
 begin
   with modDados.cdCompletion do
-    SavePoint:= frmMain.iCompletionBeforeChanges;
+    SavePoint:= frmMain.iCompletion_SavePoint;
 end;
 
 procedure TfrmCompletion.bbtCompletionRestoreDefaultClick(Sender: TObject);
@@ -372,7 +372,7 @@ begin
 
     with modDados do begin
       cdCompletion.Active:= True;
-      frmMain.iCompletionBeforeChanges:= cdCompletion.SavePoint;
+      frmMain.iCompletion_SavePoint:= cdCompletion.SavePoint;
     end;
 
     MessageDlg('The original ''Completion.xml'' was successfully restored.',

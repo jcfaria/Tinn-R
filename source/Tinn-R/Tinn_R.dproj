@@ -172,9 +172,6 @@
     <DCCReference Include="ufrmSearchInFiles.pas">
       <Form>frmSearch_InFiles_Dlg</Form>
     </DCCReference>
-    <DCCReference Include="ufrmShortcuts.pas">
-      <Form>frmShortcuts</Form>
-    </DCCReference>
     <DCCReference Include="ufrmSKH_Manager.pas">
       <Form>frmSKH_Manager_Dlg</Form>
     </DCCReference>

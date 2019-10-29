@@ -108,7 +108,6 @@ uses
   ufrmRterm in 'ufrmRterm.pas' {frmRterm},
   ufrmSearchInFiles in 'ufrmSearchInFiles.pas' {frmSearch_InFiles_Dlg},
   ufrmSearch in 'ufrmSearch.pas' {frmSearchDlg},
-  ufrmShortcuts in 'ufrmShortcuts.pas' {frmShortcuts},
   ufrmSplash in 'ufrmSplash.pas' {frmSplash},
   ufrmTools in 'ufrmTools.pas' {frmTools},
   ufrmUpdater in 'ufrmUpdater.pas' {frmUpdater},
