@@ -3116,7 +3116,7 @@ begin
   sVersion_RH_Custom := ifTinn.ReadString('App', 'sVersion_RH_Custom' , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
-  sCurrentVersion_Cache     := '5.02.02.00';
+  sCurrentVersion_Cache     := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '5.02.03.00';
   sCurrentVersion_Latex     := '2.01.01.01';
@@ -3124,9 +3124,9 @@ begin
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.04.01.00';
   sCurrentVersion_Shortcuts := '5.04.01.00';
-  sCurrentVersion_RH_Send   := '5.04.01.00';
-  sCurrentVersion_RH_Control:= '5.04.01.00';
-  sCurrentVersion_RH_Custom := '5.04.01.00';
+  sCurrentVersion_RH_Send   := '5.04.01.00';  // Started from version '5.04.01.00'/beta
+  sCurrentVersion_RH_Control:= '5.04.01.01';  // Started from version '5.04.01.00'/beta
+  sCurrentVersion_RH_Custom := '5.04.01.00';  // Started from version '5.04.01.00'/beta
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3212,7 +3212,6 @@ begin
                   '\RH_Custom.xml') then
       bUpdate_RH_Custom:= True;
   end;
-
 
   // SynUnihighlighter: It was removed from the project!
   if DirectoryExists(sPath_Ini +
@@ -14483,12 +14482,12 @@ begin
   try
     // Initial status
     with dlgSKH_Map do begin
-      edFilter_Group.Text:= '';
-      edtSearch_Group.Text:= '';
-      edFilter_Caption.Text:= '';
-      edtSearch_Caption.Text:= '';
+      edApp_Filter_Group.Text   := '';
+      edApp_Search_Group.Text   := '';
+      edApp_Filter_Caption.Text := '';
+      edApp_Search_Caption.Text:= '';
       pgSKH.ActivePage:= tbsAppShortcuts;
-      pgRH.ActivePage:= tbsRH_Send;
+      pgRH.ActivePage := tbsRH_Send;
     end;
 
     pSetHotkeys_Status(False);  // Set temporarily pSetHotkeys_Status to False: it is necessary to manager Hotkeys!

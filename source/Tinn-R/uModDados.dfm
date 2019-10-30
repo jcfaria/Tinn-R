@@ -216,26 +216,21 @@ object modDados: TmodDados
   object cdRH_Send: TClientDataSet
     Aggregates = <>
     Params = <>
-    BeforeEdit = cdShortcutsBeforeEdit
-    AfterPost = cdShortcutsAfterPost
-    AfterScroll = cdShortcutsAfterScroll
-    OnNewRecord = cdShortcutsNewRecord
-    OnPostError = cdShortcutsPostError
     Left = 31
     Top = 315
-    object IntegerField1: TIntegerField
+    object cdRH_Send_Index: TIntegerField
       FieldName = 'Index'
       Required = True
     end
-    object StringField1: TStringField
+    object cdRH_Send_Group: TStringField
       FieldName = 'Group'
       Size = 50
     end
-    object StringField2: TStringField
+    object cdRH_Send_Caption: TStringField
       FieldName = 'Caption'
       Size = 50
     end
-    object StringField4: TStringField
+    object cdRH_Send_Shortcut: TStringField
       Alignment = taRightJustify
       FieldName = 'Shortcut'
     end
@@ -248,26 +243,21 @@ object modDados: TmodDados
   object cdRH_Control: TClientDataSet
     Aggregates = <>
     Params = <>
-    BeforeEdit = cdShortcutsBeforeEdit
-    AfterPost = cdShortcutsAfterPost
-    AfterScroll = cdShortcutsAfterScroll
-    OnNewRecord = cdShortcutsNewRecord
-    OnPostError = cdShortcutsPostError
     Left = 31
     Top = 367
-    object IntegerField2: TIntegerField
+    object cdRH_Control_Index: TIntegerField
       FieldName = 'Index'
       Required = True
     end
-    object StringField3: TStringField
+    object cdRH_Control_Group: TStringField
       FieldName = 'Group'
       Size = 50
     end
-    object StringField5: TStringField
+    object cdRH_Control_Caption: TStringField
       FieldName = 'Caption'
       Size = 50
     end
-    object StringField6: TStringField
+    object cdRH_Control_Shortcut: TStringField
       Alignment = taRightJustify
       FieldName = 'Shortcut'
     end
@@ -280,26 +270,23 @@ object modDados: TmodDados
   object cdRH_Custom: TClientDataSet
     Aggregates = <>
     Params = <>
-    BeforeEdit = cdShortcutsBeforeEdit
-    AfterPost = cdShortcutsAfterPost
-    AfterScroll = cdShortcutsAfterScroll
-    OnNewRecord = cdShortcutsNewRecord
-    OnPostError = cdShortcutsPostError
+    OnNewRecord = cdRH_CustomNewRecord
+    OnPostError = cdRH_CustomPostError
     Left = 31
     Top = 422
-    object IntegerField3: TIntegerField
+    object cdRH_Custom_Index: TIntegerField
       FieldName = 'Index'
       Required = True
     end
-    object StringField7: TStringField
+    object cdRH_Custom_Group: TStringField
       FieldName = 'Group'
       Size = 50
     end
-    object StringField8: TStringField
+    object cdRH_Custom_Caption: TStringField
       FieldName = 'Caption'
       Size = 100
     end
-    object StringField9: TStringField
+    object cdRH_Custom_Shortcut: TStringField
       Alignment = taRightJustify
       FieldName = 'Shortcut'
     end

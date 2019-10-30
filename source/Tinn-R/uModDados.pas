@@ -92,22 +92,22 @@ type
     dsRmirrors: TDataSource;
     dsShortcuts: TDataSource;
     cdRH_Send: TClientDataSet;
-    IntegerField1: TIntegerField;
-    StringField1: TStringField;
-    StringField2: TStringField;
-    StringField4: TStringField;
+    cdRH_Send_Index: TIntegerField;
+    cdRH_Send_Group: TStringField;
+    cdRH_Send_Caption: TStringField;
+    cdRH_Send_Shortcut: TStringField;
     dsRH_Send: TDataSource;
     cdRH_Control: TClientDataSet;
-    IntegerField2: TIntegerField;
-    StringField3: TStringField;
-    StringField5: TStringField;
-    StringField6: TStringField;
+    cdRH_Control_Index: TIntegerField;
+    cdRH_Control_Group: TStringField;
+    cdRH_Control_Caption: TStringField;
+    cdRH_Control_Shortcut: TStringField;
     dsRH_Control: TDataSource;
     cdRH_Custom: TClientDataSet;
-    IntegerField3: TIntegerField;
-    StringField7: TStringField;
-    StringField8: TStringField;
-    StringField9: TStringField;
+    cdRH_Custom_Index: TIntegerField;
+    cdRH_Custom_Group: TStringField;
+    cdRH_Custom_Caption: TStringField;
+    cdRH_Custom_Shortcut: TStringField;
     dsRH_Custom: TDataSource;
 
     procedure cdCommentsAfterPost(DataSet: TDataSet);
@@ -135,6 +135,8 @@ type
     procedure cdShortcutsPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure cdRH_CustomNewRecord(DataSet: TDataSet);
+    procedure cdRH_CustomPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 
   private
     { Private declarations }
@@ -845,6 +847,34 @@ begin
   Action:= daAbort;
 end;
 
+procedure TmodDados.cdRH_CustomNewRecord(DataSet: TDataSet);
+var
+  i: integer;
+
+begin
+  i:= cdRH_Custom.RecordCount;
+  cdRH_Custom_Index.AsInteger:= i;
+  cdRH_Custom_Group.AsString:= 'Custom';
+
+  with frmMain.dlgSKH_Map.dbeRH_Custom_Caption do
+    SetFocus;
+end;
+
+procedure TmodDados.cdRH_CustomPostError(DataSet: TDataSet;
+                                         E: EDatabaseError;
+                                         var Action: TDataAction);
+begin
+  MessageDlg(DataSet.Fields.Fields[1].Value + #13 + #13 +
+             'Key violation.' + #13 +
+             'Latest insertion (or change) will be lost!',
+             mtError,
+             [MBOK],
+             0);
+
+  Dataset.Cancel;
+  Action:= daAbort;
+end;
+
 procedure TmodDados.cdRmirrorsAfterPost(DataSet: TDataSet);
 begin
   if Assigned(frmRmirrors) then
@@ -970,7 +1000,7 @@ end;
 
 procedure TmodDados.cdShortcutsNewRecord(DataSet: TDataSet);
 var
-  i: Integer;
+  i: integer;
 
 begin
   i:= cdShortcuts.RecordCount;
