@@ -91,7 +91,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsAppShortcuts
+    ActivePage = tbsRHotkeys
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -131,10 +131,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -235,7 +231,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ParentColor = False
           ParentFont = False
         end
-        object dbeCaption: TDBEdit
+        object dbeApp_Caption: TDBEdit
           Left = 295
           Top = 58
           Width = 304
@@ -253,7 +249,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ParentFont = False
           TabOrder = 5
         end
-        object edtSearch_Caption: TEdit
+        object edApp_Search_Caption: TEdit
           Left = 295
           Top = 40
           Width = 304
@@ -268,10 +264,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 3
-          OnChange = edtSearch_CaptionChange
-          OnEnter = edtSearch_CaptionEnter
+          OnChange = edApp_Search_CaptionChange
+          OnEnter = edApp_Search_CaptionEnter
         end
-        object dbeGroup: TDBEdit
+        object dbeApp_Group: TDBEdit
           Left = 52
           Top = 58
           Width = 170
@@ -304,7 +300,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           DataSource = modDados.dsShortcuts
           TabOrder = 6
         end
-        object edtSearch_Group: TEdit
+        object edApp_Search_Group: TEdit
           Left = 52
           Top = 40
           Width = 170
@@ -319,10 +315,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 2
-          OnChange = edtSearch_GroupChange
-          OnEnter = edtSearch_GroupEnter
+          OnChange = edApp_Search_GroupChange
+          OnEnter = edApp_Search_GroupEnter
         end
-        object edFilter_Group: TEdit
+        object edApp_Filter_Group: TEdit
           Left = 52
           Top = 22
           Width = 170
@@ -337,9 +333,9 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          OnChange = edFilter_GroupChange
+          OnChange = edApp_Filter_GroupChange
         end
-        object edFilter_Caption: TEdit
+        object edApp_Filter_Caption: TEdit
           Left = 295
           Top = 22
           Width = 304
@@ -354,7 +350,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 1
-          OnChange = edFilter_CaptionChange
+          OnChange = edApp_Filter_CaptionChange
         end
       end
       object bbtShortcuts_Load: TBitBtn
@@ -470,10 +466,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label20: TLabel
         Left = 0
         Top = 450
@@ -541,10 +533,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object rdgTinnRHotKeys: TRadioGroup
         Left = 4
         Top = 432
@@ -566,32 +554,23 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         TabOrder = 0
         OnClick = rdgTinnRHotKeysClick
       end
-      object btnRemove: TButton
-        Left = 484
+      object btnClear: TButton
+        Left = 433
         Top = 443
-        Width = 65
+        Width = 90
         Height = 25
-        Caption = 'Remove'
+        Caption = 'Clear (H)'
         TabOrder = 1
-        OnClick = btnRemoveClick
+        OnClick = btnClearClick
       end
       object btnClearAllHotKeys: TButton
-        Left = 549
+        Left = 524
         Top = 443
-        Width = 65
+        Width = 90
         Height = 25
-        Caption = 'Clear all'
+        Caption = 'Clear all (H)'
         TabOrder = 2
         OnClick = btnClearAllHotKeysClick
-      end
-      object btnAddHotKey: TButton
-        Left = 419
-        Top = 443
-        Width = 65
-        Height = 25
-        Caption = 'Add'
-        TabOrder = 3
-        OnClick = btnAddHotKeyClick
       end
       object pgRH: TJvgPageControl
         Left = 0
@@ -606,7 +585,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Font.Name = 'Tahoma'
         Font.Style = []
         Style = tsFlatButtons
-        TabOrder = 4
+        TabOrder = 3
         TabStop = False
         OnChange = pgRHChange
         TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
@@ -638,10 +617,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
-          ExplicitLeft = 0
-          ExplicitTop = 25
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox1: TGroupBox
             Left = 0
             Top = 0
@@ -720,7 +695,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ParentFont = False
               TabOrder = 3
             end
-            object Edit1: TEdit
+            object edRH_Send_Search_Caption: TEdit
               Left = 295
               Top = 40
               Width = 304
@@ -735,8 +710,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentFont = False
               TabOrder = 1
-              OnChange = edtSearch_CaptionChange
-              OnEnter = edtSearch_CaptionEnter
+              OnChange = edRH_Send_Search_CaptionChange
+              OnEnter = edApp_Search_CaptionEnter
             end
             object DBEdit2: TDBEdit
               Left = 52
@@ -759,7 +734,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ReadOnly = True
               TabOrder = 2
             end
-            object Edit4: TEdit
+            object edRH_Send_Filter_Caption: TEdit
               Left = 295
               Top = 22
               Width = 304
@@ -774,7 +749,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentFont = False
               TabOrder = 0
-              OnChange = edFilter_CaptionChange
+              OnChange = edRH_Send_Filter_CaptionChange
             end
           end
           object JvDBNavigator1: TJvDBNavigator
@@ -790,7 +765,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             ParentCtl3D = False
             TabOrder = 1
           end
-          object DBGrid1: TDBGrid
+          object dbgRH_Send: TDBGrid
             Left = 0
             Top = 105
             Width = 607
@@ -834,10 +809,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Control: TTabSheet
           Caption = 'Control'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox2: TGroupBox
             Left = 0
             Top = 0
@@ -916,7 +887,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ParentFont = False
               TabOrder = 3
             end
-            object Edit5: TEdit
+            object edRH_Control_Search_Caption: TEdit
               Left = 295
               Top = 40
               Width = 304
@@ -931,8 +902,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentFont = False
               TabOrder = 1
-              OnChange = edtSearch_CaptionChange
-              OnEnter = edtSearch_CaptionEnter
+              OnChange = edRH_Control_Search_CaptionChange
+              OnEnter = edApp_Search_CaptionEnter
             end
             object DBEdit4: TDBEdit
               Left = 52
@@ -955,7 +926,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ReadOnly = True
               TabOrder = 2
             end
-            object Edit8: TEdit
+            object edRH_Control_Filter_Caption: TEdit
               Left = 295
               Top = 22
               Width = 304
@@ -970,7 +941,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentFont = False
               TabOrder = 0
-              OnChange = edFilter_CaptionChange
+              OnChange = edRH_Control_Filter_CaptionChange
             end
           end
           object JvDBNavigator3: TJvDBNavigator
@@ -986,7 +957,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             ParentCtl3D = False
             TabOrder = 1
           end
-          object DBGrid2: TDBGrid
+          object dbgRH_Control: TDBGrid
             Left = 0
             Top = 105
             Width = 607
@@ -1030,10 +1001,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Custom: TTabSheet
           Caption = 'Custom'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox3: TGroupBox
             Left = 0
             Top = 0
@@ -1094,7 +1061,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ParentColor = False
               ParentFont = False
             end
-            object DBEdit5: TDBEdit
+            object dbeRH_Custom_Caption: TDBEdit
               Left = 295
               Top = 58
               Width = 304
@@ -1112,7 +1079,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ParentFont = False
               TabOrder = 3
             end
-            object Edit9: TEdit
+            object edRH_Custom_Search_Caption: TEdit
               Left = 295
               Top = 40
               Width = 304
@@ -1127,8 +1094,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentFont = False
               TabOrder = 1
-              OnChange = edtSearch_CaptionChange
-              OnEnter = edtSearch_CaptionEnter
+              OnChange = edRH_Custom_Search_CaptionChange
+              OnEnter = edApp_Search_CaptionEnter
             end
             object DBEdit6: TDBEdit
               Left = 52
@@ -1151,7 +1118,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ReadOnly = True
               TabOrder = 2
             end
-            object Edit12: TEdit
+            object edRH_Custom_Filter_Caption: TEdit
               Left = 295
               Top = 22
               Width = 304
@@ -1166,7 +1133,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentFont = False
               TabOrder = 0
-              OnChange = edFilter_CaptionChange
+              OnChange = edRH_Custom_Filter_CaptionChange
             end
           end
           object JvDBNavigator4: TJvDBNavigator
@@ -1175,14 +1142,14 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Width = 607
             Height = 22
             DataSource = modDados.dsRH_Custom
-            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost, nbCancel]
             Align = alTop
             Flat = True
             Ctl3D = False
             ParentCtl3D = False
             TabOrder = 1
           end
-          object DBGrid3: TDBGrid
+          object dbgRH_Custom: TDBGrid
             Left = 0
             Top = 105
             Width = 607
@@ -1195,7 +1162,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             TabOrder = 2
             TitleFont.Charset = DEFAULT_CHARSET
@@ -1204,9 +1171,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = [fsBold]
             OnDblClick = dbgShortcutsDblClick
-            OnEnter = dbgShortcutsEnter
-            OnKeyPress = dbgShortcutsKeyPress
-            OnTitleClick = dbgShortcutsTitleClick
+            OnEnter = dbgRH_CustomEnter
+            OnKeyPress = dbgRH_CustomKeyPress
             Columns = <
               item
                 Expanded = False

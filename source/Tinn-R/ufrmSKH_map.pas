@@ -16,9 +16,8 @@ type
     tbsEditorKeystrokes: TTabSheet;
     tbsRHotkeys: TTabSheet;
     rdgTinnRHotKeys: TRadioGroup;
-    btnRemove: TButton;
+    btnClear: TButton;
     btnClearAllHotKeys: TButton;
-    btnAddHotKey: TButton;
     Panel2: TPanel;
     JvDBNavigator2: TJvDBNavigator;
     gbKeystrokes: TGroupBox;
@@ -27,11 +26,11 @@ type
     Label4: TLabel;
     Label5: TLabel;
     imgShortcut: TImage;
-    dbeCaption: TDBEdit;
-    edtSearch_Caption: TEdit;
-    dbeGroup: TDBEdit;
+    dbeApp_Caption: TDBEdit;
+    edApp_Search_Caption: TEdit;
+    dbeApp_Group: TDBEdit;
     dbmHint: TDBMemo;
-    edtSearch_Group: TEdit;
+    edApp_Search_Group: TEdit;
     bbtShortcuts_Load: TBitBtn;
     bbtShortcuts_SaveDefault: TBitBtn;
     bbtShortcuts_Edit: TBitBtn;
@@ -50,8 +49,8 @@ type
     tbsRH_Custom: TTabSheet;
     stbShortcuts: TStatusBar;
     BitBtn2: TBitBtn;
-    edFilter_Group: TEdit;
-    edFilter_Caption: TEdit;
+    edApp_Filter_Group: TEdit;
+    edApp_Filter_Caption: TEdit;
     Label1: TLabel;
     bbtShortcuts_Manager: TBitBtn;
     tbsRH_Control: TTabSheet;
@@ -61,29 +60,29 @@ type
     Label8: TLabel;
     Label9: TLabel;
     DBEdit1: TDBEdit;
-    Edit1: TEdit;
+    edRH_Send_Search_Caption: TEdit;
     DBEdit2: TDBEdit;
-    Edit4: TEdit;
+    edRH_Send_Filter_Caption: TEdit;
     JvDBNavigator1: TJvDBNavigator;
     GroupBox2: TGroupBox;
     Label7: TLabel;
     Label10: TLabel;
     DBEdit3: TDBEdit;
-    Edit5: TEdit;
+    edRH_Control_Search_Caption: TEdit;
     DBEdit4: TDBEdit;
-    Edit8: TEdit;
+    edRH_Control_Filter_Caption: TEdit;
     GroupBox3: TGroupBox;
     Label12: TLabel;
     Label13: TLabel;
-    DBEdit5: TDBEdit;
-    Edit9: TEdit;
+    dbeRH_Custom_Caption: TDBEdit;
+    edRH_Custom_Search_Caption: TEdit;
     DBEdit6: TDBEdit;
-    Edit12: TEdit;
+    edRH_Custom_Filter_Caption: TEdit;
     JvDBNavigator3: TJvDBNavigator;
     JvDBNavigator4: TJvDBNavigator;
-    DBGrid1: TDBGrid;
-    DBGrid2: TDBGrid;
-    DBGrid3: TDBGrid;
+    dbgRH_Send: TDBGrid;
+    dbgRH_Control: TDBGrid;
+    dbgRH_Custom: TDBGrid;
     Label15: TLabel;
     Label11: TLabel;
     Label16: TLabel;
@@ -109,22 +108,30 @@ type
     procedure dbgShortcutsTitleClick(Column: TColumn);
     procedure dbgShortcutsEnter(Sender: TObject);
     procedure dbgShortcutsKeyPress(Sender: TObject; var Key: Char);
-    procedure edtSearch_CaptionChange(Sender: TObject);
-    procedure edtSearch_CaptionEnter(Sender: TObject);
-    procedure edtSearch_GroupChange(Sender: TObject);
-    procedure edtSearch_GroupEnter(Sender: TObject);
-    procedure edFilter_CaptionChange(Sender: TObject);
-    procedure edFilter_GroupChange(Sender: TObject);
+    procedure edApp_Search_CaptionChange(Sender: TObject);
+    procedure edApp_Search_CaptionEnter(Sender: TObject);
+    procedure edApp_Search_GroupChange(Sender: TObject);
+    procedure edApp_Search_GroupEnter(Sender: TObject);
+    procedure edApp_Filter_CaptionChange(Sender: TObject);
+    procedure edApp_Filter_GroupChange(Sender: TObject);
     procedure bbtShortcuts_ManagerClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
-    procedure btnAddHotKeyClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure rdgTinnRHotKeysClick(Sender: TObject);
-    procedure btnRemoveClick(Sender: TObject);
+    procedure btnClearClick(Sender: TObject);
     procedure btnClearAllHotKeysClick(Sender: TObject);
     procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure pgRHChange(Sender: TObject);
     procedure pgSKHChange(Sender: TObject);
+    procedure edRH_Send_Filter_CaptionChange(Sender: TObject);
+    procedure edRH_Control_Filter_CaptionChange(Sender: TObject);
+    procedure edRH_Custom_Filter_CaptionChange(Sender: TObject);
+    procedure edRH_Send_Search_CaptionChange(Sender: TObject);
+    procedure edRH_Control_Search_CaptionChange(Sender: TObject);
+    procedure edRH_Custom_Search_CaptionChange(Sender: TObject);
+    procedure btnNew_RH_CustomClick(Sender: TObject);
+    procedure dbgRH_CustomEnter(Sender: TObject);
+    procedure dbgRH_CustomKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -320,12 +327,15 @@ begin
 end;
 
 procedure TfrmSKH_Map_Dlg.pgRHChange(Sender: TObject);
+var
+  bVisible: boolean;
+
 begin
   with frmMain.dlgSKH_Map do begin
-    lblCustom.Visible:= (pgSKH.ActivePageIndex = 2) and
-                        (pgRH.ActivePageIndex = 2);
+    bVisible:= (pgSKH.ActivePageIndex = 2) and
+               (pgRH.ActivePageIndex = 2);
 
-//    ShowMessage(IntToStr(strgHK_Send.Row));
+    lblCustom.Visible:= bVisible;
   end;
 end;
 
@@ -563,7 +573,7 @@ begin
   pClear_Warnings;
   with modDados.cdShortcuts do
     Edit;
-  dbeGroup.SetFocus;
+  dbeApp_Group.SetFocus;
   with stbShortcuts do
     Panels[0].Text:= 'Edit mode';
 end;
@@ -746,62 +756,10 @@ begin
   frmMain.pOpenUserGuidePDF('"3.5 Hotkeys (operational system)"');
 end;
 
-procedure TfrmSKH_Map_Dlg.btnAddHotKeyClick(Sender: TObject);
-//var
-//  sTmp: string;
-//  iRow: integer;
-
+procedure TfrmSKH_Map_Dlg.btnNew_RH_CustomClick(Sender: TObject);
 begin
-  pClear_Warnings;
-
-//  case pgRHotkeys.TabIndex of
-//    // Send
-//    0: begin
-//         iRow:= strgHK_Send.Row;
-//         with frmMain do begin
-//           if Assigned(ajavHK_S[iRow]) then begin
-//             ajavHK_S[iRow].WindowsKey:= True;
-//             FreeAndNil(ajavHK_S[iRow]);
-//             strgHK_Send.Cells[1,iRow]:= '';
-//           end;
-//         end;
-//         sTmp:= ShortCutToText(jvhkHotkey.HotKey);
-//         pCreateHotkey_Send(iRow,
-//                            sTmp);
-//       end;
-//
-//    // Control
-//    1: begin
-//         iRow:= strgHK_Control.Row;
-//         with frmMain do begin
-//           if Assigned(ajavHK_Control[iRow]) then begin
-//             ajavHK_Control[iRow].WindowsKey:= True;
-//             FreeAndNil(ajavHK_Control[iRow]);
-//             strgHK_Control.Cells[1,iRow]:= '';
-//           end;
-//         end;
-//         sTmp:= ShortCutToText(jvhkHotkey.HotKey);
-//         pCreateHotkey_Control(iRow,
-//                               sTmp);
-//       end;
-//
-//    // R Action Custom
-//    2: begin
-//         iRow:= strgHK_Custom.Row;
-//         with frmMain do begin
-//           if Assigned(ajavHK_Custom[iRow]) then begin
-//             ajavHK_Custom[iRow].WindowsKey:= True;
-//             FreeAndNil(ajavHK_Custom[iRow]);
-//             strgHK_Custom.Cells[1,iRow]:= '';
-//           end;
-//         end;
-//         sTmp:= ShortCutToText(jvhkHotkey.HotKey);
-//         pCreateR_Custom(iRow,
-//                         edHotkey.Text);
-//         pCreateHotkey_Custom(iRow,
-//                              sTmp);
-//       end;
-//  end;
+  with modDados.cdRH_Custom do
+    Insert;
 end;
 
 procedure TfrmSKH_Map_Dlg.btnClearAllHotKeysClick(Sender: TObject);
@@ -817,14 +775,14 @@ begin
          with modDados.cdRH_Send do begin
            DisableControls;
            First;
-           Edit;
 
            for i:=1 to RecordCount do begin
+             Edit;
              FieldByName('Shortcut').Value:= '';
+             Post;
              Next;
            end;
 
-           Post;
            EnableControls;
          end;
     end;
@@ -834,14 +792,14 @@ begin
          with modDados.cdRH_Control do begin
            DisableControls;
            First;
-           Edit;
 
            for i:=1 to RecordCount do begin
+             Edit;
              FieldByName('Shortcut').Value:= '';
+             Post;
              Next;
            end;
 
-           Post;
            EnableControls;
          end;
     end;
@@ -851,21 +809,21 @@ begin
          with modDados.cdRH_Custom do begin
            DisableControls;
            First;
-           Edit;
 
            for i:=1 to RecordCount do begin
+             Edit;
              FieldByName('Shortcut').Value:= '';
+             Post;
              Next;
            end;
 
-           Post;
            EnableControls;
          end;
     end;
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.btnRemoveClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.btnClearClick(Sender: TObject);
 begin
   pClear_Warnings;
 
@@ -897,6 +855,16 @@ begin
          end;
     end;
   end;
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgRH_CustomEnter(Sender: TObject);
+begin
+  pClear_Warnings;
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgRH_CustomKeyPress(Sender: TObject; var Key: Char);
+begin
+  pClear_Warnings;
 end;
 
 procedure TfrmSKH_Map_Dlg.dbgShortcutsDblClick(Sender: TObject);
@@ -924,14 +892,14 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edFilter_CaptionChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edApp_Filter_CaptionChange(Sender: TObject);
 begin
   try
     with modDados.cdShortcuts do begin
       Filtered:= False;
-      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + edFilter_Group.Text + '%')) +
+      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + edApp_Filter_Group.Text + '%')) +
                ' AND ' +
-               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edFilter_Caption.Text + '%'));
+               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edApp_Filter_Caption.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -939,14 +907,14 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edFilter_GroupChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edApp_Filter_GroupChange(Sender: TObject);
 begin
   try
     with modDados.cdShortcuts do begin
       Filtered:= False;
-      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + edFilter_Group.Text + '%')) +
+      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + edApp_Filter_Group.Text + '%')) +
                ' AND ' +
-               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edFilter_Caption.Text + '%'));
+               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edApp_Filter_Caption.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -954,10 +922,137 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtSearch_CaptionChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edRH_Send_Search_CaptionChange(Sender: TObject);
 begin
   pClear_Warnings;
-  with edtSearch_Caption do begin
+
+  with edRH_Send_Search_Caption do begin
+    if (Text = '') then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+      Exit;
+    end;
+
+    if (modDados.cdRH_Send.Locate('Caption',
+                                  Text,
+                                  [loCaseInsensitive, loPartialKey]) = True) then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+    end
+    else begin
+      Color     := clRed;
+      Font.Color:= clWhite;
+      Font.Style:= [fsBold];
+    end;
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.edRH_Send_Filter_CaptionChange(Sender: TObject);
+begin
+  try
+    with modDados.cdRH_Send do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Send' + '%')) +
+               ' AND ' +
+               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edRH_Send_Filter_Caption.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.edRH_Control_Filter_CaptionChange(Sender: TObject);
+begin
+  try
+    with modDados.cdRH_Control do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Control' + '%')) +
+               ' AND ' +
+               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edRH_Control_Filter_Caption.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.edRH_Control_Search_CaptionChange(Sender: TObject);
+begin
+  pClear_Warnings;
+
+  with edRH_Control_Search_Caption do begin
+    if (Text = '') then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+      Exit;
+    end;
+
+    if (modDados.cdRH_Control.Locate('Caption',
+                                     Text,
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+    end
+    else begin
+      Color     := clRed;
+      Font.Color:= clWhite;
+      Font.Style:= [fsBold];
+    end;
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.edRH_Custom_Filter_CaptionChange(Sender: TObject);
+begin
+  try
+    with modDados.cdRH_Custom do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Custom' + '%')) +
+               ' AND ' +
+               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edRH_Custom_Filter_Caption.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.edRH_Custom_Search_CaptionChange(Sender: TObject);
+begin
+  pClear_Warnings;
+
+  with edRH_Custom_Search_Caption do begin
+    if (Text = '') then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+      Exit;
+    end;
+
+    if (modDados.cdRH_Custom.Locate('Caption',
+                                     Text,
+                                     [loCaseInsensitive, loPartialKey]) = True) then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+    end
+    else begin
+      Color     := clRed;
+      Font.Color:= clWhite;
+      Font.Style:= [fsBold];
+    end;
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.edApp_Search_CaptionChange(Sender: TObject);
+begin
+  pClear_Warnings;
+
+  with edApp_Search_Caption do begin
     if (Text = '') then begin
       Color     := clWindow;
       Font.Color:= clBlack;
@@ -980,15 +1075,16 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtSearch_CaptionEnter(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edApp_Search_CaptionEnter(Sender: TObject);
 begin
   pClear_Warnings;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtSearch_GroupChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edApp_Search_GroupChange(Sender: TObject);
 begin
   pClear_Warnings;
-  with edtSearch_Group do begin
+
+  with edApp_Search_Group do begin
     if (Text = '') then begin
       Color     := clWindow;
       Font.Color:= clBlack;
@@ -1011,7 +1107,7 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edtSearch_GroupEnter(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edApp_Search_GroupEnter(Sender: TObject);
 begin
   pClear_Warnings;
 end;
@@ -1028,12 +1124,12 @@ begin
 
   pClear_Warnings;
   with frmMain do begin
-    with dbeGroup do begin
+    with dbeApp_Group do begin
       Color     := clBGApplication;
       Font.Color:= clFGApplication;
     end;
 
-    with dbeCaption do begin
+    with dbeApp_Caption do begin
       Color     := clBGApplication;
       Font.Color:= clFGApplication;
     end;
