@@ -247,7 +247,7 @@ end;
 procedure TfrmSKH_Manager_Dlg.FormShow(Sender: TObject);
 begin
   with frmMain.dlgSKH_Map do
-    iSKH_Assign_To:= 0;  // Not usd
+    iSKH_Assign_To:= 0;  // Not used
 
   case frmMain.dlgSKH_Map.pgSKH.ActivePageIndex of
     // Application
@@ -340,7 +340,7 @@ begin
                 end;  //with modDados.cdShortcuts
 
              with frmMain.dlgSKH_Map do
-               iSKH_Assign_To:= 3;
+               iSKH_Assign_To:= 5;
 
              Exit;
            end;  // 2: begin

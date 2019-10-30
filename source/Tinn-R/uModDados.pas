@@ -854,10 +854,14 @@ var
 begin
   i:= cdRH_Custom.RecordCount;
   cdRH_Custom_Index.AsInteger:= i;
-  cdRH_Custom_Group.AsString:= 'Custom';
+  cdRH_Custom_Group.AsString   := 'Custom';
+  cdRH_Custom_Caption.AsString := 'str(%s)';
+  cdRH_Custom_Shortcut.AsString:= '';
 
-  with frmMain.dlgSKH_Map.dbeRH_Custom_Caption do
+  with frmMain.dlgSKH_Map.dbeRH_Custom_Caption do begin
     SetFocus;
+    SelectAll;
+  end;
 end;
 
 procedure TmodDados.cdRH_CustomPostError(DataSet: TDataSet;
