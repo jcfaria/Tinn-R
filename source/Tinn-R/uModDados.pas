@@ -766,7 +766,7 @@ begin
     with IndexDefs.AddIndexDef do
     begin
       Name   := 'RH_Custom_Idx';
-      Fields := 'Index';
+      Fields := 'Caption;Index';
       Options:= [ixPrimary, ixUnique];
     end;
     IndexName:= 'RH_Custom_Idx';

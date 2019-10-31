@@ -3932,7 +3932,7 @@ object frmMain: TfrmMain
     end
     object actSKH_map: TAction
       Category = 'Options'
-      Caption = 'Shortcuts/keystrokes/hotkeys (map)'
+      Caption = 'Shortcuts/keystrokes/hotkeys (S/K/H map)'
       Hint = 'Options: shortcut/keystrokes/hotkeys (map)'
       ImageIndex = 119
       ShortCut = 49229

@@ -59,24 +59,24 @@ type
     Label6: TLabel;
     Label8: TLabel;
     Label9: TLabel;
-    DBEdit1: TDBEdit;
+    dbeRH_Send_Caption: TDBEdit;
     edRH_Send_Search_Caption: TEdit;
-    DBEdit2: TDBEdit;
+    dbeRH_Send_Group: TDBEdit;
     edRH_Send_Filter_Caption: TEdit;
     JvDBNavigator1: TJvDBNavigator;
     GroupBox2: TGroupBox;
     Label7: TLabel;
     Label10: TLabel;
-    DBEdit3: TDBEdit;
+    dbeRH_Control_Caption: TDBEdit;
     edRH_Control_Search_Caption: TEdit;
-    DBEdit4: TDBEdit;
+    dbeRH_Control_Group: TDBEdit;
     edRH_Control_Filter_Caption: TEdit;
     GroupBox3: TGroupBox;
     Label12: TLabel;
     Label13: TLabel;
     dbeRH_Custom_Caption: TDBEdit;
     edRH_Custom_Search_Caption: TEdit;
-    DBEdit6: TDBEdit;
+    dbeRH_Custom_Group: TDBEdit;
     edRH_Custom_Filter_Caption: TEdit;
     JvDBNavigator3: TJvDBNavigator;
     JvDBNavigator4: TJvDBNavigator;
@@ -138,7 +138,6 @@ type
 
     procedure pAppMessage(var Msg: TMSG; var bHandled: Boolean);
     procedure pClear_Warnings;
-    procedure pCreateHotkey_Custom(i: integer; sTmp: string);
     procedure pCreateHotkey_Send(i: integer; sTmp: string);
     procedure pCreateHotkey_Control(i: integer; sTmp: string);
     procedure pDoHotKey_Custom(Sender: TObject);
@@ -153,7 +152,9 @@ type
     eKeyShort        : TSynHotKey;
     iSKH_Used_By     : integer;
     iSKH_Assign_To   : integer;
-    iDx              : integer  // índice of the editor keystrokes/R hotkey in their respective stringGrid
+    iDx              : integer;  // índice of the editor keystrokes/R hotkey in their respective stringGrid
+
+    procedure pCreateHotkey_Custom(i: integer; sTmp: string);
   end;
 
 var

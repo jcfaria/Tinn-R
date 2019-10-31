@@ -131,6 +131,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -466,6 +470,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label20: TLabel
         Left = 0
         Top = 450
@@ -538,7 +546,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 432
         Width = 243
         Height = 37
-        Caption = ' Option (all hotkeys) '
+        Caption = ' Option (all H) '
         Columns = 2
         Ctl3D = False
         Font.Charset = DEFAULT_CHARSET
@@ -617,6 +625,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object GroupBox1: TGroupBox
             Left = 0
             Top = 0
@@ -677,7 +689,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ParentColor = False
               ParentFont = False
             end
-            object DBEdit1: TDBEdit
+            object dbeRH_Send_Caption: TDBEdit
               Left = 295
               Top = 58
               Width = 304
@@ -693,6 +705,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Name = 'MS Sans Serif'
               Font.Style = []
               ParentFont = False
+              ReadOnly = True
               TabOrder = 3
             end
             object edRH_Send_Search_Caption: TEdit
@@ -713,7 +726,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               OnChange = edRH_Send_Search_CaptionChange
               OnEnter = edApp_Search_CaptionEnter
             end
-            object DBEdit2: TDBEdit
+            object dbeRH_Send_Group: TDBEdit
               Left = 52
               Top = 58
               Width = 170
@@ -809,6 +822,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Control: TTabSheet
           Caption = 'Control'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object GroupBox2: TGroupBox
             Left = 0
             Top = 0
@@ -869,7 +886,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               ParentColor = False
               ParentFont = False
             end
-            object DBEdit3: TDBEdit
+            object dbeRH_Control_Caption: TDBEdit
               Left = 295
               Top = 58
               Width = 304
@@ -885,6 +902,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Name = 'MS Sans Serif'
               Font.Style = []
               ParentFont = False
+              ReadOnly = True
               TabOrder = 3
             end
             object edRH_Control_Search_Caption: TEdit
@@ -905,7 +923,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               OnChange = edRH_Control_Search_CaptionChange
               OnEnter = edApp_Search_CaptionEnter
             end
-            object DBEdit4: TDBEdit
+            object dbeRH_Control_Group: TDBEdit
               Left = 52
               Top = 58
               Width = 170
@@ -1097,7 +1115,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               OnChange = edRH_Custom_Search_CaptionChange
               OnEnter = edApp_Search_CaptionEnter
             end
-            object DBEdit6: TDBEdit
+            object dbeRH_Custom_Group: TDBEdit
               Left = 52
               Top = 58
               Width = 170
@@ -1115,7 +1133,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              ReadOnly = True
               TabOrder = 2
             end
             object edRH_Custom_Filter_Caption: TEdit

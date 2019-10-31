@@ -2574,8 +2574,6 @@ type
     bSearch_InSub                  : boolean;
     bSearch_OpenFiles              : boolean;
     bStartingUp                    : boolean;
-    //bStartOptionsWithProcessingPage: boolean;
-    //bStartOptionsWithRPage         : boolean;
     bSyntax_OldVersion             : boolean;
     bTCPIPRunning                  : boolean;
     bToolsCanFloat                 : boolean;
@@ -2646,7 +2644,6 @@ type
     sLatexClearWaste               : string;
     sParRgui                       : string;
     sParRPuTTY                     : string;
-    //sParRterm                      : string;
     sParTxt2tags                   : string;
     sPath_Bkp                      : string;
     sPath_Editor                   : string;
@@ -2657,7 +2654,6 @@ type
     sPath_R                        : string;
     sPath_R_Connected              : string;
     sPath_Rgui                     : string;
-    //sPath_Rterm                    : string;
     sPathDeplate_Converter         : string;
     sPathDeplate_Interpreter       : string;
     sPathIniEditor_Tmp             : string;
@@ -2694,7 +2690,6 @@ type
     function fCloseAllFilesOfProject: boolean;
     function fFileExistsAsNode(var iPos: integer; sFile: string): boolean;
     function fFindWindowByName(sName: string): integer;
-//    function fFindWord: string;
     function fGet_Syn: TSynEdit;
     function fGenericGroupExists: boolean;
     function fGetBlockMarked(var bSingleLine: boolean): string;
@@ -2715,7 +2710,6 @@ type
     function fGroupExistsAsNode(sGroupName: string): boolean;
     function fMessageDlg(const sMsg: string; mdType: TMsgDlgType; mdButtons: TMsgDlgButtons; iHelp: Integer): Integer;
     function fREnvironment: string;
-    //function fRWorkDir: string;
     function fStripRegExPower(sSearchText: string): string;
 
     procedure pAddFile(iFile: string);
@@ -3123,7 +3117,7 @@ begin
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.04.01.00';
-  sCurrentVersion_Shortcuts := '5.04.01.00';
+  sCurrentVersion_Shortcuts := '5.04.01.01';
   sCurrentVersion_RH_Send   := '5.04.01.00';  // Started from version '5.04.01.00'/beta
   sCurrentVersion_RH_Control:= '5.04.01.01';  // Started from version '5.04.01.00'/beta
   sCurrentVersion_RH_Custom := '5.04.01.00';  // Started from version '5.04.01.00'/beta
@@ -14474,6 +14468,8 @@ procedure TfrmMain.actSKH_mapExecute(Sender: TObject);
 var
   pTmp: pointer;
 
+  i: integer;
+
 begin
   // Related to Shortcuts
   with modDados.cdShortcuts do
@@ -14550,6 +14546,22 @@ begin
         except
           //TODO
         end;
+      end;
+
+      // RH Custom: make efective new hotkeys created by user
+      with modDados.cdRH_Custom do begin
+        SetLength(frmMain.ajavHK_Custom,
+                  RecordCount);
+        DisableControls;
+        First;
+        for i:= 0 to (RecordCount - 1) do begin
+          with dlgSKH_Map do
+            pCreateHotkey_Custom(i,
+                                 Fields[3].AsString);
+          Next;
+        end;
+        First;
+        EnableControls;
       end;
 
       pSetFocus_Main;
