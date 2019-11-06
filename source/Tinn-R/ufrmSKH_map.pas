@@ -16,8 +16,8 @@ type
     tbsEditorKeystrokes: TTabSheet;
     tbsRHotkeys: TTabSheet;
     rdgTinnRHotKeys: TRadioGroup;
-    btnClear: TButton;
-    btnClearAllHotKeys: TButton;
+    btnRH_Clear: TButton;
+    btnRH_ClearAll: TButton;
     Panel2: TPanel;
     JvDBNavigator2: TJvDBNavigator;
     gbKeystrokes: TGroupBox;
@@ -39,11 +39,9 @@ type
     dbgShortcuts: TDBGrid;
     bbtShortcuts_CancelAll: TBitBtn;
     bbtShortcuts_RestoreDefault: TBitBtn;
-    btnUpdateKey: TButton;
     Label20: TLabel;
     Label24: TLabel;
     pnlCommands: TPanel;
-    lvKeystrokes: TListView;
     pgRH: TJvgPageControl;
     tbsRH_Send: TTabSheet;
     tbsRH_Custom: TTabSheet;
@@ -88,6 +86,19 @@ type
     Label16: TLabel;
     Label14: TLabel;
     Label17: TLabel;
+    dbgEditor: TDBGrid;
+    JvDBNavigator5: TJvDBNavigator;
+    GroupBox4: TGroupBox;
+    Label18: TLabel;
+    Label19: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    dbeEditor_Command: TDBEdit;
+    edEditor_Search_Command: TEdit;
+    dbeEditor_Group: TDBEdit;
+    edEditor_Filter_Command: TEdit;
+    btnKeystroke_Clear: TButton;
+    btnKeystroke_ClearAll: TButton;
     procedure FormShow(Sender: TObject);
     procedure dbgShortcutsDblClick(Sender: TObject);
     procedure lvKeystrokesDblClick(Sender: TObject);
@@ -118,8 +129,8 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure rdgTinnRHotKeysClick(Sender: TObject);
-    procedure btnClearClick(Sender: TObject);
-    procedure btnClearAllHotKeysClick(Sender: TObject);
+    procedure btnRH_ClearClick(Sender: TObject);
+    procedure btnRH_ClearAllClick(Sender: TObject);
     procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure pgRHChange(Sender: TObject);
     procedure pgSKHChange(Sender: TObject);
@@ -132,6 +143,16 @@ type
     procedure btnNew_RH_CustomClick(Sender: TObject);
     procedure dbgRH_CustomEnter(Sender: TObject);
     procedure dbgRH_CustomKeyPress(Sender: TObject; var Key: Char);
+    procedure edEditor_Filter_CommandChange(Sender: TObject);
+    procedure edEditor_Search_CommandChange(Sender: TObject);
+    procedure btnKeystroke_ClearClick(Sender: TObject);
+    procedure btnKeystroke_ClearAllClick(Sender: TObject);
+    procedure dbgEditorTitleClick(Column: TColumn);
+    procedure dbgEditorEnter(Sender: TObject);
+    procedure dbgRH_SendDblClick(Sender: TObject);
+    procedure dbgRH_ControlDblClick(Sender: TObject);
+    procedure dbgRH_CustomDblClick(Sender: TObject);
+    procedure dbgEditorDblClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -757,13 +778,48 @@ begin
   frmMain.pOpenUserGuidePDF('"3.5 Hotkeys (operational system)"');
 end;
 
+procedure TfrmSKH_Map_Dlg.btnKeystroke_ClearAllClick(Sender: TObject);
+var
+  i: integer;
+  
+begin
+  pClear_Warnings;
+
+  // Editor
+  with modDados.cdEditor do begin
+    DisableControls;
+    First;
+
+    for i:=1 to RecordCount do begin
+      Edit;
+      FieldByName('Keystroke').Value:= '';
+      Post;
+      Next;
+    end;
+
+    EnableControls;
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.btnKeystroke_ClearClick(Sender: TObject);
+begin
+  pClear_Warnings;
+
+  // Editor
+  with modDados.cdEditor do begin
+    Edit;
+    FieldByName('Keystroke').Value:= '';
+    Post;
+  end;
+end;
+
 procedure TfrmSKH_Map_Dlg.btnNew_RH_CustomClick(Sender: TObject);
 begin
   with modDados.cdRH_Custom do
     Insert;
 end;
 
-procedure TfrmSKH_Map_Dlg.btnClearAllHotKeysClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.btnRH_ClearAllClick(Sender: TObject);
 var
   i: Integer;
 
@@ -824,7 +880,7 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.btnClearClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.btnRH_ClearClick(Sender: TObject);
 begin
   pClear_Warnings;
 
@@ -858,6 +914,16 @@ begin
   end;
 end;
 
+procedure TfrmSKH_Map_Dlg.dbgRH_ControlDblClick(Sender: TObject);
+begin
+  bbtShortcuts_ManagerClick(nil);
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgRH_CustomDblClick(Sender: TObject);
+begin
+  bbtShortcuts_ManagerClick(nil);
+end;
+
 procedure TfrmSKH_Map_Dlg.dbgRH_CustomEnter(Sender: TObject);
 begin
   pClear_Warnings;
@@ -866,6 +932,30 @@ end;
 procedure TfrmSKH_Map_Dlg.dbgRH_CustomKeyPress(Sender: TObject; var Key: Char);
 begin
   pClear_Warnings;
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgRH_SendDblClick(Sender: TObject);
+begin
+  bbtShortcuts_ManagerClick(nil);
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgEditorDblClick(Sender: TObject);
+begin
+  bbtShortcuts_ManagerClick(nil);
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgEditorEnter(Sender: TObject);
+begin
+  pClear_Warnings;
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgEditorTitleClick(Column: TColumn);
+begin
+  pClear_Warnings;
+
+  with modDados do begin
+    cdEditor.IndexFieldNames:= Column.FieldName;
+  end;
 end;
 
 procedure TfrmSKH_Map_Dlg.dbgShortcutsDblClick(Sender: TObject);
@@ -1113,6 +1203,48 @@ begin
   pClear_Warnings;
 end;
 
+procedure TfrmSKH_Map_Dlg.edEditor_Filter_CommandChange(Sender: TObject);
+begin
+  try
+    with modDados.cdEditor do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Editor' + '%')) +
+               ' AND ' +
+               'UPPER(Command) Like ' + UpperCase(QuotedStr('%' + edEditor_Filter_Command.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.edEditor_Search_CommandChange(Sender: TObject);
+begin
+  pClear_Warnings;
+
+  with edEditor_Search_Command do begin
+    if (Text = '') then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+      Exit;
+    end;
+
+    if (modDados.cdEditor.Locate('Command',
+                                  Text,
+                                  [loCaseInsensitive, loPartialKey]) = True) then begin
+      Color     := clWindow;
+      Font.Color:= clBlack;
+      Font.Style:= [];
+    end
+    else begin
+      Color     := clRed;
+      Font.Color:= clWhite;
+      Font.Style:= [fsBold];
+    end;
+  end;
+end;
+
 procedure TfrmSKH_Map_Dlg.FormActivate(Sender: TObject);
 var
   pTmp: pointer;
@@ -1221,6 +1353,13 @@ begin
                            Fields[3].AsString);
       Next;
     end;
+    First;
+    EnableControls;
+  end;
+
+  // Editor
+  with modDados.cdEditor do begin
+    DisableControls;
     First;
     EnableControls;
   end;

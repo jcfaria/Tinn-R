@@ -44,7 +44,7 @@ object frmAbout: TfrmAbout
     Top = 0
     Width = 600
     Height = 312
-    ActivePage = tbsAboutVersion
+    ActivePage = tbsAboutProject
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
@@ -84,7 +84,6 @@ object frmAbout: TfrmAbout
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-    ExplicitWidth = 656
     object tbsAboutVersion: TTabSheet
       Caption = 'Version'
       object lVersion: TLabel
@@ -194,7 +193,6 @@ object frmAbout: TfrmAbout
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
-      ExplicitWidth = 648
       object synAboutProject: TSynEdit
         Left = 0
         Top = 0
@@ -230,7 +228,6 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 648
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -246,7 +243,6 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
-      ExplicitWidth = 648
       object synAboutAknowledgments: TSynEdit
         Left = 0
         Top = 0
@@ -293,7 +289,6 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 648
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -309,7 +304,6 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
-      ExplicitWidth = 648
       object synAboutCredits: TSynEdit
         Left = 0
         Top = 0
@@ -365,7 +359,6 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 648
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -381,7 +374,6 @@ object frmAbout: TfrmAbout
     object tbsDonation: TTabSheet
       Caption = 'Donation'
       ImageIndex = 4
-      ExplicitWidth = 648
       object synAboutDonation: TSynEdit
         Left = 0
         Top = 0
@@ -419,7 +411,6 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 648
         RemovedKeystrokes = <
           item
             Command = ecContextHelp

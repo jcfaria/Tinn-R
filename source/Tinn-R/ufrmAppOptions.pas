@@ -541,7 +541,7 @@ type
     bFormVisible      : boolean;
     cpFrom            : TColorPopup;
     eKeyShort         : TSynHotKey;
-    liOldSelected     : TListItem;
+    liSelected        : TListItem;
     seoAllUserCommands: TSynEditorOptionsAllUserCommands;
     seoUserCommand    : TSynEditorOptionsUserCommand;
 
@@ -885,17 +885,17 @@ begin
 
   iCmd:= Integer(cbCommands.Items.Objects[cbCommands.ItemIndex]);
 
-  TSynEditKeyStroke(liOldSelected.Data).Command:= iCmd;
+  TSynEditKeyStroke(liSelected.Data).Command:= iCmd;
 
   try  // After remove generate exception: I could not find the origin of (ocasional exception) yet!
     if (eKeyShort.HotKey <> 0) then
-      TSynEditKeyStroke(liOldSelected.Data).ShortCut:= eKeyShort.HotKey;
+      TSynEditKeyStroke(liSelected.Data).ShortCut:= eKeyShort.HotKey;
   except
     // TODO
   end;
 
 
-  pFillInKeystrokeInfo(TSynEditKeyStroke(liOldSelected.Data),
+  pFillInKeystrokeInfo(TSynEditKeyStroke(liSelected.Data),
                        lvKeystrokes.Selected);
 end;
 
@@ -1601,13 +1601,13 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.lvKeystrokesChanging(Sender: TObject;
-                                              Item: TListItem;
-                                              Change: TItemChange;
-                                              var AllowChange: Boolean);
+                                                   Item: TListItem;
+                                                   Change: TItemChange;
+                                                   var AllowChange: Boolean);
 begin
   if Visible then
   begin
-    if (Item = liOldSelected) and
+    if (Item = liSelected) and
        ((Item.Caption <> cbCommands.Text) or
        (TSynEditKeystroke(Item.Data).ShortCut <> eKeyShort.HotKey)) then begin
       btnUpdateKeyClick(btnUpdateKey);
@@ -1616,8 +1616,8 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.lvKeystrokesSelectItem(Sender: TObject;
-                                                Item: TListItem;
-                                                Selected: Boolean);
+                                                     Item: TListItem;
+                                                     Selected: Boolean);
 begin
   if (lvKeystrokes.Selected = nil) then Exit;
 
@@ -1626,7 +1626,7 @@ begin
 
   eKeyShort.HotKey:= TSynEditKeyStroke(lvKeystrokes.Selected.Data).ShortCut;
 
-  liOldSelected:= Item;
+  liSelected:= Item;
 end;
 
 procedure TfrmApp_Options_Dlg.pEditStrCallback(const S: string);
@@ -1711,7 +1711,7 @@ begin
   try
     lvKeystrokes.Items.Clear;
 
-    for i:= 0 to (coTmp.Keystrokes.Count-1) do begin
+    for i:= 0 to (coTmp.Keystrokes.Count-1) do begin  // coTmp.Keystrokes.Count = 82
       liTmp:= lvKeystrokes.Items.Add;
 
       pFillInKeystrokeInfo(coTmp.Keystrokes.Items[i],
@@ -1719,7 +1719,6 @@ begin
 
       liTmp.Data:= coTmp.Keystrokes.Items[i];
   end;
-    //if (lvKeystrokes.Items.Count > 0) then lvKeystrokes.Items[0].Selected:= True;
   finally
     lvKeystrokes.Items.EndUpdate;
   end;
@@ -1799,51 +1798,6 @@ begin
   // Caret
   coTmp.InsertCaret   := TSynEditCaretType(cInsertCaret.ItemIndex);
   coTmp.OverwriteCaret:= TSynEditCaretType(cOverwriteCaret.ItemIndex);
-{
-  // Keystrokes
-  lvKeystrokes.Items.BeginUpdate;
-  try
-    lvKeystrokes.Items.Clear;
-    for i:= 0 to (coTmp.Keystrokes.Count-1) do begin
-      li:= lvKeystrokes.Items.Add;
-
-      pFillInKeystrokeInfo(coTmp.Keystrokes.Items[i],
-                           li);
-
-      li.Data:= coTmp.Keystrokes.Items[i];
-    end;
-    //if (lvKeystrokes.Items.Count > 0) then lvKeystrokes.Items[0].Selected:= True;
-  finally
-    lvKeystrokes.Items.EndUpdate;
-  end;
-}
-(*
-  // Keystrokes
-  //coTmp.Keystrokes.Clear;
-  lvKeystrokes.Items.BeginUpdate;
-
-  try
-    for i:= 0 to (lvKeystrokes.Items.Count - 1) do begin
-      //coTmp.Keystrokes.Items[i].:= nil;
-      //coTmp.Keystrokes.Items[i]:= lvKeystrokes.Items.Item[i].Data;
-      //coTmp.Keystrokes.Items[i]:= lvKeystrokes.Items.Item[i].Data;
-{
-      coTmp.Keystrokes.AddKey(TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Command,
-                              TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).ShortCut,
-                              TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Shift);
-}
-      //TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Command; //está comendo um já existente.
-      //TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).ShortCut;
-      coTmp.Keystrokes.Items[i].Command := TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Command;
-      coTmp.Keystrokes.Items[i].ShortCut:= TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Shortcut;
-      coTmp.Keystrokes.Items[i].Shift   := TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Shift;
-    end;
-  except
-    // TODO
-  end;
-
-  lvKeystrokes.Items.EndUpdate;
-*)
 end;
 
 procedure TfrmApp_Options_Dlg.imGeneralMouseDown(Sender: TObject;
@@ -1881,7 +1835,7 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.pFillInKeystrokeInfo(seKeystroke: TSynEditKeystroke;
-                                              liTmp: TListItem);
+                                                   liTmp: TListItem);
 var
   sTmp: string;
 
@@ -2127,7 +2081,53 @@ begin
   end;
 end;
 
-end.
+(*
+{
+  // Keystrokes
+  lvKeystrokes.Items.BeginUpdate;
+  try
+    lvKeystrokes.Items.Clear;
+    for i:= 0 to (coTmp.Keystrokes.Count-1) do begin
+      li:= lvKeystrokes.Items.Add;
+
+      pFillInKeystrokeInfo(coTmp.Keystrokes.Items[i],
+                           li);
+
+      li.Data:= coTmp.Keystrokes.Items[i];
+    end;
+    //if (lvKeystrokes.Items.Count > 0) then lvKeystrokes.Items[0].Selected:= True;
+  finally
+    lvKeystrokes.Items.EndUpdate;
+  end;
+}
+
+  // Keystrokes
+  //coTmp.Keystrokes.Clear;
+  lvKeystrokes.Items.BeginUpdate;
+
+  try
+    for i:= 0 to (lvKeystrokes.Items.Count - 1) do begin
+      //coTmp.Keystrokes.Items[i].:= nil;
+      //coTmp.Keystrokes.Items[i]:= lvKeystrokes.Items.Item[i].Data;
+      //coTmp.Keystrokes.Items[i]:= lvKeystrokes.Items.Item[i].Data;
+{
+      coTmp.Keystrokes.AddKey(TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Command,
+                              TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).ShortCut,
+                              TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Shift);
+}
+      //TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Command; //está comendo um já existente.
+      //TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).ShortCut;
+      coTmp.Keystrokes.Items[i].Command := TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Command;
+      coTmp.Keystrokes.Items[i].ShortCut:= TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Shortcut;
+      coTmp.Keystrokes.Items[i].Shift   := TSynEditKeyStroke(lvKeystrokes.Items.Item[i].Data).Shift;
+    end;
+  except
+    // TODO
+  end;
+
+  lvKeystrokes.Items.EndUpdate;
+*)
+
 (*
 procedure TfrmAppOptions.btnRemKeyClick(Sender: TObject);
 var
@@ -2193,3 +2193,4 @@ end;
 {$ENDIF}
 *)
 
+end.

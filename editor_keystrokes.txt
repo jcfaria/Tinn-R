@@ -1,0 +1,82 @@
+ 0 | ecBlockIndent | 73 | Shift+Ctrl+I
+ 1 | ecBlockUnindent | 85 | Shift+Ctrl+U
+ 2 | ecColumnSelect | 67 | Shift+Ctrl+C
+ 3 | ecContextHelp | 112 | F1
+ 4 | ecCopy | 45 | Ctrl+Ins
+ 5 | ecCopy | 67 | Ctrl+C
+ 6 | ecCut | 46 | Shift+Del
+ 7 | ecCut | 88 | Ctrl+X
+ 8 | ecDeleteChar | 46 | Del
+ 9 | ecDeleteEOL | 89 | Shift+Ctrl+Yt
+10 | ecDeleteLastChar | 8 | BkSp
+11 | ecDeleteLastChar | 8 | Shift+BkSp
+12 | ecDeleteLastWord | 8 | Ctrl+BkSp
+13 | ecDeleteLine | 89 | Ctrl+Yght
+14 | ecDeleteWord | 84 | Ctrl+T
+15 | ecDown | 40 | Down
+16 | ecEditorBottom | 35 | Ctrl+End
+17 | ecEditorTop | 36 | Ctrl+HomegDn
+18 | ecGotoMarker0 | 48 | Ctrl+0
+19 | ecGotoMarker1 | 49 | Ctrl+1
+20 | ecGotoMarker2 | 50 | Ctrl+2
+21 | ecGotoMarker3 | 51 | Ctrl+3
+22 | ecGotoMarker4 | 52 | Ctrl+4
+23 | ecGotoMarker5 | 53 | Ctrl+5
+24 | ecGotoMarker6 | 54 | Ctrl+6
+25 | ecGotoMarker7 | 55 | Ctrl+7me
+26 | ecGotoMarker8 | 56 | Ctrl+8
+27 | ecGotoMarker9 | 57 | Ctrl+9
+28 | ecInsertLine | 78 | Ctrl+N
+29 | ecLeft | 37 | Left+End
+30 | ecLineBreak | 13 | Enter
+31 | ecLineBreak | 13 | Shift+Enter
+32 | ecLineBreak | 77 | Ctrl+M
+33 | ecLineEnd | 35 | End
+34 | ecLineSelect | 76 | Shift+Ctrl+L
+35 | ecLineStart | 36 | Home
+36 | ecMatchBracket | 66 | Shift+Ctrl+B
+37 | ecNormalSelect | 78 | Shift+Ctrl+N
+38 | ecPageBottom | 34 | Ctrl+PgDn
+39 | ecPageDown | 34 | PgDn
+40 | ecPageTop | 33 | Ctrl+PgUp
+41 | ecPageUp | 33 | PgUp
+42 | ecPaste | 45 | Shift+Ins
+43 | ecPaste | 86 | Ctrl+V
+44 | ecRedo | 8 | Shift+Alt+BkSp
+45 | ecRedo | 90 | Shift+Ctrl+Z
+46 | ecRight | 39 | Right
+47 | ecScrollDown | 40 | Ctrl+Down
+48 | ecScrollUp | 38 | Ctrl+Up
+49 | ecSelDown | 40 | Shift+Down
+50 | ecSelectAll | 65 | Ctrl+A
+51 | ecSelEditorBottom | 35 | Shift+Ctrl
+52 | ecSelEditorTop | 36 | Shift+Ctrl+Ho
+53 | ecSelLeft | 37 | Shift+Left
+54 | ecSelLineEnd | 35 | Shift+End
+55 | ecSelLineStart | 36 | Shift+Home
+56 | ecSelPageBottom | 34 | Shift+Ctrl+P
+57 | ecSelPageDown | 34 | Shift+PgDn
+58 | ecSelPageTop | 33 | Shift+Ctrl+PgUp
+59 | ecSelPageUp | 33 | Shift+PgUp
+60 | ecSelRight | 39 | Shift+Right
+61 | ecSelUp | 38 | Shift+Up
+62 | ecSelWordLeft | 37 | Shift+Ctrl+Lef
+63 | ecSelWordRight | 39 | Shift+Ctrl+Ri
+64 | ecSetMarker0 | 48 | Shift+Ctrl+0
+65 | ecSetMarker1 | 49 | Shift+Ctrl+1
+66 | ecSetMarker2 | 50 | Shift+Ctrl+2
+67 | ecSetMarker3 | 51 | Shift+Ctrl+3
+68 | ecSetMarker4 | 52 | Shift+Ctrl+4
+69 | ecSetMarker5 | 53 | Shift+Ctrl+5
+70 | ecSetMarker6 | 54 | Shift+Ctrl+6
+71 | ecSetMarker7 | 55 | Shift+Ctrl+7
+72 | ecSetMarker8 | 56 | Shift+Ctrl+8
+73 | ecSetMarker9 | 57 | Shift+Ctrl+9
+74 | ecShiftTab | 9 | Shift+Tab
+75 | ecTab | 9 | Tab
+76 | ecToggleMode | 45 | Ins
+77 | ecUndo | 8 | Alt+BkSp
+78 | ecUndo | 90 | Ctrl+Z
+79 | ecUp | 38 | Up
+80 | ecWordLeft | 37 | Ctrl+Left
+81 | ecWordRight | 39 | Ctrl+Right

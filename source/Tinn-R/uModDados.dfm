@@ -2,8 +2,8 @@ object modDados: TmodDados
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 482
-  Width = 189
+  Height = 530
+  Width = 181
   object dsRcard: TDataSource
     DataSet = cdRcard
     Left = 118
@@ -295,5 +295,34 @@ object modDados: TmodDados
     DataSet = cdRH_Custom
     Left = 117
     Top = 422
+  end
+  object cdEditor: TClientDataSet
+    Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Editor.xml'
+    Params = <>
+    OnPostError = cdEditorPostError
+    Left = 31
+    Top = 472
+    object cdEditor_Index: TSmallintField
+      FieldName = 'Index'
+    end
+    object cdEditor_Group: TStringField
+      FieldName = 'Group'
+    end
+    object cdEditor_Command: TStringField
+      FieldName = 'Command'
+      Size = 50
+    end
+    object cdEditor_Key: TSmallintField
+      FieldName = 'Key'
+    end
+    object cdEditor_Keystroke: TStringField
+      FieldName = 'Keystroke'
+    end
+  end
+  object dsEditor: TDataSource
+    DataSet = cdEditor
+    Left = 117
+    Top = 472
   end
 end

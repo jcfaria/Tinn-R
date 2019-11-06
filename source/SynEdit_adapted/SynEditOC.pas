@@ -187,6 +187,8 @@ begin
     TCustomSynEdit(Dest).Font.Assign(Self.Font);
     TCustomSynEdit(Dest).BookmarkOptions.Assign(Self.BookmarkOptions);
     TCustomSynEdit(Dest).Gutter.Assign(Self.Gutter);
+
+
     TCustomSynEdit(Dest).Keystrokes.Assign(Self.Keystrokes);
     TCustomSynEdit(Dest).SelectedColor.Assign(Self.SelectedColor);
     TCustomSynEdit(Dest).Color           := Self.Color;

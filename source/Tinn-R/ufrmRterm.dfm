@@ -201,26 +201,20 @@ object frmRterm: TfrmRterm
         Caption = 'Edit'
         ImageIndex = 276
         object TBItem29: TTBItem
-          Action = frmMain.actEditUndo
         end
         object TBItem28: TTBItem
-          Action = frmMain.actEditRedo
         end
         object TBSeparatorItem4: TTBSeparatorItem
         end
         object TBItem32: TTBItem
-          Action = frmMain.actEditCopy
         end
         object TBItem31: TTBItem
-          Action = frmMain.actEditCut
         end
         object TBItem30: TTBItem
-          Action = frmMain.actEditPaste
         end
         object TBSeparatorItem8: TTBSeparatorItem
         end
         object TBItem33: TTBItem
-          Action = frmMain.actEditSelectAll
         end
       end
       object TBSubmenuItem11: TTBSubmenuItem

@@ -2108,10 +2108,9 @@ begin
                                sTmp)) then Result:= True;
 end;
 
-end.
-
 {sRVersion:= Copy(sPath_R,
                   LastDelimiter('\',
                                 sPath_R) + 1,
                   Length(sPath_R));}
 
+end.

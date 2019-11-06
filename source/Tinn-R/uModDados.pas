@@ -109,6 +109,13 @@ type
     cdRH_Custom_Caption: TStringField;
     cdRH_Custom_Shortcut: TStringField;
     dsRH_Custom: TDataSource;
+    cdEditor: TClientDataSet;
+    dsEditor: TDataSource;
+    cdEditor_Index: TSmallintField;
+    cdEditor_Group: TStringField;
+    cdEditor_Command: TStringField;
+    cdEditor_Key: TSmallintField;
+    cdEditor_Keystroke: TStringField;
 
     procedure cdCommentsAfterPost(DataSet: TDataSet);
     procedure cdCommentsAfterScroll(DataSet: TDataSet);
@@ -137,6 +144,7 @@ type
     procedure DataModuleDestroy(Sender: TObject);
     procedure cdRH_CustomNewRecord(DataSet: TDataSet);
     procedure cdRH_CustomPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
+    procedure cdEditorPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 
   private
     { Private declarations }
@@ -154,6 +162,7 @@ type
     function fCheck_Hotkey_RH_Send(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fCheck_Hotkey_RH_Control(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fCheck_Hotkey_RH_Custom(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_Editor(sKeystroke: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fRmirrors_Update(sFile: string): boolean;
     function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
 
@@ -300,7 +309,7 @@ begin
     FreeBookmark(pTmp);
 
     EnableControls;
-  end; //with cdShortcuts
+  end; //with cdRH_Send
 end;
 
 function TmodDados.fCheck_Hotkey_RH_Control(sShortcut: string;
@@ -351,7 +360,7 @@ begin
     FreeBookmark(pTmp);
 
     EnableControls;
-  end; //with cdShortcuts
+  end; //with cdRH_Control
 end;
 
 function TmodDados.fCheck_Hotkey_RH_Custom(sShortcut: string;
@@ -402,7 +411,58 @@ begin
     FreeBookmark(pTmp);
 
     EnableControls;
-  end; //with cdShortcuts
+  end; //with cdRH_Custom
+end;
+
+function  TmodDados.fCheck_Editor(sKeystroke: string;
+                                  var sBy: string;
+                                  bShortcut_Clear: boolean = False): boolean;
+var
+  pTmp:  pointer;
+
+  bFiltered: boolean;
+
+  sTmp: string;
+
+begin
+  Result:= False;
+
+  with cdEditor do begin
+    pTmp:= GetBookmark;
+    DisableControls;
+    bFiltered:= Filtered;
+    if bFiltered then
+      Filtered:= False;
+
+    sTmp:= StringReplace(sKeystroke,
+                         ' ',
+                         '',
+                         [rfReplaceAll]);
+
+    if (Locate('keystroke',
+               sTmp,
+               []) = True) then begin
+      Result:= True;
+
+      sBy:= 'Editor' +
+            ' | ' +
+            FieldValues['Command'];
+
+      if bShortcut_Clear then begin
+         Edit;
+         FieldByName('keystroke').Value:= '';
+         Post;
+      end;
+    end; //if (Locate('Shortcut'...
+
+    Filtered:= bFiltered;
+
+    if BookmarkValid(pTmp) then
+      GoToBookmark(pTmp);
+    FreeBookmark(pTmp);
+
+    EnableControls;
+  end; //with cdEditor
 end;
 
 function TmodDados.fSave_FileState(sFile,
@@ -772,6 +832,22 @@ begin
     IndexName:= 'RH_Custom_Idx';
   end;
 
+  // Editor
+  with cdEditor do begin
+    Active   := False;
+    FileName := frmMain.sPath_Data +
+                '\Editor.xml';
+    Active   := True;
+    IndexDefs.Clear;
+    with IndexDefs.AddIndexDef do
+    begin
+      Name   := 'Editor_Idx';
+      Fields := 'Command;Index';
+      Options:= [ixPrimary, ixUnique];
+    end;
+    IndexName:= 'Editor_Idx';
+  end;
+
   with frmMain do begin
     if not bDatabaseRestored then begin
       cdRcard.SavePoint     := iRcard_SavePoint;
@@ -781,6 +857,7 @@ begin
       cdRH_Send.SavePoint   := iRH_Send_SavePoint;
       cdRH_Control.SavePoint:= iRH_Control_SavePoint;
       cdRH_Custom.SavePoint := iRH_Custom_SavePoint;
+      cdEditor.SavePoint    := iEditor_SavePoint;
     end
     else begin
       iRcard_SavePoint     := cdRcard.SavePoint;
@@ -790,6 +867,7 @@ begin
       iRH_Send_SavePoint   := cdRH_Send.SavePoint;
       iRH_Control_SavePoint:= cdRH_Control.SavePoint;
       iRH_Custom_SavePoint := cdRH_Custom.SavePoint;
+      iEditor_SavePoint    := cdEditor.SavePoint;
       bDatabaseRestored    := False
     end;
   end;
@@ -828,6 +906,10 @@ begin
 
   with cdRH_Custom do
     Close; //Will also save to file whether any change was made!
+
+  with cdEditor do
+    Close; //Will also save to file whether any change was made!
+
 end;
 
 procedure TmodDados.cdRcardPostError(DataSet: TDataSet;
@@ -950,6 +1032,19 @@ end;
 procedure TmodDados.cdCompletionPostError(DataSet: TDataSet;
                                           E: EDatabaseError;
                                           var Action: TDataAction);
+begin
+  MessageDlg(DataSet.Fields.Fields[2].Value + #13 + #13 +
+             'Key violation.' + #13 +
+             'Latest insertion (or change) will be lost!',
+             mtError,
+             [MBOK],
+             0);
+
+  Dataset.Cancel;
+  Action:= daAbort;
+end;
+
+procedure TmodDados.cdEditorPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 begin
   MessageDlg(DataSet.Fields.Fields[2].Value + #13 + #13 +
              'Key violation.' + #13 +

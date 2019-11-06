@@ -3066,8 +3066,6 @@ begin
     actRtermEditorSetFocus.Checked:= True;
 end;
 
-end.
-
 (*
 By Jan Fiala - PSPad editor
 
@@ -3239,4 +3237,6 @@ begin
     end;
 end;
 *)
+
+end.
 

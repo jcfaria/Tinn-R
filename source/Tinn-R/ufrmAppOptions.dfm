@@ -105,7 +105,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
       Top = 1
       Width = 341
       Height = 487
-      ActivePage = tbsProcessing_DviLatex
+      ActivePage = tbsEditor_Keystrokes
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -555,6 +555,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Dock/Float (Tools and Rterm)'
         ImageIndex = 5
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox8: TGroupBox
           Left = 0
           Top = 0
@@ -949,6 +953,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Advanced'
         ImageIndex = 22
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label23: TLabel
           Left = 0
           Top = 320
@@ -1282,6 +1290,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Keystrokes'
         ImageIndex = 23
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label20: TLabel
           Left = 0
           Top = 374
@@ -1377,7 +1389,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Height = 21
             BevelInner = bvNone
             BevelOuter = bvNone
-            ItemHeight = 13
+            ItemHeight = 0
             Sorted = True
             TabOrder = 0
             OnExit = cbCommandsExit
@@ -1390,6 +1402,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Encoding/EOL'
         ImageIndex = 25
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox25: TGroupBox
           Left = 0
           Top = 228
@@ -1717,6 +1733,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Installed'
         ImageIndex = 27
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox11: TGroupBox
           Left = 0
           Top = 0
@@ -1813,6 +1833,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Basic'
         ImageIndex = 9
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object gpbMaxDeparseLength: TGroupBox
           Left = 0
           Top = 174
@@ -2584,6 +2608,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Rgui/PuTTY'
         ImageIndex = 12
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgRgui_PuTTY: TJvgPageControl
           Left = 0
           Top = 0
@@ -2871,6 +2899,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet4: TTabSheet
             Caption = 'Recognition'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object rdgRecognition_Caption: TRadioGroup
               Left = 0
               Top = 0
@@ -2922,6 +2954,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Packages'
         ImageIndex = 26
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgPackages: TJvgPageControl
           Left = 0
           Top = 0
@@ -3363,6 +3399,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet8: TTabSheet
             Caption = 'formatR'
             ImageIndex = 3
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object GroupBox15: TGroupBox
               Left = 0
               Top = 91
@@ -3454,6 +3494,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet9: TTabSheet
             Caption = 'knitr'
             ImageIndex = 4
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object GroupBox26: TGroupBox
               Left = 0
               Top = 91
@@ -3981,6 +4025,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Latex'
         ImageIndex = 18
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgProcessing_Latex: TJvgPageControl
           Left = 0
           Top = 0
@@ -4219,6 +4267,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet16: TTabSheet
             Caption = 'More'
             ImageIndex = 2
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object gpbLatexOptions: TGroupBox
               Left = 0
               Top = 0

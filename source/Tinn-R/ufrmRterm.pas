@@ -50,7 +50,7 @@ uses
   Dialogs, SynEdit, ComCtrls, JvgPage, JvDockTree, JvDockControlForm,
   JvComponentBase, SynEditTypes, SynEditKeyCmds, SynCompletionProposal,
   ExtCtrls, ConsoleIO, ToolWin, TB2Item, TB2Dock, TB2Toolbar, ActnList,
-  PerlRegEx;
+  PerlRegEx, Menus;
 
 type
   TfrmRterm = class(TForm)
@@ -1339,8 +1339,15 @@ begin
     if not frmMain.fRterm_Running then Exit;
 
     case Key of
-      89: with synIO do // CTRL+Y
-            if (CaretY = Lines.Count) then Key:= VK_PAUSE;
+      ord('V'): with synIO do
+                  if (CaretY = Lines.Count) then begin
+                    with frmMain do
+                      actRSendClipboardExecute(nil);
+                    Key:= VK_PAUSE;
+                  end;
+
+      ord('Y'): with synIO do // CTRL+Y
+                  if (CaretY = Lines.Count) then Key:= VK_PAUSE;
 
       VK_BACK: with synIO do begin  // CTRL+BACK
                  if (CaretY = Lines.Count) then begin

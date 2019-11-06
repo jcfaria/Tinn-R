@@ -278,13 +278,7 @@ type
     actDosMinimizedAlways: TAction;
     actDviOpenAlways: TAction;
     actDviOpenFile: TAction;
-    actEditCopy: TAction;
-    actEditCut: TAction;
     actEditorLineWrap: TAction;
-    actEditPaste: TAction;
-    actEditRedo: TAction;
-    actEditSelectAll: TAction;
-    actEditUndo: TAction;
     actFileClose: TAction;
     actFileCloseAll: TAction;
     actFileCloseLeft: TAction;
@@ -712,18 +706,12 @@ type
     menControlRSetWorkDir: TMenuItem;
     menEdit: TMenuItem;
     menEditComment: TMenuItem;
-    menEditCopy: TMenuItem;
     menEditCopyFormated: TMenuItem;
     menEditCopyFormatedHtml: TMenuItem;
     menEditCopyFormatedRtf: TMenuItem;
     menEditCopyFormatedTex: TMenuItem;
-    menEditCut: TMenuItem;
-    menEditPaste: TMenuItem;
-    menEditRedo: TMenuItem;
-    menEditSelectAll: TMenuItem;
     menEditUncommentAll: TMenuItem;
     menEditUncommentFirst: TMenuItem;
-    menEditUndo: TMenuItem;
     menFile: TMenuItem;
     menFileClose: TMenuItem;
     menFileCloseAll: TMenuItem;
@@ -1216,7 +1204,6 @@ type
     N133: TMenuItem;
     N134: TMenuItem;
     N135: TMenuItem;
-    N136: TMenuItem;
     N138: TMenuItem;
     N139: TMenuItem;
     N14: TMenuItem;
@@ -1234,7 +1221,6 @@ type
     N151: TMenuItem;
     N152: TMenuItem;
     N153: TMenuItem;
-    N154: TMenuItem;
     N155: TMenuItem;
     N156: TMenuItem;
     N157: TMenuItem;
@@ -1300,7 +1286,6 @@ type
     N34: TMenuItem;
     N34_OLD: TMenuItem;
     N36: TMenuItem;
-    N37: TMenuItem;
     N37_OLD: TMenuItem;
     N38: TMenuItem;
     N38_OLD: TMenuItem;
@@ -1919,8 +1904,8 @@ type
     tobView: TTBToolbar;
     ToolButton1: TToolButton;
     ToolButton11: TToolButton;
-    ToolButton2: TToolButton;
-    ToolButton3: TToolButton;
+    btUndo: TToolButton;
+    btRedo: TToolButton;
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
     ToolButton7: TToolButton;
@@ -1988,6 +1973,8 @@ type
     actLatexClearWaste: TAction;
     TBItem68: TTBItem;
     actSKH_map: TAction;
+    Loadstream1: TMenuItem;
+    test1: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2042,13 +2029,7 @@ type
     procedure actDosMinimizedAlwaysExecute(Sender: TObject);
     procedure actDviOpenAlwaysExecute(Sender: TObject);
     procedure actDviOpenFileExecute(Sender: TObject);
-    procedure actEditCopyExecute(Sender: TObject);
-    procedure actEditCutExecute(Sender: TObject);
     procedure actEditorLineWrapExecute(Sender: TObject);
-    procedure actEditPasteExecute(Sender: TObject);
-    procedure actEditRedoExecute(Sender: TObject);
-    procedure actEditSelectAllExecute(Sender: TObject);
-    procedure actEditUndoExecute(Sender: TObject);
     procedure actFileCloseAllExecute(Sender: TObject);
     procedure actFileCloseExecute(Sender: TObject);
     procedure actFileCloseLeftExecute(Sender: TObject);
@@ -2533,6 +2514,9 @@ type
     procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
     procedure actLatexClearWasteExecute(Sender: TObject);
     procedure actSKH_mapExecute(Sender: TObject);
+    procedure Loadstream1Click(Sender: TObject);
+    procedure btUndoClick(Sender: TObject);
+    procedure btRedoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -2588,6 +2572,7 @@ type
     bUpdate_RH_Send                : boolean;
     bUpdate_RH_Control             : boolean;
     bUpdate_RH_Custom              : boolean;
+    bUpdate_Editor                 : boolean; 
     iCols                          : integer;
     ifEditor                       : TIniFile;
     ifEditor_Tmp                   : TIniFile;
@@ -2619,6 +2604,7 @@ type
     sCurrentVersion_RH_Send        : string;
     sCurrentVersion_RH_Control     : string;
     sCurrentVersion_RH_Custom      : string;
+    sCurrentVersion_Editor         : string;
     seTmp                          : TSynEdit;
     sEncodingDefault               : string;
     sEOLDefault                    : string;
@@ -2680,6 +2666,7 @@ type
     sVersion_RH_Send               : string;
     sVersion_RH_Control            : string;
     sVersion_RH_Custom             : string;
+    sVersion_Editor                : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
@@ -2896,6 +2883,7 @@ type
     iRH_Send_SavePoint           : integer;
     iRH_Control_SavePoint        : integer;
     iRH_Custom_SavePoint         : integer;
+    iEditor_SavePoint            : integer;
     iRcardFilter                 : integer;
     iRmirrors_SavePoint          : integer;
     iRtip_SavePoint              : integer;
@@ -3108,16 +3096,18 @@ begin
   sVersion_RH_Send   := ifTinn.ReadString('App', 'sVersion_RH_Send'   , '0.0.0.0');
   sVersion_RH_Control:= ifTinn.ReadString('App', 'sVersion_RH_Control', '0.0.0.0');
   sVersion_RH_Custom := ifTinn.ReadString('App', 'sVersion_RH_Custom' , '0.0.0.0');
+  sVersion_Editor    := ifTinn.ReadString('App', 'sVersion_Editor'    , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
   sCurrentVersion_Cache     := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '5.02.03.00';
+  sCurrentVersion_Editor    := '5.04.01.03';  // Started from version '5.04.01.00'/beta
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.04.01.00';
-  sCurrentVersion_Shortcuts := '5.04.01.01';
+  sCurrentVersion_Shortcuts := '5.04.01.02';
   sCurrentVersion_RH_Send   := '5.04.01.00';  // Started from version '5.04.01.00'/beta
   sCurrentVersion_RH_Control:= '5.04.01.01';  // Started from version '5.04.01.00'/beta
   sCurrentVersion_RH_Custom := '5.04.01.00';  // Started from version '5.04.01.00'/beta
@@ -3205,6 +3195,15 @@ begin
     if FileExists(sPath_Data +
                   '\RH_Custom.xml') then
       bUpdate_RH_Custom:= True;
+  end;
+
+  // Editor
+  if (AnsiCompareStr(sVersion_Editor,
+                     sCurrentVersion_Editor) < 0) then begin
+    sVersion_Editor:= sCurrentVersion_Editor;
+    if FileExists(sPath_Data +
+                  '\Editor.xml') then
+      bUpdate_Editor:= True;
   end;
 
   // SynUnihighlighter: It was removed from the project!
@@ -3737,6 +3736,7 @@ begin
     WriteString('App', 'sVersion_RH_Send'   , sVersion_RH_Send);
     WriteString('App', 'sVersion_RH_Control', sVersion_RH_Control);
     WriteString('App', 'sVersion_RH_Custom' , sVersion_RH_Custom);
+    WriteString('App', 'sVersion_Editor'    , sVersion_Editor);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -4269,6 +4269,7 @@ begin
     WriteString('App', 'sVersion_RH_Send'   , sVersion_RH_Send);
     WriteString('App', 'sVersion_RH_Control', sVersion_RH_Control);
     WriteString('App', 'sVersion_RH_Custom' , sVersion_RH_Custom);
+    WriteString('App', 'sVersion_Editor'    , sVersion_Editor);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -7541,136 +7542,6 @@ begin
   end;
 end;
 
-procedure TfrmMain.actEditCopyExecute(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLog: TSynEdit;
-
-begin
-  iFocus:= fGetFocus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          CopyToClipboard;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          CopyToClipboard;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          CopyToClipboard;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
-          CopyToClipboard;
-  end;
-end;
-
-procedure TfrmMain.actEditCutExecute(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLog: TSynEdit;
-
-begin
-  iFocus:= fGetFocus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          CutToClipboard;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          CutToClipboard;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          CutToClipboard;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
-          CutToClipboard;
-  end;
-end;
-
-procedure TfrmMain.actEditPasteExecute(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLog: TSynEdit;
-
-begin
-  iFocus:= fGetFocus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          PasteFromClipboard;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          PasteFromClipboard;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          PasteFromClipboard;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
-          PasteFromClipboard;
-  end;
-end;
-
-procedure TfrmMain.actEditRedoExecute(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLog: TSynEdit;
-
-begin
-  iFocus:= fGetFocus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          Redo;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          Redo;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          Redo;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
-          Redo;
-  end;
-end;
-
-procedure TfrmMain.actEditSelectAllExecute(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLog: TSynEdit;
-
-begin
-  iFocus:= fGetFocus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          SelectAll;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          SelectAll;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          SelectAll;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
-          SelectAll;
-  end;
-end;
-
 procedure TfrmMain.actTobEditVisibleExecute(Sender: TObject);
 begin
   tobEdit.Visible             := not(tobEdit.Visible);
@@ -8024,9 +7895,11 @@ var
 
   stream: TStream;
 
+  i: integer;
+
 begin
-  sEditor:= (sPath_Editor +
-             '\Editor.kst');
+  sEditor:= sPath_Editor +
+            '\Editor.kst';
 
   if FileExists(sEditor) then begin
     stream:= TFileStream.Create(sEditor,
@@ -8034,6 +7907,22 @@ begin
 
     with coEditor.Keystrokes do
       LoadFromStream(stream);
+
+//  with modDados.cdEditor do begin
+//    DisableControls;
+//    First;
+//    for i:=0 to (RecordCount - 1) do begin
+//      with coEditor.Keystrokes do begin
+//        Items[i].Index   := FieldByName('Index').Value;
+//        Items[i].Command := ConvertExtendedToCommand(FieldByName('Command').Value);
+//        Items[i].Key     := FieldByName('Key').Value;
+//        //Items[i].ShortCut:= TextToShortcut(FieldByName('Keystroke').Value);
+//      end;
+//      Next;
+//    end;
+//    DisableControls;
+//    First;
+//  end;
 
     FreeAndNil(stream);
   end;
@@ -8548,7 +8437,8 @@ var
    sFileShortcuts,
    sFileRH_Send,
    sFileRH_Control,
-   sFIleRH_Custom,
+   sFileRH_Custom,
+   sFileEditor,
    sFileCache: string;
 
   tfTmp: TextFile;
@@ -8562,7 +8452,8 @@ begin
   sFileShortcuts := sPath_Data + '\Shortcuts.xml';
   sFileRH_Send   := sPath_Data + '\RH_Send.xml';
   sFileRH_Control:= sPath_Data + '\RH_Control.xml';
-  sFIleRH_Custom := sPath_Data + '\RH_Custom.xml';
+  sFileRH_Custom := sPath_Data + '\RH_Custom.xml';
+  sFileEditor    := sPath_Data + '\Editor.xml';
 
   try
     with frmTools.memIniLog.Lines do begin
@@ -8703,6 +8594,33 @@ begin
                                    ': OK');
     end;
 
+    // Editor
+    if not FileExists(sFileEditor) then begin
+      pUnpackFile(sFileDataOrigin,
+                  sPath_Data,
+                  'Editor.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileEditor) +
+                                   '(version = ' +
+                                   sCurrentVersion_Editor +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_Editor then
+        pUnpackFile(sFileDataOrigin,
+                    sPath_Data,
+                    'Editor.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileEditor) +
+                                   '(version = ' +
+                                   sCurrentVersion_Editor +
+                                   ')' +
+                                   ': OK');
+    end;
+
     // Rcard
     if not FileExists(sFileRcard) then begin
       pUnpackFile(sFileDataOrigin,
@@ -8726,6 +8644,87 @@ begin
                                    ExtractFileName(sFileRcard) +
                                    '(version = ' +
                                    sCurrentVersion_Rcard +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // RH_Control
+    if not FileExists(sFileRH_Control) then begin
+      pUnpackFile(sFileDataOrigin,
+                  sPath_Data,
+                  'RH_Control.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Control) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Control +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_RH_Control then
+        pUnpackFile(sFileDataOrigin,
+                    sPath_Data,
+                    'RH_Control.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Control) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Control +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // RH_Custom
+    if not FileExists(sFileRH_Custom) then begin
+      pUnpackFile(sFileDataOrigin,
+                  sPath_Data,
+                  'RH_Custom.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Custom) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Custom +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_RH_Custom then
+        pUnpackFile(sFileDataOrigin,
+                    sPath_Data,
+                    'RH_Custom.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Custom) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Custom +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // RH_Send
+    if not FileExists(sFileRH_Send) then begin
+      pUnpackFile(sFileDataOrigin,
+                  sPath_Data,
+                  'RH_Send.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Send) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Send +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_RH_Send then
+        pUnpackFile(sFileDataOrigin,
+                    sPath_Data,
+                    'RH_Send.xml');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sFileRH_Send) +
+                                   '(version = ' +
+                                   sCurrentVersion_RH_Send +
                                    ')' +
                                    ': OK');
     end;
@@ -8785,88 +8784,6 @@ begin
                                    ')' +
                                    ': OK');
     end;
-
-    // RH_Send
-    if not FileExists(sFileRH_Send) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'RH_Send.xml');
-
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Send) +
-                                   '(version = ' +
-                                   sCurrentVersion_RH_Send +
-                                   ')' +
-                                   ': CREATED');
-    end
-    else begin
-      if bUpdate_RH_Send then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'RH_Send.xml');
-
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Send) +
-                                   '(version = ' +
-                                   sCurrentVersion_RH_Send +
-                                   ')' +
-                                   ': OK');
-    end;
-
-    // RH_Control
-    if not FileExists(sFileRH_Control) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'RH_Control.xml');
-
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Control) +
-                                   '(version = ' +
-                                   sCurrentVersion_RH_Control +
-                                   ')' +
-                                   ': CREATED');
-    end
-    else begin
-      if bUpdate_RH_Control then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'RH_Control.xml');
-
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Control) +
-                                   '(version = ' +
-                                   sCurrentVersion_RH_Control +
-                                   ')' +
-                                   ': OK');
-    end;
-
-    // RH_Custom
-    if not FileExists(sFileRH_Custom) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'RH_Custom.xml');
-
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Custom) +
-                                   '(version = ' +
-                                   sCurrentVersion_RH_Custom +
-                                   ')' +
-                                   ': CREATED');
-    end
-    else begin
-      if bUpdate_RH_Custom then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'RH_Custom.xml');
-
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Custom) +
-                                   '(version = ' +
-                                   sCurrentVersion_RH_Custom +
-                                   ')' +
-                                   ': OK');
-    end;
-
   except
     raise;
     Exit;
@@ -8880,7 +8797,7 @@ begin
   Rewrite(tfTmp);
     WriteLn(tfTmp,
             'This folder stores (by default):' + #13 +
-            'The XML files: Cache.xml, Comments.xml, Completion.xml, Rcard.xlm, Rmirrors.xml, Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
+            'The XML files: Cache.xml, Comments.xml, Completion.xml, Editor.xml, Rcard.xlm, Rmirrors.xml, Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
   CloseFile(tfTmp);
 end;
 
@@ -11537,7 +11454,7 @@ begin
 
       for i:= 0 to (RecordCount-1) do
         with frmMain do
-          if Assigned(ajavHK_Custom[i])  then ajavHK_Custom[i].Active := bStatus;
+          if Assigned(ajavHK_Custom[i]) then ajavHK_Custom[i].Active := bStatus;
     end;
   end;  // with modDados
 end;
@@ -14564,6 +14481,19 @@ begin
         EnableControls;
       end;
 
+      // Editor
+      with modDados.cdEditor do begin
+        Edit;
+        try
+          Post;
+          MergeChangeLog;
+          SaveToFile();
+          frmMain.iEditor_SavePoint:= SavePoint;
+        except
+          //TODO
+        end;
+      end;
+
       pSetFocus_Main;
     end // if (dlgSH_Map.ShowModal = mrOK)
     // else (dlgSH_Map.ShowModal <> mrOK)
@@ -14573,6 +14503,7 @@ begin
         cdRH_Send.SavePoint   := iRH_Send_SavePoint;
         cdRH_Control.SavePoint:= iRH_Control_SavePoint;
         cdRH_Custom.SavePoint := iRH_Custom_SavePoint;
+        cdEditor.SavePoint    := iEditor_SavePoint;
         cdShortcutsAfterScroll(nil);
       end;
     end;
@@ -20064,7 +19995,7 @@ procedure TfrmMain.pSetToolbarProcessing(sFileExtension: string);
     actLatexToPdfSingle.Enabled:= bTmp;
     actLatexToPdfBibtex.Enabled:= bTmp;
     actLatexMakeIndex.Enabled  := bTmp;
-    actLatexClearWaste.Enabled := bTmp;
+//    actLatexClearWaste.Enabled := bTmp;
   end;
 
 const
@@ -20083,6 +20014,11 @@ const
                                        '.t2t',
                                        '.txt2tags',
                                        '.txt');
+//
+//  noweb: array [0..3] of string = ('.Rnw',
+//                                   '.Rmd',
+//                                   '.Snw',
+//                                   '.tex');
 
 var
   sExt: string;
@@ -20106,7 +20042,7 @@ begin
                                         else pSetTxt2tags(False);
   //SetTxt2tags(True);  // any file extension
 
-  // MikTeX
+  // Noweb
   if (sExt = '.tex') then pSetTex(True)
                      else pSetTex(False);
 end;
@@ -20801,32 +20737,6 @@ procedure TfrmMain.actIndentBlockExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pIndent_Block;
-end;
-
-procedure TfrmMain.actEditUndoExecute(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLog: TSynEdit;
-
-begin
-  iFocus:= fGetFocus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          Undo;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          Undo;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          Undo;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
-          Undo;
-  end;
 end;
 
 procedure TfrmMain.actUnindentBlockExecute(Sender: TObject);
@@ -22558,6 +22468,58 @@ begin
   end;
 end;
 
+procedure TfrmMain.btRedoClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLog: TSynEdit;
+
+begin
+  iFocus:= fGetFocus;
+  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
+                                else seLog:= frmRterm.synLog;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          Redo;
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          REdo;
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          Redo;
+     // synLog and synLog2
+     4: with (seLog as TSynEdit) do
+          Redo;
+  end;
+end;
+
+procedure TfrmMain.btUndoClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLog: TSynEdit;
+
+begin
+  iFocus:= fGetFocus;
+  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
+                                else seLog:= frmRterm.synLog;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          Undo;
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          Undo;
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          Undo;
+     // synLog and synLog2
+     4: with (seLog as TSynEdit) do
+          Undo;
+  end;
+end;
+
 procedure TfrmMain.actProjectVisibleExecute(Sender: TObject);
 begin
   with frmTools.tbsProject do begin
@@ -23737,6 +23699,85 @@ begin
 end;
 
 
+procedure TfrmMain.Loadstream1Click(Sender: TObject);
+{
+var
+  seEditor: TSynEdit;
+
+  sEditor: string;
+
+  stream: TStream;
+
+begin
+  sEditor:= 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\app_data\editor' +
+            '\Editor.kst';
+
+  if FileExists(sEditor) then begin
+    stream:= TFileStream.Create(sEditor,
+                                fmOpenRead);
+
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
+
+    with seEditor.Lines do
+     LoadFromStream(stream);
+
+    FreeAndNil(stream);
+  end;
+end;
+}
+var
+  i: integer;
+
+  sTmp1,
+    sTmp2,
+    sTmp3: string;
+
+  seEditor: TSynEdit;
+
+  slTmp: TStringList;
+
+begin
+  i:= coEditor.Keystrokes.FindShortcut(TextToShortcut('Ctrl+V'));
+  if (i >= 0) then begin
+    with coEditor.Keystrokes.Items[i] do begin
+      sTmp1:= EditorCommandToCodeString(Command);
+      sTmp2:= IntToStr(Key);
+      sTmp3:= ShortcutToText(ShortCut);
+    end;
+    ShowMessage(IntToStr(i) + ' | ' +
+                      sTmp1 + ' | ' +
+                      sTmp2 + ' | ' +
+                      sTmp3)
+  end;
+
+  slTmp:= TStringList.Create;
+  for i:= 0 to (coEditor.Keystrokes.Count-1) do begin
+    //ShowMessage(IntToStr(coEditor.Keystrokes.FindCommand(ecPaste)));
+    with coEditor.Keystrokes.Items[i] do begin
+      sTmp1:= EditorCommandToCodeString(Command);
+      sTmp2:= IntToStr(Key);
+      sTmp3:= ShortcutToText(ShortCut);
+    end;
+
+    slTmp.Add(IntToStr(i) + ' | ' +
+                    sTmp1 + ' | ' +
+                    sTmp2 + ' | ' +
+                    sTmp3);
+  end;
+
+  actFileNewExecute(nil);
+  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
+    if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                     else seEditor:= synEditor2;
+
+  seEditor.Lines.AddStrings(slTmp);
+
+   FreeAndNil(slTmp);
+//    ShowMessage(sTmp1 + ' | ' + sTmp2 + ' | ' + sTmp3);
+end;
+
 procedure TfrmMain.LatexFont(Sender: TObject);
 
   procedure pInsertLatex(iFont: integer);
@@ -24416,14 +24457,17 @@ procedure TfrmMain.actLatexClearWasteExecute(Sender: TObject);
   end;
 
 var
-  sTmpDir: string;
+  sDir: string;
 
   slTmp: TStringList;
 
   i: integer;
 
 begin
-  sTmpDir:= ExtractFilePath((Self.MDIChildren[fFindTop_Window] as TfrmEditor).sActiveFile);
+  if (pgFiles.PageCount = 0) then Exit;
+
+  sDir:= ExtractFilePath((Self.MDIChildren[fFindTop_Window] as TfrmEditor).sActiveFile);
+  if not DirectoryExists(sDir) then Exit;
 
   try
     slTmp:= TStringList.Create;
@@ -24434,7 +24478,7 @@ begin
     end;
 
     for i:= 0 to (slTmp.Count-1) do
-      DeleteFiles(sTmpDir,
+      DeleteFiles(sDir,
                   '*' + slTmp.Strings[i]);
   except
     FreeAndNil(slTmp);
@@ -26477,6 +26521,34 @@ begin
       pUpdateCompletionArgs;
       pSetFocus_Main;
     end;
+}
+
+{
+procedure TfrmMain.actEditCutExecute(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLog: TSynEdit;
+
+begin
+  iFocus:= fGetFocus;
+  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
+                                else seLog:= frmRterm.synLog;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          CutToClipboard;
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          CutToClipboard;
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          CutToClipboard;
+     // synLog and synLog2
+     4: with (seLog as TSynEdit) do
+          CutToClipboard;
+  end;
+end;
 }
 
 end.

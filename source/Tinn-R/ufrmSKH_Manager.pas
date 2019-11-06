@@ -164,6 +164,19 @@ begin
       Exit;
     end;
 
+  // Editor
+  with modDados do
+    if fCheck_Editor(ShortCutToText(eKeyShort.HotKey),
+                                    sBy) then begin
+      pSetYes_inUse(sBy,
+                    'Editor');
+
+      with frmMain.dlgSKH_Map do
+        iSKH_Used_By:= 2;
+
+      Exit;
+    end;
+
   // RH Send
   with modDados do
     if fCheck_Hotkey_RH_Send(ShortCutToText(eKeyShort.HotKey),

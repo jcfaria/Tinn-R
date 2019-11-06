@@ -91,7 +91,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsRHotkeys
+    ActivePage = tbsEditorKeystrokes
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -131,10 +131,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -470,12 +466,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label20: TLabel
-        Left = 0
+        Left = 1
         Top = 450
         Width = 127
         Height = 13
@@ -490,52 +482,224 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Caption = '** Some may be overlaid by the main program!'
         Enabled = False
       end
-      object btnUpdateKey: TButton
-        Left = 511
-        Top = 447
-        Width = 104
-        Height = 25
-        Caption = 'Update'
-        TabOrder = 0
-      end
       object pnlCommands: TPanel
         Left = 0
         Top = 0
         Width = 615
-        Height = 444
+        Height = 433
         Align = alTop
         BevelInner = bvRaised
         BevelOuter = bvLowered
         Caption = 'pnlCommands'
-        TabOrder = 1
-        object lvKeystrokes: TListView
-          AlignWithMargins = True
-          Left = 5
-          Top = 5
-          Width = 605
-          Height = 434
+        TabOrder = 0
+        object dbgEditor: TDBGrid
+          Left = 2
+          Top = 107
+          Width = 611
+          Height = 324
           Align = alClient
-          BevelInner = bvNone
           BorderStyle = bsNone
-          Color = 16250871
+          DataSource = modDados.dsEditor
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = [fsBold]
+          OnDblClick = dbgEditorDblClick
+          OnEnter = dbgEditorEnter
+          OnTitleClick = dbgEditorTitleClick
           Columns = <
             item
-              Caption = 'Command*'
-              Width = 300
+              Expanded = False
+              FieldName = 'Command'
+              Title.Caption = 'Command*'
+              Width = 462
+              Visible = True
             end
             item
-              Caption = 'Keystroke**'
-              Width = 280
+              Alignment = taRightJustify
+              Expanded = False
+              FieldName = 'Keystroke'
+              Title.Alignment = taRightJustify
+              Width = 120
+              Visible = True
             end>
-          ColumnClick = False
-          HideSelection = False
-          ReadOnly = True
-          RowSelect = True
-          SortType = stText
-          TabOrder = 0
-          ViewStyle = vsReport
-          OnDblClick = lvKeystrokesDblClick
         end
+        object JvDBNavigator5: TJvDBNavigator
+          Left = 2
+          Top = 85
+          Width = 611
+          Height = 22
+          DataSource = modDados.dsEditor
+          VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+          Align = alTop
+          Flat = True
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 1
+        end
+        object GroupBox4: TGroupBox
+          Left = 2
+          Top = 2
+          Width = 611
+          Height = 83
+          Align = alTop
+          Caption = ' Search/Edit '
+          Ctl3D = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          TabOrder = 2
+          object Label18: TLabel
+            Left = 241
+            Top = 59
+            Width = 50
+            Height = 13
+            Caption = 'Command:'
+          end
+          object Label19: TLabel
+            Left = 15
+            Top = 59
+            Width = 32
+            Height = 13
+            Caption = 'Group:'
+          end
+          object Label21: TLabel
+            Left = 254
+            Top = 42
+            Width = 37
+            Height = 13
+            Caption = 'Search:'
+            Color = 16250871
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clMaroon
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label22: TLabel
+            Left = 266
+            Top = 24
+            Width = 25
+            Height = 13
+            Caption = 'Filter:'
+            Color = 16250871
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clMaroon
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+          end
+          object dbeEditor_Command: TDBEdit
+            Left = 295
+            Top = 58
+            Width = 304
+            Height = 16
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = bsNone
+            DataField = 'Command'
+            DataSource = modDados.dsEditor
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object edEditor_Search_Command: TEdit
+            Left = 295
+            Top = 40
+            Width = 304
+            Height = 16
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = bsNone
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnChange = edEditor_Search_CommandChange
+            OnEnter = edApp_Search_CaptionEnter
+          end
+          object dbeEditor_Group: TDBEdit
+            Left = 52
+            Top = 58
+            Width = 170
+            Height = 16
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = bsNone
+            Ctl3D = False
+            DataField = 'Group'
+            DataSource = modDados.dsEditor
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object edEditor_Filter_Command: TEdit
+            Left = 295
+            Top = 22
+            Width = 304
+            Height = 16
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BorderStyle = bsNone
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clRed
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            OnChange = edEditor_Filter_CommandChange
+          end
+        end
+      end
+      object btnKeystroke_Clear: TButton
+        Left = 433
+        Top = 443
+        Width = 90
+        Height = 25
+        Caption = 'Clear (K)'
+        TabOrder = 1
+        OnClick = btnKeystroke_ClearClick
+      end
+      object btnKeystroke_ClearAll: TButton
+        Left = 524
+        Top = 443
+        Width = 90
+        Height = 25
+        Caption = 'Clear all (K)'
+        TabOrder = 2
+        OnClick = btnKeystroke_ClearAllClick
       end
     end
     object tbsRHotkeys: TTabSheet
@@ -562,23 +726,23 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         TabOrder = 0
         OnClick = rdgTinnRHotKeysClick
       end
-      object btnClear: TButton
+      object btnRH_Clear: TButton
         Left = 433
         Top = 443
         Width = 90
         Height = 25
         Caption = 'Clear (H)'
         TabOrder = 1
-        OnClick = btnClearClick
+        OnClick = btnRH_ClearClick
       end
-      object btnClearAllHotKeys: TButton
+      object btnRH_ClearAll: TButton
         Left = 524
         Top = 443
         Width = 90
         Height = 25
         Caption = 'Clear all (H)'
         TabOrder = 2
-        OnClick = btnClearAllHotKeysClick
+        OnClick = btnRH_ClearAllClick
       end
       object pgRH: TJvgPageControl
         Left = 0
@@ -625,10 +789,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox1: TGroupBox
             Left = 0
             Top = 0
@@ -782,8 +942,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Left = 0
             Top = 105
             Width = 607
-            Height = 292
-            Align = alTop
+            Height = 296
+            Align = alClient
             BorderStyle = bsNone
             DataSource = modDados.dsRH_Send
             Font.Charset = DEFAULT_CHARSET
@@ -799,7 +959,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = [fsBold]
-            OnDblClick = dbgShortcutsDblClick
+            OnDblClick = dbgRH_SendDblClick
             OnEnter = dbgShortcutsEnter
             OnKeyPress = dbgShortcutsKeyPress
             OnTitleClick = dbgShortcutsTitleClick
@@ -822,10 +982,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Control: TTabSheet
           Caption = 'Control'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox2: TGroupBox
             Left = 0
             Top = 0
@@ -979,8 +1135,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Left = 0
             Top = 105
             Width = 607
-            Height = 292
-            Align = alTop
+            Height = 296
+            Align = alClient
             BorderStyle = bsNone
             DataSource = modDados.dsRH_Control
             Font.Charset = DEFAULT_CHARSET
@@ -996,7 +1152,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = [fsBold]
-            OnDblClick = dbgShortcutsDblClick
+            OnDblClick = dbgRH_ControlDblClick
             OnEnter = dbgShortcutsEnter
             OnKeyPress = dbgShortcutsKeyPress
             OnTitleClick = dbgShortcutsTitleClick
@@ -1133,6 +1289,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
+              ReadOnly = True
               TabOrder = 2
             end
             object edRH_Custom_Filter_Caption: TEdit
@@ -1170,8 +1327,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Left = 0
             Top = 105
             Width = 607
-            Height = 292
-            Align = alTop
+            Height = 296
+            Align = alClient
             BorderStyle = bsNone
             DataSource = modDados.dsRH_Custom
             Font.Charset = DEFAULT_CHARSET
@@ -1187,7 +1344,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = [fsBold]
-            OnDblClick = dbgShortcutsDblClick
+            OnDblClick = dbgRH_CustomDblClick
             OnEnter = dbgRH_CustomEnter
             OnKeyPress = dbgRH_CustomKeyPress
             Columns = <
