@@ -280,18 +280,30 @@ begin
              Caption:= 'Aplication';
          end;  //with modDados.cdShortcuts
 
-      with frmMain.dlgSKH_Map do
-        iSKH_Assign_To:= 1;
+        with frmMain.dlgSKH_Map do
+          iSKH_Assign_To:= 1;
 
-      Exit;
+        Exit;
     end;  //0:
 
+    // Editor
     1: begin
-       //TODO
-//       with frmMain.dlgSKH_Map do begin
-//         iSKH_Assign_To:= 2;
-//         iDx:= i;
-//       end;
+         with modDados.cdEditor do begin
+           eKeyShort.HotKey:= TextToShortcut(FieldByName('Keystroke').Value);
+
+           with lbId_Cur do
+             Caption:= FieldValues['Group'] +
+                       ' | ' +
+                       FieldValues['Command'];
+
+           with lbWhere_Cur do
+             Caption:= 'Editor';
+         end;  //with modDados.cdEditor
+
+         with frmMain.dlgSKH_Map do
+           iSKH_Assign_To:= 2;
+
+         Exit;
     end;
 
     // R Hotkeys
@@ -312,10 +324,10 @@ begin
                     Caption:= 'RH Send';
                 end;  //with modDados
 
-             with frmMain.dlgSKH_Map do
-               iSKH_Assign_To:= 3;
+               with frmMain.dlgSKH_Map do
+                 iSKH_Assign_To:= 3;
 
-             Exit;
+               Exit;
            end;  // 0: begin
 
            // RH Control
@@ -332,10 +344,10 @@ begin
                     Caption:= 'RH Control';
                 end;  //with modDados
 
-             with frmMain.dlgSKH_Map do
-               iSKH_Assign_To:= 4;
+               with frmMain.dlgSKH_Map do
+                 iSKH_Assign_To:= 4;
 
-             Exit;
+               Exit;
            end;  // 1: begin
 
            // RH Custom
@@ -352,10 +364,10 @@ begin
                     Caption:= 'RH Custom';
                 end;  //with modDados.cdShortcuts
 
-             with frmMain.dlgSKH_Map do
-               iSKH_Assign_To:= 5;
+               with frmMain.dlgSKH_Map do
+                 iSKH_Assign_To:= 5;
 
-             Exit;
+               Exit;
            end;  // 2: begin
          end;  //case frmMain.dlgSKH_Map.pgRH.ActivePageIndex
        end;  //2: begin (R Hotkeys)
