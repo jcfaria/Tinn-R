@@ -58,7 +58,7 @@ type
   TSyn_Transient = class (TObject)
 
   public
-    class procedure pSynPaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
+    class procedure pSyn_PaintTransient(Sender: TObject; Canvas: TCanvas; TransientType: TTransientType);
   end;
 
   //procedure pGetCallTip(var sRObject, sRPackage, sRTip: string; var bTipFound: boolean);
@@ -67,8 +67,8 @@ type
   function fTrigger_Get_Left(seTmp: TSynEdit): string;
   function fTrigger_Select(seTmp: TSynEdit): boolean;
 
-  procedure pInsertText_Smart(seEditor: TSynEdit; sText: string; iLen: integer = 0);
-  procedure pSetDataCompletion(synDC: TSynCompletionProposal; synTmp: TSynEdit; sTmp: string);
+  procedure pInsert_Text_Smart(seEditor: TSynEdit; sText: string; iLen: integer = 0);
+  procedure pSet_DataCompletion(synDC: TSynCompletionProposal; synTmp: TSynEdit; sTmp: string);
 
 implementation
 
@@ -81,7 +81,7 @@ uses
 // This procedure was in the main unit of the projecy for a long time!
 // SynEdit_UNICODE
 // https://stackoverflow.com/questions/11314641/method-pointer-and-regular-procedure-incompatible
-class procedure TSyn_Transient.pSynPaintTransient(Sender: TObject;
+class procedure TSyn_Transient.pSyn_PaintTransient(Sender: TObject;
                                                   Canvas: TCanvas;
                                                   TransientType: TTransientType);
 var
@@ -581,7 +581,7 @@ begin
   end;
 end;
 
-procedure pSetDataCompletion(synDC: TSynCompletionProposal;
+procedure pSet_DataCompletion(synDC: TSynCompletionProposal;
                              synTmp: TSynEdit;
                              sTmp: string);
 begin
@@ -590,7 +590,7 @@ begin
   synDC.ShortCut:= TextToShortCut(sTmp);
 end;
 
-procedure pInsertText_Smart(seEditor: TSynEdit;
+procedure pInsert_Text_Smart(seEditor: TSynEdit;
                             sText: string;
                             iLen: integer = 0);
 

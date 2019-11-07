@@ -292,7 +292,7 @@ end;
 
 procedure TfrmComments.bbHelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Comments"');
+  frmMain.pOpen_UserGuidePDF('"Comments"');
 end;
 
 procedure TfrmComments.bbtCommentsCancelAllClick(Sender: TObject);

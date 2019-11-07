@@ -368,7 +368,7 @@ end;
 
 procedure TfrmAbout.bbHelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Contents"');
+  frmMain.pOpen_UserGuidePDF('"Contents"');
 end;
 
 procedure TfrmAbout.FormActivate(Sender: TObject);
@@ -377,25 +377,25 @@ begin
     pgAbout.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
 
   with synAboutProject do begin
-    OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     if frmMain.bActiveLine then ActiveLineColor:= TColor(frmMain.clActiveLine)
                            else ActiveLineColor:= TColor(clNone);
   end;
 
   with synAboutAknowledgments do begin
-    OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     if frmMain.bActiveLine then ActiveLineColor:= TColor(frmMain.clActiveLine)
                            else ActiveLineColor:= TColor(clNone);
   end;
 
   with synAboutCredits do begin
-    OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     if frmMain.bActiveLine then ActiveLineColor:= TColor(frmMain.clActiveLine)
                            else ActiveLineColor:= TColor(clNone);
   end;
 
   with synAboutDonation do begin
-    OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     if frmMain.bActiveLine then ActiveLineColor:= TColor(frmMain.clActiveLine)
                            else ActiveLineColor:= TColor(clNone);
   end;

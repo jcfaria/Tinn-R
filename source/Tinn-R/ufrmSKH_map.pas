@@ -216,7 +216,7 @@ begin
            sRH_Custom,
            []);
 
-    frmMain.pSendRCustom(Fields[2].AsString);
+    frmMain.pSend_Rcustom(Fields[2].AsString);
 
     EnableControls;
   end;
@@ -770,12 +770,12 @@ end;
 
 procedure TfrmSKH_Map_Dlg.bbtShortcut_HelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Shortcuts"');
+  frmMain.pOpen_UserGuidePDF('"Shortcuts"');
 end;
 
 procedure TfrmSKH_Map_Dlg.BitBtn1Click(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"3.5 Hotkeys (operational system)"');
+  frmMain.pOpen_UserGuidePDF('"3.5 Hotkeys (operational system)"');
 end;
 
 procedure TfrmSKH_Map_Dlg.btnKeystroke_ClearAllClick(Sender: TObject);

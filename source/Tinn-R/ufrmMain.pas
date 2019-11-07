@@ -1974,7 +1974,6 @@ type
     TBItem68: TTBItem;
     actSKH_map: TAction;
     Loadstream1: TMenuItem;
-    test1: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2673,77 +2672,77 @@ type
     R_Useful                       : TR_Useful;
 
     function fActivePanel: integer;
-    function fCheckConnection: boolean;
-    function fCloseAllFilesOfProject: boolean;
-    function fFileExistsAsNode(var iPos: integer; sFile: string): boolean;
-    function fFindWindowByName(sName: string): integer;
+    function fCheck_Connection: boolean;
+    function fClose_AllFiles_Project: boolean;
+    function fFile_Exists_AsNode(var iPos: integer; sFile: string): boolean;
+    function fFind_Window_ByName(sName: string): integer;
     function fGet_Syn: TSynEdit;
-    function fGenericGroupExists: boolean;
-    function fGetBlockMarked(var bSingleLine: boolean): string;
-    function fGetClipboard(var bSingleLine: boolean): string;
-    function fGetContiguous(var bSingleLine: boolean): string;
-    function fGetEncodingDefault: string;
-    function fGetCursorTo(sWay: string): string;
-    function fGetEOLDefault: string;
-    function fGetFile(var bSingleLine: boolean): string;
-    function fGetFileToReformat: string;
-    function fGetFocus: integer;
+    function fCheck_GenericGroup: boolean;
+    function fGet_BlockMarked(var bSingleLine: boolean): string;
+    function fGet_Clipboard(var bSingleLine: boolean): string;
+    function fGet_Contiguous(var bSingleLine: boolean): string;
+    function fGet_EncodingDefault: string;
+    function fGet_CursorTo(sWay: string): string;
+    function fGet_EOLDefault: string;
+    function fGet_File(var bSingleLine: boolean): string;
+    function fGet_FileToReformat: string;
+    function fGet_Focus: integer;
     function fGetLine(bGoToNextValidLine: boolean; seEditor: TSynEdit): string;
-    function fGetLinesToEndPage(var bSingleLine: boolean): string;
-    function fGetPathFile(bFull: boolean = False): string;
-    function fGetSaveFormat(uStrings: TUnicodeStrings): string;
-    function fGetSelection(var bSingleLine: boolean): string;
-    function fGetSelectionToReformat(sSel: string): string;
-    function fGroupExistsAsNode(sGroupName: string): boolean;
+    function fGet_LinesToEndPage(var bSingleLine: boolean): string;
+    function fGet_PathFile(bFull: boolean = False): string;
+    function fGet_SaveFormat(uStrings: TUnicodeStrings): string;
+    function fGet_Selection(var bSingleLine: boolean): string;
+    function fGet_Selection_ToReformat(sSel: string): string;
+    function fGroup_ExistsAsNode(sGroupName: string): boolean;
     function fMessageDlg(const sMsg: string; mdType: TMsgDlgType; mdButtons: TMsgDlgButtons; iHelp: Integer): Integer;
     function fREnvironment: string;
     function fStripRegExPower(sSearchText: string): string;
 
-    procedure pAddFile(iFile: string);
-    procedure pBackupSystemConfiguration(bStarting: boolean);
-    procedure pBuildMRU(var miItem: TMenuItem);
-    procedure pBuildProjectMRU(var miItem: TMenuItem);
-    procedure pCheckData;
-    procedure pCheckEditorOptions;
-    procedure pCheckIfProjectWasChanged;
-    procedure pCheckIni;
-    procedure pCheckIniDock;
-    procedure pCheckLatex(bReload: boolean);
-    procedure pCheckOrigin;
-    procedure pCheckProcessingPath(sPath: string);
-    procedure pCheckProject;
-    procedure pCheckREcho;
-    procedure pCheckTemporary;
-    procedure pCheckTop;
-    procedure pCheckVersion;
-    procedure pClearStatusBarProject;
-    procedure pCloseAllFilesOfGroup;
-    procedure pCompileLaTeX(sMikPar, sBibPar, sExtension: string; bWait: boolean);
-    procedure pControlResources(bOption: boolean);
-    procedure pCreateGroup(sGroupName: string);
-    procedure pCreateProject;
-    procedure pDoClearConsole;
-    procedure pDoIPConnection(sIPHost: string; iIPPort: integer; bActive: boolean);
-    procedure pDoTxt2Tag(iButton: integer);
-    procedure pFileConversion(sParameter, sExtension, sPathConversor: string; sPathInterpreter: string = ''; bWait: boolean = True);
-    procedure pFileSaveGeneric(sFile: string; synEditor: TSynEdit);
-    procedure pGetCallTip(var sRObject, sRPackage, sRTip: string; var bTipFound: boolean);
-    procedure pGetComments;
-    procedure pInsertLatexMath(sFunction: string; iCaretControl: integer);
-    procedure pLoadEditorKeystrokes;
-    procedure pLoadFile(sFileName: string; bCreateNewChild: boolean = True; bUpdateMRU: boolean = True);
-    procedure pMakeItem(sRObjName, sRObjDim, sRObjGroup, sRObjClass: string; iIndex: integer);
-    procedure pMakeRenvironment(slRObjects: TStringList);
-    procedure pMakeTemplate(sFile: string);
-    procedure pMakeTree(sRObjName, sRObjDim, sRObjGroup, sRObjClass: string);
-    procedure pMakeTreeRExplorer_TmpFile(slRObjects: TStringList);
-    procedure pMatchBracket(seActive: TSynEdit);
+    procedure pAdd_File(iFile: string);
+    procedure pBackup_SystemConfiguration(bStarting: boolean);
+    procedure pBuild_MRU(var miItem: TMenuItem);
+    procedure pBuild_MRU_Project(var miItem: TMenuItem);
+    procedure pCheck_Data;
+    procedure pCheck_EditorOptions;
+    procedure pCheck_Project_Changed;
+    procedure pCheck_Ini;
+    procedure pCheck_IniDock;
+    procedure pCheck_Latex(bReload: boolean);
+    procedure pCheck_Origin;
+    procedure pCheck_ProcessingPath(sPath: string);
+    procedure pCheck_Project;
+    procedure pCheck_REcho;
+    procedure pCheck_Temporary;
+    procedure pCheck_Top;
+    procedure pCheck_Version;
+    procedure pClear_StatusBar_Project;
+    procedure pClose_AllFiles_Group;
+    procedure pCompile_LaTeX(sMikPar, sBibPar, sExtension: string; bWait: boolean);
+    procedure pControl_Resources(bOption: boolean);
+    procedure pCreate_Group(sGroupName: string);
+    procedure pCreate_Project;
+    procedure pDo_ClearConsole;
+    procedure pDo_IPConnection(sIPHost: string; iIPPort: integer; bActive: boolean);
+    procedure pDo_Txt2Tag(iButton: integer);
+    procedure pFile_Conversion(sParameter, sExtension, sPathConversor: string; sPathInterpreter: string = ''; bWait: boolean = True);
+    procedure pFile_SaveGeneric(sFile: string; synEditor: TSynEdit);
+    procedure pGet_CallTip(var sRObject, sRPackage, sRTip: string; var bTipFound: boolean);
+    procedure pGet_Comments;
+    procedure pInsert_LatexMath(sFunction: string; iCaretControl: integer);
+    procedure pLoad_EditorKeystrokes;
+    procedure pLoad_File(sFileName: string; bCreateNewChild: boolean = True; bUpdateMRU: boolean = True);
+    procedure pMake_Item(sRObjName, sRObjDim, sRObjGroup, sRObjClass: string; iIndex: integer);
+    procedure pMake_Renvironment(slRObjects: TStringList);
+    procedure pMake_Template(sFile: string);
+    procedure pMake_Tree(sRObjName, sRObjDim, sRObjGroup, sRObjClass: string);
+    procedure pMake_TreeRExplorer_TmpFile(slRObjects: TStringList);
+    procedure pMatch_Bracket(seActive: TSynEdit);
     procedure pMySort(iSort: integer);
     procedure pOnTop(hHandle: HWND);
-    procedure pOpenFileWithViewer(sFilter, sDefaultExt: string);
-    procedure pOpenHelpFile(sFileToOpen: string);
-    procedure pOpenProject;
-    procedure pOpenProjectIntoTinn(sProjectName: string);
+    procedure pOpen_FileWithViewer(sFilter, sDefaultExt: string);
+    procedure pOpen_HelpFile(sFileToOpen: string);
+    procedure pOpen_Project;
+    procedure pOpen_ProjectIntoTinn(sProjectName: string);
     procedure pPandocConversion(sPandocInstruction, sPandocFrom, sPandocTo: string; bWait: boolean = True);
     procedure pRecentProjectFileClick(Sender: TObject);
     procedure pRecordActions(baAction: TBasicAction; var bHandled: Boolean);
@@ -2753,56 +2752,59 @@ type
     procedure pRSetSend_Info(var sInfo, sFileInfo: string);
     procedure pR_Info;
     procedure pRToolbar(bOption: boolean);
-    procedure pSaveEditorKeystrokes;
-    procedure pSaveNewIni_Application;
-    procedure pSaveNewIni_Editor;
-    procedure pSavePreferencesOfOldVersion;
-    procedure pSaveProject;
-    procedure pSearchInDirectories(const sDir, sMask: string; var iFileCount, iMatchCount, iTotFileCount: integer);
-    procedure pSearchInOpenFiles(var iFileCount, iMatchCount: integer);
-    procedure pSendResources(bOption: boolean);
-    procedure pSetBuffer_FileFormat(ff: TSynEditFileFormat);
-    procedure pSetBuffer_SaveFormat(sf: TSaveFormat);
-    procedure pSetCompletion;
-    procedure pSetEncodingDefault(sTmp: string);
-    procedure pSetEOLDefault(sTmp: string);
-    procedure pSetIniStructure;
-    procedure pSetInterfaceSize(frm: TForm; iSize: integer);
-    procedure pSetPreferences_Application;
-    procedure pSetPreferences_Editor;
-    procedure pSetRcard;
-    procedure pSetSKH;
-    procedure pSetREcho_False;
-    procedure pSetREcho_True;
-    procedure pSetRExplorer(bOption: boolean);
-    procedure pSetRLibrary_Path(sTmp: string);
-    procedure pSetRmirrors;
-    procedure pSetShortcuts;
-    procedure pSetupSearchParameters(sSearchText: string);
-    procedure pSortProject;
-    procedure pStartSocketServer_svSocket;
+    procedure pSave_EditorKeystrokes;
+    procedure pSave_NewIni_Application;
+    procedure pSave_NewIni_Editor;
+    procedure pSave_Preferences_Old_Version;
+    procedure pSave_Project;
+    procedure pSearch_InDirectories(const sDir, sMask: string; var iFileCount, iMatchCount, iTotFileCount: integer);
+    procedure pSearch_InOpenFiles(var iFileCount, iMatchCount: integer);
+    procedure pSend_Resources(bOption: boolean);
+    procedure pSet_FileFormat(ff: TSynEditFileFormat);
+    procedure pSet_SaveFormat(sf: TSaveFormat);
+    procedure pSet_Completion;
+    procedure pSet_EncodingDefault(sTmp: string);
+    procedure pSet_EOLDefault(sTmp: string);
+    procedure pSet_IniStructure;
+    procedure pSet_InterfaceSize(frm: TForm; iSize: integer);
+    procedure pSet_PathRgui;
+    procedure pSet_PathRterm;
+    procedure pSet_Preferences_Application;
+    procedure pSet_Preferences_Editor;
+    procedure pSet_Rcard;
+    procedure pSet_SKH;
+    procedure pSet_Recho_False;
+    procedure pSet_Recho_True;
+    procedure pSet_Rexplorer(bOption: boolean);
+    procedure pSet_Rlibrary_Path(sTmp: string);
+    procedure pSet_Rmirrors;
+    procedure pSet_Shortcuts;
+    procedure pSetup_SearchParameters(sSearchText: string);
+    procedure pSort_Project;
+    procedure pStart_svSocket;
     procedure pTabMenuPopup(pcTmp: TPageControl; X, Y: Integer);
-    procedure pToolsProjectControls(bOption: boolean);
-    procedure pToolsSearchControls(bOption: boolean);
+    procedure pTools_ProjectControls(bOption: boolean);
+    procedure pTools_SearchControls(bOption: boolean);
     procedure pTraverseDir(sPath: string; var tsFileList: TStringList; sMask: string);
-    procedure pUdatePgFiles;
-    procedure pUnpackFile(sFile, sPath, sChoice: string);
-    procedure pUpdateAppearance(bFontSize: boolean = True);
-    procedure pUpdateBars(bOption: boolean);
-    procedure pUpdateCloseFileOptions;
-    procedure pUpdateFile(var seEditor: TSynEdit; var smOption: TSynSelectionMode);
-    procedure pUpdateFileIntoTinn(sFile: string; iLineNumberJump: integer = 0);
-    procedure pUpdateOptions;
-    procedure pUpdateProjectMRU(var miItem: TMenuItem; sFileName: string);
-    procedure pUpdateRFileReformatted(Stmp: string);
-    procedure pUpdateRSelectionReformatted(Stmp: string);
-    Procedure pUpdateRterm_Appearance(bUpdate_FontSize: boolean = True);
+    procedure pUdate_PgFiles;
+    procedure pUnpack_File(sFile, sPath, sChoice: string);
+    procedure pUpdate_Appearance(bFontSize: boolean = True);
+    procedure pUpdate_Bars(bOption: boolean);
+    procedure pUpdate_CloseFileOptions;
+    procedure pUpdate_File(var seEditor: TSynEdit; var smOption: TSynSelectionMode);
+    procedure pUpdate_FileIntoTinn(sFile: string; iLineNumberJump: integer = 0);
+    procedure pUpdate_Options;
+    procedure pUpdate_MRU_Project(var miItem: TMenuItem; sFileName: string);
+    procedure pUpdate_Rfile_Reformatted(Stmp: string);
+    procedure pUpdate_Rselection_Reformatted(Stmp: string);
+    Procedure pUpdate_Rterm_Appearance(bUpdate_FontSize: boolean = True);
     procedure pWMCopyData(var msg: TWMCopyData); message WM_COPYDATA;
     procedure pWMDropFiles(var Msg: TWMDropFiles); message WM_DROPFILES;
     procedure pWMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
-    procedure pWriteIniFile_Application(bMakingBackup: boolean);
-    procedure pWriteIniFile_Editor(bMakingBackup: boolean);
+    procedure pWrite_IniFile_Application(bMakingBackup: boolean);
+    procedure pWrite_IniFile_Editor(bMakingBackup: boolean);
     procedure pDraw_RtermSend_Plus;
+    procedure pSet_Hotkeys_Status(bStatus: boolean);
 
     // From public
     procedure pAppActivate(Sender: TObject);
@@ -2953,40 +2955,37 @@ type
     function fValidR_Running: boolean;
 
     procedure DefaultHandler(var message); override;
-    procedure pCheckIfFileFromDvi(sFile: string);
-    procedure pCheckRterm;
-    procedure pClearMRU;
-    procedure pClearStatusBar;
+    procedure pCheck_IfFileFromDvi(sFile: string);
+    procedure pCheck_Rterm;
+    procedure pClear_MRU;
+    procedure pClear_StatusBar;
     procedure pDatasetToActionList;
-    procedure pDoRConnection(sTmp: string; bActive, bSendTask: boolean);
-    procedure pDoRguiConnection(sTmp: string; bActive: boolean);
-    procedure pDoSend(var sTmp: string; bSendToSynIO: boolean = True);
-    procedure pDrawSelectionMode(iSelMode: integer);
-    procedure pGetFile_Info(sFileName: string; uStrings: TUnicodeStrings; bConverting: boolean = False);
-    procedure pInsertLatexSymbol(sSymbol: string; iCaretControl: integer);
-    procedure pMinimizeTinnAfterLastFile;
-    procedure pOpenAllFiles;
-    procedure pOpenAllFilesOfGroup;
-    procedure pOpenFileFromSearch;
-    procedure pOpenFileIntoTinn(sFile: string; iLineNumberJump: integer = 0; bOpenProjetcText: boolean = False; bUpdateMRU: boolean = True);
-    procedure pOpenUserGuidePDF(sWhere: string);
-    procedure pPrintMessage(sInstruction: string; bNewLine: boolean; sSignal: string = '> ');
+    procedure pDo_RConnection(sTmp: string; bActive, bSendTask: boolean);
+    procedure pDo_RguiConnection(sTmp: string; bActive: boolean);
+    procedure pDo_Send(var sTmp: string; bSendToSynIO: boolean = True);
+    procedure pDraw_SelectionMode(iSelMode: integer);
+    procedure pGet_File_Info(sFileName: string; uStrings: TUnicodeStrings; bConverting: boolean = False);
+    procedure pInsert_LatexSymbol(sSymbol: string; iCaretControl: integer);
+    procedure pMinimize_TinnAfterLastFile;
+    procedure pOpen_AllFiles;
+    procedure pOpen_AllFilesOfGroup;
+    procedure pOpen_FileFromSearch;
+    procedure pOpen_FileIntoTinn(sFile: string; iLineNumberJump: integer = 0; bOpenProjetcText: boolean = False; bUpdateMRU: boolean = True);
+    procedure pOpen_UserGuidePDF(sWhere: string);
+    procedure pPrint_Message(sInstruction: string; bNewLine: boolean; sSignal: string = '> ');
     procedure pRemoveTab(sTabCaption: string);
-    procedure pSendRCustom(sRC: string);
-    procedure pSendToConsole(sTmp: string);
-    procedure pSetFileSize_StatusBar(sFileName: string);
-    procedure pSetFocus_Main;
-    procedure pSetFocus_Rgui(iDelay: integer);
-    procedure pSetHotkeys_Status(bStatus: boolean);
-    procedure pSetPathRgui;
-    procedure pSetPathRTerm;
-    procedure pSetSyntaxComboBox(sSynName: string);
-    procedure pSetSyntaxMenuItem(sSynName: string);
-    procedure pSetTabTitle(sStat: string);
-    procedure pSetToolbarProcessing(sFileExtension: string);
-    procedure pUpdateCursorPos(Sender: TSynEdit);
-    procedure pUpdateHexViewer;
-    procedure pUpdateMRU(var miItem: TMenuItem; sFileName: string);
+    procedure pSend_Rcustom(sRC: string);
+    procedure pSend_ToConsole(sTmp: string);
+    procedure pSet_FileSize_StatusBar(sFileName: string);
+    procedure pSet_Focus_Main;
+    procedure pSet_Focus_Rgui(iDelay: integer);
+    procedure pSet_SyntaxComboBox(sSynName: string);
+    procedure pSet_SyntaxMenuItem(sSynName: string);
+    procedure pSet_TabTitle(sStat: string);
+    procedure pSet_ToolbarProcessing(sFileExtension: string);
+    procedure pUpdate_CursorPos(Sender: TSynEdit);
+    procedure pUpdate_HexViewer;
+    procedure pUpdate_MRU(var miItem: TMenuItem; sFileName: string);
 
 end;
 
@@ -3030,10 +3029,10 @@ uses
 
 (*
 ----------------------------------------------------
- pSetShortcuts: It is very important for developers!
+ pSet_Shortcuts: It is very important for developers!
 ----------------------------------------------------
 *)
-procedure TfrmMain.pSetShortcuts;
+procedure TfrmMain.pSet_Shortcuts;
 begin
 (*
 ----------------------------------------------------------------------------------------------
@@ -3043,7 +3042,7 @@ begin
    3- Generate a new Dataset: Tools/Utils/Actionlist to dataset
       (This menu is visible only when running the project under the IDE);
    4- Close Tinn-R;
-   5- Change the version of sCurrentVersion_Shortcuts in procedure TfrmMain.pCheckVersion
+   5- Change the version of sCurrentVersion_Shortcuts in procedure TfrmMain.pCheck_Version
       (It is very important to the user version be updated!);
    6- Uncomment this line newly (pDatasetToActionList);
    7- It is all!
@@ -3067,21 +3066,21 @@ begin
   frmTools.lbShortcutsClick(Self);
 end;
 
-procedure TfrmMain.pCheckREcho;
+procedure TfrmMain.pCheck_REcho;
 begin
   bREcho:= ifTinn.ReadBool('App', 'bREcho', True);
 
   if bREcho then begin
     actREcho.Checked:= True;
-    pSetREcho_True;
+    pSet_Recho_True;
   end
   else begin
     actREcho.Checked:= False;
-    pSetREcho_False;
+    pSet_Recho_False;
   end;
 end;
 
-procedure TfrmMain.pCheckVersion;
+procedure TfrmMain.pCheck_Version;
 begin
   // Versions in use by user: from ini file
   sVersion_Cache     := ifTinn.ReadString('App', 'sVersion_Cache'     , '0.0.0.0');
@@ -3216,7 +3215,7 @@ begin
                                                            '\editor shortcuts');
 end;
 
-procedure TfrmMain.pOpenFileIntoTinn(sFile: string;
+procedure TfrmMain.pOpen_FileIntoTinn(sFile: string;
                                          iLineNumberJump: integer = 0;
                                          bOpenProjetcText: boolean = False;
                                          bUpdateMRU: boolean = True);
@@ -3300,13 +3299,13 @@ var
 
 begin
   // Check if sFile is a valid URL
-  if fIsURL(sFile) then begin
+  if fIs_URL(sFile) then begin
     sFileName:= fGetFileNameFromURL(sFile);
 
     if fDownload_File(sFile,
                       sFileName) then
       if FileExists(sFileName) then begin
-        pOpenFileIntoTinn(sFileName);
+        pOpen_FileIntoTinn(sFileName);
         Exit;
       end
       else begin
@@ -3327,23 +3326,23 @@ begin
     frmTools.pgTools.ActivePage:= frmTools.tbsMisc;
     frmTools.pgMisc.ActivePage := frmTools.tbsProject;
 
-    pCheckIfProjectWasChanged;
+    pCheck_Project_Changed;
     Application.ProcessMessages;
 
     sProjectName:= sFile;
 
     // Bring to front the textual project, if it is opened
-    i:= fFindWindowByName(sProjectName);
+    i:= fFind_Window_ByName(sProjectName);
 
     if (i > -1) then Self.MDIChildren[i].BringToFront;
 
-    pOpenProjectIntoTinn(sProjectName);
+    pOpen_ProjectIntoTinn(sProjectName);
     Application.ProcessMessages;
 
     if not bOpenProjetcText then Exit;  // The textual project file (*.tps) will not be opened!
   end;
 
-  pControlResources(False);
+  pControl_Resources(False);
 
   // Init of the variables
   bLoadFileFromDisk        := True;
@@ -3352,10 +3351,10 @@ begin
   // Check to see if the file is already opened
   sTmp:= sFile;
 
-  i:= fFindWindowByName(sTmp);
+  i:= fFind_Window_ByName(sTmp);
   if (i > -1) then begin  // if the file is already open, bring it to the front
     // !! removed, done in activate and btw, do not change if user set it manually
-    if bUpdateMRU then pUpdateMRU(menFileRecentFiles,
+    if bUpdateMRU then pUpdate_MRU(menFileRecentFiles,
                                   sTmp);
 
     with (Self.MDIChildren[i] as TfrmEditor) do
@@ -3413,16 +3412,16 @@ begin
     if not(bFileExists) and
           (ExecRegExpr('Untitled[1-9] + $',
                        pgFiles.ActivePage.Caption))  then begin
-      if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Modified = False) then pLoadFile(sTmp,
-                                                                                                      False,
-                                                                                                      bUpdateMRU)
-                                                                                      else pLoadFile(sTmp,
-                                                                                                     True,
-                                                                                                     bUpdateMRU);
+      if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Modified = False) then pLoad_File(sTmp,
+                                                                                                        False,
+                                                                                                        bUpdateMRU)
+                                                                                      else pLoad_File(sTmp,
+                                                                                                      True,
+                                                                                                      bUpdateMRU);
     end
-    else pLoadFile(sTmp,
-                   not bOverwriteCurrentContents,
-                   bUpdateMRU); // Boolean added
+    else pLoad_File(sTmp,
+                    not bOverwriteCurrentContents,
+                    bUpdateMRU); // Boolean added
 
     cTmp:= sFile[1];
     sTmp:= ExtractFilePath(sFile);
@@ -3457,7 +3456,7 @@ begin
   i:= fFindTop_Window;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
 
-  (Self.MDIChildren[i] as TfrmEditor).pCheckSaveStatus;
+  (Self.MDIChildren[i] as TfrmEditor).pCheck_Save_Status;
 
   if bRememberFileState then
     // Load file state from Cache.xml
@@ -3501,7 +3500,7 @@ begin
     end;
 end;
 
-procedure TfrmMain.pUpdateFileIntoTinn(sFile: string;
+procedure TfrmMain.pUpdate_FileIntoTinn(sFile: string;
                                            iLineNumberJump: integer = 0);
 var
   bFileExists,
@@ -3520,7 +3519,7 @@ var
   sTmp: string;
 
 begin
-  pControlResources(False);
+  pControl_Resources(False);
 
   // Init of the variables
   bLoadFileFromDisk        := True;
@@ -3528,10 +3527,10 @@ begin
 
   // Check to see if the file is already opened
   sTmp:= sFile;
-  i:= fFindWindowByName(sTmp);
+  i:= fFind_Window_ByName(sTmp);
   if (i > -1) then begin// If the file is already open, bring it to the front
     // !! Removed, done in activate and btw, do not change if user set it manually
-    pUpdateMRU(menFileRecentFiles,
+    pUpdate_MRU(menFileRecentFiles,
                sTmp);
 
     seEditor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
@@ -3569,13 +3568,13 @@ begin
     if not bFileExists and
           (ExecRegExpr('Untitled[1-9] + $',
                        pgFiles.ActivePage.Caption)) then begin
-      if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Modified = False) then pLoadFile(sTmp,
-                                                                                                      False)
-                                                                                      else pLoadFile(sTmp,
-                                                                                                     True);
+      if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Modified = False) then pLoad_File(sTmp,
+                                                                                                        False)
+                                                                                      else pLoad_File(sTmp,
+                                                                                                      True);
     end
-    else pLoadFile(sTmp,
-                   not bOverwriteCurrentContents); // Boolean added
+    else pLoad_File(sTmp,
+                    not bOverwriteCurrentContents); // Boolean added
   end;
 
   if (iLineNumberJump > 0) then begin
@@ -3588,12 +3587,12 @@ begin
 
   i:= fFindTop_Window;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
-  (Self.MDIChildren[i] as TfrmEditor).pCheckSaveStatus;
+  (Self.MDIChildren[i] as TfrmEditor).pCheck_Save_Status;
 end;
 
-procedure TfrmMain.pLoadFile(sFileName: string;
-                                 bCreateNewChild: boolean = True;
-                                 bUpdateMRU: boolean = True);
+procedure TfrmMain.pLoad_File(sFileName: string;
+                              bCreateNewChild: boolean = True;
+                              bUpdateMRU: boolean = True);
 var
   sTmp: string;
 
@@ -3620,10 +3619,10 @@ begin
                             bBOM);
 
       if (seUsed = seANSI) and
-         actApplyToANSI.Checked then pSetBuffer_SaveFormat(sfUTF8);
+         actApplyToANSI.Checked then pSet_SaveFormat(sfUTF8);
 
-      pGetFile_Info(sActiveFile,
-                    synEditor.Lines);
+      pGet_File_Info(sActiveFile,
+                     synEditor.Lines);
 
       wAttributes:= FileGetAttr(sActiveFile);
 
@@ -3633,27 +3632,27 @@ begin
         actReadOnly.Checked   := True;
       end;
 
-      pSetFileSize_StatusBar(sActiveFile);
+      pSet_FileSize_StatusBar(sActiveFile);
     end;
 
     synEditor.WordWrap:= actEditorLineWrap.Checked;
     if synEditor.WordWrap then synEditor.Options:= synEditor.Options - [eoTrimTrailingSpaces]
                           else synEditor.Options:= synEditor.Options + [eoTrimTrailingSpaces];
 
-    synEditor.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    synEditor.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 
-    pSetDataCompletion(synEditor_Tip,
-                       synEditor,
-                       'CTRL+SPACE');
+    pSet_DataCompletion(synEditor_Tip,
+                        synEditor,
+                        'CTRL+SPACE');
 
-    pSetHighlighter_FromFileExt(ExtractFileExt(sFileName));
-    pSetTitle;
+    pSet_Highlighter_FromFileExt(ExtractFileExt(sFileName));
+    pSet_Title;
 
     if bActiveLine then synEditor.ActiveLineColor:= TColor(clActiveLine)
                    else synEditor.ActiveLineColor:= TColor(clNone);
 
     synEditor.Modified:= False;
-    pUpdateCursorPos(synEditor);
+    pUpdate_CursorPos(synEditor);
 
     with synEditor do
       if CanFocus then SetFocus;
@@ -3661,7 +3660,7 @@ begin
     // File notify: Start
     fNotif:= TATFileNotificationSimple.Create(Self);
     fNotif.OnChanged:= pFile_Changed;
-    pNotifyFile_Start(sFileName);
+    pNotify_File_Start(sFileName);
   end;
 
   sTmp:= StringReplace(sFileName,
@@ -3678,13 +3677,13 @@ begin
 
   pgFiles.ActivePage.Tag:= -1;
 
-  if bUpdateMRU then pUpdateMRU(menFileRecentFiles,
+  if bUpdateMRU then pUpdate_MRU(menFileRecentFiles,
                                 sFileName);
 
-  pUpdateHexViewer;
+  pUpdate_HexViewer;
 end;
 
-procedure TfrmMain.pSaveNewIni_Application;
+procedure TfrmMain.pSave_NewIni_Application;
 var
   slSearch,
    slReplace,
@@ -3919,9 +3918,9 @@ begin
     WriteInteger('App', 'iTransparency', iTransparency);
     WriteInteger('App', 'iViewStyleRExplorer', iViewStyleRExplorer);
     WriteString('App', 'sAppSelected', sAppSelected);
-    WriteString('App', 'sEncodingDefault', fGetEncodingDefault);
+    WriteString('App', 'sEncodingDefault', fGet_EncodingDefault);
     WriteString('App', 'sEndComment', sEndComment);
-    WriteString('App', 'sEOLDefault', fGetEOLDefault);
+    WriteString('App', 'sEOLDefault', fGet_EOLDefault);
     WriteString('App', 'sFormatR', sFormatR);
     WriteString('App', 'sKnit', sKnit);
     WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
@@ -4172,7 +4171,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSaveNewIni_Editor;
+procedure TfrmMain.pSave_NewIni_Editor;
 begin
   // Editor
   if not DirectoryExists(sPath_Editor) then begin
@@ -4231,7 +4230,7 @@ begin
   FreeAndNil(ifEditor_Tmp);
 end;
 
-procedure TfrmMain.pWriteIniFile_Application(bMakingBackup: boolean);
+procedure TfrmMain.pWrite_IniFile_Application(bMakingBackup: boolean);
 var
   slSearch,
    slReplace,
@@ -4452,9 +4451,9 @@ begin
     WriteInteger('App', 'iTransparency', iTransparency);
     WriteInteger('App', 'iViewStyleRExplorer', iViewStyleRExplorer);
     WriteString('App', 'sAppSelected', sAppSelected);
-    WriteString('App', 'sEncodingDefault', fGetEncodingDefault);
+    WriteString('App', 'sEncodingDefault', fGet_EncodingDefault);
     WriteString('App', 'sEndComment', sEndComment);
-    WriteString('App', 'sEOLDefault', fGetEOLDefault);
+    WriteString('App', 'sEOLDefault', fGet_EOLDefault);
     WriteString('App', 'sFormatR', sFormatR);
     WriteString('App', 'sKnit', sKnit);
     WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
@@ -4678,7 +4677,7 @@ begin
   end;
   FreeAndNil(slSearch);
 
-  pSaveEditorKeystrokes;
+  pSave_EditorKeystrokes;
 
   // Explorer Favorites
   ifTinn.EraseSection('Explorer Favorites');
@@ -4717,7 +4716,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pWriteIniFile_Editor(bMakingBackup: boolean);
+procedure TfrmMain.pWrite_IniFile_Editor(bMakingBackup: boolean);
 begin
   // Editor
   if not DirectoryExists(sPath_Editor) then begin
@@ -4772,7 +4771,7 @@ begin
   end;
 end;
 
-function TfrmMain.fGetEncodingDefault: string;
+function TfrmMain.fGet_EncodingDefault: string;
 begin
   if      actANSI.Checked    then Result:= 'ANSI'
   else if actUTF8.Checked    then Result:= 'UTF8'
@@ -4780,14 +4779,14 @@ begin
   else if actUTF16BE.Checked then Result:= 'UTF16BE';
 end;
 
-function TfrmMain.fGetEOLDefault: string;
+function TfrmMain.fGet_EOLDefault: string;
 begin
   if      actWIN.Checked  then Result:= 'WIN'
   else if actMAC.Checked  then Result:= 'MAC'
   else if actUNIX.Checked then Result:= 'UNIX';
 end;
 
-procedure TfrmMain.pSetEOLDefault(sTmp: string);
+procedure TfrmMain.pSet_EOLDefault(sTmp: string);
 begin
   case fString_ToCase_Select(sTmp,
                              ['WIN',
@@ -4799,7 +4798,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSetEncodingDefault(sTmp: string);
+procedure TfrmMain.pSet_EncodingDefault(sTmp: string);
 begin
   case fString_ToCase_Select(sTmp,
                              ['ANSI',
@@ -4813,7 +4812,7 @@ begin
   end;
 end;
 
-function TfrmMain.fGetSaveFormat(uStrings: TUnicodeStrings): string;
+function TfrmMain.fGet_SaveFormat(uStrings: TUnicodeStrings): string;
 var
   sf: TSaveFormat;
   
@@ -4828,15 +4827,15 @@ begin
   end;
 end;
 
-procedure TfrmMain.pGetFile_Info(sFileName: string;
-                                     uStrings: TUnicodeStrings;
-                                     bConverting: boolean = False);
+procedure TfrmMain.pGet_File_Info(sFileName: string;
+                                  uStrings: TUnicodeStrings;
+                                  bConverting: boolean = False);
 var
   sff,
    ssf: string;
 
 begin
-  ssf:= fGetSaveFormat(uStrings);
+  ssf:= fGet_SaveFormat(uStrings);
 
   case TSynEditStringList(uStrings).FileFormat of
     sffDOS:  sff:= 'WIN';
@@ -4869,33 +4868,33 @@ begin
     Panels[1].Text:= sff;
 end;
 
-procedure TfrmMain.pSetBuffer_SaveFormat(sf: TSaveFormat);
+procedure TfrmMain.pSet_SaveFormat(sf: TSaveFormat);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     TSynEditStringList(synEditor.Lines).SaveFormat:= sf;
     synEditor.Modified:= True;
-    pSetTabTitle('*');
-    pCheckSaveStatus;
-    pGetFile_Info(sActiveFile,
-                  synEditor.Lines,
-                  True);  // True because is converting
+    pSet_TabTitle('*');
+    pCheck_Save_Status;
+    pGet_File_Info(sActiveFile,
+                   synEditor.Lines,
+                   True);  // True because is converting
   end;
 end;
 
-procedure TfrmMain.pSetBuffer_FileFormat(ff: TSynEditFileFormat);
+procedure TfrmMain.pSet_FileFormat(ff: TSynEditFileFormat);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     TSynEditStringList(synEditor.Lines).FileFormat:= ff;
     synEditor.Modified:= True;
-    pSetTabTitle('*');
-    pCheckSaveStatus;
-    pGetFile_Info(sActiveFile,
-                  synEditor.Lines,
-                  True);  // True because is converting
+    pSet_TabTitle('*');
+    pCheck_Save_Status;
+    pGet_File_Info(sActiveFile,
+                   synEditor.Lines,
+                   True);  // True because is converting
   end;
 end;
 
-procedure TfrmMain.pSetPreferences_Application;
+procedure TfrmMain.pSet_Preferences_Application;
 
 //  function fReadRegEntry(strSubKey,
 //                         strValueName: string): string;
@@ -5071,7 +5070,7 @@ begin
   frmTools.tbsWorkExplorer.TabVisible:= actWorkExplVisible.Checked;
 
   actShowAllBars.Checked:= ifTinn.ReadBool('App', 'bShowAllBars', True);
-  pUpdateBars(actShowAllBars.Checked);
+  pUpdate_Bars(actShowAllBars.Checked);
 
   actAlwaysAddBOM.Checked  := ifTinn.ReadBool('App', 'bAlwaysAddBOM', False);
   actApplyToANSI.Checked   := ifTinn.ReadBool('App', 'bApplyToANSI', False);
@@ -5137,7 +5136,7 @@ begin
   bOrganizeAutomatically := ifTinn.ReadBool('App', 'bOrganizeAutomatically', False);
 
   // There is still some 32 bit computer in use today!
-  if (fIs64Bit_OS) and
+  if (fIs_64Bit_OS) and
      ifTinn.ReadBool('App', 'bRArchitecture64', True) then bRArchitecture64:= True
                                                       else bRArchitecture64:= False;
 
@@ -5267,11 +5266,11 @@ begin
 
   // Encoding
   sEncodingDefault:= ifTinn.ReadString('App', 'sEncodingDefault', 'ANSI');
-  pSetEncodingDefault(sEncodingDefault);
+  pSet_EncodingDefault(sEncodingDefault);
 
   // EOL
   sEOLDefault:= ifTinn.ReadString('App', 'sEOLDefault', 'WIN');
-  pSetEOLDefault(sEOLDefault);
+  pSet_EOLDefault(sEOLDefault);
 
   // Search Settings
   bSearch_Backwards    := ifTinn.ReadBool('Search', 'bSearch_Backwards', False);
@@ -5581,11 +5580,11 @@ begin
 
   // Read the list of File MRU docs and add them to the menu and the drop down menu
   ifTinn.ReadSectionValues('File MRU', slFileMRU);
-  pBuildMRU(menFileRecentFiles);
+  pBuild_MRU(menFileRecentFiles);
 
   // Do the same for Projects
   ifTinn.ReadSectionValues('Project MRU', slprojectMRU);
-  pBuildProjectMRU(menProjRecent);
+  pBuild_MRU_Project(menProjRecent);
 
   slTextDiff:= TStringList.Create;
   ifTinn.ReadSectionValues('Diff Options', slTextDiff);
@@ -5600,15 +5599,15 @@ begin
   // Check the latest R version installed
   if bRUseLatest then begin
     if (sPath_R <> EmptyStr) then begin
-      pSetPathRTerm;
-      pSetPathRgui;
+      pSet_PathRterm;
+      pSet_PathRgui;
     end;
   end
   else begin
     // Will read from INI because the user choice is not to use the latest instaled version of R
     sPath_Rterm:= trim(ifTinn.ReadString('App', 'sPath_Rterm', EmptyStr));
-    if fIsPortable_Version then
-      if not fPathRExists(sPath_Rterm) then begin  // Portable
+    if fIs_Portable_Version then
+      if not fPath_R_Exists(sPath_Rterm) then begin  // Portable
         sPath_R    := 'UNKNOWN';
         sPath_Rterm:= 'UNKNOWN';
       end
@@ -5620,8 +5619,8 @@ begin
       end;
 
     sPath_Rgui:= trim(ifTinn.ReadString('App', 'sPath_Rgui', EmptyStr));
-    if fIsPortable_Version then
-      if not fPathRExists(sPath_Rgui) then begin  // Portable
+    if fIs_Portable_Version then
+      if not fPath_R_Exists(sPath_Rgui) then begin  // Portable
         sPath_R    := 'UNKNOWN';
         sPath_Rterm:= 'UNKNOWN';
       end
@@ -5645,7 +5644,7 @@ begin
   iAlphaBlendValue:= 255 - (255 * iTransparency) Div 100;
 end;
 
-procedure TfrmMain.pSetPreferences_Editor;
+procedure TfrmMain.pSet_Preferences_Editor;
 begin
   coEditor:= TSynEditorOC.Create(nil);
 
@@ -5690,7 +5689,7 @@ begin
   actSpecialCharVisible.Checked:= (eoShowSpecialChars in coEditor.Options);
 end;
 
-procedure TfrmMain.pGetCallTip(var sRObject,
+procedure TfrmMain.pGet_CallTip(var sRObject,
                                    sRPackage,
                                    sRTip: string;
                                    var bTipFound: boolean);
@@ -6788,10 +6787,10 @@ begin
 
   bTipFound:= False;
 
-  pGetCallTip(sRObject,
-              sRPackage,
-              sRTip,
-              bTipFound);
+  pGet_CallTip(sRObject,
+               sRPackage,
+               sRTip,
+               bTipFound);
 
   if (not bTipFound) then Exit;
 
@@ -6914,11 +6913,11 @@ begin
   inc(iFileCount);
 
   with TfrmEditor.Create(Self) do begin
-    synEditor.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    synEditor.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 
-    pSetDataCompletion(synEditor_Tip,
-                       (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor,
-                       'CTRL+SPACE');
+    pSet_DataCompletion(synEditor_Tip,
+                        (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor,
+                        'CTRL+SPACE');
 
     (Self.MDIChildren[fFindTop_Window] as tfrmEditor).pLineWrap_Toogle(actEditorLineWrap.Checked);
 
@@ -6944,7 +6943,7 @@ begin
   pgFiles.ActivePageIndex:= pgFiles.PageCount - 1;
   pgFiles.ActivePage.Tag := -1;
 
-  pUpdateHexViewer;
+  pUpdate_HexViewer;
 end;
 
 procedure TfrmMain.actFileOpenExecute(Sender: TObject);
@@ -6961,7 +6960,7 @@ begin
 
     if Execute then
       for i:= 0 to (Files.Count - 1) do
-        pOpenFileIntoTinn(Files[i]);
+        pOpen_FileIntoTinn(Files[i]);
 
     Options:= Options -
               [ofAllowMultiSelect];
@@ -6980,7 +6979,7 @@ begin
   TBRMain.Visible      := bOption;
 end;
 
-procedure TfrmMain.pControlResources(bOption: boolean);
+procedure TfrmMain.pControl_Resources(bOption: boolean);
 
   // Return True if R is selected from frmTools.lbCompletion
   function fIsRSelected: boolean;
@@ -7052,8 +7051,8 @@ begin
 
   if Assigned(frmTools) then
     with frmTools.lvRexplorer.Items do
-      if (Count = 0) then pSetRExplorer(False)
-                     else pSetRExplorer(bOption);
+      if (Count = 0) then pSet_Rexplorer(False)
+                     else pSet_Rexplorer(bOption);
 
   // Project
   pmenProjRSendToR.Enabled   := bOption;
@@ -7064,7 +7063,7 @@ begin
   menRSet_trPAths.Enabled:= bOption;
 end;
 
-procedure TfrmMain.pSendResources(bOption: boolean);
+procedure TfrmMain.pSend_Resources(bOption: boolean);
 var
   bMark: boolean;
 
@@ -7153,25 +7152,25 @@ begin
   if (Self.MDIChildCount > 0) then begin
     for i:= (Self.MDIChildCount - 1) downto 0 do
       if Self.MDIChildren[i].Active then break;
-    (Self.MDIChildren[i] as TfrmEditor).pSetHighlighter_Status(Sender);
-    pgFiles.ActivePage.Tag:= (Self.MDIChildren[i] as TfrmEditor).fSetHighlighterID;
+    (Self.MDIChildren[i] as TfrmEditor).pSet_Highlighter_Status(Sender);
+    pgFiles.ActivePage.Tag:= (Self.MDIChildren[i] as TfrmEditor).fSet_HighlighterID;
   end
   else begin
     if Sender is TComboBox then begin
       sTmp:= trim((Sender as TComboBox).Text);
-      pSetSyntaxMenuItem(sTmp)
+      pSet_SyntaxMenuItem(sTmp)
     end
     else begin
       sTmp:= StringReplace((Sender as TMenuItem).Caption,
                            '&',
                            EmptyStr,
                            []); // [rfReplaceAll])
-      pSetSyntaxComboBox(sTmp);
+      pSet_SyntaxComboBox(sTmp);
     end;
   end;
 end;
 
-procedure TfrmMain.pOpenUserGuidePDF(sWhere: string);
+procedure TfrmMain.pOpen_UserGuidePDF(sWhere: string);
 var
   sFile,
    sViewerDefault,
@@ -7221,7 +7220,7 @@ end;
 
 procedure TfrmMain.menHelUserGuideClick(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Contents"');
+  pOpen_UserGuidePDF('"Contents"');
 end;
 
 procedure TfrmMain.menHelUserListClick(Sender: TObject);
@@ -7265,7 +7264,7 @@ begin
     finally
       frmMain.Refresh;
       FreeAndNil(frmAbout);
-      pSetFocus_Main;
+      pSet_Focus_Main;
     end;
 end;
 
@@ -7308,7 +7307,7 @@ begin
       end;
 
       for i:= 0 to (slFile.Count - 1) do
-        pOpenFileIntoTinn(slFile.Strings[i]);
+        pOpen_FileIntoTinn(slFile.Strings[i]);
 
     finally
       FreeAndNil(slFile);
@@ -7328,13 +7327,13 @@ begin
   chReceived   := msg.CopyDataStruct.lpData;
   sPathReceived:= AnsiExtractQuotedStr(chReceived,
                                        '"');
-  pCheckIfFileFromDvi(StringReplace(sPathReceived,
+  pCheck_IfFileFromDvi(StringReplace(sPathReceived,
                                     '/',
                                     '\',
                                     [rfReplaceAll]));
 end;
 
-procedure TfrmMain.pSetFileSize_StatusBar(sFileName: string);
+procedure TfrmMain.pSet_FileSize_StatusBar(sFileName: string);
 
   // Return the exact file size for a file. Return zero if the file is not found.
   function fFileSize(FileName : string) : Int64;
@@ -7445,24 +7444,24 @@ begin
     end;
   end;
 
-  if not bReadOnly then (Self.MDIChildren[i] as TfrmEditor).pEnableSave;
+  if not bReadOnly then (Self.MDIChildren[i] as TfrmEditor).pEnable_Save;
 
   actReadOnly.Checked:= not(actReadOnly.Checked);
 
   with (Self.MDIChildren[i] as tfrmEditor) do
   begin
     if synEditor.Modified then begin
-      pSetTabTitle('*');
-      pCheckSaveStatus;
+      pSet_TabTitle('*');
+      pCheck_Save_Status;
     end
     else begin
-      pSetTabTitle(EmptyStr);
-      pCheckSaveStatus;
+      pSet_TabTitle(EmptyStr);
+      pCheck_Save_Status;
     end
   end;
 end;
 
-procedure TfrmMain.pSetREcho_True;
+procedure TfrmMain.pSet_Recho_True;
 begin
   // File
   actRSendFile.Caption   := 'File (echo=TRUE)';
@@ -7495,7 +7494,7 @@ begin
   actRSendLinesToEndPage.ImageIndex:= 8;
 end;
 
-procedure TfrmMain.pSetREcho_False;
+procedure TfrmMain.pSet_Recho_False;
 begin
   // File
   actRSendFile.Caption   := 'File';
@@ -7533,12 +7532,12 @@ begin
   if not actREcho.Checked then begin
     bREcho:= True;
     actREcho.Checked:= bREcho;
-    pSetREcho_True;
+    pSet_Recho_True;
   end
   else begin
     bREcho:= False;
     actREcho.Checked:= bREcho;
-    pSetREcho_False;
+    pSet_Recho_False;
   end;
 end;
 
@@ -7555,7 +7554,7 @@ end;
 // OBS: If we use R_LIBS_USER (instead of R_LIBS)
 // and the user sets a WEV R_LIBS
 // R-packages will stay in second position in .libPaths()
-procedure TfrmMain.pSetRLibrary_Path(sTmp: string);
+procedure TfrmMain.pSet_Rlibrary_Path(sTmp: string);
 
   function fRLibraryNumber(sTmp: string): string;
   begin
@@ -7611,7 +7610,7 @@ var
    sFilter: string;
 
 begin
-  if fIsPortable_Version then frmMain.Caption:= 'Tinn-R (portable)';
+  if fIs_Portable_Version then frmMain.Caption:= 'Tinn-R (portable)';
 
   (*
   // The below controls (automatically) the visibility of the menu Tools/Utils on build!
@@ -7626,8 +7625,8 @@ begin
   frmSplash.pb.Position:= 0;
 
   // Initial status
-  pToolsProjectControls(False);
-  pToolsSearchControls(False);
+  pTools_ProjectControls(False);
+  pTools_SearchControls(False);
   actMacroPlay.Enabled          := False;
   actMacroRecord.Enabled        := False;
   actReadOnly.Enabled           := False;
@@ -7651,54 +7650,54 @@ begin
     frmTools:= TfrmTools.Create(nil);
     frmSplash.pb.Position:= 2;
 
-    pCheckOrigin;
+    pCheck_Origin;
 
-    pSetIniStructure;
+    pSet_IniStructure;
     frmSplash.pb.Position:= 3;
 
-    pCheckVersion;
+    pCheck_Version;
 
     sOldPreferencesTmp:= sPath_Ini +
                          '_tmp';
 
-    pSavePreferencesOfOldVersion;
+    pSave_Preferences_Old_Version;
 
     frmRterm:= TfrmRterm.Create(nil);
     frmSplash.pb.Position:= 4;
 
-    pSetPreferences_Application;
-    pSetPreferences_Editor;
+    pSet_Preferences_Application;
+    pSet_Preferences_Editor;
 
-    pCheckIni;
+    pCheck_Ini;
 
-    pCheckIniDock;
+    pCheck_IniDock;
     frmSplash.pb.Position:= 5;
 
-    pCheckData;
+    pCheck_Data;
 
     Application.CreateForm(TmodDados,
                            modDados);
     frmSplash.pb.Position:= 6;
 
-    pSetSKH;  // Dlg to unified manager of: Shortcuts|Keystrokes|Hotkeys
-    pSetRcard;
+    pSet_SKH;  // Dlg to unified manager of: Shortcuts|Keystrokes|Hotkeys
+    pSet_Rcard;
     frmSplash.pb.Position:= 7;
 
-    pSetCompletion;
-    pSetRmirrors;
+    pSet_Completion;
+    pSet_Rmirrors;
     frmSplash.pb.Position:= 8;
 
-    pSetShortcuts;
-    pCheckREcho;  // Must be after pSetShortcuts!
+    pSet_Shortcuts;
+    pCheck_REcho;  // Must be after pSet_Shortcuts!
 
     frmTools.tbsLatex.TabVisible:= actLatexVisible.Checked;
-    pCheckLatex(False);
+    pCheck_Latex(False);
 
-    pCheckProject;
+    pCheck_Project;
 
-    pCheckEditorOptions;
+    pCheck_EditorOptions;
 
-    pCheckTemporary;
+    pCheck_Temporary;
 
     frmSplash.pb.Position:= 9;
 
@@ -7718,14 +7717,14 @@ begin
     frmSplash.pb.Position:= 10;
 
     // Application
-    pSaveNewIni_Application;                                                  // Will create a new and clean Tinn.tmp
+    pSave_NewIni_Application;                                                  // Will create a new and clean Tinn.tmp
     if FileExists(sPathIniTinn_File) then DeleteFile(sPathIniTinn_File);      // Delete old Tinn.ini
 
     RenameFile(sPathIniTinn_Tmp,
                sPathIniTinn_File);                                            // Set the new Tinn.ini
 
     // Editor
-    pSaveNewIni_Editor;                                                       // Will create a new and clean Tinn.tmp
+    pSave_NewIni_Editor;                                                       // Will create a new and clean Tinn.tmp
     if FileExists(sPathIniEditor_File) then DeleteFile(sPathIniEditor_File);  // Delete old Tinn.ini
 
     RenameFile(sPathIniEditor_Tmp,
@@ -7841,17 +7840,17 @@ begin
     Duplicates:= dupIgnore;
   end;
 
-  pSetDataCompletion(synIO_Tip,
-                     frmRterm.synIO,
-                     'CTRL+SPACE');
+  pSet_DataCompletion(synIO_Tip,
+                      frmRterm.synIO,
+                      'CTRL+SPACE');
 
 
   if FileExists(sPath_App + '\Rhistory.txt') then
     RHistory.fLoadFromFile(sPath_App + '\Rhistory.txt');
 
-  pSetDataCompletion(synIO_History,
-                     frmRterm.synIO,
-                     'CTRL+ALT+SPACE');
+  pSet_DataCompletion(synIO_History,
+                      frmRterm.synIO,
+                      'CTRL+ALT+SPACE');
 end;
 
 procedure TfrmMain.pAppActivate(Sender: TObject);
@@ -7889,7 +7888,7 @@ begin
   slFileNotify.Clear;
 end;
 
-procedure TfrmMain.pLoadEditorKeystrokes;
+procedure TfrmMain.pLoad_EditorKeystrokes;
 var
   sEditor: string;
 
@@ -7898,6 +7897,7 @@ var
   i: integer;
 
 begin
+//{
   sEditor:= sPath_Editor +
             '\Editor.kst';
 
@@ -7926,15 +7926,17 @@ begin
 
     FreeAndNil(stream);
   end;
+//}
 end;
 
-procedure TfrmMain.pSaveEditorKeystrokes;
+procedure TfrmMain.pSave_EditorKeystrokes;
 var
   sEditor: string;
 
   stream: TStream;
 
 begin
+//{
   sEditor:= sPath_Editor +
             '\Editor.kst';
 
@@ -7948,11 +7950,12 @@ begin
     SaveToStream(stream);
 
   FreeAndNil(stream);
+//}
 end;
 
-procedure TfrmMain.pUnpackFile(sFile,
-                                   sPath,
-                                   sChoice: string);
+procedure TfrmMain.pUnpack_File(sFile,
+                                 sPath,
+                                 sChoice: string);
 begin
   with zipKit do begin
     FileName     := sFile;
@@ -7962,7 +7965,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pCheckOrigin;
+procedure TfrmMain.pCheck_Origin;
 begin
   with frmTools.memIniLog.Lines do begin
     Add('Version - ' +
@@ -8037,7 +8040,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSavePreferencesOfOldVersion;
+procedure TfrmMain.pSave_Preferences_Old_Version;
 
   function fMakeBackup(sPathSource,
                        sPathDest,
@@ -8092,7 +8095,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSetIniStructure;
+procedure TfrmMain.pSet_IniStructure;
 
   function fGet_LocalTmp: string;
   begin
@@ -8101,7 +8104,7 @@ procedure TfrmMain.pSetIniStructure;
 
 begin
   // Portable simple
-  if fIsPortable_Version then begin
+  if fIs_Portable_Version then begin
     sPath_Ini:= Copy(sPath_TinnR,
                      1,
                      fLastPos('\Tinn-R',
@@ -8152,7 +8155,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pCheckIni;
+procedure TfrmMain.pCheck_Ini;
 
   procedure pCheckPriorTo_2(sPathUser,
                             sPath_Ini: string);
@@ -8160,7 +8163,7 @@ procedure TfrmMain.pCheckIni;
     try
       if DirectoryExists(sPathUser) and
         (StrToInt(sVersion_Ini[1]) < 2) then begin
-        pBackupSystemConfiguration(True);
+        pBackup_SystemConfiguration(True);
         pDelete_Dir(sPathUser);
       end;
     except
@@ -8230,10 +8233,10 @@ begin
                                    ExtractFileName(sPath_Color) +
                                    '     : CREATED');
       // Recover colors from old version
-      if bColors_OldVersion then pUnpackFile(sOldPreferencesTmp +
-                                             '\colors_bkp.zip',
-                                             sPath_Color,
-                                             '*.*');
+      if bColors_OldVersion then pUnpack_File(sOldPreferencesTmp +
+                                              '\colors_bkp.zip',
+                                              sPath_Color,
+                                              '*.*');
     end
     else frmTools.memIniLog.Lines.Add('   \' +
                                       ExtractFileName(sPath_Color) +
@@ -8262,10 +8265,10 @@ begin
                                    ExtractFileName(sPath_Syntax) +
                                    '     : CREATED');
       // Recover syntax from old version
-      if bSyntax_OldVersion then pUnpackFile(sOldPreferencesTmp +
-                                             '\syntax_bkp.zip',
-                                             sPath_Syntax,
-                                             '*.*');
+      if bSyntax_OldVersion then pUnpack_File(sOldPreferencesTmp +
+                                              '\syntax_bkp.zip',
+                                              sPath_Syntax,
+                                              '*.*');
     end
     else frmTools.memIniLog.Lines.Add('   \' +
                                       ExtractFileName(sPath_Syntax) +
@@ -8362,7 +8365,7 @@ begin
   CloseFile(tfTmp);
 end;
 
-procedure TfrmMain.pCheckTemporary;
+procedure TfrmMain.pCheck_Temporary;
 begin
   // Tinn-R: temporary folder
   with frmTools.memIniLog.Lines do begin
@@ -8379,7 +8382,7 @@ begin
                                ': CREATED');
 end;
 
-procedure TfrmMain.pCheckIniDock;
+procedure TfrmMain.pCheck_IniDock;
 begin
   sIniDockFilePath:= (sPath_App +
                       '\Tinn_dock.ini');
@@ -8387,7 +8390,7 @@ begin
   JvAppIniFileStorage.FileName:= sIniDockFilePath;
 end;
 
-procedure TfrmMain.pCheckData;
+procedure TfrmMain.pCheck_Data;
 
   procedure pCreateDataDir;
   begin
@@ -8483,9 +8486,9 @@ begin
                      sPath_Data +
                      '\OldShortcuts.xml');
 
-          pUnpackFile(sFileDataOrigin,
-                      sPath_Data,
-                      'Shortcuts.xml');  // It is necessary to make a new copy from origin
+          pUnpack_File(sFileDataOrigin,
+                       sPath_Data,
+                       'Shortcuts.xml');  // It is necessary to make a new copy from origin
 
           with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts.xml
             pShortcuts_Validation(sPath_Data +
@@ -8497,9 +8500,9 @@ begin
         end
         // Shortcuts in use: <> Shortcuts.xml
         else begin
-          pUnpackFile(sFileDataOrigin,
-                      sPath_Data,
-                      'Shortcuts.xml');  // It is necessary to make a new copy from origin
+          pUnpack_File(sFileDataOrigin,
+                       sPath_Data,
+                       'Shortcuts.xml');  // It is necessary to make a new copy from origin
 
           with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts.xml
             pShortcuts_Validation(sShortcutsInUse,
@@ -8515,9 +8518,9 @@ begin
 
     // Cache
     if not FileExists(sFileCache)  then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Cache.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Cache.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileCache) +
@@ -8528,9 +8531,9 @@ begin
     end
     else begin
     if bUpdate_Cache then
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Cache.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Cache.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileCache) +
@@ -8542,9 +8545,9 @@ begin
 
     // Comments
     if not FileExists(sFileComments)  then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Comments.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Comments.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileComments) +
@@ -8555,9 +8558,9 @@ begin
     end
     else begin
       if bUpdate_Comments then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'Comments.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'Comments.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileComments) +
@@ -8569,9 +8572,9 @@ begin
 
     // Completion
     if not FileExists(sFileCompletion)  then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Completion.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Completion.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileCompletion) +
@@ -8582,9 +8585,9 @@ begin
     end
     else begin
       if bUpdate_Completion then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'Completion.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'Completion.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileCompletion) +
@@ -8596,9 +8599,9 @@ begin
 
     // Editor
     if not FileExists(sFileEditor) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Editor.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Editor.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileEditor) +
@@ -8609,9 +8612,9 @@ begin
     end
     else begin
       if bUpdate_Editor then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'Editor.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'Editor.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileEditor) +
@@ -8623,9 +8626,9 @@ begin
 
     // Rcard
     if not FileExists(sFileRcard) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Rcard.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Rcard.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRcard) +
@@ -8636,9 +8639,9 @@ begin
     end
     else begin
       if bUpdate_Rcard then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'Rcard.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'Rcard.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRcard) +
@@ -8650,9 +8653,9 @@ begin
 
     // RH_Control
     if not FileExists(sFileRH_Control) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'RH_Control.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'RH_Control.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRH_Control) +
@@ -8663,9 +8666,9 @@ begin
     end
     else begin
       if bUpdate_RH_Control then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'RH_Control.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'RH_Control.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRH_Control) +
@@ -8677,9 +8680,9 @@ begin
 
     // RH_Custom
     if not FileExists(sFileRH_Custom) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'RH_Custom.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'RH_Custom.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRH_Custom) +
@@ -8690,9 +8693,9 @@ begin
     end
     else begin
       if bUpdate_RH_Custom then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'RH_Custom.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'RH_Custom.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRH_Custom) +
@@ -8704,9 +8707,9 @@ begin
 
     // RH_Send
     if not FileExists(sFileRH_Send) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'RH_Send.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'RH_Send.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRH_Send) +
@@ -8717,9 +8720,9 @@ begin
     end
     else begin
       if bUpdate_RH_Send then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'RH_Send.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'RH_Send.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRH_Send) +
@@ -8731,9 +8734,9 @@ begin
 
     // Rmirrors
     if not FileExists(sFileRmirrors) then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Rmirrors.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Rmirrors.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRmirrors) +
@@ -8744,9 +8747,9 @@ begin
     end
     else begin
       if bUpdate_Rmirrors then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'Rmirrors.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'Rmirrors.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileRmirrors) +
@@ -8760,9 +8763,9 @@ begin
     if not FileExists(sShortcutsInUse) then sShortcutsInUse:= sPath_Data +
                                                               '\Shortcuts.xml';
     if not FileExists(sFileShortcuts)  then begin
-      pUnpackFile(sFileDataOrigin,
-                  sPath_Data,
-                  'Shortcuts.xml');
+      pUnpack_File(sFileDataOrigin,
+                   sPath_Data,
+                   'Shortcuts.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileShortcuts) +
@@ -8773,9 +8776,9 @@ begin
     end
     else begin
       if bUpdate_Shortcuts then
-        pUnpackFile(sFileDataOrigin,
-                    sPath_Data,
-                    'Shortcuts.xml');
+        pUnpack_File(sFileDataOrigin,
+                     sPath_Data,
+                     'Shortcuts.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileShortcuts) +
@@ -8801,7 +8804,7 @@ begin
   CloseFile(tfTmp);
 end;
 
-procedure TfrmMain.pCheckLatex(bReload: boolean);
+procedure TfrmMain.pCheck_Latex(bReload: boolean);
 
   procedure pCheckLatexDir(sDir: string;
                            bMain: boolean = False);
@@ -9037,7 +9040,7 @@ begin
   CloseFile(tfTmp);
 end;
 
-procedure TfrmMain.pCheckProject;
+procedure TfrmMain.pCheck_Project;
 var
   tfTmp: TextFile;
 
@@ -9138,7 +9141,7 @@ begin
   CloseFile(tfTmp);
 end;
 
-procedure TfrmMain.pCheckEditorOptions;
+procedure TfrmMain.pCheck_EditorOptions;
 
   procedure pUpdateShortcutsDir;
   begin
@@ -9163,7 +9166,7 @@ begin
       Add('3.5. Editor options');
     end;
 
-    pLoadEditorKeystrokes;
+    pLoad_EditorKeystrokes;
     pUpdateShortcutsDir;
     frmTools.memIniLog.Lines.Add('  Main folder - ' +
                                  sPath_Editor +
@@ -9191,7 +9194,7 @@ begin
   CloseFile(tfTmp);
 end;
 
-procedure TfrmMain.pSetPathRTerm;
+procedure TfrmMain.pSet_PathRterm;
 begin
   if bRArchitecture64 then sPath_Rterm:= sPath_R +
                                          '\bin\x64\Rterm.exe'
@@ -9199,7 +9202,7 @@ begin
                                          '\bin\i386\Rterm.exe';
 end;
 
-procedure TfrmMain.pSetPathRgui;
+procedure TfrmMain.pSet_PathRgui;
 begin
   if bRArchitecture64 then sPath_Rgui:= sPath_R +
                                         '\bin\x64\Rgui.exe'
@@ -9207,7 +9210,7 @@ begin
                                         '\bin\i386\Rgui.exe';
 end;
 
-procedure TfrmMain.pSetRcard;
+procedure TfrmMain.pSet_Rcard;
 begin
   // Create items in lbRcard from strListRcardGroup create in uModDados
   with modDados do begin
@@ -9222,12 +9225,12 @@ begin
   frmTools.lbRcardClick(Self);
 end;
 
-procedure TfrmMain.pSetSKH;
+procedure TfrmMain.pSet_SKH;
 begin
   dlgSKH_Map:= TfrmSKH_Map_Dlg.Create(Self);
 end;
 
-procedure TfrmMain.pSetCompletion;
+procedure TfrmMain.pSet_Completion;
 begin
   // Create items in lbCompletion from strListCompletionGroups create in uModDados
   with modDados do begin
@@ -9243,7 +9246,7 @@ begin
   frmTools.lbCompletionClick(Self);
 end;
 
-procedure TfrmMain.pSetRmirrors;
+procedure TfrmMain.pSet_Rmirrors;
 begin
   // Create items in lbCountries from slRmirrors_Countries create in uModDados
   with modDados do begin
@@ -9259,7 +9262,7 @@ begin
   frmTools.lbCountriesClick(Self);
 end;
 
-procedure TfrmMain.pBuildMRU(var miItem: TMenuItem);
+procedure TfrmMain.pBuild_MRU(var miItem: TMenuItem);
 var
   i: integer;
 
@@ -9300,7 +9303,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pUpdateMRU(var miItem: TMenuItem;
+procedure TfrmMain.pUpdate_MRU(var miItem: TMenuItem;
                                   sFileName: string);
 var
   i,
@@ -9337,7 +9340,7 @@ begin
  end;
  
  slFileMRU.Text:= slTmp.Text;
- pBuildMRU(miItem);
+ pBuild_MRU(miItem);
  FreeAndNil(slTmp);
 end;
 
@@ -9356,7 +9359,7 @@ begin
                        '&',
                        [rfReplaceAll]);
  
-  if FileExists(sTmp) then pOpenFileIntoTinn(sTmp)
+  if FileExists(sTmp) then pOpen_FileIntoTinn(sTmp)
   else
     // Takes it off the File MRU list
     if (fMessageDlg(sTmp + #13 + #13 +
@@ -9364,11 +9367,11 @@ begin
                     'Would you like to remove it from MRU (Most Recent Used) list?',
                     mtInformation,
                     [mbYes, mbNo],
-                    0) = mrYes) then pUpdateMRU(menFileRecentFiles,
+                    0) = mrYes) then pUpdate_MRU(menFileRecentFiles,
                                                 sTmp);
 end;
 
-function TfrmMain.fFindWindowByName(sName: string): integer;
+function TfrmMain.fFind_Window_ByName(sName: string): integer;
 var
   i: integer;
 
@@ -9380,7 +9383,7 @@ begin
   bFound:= False;
  
   for i:= (Self.MDIChildCount - 1) downto 0 do begin
-    sCaption:= frmEditor.fScrubCaption(Self.MDIChildren[i].Caption);
+    sCaption:= frmEditor.fScrub_Caption(Self.MDIChildren[i].Caption);
     if (UpperCase(sCaption) = UpperCase(sName)) then begin
       bFound:= True;
       break;
@@ -9475,12 +9478,12 @@ procedure TfrmMain.actRmirrorsEditExecute(Sender: TObject);
 begin
   sRmirrorsBookMark:= modDados.cdRmirrors.Bookmark;
   menToolsDatabaseMirrorsRClick(nil);
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actRmirrorsHelpExecute(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Mirrors (R)"');
+  pOpen_UserGuidePDF('"Mirrors (R)"');
 end;
 
 procedure TfrmMain.actRmirrorsOpenURLDefaultExecute(Sender: TObject);
@@ -9506,7 +9509,7 @@ begin
                   '''' +
                   ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 
   frmTools.stbRMirrors.Panels[1].Text:= sRmirror;
 end;
@@ -9581,7 +9584,7 @@ begin
           ''')';
 
   sTmp:= DosPathToUnixPath(sTmp);
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 
   sPath:= sPath_Tmp +
           '\mirrors.txt';
@@ -9648,7 +9651,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pUpdateCursorPos(Sender: TSynEdit);
+procedure TfrmMain.pUpdate_CursorPos(Sender: TSynEdit);
 var
   bcCol: TDisplayCoord;
 
@@ -9667,7 +9670,7 @@ begin
                                    bcCol.Column]);
 end;
 
-procedure TfrmMain.pSetSyntaxMenuItem(sSynName: string);
+procedure TfrmMain.pSet_SyntaxMenuItem(sSynName: string);
 var
   i: integer;
 
@@ -9684,7 +9687,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSetSyntaxComboBox(sSynName: string);
+procedure TfrmMain.pSet_SyntaxComboBox(sSynName: string);
 var
   i: integer;
 
@@ -9706,16 +9709,16 @@ begin
   bCanClose:= not bRtermOptionCancel;  // If the choice is 'Cancel' don't close
 
   if bCanClose then begin
-    pCheckIfProjectWasChanged;
+    pCheck_Project_Changed;
     Application.ProcessMessages;
 
     if not bUpdating then
       pDelete_Dir(sPath_Tmp);      // The dowloaded setup of the new version was stored in this folder
 
     if not bRestored then begin  // If it was made a restore will not save to ini!
-      pWriteIniFile_Application(False);
+      pWrite_IniFile_Application(False);
 
-      pWriteIniFile_Editor(False);
+      pWrite_IniFile_Editor(False);
 
       // Save layout
       JvAppIniFileStorage.BeginUpdate;
@@ -9812,7 +9815,7 @@ begin
                      ord(bRtermSend_Plus));
 end;
 
-procedure TfrmMain.pDrawSelectionMode(iSelMode: integer);
+procedure TfrmMain.pDraw_SelectionMode(iSelMode: integer);
 var
   i,
    iLeft: integer;
@@ -9874,7 +9877,7 @@ begin
   end;
 
   sTmp:= pgFiles.ActivePage.Hint;
-  i:= fFindWindowByName(sTmp);
+  i:= fFind_Window_ByName(sTmp);
 
   if (i > -1) then begin
     if Self.MDIChildren[i].WindowState = wsMinimized then Self.MDIChildren[i].WindowState:= wsNormal
@@ -9890,9 +9893,9 @@ begin
 
     with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       case synEDitor.SelectionMode of
-        smNormal: pDrawSelectionMode(0);
-        smLine  : pDrawSelectionMode(1);
-        smColumn: pDrawSelectionMode(2);
+        smNormal: pDraw_SelectionMode(0);
+        smLine  : pDraw_SelectionMode(1);
+        smColumn: pDraw_SelectionMode(2);
       end;
     end;
   end;
@@ -9900,15 +9903,15 @@ begin
   i:= fFindTop_Window;
   synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor;
 
-  pSetDataCompletion(synEditor_Tip,
-                     (Self.MDIChildren[i] as TfrmEditor).synEditor,
-                     'CTRL+SPACE');
+  pSet_DataCompletion(synEditor_Tip,
+                      (Self.MDIChildren[i] as TfrmEditor).synEditor,
+                      'CTRL+SPACE');
 
-  pSetDataCompletion(synEditor2_Tip,
-                     (Self.MDIChildren[i] as TfrmEditor).synEditor2,
-                     'CTRL+SPACE');
+  pSet_DataCompletion(synEditor2_Tip,
+                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
+                      'CTRL+SPACE');
 
-  pUpdateHexViewer;
+  pUpdate_HexViewer;
 end;
 
 procedure TfrmMain.actPrintExecute(Sender: TObject);
@@ -9935,7 +9938,7 @@ begin
     finally
       FreeAndNil(frmConfigurePrint);
       frmMain.Repaint;
-      pSetFocus_Main;
+      pSet_Focus_Main;
     end;
   end;
 end;
@@ -9947,7 +9950,7 @@ begin
     TabsPosition:= fsdTop;
   end;
   actFilesTabsTop.Checked:= True;
-  //if (Self.MDIChildCount > 0) then pUdatePgFiles;
+  //if (Self.MDIChildCount > 0) then pUdate_PgFiles;
 end;
 
 procedure TfrmMain.actFilesTabsBottomExecute(Sender: TObject);
@@ -9957,7 +9960,7 @@ begin
     TabsPosition:= fsdBottom;
   end;
   actFilesTabsBottom.Checked:= True;
-  //if (Self.MDIChildCount > 0) then pUdatePgFiles;
+  //if (Self.MDIChildCount > 0) then pUdate_PgFiles;
 end;
 
 procedure TfrmMain.actGutterVisibleExecute(Sender: TObject);
@@ -9985,7 +9988,7 @@ begin
       end;
 
   // Update Rterm
-  pUpdateRterm_Appearance(False);
+  pUpdate_Rterm_Appearance(False);
 end;
 
 procedure TfrmMain.actLineNumbersVisibleExecute(Sender: TObject);
@@ -10062,10 +10065,10 @@ begin
     for i:= 0 to (pgFiles.PageCount - 1) do begin
       pgFiles.ActivePageIndex:= i;
       sTmp    := pgFiles.ActivePage.Hint;
-      iChildID:= fFindWindowByName(sTmp);
+      iChildID:= fFind_Window_ByName(sTmp);
       MDIChildren[iChildID].BringToFront;
       Application.ProcessMessages;
-      iChildID:= fFindWindowByName(sTmp);
+      iChildID:= fFind_Window_ByName(sTmp);
       with (Self.MDIChildren[iChildID] as tfrmEditor) do
         if synEditor.Modified then
       	  actFileSaveExecute(Sender);
@@ -10074,12 +10077,12 @@ begin
     // Bring back the starting window
     pgFiles.ActivePageIndex:= iActivePage;
     sTmp    := pgFiles.ActivePage.Hint;
-    iChildID:= fFindWindowByName(sTmp);
+    iChildID:= fFind_Window_ByName(sTmp);
     MDIChildren[iChildID].BringToFront;
   end;
   actFileSaveAll.Enabled:= False;
 
-  pUpdateHexViewer;
+  pUpdate_HexViewer;
 end;
 
 procedure TfrmMain.tbFilterClick(Sender: TObject);
@@ -10205,7 +10208,7 @@ begin
     (Self.MDIChildren[i] as TfrmEditor).Repaint;
   end;
 
-  // It is necessary to update pSynPaintTransient in cases where the brackets are selected!
+  // It is necessary to update pSyn_PaintTransient in cases where the brackets are selected!
   i:= fFindTop_Window;
   if Assigned(Self.MDIChildren[i] as TfrmEditor) then
     with (Self.MDIChildren[i] as TfrmEditor) do begin
@@ -10213,8 +10216,8 @@ begin
       if Assigned(synEditor2) then synEditor2.Repaint;
     end;
 
-  pUpdateAppearance(False);
-  pSetFocus_Main;
+  pUpdate_Appearance(False);
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actStatusBarVisibleExecute(Sender: TObject);
@@ -10252,7 +10255,7 @@ begin
       end;
 end;
 
-procedure TfrmMain.pSetTabTitle(sStat: string);
+procedure TfrmMain.pSet_TabTitle(sStat: string);
 begin
   if (pgFiles.PageCount > 0) then begin
     if (not actReadOnly.Checked) then pgFiles.ActivePage.Caption:= fStrip_Path(pgFiles.ActivePage.Hint) +
@@ -10299,7 +10302,7 @@ begin
     slTmp.Add(menFileRecentFiles.Items[i].Caption);
  
   for i:= 0 to (slTmp.Count - 1) do begin
-    if FileExists(slTmp.Strings[i]) then pOpenFileIntoTinn(slTmp.Strings[i])
+    if FileExists(slTmp.Strings[i]) then pOpen_FileIntoTinn(slTmp.Strings[i])
     else begin
       // Take it off the File MRU list
       if (fMessageDlg(slTmp.Strings[i] + #13 + #13 +
@@ -10308,7 +10311,7 @@ begin
                       mtInformation,
                       [mbYes, mbNo],
                       0) = mrYes) then
-        pUpdateMRU(menFileRecentFiles,
+        pUpdate_MRU(menFileRecentFiles,
                    slTmp.Strings[i]);
     end;
   end;
@@ -10322,7 +10325,7 @@ begin
     pDoProjectOpenNode;
 end;
 
-procedure TfrmMain.pSearchInOpenFiles(var iFileCount,
+procedure TfrmMain.pSearch_InOpenFiles(var iFileCount,
                                           iMatchCount: integer);
 var
   bFileFind: boolean;
@@ -10351,7 +10354,7 @@ begin
   for i:= (Self.MDIChildCount - 1) downto 0 do begin
     with (Self.MDIChildren[i] as TfrmEditor) do begin
       bFileFind:= False;
-      sFileName:= frmEditor.fScrubCaption((Self.MDIChildren[i] as TfrmEditor).Caption);
+      sFileName:= frmEditor.fScrub_Caption((Self.MDIChildren[i] as TfrmEditor).Caption);
  
       with stbMain do begin
         Panels[8].Text:= 'Search in file(s)';
@@ -10407,7 +10410,7 @@ begin
 
 end;
 
-procedure TfrmMain.pClearMRU;
+procedure TfrmMain.pClear_MRU;
 begin
   slFileMRU.Clear;
   pmenMainMRU.Items.Clear;
@@ -10415,12 +10418,12 @@ begin
     menFileRecentFiles.Delete(0);
 end;
 
-procedure TfrmMain.pMinimizeTinnAfterLastFile;
+procedure TfrmMain.pMinimize_TinnAfterLastFile;
 begin
   if bMinimizeTinnAfterLastFile then Application.Minimize;
 end;
 
-procedure TfrmMain.pSearchInDirectories(const sDir,
+procedure TfrmMain.pSearch_InDirectories(const sDir,
                                                   sMask: string;
                                             var iFileCount,
                                                 iMatchCount,
@@ -10608,7 +10611,7 @@ begin
   Result:= sSearchText;
 end;
 
-procedure TfrmMain.pSetupSearchParameters(sSearchText: string);
+procedure TfrmMain.pSetup_SearchParameters(sSearchText: string);
 begin
   if rsSearch = nil then rsSearch:= TRegExpr.Create;
   if (length(trim(sSearchText)) = 0) then sSearchText:= ' ';
@@ -10745,7 +10748,7 @@ var
 
 begin
   // New Project
-  pCheckIfProjectWasChanged;
+  pCheck_Project_Changed;
   Application.ProcessMessages;
 
   with sdMain do begin
@@ -10766,11 +10769,11 @@ begin
                         [mbYes, mbCancel],
                         0) <> idYes) then Exit;
 
-      pCreateProject;
-      pSaveProject;
-      pUpdateProjectMRU(menProjRecent,
-                        sProjectName);
-      pToolsProjectControls(True);
+      pCreate_Project;
+      pSave_Project;
+      pUpdate_MRU_Project(menProjRecent,
+                          sProjectName);
+      pTools_ProjectControls(True);
     end;
     sdMain.Filter:= slFilters.Text;
   end;
@@ -10803,7 +10806,7 @@ begin
       i:= slProjectChanges.IndexOf(sActiveFile);
     end;
 
-    pAddFile(slProjectChanges[i]);
+    pAdd_File(slProjectChanges[i]);
   end;
 end;
 
@@ -10816,7 +10819,7 @@ begin
          '\pDemo.tps';
 
   if FileExists(fTmp) then
-    pOpenFileIntoTinn(fTmp)
+    pOpen_FileIntoTinn(fTmp)
   else
     fMessageDlg(fTmp + #13 + #13 +
                 'The file was not found.' + #13 +
@@ -10841,7 +10844,7 @@ begin
 
     if od.Execute then begin
       sFile:= od.FileName;
-      pOpenFileIntoTinn(sFile);
+      pOpen_FileIntoTinn(sFile);
     end;
   finally
     FreeAndNil(od);
@@ -10851,9 +10854,9 @@ end;
 
 procedure TfrmMain.actProjectSaveExecute(Sender: TObject);
 begin
-  pSaveProject;
-  pUpdateProjectMRU(menProjRecent,
-                    sProjectName);
+  pSave_Project;
+  pUpdate_MRU_Project(menProjRecent,
+                      sProjectName);
 end;
 
 procedure TfrmMain.actFilesRemoveExecute(Sender: TObject);
@@ -10868,7 +10871,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pCheckIfProjectWasChanged;
+procedure TfrmMain.pCheck_Project_Changed;
 var
   i: integer;
 
@@ -10876,7 +10879,7 @@ begin
   if not bProjectChanged then Exit;
 
   // Bring to front the textual project, if it is opened
-  i:= fFindWindowByName(sProjectName);
+  i:= fFind_Window_ByName(sProjectName);
   if (i > -1) then Self.MDIChildren[i].BringToFront;
 
   if (fMessageDlg(sProjectName + #13 + #13 +
@@ -10887,7 +10890,7 @@ begin
                   0) = mrYes) then actProjectSaveExecute(nil);
 end;
 
-procedure TfrmMain.pClearStatusBar;
+procedure TfrmMain.pClear_StatusBar;
 var
   i: integer;
 
@@ -10901,7 +10904,7 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure TfrmMain.pClearStatusBarProject;
+procedure TfrmMain.pClear_StatusBar_Project;
 begin
   with frmTools.stbProject do begin
     Panels[1].Text:= EmptyStr;
@@ -10916,15 +10919,15 @@ var
   iPos: integer;
 
 begin
-  pCheckIfProjectWasChanged;
+  pCheck_Project_Changed;
   Application.ProcessMessages;
-  if not fCloseAllFilesOfProject then Exit;
+  if not fClose_AllFiles_Project then Exit;
 
   // Close also the *.tps project file
-  iPos:= fFindWindowByName(sProjectName);
+  iPos:= fFind_Window_ByName(sProjectName);
   try
     if (iPos > -1) then (Self.MDIChildren[iPos] as TfrmEditor).Close;
-    if (pgFiles.PageCount = 0) then pClearStatusBar
+    if (pgFiles.PageCount = 0) then pClear_StatusBar
   except
     fMessageDlg(sProjectName + #13 + #13 +
                 'The project file above was not found!',
@@ -10933,7 +10936,7 @@ begin
                 0);
   end;
 
-  pToolsProjectControls(False);
+  pTools_ProjectControls(False);
 
   with frmTools.tvProject.Items do begin
     BeginUpdate;
@@ -10943,35 +10946,35 @@ begin
 
   if Assigned(slProjectChanges) then slProjectChanges.Clear;
   bProjectChanged:= False;
-  pClearStatusBarProject;
+  pClear_StatusBar_Project;
 end;
 
 procedure TfrmMain.actFilesOpenAllExecute(Sender: TObject);
 begin
-  pOpenAllFiles;
+  pOpen_AllFiles;
 end;
 
 procedure TfrmMain.actFilesCloseAllExecute(Sender: TObject);
 begin
   // Close all files of the active project;
-  fCloseAllFilesOfProject;
+  fClose_AllFiles_Project;
 end;
 
-procedure TfrmMain.pOpenProjectIntoTinn(sProjectName: string);
+procedure TfrmMain.pOpen_ProjectIntoTinn(sProjectName: string);
 begin
   // If not panTools.Visible then actToolsVisibleToogleExecute(nil);
   if not frmTools.tbsProject.TabVisible then actProjectVisibleExecute(nil);
   Application.ProcessMessages;
   frmTools.pgTools.ActivePage:= frmTools.tbsMisc;
   frmTools.pgMisc.ActivePage:= frmTools.tbsProject;
-  pOpenProject;
+  pOpen_Project;
   bProjectChanged:= False;
-  pToolsProjectControls(True);
+  pTools_ProjectControls(True);
 
-  pUpdateProjectMRU(menProjRecent,
-                    sProjectName);
-  pSortProject;
-  pClearStatusBarProject;
+  pUpdate_MRU_Project(menProjRecent,
+                      sProjectName);
+  pSort_Project;
+  pClear_StatusBar_Project;
 
   with frmTools.stbProject do begin
     Panels[1].Text:= IntToStr(frmTools.tvProject.Items.Count);
@@ -10982,7 +10985,7 @@ begin
     Selected:= Items.GetFirstNode;
 end;
 
-procedure TfrmMain.pBuildProjectMRU(var miItem: TMenuItem);
+procedure TfrmMain.pBuild_MRU_Project(var miItem: TMenuItem);
 var
   i: integer;
 
@@ -11026,8 +11029,8 @@ begin
   end;
 end;
 
-procedure TfrmMain.pUpdateProjectMRU(var miItem: TMenuItem;
-                                         sFileName: string);
+procedure TfrmMain.pUpdate_MRU_Project(var miItem: TMenuItem;
+                                       sFileName: string);
 var
   i,
    j: integer;
@@ -11062,7 +11065,7 @@ begin
   end;
 
   slprojectMRU.Text:= slTmp.Text;
-  pBuildProjectMRU(miItem);
+  pBuild_MRU_Project(miItem);
   FreeAndNil(slTmp);
 end;
 
@@ -11082,7 +11085,7 @@ begin
                        [rfReplaceAll]);
 
   if FileExists(sTmp) then
-    pOpenFileIntoTinn(sTmp)
+    pOpen_FileIntoTinn(sTmp)
   else begin
     // Take it off the File MRU list
     if (fMessageDlg(sTmp + #13 + #13 +
@@ -11091,8 +11094,8 @@ begin
                     mtInformation,
                     [mbYes, mbNo],
                     0) = mrYes) then
-      pUpdateProjectMRU(menProjRecent,
-                        sTmp);
+      pUpdate_MRU_Project(menProjRecent,
+                          sTmp);
   end;
 end;
 
@@ -11419,12 +11422,12 @@ begin
   stbMain.Panels[8].Text:= 'Done!';
 end;
 
-procedure TfrmMain.pCheckTop;
+procedure TfrmMain.pCheck_Top;
 begin
   pOnTop(Application.Handle);
 end;
 
-procedure TfrmMain.pSetHotkeys_Status(bStatus: boolean);
+procedure TfrmMain.pSet_Hotkeys_Status(bStatus: boolean);
 var
   i: integer;
 
@@ -11459,7 +11462,7 @@ begin
   end;  // with modDados
 end;
 
-procedure TfrmMain.pSetFocus_Rgui(iDelay: integer);
+procedure TfrmMain.pSet_Focus_Rgui(iDelay: integer);
 begin
   Sleep(iDelay);
   if bRguiReturnFocus then SetForegroundWindow(Application.Handle);
@@ -11591,7 +11594,7 @@ begin
 *)  
 end;
 
-procedure TfrmMain.pUpdateRFileReformatted(sTmp: string);
+procedure TfrmMain.pUpdate_Rfile_Reformatted(sTmp: string);
 var
   i,
     iTopLine: Integer;
@@ -11647,14 +11650,14 @@ begin
   end;
 
   with (Self.MDIChildren[i] as TfrmEditor) do
-    pCheckSaveStatus;
+    pCheck_Save_Status;
 
   DeleteFile(sTmp);
 
   iRFormatted:= -1;
 end;
 
-procedure TfrmMain.pUpdateRSelectionReformatted(sTmp: string);
+procedure TfrmMain.pUpdate_Rselection_Reformatted(sTmp: string);
 var
   seEditor: TSynEdit;
 
@@ -11693,7 +11696,7 @@ end;
 procedure TfrmMain.tUpdateOptionsTimer(Sender: TObject);
 begin
   try
-    pUpdateOptions;
+    pUpdate_Options;
   except
     // TODO
   end;
@@ -11709,7 +11712,7 @@ begin
 
   // Start svSocket
   if bRsvSocket_Connect and
-     not bTCPIPRunning then pStartSocketServer_svSocket;
+     not bTCPIPRunning then pStart_svSocket;
 end;
 
 procedure TfrmMain.pRSetSend_Info(var sInfo,
@@ -11871,7 +11874,7 @@ begin
      bRguiReturnFocus then actRguiReturnFocus.Checked:= False;
   Application.ProcessMessages;
 
-  pDoSend(sToSend);
+  pDo_Send(sToSend);
 
   if fRterm_Running then frmRTerm.cRterm.bRterm_Ready:= False;
   //ShowMessage(sInfo); Exit;  // To debug only
@@ -11885,7 +11888,7 @@ procedure TfrmMain.pR_Info;
     if bOnTop then begin
       pOnTop(Application.Handle);
       actOnTop.Checked:= True;
-      pCheckTop;
+      pCheck_Top;
     end
     else begin
       pOnTop(Application.Handle);
@@ -11895,7 +11898,7 @@ procedure TfrmMain.pR_Info;
     // ReturnFocus
     if bRguiReturnFocus then begin
       actRguiReturnFocus.Checked:= True;
-      pSetFocus_Rgui(iDelay);
+      pSet_Focus_Rgui(iDelay);
     end
     else actRguiReturnFocus.Checked:= False;
   end;
@@ -12005,7 +12008,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pStartSocketServer_svSocket;
+procedure TfrmMain.pStart_svSocket;
 begin
   Screen.Cursor:= crHourglass;
 
@@ -12067,11 +12070,11 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
   begin
     pRMenu(True);
 
-    pControlResources(True);
+    pControl_Resources(True);
 
-    if (pgFiles.PageCount = 0) then pSendResources(False)
+    if (pgFiles.PageCount = 0) then pSend_Resources(False)
     else begin
-      pSendResources(True);
+      pSend_Resources(True);
       with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                          else seEditor:= synEditor2;
@@ -12092,10 +12095,10 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
 
     case iRFormatted of
       -1: Exit;
-       0: pUpdateRFileReformatted(sPath_Tmp +
-                                  '\reformat-output.r');
-       1: pUpdateRSelectionReformatted(sPath_Tmp +
-                                       '\reformat-output.r');
+       0: pUpdate_Rfile_Reformatted(sPath_Tmp +
+                                    '\reformat-output.r');
+       1: pUpdate_Rselection_Reformatted(sPath_Tmp +
+                                         '\reformat-output.r');
     end;
   end;
 
@@ -12104,9 +12107,9 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
   begin
     pRMenu(True);
 
-    pControlResources(False);
+    pControl_Resources(False);
 
-    pSendResources(False);
+    pSend_Resources(False);
 
     if (stbMain.Panels[6].Text <> EmptyStr) then stbMain.Panels[6].Text:= EmptyStr;
 
@@ -12137,13 +12140,13 @@ begin
   end;
 end;
 
-procedure TfrmMain.pOpenHelpFile(sFileToOpen: string);
+procedure TfrmMain.pOpen_HelpFile(sFileToOpen: string);
 var
   sPathFile: string;
 
 begin
   sPathFile:= sPath_TinnR + sFileToOpen;
-  if FileExists(sPathFile) then pOpenFileIntoTinn(sPathFile)
+  if FileExists(sPathFile) then pOpen_FileIntoTinn(sPathFile)
   else fMessageDlg(sPathFile + #13 + #13 +
                    'The file was not found.' + #13 +
                    'Please, reinstall the program!',
@@ -12323,7 +12326,7 @@ end;
 
 procedure TfrmMain.menHelSecretsClick(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Some Secrets for an Efficient Use"');
+  pOpen_UserGuidePDF('"Some Secrets for an Efficient Use"');
 end;
 
 procedure TfrmMain.menWebSearchSelGoogleClick(Sender: TObject);
@@ -12410,7 +12413,7 @@ begin
   // Object was draged from Search interface
   if (Source = frmTools.tvSearch) then begin
     if not (iDragLevel = 2) then Exit;
-    if FileExists(trim(sDragSource)) then pOpenFileIntoTinn(sDragSource,
+    if FileExists(trim(sDragSource)) then pOpen_FileIntoTinn(sDragSource,
                                                             StrToIntDef(sDragSourceLine,
                                                                         0))
                                      else fMessageDlg(trim(sDragSource) + #13 + #13 +
@@ -12437,7 +12440,7 @@ begin
   // Object was draged from R explorer interface
   if (Source = frmTools.lvRexplorer) then begin
     if FileExists(sDragSource) then begin
-      pOpenFileIntoTinn(sDragSource,
+      pOpen_FileIntoTinn(sDragSource,
                         0,
                         False,
                         False);
@@ -12453,12 +12456,12 @@ begin
 
   // Object was draged from Project interface
   if (Source = frmTools.tvProject) then begin
-    if (iDragLevel = 0) then pOpenAllFiles;
-    if (iDragLevel = 1) then pOpenAllFilesOfGroup;
+    if (iDragLevel = 0) then pOpen_AllFiles;
+    if (iDragLevel = 1) then pOpen_AllFilesOfGroup;
     if (sDragSource = EmptyStr) then Exit;
   end;
 
-  if FileExists(sDragSource) then pOpenFileIntoTinn(sDragSource)
+  if FileExists(sDragSource) then pOpen_FileIntoTinn(sDragSource)
                              else fMessageDlg(sDragSource + #13 + #13 +
                                               'The file above was not found!',
                                               mtWarning,
@@ -12468,11 +12471,11 @@ end;
 
 procedure TfrmMain.menHelpEnglishChanges_t2tClick(Sender: TObject);
 begin
-  pOpenHelpFile('\doc\Tinn-R_changes.t2t');
+  pOpen_HelpFile('\doc\Tinn-R_changes.t2t');
 end;
 
 {$HINTS OFF}
-procedure TfrmMain.pCreateProject;
+procedure TfrmMain.pCreate_Project;
 var
   tnProject: TTreeNode;
 
@@ -12501,7 +12504,7 @@ end;
 {$HINTS ON}
 
 {$WARNINGS OFF}
-function TfrmMain.fGenericGroupExists: boolean;
+function TfrmMain.fCheck_GenericGroup: boolean;
 var
   i: integer;
 
@@ -12542,7 +12545,7 @@ begin
 end;
 {$WARNINGS ON}
 
-procedure TfrmMain.pSortProject;
+procedure TfrmMain.pSort_Project;
 var
   j: integer;
 
@@ -12555,7 +12558,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pOpenProject;
+procedure TfrmMain.pOpen_Project;
 var
   sTmp,
    sGroupName: string;
@@ -12564,7 +12567,7 @@ var
    tnGroupToAdd,
    tnFileToAdd: TTreeNode;
 
-  procedure pMakeTree;
+  procedure pMake_Tree;
   var
     i: integer;
 
@@ -12573,7 +12576,7 @@ var
     frmTools.tvProject.SortType:= stText;
     tnProject:= frmTools.tvProject.Items.Add(tnProject,
                                              ExtractFileName(sProjectName));
-    if not fGenericGroupExists then begin
+    if not fCheck_GenericGroup then begin
       tnGenericGroup:= frmTools.tvProject.Items.AddChild(tnProject,
                                                          'generic group*');
       tnGenericGroup.ImageIndex   := 1;
@@ -12635,13 +12638,13 @@ begin
   with frmTools.tvProject do begin
     Items.BeginUpdate;
     Items.Clear;
-    pMakeTree;
+    pMake_Tree;
     Items[0].Expanded:= True;
     Items.EndUpdate;
   end;
 end;
 
-procedure TfrmMain.pAddFile(iFile: string);
+procedure TfrmMain.pAdd_File(iFile: string);
 
   function fVerifyGenericGroup: boolean;
   var
@@ -12669,7 +12672,7 @@ begin
   if (frmTools.tvProject.Selected = nil) then Exit;
 
   // Check to see if the file has already been added
-  if (fFileExistsAsNode(iGroupPos,
+  if (fFile_Exists_AsNode(iGroupPos,
                         iFile)) then begin
     if (fMessageDlg(iFile + #13 + #13 +
                     'The file above already exists in the active project at position:' + #13 +
@@ -12718,13 +12721,13 @@ begin
                       mtConfirmation,
                       [mbYes,mbCancel],
                       0) = mrYes) then begin
-        pCreateGroup('generic group*');
-        pAddFile(iFile);
+        pCreate_Group('generic group*');
+        pAdd_File(iFile);
       end;
   end;
 end;
 
-procedure TfrmMain.pSaveProject;
+procedure TfrmMain.pSave_Project;
 var
   i: integer;
 
@@ -12763,14 +12766,14 @@ begin
   bProjectChanged:= False;
 
   // Update the textual project, if it is opened
-  i:= fFindWindowByName(sProjectName);
+  i:= fFind_Window_ByName(sProjectName);
   if (i > -1) then begin
     Self.MDIChildren[i].BringToFront;
     actReloadExecute(nil);
   end;
 end;
 
-function TfrmMain.fGroupExistsAsNode(sGroupName: string): boolean;
+function TfrmMain.fGroup_ExistsAsNode(sGroupName: string): boolean;
 var
   i: integer;
 
@@ -12784,7 +12787,7 @@ begin
   end;
 end;
 
-function TfrmMain.fFileExistsAsNode(var iPos: integer;
+function TfrmMain.fFile_Exists_AsNode(var iPos: integer;
                                         sFile: string): boolean;
 var
   i: integer;
@@ -12799,7 +12802,7 @@ begin
     end;
 end;
 
-procedure TfrmMain.pCreateGroup(sGroupName: string);
+procedure TfrmMain.pCreate_Group(sGroupName: string);
 var
   tnNewGroup: TTreeNode;
 
@@ -12818,7 +12821,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pOpenAllFiles;
+procedure TfrmMain.pOpen_AllFiles;
 var
   bIgnoreAll: boolean;
 
@@ -12836,7 +12839,7 @@ begin
       if (Items[j].Level = 2) then begin
         sTmp:= trim(string(Items[j].Data));
 
-        if FileExists(sTmp) then pOpenFileIntoTinn(sTmp)
+        if FileExists(sTmp) then pOpen_FileIntoTinn(sTmp)
         else if not bIgnoreAll then begin
           userOption:= fMessageDlg(sTmp + #13 + #13 +
                                    'The file above was not found!' + #13 +
@@ -12859,7 +12862,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pOpenAllFilesOfGroup;
+procedure TfrmMain.pOpen_AllFilesOfGroup;
 var
   bIgnoreAll: boolean;
 
@@ -12886,7 +12889,7 @@ begin
       tnCurNode:= tnCurNode.GetNext;
       sTmp     := trim(string(tnCurNode.Data));
 
-      if FileExists(sTmp) then pOpenFileIntoTinn(sTmp)
+      if FileExists(sTmp) then pOpen_FileIntoTinn(sTmp)
       else if not bIgnoreAll then begin
         userOption:= fMessageDlg(sTmp + #13 + #13 +
                                  'The file above was not found!' + #13 +
@@ -12908,7 +12911,7 @@ begin
   end;
 end;
 
-function TfrmMain.fCloseAllFilesOfProject: boolean;
+function TfrmMain.fClose_AllFiles_Project: boolean;
 var
   i,
    iPos: integer;
@@ -12922,7 +12925,7 @@ begin
     for i:= 0 to (Items.Count - 1) do
       if (Items[i].Level = 2) then begin
         sFileName:= trim(string(Items[i].Data));
-        iPos:= fFindWindowByName(sFileName);
+        iPos:= fFind_Window_ByName(sFileName);
         try
           if (iPos > -1) then
             with (MDIChildren[iPos] as TfrmEditor) do begin
@@ -12943,7 +12946,7 @@ begin
       end;
 end;
 
-procedure TfrmMain.pCloseAllFilesOfGroup;
+procedure TfrmMain.pClose_AllFiles_Group;
 var
   iPos,
    j,
@@ -12965,7 +12968,7 @@ begin
     while iFiles > 0 do begin
       tnCurNode:= tnCurNode.GetNext;
       sTmp     := trim(string(tnCurNode.Data));
-      iPos     := fFindWindowByName(sTmp);
+      iPos     := fFind_Window_ByName(sTmp);
       try
         if (iPos > -1) then (MDIChildren[iPos] as TfrmEditor).Close;
       except
@@ -12989,8 +12992,8 @@ begin
   with newGroup do begin
     if (ShowModal = mrOK) then begin
       if (edtNewGroup.Text <> EmptyStr) then begin
-        if not fGroupExistsAsNode(edtNewGroup.Text) then begin
-          pCreateGroup(edtNewGroup.Text);
+        if not fGroup_ExistsAsNode(edtNewGroup.Text) then begin
+          pCreate_Group(edtNewGroup.Text);
           bProjectChanged:= True;
         end
         else fMessageDlg(edtNewGroup.Text + #13 + #13 +
@@ -13003,10 +13006,10 @@ begin
     end;
   end;
   FreeAndNil(newGroup);
-  pSortProject;
+  pSort_Project;
 end;
 
-Procedure TfrmMain.pUpdateRterm_Appearance(bUpdate_FontSize: boolean = True);
+Procedure TfrmMain.pUpdate_Rterm_Appearance(bUpdate_FontSize: boolean = True);
 var
   i,
    j: integer;
@@ -13087,12 +13090,12 @@ begin
     end;
 end;
 
-Procedure TfrmMain.pUpdateAppearance(bFontSize: boolean = True);
+Procedure TfrmMain.pUpdate_Appearance(bFontSize: boolean = True);
 begin
   // Update transparency
   AlphaBlendValue:= iAlphaBlendValue;
 
-  pUpdateRterm_Appearance(bFontSize);
+  pUpdate_Rterm_Appearance(bFontSize);
 
   // WinExpl - BG
   frmTools.edWinExplorerFilter.Color:= clBGApplication;
@@ -13270,7 +13273,7 @@ begin
      (frmTools.pgMisc.ActivePage = frmTools.tbsRcard) then frmTools.lbRcard.SetFocus;
 
   ctbMain.Realign;  // Don't remove!
-  pUpdateAppearance;
+  pUpdate_Appearance;
 
   // Check user option related to dock satus
   if FileExists(sIniDockFilePath) and
@@ -13314,7 +13317,7 @@ begin
     ShowDockForm(frmRterm);
 
     actRtermDivideExecute(nil);
-    pSetInterfaceSize(frmTools,
+    pSet_InterfaceSize(frmTools,
                       350);
   end;
 
@@ -13364,7 +13367,7 @@ begin
     if (Level = 1) then begin
       Delete;
       bProjectChanged:= True;
-      pSortProject;
+      pSort_Project;
     end;
 end;
 
@@ -13387,21 +13390,21 @@ begin
                   mtConfirmation,
                   [mbOk, mbCancel],
                   0) = mrOk) then begin
-    fCloseAllFilesOfProject;
+    fClose_AllFiles_Project;
 
-    pToolsProjectControls(False);
+    pTools_ProjectControls(False);
     if Assigned(slProjectChanges) then slProjectChanges.Clear;
     frmTools.tvProject.Items.Clear;
     DeleteFile(sProjectName);
 
     // Close project file if is open.
-    intPos:= fFindWindowByName(sProjectName);
+    intPos:= fFind_Window_ByName(sProjectName);
     if (intPos > -1) then (MDIChildren[intPos] as TfrmEditor).Close;
-    pUpdateMRU(menFileRecentFiles,
+    pUpdate_MRU(menFileRecentFiles,
                sProjectName);
 
-    pUpdateProjectMRU(menProjRecent,
-                      sProjectName);
+    pUpdate_MRU_Project(menProjRecent,
+                        sProjectName);
 
     with frmTools.jvflbWinExplorer do begin
       Items.BeginUpdate;
@@ -13426,7 +13429,7 @@ begin
     edtNewGroupName.Text:= frmTools.tvProject.Selected.Text;
     if (ShowModal = mrOK) then begin
       if (edtNewGroupName.Text = EmptyStr) then Exit;
-      if not fGroupExistsAsNode(edtNewGroupName.Text) then begin
+      if not fGroup_ExistsAsNode(edtNewGroupName.Text) then begin
         frmTools.tvProject.Selected.Text:= edtNewGroupName.Text;
         bProjectChanged:= True;
       end
@@ -13440,7 +13443,7 @@ begin
   end;
 
   FreeAndNil(renGroup);
-  pSortProject;
+  pSort_Project;
 end;
 
 procedure TfrmMain.actProjectSaveAsExecute(Sender: TObject);
@@ -13513,8 +13516,8 @@ begin
     FreeAndNil(meTmp);
     bProjectChanged:= False;
 
-    pUpdateProjectMRU(menProjRecent,
-                      sName);
+    pUpdate_MRU_Project(menProjRecent,
+                        sName);
 
     with frmTools.tvProject do begin
       Items[0].Collapse(True);
@@ -13522,7 +13525,7 @@ begin
     end;
     Sleep(iDelay div 3);
     sProjectName:= sName;
-    pOpenFileIntoTinn(sProjectName);
+    pOpen_FileIntoTinn(sProjectName);
   end;
   sdMain.Filter:= slFilters.Text;
 end;
@@ -13577,7 +13580,7 @@ begin
             for i:= 0 to (Count-1) do begin
               slProjectChanges.Add(Strings[i]);
               j:= slProjectChanges.IndexOf(Strings[i]);
-              pAddFile(slProjectChanges[j]);
+              pAdd_File(slProjectChanges[j]);
             end;
           end;
         Options:= Options - [ofAllowMultiSelect];
@@ -13588,15 +13591,15 @@ end;
 
 procedure TfrmMain.actFilesOpenAllOfGroupExecute(Sender: TObject);
 begin
-  pOpenAllFilesOfGroup;
+  pOpen_AllFilesOfGroup;
 end;
 
 procedure TfrmMain.actFilesCloseAllOfGroupExecute(Sender: TObject);
 begin
-  pCloseAllFilesOfGroup;
+  pClose_AllFiles_Group;
 end;
 
-procedure TfrmMain.pToolsProjectControls(bOption: boolean);
+procedure TfrmMain.pTools_ProjectControls(bOption: boolean);
 begin
   actFilesAdd.Enabled               := bOption;
   actFilesAddCurrent.Enabled        := bOption;
@@ -13624,7 +13627,7 @@ begin
   actProjectSaveAs.Enabled          := bOption;
 end;
 
-procedure TfrmMain.pToolsSearchControls(bOption: boolean);
+procedure TfrmMain.pTools_SearchControls(bOption: boolean);
 begin
   actSearchCollapseAll.Enabled:= bOption;
   actSearchCollapseOne.Enabled:= bOption;
@@ -13684,12 +13687,12 @@ end;
 
 procedure TfrmMain.menHelExampleOfScriptClick(Sender: TObject);
 begin
-  pOpenHelpFile('\sample\Tinn-R_example of script.R');
+  pOpen_HelpFile('\sample\Tinn-R_example of script.R');
 end;
 
 procedure TfrmMain.menHelpRecognizedWordsClick(Sender: TObject);
 begin
-  pOpenHelpFile('\doc\Tinn-R_recognized words.R');
+  pOpen_HelpFile('\doc\Tinn-R_recognized words.R');
 end;
 
 procedure TfrmMain.actTobMiscVisibleExecute(Sender: TObject);
@@ -13802,7 +13805,7 @@ var
   IdHTTP: TIdHTTP;
 
 begin
-  if not fCheckConnection then begin
+  if not fCheck_Connection then begin
     Windows.Beep(600, 800);
     Exit;
   end;
@@ -13837,7 +13840,7 @@ begin
     finally
       frmMain.Refresh;
       FreeAndNil(frmUpdater);
-      pSetFocus_Main;
+      pSet_Focus_Main;
     end;
 end;
 
@@ -13852,7 +13855,7 @@ begin
               [mbOk],
               0);
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actShowAppOptionsExecute(Sender: TObject);
@@ -14238,11 +14241,11 @@ begin
 
         if bREcho then begin
           actREcho.Checked:= True;
-          pSetREcho_True;
+          pSet_Recho_True;
         end
         else begin
           actREcho.Checked:= False;
-          pSetREcho_False;
+          pSet_Recho_False;
         end;
 
         // EOL
@@ -14364,20 +14367,20 @@ begin
       frmRterm.JvDockClientRterm.CanFloat:= bRtermCanFloat;
 
       // Update General
-      pUpdateAppearance;
+      pUpdate_Appearance;
 
       // Update Rterm
-      pUpdateRterm_Appearance;
+      pUpdate_Rterm_Appearance;
 
       // Update hex viewer
-      pUpdateHexViewer;
+      pUpdate_HexViewer;
 
       pDraw_RtermSend_Plus;
     end;
   finally
     FreeAndNil(dlgApp_Options);
     FreeAndNil(slRAvailable);
-    pSetFocus_Main;
+    pSet_Focus_Main;
   end;
 end;
 
@@ -14403,7 +14406,7 @@ begin
       pgRH.ActivePage := tbsRH_Send;
     end;
 
-    pSetHotkeys_Status(False);  // Set temporarily pSetHotkeys_Status to False: it is necessary to manager Hotkeys!
+    pSet_Hotkeys_Status(False);  // Set temporarily pSet_Hotkeys_Status to False: it is necessary to manager Hotkeys!
     // If OK
     if (dlgSKH_Map.ShowModal = mrOK) then begin
       // Application
@@ -14494,7 +14497,7 @@ begin
         end;
       end;
 
-      pSetFocus_Main;
+      pSet_Focus_Main;
     end // if (dlgSH_Map.ShowModal = mrOK)
     // else (dlgSH_Map.ShowModal <> mrOK)
     else begin
@@ -14509,7 +14512,7 @@ begin
     end;
 
   finally
-    pSetHotkeys_Status(bHotKeys_On);
+    pSet_Hotkeys_Status(bHotKeys_On);
 
     with modDados.cdShortcuts do begin
       if BookmarkValid(pTmp) then GoToBookmark(pTmp);
@@ -14521,10 +14524,10 @@ end;
 procedure TfrmMain.pWMSysCommand;
 begin
   inherited;
-  pCheckTop;
+  pCheck_Top;
 end;
 
-procedure TfrmMain.pSetRExplorer(bOption: boolean);
+procedure TfrmMain.pSet_Rexplorer(bOption: boolean);
 begin
   //actRExplorerExpHtml.Enabled            := bOption;
   //actRExplorerExpTeX.Enabled             := bOption;
@@ -14546,7 +14549,7 @@ begin
   actRExplorerSummary.Enabled            := bOption;
 end;
 
-procedure TfrmMain.pMakeRenvironment(slRObjects: TStringList);
+procedure TfrmMain.pMake_Renvironment(slRObjects: TStringList);
 var
   i,
    j: integer;
@@ -14576,11 +14579,11 @@ begin
   end;
 end;
 
-procedure TfrmMain.pMakeItem(sRObjName,
-                                 sRObjDim,
-                                 sRObjGroup,
-                                 sRObjClass: string;
-                                 iIndex: integer);
+procedure TfrmMain.pMake_Item(sRObjName,
+                               sRObjDim,
+                               sRObjGroup,
+                               sRObjClass: string;
+                              iIndex: integer);
 var
   liItem: TListItem;
 
@@ -14593,10 +14596,10 @@ begin
   liItem.SubItems.Add(sRObjClass);
 end;
 
-procedure TfrmMain.pMakeTree(sRObjName,
-                                 sRObjDim,
-                                 sRObjGroup,
-                                 sRObjClass: string);
+procedure TfrmMain.pMake_Tree(sRObjName,
+                               sRObjDim,
+                               sRObjGroup,
+                               sRObjClass: string);
 begin
   {
     cbbToolsRExplorer.Items:
@@ -14624,81 +14627,81 @@ begin
     0: begin  // function
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 2) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                    2);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      2);
        end;
     1: begin  // vector
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 3) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                     3);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      3);
        end;
     2: begin  // matrix
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 4) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                     4);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      4);
        end;
     3: begin  // data.frame
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 5) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                     5);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      5);
        end;
     4: begin  // array
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 6) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                     6);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      6);
        end;
     5: begin  // list
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 7) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                     7);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      7);
        end;
     6: begin  // table
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 8) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                     8);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      8);
        end;
     7: begin  // other
          if (frmTools.cbbToolsRExplorer.ItemIndex = 0) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 1) or
             (frmTools.cbbToolsRExplorer.ItemIndex = 9) then
-           pMakeItem(sRObjName,
-                     sRObjDim,
-                     sRObjGroup,
-                     sRObjClass,
-                     9);
+           pMake_Item(sRObjName,
+                      sRObjDim,
+                      sRObjGroup,
+                      sRObjClass,
+                      9);
        end;
   end;
 end;
@@ -14736,10 +14739,10 @@ begin
         sRObjDims := slTmp[2]; // Dims of R object
         sRObjGroup:= slTmp[3]; // Group of R object
         sRObjClass:= slTmp[4]; // Class of R object
-        pMakeTree(sRObjName,
-                  sRObjDims,
-                  sRObjGroup,
-                  sRObjClass);
+        pMake_Tree(sRObjName,
+                   sRObjDims,
+                   sRObjGroup,
+                   sRObjClass);
       end;
     end;
     frmTools.lvRExplorer.Invalidate;
@@ -14754,7 +14757,7 @@ begin
 end;
 *)
 
-procedure TfrmMain.pMakeTreeRExplorer_TmpFile(slRObjects: TStringList);
+procedure TfrmMain.pMake_TreeRExplorer_TmpFile(slRObjects: TStringList);
 
   procedure pDefineObjectStructure(var sTmp,
                                        RobjName,
@@ -14809,10 +14812,10 @@ begin
                              sRObjClass,
                              slTmp);
 
-      pMakeTree(sRObjName,
-                sRObjDim,
-                sRObjGroup,
-                sRObjClass);
+      pMake_Tree(sRObjName,
+                 sRObjDim,
+                 sRObjGroup,
+                 sRObjClass);
     end;
     frmTools.lvRExplorer.Invalidate;
   finally
@@ -14832,7 +14835,7 @@ begin
     frmRServer.ShowModal;
   finally
     FreeAndNil(frmRServer);
-    pSetFocus_Main;
+    pSet_Focus_Main;
   end;
   frmMain.Refresh;
 end;
@@ -14856,7 +14859,7 @@ sTinnRPaths:= '.paths <- file.path(Sys.getenv(''TEMP''), ' +
                                    '''reformat-output.r''), ' +
                                    'fsep=''\\'')';
 
-pDoSend(sTinnRPaths);
+pDo_Send(sTinnRPaths);
 end;
 
 procedure TfrmMain.menRtermHistoryNextClick(Sender: TObject);
@@ -15074,7 +15077,7 @@ begin
                   #13#10;
 
   slFromRServer.Text:= sTmp;
-  pMakeRenvironment(slFromRServer);
+  pMake_Renvironment(slFromRServer);
   FreeAndNil(slFromRServer);
 end;
 
@@ -15172,7 +15175,7 @@ begin
   Socket.Close;
 end;
 
-procedure TfrmMain.pPrintMessage(sInstruction: string;
+procedure TfrmMain.pPrint_Message(sInstruction: string;
                                      bNewLine: boolean;
                                      sSignal: string = '> ');
 begin
@@ -15197,7 +15200,7 @@ procedure TfrmMain.pmenProjRSendToRClick(Sender: TObject);
 
   procedure pSendToR(var Stmp: string);
   begin
-    pDoSend(sTmp);
+    pDo_Send(sTmp);
   end;
 
   procedure pPrepareToSendToR(sFilePath: string;
@@ -15224,7 +15227,7 @@ procedure TfrmMain.pmenProjRSendToRClick(Sender: TObject);
       sToSend:= 'source(''' +
                         sUnixPath +
                         ''')';
-      pDoSend(sToSend);
+      pDo_Send(sToSend);
   end;
 
 var
@@ -15325,7 +15328,7 @@ procedure TfrmMain.pmenProjRSetWorkDirClick(Sender: TObject);
     sToSend := 'setwd(''' +
                unixPath +
                ''')';
-    pDoSend(sToSend);
+    pDo_Send(sToSend);
   end;
 
 var
@@ -15369,7 +15372,7 @@ end;
 
 procedure TfrmMain.actRExplorerHelpExecute(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Tools interface"');
+  pOpen_UserGuidePDF('"Tools interface"');
 end;
 
 function TfrmMain.fREnvironment: string;
@@ -15394,7 +15397,7 @@ begin
   sTmp:= 'help(''' +
          frmTools.lvRexplorer.Selected.Caption +
          ''')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerExampleSelectedExecute(Sender: TObject);
@@ -15406,7 +15409,7 @@ begin
   sTmp:= 'example(''' +
          frmTools.lvRexplorer.Selected.Caption +
          ''')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerOpenExampleSelectedExecute(Sender: TObject);
@@ -15512,7 +15515,7 @@ begin
        bRguiReturnFocus then actRguiReturnFocus.Checked:= False;
     Application.ProcessMessages;
 
-    pDoSend(sToSend);
+    pDo_Send(sToSend);
 
     i:= 1;
     repeat
@@ -15541,7 +15544,7 @@ begin
       Exit;
     end
     else
-      pOpenFileIntoTinn(sResult,
+      pOpen_FileIntoTinn(sResult,
                         0,
                         False,
                         False);
@@ -15560,7 +15563,7 @@ begin
          fREnvironment +
          frmTools.lvRexplorer.Selected.Caption +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerStructureExecute(Sender: TObject);
@@ -15573,7 +15576,7 @@ begin
          fREnvironment +
          frmTools.lvRexplorer.Selected.Caption +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerSummaryExecute(Sender: TObject);
@@ -15586,7 +15589,7 @@ begin
          fREnvironment +
          frmTools.lvRexplorer.Selected.Caption +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerEditExecute(Sender: TObject);
@@ -15599,7 +15602,7 @@ begin
          fREnvironment +
          frmTools.lvRexplorer.Selected.Caption +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerFixExecute(Sender: TObject);
@@ -15611,7 +15614,7 @@ begin
   sTmp:= 'fix(' +
          frmTools.lvRexplorer.Selected.Caption +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerPlotExecute(Sender: TObject);
@@ -15624,7 +15627,7 @@ begin
          fREnvironment +
          frmTools.lvRexplorer.Selected.Caption +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerRemoveExecute(Sender: TObject);
@@ -15636,7 +15639,7 @@ begin
   sTmp:= 'rm(' +
          frmTools.lvRexplorer.Selected.Caption +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerRemoveAllObjectsExecute(Sender: TObject);
@@ -15648,7 +15651,7 @@ begin
 
   //sTmp:= 'rm(list=ls(all=TRUE))';  // It is very danger!
   sTmp:= 'rm(list=ls())';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerContentExecute(Sender: TObject);
@@ -15660,7 +15663,7 @@ begin
 
   sTmp:= fREnvironment +
          frmTools.lvRexplorer.Selected.Caption;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerSendNameToEditorExecute(Sender: TObject);
@@ -15680,7 +15683,7 @@ begin
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                          else seEditor:= synEditor2;
         seEditor.PasteFromClipboard;
-        pEnableSave;
+        pEnable_Save;
       end;
     end;
 
@@ -15704,7 +15707,7 @@ begin
          '''' +
          ', ' +
          'type=''raw'')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRExplorerExpAsciiExecute(Sender: TObject);
@@ -15718,12 +15721,12 @@ begin
          '''' +
          ', ' +
          'type=''ascii'')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRCardHelpExecute(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Card (R)"');
+  pOpen_UserGuidePDF('"Card (R)"');
 end;
 
 procedure TfrmMain.actRCardHelpSelectedExecute(Sender: TObject);
@@ -15765,7 +15768,7 @@ var
 begin
   sTmp:= fGetWord;
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRcardInsertExecute(Sender: TObject);
@@ -15777,7 +15780,7 @@ begin
   i:= fFindTop_Window;
 
   with (MDIChildren[i] as TfrmEditor) do
-    pDoCardInsert;
+    pDo_CardInsert;
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
               0,
@@ -15823,7 +15826,7 @@ var
 begin
   sTmp:= fGetWord;
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRcardCopyFunctionExecute(Sender: TObject);
@@ -15836,7 +15839,7 @@ procedure TfrmMain.actRcardEditExecute(Sender: TObject);
 begin
   sRcardBookMark:= modDados.cdRcard.Bookmark;
   menToolsDatabaseCardRClick(nil);
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actRcardCopyDescritionExecute(Sender: TObject);
@@ -15846,7 +15849,7 @@ begin
                                            else Clipboard.AsText:= cdRcardDescription.Value;
 end;
 
-procedure TfrmMain.pUpdateOptions;
+procedure TfrmMain.pUpdate_Options;
 var
   seEditor: TSynEdit;
 
@@ -15864,7 +15867,7 @@ begin
     actUnindentBlock.Enabled           := SelAvail;
     actUpperCaseSelection.Enabled      := SelAvail;
   end;
-  pUpdateCloseFileOptions;
+  pUpdate_CloseFileOptions;
 end;
 
 procedure TfrmMain.actSplitVerticalExecute(Sender: TObject);
@@ -15878,11 +15881,11 @@ begin
   with (Self.MDIChildren[i] as TfrmEditor) do
     pEditor_Split(False);
 
-  pSetDataCompletion(synEditor2_Tip,
-                     (Self.MDIChildren[i] as TfrmEditor).synEditor2,
-                     'CTRL+SPACE');
+  pSet_DataCompletion(synEditor2_Tip,
+                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
+                      'CTRL+SPACE');
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actSplitHorizontalExecute(Sender: TObject);
@@ -15896,11 +15899,11 @@ begin
   with (Self.MDIChildren[i] as TfrmEditor) do
     pEditor_Split;
 
-  pSetDataCompletion(synEditor2_Tip,
-                     (Self.MDIChildren[i] as TfrmEditor).synEditor2,
-                     'CTRL+SPACE');
+  pSet_DataCompletion(synEditor2_Tip,
+                      (Self.MDIChildren[i] as TfrmEditor).synEditor2,
+                      'CTRL+SPACE');
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actSplitRemoveExecute(Sender: TObject);
@@ -15945,7 +15948,7 @@ begin
   pOpen_Url('http://www.vim.org/scripts/script.php?script_id=2628')
 end;
 
-procedure TfrmMain.pSendToConsole(sTmp: string);
+procedure TfrmMain.pSend_ToConsole(sTmp: string);
 var
   iPos: integer;
 
@@ -15990,18 +15993,18 @@ begin
                    #0,
                    nil);
 
-    frmRTerm.synIO.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    frmRTerm.synIO.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
   end;
 end;
 
-procedure TfrmMain.pCheckRterm;
+procedure TfrmMain.pCheck_Rterm;
 begin
   if not GetFormVisible(frmRterm) then ShowDockForm(frmRterm);
 
   actRtermVisible.Checked:= GetFormVisible(frmRterm);
 end;
 
-procedure TfrmMain.pDoSend(var sTmp: string;
+procedure TfrmMain.pDo_Send(var sTmp: string;
                                bSendToSynIO: boolean = True);
 var
   sToSend: string;
@@ -16014,11 +16017,11 @@ begin
 
   // Rterm: priority 1
   if fRterm_Running then begin
-    pCheckRterm;
+    pCheck_Rterm;
     sToSend:= sTmp + #13#10;
     // The order below is important for sincronization: do not change!
     if bSendToSynIO then
-      pSendToConsole(sTmp);
+      pSend_ToConsole(sTmp);
     with frmRterm.cRterm do
       SendInput(sToSend);
   end
@@ -16028,24 +16031,24 @@ begin
     fCodeSender.pSendChar(sToSend,
                           hRgui,
                           iDelay);
-    pCheckTop;
-    pSetFocus_Rgui(iDelay div 4);
+    pCheck_Top;
+    pSet_Focus_Rgui(iDelay div 4);
   end
   // R server remote: priority 3
   else if bIPRemoteConnected then begin
     if not fUseTCPIP then Exit;
 
-    pCheckRterm;
+    pCheck_Rterm;
     sToSend:= sTmp + #13#10;
 
-    if bSendToSynIO then pPrintMessage(sTmp,
+    if bSendToSynIO then pPrint_Message(sTmp,
                                        True);
     csRGeneral.Socket.SendText(sToSend);
-    pSetFocus_Rgui(iDelay div 4);
+    pSet_Focus_Rgui(iDelay div 4);
   end;
 end;
 
-function TfrmMain.fGetFile(var bSingleLine: boolean): string;
+function TfrmMain.fGet_File(var bSingleLine: boolean): string;
 var
   sTmp,
    sFilePath: string;
@@ -16054,8 +16057,8 @@ begin
   Result:= EmptyStr;
   if not fValidR_Running then Exit;
   sTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor.Text;
-  if not bRSendAll then pRemoveLine_Commented(sTmp);
-  pRemoveLine_Empty(sTmp);
+  if not bRSendAll then pRemove_Line_Commented(sTmp);
+  pRemove_Line_Empty(sTmp);
 
   if bRSmart and
      fSingleLine(sTmp) then begin
@@ -16075,7 +16078,7 @@ begin
                      sTmp) then Result:= '.paths[4]';
 end;
 
-function TfrmMain.fGetSelectionToReformat(sSel: string): string;
+function TfrmMain.fGet_Selection_ToReformat(sSel: string): string;
 var
   sFilePath: string;
 
@@ -16090,7 +16093,7 @@ begin
                      sSel) then Result:= '.paths[8]';
 end;
 
-function TfrmMain.fGetFileToReformat: string;
+function TfrmMain.fGet_FileToReformat: string;
 var
   sTmp,
    sFilePath: string;
@@ -16108,7 +16111,7 @@ begin
                      sTmp) then Result:= '.paths[8]';
 end;
 
-function TfrmMain.fGetClipboard(var bSingleLine: boolean): string;
+function TfrmMain.fGet_Clipboard(var bSingleLine: boolean): string;
 var
   sTmp,
    sFilePath: string;
@@ -16118,8 +16121,8 @@ begin
   if not fValidR_Running then Exit;
 
   sTmp:= Clipboard.AsText;
-  if not bRSendAll then pRemoveLine_Commented(sTmp);
-  pRemoveLine_Empty(sTmp);
+  if not bRSendAll then pRemove_Line_Commented(sTmp);
+  pRemove_Line_Empty(sTmp);
 
   if bRSmart and
      fSingleLine(sTmp) then begin
@@ -16142,7 +16145,7 @@ begin
   end;
 end;
 
-function TfrmMain.fGetSelection(var bSingleLine: boolean): string;
+function TfrmMain.fGet_Selection(var bSingleLine: boolean): string;
 var
   seEditor: TSynEdit;
 
@@ -16161,8 +16164,8 @@ begin
     if SelAvail then sTmp:= SelText
                 else Exit;
 
-  if not bRSendAll then pRemoveLine_Commented(sTmp);
-  pRemoveLine_Empty(sTmp);
+  if not bRSendAll then pRemove_Line_Commented(sTmp);
+  pRemove_Line_Empty(sTmp);
 
   if bRSmart and
      fSingleLine(sTmp) then begin
@@ -16185,7 +16188,7 @@ begin
   end;
 end;
 
-function TfrmMain.fGetBlockMarked(var bSingleLine: boolean): string;
+function TfrmMain.fGet_BlockMarked(var bSingleLine: boolean): string;
 var
   aMarks: array of array of integer;
 
@@ -16253,8 +16256,8 @@ begin
     EndUpdate;
   end;
 
-  if not bRSendAll then pRemoveLine_Commented(sTmp);
-  pRemoveLine_Empty(sTmp);
+  if not bRSendAll then pRemove_Line_Commented(sTmp);
+  pRemove_Line_Empty(sTmp);
 
   if bRSmart and
      fSingleLine(sTmp) then begin
@@ -16277,7 +16280,7 @@ begin
   end;
 end;
 
-function TfrmMain.fGetContiguous(var bSingleLine: boolean): string;
+function TfrmMain.fGet_Contiguous(var bSingleLine: boolean): string;
 var
   bEmptyLine,
    bEndOfChunk,
@@ -16472,8 +16475,8 @@ begin
     EndUpdate;
   end;
 
-  if not bRSendAll then pRemoveLine_Commented(sTmp);
-  pRemoveLine_Empty(sTmp);
+  if not bRSendAll then pRemove_Line_Commented(sTmp);
+  pRemove_Line_Empty(sTmp);
 
   if (sTmp = EmptyStr) then Exit;
 
@@ -16676,7 +16679,7 @@ begin
   Result:= sTmp;
 end;
 
-function TfrmMain.fGetLinesToEndPage(var bSingleLine: boolean): string;
+function TfrmMain.fGet_LinesToEndPage(var bSingleLine: boolean): string;
 var
   seEditor: TSynEdit;
 
@@ -16710,8 +16713,8 @@ begin
     EndUpdate;
   end;
 
-  if not bRSendAll then pRemoveLine_Commented(sTmp);
-  pRemoveLine_Empty(sTmp);
+  if not bRSendAll then pRemove_Line_Commented(sTmp);
+  pRemove_Line_Empty(sTmp);
 
   if bRSmart and
      fSingleLine(sTmp) then begin
@@ -16734,7 +16737,7 @@ begin
   end;
 end;
 
-function TfrmMain.fGetCursorTo(sWay: string): string;
+function TfrmMain.fGet_CursorTo(sWay: string): string;
 var
   bLineWrapOption: boolean;
 
@@ -16787,7 +16790,7 @@ begin
   end;
 end;
 
-function TfrmMain.fGetPathFile(bFull: boolean = False): string;
+function TfrmMain.fGet_PathFile(bFull: boolean = False): string;
 var
   sDos: string;
 
@@ -16814,7 +16817,7 @@ var
   bSingleLine: boolean;
 
 begin
-  sToSend:= fGetFile(bSingleLine);
+  sToSend:= fGet_File(bSingleLine);
   if (sToSend = EmptyStr) then Exit;
 
   if bSingleLine then
@@ -16832,7 +16835,7 @@ begin
              sToSend +
              ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendSelectionExecute(Sender: TObject);
@@ -16843,7 +16846,7 @@ var
   bSingleLine: boolean;
 
 begin
-  sToSend:= fGetSelection(bSingleLine);
+  sToSend:= fGet_Selection(bSingleLine);
   if (sToSend = EmptyStr) then Exit;
 
   if bSingleLine then
@@ -16861,7 +16864,7 @@ begin
              sToSend +
              ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendSmartExecute(Sender: TObject);
@@ -16873,7 +16876,7 @@ procedure TfrmMain.actRSendSmartExecute(Sender: TObject);
   begin
     // Rterm: priority 1
     if fRterm_Running then begin
-      pCheckRterm;
+      pCheck_Rterm;
       sToSend:= sTmp + #13#10;
       // The order below is important for sincronization: do not change!
       with R_Useful.cRTerm_RU do
@@ -16886,19 +16889,19 @@ procedure TfrmMain.actRSendSmartExecute(Sender: TObject);
 //                            hRgui,
 //                            iDelay);
 //      pCheckTop;
-//      pSetFocus_Rgui(iDelay div 4);
+//      pSet_Focus_Rgui(iDelay div 4);
 //    end
 //    // R server remote: priority 3
 //    else if bIPRemoteConnected then begin
 //      if not fUseTCPIP then Exit;
 //
-//      pCheckRterm;
+//      pCheck_Rterm;
 //      sToSend:= sTmp + #13#10;
 //
-//      if bSendToSynIO then pPrintMessage(sTmp,
+//      if bSendToSynIO then pPrint_Message(sTmp,
 //                                         True);
 //      csRGeneral.Socket.SendText(sToSend);
-//      pSetFocus_Rgui(iDelay div 4);
+//      pSet_Focus_Rgui(iDelay div 4);
 //    end;
   end;
 
@@ -16978,7 +16981,7 @@ begin
                       seEditor);
       if (sTmp = EmptyStr) then Exit;
 
-      pDoSend(sTmp);
+      pDo_Send(sTmp);
     end;
   end;  //with RSend_Smart
 end;
@@ -16991,7 +16994,7 @@ var
   bSingleLine: boolean;
 
 begin
-  sToSend:= fGetClipboard(bSingleLine);
+  sToSend:= fGet_Clipboard(bSingleLine);
   if (sToSend = EmptyStr) then Exit;
 
   if bSingleLine then
@@ -17009,7 +17012,7 @@ begin
              sToSend +
              ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendBlockMarkedExecute(Sender: TObject);
@@ -17020,7 +17023,7 @@ var
   bSingleLine: boolean;
 
 begin
-  sToSend:= fGetBlockMarked(bSingleLine);
+  sToSend:= fGet_BlockMarked(bSingleLine);
   if (sToSend = EmptyStr) then Exit;
 
   if bSingleLine then
@@ -17038,7 +17041,7 @@ begin
              sToSend +
              ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendContiguousExecute(Sender: TObject);
@@ -17049,7 +17052,7 @@ var
   bSingleLine: boolean;
 
 begin
-  sToSend:= fGetContiguous(bSingleLine);
+  sToSend:= fGet_Contiguous(bSingleLine);
   if (sToSend = EmptyStr) then Exit;
 
   if bSingleLine then
@@ -17067,7 +17070,7 @@ begin
              sToSend +
              ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendLineExecute(Sender: TObject);
@@ -17095,14 +17098,14 @@ begin
 
   sTmp:= fGetLine(bGoToNextValidLine,
                   seEditor);
-  seEditor.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+  seEditor.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 
   if (sTmp = EmptyStr) then begin
-    frmRTerm.synIO.OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    frmRTerm.synIO.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     Exit;
   end;
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendLinesToEndPageExecute(Sender: TObject);
@@ -17113,7 +17116,7 @@ var
    sToSend: string;
 
 begin
-  sToSend:= fGetLinesToEndPage(bSingleLine);
+  sToSend:= fGet_LinesToEndPage(bSingleLine);
   if (sToSend = EmptyStr) then Exit;
 
   if bSingleLine then
@@ -17131,7 +17134,7 @@ begin
              sToSend +
              ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRCurrentLineToTopExecute(Sender: TObject);
@@ -17148,8 +17151,8 @@ begin
     CaretX := 0;
   end;
 
-  pCheckTop;
-  pSetFocus_Rgui(iDelay);
+  pCheck_Top;
+  pSet_Focus_Rgui(iDelay);
 end;
 
 procedure TfrmMain.actRSendCursorToBeginningLineExecute(Sender: TObject);
@@ -17157,9 +17160,9 @@ var
   sTmp: string;
 
 begin
-  sTmp:= fGetCursorTo('BeginningLine');
+  sTmp:= fGet_CursorTo('BeginningLine');
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendCursorToEndLineExecute(Sender: TObject);
@@ -17167,9 +17170,9 @@ var
   sTmp: string;
 
 begin
-  sTmp:= fGetCursorTo('EndLine');
+  sTmp:= fGet_CursorTo('EndLine');
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRSendSweaveExecute(Sender: TObject);
@@ -17182,12 +17185,12 @@ var
    sLatex_Old: string;
 
 begin
-  sUnix:= fGetPathFile(True);
+  sUnix:= fGet_PathFile(True);
 
   if (sUnix = EmptyStr) then Exit;
 
   sTmp:= 'setwd(''' +
-          fGetPathFile(False) +
+          fGet_PathFile(False) +
           ''')' + #13#10;
 
   if (csRGeneral.Active) then csRGeneral.Socket.SendText(sTmp);
@@ -17197,7 +17200,7 @@ begin
          sUnix +
          ''')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 
   sLatex_File:= UnixPathToDosPath(ChangeFileExt(sUnix,
                                                 '.tex'));
@@ -17211,7 +17214,7 @@ begin
   if FileExists(sLatex_Old) then
     Windows.DeleteFile(PChar(sLatex_Old));
 
-  // It will avoid the procedure pUpdateFileIntoTinn(.tex)
+  // It will avoid the procedure pUpdate_FileIntoTinn(.tex)
   // when R takes too long to generate a new one.
   if FileExists(sLatex_File) then
     RenameFile(sLatex_File, sLatex_Old);
@@ -17224,7 +17227,7 @@ begin
 
     if FileExists(sLatex_File) and
        not fFile_InUse(sLatex_File) then begin
-      pUpdateFileIntoTinn(sLatex_File);
+      pUpdate_FileIntoTinn(sLatex_File);
       Break;
     end;
 
@@ -17235,7 +17238,7 @@ begin
   if FileExists(sLatex_Old) and
      not FileExists(sLatex_File) then begin
      RenameFile(sLatex_Old, sLatex_File);
-     pUpdateFileIntoTinn(sLatex_File);
+     pUpdate_FileIntoTinn(sLatex_File);
   end;
   
 end;
@@ -17250,11 +17253,11 @@ var
    sLatex_Old: string;
 
 begin
-  sUnix:= fGetPathFile(True);
+  sUnix:= fGet_PathFile(True);
   if (sUnix = EmptyStr) then Exit;
 
   sTmp:= 'setwd(''' +
-          fGetPathFile(False) +
+          fGet_PathFile(False) +
           ''')' + #13#10;
 
   if (csRGeneral.Active) then csRGeneral.Socket.SendText(sTmp);
@@ -17303,14 +17306,14 @@ begin
   if FileExists(sLatex_Old) then
     Windows.DeleteFile(PChar(sLatex_Old));
 
-  // It will avoid the procedure pUpdateFileIntoTinn(.tex)
+  // It will avoid the procedure pUpdate_FileIntoTinn(.tex)
   // when R takes too long to generate a new one.
   if FileExists(sLatex_File) then
     RenameFile(sLatex_File, sLatex_Old);
 
   Application.ProcessMessages;
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 
   i:= 1;
   repeat
@@ -17318,7 +17321,7 @@ begin
 
     if FileExists(sLatex_File) and
        not fFile_InUse(sLatex_File) then begin
-      pUpdateFileIntoTinn(sLatex_File);
+      pUpdate_FileIntoTinn(sLatex_File);
       Break;
     end;
 
@@ -17329,7 +17332,7 @@ begin
   if FileExists(sLatex_Old) and
      not FileExists(sLatex_File) then begin
      RenameFile(sLatex_Old, sLatex_File);
-     pUpdateFileIntoTinn(sLatex_File);
+     pUpdate_FileIntoTinn(sLatex_File);
   end;
 end;
 
@@ -17345,11 +17348,11 @@ var
    sHtml_Old: string;
 
 begin
-  sUnix:= fGetPathFile(True);
+  sUnix:= fGet_PathFile(True);
   if (sUnix = EmptyStr) then Exit;
 
   sTmp:= 'setwd(''' +
-          fGetPathFile(False) +
+          fGet_PathFile(False) +
           ''')' + #13#10;
 
   if (csRGeneral.Active) then csRGeneral.Socket.SendText(sTmp);
@@ -17386,7 +17389,7 @@ begin
              ')'
   end;
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 
   sMarkdown_File:= UnixPathToDosPath(ChangeFileExt(sUnix,
                                                    '.md'));
@@ -17412,13 +17415,13 @@ begin
   if FileExists(sHtml_Old) then
     Windows.DeleteFile(PChar(sHtml_Old));
 
-  // It will avoid the procedure pUpdateFileIntoTinn(.html)
+  // It will avoid the procedure pUpdate_FileIntoTinn(.html)
   // when R takes too long to generate a new one.
   if FileExists(sMarkdown_File) then
     RenameFile(sMarkdown_File,
                sMarkdown_Old);
 
-  // It will avoid the procedure pUpdateFileIntoTinn(.html)
+  // It will avoid the procedure pUpdate_FileIntoTinn(.html)
   // when R takes too long to generate a new one.
   if FileExists(sHtml_File) then
     RenameFile(sHtml_File,
@@ -17430,15 +17433,15 @@ begin
   repeat
     Sleep(5*iDelay);
 
-    // Do not change the order of the pUpdateFileIntoTinn
+    // Do not change the order of the pUpdate_FileIntoTinn
     if not fFile_InUse(sMarkdown_File) and
        not fFile_InUse(sHtml_File) then begin
 
          if FileExists(sMarkdown_File) and  // *.Rhtml do not generate *.md
-            not fFile_InUse(sMarkdown_File) then pUpdateFileIntoTinn(sMarkdown_File);
+            not fFile_InUse(sMarkdown_File) then pUpdate_FileIntoTinn(sMarkdown_File);
 
          if FileExists(sHtml_File) and
-            not fFile_InUse(sHtml_File) then pUpdateFileIntoTinn(sHtml_File);
+            not fFile_InUse(sHtml_File) then pUpdate_FileIntoTinn(sHtml_File);
 
         if (actHtmlOpenAlways.Checked) then actHtmlOpenCurrentFileExecute(nil);
 
@@ -17454,7 +17457,7 @@ begin
      RenameFile(sMarkdown_Old,
                 sMarkdown_File);
 
-     pUpdateFileIntoTinn(sMarkdown_File);
+     pUpdate_FileIntoTinn(sMarkdown_File);
   end;
 
   // The new .html was not created by R, so, it will must be regenerated.
@@ -17463,7 +17466,7 @@ begin
      RenameFile(sHtml_Old,
                 sHtml_File);
 
-     pUpdateFileIntoTinn(sHtml_File);
+     pUpdate_FileIntoTinn(sHtml_File);
   end;
 
 end;
@@ -17474,14 +17477,14 @@ var
    sUnix: string;
 
 begin
-  sUnix:= fGetPathFile;
+  sUnix:= fGet_PathFile;
   if (sUnix = EmptyStr) then Exit;
 
   sTmp:= 'setwd(''' +
          sUnix +
          ''')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContListAllObjectsExecute(Sender: TObject);
@@ -17491,7 +17494,7 @@ var
 begin
   if not fValidR_Running then Exit;
   sTmp:= 'ls()';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPrintVariableContentExecute(Sender: TObject);
@@ -17510,7 +17513,7 @@ begin
     Exit;
   end;
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContListVariableNamesExecute(Sender: TObject);
@@ -17532,7 +17535,7 @@ begin
           sTmp +
           ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContListVariableStructureExecute(Sender: TObject);
@@ -17554,7 +17557,7 @@ begin
           sTmp +
           ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContOpenExampleSelectedWordExecute(Sender: TObject);
@@ -17716,7 +17719,7 @@ begin
        bRguiReturnFocus then actRguiReturnFocus.Checked:= False;
     Application.ProcessMessages;
 
-    pDoSend(sToSend);
+    pDo_Send(sToSend);
 
     i:= 1;
     repeat
@@ -17745,7 +17748,7 @@ begin
       Exit;
     end
     else
-      pOpenFileIntoTinn(sResult,
+      pOpen_FileIntoTinn(sResult,
                         0,
                         False,
                         False);
@@ -17773,7 +17776,7 @@ begin
           sTmp +
           ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContFixVariableExecute(Sender: TObject);
@@ -17795,7 +17798,7 @@ begin
           sTmp +
           ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPlotVariableExecute(Sender: TObject);
@@ -17817,10 +17820,10 @@ begin
           sTmp +
           ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.pSendRCustom(sRC: string);
+procedure TfrmMain.pSend_Rcustom(sRC: string);
 var
   bSingleLine: boolean;
 
@@ -17846,7 +17849,7 @@ begin
   else if (Pos('%s',
                sRC) > 0) then begin
     if (pgFiles.PageCount = 0) then Exit;
-    sToSend:= fGetSelection(bSingleLine);  // Get slection
+    sToSend:= fGet_Selection(bSingleLine);  // Get slection
 
     if (sToSend = EmptyStr) then begin
       sToSend:= fFindWord_Extended(fGet_Syn);  // Get word
@@ -17866,10 +17869,10 @@ begin
   end
   else sTmp:= sRC;
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.pDoClearConsole;
+procedure TfrmMain.pDo_ClearConsole;
 var
   sToSend: string;
 
@@ -17878,7 +17881,7 @@ begin
 
   // Rterm: priority 1
   if fRterm_Running then begin
-    pCheckRterm;
+    pCheck_Rterm;
 
     if frmRterm.bRUnderDebug_Function or
        frmRterm.bRUnderDebug_Package then begin
@@ -17902,8 +17905,8 @@ begin
     sToSend:= '^l';
     fCodeSender.pDoPrepare;
     fCodeSender.pSendString(sToSend);
-    pCheckTop;
-    pSetFocus_Rgui(iDelay);
+    pCheck_Top;
+    pSet_Focus_Rgui(iDelay);
     Exit;
   end;
 
@@ -17913,7 +17916,7 @@ begin
     frmRterm.synIO.Clear;
     sToSend:= EmptyStr + #13#10;
     csRGeneral.Socket.SendText(sToSend);
-    pSetFocus_Rgui(iDelay div 4);
+    pSet_Focus_Rgui(iDelay div 4);
   end;
 end;
 
@@ -17929,7 +17932,7 @@ var
 begin
   if not fValidR_Running then Exit;
   sTmp:= 'graphics.off()';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContRemoveAllObjectsExecute(Sender: TObject);
@@ -17939,7 +17942,7 @@ var
 begin
   if not fValidR_Running then Exit;
   sTmp:= 'rm(list=ls())';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContClearAllExecute(Sender: TObject);
@@ -17982,15 +17985,15 @@ begin
   // So it clear the console first
   // Rterm: priority 2
   if fRgui_Running then begin
-    pCheckTop;
-    pSetFocus_Rgui(iDelay div 2);
+    pCheck_Top;
+    pSet_Focus_Rgui(iDelay div 2);
     sToSend:= '^l';
     fCodeSender.pDoPrepare;
     fCodeSender.pSendString(sToSend);
   end;
 
   sTmp:= 'rm(list=ls()); graphics.off()';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 
   // Rterm: priority 1
   if fRterm_Running then begin
@@ -18013,7 +18016,7 @@ begin
 
     sToSend:= EmptyStr + #13#10;
     csRGeneral.Socket.SendText(sToSend);
-    pSetFocus_Rgui(iDelay div 4);
+    pSet_Focus_Rgui(iDelay div 4);
   end;
 end;
 
@@ -18033,8 +18036,8 @@ begin
   sTmp:= '{ESC}';
   fCodeSender.pDoPrepare;
   fCodeSender.pSendString(sTmp);
-  pCheckTop;
-  pSetFocus_Rgui(iDelay);
+  pCheck_Top;
+  pSet_Focus_Rgui(iDelay);
 end;
 
 procedure TfrmMain.actRContHelpSelectedWordExecute(Sender: TObject);
@@ -18131,7 +18134,7 @@ var
 begin
   sTmp:= fGetWord;
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContExampleSelectedWordExecute(Sender: TObject);
@@ -18228,7 +18231,7 @@ var
 begin
   sTmp:= fGetWord;
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContHelpExecute(Sender: TObject);
@@ -18238,7 +18241,7 @@ var
 begin
   if not fValidR_Running then Exit;
   sTmp:= 'help.start(update=FALSE)';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actREnvironmentRefreshExecute(Sender: TObject);
@@ -18275,7 +18278,7 @@ var
 begin
   stbMain.Panels[9].Text:= EmptyStr;
 
-  iFocus:= fGetFocus;
+  iFocus:= fGet_Focus;
 
   with actRtermWarningError do begin
     Visible:= False;
@@ -18293,9 +18296,9 @@ begin
 
       if (csREnvironment.Active) then csREnvironment.Socket.SendText(sToSend)
       else begin
-        pCheckRterm;
+        pCheck_Rterm;
         frmRterm.cRterm.SendInput(sToSend);
-        pSendToConsole(sTmp);
+        pSend_ToConsole(sTmp);
       end;
 
     end
@@ -18308,7 +18311,7 @@ begin
                                    else fCodeSender.pSendChar(sToSend,
                                                               hRgui);
 
-        pSetFocus_Rgui(iDelay div 4);
+        pSet_Focus_Rgui(iDelay div 4);
       end;
 
     i:= 0;
@@ -18325,9 +18328,9 @@ begin
 
     DeleteFile(sRFile);
 
-    pCheckTop;
+    pCheck_Top;
 
-    if fRgui_Running then pSetFocus_Rgui(iDelay)
+    if fRgui_Running then pSet_Focus_Rgui(iDelay)
     else begin
       case iFocus of
          // synEditor1
@@ -18374,7 +18377,7 @@ var
           Sleep(iDelay);
           pReadTmpFile(sRFile);
         end;
-        pMakeTreeRExplorer_TmpFile(strlFromR);
+        pMake_TreeRExplorer_TmpFile(strlFromR);
       except
        on EFOpenError do begin
          FreeAndNil(strlFromR);
@@ -18388,7 +18391,7 @@ var
  end;
 
 begin
-  iFocus:= fGetFocus;
+  iFocus:= fGet_Focus;
 
   try
     case frmTools.cbbToolsRExplorer.ItemIndex of
@@ -18446,9 +18449,9 @@ begin
 
       if (csRExplorer.Active) then csRExplorer.Socket.SendText(sToSend)
       else begin
-        pCheckRterm;
+        pCheck_Rterm;
         frmRterm.cRterm.SendInput(sToSend);
-        pSendToConsole(sTmp);
+        pSend_ToConsole(sTmp);
       end;
     end
     else // Rgui: priority 2.2
@@ -18460,7 +18463,7 @@ begin
                                 else fCodeSender.pSendChar(sToSend,
                                                            hRgui);
 
-        pSetFocus_Rgui(iDelay div 4);
+        pSet_Focus_Rgui(iDelay div 4);
       end;
 
     i:= 0;
@@ -18477,9 +18480,9 @@ begin
 
     DeleteFile(sRFile);
 
-    pCheckTop;
+    pCheck_Top;
 
-    if fRgui_Running then pSetFocus_Rgui(iDelay)
+    if fRgui_Running then pSet_Focus_Rgui(iDelay)
     else begin
       case iFocus of
          // synEditor1
@@ -18501,10 +18504,10 @@ end;
 
 procedure TfrmMain.actProjectReloadExecute(Sender: TObject);
 begin
-  pCheckIfProjectWasChanged;
+  pCheck_Project_Changed;
   Application.ProcessMessages;
 
-  pToolsProjectControls(False);
+  pTools_ProjectControls(False);
   with frmTools.tvProject.Items do begin
     BeginUpdate;
     Clear;
@@ -18513,18 +18516,18 @@ begin
   if Assigned(slProjectChanges) then slProjectChanges.Clear;
   bProjectChanged:= False;
 
-  pClearStatusBarProject;
-  pOpenFileIntoTinn(sProjectName);
+  pClear_StatusBar_Project;
+  pOpen_FileIntoTinn(sProjectName);
 end;
 
 procedure TfrmMain.actProjectEditExecute(Sender: TObject);
 begin
-  pOpenFileIntoTinn(sProjectName,
+  pOpen_FileIntoTinn(sProjectName,
                     0,
                     True);
 end;
 
-procedure TfrmMain.pBackupSystemConfiguration(bStarting: boolean);
+procedure TfrmMain.pBackup_SystemConfiguration(bStarting: boolean);
 var
   sBackup: string;
 
@@ -18556,8 +18559,8 @@ begin
 
       try
         if not bStarting then begin
-          pWriteIniFile_Application(True);
-          pWriteIniFile_Editor(True);
+          pWrite_IniFile_Application(True);
+          pWrite_IniFile_Editor(True);
         end;
 
         with zipKit do begin
@@ -18608,8 +18611,8 @@ end;
 
 procedure TfrmMain.actBackupSystemConfigurationExecute(Sender: TObject);
 begin
-  pBackupSystemConfiguration(False);
-  pSetFocus_Main;
+  pBackup_SystemConfiguration(False);
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actBackupDatabaseExecute(Sender: TObject);
@@ -18705,7 +18708,7 @@ begin
     end;  // if (sd.Execute)
   finally
     FreeAndNil(sd);
-    pSetFocus_Main;
+    pSet_Focus_Main;
   end;
 end;
 
@@ -19008,7 +19011,7 @@ begin
   pmenViewToolbarsFormat.Checked:= tobFormat.Visible;
 end;
 
-procedure TfrmMain.pCheckProcessingPath(sPath: string);
+procedure TfrmMain.pCheck_ProcessingPath(sPath: string);
 begin
   if (sPath = EmptyStr) then begin
     fMessageDlg('The path of interpreter, conversor or viewer was not defined.' + #13#10 +
@@ -19021,11 +19024,11 @@ begin
   end;
 end;
 
-procedure TfrmMain.pFileConversion(sParameter,
-                                       sExtension,
-                                       sPathConversor: string;
-                                       sPathInterpreter: string = '';
-                                       bWait: boolean = True);
+procedure TfrmMain.pFile_Conversion(sParameter,
+                                    sExtension,
+                                    sPathConversor: string;
+                                    sPathInterpreter: string = '';
+                                    bWait: boolean = True);
 
   procedure pCopyFile(const sourcefilename,
                             targetfilename: string);
@@ -19082,8 +19085,8 @@ begin
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
   actFileSaveExecute(Self);
 
-  pCheckProcessingPath(sPathInterpreter);
-  pCheckProcessingPath(sPathConversor);
+  pCheck_ProcessingPath(sPathInterpreter);
+  pCheck_ProcessingPath(sPathConversor);
 
   try
     if (sPathInterpreter <> EmptyStr) then sTmpPar:= sPathInterpreter +
@@ -19100,12 +19103,12 @@ begin
     SetCurrentDir(ExtractFilePath(sTmpFile));  // Set the OS directory to the current file prior to make the conversion
 
     if bWait then begin
-      if fExecCmdLine_Wait(sTmpPar,
-                           SW_HIDE) then begin
+      if fExec_CmdLine_Wait(sTmpPar,
+                            SW_HIDE) then begin
         if (sExtension = '.rnw') then pLatexToSweave
                                  else sNewFile:= ChangeFileExt(sTmpFile,
                                                                sExtension);
-        pUpdateFileIntoTinn(sNewFile);
+        pUpdate_FileIntoTinn(sNewFile);
       end
       else begin
         (Self.MDIChildren[i] as TfrmEditor).Cursor:= oldCursor;
@@ -19151,7 +19154,7 @@ begin
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
   actFileSaveExecute(Self);
 
-  pCheckProcessingPath(sPath_Pandoc);
+  pCheck_ProcessingPath(sPath_Pandoc);
 
   sPandocInstruction:= StringReplace(sPandocInstruction,
                                      'pandoc',
@@ -19159,9 +19162,9 @@ begin
                                      []);
   try
     if bWait then
-      if fExecCmdLine_Wait(sPandocInstruction,
-                           SW_HIDE) and
-         not fFile_InUse(sPandocTo) then pUpdateFileIntoTinn(sPandocTo)
+      if fExec_CmdLine_Wait(sPandocInstruction,
+                            SW_HIDE) and
+         not fFile_InUse(sPandocTo) then pUpdate_FileIntoTinn(sPandocTo)
       else begin
         (Self.MDIChildren[i] as TfrmEditor).Cursor:= oldCursor;
         fMessageDlg(sPandocInstruction + #13 + #13 +
@@ -19190,230 +19193,230 @@ end;
 
 procedure TfrmMain.actDeplateToLaTeXDramatistExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' latex-dramatist',
-                  '.tex',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' latex-dramatist',
+                   '.tex',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToLaTeXExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' latex',
-                  '.tex',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' latex',
+                   '.tex',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToPhpExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' php',
-                  '.php',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' php',
+                   '.php',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToPlainExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' plain',
-                  '.text',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' plain',
+                   '.text',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToLatexExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' tex',
-                  '.tex',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' tex',
+                   '.tex',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToLoutExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' lout',
-                  '.lout',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' lout',
+                   '.lout',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToManExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' man',
-                  '.man',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' man',
+                   '.man',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToMgpExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' mgp',
-                  '.mgp',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' mgp',
+                   '.mgp',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToMoinExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' moin',
-                  '.moin',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' moin',
+                   '.moin',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToPm6Execute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' pm6',
-                  '.pm6',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' pm6',
+                   '.pm6',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToSweaveExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' latex',
-                  '.rnw',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' latex',
+                   '.rnw',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToXhtmlMathMlExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' xhtml11m',
-                  '.xhtml',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' xhtml11m',
+                   '.xhtml',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToXhtmlTransitionalExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' xhtml10t',
-                  '.xhtml',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' xhtml10t',
+                   '.xhtml',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToSgmlExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' sgml',
-                  '.sgml',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' sgml',
+                   '.sgml',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
 procedure TfrmMain.actTxt2tagsToSweaveExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' tex',
-                  '.rnw',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' tex',
+                   '.rnw',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToTxtExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' txt',
-                  '.txt',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' txt',
+                   '.txt',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToWikiExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' wiki',
-                  '.wiki',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' wiki',
+                   '.wiki',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToXhtmlExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' xhtml',
-                  '.xhtml',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' xhtml',
+                   '.xhtml',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
 procedure TfrmMain.actDeplateToDocbookArticleExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' dbk-article',
-                  '.xml',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' dbk-article',
+                   '.xml',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToDocbookBookExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' dbk-book',
-                  '.xml',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' dbk-book',
+                   '.xml',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToDocbookReferenceExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' dbk-ref',
-                  '.xml',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' dbk-ref',
+                   '.xml',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToHtmlExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' html',
-                  '.html',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter);
+  pFile_Conversion(sParDeplate + ' html',
+                   '.html',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
 procedure TfrmMain.actDeplateToHtmlSiteExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' htmlsite',
-                  '.html',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter,
-                  False);
+  pFile_Conversion(sParDeplate + ' htmlsite',
+                   '.html',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter,
+                   False);
 end;
 
 procedure TfrmMain.actDeplateToHtmlSlidesExecute(Sender: TObject);
 begin
-  pFileConversion(sParDeplate + ' htmlslides',
-                  '.html',
-                  sPathDeplate_Converter,
-                  sPathDeplate_Interpreter,
-                  False);
+  pFile_Conversion(sParDeplate + ' htmlslides',
+                   '.html',
+                   sPathDeplate_Converter,
+                   sPathDeplate_Interpreter,
+                   False);
 end;
 
 procedure TfrmMain.actTxt2tagsToDokuExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' doku',
-                  '.doku',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' doku',
+                   '.doku',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToGwikiExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' gwiki',
-                  '.gwiki',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' gwiki',
+                   '.gwiki',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToHtmlExecute(Sender: TObject);
 begin
-  pFileConversion(sParTxt2tags + ' html',
-                  '.html',
-                  sPathTxt2tags_Converter,
-                  sPathTxt2tags_Interpreter);
+  pFile_Conversion(sParTxt2tags + ' html',
+                   '.html',
+                   sPathTxt2tags_Converter,
+                   sPathTxt2tags_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
-procedure TfrmMain.pCompileLaTeX(sMikPar,
-                                     sBibPar,
-                                     sExtension: string;
-                                     bWait: boolean);
+procedure TfrmMain.pCompile_LaTeX(sMikPar,
+                                  sBibPar,
+                                  sExtension: string;
+                                  bWait: boolean);
 var
   oldCursor: TCursor;
 
@@ -19499,21 +19502,21 @@ begin
         sBibParameter:= sBibPar + ' ' + fRemove_FileExtension(sTmpFile);
         // The three steps below are necessary to incorporate the complete citations from bibtex resource
 
-        if fExecCmdLine_Wait(sMikParameter,
-                             wOption) then
+        if fExec_CmdLine_Wait(sMikParameter,
+                              wOption) then
         else pCloseCompileLaTeX;
 
-        if fExecCmdLine_Wait(sBibParameter,
-                             wOption) then
+        if fExec_CmdLine_Wait(sBibParameter,
+                              wOption) then
         else pCloseCompileLaTeX;
 
-        if fExecCmdLine_Wait(sMikParameter,
-                             wOption) then
+        if fExec_CmdLine_Wait(sMikParameter,
+                              wOption) then
         else pCloseCompileLaTeX;
       end;
 
-      if fExecCmdLine_Wait(sMikParameter,
-                           wOption) then begin
+      if fExec_CmdLine_Wait(sMikParameter,
+                            wOption) then begin
         if (sExtension = '.dvi') and
            actDviOpenAlways.Checked then
              ShellExecute(handle,
@@ -19566,7 +19569,7 @@ procedure TfrmMain.menToolsConversionPandocClick(Sender: TObject);
     with (MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       //if (seUsed = seUTF8) then Result:= True;
       seTmp:= SynEditor;
-      sTmp:= fGetSaveFormat(seTmp.Lines)
+      sTmp:= fGet_SaveFormat(seTmp.Lines)
     end;
 
     Result:= sTmp;
@@ -19720,7 +19723,7 @@ end;
 
 procedure TfrmMain.actLatexToDviSingleExecute(Sender: TObject);
 begin
-  pCompileLaTeX(sParDviSingle,
+  pCompile_LaTeX(sParDviSingle,
                 'N',
                 '.dvi',
                 actDviOpenAlways.Checked);
@@ -19728,7 +19731,7 @@ end;
 
 procedure TfrmMain.actLatexToDviBibtexExecute(Sender: TObject);
 begin
-  pCompileLaTeX(sParDviSingle,
+  pCompile_LaTeX(sParDviSingle,
                 sParDviBibtex,
                 '.dvi',
                 actDviOpenAlways.Checked);
@@ -19736,7 +19739,7 @@ end;
 
 procedure TfrmMain.actLatexToPdfSingleExecute(Sender: TObject);
 begin
-  pCompileLaTeX(sParPdfSingle,
+  pCompile_LaTeX(sParPdfSingle,
                 'N',
                 '.pdf',
                 actPdfOpenAlways.Checked)
@@ -19744,7 +19747,7 @@ end;
 
 procedure TfrmMain.actLatexToPdfBibtexExecute(Sender: TObject);
 begin
-  pCompileLaTeX(sParPdfSingle,
+  pCompile_LaTeX(sParPdfSingle,
                 sParPdfBibtex,
                 '.pdf',
                 actPdfOpenAlways.Checked)
@@ -19777,7 +19780,7 @@ begin
 
   with (Self.MDIChildren[i] as TfrmEditor) do begin
     // File notify: Stop
-    if Assigned(fNotif) then pNotifyFile_Stop;
+    if Assigned(fNotif) then pNotify_File_Stop;
 
     synEditor.BeginUpdate;
     iTopLine:= synEditor.TopLine;
@@ -19790,13 +19793,13 @@ begin
                                       bBOM),
                           bBOM);
 
-    pGetFile_Info(sActiveFile,
-                  synEditor.Lines);
+    pGet_File_Info(sActiveFile,
+                   synEditor.Lines);
 
     synEditor.Modified:= False;
-    pSetFileSize_StatusBar(sActiveFile);
-    pCheckSaveStatus;
-    pSetTitle;
+    pSet_FileSize_StatusBar(sActiveFile);
+    pCheck_Save_Status;
+    pSet_Title;
 
     synEditor.ExecuteCommand(ecGotoXY,
                              'A',
@@ -19807,16 +19810,16 @@ begin
     // File notify: Start
     fNotif:= TATFileNotificationSimple.Create(Self);
     fNotif.OnChanged:= pFile_Changed;
-    pNotifyFile_Start(sActiveFile);
+    pNotify_File_Start(sActiveFile);
 
     stbMain.Panels[8].Text:= 'Reloaded file';
     stbMain.Panels[9].Text:= sActiveFile;
   end;
 
-  pUpdateHexViewer;
+  pUpdate_HexViewer;
 end;
 
-procedure TfrmMain.pOpenFileWithViewer(sFilter,
+procedure TfrmMain.pOpen_FileWithViewer(sFilter,
                                            sDefaultExt: string);
 var
   od: TOpenDialog;
@@ -19860,20 +19863,20 @@ end;
 
 procedure TfrmMain.actDviOpenFileExecute(Sender: TObject);
 begin
-  pOpenFileWithViewer('Dvi (*.dvi)|*.dvi',
-                      '.dvi');
+  pOpen_FileWithViewer('Dvi (*.dvi)|*.dvi',
+                       '.dvi');
 end;
 
 procedure TfrmMain.actPdfOpenFileExecute(Sender: TObject);
 begin
-  pOpenFileWithViewer('Pdf (*.pdf)|*.pdf',
-                      '.pdf');
+  pOpen_FileWithViewer('Pdf (*.pdf)|*.pdf',
+                       '.pdf');
 end;
 
 procedure TfrmMain.actHtmlOpenFileExecute(Sender: TObject);
 begin
-  pOpenFileWithViewer('Html (*.html, *.htm)|*.html; *.htm',
-                      '.html; .htm')
+  pOpen_FileWithViewer('Html (*.html, *.htm)|*.html; *.htm',
+                       '.html; .htm')
 end;
 
 procedure TfrmMain.actHtmlOpenCurrentFileExecute(Sender: TObject);
@@ -19927,7 +19930,7 @@ begin
   actHtmlOpenAlways.Checked:= not actHtmlOpenAlways.Checked;
 end;
 
-procedure TfrmMain.pSetToolbarProcessing(sFileExtension: string);
+procedure TfrmMain.pSet_ToolbarProcessing(sFileExtension: string);
 
   function fMatchExtension(sTmp: string;
                            aTmp: array of string): boolean;
@@ -20049,17 +20052,17 @@ end;
 
 procedure TfrmMain.menHelFileConversionDeplateClick(Sender: TObject);
 begin
-  pOpenHelpFile('\sample\deplate.dplt');
+  pOpen_HelpFile('\sample\deplate.dplt');
 end;
 
 procedure TfrmMain.menHelFileConversionPandocClick(Sender: TObject);
 begin
-  pOpenHelpFile('\sample\pandoc.markdown');
+  pOpen_HelpFile('\sample\pandoc.markdown');
 end;
 
 procedure TfrmMain.menHelFileConversionTxt2tagsClick(Sender: TObject);
 begin
-  pOpenHelpFile('\sample\txt2tags.t2t');
+  pOpen_HelpFile('\sample\txt2tags.t2t');
 end;
 
 procedure TfrmMain.menWebtProcessingMikTeXClick(Sender: TObject);
@@ -20330,7 +20333,7 @@ begin
   pmenRResContTCPConnection.Checked:= actRContTCPConnection.Visible;
 end;
 
-procedure TfrmMain.pUpdateFile(var seEditor: TSynEdit;
+procedure TfrmMain.pUpdate_File(var seEditor: TSynEdit;
                                    var smOption: TSynSelectionMode);
 var
   bcPos: TBufferCoord;
@@ -20409,7 +20412,7 @@ begin
 
   SpellChecker.Check(frmTools.memSpell);
   Refresh;
-  pUpdateFile(seEditor,
+  pUpdate_File(seEditor,
               smOption);
 end;
 
@@ -20484,7 +20487,7 @@ end;
 
 procedure TfrmMain.actShortcutsHelpExecute(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Shortcuts"');
+  pOpen_UserGuidePDF('"Shortcuts"');
 end;
 
 procedure TfrmMain.actFindExecute(Sender: TObject);
@@ -20496,7 +20499,7 @@ end;
 procedure TfrmMain.actFindAgainExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    pFindAgain;
+    pFind_Again;
 end;
 
 procedure TfrmMain.actReplaceExecute(Sender: TObject);
@@ -20597,14 +20600,14 @@ begin
       with dlg do begin
         iTimerCounter:= 0;
         iTotFileCount:= 0;
-        pSetupSearchParameters(sSearch_Text);
+        pSetup_SearchParameters(sSearch_Text);
         if bSearch_OpenFiles then begin
-          pSearchInOpenFiles(iFoundFileCount,
+          pSearch_InOpenFiles(iFoundFileCount,
                              iMatchCount);
           iTotFileCount:= Self.MDIChildCount;
         end;
         if bSearch_Directory then begin
-          pSearchInDirectories(sSearch_DirectoryText,
+          pSearch_InDirectories(sSearch_DirectoryText,
                                sSearch_FileMask,
                                iFoundFileCount,
                                iMatchCount,
@@ -20624,8 +20627,8 @@ begin
       with frmTools.tvSearch do begin
         Selected:= Items.GetFirstNode;
         actSearchExpandOneExecute(Self);
-        if (Items.Count > 2) then pToolsSearchControls(True)
-                             else pToolsSearchControls(False);
+        if (Items.Count > 2) then pTools_SearchControls(True)
+                             else pTools_SearchControls(False);
       end;
     end;
   end;
@@ -20635,37 +20638,37 @@ end;
 procedure TfrmMain.actGotoLineExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    pGotoLine;
+    pGoto_Line;
 end;
 
 procedure TfrmMain.actCopyFormattedRtfExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    pCopyFormatted_RTF;
+    pCopy_Formatted_RTF;
 end;
 
 procedure TfrmMain.actCopyFormattedHtmlExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    pCopyFormatted_HTML;
+    pCopy_Formatted_HTML;
 end;
 
 procedure TfrmMain.actCopyFormattedTeXExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    pCopyFormatted_TeX;
+    pCopy_Formatted_TeX;
 end;
 
 procedure TfrmMain.actFileSaveExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     // File notify: Stop
-    if Assigned(fNotif) then pNotifyFile_Stop;
+    if Assigned(fNotif) then pNotify_File_Stop;
 
     pFile_Save(Self);
 
-    pGetFile_Info(sActiveFile,
-                  synEditor.Lines);
+    pGet_File_Info(sActiveFile,
+                   synEditor.Lines);
 
     // File notify: Start
     if (ExtractFileExt(sActiveFile) = EmptyStr) and
@@ -20674,21 +20677,21 @@ begin
 
     fNotif:= TATFileNotificationSimple.Create(Self);
     fNotif.OnChanged:= pFile_Changed;
-    pNotifyFile_Start(sActiveFile);
+    pNotify_File_Start(sActiveFile);
   end;
-  pUpdateHexViewer;
+  pUpdate_HexViewer;
 end;
 
 procedure TfrmMain.actFileSaveAsExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     // File notify: Stop
-    if Assigned(fNotif) then pNotifyFile_Stop;
+    if Assigned(fNotif) then pNotify_File_Stop;
 
     pFile_SaveAs(Self);
 
-    pGetFile_Info(sActiveFile,
-                  synEditor.Lines);
+    pGet_File_Info(sActiveFile,
+                   synEditor.Lines);
 
     // File notify: Start
     if (ExtractFileExt(sActiveFile) = EmptyStr) and
@@ -20697,10 +20700,10 @@ begin
 
     fNotif:= TATFileNotificationSimple.Create(Self);
     fNotif.OnChanged:= pFile_Changed;
-    pNotifyFile_Start(sActiveFile);
+    pNotify_File_Start(sActiveFile);
   end;
 
-  pUpdateHexViewer;
+  pUpdate_HexViewer;
 end;
 
 procedure TfrmMain.actFullPathUnixExecute(Sender: TObject);
@@ -20708,7 +20711,7 @@ begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFullPath_Unix;
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actFullPathWindowsExecute(Sender: TObject);
@@ -20716,7 +20719,7 @@ begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFullPath_Windows;
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actDatabaseVisibleExecute(Sender: TObject);
@@ -20730,7 +20733,7 @@ end;
 procedure TfrmMain.actDateStampExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    pDateStamp;
+    pDate_Stamp;
 end;
 
 procedure TfrmMain.actIndentBlockExecute(Sender: TObject);
@@ -20802,7 +20805,7 @@ begin
     pInvert_Case;
 end;
 
-procedure TfrmMain.pMatchBracket(seActive: TSynEdit);
+procedure TfrmMain.pMatch_Bracket(seActive: TSynEdit);
 const
   allBrackets = ['{',
                  '[',
@@ -20848,10 +20851,10 @@ end;
 
 procedure TfrmMain.menEncConUTF8wClick(Sender: TObject);
 begin
-  pSetBuffer_SaveFormat(sfUTF8);
+  pSet_SaveFormat(sfUTF8);
 end;
 
-procedure TfrmMain.pMakeTemplate(sFile: string);
+procedure TfrmMain.pMake_Template(sFile: string);
 var
   i: integer;
 
@@ -20868,88 +20871,88 @@ begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     synEditor.Text:= sContent;
     synEditor.Modified:= True;
-    pSetHighlighter_FromFileExt(sFileExt);
+    pSet_Highlighter_FromFileExt(sFileExt);
   end;
 
   with pgFiles.ActivePage do
-    Tag:= (Self.MDIChildren[i] as TfrmEditor).fSetHighlighterID;
+    Tag:= (Self.MDIChildren[i] as TfrmEditor).fSet_HighlighterID;
 end;
 
 procedure TfrmMain.menFileTemplateRdocDatasetClick(Sender: TObject);
 begin
-  pMakeTemplate(sPath_TinnR +
-                '\templates\R doc_dataset.Rd');
+  pMake_Template(sPath_TinnR +
+                 '\templates\R doc_dataset.Rd');
 end;
 
 procedure TfrmMain.menFileTemplateRdocEmptyClick(Sender: TObject);
 begin
-  pMakeTemplate(sPath_TinnR +
-                '\templates\R doc_empty.Rd');
+  pMake_Template(sPath_TinnR +
+                 '\templates\R doc_empty.Rd');
 end;
 
 procedure TfrmMain.menFileTemplateRdocFunctionClick(Sender: TObject);
 begin
-  pMakeTemplate(sPath_TinnR +
-                '\templates\R doc_function.Rd');
+  pMake_Template(sPath_TinnR +
+                 '\templates\R doc_function.Rd');
 end;
 
 procedure TfrmMain.menFileTemplateRhtmlClick(Sender: TObject);
 begin
-  pMakeTemplate(sPath_TinnR +
-                '\templates\R html.Rhtml');
+  pMake_Template(sPath_TinnR +
+                 '\templates\R html.Rhtml');
 end;
 
 procedure TfrmMain.menFileTemplateRmarkdownClick(Sender: TObject);
 begin
-  pMakeTemplate(sPath_TinnR +
-                '\templates\R markdown.Rmd');
+  pMake_Template(sPath_TinnR +
+                 '\templates\R markdown.Rmd');
 end;
 
 procedure TfrmMain.menFileTemplateRscriptClick(Sender: TObject);
 begin
-  pMakeTemplate(sPath_TinnR +
-                '\templates\R script.R');
+  pMake_Template(sPath_TinnR +
+                 '\templates\R script.R');
 end;
 
 procedure TfrmMain.menFileTemplateRsweaveClick(Sender: TObject);
 begin
-  pMakeTemplate(sPath_TinnR +
-                '\templates\R_noweb.Rnw');
+  pMake_Template(sPath_TinnR +
+                 '\templates\R_noweb.Rnw');
 end;
 
 procedure TfrmMain.menForEncConANSIClick(Sender: TObject);
 begin
-  pSetBuffer_SaveFormat(sfANSI);
+  pSet_SaveFormat(sfANSI);
 end;
 
 procedure TfrmMain.menForEncConUTF16BEClick(Sender: TObject);
 begin
-  pSetBuffer_SaveFormat(sfUTF16MSB)
+  pSet_SaveFormat(sfUTF16MSB)
 end;
 
 procedure TfrmMain.menForEncConUTF16LEClick(Sender: TObject);
 begin
-  pSetBuffer_SaveFormat(sfUTF16LSB);
+  pSet_SaveFormat(sfUTF16LSB);
 end;
 
 procedure TfrmMain.menForEncConUTF8Click(Sender: TObject);
 begin
-  pSetBuffer_SaveFormat(sfUTF8);
+  pSet_SaveFormat(sfUTF8);
 end;
 
 procedure TfrmMain.menForLinEndConMACClick(Sender: TObject);
 begin
-  pSetBuffer_FileFormat(sffMAC);
+  pSet_FileFormat(sffMAC);
 end;
 
 procedure TfrmMain.menForLinEndConUNIXClick(Sender: TObject);
 begin
-  pSetBuffer_FileFormat(sffUNIX);
+  pSet_FileFormat(sffUNIX);
 end;
 
 procedure TfrmMain.menForLinEndConWINClick(Sender: TObject);
 begin
-  pSetBuffer_FileFormat(sffDOS);
+  pSet_FileFormat(sffDOS);
 end;
 
 procedure TfrmMain.actMatchBracketExecute(Sender: TObject);
@@ -20965,13 +20968,13 @@ begin
   if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
                                 else seLog:= frmRterm.synLog;
 
-  case fGetFocus of
+  case fGet_Focus of
         // synEditor or synEditor2
-    1..2: pMatchBracket(seEditor);
+    1..2: pMatch_Bracket(seEditor);
         // synIO
-       3: pMatchBracket(frmRterm.synIO);
+       3: pMatch_Bracket(frmRterm.synIO);
         // synLog and synLog2
-       4: pMatchBracket(seLog);
+       4: pMatch_Bracket(seLog);
   end;
 end;
 
@@ -20987,12 +20990,12 @@ procedure TfrmMain.actCommentsEditExecute(Sender: TObject);
 begin
   sCommentsBookMark:= modDados.cdComments.Bookmark;
   menToolsDatabaseCommentsClick(nil);
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actCommentsHelpExecute(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Comments"');
+  pOpen_UserGuidePDF('"Comments"');
 end;
 
 procedure TfrmMain.actCompletionCopyDescritionExecute(Sender: TObject);
@@ -21012,7 +21015,7 @@ procedure TfrmMain.actCompletionEditExecute(Sender: TObject);
 begin
   sCompletionBookMark:= modDados.cdCompletion.Bookmark;
   menToolsDatabaseCompletionClick(nil);
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actCompletionExampleSelectedExecute(Sender: TObject);
@@ -21052,7 +21055,7 @@ var
 begin
   sTmp:= fGetWord;
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actCompletionExecute(Sender: TObject);
@@ -21062,7 +21065,7 @@ var
 begin
   i:= fFindTop_Window;
   with (Self.MDIChildren[i] as TfrmEditor) do
-    pDoCompletion_Insert(True);
+    pDo_Completion_Insert(True);
 
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
@@ -21072,7 +21075,7 @@ end;
 
 procedure TfrmMain.actCompletionHelpExecute(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"Completion"');
+  pOpen_UserGuidePDF('"Completion"');
 end;
 
 procedure TfrmMain.actCompletionHelpSelectedExecute(Sender: TObject);
@@ -21112,7 +21115,7 @@ var
 begin
   sTmp:= fGetWord;
   if (sTmp = EmptyStr) then Exit;
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actCompletionInsertExecute(Sender: TObject);
@@ -21124,7 +21127,7 @@ begin
   i:= fFindTop_Window;
 
   with (MDIChildren[i] as TfrmEditor) do
-    pDoCompletion_Insert;
+    pDo_Completion_Insert;
 
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
@@ -21230,7 +21233,7 @@ begin
     WordWrap:= actRtermIOLineWrap.Checked;
 end;
 
-procedure TfrmMain.pGetComments;
+procedure TfrmMain.pGet_Comments;
 var
   scHighlighter,
    scBB_Highlighter,
@@ -21286,7 +21289,7 @@ procedure TfrmMain.actCommentExecute(Sender: TObject);
 begin
   sBeginComment:= EmptyStr;  // Initial status
 
-  pGetComments;
+  pGet_Comments;
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pComment(sBeginComment,
              sEndComment);
@@ -21296,7 +21299,7 @@ procedure TfrmMain.actUncommentFirstExecute(Sender: TObject);
 begin
   sBeginComment:= EmptyStr;  // Initial status
 
-  pGetComments;
+  pGet_Comments;
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pUncomment(sBeginComment,
                sEndComment);
@@ -21306,7 +21309,7 @@ procedure TfrmMain.actUncommentExecute(Sender: TObject);
 begin
   sBeginComment:= EmptyStr;  // Initial status
 
-  pGetComments;
+  pGet_Comments;
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pUncomment(sBeginComment,
                sEndComment,
@@ -21334,7 +21337,7 @@ begin
     pgFiles.ActivePageIndex:= i;
     sTmp:= pgFiles.ActivePage.Hint;
     if (sTmp <> sActiveChild) then begin
-      iChildID:= fFindWindowByName(sTmp);
+      iChildID:= fFind_Window_ByName(sTmp);
 
       with (Self.MDIChildren[iChildID] as tfrmEditor) do begin
         bCloseCanceled:= False;
@@ -21358,7 +21361,7 @@ begin
   while (pgFiles.PageCount > 0) do begin
     pgFiles.ActivePageIndex:= 0;
     sTmp    := pgFiles.ActivePage.Hint;
-    iChildID:= fFindWindowByName(sTmp);
+    iChildID:= fFind_Window_ByName(sTmp);
 
     with (Self.MDIChildren[iChildID] as tfrmEditor) do begin
       bCloseCanceled:= False;
@@ -21367,7 +21370,7 @@ begin
     end;
 
   end;
-  if (pgFiles.PageCount = 0) then pClearStatusBar;
+  if (pgFiles.PageCount = 0) then pClear_StatusBar;
 end;
 
 procedure TfrmMain.actFileCloseRightExecute(Sender: TObject);
@@ -21386,7 +21389,7 @@ begin
   if (iNumToClose = 0) then Exit;
   repeat
     sTmp    := pgFiles.Pages[iPos + 1].Hint;
-    iChildID:= fFindWindowByName(sTmp);
+    iChildID:= fFind_Window_ByName(sTmp);
 
     with (Self.MDIChildren[iChildID] as tfrmEditor) do begin
       bCloseCanceled:= False;
@@ -21411,7 +21414,7 @@ begin
   if (iPos = 0) then Exit;
   repeat
     sTmp    := pgFiles.Pages[iPos - 1].Hint;
-    iChildID:= fFindWindowByName(sTmp);
+    iChildID:= fFind_Window_ByName(sTmp);
 
     with (Self.MDIChildren[iChildID] as tfrmEditor) do begin
       bCloseCanceled:= False;
@@ -21567,12 +21570,12 @@ begin
               [mbOk],
               0);
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.menHelNewsClick(Sender: TObject);
 begin
-  pOpenUserGuidePDF('"What is new?"');
+  pOpen_UserGuidePDF('"What is new?"');
 end;
 
 procedure TfrmMain.actRFilterRefreshExecute(Sender: TObject);
@@ -21814,12 +21817,12 @@ begin
 
   bAlreadyOrganized:= True;
   Self.WindowState := wsNormal;
-  pSetFocus_Rgui(iDelay);
+  pSet_Focus_Rgui(iDelay);
 end;
 
-procedure TfrmMain.pDoIPConnection(sIPHost: string;
-                                       iIPPort: integer;
-                                       bActive: boolean);
+procedure TfrmMain.pDo_IPConnection(sIPHost: string;
+                                    iIPPort: integer;
+                                    bActive: boolean);
 begin
   csREnvironment.Host  := sIPHost;
   csREnvironment.Port  := iIPPort;
@@ -21837,30 +21840,30 @@ begin
   bTCPIPRunning        := bActive;
 end;
 
-procedure TfrmMain.pDoRConnection(sTmp: string;
-                                      bActive,
-                                      bSendTask: boolean);
+procedure TfrmMain.pDo_RConnection(sTmp: string;
+                                   bActive,
+                                    bSendTask: boolean);
 var
   sToSend: string;
 
 begin
   if bSendTask then begin  // Rterm local must be running!
-    pCheckRterm;
+    pCheck_Rterm;
     sToSend:= sTmp + #13#10;
     frmRterm.cRterm.SendInput(sToSend);
-    pSendToConsole(sTmp);
+    pSend_ToConsole(sTmp);
   end;
 
-  pSetFocus_Rgui(iDelay div 4);
-  if bIPLocal then pDoIPConnection(sIPHostLocal,
-                                   iIPPortLocal,
-                                   bActive)
-              else pDoIPConnection(sIPHostRemote,
-                                   iIPPortRemote,
-                                   bActive);
+  pSet_Focus_Rgui(iDelay div 4);
+  if bIPLocal then pDo_IPConnection(sIPHostLocal,
+                                    iIPPortLocal,
+                                    bActive)
+              else pDo_IPConnection(sIPHostRemote,
+                                    iIPPortRemote,
+                                    bActive);
 end;
 
-procedure TfrmMain.pDoRguiConnection(sTmp: string;
+procedure TfrmMain.pDo_RguiConnection(sTmp: string;
                                          bActive: boolean);
 begin
   if not fRgui_Running then Exit;
@@ -21868,12 +21871,12 @@ begin
                         hRgui);
 
   Sleep(2*iDelay div 3);
-  if bIPLocal then pDoIPConnection(sIPHostLocal,
-                                   iIPPortLocal,
-                                   bActive)
-              else pDoIPConnection(sIPHostRemote,
-                                   iIPPortRemote,
-                                   bActive);
+  if bIPLocal then pDo_IPConnection(sIPHostLocal,
+                                    iIPPortLocal,
+                                    bActive)
+              else pDo_IPConnection(sIPHostRemote,
+                                    iIPPortRemote,
+                                    bActive);
 end;
 
 procedure TfrmMain.actRContTCPConnectionExecute(Sender: TObject);
@@ -21907,26 +21910,26 @@ begin
       // Related to Rterm local
       if fRterm_Running and
          bIPLocal then begin
-        pDoRConnection(sStart,
-                       True,
-                       True);
+        pDo_RConnection(sStart,
+                        True,
+                        True);
         actRContTCPConnection.ImageIndex:= 293;
         Exit;
       end;
 
       // Related to R (gui or term) remote
       if not bIPLocal then begin
-        pDoRConnection(sStart,
-                       True,
-                       False);
+        pDo_RConnection(sStart,
+                        True,
+                        False);
         actRContTCPConnection.ImageIndex:= 293;
         Exit;
       end;
 
       // Related to Rgui local
       if fRgui_Running then begin
-        pDoRguiConnection(sStart,
-                          True);
+        pDo_RguiConnection(sStart,
+                           True);
         actRContTCPConnection.ImageIndex:= 293;
       end;
     end
@@ -21937,26 +21940,26 @@ begin
       // Related to Rterm local
       if fRterm_Running and
          bIPLocal then begin
-        pDoRConnection(sStop,
-                       False,
-                       True);
+        pDo_RConnection(sStop,
+                        False,
+                        True);
         actRContTCPConnection.ImageIndex:= 168;
         Exit;
       end;
 
       // Related to R (gui or term) remote
       if not bIPLocal then begin
-        pDoRConnection(sStop,
-                       False,
-                       False);
+        pDo_RConnection(sStop,
+                        False,
+                        False);
         actRContTCPConnection.ImageIndex:= 168;
         Exit;
       end;
 
       // Related to Rgui local
       if fRgui_Running then begin
-        pDoRguiConnection(sStop,
-                          False);
+        pDo_RguiConnection(sStop,
+                           False);
         actRContTCPConnection.ImageIndex:= 168;
       end;
     end;
@@ -21992,7 +21995,7 @@ procedure TfrmMain.actRContGuiPuTTYStartCloseExecute(Sender: TObject);
     if bOnTop then begin
       pOnTop(Application.Handle);
       actOnTop.Checked:= True;
-      pCheckTop;
+      pCheck_Top;
     end
     else begin
       pOnTop(Application.Handle);
@@ -22002,7 +22005,7 @@ procedure TfrmMain.actRContGuiPuTTYStartCloseExecute(Sender: TObject);
     // ReturnFocus
     if bRguiReturnFocus then begin
       actRguiReturnFocus.Checked:= True;
-      pSetFocus_Rgui(iDelay);
+      pSet_Focus_Rgui(iDelay);
     end
     else actRguiReturnFocus.Checked:= False;
   end;
@@ -22014,7 +22017,7 @@ procedure TfrmMain.actRContGuiPuTTYStartCloseExecute(Sender: TObject);
      sTmp: string;
 
   begin
-    if not fCheckConnection then begin
+    if not fCheck_Connection then begin
       Windows.Beep(600, 800);
       Exit;
     end;
@@ -22037,7 +22040,7 @@ procedure TfrmMain.actRContGuiPuTTYStartCloseExecute(Sender: TObject);
 
       Sleep(30*iDelay);
 
-      pDoSend(sTmp);
+      pDo_Send(sTmp);
     end;
   end;
 
@@ -22095,7 +22098,7 @@ begin
       Exit;
     end;
 
-    pSetRLibrary_Path(sPath_Rgui);
+    pSet_Rlibrary_Path(sPath_Rgui);
 
     // It will open preferred Rgui
     resShellExecute:= fRunFile(sPath_Rgui,
@@ -22131,7 +22134,7 @@ begin
     if fUseTCPIP then begin
       sTmp:= 'q()' + #13#10;
 
-      pPrintMessage(sTmp,
+      pPrint_Message(sTmp,
                     True);
 
       csRGeneral.Socket.SendText(sTmp)
@@ -22205,7 +22208,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pDoTxt2Tag(iButton: integer);
+procedure TfrmMain.pDo_Txt2Tag(iButton: integer);
 var
   seEditor: TSynEdit;
 
@@ -22445,7 +22448,7 @@ var
 begin
   i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
-  pDoTxt2Tag((Sender as TLabel).Tag);
+  pDo_Txt2Tag((Sender as TLabel).Tag);
   PostMessage(TWinControl(Self.MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
               0,
@@ -22475,7 +22478,7 @@ var
   seLog: TSynEdit;
 
 begin
-  iFocus:= fGetFocus;
+  iFocus:= fGet_Focus;
   if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
                                 else seLog:= frmRterm.synLog;
   case iFocus of
@@ -22501,7 +22504,7 @@ var
   seLog: TSynEdit;
 
 begin
-  iFocus:= fGetFocus;
+  iFocus:= fGet_Focus;
   if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
                                 else seLog:= frmRterm.synLog;
   case iFocus of
@@ -22600,7 +22603,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pUdatePgFiles;
+procedure TfrmMain.pUdate_PgFiles;
 begin
   if actFilesTabsTop.Checked then begin
     actFilesTabsBottomExecute(nil);
@@ -22612,21 +22615,21 @@ begin
   end;
 end;
 
-procedure TfrmMain.pUpdateBars(bOption: boolean);
+procedure TfrmMain.pUpdate_Bars(bOption: boolean);
 begin
   pRToolbar(bOption and actTobRVisible.Checked);
   with ctbMain do begin
     Align  := alTop;
     Visible:= bOption;
   end;
-  pUdatePgFiles;
+  pUdate_PgFiles;
 end;
 
 procedure TfrmMain.actShowAllBarsExecute(Sender: TObject);
 begin
   with actShowAllBars do begin
     Checked:= not Checked;
-    pUpdateBars(Checked)
+    pUpdate_Bars(Checked)
   end;
 end;
 
@@ -22640,13 +22643,13 @@ var
   sTmp: string;
 
 begin
-  if not fCheckConnection then begin
+  if not fCheck_Connection then begin
     Windows.Beep(600, 800);
     Exit;
   end;
 
   sTmp:= 'available.packages()';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPacInstallExecute(Sender: TObject);
@@ -22654,7 +22657,7 @@ var
   sTmp: string;
 
 begin
-  if not fCheckConnection then begin
+  if not fCheck_Connection then begin
     Windows.Beep(600, 800);
     Exit;
   end;
@@ -22666,7 +22669,7 @@ begin
          'dependencies=NA, ' +
          'type=getOption("pkgType")' +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPacInstallZipExecute(Sender: TObject);
@@ -22682,7 +22685,7 @@ begin
          'repos=NULL, ' +
          'type="binary"' +
          ')';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPacInstalledExecute(Sender: TObject);
@@ -22691,7 +22694,7 @@ var
 
 begin
   sTmp:= 'installed.packages()';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPacLoadExecute(Sender: TObject);
@@ -22704,7 +22707,7 @@ begin
          '  if(nchar(pkg)) library(pkg, character.only=TRUE)})';' +
 *)
   sTmp:= 'local({pkg <- select.list(sort(.packages(all.available = TRUE))); if(nchar(pkg)) library(pkg, character.only=TRUE)})';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 // Install TinnRcom from TinnRcom_X.X.X.zip
@@ -22758,7 +22761,7 @@ procedure TfrmMain.actRContPacInstTinnRcomExecute(Sender: TObject);
                                              '''' +
                                              ')';
 
-    pDoSend(sToSend);
+    pDo_Send(sToSend);
 
     stbMain.Panels[8].Text:= 'Please, wait...';
     stbMain.Panels[9].Text:= 'Installing packages: ' +
@@ -22914,7 +22917,7 @@ var
 begin
   Screen.Cursor:= crHourglass;
   sTmp:= 'library(TinnRcom)';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
   Sleep(10*iDelay);
   bRTinnRcom_Loaded:= True;
   Screen.Cursor:= crDefault;
@@ -22925,13 +22928,13 @@ var
   sTmp: string;
 
 begin
-  if not fCheckConnection then begin
+  if not fCheck_Connection then begin
     Windows.Beep(600, 800);
     Exit;
   end;
 
   sTmp:= 'new.packages()';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPacRemoveExecute(Sender: TObject);
@@ -22944,7 +22947,7 @@ begin
          '  if(nchar(pkg)) remove.packages(pkg)})';
 *)
   sTmp:= 'local({pkg <- select.list(sort(.packages(all.available = TRUE))); if(nchar(pkg)) remove.packages(pkg)})';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPacStatusExecute(Sender: TObject);
@@ -22952,13 +22955,13 @@ var
   sTmp: string;
 
 begin
-  if not fCheckConnection then begin
+  if not fCheck_Connection then begin
     Windows.Beep(600, 800);
     Exit;
   end;
 
   sTmp:= 'packageStatus()';
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 procedure TfrmMain.actRContPacUpdateExecute(Sender: TObject);
@@ -22967,7 +22970,7 @@ var
 
 begin
   // sTmp:= 'update.packages(ask=''graphics'')';
-  if not fCheckConnection then begin
+  if not fCheck_Connection then begin
     Windows.Beep(600, 800);
     Exit;
   end;
@@ -22976,7 +22979,7 @@ begin
          sRLibPathDefault
          + ')';
 
-  pDoSend(sTmp);
+  pDo_Send(sTmp);
 end;
 
 function TfrmMain.fActivePanel: integer;
@@ -23034,7 +23037,7 @@ begin
 
      6: begin
           bHotKeys_On:= not bHotKeys_On;
-          pSetHotkeys_Status(bHotKeys_On);
+          pSet_Hotkeys_Status(bHotKeys_On);
         end;
 
      7: begin
@@ -23076,9 +23079,9 @@ begin
               if Assigned(Self.MDIChildren[i] as TfrmEditor) then
                 with (Self.MDIChildren[i] as TfrmEditor) do begin
                   case synEDitor.SelectionMode of
-                    smNormal: pDrawSelectionMode(0);
-                    smLine  : pDrawSelectionMode(1);
-                    smColumn: pDrawSelectionMode(2);
+                    smNormal: pDraw_SelectionMode(0);
+                    smLine  : pDraw_SelectionMode(1);
+                    smColumn: pDraw_SelectionMode(2);
                   end;
                 end;
             end;
@@ -23175,7 +23178,7 @@ begin
   end; {if}
 end;
 
-procedure TfrmMain.pUpdateCloseFileOptions;
+procedure TfrmMain.pUpdate_CloseFileOptions;
 begin
   if (pgFiles.PageCount > 1) then begin
     if (pgFiles.ActivePageIndex = 0) then begin // First
@@ -23207,7 +23210,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pInsertLatexSymbol(sSymbol: string;
+procedure TfrmMain.pInsert_LatexSymbol(sSymbol: string;
                                           iCaretControl: integer);
 var
   seEditor: TSynEdit;
@@ -23251,10 +23254,10 @@ end;
 
 function TfrmMain.fRgui_Running(bFirstTime: boolean = False): boolean;
 begin
-  Result:= fIsGuiRunning(hRgui,
-                         sGuiRRunning,
-                         iRecognition_Caption,
-                         bFirstTime);
+  Result:= fIs_GuiRunning(hRgui,
+                          sGuiRRunning,
+                          iRecognition_Caption,
+                          bFirstTime);
 
   if Result then begin
     fCodeSender.pGuiHandle  := hRgui;
@@ -23537,9 +23540,9 @@ begin
                             iCols,
                             iLatexDimensionalAlign);
 
-           pInsertText_Smart(seEditor,
-                             stmp,
-                             0);
+           pInsert_Text_Smart(seEditor,
+                              stmp,
+                              0);
          end;
 
       1: begin // Matrix
@@ -23548,9 +23551,9 @@ begin
                             iCols,
                             iLatexDimensionalAlign);
 
-           pInsertText_Smart(seEditor,
-                             stmp,
-                             0);
+           pInsert_Text_Smart(seEditor,
+                              stmp,
+                              0);
          end;
 
       2: begin  // Tabular
@@ -23559,9 +23562,9 @@ begin
                             iCols,
                             iLatexDimensionalAlign);
 
-           pInsertText_Smart(seEditor,
-                             stmp,
-                             0);
+           pInsert_Text_Smart(seEditor,
+                              stmp,
+                              0);
          end;
 
       3: begin  // Tabbing
@@ -23570,9 +23573,9 @@ begin
                             iCols,
                             iLatexDimensionalAlign);
 
-           pInsertText_Smart(seEditor,
-                             stmp,
-                             0);
+           pInsert_Text_Smart(seEditor,
+                              stmp,
+                              0);
          end;
     end;
   finally
@@ -23588,11 +23591,11 @@ begin
 
     bSearch_RegExp:= False;  // Do not remove due to '|' -> or in fRegEx
 
-    pDoSearchReplaceText(False,
-                         True,
-                         False);
+    pDo_SearchReplace(False,
+                      True,
+                      False);
 
-    pEnableSave;
+    pEnable_Save;
   end;
 end;
 
@@ -23634,9 +23637,9 @@ begin
     if actDosMinimizedAlways.Checked then wOption:= SW_SHOWMINIMIZED
                                      else wOption:= SW_RESTORE;
 
-    fExecCmdLine_Wait('makeindex ' +
-                      sTmpFile,
-                      wOption)
+    fExec_CmdLine_Wait('makeindex ' +
+                       sTmpFile,
+                       wOption)
   finally
     (Self.MDIChildren[i] as TfrmEditor).Cursor:= oldCursor;
   end;
@@ -24210,11 +24213,11 @@ end;
 
 procedure TfrmMain.actReloadLatexSymbolsExecute(Sender: TObject);
 begin
-  pCheckLatex(True);
+  pCheck_Latex(True);
 end;
 
-procedure TfrmMain.pInsertLatexMath(sFunction: string;
-                                        iCaretControl: integer);
+procedure TfrmMain.pInsert_LatexMath(sFunction: string;
+                                     iCaretControl: integer);
 var
   seEditor: TSynEdit;
 
@@ -24305,18 +24308,18 @@ begin
   with seEditor do
     if SelAvail then begin
       if (fCountStrings(SelText) = 2) then
-        pInsertLatexMath('\frac' +
-                         fFormatFrac(SelText),
-                         0)
+        pInsert_LatexMath('\frac' +
+                          fFormatFrac(SelText),
+                          0)
       else
-        pInsertLatexMath('\frac' +
-                         fFormatFrac(SelText),
-                         -3);
+        pInsert_LatexMath('\frac' +
+                          fFormatFrac(SelText),
+                          -3);
     end
     else
-      pInsertLatexMath('\frac' +
-                       fFormatFrac(EmptyStr),
-                       -3);
+      pInsert_LatexMath('\frac' +
+                        fFormatFrac(EmptyStr),
+                        -3);
 end;
 
 procedure TfrmMain.actLatexAlgebricSqrtExecute(Sender: TObject);
@@ -24343,13 +24346,13 @@ begin
 
   with seEditor do
     if SelAvail then
-      pInsertLatexMath('\sqrt' +
-                       fFormatSqrt(SelText),
-                       0)
+      pInsert_LatexMath('\sqrt' +
+                        fFormatSqrt(SelText),
+                        0)
     else
-      pInsertLatexMath('\sqrt' +
-                       fFormatSqrt(EmptyStr),
-                       -1);
+      pInsert_LatexMath('\sqrt' +
+                        fFormatSqrt(EmptyStr),
+                        -1);
 end;
 
 procedure TfrmMain.actLatexAlgebricSqrtNExecute(Sender: TObject);
@@ -24417,18 +24420,18 @@ begin
   with seEditor do
     if SelAvail then begin
       if (fCountStrings(SelText) = 2) then
-        pInsertLatexMath('\sqrt' +
-                         fFormatSqrtN(SelText),
-                         0)
+        pInsert_LatexMath('\sqrt' +
+                          fFormatSqrtN(SelText),
+                          0)
       else
-        pInsertLatexMath('\sqrt' +
-                         fFormatSqrtN(SelText),
-                         -3);
+        pInsert_LatexMath('\sqrt' +
+                          fFormatSqrtN(SelText),
+                          -3);
     end
     else
-      pInsertLatexMath('\sqrt' +
-                       fFormatSqrtN(EmptyStr),
-                       -3);
+      pInsert_LatexMath('\sqrt' +
+                        fFormatSqrtN(EmptyStr),
+                        -3);
 end;
 
 procedure TfrmMain.actLatexClearWasteExecute(Sender: TObject);
@@ -24547,8 +24550,8 @@ begin
 //    end;
 
     // Will open preferred Rterm
-    pSetRLibrary_Path(sPath_Rterm);
-    pCheckRterm;
+    pSet_Rlibrary_Path(sPath_Rterm);
+    pCheck_Rterm;
 
     if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Clear
                                   else frmRterm.synLog.Clear;
@@ -24569,7 +24572,7 @@ begin
     bRRequireKnitr:= True;
   end
   else begin
-    pCheckRterm;
+    pCheck_Rterm;
 
     if bRtermCloseWithoutAsk then
       pCloseRterm
@@ -24584,7 +24587,7 @@ begin
         mrYes: begin
                  with frmRterm.synIO do begin
                    sTmp:= 'save.image()';
-                   pDoSend(sTmp);
+                   pDo_Send(sTmp);
                  end;
                  pCloseRterm;
                end;
@@ -24600,7 +24603,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSetInterfaceSize(frm: TForm;
+procedure TfrmMain.pSet_InterfaceSize(frm: TForm;
                                          iSize: integer);
 begin
   with JvDockServer do begin
@@ -24639,12 +24642,12 @@ begin
   actToolsVisible.Checked:= GetFormVisible(frmTools);
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then pSetInterfaceSize(frmRterm, frmMain.Width  - iW)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then pSetInterfaceSize(frmRterm, frmMain.Height - iH)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then pSetInterfaceSize(frmRterm, frmMain.Width  - iW)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then pSetInterfaceSize(frmRterm, frmMain.Height - iH); // Bottom
+    if      LeftDockPanel.ContainsControl(frmRterm)   then pSet_InterfaceSize(frmRterm, frmMain.Width  - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmRterm)    then pSet_InterfaceSize(frmRterm, frmMain.Height - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmRterm)  then pSet_InterfaceSize(frmRterm, frmMain.Width  - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmRterm) then pSet_InterfaceSize(frmRterm, frmMain.Height - iH); // Bottom
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actRtermAutoHideExecute(Sender: TObject);
@@ -24671,12 +24674,12 @@ begin
   if not GetFormVisible(frmRterm) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then pSetInterfaceSize(frmRterm, frmMain.Width  div 2 - iW)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then pSetInterfaceSize(frmRterm, frmMain.Height div 2 - iH)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then pSetInterfaceSize(frmRterm, frmMain.Width  div 2 - iW)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then pSetInterfaceSize(frmRterm, frmMain.Height div 2 - iH); // Bottom
+    if      LeftDockPanel.ContainsControl(frmRterm)   then pSet_InterfaceSize(frmRterm, frmMain.Width  div 2 - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmRterm)    then pSet_InterfaceSize(frmRterm, frmMain.Height div 2 - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmRterm)  then pSet_InterfaceSize(frmRterm, frmMain.Width  div 2 - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmRterm) then pSet_InterfaceSize(frmRterm, frmMain.Height div 2 - iH); // Bottom
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actRtermMinimizeExecute(Sender: TObject);
@@ -24687,12 +24690,12 @@ begin
   if not GetFormVisible(frmRterm) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then pSetInterfaceSize(frmRterm, frmMain.Width  div iK)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then pSetInterfaceSize(frmRterm, frmMain.Height div iK)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then pSetInterfaceSize(frmRterm, frmMain.Width  div iK)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then pSetInterfaceSize(frmRterm, frmMain.Height div iK); // Bottom
+    if      LeftDockPanel.ContainsControl(frmRterm)   then pSet_InterfaceSize(frmRterm, frmMain.Width  div iK)  // Left
+    else if TopDockPanel.ContainsControl(frmRterm)    then pSet_InterfaceSize(frmRterm, frmMain.Height div iK)  // Top
+    else if RightDockPanel.ContainsControl(frmRterm)  then pSet_InterfaceSize(frmRterm, frmMain.Width  div iK)  // Right
+    else if BottomDockPanel.ContainsControl(frmRterm) then pSet_InterfaceSize(frmRterm, frmMain.Height div iK); // Bottom
 
-  pSetFocus_Main;
+  pSet_Focus_Main;
 end;
 
 procedure TfrmMain.actToolsMaximizeExecute(Sender: TObject);
@@ -24707,10 +24710,10 @@ begin
   actRtermVisible.Checked:= GetFormVisible(frmRterm);
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmTools)   then pSetInterfaceSize(frmTools, frmMain.Width  - iW)  // Left
-    else if TopDockPanel.ContainsControl(frmTools)    then pSetInterfaceSize(frmTools, frmMain.Height - iH)  // Top
-    else if RightDockPanel.ContainsControl(frmTools)  then pSetInterfaceSize(frmTools, frmMain.Width  - iW)  // Right
-    else if BottomDockPanel.ContainsControl(frmTools) then pSetInterfaceSize(frmTools, frmMain.Height - iH); // Bottom
+    if      LeftDockPanel.ContainsControl(frmTools)   then pSet_InterfaceSize(frmTools, frmMain.Width  - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmTools)    then pSet_InterfaceSize(frmTools, frmMain.Height - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmTools)  then pSet_InterfaceSize(frmTools, frmMain.Width  - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmTools) then pSet_InterfaceSize(frmTools, frmMain.Height - iH); // Bottom
 end;
 
 procedure TfrmMain.actToolsAutoHideExecute(Sender: TObject);
@@ -24737,10 +24740,10 @@ begin
   if not GetFormVisible(frmTools) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmTools)   then pSetInterfaceSize(frmTools, frmMain.Width  div 2 - iW)  // Left
-    else if TopDockPanel.ContainsControl(frmTools)    then pSetInterfaceSize(frmTools, frmMain.Height div 2 - iH)  // Top
-    else if RightDockPanel.ContainsControl(frmTools)  then pSetInterfaceSize(frmTools, frmMain.Width  div 2 - iW)  // Right
-    else if BottomDockPanel.ContainsControl(frmTools) then pSetInterfaceSize(frmTools, frmMain.Height div 2 - iH); // Bottom
+    if      LeftDockPanel.ContainsControl(frmTools)   then pSet_InterfaceSize(frmTools, frmMain.Width  div 2 - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmTools)    then pSet_InterfaceSize(frmTools, frmMain.Height div 2 - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmTools)  then pSet_InterfaceSize(frmTools, frmMain.Width  div 2 - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmTools) then pSet_InterfaceSize(frmTools, frmMain.Height div 2 - iH); // Bottom
 end;
 
 procedure TfrmMain.actToolsMinimizeExecute(Sender: TObject);
@@ -24751,13 +24754,13 @@ begin
   if not GetFormVisible(frmTools) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmTools)   then pSetInterfaceSize(frmTools, frmMain.Width  div iK)  // Left
-    else if TopDockPanel.ContainsControl(frmTools)    then pSetInterfaceSize(frmTools, frmMain.Height div iK)  // Top
-    else if RightDockPanel.ContainsControl(frmTools)  then pSetInterfaceSize(frmTools, frmMain.Width  div iK)  // Right
-    else if BottomDockPanel.ContainsControl(frmTools) then pSetInterfaceSize(frmTools, frmMain.Height div iK); // Bottom
+    if      LeftDockPanel.ContainsControl(frmTools)   then pSet_InterfaceSize(frmTools, frmMain.Width  div iK)  // Left
+    else if TopDockPanel.ContainsControl(frmTools)    then pSet_InterfaceSize(frmTools, frmMain.Height div iK)  // Top
+    else if RightDockPanel.ContainsControl(frmTools)  then pSet_InterfaceSize(frmTools, frmMain.Width  div iK)  // Right
+    else if BottomDockPanel.ContainsControl(frmTools) then pSet_InterfaceSize(frmTools, frmMain.Height div iK); // Bottom
 end;
 
-procedure TfrmMain.pCheckIfFileFromDvi(sFile: string);
+procedure TfrmMain.pCheck_IfFileFromDvi(sFile: string);
 var
   iPos: integer;
 
@@ -24789,7 +24792,7 @@ begin
     end;
 
     if FileExists(trim(sFile)) then begin
-      pOpenFileIntoTinn(sFile,
+      pOpen_FileIntoTinn(sFile,
                         StrToIntDef(sLineNumber,
                                     0));
       if (pgFiles.PageCount > 0) then
@@ -24807,10 +24810,10 @@ begin
     end
     else Exit
   end
-  else if FileExists(trim(sFile)) then pOpenFileIntoTinn(sFile);
+  else if FileExists(trim(sFile)) then pOpen_FileIntoTinn(sFile);
 end;
 
-procedure TfrmMain.pOpenFileFromSearch;
+procedure TfrmMain.pOpen_FileFromSearch;
 var
   iPos,
    iEnd: integer;
@@ -24843,7 +24846,7 @@ begin
     end;
   end;
 
-  if FileExists(trim(sFile)) then pOpenFileIntoTinn(sFile,
+  if FileExists(trim(sFile)) then pOpen_FileIntoTinn(sFile,
                                                     StrToIntDef(sLineNumber,
                                                                0))
                              else fMessageDlg(trim(sFile) + #13 + #13 +
@@ -24876,7 +24879,7 @@ end;
 
 procedure TfrmMain.pmenResultsOpenLinkClick(Sender: TObject);
 begin
-  pOpenFileFromSearch;
+  pOpen_FileFromSearch;
 end;
 
 procedure TfrmMain.actSearchExpandOneExecute(Sender: TObject);
@@ -24976,7 +24979,7 @@ begin
                               else begin
                                 ShowDockForm(frmRterm);
 
-                                pSetInterfaceSize(frmRterm,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
+                                pSet_InterfaceSize(frmRterm,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
                                                   frmRterm.iSize);  // http://stackoverflow.com/questions/27696359/delphi-jedi-docking-storage-remember
                               end;
 
@@ -24991,7 +24994,7 @@ begin
                               else begin
                                 ShowDockForm(frmTools);
 
-                                pSetInterfaceSize(frmTools,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
+                                pSet_InterfaceSize(frmTools,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
                                                   frmTools.iSize);  // http://stackoverflow.com/questions/27696359/delphi-jedi-docking-storage-remember
                               end;
 
@@ -25053,7 +25056,7 @@ begin
   i:= fFindTop_Window;
 
   with (MDIChildren[i] as TfrmEditor) do
-    pDoTip_Insert;
+    pDo_Tip_Insert;
 
   PostMessage(TWinControl(MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
@@ -25201,7 +25204,7 @@ begin
   frmRterm.tbsLog.TabVisible:= True;
   actRtermIOSplitRemove.Checked:= (frmRterm.synLog2 = nil);
   bRtermSingle:= False;
-  pUpdateRterm_Appearance;
+  pUpdate_Rterm_Appearance;
 end;
 
 procedure TfrmMain.actRtermLOGSetFocusExecute(Sender: TObject);
@@ -25338,7 +25341,7 @@ begin
       ClearBookMark(i);
     Clear;
   end;
-  pDoClearConsole;
+  pDo_ClearConsole;
 end;
 
 procedure TfrmMain.actRtermIOHistoryPriorExecute(Sender: TObject);
@@ -25489,9 +25492,9 @@ var
 begin
   sTmp:= fRemove_FileExtension(pgFiles.ActivePage.Caption);
   
-  pFileSaveGeneric(sTmp +
-                   '_io.txt',
-                   frmRterm.synIO);
+  pFile_SaveGeneric(sTmp +
+                    '_io.txt',
+                    frmRterm.synIO);
 end;
 
 procedure TfrmMain.actRtermLOGSaveAsExecute(Sender: TObject);
@@ -25505,12 +25508,12 @@ begin
   if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
                                 else seLog:= frmRterm.synLog;
 
-  pFileSaveGeneric(sTmp +
-                   '_log.txt',
-                   seLog);
+  pFile_SaveGeneric(sTmp +
+                    '_log.txt',
+                    seLog);
 end;
 
-procedure TfrmMain.pFileSaveGeneric(sFile: string;
+procedure TfrmMain.pFile_SaveGeneric(sFile: string;
                                         synEditor: TSynEdit);
 begin
   sdMain.InitialDir:= sWorkingDir;
@@ -25722,7 +25725,7 @@ begin
        bRguiReturnFocus then actRguiReturnFocus.Checked:= False;
     Application.ProcessMessages;
 
-    pDoSend(sToSend);
+    pDo_Send(sToSend);
 
     i:= 1;
     repeat
@@ -25751,7 +25754,7 @@ begin
       Exit;
     end
     else
-      pOpenFileIntoTinn(sResult,
+      pOpen_FileIntoTinn(sResult,
                         0,
                         False,
                         False);
@@ -25797,7 +25800,7 @@ begin
     sTmp:= 'save.image(''' +
                        DosPathToUnixPath(sFile) +
                        ''')';
-    pDoSend(sTmp);
+    pDo_Send(sTmp);
   end;
   sdMain.Filter:= slFilters.Text;
 end;
@@ -25851,7 +25854,7 @@ begin
                   DosPathToUnixPath(sFile) +
                   ''')';
   
-    pDoSend(sTmp);
+    pDo_Send(sTmp);
   end;
 end;
 
@@ -25884,7 +25887,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSetFocus_Main;
+procedure TfrmMain.pSet_Focus_Main;
 var
   i: integer;
 
@@ -25911,7 +25914,7 @@ begin
 //  end;
 end;
 
-function TfrmMain.fGetFocus: integer;
+function TfrmMain.fGet_Focus: integer;
 var
   seLog: TSynEdit;
 
@@ -25986,7 +25989,7 @@ var
   seLog: TSynEdit;
 
 begin  // Font.Size < 50
-  iFocus:= fGetFocus;
+  iFocus:= fGet_Focus;
   
   if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
                                 else seLog:= frmRterm.synLog;
@@ -25996,13 +25999,13 @@ begin  // Font.Size < 50
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           if (Font.Size < 50) then begin
             Font.Size:= Font.Size + 1;
-            pUpdateHexViewer;
+            pUpdate_HexViewer;
           end;
      // synEditor2
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           if (Font.Size < 50) then begin
             Font.Size:= Font.Size + 1;
-            pUpdateHexViewer;
+            pUpdate_HexViewer;
           end;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do begin
@@ -26088,7 +26091,7 @@ var
   seLog: TSynEdit;
 
 begin  //Font.Size > 02
-  iFocus:= fGetFocus;
+  iFocus:= fGet_Focus;
   if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
                                 else seLog:= frmRterm.synLog;
   case iFocus of
@@ -26096,13 +26099,13 @@ begin  //Font.Size > 02
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
           if (Font.Size > 02) then begin
             Font.Size:= Font.Size - 1;
-            pUpdateHexViewer;
+            pUpdate_HexViewer;
           end;
      // synEditor2
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           if (Font.Size > 02) then begin
             Font.Size:= Font.Size - 1;
-            pUpdateHexViewer;
+            pUpdate_HexViewer;
           end;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do begin
@@ -26210,7 +26213,7 @@ var
              sFormatR +
              ')';
 
-    pDoSend(sTmp);
+    pDo_Send(sTmp);
 
     if bFile then  // Do not remove from the end of the procedure!
       iRFormatted:= 0
@@ -26221,7 +26224,7 @@ var
   // File to reformat
   procedure pRReformatFile;
   begin
-    sToSend:= fGetFileToReformat;
+    sToSend:= fGet_FileToReformat;
     if (sToSend = EmptyStr) then Exit;
     pSendToRReformat(True);
   end;
@@ -26238,7 +26241,7 @@ var
         sSel:= SelText;
       end;
 
-      sToSend:= fGetSelectionToReformat(sSel);
+      sToSend:= fGet_Selection_ToReformat(sSel);
       if (sToSend = EmptyStr) then Exit;
       pSendToRReformat(False);
     end;
@@ -26258,9 +26261,9 @@ begin
   end;
 end;
 
-function TfrmMain.fCheckConnection: boolean;
+function TfrmMain.fCheck_Connection: boolean;
 begin
-  if fIsConnected then Result:= True
+  if fIs_Connected then Result:= True
   else begin
     with stbMain do begin
       Panels[8].Text:= 'Warning';
@@ -26272,7 +26275,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pUpdateHexViewer;
+procedure TfrmMain.pUpdate_HexViewer;
 
   procedure pSetMode(sMode: string);
   begin
@@ -26333,7 +26336,7 @@ begin
       FontGutter:= seTmp.Gutter.Font;
 
       // It is necessary to know the file encoding
-      sTmp:= fGetSaveFormat(seTmp.Lines);
+      sTmp:= fGet_SaveFormat(seTmp.Lines);
 
       // It is necessary some retriction in the interface
       case fString_ToCase_Select(sTmp,
@@ -26424,7 +26427,7 @@ Finalization
 //      with modDados.cdShortcuts do
 //        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
 //      pDatasetToActionList;
-//      pSetFocus_Main;
+//      pSet_Focus_Main;
 //    end // if (dlgSH_Map.ShowModal = mrOK)
 //    // Else
 //    else begin
@@ -26519,7 +26522,7 @@ begin
       FreeAndNil(frmShortcuts);
       pDatasetToActionList;
       pUpdateCompletionArgs;
-      pSetFocus_Main;
+      pSet_Focus_Main;
     end;
 }
 
@@ -26531,7 +26534,7 @@ var
   seLog: TSynEdit;
 
 begin
-  iFocus:= fGetFocus;
+  iFocus:= fGet_Focus;
   if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
                                 else seLog:= frmRterm.synLog;
   case iFocus of

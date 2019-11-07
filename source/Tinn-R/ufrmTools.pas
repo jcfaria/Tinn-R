@@ -970,7 +970,7 @@ begin
   pAdjustColumnWidths(dbgCompletion);
   pAdjustColumnWidths(dbgComments);
 
-  frmMain.pUpdateHexViewer;
+  frmMain.pUpdate_HexViewer;
   
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
 end;
@@ -1024,7 +1024,7 @@ var
   
 begin
   sTmp:= jvflbWinExplorer.FileName;
-  if FileExists(sTmp) then frmMain.pOpenFileIntoTinn(sTmp);
+  if FileExists(sTmp) then frmMain.pOpen_FileIntoTinn(sTmp);
 end;
 
 procedure TfrmTools.jvflbWinExplorerEndDrag(Sender,
@@ -1045,7 +1045,7 @@ begin
   case Key of
     VK_RETURN: begin
                  sTmp:= jvflbWinExplorer.FileName;
-                 if FileExists(sTmp) then frmMain.pOpenFileIntoTinn(sTmp);
+                 if FileExists(sTmp) then frmMain.pOpen_FileIntoTinn(sTmp);
                end;
   end;
 end;
@@ -1062,7 +1062,7 @@ var
   
 begin
   sTmp:= jvflbWorkExplorer.FileName;
-  if FileExists(sTmp) then frmMain.pOpenFileIntoTinn(sTmp);
+  if FileExists(sTmp) then frmMain.pOpen_FileIntoTinn(sTmp);
 end;
 
 procedure TfrmTools.jvflbWorkExplorerKeyDown(Sender: TObject;
@@ -1075,7 +1075,7 @@ begin
   case Key of
     VK_RETURN: begin
                  sTmp:= jvflbWorkExplorer.FileName;
-                 if FileExists(sTmp) then frmMain.pOpenFileIntoTinn(sTmp);
+                 if FileExists(sTmp) then frmMain.pOpen_FileIntoTinn(sTmp);
                end;
   end;
 end;
@@ -1174,15 +1174,15 @@ begin
 
   with tvProject do
     case Selected.level of
-      0: frmMain.pOpenAllFiles;
-      1: frmMain.pOpenAllFilesOfGroup;
+      0: frmMain.pOpen_AllFiles;
+      1: frmMain.pOpen_AllFilesOfGroup;
       2: begin
            sTmp:= string(tvProject.Selected.Data);
            for i:= 1 to (Items.Count -1) do
              if Items[i].Level = 2 then
                if (Items[i].Selected) then Items[i].ImageIndex:= 3
                else if (Items[i].ImageIndex = 3) then Items[i].ImageIndex:= 2;
-           if FileExists(Trim(sTmp)) then frmMain.pOpenFileIntoTinn(Trim(sTmp))
+           if FileExists(Trim(sTmp)) then frmMain.pOpen_FileIntoTinn(Trim(sTmp))
                                       else MessageDlg(Trim(sTmp) + #13 + #13 +
                                                       'File not found!',
                                                       mtWarning,
@@ -1317,7 +1317,7 @@ end;
 
 procedure TfrmTools.tvSearchDblClick(Sender: TObject);
 begin
-  frmMain.pOpenFileFromSearch;
+  frmMain.pOpen_FileFromSearch;
 end;
 
 procedure TfrmTools.tvSearchDragOver(Sender,
@@ -1402,8 +1402,8 @@ begin
     if (i < 0) then Exit;
     sTmp:= ExtractFileName(Items[i].FileName);
     FormatSymbol;
-    frmMain.pInsertLatexSymbol(sTmp,
-                                   0);
+    frmMain.pInsert_LatexSymbol(sTmp,
+                                0);
   end;
 end;
 
@@ -1581,8 +1581,8 @@ begin
 
       if (csRExplorer.Active) then csRExplorer.Socket.SendText(sToSend)
       else begin
-        pCheckRterm;
-        pSendToConsole(sTmp);
+        pCheck_Rterm;
+        pSend_ToConsole(sTmp);
         frmRterm.cRterm.SendInput(sToSend);
       end;
 
@@ -1596,7 +1596,7 @@ begin
                                 else fCodeSender.pSendChar(sToSend,
                                                            hRgui);
 
-        pSetFocus_Rgui(iDelay div 4);
+        pSet_Focus_Rgui(iDelay div 4);
       end;
 
   i:= 0;
@@ -1607,7 +1607,7 @@ begin
     inc(i);
   until (i = 10);  // To avoid infinite loop
 
-  frmMain.pSetFocus_Rgui(0);
+  frmMain.pSet_Focus_Rgui(0);
 end;
 
 procedure TfrmTools.pgDatabaseChange(Sender: TObject);
@@ -1633,7 +1633,7 @@ end;
 
 procedure TfrmTools.pgResultsChange(Sender: TObject);
 begin
-  frmMain.pUpdateHexViewer;
+  frmMain.pUpdate_HexViewer;
 end;
 
 procedure TfrmTools.pgToolsChange(Sender: TObject);

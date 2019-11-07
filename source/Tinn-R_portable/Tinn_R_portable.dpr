@@ -314,7 +314,7 @@ begin
     sTemp:= AnsiExtractQuotedStr(cTemp,
                                  '"');
 
-    frmMain.pCheckIfFileFromDVI(sTemp);
+    frmMain.pCheck_IfFileFromDVI(sTemp);
   end;
 
   FreeAndNil(slFilesStarting);

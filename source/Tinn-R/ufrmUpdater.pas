@@ -163,7 +163,7 @@ begin
   lStatus.Caption   := 'Download finished ...';
 
   btDownload.Visible:= False;
-  if fIsPortable_Version then begin  // portable
+  if fIs_Portable_Version then begin  // portable
     btCancel.Caption:= 'Close';
 
     Windows.Beep(600, 800);
@@ -202,15 +202,15 @@ begin
   lStatus.Visible   := True;
   lWhatIsNew.Visible:= False;
 
-  if fIsPortable_Version then sFileName:= 'Tinn-R_' +
-                                          sNew_Version +
-                                          '_portable.zip'
+  if fIs_Portable_Version then sFileName:= 'Tinn-R_' +
+                                           sNew_Version +
+                                           '_portable.zip'
                          else sFileName:= 'Tinn-R_' +
                                           sNew_Version +
                                           '_setup.exe';
   try
     // Portable.zip
-    if fIsPortable_Version then begin
+    if fIs_Portable_Version then begin
       with frmMain.sdMain do begin
         Filter    := 'Tinn-R_portable (*.zip)|*.zip';
         DefaultExt:= '*.zip';

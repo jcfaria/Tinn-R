@@ -311,7 +311,7 @@ begin
     cbActiveLineBG.Checked:= bActiveLine;
 
     with synSample do begin
-      OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+      OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
       if bActiveLine then ActiveLineColor:= TColor(clActiveLine)
                      else ActiveLineColor:= TColor(clNone);
     end;
@@ -545,7 +545,7 @@ end;
 
 procedure TfrmColors.bbHelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Highlighters (settings)"');
+  frmMain.pOpen_UserGuidePDF('"Highlighters (settings)"');
 end;
 
 procedure TfrmColors.bbtOKClick(Sender: TObject);

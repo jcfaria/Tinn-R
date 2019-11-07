@@ -51,7 +51,7 @@ type
   TCharSet = set of Char;
   TGuiType = (gtJGR, gtUnknown);
 
-  function fCheckR_Version(sText: string): boolean;
+  function fCheck_Rversion(sText: string): boolean;
   function fClipboardTxt_ToFile (sFileTXT: string): boolean;
   function fContrast_Color(FontC: TColor): TColor;
   function fCount_Char(Text, Sub: string): Integer;
@@ -59,7 +59,7 @@ type
   function fDirectory_IsEmpty(Directory: string): boolean;
   function fDownload_File(const url: string; const sFileName: string): boolean;
   function fExec_Wait(const sFileName, sParams: string; wWindowState: Word): boolean;
-  function fExecCmdLine_Wait(const CmdLine: string; wWindowState: Word): boolean;
+  function fExec_CmdLine_Wait(const CmdLine: string; wWindowState: Word): boolean;
   function fFile_Exists_PuTTY(sFile, sFileRemote, sPuTTYPath, sPuTTYPassword, sPuTTYUser, sPuTTYHost: string): boolean;
   function fFile_InUse(sFile: string): boolean;
   function fFile_Save_Fast(sFile, sContent: string): boolean;
@@ -75,17 +75,17 @@ type
   function fGet_RPackage(sTmp: string): string;
   function fGet_SpecialFolder(const ASpecialFolderID: Integer): string;
   function fGet_WindowHandle(const chCaption: PChar; const bPartial: boolean = True): HWND;
-  function fIs64Bit_OS: boolean;
-  function fIsConnected: boolean;
-  function fIsGuiRunning(var hRgui: HWND; var sCaption: string; var iRecognitionCaption: integer; bFirstTime: boolean = False): boolean;
-  function fIsInteger(sTmp: string): boolean;
-  function fIsPortable_Version: boolean;
-  function fIsURL(s: string): boolean;
-  function fIsValidNumber_RVersion(s: string): boolean;
+  function fIs_64Bit_OS: boolean;
+  function fIs_Connected: boolean;
+  function fIs_GuiRunning(var hRgui: HWND; var sCaption: string; var iRecognitionCaption: integer; bFirstTime: boolean = False): boolean;
+  function fIs_Integer(sTmp: string): boolean;
+  function fIs_Portable_Version: boolean;
+  function fIs_URL(s: string): boolean;
+  function fIs_ValidNumber_Rversion(s: string): boolean;
   function fLastPos(sSub, s: string): Integer;
   function fOpen_CmdLine(const CmdLine: string; wWindowState: Word): boolean;
   function fPath_Browser: String;
-  function fPathRExists(var sPathR: string): boolean;  // Portable
+  function fPath_R_Exists(var sPathR: string): boolean;  // Portable
   function fRegEx(sSubject, sRegEx: string; bReplace: boolean = False; sReplacement: string = ''; bReplace_All: boolean = False; opOptions: TPerlRegExOptions = []): string;
   function fRegEx_Multiline(sSubject, sRegEx: string): string;
   function fRemove_FileExtension(sFile: string): string;
@@ -100,9 +100,9 @@ type
   function fStrip_FileName(sFileName: string): string;
   function fStrip_NonConforming(const sTmp: string; const ValidChars: TCharSet): string;
   function fStrip_Path(sFileName: string): string;
-  function fStrippedOf_NonAscii(const s: string): string;
+  function fStripp_No_ASCII(const s: string): string;
 
-  procedure pCaptureConsole_Output(const ACommand, AParameters: String; AMemo: TMemo);
+  procedure pCapture_Console_Output(const ACommand, AParameters: String; AMemo: TMemo);
   procedure pDelete_Dir(sDir: string);
   procedure pDelete_FilesOfPath(path: string);
   procedure pGet_DriveLetters(slTmp: TStringList);  // Portable
@@ -113,8 +113,8 @@ type
   procedure pOpen_Url(const sURL: string);
   procedure pOpen_UrlByIEShell(const sURL: string);
   procedure pSend_Message(msg: HINST);
-  procedure pRemoveLine_Commented(var sTmp: string);
-  procedure pRemoveLine_Empty(var sTmp: string);
+  procedure pRemove_Line_Commented(var sTmp: string);
+  procedure pRemove_Line_Empty(var sTmp: string);
   procedure pRestore_PriorClipboard_Text;
   procedure pSet_EnvVariable(Name, Value: string; User: boolean = True);
   procedure pString_Split(const cDelimiter: Char; sInput: string; const tsStrings: TStrings);
@@ -139,7 +139,7 @@ var
   sOldClipBoard: string;
 
 
-function fCheckR_Version(sText: string): boolean;
+function fCheck_Rversion(sText: string): boolean;
 var
   sPath: string;
 
@@ -244,7 +244,7 @@ begin
   end;
 end;
 
-function fIsGuiRunning(var hRgui: HWND;
+function fIs_GuiRunning(var hRgui: HWND;
                        var sCaption: string;
                        var iRecognitionCaption: integer;
                        bFirstTime: boolean = False): boolean;
@@ -647,7 +647,7 @@ begin
 end;
 
 { Execute a complete shell command line and waits until terminated. }
-function fExecCmdLine_Wait(const CmdLine: string;
+function fExec_CmdLine_Wait(const CmdLine: string;
                            wWindowState: Word): boolean;
 var
   sUInfo: TStartupInfo;
@@ -906,7 +906,7 @@ begin
                    SW_HIDE) then Result:= True;
 end;
 
-function fStrippedOf_NonAscii(const s: string): string;
+function fStripp_No_ASCII(const s: string): string;
 var
   i,
    Count: Integer;
@@ -944,7 +944,7 @@ begin
 end;
 
 // Based in http://stackoverflow.com/questions/2863931/problems-reading-registry-from-delphi-7-on-windows-7-64-bit
-function fIs64Bit_OS: boolean;
+function fIs_64Bit_OS: boolean;
 type
   TIsWow64Process = function(Handle: THandle;
                              var IsWow64: BOOL): BOOL; stdcall;
@@ -999,7 +999,7 @@ begin
   slKeys:= TStringList.Create;
 
   try
-    if fIs64Bit_OS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
+    if fIs_64Bit_OS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
                    else Reg:= TRegistry.Create(KEY_READ);
 
     Reg.RootKey:= HKEY_LOCAL_MACHINE;
@@ -1062,7 +1062,7 @@ begin
   slKeys:= TStringList.Create;
 
   try
-    if fIs64Bit_OS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
+    if fIs_64Bit_OS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
                    else Reg:= TRegistry.Create(KEY_READ);
 
     Reg.RootKey:= HKEY_LOCAL_MACHINE;
@@ -1139,7 +1139,7 @@ begin
   try
     slKeys:= TStringList.Create;
 
-    if  fIs64Bit_OS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
+    if  fIs_64Bit_OS then Reg:= TRegistry.Create(KEY_READ or KEY_WOW64_64KEY)
                     else Reg:= TRegistry.Create(KEY_READ);
 
     Reg.RootKey:= HKEY_LOCAL_MACHINE;
@@ -1598,7 +1598,7 @@ end;
 
 // From: http://stackoverflow.com/questions/325872/detect-an-internet-connection-activation-with-delphi?rq=1
 // It is simple but make the job for the purposes of Tinn-R projet!
-function fIsConnected: boolean;
+function fIs_Connected: boolean;
 const
   INTERNET_CONNECTION_MODEM      = 1;  // local system uses a modem to connect to the Internet.
   INTERNET_CONNECTION_LAN        = 2;  // local system uses a local area network to connect to the Internet.
@@ -1617,7 +1617,7 @@ begin
                                      0);
 end;
 
-function fIsValidNumber_RVersion(s: string): boolean;
+function fIs_ValidNumber_Rversion(s: string): boolean;
 var
   i: integer;
 
@@ -1632,7 +1632,7 @@ begin
 end;
 
 // From: http://delphi.wikia.com/wiki/Capture_Console_Output_Realtime_To_Memo
-procedure pCaptureConsole_Output(const ACommand, AParameters: String; AMemo: TMemo);
+procedure pCapture_Console_Output(const ACommand, AParameters: String; AMemo: TMemo);
  const
    CReadBuffer = 2400;
  var
@@ -1703,7 +1703,7 @@ begin
   end;
 end;
 
-function fIsUrl(S: string): boolean;
+function fIs_URL(S: string): boolean;
 (*
 const
 cbad = ';*<>{}[]|\()^!';
@@ -2031,7 +2031,7 @@ begin
   FindClose(SR);
 end;
 
-function fIsInteger(sTmp: string): boolean;
+function fIs_Integer(sTmp: string): boolean;
 begin
   try
     result:= True;
@@ -2042,14 +2042,14 @@ begin
   end;
 end;
 
-function fIsPortable_Version: boolean;
+function fIs_Portable_Version: boolean;
 begin
   Result:= fRegEx(Application.Title,
                   'portable',
                   False) <> EmptyStr;
 end;
 
-function fPathRExists(var sPathR: string): boolean;  // Portable
+function fPath_R_Exists(var sPathR: string): boolean;  // Portable
 var
   slDrives: TStringList;
 
@@ -2085,7 +2085,7 @@ begin
   end;
 end;
 
-procedure pRemoveLine_Commented(var sTmp: string);
+procedure pRemove_Line_Commented(var sTmp: string);
 begin
   sTmp:= fRegEx_Multiline(sTmp,
                           //'^[ \{\}\(\)"''''_a-zA-Z0-9,.=-].*' // Get all lines not started by # (R is a language quite promiscuous!!!)
@@ -2093,7 +2093,7 @@ begin
                           '^((?!^#)).*$');                      // \o/
 end;
 
-procedure pRemoveLine_Empty(var sTmp: string);
+procedure pRemove_Line_Empty(var sTmp: string);
 begin
   sTmp:= fRegEx_Multiline(sTmp,
                           '.*$');  // \o/

@@ -128,32 +128,32 @@ type
     function fGet_BB_HighLighter: TSynCustomHighlighter;
     function fGet_BE_HighLighter: TSynCustomHighlighter;
     function fGet_Current_HighLighter: TSynCustomHighlighter;
-    function fScrubCaption(sCap: string): string;
-    function fSetHighlighterID: integer;
+    function fScrub_Caption(sCap: string): string;
+    function fSet_HighlighterID: integer;
 
-    procedure pCheckSaveStatus;
+    procedure pCheck_Save_Status;
     procedure pColumn_Select;
     procedure pComment(sStartComment, sEndComment: string);
-    procedure pCopyFormatted_HTML;
-    procedure pCopyFormatted_RTF;
-    procedure pCopyFormatted_TeX;
+    procedure pCopy_Formatted_HTML;
+    procedure pCopy_Formatted_RTF;
+    procedure pCopy_Formatted_TeX;
     procedure pCR;
-    procedure pDateStamp;
-    procedure pDoCardInsert;
-    procedure pDoCompletion_Insert(bSearch: boolean = False);
-    procedure pDoTip_Insert;
+    procedure pDate_Stamp;
+    procedure pDo_CardInsert;
+    procedure pDo_Completion_Insert(bSearch: boolean = False);
+    procedure pDo_Tip_Insert;
     procedure pEditor_RemoveSplit;
     procedure pEditor_Split(bSplitHoriz: boolean = True);
-    procedure pEnableSave;
+    procedure pEnable_Save;
     procedure pFile_Changed(Sender: TObject);
     procedure pFile_Save(Sender: TObject);
     procedure pFile_SaveAs(Sender: TObject);
     procedure pFind;
-    procedure pFindAgain;
+    procedure pFind_Again;
     procedure pFullPath_Unix;
     procedure pFullPath_Windows;
-    procedure pGetCursorTo(sWay: string);
-    procedure pGotoLine;
+    procedure pGet_CursorTo(sWay: string);
+    procedure pGoto_Line;
     procedure pIndent_Block;
     procedure pInvert_Case;
     procedure pInvert_Selection;
@@ -162,18 +162,18 @@ type
     procedure pLowerCase_Word;
     procedure pNormal_Select;
     procedure pReplace;
-    procedure pSearchError(sTmp: string);
-    procedure pSetHighlighter_FromFileExt(sExt: string);
-    procedure pSetHighlighter_Status(Sender: TObject);
-    procedure pSetTitle;
+    procedure pSearch_Error(sTmp: string);
+    procedure pSet_Highlighter_FromFileExt(sExt: string);
+    procedure pSet_Highlighter_Status(Sender: TObject);
+    procedure pSet_Title;
     procedure pLineWrap_Toogle(bChecked: boolean);
     procedure pUncomment(sStartComment, sEndComment: string; rfTmp: TReplaceFlags = []);
     procedure pUnindent_Block;
     procedure pUpperCase_Selection;
     procedure pUpperCase_Word;
-    procedure pNotifyFile_Start(sTmp: string);
-    procedure pNotifyFile_Stop;
-    procedure pDoSearchReplaceText(bReplace, bSearchAgain: boolean; bMessage: boolean = True);
+    procedure pNotify_File_Start(sTmp: string);
+    procedure pNotify_File_Stop;
+    procedure pDo_SearchReplace(bReplace, bSearchAgain: boolean; bMessage: boolean = True);
 
    protected
     procedure Loaded; override;
@@ -208,7 +208,7 @@ uses
 
 {$R *.DFM}
 
-procedure TfrmEditor.pNotifyFile_Start(sTmp: string);
+procedure TfrmEditor.pNotify_File_Start(sTmp: string);
 begin
   with fNotif do begin
     Timer.Enabled:= False;
@@ -218,7 +218,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pNotifyFile_Stop;
+procedure TfrmEditor.pNotify_File_Stop;
 begin
   with fNotif do begin
     Timer.Enabled:= False;
@@ -299,13 +299,13 @@ var
   sNodeSelected: string;
 
 begin
-  frmMain.pRemoveTab(fScrubCaption(Caption));  //not remove from here!!!
+  frmMain.pRemoveTab(fScrub_Caption(Caption));  //not remove from here!!!
 
   with frmMain do begin
     synURIOpener.Editor:= nil;  //don't remove this line!
 
     if (pgFiles.PageCount = 0) then begin
-      pClearStatusBar;
+      pClear_StatusBar;
       // The below is alphabetically ordered
       actBlockMark.Enabled                := False;
       actBlockUnmark.Enabled              := False;
@@ -399,12 +399,12 @@ begin
       menWebSearchSelRSite.Enabled        := False;
       tbFilter.Enabled                    := False;
       tbiPandoc.Enabled                   := False;
-      pMinimizeTinnAfterLastFile;
+      pMinimize_TinnAfterLastFile;
 
       with tUpdateOptions do
         if (Enabled) then Enabled:= False;
 
-      pSetToolbarProcessing('fileAllClosed.disableAll');  // will disable all Deplate, Txt2tags and MikTeX options
+      pSet_ToolbarProcessing('fileAllClosed.disableAll');  // will disable all Deplate, Txt2tags and MikTeX options
       pgFiles.Refresh;
 
       with frmTools do begin
@@ -428,7 +428,7 @@ begin
   Action:= caFree;
 end;
 
-procedure TfrmEditor.pSetTitle;
+procedure TfrmEditor.pSet_Title;
 var
   sStat: string;
 
@@ -440,10 +440,10 @@ begin
   Caption:= Format('%s%s',
                    [sActiveFile, sStat]);
 
-  frmMain.pSetTabTitle(sStat);
+  frmMain.pSet_TabTitle(sStat);
 end;
 
-procedure TfrmEditor.pCheckSaveStatus;
+procedure TfrmEditor.pCheck_Save_Status;
 begin
   if (synEditor.Modified = True) then begin
     frmMain.actFileSave.Enabled   := True;
@@ -564,20 +564,20 @@ begin
                    bAddBOM);
 
         synEditor.Modified:= False;
-        pSetTitle;
+        pSet_Title;
         frmMain.actFileSave.Enabled:= False;
 
-        if (frmMain.pgFiles.ActivePage.Tag = -1) then pSetHighlighter_FromFileExt(ExtractFileExt(sActiveFile));
+        if (frmMain.pgFiles.ActivePage.Tag = -1) then pSet_Highlighter_FromFileExt(ExtractFileExt(sActiveFile));
         frmMain.sWorkingDir:= ExtractFilePath(sActiveFile);
 
         if (frmMain.bUndoAfterSave = False) then synEditor.UndoList.Clear;
         bHasFileBeenSaved:= True;
 
         with frmMain do begin
-          pSetFileSize_StatusBar(sActiveFile);
+          pSet_FileSize_StatusBar(sActiveFile);
 
-          pGetFile_Info(sActiveFile,
-                        synEditor.Lines);
+          pGet_File_Info(sActiveFile,
+                         synEditor.Lines);
         end;
 
         if frmMain.bRememberFileState then pDoSave_FileState;
@@ -667,22 +667,22 @@ begin
 
     synEditor.Modified:= False;
     frmMain.sWorkingDir:= fStrip_FileName(sFile);
-    pSetHighlighter_FromFileExt(ExtractFileExt(sActiveFile));
+    pSet_Highlighter_FromFileExt(ExtractFileExt(sActiveFile));
 
     frmMain.actFileSave.Enabled:= False;
-    pSetTitle;
+    pSet_Title;
 
     if (frmMain.bUndoAfterSave = False) then synEditor.UndoList.Clear;
     bHasFileBeenSaved:= True;
 
     with frmMain do begin
-      pSetFileSize_StatusBar(sActiveFile);
+      pSet_FileSize_StatusBar(sActiveFile);
 
-      pGetFile_Info(sActiveFile,
-                    synEditor.Lines);
+      pGet_File_Info(sActiveFile,
+                     synEditor.Lines);
 
-      pUpdateMRU(menFileRecentFiles,
-                 sActiveFile);
+      pUpdate_MRU(menFileRecentFiles,
+                  sActiveFile);
 
       if bRememberFileState then pDoSave_FileState;
     end;
@@ -695,7 +695,7 @@ var
   iTopLine: Integer;
 
 begin
-  pEnableSave;
+  pEnable_Save;
 
   if Assigned(synEditor2) then begin
     if (sActiveEditor = 'synEditor') then begin
@@ -714,7 +714,7 @@ begin
     end;
   end;
 
-  frmMain.pUpdateHexViewer;
+  frmMain.pUpdate_HexViewer;
 end;
 
 procedure TfrmEditor.FormCreate(Sender: TObject);
@@ -726,7 +726,7 @@ begin
     sActiveFile:= 'Untitled' +
                   IntToStr(iFileCount);
 
-    pUpdateCursorPos(synEditor);
+    pUpdate_CursorPos(synEditor);
   end;
 
   Caption:= sActiveFile;
@@ -866,7 +866,7 @@ begin
     if (i > frmMain.pgFiles.PageCount -1) then
       bDone:= True
     else begin
-      if (frmMain.pgFiles.Pages[i].Hint = fScrubCaption(Caption)) then begin
+      if (frmMain.pgFiles.Pages[i].Hint = fScrub_Caption(Caption)) then begin
         frmMain.pgFiles.ActivePageIndex:= i;
 
         bDone:= True;
@@ -875,10 +875,10 @@ begin
       inc(i);
     end;
 
-  frmMain.pUpdateCursorPos(synEditor);
+  frmMain.pUpdate_CursorPos(synEditor);
 
   if Assigned(frmMain.pgFiles.ActivePage) then begin
-    if (frmMain.pgFiles.ActivePage.Tag = -1) then pSetHighlighter_FromFileExt(ExtractFileExt(sActiveFile))
+    if (frmMain.pgFiles.ActivePage.Tag = -1) then pSet_Highlighter_FromFileExt(ExtractFileExt(sActiveFile))
                                              else pSetHighlighter_FromTag(frmMain.pgFiles.ActivePage.Tag);
   end
   else begin  //To the first new file
@@ -892,7 +892,7 @@ begin
     else
       slSynName.Text:= dmSyn.SynAll.GetFriendlyLanguageName;
 
-    pSetHighlighter_Status(slSynName);
+    pSet_Highlighter_Status(slSynName);
 
     FreeAndNil(slSynName)
   end;
@@ -912,20 +912,20 @@ begin
     end;
   end;
 
-  pCheckSaveStatus;
+  pCheck_Save_Status;
 
   with frmMain do begin
-    pSetFileSize_StatusBar(sActiveFile);
+    pSet_FileSize_StatusBar(sActiveFile);
 
-    pGetFile_Info(sActiveFile,
-                  synEditor.Lines);
+    pGet_File_Info(sActiveFile,
+                   synEditor.Lines);
 
     //stbMain.Panels[4].Text:= 'Normal';
-    pDrawSelectionMode(0);
+    pDraw_SelectionMode(0);
   end;
 end;
 
-procedure TfrmEditor.pDoCardInsert;
+procedure TfrmEditor.pDo_CardInsert;
 var
   seEditor: TSynEdit;
 
@@ -979,23 +979,23 @@ begin
     seEditor.CaretX:= iPriPos +
                       iPos;
     FreeAndNil(slTmp);
-    pEnableSave;
+    pEnable_Save;
     pRestore_PriorClipboard_Text;
     Exit;
   end;
 
-  pDoSearchReplaceText(False,
-                       True,
-                       False);
+  pDo_SearchReplace(False,
+                    True,
+                    False);
 
   sSearch_Text:= sSearch_OldText;
 
   FreeAndNil(slTmp);
-  pEnableSave;
+  pEnable_Save;
   pRestore_PriorClipboard_Text;
 end;
 
-procedure TfrmEditor.pDoTip_Insert;
+procedure TfrmEditor.pDo_Tip_Insert;
 var
   seEditor: TSynEdit;
 
@@ -1034,19 +1034,19 @@ begin
   sSearch_OldText:= sSearch_Text;
   sSearch_Text   := slTmp[0];
 
-  pDoSearchReplaceText(False,
-                       True,
-                       False);
+  pDo_SearchReplace(False,
+                    True,
+                    False);
 
   sSearch_Text:= sSearch_OldText;
 
   FreeAndNil(slTmp);
-  pEnableSave;
+  pEnable_Save;
 
   pRestore_PriorClipboard_Text;
 end;
 
-procedure TfrmEditor.pDoCompletion_Insert(bSearch: boolean = False);
+procedure TfrmEditor.pDo_Completion_Insert(bSearch: boolean = False);
 var
   seEditor: TSynEdit;
 
@@ -1107,9 +1107,9 @@ begin
     Exit;
   end;
 
-  pInsertText_Smart(seEditor,
-                    sCompletion,
-                    Length(sTrigger));
+  pInsert_Text_Smart(seEditor,
+                     sCompletion,
+                     Length(sTrigger));
 
   // Will search the next '|' as part of the stop of the completion
   sSearch_Text:= '|';
@@ -1117,11 +1117,11 @@ begin
   with frmMain do
     bSearch_RegExp:= False;  // Do not remove due to '|' -> or in fRegEx
 
-  pDoSearchReplaceText(False,
-                       True,
-                       False);
+  pDo_SearchReplace(False,
+                    True,
+                    False);
 
-  pEnableSave;
+  pEnable_Save;
 end;
 
 // Send current line to R when editing
@@ -1154,7 +1154,7 @@ begin
     CaretY:= CaretY + 1;
   end;
   bSendToREditing:= False;
-  pEnableSave;
+  pEnable_Save;
 end;
 
 procedure TfrmEditor.synEditorKeyDown(Sender: TObject;
@@ -1182,7 +1182,7 @@ begin
 
   // SHIFT + Ins is the default 'paste' shortcut of synEdit
   if (Shift = [ssShift]) and
-     (Key = VK_INSERT) then pEnableSave;
+     (Key = VK_INSERT) then pEnable_Save;
 
   if (Shift = [ssCtrl]) then
     case Key of
@@ -1196,7 +1196,7 @@ begin
                        CaretX := iPosX;
                      end;
                      frmMain.sTipToWrite:= EmptyStr;
-                     pEnableSave;
+                     pEnable_Save;
                    end;
 
       // The below avoid problens with undo/redo and eoScrollPastEol (in or not in options)
@@ -1383,7 +1383,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pSetHighlighter_FromFileExt(sExt: string);
+procedure TfrmEditor.pSet_Highlighter_FromFileExt(sExt: string);
 var
   i,
    iDelimiter,
@@ -1398,7 +1398,7 @@ var
   slSynName: TStringlist;
 
 begin
-  frmMain.pSetToolbarProcessing(sExt);
+  frmMain.pSet_ToolbarProcessing(sExt);
   slSynName:= TStringlist.Create;
   slFilters:= TStringList.Create;
   slSynName.Text:= dmSyn.SynAll.GetFriendlyLanguageName;  //The default
@@ -1454,13 +1454,13 @@ begin
   end;
 
   //ShowMessage(slSynName.Text);  //To debug
-  pSetHighlighter_Status(slSynName);
+  pSet_Highlighter_Status(slSynName);
 
   FreeAndNil(slSynName);
   FreeAndNil(slFilters);
 end;
 
-procedure TfrmEditor.pSetHighlighter_Status(Sender: TObject);
+procedure TfrmEditor.pSet_Highlighter_Status(Sender: TObject);
 var
   sSynName: string;
 
@@ -1475,8 +1475,8 @@ begin
   else
     sSynName:= Trim((Sender as TStringList).text);
 
-  frmMain.pSetSyntaxMenuItem(sSynName);
-  frmMain.pSetSyntaxComboBox(sSynName);
+  frmMain.pSet_SyntaxMenuItem(sSynName);
+  frmMain.pSet_SyntaxComboBox(sSynName);
 
   pSetSyntax_Highlighter(sSynName);
 end;
@@ -1513,7 +1513,7 @@ end;
 procedure TfrmEditor.synEditorStatusChange(Sender: TObject;
                                            Changes: TSynStatusChanges);
 begin
-  frmMain.pUpdateCursorPos(Sender as TsynEdit);
+  frmMain.pUpdate_CursorPos(Sender as TsynEdit);
   iLine:= (Sender as TsynEdit).CaretX;
 end;
 
@@ -1523,7 +1523,7 @@ begin
   pShowSearchReplaceDialog(FALSE);
 end;
 
-procedure TfrmEditor.pGotoLine;
+procedure TfrmEditor.pGoto_Line;
 var
   gotoBox: TfrmGotoBox;
 
@@ -1614,8 +1614,8 @@ begin
           frmMain.sReplaceTextHistory:= ReplaceTextHistory;
         end;
 
-      if (sSearch_Text <> EmptyStr) then pDoSearchReplaceText(bReplace,
-                                                              False);
+      if (sSearch_Text <> EmptyStr) then pDo_SearchReplace(bReplace,
+                                                           False);
     end;
 
   finally
@@ -1623,7 +1623,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pSearchError(sTmp: string);
+procedure TfrmEditor.pSearch_Error(sTmp: string);
 var
   synSearchOptions: TSynSearchOptions;
 
@@ -1659,9 +1659,9 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pDoSearchReplaceText(bReplace,
-                                          bSearchAgain: boolean;
-                                          bMessage: boolean = True);
+procedure TfrmEditor.pDo_SearchReplace(bReplace,
+                                       bSearchAgain: boolean;
+                                       bMessage: boolean = True);
 var
   synSearchOptions: TSynSearchOptions;
 
@@ -1716,14 +1716,14 @@ begin
   if Assigned(frmConfirm_Replace_Dlg) then FreeAndNil(frmConfirm_Replace_Dlg);
 end;
 
-procedure TfrmEditor.pFindAgain;
+procedure TfrmEditor.pFind_Again;
 begin
   // For while, it is impossible to search with F3 any old selection!
   bSearchSelectionOnly:= False;
 
   if (sSearch_Text = EmptyStr) then pShowSearchReplaceDialog(False)
-                               else pDoSearchReplaceText(False,
-                                                        True);
+                               else pDo_SearchReplace(False,
+                                                      True);
 end;
 
 procedure TfrmEditor.pReplace;
@@ -1735,7 +1735,7 @@ begin
    else if Assigned(synEditor2) then synEditor2.Lines:= synEditor.Lines;
 
    frmMain.actFileSave.Enabled:= True;
-   pSetTitle;
+   pSet_Title;
  end
  else fMessageDlg(sActiveFile + #13 + #13 +
                   'The file is set as read only.' + #13 +
@@ -1745,7 +1745,7 @@ begin
                   0);
 end;
 
-function TfrmEditor.fSetHighlighterID: integer;
+function TfrmEditor.fSet_HighlighterID: integer;
 var
   bFound: boolean;
 
@@ -1771,7 +1771,7 @@ begin
             else Result:= -1;
 end;
 
-procedure TfrmEditor.pEnableSave;
+procedure TfrmEditor.pEnable_Save;
 begin
   if Assigned(synEditor2) then synEditor2.Modified:= True;
 
@@ -1780,10 +1780,10 @@ begin
   frmMain.actFileSaveAs.Enabled := True;
   frmMain.actFileSaveAll.Enabled:= True;
 
-  pSetTitle;
+  pSet_Title;
 end;
 
-procedure TfrmEditor.pDateStamp;
+procedure TfrmEditor.pDate_Stamp;
 var
   seEditor: TSynEdit;
 
@@ -1805,7 +1805,7 @@ begin
 
   seEditor.SelText:= DateTimeToStr(Now);
 
-  pEnableSave;
+  pEnable_Save;
 end;
 
 procedure TfrmEditor.pIndent_Block;
@@ -1818,7 +1818,7 @@ begin
                                                                     'A',
                                                                     @synEditor.lines);;
 
-    pEnableSave;
+    pEnable_Save;
   end
   else fMessageDlg(sActiveFile + #13 + #13 +
                    'The file is set as read only.' + #13 +
@@ -1838,7 +1838,7 @@ begin
                                                                     'A',
                                                                     @synEditor.lines);
 
-    pEnableSave;
+    pEnable_Save;
   end
   else fMessageDlg(sActiveFile + #13 + #13 +
                    'The file is set as read only.' + #13 +
@@ -1858,7 +1858,7 @@ begin
                                                                    'A',
                                                                    @synEditor.lines);
 
-    pEnableSave;
+    pEnable_Save;
   end
   else fMessageDlg(sActiveFile + #13 + #13 +
                    'The file is set as read only.' + #13 +
@@ -1947,7 +1947,7 @@ begin
     OnKeyDown             := synEditor.onKeyDown;
     OnKeyUp               := synEditor.onKeyUp;
     OnMouseUp             := synEditor.onMouseUp;
-    OnPaintTransient      := TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient      := TSyn_Transient.pSyn_PaintTransient;
     OnReplaceText         := synEditor.onReplaceText;
     OnStatusChange        := synEditor.onStatusChange;
     Options               := synEditor.Options;
@@ -2139,7 +2139,7 @@ begin
     sTmp:= (dmSyn.Components[iTag] as TSynCustomHighlighter).GetFriendlyLanguageName;
     if (sTmp = 'General_Multi-Highlighter') then sTmp:= (dmSyn.Components[iTag] as TSynMultiSyn).DefaultLanguageName;
     slSynName.Text:= sTmp;
-    pSetHighlighter_Status(slSynName);
+    pSet_Highlighter_Status(slSynName);
   finally
     FreeAndNil(slSynName);
   end;
@@ -2157,7 +2157,7 @@ begin
   frmMain.actLineSelect.Checked  := False;
   frmMain.actColumnSelect.Checked:= False;
 
-  frmMain.pDrawSelectionMode(0);
+  frmMain.pDraw_SelectionMode(0);
 
   synEditor.Options:= synEditor.Options +
                       [eoAltSetsColumnMode];
@@ -2175,7 +2175,7 @@ begin
   frmMain.actLineSelect.Checked  := True;
   frmMain.actColumnSelect.Checked:= False;
 
-  frmMain.pDrawSelectionMode(1);
+  frmMain.pDraw_SelectionMode(1);
 
   synEditor.Options:= synEditor.Options +
                       [eoAltSetsColumnMode];
@@ -2194,7 +2194,7 @@ begin
   frmMain.actLineSelect.Checked  := False;
   frmMain.actColumnSelect.Checked:= True;
 
-  frmMain.pDrawSelectionMode(2);
+  frmMain.pDraw_SelectionMode(2);
 
   synEditor.Options:= synEditor.Options -
                       [eoAltSetsColumnMode];
@@ -2210,7 +2210,7 @@ begin
                                                                     'A',
                                                                     @synEditor.lines);
 
-    pEnableSave;
+    pEnable_Save;
   end
   else fMessageDlg(sActiveFile + #13 + #13 +
                    'The file is set as read only.' + #13 +
@@ -2229,7 +2229,7 @@ begin
                                       else synEditor.ExecuteCommand(ecLowerCaseBlock,
                                                                     'A',
                                                                     @synEditor.lines);
-    pEnableSave;
+    pEnable_Save;
   end
   else fMessageDlg(sActiveFile + #13 + #13 +
                    'The file is set as read only.' + #13 +
@@ -2249,7 +2249,7 @@ begin
                                                                     'A',
                                                                     @synEditor.lines);
 
-    pEnableSave;
+    pEnable_Save;
   end
   else fMessageDlg(sActiveFile + #13 + #13 +
                    'The file is set as read only.' + #13 +
@@ -2259,7 +2259,7 @@ begin
                    0);
 end;
 
-function TfrmEditor.fScrubCaption(sCap: string): string;
+function TfrmEditor.fScrub_Caption(sCap: string): string;
 var
   sTmp: string;
 
@@ -2279,7 +2279,7 @@ procedure TfrmEditor.synEditorEndDrag(Sender,
                                       X,
                                       Y: Integer);
 begin
-  pEnableSave;
+  pEnable_Save;
 end;
 
 procedure TfrmEditor.synEditorGutterClick(Sender: TObject;
@@ -2442,7 +2442,7 @@ begin
       Result:= Highlighter;
 end;
 
-procedure TfrmEditor.pGetCursorTo(sWay: string);
+procedure TfrmEditor.pGet_CursorTo(sWay: string);
 var
   bWordWrapOption: boolean;
 
@@ -2518,7 +2518,7 @@ var
       CaretX := iCaret;
       CaretY := iPosY;
       TopLine:= iTop;
-      pEnableSave;
+      pEnable_Save;
     end;
   end;
 
@@ -2669,7 +2669,7 @@ var
       CaretX := iCaret;
       CaretY := iPosY;
       TopLine:= iTop;
-      pEnableSave;
+      pEnable_Save;
     end;
   end;
 
@@ -2812,7 +2812,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pCopyFormatted_RTF;
+procedure TfrmEditor.pCopy_Formatted_RTF;
 var
   bcStart,
    bcStop: TBufferCoord;
@@ -2866,7 +2866,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pCopyFormatted_HTML;
+procedure TfrmEditor.pCopy_Formatted_HTML;
 var
   bcStart,
    bcStop: TBufferCoord;
@@ -2920,7 +2920,7 @@ begin
   end;
 end;
 
-procedure TfrmEditor.pCopyFormatted_TeX;
+procedure TfrmEditor.pCopy_Formatted_TeX;
 var
   bcStart,
    bcStop: TBufferCoord;
@@ -3028,7 +3028,7 @@ begin
                                                                     'A',
                                                                     @synEditor.lines);;
 
-    pEnableSave;
+    pEnable_Save;
   end
   else fMessageDlg(sActiveFile + #13 + #13 +
                    'The file is set as read only.' + #13 +
@@ -3129,7 +3129,7 @@ var
       CaretX := iCaret;
       CaretY := iPosY;
       TopLine:= iTop;
-      pEnableSave;
+      pEnable_Save;
     end;
   end;
 

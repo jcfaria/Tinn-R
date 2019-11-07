@@ -359,7 +359,7 @@ end;
 
 procedure TfrmRmirrors.bbHelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Mirrors (R)"');
+  frmMain.pOpen_UserGuidePDF('"Mirrors (R)"');
 end;
 
 procedure TfrmRmirrors.bbtRmirrorsCancelAllClick(Sender: TObject);

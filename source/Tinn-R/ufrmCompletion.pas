@@ -348,7 +348,7 @@ end;
 
 procedure TfrmCompletion.bbHelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Completion"');
+  frmMain.pOpen_UserGuidePDF('"Completion"');
 end;
 
 procedure TfrmCompletion.bbtCompletionCancelAllClick(Sender: TObject);

@@ -310,7 +310,7 @@ end;
 
 procedure TfrmRcard.bbHelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Card (R)"');
+  frmMain.pOpen_UserGuidePDF('"Card (R)"');
 end;
 
 procedure TfrmRcard.bbtRcardCancelAllClick(Sender: TObject);

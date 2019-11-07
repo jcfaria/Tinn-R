@@ -7185,10 +7185,6 @@ object frmMain: TfrmMain
         Action = actUncomment
         GroupIndex = 6
       end
-      object test1: TMenuItem
-        Caption = 'test'
-        GroupIndex = 6
-      end
     end
     object menFormat: TMenuItem
       Caption = 'Form&at'

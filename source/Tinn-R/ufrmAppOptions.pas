@@ -694,7 +694,7 @@ end;
 
 procedure TfrmApp_Options_Dlg.btnMRUClearClick(Sender: TObject);
 begin
-  frmMain.pClearMRU;
+  frmMain.pClear_MRU;
 end;
 
 procedure TfrmApp_Options_Dlg.btnSetToBothClick(Sender: TObject);
@@ -1170,7 +1170,7 @@ end;
 
 procedure TfrmApp_Options_Dlg.bbHelpClick(Sender: TObject);
 begin
-  frmMain.pOpenUserGuidePDF('"Application options"');
+  frmMain.pOpen_UserGuidePDF('"Application options"');
 end;
 
 procedure TfrmApp_Options_Dlg.bbtConPathDeplateClick(Sender: TObject);

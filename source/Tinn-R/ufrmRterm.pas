@@ -215,7 +215,7 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
       if (pgFiles.PageCount > 0) then begin
         i:= fFindTop_Window;
         with (MDIChildren[i] as TfrmEditor) do
-          pSearchError(sTmp)
+          pSearch_Error(sTmp)
       end;
   end;
 
@@ -519,7 +519,7 @@ procedure TfrmRterm.cRTermReceiveOutput(Sender: TObject;
    procedure pSetFocus;
    begin
      with frmMain do
-       if (pgFiles.PageCount > 0) then pSetFocus_Main;
+       if (pgFiles.PageCount > 0) then pSet_Focus_Main;
                                   //else synIO.SetFocus;  // Problem when AutoHide is On
    end;
 
@@ -623,7 +623,7 @@ begin
     Checked:= False;
   end;
 
-  frmMain.pSetFocus_Main;
+  frmMain.pSet_Focus_Main;
 end;
 
 procedure TfrmRterm.cRTermProcessStatusChange(Sender: TObject;
@@ -715,16 +715,16 @@ begin
     Checked:= False;
   end;
 
-  frmMain.pSetFocus_Main;
+  frmMain.pSet_Focus_Main;
 end;
 
 procedure TfrmRterm.FormCreate(Sender: TObject);
 begin
   with synIO do
-    OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 
   with synLog do
-    OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 end;
 
 procedure TfrmRterm.FormHide(Sender: TObject);
@@ -885,8 +885,8 @@ procedure TfrmRterm.pCR;
       sTmp:= SelText;
 
     if not frmMain.bRSendAll then
-      pRemoveLine_Commented(sTmp);
-    pRemoveLine_Empty(sTmp);
+      pRemove_Line_Commented(sTmp);
+    pRemove_Line_Empty(sTmp);
 
     // if selection is a single line and bRSmart
     if frmMain.bRSmart and
@@ -901,7 +901,7 @@ procedure TfrmRterm.pCR;
     end;
 
     pSantize_Selection(sTmp);
-    pRemoveLine_Empty(sTmp);
+    pRemove_Line_Empty(sTmp);
 
     sFilePath:= frmMain.sPath_Tmp +
                 '\selection.r';
@@ -1045,8 +1045,8 @@ procedure TfrmRterm.pCR;
                 LineText:= '>' + ' ' + sSend;
         end;
 
-      frmMain.pDoSend(sSend,
-                      False);
+      frmMain.pDo_Send(sSend,
+                       False);
 
       ExecuteCommand(ecPageLeft,
         #0,
@@ -1105,8 +1105,8 @@ begin
 
     if fCheck_Quit(sTmp) then
     begin
-      frmMain.pDoSend(sSend,
-                      False);
+      frmMain.pDo_Send(sSend,
+                       False);
     end
     else
       pProcess_CR(sTmp,
@@ -1321,8 +1321,8 @@ begin
       bRterm_Sent:= True;
       bRterm_Plus:= False;
 
-      frmMain.pDoSend(sToSend,
-                      False);
+      frmMain.pDo_Send(sToSend,
+                       False);
 
       ExecuteCommand(ecEditorBottom,
                      #0,
@@ -1920,7 +1920,7 @@ begin
   with synLog2 do begin
     BeginUpdate;
 
-    OnPaintTransient:= TSyn_Transient.pSynPaintTransient;
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     if bSplitHorizontal then begin
       Align:= alBottom;
       if (iSynLog2Height > tbsIO.Height) then synLog2.Height:= 4 * (tbsIO.Height div 5)
@@ -1934,7 +1934,7 @@ begin
     Parent                := tbsIO;
     BorderStyle           := bsNone;
     HideSelection         := False;
-    onPaintTransient      := TSyn_Transient.pSynPaintTransient;
+    onPaintTransient      := TSyn_Transient.pSyn_PaintTransient;
     OnKeyDown             := synLogKeyDown;
     PopupMenu             := frmMain.pmenLog;
     Options               := synIO.Options;

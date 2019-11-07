@@ -188,23 +188,23 @@ begin
     // Related to R (Gui or Term) local
     if frmRterm.bRTerm_Running and
        bIPLocal then begin
-      pDoRConnection(sStop,
-                     False,
-                     True);
+      pDo_RConnection(sStop,
+                      False,
+                      True);
       Exit;
     end;
 
     // Related to R (Gui or Term) remote
     if not bIPLocal then begin
-      pDoRConnection(sStop,
-                     False,
-                     False);
+      pDo_RConnection(sStop,
+                      False,
+                      False);
       Exit;
     end;
 
     // Related to RGui
-    if (hRGui <> 0) then pDoRGuiConnection(sStop,
-                                          False);
+    if (hRGui <> 0) then pDo_RGuiConnection(sStop,
+                                            False);
   end;
 end;
 
@@ -230,10 +230,10 @@ begin
   end;
   with frmMain do begin
     with frmRterm.synIO do
-      if (LineText = '> ') then pPrintMessage(sTmp,
-                                              False)
-                           else pPrintMessage(sTmp,
-                                              True);
+      if (LineText = '> ') then pPrint_Message(sTmp,
+                                               False)
+                           else pPrint_Message(sTmp,
+                                               True);
     csRGeneral.Socket.SendText(sToSend);
   end;
   edtSend.SetFocus;
