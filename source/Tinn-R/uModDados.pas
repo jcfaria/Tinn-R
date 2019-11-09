@@ -162,7 +162,7 @@ type
     function fCheck_Hotkey_RH_Send(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fCheck_Hotkey_RH_Control(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fCheck_Hotkey_RH_Custom(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
-    function fCheck_Editor(sKeystroke: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_keystroke_Editor(sKeystroke: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fRmirrors_Update(sFile: string): boolean;
     function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
 
@@ -414,9 +414,9 @@ begin
   end; //with cdRH_Custom
 end;
 
-function  TmodDados.fCheck_Editor(sKeystroke: string;
-                                  var sBy: string;
-                                  bShortcut_Clear: boolean = False): boolean;
+function  TmodDados.fCheck_keystroke_Editor(sKeystroke: string;
+                                            var sBy: string;
+                                            bShortcut_Clear: boolean = False): boolean;
 var
   pTmp:  pointer;
 
@@ -843,6 +843,7 @@ begin
     begin
       Name   := 'Editor_Idx';
       Fields := 'Command;Index';
+//      Fields := 'Index';
       Options:= [ixPrimary, ixUnique];
     end;
     IndexName:= 'Editor_Idx';

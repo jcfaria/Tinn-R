@@ -166,8 +166,8 @@ begin
 
   // Editor
   with modDados do
-    if fCheck_Editor(ShortCutToText(eKeyShort.HotKey),
-                                    sBy) then begin
+    if fCheck_keystroke_Editor(ShortCutToText(eKeyShort.HotKey),
+                                              sBy) then begin
       pSetYes_inUse(sBy,
                     'Editor');
 
@@ -292,7 +292,7 @@ begin
            eKeyShort.HotKey:= TextToShortcut(FieldByName('Keystroke').Value);
 
            with lbId_Cur do
-             Caption:= FieldValues['Group'] +
+             Caption:= 'Editor' +
                        ' | ' +
                        FieldValues['Command'];
 

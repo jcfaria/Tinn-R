@@ -217,7 +217,7 @@ begin
   FSelectedColor.Foreground:= clHighlightText;
   FSelectedColor.Background:= clHighlight;
   FFont           := TFont.Create;
-  FFont.Name      := 'Courier New';
+  FFont.Name      := 'Consolas';
   FFont.Size      := 11;
   Color           := clWhite;
   Options         := SYNEDIT_DEFAULT_OPTIONS;

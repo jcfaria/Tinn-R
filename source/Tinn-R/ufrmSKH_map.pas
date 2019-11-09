@@ -456,9 +456,12 @@ begin
          end;
 
     // Editor
-    2: begin
-         //TODO
-    end;
+    2: with modDados do
+         with cdEditor do begin
+           Edit;
+           FieldByName('Keystroke').Value:= sSHK;
+           Post;
+         end;
 
     // RH Send
     3: with modDados do
@@ -508,7 +511,15 @@ begin
 
     // Editor
     2: begin
-       // TODO
+         with modDados do begin
+           fCheck_keystroke_Editor(sSHK,
+                                   sBy,
+                                   True);
+         end;  // with modDados
+
+         ShowMessage('The S/K/H associated to [' +
+                     sBy +
+                     '] was emptied!');
     end;
 
     // RHK Send

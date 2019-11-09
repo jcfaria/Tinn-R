@@ -1262,7 +1262,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 0
             Items.Strings = (
               'Vertical Line'
@@ -1276,7 +1276,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 1
             Items.Strings = (
               'Vertical Line'
@@ -1290,10 +1290,6 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Keystrokes'
         ImageIndex = 23
         TabVisible = False
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Label20: TLabel
           Left = 0
           Top = 374
@@ -1389,7 +1385,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Height = 21
             BevelInner = bvNone
             BevelOuter = bvNone
-            ItemHeight = 0
+            ItemHeight = 13
             Sorted = True
             TabOrder = 0
             OnExit = cbCommandsExit

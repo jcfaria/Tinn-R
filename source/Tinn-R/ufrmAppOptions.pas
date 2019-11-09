@@ -885,6 +885,18 @@ begin
 
   iCmd:= Integer(cbCommands.Items.Objects[cbCommands.ItemIndex]);
 
+//  // To debug only
+//  ShowMessage('Index: ' +
+//              IntToStr(liSelected.Index) +
+//              ' | ' +
+//              'Caption: ' +
+//              liSelected.Caption +
+//              ' | ' +
+//              'Command: ' +
+//              ShortcutToText(TSynEditKeyStroke(liSelected.Data).ShortCut)
+//              );
+//  Exit;
+
   TSynEditKeyStroke(liSelected.Data).Command:= iCmd;
 
   try  // After remove generate exception: I could not find the origin of (ocasional exception) yet!

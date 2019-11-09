@@ -2752,7 +2752,6 @@ type
     procedure pRSetSend_Info(var sInfo, sFileInfo: string);
     procedure pR_Info;
     procedure pRToolbar(bOption: boolean);
-    procedure pSave_EditorKeystrokes;
     procedure pSave_NewIni_Application;
     procedure pSave_NewIni_Editor;
     procedure pSave_Preferences_Old_Version;
@@ -3101,7 +3100,7 @@ begin
   sCurrentVersion_Cache     := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '5.02.03.00';
-  sCurrentVersion_Editor    := '5.04.01.03';  // Started from version '5.04.01.00'/beta
+  sCurrentVersion_Editor    := '5.04.01.04';  // Started from version '5.04.01.00'/beta
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
@@ -4676,8 +4675,6 @@ begin
     slSearch.Delete(0);
   end;
   FreeAndNil(slSearch);
-
-  pSave_EditorKeystrokes;
 
   // Explorer Favorites
   ifTinn.EraseSection('Explorer Favorites');
@@ -7890,67 +7887,32 @@ end;
 
 procedure TfrmMain.pLoad_EditorKeystrokes;
 var
-  sEditor: string;
-
-  stream: TStream;
 
   i: integer;
-
 begin
-//{
-  sEditor:= sPath_Editor +
-            '\Editor.kst';
-
-  if FileExists(sEditor) then begin
-    stream:= TFileStream.Create(sEditor,
-                                fmOpenRead);
-
-    with coEditor.Keystrokes do
-      LoadFromStream(stream);
-
-//  with modDados.cdEditor do begin
-//    DisableControls;
-//    First;
-//    for i:=0 to (RecordCount - 1) do begin
-//      with coEditor.Keystrokes do begin
-//        Items[i].Index   := FieldByName('Index').Value;
-//        Items[i].Command := ConvertExtendedToCommand(FieldByName('Command').Value);
-//        Items[i].Key     := FieldByName('Key').Value;
-//        //Items[i].ShortCut:= TextToShortcut(FieldByName('Keystroke').Value);
-//      end;
-//      Next;
-//    end;
-//    DisableControls;
-//    First;
-//  end;
-
-    FreeAndNil(stream);
+  with modDados.cdEditor do begin
+    IndexFieldNames:= 'Index';  // To cdEditor has the same order than coEditor.Keystrokes.Items
+    DisableControls;
+    First;
+    for i:=0 to (RecordCount - 1) do begin
+      with coEditor.Keystrokes.Items[i] do begin
+//        ShowMessage('Editor.xml: ' +
+//                    FieldByName('Command').Value +
+//                    ' | ' +
+//                    'coEditor: ' +
+//                    EditorCommandToCodeString(Command)
+//                    );
+//        Index   := FieldByName('Index').Value;
+//        Command := ConvertExtendedToCommand(FieldByName('Command').Value);
+//        Key     := FieldByName('Key').Value;
+        ShortCut:= TextToShortcut(FieldByName('Keystroke').Value);
+      end;
+      Next;
+    end;
+    EnableControls;
+    First;
+    IndexFieldNames:= 'Command';
   end;
-//}
-end;
-
-procedure TfrmMain.pSave_EditorKeystrokes;
-var
-  sEditor: string;
-
-  stream: TStream;
-
-begin
-//{
-  sEditor:= sPath_Editor +
-            '\Editor.kst';
-
-  if FileExists(sEditor) then
-    DeleteFile(sEditor);
-
-  stream:= TFileStream.Create(sEditor,
-                              fmCreate);
-
-  with coEditor.Keystrokes do
-    SaveToStream(stream);
-
-  FreeAndNil(stream);
-//}
 end;
 
 procedure TfrmMain.pUnpack_File(sFile,
@@ -9143,7 +9105,7 @@ end;
 
 procedure TfrmMain.pCheck_EditorOptions;
 
-  procedure pUpdateShortcutsDir;
+  procedure pUpdate_ShortcutsDir;
   begin
     pDelete_Dir(sApp_Data +
                 '\Tinn-R\shortcuts'); // Related to old versions of Tinn-R
@@ -9167,7 +9129,7 @@ begin
     end;
 
     pLoad_EditorKeystrokes;
-    pUpdateShortcutsDir;
+    pUpdate_ShortcutsDir;
     frmTools.memIniLog.Lines.Add('  Main folder - ' +
                                  sPath_Editor +
                                  ': CREATED');
@@ -14429,6 +14391,22 @@ begin
 
       pDatasetToActionList;
 
+      // Editor
+      with modDados.cdEditor do begin
+        Edit;
+        try
+          Post;
+          MergeChangeLog;
+          SaveToFile();
+          frmMain.iEditor_SavePoint:= SavePoint;
+        except
+          //TODO
+        end;
+      end;
+
+      // It will set to coEditor.Keystrokes from modDados.cdEditor
+      frmMain.pLoad_EditorKeystrokes;
+
       // RH_Send
       with modDados.cdRH_Send do begin
         Edit;
@@ -14482,19 +14460,6 @@ begin
         end;
         First;
         EnableControls;
-      end;
-
-      // Editor
-      with modDados.cdEditor do begin
-        Edit;
-        try
-          Post;
-          MergeChangeLog;
-          SaveToFile();
-          frmMain.iEditor_SavePoint:= SavePoint;
-        except
-          //TODO
-        end;
       end;
 
       pSet_Focus_Main;
@@ -23742,43 +23707,45 @@ var
   slTmp: TStringList;
 
 begin
-  i:= coEditor.Keystrokes.FindShortcut(TextToShortcut('Ctrl+V'));
-  if (i >= 0) then begin
-    with coEditor.Keystrokes.Items[i] do begin
-      sTmp1:= EditorCommandToCodeString(Command);
-      sTmp2:= IntToStr(Key);
-      sTmp3:= ShortcutToText(ShortCut);
-    end;
-    ShowMessage(IntToStr(i) + ' | ' +
-                      sTmp1 + ' | ' +
-                      sTmp2 + ' | ' +
-                      sTmp3)
-  end;
+//  ShowMessage(IntToStr(coEditor.Keystrokes.FindCommand(ecPaste)));
+
+//  i:= coEditor.Keystrokes.FindShortcut(TextToShortcut('Ctrl+V'));
+//  if (i >= 0) then begin
+//    with coEditor.Keystrokes.Items[i] do begin
+//      sTmp1:= EditorCommandToCodeString(Command);
+//      sTmp2:= IntToStr(Key);
+//      sTmp3:= ShortcutToText(ShortCut);
+//    end;
+//    ShowMessage(IntToStr(i) + ' | ' +
+//                      sTmp1 + ' | ' +
+//                      sTmp2 + ' | ' +
+//                      sTmp3)
+//  end;
 
   slTmp:= TStringList.Create;
-  for i:= 0 to (coEditor.Keystrokes.Count-1) do begin
-    //ShowMessage(IntToStr(coEditor.Keystrokes.FindCommand(ecPaste)));
-    with coEditor.Keystrokes.Items[i] do begin
-      sTmp1:= EditorCommandToCodeString(Command);
-      sTmp2:= IntToStr(Key);
-      sTmp3:= ShortcutToText(ShortCut);
+  try
+    for i:= 0 to (coEditor.Keystrokes.Count-1) do begin
+      with coEditor.Keystrokes.Items[i] do begin
+        sTmp1:= EditorCommandToCodeString(Command);
+        sTmp2:= IntToStr(Key);
+        sTmp3:= ShortcutToText(ShortCut);
+      end;
+
+      slTmp.Add(IntToStr(i) + ' | ' +
+                      sTmp1 + ' | ' +
+                      sTmp2 + ' | ' +
+                      sTmp3);
     end;
 
-    slTmp.Add(IntToStr(i) + ' | ' +
-                    sTmp1 + ' | ' +
-                    sTmp2 + ' | ' +
-                    sTmp3);
+    actFileNewExecute(nil);
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
+
+    seEditor.Lines.AddStrings(slTmp);
+  finally
+    FreeAndNil(slTmp);
   end;
-
-  actFileNewExecute(nil);
-  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    if (sActiveEditor = 'synEditor') then seEditor:= synEditor
-                                     else seEditor:= synEditor2;
-
-  seEditor.Lines.AddStrings(slTmp);
-
-   FreeAndNil(slTmp);
-//    ShowMessage(sTmp1 + ' | ' + sTmp2 + ' | ' + sTmp3);
 end;
 
 procedure TfrmMain.LatexFont(Sender: TObject);
@@ -26551,6 +26518,51 @@ begin
      4: with (seLog as TSynEdit) do
           CutToClipboard;
   end;
+end;
+}
+
+{
+procedure TfrmMain.pLoad_EditorKeystrokes;
+var
+  sEditor: string;
+
+  stream: TStream;
+
+begin
+  sEditor:= sPath_Editor +
+            '\Editor.kst';
+
+  if FileExists(sEditor) then begin
+    stream:= TFileStream.Create(sEditor,
+                                fmOpenRead);
+
+    with coEditor.Keystrokes do
+      LoadFromStream(stream);
+
+    FreeAndNil(stream);
+  end;
+end;
+
+procedure TfrmMain.pSave_EditorKeystrokes;
+var
+  sEditor: string;
+
+  stream: TStream;
+
+begin
+  sEditor:= sPath_Editor +
+            '\Editor.kst';
+
+  if FileExists(sEditor) then
+    DeleteFile(sEditor);
+
+  stream:= TFileStream.Create(sEditor,
+                              fmCreate);
+
+  with coEditor.Keystrokes do
+    SaveToStream(stream);
+
+  FreeAndNil(stream);
 end;
 }
 
