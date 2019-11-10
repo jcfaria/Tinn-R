@@ -1035,13 +1035,14 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 665
+    Height = 685
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
+    ExplicitHeight = 665
   end
   object Panel1: TPanel
     Left = 0
@@ -2020,13 +2021,14 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 665
+    Height = 685
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
+    ExplicitHeight = 665
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2041,7 +2043,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 772
+    Top = 792
     Width = 994
     Height = 20
     AutoHint = True
@@ -2096,22 +2098,24 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
+    ExplicitTop = 772
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 665
+    Height = 685
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
+    ExplicitHeight = 665
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 763
+    Top = 783
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2120,6 +2124,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
+    ExplicitTop = 763
   end
   object pgFiles: TJvgPageControl
     Left = 0

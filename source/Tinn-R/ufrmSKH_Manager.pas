@@ -151,7 +151,7 @@ begin
   with frmMain.dlgSKH_Map do
     iSKH_Used_By:= 0;
 
-  // Application shortcut
+  // App
   with modDados do
     if fCheck_Shortcut_App(ShortCutToText(eKeyShort.HotKey),
                            sBy) then begin
@@ -164,7 +164,7 @@ begin
       Exit;
     end;
 
-  // Editor
+  // Keys_Editor
   with modDados do
     if fCheck_keystroke_Editor(ShortCutToText(eKeyShort.HotKey),
                                               sBy) then begin
@@ -177,7 +177,7 @@ begin
       Exit;
     end;
 
-  // RH Send
+  // RH_Send
   with modDados do
     if fCheck_Hotkey_RH_Send(ShortCutToText(eKeyShort.HotKey),
                              sBy) then begin
@@ -190,7 +190,7 @@ begin
       Exit;
     end;
 
-  // RH Control
+  // RH_Control
   with modDados do
     if fCheck_Hotkey_RH_Control(ShortCutToText(eKeyShort.HotKey),
                                 sBy) then begin
@@ -203,7 +203,7 @@ begin
       Exit;
     end;
 
-  // RH Custom
+  // RH_Custom
   with modDados do
     if fCheck_Hotkey_RH_Custom(ShortCutToText(eKeyShort.HotKey),
                                sBy) then begin
@@ -216,13 +216,13 @@ begin
       Exit;
     end;
 
-  {Map of iSKH_Used_By
-   iSKH_Used_By:= 0; Not used
-   iSKH_Used_By:= 1; Application
-   iSKH_Used_By:= 2; Editor
-   iSKH_Used_By:= 3; RHK Send
-   iSKH_Used_By:= 4; RHK Control
-   iSKH_Used_By:= 5; RHK Custom}
+//  Map of iSKH_Used_By
+//   iSKH_Used_By:= 0; Not used
+//   iSKH_Used_By:= 1; App
+//   iSKH_Used_By:= 2; Keys_Editor
+//   iSKH_Used_By:= 3; RHK_Send
+//   iSKH_Used_By:= 4; RHK_Control
+//   iSKH_Used_By:= 5; RHK_Custom
 
   pSetNot_InUse;  // It was not found in any prior
 end;
@@ -263,7 +263,7 @@ begin
     iSKH_Assign_To:= 0;  // Not used
 
   case frmMain.dlgSKH_Map.pgSKH.ActivePageIndex of
-    // Application
+    // App
     0: begin
          gbInfo.Caption:= ' Info (Group | Identification | Hint) ';
          with modDados.cdShortcuts do begin
@@ -286,9 +286,9 @@ begin
         Exit;
     end;  //0:
 
-    // Editor
+    // Keys_Editor
     1: begin
-         with modDados.cdEditor do begin
+         with modDados.cdKeys_Editor do begin
            eKeyShort.HotKey:= TextToShortcut(FieldByName('Keystroke').Value);
 
            with lbId_Cur do
@@ -306,11 +306,11 @@ begin
          Exit;
     end;
 
-    // R Hotkeys
+    // R_Hotkeys
     2: begin
          gbInfo.Caption:= ' Info (Group | Identification) ';
          case frmMain.dlgSKH_Map.pgRH.ActivePageIndex of
-           // RH Send
+           // RH_Send
            0: begin
                 with modDados.cdRH_Send do begin
                   eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
@@ -330,7 +330,7 @@ begin
                Exit;
            end;  // 0: begin
 
-           // RH Control
+           // RH_Control
            1: begin
                 with modDados.cdRH_Control do begin
                   eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
@@ -350,7 +350,7 @@ begin
                Exit;
            end;  // 1: begin
 
-           // RH Custom
+           // RH_Custom
            2: begin
                 with modDados.cdRH_Custom do begin
                   eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
@@ -370,7 +370,7 @@ begin
                Exit;
            end;  // 2: begin
          end;  //case frmMain.dlgSKH_Map.pgRH.ActivePageIndex
-       end;  //2: begin (R Hotkeys)
+       end;  //2: begin (R_Hotkeys)
   end;  //case frmMain.dlgSKH_Map.pgSH.ActivePageIndex
 end;
 

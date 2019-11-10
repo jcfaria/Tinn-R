@@ -2804,6 +2804,10 @@ type
     procedure pWrite_IniFile_Editor(bMakingBackup: boolean);
     procedure pDraw_RtermSend_Plus;
     procedure pSet_Hotkeys_Status(bStatus: boolean);
+    procedure pUpdate_Hotkey_Send;
+    procedure pUpdate_Hotkey_Control;
+    procedure pUpdate_Hotkey_Custom;
+
 
     // From public
     procedure pAppActivate(Sender: TObject);
@@ -2884,7 +2888,7 @@ type
     iRH_Send_SavePoint           : integer;
     iRH_Control_SavePoint        : integer;
     iRH_Custom_SavePoint         : integer;
-    iEditor_SavePoint            : integer;
+    iKeys_Editor_SavePoint       : integer;
     iRcardFilter                 : integer;
     iRmirrors_SavePoint          : integer;
     iRtip_SavePoint              : integer;
@@ -7887,10 +7891,10 @@ end;
 
 procedure TfrmMain.pLoad_EditorKeystrokes;
 var
-
   i: integer;
+  
 begin
-  with modDados.cdEditor do begin
+  with modDados.cdKeys_Editor do begin
     IndexFieldNames:= 'Index';  // To cdEditor has the same order than coEditor.Keystrokes.Items
     DisableControls;
     First;
@@ -7911,7 +7915,7 @@ begin
     end;
     EnableControls;
     First;
-    IndexFieldNames:= 'Command';
+    IndexFieldNames:= 'Command;Index';
   end;
 end;
 
@@ -14346,6 +14350,69 @@ begin
   end;
 end;
 
+procedure TfrmMain.pUpdate_Hotkey_Send;
+var
+  i: integer;
+
+begin
+  with modDados.cdRH_Send do begin
+    SetLength(frmMain.ajavHK_Send,
+              RecordCount);
+    DisableControls;
+    First;
+    for i:= 0 to (RecordCount - 1) do begin
+      with ajavHK_Send[i] do
+        HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+
+      Next;
+    end;
+    First;
+    EnableControls;
+  end;
+end;
+
+procedure TfrmMain.pUpdate_Hotkey_Control;
+var
+  i: integer;
+
+begin
+  with modDados.cdRH_Control do begin
+    SetLength(frmMain.ajavHK_Control,
+              RecordCount);
+    DisableControls;
+    First;
+    for i:= 0 to (RecordCount - 1) do begin
+      with ajavHK_Control[i] do
+        HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+
+      Next;
+    end;
+    First;
+    EnableControls;
+  end;
+end;
+
+procedure TfrmMain.pUpdate_Hotkey_Custom;
+var
+  i: integer;
+
+begin
+  with modDados.cdRH_Custom do begin
+    SetLength(frmMain.ajavHK_Custom,
+              RecordCount);
+    DisableControls;
+    First;
+    for i:= 0 to (RecordCount - 1) do begin
+      with ajavHK_Custom[i] do
+        HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+
+      Next;
+    end;
+    First;
+    EnableControls;
+  end;
+end;
+
 procedure TfrmMain.actSKH_mapExecute(Sender: TObject);
 var
   pTmp: pointer;
@@ -14371,7 +14438,7 @@ begin
     pSet_Hotkeys_Status(False);  // Set temporarily pSet_Hotkeys_Status to False: it is necessary to manager Hotkeys!
     // If OK
     if (dlgSKH_Map.ShowModal = mrOK) then begin
-      // Application
+      // App
       with modDados.cdShortcuts do begin
         Edit;
         try
@@ -14388,24 +14455,21 @@ begin
         IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
 
       bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
+      pDatasetToActionList;  //It will update all options related to the alMain (ActionList)
 
-      pDatasetToActionList;
-
-      // Editor
-      with modDados.cdEditor do begin
+      // Keys_Editor
+      with modDados.cdKeys_Editor do begin
         Edit;
         try
           Post;
           MergeChangeLog;
           SaveToFile();
-          frmMain.iEditor_SavePoint:= SavePoint;
+          frmMain.iKeys_Editor_SavePoint:= SavePoint;
         except
           //TODO
         end;
       end;
-
-      // It will set to coEditor.Keystrokes from modDados.cdEditor
-      frmMain.pLoad_EditorKeystrokes;
+      frmMain.pLoad_EditorKeystrokes;  // It will set to coEditor.Keystrokes from modDados.cdEditor
 
       // RH_Send
       with modDados.cdRH_Send do begin
@@ -14419,6 +14483,7 @@ begin
           //TODO
         end;
       end;
+      pUpdate_Hotkey_Send;  // It will update all RH_Send
 
       // RH_Control
       with modDados.cdRH_Control do begin
@@ -14432,6 +14497,24 @@ begin
           //TODO
         end;
       end;
+      pUpdate_Hotkey_Control;  // It will update all RH_Control
+
+      // RH_Custom: make efective any new hotkey created by user
+      with modDados.cdRH_Custom do begin
+        SetLength(frmMain.ajavHK_Custom,
+                  RecordCount);
+        DisableControls;
+        First;
+        for i:= 0 to (RecordCount - 1) do begin
+          with dlgSKH_Map do
+            pCreate_Hotkey_Custom(i,
+                                  Fields[3].AsString);
+          Next;
+        end;
+        First;
+        EnableControls;
+      end;
+      pUpdate_Hotkey_Custom;  // It will update all RH_Custom
 
       // RH_Custom
       with modDados.cdRH_Custom do begin
@@ -14446,32 +14529,16 @@ begin
         end;
       end;
 
-      // RH Custom: make efective new hotkeys created by user
-      with modDados.cdRH_Custom do begin
-        SetLength(frmMain.ajavHK_Custom,
-                  RecordCount);
-        DisableControls;
-        First;
-        for i:= 0 to (RecordCount - 1) do begin
-          with dlgSKH_Map do
-            pCreateHotkey_Custom(i,
-                                 Fields[3].AsString);
-          Next;
-        end;
-        First;
-        EnableControls;
-      end;
-
       pSet_Focus_Main;
     end // if (dlgSH_Map.ShowModal = mrOK)
     // else (dlgSH_Map.ShowModal <> mrOK)
     else begin
       with modDados do begin
-        cdShortcuts.SavePoint := iShortcuts_SavePoint;
-        cdRH_Send.SavePoint   := iRH_Send_SavePoint;
-        cdRH_Control.SavePoint:= iRH_Control_SavePoint;
-        cdRH_Custom.SavePoint := iRH_Custom_SavePoint;
-        cdEditor.SavePoint    := iEditor_SavePoint;
+        cdShortcuts.SavePoint  := iShortcuts_SavePoint;
+        cdRH_Send.SavePoint    := iRH_Send_SavePoint;
+        cdRH_Control.SavePoint := iRH_Control_SavePoint;
+        cdRH_Custom.SavePoint  := iRH_Custom_SavePoint;
+        cdKeys_Editor.SavePoint:= iKeys_Editor_SavePoint;
         cdShortcutsAfterScroll(nil);
       end;
     end;

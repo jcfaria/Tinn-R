@@ -86,19 +86,19 @@ type
     Label16: TLabel;
     Label14: TLabel;
     Label17: TLabel;
-    dbgEditor: TDBGrid;
+    dbgKeys_Editor: TDBGrid;
     JvDBNavigator5: TJvDBNavigator;
     GroupBox4: TGroupBox;
     Label18: TLabel;
     Label19: TLabel;
     Label21: TLabel;
     Label22: TLabel;
-    dbeEditor_Command: TDBEdit;
-    edEditor_Search_Command: TEdit;
+    dbeKeys_Editor_Command: TDBEdit;
+    edKeys_Editor_Search: TEdit;
     dbeEditor_Group: TDBEdit;
-    edEditor_Filter_Command: TEdit;
-    btnKeystroke_Clear: TButton;
-    btnKeystroke_ClearAll: TButton;
+    edKeys_Editor_Filter: TEdit;
+    btnKeys_Editor_Clear: TButton;
+    btnKeys_Editor_ClearAll: TButton;
     procedure FormShow(Sender: TObject);
     procedure dbgShortcutsDblClick(Sender: TObject);
     procedure lvKeystrokesDblClick(Sender: TObject);
@@ -143,27 +143,27 @@ type
     procedure btnNew_RH_CustomClick(Sender: TObject);
     procedure dbgRH_CustomEnter(Sender: TObject);
     procedure dbgRH_CustomKeyPress(Sender: TObject; var Key: Char);
-    procedure edEditor_Filter_CommandChange(Sender: TObject);
-    procedure edEditor_Search_CommandChange(Sender: TObject);
-    procedure btnKeystroke_ClearClick(Sender: TObject);
-    procedure btnKeystroke_ClearAllClick(Sender: TObject);
-    procedure dbgEditorTitleClick(Column: TColumn);
-    procedure dbgEditorEnter(Sender: TObject);
+    procedure edKeys_Editor_FilterChange(Sender: TObject);
+    procedure edKeys_Editor_SearchChange(Sender: TObject);
+    procedure btnKeys_Editor_ClearClick(Sender: TObject);
+    procedure btnKeys_Editor_ClearAllClick(Sender: TObject);
+    procedure dbgKeys_EditorTitleClick(Column: TColumn);
+    procedure dbgKeys_EditorEnter(Sender: TObject);
     procedure dbgRH_SendDblClick(Sender: TObject);
     procedure dbgRH_ControlDblClick(Sender: TObject);
     procedure dbgRH_CustomDblClick(Sender: TObject);
-    procedure dbgEditorDblClick(Sender: TObject);
+    procedure dbgKeys_EditorDblClick(Sender: TObject);
 
   private
     { Private declarations }
 
     procedure pAppMessage(var Msg: TMSG; var bHandled: Boolean);
     procedure pClear_Warnings;
-    procedure pCreateHotkey_Send(i: integer; sTmp: string);
-    procedure pCreateHotkey_Control(i: integer; sTmp: string);
-    procedure pDoHotKey_Custom(Sender: TObject);
-    procedure pDoHotKey_Send(Sender: TObject);
-    procedure pDoHotKey_Control(Sender: TObject);
+    procedure pCreate_Hotkey_Send(i: integer; sTmp: string);
+    procedure pCreate_Hotkey_Control(i: integer; sTmp: string);
+    procedure pDo_HotKey_Custom(Sender: TObject);
+    procedure pDo_HotKey_Send(Sender: TObject);
+    procedure pDo_HotKey_Control(Sender: TObject);
     procedure pSKR_Clear_From(iSKH_Used_By: integer; sSHK: string);
     procedure pSKR_Assign_To(iSKH_Assign_To, iDx: integer; sSHK: string);
 
@@ -175,7 +175,7 @@ type
     iSKH_Assign_To   : integer;
     iDx              : integer;  // índice of the editor keystrokes/R hotkey in their respective stringGrid
 
-    procedure pCreateHotkey_Custom(i: integer; sTmp: string);
+    procedure pCreate_Hotkey_Custom(i: integer; sTmp: string);
   end;
 
 var
@@ -201,14 +201,14 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.pDoHotKey_Custom(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.pDo_HotKey_Custom(Sender: TObject);
 var
   sRH_Custom: string;
 
 begin
   sRH_Custom:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
 
-  // RH Custom
+  // RH_Custom
   with modDados.cdRH_Custom do begin
     DisableControls;
 
@@ -222,7 +222,7 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.pDoHotKey_Send(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.pDo_HotKey_Send(Sender: TObject);
 var
   sRH_Send: string;
 
@@ -232,7 +232,7 @@ begin
   //SetForegroundWindow(Application.Handle);
   sRH_Send:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
 
-  // RH Send
+  // RH_Send
   with modDados.cdRH_Send do begin
     DisableControls;
 
@@ -283,7 +283,7 @@ begin
     end;
 end;
 
-procedure TfrmSKH_Map_Dlg.pDoHotKey_Control(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.pDo_HotKey_Control(Sender: TObject);
 var
   sRH_Control: string;
 
@@ -293,7 +293,7 @@ begin
   //SetForegroundWindow(Application.Handle);
   sRH_Control:= ShortCutToText((Sender as TJvApplicationHotKey).HotKey);
 
-  // RH Control
+  // RH_Control
   with modDados.cdRH_Control do begin
     DisableControls;
 
@@ -373,41 +373,44 @@ begin
   pClear_Warnings;
 end;
 
-procedure TfrmSKH_Map_Dlg.pCreateHotkey_Send(i: integer;
-                                             sTmp: string);
+procedure TfrmSKH_Map_Dlg.pCreate_Hotkey_Send(i: integer;
+                                              sTmp: string);
 begin
   with frmMain do begin
-    ajavHK_Send[i]:= TJvApplicationHotKey.Create(Self);
+    if not Assigned(ajavHK_Send[i]) then
+      ajavHK_Send[i]:= TJvApplicationHotKey.Create(Self);
     with ajavHK_Send[i] do begin
       HotKey  := TextToShortCut(sTmp);
       Active  := bHotKeys_On;
-      OnHotKey:= pDoHotKey_Send;
+      OnHotKey:= pDo_HotKey_Send;
     end;
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.pCreateHotkey_Control(i: integer;
-                                                sTmp: string);
+procedure TfrmSKH_Map_Dlg.pCreate_Hotkey_Control(i: integer;
+                                                 sTmp: string);
 begin
   with frmMain do begin
-    ajavHK_Control[i]:= TJvApplicationHotKey.Create(Self);
+    if not Assigned(ajavHK_Control[i]) then
+      ajavHK_Control[i]:= TJvApplicationHotKey.Create(Self);
     with ajavHK_Control[i] do begin
       HotKey  := TextToShortCut(sTmp);
       Active  := bHotKeys_On;
-      OnHotKey:= pDoHotKey_Control;
+      OnHotKey:= pDo_HotKey_Control;
     end;
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.pCreateHotkey_Custom(i: integer;
-                                               sTmp: string);
+procedure TfrmSKH_Map_Dlg.pCreate_Hotkey_Custom(i: integer;
+                                                sTmp: string);
 begin
   with frmMain do begin
-    ajavHK_Custom[i]:= TJvApplicationHotKey.Create(Self);
+    if not Assigned(ajavHK_Custom[i]) then
+      ajavHK_Custom[i]:= TJvApplicationHotKey.Create(Self);
     with ajavHK_Custom[i] do begin
       HotKey  := TextToShortCut(sTmp);
       Active  := bHotKeys_On;
-      OnHotKey:= pDoHotKey_Custom;
+      OnHotKey:= pDo_HotKey_Custom;
     end;
   end;
 end;
@@ -455,15 +458,15 @@ begin
            Post;
          end;
 
-    // Editor
+    // Keys_Editor
     2: with modDados do
-         with cdEditor do begin
+         with cdKeys_Editor do begin
            Edit;
            FieldByName('Keystroke').Value:= sSHK;
            Post;
          end;
 
-    // RH Send
+    // RH_Send
     3: with modDados do
          with cdRH_Send do begin
            Edit;
@@ -471,7 +474,7 @@ begin
            Post;
          end;
 
-    // RH Control
+    // RH_Control
     4: with modDados do
          with cdRH_Control do begin
            Edit;
@@ -479,7 +482,7 @@ begin
            Post;
          end;
 
-    // RH Custom
+    // RH_Custom
     5: with modDados do
          with cdRH_Custom do begin
            Edit;
@@ -789,15 +792,15 @@ begin
   frmMain.pOpen_UserGuidePDF('"3.5 Hotkeys (operational system)"');
 end;
 
-procedure TfrmSKH_Map_Dlg.btnKeystroke_ClearAllClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.btnKeys_Editor_ClearAllClick(Sender: TObject);
 var
   i: integer;
   
 begin
   pClear_Warnings;
 
-  // Editor
-  with modDados.cdEditor do begin
+  // Keys_Editor
+  with modDados.cdKeys_Editor do begin
     DisableControls;
     First;
 
@@ -812,12 +815,12 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.btnKeystroke_ClearClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.btnKeys_Editor_ClearClick(Sender: TObject);
 begin
   pClear_Warnings;
 
-  // Editor
-  with modDados.cdEditor do begin
+  // Keys_Editor
+  with modDados.cdKeys_Editor do begin
     Edit;
     FieldByName('Keystroke').Value:= '';
     Post;
@@ -838,7 +841,7 @@ begin
   pClear_Warnings;
 
   case pgRH.TabIndex of
-    // RH Send
+    // RH_Send
     0: begin
          with modDados.cdRH_Send do begin
            DisableControls;
@@ -855,7 +858,7 @@ begin
          end;
     end;
 
-    // RH Control
+    // RH_Control
     1: begin
          with modDados.cdRH_Control do begin
            DisableControls;
@@ -872,7 +875,7 @@ begin
          end;
     end;
 
-    // RH Custom
+    // RH_Custom
     2: begin
          with modDados.cdRH_Custom do begin
            DisableControls;
@@ -896,7 +899,7 @@ begin
   pClear_Warnings;
 
   case pgRH.TabIndex of
-    // RH Send
+    // RH_Send
     0: begin
          with modDados.cdRH_Send do begin
            Edit;
@@ -905,7 +908,7 @@ begin
          end;
     end;
 
-    // RH Control
+    // RH_Control
     1: begin
          with modDados.cdRH_Control do begin
            Edit;
@@ -914,7 +917,7 @@ begin
          end;
     end;
 
-    // RH Custom
+    // RH_Custom
     2: begin
          with modDados.cdRH_Custom do begin
            Edit;
@@ -950,22 +953,22 @@ begin
   bbtShortcuts_ManagerClick(nil);
 end;
 
-procedure TfrmSKH_Map_Dlg.dbgEditorDblClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.dbgKeys_EditorDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
 end;
 
-procedure TfrmSKH_Map_Dlg.dbgEditorEnter(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.dbgKeys_EditorEnter(Sender: TObject);
 begin
   pClear_Warnings;
 end;
 
-procedure TfrmSKH_Map_Dlg.dbgEditorTitleClick(Column: TColumn);
+procedure TfrmSKH_Map_Dlg.dbgKeys_EditorTitleClick(Column: TColumn);
 begin
   pClear_Warnings;
 
   with modDados do begin
-    cdEditor.IndexFieldNames:= Column.FieldName;
+    cdKeys_Editor.IndexFieldNames:= Column.FieldName;
   end;
 end;
 
@@ -1214,14 +1217,12 @@ begin
   pClear_Warnings;
 end;
 
-procedure TfrmSKH_Map_Dlg.edEditor_Filter_CommandChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edKeys_Editor_FilterChange(Sender: TObject);
 begin
   try
-    with modDados.cdEditor do begin
+    with modDados.cdKeys_Editor do begin
       Filtered:= False;
-      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Editor' + '%')) +
-               ' AND ' +
-               'UPPER(Command) Like ' + UpperCase(QuotedStr('%' + edEditor_Filter_Command.Text + '%'));
+      Filter:= 'UPPER(Command) Like ' + UpperCase(QuotedStr('%' + edKeys_Editor_Filter.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -1229,11 +1230,11 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edEditor_Search_CommandChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edKeys_Editor_SearchChange(Sender: TObject);
 begin
   pClear_Warnings;
 
-  with edEditor_Search_Command do begin
+  with edKeys_Editor_Search do begin
     if (Text = '') then begin
       Color     := clWindow;
       Font.Color:= clBlack;
@@ -1241,9 +1242,9 @@ begin
       Exit;
     end;
 
-    if (modDados.cdEditor.Locate('Command',
-                                  Text,
-                                  [loCaseInsensitive, loPartialKey]) = True) then begin
+    if (modDados.cdKeys_Editor.Locate('Command',
+                                      Text,
+                                      [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
       Font.Color:= clBlack;
       Font.Style:= [];
@@ -1323,29 +1324,43 @@ begin
   pgRH.TabIndex:= 0;
   Application.OnMessage:= pAppMessage;
 
-  // RH Send
   with modDados.cdRH_Send do begin
     SetLength(frmMain.ajavHK_Send,
               RecordCount);
     DisableControls;
     First;
     for i:= 0 to (RecordCount - 1) do begin
-      pCreateHotkey_Send(i,
-                         Fields[3].AsString);
+      pCreate_Hotkey_Send(i,
+                          Fields[3].AsString);
       Next;
     end;
     First;
     EnableControls;
   end;
 
-  // RH Control
+  // RH_Control
   with modDados.cdRH_Control do begin
     SetLength(frmMain.ajavHK_Control,
               RecordCount);
     DisableControls;
     First;
     for i:= 0 to (RecordCount - 1) do begin
-      pCreateHotkey_Control(i,
+      pCreate_Hotkey_Control(i,
+                             Fields[3].AsString);
+      Next;
+    end;
+    First;
+    EnableControls;
+  end;
+
+  // RH_Custom
+  with modDados.cdRH_Custom do begin
+    SetLength(frmMain.ajavHK_Custom,
+              RecordCount);
+    DisableControls;
+    First;
+    for i:= 0 to (RecordCount - 1) do begin
+      pCreate_Hotkey_Custom(i,
                             Fields[3].AsString);
       Next;
     end;
@@ -1353,23 +1368,8 @@ begin
     EnableControls;
   end;
 
-  // RH Custom
-  with modDados.cdRH_Custom do begin
-    SetLength(frmMain.ajavHK_Custom,
-              RecordCount);
-    DisableControls;
-    First;
-    for i:= 0 to (RecordCount - 1) do begin
-      pCreateHotkey_Custom(i,
-                           Fields[3].AsString);
-      Next;
-    end;
-    First;
-    EnableControls;
-  end;
-
-  // Editor
-  with modDados.cdEditor do begin
+  // Keys_Editor
+  with modDados.cdKeys_Editor do begin
     DisableControls;
     First;
     EnableControls;

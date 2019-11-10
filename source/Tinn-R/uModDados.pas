@@ -109,13 +109,13 @@ type
     cdRH_Custom_Caption: TStringField;
     cdRH_Custom_Shortcut: TStringField;
     dsRH_Custom: TDataSource;
-    cdEditor: TClientDataSet;
-    dsEditor: TDataSource;
-    cdEditor_Index: TSmallintField;
-    cdEditor_Group: TStringField;
-    cdEditor_Command: TStringField;
-    cdEditor_Key: TSmallintField;
-    cdEditor_Keystroke: TStringField;
+    cdKeys_Editor: TClientDataSet;
+    dsKeys_Editor: TDataSource;
+    cdKeys_Editor_Index: TSmallintField;
+    cdKeys_Editor_Group: TStringField;
+    cdKeys_Editor_Command: TStringField;
+    cdKeys_Editor_Key: TSmallintField;
+    cdKeys_Editor_Keystroke: TStringField;
 
     procedure cdCommentsAfterPost(DataSet: TDataSet);
     procedure cdCommentsAfterScroll(DataSet: TDataSet);
@@ -144,7 +144,7 @@ type
     procedure DataModuleDestroy(Sender: TObject);
     procedure cdRH_CustomNewRecord(DataSet: TDataSet);
     procedure cdRH_CustomPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
-    procedure cdEditorPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
+    procedure cdKeys_EditorPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 
   private
     { Private declarations }
@@ -427,7 +427,7 @@ var
 begin
   Result:= False;
 
-  with cdEditor do begin
+  with cdKeys_Editor do begin
     pTmp:= GetBookmark;
     DisableControls;
     bFiltered:= Filtered;
@@ -832,8 +832,8 @@ begin
     IndexName:= 'RH_Custom_Idx';
   end;
 
-  // Editor
-  with cdEditor do begin
+  // Keys_Editor
+  with cdKeys_Editor do begin
     Active   := False;
     FileName := frmMain.sPath_Data +
                 '\Editor.xml';
@@ -843,7 +843,7 @@ begin
     begin
       Name   := 'Editor_Idx';
       Fields := 'Command;Index';
-//      Fields := 'Index';
+//      Fields := 'Index;Command';
       Options:= [ixPrimary, ixUnique];
     end;
     IndexName:= 'Editor_Idx';
@@ -851,25 +851,25 @@ begin
 
   with frmMain do begin
     if not bDatabaseRestored then begin
-      cdRcard.SavePoint     := iRcard_SavePoint;
-      cdRmirrors.SavePoint  := iRmirrors_SavePoint;
-      cdCompletion.SavePoint:= iCompletion_SavePoint;
-      cdShortcuts.SavePoint := iShortcuts_SavePoint;
-      cdRH_Send.SavePoint   := iRH_Send_SavePoint;
-      cdRH_Control.SavePoint:= iRH_Control_SavePoint;
-      cdRH_Custom.SavePoint := iRH_Custom_SavePoint;
-      cdEditor.SavePoint    := iEditor_SavePoint;
+      cdRcard.SavePoint      := iRcard_SavePoint;
+      cdRmirrors.SavePoint   := iRmirrors_SavePoint;
+      cdCompletion.SavePoint := iCompletion_SavePoint;
+      cdShortcuts.SavePoint  := iShortcuts_SavePoint;
+      cdRH_Send.SavePoint    := iRH_Send_SavePoint;
+      cdRH_Control.SavePoint := iRH_Control_SavePoint;
+      cdRH_Custom.SavePoint  := iRH_Custom_SavePoint;
+      cdKeys_Editor.SavePoint:= iKeys_Editor_SavePoint;
     end
     else begin
-      iRcard_SavePoint     := cdRcard.SavePoint;
-      iRmirrors_SavePoint  := cdRmirrors.SavePoint;
-      iCompletion_SavePoint:= cdCompletion.SavePoint;
-      iShortcuts_SavePoint := cdShortcuts.SavePoint;
-      iRH_Send_SavePoint   := cdRH_Send.SavePoint;
-      iRH_Control_SavePoint:= cdRH_Control.SavePoint;
-      iRH_Custom_SavePoint := cdRH_Custom.SavePoint;
-      iEditor_SavePoint    := cdEditor.SavePoint;
-      bDatabaseRestored    := False
+      iRcard_SavePoint      := cdRcard.SavePoint;
+      iRmirrors_SavePoint   := cdRmirrors.SavePoint;
+      iCompletion_SavePoint := cdCompletion.SavePoint;
+      iShortcuts_SavePoint  := cdShortcuts.SavePoint;
+      iRH_Send_SavePoint    := cdRH_Send.SavePoint;
+      iRH_Control_SavePoint := cdRH_Control.SavePoint;
+      iRH_Custom_SavePoint  := cdRH_Custom.SavePoint;
+      iKeys_Editor_SavePoint:= cdKeys_Editor.SavePoint;
+      bDatabaseRestored     := False
     end;
   end;
 
@@ -908,7 +908,7 @@ begin
   with cdRH_Custom do
     Close; //Will also save to file whether any change was made!
 
-  with cdEditor do
+  with cdKeys_Editor do
     Close; //Will also save to file whether any change was made!
 
 end;
@@ -1045,7 +1045,7 @@ begin
   Action:= daAbort;
 end;
 
-procedure TmodDados.cdEditorPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
+procedure TmodDados.cdKeys_EditorPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 begin
   MessageDlg(DataSet.Fields.Fields[2].Value + #13 + #13 +
              'Key violation.' + #13 +

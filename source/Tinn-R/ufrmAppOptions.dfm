@@ -74,29 +74,28 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         006E0073002900510000000000000000000000FFFFFFFFFFFFFFFF0000000000
         0000001C44006F0063006B002F0046006C006F00610074002000280054006F00
         6F006C007300200061006E006400200052007400650072006D00290025000000
-        0000000000000000FFFFFFFFFFFFFFFF00000000040000000645006400690074
+        0000000000000000FFFFFFFFFFFFFFFF00000000030000000645006400690074
         006F007200270000000000000000000000FFFFFFFFFFFFFFFF00000000000000
         000744006900730070006C0061007900290000000000000000000000FFFFFFFF
-        FFFFFFFF00000000000000000841006400760061006E006300650064002D0000
-        000000000000000000FFFFFFFFFFFFFFFF00000000000000000A4B0065007900
-        7300740072006F006B0065007300310000000000000000000000FFFFFFFFFFFF
-        FFFF00000000000000000C45006E0063006F00640069006E0067002F0045004F
-        004C001B0000000000000000000000FFFFFFFFFFFFFFFF000000000700000001
-        52002B0000000000000000000000FFFFFFFFFFFFFFFF00000000000000000949
-        006E007300740061006C006C0065006400390000000000000000000000FFFFFF
-        FFFFFFFFFF0000000000000000105000610074006800200061006E0064002000
-        6F007000740069006F006E007300230000000000000000000000FFFFFFFFFFFF
-        FFFF000000000000000005420061007300690063002B00000000000000000000
-        00FFFFFFFFFFFFFFFF0000000000000000095200650073006F00750072006300
-        65007300230000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
-        0552007400650072006D002D0000000000000000000000FFFFFFFFFFFFFFFF00
-        000000000000000A52006700750069002F005000750054005400590029000000
-        0000000000000000FFFFFFFFFFFFFFFF0000000000000000085000610063006B
-        0061006700650073002D0000000000000000000000FFFFFFFFFFFFFFFF000000
-        00020000000A500072006F00630065007300730069006E0067002D0000000000
-        000000000000FFFFFFFFFFFFFFFF00000000000000000A43006F006E00760065
-        007200730069006F006E00230000000000000000000000FFFFFFFFFFFFFFFF00
-        00000000000000054C006100740065007800}
+        FFFFFFFF00000000000000000841006400760061006E00630065006400310000
+        000000000000000000FFFFFFFFFFFFFFFF00000000000000000C45006E006300
+        6F00640069006E0067002F0045004F004C001B0000000000000000000000FFFF
+        FFFFFFFFFFFF00000000070000000152002B0000000000000000000000FFFFFF
+        FFFFFFFFFF00000000000000000949006E007300740061006C006C0065006400
+        390000000000000000000000FFFFFFFFFFFFFFFF000000000000000010500061
+        0074006800200061006E00640020006F007000740069006F006E007300230000
+        000000000000000000FFFFFFFFFFFFFFFF000000000000000005420061007300
+        690063002B0000000000000000000000FFFFFFFFFFFFFFFF0000000000000000
+        095200650073006F0075007200630065007300230000000000000000000000FF
+        FFFFFFFFFFFFFF00000000000000000552007400650072006D002D0000000000
+        000000000000FFFFFFFFFFFFFFFF00000000000000000A52006700750069002F
+        0050007500540054005900290000000000000000000000FFFFFFFFFFFFFFFF00
+        00000000000000085000610063006B0061006700650073002D00000000000000
+        00000000FFFFFFFFFFFFFFFF00000000020000000A500072006F006300650073
+        00730069006E0067002D0000000000000000000000FFFFFFFFFFFFFFFF000000
+        00000000000A43006F006E00760065007200730069006F006E00230000000000
+        000000000000FFFFFFFFFFFFFFFF0000000000000000054C0061007400650078
+        00}
       LineColor = clScrollBar
       PageControl = pgApp
     end
@@ -105,7 +104,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
       Top = 1
       Width = 341
       Height = 487
-      ActivePage = tbsEditor_Keystrokes
+      ActivePage = tbsEditor_Encoding
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1262,7 +1261,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 0
             Items.Strings = (
               'Vertical Line'
@@ -1276,121 +1275,13 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 1
             Items.Strings = (
               'Vertical Line'
               'Horizontal Line'
               'Half Block'
               'Block')
-          end
-        end
-      end
-      object tbsEditor_Keystrokes: TTabSheet
-        Caption = 'Keystrokes'
-        ImageIndex = 23
-        TabVisible = False
-        object Label20: TLabel
-          Left = 0
-          Top = 374
-          Width = 127
-          Height = 13
-          Caption = '*   ec = execute command'
-          Enabled = False
-        end
-        object Label24: TLabel
-          Left = 0
-          Top = 390
-          Width = 226
-          Height = 13
-          Caption = '** Some may be overlaid by the main program!'
-          Enabled = False
-        end
-        object pnlCommands: TPanel
-          Left = 0
-          Top = 0
-          Width = 333
-          Height = 372
-          Align = alTop
-          BevelInner = bvRaised
-          BevelOuter = bvLowered
-          Caption = 'pnlCommands'
-          TabOrder = 0
-          object lvKeystrokes: TListView
-            AlignWithMargins = True
-            Left = 5
-            Top = 5
-            Width = 323
-            Height = 362
-            Align = alClient
-            BevelInner = bvNone
-            BorderStyle = bsNone
-            Color = 16250871
-            Columns = <
-              item
-                Caption = 'Command*'
-                Width = 160
-              end
-              item
-                Caption = 'Keystroke**'
-                Width = 147
-              end>
-            ColumnClick = False
-            HideSelection = False
-            ReadOnly = True
-            RowSelect = True
-            SortType = stText
-            TabOrder = 0
-            ViewStyle = vsReport
-            OnChanging = lvKeystrokesChanging
-            OnSelectItem = lvKeystrokesSelectItem
-          end
-        end
-        object btnUpdateKey: TButton
-          Left = 264
-          Top = 375
-          Width = 68
-          Height = 25
-          Caption = 'Update'
-          TabOrder = 1
-          OnClick = btnUpdateKeyClick
-        end
-        object gbKeyStrokes: TGroupBox
-          Left = 0
-          Top = 412
-          Width = 333
-          Height = 64
-          Caption = ' Options '
-          Ctl3D = False
-          ParentCtl3D = False
-          TabOrder = 2
-          object Label21: TLabel
-            Left = 43
-            Top = 17
-            Width = 51
-            Height = 13
-            Caption = 'Command:'
-          end
-          object Label22: TLabel
-            Left = 42
-            Top = 42
-            Width = 52
-            Height = 13
-            Caption = 'Keystroke:'
-          end
-          object cbCommands: TComboBox
-            Left = 100
-            Top = 14
-            Width = 185
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            ItemHeight = 13
-            Sorted = True
-            TabOrder = 0
-            OnExit = cbCommandsExit
-            OnKeyPress = cbCommandsKeyPress
-            OnKeyUp = cbCommandsKeyUp
           end
         end
       end

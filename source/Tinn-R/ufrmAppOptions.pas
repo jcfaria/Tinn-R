@@ -76,14 +76,12 @@ type
     btnGutterFont: TButton;
     btnMRUClear: TButton;
     btnRightEdge: TPanel;
-    btnUpdateKey: TButton;
     ButtonFace1: TMenuItem;
     ButtonShadow1: TMenuItem;
     ButtonText1: TMenuItem;
     CaptionText1: TMenuItem;
     cbAllNames: TCheckBox;
     cbComAutoDetect_Language: TCheckBox;
-    cbCommands: TComboBox;
     cbComPriority_Line: TCheckBox;
     cbConnectionBeepOnError: TCheckBox;
     cbGutterFont: TCheckBox;
@@ -173,7 +171,6 @@ type
     fdAppOptions: TFontDialog;
     gbControlling: TGroupBox;
     gbGutter: TGroupBox;
-    gbKeyStrokes: TGroupBox;
     gbOptions: TGroupBox;
     gbRightEdge: TGroupBox;
     gbSendR: TGroupBox;
@@ -213,10 +210,6 @@ type
     Label13: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
-    Label24: TLabel;
     Label8: TLabel;
     labFont: TLabel;
     lbDelay: TLabel;
@@ -238,7 +231,6 @@ type
     pgApp: TJvgPageControl;
     pGutterBack: TPanel;
     pmAppOptions: TPopupMenu;
-    pnlCommands: TPanel;
     pRightEdgeBack: TPanel;
     rdgDataCompletion_Pattern: TRadioGroup;
     rdgLineWraping: TRadioGroup;
@@ -267,7 +259,6 @@ type
     tbsR_Resources: TTabSheet;
     tbsEditor_Advanced: TTabSheet;
     tbsEditor_Display: TTabSheet;
-    tbsEditor_Keystrokes: TTabSheet;
     tbTransparency: TJvColorTrackBar;
     Window1: TMenuItem;
     WindowFrame1: TMenuItem;
@@ -292,7 +283,6 @@ type
     rgEOL: TRadioGroup;
     Edit1: TEdit;
     cbROpenExampleSelectedWord: TCheckBox;
-    lvKeystrokes: TListView;
     tbsR_Library_Packages: TTabSheet;
     Memo3: TMemo;
     tbsR_Installed: TTabSheet;
@@ -482,10 +472,6 @@ type
     procedure btnFontClick(Sender: TObject);
     procedure btnGutterFontClick(Sender: TObject);
     procedure btnMRUClearClick(Sender: TObject);
-    procedure btnUpdateKeyClick(Sender: TObject);
-    procedure cbCommandsExit(Sender: TObject);
-    procedure cbCommandsKeyPress(Sender: TObject; var Key: Char);
-    procedure cbCommandsKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cbRResourcesVisibleClick(Sender: TObject);
     procedure edLineWidthKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edMaxDeparseLengthKeyPress(Sender: TObject; var Key: Char);
@@ -496,8 +482,6 @@ type
     procedure imGeneralMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure imGutterMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure jtvAppOptionsChange(Sender: TObject; Node: TTreeNode);
-    procedure lvKeystrokesChanging(Sender: TObject; Item: TListItem; Change: TItemChange; var AllowChange: Boolean);
-    procedure lvKeystrokesSelectItem(Sender: TObject; Item: TListItem; Selected: Boolean);
     procedure pmColorClick(Sender: TObject);
     procedure rdgRArchitectureClick(Sender: TObject);
     procedure rdgRTCPIPTypeClick(Sender: TObject);
@@ -537,11 +521,8 @@ type
     bRArchitecture64: boolean;  // It is necessary here due to automatic changes in path according with user option.
                                 // The same variable name exists also as private in frmMain.
 
-    bExtended         : boolean;
     bFormVisible      : boolean;
     cpFrom            : TColorPopup;
-    eKeyShort         : TSynHotKey;
-    liSelected        : TListItem;
     seoAllUserCommands: TSynEditorOptionsAllUserCommands;
     seoUserCommand    : TSynEditorOptionsUserCommand;
 
@@ -551,10 +532,6 @@ type
     {$ENDIF}
 
     function fGetColor(Item: TMenuItem): TColor;
-    function fGetEmpty: boolean;
-    procedure pEditStrCallback(const S: string);
-    procedure pFillInKeystrokeInfo(seKeystroke: TSynEditKeystroke; liTmp: TListItem);
-    procedure pRemoveEmpty;
     procedure pShowAdjustedFont(lbl: TLabel; pan: TPanel);
     procedure pRAvailable_Set;
 
@@ -611,43 +588,6 @@ begin
     end;
     nTmp:= nTmp.GetNext;
   end;
-end;
-
-
-procedure TfrmApp_Options_Dlg.pRemoveEmpty;
-var
-  i: integer;
-
-begin
-  for i:= 0 to (lvKeystrokes.Items.Count - 1) do
-    if (lvKeystrokes.Items[i].Caption = '') or
-       (lvKeystrokes.Items[i].Caption = 'ecNone') then begin  // The empty!
-      lvKeystrokes.Items[i].Selected:= True;
-      TSynEditKeyStroke(lvKeystrokes.Selected.Data).Free;
-      lvKeystrokes.Selected.Delete;
-    end;
-end;
-
-
-function TfrmApp_Options_Dlg.fGetEmpty: boolean;
-var
-  i: integer;
-
-begin
-  Result:= False;
-
-  for i:= (lvKeystrokes.Items.Count - 1) downto 0 do
-    if (lvKeystrokes.Items[i].Caption = '') then begin  // The empty!
-      lvKeystrokes.Items[i].Selected:= true;
-      try
-        lvKeystrokes.Scroll(0,
-                            5000); // Force the latest to be visible
-      except
-        // TODO
-      end;
-      lvKeystrokes.SetFocus;
-      Result:= True;
-    end;
 end;
 
 procedure TfrmApp_Options_Dlg.btnFontClick(Sender: TObject);
@@ -871,46 +811,6 @@ begin
                      'Rterm.exe';
 end;
 
-procedure TfrmApp_Options_Dlg.btnUpdateKeyClick(Sender: TObject);
-var
-  iCmd: Integer;
-
-begin
-  if (lvKeystrokes.Selected = nil) then Exit;
-
-  if (cbCommands.ItemIndex < 0) then begin
-    if (pgApp.ActivePage = tbsEditor_Keystrokes) then fGetEmpty;
-    Exit;
-  end;
-
-  iCmd:= Integer(cbCommands.Items.Objects[cbCommands.ItemIndex]);
-
-//  // To debug only
-//  ShowMessage('Index: ' +
-//              IntToStr(liSelected.Index) +
-//              ' | ' +
-//              'Caption: ' +
-//              liSelected.Caption +
-//              ' | ' +
-//              'Command: ' +
-//              ShortcutToText(TSynEditKeyStroke(liSelected.Data).ShortCut)
-//              );
-//  Exit;
-
-  TSynEditKeyStroke(liSelected.Data).Command:= iCmd;
-
-  try  // After remove generate exception: I could not find the origin of (ocasional exception) yet!
-    if (eKeyShort.HotKey <> 0) then
-      TSynEditKeyStroke(liSelected.Data).ShortCut:= eKeyShort.HotKey;
-  except
-    // TODO
-  end;
-
-
-  pFillInKeystrokeInfo(TSynEditKeyStroke(liSelected.Data),
-                       lvKeystrokes.Selected);
-end;
-
 procedure TfrmApp_Options_Dlg.bbtLatexWaste_defaultClick(Sender: TObject);
 begin
   edLatexClearWaste.Text:= '.aux, .log, .lof, .lot, .bbl, .blg, .out, .toc';
@@ -990,42 +890,19 @@ begin
     B.Free;
   end;
 
-  eKeyShort:= TSynHotKey.Create(Self);
-  with eKeyShort do
-  begin
-    Parent     := gbKeystrokes;
-    Left       := cbCommands.Left;
-    Top        := cbCommands.Top +
-                  cbCommands.Height +
-                  5;
-    Width      := cbCommands.Width;
-    Height     := cbCommands.Height - 5;
-    HotKey     := 0;
-    InvalidKeys:= [];
-    Modifiers  := [];
-    TabOrder   := 1;
-    BorderStyle:= bsNone;
-  end;
-
   bFormVisible:= False;
 end;
 
 procedure TfrmApp_Options_Dlg.FormClose(Sender: TObject;
-                                   var Action: TCloseAction);
+                                        var Action: TCloseAction);
 begin
-  pRemoveEmpty;         // Remove any empty entry
-  //btnUpdateKey.Click;  // Update
-
   frmMain.sAppSelected:= jtvAppOptions.Selected.Text;
 end;
 
 procedure TfrmApp_Options_Dlg.FormShow(Sender: TObject);
-var
-  i         : Integer;
-  slCommands: TStringList;
-
+//var
   //vloNode : TTreeNode;
-
+  
 begin
 {
   vloNode := tvRAvailable.Items.Add(nil, '3.5.1');
@@ -1040,38 +917,10 @@ begin
                 frmMain.sAppSelected,
                 True);
 
-  // Editor Keystrokes
-  // We need to do this now because it will not have been assigned when create occurs
-  cbCommands.Items.Clear;
-
-  //Start the callback to add the strings
-  if bExtended then GetEditorCommandExtended(pEditStrCallback)
-               else GetEditorCommandValues(pEditStrCallBack);
-
-  // Now add in the user defined ones if they have any
-  if Assigned(seoAllUserCommands) then begin
-    slCommands:= TStringList.Create;
-    try
-      seoAllUserCommands(slCommands);
-
-      for i:= 0 to (slCommands.Count - 1) do
-        if Assigned(slCommands.Objects[i]) then cbCommands.Items.AddObject(slCommands[i],
-                                                                           slCommands.Objects[i]);
-    finally
-      FreeAndNil(slCommands);
-    end;
-  end;
-
-  if (lvKeystrokes.Items.Count > 0) then lvKeystrokes.Items[0].Selected:= True;
-
   with frmMain do begin
     // Files
     mFiles.Color     := clBGApplication;
     mFiles.Font.Color:= clFGApplication;
-
-    // Editor
-    lvKeystrokes.Color     := clBGApplication;
-    lvKeystrokes.Font.Color:= clFGApplication;
 
     // FormatR
     edFormatR.Color      := clBGApplication;
@@ -1378,53 +1227,6 @@ begin
   //tbsR.TabVisible:= cbRResourcesVisible.Checked;
 end;
 
-procedure TfrmApp_Options_Dlg.cbCommandsExit(Sender: TObject);
-var
-  iTmp: Integer;
-
-begin
-  iTmp:= cbCommands.Items.IndexOf(cbCommands.Text);
-  if (iTmp = -1) then begin
-    if bExtended then cbCommands.ItemIndex:= cbCommands.Items.IndexOf(ConvertCodeStringToExtended('ecNone'))
-                 else cbCommands.ItemIndex:= cbCommands.Items.IndexOf('ecNone');
-  end
-  else cbCommands.ItemIndex:= iTmp;  // Need to force it incase they just typed something in
-end;
-
-procedure TfrmApp_Options_Dlg.cbCommandsKeyPress(Sender: TObject;
-                                             var Key: Char);
-var
-  WorkStr: String;
-  i      : Integer;
-
-begin
-  // This would be better if componentized, but oh well...
-  WorkStr:= AnsiUppercase(Copy(cbCommands.Text,
-                               1,
-                               cbCommands.SelStart) +
-                          Key);
-  i:= 0;
-  while i < cbCommands.Items.Count do begin
-    if (Pos(WorkStr,
-            AnsiUppercase(cbCommands.Items[i])) = 1) then begin
-      cbCommands.Text:= cbCommands.Items[i];
-      cbCommands.SelStart:= length(WorkStr);
-      cbCommands.SelLength:= Length(cbCommands.Text) -
-                             cbCommands.SelStart;
-      Key:= #0;
-      break;
-    end
-    else inc(i);
-  end;
-end;
-
-procedure TfrmApp_Options_Dlg.cbCommandsKeyUp(Sender: TObject;
-                                          var Key: Word;
-                                          Shift: TShiftState);
-begin
-  if (Key = SYNEDIT_RETURN) then btnUpdateKey.Click;
-end;
-
 procedure TfrmApp_Options_Dlg.cbNotificationClick(Sender: TObject);
 begin
   with cbNotification do begin
@@ -1612,49 +1414,7 @@ begin
   lblURLTxt2tags.Cursor:= crHandPoint;
 end;
 
-procedure TfrmApp_Options_Dlg.lvKeystrokesChanging(Sender: TObject;
-                                                   Item: TListItem;
-                                                   Change: TItemChange;
-                                                   var AllowChange: Boolean);
-begin
-  if Visible then
-  begin
-    if (Item = liSelected) and
-       ((Item.Caption <> cbCommands.Text) or
-       (TSynEditKeystroke(Item.Data).ShortCut <> eKeyShort.HotKey)) then begin
-      btnUpdateKeyClick(btnUpdateKey);
-    end;
-  end;
-end;
-
-procedure TfrmApp_Options_Dlg.lvKeystrokesSelectItem(Sender: TObject;
-                                                     Item: TListItem;
-                                                     Selected: Boolean);
-begin
-  if (lvKeystrokes.Selected = nil) then Exit;
-
-  cbCommands.Text     := lvKeystrokes.Selected.Caption;
-  cbCommands.ItemIndex:= cbCommands.Items.IndexOf(lvKeystrokes.Selected.Caption);
-
-  eKeyShort.HotKey:= TSynEditKeyStroke(lvKeystrokes.Selected.Data).ShortCut;
-
-  liSelected:= Item;
-end;
-
-procedure TfrmApp_Options_Dlg.pEditStrCallback(const S: string);
-begin
-  //Add the Item
-  if bExtended then cbCommands.Items.AddObject(S,
-                                               TObject(ConvertExtendedToCommand(S)))
-               else cbCommands.Items.AddObject(S,
-                                               TObject(ConvertCodeStringToCommand(S)));
-end;
-
 procedure TfrmApp_Options_Dlg.pStatus_Editor(var coTmp: TSynEditorOC);
-var
-  i    : integer;
-  liTmp: TListItem;
-
 begin
   // Gutter
   ckGutterVisible.Checked        := coTmp.Gutter.Visible;
@@ -1717,23 +1477,6 @@ begin
   // Caret
   cInsertCaret.ItemIndex   := ord(coTmp.InsertCaret);
   cOverwriteCaret.ItemIndex:= ord(coTmp.OverwriteCaret);
-
-  // Keystrokes
-  lvKeystrokes.Items.BeginUpdate;
-  try
-    lvKeystrokes.Items.Clear;
-
-    for i:= 0 to (coTmp.Keystrokes.Count-1) do begin  // coTmp.Keystrokes.Count = 82
-      liTmp:= lvKeystrokes.Items.Add;
-
-      pFillInKeystrokeInfo(coTmp.Keystrokes.Items[i],
-                           liTmp);
-
-      liTmp.Data:= coTmp.Keystrokes.Items[i];
-  end;
-  finally
-    lvKeystrokes.Items.EndUpdate;
-  end;
 end;
 
 procedure TfrmApp_Options_Dlg.pNewStatus_Editor(var coTmp: TSynEditorOC);
@@ -1844,37 +1587,6 @@ begin
   pmAppOptions.Popup(P.X,
                      P.Y);
   btnGutterColor.BevelOuter:= bvNone;
-end;
-
-procedure TfrmApp_Options_Dlg.pFillInKeystrokeInfo(seKeystroke: TSynEditKeystroke;
-                                                   liTmp: TListItem);
-var
-  sTmp: string;
-
-begin
-  with seKeystroke do begin
-    if (Command >= ecUserFirst) then begin
-      sTmp:= 'User Command';
-
-      if Assigned(GetUserCommandNames) then GetUserCommandNames(Command,
-                                                                sTmp);
-    end
-    else begin
-      if bExtended then sTmp:= ConvertCodeStringToExtended(EditorCommandToCodeString(Command))
-                   else sTmp:= EditorCommandToCodeString(Command);
-    end;
-
-    // Caption
-    liTmp.Caption:= sTmp;
-
-    // Keystroke
-    liTmp.SubItems.Clear;
-    sTmp:= '';
-
-    if (Shortcut <> 0) then sTmp:= ShortCutToText(ShortCut);
-
-    liTmp.SubItems.Add(sTmp);
-  end;
 end;
 
 procedure TfrmApp_Options_Dlg.pmColorClick(Sender: TObject);

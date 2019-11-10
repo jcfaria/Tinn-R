@@ -131,10 +131,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -470,13 +466,9 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label20: TLabel
-        Left = 1
-        Top = 450
+        Left = 0
+        Top = 436
         Width = 127
         Height = 13
         Caption = '*   ec = execute command'
@@ -500,14 +492,14 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         BevelOuter = bvLowered
         Caption = 'pnlCommands'
         TabOrder = 0
-        object dbgEditor: TDBGrid
+        object dbgKeys_Editor: TDBGrid
           Left = 2
           Top = 107
           Width = 611
           Height = 324
           Align = alClient
           BorderStyle = bsNone
-          DataSource = modDados.dsEditor
+          DataSource = modDados.dsKeys_Editor
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -521,9 +513,9 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = [fsBold]
-          OnDblClick = dbgEditorDblClick
-          OnEnter = dbgEditorEnter
-          OnTitleClick = dbgEditorTitleClick
+          OnDblClick = dbgKeys_EditorDblClick
+          OnEnter = dbgKeys_EditorEnter
+          OnTitleClick = dbgKeys_EditorTitleClick
           Columns = <
             item
               Expanded = False
@@ -546,7 +538,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Top = 85
           Width = 611
           Height = 22
-          DataSource = modDados.dsEditor
+          DataSource = modDados.dsKeys_Editor
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alTop
           Flat = True
@@ -614,7 +606,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             ParentColor = False
             ParentFont = False
           end
-          object dbeEditor_Command: TDBEdit
+          object dbeKeys_Editor_Command: TDBEdit
             Left = 295
             Top = 58
             Width = 304
@@ -623,7 +615,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             BevelOuter = bvNone
             BorderStyle = bsNone
             DataField = 'Command'
-            DataSource = modDados.dsEditor
+            DataSource = modDados.dsKeys_Editor
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -633,7 +625,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             ReadOnly = True
             TabOrder = 3
           end
-          object edEditor_Search_Command: TEdit
+          object edKeys_Editor_Search: TEdit
             Left = 295
             Top = 40
             Width = 304
@@ -648,7 +640,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Font.Style = []
             ParentFont = False
             TabOrder = 1
-            OnChange = edEditor_Search_CommandChange
+            OnChange = edKeys_Editor_SearchChange
             OnEnter = edApp_Search_CaptionEnter
           end
           object dbeEditor_Group: TDBEdit
@@ -661,7 +653,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             BorderStyle = bsNone
             Ctl3D = False
             DataField = 'Group'
-            DataSource = modDados.dsEditor
+            DataSource = modDados.dsKeys_Editor
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -672,7 +664,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             ReadOnly = True
             TabOrder = 2
           end
-          object edEditor_Filter_Command: TEdit
+          object edKeys_Editor_Filter: TEdit
             Left = 295
             Top = 22
             Width = 304
@@ -687,36 +679,32 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            OnChange = edEditor_Filter_CommandChange
+            OnChange = edKeys_Editor_FilterChange
           end
         end
       end
-      object btnKeystroke_Clear: TButton
+      object btnKeys_Editor_Clear: TButton
         Left = 433
         Top = 443
         Width = 90
         Height = 25
         Caption = 'Clear (K)'
         TabOrder = 1
-        OnClick = btnKeystroke_ClearClick
+        OnClick = btnKeys_Editor_ClearClick
       end
-      object btnKeystroke_ClearAll: TButton
+      object btnKeys_Editor_ClearAll: TButton
         Left = 524
         Top = 443
         Width = 90
         Height = 25
         Caption = 'Clear all (K)'
         TabOrder = 2
-        OnClick = btnKeystroke_ClearAllClick
+        OnClick = btnKeys_Editor_ClearAllClick
       end
     end
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object rdgTinnRHotKeys: TRadioGroup
         Left = 4
         Top = 432
@@ -801,10 +789,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox1: TGroupBox
             Left = 0
             Top = 0
@@ -998,10 +982,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Control: TTabSheet
           Caption = 'Control'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox2: TGroupBox
             Left = 0
             Top = 0
@@ -1195,10 +1175,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Custom: TTabSheet
           Caption = 'Custom'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox3: TGroupBox
             Left = 0
             Top = 0
