@@ -91,7 +91,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsEditorKeystrokes
+    ActivePage = tbsRHotkeys
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -131,6 +131,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -769,7 +773,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
-          ExplicitHeight = 401
           object GroupBox1: TGroupBox
             Left = 0
             Top = 0
@@ -943,7 +946,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             OnDblClick = dbgRH_SendDblClick
             OnEnter = dbgShortcutsEnter
             OnKeyPress = dbgShortcutsKeyPress
-            OnTitleClick = dbgShortcutsTitleClick
+            OnTitleClick = dbgRH_SendTitleClick
             Columns = <
               item
                 Expanded = False
@@ -1116,7 +1119,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Left = 0
             Top = 105
             Width = 607
-            Height = 298
+            Height = 299
             Align = alClient
             BorderStyle = bsNone
             DataSource = modDados.dsRH_Control
@@ -1136,7 +1139,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             OnDblClick = dbgRH_ControlDblClick
             OnEnter = dbgShortcutsEnter
             OnKeyPress = dbgShortcutsKeyPress
-            OnTitleClick = dbgShortcutsTitleClick
+            OnTitleClick = dbgRH_ControlTitleClick
             Columns = <
               item
                 Expanded = False
@@ -1156,7 +1159,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Custom: TTabSheet
           Caption = 'Custom'
           ImageIndex = 2
-          ExplicitHeight = 401
           object GroupBox3: TGroupBox
             Left = 0
             Top = 0
@@ -1329,6 +1331,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             OnDblClick = dbgRH_CustomDblClick
             OnEnter = dbgRH_CustomEnter
             OnKeyPress = dbgRH_CustomKeyPress
+            OnTitleClick = dbgRH_CustomTitleClick
             Columns = <
               item
                 Expanded = False

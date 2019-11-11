@@ -75,8 +75,8 @@ FileStates [
 		OpenCount = 1
 		UseDefaultState = false
 		DisplayMode = continuous
-		ScrollPos = -1 -1
-		PageNo = 26
+		ScrollPos = -1 184
+		PageNo = 4
 		Zoom = fit page
 		Rotation = 0
 		WindowState = 2
@@ -110,7 +110,7 @@ FileStates [
 ]
 SessionData [
 ]
-TimeOfLastUpdateCheck = 30773214 -847203214
-OpenCountWeek = 460
+TimeOfLastUpdateCheck = 30775366 2024630657
+OpenCountWeek = 462
 
 # Settings after this line have not been recognized by the current version

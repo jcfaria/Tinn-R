@@ -152,6 +152,9 @@ type
     procedure dbgKeys_EditorDblClick(Sender: TObject);
     procedure bbtKeystrokes_RestoreDefaultClick(Sender: TObject);
     procedure bbtHotkeys_RestoreDefaultClick(Sender: TObject);
+    procedure dbgRH_SendTitleClick(Column: TColumn);
+    procedure dbgRH_ControlTitleClick(Column: TColumn);
+    procedure dbgRH_CustomTitleClick(Column: TColumn);
 
   private
     { Private declarations }
@@ -941,6 +944,15 @@ begin
   bbtShortcuts_ManagerClick(nil);
 end;
 
+procedure TfrmSKH_Map_Dlg.dbgRH_ControlTitleClick(Column: TColumn);
+begin
+  pClear_Warnings;
+
+  with modDados do begin
+    cdRH_Control.IndexFieldNames:= Column.FieldName;
+  end;
+end;
+
 procedure TfrmSKH_Map_Dlg.dbgRH_CustomDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
@@ -956,9 +968,27 @@ begin
   pClear_Warnings;
 end;
 
+procedure TfrmSKH_Map_Dlg.dbgRH_CustomTitleClick(Column: TColumn);
+begin
+  pClear_Warnings;
+
+  with modDados do begin
+    cdRH_Custom.IndexFieldNames:= Column.FieldName;
+  end;
+end;
+
 procedure TfrmSKH_Map_Dlg.dbgRH_SendDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
+end;
+
+procedure TfrmSKH_Map_Dlg.dbgRH_SendTitleClick(Column: TColumn);
+begin
+  pClear_Warnings;
+
+  with modDados do begin
+    cdRH_Send.IndexFieldNames:= Column.FieldName;
+  end;
 end;
 
 procedure TfrmSKH_Map_Dlg.dbgKeys_EditorDblClick(Sender: TObject);
