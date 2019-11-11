@@ -95,19 +95,16 @@ type
     cdRH_Send_Index: TIntegerField;
     cdRH_Send_Group: TStringField;
     cdRH_Send_Caption: TStringField;
-    cdRH_Send_Shortcut: TStringField;
     dsRH_Send: TDataSource;
     cdRH_Control: TClientDataSet;
     cdRH_Control_Index: TIntegerField;
     cdRH_Control_Group: TStringField;
     cdRH_Control_Caption: TStringField;
-    cdRH_Control_Shortcut: TStringField;
     dsRH_Control: TDataSource;
     cdRH_Custom: TClientDataSet;
     cdRH_Custom_Index: TIntegerField;
     cdRH_Custom_Group: TStringField;
     cdRH_Custom_Caption: TStringField;
-    cdRH_Custom_Shortcut: TStringField;
     dsRH_Custom: TDataSource;
     cdKeys_Editor: TClientDataSet;
     dsKeys_Editor: TDataSource;
@@ -116,6 +113,9 @@ type
     cdKeys_Editor_Command: TStringField;
     cdKeys_Editor_Key: TSmallintField;
     cdKeys_Editor_Keystroke: TStringField;
+    cdRH_Send_Hotkey: TStringField;
+    cdRH_Control_Hotkey: TStringField;
+    cdRH_Custom_Hotkey: TStringField;
 
     procedure cdCommentsAfterPost(DataSet: TDataSet);
     procedure cdCommentsAfterScroll(DataSet: TDataSet);
@@ -286,7 +286,7 @@ begin
                          '',
                          [rfReplaceAll]);
 
-    if (Locate('Shortcut',
+    if (Locate('HotKey',
                sTmp,
                []) = True) then begin
       Result:= True;
@@ -297,10 +297,10 @@ begin
 
       if bShortcut_Clear then begin
          Edit;
-         FieldByName('Shortcut').Value:= '';
+         FieldByName('HotKey').Value:= '';
          Post;
       end;
-    end; //if (Locate('Shortcut'...
+    end; //if (Locate('HotKey'...
 
     Filtered:= bFiltered;
 
@@ -337,7 +337,7 @@ begin
                          '',
                          [rfReplaceAll]);
 
-    if (Locate('Shortcut',
+    if (Locate('HotKey',
                sTmp,
                []) = True) then begin
       Result:= True;
@@ -348,10 +348,10 @@ begin
 
       if bShortcut_Clear then begin
          Edit;
-         FieldByName('Shortcut').Value:= '';
+         FieldByName('HotKey').Value:= '';
          Post;
       end;
-    end; //if (Locate('Shortcut'...
+    end; //if (Locate('HotKey'...
 
     Filtered:= bFiltered;
 
@@ -388,7 +388,7 @@ begin
                          '',
                          [rfReplaceAll]);
 
-    if (Locate('Shortcut',
+    if (Locate('HotKey',
                sTmp,
                []) = True) then begin
       Result:= True;
@@ -399,10 +399,10 @@ begin
 
       if bShortcut_Clear then begin
          Edit;
-         FieldByName('Shortcut').Value:= '';
+         FieldByName('HotKey').Value:= '';
          Post;
       end;
-    end; //if (Locate('Shortcut'...
+    end; //if (Locate('HotKey'...
 
     Filtered:= bFiltered;
 
@@ -843,7 +843,6 @@ begin
     begin
       Name   := 'Editor_Idx';
       Fields := 'Command;Index';
-//      Fields := 'Index;Command';
       Options:= [ixPrimary, ixUnique];
     end;
     IndexName:= 'Editor_Idx';
@@ -936,10 +935,10 @@ var
 
 begin
   i:= cdRH_Custom.RecordCount;
-  cdRH_Custom_Index.AsInteger:= i;
-  cdRH_Custom_Group.AsString   := 'Custom';
-  cdRH_Custom_Caption.AsString := 'str(%s)';
-  cdRH_Custom_Shortcut.AsString:= '';
+  cdRH_Custom_Index.AsInteger := i;
+  cdRH_Custom_Group.AsString  := 'Custom';
+  cdRH_Custom_Caption.AsString:= 'str(%s)';
+  cdRH_Custom_Hotkey.AsString := '';
 
   with frmMain.dlgSKH_Map.dbeRH_Custom_Caption do begin
     SetFocus;

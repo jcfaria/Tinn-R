@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Db, DBTables, Menus,
   Dialogs, ExtCtrls, Grids, JvgPage, EditAlign, StdCtrls, ComCtrls, DBGrids, JvExComCtrls, JvHotKey, DBCtrls, Mask,
-  JvComCtrls, Buttons, JvAppHotKey, JvDBControls, SynEditMiscClasses, inifiles, ufrmSKH_Manager;
+  JvComCtrls, Buttons, JvAppHotKey, JvDBControls, SynEditMiscClasses, inifiles, ufrmSKH_Manager, DBClient;
 
 type
   TfrmSKH_Map_Dlg = class(TForm)
@@ -17,7 +17,6 @@ type
     tbsRHotkeys: TTabSheet;
     rdgTinnRHotKeys: TRadioGroup;
     btnRH_Clear: TButton;
-    btnRH_ClearAll: TButton;
     Panel2: TPanel;
     JvDBNavigator2: TJvDBNavigator;
     gbKeystrokes: TGroupBox;
@@ -41,7 +40,6 @@ type
     bbtShortcuts_RestoreDefault: TBitBtn;
     Label20: TLabel;
     Label24: TLabel;
-    pnlCommands: TPanel;
     pgRH: TJvgPageControl;
     tbsRH_Send: TTabSheet;
     tbsRH_Custom: TTabSheet;
@@ -86,8 +84,9 @@ type
     Label16: TLabel;
     Label14: TLabel;
     Label17: TLabel;
-    dbgKeys_Editor: TDBGrid;
-    JvDBNavigator5: TJvDBNavigator;
+    btnKeys_Editor_Clear: TButton;
+    bbtKeystrokes_RestoreDefault: TBitBtn;
+    bbtHotkeys_RestoreDefault: TBitBtn;
     GroupBox4: TGroupBox;
     Label18: TLabel;
     Label19: TLabel;
@@ -97,8 +96,8 @@ type
     edKeys_Editor_Search: TEdit;
     dbeEditor_Group: TDBEdit;
     edKeys_Editor_Filter: TEdit;
-    btnKeys_Editor_Clear: TButton;
-    btnKeys_Editor_ClearAll: TButton;
+    JvDBNavigator5: TJvDBNavigator;
+    dbgKeys_Editor: TDBGrid;
     procedure FormShow(Sender: TObject);
     procedure dbgShortcutsDblClick(Sender: TObject);
     procedure lvKeystrokesDblClick(Sender: TObject);
@@ -130,7 +129,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure rdgTinnRHotKeysClick(Sender: TObject);
     procedure btnRH_ClearClick(Sender: TObject);
-    procedure btnRH_ClearAllClick(Sender: TObject);
     procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure pgRHChange(Sender: TObject);
     procedure pgSKHChange(Sender: TObject);
@@ -146,13 +144,14 @@ type
     procedure edKeys_Editor_FilterChange(Sender: TObject);
     procedure edKeys_Editor_SearchChange(Sender: TObject);
     procedure btnKeys_Editor_ClearClick(Sender: TObject);
-    procedure btnKeys_Editor_ClearAllClick(Sender: TObject);
     procedure dbgKeys_EditorTitleClick(Column: TColumn);
     procedure dbgKeys_EditorEnter(Sender: TObject);
     procedure dbgRH_SendDblClick(Sender: TObject);
     procedure dbgRH_ControlDblClick(Sender: TObject);
     procedure dbgRH_CustomDblClick(Sender: TObject);
     procedure dbgKeys_EditorDblClick(Sender: TObject);
+    procedure bbtKeystrokes_RestoreDefaultClick(Sender: TObject);
+    procedure bbtHotkeys_RestoreDefaultClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -212,7 +211,7 @@ begin
   with modDados.cdRH_Custom do begin
     DisableControls;
 
-    Locate('Shortcut',
+    Locate('HotKey',
            sRH_Custom,
            []);
 
@@ -236,7 +235,7 @@ begin
   with modDados.cdRH_Send do begin
     DisableControls;
 
-    Locate('Shortcut',
+    Locate('HotKey',
            sRH_Send,
            []);
 
@@ -297,7 +296,7 @@ begin
   with modDados.cdRH_Control do begin
     DisableControls;
 
-    Locate('Shortcut',
+    Locate('HotKey',
            sRH_Control,
            []);
 
@@ -423,6 +422,99 @@ begin
   end;
 end;
 
+procedure TfrmSKH_Map_Dlg.bbtHotkeys_RestoreDefaultClick(Sender: TObject);
+
+  procedure pRestore_Hotkey(var cdRH: TClientDataSet;
+                            sXML: string;
+                            var iHotkeys_SavePoint: integer);
+  begin
+    pClear_Warnings;
+    if not FileExists(frmMain.sFileDataOrigin) then Exit;
+
+    try
+      with cdRH do
+        Active:= False;
+
+      with frmMain.zipKit do begin
+        FileName     := frmMain.sFileDataOrigin;
+        BaseDirectory:= frmMain.sPath_Data;
+        ExtractFiles(sXML);
+        CloseArchive;
+      end;
+
+      with cdRH do begin
+        FileName:= frmMain.sPath_Data +
+                   '\' +
+                   sXML;
+        Active:= True;
+      end;
+
+      with frmMain do
+        iHotkeys_SavePoint:= cdRH.SavePoint;
+
+      MessageDlg('The original '+
+                 sXML +
+                 ' was successfully restored!',
+                 mtInformation,
+                 [MBOK],
+                 0);
+    except
+      // TODO!
+    end;
+  end;
+
+begin
+  case pgRH.TabIndex of
+    // RH_Send
+    0: pRestore_Hotkey(modDados.cdRH_Send,
+                       'RH_Send.xml',
+                       frmMain.iRH_Send_SavePoint);
+
+    // RH_Control
+    1: pRestore_Hotkey(modDados.cdRH_Control,
+                       'RH_Control.xml',
+                       frmMain.iRH_Control_SavePoint);
+
+    // RH_Custom
+    2: pRestore_Hotkey(modDados.cdRH_Custom,
+                       'RH_Custom.xml',
+                       frmMain.iRH_Custom_SavePoint);
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.bbtKeystrokes_RestoreDefaultClick(Sender: TObject);
+begin
+  pClear_Warnings;
+  if not FileExists(frmMain.sFileDataOrigin) then Exit;
+
+  try
+    with modDados.cdKeys_Editor do
+      Active:= False;
+
+    with frmMain.zipKit do begin
+      FileName     := frmMain.sFileDataOrigin;
+      BaseDirectory:= frmMain.sPath_Data;
+      ExtractFiles('Editor.xml');
+      CloseArchive;
+    end;
+
+    with modDados.cdKeys_Editor do begin
+      FileName:= frmMain.sPath_Data + '\Editor.xml';
+      Active  := True;
+    end;
+
+    with frmMain do
+      iKeys_Editor_SavePoint:= modDados.cdKeys_Editor.SavePoint;
+
+    MessageDlg('The original ''Editor.xml'' was successfully restored!',
+               mtInformation,
+               [MBOK],
+               0);
+  except
+    // TODO!
+  end;
+end;
+
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_CancelAllClick(Sender: TObject);
 begin
   pClear_Warnings;
@@ -470,7 +562,7 @@ begin
     3: with modDados do
          with cdRH_Send do begin
            Edit;
-           FieldByName('Shortcut').Value:= sSHK;
+           FieldByName('HotKey').Value:= sSHK;
            Post;
          end;
 
@@ -478,7 +570,7 @@ begin
     4: with modDados do
          with cdRH_Control do begin
            Edit;
-           FieldByName('Shortcut').Value:= sSHK;
+           FieldByName('HotKey').Value:= sSHK;
            Post;
          end;
 
@@ -486,7 +578,7 @@ begin
     5: with modDados do
          with cdRH_Custom do begin
            Edit;
-           FieldByName('Shortcut').Value:= sSHK;
+           FieldByName('HotKey').Value:= sSHK;
            Post;
          end;
   end;
@@ -792,29 +884,6 @@ begin
   frmMain.pOpen_UserGuidePDF('"3.5 Hotkeys (operational system)"');
 end;
 
-procedure TfrmSKH_Map_Dlg.btnKeys_Editor_ClearAllClick(Sender: TObject);
-var
-  i: integer;
-  
-begin
-  pClear_Warnings;
-
-  // Keys_Editor
-  with modDados.cdKeys_Editor do begin
-    DisableControls;
-    First;
-
-    for i:=1 to RecordCount do begin
-      Edit;
-      FieldByName('Keystroke').Value:= '';
-      Post;
-      Next;
-    end;
-
-    EnableControls;
-  end;
-end;
-
 procedure TfrmSKH_Map_Dlg.btnKeys_Editor_ClearClick(Sender: TObject);
 begin
   pClear_Warnings;
@@ -833,67 +902,6 @@ begin
     Insert;
 end;
 
-procedure TfrmSKH_Map_Dlg.btnRH_ClearAllClick(Sender: TObject);
-var
-  i: Integer;
-
-begin
-  pClear_Warnings;
-
-  case pgRH.TabIndex of
-    // RH_Send
-    0: begin
-         with modDados.cdRH_Send do begin
-           DisableControls;
-           First;
-
-           for i:=1 to RecordCount do begin
-             Edit;
-             FieldByName('Shortcut').Value:= '';
-             Post;
-             Next;
-           end;
-
-           EnableControls;
-         end;
-    end;
-
-    // RH_Control
-    1: begin
-         with modDados.cdRH_Control do begin
-           DisableControls;
-           First;
-
-           for i:=1 to RecordCount do begin
-             Edit;
-             FieldByName('Shortcut').Value:= '';
-             Post;
-             Next;
-           end;
-
-           EnableControls;
-         end;
-    end;
-
-    // RH_Custom
-    2: begin
-         with modDados.cdRH_Custom do begin
-           DisableControls;
-           First;
-
-           for i:=1 to RecordCount do begin
-             Edit;
-             FieldByName('Shortcut').Value:= '';
-             Post;
-             Next;
-           end;
-
-           EnableControls;
-         end;
-    end;
-  end;
-end;
-
 procedure TfrmSKH_Map_Dlg.btnRH_ClearClick(Sender: TObject);
 begin
   pClear_Warnings;
@@ -903,7 +911,7 @@ begin
     0: begin
          with modDados.cdRH_Send do begin
            Edit;
-           FieldByName('Shortcut').Value:= '';
+           FieldByName('HotKey').Value:= '';
            Post;
          end;
     end;
@@ -912,7 +920,7 @@ begin
     1: begin
          with modDados.cdRH_Control do begin
            Edit;
-           FieldByName('Shortcut').Value:= '';
+           FieldByName('HotKey').Value:= '';
            Post;
          end;
     end;
@@ -921,7 +929,7 @@ begin
     2: begin
          with modDados.cdRH_Custom do begin
            Edit;
-           FieldByName('Shortcut').Value:= '';
+           FieldByName('HotKey').Value:= '';
            Post;
          end;
     end;
@@ -1430,4 +1438,66 @@ begin
   bbtShortcuts_ManagerClick(nil);
 end;
 
+{
+procedure TfrmSKH_Map_Dlg.btnRH_ClearAllClick(Sender: TObject);
+var
+  i: Integer;
+
+begin
+  pClear_Warnings;
+
+  case pgRH.TabIndex of
+    // RH_Send
+    0: begin
+         with modDados.cdRH_Send do begin
+           DisableControls;
+           First;
+
+           for i:=1 to RecordCount do begin
+             Edit;
+             FieldByName('HotKey').Value:= '';
+             Post;
+             Next;
+           end;
+
+           EnableControls;
+         end;
+    end;
+
+    // RH_Control
+    1: begin
+         with modDados.cdRH_Control do begin
+           DisableControls;
+           First;
+
+           for i:=1 to RecordCount do begin
+             Edit;
+             FieldByName('HotKey').Value:= '';
+             Post;
+             Next;
+           end;
+
+           EnableControls;
+         end;
+    end;
+
+    // RH_Custom
+    2: begin
+         with modDados.cdRH_Custom do begin
+           DisableControls;
+           First;
+
+           for i:=1 to RecordCount do begin
+             Edit;
+             FieldByName('HotKey').Value:= '';
+             Post;
+             Next;
+           end;
+
+           EnableControls;
+         end;
+    end;
+  end;
+end;
+}
 end.

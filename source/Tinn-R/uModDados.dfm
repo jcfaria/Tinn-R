@@ -230,9 +230,10 @@ object modDados: TmodDados
       FieldName = 'Caption'
       Size = 50
     end
-    object cdRH_Send_Shortcut: TStringField
+    object cdRH_Send_Hotkey: TStringField
       Alignment = taRightJustify
-      FieldName = 'Shortcut'
+      FieldName = 'Hotkey'
+      Size = 50
     end
   end
   object dsRH_Send: TDataSource
@@ -257,9 +258,10 @@ object modDados: TmodDados
       FieldName = 'Caption'
       Size = 50
     end
-    object cdRH_Control_Shortcut: TStringField
+    object cdRH_Control_Hotkey: TStringField
       Alignment = taRightJustify
-      FieldName = 'Shortcut'
+      FieldName = 'Hotkey'
+      Size = 50
     end
   end
   object dsRH_Control: TDataSource
@@ -269,6 +271,7 @@ object modDados: TmodDados
   end
   object cdRH_Custom: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Custom.xml'
     Params = <>
     OnNewRecord = cdRH_CustomNewRecord
     OnPostError = cdRH_CustomPostError
@@ -286,9 +289,10 @@ object modDados: TmodDados
       FieldName = 'Caption'
       Size = 100
     end
-    object cdRH_Custom_Shortcut: TStringField
+    object cdRH_Custom_Hotkey: TStringField
       Alignment = taRightJustify
-      FieldName = 'Shortcut'
+      FieldName = 'Hotkey'
+      Size = 50
     end
   end
   object dsRH_Custom: TDataSource

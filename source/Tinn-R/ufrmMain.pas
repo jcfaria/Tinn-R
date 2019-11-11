@@ -3104,15 +3104,15 @@ begin
   sCurrentVersion_Cache     := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '5.02.03.00';
-  sCurrentVersion_Editor    := '5.04.01.04';  // Started from version '5.04.01.00'/beta
+  sCurrentVersion_Editor    := '5.04.03.00';  // Started from version '5.04.03.00'/beta
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.04.01.00';
   sCurrentVersion_Shortcuts := '5.04.01.02';
-  sCurrentVersion_RH_Send   := '5.04.01.00';  // Started from version '5.04.01.00'/beta
-  sCurrentVersion_RH_Control:= '5.04.01.01';  // Started from version '5.04.01.00'/beta
-  sCurrentVersion_RH_Custom := '5.04.01.00';  // Started from version '5.04.01.00'/beta
+  sCurrentVersion_RH_Send   := '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurrentVersion_RH_Control:= '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurrentVersion_RH_Custom := '5.04.03.00';  // Started from version '5.04.03.00'/beta
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -14362,7 +14362,7 @@ begin
     First;
     for i:= 0 to (RecordCount - 1) do begin
       with ajavHK_Send[i] do
-        HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+        HotKey:= TextToShortcut(FieldByName('HotKey').Value);
 
       Next;
     end;
@@ -14383,7 +14383,7 @@ begin
     First;
     for i:= 0 to (RecordCount - 1) do begin
       with ajavHK_Control[i] do
-        HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+        HotKey:= TextToShortcut(FieldByName('HotKey').Value);
 
       Next;
     end;
@@ -14404,7 +14404,7 @@ begin
     First;
     for i:= 0 to (RecordCount - 1) do begin
       with ajavHK_Custom[i] do
-        HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+        HotKey:= TextToShortcut(FieldByName('HotKey').Value);
 
       Next;
     end;
@@ -14427,10 +14427,11 @@ begin
   try
     // Initial status
     with dlgSKH_Map do begin
-      edApp_Filter_Group.Text   := '';
-      edApp_Search_Group.Text   := '';
-      edApp_Filter_Caption.Text := '';
+      edApp_Filter_Group.Text  := '';
+      edApp_Search_Group.Text  := '';
+      edApp_Filter_Caption.Text:= '';
       edApp_Search_Caption.Text:= '';
+
       pgSKH.ActivePage:= tbsAppShortcuts;
       pgRH.ActivePage := tbsRH_Send;
     end;

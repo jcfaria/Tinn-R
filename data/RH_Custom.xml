@@ -5,15 +5,15 @@
       <FIELD attrname="Index" fieldtype="i4"/>
       <FIELD attrname="Group" fieldtype="string" WIDTH="50"/>
       <FIELD attrname="Caption" fieldtype="string" WIDTH="100"/>
-      <FIELD attrname="Shortcut" fieldtype="string" WIDTH="50"/>
+      <FIELD attrname="Hotkey" fieldtype="string" WIDTH="50"/>
     </FIELDS>
     <PARAMS/>
   </METADATA>
   <ROWDATA>
-    <ROW Index="0" Group="Custom" Caption="search()" Shortcut="Ctrl+/"/>
-    <ROW Index="1" Group="Custom" Caption="head(%s)" Shortcut="Ctrl+Alt+H"/>
-    <ROW Index="2" Group="Custom" Caption="tail(%s)" Shortcut="Ctrl+Alt+T"/>
-    <ROW Index="3" Group="Custom" Caption="methods(%s)" Shortcut="Ctrl+M"/>
-    <ROW Index="4" Group="Custom" Caption="argsAnywhere(%s)" Shortcut="Shift+Ctrl+A"/>
+    <ROW Index="0" Group="Custom" Caption="search()" Hotkey="Ctrl+/"/>
+    <ROW Index="1" Group="Custom" Caption="head(%s)" Hotkey="Ctrl+Alt+H"/>
+    <ROW Index="2" Group="Custom" Caption="tail(%s)" Hotkey="Ctrl+Alt+T"/>
+    <ROW Index="3" Group="Custom" Caption="methods(%s)" Hotkey="Ctrl+M"/>
+    <ROW Index="4" Group="Custom" Caption="argsAnywhere(%s)" Hotkey="Shift+Ctrl+A"/>
   </ROWDATA>
 </DATAPACKET>

@@ -313,7 +313,7 @@ begin
            // RH_Send
            0: begin
                 with modDados.cdRH_Send do begin
-                  eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+                  eKeyShort.HotKey:= TextToShortcut(FieldByName('HotKey').Value);
 
                   with lbId_Cur do
                     Caption:= FieldValues['Group'] +
@@ -333,7 +333,7 @@ begin
            // RH_Control
            1: begin
                 with modDados.cdRH_Control do begin
-                  eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+                  eKeyShort.HotKey:= TextToShortcut(FieldByName('HotKey').Value);
 
                   with lbId_Cur do
                     Caption:= FieldValues['Group'] +
@@ -353,7 +353,7 @@ begin
            // RH_Custom
            2: begin
                 with modDados.cdRH_Custom do begin
-                  eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
+                  eKeyShort.HotKey:= TextToShortcut(FieldByName('HotKey').Value);
 
                   with lbId_Cur do
                     Caption:= FieldValues['Group'] +

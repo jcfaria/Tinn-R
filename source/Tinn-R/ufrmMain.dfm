@@ -1219,7 +1219,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
