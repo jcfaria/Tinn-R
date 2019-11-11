@@ -252,36 +252,34 @@ begin
     <ROWDATA>
       <ROW Index="0" Group="Send" Caption="File" Shortcut="Ctrl+."/>
       <ROW Index="1" Group="Send" Caption="Selection" Shortcut="Ctrl+,"/>
-      <ROW Index="2" Group="Send" Caption="Clipboard" Shortcut="Ctrl+;"/>
-      <ROW Index="3" Group="Send" Caption="Marked block" Shortcut="Ctrl+["/>
-      <ROW Index="4" Group="Send" Caption="Contiguous" Shortcut="Ctrl+]"/>
-      <ROW Index="5" Group="Send" Caption="Smart" Shortcut="Shift+Ctrl+\"/>
-      <ROW Index="6" Group="Send" Caption="Line" Shortcut="Ctrl+\"/>
-      <ROW Index="7" Group="Send" Caption="Current line to top" Shortcut="Ctrl+D"/>
-      <ROW Index="8" Group="Send" Caption="Lines to end page" Shortcut="Ctrl+D"/>
-      <ROW Index="9" Group="Send" Caption="Cursor to beggining line" Shortcut="Ctrl+D"/>
-      <ROW Index="10" Group="Send" Caption="Cursor to end line" Shortcut="Ctrl+D"/>
-      <ROW Index="11" Group="Send" Caption="Sweave (.Rnw)" Shortcut="Ctrl+D"/>
-      <ROW Index="12" Group="Send" Caption="Knit to LaTeX (.Rnw)" Shortcut="Ctrl+D"/>
-      <ROW Index="13" Group="Send" Caption="Knit to HTML (.Rmd, Rhtml)" Shortcut="Ctrl+D"/>
+      <ROW Index="2" Group="Send" Caption="Marked block" Shortcut="Ctrl+["/>
+      <ROW Index="3" Group="Send" Caption="Contiguous" Shortcut="Ctrl+]"/>
+      <ROW Index="4" Group="Send" Caption="Smart" Shortcut="Shift+Ctrl+\"/>
+      <ROW Index="5" Group="Send" Caption="Line" Shortcut="Ctrl+\"/>
+      <ROW Index="6" Group="Send" Caption="Current line to top" Shortcut="Ctrl+D"/>
+      <ROW Index="7" Group="Send" Caption="Lines to end page" Shortcut="Ctrl+D"/>
+      <ROW Index="8" Group="Send" Caption="Cursor to beggining line" Shortcut="Ctrl+D"/>
+      <ROW Index="9" Group="Send" Caption="Cursor to end line" Shortcut="Ctrl+D"/>
+      <ROW Index="10" Group="Send" Caption="Sweave (.Rnw)" Shortcut="Ctrl+D"/>
+      <ROW Index="11" Group="Send" Caption="Knit to LaTeX (.Rnw)" Shortcut="Ctrl+D"/>
+      <ROW Index="12" Group="Send" Caption="Knit to HTML (.Rmd, Rhtml)" Shortcut="Ctrl+D"/>
     </ROWDATA>
     *)
 
     case i of
         0: if actRSendFile.Enabled                   then actRSendFileExecute(nil);
         1: if actRSendSelection.Enabled              then actRSendSelectionExecute(nil);
-        2: if actRSendClipboard.Enabled              then actRSendClipboardExecute(nil);
-        3: if actRSendBlockMarked.Enabled            then actRSendBlockMarkedExecute(nil);
-        4: if actRSendContiguous.Enabled             then actRSendContiguousExecute(nil);
-        5: if actRSendSmart.Enabled                  then actRSendSmartExecute(nil);
-        6: if actRSendLine.Enabled                   then actRSendLineExecute(nil);
-        7: if actRCurrentLineToTop.Enabled           then actRCurrentLineToTopExecute(nil);
-        8: if actRSendLinesToEndPage.Enabled         then actRSendLinesToEndPageExecute(nil);
-        9: if actRSendCursorToBeginningLine.Enabled  then actRSendCursorToBeginningLineExecute(nil);
-       10: if actRSendCursorToEndLine.Enabled        then actRSendCursorToEndLineExecute(nil);
-       11: if actRSendSweave.Enabled                 then actRSendSweaveExecute(nil);
-       12: if actRSendKnitPdf.Enabled                then actRSendKnitPdfExecute(nil);
-       13: if actRSendKnitHtml.Enabled               then actRSendKnitHtmlExecute(nil);
+        2: if actRSendBlockMarked.Enabled            then actRSendBlockMarkedExecute(nil);
+        3: if actRSendContiguous.Enabled             then actRSendContiguousExecute(nil);
+        4: if actRSendSmart.Enabled                  then actRSendSmartExecute(nil);
+        5: if actRSendLine.Enabled                   then actRSendLineExecute(nil);
+        6: if actRCurrentLineToTop.Enabled           then actRCurrentLineToTopExecute(nil);
+        7: if actRSendLinesToEndPage.Enabled         then actRSendLinesToEndPageExecute(nil);
+        8: if actRSendCursorToBeginningLine.Enabled  then actRSendCursorToBeginningLineExecute(nil);
+        9: if actRSendCursorToEndLine.Enabled        then actRSendCursorToEndLineExecute(nil);
+       10: if actRSendSweave.Enabled                 then actRSendSweaveExecute(nil);
+       11: if actRSendKnitPdf.Enabled                then actRSendKnitPdfExecute(nil);
+       12: if actRSendKnitHtml.Enabled               then actRSendKnitHtmlExecute(nil);
     end;
 end;
 

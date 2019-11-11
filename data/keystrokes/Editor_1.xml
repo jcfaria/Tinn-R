@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATAPACKET Version="2.0">
+  <METADATA>
+    <FIELDS>
+      <FIELD attrname="Index" fieldtype="i2"/>
+      <FIELD attrname="Group" fieldtype="string" WIDTH="20"/>
+      <FIELD attrname="Command" fieldtype="string" WIDTH="50"/>
+      <FIELD attrname="Key" fieldtype="i2"/>
+      <FIELD attrname="Keystroke" fieldtype="string" WIDTH="20"/>
+    </FIELDS>
+    <PARAMS/>
+  </METADATA>
+  <ROWDATA>
+    <ROW Index="0" Command="ecUp" Key="38" Keystroke="Up"/>
+    <ROW Index="1" Command="ecSelUp" Key="38" Keystroke="Shift+Up"/>
+    <ROW Index="2" Command="ecScrollUp" Key="38" Keystroke="Ctrl+Up"/>
+    <ROW Index="3" Command="ecDown" Key="40" Keystroke="Down"/>
+    <ROW Index="4" Command="ecSelDown" Key="40" Keystroke="Shift+Down"/>
+    <ROW Index="5" Command="ecScrollDown" Key="40" Keystroke="Ctrl+Down"/>
+    <ROW Index="6" Command="ecLeft" Key="37" Keystroke="Left"/>
+    <ROW Index="7" Command="ecSelLeft" Key="37" Keystroke="Shift+Left"/>
+    <ROW Index="8" Command="ecWordLeft" Key="37" Keystroke="Ctrl+Left"/>
+    <ROW Index="9" Command="ecSelWordLeft" Key="37" Keystroke="Shift+Ctrl+Left"/>
+    <ROW Index="10" Command="ecRight" Key="39" Keystroke="Right"/>
+    <ROW Index="11" Command="ecSelRight" Key="39" Keystroke="Shift+Right"/>
+    <ROW Index="12" Command="ecWordRight" Key="39" Keystroke="Ctrl+Right"/>
+    <ROW Index="13" Command="ecSelWordRight" Key="39" Keystroke="Shift+Ctrl+Right"/>
+    <ROW Index="14" Command="ecPageDown" Key="34" Keystroke="PgDn"/>
+    <ROW Index="15" Command="ecSelPageDown" Key="34" Keystroke="Shift+PgDn"/>
+    <ROW Index="16" Command="ecPageBottom" Key="34" Keystroke="Ctrl+PgDn"/>
+    <ROW Index="17" Command="ecSelPageBottom" Key="34" Keystroke="Shift+Ctrl+PgDn"/>
+    <ROW Index="18" Command="ecPageUp" Key="33" Keystroke="PgUp"/>
+    <ROW Index="19" Command="ecSelPageUp" Key="33" Keystroke="Shift+PgUp"/>
+    <ROW Index="20" Command="ecPageTop" Key="33" Keystroke="Ctrl+PgUp"/>
+    <ROW Index="21" Command="ecSelPageTop" Key="33" Keystroke="Shift+Ctrl+PgUp"/>
+    <ROW Index="22" Command="ecLineStart" Key="36" Keystroke="Home"/>
+    <ROW Index="23" Command="ecSelLineStart" Key="36" Keystroke="Shift+Home"/>
+    <ROW Index="24" Command="ecEditorTop" Key="36" Keystroke="Ctrl+Home"/>
+    <ROW Index="25" Command="ecSelEditorTop" Key="36" Keystroke="Shift+Ctrl+Home"/>
+    <ROW Index="26" Command="ecLineEnd" Key="35" Keystroke="End"/>
+    <ROW Index="27" Command="ecSelLineEnd" Key="35" Keystroke="Shift+End"/>
+    <ROW Index="28" Command="ecEditorBottom" Key="35" Keystroke="Ctrl+End"/>
+    <ROW Index="29" Command="ecSelEditorBottom" Key="35" Keystroke="Shift+Ctrl+End"/>
+    <ROW Index="30" Command="ecToggleMode" Key="45" Keystroke="Ins"/>
+    <ROW Index="31" Command="ecCopy" Key="45" Keystroke="Ctrl+Ins"/>
+    <ROW Index="32" Command="ecCut" Key="46" Keystroke="Shift+Del"/>
+    <ROW Index="33" Command="ecPaste" Key="45" Keystroke="Shift+Ins"/>
+    <ROW Index="34" Command="ecDeleteChar" Key="46" Keystroke="Del"/>
+    <ROW Index="35" Command="ecDeleteLastChar" Key="8" Keystroke="BkSp"/>
+    <ROW Index="36" Command="ecDeleteLastChar" Key="8" Keystroke="Shift+BkSp"/>
+    <ROW Index="37" Command="ecDeleteLastWord" Key="8" Keystroke="Ctrl+BkSp"/>
+    <ROW Index="38" Command="ecUndo" Key="8" Keystroke="Alt+BkSp"/>
+    <ROW Index="39" Command="ecRedo" Key="8" Keystroke="Shift+Alt+BkSp"/>
+    <ROW Index="40" Command="ecLineBreak" Key="13" Keystroke="Enter"/>
+    <ROW Index="41" Command="ecLineBreak" Key="13" Keystroke="Shift+Enter"/>
+    <ROW Index="42" Command="ecTab" Key="9" Keystroke="Tab"/>
+    <ROW Index="43" Command="ecShiftTab" Key="9" Keystroke="Shift+Tab"/>
+    <ROW Index="44" Command="ecContextHelp" Key="112" Keystroke="F1"/>
+    <ROW Index="45" Command="ecSelectAll" Key="65" Keystroke="Ctrl+A"/>
+    <ROW Index="46" Command="ecCopy" Key="67" Keystroke="Ctrl+C"/>
+    <ROW Index="47" Command="ecPaste" Key="86" Keystroke="Ctrl+V"/>
+    <ROW Index="48" Command="ecCut" Key="88" Keystroke="Ctrl+X"/>
+    <ROW Index="49" Command="ecBlockIndent" Key="73" Keystroke="Shift+Ctrl+I"/>
+    <ROW Index="50" Command="ecBlockUnindent" Key="85" Keystroke="Shift+Ctrl+U"/>
+    <ROW Index="51" Command="ecLineBreak" Key="77" Keystroke="Ctrl+M"/>
+    <ROW Index="52" Command="ecInsertLine" Key="78" Keystroke="Ctrl+N"/>
+    <ROW Index="53" Command="ecDeleteWord" Key="84" Keystroke="Ctrl+T"/>
+    <ROW Index="54" Command="ecDeleteLine" Key="89" Keystroke="Ctrl+Y"/>
+    <ROW Index="55" Command="ecDeleteEOL" Key="89" Keystroke="Shift+Ctrl+Y"/>
+    <ROW Index="56" Command="ecUndo" Key="90" Keystroke="Ctrl+Z"/>
+    <ROW Index="57" Command="ecRedo" Key="90" Keystroke="Shift+Ctrl+Z"/>
+    <ROW Index="58" Command="ecGotoMarker0" Key="48" Keystroke="Ctrl+0"/>
+    <ROW Index="59" Command="ecGotoMarker1" Key="49" Keystroke="Ctrl+1"/>
+    <ROW Index="60" Command="ecGotoMarker2" Key="50" Keystroke="Ctrl+2"/>
+    <ROW Index="61" Command="ecGotoMarker3" Key="51" Keystroke="Ctrl+3"/>
+    <ROW Index="62" Command="ecGotoMarker4" Key="52" Keystroke="Ctrl+4"/>
+    <ROW Index="63" Command="ecGotoMarker5" Key="53" Keystroke="Ctrl+5"/>
+    <ROW Index="64" Command="ecGotoMarker6" Key="54" Keystroke="Ctrl+6"/>
+    <ROW Index="65" Command="ecGotoMarker7" Key="55" Keystroke="Ctrl+7"/>
+    <ROW Index="66" Command="ecGotoMarker8" Key="56" Keystroke="Ctrl+8"/>
+    <ROW Index="67" Command="ecGotoMarker9" Key="57" Keystroke="Ctrl+9"/>
+    <ROW Index="68" Command="ecSetMarker0" Key="48" Keystroke="Shift+Ctrl+0"/>
+    <ROW Index="69" Command="ecSetMarker1" Key="49" Keystroke="Shift+Ctrl+1"/>
+    <ROW Index="70" Command="ecSetMarker2" Key="50" Keystroke="Shift+Ctrl+2"/>
+    <ROW Index="71" Command="ecSetMarker3" Key="51" Keystroke="Shift+Ctrl+3"/>
+    <ROW Index="72" Command="ecSetMarker4" Key="52" Keystroke="Shift+Ctrl+4"/>
+    <ROW Index="73" Command="ecSetMarker5" Key="53" Keystroke="Shift+Ctrl+5"/>
+    <ROW Index="74" Command="ecSetMarker6" Key="54" Keystroke="Shift+Ctrl+6"/>
+    <ROW Index="75" Command="ecSetMarker7" Key="55" Keystroke="Shift+Ctrl+7"/>
+    <ROW Index="76" Command="ecSetMarker8" Key="56" Keystroke="Shift+Ctrl+8"/>
+    <ROW Index="77" Command="ecSetMarker9" Key="57" Keystroke="Shift+Ctrl+9"/>
+    <ROW Index="78" Command="ecNormalSelect" Key="78" Keystroke="Shift+Ctrl+N"/>
+    <ROW Index="79" Command="ecColumnSelect" Key="67" Keystroke="Shift+Ctrl+C"/>
+    <ROW Index="80" Command="ecLineSelect" Key="76" Keystroke="Shift+Ctrl+L"/>
+    <ROW Index="81" Command="ecMatchBracket" Key="66" Keystroke="Shift+Ctrl+B"/>
+  </ROWDATA>
+</DATAPACKET>
+    

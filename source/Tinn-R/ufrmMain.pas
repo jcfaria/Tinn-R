@@ -1382,8 +1382,8 @@ type
     pmemIOClear: TMenuItem;
     pmemIOClearIO: TMenuItem;
     pmemIOClearIOLog: TMenuItem;
-    pmemIOCopy: TMenuItem;
-    pmemIOCut: TMenuItem;
+    pmenIO_Copy: TMenuItem;
+    pmenIO_Cut: TMenuItem;
     pmemIOEdit: TMenuItem;
     pmemIOFile: TMenuItem;
     pmemIOFilePrint: TMenuItem;
@@ -1399,9 +1399,9 @@ type
     pmemIOHistoryPrior: TMenuItem;
     pmemIOHistorySave: TMenuItem;
     pmemIOLineWrap: TMenuItem;
-    pmemIOPaste: TMenuItem;
-    pmemIORedo: TMenuItem;
-    pmemIOSelectAll: TMenuItem;
+    pmenIO_Paste: TMenuItem;
+    pmenIO_Redo: TMenuItem;
+    pmenIO_SelectAll: TMenuItem;
     pmemIOSetFocusConsole: TMenuItem;
     pmemIOSetFocusEditor: TMenuItem;
     pmemIOSetFocusLog: TMenuItem;
@@ -1417,7 +1417,7 @@ type
     pmemIOSplitVertical: TMenuItem;
     pmemIOSyntaxR: TMenuItem;
     pmemIOSyntaxText: TMenuItem;
-    pmemIOUndo: TMenuItem;
+    pmenIO_Undo: TMenuItem;
     pmemIOWorkspace: TMenuItem;
     pmemIOWorkspaceLoad: TMenuItem;
     pmemIOWorkspaceSave: TMenuItem;
@@ -1425,12 +1425,12 @@ type
     pmemLogClearIOLog: TMenuItem;
     pmemLogClearLog: TMenuItem;
     pmemLogEdit: TMenuItem;
-    pmemLogEditCopy: TMenuItem;
-    pmemLogEditCut: TMenuItem;
-    pmemLogEditPaste: TMenuItem;
-    pmemLogEditRedo: TMenuItem;
-    pmemLogEditSelectAll: TMenuItem;
-    pmemLogEditUndo: TMenuItem;
+    pmenLOG_Copy: TMenuItem;
+    pmenLOG_Cut: TMenuItem;
+    pmenLOG_Paste: TMenuItem;
+    pmenLOG_Redo: TMenuItem;
+    pmenLOG_SelectAll: TMenuItem;
+    pmenLOG_Undo: TMenuItem;
     pmemLogFile: TMenuItem;
     pmemLogFilePrint: TMenuItem;
     pmemLogFileSave: TMenuItem;
@@ -1484,10 +1484,10 @@ type
     pmenEditorCloseOthers: TMenuItem;
     pmenEditorCloseRight: TMenuItem;
     pmenEditorComment: TMenuItem;
-    pmenEditorCopy: TMenuItem;
+    pmenEdit_Copy: TMenuItem;
     pmenEditorCopyFormatted: TMenuItem;
     pmenEditorCount: TMenuItem;
-    pmenEditorCut: TMenuItem;
+    pmenEdit_Cut: TMenuItem;
     pmenEditorEdit: TMenuItem;
     pmenEditorFile: TMenuItem;
     pmenEditorFont: TMenuItem;
@@ -1498,15 +1498,15 @@ type
     pmenEditorFormatSelection: TMenuItem;
     pmenEditorFormatWord: TMenuItem;
     pmenEditorLineWrap: TMenuItem;
-    pmenEditorPaste: TMenuItem;
+    pmenEdit_Paste: TMenuItem;
     pmenEditorPrint: TMenuItem;
     pmenEditorReadOnly: TMenuItem;
-    pmenEditorRedo: TMenuItem;
+    pmenEdit_Redo: TMenuItem;
     pmenEditorReload: TMenuItem;
     pmenEditorSave: TMenuItem;
     pmenEditorSaveAll: TMenuItem;
     pmenEditorSaveAs: TMenuItem;
-    pmenEditorSelectAll: TMenuItem;
+    pmenEdit_SelectAll: TMenuItem;
     pmenEditorSort: TMenuItem;
     pmenEditorSortDate: TMenuItem;
     pmenEditorSortNumber: TMenuItem;
@@ -1514,7 +1514,7 @@ type
     pmenEditorSpell: TMenuItem;
     pmenEditorUncommentAll: TMenuItem;
     pmenEditorUncommentFirsts: TMenuItem;
-    pmenEditorUndo: TMenuItem;
+    pmenEdit_Undo: TMenuItem;
     pmenFilePath: TMenuItem;
     pmenFilePathUnix: TMenuItem;
     pmenFilePathWindows: TMenuItem;
@@ -1738,7 +1738,6 @@ type
     TBItem23: TTBItem;
     TBItem24: TTBItem;
     TBItem25: TTBItem;
-    TBItem26: TTBItem;
     TBItem27: TTBItem;
     TBItem28: TTBItem;
     TBItem3: TTBItem;
@@ -1974,6 +1973,14 @@ type
     TBItem68: TTBItem;
     actSKH_map: TAction;
     Loadstream1: TMenuItem;
+    menEdit_Undo: TMenuItem;
+    menEdit_Redo: TMenuItem;
+    N12: TMenuItem;
+    N15: TMenuItem;
+    menEdit_Copy: TMenuItem;
+    menEdit_Paste: TMenuItem;
+    menEdit_Cut: TMenuItem;
+    menEdit_Selectall: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2199,7 +2206,6 @@ type
     procedure actRmirrorsSetReposExecute(Sender: TObject);
     procedure actRmirrorsUpdateExecute(Sender: TObject);
     procedure actRSendBlockMarkedExecute(Sender: TObject);
-    procedure actRSendClipboardExecute(Sender: TObject);
     procedure actRSendContiguousExecute(Sender: TObject);
     procedure actRSendCursorToBeginningLineExecute(Sender: TObject);
     procedure actRSendCursorToEndLineExecute(Sender: TObject);
@@ -2516,6 +2522,24 @@ type
     procedure Loadstream1Click(Sender: TObject);
     procedure btUndoClick(Sender: TObject);
     procedure btRedoClick(Sender: TObject);
+    procedure menEdit_CutClick(Sender: TObject);
+    procedure menEdit_UndoClick(Sender: TObject);
+    procedure menEdit_RedoClick(Sender: TObject);
+    procedure menEdit_CopyClick(Sender: TObject);
+    procedure menEdit_PasteClick(Sender: TObject);
+    procedure menEdit_SelectallClick(Sender: TObject);
+    procedure pmenEdit_UndoClick(Sender: TObject);
+    procedure pmenEdit_RedoClick(Sender: TObject);
+    procedure pmenEdit_CopyClick(Sender: TObject);
+    procedure pmenEdit_CutClick(Sender: TObject);
+    procedure pmenEdit_PasteClick(Sender: TObject);
+    procedure pmenEdit_SelectAllClick(Sender: TObject);
+    procedure pmenIO_UndoClick(Sender: TObject);
+    procedure pmenIO_RedoClick(Sender: TObject);
+    procedure pmenIO_CopyClick(Sender: TObject);
+    procedure pmenIO_CutClick(Sender: TObject);
+    procedure pmenIO_PasteClick(Sender: TObject);
+    procedure pmenIO_SelectAllClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -2807,6 +2831,7 @@ type
     procedure pUpdate_Hotkey_Send;
     procedure pUpdate_Hotkey_Control;
     procedure pUpdate_Hotkey_Custom;
+    procedure pUpdate_Edit_Shortcuts;
 
 
     // From public
@@ -2977,6 +3002,7 @@ type
     procedure pOpen_UserGuidePDF(sWhere: string);
     procedure pPrint_Message(sInstruction: string; bNewLine: boolean; sSignal: string = '> ');
     procedure pRemoveTab(sTabCaption: string);
+    procedure pSend_Clipboard_ToRterm;
     procedure pSend_Rcustom(sRC: string);
     procedure pSend_ToConsole(sTmp: string);
     procedure pSet_FileSize_StatusBar(sFileName: string);
@@ -2989,6 +3015,7 @@ type
     procedure pUpdate_CursorPos(Sender: TSynEdit);
     procedure pUpdate_HexViewer;
     procedure pUpdate_MRU(var miItem: TMenuItem; sFileName: string);
+
 
 end;
 
@@ -3104,13 +3131,13 @@ begin
   sCurrentVersion_Cache     := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurrentVersion_Comments  := '3.00.02.01';
   sCurrentVersion_Completion:= '5.02.03.00';
-  sCurrentVersion_Editor    := '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurrentVersion_Editor    := '5.04.03.01';  // Started from version '5.04.03.00'/beta
   sCurrentVersion_Latex     := '2.01.01.01';
   sCurrentVersion_Project   := '5.03.05.01';
   sCurrentVersion_Rcard     := '2.03.00.00';
   sCurrentVersion_Rmirrors  := '5.04.01.00';
   sCurrentVersion_Shortcuts := '5.04.01.02';
-  sCurrentVersion_RH_Send   := '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurrentVersion_RH_Send   := '5.04.03.01';  // Started from version '5.04.03.00'/beta
   sCurrentVersion_RH_Control:= '5.04.03.00';  // Started from version '5.04.03.00'/beta
   sCurrentVersion_RH_Custom := '5.04.03.00';  // Started from version '5.04.03.00'/beta
 
@@ -3806,8 +3833,8 @@ begin
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
     WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
-    WriteInteger('App', 'iSynLog2.Height', frmRterm.iSynLog2Height);
-    WriteInteger('App', 'iSynLog2.Width', frmRterm.iSynLog2Width);
+    WriteInteger('App', 'iSynLOG2.Height', frmRterm.iSynLOG2Height);
+    WriteInteger('App', 'iSynLOG2.Width', frmRterm.iSynLOG2Width);
 
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
@@ -4339,8 +4366,8 @@ begin
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
     WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
-    WriteInteger('App', 'iSynLog2.Height', frmRterm.iSynLog2Height);
-    WriteInteger('App', 'iSynLog2.Width', frmRterm.iSynLog2Width);
+    WriteInteger('App', 'iSynLOG2.Height', frmRterm.iSynLOG2Height);
+    WriteInteger('App', 'iSynLOG2.Width', frmRterm.iSynLOG2Width);
 
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
@@ -5238,14 +5265,14 @@ begin
   bRtermHorizontal       := ifTinn.ReadBool('App', 'bRtermHorizontal', True);
   bRtermSingle           := ifTinn.ReadBool('App', 'bRtermSingle', True);
   frmRterm.iSize         := ifTinn.ReadInteger('App', 'iRterm.Size', 480);
-  frmRterm.iSynLog2Height:= ifTinn.ReadInteger('App', 'iSynLog2.Height', 90);
-  frmRterm.iSynLog2Width := ifTinn.ReadInteger('App', 'iSynLog2.Width', 140);
+  frmRterm.iSynLOG2Height:= ifTinn.ReadInteger('App', 'iSynLOG2.Height', 90);
+  frmRterm.iSynLOG2Width := ifTinn.ReadInteger('App', 'iSynLOG2.Width', 140);
   iIO_Syntax             := ifTinn.ReadInteger('App', 'iIO_Syntax', 2);   // .R
   iLOG_Syntax            := ifTinn.ReadInteger('App', 'iLOG_Syntax', 0);  // .txt
 
   with frmRterm do begin
     synIO.WordWrap := bIOLineWrap;
-    synLog.WordWrap:= bLogLineWrap;
+    synLOG.WordWrap:= bLogLineWrap;
   end;
 
   actRtermIOLineWrap.Checked := bIOLineWrap;
@@ -7689,7 +7716,7 @@ begin
     frmSplash.pb.Position:= 8;
 
     pSet_Shortcuts;
-    pCheck_REcho;  // Must be after pSet_Shortcuts!
+    pCheck_Recho;  // Must be after pSet_Shortcuts!
 
     frmTools.tbsLatex.TabVisible:= actLatexVisible.Checked;
     pCheck_Latex(False);
@@ -7900,6 +7927,7 @@ begin
     First;
     for i:=0 to (RecordCount - 1) do begin
       with coEditor.Keystrokes.Items[i] do begin
+// To debug only
 //        ShowMessage('Editor.xml: ' +
 //                    FieldByName('Command').Value +
 //                    ' | ' +
@@ -9399,8 +9427,8 @@ begin
     2: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2;
     3: seTmp:= frmRterm.synIO;
     4: with frmRterm do
-         if Assigned(synLog2) then seTmp:= synLog2
-                              else seTmp:= synLog;
+         if Assigned(synLOG2) then seTmp:= synLOG2
+                              else seTmp:= synLOG;
   end;
 
   with seTmp do
@@ -9420,8 +9448,8 @@ begin
     2: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2;
     3: seTmp:= frmRterm.synIO;
     4: with frmRterm do
-         if Assigned(synLog2) then seTmp:= synLog2
-                              else seTmp:= synLog;
+         if Assigned(synLOG2) then seTmp:= synLOG2
+                              else seTmp:= synLOG;
   end;
 
   with seTmp do
@@ -11453,8 +11481,8 @@ begin
                                             else seTmp:= (Self.MDIChildren[i] as TfrmEditor).synEditor2;
     3: seTmp:= frmRterm.synIO;
     4: with frmRterm do
-         if Assigned(synLog2) then seTmp:= synLog2
-                              else seTmp:= synLog;
+         if Assigned(synLOG2) then seTmp:= synLOG2
+                              else seTmp:= synLOG;
   end;
 
   Result:= seTmp;
@@ -12987,22 +13015,22 @@ begin
   if (not bUpdate_FontSize) then begin
     i:= frmRterm.synIO.Font.Size;
 
-    if Assigned(frmRterm.synLog2) then j:= frmRterm.synLog2.Font.Size
-                                  else j:= frmRterm.synLog.Font.Size;
+    if Assigned(frmRterm.synLOG2) then j:= frmRterm.synLOG2.Font.Size
+                                  else j:= frmRterm.synLOG.Font.Size;
   end;
 
   with coEditor do begin
     AssignTo(frmRterm.synIO);
 
-    if Assigned(frmRterm.synLog2) then AssignTo(frmRterm.synLog2)
-                                  else AssignTo(frmRterm.synLog);
+    if Assigned(frmRterm.synLOG2) then AssignTo(frmRterm.synLOG2)
+                                  else AssignTo(frmRterm.synLOG);
   end;
 
   if (not bUpdate_FontSize) then begin
     frmRterm.synIO.Font.Size:= i;
 
-    if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Font.Size:= j
-                                  else frmRterm.synLog.Font.Size:= j;
+    if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Font.Size:= j
+                                  else frmRterm.synLOG.Font.Size:= j;
   end;
 
   // Not all options of the editor are suitable to synIO
@@ -13022,8 +13050,8 @@ begin
     RightEdge:= 0;
   end;
 
-  // Not all options of the editor are suitable to synLog
-  with frmRterm.synLog do begin
+  // Not all options of the editor are suitable to synLOG
+  with frmRterm.synLOG do begin
     // Gutter
     Gutter.ShowLineNumbers:= False;  // Fixed vaule!
     Gutter.Width          := 15;     // Fixed vaule!
@@ -13038,9 +13066,9 @@ begin
     RightEdge:= 0;
   end;
 
-  // Not all options of the editor are suitable to synLog2
-  if Assigned(frmRterm.synLog2) then
-    with frmRterm.synLog2 do begin
+  // Not all options of the editor are suitable to synLOG2
+  if Assigned(frmRterm.synLOG2) then
+    with frmRterm.synLOG2 do begin
       // Gutter
       Gutter.ShowLineNumbers:= False;  // Fixed vaule!
       Gutter.Width          := 15;     // Fixed vaule!
@@ -13228,6 +13256,53 @@ begin
 
 end;
 
+procedure TfrmMain.pUpdate_Edit_Shortcuts;
+var
+  sUndo,
+   sRedo,
+   sCopy,
+   sPaste,
+   sCut,
+   sSelectAll: string;
+
+begin
+  with modDados do begin
+    sUndo := fGet_keystroke_Editor('ecUndo');
+    sRedo := fGet_keystroke_Editor('ecRedo');
+    sCopy := fGet_keystroke_Editor('ecCopy');
+    sPaste:= fGet_keystroke_Editor('ecPaste');
+    sCut  := fGet_keystroke_Editor('ecCut');
+    sSelectAll:= fGet_keystroke_Editor('ecSelectAll');
+
+    menEdit_Undo.ShortCut := TextToShortcut(sUndo);
+    menEdit_Redo.ShortCut := TextToShortcut(sRedo);
+    menEdit_Copy.ShortCut := TextToShortcut(sCopy);
+    menEdit_Paste.ShortCut:= TextToShortcut(sPaste);
+    menEdit_Cut.ShortCut  := TextToShortcut(sCut);
+    menEdit_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+
+    pmenEdit_Undo.ShortCut := TextToShortcut(sUndo);
+    pmenEdit_Redo.ShortCut := TextToShortcut(sRedo);
+    pmenEdit_Copy.ShortCut := TextToShortcut(sCopy);
+    pmenEdit_Paste.ShortCut:= TextToShortcut(sPaste);
+    pmenEdit_Cut.ShortCut  := TextToShortcut(sCut);
+    pmenEdit_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+
+    pmenIO_Undo.ShortCut := TextToShortcut(sUndo);
+    pmenIO_Redo.ShortCut := TextToShortcut(sRedo);
+    pmenIO_Copy.ShortCut := TextToShortcut(sCopy);
+    pmenIO_Paste.ShortCut:= TextToShortcut(sPaste);
+    pmenIO_Cut.ShortCut  := TextToShortcut(sCut);
+    pmenIO_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+
+    pmenLOG_Undo.ShortCut := TextToShortcut(sUndo);
+    pmenLOG_Redo.ShortCut := TextToShortcut(sRedo);
+    pmenLOG_Copy.ShortCut := TextToShortcut(sCopy);
+    pmenLOG_Paste.ShortCut:= TextToShortcut(sPaste);
+    pmenLOG_Cut.ShortCut  := TextToShortcut(sCut);
+    pmenLOG_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+  end;
+end;
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   with frmTools.jvflbWinExplorer do begin
@@ -13321,6 +13396,8 @@ begin
 
   // Very nice: from http://stackoverflow.com/questions/374304/how-can-i-make-delphi-2009-open-my-application-in-the-second-monitor-by-default?rq=1
   if (DebugHook <> 0) and (Screen.MonitorCount > 1) then Left:= Screen.Monitors[1].Left;
+
+  pUpdate_Edit_Shortcuts;
 end;
 
 procedure TfrmMain.actGroupDeleteCurrentExecute(Sender: TObject);
@@ -14024,10 +14101,10 @@ begin
       end;
 
       with rdgRtermLOG_Syntax do begin
-        if (frmRterm.synLog.Highlighter = dmSyn.synText)      then ItemIndex:= 0;
-        if (frmRterm.synLog.Highlighter = dmSyn.synText_term) then ItemIndex:= 1;
-        if (frmRterm.synLog.Highlighter = dmSyn.synR)         then ItemIndex:= 2;
-        if (frmRterm.synLog.Highlighter = dmSyn.synR_term)    then ItemIndex:= 3;
+        if (frmRterm.synLOG.Highlighter = dmSyn.synText)      then ItemIndex:= 0;
+        if (frmRterm.synLOG.Highlighter = dmSyn.synText_term) then ItemIndex:= 1;
+        if (frmRterm.synLOG.Highlighter = dmSyn.synR)         then ItemIndex:= 2;
+        if (frmRterm.synLOG.Highlighter = dmSyn.synR_term)    then ItemIndex:= 3;
       end;
 
       with rdgRtermSend_Plus do
@@ -15229,6 +15306,36 @@ begin
   end;
 end;
 
+procedure TfrmMain.pmenEdit_CopyClick(Sender: TObject);
+begin
+  menEdit_CopyClick(nil);
+end;
+
+procedure TfrmMain.pmenEdit_CutClick(Sender: TObject);
+begin
+  menEdit_CutClick(nil);
+end;
+
+procedure TfrmMain.pmenEdit_PasteClick(Sender: TObject);
+begin
+  menEdit_PasteClick(nil);
+end;
+
+procedure TfrmMain.pmenEdit_RedoClick(Sender: TObject);
+begin
+  menEdit_RedoClick(nil);
+end;
+
+procedure TfrmMain.pmenEdit_SelectAllClick(Sender: TObject);
+begin
+  menEdit_SelectAllClick(nil);
+end;
+
+procedure TfrmMain.pmenEdit_UndoClick(Sender: TObject);
+begin
+  menEdit_UndoClick(nil);
+end;
+
 procedure TfrmMain.pmenProjRSendToRClick(Sender: TObject);
 
   procedure pSendToR(var Stmp: string);
@@ -15891,14 +15998,18 @@ begin
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
   with seEditor do begin
-    actCopyFormattedHtml.Enabled       := SelAvail;
-    actCopyFormattedRtf.Enabled        := SelAvail;
-    actCopyFormattedTeX.Enabled        := SelAvail;
-    actIndentBlock.Enabled             := SelAvail;
-    actInvertSelection.Enabled         := SelAvail;
-    actLowerCaseSelection.Enabled      := SelAvail;
-    actUnindentBlock.Enabled           := SelAvail;
-    actUpperCaseSelection.Enabled      := SelAvail;
+    actCopyFormattedHtml.Enabled := SelAvail;
+    actCopyFormattedRtf.Enabled  := SelAvail;
+    actCopyFormattedTeX.Enabled  := SelAvail;
+    actIndentBlock.Enabled       := SelAvail;
+    actInvertSelection.Enabled   := SelAvail;
+    actLowerCaseSelection.Enabled:= SelAvail;
+    actUnindentBlock.Enabled     := SelAvail;
+    actUpperCaseSelection.Enabled:= SelAvail;
+    menEdit_Cut.Enabled          := SelAvail;
+    pmenEdit_Cut.Enabled         := SelAvail;
+//    pmenIO_Cut.Enabled           := SelAvail;
+//    pmenLOG_Cut.Enabled          := SelAvail;
   end;
   pUpdate_CloseFileOptions;
 end;
@@ -17019,7 +17130,7 @@ begin
   end;  //with RSend_Smart
 end;
 
-procedure TfrmMain.actRSendClipboardExecute(Sender: TObject);
+procedure TfrmMain.pSend_Clipboard_ToRterm;
 var
   sTmp,
    sToSend: string;
@@ -17985,7 +18096,7 @@ var
   sTmp,
    sToSend: string;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   if not fValidR_Running then Exit;
@@ -18002,10 +18113,10 @@ begin
     end;
 
     // Log
-    if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                  else seLog:= frmRterm.synLog;
+    if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                  else seLOG:= frmRterm.synLOG;
 
-    with seLog do begin
+    with seLOG do begin
       for i:= 0 to 9 do
         ClearBookMark(i);
       Clear;
@@ -20169,6 +20280,36 @@ begin
   pmemRResSendSelection.Checked:= actRSendSelection.Visible;
 end;
 
+procedure TfrmMain.pmenIO_CopyClick(Sender: TObject);
+begin
+  menEdit_CopyClick(nil);
+end;
+
+procedure TfrmMain.pmenIO_CutClick(Sender: TObject);
+begin
+  menEdit_CutClick(nil);
+end;
+
+procedure TfrmMain.pmenIO_PasteClick(Sender: TObject);
+begin
+  menEdit_PasteClick(nil);
+end;
+
+procedure TfrmMain.pmenIO_RedoClick(Sender: TObject);
+begin
+  menEdit_RedoClick(nil);
+end;
+
+procedure TfrmMain.pmenIO_SelectAllClick(Sender: TObject);
+begin
+  menEdit_SelectAllClick(nil);
+end;
+
+procedure TfrmMain.pmenIO_UndoClick(Sender: TObject);
+begin
+  menEdit_UndoClick(nil);
+end;
+
 procedure TfrmMain.pmemRResCurrentLineToTopClick(Sender: TObject);
 begin
   with actRCurrentLineToTop do
@@ -20882,6 +21023,215 @@ begin
   end
 end;
 
+procedure TfrmMain.menEdit_CopyClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          ExecuteCommand(ecCopy,
+                         #0,
+                         nil);
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          ExecuteCommand(ecCopy,
+                         #0,
+                         nil);
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          ExecuteCommand(ecCopy,
+                         #0,
+                         nil);
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          ExecuteCommand(ecCopy,
+                         #0,
+                         nil);
+  end;
+end;
+
+procedure TfrmMain.menEdit_CutClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          CutToClipboard;
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          CutToClipboard;
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          CutToClipboard;
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          CutToClipboard;
+  end;
+end;
+
+procedure TfrmMain.menEdit_PasteClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          ExecuteCommand(ecPaste,
+                         #0,
+                         nil);
+
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          ExecuteCommand(ecPaste,
+                         #0,
+                         nil);
+
+     // synIO
+     3: begin
+        with (frmRterm.synIO as TSynEdit) do begin
+          if not frmMain.fRterm_Running then begin
+            ExecuteCommand(ecPaste,
+                           #0,
+                           nil);
+            Exit;
+          end;
+        end;
+
+        with (frmRterm.synIO as TSynEdit) do
+          if (CaretY = Lines.Count) then
+            pSend_Clipboard_ToRterm;
+     end;
+
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          ExecuteCommand(ecPaste,
+                         #0,
+                         nil);
+  end;
+end;
+
+procedure TfrmMain.menEdit_RedoClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          ExecuteCommand(ecRedo,
+                         #0,
+                         nil);
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          ExecuteCommand(ecRedo,
+                         #0,
+                         nil);
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          ExecuteCommand(ecRedo,
+                         #0,
+                         nil);
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          ExecuteCommand(ecRedo,
+                         #0,
+                         nil);
+  end;
+end;
+
+procedure TfrmMain.menEdit_SelectallClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          ExecuteCommand(ecSelectAll,
+                         #0,
+                         nil);
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          ExecuteCommand(ecSelectAll,
+                         #0,
+                         nil);
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          ExecuteCommand(ecSelectAll,
+                         #0,
+                         nil);
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          ExecuteCommand(ecSelectAll,
+                         #0,
+                         nil);
+  end;
+end;
+
+procedure TfrmMain.menEdit_UndoClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          ExecuteCommand(ecUndo,
+                         #0,
+                         nil);
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          ExecuteCommand(ecUndo,
+                         #0,
+                         nil);
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          ExecuteCommand(ecUndo,
+                         #0,
+                         nil);
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          ExecuteCommand(ecUndo,
+                         #0,
+                         nil);
+  end;
+end;
+
 procedure TfrmMain.menEncConUTF8wClick(Sender: TObject);
 begin
   pSet_SaveFormat(sfUTF8);
@@ -20991,23 +21341,23 @@ end;
 procedure TfrmMain.actMatchBracketExecute(Sender: TObject);
 var
   seEditor,
-   seLog: TSynEdit;
+   seLOG: TSynEdit;
 
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
 
   case fGet_Focus of
         // synEditor or synEditor2
     1..2: pMatch_Bracket(seEditor);
         // synIO
        3: pMatch_Bracket(frmRterm.synIO);
-        // synLog and synLog2
-       4: pMatch_Bracket(seLog);
+        // synLOG and synLOG2
+       4: pMatch_Bracket(seLOG);
   end;
 end;
 
@@ -21232,16 +21582,16 @@ end;
 
 procedure TfrmMain.actRtermLOGLineWrapExecute(Sender: TObject);
 var
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   with actRtermLogLineWrap do
     Checked:= not Checked;
 
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
 
-  with seLog do
+  with seLOG do
     WordWrap:= actRtermLogLineWrap.Checked;
 end;
 
@@ -22508,12 +22858,12 @@ procedure TfrmMain.btRedoClick(Sender: TObject);
 var
   iFocus: integer;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -22524,8 +22874,8 @@ begin
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
           Redo;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
           Redo;
   end;
 end;
@@ -22534,12 +22884,12 @@ procedure TfrmMain.btUndoClick(Sender: TObject);
 var
   iFocus: integer;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -22550,8 +22900,8 @@ begin
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
           Undo;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
           Undo;
   end;
 end;
@@ -24527,8 +24877,8 @@ procedure TfrmMain.actRContTermStartCloseExecute(Sender: TObject);
 
   procedure pCloseRterm;
   begin
-    if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Clear
-                                  else frmRterm.synLog.Clear;
+    if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Clear
+                                  else frmRterm.synLOG.Clear;
 
     stbMain.Panels[9].Text:= EmptyStr;
 
@@ -24588,8 +24938,8 @@ begin
     pSet_Rlibrary_Path(sPath_Rterm);
     pCheck_Rterm;
 
-    if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Clear
-                                  else frmRterm.synLog.Clear;
+    if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Clear
+                                  else frmRterm.synLOG.Clear;
 
     with frmRterm do begin
       synIO.Clear;
@@ -25129,18 +25479,18 @@ var
   sPriorLog: string;
 
 begin
-  if Assigned(frmRterm.synLog2) then sPriorLog:= frmRterm.synLog2.Text
-                                else sPriorLog:= frmRterm.synLog.Text;
+  if Assigned(frmRterm.synLOG2) then sPriorLog:= frmRterm.synLOG2.Text
+                                else sPriorLog:= frmRterm.synLOG.Text;
 
   frmRterm.pRtermSplit;
-  if Assigned(frmRterm.synLog2) then
+  if Assigned(frmRterm.synLOG2) then
 
-    with frmRterm.synLog2 do begin
+    with frmRterm.synLOG2 do begin
       BeginUpdate;
       WordWrap:= bLogLineWrap;
       Text:= sPriorLog;
 
-      PostMessage(TWinControl(frmRterm.synLog2).Handle,
+      PostMessage(TWinControl(frmRterm.synLOG2).Handle,
                   WM_SETFOCUS,
                   0,
                   0);  // Will force ecEditorBottom below
@@ -25156,7 +25506,7 @@ begin
     with frmRterm.synIO do
         if Parent.CanFocus then SetFocus;
 
-  actRtermIOSplitHorizontal.Checked:= Assigned(frmRterm.synLog2);
+  actRtermIOSplitHorizontal.Checked:= Assigned(frmRterm.synLOG2);
   bRtermSingle    := True;
   bRtermHorizontal:= True;
 end;
@@ -25166,18 +25516,18 @@ var
   sPriorLog: string;
 
 begin
-  if Assigned(frmRterm.synLog2) then sPriorLog:= frmRterm.synLog2.Text
-                                else sPriorLog:= frmRterm.synLog.Text;
+  if Assigned(frmRterm.synLOG2) then sPriorLog:= frmRterm.synLOG2.Text
+                                else sPriorLog:= frmRterm.synLOG.Text;
   
   frmRterm.pRtermSplit(False);
 
-  if Assigned(frmRterm.synLog2) then
-    with frmRterm.synLog2 do begin
+  if Assigned(frmRterm.synLOG2) then
+    with frmRterm.synLOG2 do begin
       BeginUpdate;
       WordWrap:= bLogLineWrap;
       Text:= sPriorLog;
 
-      PostMessage(TWinControl(frmRterm.synLog2).Handle,
+      PostMessage(TWinControl(frmRterm.synLOG2).Handle,
                   WM_SETFOCUS,
                   0,
                   0);  // Will force ecEditorBottom below
@@ -25194,7 +25544,7 @@ begin
     with frmRterm.synIO do
         if Parent.CanFocus then SetFocus;
 
-  actRtermIOSplitVertical.Checked:= Assigned(frmRterm.synLog2);
+  actRtermIOSplitVertical.Checked:= Assigned(frmRterm.synLOG2);
   bRtermSingle    := True;
   bRtermHorizontal:= False;
 end;
@@ -25204,26 +25554,26 @@ var
   sPriorLog: string;
 
 begin
-  if Assigned(frmRterm.synLog2) then sPriorLog:= frmRterm.synLog2.Text
-                                else sPriorLog:= frmRterm.synLog.Text;
+  if Assigned(frmRterm.synLOG2) then sPriorLog:= frmRterm.synLOG2.Text
+                                else sPriorLog:= frmRterm.synLOG.Text;
 
   if Assigned(frmRterm.splRIO) then FreeAndNil(frmRterm.splRIO);
 
-  if Assigned(frmRterm.synLog2) then begin
+  if Assigned(frmRterm.synLOG2) then begin
     with frmRterm.synIO do
       if CanFocus then SetFocus;
     Application.ProcessMessages;
-    FreeAndNil(frmRterm.synLog2);
+    FreeAndNil(frmRterm.synLOG2);
   end;
 
-  with frmRterm.synLog do begin
+  with frmRterm.synLOG do begin
     BeginUpdate;
 
     WordWrap:= bLogLineWrap;
 
     Text:= sPriorLog;
   
-    PostMessage(TWinControl(frmRterm.synLog).Handle,
+    PostMessage(TWinControl(frmRterm.synLOG).Handle,
                 WM_SETFOCUS,
                 0,
                 0);  // Will force ecEditorBottom below
@@ -25237,7 +25587,7 @@ begin
 
   frmRterm.synIO.Align:= alClient;
   frmRterm.tbsLog.TabVisible:= True;
-  actRtermIOSplitRemove.Checked:= (frmRterm.synLog2 = nil);
+  actRtermIOSplitRemove.Checked:= (frmRterm.synLOG2 = nil);
   bRtermSingle:= False;
   pUpdate_Rterm_Appearance;
 end;
@@ -25248,14 +25598,14 @@ begin
 
   with frmRterm do
     try
-      if Assigned(synLog2) then begin
+      if Assigned(synLOG2) then begin
         pgRterm.ActivePage:= frmRterm.tbsIO;
-        with synLog2 do
+        with synLOG2 do
           if CanFocus then SetFocus;
       end
       else begin
         pgRterm.ActivePage:= frmRterm.tbsLog;
-        with synLog do
+        with synLOG do
           if CanFocus then SetFocus;
       end;
     except
@@ -25317,16 +25667,16 @@ end;
 
 procedure TfrmMain.actRtermLOG_TextExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Highlighter:= dmSyn.synText;
-  frmRterm.synLog.Highlighter:= dmSyn.synText;
+  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synText;
+  frmRterm.synLOG.Highlighter:= dmSyn.synText;
   iLOG_Syntax:= 0;
   actRtermLOG_Text.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermLOG_Text_nMLExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Highlighter:= dmSyn.synText_term;
-  frmRterm.synLog.Highlighter:= dmSyn.synText_term;
+  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synText_term;
+  frmRterm.synLOG.Highlighter:= dmSyn.synText_term;
   iLOG_Syntax:= 1;
   actRtermLOG_Text_nML.Checked:= True;
 end;
@@ -25347,16 +25697,16 @@ end;
 
 procedure TfrmMain.actRtermLOG_RExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Highlighter:= dmSyn.synR;
-  frmRterm.synLog.Highlighter:= dmSyn.synR;
+  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synR;
+  frmRterm.synLOG.Highlighter:= dmSyn.synR;
   iLOG_Syntax:= 2;
   actRtermLOG_R.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermLOG_R_nMLExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLog2) then frmRterm.synLog2.Highlighter:= dmSyn.synR_term;
-  frmRterm.synLog.Highlighter:= dmSyn.synR_term;
+  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synR_term;
+  frmRterm.synLOG.Highlighter:= dmSyn.synR_term;
   iLOG_Syntax:= 3;
   actRtermLOG_R_nML.Checked:= True;
 end;
@@ -25439,7 +25789,7 @@ procedure TfrmMain.actRtermLOGClearExecute(Sender: TObject);
 var
   i: integer;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   stbMain.Panels[9].Text:= EmptyStr;
@@ -25448,10 +25798,10 @@ begin
     Checked:= False;
   end;
 
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
   
-  with seLog do begin
+  with seLOG do begin
     for i:= 0 to 9 do
       ClearBookMark(i);
     Clear;
@@ -25485,22 +25835,22 @@ end;
 
 procedure TfrmMain.actRtermLOGPrintExecute(Sender: TObject);
 var
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
 
-  with seLog do
-    if (seLog.SelText <> EmptyStr) then bSelectedToPreview:= True
+  with seLOG do
+    if (seLOG.SelText <> EmptyStr) then bSelectedToPreview:= True
                                    else bSelectedToPreview:= False;
 
   frmConfigurePrint:= TfrmConfigurePrint.Create(Self);
 
   with frmConfigurePrint do begin
     try
-      with seLog do
-        ShowDialog(seLog);
+      with seLOG do
+        ShowDialog(seLOG);
     finally
       FreeAndNil(frmConfigurePrint);
       frmMain.Repaint;
@@ -25536,16 +25886,16 @@ procedure TfrmMain.actRtermLOGSaveAsExecute(Sender: TObject);
 var
   sTmp: string;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   sTmp:= fRemove_FileExtension(pgFiles.ActivePage.Caption);
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
 
   pFile_SaveGeneric(sTmp +
                     '_log.txt',
-                    seLog);
+                    seLOG);
 end;
 
 procedure TfrmMain.pFile_SaveGeneric(sFile: string;
@@ -25951,12 +26301,12 @@ end;
 
 function TfrmMain.fGet_Focus: integer;
 var
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   Result:= 0;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
   // Editors
   if (pgFiles.PageCount <> 0) then
     with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
@@ -25969,8 +26319,8 @@ begin
     end;
   // synIO
   if frmRterm.synIO.Focused                          then Result:= 3
-  // syLog and synLog2
-  else if seLog.Focused                              then Result:= 4
+  // syLog and synLOG2
+  else if seLOG.Focused                              then Result:= 4
   // jvdlbWinExplorer
   else if (frmTools.jvdlbWinExplorer.Focused = True) then Result:= 5
   // jvflbWinExplorer
@@ -26021,13 +26371,13 @@ procedure TfrmMain.actFontIncreaseExecute(Sender: TObject);
 var
   iFocus: integer;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin  // Font.Size < 50
   iFocus:= fGet_Focus;
   
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
   
   case iFocus of
      // synEditor1
@@ -26047,8 +26397,8 @@ begin  // Font.Size < 50
           if (Font.Size < 50) then Font.Size:= Font.Size + 1;
           frmRterm.pgRtermResize(nil);
         end;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
           if (Font.Size < 50) then Font.Size:= Font.Size + 1;
      // jvdlbWinExplorer
      5: with frmTools.jvdlbWinExplorer do
@@ -26123,12 +26473,12 @@ procedure TfrmMain.actFontDecreaseExecute(Sender: TObject);
 var
   iFocus: integer;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin  //Font.Size > 02
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -26147,8 +26497,8 @@ begin  //Font.Size > 02
           if (Font.Size > 02) then Font.Size:= Font.Size - 1;
           frmRterm.pgRtermResize(nil);
         end;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
           if (Font.Size > 02) then Font.Size:= Font.Size - 1;
      // jvdlbWinExplorer
      5: with frmTools.jvdlbWinExplorer do
@@ -26566,12 +26916,12 @@ procedure TfrmMain.actEditCutExecute(Sender: TObject);
 var
   iFocus: integer;
 
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLog2
-                                else seLog:= frmRterm.synLog;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -26582,8 +26932,8 @@ begin
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
           CutToClipboard;
-     // synLog and synLog2
-     4: with (seLog as TSynEdit) do
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
           CutToClipboard;
   end;
 end;

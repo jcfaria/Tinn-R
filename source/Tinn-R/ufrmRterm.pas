@@ -47,10 +47,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, SynEdit, ComCtrls, JvgPage, JvDockTree, JvDockControlForm,
-  JvComponentBase, SynEditTypes, SynEditKeyCmds, SynCompletionProposal,
-  ExtCtrls, ConsoleIO, ToolWin, TB2Item, TB2Dock, TB2Toolbar, ActnList,
-  PerlRegEx, Menus;
+  Dialogs, ComCtrls, JvgPage, JvDockTree, JvDockControlForm, JvComponentBase,
+  ExtCtrls, ConsoleIO, ToolWin, TB2Item, TB2Dock, TB2Toolbar,
+  ActnList, PerlRegEx, Menus,
+  SynEdit, SynEditTypes, SynEditKeyCmds, SynCompletionProposal;
 
 type
   TfrmRterm = class(TForm)
@@ -58,7 +58,7 @@ type
     JvDockClientRterm: TJvDockClient;
     pgRterm: TJvgPageControl;
     synIO: TSynEdit;
-    synLog: TSynEdit;
+    synLOG: TSynEdit;
     tbsIO: TTabSheet;
     tbsLog: TTabSheet;
     TBDock1: TTBDock;
@@ -147,11 +147,11 @@ type
     procedure synIOKeyPress(Sender: TObject; var Key: WideChar);
     procedure synIOKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synIOMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure synLogEnter(Sender: TObject);
-    procedure synLogKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure synLogKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure synLogMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure synLogKeyPress(Sender: TObject; var Key: WideChar);
+    procedure synLOGEnter(Sender: TObject);
+    procedure synLOGKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure synLOGKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure synLOGMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure synLOGKeyPress(Sender: TObject; var Key: WideChar);
     procedure FormHide(Sender: TObject);
 
   private
@@ -176,13 +176,13 @@ type
     bRUnderDebug_Function : boolean;
     bRUnderDebug_Package  : boolean;
     bRUnderScan_Function  : boolean; // 1:
-    iSynLog2Height        : integer;
-    iSynLog2Width         : integer;
+    iSynLOG2Height        : integer;
+    iSynLOG2Width         : integer;
     iSize                 : integer;
     splRIO                : TSplitter;
     sRDebug_Prefix        : string;
     sRScan_Prefix         : string;  // X:
-    synLog2               : TSynEdit;
+    synLOG2               : TSynEdit;
 
     procedure pCR;
     procedure pRtermSplit(bSplitHorizontal: boolean = True);
@@ -659,7 +659,7 @@ procedure TfrmRterm.cRTermReceiveError(Sender: TObject;
   end;
 
 var
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
 begin
   if CheckIfError then begin
@@ -684,17 +684,17 @@ begin
     end;
   end;
 
-  if Assigned(synLog2) then seLog:= synLog2
-                       else seLog:= synLog;
+  if Assigned(synLOG2) then seLOG:= synLOG2
+                       else seLOG:= synLOG;
 
-  with seLog do begin
+  with seLOG do begin
     BeginUpdate;
 
     if bRterm_Sent then bRterm_Sent:= False;
 
     Lines.Add(Cmd);
 
-    PostMessage(TWinControl(seLog).Handle,
+    PostMessage(TWinControl(seLOG).Handle,
                 WM_SETFOCUS,
                 0,
                 0);  // Will force ecEditorBottom below
@@ -723,7 +723,7 @@ begin
   with synIO do
     OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 
-  with synLog do
+  with synLOG do
     OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 end;
 
@@ -794,9 +794,9 @@ end;
 
 procedure TfrmRterm.pCtrl_Tab(bNext: boolean = True);
 begin
-  if Assigned(synLog2) then begin
+  if Assigned(synLOG2) then begin
     if (frmMain.iSynWithFocus = 3) then begin
-      with synLog2 do
+      with synLOG2 do
         if CanFocus then SetFocus
     end
     else
@@ -818,7 +818,7 @@ begin
     end;
   end
   else begin
-    if Assigned(synLog2) then
+    if Assigned(synLOG2) then
       with synIO do begin
         if CanFocus then SetFocus;
         Exit;
@@ -1339,14 +1339,7 @@ begin
     if not frmMain.fRterm_Running then Exit;
 
     case Key of
-      ord('V'): with synIO do
-                  if (CaretY = Lines.Count) then begin
-                    with frmMain do
-                      actRSendClipboardExecute(nil);
-                    Key:= VK_PAUSE;
-                  end;
-
-      ord('Y'): with synIO do // CTRL+Y
+     ord('Y'): with synIO do // CTRL+Y
                   if (CaretY = Lines.Count) then Key:= VK_PAUSE;
 
       VK_BACK: with synIO do begin  // CTRL+BACK
@@ -1761,13 +1754,13 @@ begin
   pSetCursorRestriction;
 end;
 
-procedure TfrmRterm.synLogEnter(Sender: TObject);
+procedure TfrmRterm.synLOGEnter(Sender: TObject);
 begin
   with frmMain do
     actRtermLogSetFocus.Checked:= True;
 end;
 
-procedure TfrmRterm.synLogKeyDown(Sender: TObject;
+procedure TfrmRterm.synLOGKeyDown(Sender: TObject;
                                   var Key: Word;
                                   Shift: TShiftState);
 var
@@ -1808,10 +1801,10 @@ begin
      (Key = VK_TAB) then pCtrl_Tab(False);
 end;
 
-procedure TfrmRterm.synLogKeyPress(Sender: TObject;
+procedure TfrmRterm.synLOGKeyPress(Sender: TObject;
                                    var Key: WideChar);
 var
-  seLog: TSynEdit;
+  seLOG: TSynEdit;
 
   function sFormat(sTmp: string;
                    cTmp: char): string;
@@ -1824,7 +1817,7 @@ var
   procedure InsertText(sTmp: string;
                        i: integer);
   begin
-    with seLog do begin
+    with seLOG do begin
       SelText:= sTmp;
       CaretX := CaretX - i;
     end;
@@ -1833,11 +1826,11 @@ var
   end;
 
 begin
-  if Assigned(synLog2) then seLog:= synLog2
-                       else seLog:= synLog;
+  if Assigned(synLOG2) then seLOG:= synLOG2
+                       else seLOG:= synLOG;
 
   if frmMain.actAutoCompletion.Checked then
-    with seLog do
+    with seLOG do
       case key of
          '(': if SelAvail then
                 InsertText(sFormat(SelText,
@@ -1882,14 +1875,14 @@ begin
       end;
 end;
 
-procedure TfrmRterm.synLogKeyUp(Sender: TObject;
+procedure TfrmRterm.synLOGKeyUp(Sender: TObject;
                                 var Key: Word;
                                 Shift: TShiftState);
 begin
   frmMain.iSynWithFocus:= 4;
 end;
 
-procedure TfrmRterm.synLogMouseUp(Sender: TObject;
+procedure TfrmRterm.synLOGMouseUp(Sender: TObject;
                                   Button: TMouseButton;
                                   Shift: TShiftState;
                                   X,
@@ -1900,8 +1893,8 @@ end;
 
 procedure TfrmRterm.psplRIOMoved(Sender: TObject);
 begin
-  if frmMain.actRtermIOSplitHorizontal.Checked then iSynLog2Height:= synLog2.Height;
-  if frmMain.actRtermIOSplitVertical.Checked   then iSynLog2Width := synLog2.Width;
+  if frmMain.actRtermIOSplitHorizontal.Checked then iSynLOG2Height:= synLOG2.Height;
+  if frmMain.actRtermIOSplitVertical.Checked   then iSynLOG2Width := synLOG2.Width;
 end;
 
 procedure TfrmRterm.pRtermSplit(bSplitHorizontal: boolean = True);
@@ -1909,33 +1902,33 @@ begin
   tbsIO.Visible:= False;  // To avoid screen flicker on Rterm interface
 
   if Assigned(splRIO) then FreeAndNil(splRIO);
-  if Assigned(synLog2) then begin
+  if Assigned(synLOG2) then begin
     with synIO do
       if CanFocus then SetFocus;
     Application.ProcessMessages;
-    FreeAndNil(synLog2);
+    FreeAndNil(synLOG2);
   end;
 
-  synLog2:= TSynEdit.Create(Self);
-  with synLog2 do begin
+  synLOG2:= TSynEdit.Create(Self);
+  with synLOG2 do begin
     BeginUpdate;
 
     OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     if bSplitHorizontal then begin
       Align:= alBottom;
-      if (iSynLog2Height > tbsIO.Height) then synLog2.Height:= 4 * (tbsIO.Height div 5)
-                                         else synLog2.Height:= iSynLog2Height
+      if (iSynLOG2Height > tbsIO.Height) then synLOG2.Height:= 4 * (tbsIO.Height div 5)
+                                         else synLOG2.Height:= iSynLOG2Height
     end
     else begin
       Align:= alRight;
-      if (iSynLog2Width > tbsIO.Width) then synLog2.Width:= 2 * (tbsIO.Width div 3)
-                                       else synLog2.Width:= iSynLog2Width
+      if (iSynLOG2Width > tbsIO.Width) then synLOG2.Width:= 2 * (tbsIO.Width div 3)
+                                       else synLOG2.Width:= iSynLOG2Width
     end;
     Parent                := tbsIO;
     BorderStyle           := bsNone;
     HideSelection         := False;
     onPaintTransient      := TSyn_Transient.pSyn_PaintTransient;
-    OnKeyDown             := synLogKeyDown;
+    OnKeyDown             := synLOGKeyDown;
     PopupMenu             := frmMain.pmenLog;
     Options               := synIO.Options;
     Gutter                := synIO.Gutter;
@@ -1948,9 +1941,9 @@ begin
     TabWidth              := synIO.TabWidth;
     RightEdge             := synIO.RightEdge;
     RightEdgeColor        := synIO.RightEdgeColor;
-    OnKeyUp               := synLog.OnKeyUp;
-    OnMouseUp             := synLog.OnMouseUp;
-    OnKeyPress            := synLog.OnKeyPress;
+    OnKeyUp               := synLOG.OnKeyUp;
+    OnMouseUp             := synLOG.OnMouseUp;
+    OnKeyPress            := synLOG.OnKeyPress;
 
     with Constraints do begin
       MinHeight:= 20;
@@ -1985,7 +1978,7 @@ end;
 
 procedure TfrmRterm.CMDialogKey(var Message: TCMDialogKey);
 begin
-  if Assigned(synLog2) then begin
+  if Assigned(synLOG2) then begin
     Exit;
     inherited;
   end;
@@ -2004,8 +1997,6 @@ begin
   end
   else inherited;
 end;
-
-end.
 
 //      VK_RETURN: with synIO do begin // CTRL+ENTER -> Send prior lines
 //                   BeginUpdate;
@@ -2115,4 +2106,22 @@ end.
 //
 //    EndUpdate;
 //  end;
+
+//procedure TfrmRterm.synIOProcessCommand(Sender: TObject;
+//                                        var Command: TSynEditorCommand;
+//                                        var AChar: WideChar;
+//                                        Data: Pointer);
+//begin
+//  if (Command <> ecPaste) then Exit;
+//  if not frmMain.fRterm_Running then Exit;
+//
+//  with synIO do
+//    if (CaretY = Lines.Count) then
+//      with frmMain do
+//        pSend_Clipboard_ToRterm;
+//
+//  Command:= ecNone;
+//end;
+
+end.
 

@@ -61,7 +61,7 @@ type
     bIncomplete : boolean;
     cRTerm_RU   : TConsoleIO;
     synIO_RU    : TSynEdit;
-    synLog_RU   : TSynEdit;
+    synLOG_RU   : TSynEdit;
 
     constructor Create;//(AOwner: TComponent);
     destructor Free;
@@ -83,7 +83,7 @@ constructor TR_Useful.Create;//(AOwner: TComponent);
 begin
   cRTerm_RU:= TConsoleIO.Create(nil);
   synIO_RU:= TSynEdit.Create(nil);
-  synLog_RU:= TSynEdit.Create(nil);
+  synLOG_RU:= TSynEdit.Create(nil);
 
   with cRTerm_RU do begin
     // Properties
@@ -108,7 +108,7 @@ begin
   cRTerm_RU.StopProcess;
   FreeAndNil(cRTerm_RU);
   FreeAndNil(synIO_RU);
-  FreeAndNil(synLog_RU);
+  FreeAndNil(synLOG_RU);
 end;
 
 procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
@@ -375,7 +375,7 @@ end;
 procedure TR_Useful.cRTerm_RU_ReceiveError(Sender: TObject;
                                            const Cmd: string);
 begin
-  with synLog_RU do begin
+  with synLOG_RU do begin
     BeginUpdate;
     Lines.Add(Cmd);
     ExecuteCommand(ecEditorBottom,

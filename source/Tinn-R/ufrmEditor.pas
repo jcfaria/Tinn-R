@@ -52,12 +52,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  SynEdit, Menus, StdActns, ActnList, SynRegExpr, StdCtrls, SynEditHighlighter,
-  SynHighlighterMulti, ExtCtrls, SynEditTypes, SynEditRegExSearch,
+  ActnList, StdCtrls, ExtCtrls, ClipBrd, DdeMan, ShellCtrls, ComCtrls, Httpapp,
+  Menus, ShellAPI, JvDriveCtrls, JvExStdCtrls, ATFileNotificationSimple,
+  SynEdit, SynUnicode, SynRegExpr, SynEditHighlighter, SynHighlighterURI,
+  SynHighlighterMulti, SynEditTypes, SynEditRegExSearch, SynEditKeyCmds,
   SynEditMiscClasses, SynEditSearch, SynExportTeX, SynExportRTF,
-  SynEditExport, SynExportHTML, ClipBrd, SynCompletionProposal, DdeMan,
-  ShellCtrls, ComCtrls, Httpapp, SynHighlighterURI, ShellAPI,
-  JvDriveCtrls, JvExStdCtrls, SynUnicode, SynEditTextBuffer, ATFileNotificationSimple;
+  SynEditExport, SynExportHTML, SynCompletionProposal, SynEditTextBuffer;
 
 type
   TfrmEditor = class(TForm)
@@ -103,6 +103,7 @@ type
 
     function fMessageDlg(const Msg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons; HelpCtx: Integer): Integer;
     function fDoSave_ModifiedFileQuery: boolean;
+
     procedure pDoSave_FileState;
     procedure pSetHighlighter_FromTag(iTag: integer);
     procedure pSetSyntax_Highlighter(sSynName: string);
@@ -193,7 +194,7 @@ implementation
 uses
   DB,
   StrUtils,
-  synEditKeyCmds,
+  //synEditKeyCmds,
   trSynUtils,
   trUtils,
   uDMSyn,
@@ -399,6 +400,26 @@ begin
       menWebSearchSelRSite.Enabled        := False;
       tbFilter.Enabled                    := False;
       tbiPandoc.Enabled                   := False;
+      menEdit_Undo.Enabled                := False;
+      menEdit_Redo.Enabled                := False;
+      menEdit_Copy.Enabled                := False;
+      menEdit_Paste.Enabled               := False;
+      menEdit_SelectAll.Enabled           := False;
+      pmenEdit_Undo.Enabled               := False;
+      pmenEdit_Redo.Enabled               := False;
+      pmenEdit_Copy.Enabled               := False;
+      pmenEdit_Paste.Enabled              := False;
+      pmenEdit_SelectAll.Enabled          := False;
+//      pmenIO_Undo.Enabled                 := False;
+//      pmenIO_Redo.Enabled                 := False;
+//      pmenIO_Copy.Enabled                 := False;
+//      pmenIO_Paste.Enabled                := False;
+//      pmenIO_SelectAll.Enabled            := False;
+//      pmenLOG_Undo.Enabled                := False;
+//      pmenLOG_Redo.Enabled                := False;
+//      pmenLOG_Copy.Enabled                := False;
+//      pmenLOG_Paste.Enabled               := False;
+//      pmenLOG_SelectAll.Enabled           := False;
       pMinimize_TinnAfterLastFile;
 
       with tUpdateOptions do
@@ -819,6 +840,27 @@ begin
     menToolsConversionPandoc.Enabled    := True;
     menWebSearchSelGoogle.Enabled       := True;
     menWebSearchSelRSite.Enabled        := True;
+    menEdit_Undo.Enabled                := True;
+    menEdit_Redo.Enabled                := True;
+    menEdit_Copy.Enabled                := True;
+    menEdit_Paste.Enabled               := True;
+    menEdit_SelectAll.Enabled           := True;
+    pmenEdit_Undo.Enabled               := True;
+    pmenEdit_Redo.Enabled               := True;
+    pmenEdit_Copy.Enabled               := True;
+    pmenEdit_Paste.Enabled              := True;
+    pmenEdit_SelectAll.Enabled          := True;
+//    pmenIO_Undo.Enabled                 := True;
+//    pmenIO_Redo.Enabled                 := True;
+//    pmenIO_Copy.Enabled                 := True;
+//    pmenIO_Paste.Enabled                := True;
+//    pmenIO_SelectAll.Enabled            := True;
+//    pmenLOG_Undo.Enabled                := True;
+//    pmenLOG_Redo.Enabled                := True;
+//    pmenLOG_Copy.Enabled                := True;
+//    pmenLOG_Paste.Enabled               := True;
+//    pmenLOG_SelectAll.Enabled           := True;
+    pMinimize_TinnAfterLastFile;
     synMR.Editor                        := synEditor;
     tbFilter.Enabled                    := True;
     tbiPandoc.Enabled                   := True;

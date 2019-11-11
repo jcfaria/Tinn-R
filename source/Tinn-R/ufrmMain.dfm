@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 843
+  Height = 923
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,14 +1035,14 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 685
+    Height = 765
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 665
+    ExplicitHeight = 745
   end
   object Panel1: TPanel
     Left = 0
@@ -1834,9 +1834,6 @@ object frmMain: TfrmMain
         object TBRSendSelection: TTBItem
           Action = actRSendSelection
         end
-        object TBItem26: TTBItem
-          Action = actRSendClipboard
-        end
         object TBRSendBlockMarked: TTBItem
           Action = actRSendBlockMarked
         end
@@ -2021,14 +2018,14 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 685
+    Height = 765
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 665
+    ExplicitHeight = 745
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2043,7 +2040,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 792
+    Top = 872
     Width = 994
     Height = 20
     AutoHint = True
@@ -2098,24 +2095,24 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 772
+    ExplicitTop = 852
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 685
+    Height = 765
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 665
+    ExplicitHeight = 745
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 783
+    Top = 863
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2124,7 +2121,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 763
+    ExplicitTop = 843
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -4632,7 +4629,6 @@ object frmMain: TfrmMain
       Hint = 'R send: clipboard (echo=TRUE)'
       ImageIndex = 269
       ShortCut = 16465
-      OnExecute = actRSendClipboardExecute
     end
     object actRSendBlockMarked: TAction
       Category = 'R send'
@@ -6133,39 +6129,50 @@ object frmMain: TfrmMain
     object pmenEditorEdit: TMenuItem
       Caption = 'Edit'
       ImageIndex = 276
-      Visible = False
-      object pmenEditorUndo: TMenuItem
+      object pmenEdit_Undo: TMenuItem
         Caption = 'Undo'
+        Enabled = False
         Hint = 'Edit: undo'
         ImageIndex = 130
+        OnClick = pmenEdit_UndoClick
       end
-      object pmenEditorRedo: TMenuItem
+      object pmenEdit_Redo: TMenuItem
         Caption = 'Redo'
+        Enabled = False
         Hint = 'Edit: redo'
         ImageIndex = 131
+        OnClick = pmenEdit_RedoClick
       end
       object N43: TMenuItem
         Caption = '-'
       end
-      object pmenEditorCopy: TMenuItem
+      object pmenEdit_Copy: TMenuItem
         Caption = 'Copy'
+        Enabled = False
         Hint = 'Edit: copy'
+        OnClick = pmenEdit_CopyClick
       end
-      object pmenEditorCut: TMenuItem
+      object pmenEdit_Cut: TMenuItem
         Caption = 'Cut'
+        Enabled = False
         Hint = 'Edit: cut'
         ImageIndex = 47
+        OnClick = pmenEdit_CutClick
       end
-      object pmenEditorPaste: TMenuItem
+      object pmenEdit_Paste: TMenuItem
         Caption = 'Paste'
+        Enabled = False
         Hint = 'Edit: paste'
+        OnClick = pmenEdit_PasteClick
       end
       object N44: TMenuItem
         Caption = '-'
       end
-      object pmenEditorSelectAll: TMenuItem
+      object pmenEdit_SelectAll: TMenuItem
         Caption = 'Select all'
+        Enabled = False
         Hint = 'Edit: select all'
+        OnClick = pmenEdit_SelectAllClick
       end
       object N178: TMenuItem
         Caption = '-'
@@ -6443,39 +6450,44 @@ object frmMain: TfrmMain
     object pmemIOEdit: TMenuItem
       Caption = 'Edit'
       ImageIndex = 276
-      Visible = False
-      object pmemIOUndo: TMenuItem
+      object pmenIO_Undo: TMenuItem
         Caption = 'Undo'
         Hint = 'Edit: undo'
         ImageIndex = 130
+        OnClick = pmenIO_UndoClick
       end
-      object pmemIORedo: TMenuItem
+      object pmenIO_Redo: TMenuItem
         Caption = 'Redo'
         Hint = 'Edit: redo'
         ImageIndex = 131
+        OnClick = pmenIO_RedoClick
       end
       object N47: TMenuItem
         Caption = '-'
       end
-      object pmemIOCopy: TMenuItem
+      object pmenIO_Copy: TMenuItem
         Caption = 'Copy'
         Hint = 'Edit: copy'
+        OnClick = pmenIO_CopyClick
       end
-      object pmemIOCut: TMenuItem
+      object pmenIO_Cut: TMenuItem
         Caption = 'Cut'
         Hint = 'Edit: cut'
         ImageIndex = 47
+        OnClick = pmenIO_CutClick
       end
-      object pmemIOPaste: TMenuItem
+      object pmenIO_Paste: TMenuItem
         Caption = 'Paste'
         Hint = 'Edit: paste'
+        OnClick = pmenIO_PasteClick
       end
       object N56: TMenuItem
         Caption = '-'
       end
-      object pmemIOSelectAll: TMenuItem
+      object pmenIO_SelectAll: TMenuItem
         Caption = 'Select all'
         Hint = 'Edit: select all'
+        OnClick = pmenIO_SelectAllClick
       end
     end
     object pmemIOFile: TMenuItem
@@ -6658,13 +6670,12 @@ object frmMain: TfrmMain
     object pmemLogEdit: TMenuItem
       Caption = 'Edit'
       ImageIndex = 276
-      Visible = False
-      object pmemLogEditUndo: TMenuItem
+      object pmenLOG_Undo: TMenuItem
         Caption = 'Undo'
         Hint = 'Edit: undo'
         ImageIndex = 130
       end
-      object pmemLogEditRedo: TMenuItem
+      object pmenLOG_Redo: TMenuItem
         Caption = 'Redo'
         Hint = 'Edit: redo'
         ImageIndex = 131
@@ -6672,23 +6683,23 @@ object frmMain: TfrmMain
       object N102: TMenuItem
         Caption = '-'
       end
-      object pmemLogEditCopy: TMenuItem
+      object pmenLOG_Copy: TMenuItem
         Caption = 'Copy'
         Hint = 'Edit: copy'
       end
-      object pmemLogEditCut: TMenuItem
+      object pmenLOG_Cut: TMenuItem
         Caption = 'Cut'
         Hint = 'Edit: cut'
         ImageIndex = 47
       end
-      object pmemLogEditPaste: TMenuItem
+      object pmenLOG_Paste: TMenuItem
         Caption = 'Paste'
         Hint = 'Edit: paste'
       end
       object N152: TMenuItem
         Caption = '-'
       end
-      object pmemLogEditSelectAll: TMenuItem
+      object pmenLOG_SelectAll: TMenuItem
         Caption = 'Select all'
         Hint = 'Edit: select all'
       end
@@ -7156,6 +7167,45 @@ object frmMain: TfrmMain
     object menEdit: TMenuItem
       Caption = 'E&dit'
       GroupIndex = 6
+      object menEdit_Undo: TMenuItem
+        Caption = 'Undo'
+        Enabled = False
+        ImageIndex = 130
+        OnClick = menEdit_UndoClick
+      end
+      object menEdit_Redo: TMenuItem
+        Caption = 'Redo'
+        Enabled = False
+        ImageIndex = 131
+        OnClick = menEdit_RedoClick
+      end
+      object N12: TMenuItem
+        Caption = '-'
+      end
+      object menEdit_Copy: TMenuItem
+        Caption = 'Copy'
+        Enabled = False
+        OnClick = menEdit_CopyClick
+      end
+      object menEdit_Cut: TMenuItem
+        Caption = 'Cut'
+        Enabled = False
+        ImageIndex = 47
+        OnClick = menEdit_CutClick
+      end
+      object menEdit_Paste: TMenuItem
+        Caption = 'Paste'
+        Enabled = False
+        OnClick = menEdit_PasteClick
+      end
+      object menEdit_Selectall: TMenuItem
+        Caption = 'Select all'
+        Enabled = False
+        OnClick = menEdit_SelectallClick
+      end
+      object N15: TMenuItem
+        Caption = '-'
+      end
       object menEditCopyFormated: TMenuItem
         Action = actCopyFormatted
         GroupIndex = 6

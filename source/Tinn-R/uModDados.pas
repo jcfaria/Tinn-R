@@ -47,7 +47,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DBClient, DB, MidasLib, FMTBcd, SqlExpr, WideStrings;
+  DBClient, DB, MidasLib, FMTBcd, SqlExpr, WideStrings,
+  SynEditKeyCmds;
 
 type
   TmodDados = class(TDataModule)
@@ -165,6 +166,7 @@ type
     function fCheck_keystroke_Editor(sKeystroke: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fRmirrors_Update(sFile: string): boolean;
     function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
+    function fGet_keystroke_Editor(Command: string): string;
 
     procedure pCompletionGroups_Filter(Sender: TObject);
     procedure pRcardGroups_Filter(Sender: TObject);
@@ -454,6 +456,35 @@ begin
          Post;
       end;
     end; //if (Locate('Shortcut'...
+
+    Filtered:= bFiltered;
+
+    if BookmarkValid(pTmp) then
+      GoToBookmark(pTmp);
+    FreeBookmark(pTmp);
+
+    EnableControls;
+  end; //with cdEditor
+end;
+
+function  TmodDados.fGet_keystroke_Editor(Command: string): string;
+var
+  pTmp:  pointer;
+
+  bFiltered: boolean;
+
+begin
+  with cdKeys_Editor do begin
+    pTmp:= GetBookmark;
+    DisableControls;
+    bFiltered:= Filtered;
+    if bFiltered then
+      Filtered:= False;
+
+    if (Locate('Command',
+               Command,
+               []) = True) then
+      Result:= FieldValues['Keystroke'];
 
     Filtered:= bFiltered;
 

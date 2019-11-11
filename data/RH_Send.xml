@@ -12,17 +12,16 @@
   <ROWDATA>
     <ROW Index="0" Group="Send" Caption="File" Hotkey="Ctrl+."/>
     <ROW Index="1" Group="Send" Caption="Selection" Hotkey="Ctrl+,"/>
-    <ROW Index="2" Group="Send" Caption="Clipboard" Hotkey="Ctrl+;"/>
-    <ROW Index="3" Group="Send" Caption="Marked block" Hotkey="Ctrl+["/>
-    <ROW Index="4" Group="Send" Caption="Contiguous" Hotkey="Ctrl+]"/>
-    <ROW Index="5" Group="Send" Caption="Smart" Hotkey="Shift+Ctrl+\"/>
-    <ROW Index="6" Group="Send" Caption="Line" Hotkey="Ctrl+\"/>
-    <ROW Index="7" Group="Send" Caption="Current line to top" Hotkey=""/>
-    <ROW Index="8" Group="Send" Caption="Lines to end page" Hotkey=""/>
-    <ROW Index="9" Group="Send" Caption="Cursor to beggining line" Hotkey=""/>
-    <ROW Index="10" Group="Send" Caption="Cursor to end line" Hotkey=""/>
-    <ROW Index="11" Group="Send" Caption="Sweave (.Rnw)" Hotkey=""/>
-    <ROW Index="12" Group="Send" Caption="Knit to LaTeX (.Rnw)" Hotkey=""/>
-    <ROW Index="13" Group="Send" Caption="Knit to HTML (.Rmd, Rhtml)" Hotkey=""/>
+    <ROW Index="2" Group="Send" Caption="Marked block" Hotkey="Ctrl+["/>
+    <ROW Index="3" Group="Send" Caption="Contiguous" Hotkey="Ctrl+]"/>
+    <ROW Index="4" Group="Send" Caption="Smart" Hotkey="Shift+Ctrl+\"/>
+    <ROW Index="5" Group="Send" Caption="Line" Hotkey="Ctrl+\"/>
+    <ROW Index="6" Group="Send" Caption="Current line to top" Hotkey=""/>
+    <ROW Index="7" Group="Send" Caption="Lines to end page" Hotkey=""/>
+    <ROW Index="8" Group="Send" Caption="Cursor to beggining line" Hotkey=""/>
+    <ROW Index="9" Group="Send" Caption="Cursor to end line" Hotkey=""/>
+    <ROW Index="10" Group="Send" Caption="Sweave (.Rnw)" Hotkey=""/>
+    <ROW Index="11" Group="Send" Caption="Knit to LaTeX (.Rnw)" Hotkey=""/>
+    <ROW Index="12" Group="Send" Caption="Knit to HTML (.Rmd, Rhtml)" Hotkey=""/>
   </ROWDATA>
 </DATAPACKET>
