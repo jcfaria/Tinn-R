@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 923
+  Height = 983
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,7 +1035,7 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 765
+    Height = 805
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
@@ -1219,7 +1219,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2018,7 +2018,7 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 765
+    Height = 805
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
@@ -2040,7 +2040,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 872
+    Top = 912
     Width = 994
     Height = 20
     AutoHint = True
@@ -2101,7 +2101,7 @@ object frmMain: TfrmMain
     Left = 985
     Top = 98
     Width = 9
-    Height = 765
+    Height = 805
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
@@ -2112,7 +2112,7 @@ object frmMain: TfrmMain
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 863
+    Top = 903
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -6130,6 +6130,7 @@ object frmMain: TfrmMain
       Caption = 'Edit'
       ImageIndex = 276
       object pmenEdit_Undo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Undo'
         Enabled = False
         Hint = 'Edit: undo'
@@ -6137,6 +6138,7 @@ object frmMain: TfrmMain
         OnClick = pmenEdit_UndoClick
       end
       object pmenEdit_Redo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Redo'
         Enabled = False
         Hint = 'Edit: redo'
@@ -6147,12 +6149,14 @@ object frmMain: TfrmMain
         Caption = '-'
       end
       object pmenEdit_Copy: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Copy'
         Enabled = False
         Hint = 'Edit: copy'
         OnClick = pmenEdit_CopyClick
       end
       object pmenEdit_Cut: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Cut'
         Enabled = False
         Hint = 'Edit: cut'
@@ -6160,6 +6164,7 @@ object frmMain: TfrmMain
         OnClick = pmenEdit_CutClick
       end
       object pmenEdit_Paste: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Paste'
         Enabled = False
         Hint = 'Edit: paste'
@@ -6169,6 +6174,7 @@ object frmMain: TfrmMain
         Caption = '-'
       end
       object pmenEdit_SelectAll: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Select all'
         Enabled = False
         Hint = 'Edit: select all'
@@ -6451,12 +6457,14 @@ object frmMain: TfrmMain
       Caption = 'Edit'
       ImageIndex = 276
       object pmenIO_Undo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Undo'
         Hint = 'Edit: undo'
         ImageIndex = 130
         OnClick = pmenIO_UndoClick
       end
       object pmenIO_Redo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Redo'
         Hint = 'Edit: redo'
         ImageIndex = 131
@@ -6466,17 +6474,20 @@ object frmMain: TfrmMain
         Caption = '-'
       end
       object pmenIO_Copy: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Copy'
         Hint = 'Edit: copy'
         OnClick = pmenIO_CopyClick
       end
       object pmenIO_Cut: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Cut'
         Hint = 'Edit: cut'
         ImageIndex = 47
         OnClick = pmenIO_CutClick
       end
       object pmenIO_Paste: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Paste'
         Hint = 'Edit: paste'
         OnClick = pmenIO_PasteClick
@@ -6485,6 +6496,7 @@ object frmMain: TfrmMain
         Caption = '-'
       end
       object pmenIO_SelectAll: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Select all'
         Hint = 'Edit: select all'
         OnClick = pmenIO_SelectAllClick
@@ -6671,37 +6683,49 @@ object frmMain: TfrmMain
       Caption = 'Edit'
       ImageIndex = 276
       object pmenLOG_Undo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Undo'
         Hint = 'Edit: undo'
         ImageIndex = 130
+        OnClick = pmenLOG_UndoClick
       end
       object pmenLOG_Redo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Redo'
         Hint = 'Edit: redo'
         ImageIndex = 131
+        OnClick = pmenLOG_RedoClick
       end
       object N102: TMenuItem
         Caption = '-'
       end
       object pmenLOG_Copy: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Copy'
         Hint = 'Edit: copy'
+        OnClick = pmenLOG_CopyClick
       end
       object pmenLOG_Cut: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Cut'
         Hint = 'Edit: cut'
         ImageIndex = 47
+        OnClick = pmenLOG_CutClick
       end
       object pmenLOG_Paste: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Paste'
         Hint = 'Edit: paste'
+        OnClick = pmenLOG_PasteClick
       end
       object N152: TMenuItem
         Caption = '-'
       end
       object pmenLOG_SelectAll: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Select all'
         Hint = 'Edit: select all'
+        OnClick = pmenLOG_SelectAllClick
       end
     end
     object pmemLogFile: TMenuItem
@@ -7168,12 +7192,14 @@ object frmMain: TfrmMain
       Caption = 'E&dit'
       GroupIndex = 6
       object menEdit_Undo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Undo'
         Enabled = False
         ImageIndex = 130
         OnClick = menEdit_UndoClick
       end
       object menEdit_Redo: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Redo'
         Enabled = False
         ImageIndex = 131
@@ -7183,22 +7209,26 @@ object frmMain: TfrmMain
         Caption = '-'
       end
       object menEdit_Copy: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Copy'
         Enabled = False
         OnClick = menEdit_CopyClick
       end
       object menEdit_Cut: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Cut'
         Enabled = False
         ImageIndex = 47
         OnClick = menEdit_CutClick
       end
       object menEdit_Paste: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Paste'
         Enabled = False
         OnClick = menEdit_PasteClick
       end
       object menEdit_Selectall: TMenuItem
+        AutoHotkeys = maManual
         Caption = 'Select all'
         Enabled = False
         OnClick = menEdit_SelectallClick
@@ -7742,7 +7772,6 @@ object frmMain: TfrmMain
         object Loadstream1: TMenuItem
           Caption = 'Editor_keystrokes'
           GroupIndex = 12
-          OnClick = Loadstream1Click
         end
       end
       object menToolsProcessing: TMenuItem

@@ -2519,7 +2519,6 @@ type
     procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
     procedure actLatexClearWasteExecute(Sender: TObject);
     procedure actSKH_mapExecute(Sender: TObject);
-    procedure Loadstream1Click(Sender: TObject);
     procedure btUndoClick(Sender: TObject);
     procedure btRedoClick(Sender: TObject);
     procedure menEdit_CutClick(Sender: TObject);
@@ -2540,6 +2539,12 @@ type
     procedure pmenIO_CutClick(Sender: TObject);
     procedure pmenIO_PasteClick(Sender: TObject);
     procedure pmenIO_SelectAllClick(Sender: TObject);
+    procedure pmenLOG_UndoClick(Sender: TObject);
+    procedure pmenLOG_RedoClick(Sender: TObject);
+    procedure pmenLOG_CopyClick(Sender: TObject);
+    procedure pmenLOG_CutClick(Sender: TObject);
+    procedure pmenLOG_PasteClick(Sender: TObject);
+    procedure pmenLOG_SelectAllClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -20310,6 +20315,36 @@ begin
   menEdit_UndoClick(nil);
 end;
 
+procedure TfrmMain.pmenLOG_CopyClick(Sender: TObject);
+begin
+  menEdit_CopyClick(nil);
+end;
+
+procedure TfrmMain.pmenLOG_CutClick(Sender: TObject);
+begin
+  menEdit_CutClick(nil);
+end;
+
+procedure TfrmMain.pmenLOG_PasteClick(Sender: TObject);
+begin
+  menEdit_PasteClick(nil);
+end;
+
+procedure TfrmMain.pmenLOG_RedoClick(Sender: TObject);
+begin
+  menEdit_RedoClick(nil);
+end;
+
+procedure TfrmMain.pmenLOG_SelectAllClick(Sender: TObject);
+begin
+  menEdit_SelectAllClick(nil);
+end;
+
+procedure TfrmMain.pmenLOG_UndoClick(Sender: TObject);
+begin
+  menEdit_UndoClick(nil);
+end;
+
 procedure TfrmMain.pmemRResCurrentLineToTopClick(Sender: TObject);
 begin
   with actRCurrentLineToTop do
@@ -21036,24 +21071,16 @@ begin
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          ExecuteCommand(ecCopy,
-                         #0,
-                         nil);
+          CopyToClipboard;
      // synEditor2
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          ExecuteCommand(ecCopy,
-                         #0,
-                         nil);
+          CopyToClipboard;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
-          ExecuteCommand(ecCopy,
-                         #0,
-                         nil);
+          CopyToClipboard;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
-          ExecuteCommand(ecCopy,
-                         #0,
-                         nil);
+          CopyToClipboard;
   end;
 end;
 
@@ -21096,23 +21123,17 @@ begin
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          ExecuteCommand(ecPaste,
-                         #0,
-                         nil);
+          PasteFromClipboard;
 
      // synEditor2
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          ExecuteCommand(ecPaste,
-                         #0,
-                         nil);
+          PasteFromClipboard;
 
      // synIO
      3: begin
         with (frmRterm.synIO as TSynEdit) do begin
           if not frmMain.fRterm_Running then begin
-            ExecuteCommand(ecPaste,
-                           #0,
-                           nil);
+            PasteFromClipboard;
             Exit;
           end;
         end;
@@ -21124,77 +21145,7 @@ begin
 
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
-          ExecuteCommand(ecPaste,
-                         #0,
-                         nil);
-  end;
-end;
-
-procedure TfrmMain.menEdit_RedoClick(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLOG: TSynEdit;
-
-begin
-  iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          ExecuteCommand(ecRedo,
-                         #0,
-                         nil);
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          ExecuteCommand(ecRedo,
-                         #0,
-                         nil);
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          ExecuteCommand(ecRedo,
-                         #0,
-                         nil);
-     // synLOG and synLOG2
-     4: with (seLOG as TSynEdit) do
-          ExecuteCommand(ecRedo,
-                         #0,
-                         nil);
-  end;
-end;
-
-procedure TfrmMain.menEdit_SelectallClick(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLOG: TSynEdit;
-
-begin
-  iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          ExecuteCommand(ecSelectAll,
-                         #0,
-                         nil);
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          ExecuteCommand(ecSelectAll,
-                         #0,
-                         nil);
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          ExecuteCommand(ecSelectAll,
-                         #0,
-                         nil);
-     // synLOG and synLOG2
-     4: with (seLOG as TSynEdit) do
-          ExecuteCommand(ecSelectAll,
-                         #0,
-                         nil);
+          PasteFromClipboard;
   end;
 end;
 
@@ -21211,24 +21162,68 @@ begin
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          ExecuteCommand(ecUndo,
-                         #0,
-                         nil);
+          Undo;
      // synEditor2
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          ExecuteCommand(ecUndo,
-                         #0,
-                         nil);
+          Undo;
      // synIO
      3: with (frmRterm.synIO as TSynEdit) do
-          ExecuteCommand(ecUndo,
-                         #0,
-                         nil);
+          Undo;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
-          ExecuteCommand(ecUndo,
-                         #0,
-                         nil);
+          Undo;
+  end;
+end;
+
+procedure TfrmMain.menEdit_RedoClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLog: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLOG2
+                                else seLog:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          Redo;
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          Redo;
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          Redo;
+     // synLOG and synLOG2
+     4: with (seLog as TSynEdit) do
+          Redo;
+  end;
+end;
+
+procedure TfrmMain.menEdit_SelectallClick(Sender: TObject);
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  iFocus:= fGet_Focus;
+  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
+                                else seLOG:= frmRterm.synLOG;
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          SelectAll;
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          SelectAll;
+     // synIO
+     3: with (frmRterm.synIO as TSynEdit) do
+          SelectAll;
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          SelectAll;
   end;
 end;
 
@@ -22854,56 +22849,14 @@ begin
   end;
 end;
 
-procedure TfrmMain.btRedoClick(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLOG: TSynEdit;
-
+procedure TfrmMain.btUndoClick(Sender: TObject);
 begin
-  iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          Redo;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          REdo;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          Redo;
-     // synLOG and synLOG2
-     4: with (seLOG as TSynEdit) do
-          Redo;
-  end;
+  menEdit_UndoClick(nil);
 end;
 
-procedure TfrmMain.btUndoClick(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLOG: TSynEdit;
-
+procedure TfrmMain.btRedoClick(Sender: TObject);
 begin
-  iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          Undo;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          Undo;
-     // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
-          Undo;
-     // synLOG and synLOG2
-     4: with (seLOG as TSynEdit) do
-          Undo;
-  end;
+  menEdit_RedoClick(nil);
 end;
 
 procedure TfrmMain.actProjectVisibleExecute(Sender: TObject);
@@ -24082,88 +24035,6 @@ procedure TfrmMain.LatexHeader(Sender: TObject);
 begin
   with Sender as TAction do
     pInsertLatex(Tag);
-end;
-
-
-procedure TfrmMain.Loadstream1Click(Sender: TObject);
-{
-var
-  seEditor: TSynEdit;
-
-  sEditor: string;
-
-  stream: TStream;
-
-begin
-  sEditor:= 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\app_data\editor' +
-            '\Editor.kst';
-
-  if FileExists(sEditor) then begin
-    stream:= TFileStream.Create(sEditor,
-                                fmOpenRead);
-
-    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
-                                       else seEditor:= synEditor2;
-
-    with seEditor.Lines do
-     LoadFromStream(stream);
-
-    FreeAndNil(stream);
-  end;
-end;
-}
-var
-  i: integer;
-
-  sTmp1,
-    sTmp2,
-    sTmp3: string;
-
-  seEditor: TSynEdit;
-
-  slTmp: TStringList;
-
-begin
-//  ShowMessage(IntToStr(coEditor.Keystrokes.FindCommand(ecPaste)));
-
-//  i:= coEditor.Keystrokes.FindShortcut(TextToShortcut('Ctrl+V'));
-//  if (i >= 0) then begin
-//    with coEditor.Keystrokes.Items[i] do begin
-//      sTmp1:= EditorCommandToCodeString(Command);
-//      sTmp2:= IntToStr(Key);
-//      sTmp3:= ShortcutToText(ShortCut);
-//    end;
-//    ShowMessage(IntToStr(i) + ' | ' +
-//                      sTmp1 + ' | ' +
-//                      sTmp2 + ' | ' +
-//                      sTmp3)
-//  end;
-
-  slTmp:= TStringList.Create;
-  try
-    for i:= 0 to (coEditor.Keystrokes.Count-1) do begin
-      with coEditor.Keystrokes.Items[i] do begin
-        sTmp1:= EditorCommandToCodeString(Command);
-        sTmp2:= IntToStr(Key);
-        sTmp3:= ShortcutToText(ShortCut);
-      end;
-
-      slTmp.Add(IntToStr(i) + ' | ' +
-                      sTmp1 + ' | ' +
-                      sTmp2 + ' | ' +
-                      sTmp3);
-    end;
-
-    actFileNewExecute(nil);
-    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
-                                       else seEditor:= synEditor2;
-
-    seEditor.Lines.AddStrings(slTmp);
-  finally
-    FreeAndNil(slTmp);
-  end;
 end;
 
 procedure TfrmMain.LatexFont(Sender: TObject);

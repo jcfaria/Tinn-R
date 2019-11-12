@@ -1189,8 +1189,6 @@ var
    sPrior,
    sAfter: string;
 
-//  sEfective: string;
-
 begin
   bIO_Keyed:= True;  // Some instruction was typed in the RTerm_IO!
 
@@ -1822,7 +1820,7 @@ var
       CaretX := CaretX - i;
     end;
 
-    key:= #0;  // make nul the key pressed
+    key:= #0;  // make null the key pressed
   end;
 
 begin
