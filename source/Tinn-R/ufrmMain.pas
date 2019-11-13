@@ -21116,6 +21116,8 @@ var
 
   seLOG: TSynEdit;
 
+  sLine: string;
+
 begin
   iFocus:= fGet_Focus;
   if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
@@ -21132,15 +21134,26 @@ begin
      // synIO
      3: begin
         with (frmRterm.synIO as TSynEdit) do begin
-          if not frmMain.fRterm_Running then begin
-            PasteFromClipboard;
-            Exit;
-          end;
-        end;
+          sLine:= trim(LineText);
+          sLine:= StringReplace(sLine,
+                                '>',
+                                '',
+                                []);
 
-        with (frmRterm.synIO as TSynEdit) do
-          if (CaretY = Lines.Count) then
-            pSend_Clipboard_ToRterm;
+          if (not frmMain.fRterm_Running) then
+            PasteFromClipboard
+          else
+            if (CaretY <> Lines.Count) then
+              PasteFromClipboard
+            else
+              if (sLine <> '') then
+                PasteFromClipboard
+              else
+                if fSingleLine(Clipboard.AsText) then
+                  PasteFromClipboard
+                else
+                  pSend_Clipboard_ToRterm;
+        end;
      end;
 
      // synLOG and synLOG2
