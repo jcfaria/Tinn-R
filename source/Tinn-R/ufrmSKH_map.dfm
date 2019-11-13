@@ -91,7 +91,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsRHotkeys
+    ActivePage = tbsAppShortcuts
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -741,7 +741,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 0
         Width = 615
         Height = 435
-        ActivePage = tbsRH_Custom
+        ActivePage = tbsRH_Send
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

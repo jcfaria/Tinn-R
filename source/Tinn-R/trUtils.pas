@@ -58,8 +58,8 @@ type
   function fDataFolder: string;
   function fDirectory_IsEmpty(Directory: string): boolean;
   function fDownload_File(const url: string; const sFileName: string): boolean;
-  function fExec_Wait(const sFileName, sParams: string; wWindowState: Word): boolean;
   function fExec_CmdLine_Wait(const CmdLine: string; wWindowState: Word): boolean;
+  function fExec_Wait(const sFileName, sParams: string; wWindowState: Word): boolean;
   function fFile_Exists_PuTTY(sFile, sFileRemote, sPuTTYPath, sPuTTYPassword, sPuTTYUser, sPuTTYHost: string): boolean;
   function fFile_InUse(sFile: string): boolean;
   function fFile_Save_Fast(sFile, sContent: string): boolean;
@@ -112,10 +112,10 @@ type
   procedure pOpen_Program(sProg, sParams: string);
   procedure pOpen_Url(const sURL: string);
   procedure pOpen_UrlByIEShell(const sURL: string);
-  procedure pSend_Message(msg: HINST);
   procedure pRemove_Line_Commented(var sTmp: string);
   procedure pRemove_Line_Empty(var sTmp: string);
   procedure pRestore_PriorClipboard_Text;
+  procedure pSend_Message(msg: HINST);
   procedure pSet_EnvVariable(Name, Value: string; User: boolean = True);
   procedure pString_Split(const cDelimiter: Char; sInput: string; const tsStrings: TStrings);
 

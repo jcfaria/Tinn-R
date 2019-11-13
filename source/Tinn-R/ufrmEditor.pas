@@ -101,8 +101,8 @@ type
     spEditor           : TSplitter;
 
 
-    function fMessageDlg(const Msg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons; HelpCtx: Integer): Integer;
     function fDoSave_ModifiedFileQuery: boolean;
+    function fMessageDlg(const Msg: string; DlgType: TMsgDlgType; Buttons: TMsgDlgButtons; HelpCtx: Integer): Integer;
 
     procedure pDoSave_FileState;
     procedure pSetHighlighter_FromTag(iTag: integer);
@@ -142,6 +142,7 @@ type
     procedure pDate_Stamp;
     procedure pDo_CardInsert;
     procedure pDo_Completion_Insert(bSearch: boolean = False);
+    procedure pDo_SearchReplace(bReplace, bSearchAgain: boolean; bMessage: boolean = True);
     procedure pDo_Tip_Insert;
     procedure pEditor_RemoveSplit;
     procedure pEditor_Split(bSplitHoriz: boolean = True);
@@ -159,22 +160,21 @@ type
     procedure pInvert_Case;
     procedure pInvert_Selection;
     procedure pLine_Select;
+    procedure pLineWrap_Toogle(bChecked: boolean);
     procedure pLowerCase_Selection;
     procedure pLowerCase_Word;
     procedure pNormal_Select;
+    procedure pNotify_File_Start(sTmp: string);
+    procedure pNotify_File_Stop;
     procedure pReplace;
     procedure pSearch_Error(sTmp: string);
     procedure pSet_Highlighter_FromFileExt(sExt: string);
     procedure pSet_Highlighter_Status(Sender: TObject);
     procedure pSet_Title;
-    procedure pLineWrap_Toogle(bChecked: boolean);
     procedure pUncomment(sStartComment, sEndComment: string; rfTmp: TReplaceFlags = []);
     procedure pUnindent_Block;
     procedure pUpperCase_Selection;
     procedure pUpperCase_Word;
-    procedure pNotify_File_Start(sTmp: string);
-    procedure pNotify_File_Stop;
-    procedure pDo_SearchReplace(bReplace, bSearchAgain: boolean; bMessage: boolean = True);
 
    protected
     procedure Loaded; override;

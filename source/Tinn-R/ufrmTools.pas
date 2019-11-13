@@ -506,12 +506,15 @@ type
     procedure cbExplorerFavoritesChange(Sender: TObject);
     procedure dbeRmirrorsURLClick(Sender: TObject);
     procedure dbeRmirrorsURLMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure dbgCommentsDblClick(Sender: TObject);
     procedure dbgCompletionDblClick(Sender: TObject);
     procedure dbgCompletionKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure dbgRcardDblClick(Sender: TObject);
     procedure dbgRCardKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure dbgRmirrorsDblClick(Sender: TObject);
     procedure dbgRtipDblClick(Sender: TObject);
     procedure dbgRtipKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure dbgShortcutsDblClick(Sender: TObject);
     procedure edToolsRExplorerFilterKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edWinExplorerFilterKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edWorkExplorerFilterKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -574,9 +577,6 @@ type
     procedure tvSearchDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure tvSearchEndDrag(Sender, Target: TObject; X, Y: Integer);
     procedure tvSearchStartDrag(Sender: TObject; var DragObject: TDragObject);
-    procedure dbgShortcutsDblClick(Sender: TObject);
-    procedure dbgCommentsDblClick(Sender: TObject);
-    procedure dbgRmirrorsDblClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -1593,8 +1593,8 @@ begin
 
         if (csRExplorer.Active) then csRExplorer.Socket.SendText(sToSend +
                                                                  #13#10)
-                                else fCodeSender.pSendChar(sToSend,
-                                                           hRgui);
+                                else fCodeSender.pSend_Char(sToSend,
+                                                            hRgui);
 
         pSet_Focus_Rgui(iDelay div 4);
       end;

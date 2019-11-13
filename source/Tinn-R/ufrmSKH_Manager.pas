@@ -24,16 +24,17 @@ type
     lbId_Check: TLabel;
     lbWhere_Check: TLabel;
 
-    procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure bbtCheckClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure gbKeystrokesEnter(Sender: TObject);
 
   private
     { Private declarations }
 
     function fCheck_Reserved: boolean;
+
     procedure pSet_LabelColor(clTmp: TColor);
 
   public

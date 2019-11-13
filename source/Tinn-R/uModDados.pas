@@ -158,23 +158,23 @@ type
     slShortcuts_Groups  : TStringList;  //Stores groups of Shortcuts
 
     function fActionlist_To_Dataset: boolean;
-    function fLoad_FileState(sFile: string; var sMarks: string; var iTopLine: integer; var iCaretX: integer; var iCaretY: integer): boolean;
-    function fCheck_Shortcut_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
-    function fCheck_Hotkey_RH_Send(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fCheck_Hotkey_RH_Control(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fCheck_Hotkey_RH_Custom(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_Hotkey_RH_Send(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
     function fCheck_keystroke_Editor(sKeystroke: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fCheck_Shortcut_App(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
+    function fGet_keystroke_Editor(Command: string): string;
+    function fLoad_FileState(sFile: string; var sMarks: string; var iTopLine: integer; var iCaretX: integer; var iCaretY: integer): boolean;
     function fRmirrors_Update(sFile: string): boolean;
     function fSave_FileState(sFile, sMarks: string; iTopLine, iCaretX, iCaretY: integer): boolean;
-    function fGet_keystroke_Editor(Command: string): string;
 
     procedure pCompletionGroups_Filter(Sender: TObject);
     procedure pRcardGroups_Filter(Sender: TObject);
     procedure pRmirrorsCountries_Filter(Sender: TObject);
     procedure pSet_Current_Highlighter(sLanguage: string);
-    procedure pShortcutsGroups_Filter(Sender: TObject);
     procedure pShortcuts_Validation(sOldShortcutsFile, sNewShortcutsFile: string);
-//    procedure mtest;
+    procedure pShortcutsGroups_Filter(Sender: TObject);
+
   end;
 
 var

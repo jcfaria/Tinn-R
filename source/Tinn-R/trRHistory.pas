@@ -64,8 +64,9 @@ type
     iCur: integer;
     sLatest: string;
 
-    function fGetEmpty: integer;
-    function fGetFirstNoEmpty(sDirection: string): integer;
+    function fGet_Empty: integer;
+    function fGet_FirstNoEmpty(sDirection: string): integer;
+
     procedure pRestructure;
     procedure pReorder(iPos, iEmpty: integer; sInstruction: string);
 
@@ -76,10 +77,10 @@ type
     constructor Create;
     destructor Free;
 
-    function fGetNext: string;
-    function fGetPrior: string;
-    function fLoadFromFile(sPath: string): boolean;
-    function fSaveToFile(sPath: string): boolean;
+    function fGet_Next: string;
+    function fGet_Prior: string;
+    function fLoad_FromFile(sPath: string): boolean;
+    function fSave_ToFile(sPath: string): boolean;
 
     procedure Add(sInstruction: string);
   end;
@@ -104,7 +105,7 @@ var
    iPos: integer;
 
 begin
-  iCur:= fGetEmpty;
+  iCur:= fGet_Empty;
 
   iPos:= -1;
   // Try to find a prior occurence of sInstruction in the array aRHistory
@@ -152,7 +153,7 @@ begin
   aRHistory[99]:= '';
 end;
 
-function TRHistory.fGetEmpty: integer;
+function TRHistory.fGet_Empty: integer;
 var
   i: integer;
 
@@ -170,7 +171,7 @@ begin
   end;
 end;
 
-function TRHistory.fGetFirstNoEmpty(sDirection: string): integer;
+function TRHistory.fGet_FirstNoEmpty(sDirection: string): integer;
 var
   i: integer;
 
@@ -191,11 +192,11 @@ begin
       end;
 end;
 
-function TRHistory.fGetPrior: string;
+function TRHistory.fGet_Prior: string;
 begin
   if (sLatest <> 'Add') then iCur:= iCur - 1;
 
-  if (iCur = -1) then iCur:= fGetFirstNoEmpty('Prior');
+  if (iCur = -1) then iCur:= fGet_FirstNoEmpty('Prior');
 
   if (iCur < 0) then Exit;
 
@@ -209,14 +210,14 @@ begin
   Result := aRHistory[iCur];
 end;
 
-function TRHistory.fGetNext: string;
+function TRHistory.fGet_Next: string;
 begin
   case iCur of
     0..98: iCur:= iCur + 1;
        99: iCur:= 0;
   end;
 
-  if aRHistory[iCur] = '' then iCur:= fGetFirstNoEmpty('Next');
+  if aRHistory[iCur] = '' then iCur:= fGet_FirstNoEmpty('Next');
 
   if (iCur < 0) then Exit;
 
@@ -230,7 +231,7 @@ begin
   Result:= aRHistory[iCur];
 end;
 
-function TRHistory.fSaveToFile(sPath: string): boolean;
+function TRHistory.fSave_ToFile(sPath: string): boolean;
 var
   tfTmp: TextFile;
 
@@ -255,7 +256,7 @@ begin
   end;
 end;
 
-function TRHistory.fLoadFromFile(sPath: string): boolean;
+function TRHistory.fLoad_FromFile(sPath: string): boolean;
 var
   tfTmp: TextFile;
 

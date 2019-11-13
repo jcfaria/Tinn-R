@@ -98,84 +98,85 @@ type
     edKeys_Editor_Filter: TEdit;
     JvDBNavigator5: TJvDBNavigator;
     dbgKeys_Editor: TDBGrid;
-    procedure FormShow(Sender: TObject);
-    procedure dbgShortcutsDblClick(Sender: TObject);
-    procedure lvKeystrokesDblClick(Sender: TObject);
-    procedure strgHK_SendDblClick(Sender: TObject);
-    procedure strgHK_ControlDblClick(Sender: TObject);
-    procedure strgHK_CustomDblClick(Sender: TObject);
-    procedure strgHK_CU2DblClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure bbtShortcuts_RestoreDefaultClick(Sender: TObject);
-    procedure bbtShortcuts_CancelAllClick(Sender: TObject);
+
+    procedure bbtHotkeys_RestoreDefaultClick(Sender: TObject);
+    procedure bbtKeystrokes_RestoreDefaultClick(Sender: TObject);
     procedure bbtShortcut_HelpClick(Sender: TObject);
-    procedure bbtShortcuts_SaveDefaultClick(Sender: TObject);
-    procedure bbtShortcuts_SaveClick(Sender: TObject);
+    procedure bbtShortcuts_CancelAllClick(Sender: TObject);
     procedure bbtShortcuts_CancelClick(Sender: TObject);
     procedure bbtShortcuts_EditClick(Sender: TObject);
     procedure bbtShortcuts_LoadClick(Sender: TObject);
-    procedure dbgShortcutsTitleClick(Column: TColumn);
+    procedure bbtShortcuts_ManagerClick(Sender: TObject);
+    procedure bbtShortcuts_RestoreDefaultClick(Sender: TObject);
+    procedure bbtShortcuts_SaveClick(Sender: TObject);
+    procedure bbtShortcuts_SaveDefaultClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure btnKeys_Editor_ClearClick(Sender: TObject);
+    procedure btnNew_RH_CustomClick(Sender: TObject);
+    procedure btnRH_ClearClick(Sender: TObject);
+    procedure dbgKeys_EditorDblClick(Sender: TObject);
+    procedure dbgKeys_EditorEnter(Sender: TObject);
+    procedure dbgKeys_EditorTitleClick(Column: TColumn);
+    procedure dbgRH_ControlDblClick(Sender: TObject);
+    procedure dbgRH_ControlTitleClick(Column: TColumn);
+    procedure dbgRH_CustomDblClick(Sender: TObject);
+    procedure dbgRH_CustomEnter(Sender: TObject);
+    procedure dbgRH_CustomKeyPress(Sender: TObject; var Key: Char);
+    procedure dbgRH_CustomTitleClick(Column: TColumn);
+    procedure dbgRH_SendDblClick(Sender: TObject);
+    procedure dbgRH_SendTitleClick(Column: TColumn);
+    procedure dbgShortcutsDblClick(Sender: TObject);
     procedure dbgShortcutsEnter(Sender: TObject);
     procedure dbgShortcutsKeyPress(Sender: TObject; var Key: Char);
+    procedure dbgShortcutsTitleClick(Column: TColumn);
+    procedure edApp_Filter_CaptionChange(Sender: TObject);
+    procedure edApp_Filter_GroupChange(Sender: TObject);
     procedure edApp_Search_CaptionChange(Sender: TObject);
     procedure edApp_Search_CaptionEnter(Sender: TObject);
     procedure edApp_Search_GroupChange(Sender: TObject);
     procedure edApp_Search_GroupEnter(Sender: TObject);
-    procedure edApp_Filter_CaptionChange(Sender: TObject);
-    procedure edApp_Filter_GroupChange(Sender: TObject);
-    procedure bbtShortcuts_ManagerClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure rdgTinnRHotKeysClick(Sender: TObject);
-    procedure btnRH_ClearClick(Sender: TObject);
-    procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
-    procedure pgRHChange(Sender: TObject);
-    procedure pgSKHChange(Sender: TObject);
-    procedure edRH_Send_Filter_CaptionChange(Sender: TObject);
-    procedure edRH_Control_Filter_CaptionChange(Sender: TObject);
-    procedure edRH_Custom_Filter_CaptionChange(Sender: TObject);
-    procedure edRH_Send_Search_CaptionChange(Sender: TObject);
-    procedure edRH_Control_Search_CaptionChange(Sender: TObject);
-    procedure edRH_Custom_Search_CaptionChange(Sender: TObject);
-    procedure btnNew_RH_CustomClick(Sender: TObject);
-    procedure dbgRH_CustomEnter(Sender: TObject);
-    procedure dbgRH_CustomKeyPress(Sender: TObject; var Key: Char);
     procedure edKeys_Editor_FilterChange(Sender: TObject);
     procedure edKeys_Editor_SearchChange(Sender: TObject);
-    procedure btnKeys_Editor_ClearClick(Sender: TObject);
-    procedure dbgKeys_EditorTitleClick(Column: TColumn);
-    procedure dbgKeys_EditorEnter(Sender: TObject);
-    procedure dbgRH_SendDblClick(Sender: TObject);
-    procedure dbgRH_ControlDblClick(Sender: TObject);
-    procedure dbgRH_CustomDblClick(Sender: TObject);
-    procedure dbgKeys_EditorDblClick(Sender: TObject);
-    procedure bbtKeystrokes_RestoreDefaultClick(Sender: TObject);
-    procedure bbtHotkeys_RestoreDefaultClick(Sender: TObject);
-    procedure dbgRH_SendTitleClick(Column: TColumn);
-    procedure dbgRH_ControlTitleClick(Column: TColumn);
-    procedure dbgRH_CustomTitleClick(Column: TColumn);
+    procedure edRH_Control_Filter_CaptionChange(Sender: TObject);
+    procedure edRH_Control_Search_CaptionChange(Sender: TObject);
+    procedure edRH_Custom_Filter_CaptionChange(Sender: TObject);
+    procedure edRH_Custom_Search_CaptionChange(Sender: TObject);
+    procedure edRH_Send_Filter_CaptionChange(Sender: TObject);
+    procedure edRH_Send_Search_CaptionChange(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure lvKeystrokesDblClick(Sender: TObject);
+    procedure pgRHChange(Sender: TObject);
+    procedure pgSKHChange(Sender: TObject);
+    procedure rdgTinnRHotKeysClick(Sender: TObject);
+    procedure strgHK_ControlDblClick(Sender: TObject);
+    procedure strgHK_CU2DblClick(Sender: TObject);
+    procedure strgHK_CustomDblClick(Sender: TObject);
+    procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+    procedure strgHK_SendDblClick(Sender: TObject);
 
   private
     { Private declarations }
 
     procedure pAppMessage(var Msg: TMSG; var bHandled: Boolean);
     procedure pClear_Warnings;
-    procedure pCreate_Hotkey_Send(i: integer; sTmp: string);
     procedure pCreate_Hotkey_Control(i: integer; sTmp: string);
+    procedure pCreate_Hotkey_Send(i: integer; sTmp: string);
+    procedure pDo_HotKey_Control(Sender: TObject);
     procedure pDo_HotKey_Custom(Sender: TObject);
     procedure pDo_HotKey_Send(Sender: TObject);
-    procedure pDo_HotKey_Control(Sender: TObject);
-    procedure pSKR_Clear_From(iSKH_Used_By: integer; sSHK: string);
     procedure pSKR_Assign_To(iSKH_Assign_To, iDx: integer; sSHK: string);
+    procedure pSKR_Clear_From(iSKH_Used_By: integer; sSHK: string);
 
   public
     { Public declarations }
     dlgSKH_Manager   : TfrmSKH_Manager_Dlg;
     eKeyShort        : TSynHotKey;
-    iSKH_Used_By     : integer;
-    iSKH_Assign_To   : integer;
     iDx              : integer;  // índice of the editor keystrokes/R hotkey in their respective stringGrid
+    iSKH_Assign_To   : integer;
+    iSKH_Used_By     : integer;
 
     procedure pCreate_Hotkey_Custom(i: integer; sTmp: string);
   end;
@@ -1413,9 +1414,21 @@ begin
 end;
 
 procedure TfrmSKH_Map_Dlg.FormShow(Sender: TObject);
+
+  // From: https://stackoverflow.com/questions/42624343/delphi-command-to-clear-all-tedit
+  procedure pClear_Edits(Owner: TWinControl);
+  var
+    i: integer;
+
+  begin
+    for i:= 0 to (Owner.ComponentCount - 1) do
+      if Owner.Components[i] is TEdit then TEdit(Owner.Components[i]).Clear;
+  end;
+
 begin
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
   rdgTinnRHotKeys.ItemIndex:= Integer(frmMain.bHotKeys_On);
+  pClear_Edits(Self);
 end;
 
 procedure TfrmSKH_Map_Dlg.lvKeystrokesDblClick(Sender: TObject);

@@ -35,6 +35,8 @@
 \03. pas_internal
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trCodeSender.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRHistory.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRutils.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSendSmart.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trSynUtils.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
@@ -63,7 +65,8 @@
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearch.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearchInFiles.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSplash.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas

@@ -59,8 +59,8 @@ type
     class function Instance: TCodeSender;
     class procedure ReleaseInstance;
 
-    procedure pSendString(const sValue: string; const iDelay: Integer = 0); virtual; abstract;
-    procedure pSendCommand(const sValue: string; const iDelay: Integer = 0); virtual; abstract;
+    procedure pSend_String(const sValue: string; const iDelay: Integer = 0); virtual; abstract;
+    procedure pSend_Command(const sValue: string; const iDelay: Integer = 0); virtual; abstract;
   end;
 
   TKeySender = class(TCodeSender)
@@ -72,10 +72,10 @@ type
 //    procedure pSendPaste;
 
   public
-    procedure pDoPrepare;
-    procedure pSendCommand(const sValue: string; const iDelay: Integer = 0); override;
-    procedure pSendChar(const sValue: string; const RHandle: HWND; const iDelay: Integer = 0);
-    procedure pSendString(const sValue: string; const iDelay: Integer = 0); override;
+    procedure pDo_Prepare;
+    procedure pSend_Char(const sValue: string; const RHandle: HWND; const iDelay: Integer = 0);
+    procedure pSend_Command(const sValue: string; const iDelay: Integer = 0); override;
+    procedure pSend_String(const sValue: string; const iDelay: Integer = 0); override;
     property pGuiCaption: string read FGuiCaption write FGuiCaption;
     property pGuiHandle: Cardinal read FGuiHandle write FGuiHandle;
   end;
@@ -137,19 +137,19 @@ begin
 end;
 
 { TKeySender }
-procedure TKeySender.pDoPrepare;
+procedure TKeySender.pDo_Prepare;
 begin
   AppActivate(FGuiHandle);
   //if (GetGUIType(FGuiCaption) = gtSciViewsR) then fCodeSender.pSendString('%w1', 50);   //switch to R console window
-  pSendString('^u',
-              50); //Clear R line in edition
+  pSend_String('^u',
+               50); //Clear R line in edition
 end;
 
-procedure TKeySender.pSendCommand(const sValue: string;
-                                  const iDelay: Integer = 0);
+procedure TKeySender.pSend_Command(const sValue: string;
+                                   const iDelay: Integer = 0);
 begin
-  pSendString(sValue,
-              iDelay);
+  pSend_String(sValue,
+               iDelay);
   pSendEnter;
 end;
 
@@ -165,22 +165,22 @@ end;
 //           True);
 //end;
 
-procedure TKeySender.pSendString(const sValue: string;
-                                 const iDelay: Integer = 0);
+procedure TKeySender.pSend_String(const sValue: string;
+                                  const iDelay: Integer = 0);
 begin
   SendKeys(PChar(sValue),
            True);
   Sleep(iDelay);
 end;
 
-procedure TKeySender.pSendChar(const sValue: string;
-                               const RHandle: HWND;
-                               const iDelay: Integer = 0);
+procedure TKeySender.pSend_Char(const sValue: string;
+                                const RHandle: HWND;
+                                const iDelay: Integer = 0);
 var
   i: integer;
 
 begin
-  pDoPrepare;
+  pDo_Prepare;
   for i:= 1 to Length(sValue) do
     PostMessage(RHandle,
                 WM_CHAR,

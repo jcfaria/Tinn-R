@@ -532,6 +532,7 @@ type
     {$ENDIF}
 
     function fGetColor(Item: TMenuItem): TColor;
+
     procedure pShowAdjustedFont(lbl: TLabel; pan: TPanel);
     procedure pRAvailable_Set;
 

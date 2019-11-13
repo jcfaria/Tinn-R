@@ -140,6 +140,7 @@ type
     procedure cRTermReceiveError(Sender: TObject; const Cmd: string);
     procedure cRTermReceiveOutput(Sender: TObject; const Cmd: string);
     procedure FormCreate(Sender: TObject);
+    procedure FormHide(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure pgRtermResize(Sender: TObject);
     procedure synIOEnter(Sender: TObject);
@@ -149,10 +150,9 @@ type
     procedure synIOMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure synLOGEnter(Sender: TObject);
     procedure synLOGKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure synLOGKeyPress(Sender: TObject; var Key: WideChar);
     procedure synLOGKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synLOGMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure synLOGKeyPress(Sender: TObject; var Key: WideChar);
-    procedure FormHide(Sender: TObject);
 
   private
     { Private declarations }
@@ -164,9 +164,9 @@ type
 
     procedure CMDialogKey(var Message: TCMDialogKey); message CM_DIALOGKEY;
 
+    procedure pCtrl_Tab(bNext: boolean = True);
     procedure pSetCursorRestriction;
     procedure psplRIOMoved(Sender: TObject);
-    procedure pCtrl_Tab(bNext: boolean = True);
 
   public
     { Public declarations }
@@ -176,9 +176,9 @@ type
     bRUnderDebug_Function : boolean;
     bRUnderDebug_Package  : boolean;
     bRUnderScan_Function  : boolean; // 1:
+    iSize                 : integer;
     iSynLOG2Height        : integer;
     iSynLOG2Width         : integer;
-    iSize                 : integer;
     splRIO                : TSplitter;
     sRDebug_Prefix        : string;
     sRScan_Prefix         : string;  // X:

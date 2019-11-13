@@ -1,4 +1,4 @@
-﻿{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
+{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
 {$MINSTACKSIZE $00004000}
 {$MAXSTACKSIZE $00100000}
 {$IMAGEBASE $00400000}
@@ -2085,6 +2085,7 @@ type
     procedure actLatexAlgebricFracExecute(Sender: TObject);
     procedure actLatexAlgebricSqrtExecute(Sender: TObject);
     procedure actLatexAlgebricSqrtNExecute(Sender: TObject);
+    procedure actLatexClearWasteExecute(Sender: TObject);
     procedure actLatexDimensionalExecute(Sender: TObject);
     procedure actLatexMakeIndexExecute(Sender: TObject);
     procedure actLatexToDviBibtexExecute(Sender: TObject);
@@ -2106,6 +2107,7 @@ type
     procedure actNotification_USExecute(Sender: TObject);
     procedure actNotificationExecute(Sender: TObject);
     procedure actOnTopExecute(Sender: TObject);
+    procedure actOpenCurrentFileExecute(Sender: TObject);
     procedure actOpenMaximizedExecute(Sender: TObject);
     procedure actOpenMRUExecute(Sender: TObject);
     procedure actOrganizeScreenExecute(Sender: TObject);
@@ -2133,6 +2135,7 @@ type
     procedure actRCardHelpExecute(Sender: TObject);
     procedure actRCardHelpSelectedExecute(Sender: TObject);
     procedure actRcardInsertExecute(Sender: TObject);
+    procedure actRCardOpenExampleSelectedExecute(Sender: TObject);
     procedure actRComplexDefaultExecute(Sender: TObject);
     procedure actRContClearAllExecute(Sender: TObject);
     procedure actRContClearConsoleExecute(Sender: TObject);
@@ -2147,6 +2150,7 @@ type
     procedure actRContListAllObjectsExecute(Sender: TObject);
     procedure actRContListVariableNamesExecute(Sender: TObject);
     procedure actRContListVariableStructureExecute(Sender: TObject);
+    procedure actRContOpenExampleSelectedWordExecute(Sender: TObject);
     procedure actRContPacAvailableExecute(Sender: TObject);
     procedure actRContPacInstalledExecute(Sender: TObject);
     procedure actRContPacInstallExecute(Sender: TObject);
@@ -2185,6 +2189,7 @@ type
     procedure actRExplorerHelpExecute(Sender: TObject);
     procedure actRExplorerHelpSelectedExecute(Sender: TObject);
     procedure actRExplorerNamesExecute(Sender: TObject);
+    procedure actRExplorerOpenExampleSelectedExecute(Sender: TObject);
     procedure actRExplorerPlotExecute(Sender: TObject);
     procedure actRExplorerRefreshExecute(Sender: TObject);
     procedure actRExplorerRemoveAllObjectsExecute(Sender: TObject);
@@ -2215,11 +2220,16 @@ type
     procedure actRSendLineExecute(Sender: TObject);
     procedure actRSendLinesToEndPageExecute(Sender: TObject);
     procedure actRSendSelectionExecute(Sender: TObject);
+    procedure actRSendSmartExecute(Sender: TObject);
     procedure actRSendSweaveExecute(Sender: TObject);
     procedure actRSimpleDefaultExecute(Sender: TObject);
     procedure actRtermAutoHideExecute(Sender: TObject);
     procedure actRtermDivideExecute(Sender: TObject);
     procedure actRtermEditorSetFocusExecute(Sender: TObject);
+    procedure actRtermIO_R_nMLExecute(Sender: TObject);
+    procedure actRtermIO_RExecute(Sender: TObject);
+    procedure actRtermIO_Text_nMLExecute(Sender: TObject);
+    procedure actRtermIO_TextExecute(Sender: TObject);
     procedure actRtermIOandLOGClearExecute(Sender: TObject);
     procedure actRtermIOClearExecute(Sender: TObject);
     procedure actRtermIOHistoryNextExecute(Sender: TObject);
@@ -2234,6 +2244,10 @@ type
     procedure actRtermIOSplitVerticalExecute(Sender: TObject);
     procedure actRtermLoadHistoryExecute(Sender: TObject);
     procedure actRtermLoadWorkspaceExecute(Sender: TObject);
+    procedure actRtermLOG_R_nMLExecute(Sender: TObject);
+    procedure actRtermLOG_RExecute(Sender: TObject);
+    procedure actRtermLOG_Text_nMLExecute(Sender: TObject);
+    procedure actRtermLOG_TextExecute(Sender: TObject);
     procedure actRtermLOGClearExecute(Sender: TObject);
     procedure actRtermLOGLineWrapExecute(Sender: TObject);
     procedure actRtermLOGPrintExecute(Sender: TObject);
@@ -2244,10 +2258,6 @@ type
     procedure actRtermMinimizeExecute(Sender: TObject);
     procedure actRtermSaveHistoryExecute(Sender: TObject);
     procedure actRtermSaveWorkspaceExecute(Sender: TObject);
-    procedure actRtermIO_RExecute(Sender: TObject);
-    procedure actRtermIO_TextExecute(Sender: TObject);
-    procedure actRtermLOG_RExecute(Sender: TObject);
-    procedure actRtermLOG_TextExecute(Sender: TObject);
     procedure actRtermTabsBottomExecute(Sender: TObject);
     procedure actRtermTabsLeftExecute(Sender: TObject);
     procedure actRtermTabsRightExecute(Sender: TObject);
@@ -2267,6 +2277,7 @@ type
     procedure actShortcutsHelpExecute(Sender: TObject);
     procedure actShowAllBarsExecute(Sender: TObject);
     procedure actShowAppOptionsExecute(Sender: TObject);
+    procedure actSKH_mapExecute(Sender: TObject);
     procedure actSortDateExecute(Sender: TObject);
     procedure actSortNumberExecute(Sender: TObject);
     procedure actSortStringExecute(Sender: TObject);
@@ -2332,6 +2343,8 @@ type
     procedure actWINExecute(Sender: TObject);
     procedure actWinExplVisibleExecute(Sender: TObject);
     procedure actWorkExplVisibleExecute(Sender: TObject);
+    procedure btRedoClick(Sender: TObject);
+    procedure btUndoClick(Sender: TObject);
     procedure csREnvironmentError(Sender: TObject; Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
     procedure csREnvironmentRead(Sender: TObject; Socket: TCustomWinSocket);
     procedure csRExplorerError(Sender: TObject; Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
@@ -2355,6 +2368,12 @@ type
     procedure LatexFormat(Sender: TObject);
     procedure LatexHeader(Sender: TObject);
     procedure lvRexplorerDblClick(Sender: TObject);
+    procedure menEdit_CopyClick(Sender: TObject);
+    procedure menEdit_CutClick(Sender: TObject);
+    procedure menEdit_PasteClick(Sender: TObject);
+    procedure menEdit_RedoClick(Sender: TObject);
+    procedure menEdit_SelectallClick(Sender: TObject);
+    procedure menEdit_UndoClick(Sender: TObject);
     procedure menEncConUTF8wClick(Sender: TObject);
     procedure menFileTemplateRdocDatasetClick(Sender: TObject);
     procedure menFileTemplateRdocEmptyClick(Sender: TObject);
@@ -2370,6 +2389,7 @@ type
     procedure menForLinEndConMACClick(Sender: TObject);
     procedure menForLinEndConUNIXClick(Sender: TObject);
     procedure menForLinEndConWINClick(Sender: TObject);
+    procedure menHelCheckForUpdateClick(Sender: TObject);
     procedure menHelCitationClick(Sender: TObject);
     procedure menHelExampleOfScriptClick(Sender: TObject);
     procedure menHelFileConversionDeplateClick(Sender: TObject);
@@ -2381,6 +2401,7 @@ type
     procedure menHelpRecognizedWordsClick(Sender: TObject);
     procedure menHelpStatHyperstatClick(Sender: TObject);
     procedure menHelpStatJSSClick(Sender: TObject);
+    procedure menHelpStatRJournalClick(Sender: TObject);
     procedure menHelpStatStatSoftClick(Sender: TObject);
     procedure menHelSecretsClick(Sender: TObject);
     procedure menHelUserGuideClick(Sender: TObject);
@@ -2404,11 +2425,13 @@ type
     procedure menWebR_helpClick(Sender: TObject);
     procedure menWebRguiRComanderClick(Sender: TObject);
     procedure menWebRGuiRStudioClick(Sender: TObject);
+    procedure menWebRGuiRTVSClick(Sender: TObject);
     procedure menWebRGuiTinnRLECClick(Sender: TObject);
     procedure menWebRguiTinnRSourceForgeClick(Sender: TObject);
     procedure menWebRGuiTinnRUserListClick(Sender: TObject);
     procedure menWebRInformationsBioconductorClick(Sender: TObject);
     procedure menWebRInformationsCRANClick(Sender: TObject);
+    procedure menWebRInformationsMRANClick(Sender: TObject);
     procedure menWebRInformationsNewsClick(Sender: TObject);
     procedure menWebRInformationsOmegaClick(Sender: TObject);
     procedure menWebRInformationsRWikiClick(Sender: TObject);
@@ -2431,6 +2454,7 @@ type
     procedure menWebtProcessingMikTeXClick(Sender: TObject);
     procedure menWebtProcessingPandocClick(Sender: TObject);
     procedure menWebtProcessingTxt2tagsClick(Sender: TObject);
+    procedure Nvim_R_pluginClick(Sender: TObject);
     procedure panProjectDockSiteDockDrop(Sender: TObject; Source: TDragDockObject; X, Y: Integer);
     procedure panProjectDockSiteUnDock(Sender: TObject; Client: TControl; NewTarget: TWinControl; var Allow: Boolean);
     procedure pgFilesChange(Sender: TObject);
@@ -2450,6 +2474,7 @@ type
     procedure pmemRResSendLineClick(Sender: TObject);
     procedure pmemRResSendLinesToEndPageClick(Sender: TObject);
     procedure pmemRResSendSelectionClick(Sender: TObject);
+    procedure pmemRResSendSmartClick(Sender: TObject);
     procedure pmemRResSendSweaveClick(Sender: TObject);
     procedure pmemSpellClearAllClick(Sender: TObject);
     procedure pmemSpellCopyClick(Sender: TObject);
@@ -2457,6 +2482,24 @@ type
     procedure pmemSpellDeleteClick(Sender: TObject);
     procedure pmemSpellPasteClick(Sender: TObject);
     procedure pmemSpellSelectAllClick(Sender: TObject);
+    procedure pmenEdit_CopyClick(Sender: TObject);
+    procedure pmenEdit_CutClick(Sender: TObject);
+    procedure pmenEdit_PasteClick(Sender: TObject);
+    procedure pmenEdit_RedoClick(Sender: TObject);
+    procedure pmenEdit_SelectAllClick(Sender: TObject);
+    procedure pmenEdit_UndoClick(Sender: TObject);
+    procedure pmenIO_CopyClick(Sender: TObject);
+    procedure pmenIO_CutClick(Sender: TObject);
+    procedure pmenIO_PasteClick(Sender: TObject);
+    procedure pmenIO_RedoClick(Sender: TObject);
+    procedure pmenIO_SelectAllClick(Sender: TObject);
+    procedure pmenIO_UndoClick(Sender: TObject);
+    procedure pmenLOG_CopyClick(Sender: TObject);
+    procedure pmenLOG_CutClick(Sender: TObject);
+    procedure pmenLOG_PasteClick(Sender: TObject);
+    procedure pmenLOG_RedoClick(Sender: TObject);
+    procedure pmenLOG_SelectAllClick(Sender: TObject);
+    procedure pmenLOG_UndoClick(Sender: TObject);
     procedure pmenProjRSendToRClick(Sender: TObject);
     procedure pmenProjRSetWorkDirClick(Sender: TObject);
     procedure pmenResultsOpenLinkClick(Sender: TObject);
@@ -2490,61 +2533,18 @@ type
     procedure sdMainTypeChange(Sender: TObject);
     procedure stbMainClick(Sender: TObject);
     procedure stbMainDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel; const Rect: TRect);
+    procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure synCompletion(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
+    procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
     procedure synIOClick(Sender: TObject);
     procedure synIOEnter(Sender: TObject);
     procedure synMRStateChange(Sender: TObject);
-    procedure synCompletion(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
     procedure tbFilterClick(Sender: TObject);
     procedure tbiPandocClick(Sender: TObject);
     procedure tbReloadClick(Sender: TObject);
     procedure TBRMainMove(Sender: TObject);
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
-    procedure Nvim_R_pluginClick(Sender: TObject);
-    procedure actOpenCurrentFileExecute(Sender: TObject);
-    procedure actRContOpenExampleSelectedWordExecute(Sender: TObject);
-    procedure actRExplorerOpenExampleSelectedExecute(Sender: TObject);
-    procedure actRtermIO_Text_nMLExecute(Sender: TObject);
-    procedure actRtermIO_R_nMLExecute(Sender: TObject);
-    procedure actRtermLOG_Text_nMLExecute(Sender: TObject);
-    procedure actRtermLOG_R_nMLExecute(Sender: TObject);
-    procedure menWebRGuiRTVSClick(Sender: TObject);
-    procedure menHelpStatRJournalClick(Sender: TObject);
-    procedure menWebRInformationsMRANClick(Sender: TObject);
-    procedure menHelCheckForUpdateClick(Sender: TObject);
-    procedure actRCardOpenExampleSelectedExecute(Sender: TObject);
-    procedure actRSendSmartExecute(Sender: TObject);
-    procedure pmemRResSendSmartClick(Sender: TObject);
-    procedure stbMainMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
-    procedure synIO_HistoryExecute(Kind: SynCompletionType; Sender: TObject; var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
-    procedure actLatexClearWasteExecute(Sender: TObject);
-    procedure actSKH_mapExecute(Sender: TObject);
-    procedure btUndoClick(Sender: TObject);
-    procedure btRedoClick(Sender: TObject);
-    procedure menEdit_CutClick(Sender: TObject);
-    procedure menEdit_UndoClick(Sender: TObject);
-    procedure menEdit_RedoClick(Sender: TObject);
-    procedure menEdit_CopyClick(Sender: TObject);
-    procedure menEdit_PasteClick(Sender: TObject);
-    procedure menEdit_SelectallClick(Sender: TObject);
-    procedure pmenEdit_UndoClick(Sender: TObject);
-    procedure pmenEdit_RedoClick(Sender: TObject);
-    procedure pmenEdit_CopyClick(Sender: TObject);
-    procedure pmenEdit_CutClick(Sender: TObject);
-    procedure pmenEdit_PasteClick(Sender: TObject);
-    procedure pmenEdit_SelectAllClick(Sender: TObject);
-    procedure pmenIO_UndoClick(Sender: TObject);
-    procedure pmenIO_RedoClick(Sender: TObject);
-    procedure pmenIO_CopyClick(Sender: TObject);
-    procedure pmenIO_CutClick(Sender: TObject);
-    procedure pmenIO_PasteClick(Sender: TObject);
-    procedure pmenIO_SelectAllClick(Sender: TObject);
-    procedure pmenLOG_UndoClick(Sender: TObject);
-    procedure pmenLOG_RedoClick(Sender: TObject);
-    procedure pmenLOG_CopyClick(Sender: TObject);
-    procedure pmenLOG_CutClick(Sender: TObject);
-    procedure pmenLOG_PasteClick(Sender: TObject);
-    procedure pmenLOG_SelectAllClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -2592,15 +2592,15 @@ type
     bUpdate_Cache                  : boolean;
     bUpdate_Comments               : boolean;
     bUpdate_Completion             : boolean;
+    bUpdate_Editor                 : boolean;
     bUpdate_Latex                  : boolean;
     bUpdate_Project                : boolean;
     bUpdate_Rcard                  : boolean;
-    bUpdate_Rmirrors               : boolean;
-    bUpdate_Shortcuts              : boolean;
-    bUpdate_RH_Send                : boolean;
     bUpdate_RH_Control             : boolean;
     bUpdate_RH_Custom              : boolean;
-    bUpdate_Editor                 : boolean; 
+    bUpdate_RH_Send                : boolean;
+    bUpdate_Rmirrors               : boolean;
+    bUpdate_Shortcuts              : boolean;
     iCols                          : integer;
     ifEditor                       : TIniFile;
     ifEditor_Tmp                   : TIniFile;
@@ -2619,29 +2619,31 @@ type
     iTimerCounter                  : integer;
     iViewStyleRExplorer            : integer;
     msHexViewer                    : TMemoryStream;
+    R_Useful                       : TR_Useful;
     rsSearch                       : TRegExpr;
     sApp_Data                      : string;
     sCurrentVersion_Cache          : string;
     sCurrentVersion_Comments       : string;
     sCurrentVersion_Completion     : string;
+    sCurrentVersion_Editor         : string;
     sCurrentVersion_Latex          : string;
     sCurrentVersion_Project        : string;
     sCurrentVersion_Rcard          : string;
-    sCurrentVersion_Rmirrors       : string;
-    sCurrentVersion_Shortcuts      : string;
-    sCurrentVersion_RH_Send        : string;
     sCurrentVersion_RH_Control     : string;
     sCurrentVersion_RH_Custom      : string;
-    sCurrentVersion_Editor         : string;
-    seTmp                          : TSynEdit;
+    sCurrentVersion_RH_Send        : string;
+    sCurrentVersion_Rmirrors       : string;
+    sCurrentVersion_Shortcuts      : string;
     sEncodingDefault               : string;
     sEOLDefault                    : string;
+    seTmp                          : TSynEdit;
     sFileLatexOrigin               : string;
     sFileProjectOrigin             : string;
     sformatR                       : string;
-    sKnit                          : string;
     sGuiRRunning                   : string;
     sIniDockFilePath               : string;
+    sKnit                          : string;
+    sLatexClearWaste               : string;
     slFileMRU                      : TStringList;
     slProject                      : TStringList;
     slProjectChanges               : TStringList;
@@ -2655,7 +2657,6 @@ type
     sParDviSingle                  : string;
     sParPdfBibtex                  : string;
     sParPdfSingle                  : string;
-    sLatexClearWaste               : string;
     sParRgui                       : string;
     sParRPuTTY                     : string;
     sParTxt2tags                   : string;
@@ -2685,43 +2686,42 @@ type
     sVersion_Cache                 : string;
     sVersion_Comments              : string;
     sVersion_Completion            : string;
+    sVersion_Editor                : string;
     sVersion_Ini                   : string;
     sVersion_Latex                 : string;
     sVersion_Project               : string;
     sVersion_Rcard                 : string;
-    sVersion_Rmirrors              : string;
-    sVersion_Shortcuts             : string;
-    sVersion_RH_Send               : string;
     sVersion_RH_Control            : string;
     sVersion_RH_Custom             : string;
-    sVersion_Editor                : string;
+    sVersion_RH_Send               : string;
+    sVersion_Rmirrors              : string;
+    sVersion_Shortcuts             : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
-    R_Useful                       : TR_Useful;
 
     function fActivePanel: integer;
     function fCheck_Connection: boolean;
+    function fCheck_GenericGroup: boolean;
     function fClose_AllFiles_Project: boolean;
     function fFile_Exists_AsNode(var iPos: integer; sFile: string): boolean;
     function fFind_Window_ByName(sName: string): integer;
-    function fGet_Syn: TSynEdit;
-    function fCheck_GenericGroup: boolean;
     function fGet_BlockMarked(var bSingleLine: boolean): string;
     function fGet_Clipboard(var bSingleLine: boolean): string;
     function fGet_Contiguous(var bSingleLine: boolean): string;
-    function fGet_EncodingDefault: string;
     function fGet_CursorTo(sWay: string): string;
+    function fGet_EncodingDefault: string;
     function fGet_EOLDefault: string;
     function fGet_File(var bSingleLine: boolean): string;
     function fGet_FileToReformat: string;
     function fGet_Focus: integer;
-    function fGetLine(bGoToNextValidLine: boolean; seEditor: TSynEdit): string;
     function fGet_LinesToEndPage(var bSingleLine: boolean): string;
     function fGet_PathFile(bFull: boolean = False): string;
     function fGet_SaveFormat(uStrings: TUnicodeStrings): string;
     function fGet_Selection(var bSingleLine: boolean): string;
     function fGet_Selection_ToReformat(sSel: string): string;
+    function fGet_Syn: TSynEdit;
+    function fGetLine(bGoToNextValidLine: boolean; seEditor: TSynEdit): string;
     function fGroup_ExistsAsNode(sGroupName: string): boolean;
     function fMessageDlg(const sMsg: string; mdType: TMsgDlgType; mdButtons: TMsgDlgButtons; iHelp: Integer): Integer;
     function fREnvironment: string;
@@ -2733,13 +2733,13 @@ type
     procedure pBuild_MRU_Project(var miItem: TMenuItem);
     procedure pCheck_Data;
     procedure pCheck_EditorOptions;
-    procedure pCheck_Project_Changed;
     procedure pCheck_Ini;
     procedure pCheck_IniDock;
     procedure pCheck_Latex(bReload: boolean);
     procedure pCheck_Origin;
     procedure pCheck_ProcessingPath(sPath: string);
     procedure pCheck_Project;
+    procedure pCheck_Project_Changed;
     procedure pCheck_REcho;
     procedure pCheck_Temporary;
     procedure pCheck_Top;
@@ -2750,15 +2750,17 @@ type
     procedure pControl_Resources(bOption: boolean);
     procedure pCreate_Group(sGroupName: string);
     procedure pCreate_Project;
+    procedure pDataset_To_EditorOC;
     procedure pDo_ClearConsole;
     procedure pDo_IPConnection(sIPHost: string; iIPPort: integer; bActive: boolean);
     procedure pDo_Txt2Tag(iButton: integer);
+    procedure pDraw_RtermSend_Plus;
+    procedure pEditorOC_To_Editor;
     procedure pFile_Conversion(sParameter, sExtension, sPathConversor: string; sPathInterpreter: string = ''; bWait: boolean = True);
     procedure pFile_SaveGeneric(sFile: string; synEditor: TSynEdit);
     procedure pGet_CallTip(var sRObject, sRPackage, sRTip: string; var bTipFound: boolean);
     procedure pGet_Comments;
     procedure pInsert_LatexMath(sFunction: string; iCaretControl: integer);
-    procedure pLoad_EditorKeystrokes;
     procedure pLoad_File(sFileName: string; bCreateNewChild: boolean = True; bUpdateMRU: boolean = True);
     procedure pMake_Item(sRObjName, sRObjDim, sRObjGroup, sRObjClass: string; iIndex: integer);
     procedure pMake_Renvironment(slRObjects: TStringList);
@@ -2773,13 +2775,13 @@ type
     procedure pOpen_Project;
     procedure pOpen_ProjectIntoTinn(sProjectName: string);
     procedure pPandocConversion(sPandocInstruction, sPandocFrom, sPandocTo: string; bWait: boolean = True);
+    procedure pR_Info;
     procedure pRecentProjectFileClick(Sender: TObject);
     procedure pRecordActions(baAction: TBasicAction; var bHandled: Boolean);
     procedure pRMenu(bOption: boolean);
     procedure pRmirrorsInterface_Update;
     procedure pRSetGet_Info;
     procedure pRSetSend_Info(var sInfo, sFileInfo: string);
-    procedure pR_Info;
     procedure pRToolbar(bOption: boolean);
     procedure pSave_NewIni_Application;
     procedure pSave_NewIni_Editor;
@@ -2788,11 +2790,11 @@ type
     procedure pSearch_InDirectories(const sDir, sMask: string; var iFileCount, iMatchCount, iTotFileCount: integer);
     procedure pSearch_InOpenFiles(var iFileCount, iMatchCount: integer);
     procedure pSend_Resources(bOption: boolean);
-    procedure pSet_FileFormat(ff: TSynEditFileFormat);
-    procedure pSet_SaveFormat(sf: TSaveFormat);
     procedure pSet_Completion;
     procedure pSet_EncodingDefault(sTmp: string);
     procedure pSet_EOLDefault(sTmp: string);
+    procedure pSet_FileFormat(ff: TSynEditFileFormat);
+    procedure pSet_Hotkeys_Status(bStatus: boolean);
     procedure pSet_IniStructure;
     procedure pSet_InterfaceSize(frm: TForm; iSize: integer);
     procedure pSet_PathRgui;
@@ -2800,13 +2802,14 @@ type
     procedure pSet_Preferences_Application;
     procedure pSet_Preferences_Editor;
     procedure pSet_Rcard;
-    procedure pSet_SKH;
     procedure pSet_Recho_False;
     procedure pSet_Recho_True;
     procedure pSet_Rexplorer(bOption: boolean);
     procedure pSet_Rlibrary_Path(sTmp: string);
     procedure pSet_Rmirrors;
+    procedure pSet_SaveFormat(sf: TSaveFormat);
     procedure pSet_Shortcuts;
+    procedure pSet_SKH;
     procedure pSetup_SearchParameters(sSearchText: string);
     procedure pSort_Project;
     procedure pStart_svSocket;
@@ -2819,10 +2822,14 @@ type
     procedure pUpdate_Appearance(bFontSize: boolean = True);
     procedure pUpdate_Bars(bOption: boolean);
     procedure pUpdate_CloseFileOptions;
+    procedure pUpdate_EditMenu_Shortcuts;
     procedure pUpdate_File(var seEditor: TSynEdit; var smOption: TSynSelectionMode);
     procedure pUpdate_FileIntoTinn(sFile: string; iLineNumberJump: integer = 0);
-    procedure pUpdate_Options;
+    procedure pUpdate_Hotkey_Control;
+    procedure pUpdate_Hotkey_Custom;
+    procedure pUpdate_Hotkey_Send;
     procedure pUpdate_MRU_Project(var miItem: TMenuItem; sFileName: string);
+    procedure pUpdate_Options;
     procedure pUpdate_Rfile_Reformatted(Stmp: string);
     procedure pUpdate_Rselection_Reformatted(Stmp: string);
     Procedure pUpdate_Rterm_Appearance(bUpdate_FontSize: boolean = True);
@@ -2831,13 +2838,6 @@ type
     procedure pWMSysCommand(var Msg: TWMSysCommand); message WM_SYSCOMMAND;
     procedure pWrite_IniFile_Application(bMakingBackup: boolean);
     procedure pWrite_IniFile_Editor(bMakingBackup: boolean);
-    procedure pDraw_RtermSend_Plus;
-    procedure pSet_Hotkeys_Status(bStatus: boolean);
-    procedure pUpdate_Hotkey_Send;
-    procedure pUpdate_Hotkey_Control;
-    procedure pUpdate_Hotkey_Custom;
-    procedure pUpdate_Edit_Shortcuts;
-
 
     // From public
     procedure pAppActivate(Sender: TObject);
@@ -2845,9 +2845,9 @@ type
 
   public
     { Public declarations }
-    ajavHK_Send                  : array of TJvApplicationHotKey;  // RH_Send: dynamic
     ajavHK_Control               : array of TJvApplicationHotKey;  // RH_Control: dynamic
     ajavHK_Custom                : array of TJvApplicationHotKey;  // RH_Custom: dynamic
+    ajavHK_Send                  : array of TJvApplicationHotKey;  // RH_Send: dynamic
     bActiveLine                  : boolean;
     bAllNames                    : boolean;
     bBOM                         : boolean;
@@ -2855,6 +2855,7 @@ type
     bConnectionBeepOnError       : boolean;
     bDatabaseRestored            : boolean;
     bEditorLineWrap              : boolean;
+    bHotKeys_On                  : boolean;
     bIPLocal                     : boolean;  // It controls the type of TCPIP connection: False: Remote, True: Local
     bIPRemoteConnected           : boolean;
     bPrintColors                 : boolean;
@@ -2871,19 +2872,19 @@ type
     bRemoveExtension             : boolean;
     bRguiReturnFocus             : boolean;
     bRSendAll                    : boolean;
+    bRSmart                      : boolean;
     bRTCPIPConsoleEcho           : boolean;
     bRTCPIPConsoleUse            : boolean;
     bRtermBeepOnError            : boolean;
     bRtermFindError              : boolean;
+    bRtermSend_Plus              : boolean;
     bRtermWidth                  : boolean;
-    bRSmart                      : boolean;
     bSearch_Backwards            : boolean;
     bSearch_CaseSensitive        : boolean;
     bSearch_FromCursor           : boolean;
     bSearch_RegExp               : boolean;
     bSearch_WholeWords           : boolean;
     bselectedToPreview           : boolean;
-    bHotKeys_On                  : boolean;
     bUndoAfterSave               : boolean;
     bUpdating                    : boolean;
     clActiveLine                 : TColor;
@@ -2908,18 +2909,18 @@ type
     iFilterToSaveAs              : integer;
     iIPPortLocal                 : integer;
     iIPPortRemote                : integer;
+    iKeys_Editor_SavePoint       : integer;
     iLatexDimensionalAlign       : integer;
     iMaxDeparseLength            : integer;
     iPandocFrom                  : integer;
     iPandocTo                    : integer;
     iProjecSelected              : integer;
-    iRecognition_Caption         : integer;
     iRcard_SavePoint             : integer;
-    iRH_Send_SavePoint           : integer;
+    iRcardFilter                 : integer;
+    iRecognition_Caption         : integer;
     iRH_Control_SavePoint        : integer;
     iRH_Custom_SavePoint         : integer;
-    iKeys_Editor_SavePoint       : integer;
-    iRcardFilter                 : integer;
+    iRH_Send_SavePoint           : integer;
     iRmirrors_SavePoint          : integer;
     iRtip_SavePoint              : integer;
     iRtipFilter                  : integer;
@@ -2949,9 +2950,11 @@ type
     sPandocHistory               : string;
     sPandocHistoryFrom           : string;
     sPandocHistoryTo             : string;
+    sParRterm                    : string;
     sPath_App                    : string;
     sPath_Color                  : string;
     sPath_Data                   : string;
+    sPath_Rterm                  : string;
     sPath_Syntax                 : string;
     sPath_SyntaxBKP              : string;
     sPath_TinnR                  : string;
@@ -2964,6 +2967,7 @@ type
     sPuttyPassword               : string;
     sPuttyUser                   : string;
     sRcardBookMark               : string;
+    sReplaceTextHistory          : string;
     sRmirror                     : string;
     sRmirrorsBookMark            : string;
     sRtipBookMark                : string;
@@ -2974,10 +2978,6 @@ type
     sUpdate                      : string;
     sUtilsOrigin                 : string;
     sWorkingDir                  : string;
-    bRtermSend_Plus              : boolean;
-    sPath_Rterm                  : string;
-    sParRterm                    : string;
-    sReplaceTextHistory          : string;
 
     function fFindTop_Window: integer;
     function fGetBuild_Info: string;
@@ -2992,7 +2992,7 @@ type
     procedure pCheck_Rterm;
     procedure pClear_MRU;
     procedure pClear_StatusBar;
-    procedure pDatasetToActionList;
+    procedure pDataset_To_ActionList;
     procedure pDo_RConnection(sTmp: string; bActive, bSendTask: boolean);
     procedure pDo_RguiConnection(sTmp: string; bActive: boolean);
     procedure pDo_Send(var sTmp: string; bSendToSynIO: boolean = True);
@@ -3020,7 +3020,6 @@ type
     procedure pUpdate_CursorPos(Sender: TSynEdit);
     procedure pUpdate_HexViewer;
     procedure pUpdate_MRU(var miItem: TMenuItem; sFileName: string);
-
 
 end;
 
@@ -3085,7 +3084,7 @@ begin
 *)
 
 (*-------------------------*)
-  pDatasetToActionList;
+  pDataset_To_ActionList;
 (*-------------------------*)
 
   // Create items in lbShortcuts from strListShortcutsGroups create in uModDados
@@ -7879,7 +7878,7 @@ begin
 
 
   if FileExists(sPath_App + '\Rhistory.txt') then
-    RHistory.fLoadFromFile(sPath_App + '\Rhistory.txt');
+    RHistory.fLoad_FromFile(sPath_App + '\Rhistory.txt');
 
   pSet_DataCompletion(synIO_History,
                       frmRterm.synIO,
@@ -7921,12 +7920,28 @@ begin
   slFileNotify.Clear;
 end;
 
-procedure TfrmMain.pLoad_EditorKeystrokes;
+procedure TfrmMain.pEditorOC_To_Editor;
 var
   i: integer;
   
 begin
-  with modDados.cdKeys_Editor do begin
+  // Update all opened files
+  for i:= (Self.MDIChildCount - 1) downto 0 do begin
+    // SynEditor
+    coEditor.AssignTo((Self.MDIChildren[i] as TfrmEditor).synEditor);
+
+    // SynEditor2
+    if Assigned((Self.MDIChildren[i] as TfrmEditor).synEditor2) then
+      coEditor.AssignTo((Self.MDIChildren[i] as TfrmEditor).synEditor2);
+  end;
+end;
+
+procedure TfrmMain.pDataset_To_EditorOC;
+var
+  i: integer;
+
+begin
+   with modDados.cdKeys_Editor do begin
     IndexFieldNames:= 'Index';  // To cdEditor has the same order than coEditor.Keystrokes.Items
     DisableControls;
     First;
@@ -9165,7 +9180,7 @@ begin
       Add('3.5. Editor options');
     end;
 
-    pLoad_EditorKeystrokes;
+    pDataset_To_EditorOC;  // It will set to coEditor.Keystrokes from modDados.cdEditor
     pUpdate_ShortcutsDir;
     frmTools.memIniLog.Lines.Add('  Main folder - ' +
                                  sPath_Editor +
@@ -9774,7 +9789,7 @@ begin
     // Destriy TStrings
     FreeAndNil(slFileNotify);
 
-    RHistory.fSaveToFile(sPath_App + '\Rhistory.txt');
+    RHistory.fSave_ToFile(sPath_App + '\Rhistory.txt');
 
     // Terminate
     Application.Terminate;
@@ -11347,7 +11362,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pDatasetToActionList;
+procedure TfrmMain.pDataset_To_ActionList;
 
   procedure pUpdate_Action(i: integer;
                            sGroup,
@@ -11417,7 +11432,7 @@ end;
 
 procedure TfrmMain.menToolsUtilsDatasetToActionlistClick(Sender: TObject);
 begin
-  pDatasetToActionList;
+  pDataset_To_ActionList;
   stbMain.Panels[8].Text:= 'Done!';
 end;
 
@@ -13261,7 +13276,7 @@ begin
 
 end;
 
-procedure TfrmMain.pUpdate_Edit_Shortcuts;
+procedure TfrmMain.pUpdate_EditMenu_Shortcuts;
 var
   sUndo,
    sRedo,
@@ -13308,6 +13323,7 @@ begin
     pmenLOG_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
   end;
 end;
+
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   with frmTools.jvflbWinExplorer do begin
@@ -13402,7 +13418,7 @@ begin
   // Very nice: from http://stackoverflow.com/questions/374304/how-can-i-make-delphi-2009-open-my-application-in-the-second-monitor-by-default?rq=1
   if (DebugHook <> 0) and (Screen.MonitorCount > 1) then Left:= Screen.Monitors[1].Left;
 
-  pUpdate_Edit_Shortcuts;
+  pUpdate_EditMenu_Shortcuts;
 end;
 
 procedure TfrmMain.actGroupDeleteCurrentExecute(Sender: TObject);
@@ -14523,6 +14539,7 @@ begin
     if (dlgSKH_Map.ShowModal = mrOK) then begin
       // App
       with modDados.cdShortcuts do begin
+        Filtered:= False;
         Edit;
         try
           Post;
@@ -14538,10 +14555,11 @@ begin
         IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
 
       bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
-      pDatasetToActionList;  //It will update all options related to the alMain (ActionList)
+      pDataset_To_ActionList;  //It will update all options related to the alMain (ActionList)
 
       // Keys_Editor
       with modDados.cdKeys_Editor do begin
+        Filtered:= False;
         Edit;
         try
           Post;
@@ -14552,10 +14570,14 @@ begin
           //TODO
         end;
       end;
-      frmMain.pLoad_EditorKeystrokes;  // It will set to coEditor.Keystrokes from modDados.cdEditor
+
+      pUpdate_EditMenu_Shortcuts;  // It will update the main menu Edit related to Copy,Paste, etc
+      pDataset_To_EditorOC;        // It will set to coEditor.Keystrokes from modDados.cdEditor
+      pEditorOC_To_Editor;         // It will update coEditor.Keystrokes to all synEdit instances
 
       // RH_Send
       with modDados.cdRH_Send do begin
+        Filtered:= False;
         Edit;
         try
           Post;
@@ -14570,6 +14592,7 @@ begin
 
       // RH_Control
       with modDados.cdRH_Control do begin
+        Filtered:= False;
         Edit;
         try
           Post;
@@ -14584,6 +14607,7 @@ begin
 
       // RH_Custom: make efective any new hotkey created by user
       with modDados.cdRH_Custom do begin
+        Filtered:= False;
         SetLength(frmMain.ajavHK_Custom,
                   RecordCount);
         DisableControls;
@@ -14985,19 +15009,19 @@ begin
     synIO.CaretY:= synIO.Lines.Count;
     if (synIO.SelText <> EmptyStr) then Exit;
     if frmRterm.bRterm_Plus then synIO.LineText:= '+ ' +
-                                                  RHistory.fGetNext
+                                                  RHistory.fGet_Next
     else begin
       if frmRterm.bRUnderDebug_Function or
          frmRterm.bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
                                                              ' ' +
-                                                             RHistory.fGetNext
+                                                             RHistory.fGet_Next
                               else synIO.LineText:= '> ' +
-                                                    RHistory.fGetNext;
+                                                    RHistory.fGet_Next;
 
       if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
-                                                    RHistory.fGetNExt
+                                                    RHistory.fGet_Next
                               else synIO.LineText:= '> ' +
-                                                    RHistory.fGetNext;
+                                                    RHistory.fGet_Next;
     end;
     synIO.ExecuteCommand(ecLineEnd,
                          #0,
@@ -15013,19 +15037,19 @@ begin
     synIO.CaretY:= synIO.Lines.Count;
     if (synIO.SelText <> EmptyStr) then Exit;
     if bRterm_Plus then synIO.LineText:= '+ ' +
-                                         RHistory.fGetPrior
+                                         RHistory.fGet_Prior
     else begin
       if bRUnderDebug_Function or
          bRUnderDebug_Package then synIO.LineText:= sRDebug_Prefix +
                                                     ' ' +
-                                                    RHistory.fGetPrior
+                                                    RHistory.fGet_Prior
                               else synIO.LineText:= '> ' +
-                                                    RHistory.fGetPrior;
+                                                    RHistory.fGet_Prior;
 
       if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
-                                                    RHistory.fGetPrior
+                                                    RHistory.fGet_Prior
                               else synIO.LineText:= '> ' +
-                                                    RHistory.fGetPrior;
+                                                    RHistory.fGet_Prior;
     end;
     synIO.ExecuteCommand(ecLineEnd,
                          #0,
@@ -16177,9 +16201,9 @@ begin
   // Rgui: priority 2
   else if fRgui_Running then begin
     sToSend:= sTmp;
-    fCodeSender.pSendChar(sToSend,
-                          hRgui,
-                          iDelay);
+    fCodeSender.pSend_Char(sToSend,
+                           hRgui,
+                           iDelay);
     pCheck_Top;
     pSet_Focus_Rgui(iDelay div 4);
   end
@@ -18052,8 +18076,8 @@ begin
   // Rgui: priority 2
   if fRgui_Running then begin
     sToSend:= '^l';
-    fCodeSender.pDoPrepare;
-    fCodeSender.pSendString(sToSend);
+    fCodeSender.pDo_Prepare;
+    fCodeSender.pSend_String(sToSend);
     pCheck_Top;
     pSet_Focus_Rgui(iDelay);
     Exit;
@@ -18137,8 +18161,8 @@ begin
     pCheck_Top;
     pSet_Focus_Rgui(iDelay div 2);
     sToSend:= '^l';
-    fCodeSender.pDoPrepare;
-    fCodeSender.pSendString(sToSend);
+    fCodeSender.pDo_Prepare;
+    fCodeSender.pSend_String(sToSend);
   end;
 
   sTmp:= 'rm(list=ls()); graphics.off()';
@@ -18183,8 +18207,8 @@ begin
   //if not (fRgui_Running) then Exit;
   //if fUseTCPIP then Exit;
   sTmp:= '{ESC}';
-  fCodeSender.pDoPrepare;
-  fCodeSender.pSendString(sTmp);
+  fCodeSender.pDo_Prepare;
+  fCodeSender.pSend_String(sTmp);
   pCheck_Top;
   pSet_Focus_Rgui(iDelay);
 end;
@@ -18457,8 +18481,8 @@ begin
 
         if (csREnvironment.Active) then csREnvironment.Socket.SendText(sToSend +
                                                                        #13#10)
-                                   else fCodeSender.pSendChar(sToSend,
-                                                              hRgui);
+                                   else fCodeSender.pSend_Char(sToSend,
+                                                               hRgui);
 
         pSet_Focus_Rgui(iDelay div 4);
       end;
@@ -18609,8 +18633,8 @@ begin
 
         if (csRExplorer.Active) then csRExplorer.Socket.SendText(sToSend +
                                                                  #13#10)
-                                else fCodeSender.pSendChar(sToSend,
-                                                           hRgui);
+                                else fCodeSender.pSend_Char(sToSend,
+                                                            hRgui);
 
         pSet_Focus_Rgui(iDelay div 4);
       end;
@@ -22258,8 +22282,8 @@ procedure TfrmMain.pDo_RguiConnection(sTmp: string;
                                          bActive: boolean);
 begin
   if not fRgui_Running then Exit;
-  fCodeSender.pSendChar(sTmp,
-                        hRgui);
+  fCodeSender.pSend_Char(sTmp,
+                         hRgui);
 
   Sleep(2*iDelay div 3);
   if bIPLocal then pDo_IPConnection(sIPHostLocal,
@@ -22443,8 +22467,8 @@ procedure TfrmMain.actRContGuiPuTTYStartCloseExecute(Sender: TObject);
     Sleep(10*iDelay);
 
     sTmp:= 'exit';
-    fCodeSender.pSendChar(sTmp,
-                          hRgui);
+    fCodeSender.pSend_Char(sTmp,
+                           hRgui);
   end;
 
 var
@@ -22533,8 +22557,8 @@ begin
     else if fRgui_Running then begin
       sTmp:= 'q()';
 
-      fCodeSender.pSendChar(sTmp,
-                            hRgui);
+      fCodeSender.pSend_Char(sTmp,
+                             hRgui);
 
       bRRequireKnitr:= False;
 
@@ -25623,16 +25647,16 @@ begin
     if (synIO.SelText <> EmptyStr) then Exit;
 
     if bRterm_Plus then synIO.LineText:= '+ ' +
-                                         RHistory.fGetPrior
+                                         RHistory.fGet_Prior
     else begin
       if bRUnderDebug_Function or
          bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
                                                     ' ' +
-                                                    RHistory.fGetPrior
+                                                    RHistory.fGet_Prior
       else if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
-                                                         RHistory.fGetPrior
+                                                         RHistory.fGet_Prior
                                    else synIO.LineText:= '> ' +
-                                                         RHistory.fGetPrior;
+                                                         RHistory.fGet_Prior;
     end;
 
     synIO.ExecuteCommand(ecLineEnd,
@@ -25651,16 +25675,16 @@ begin
     if (synIO.SelText <> EmptyStr) then Exit;
 
     if bRterm_Plus then synIO.LineText:= '+ ' +
-                                         RHistory.fGetNext
+                                         RHistory.fGet_Next
     else begin
       if bRUnderDebug_Function or
          bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
                                                     ' ' +
-                                                    RHistory.fGetNext
+                                                    RHistory.fGet_Next
       else if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
-                                                         RHistory.fGetNext
+                                                         RHistory.fGet_Next
                                    else synIO.LineText:= '> ' +
-                                                         RHistory.fGetNext;
+                                                         RHistory.fGet_Next;
     end;
 
     synIO.ExecuteCommand(ecLineEnd,
@@ -26096,7 +26120,7 @@ begin
       DeleteFile(sFile);
     end;
 
-    if RHistory.fSaveToFile(sFile) then
+    if RHistory.fSave_ToFile(sFile) then
       fMessageDlg(sFile + #13 + #13 +
                   'The R history was saved to the file above!',
                   mtInformation,
@@ -26139,7 +26163,7 @@ begin
   if odMain.Execute then begin
     sFile:= odMain.fileName;
   
-    if RHistory.fLoadFromFile(sFile) then
+    if RHistory.fLoad_FromFile(sFile) then
       fMessageDlg(sFile + #13 + #13 +
                   'The R history was loaded from the file above!',
                   mtInformation,
