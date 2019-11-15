@@ -152,10 +152,10 @@ type
 
   public
     { Public declarations }
-    slCompletion_Groups : TStringList;  //Stores groups of Completion
-    slRcard_Groups      : TStringList;  //Stores groups of R card
-    slRmirrors_Countries: TStringList;  //Stores countries of R mirrors
-    slShortcuts_Groups  : TStringList;  //Stores groups of Shortcuts
+    slCompletion_Groups   : TStringList;  //Stores groups of Completion
+    slRcard_Groups        : TStringList;  //Stores groups of R card
+    slRmirrors_Countries  : TStringList;  //Stores countries of R mirrors
+    slApp_Shortcuts_Groups: TStringList;  //Stores groups of Shortcuts
 
     function fActionlist_To_Dataset: boolean;
     function fCheck_Hotkey_RH_Control(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
@@ -701,15 +701,15 @@ var
   strTemp: string;
 
 begin
-  slShortcuts_Groups:= TStringList.Create;
-  slShortcuts_Groups.CaseSensitive:= True;
+  slApp_Shortcuts_Groups:= TStringList.Create;
+  slApp_Shortcuts_Groups.CaseSensitive:= True;
 
   with cdShortcuts do begin
     DisableControls;
     First;
     for i:=1 to RecordCount do begin
       strTemp:= cdShortcutsGroup.Value;
-      with slShortcuts_Groups do
+      with slApp_Shortcuts_Groups do
         if (IndexOf(strTemp) = -1) then
           Add(strTemp);
       Next;

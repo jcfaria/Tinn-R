@@ -38,7 +38,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 388
     Height = 565
-    ActivePage = tbsR
+    ActivePage = tbsDatabase
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -80,10 +80,6 @@ object frmTools: TfrmTools
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsMisc: TTabSheet
       Caption = 'Misc'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgMisc: TJvgPageControl
         Left = 0
         Top = 0
@@ -131,10 +127,6 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsWinExplorer: TTabSheet
           Caption = 'Windows expl.'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splWindows: TSplitter
             Left = 0
             Top = 130
@@ -440,7 +432,7 @@ object frmTools: TfrmTools
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
                 Font.Style = []
-                ItemHeight = 0
+                ItemHeight = 13
                 ParentCtl3D = False
                 ParentFont = False
                 Sorted = True
@@ -537,10 +529,6 @@ object frmTools: TfrmTools
         object tbsWorkExplorer: TTabSheet
           Caption = 'Work expl.'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splWork: TSplitter
             Left = 0
             Top = 103
@@ -816,10 +804,6 @@ object frmTools: TfrmTools
         object tbsProject: TTabSheet
           Caption = 'Project'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object tvProject: TTreeView
             Left = 0
             Top = 30
@@ -1081,10 +1065,6 @@ object frmTools: TfrmTools
     object tbsMarkup: TTabSheet
       Caption = 'Markup'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgMarkup: TJvgPageControl
         Left = 0
         Top = 0
@@ -1132,10 +1112,6 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsTxt2tags: TTabSheet
           Caption = 'Txt2tags'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgTxt2tags: TJvgPageControl
             Left = 0
             Top = 0
@@ -1181,10 +1157,6 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsTxt2tagsMarks: TTabSheet
               Caption = 'Marks'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Label1: TLabel
                 Tag = 1
                 Left = 8
@@ -1729,10 +1701,6 @@ object frmTools: TfrmTools
             object tbsTxt2tagsMacros: TTabSheet
               Caption = 'Macros'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Label31: TLabel
                 Tag = 31
                 Left = 8
@@ -1845,10 +1813,6 @@ object frmTools: TfrmTools
             object tbsTxt2tagsSettings: TTabSheet
               Caption = 'Settings'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Label37: TLabel
                 Tag = 37
                 Left = 8
@@ -1963,10 +1927,6 @@ object frmTools: TfrmTools
         object tbsLatex: TTabSheet
           Caption = 'LaTeX'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgLatex: TJvgPageControl
             Left = 0
             Top = 26
@@ -2013,10 +1973,6 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsLatexAccent: TTabSheet
               Caption = 'Accent'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivAccents: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2066,10 +2022,6 @@ object frmTools: TfrmTools
             object tbsLatexArrow: TTabSheet
               Caption = 'Arrow'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox3: TScrollBox
                 Left = 0
                 Top = 0
@@ -2421,10 +2373,6 @@ object frmTools: TfrmTools
             object tbsLatexBar: TTabSheet
               Caption = 'Bar'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivBar: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2474,10 +2422,6 @@ object frmTools: TfrmTools
             object tbsLatexBracket: TTabSheet
               Caption = 'Bracket'
               ImageIndex = 3
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivBracket: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2519,10 +2463,6 @@ object frmTools: TfrmTools
             object tbsLatexDot: TTabSheet
               Caption = 'Dot'
               ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivDot: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2564,10 +2504,6 @@ object frmTools: TfrmTools
             object tbsLatexGeometry: TTabSheet
               Caption = 'Geometry'
               ImageIndex = 8
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox1: TScrollBox
                 Left = 0
                 Top = 0
@@ -3012,10 +2948,6 @@ object frmTools: TfrmTools
             object tbsLatexGreek: TTabSheet
               Caption = 'Greek'
               ImageIndex = 9
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox2: TScrollBox
                 Left = 0
                 Top = 0
@@ -3223,10 +3155,6 @@ object frmTools: TfrmTools
             object tbsLatexMath: TTabSheet
               Caption = 'Math'
               ImageIndex = 10
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox5: TScrollBox
                 Left = 0
                 Top = 0
@@ -3482,10 +3410,6 @@ object frmTools: TfrmTools
             object tbsLatexMisc: TTabSheet
               Caption = 'Misc'
               ImageIndex = 11
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivMisc: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3527,10 +3451,6 @@ object frmTools: TfrmTools
             object tbsLatexNegation: TTabSheet
               Caption = 'Negation'
               ImageIndex = 12
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivNegation: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3572,10 +3492,6 @@ object frmTools: TfrmTools
             object tbsLatexOperator: TTabSheet
               Caption = 'Operator'
               ImageIndex = 5
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivOperator: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3617,10 +3533,6 @@ object frmTools: TfrmTools
             object tbsLatexRelation: TTabSheet
               Caption = 'Relation'
               ImageIndex = 6
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivRelation: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3662,10 +3574,6 @@ object frmTools: TfrmTools
             object tbsLatexSky: TTabSheet
               Caption = 'Sky'
               ImageIndex = 7
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox4: TScrollBox
                 Left = 0
                 Top = 0
@@ -3825,10 +3733,6 @@ object frmTools: TfrmTools
             object tbsLatexUserCustom: TTabSheet
               Caption = 'User custom'
               ImageIndex = 13
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivUserCustom: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -4023,10 +3927,6 @@ object frmTools: TfrmTools
     object tbsResults: TTabSheet
       Caption = 'Results'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgResults: TJvgPageControl
         Left = 0
         Top = 0
@@ -4074,10 +3974,6 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsIniLog: TTabSheet
           Caption = 'Ini log'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object memIniLog: TMemo
             Left = 0
             Top = 0
@@ -4099,10 +3995,6 @@ object frmTools: TfrmTools
         object tbsSearch: TTabSheet
           Caption = 'Search'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -4220,10 +4112,6 @@ object frmTools: TfrmTools
         object tbsHexViewer: TTabSheet
           Caption = 'Hex viewer'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object ATBinHex: TATBinHex
             Left = 0
             Top = 52
@@ -4283,10 +4171,6 @@ object frmTools: TfrmTools
     object tbsSpell: TTabSheet
       Caption = 'Spell'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memSpell: TMemo
         Left = 0
         Top = 0
@@ -4312,16 +4196,12 @@ object frmTools: TfrmTools
     object tbsDatabase: TTabSheet
       Caption = 'Database'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
         Width = 380
         Height = 537
-        ActivePage = tbsComments
+        ActivePage = tbsR_Hotkeys
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4361,13 +4241,9 @@ object frmTools: TfrmTools
         TabSelectedStyle.Gradient.Active = False
         TabSelectedStyle.Gradient.Orientation = fgdHorizontal
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-        object tbsShortcuts: TTabSheet
+        object tbsApp_Shortcuts: TTabSheet
           Caption = 'Shortcuts'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splShortcuts: TSplitter
             Left = 0
             Top = 113
@@ -4390,7 +4266,7 @@ object frmTools: TfrmTools
             Color = 16250871
             ParentBackground = False
             TabOrder = 0
-            object TBDShortcuts: TTBDock
+            object TBD_App_Shortcuts: TTBDock
               Left = 0
               Top = 0
               Width = 372
@@ -4419,7 +4295,7 @@ object frmTools: TfrmTools
               end
             end
           end
-          object panShortcuts: TPanel
+          object panApp_Shortcuts: TPanel
             Left = 0
             Top = 26
             Width = 372
@@ -4430,7 +4306,7 @@ object frmTools: TfrmTools
             Constraints.MinHeight = 15
             ParentBackground = False
             TabOrder = 1
-            object lbShortcuts: TListBox
+            object lbApp_Shortcuts: TListBox
               Left = 0
               Top = 0
               Width = 372
@@ -4446,7 +4322,7 @@ object frmTools: TfrmTools
               PopupMenu = frmMain.pmenFontGeneric
               Sorted = True
               TabOrder = 0
-              OnClick = lbShortcutsClick
+              OnClick = lbApp_ShortcutsClick
             end
           end
           object Panel11: TPanel
@@ -4459,7 +4335,7 @@ object frmTools: TfrmTools
             Color = 16250871
             ParentBackground = False
             TabOrder = 2
-            object dbShortcutsMemo: TDBMemo
+            object dbApp_ShortcutsMemo: TDBMemo
               Left = 0
               Top = 360
               Width = 372
@@ -4486,7 +4362,7 @@ object frmTools: TfrmTools
               TabOrder = 0
               WantReturns = False
             end
-            object dbgShortcuts: TDBGrid
+            object dbgApp_Shortcuts: TDBGrid
               Left = 0
               Top = 18
               Width = 372
@@ -4510,7 +4386,7 @@ object frmTools: TfrmTools
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = [fsBold]
-              OnDblClick = dbgShortcutsDblClick
+              OnDblClick = dbgApp_ShortcutsDblClick
               Columns = <
                 item
                   Expanded = False
@@ -4562,12 +4438,469 @@ object frmTools: TfrmTools
             end
           end
         end
+        object tbsEditor_Keystrokes: TTabSheet
+          Caption = 'Keystrokes'
+          ImageIndex = 3
+          object JvDBNavigator6: TJvDBNavigator
+            Left = 0
+            Top = 26
+            Width = 372
+            Height = 23
+            DataSource = modDados.dsKeys_Editor
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            Align = alTop
+            Flat = True
+            Ctl3D = False
+            ParentCtl3D = False
+            TabOrder = 0
+          end
+          object dbgKeys_Editor: TDBGrid
+            Left = 0
+            Top = 49
+            Width = 372
+            Height = 460
+            Align = alClient
+            BorderStyle = bsNone
+            DataSource = modDados.dsKeys_Editor
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = [fsBold]
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'Command'
+                Width = 200
+                Visible = True
+              end
+              item
+                Alignment = taRightJustify
+                Expanded = False
+                FieldName = 'Keystroke'
+                Title.Alignment = taRightJustify
+                Width = 60
+                Visible = True
+              end>
+          end
+          object Panel17: TPanel
+            Left = 0
+            Top = 0
+            Width = 372
+            Height = 26
+            Align = alTop
+            BevelOuter = bvNone
+            Color = 16250871
+            ParentBackground = False
+            TabOrder = 2
+            object TBDock3: TTBDock
+              Left = 0
+              Top = 0
+              Width = 372
+              Height = 26
+              BackgroundOnToolbars = False
+              Color = 16250871
+              object TBToolbar5: TTBToolbar
+                Left = 2
+                Top = 0
+                BorderStyle = bsNone
+                Caption = 'TBProject'
+                ChevronMoveItems = False
+                Color = 16250871
+                DockMode = dmCannotFloatOrChangeDocks
+                DockPos = 2
+                Images = frmMain.imlTinnR
+                TabOrder = 0
+                object TBItem41: TTBItem
+                  Action = frmMain.actShortcutsHelp
+                end
+                object TBSeparatorItem2: TTBSeparatorItem
+                end
+                object TBItem42: TTBItem
+                  Action = frmMain.actShortcutsEdit
+                end
+              end
+              object edKeys_Editor_Filter: TEdit
+                Left = 75
+                Top = 4
+                Width = 121
+                Height = 19
+                Align = alClient
+                TabOrder = 1
+                OnChange = edKeys_Editor_FilterChange
+              end
+            end
+          end
+        end
+        object tbsR_Hotkeys: TTabSheet
+          Caption = 'R Hotkeys'
+          ImageIndex = 4
+          object JvgPageControl1: TJvgPageControl
+            Left = 0
+            Top = 0
+            Width = 372
+            Height = 509
+            ActivePage = tbsRH_Custom
+            Align = alClient
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Style = tsFlatButtons
+            TabHeight = 18
+            TabOrder = 0
+            TabStop = False
+            TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
+            TabStyle.BevelInner = bvNone
+            TabStyle.BevelOuter = bvNone
+            TabStyle.Bold = False
+            TabStyle.BackgrColor = clBtnFace
+            TabStyle.Font.Charset = DEFAULT_CHARSET
+            TabStyle.Font.Color = clBlack
+            TabStyle.Font.Height = -12
+            TabStyle.Font.Name = 'MS Sans Serif'
+            TabStyle.Font.Style = []
+            TabStyle.CaptionHAlign = fhaCenter
+            TabStyle.Gradient.Active = False
+            TabStyle.Gradient.Orientation = fgdHorizontal
+            TabSelectedStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
+            TabSelectedStyle.BevelInner = bvNone
+            TabSelectedStyle.BevelOuter = bvNone
+            TabSelectedStyle.Bold = False
+            TabSelectedStyle.BackgrColor = clBtnFace
+            TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
+            TabSelectedStyle.Font.Color = clBtnText
+            TabSelectedStyle.Font.Height = -12
+            TabSelectedStyle.Font.Name = 'MS Sans Serif'
+            TabSelectedStyle.Font.Style = []
+            TabSelectedStyle.CaptionHAlign = fhaCenter
+            TabSelectedStyle.Gradient.Active = False
+            TabSelectedStyle.Gradient.Orientation = fgdHorizontal
+            Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+            object tbsRH_Send: TTabSheet
+              Caption = 'Send'
+              object Panel21: TPanel
+                Left = 0
+                Top = 0
+                Width = 364
+                Height = 26
+                Align = alTop
+                BevelOuter = bvNone
+                Color = 16250871
+                ParentBackground = False
+                TabOrder = 0
+                ExplicitWidth = 372
+                object TBDock4: TTBDock
+                  Left = 0
+                  Top = 0
+                  Width = 364
+                  Height = 26
+                  BackgroundOnToolbars = False
+                  Color = 16250871
+                  object TBToolbar6: TTBToolbar
+                    Left = 2
+                    Top = 0
+                    BorderStyle = bsNone
+                    Caption = 'TBProject'
+                    ChevronMoveItems = False
+                    Color = 16250871
+                    DockMode = dmCannotFloatOrChangeDocks
+                    DockPos = 2
+                    Images = frmMain.imlTinnR
+                    TabOrder = 0
+                    object TBItem43: TTBItem
+                      Action = frmMain.actShortcutsHelp
+                    end
+                    object TBSeparatorItem5: TTBSeparatorItem
+                    end
+                    object TBItem44: TTBItem
+                      Action = frmMain.actShortcutsEdit
+                    end
+                  end
+                  object edRH_Send_Filter_Caption: TEdit
+                    Left = 75
+                    Top = 4
+                    Width = 121
+                    Height = 19
+                    Align = alClient
+                    TabOrder = 1
+                    OnChange = edRH_Send_Filter_CaptionChange
+                  end
+                end
+              end
+              object JvDBNavigator7: TJvDBNavigator
+                Left = 0
+                Top = 26
+                Width = 364
+                Height = 23
+                DataSource = modDados.dsRH_Send
+                VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+                Align = alTop
+                Flat = True
+                Ctl3D = False
+                ParentCtl3D = False
+                TabOrder = 1
+                ExplicitTop = 83
+                ExplicitWidth = 607
+              end
+              object dbgRH_Send: TDBGrid
+                Left = 0
+                Top = 49
+                Width = 364
+                Height = 432
+                Align = alClient
+                BorderStyle = bsNone
+                DataSource = modDados.dsRH_Send
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+                ParentFont = False
+                TabOrder = 2
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = [fsBold]
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'Caption'
+                    Width = 100
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'Hotkey'
+                    Title.Alignment = taRightJustify
+                    Width = 60
+                    Visible = True
+                  end>
+              end
+            end
+            object tbsRH_Control: TTabSheet
+              Caption = 'Control'
+              ImageIndex = 1
+              object Panel22: TPanel
+                Left = 0
+                Top = 0
+                Width = 364
+                Height = 26
+                Align = alTop
+                BevelOuter = bvNone
+                Color = 16250871
+                ParentBackground = False
+                TabOrder = 0
+                ExplicitWidth = 372
+                object TBDock5: TTBDock
+                  Left = 0
+                  Top = 0
+                  Width = 364
+                  Height = 26
+                  BackgroundOnToolbars = False
+                  Color = 16250871
+                  object TBToolbar7: TTBToolbar
+                    Left = 2
+                    Top = 0
+                    BorderStyle = bsNone
+                    Caption = 'TBProject'
+                    ChevronMoveItems = False
+                    Color = 16250871
+                    DockMode = dmCannotFloatOrChangeDocks
+                    DockPos = 2
+                    Images = frmMain.imlTinnR
+                    TabOrder = 0
+                    object TBItem45: TTBItem
+                      Action = frmMain.actShortcutsHelp
+                    end
+                    object TBSeparatorItem10: TTBSeparatorItem
+                    end
+                    object TBItem48: TTBItem
+                      Action = frmMain.actShortcutsEdit
+                    end
+                  end
+                  object edRH_Control_Filter_Caption: TEdit
+                    Left = 75
+                    Top = 4
+                    Width = 121
+                    Height = 19
+                    Align = alClient
+                    TabOrder = 1
+                    OnChange = edRH_Control_Filter_CaptionChange
+                  end
+                end
+              end
+              object JvDBNavigator8: TJvDBNavigator
+                Left = 0
+                Top = 26
+                Width = 364
+                Height = 22
+                DataSource = modDados.dsRH_Control
+                VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+                Align = alTop
+                Flat = True
+                Ctl3D = False
+                ParentCtl3D = False
+                TabOrder = 1
+                ExplicitTop = 83
+                ExplicitWidth = 607
+              end
+              object dbgRH_Control: TDBGrid
+                Left = 0
+                Top = 48
+                Width = 364
+                Height = 433
+                Align = alClient
+                BorderStyle = bsNone
+                DataSource = modDados.dsRH_Control
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+                ParentFont = False
+                TabOrder = 2
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = [fsBold]
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'Caption'
+                    Width = 100
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'Hotkey'
+                    Title.Alignment = taRightJustify
+                    Width = 60
+                    Visible = True
+                  end>
+              end
+            end
+            object tbsRH_Custom: TTabSheet
+              Caption = 'Custom'
+              ImageIndex = 2
+              object Panel23: TPanel
+                Left = 0
+                Top = 0
+                Width = 364
+                Height = 26
+                Align = alTop
+                BevelOuter = bvNone
+                Color = 16250871
+                ParentBackground = False
+                TabOrder = 0
+                ExplicitWidth = 372
+                object TBDock6: TTBDock
+                  Left = 0
+                  Top = 0
+                  Width = 364
+                  Height = 26
+                  BackgroundOnToolbars = False
+                  Color = 16250871
+                  object TBToolbar8: TTBToolbar
+                    Left = 2
+                    Top = 0
+                    BorderStyle = bsNone
+                    Caption = 'TBProject'
+                    ChevronMoveItems = False
+                    Color = 16250871
+                    DockMode = dmCannotFloatOrChangeDocks
+                    DockPos = 2
+                    Images = frmMain.imlTinnR
+                    TabOrder = 0
+                    object TBItem49: TTBItem
+                      Action = frmMain.actShortcutsHelp
+                    end
+                    object TBSeparatorItem21: TTBSeparatorItem
+                    end
+                    object TBItem50: TTBItem
+                      Action = frmMain.actShortcutsEdit
+                    end
+                  end
+                  object edRH_Custom_Filter_Caption: TEdit
+                    Left = 75
+                    Top = 4
+                    Width = 121
+                    Height = 19
+                    Align = alClient
+                    TabOrder = 1
+                    OnChange = edRH_Custom_Filter_CaptionChange
+                  end
+                end
+              end
+              object JvDBNavigator9: TJvDBNavigator
+                Left = 0
+                Top = 26
+                Width = 364
+                Height = 23
+                DataSource = modDados.dsRH_Custom
+                VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+                Align = alTop
+                Flat = True
+                Ctl3D = False
+                ParentCtl3D = False
+                TabOrder = 1
+                ExplicitTop = 83
+                ExplicitWidth = 607
+              end
+              object dbgRH_Custom: TDBGrid
+                Left = 0
+                Top = 49
+                Width = 364
+                Height = 432
+                Align = alClient
+                BorderStyle = bsNone
+                DataSource = modDados.dsRH_Custom
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+                ParentFont = False
+                TabOrder = 2
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'MS Sans Serif'
+                TitleFont.Style = [fsBold]
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'Caption'
+                    Width = 100
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'Hotkey'
+                    Title.Alignment = taRightJustify
+                    Width = 60
+                    Visible = True
+                  end>
+              end
+            end
+          end
+        end
         object tbsCompletion: TTabSheet
           Caption = 'Completion'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splCompletion: TSplitter
             Left = 0
             Top = 113
@@ -4777,10 +5110,6 @@ object frmTools: TfrmTools
         object tbsComments: TTabSheet
           Caption = 'Comments'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel9: TPanel
             Left = 0
             Top = 88
@@ -4947,10 +5276,6 @@ object frmTools: TfrmTools
     object tbsR: TTabSheet
       Caption = 'R'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgR: TJvgPageControl
         Left = 0
         Top = 0
@@ -4998,10 +5323,6 @@ object frmTools: TfrmTools
         object tbsRExplorer: TTabSheet
           Caption = 'Explorer'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -5463,10 +5784,6 @@ object frmTools: TfrmTools
         end
         object tbsRCard: TTabSheet
           Caption = 'Card'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splRCard: TSplitter
             Left = 0
             Top = 113
@@ -5670,10 +5987,6 @@ object frmTools: TfrmTools
         object tbsRMirrors: TTabSheet
           Caption = 'Mirrors'
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Splitter1: TSplitter
             Left = 0
             Top = 113
@@ -5824,6 +6137,7 @@ object frmTools: TfrmTools
                 item
                   Expanded = False
                   FieldName = 'City'
+                  Width = 64
                   Visible = True
                 end>
             end
@@ -5926,7 +6240,7 @@ object frmTools: TfrmTools
   object JvDockClientTools: TJvDockClient
     DirectDrag = False
     DockStyle = frmMain.JvDockVSNetStyle
-    Left = 136
-    Top = 311
+    Left = 357
+    Top = 3
   end
 end

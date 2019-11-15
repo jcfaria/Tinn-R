@@ -1337,7 +1337,7 @@ begin
     Filtered:= False;
   end;
 
-  frmTools.lbShortcuts.Selected[frmMain.iShortcutsFilter]:= False;
+  frmTools.lbApp_Shortcuts.Selected[frmMain.iApp_ShortcutsFilter]:= False;
 
   with modDados.cdShortcuts do begin
     if BookmarkValid(pTmp) then GoToBookmark(pTmp);
@@ -1348,8 +1348,8 @@ end;
 procedure TfrmSKH_Map_Dlg.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   with frmMain do begin
-    frmTools.lbShortcuts.ItemIndex:= iShortcutsFilter;
-    frmTools.lbShortcutsClick(Self);
+    frmTools.lbApp_Shortcuts.ItemIndex:= iApp_ShortcutsFilter;
+    frmTools.lbApp_ShortcutsClick(Self);
   end;
 end;
 

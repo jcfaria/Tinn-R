@@ -91,7 +91,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsAppShortcuts
+    ActivePage = tbsRHotkeys
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -131,10 +131,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
       Caption = ' Shortcuts (aplication)'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -470,10 +466,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label20: TLabel
         Left = 0
         Top = 436
@@ -702,10 +694,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object rdgTinnRHotKeys: TRadioGroup
         Left = 4
         Top = 434
@@ -741,7 +729,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 0
         Width = 615
         Height = 435
-        ActivePage = tbsRH_Send
+        ActivePage = tbsRH_Custom
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -781,10 +769,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox1: TGroupBox
             Left = 0
             Top = 0
@@ -978,10 +962,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Control: TTabSheet
           Caption = 'Control'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox2: TGroupBox
             Left = 0
             Top = 0
@@ -1175,10 +1155,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         object tbsRH_Custom: TTabSheet
           Caption = 'Custom'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox3: TGroupBox
             Left = 0
             Top = 0

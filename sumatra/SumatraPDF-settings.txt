@@ -72,12 +72,12 @@ FileStates [
 		]
 		IsPinned = false
 		IsMissing = false
-		OpenCount = 1
+		OpenCount = 3
 		UseDefaultState = false
 		DisplayMode = continuous
-		ScrollPos = -1 184
-		PageNo = 4
-		Zoom = fit page
+		ScrollPos = -1 107
+		PageNo = 95
+		Zoom = 125
 		Rotation = 0
 		WindowState = 2
 		WindowPos = 17 5 1386 738
@@ -85,7 +85,7 @@ FileStates [
 		SidebarDx = 326
 		DisplayR2L = false
 		ReparseIdx = 0
-		TocState = 5 53
+		TocState = 5 29 53
 	]
 	[
 		FilePath = C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\Tinn-R\Tinn-R\doc\User_guide.pdf
@@ -110,7 +110,7 @@ FileStates [
 ]
 SessionData [
 ]
-TimeOfLastUpdateCheck = 30775366 2024630657
+TimeOfLastUpdateCheck = 30775947 -283138755
 OpenCountWeek = 462
 
 # Settings after this line have not been recognized by the current version

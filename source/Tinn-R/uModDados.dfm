@@ -11,6 +11,7 @@ object modDados: TmodDados
   end
   object cdRcard: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Rcard.xml'
     Params = <>
     BeforeEdit = cdRcardBeforeEdit
     AfterPost = cdRcardAfterPost
@@ -36,6 +37,7 @@ object modDados: TmodDados
   end
   object cdCompletion: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Completion.xml'
     Params = <>
     BeforeEdit = cdCompletionBeforeEdit
     AfterPost = cdCompletionAfterPost
@@ -69,6 +71,7 @@ object modDados: TmodDados
   end
   object cdShortcuts: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Shortcuts.xml'
     Params = <>
     BeforeEdit = cdShortcutsBeforeEdit
     AfterPost = cdShortcutsAfterPost
@@ -113,6 +116,7 @@ object modDados: TmodDados
   end
   object cdCache: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Cache.xml'
     Params = <>
     OnFilterRecord = cdRcardFilterRecord
     Left = 31
@@ -138,6 +142,7 @@ object modDados: TmodDados
   end
   object cdComments: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Comments.xml'
     Params = <>
     BeforeEdit = cdCommentsBeforeEdit
     AfterPost = cdCommentsAfterPost
@@ -178,6 +183,7 @@ object modDados: TmodDados
   end
   object cdRmirrors: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Rmirrors.xml'
     Params = <>
     BeforeEdit = cdRmirrorsBeforeEdit
     AfterPost = cdRmirrorsAfterPost
@@ -215,6 +221,7 @@ object modDados: TmodDados
   end
   object cdRH_Send: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Send.xml'
     Params = <>
     Left = 31
     Top = 315
@@ -243,6 +250,7 @@ object modDados: TmodDados
   end
   object cdRH_Control: TClientDataSet
     Aggregates = <>
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Control.xml'
     Params = <>
     Left = 31
     Top = 367

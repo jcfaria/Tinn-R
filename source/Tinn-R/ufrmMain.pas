@@ -1,4 +1,4 @@
-{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
+﻿{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
 {$MINSTACKSIZE $00004000}
 {$MAXSTACKSIZE $00100000}
 {$IMAGEBASE $00400000}
@@ -2926,7 +2926,7 @@ type
     iRtipFilter                  : integer;
     iScaleMode                   : integer;
     iShortcuts_SavePoint         : integer;
-    iShortcutsFilter             : integer;
+    iApp_ShortcutsFilter         : integer;
     iSynWithFocus                : integer;
     iTransparency                : integer;
     iZoomPreview                 : integer;
@@ -3087,17 +3087,17 @@ begin
   pDataset_To_ActionList;
 (*-------------------------*)
 
-  // Create items in lbShortcuts from strListShortcutsGroups create in uModDados
+  // Create items in lbApp_Shortcuts from strApp_ShortcutsGroups create in uModDados
   with modDados do begin
-    frmTools.lbShortcuts.Items:= slShortcuts_Groups;
-    frmTools.lbShortcuts.Refresh;
-    FreeAndNil(slShortcuts_Groups);
+    frmTools.lbApp_Shortcuts.Items:= slApp_Shortcuts_Groups;
+    frmTools.lbApp_Shortcuts.Refresh;
+    FreeAndNil(slApp_Shortcuts_Groups);
   end;
 
   // To prevent some problem
-  if (iShortcutsFilter < 0) then iShortcutsFilter:= 0;
-  frmTools.lbShortcuts.Selected[iShortcutsFilter]:= True;
-  frmTools.lbShortcutsClick(Self);
+  if (iApp_ShortcutsFilter < 0) then iApp_ShortcutsFilter:= 0;
+  frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= True;
+  frmTools.lbApp_ShortcutsClick(Self);
 end;
 
 procedure TfrmMain.pCheck_REcho;
@@ -3800,8 +3800,8 @@ begin
     WriteInteger('App', 'iRcard.Height', frmTools.panRcard.Height);
     WriteInteger('App', 'iRcard.ItemIndex', frmTools.lbRcard.ItemIndex);
     WriteInteger('App', 'iRExplorer.Width', frmTools.panRExplorer.Width);
-    WriteInteger('App', 'iShortcuts.Height', frmTools.panShortcuts.Height);
-    WriteInteger('App', 'iShortcuts.ItemIndex', frmTools.lbShortcuts.ItemIndex);
+    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
+    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
     WriteInteger('App', 'iSpellLanguage.ItemIndex', cbSpellLanguage.ItemIndex);
     WriteInteger('App', 'iTobEdit.Left', tobEdit.Left);
     WriteInteger('App', 'iTobEdit.Top', tobEdit.Top);
@@ -4333,8 +4333,8 @@ begin
     WriteInteger('App', 'iRcard.Height', frmTools.panRcard.Height);
     WriteInteger('App', 'iRcard.ItemIndex', frmTools.lbRcard.ItemIndex);
     WriteInteger('App', 'iRExplorer.Width', frmTools.panRExplorer.Width);
-    WriteInteger('App', 'iShortcuts.Height', frmTools.panShortcuts.Height);
-    WriteInteger('App', 'iShortcuts.ItemIndex', frmTools.lbShortcuts.ItemIndex);
+    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
+    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
     WriteInteger('App', 'iSpellLanguage.ItemIndex', cbSpellLanguage.ItemIndex);
     WriteInteger('App', 'iTobEdit.Left', tobEdit.Left);
     WriteInteger('App', 'iTobEdit.Top', tobEdit.Top);
@@ -5080,26 +5080,26 @@ begin
   actWinExplVisible.Checked          := ifTinn.ReadBool('App', 'bWinExpl.Visible', True);
   actWorkExplVisible.Checked         := ifTinn.ReadBool('App', 'bWorkExpl.Visible', True);
 
-  frmTools.tbsComments.TabVisible    := actDataCommentsVisible.Checked;
-  frmTools.tbsCompletion.TabVisible  := actDataCompletionVisible.Checked;
-  frmTools.tbsDatabase.TabVisible    := actDatabaseVisible.Checked;
-  frmTools.tbsHexViewer.TabVisible   := actHexViewerVisible.Checked;
-  frmTools.tbsIniLog.TabVisible      := actIniLogVisible.Checked;
-  frmTools.tbsLatex.TabVisible       := actLatexVisible.Checked;
-  frmTools.tbsMarkup.TabVisible      := actMarkupVisible.Checked;
-  frmTools.tbsMisc.TabVisible        := actMiscVisible.Checked;
-  frmTools.tbsProject.TabVisible     := actProjectVisible.Checked;
-  frmTools.tbsR.TabVisible           := actRVisible.Checked;
-  frmTools.tbsRcard.TabVisible       := actDataRcardVisible.Checked;
-  frmTools.tbsResults.TabVisible     := actResultsVisible.Checked;
-  frmTools.tbsRExplorer.TabVisible   := actRExplorerVisible.Checked;
-  frmTools.tbsRmirrors.TabVisible    := actDataRmirrorsVisible.Checked;
-  frmTools.tbsSearch.TabVisible      := actSearchVisible.Checked;
-  frmTools.tbsShortcuts.TabVisible   := actDataShortcutsVisible.Checked;
-  frmTools.tbsSpell.TabVisible       := actSpellVisible.Checked;
-  frmTools.tbsTxt2tags.TabVisible    := actTxt2tagsVisible.Checked;
-  frmTools.tbsWinExplorer.TabVisible := actWinExplVisible.Checked;
-  frmTools.tbsWorkExplorer.TabVisible:= actWorkExplVisible.Checked;
+  frmTools.tbsComments.TabVisible     := actDataCommentsVisible.Checked;
+  frmTools.tbsCompletion.TabVisible   := actDataCompletionVisible.Checked;
+  frmTools.tbsDatabase.TabVisible     := actDatabaseVisible.Checked;
+  frmTools.tbsHexViewer.TabVisible    := actHexViewerVisible.Checked;
+  frmTools.tbsIniLog.TabVisible       := actIniLogVisible.Checked;
+  frmTools.tbsLatex.TabVisible        := actLatexVisible.Checked;
+  frmTools.tbsMarkup.TabVisible       := actMarkupVisible.Checked;
+  frmTools.tbsMisc.TabVisible         := actMiscVisible.Checked;
+  frmTools.tbsProject.TabVisible      := actProjectVisible.Checked;
+  frmTools.tbsR.TabVisible            := actRVisible.Checked;
+  frmTools.tbsRcard.TabVisible        := actDataRcardVisible.Checked;
+  frmTools.tbsResults.TabVisible      := actResultsVisible.Checked;
+  frmTools.tbsRExplorer.TabVisible    := actRExplorerVisible.Checked;
+  frmTools.tbsRmirrors.TabVisible     := actDataRmirrorsVisible.Checked;
+  frmTools.tbsSearch.TabVisible       := actSearchVisible.Checked;
+  frmTools.tbsApp_Shortcuts.TabVisible:= actDataShortcutsVisible.Checked;
+  frmTools.tbsSpell.TabVisible        := actSpellVisible.Checked;
+  frmTools.tbsTxt2tags.TabVisible     := actTxt2tagsVisible.Checked;
+  frmTools.tbsWinExplorer.TabVisible  := actWinExplVisible.Checked;
+  frmTools.tbsWorkExplorer.TabVisible := actWorkExplVisible.Checked;
 
   actShowAllBars.Checked:= ifTinn.ReadBool('App', 'bShowAllBars', True);
   pUpdate_Bars(actShowAllBars.Checked);
@@ -5203,7 +5203,7 @@ begin
   frmTools.panCountries.Height             := ifTinn.ReadInteger('App', 'iCountries.Height', 79);
   frmTools.panRcard.Height                 := ifTinn.ReadInteger('App', 'iRcard.Height', 79);
   frmTools.panRExplorer.Width              := ifTinn.ReadInteger('App', 'iRExplorer.Width', 200);
-  frmTools.panShortcuts.Height             := ifTinn.ReadInteger('App', 'iShortcuts.Height', 79);
+  frmTools.panApp_Shortcuts.Height         := ifTinn.ReadInteger('App', 'iApp_Shortcuts.Height', 79);
   frmTools.panWinExplorer.Height           := ifTinn.ReadInteger('App', 'iWinExplorer.Height', 75);
   frmTools.panWorkExplorer.Height          := ifTinn.ReadInteger('App', 'iWorkExplorer.Height', 75);
 
@@ -5255,8 +5255,7 @@ begin
   iCountriesFilter         := ifTinn.ReadInteger('App', 'iCountries.ItemIndex', 0);
   iRcardFilter             := ifTinn.ReadInteger('App', 'iRcard.ItemIndex', 0);
   iRtipFilter              := ifTinn.ReadInteger('App', 'iRtip.ItemIndex', 0);
-  iShortcutsFilter         := ifTinn.ReadInteger('App', 'iShortcuts.ItemIndex', 0);
-  iShortcutsFilter         := ifTinn.ReadInteger('App', 'iShortcuts.ItemIndex', 0);
+  iApp_ShortcutsFilter     := ifTinn.ReadInteger('App', 'iApp_Shortcuts.ItemIndex', 0);
 
   actRguiReturnFocus.Checked:= bRguiReturnFocus;
 
@@ -13231,20 +13230,26 @@ begin
   frmTools.lbCompletion.Font.Color    := clFGApplication;
 
   // Comments - BG
-  frmTools.dbgComments.Color     := clBGApplication;
+  frmTools.dbgComments.Color:= clBGApplication;
 
   // Comments - FG
   frmTools.dbgComments.Font.Color:= clFGApplication;
 
-  // Shortcuts - BG
-  frmTools.dbgShortcuts.Color   := clBGApplication;
-  frmTools.dbShortcutsMemo.Color:= clBGApplication;
-  frmTools.lbShortcuts.Color    := clBGApplication;
+  // App_Shortcuts - BG
+  frmTools.dbgApp_Shortcuts.Color   := clBGApplication;
+  frmTools.dbApp_ShortcutsMemo.Color:= clBGApplication;
+  frmTools.lbApp_Shortcuts.Color    := clBGApplication;
 
-  // Completion - FG
-  frmTools.dbgShortcuts.Font.Color   := clFGApplication;
-  frmTools.dbShortcutsMemo.Font.Color:= clFGApplication;
-  frmTools.lbShortcuts.Font.Color    := clFGApplication;
+  // App_Shortcuts - FG
+  frmTools.dbgApp_Shortcuts.Font.Color   := clFGApplication;
+  frmTools.dbApp_ShortcutsMemo.Font.Color:= clFGApplication;
+  frmTools.lbApp_Shortcuts.Font.Color    := clFGApplication;
+
+  // Keys_Editor - BG
+  frmTools.dbgKeys_Editor.Color:= clBGApplication;
+
+  // Keys_Editor - FG
+  frmTools.dbgKeys_Editor.Font.Color:= clFGApplication;
 
   // R explorer - BG
   frmTools.cbbToolsREnvironment.Color  := clBGApplication;
@@ -26174,7 +26179,7 @@ end;
 
 procedure TfrmMain.actDataShortcutsVisibleExecute(Sender: TObject);
 begin
-  with frmTools.tbsShortcuts do begin
+  with frmTools.tbsApp_Shortcuts do begin
     TabVisible:= not TabVisible;
     actDataShortcutsVisible.Checked:= TabVisible;
   end;
@@ -26266,11 +26271,11 @@ begin
   // dbgComments
   else if frmTools.dbgComments.Focused               then Result:= 22
   // lbShortcuts
-  else if frmTools.lbShortcuts.Focused               then Result:= 23
+  else if frmTools.lbApp_Shortcuts.Focused           then Result:= 23
   // dbgShortcuts
-  else if frmTools.dbgShortcuts.Focused              then Result:= 24
+  else if frmTools.dbgApp_Shortcuts.Focused          then Result:= 24
   // dbShortcutsMemo
-  else if frmTools.dbShortcutsMemo.Focused           then Result:= 25
+  else if frmTools.dbApp_ShortcutsMemo.Focused       then Result:= 25
   // lvRexplorer
   else if (frmTools.lvRexplorer.Focused = True)      then Result:= 26;
 end;
@@ -26363,13 +26368,13 @@ begin  // Font.Size < 50
     22: with frmTools.dbgComments do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
      // lbShortcuts
-    23: with frmTools.lbShortcuts do
+    23: with frmTools.lbApp_Shortcuts do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
      // dbgShortcuts
-    24: with frmTools.dbgShortcuts do
+    24: with frmTools.dbgApp_Shortcuts do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
      // dbShortcutsMemo
-    25: with frmTools.dbShortcutsMemo do
+    25: with frmTools.dbApp_ShortcutsMemo do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
     // lvRexplorer
     26: with frmTools.lvRexplorer do
@@ -26463,13 +26468,13 @@ begin  //Font.Size > 02
     22: with frmTools.dbgComments do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
      // lbShortcuts
-    23: with frmTools.lbShortcuts do
+    23: with frmTools.lbApp_Shortcuts do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
      // dbgShortcuts
-    24: with frmTools.dbgShortcuts do
+    24: with frmTools.dbgApp_Shortcuts do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
      // dbShortcutsMemo
-    25: with frmTools.dbShortcutsMemo do
+    25: with frmTools.dbApp_ShortcutsMemo do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
     // lvRexplorer
     26: with frmTools.lvRexplorer do
