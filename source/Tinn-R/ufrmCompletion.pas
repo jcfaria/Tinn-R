@@ -231,7 +231,7 @@ begin
     with frmMain do
       frmTools.lbCompletion.Selected[iCompletionFilter]:= False;
 
-    cdCompletion.Bookmark:= frmMain.sCompletionBookMark;
+    cdCompletion.Bookmark:= frmMain.sCompletion_BookMark;
   end;
 
   edtGroupSearch.SetFocus;

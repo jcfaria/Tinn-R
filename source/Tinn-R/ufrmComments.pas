@@ -222,7 +222,7 @@ begin
 
   stbComments.Panels[0].Text:= 'Browse mode';
   with ModDados do
-    cdComments.Bookmark:= frmMain.sCommentsBookMark;
+    cdComments.Bookmark:= frmMain.sComments_Bookmark;
   edtLanguageSearch.SetFocus
 end;
 

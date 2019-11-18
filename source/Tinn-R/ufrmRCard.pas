@@ -194,7 +194,7 @@ begin
     cdRcard.Filtered:= False;
     with frmMain do
       frmTools.lbRcard.Selected[iRcardFilter]:= False;
-    cdRcard.Bookmark:= frmMain.sRcardBookMark;
+    cdRcard.Bookmark:= frmMain.sRcard_BookMark;
   end;
 
   edtGroupSearch.SetFocus;

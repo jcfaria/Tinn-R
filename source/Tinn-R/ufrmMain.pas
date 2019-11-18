@@ -2909,7 +2909,7 @@ type
     iFilterToSaveAs              : integer;
     iIPPortLocal                 : integer;
     iIPPortRemote                : integer;
-    iKeys_Editor_SavePoint       : integer;
+    iEditor_Keystrokes_SavePoint : integer;
     iLatexDimensionalAlign       : integer;
     iMaxDeparseLength            : integer;
     iPandocFrom                  : integer;
@@ -2925,15 +2925,15 @@ type
     iRtip_SavePoint              : integer;
     iRtipFilter                  : integer;
     iScaleMode                   : integer;
-    iShortcuts_SavePoint         : integer;
+    iApp_Shortcuts_SavePoint     : integer;
     iApp_ShortcutsFilter         : integer;
     iSynWithFocus                : integer;
     iTransparency                : integer;
     iZoomPreview                 : integer;
     sAppSelected                 : string;
     sBeginComment                : string;
-    sCommentsBookMark            : string;
-    sCompletionBookMark          : string;
+    sComments_BookMark           : string;
+    sCompletion_BookMark         : string;
     sDragSource                  : string;
     sDragSourceLine              : string;
     seDefault                    : TSynEncoding;
@@ -2966,11 +2966,11 @@ type
     sPuttyHost                   : string;
     sPuttyPassword               : string;
     sPuttyUser                   : string;
-    sRcardBookMark               : string;
+    sRcard_BookMark              : string;
     sReplaceTextHistory          : string;
     sRmirror                     : string;
-    sRmirrorsBookMark            : string;
-    sRtipBookMark                : string;
+    sRmirrors_BookMark           : string;
+    sRtip_BookMark               : string;
     sSaveAsFileExt               : string;
     sSearch_TextHistory          : string;
     sShortcutsInUse              : string;
@@ -3194,12 +3194,12 @@ begin
     sVersion_Rmirrors:= sCurrentVersion_Rmirrors;
   end;
 
-  // Shortcuts
+  // App_Shortcuts
   if (AnsiCompareStr(sVersion_Shortcuts,
                      sCurrentVersion_Shortcuts) < 0) then begin
     sVersion_Shortcuts:= sCurrentVersion_Shortcuts;
     if FileExists(sPath_Data +
-                  '\Shortcuts.xml') then
+                  '\App_Shortcuts.xml') then
       bUpdate_Shortcuts:= True;
   end;
 
@@ -3235,7 +3235,7 @@ begin
                      sCurrentVersion_Editor) < 0) then begin
     sVersion_Editor:= sCurrentVersion_Editor;
     if FileExists(sPath_Data +
-                  '\Editor.xml') then
+                  '\Editor_Keystrokes.xml') then
       bUpdate_Editor:= True;
   end;
 
@@ -3843,6 +3843,7 @@ begin
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
     WriteInteger('App', 'iDatabase.TabIndex', frmTools.pgDatabase.TabIndex);
+    WriteInteger('App', 'iRH.TabIndex', frmTools.pgRH.TabIndex);
     WriteInteger('App', 'iLatex.TabIndex', frmTools.pgLatex.TabIndex);
     WriteInteger('App', 'iMarkup.TabIndex', frmTools.pgMarkup.TabIndex);
     WriteInteger('App', 'iMisc.TabIndex', frmTools.pgMisc.TabIndex);
@@ -4046,7 +4047,7 @@ begin
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
     WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
     WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
-    WriteInteger('Database', 'iShortcuts_SavePoint', iShortcuts_SavePoint);
+    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
     WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
     WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
     WriteInteger('Database', 'iRH_Custom_SavePoint', iRH_Custom_SavePoint);
@@ -4376,6 +4377,7 @@ begin
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
     WriteInteger('App', 'iDatabase.TabIndex', frmTools.pgDatabase.TabIndex);
+    WriteInteger('App', 'iRH.TabIndex', frmTools.pgRH.TabIndex);
     WriteInteger('App', 'iLatex.TabIndex', frmTools.pgLatex.TabIndex);
     WriteInteger('App', 'iMarkup.TabIndex', frmTools.pgMarkup.TabIndex);
     WriteInteger('App', 'iMisc.TabIndex', frmTools.pgMisc.TabIndex);
@@ -4585,7 +4587,7 @@ begin
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
     WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
     WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
-    WriteInteger('Database', 'iShortcuts_SavePoint', iShortcuts_SavePoint);
+    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
     WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
     WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
     WriteInteger('Database', 'iRH_Custom_SavePoint', iRH_Custom_SavePoint);
@@ -5121,7 +5123,7 @@ begin
   iPandocTo             := ifTinn.ReadInteger('App', 'iPandocTo', 7);
   iTransparency         := ifTinn.ReadInteger('App', 'iTransparency', 0);
   iViewStyleRExplorer   := ifTinn.ReadInteger('App', 'iViewStyleRExplorer', 1);
-  sShortcutsInUse       := trim(ifTinn.ReadString('App', 'sShortcutsInUse', sPath_Data + '\Shortcuts.xml'));
+  sShortcutsInUse       := trim(ifTinn.ReadString('App', 'sShortcutsInUse', sPath_Data + '\App_Shortcuts.xml'));
 
   bIPLocal     := ifTinn.ReadBool('App', 'bIPLocal', True);
   iIPPortLocal := ifTinn.ReadInteger('App', 'iIPPortLocal', 8889);
@@ -5242,6 +5244,7 @@ begin
   bToolsCanFloat              := ifTinn.ReadBool('App', 'bToolsCanFloat', False);
   frmTools.iSize              := ifTinn.ReadInteger('App', 'iTools.Size', 310);
   frmTools.pgDatabase.TabIndex:= ifTinn.ReadInteger('App', 'iDatabase.TabIndex', 0);
+  frmTools.pgRH.TabIndex      := ifTinn.ReadInteger('App', 'iRH.TabIndex', 0);
   frmTools.pgLatex.TabIndex   := ifTinn.ReadInteger('App', 'iLatex.TabIndex', 0);
   frmTools.pgMarkup.TabIndex  := ifTinn.ReadInteger('App', 'iMarkup.TabIndex', 0);
   frmTools.pgMisc.TabIndex    := ifTinn.ReadInteger('App', 'iMIsc.TabIndex', 0);
@@ -5399,13 +5402,13 @@ begin
   actRSendSweave.Visible                 := ifTinn.ReadBool('R Options', 'bRSweave', True);
 
   // Database status
-  iCompletion_SavePoint:= ifTinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
-  iRcard_SavePoint     := ifTinn.ReadInteger('Database', 'iRcard_SavePoint', 0);
-  iRtip_SavePoint      := ifTinn.ReadInteger('Database', 'iRtip_SavePoint', 0);
-  iShortcuts_SavePoint := ifTinn.ReadInteger('Database', 'iShortcuts_SavePoint', 0);
-  iRH_Send_SavePoint   := ifTinn.ReadInteger('Database', 'iRH_Send_SavePoint', 0);
-  iRH_Control_SavePoint:= ifTinn.ReadInteger('Database', 'iRH_Control_SavePoint', 0);
-  iRH_Custom_SavePoint := ifTinn.ReadInteger('Database', 'iRH_Custom_SavePoint', 0);
+  iCompletion_SavePoint   := ifTinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
+  iRcard_SavePoint        := ifTinn.ReadInteger('Database', 'iRcard_SavePoint', 0);
+  iRtip_SavePoint         := ifTinn.ReadInteger('Database', 'iRtip_SavePoint', 0);
+  iApp_Shortcuts_SavePoint:= ifTinn.ReadInteger('Database', 'iApp_Shortcuts_SavePoint', 0);
+  iRH_Send_SavePoint      := ifTinn.ReadInteger('Database', 'iRH_Send_SavePoint', 0);
+  iRH_Control_SavePoint   := ifTinn.ReadInteger('Database', 'iRH_Control_SavePoint', 0);
+  iRH_Custom_SavePoint    := ifTinn.ReadInteger('Database', 'iRH_Custom_SavePoint', 0);
 
   // Latex Dimensional element
   iCols                   := ifTinn.ReadInteger('Latex', 'iCols', 2);
@@ -7940,14 +7943,14 @@ var
   i: integer;
 
 begin
-   with modDados.cdKeys_Editor do begin
-    IndexFieldNames:= 'Index';  // To cdEditor has the same order than coEditor.Keystrokes.Items
+   with modDados.cdEditor_Keystrokes do begin
+    IndexFieldNames:= 'Index';  // To Editor_Keystrokes has the same order than coEditor.Keystrokes.Items
     DisableControls;
     First;
     for i:=0 to (RecordCount - 1) do begin
       with coEditor.Keystrokes.Items[i] do begin
 // To debug only
-//        ShowMessage('Editor.xml: ' +
+//        ShowMessage('Editor_Keystrokes.xml: ' +
 //                    FieldByName('Command').Value +
 //                    ' | ' +
 //                    'coEditor: ' +
@@ -8465,13 +8468,19 @@ begin
   sFileRmirrors  := sPath_Data + '\Rmirrors.xml';
   sFileComments  := sPath_Data + '\Comments.xml';
   sFileCompletion:= sPath_Data + '\Completion.xml';
-  sFileShortcuts := sPath_Data + '\Shortcuts.xml';
+  sFileShortcuts := sPath_Data + '\App_Shortcuts.xml';
   sFileRH_Send   := sPath_Data + '\RH_Send.xml';
   sFileRH_Control:= sPath_Data + '\RH_Control.xml';
   sFileRH_Custom := sPath_Data + '\RH_Custom.xml';
-  sFileEditor    := sPath_Data + '\Editor.xml';
+  sFileEditor    := sPath_Data + '\Editor_Keystrokes.xml';
 
   try
+    // Both files below were renamed in version 5.6.1.1: they can be deleted
+    DeleteFile(sPath_Data +
+               '\Shortcuts.xml');
+    DeleteFile(sPath_Data +
+               '\Editor.xml');
+
     with frmTools.memIniLog.Lines do begin
       Add(EmptyStr);
       Add('3.2. Data');
@@ -8490,42 +8499,42 @@ begin
       if (bUpdate_Completion) then pMakeDataBackup('\Completion.xml');
 
       if (bUpdate_Shortcuts)  then begin
-        pMakeDataBackup('\Shortcuts.xml');
-        // Shortcuts in use: = Shortcuts.xml
+        pMakeDataBackup('\App_Shortcuts.xml');
+        // Shortcuts in use: = App_Shortcuts.xml
         if (sShortcutsInUse = sPath_Data +
-            '\Shortcuts.xml') then begin
+            '\App_Shortcuts.xml') then begin
           RenameFile(sPath_Data +
-                     '\Shortcuts.xml',
+                     '\App_Shortcuts.xml',
                      sPath_Data +
-                     '\OldShortcuts.xml');
+                     '\OldApp_Shortcuts.xml');
 
           pUnpack_File(sFileDataOrigin,
                        sPath_Data,
-                       'Shortcuts.xml');  // It is necessary to make a new copy from origin
+                       'App_Shortcuts.xml');  // It is necessary to make a new copy from origin
 
-          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts.xml
+          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new App_Shortcuts.xml
             pShortcuts_Validation(sPath_Data +
-                                  '\OldShortcuts.xml',
+                                  '\OldApp_Shortcuts.xml',
                                   sPath_Data +
-                                  '\Shortcuts.xml');
+                                  '\App_Shortcuts.xml');
           DeleteFile(sPath_Data +
-                     '\OldShortcuts.xml');
+                     '\OldApp_Shortcuts.xml');
         end
-        // Shortcuts in use: <> Shortcuts.xml
+        // Shortcuts in use: <> App_Shortcuts.xml
         else begin
           pUnpack_File(sFileDataOrigin,
                        sPath_Data,
-                       'Shortcuts.xml');  // It is necessary to make a new copy from origin
+                       'App_Shortcuts.xml');  // It is necessary to make a new copy from origin
 
-          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts.xml
+          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new App_Shortcuts.xml
             pShortcuts_Validation(sShortcutsInUse,
                                   sPath_Data +
-                                  '\Shortcuts.xml');
+                                  '\App_Shortcuts.xml');
           DeleteFile(sShortcutsInUse);
         end;
 
         sShortcutsInUse:= sPath_Data +
-                          '\Shortcuts.xml';
+                          '\App_Shortcuts.xml';
       end;
     end;
 
@@ -8614,7 +8623,7 @@ begin
     if not FileExists(sFileEditor) then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
-                   'Editor.xml');
+                   'Editor_Keystrokes.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileEditor) +
@@ -8627,7 +8636,7 @@ begin
       if bUpdate_Editor then
         pUnpack_File(sFileDataOrigin,
                      sPath_Data,
-                     'Editor.xml');
+                     'Editor_Keystrokes.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileEditor) +
@@ -8774,11 +8783,11 @@ begin
 
     // Shortcuts
     if not FileExists(sShortcutsInUse) then sShortcutsInUse:= sPath_Data +
-                                                              '\Shortcuts.xml';
+                                                              '\App_Shortcuts.xml';
     if not FileExists(sFileShortcuts)  then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
-                   'Shortcuts.xml');
+                   'App_Shortcuts.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileShortcuts) +
@@ -8791,7 +8800,7 @@ begin
       if bUpdate_Shortcuts then
         pUnpack_File(sFileDataOrigin,
                      sPath_Data,
-                     'Shortcuts.xml');
+                     'App_Shortcuts.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFileShortcuts) +
@@ -8813,7 +8822,7 @@ begin
   Rewrite(tfTmp);
     WriteLn(tfTmp,
             'This folder stores (by default):' + #13 +
-            'The XML files: Cache.xml, Comments.xml, Completion.xml, Editor.xml, Rcard.xlm, Rmirrors.xml, Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
+            'The XML files: Cache.xml, Comments.xml, Completion.xml, Editor_Keystrokes.xml, Rcard.xlm, Rmirrors.xml, App_Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
   CloseFile(tfTmp);
 end;
 
@@ -9489,7 +9498,7 @@ end;
 
 procedure TfrmMain.actRmirrorsEditExecute(Sender: TObject);
 begin
-  sRmirrorsBookMark:= modDados.cdRmirrors.Bookmark;
+  sRmirrors_BookMark:= modDados.cdRmirrors.Bookmark;
   menToolsDatabaseMirrorsRClick(nil);
   pSet_Focus_Main;
 end;
@@ -9535,7 +9544,7 @@ begin
 
     frmTools.lbCountries.Selected[iCountriesFilter]:= False;
 
-    cdRmirrors.Bookmark:= sRmirrorsBookMark;
+    cdRmirrors.Bookmark:= sRmirrors_BookMark;
   end;
 
   // TfrmRmirrors.FormCloseQuery
@@ -11334,11 +11343,11 @@ begin
 
   sOrigin:= sPath_Data +
             '\' +
-            'Shortcuts.xml';
+            'App_Shortcuts.xml';
 
   sDest:= sPath_TinnR +
           '\data\' +
-          'Shortcuts.xml';
+          'App_Shortcuts.xml';
 
   try
     if not (CopyFile(PChar(sOrigin),
@@ -11356,7 +11365,7 @@ begin
 
   with stbMain do begin
     Panels[8].Text:= 'Done!';
-    Panels[9].Text:= 'Shortcuts.xml replaced: ' +
+    Panels[9].Text:= 'App_Shortcuts.xml replaced: ' +
                      sPath_Data;
   end;
 end;
@@ -11398,7 +11407,7 @@ var
 begin
   alMain.State:= asSuspended;
 
-  with modDados.cdShortcuts do begin
+  with modDados.cdApp_Shortcuts do begin
     pTmp:= GetBookmark;
     DisableControls;
     Filtered:= False;
@@ -13245,11 +13254,11 @@ begin
   frmTools.dbApp_ShortcutsMemo.Font.Color:= clFGApplication;
   frmTools.lbApp_Shortcuts.Font.Color    := clFGApplication;
 
-  // Keys_Editor - BG
-  frmTools.dbgKeys_Editor.Color:= clBGApplication;
+  // Editor_Keystrokes - BG
+  frmTools.dbgEditor_Keystrokes.Color:= clBGApplication;
 
-  // Keys_Editor - FG
-  frmTools.dbgKeys_Editor.Font.Color:= clFGApplication;
+  // Editor_Keystrokes - FG
+  frmTools.dbgEditor_Keystrokes.Font.Color:= clFGApplication;
 
   // R explorer - BG
   frmTools.cbbToolsREnvironment.Color  := clBGApplication;
@@ -14524,7 +14533,7 @@ var
 
 begin
   // Related to Shortcuts
-  with modDados.cdShortcuts do
+  with modDados.cdApp_Shortcuts do
     pTmp:= GetBookmark;
 
   try
@@ -14543,34 +14552,34 @@ begin
     // If OK
     if (dlgSKH_Map.ShowModal = mrOK) then begin
       // App
-      with modDados.cdShortcuts do begin
+      with modDados.cdApp_Shortcuts do begin
         Filtered:= False;
         Edit;
         try
           Post;
           MergeChangeLog;
           SaveToFile();
-          frmMain.iShortcuts_SavePoint:= SavePoint;
+          frmMain.iApp_Shortcuts_SavePoint:= SavePoint;
         except
           //TODO
         end;
       end;
 
-      with modDados.cdShortcuts do
+      with modDados.cdApp_Shortcuts do
         IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
 
       bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
       pDataset_To_ActionList;  //It will update all options related to the alMain (ActionList)
 
-      // Keys_Editor
-      with modDados.cdKeys_Editor do begin
+      // Editor_Keystrokes
+      with modDados.cdEditor_Keystrokes do begin
         Filtered:= False;
         Edit;
         try
           Post;
           MergeChangeLog;
           SaveToFile();
-          frmMain.iKeys_Editor_SavePoint:= SavePoint;
+          frmMain.iEditor_Keystrokes_SavePoint:= SavePoint;
         except
           //TODO
         end;
@@ -14646,19 +14655,19 @@ begin
     // else (dlgSH_Map.ShowModal <> mrOK)
     else begin
       with modDados do begin
-        cdShortcuts.SavePoint  := iShortcuts_SavePoint;
-        cdRH_Send.SavePoint    := iRH_Send_SavePoint;
-        cdRH_Control.SavePoint := iRH_Control_SavePoint;
-        cdRH_Custom.SavePoint  := iRH_Custom_SavePoint;
-        cdKeys_Editor.SavePoint:= iKeys_Editor_SavePoint;
-        cdShortcutsAfterScroll(nil);
+        cdApp_Shortcuts.SavePoint    := iApp_Shortcuts_SavePoint;
+        cdRH_Send.SavePoint          := iRH_Send_SavePoint;
+        cdRH_Control.SavePoint       := iRH_Control_SavePoint;
+        cdRH_Custom.SavePoint        := iRH_Custom_SavePoint;
+        cdEditor_Keystrokes.SavePoint:= iEditor_Keystrokes_SavePoint;
+        cdApp_ShortcutsAfterScroll(nil);
       end;
     end;
 
   finally
     pSet_Hotkeys_Status(bHotKeys_On);
 
-    with modDados.cdShortcuts do begin
+    with modDados.cdApp_Shortcuts do begin
       if BookmarkValid(pTmp) then GoToBookmark(pTmp);
       FreeBookmark(pTmp);
     end;
@@ -16011,7 +16020,7 @@ end;
 
 procedure TfrmMain.actRcardEditExecute(Sender: TObject);
 begin
-  sRcardBookMark:= modDados.cdRcard.Bookmark;
+  sRcard_BookMark:= modDados.cdRcard.Bookmark;
   menToolsDatabaseCardRClick(nil);
   pSet_Focus_Main;
 end;
@@ -18850,13 +18859,46 @@ begin
               end;
             end;
 
-            with cdShortcuts do begin
+            with cdApp_Shortcuts do begin
               Edit;
               try
                 Post;
                 MergeChangeLog;
                 SaveToFile();
-                iShortcuts_SavePoint:= SavePoint;
+                iApp_Shortcuts_SavePoint:= SavePoint;
+              except
+              end;
+            end;
+
+            with cdRH_Send do begin
+              Edit;
+              try
+                Post;
+                MergeChangeLog;
+                SaveToFile();
+                iRH_Send_SavePoint:= SavePoint;
+              except
+              end;
+            end;
+
+            with cdRH_Control do begin
+              Edit;
+              try
+                Post;
+                MergeChangeLog;
+                SaveToFile();
+                iRH_Control_SavePoint:= SavePoint;
+              except
+              end;
+            end;
+
+            with cdRH_Custom do begin
+              Edit;
+              try
+                Post;
+                MergeChangeLog;
+                SaveToFile();
+                iRH_Custom_SavePoint:= SavePoint;
               except
               end;
             end;
@@ -19046,11 +19088,19 @@ begin
                   sTmp) > 0) or
              (Pos('Completion.xml',
                   sTmp) > 0) or
+             (Pos('Editor_Keystrokes.xml',
+                  sTmp) > 0) or
              (Pos('Rcard.xml',
+                  sTmp) > 0) or
+             (Pos('RH_Send.xml',
+                  sTmp) > 0) or
+             (Pos('RH_Control.xml',
+                  sTmp) > 0) or
+             (Pos('RH_Custom.xml',
                   sTmp) > 0) or
              (Pos('Rmirrors.xml',
                   sTmp) > 0) or
-             (Pos('Shortcuts.xml',
+             (Pos('App_Shortcuts.xml',
                   sTmp) > 0) then inc(j);
         end;
 
@@ -19069,9 +19119,13 @@ begin
           cdCache.Close;
           cdComments.Close;
           cdCompletion.Close;
+          cdEditor_Keystrokes.Close;
           cdRcard.Close;
+          cdRH_Send.Close;
+          cdRH_Control.Close;
+          cdRH_Custom.Close;
           cdRmirrors.Close;
-          cdShortcuts.Close;
+          cdApp_Shortcuts.Close;
         end;
         pDelete_Dir(sPath_Data);
         CreateDir(sPath_Data);
@@ -21408,7 +21462,7 @@ end;
 
 procedure TfrmMain.actCommentsEditExecute(Sender: TObject);
 begin
-  sCommentsBookMark:= modDados.cdComments.Bookmark;
+  sComments_Bookmark:= modDados.cdComments.Bookmark;
   menToolsDatabaseCommentsClick(nil);
   pSet_Focus_Main;
 end;
@@ -21433,7 +21487,7 @@ end;
 
 procedure TfrmMain.actCompletionEditExecute(Sender: TObject);
 begin
-  sCompletionBookMark:= modDados.cdCompletion.Bookmark;
+  sCompletion_BookMark:= modDados.cdCompletion.Bookmark;
   menToolsDatabaseCompletionClick(nil);
   pSet_Focus_Main;
 end;
@@ -21860,6 +21914,7 @@ end;
 procedure TfrmMain.actToolsTabsBottomExecute(Sender: TObject);
 begin
   if not Assigned(frmTools) then Exit;
+
   with frmTools do begin
     with pgTools do
       TabsPosition:= fsdBottom;
@@ -21882,6 +21937,9 @@ begin
     with pgDatabase do
       TabsPosition:= fsdBottom;
 
+    with pgRH do
+      TabsPosition:= fsdBottom;
+
     with pgR do
       TabsPosition:= fsdBottom;
   end;
@@ -21891,6 +21949,7 @@ end;
 procedure TfrmMain.actToolsTabsLeftExecute(Sender: TObject);
 begin
   if not Assigned(frmTools) then Exit;
+
   with frmTools do begin
     with pgTools do
       TabsPosition:= fsdLeft;
@@ -21913,6 +21972,9 @@ begin
     with pgDatabase do
       TabsPosition:= fsdLeft;
 
+    with pgRH do
+      TabsPosition:= fsdLeft;
+
     with pgR do
       TabsPosition:= fsdLeft;
   end;
@@ -21922,6 +21984,7 @@ end;
 procedure TfrmMain.actToolsTabsRightExecute(Sender: TObject);
 begin
   if not Assigned(frmTools) then Exit;
+
   with frmTools do begin
     with pgTools do
       TabsPosition:= fsdRight;
@@ -21944,6 +22007,9 @@ begin
     with pgDatabase do
       TabsPosition:= fsdRight;
 
+    with pgRH do
+      TabsPosition:= fsdRight;
+
     with pgR do
       TabsPosition:= fsdRight;
   end;
@@ -21953,6 +22019,7 @@ end;
 procedure TfrmMain.actToolsTabsTopExecute(Sender: TObject);
 begin
   if not Assigned(frmTools) then Exit;
+
   with frmTools do begin
     with pgTools do
       TabsPosition:= fsdTop;
@@ -21973,6 +22040,9 @@ begin
       TabsPosition:= fsdTop;
 
     with pgDatabase do
+      TabsPosition:= fsdTop;
+
+    with pgRH do
       TabsPosition:= fsdTop;
 
     with pgR do

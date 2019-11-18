@@ -342,7 +342,7 @@ type
     TBItem21: TTBItem;
     TBItem22: TTBItem;
     TBItem23: TTBItem;
-    TBItem24: TTBItem;
+    tbiHelp_Shortcut: TTBItem;
     TBItem25: TTBItem;
     TBItem26: TTBItem;
     TBItem27: TTBItem;
@@ -488,39 +488,39 @@ type
     tbsEditor_Keystrokes: TTabSheet;
     tbsR_Hotkeys: TTabSheet;
     JvDBNavigator6: TJvDBNavigator;
-    dbgKeys_Editor: TDBGrid;
+    dbgEditor_Keystrokes: TDBGrid;
     Panel17: TPanel;
     TBDock3: TTBDock;
     TBToolbar5: TTBToolbar;
-    TBItem41: TTBItem;
+    tbiHelp_Keystrokes: TTBItem;
     TBSeparatorItem2: TTBSeparatorItem;
     TBItem42: TTBItem;
-    edKeys_Editor_Filter: TEdit;
-    JvgPageControl1: TJvgPageControl;
+    edEditor_Keystrokes_Filter: TEdit;
+    pgRH: TJvgPageControl;
     tbsRH_Send: TTabSheet;
     tbsRH_Control: TTabSheet;
     tbsRH_Custom: TTabSheet;
     Panel21: TPanel;
     TBDock4: TTBDock;
     TBToolbar6: TTBToolbar;
-    TBItem43: TTBItem;
+    tbiHelp_RH_Send: TTBItem;
     TBSeparatorItem5: TTBSeparatorItem;
     TBItem44: TTBItem;
-    edRH_Send_Filter_Caption: TEdit;
+    edRH_Send_Filter: TEdit;
     Panel22: TPanel;
     TBDock5: TTBDock;
     TBToolbar7: TTBToolbar;
-    TBItem45: TTBItem;
+    tbiHelp_RH_Control: TTBItem;
     TBSeparatorItem10: TTBSeparatorItem;
     TBItem48: TTBItem;
-    edRH_Control_Filter_Caption: TEdit;
+    edRH_Control_Filter: TEdit;
     Panel23: TPanel;
     TBDock6: TTBDock;
     TBToolbar8: TTBToolbar;
-    TBItem49: TTBItem;
+    tbiHelp_RH_Custom: TTBItem;
     TBSeparatorItem21: TTBSeparatorItem;
     TBItem50: TTBItem;
-    edRH_Custom_Filter_Caption: TEdit;
+    edRH_Custom_Filter: TEdit;
     JvDBNavigator7: TJvDBNavigator;
     dbgRH_Send: TDBGrid;
     JvDBNavigator8: TJvDBNavigator;
@@ -528,6 +528,11 @@ type
     JvDBNavigator9: TJvDBNavigator;
     dbgRH_Custom: TDBGrid;
     JvDockClientTools: TJvDockClient;
+    edApp_Shortcuts_Filter: TEdit;
+    edCompletion_Filter: TEdit;
+    edComments_Filter: TEdit;
+    edRcard_Filter: TEdit;
+    edRmirrors_Filter: TEdit;
 
     procedure bbtExplorerAddFavoritesClick(Sender: TObject);
     procedure bbtExplorerRemoveFavoritesClick(Sender: TObject);
@@ -619,13 +624,42 @@ type
     procedure tvSearchDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure tvSearchEndDrag(Sender, Target: TObject; X, Y: Integer);
     procedure tvSearchStartDrag(Sender: TObject; var DragObject: TDragObject);
-    procedure edKeys_Editor_FilterChange(Sender: TObject);
-    procedure edRH_Send_Filter_CaptionChange(Sender: TObject);
-    procedure edRH_Control_Filter_CaptionChange(Sender: TObject);
-    procedure edRH_Custom_Filter_CaptionChange(Sender: TObject);
+    procedure edRH_Send_FilterChange(Sender: TObject);
+    procedure edRH_Control_FilterChange(Sender: TObject);
+    procedure edRH_Custom_FilterChange(Sender: TObject);
+    procedure pgRHChange(Sender: TObject);
+    procedure edApp_Shortcuts_FilterChange(Sender: TObject);
+    procedure tbiHelp_KeystrokesClick(Sender: TObject);
+    procedure tbiHelp_RH_SendClick(Sender: TObject);
+    procedure tbiHelp_RH_ControlClick(Sender: TObject);
+    procedure tbiHelp_RH_CustomClick(Sender: TObject);
+    procedure edEditor_Keystrokes_FilterChange(Sender: TObject);
+    procedure edApp_Shortcuts_FilterClick(Sender: TObject);
+    procedure edEditor_Keystrokes_FilterClick(Sender: TObject);
+    procedure edRH_Send_FilterClick(Sender: TObject);
+    procedure edRH_Control_FilterClick(Sender: TObject);
+    procedure edRH_Custom_FilterClick(Sender: TObject);
+    procedure edCompletion_FilterClick(Sender: TObject);
+    procedure edComments_FilterClick(Sender: TObject);
+    procedure edRcard_FilterClick(Sender: TObject);
+    procedure edRmirrors_FilterClick(Sender: TObject);
+    procedure edCompletion_FilterChange(Sender: TObject);
+    procedure edComments_FilterChange(Sender: TObject);
+    procedure edRcard_FilterChange(Sender: TObject);
+    procedure edRmirrors_FilterChange(Sender: TObject);
 
   private
     { Private declarations }
+    sApp_Shortcuts_BM    : string;
+    sEditor_Keystrokes_BM: string;
+    sRH_Send_BM          : string;
+    sRH_Control_BM       : string;
+    sRH_Custom_BM        : string;
+    sCompletion_BM       : string;
+    sComments_BM         : string;
+    sRmirrors_BM         : string;
+    sRcard_BM            : string;
+
     procedure pAdjustColumnWidths(DBGrid: TDBGrid);
 
   public
@@ -887,14 +921,130 @@ begin
   end;
 end;
 
-procedure TfrmTools.edRH_Send_Filter_CaptionChange(Sender: TObject);
+procedure TfrmTools.edApp_Shortcuts_FilterChange(Sender: TObject);
 begin
+  if (edApp_Shortcuts_Filter.Text = EmptyStr) then begin
+    lbApp_ShortcutsClick(Self);
+    with modDados.cdApp_Shortcuts do
+      Bookmark:= sApp_Shortcuts_BM;
+    Exit;
+  end;
+
+  try
+    with modDados.cdApp_Shortcuts do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Caption) Like ' +
+               UpperCase(QuotedStr('%' + edApp_Shortcuts_Filter.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmTools.edApp_Shortcuts_FilterClick(Sender: TObject);
+begin
+  sApp_Shortcuts_BM:= modDados.cdApp_Shortcuts.Bookmark;
+end;
+
+procedure TfrmTools.edComments_FilterChange(Sender: TObject);
+begin
+  if (edComments_Filter.Text = EmptyStr) then begin
+    with modDados.cdComments do begin
+      Filtered:= False;
+      Bookmark:= sComments_BM;
+    end;
+    Exit;
+  end;
+
+  try
+    with modDados.cdComments do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Language) Like ' +
+               UpperCase(QuotedStr('%' + edComments_Filter.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmTools.edComments_FilterClick(Sender: TObject);
+begin
+  sComments_BM:= modDados.cdComments.Bookmark;
+end;
+
+procedure TfrmTools.edCompletion_FilterChange(Sender: TObject);
+begin
+  if (edCompletion_Filter.Text = EmptyStr) then begin
+    lbCompletionClick(Self);
+    with modDados.cdCompletion do
+      Bookmark:= sCompletion_BM;
+    Exit;
+  end;
+
+  try
+    with modDados.cdCompletion do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Function) Like ' +
+               UpperCase(QuotedStr('%' + edCompletion_Filter.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmTools.edCompletion_FilterClick(Sender: TObject);
+begin
+  sCompletion_BM:= modDados.cdCompletion.Bookmark;
+end;
+
+procedure TfrmTools.edEditor_Keystrokes_FilterChange(Sender: TObject);
+begin
+  if (edEditor_Keystrokes_Filter.Text = EmptyStr) then begin
+    with modDados.cdEditor_Keystrokes do begin
+      Filtered:= False;
+      Bookmark:= sEditor_Keystrokes_BM;
+    end;
+    Exit;
+  end;
+
+  try
+    with modDados.cdEditor_Keystrokes do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Command) Like ' +
+               UpperCase(QuotedStr('%' + edEditor_Keystrokes_Filter.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmTools.edEditor_Keystrokes_FilterClick(Sender: TObject);
+begin
+  sEditor_Keystrokes_BM:= modDados.cdEditor_Keystrokes.Bookmark;
+end;
+
+procedure TfrmTools.edRH_Send_FilterChange(Sender: TObject);
+begin
+  if (edRH_Send_Filter.Text = EmptyStr) then begin
+    with modDados.cdRH_Send do begin
+      Filtered:= False;
+      Bookmark:= sRH_Send_BM;
+    end;
+    Exit;
+  end;
+
   try
     with modDados.cdRH_Send do begin
       Filtered:= False;
-      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Send' + '%')) +
+      Filter:= 'UPPER(Group) Like ' +
+               UpperCase(QuotedStr('%' + 'Send' + '%')) +
                ' AND ' +
-               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edRH_Send_Filter_Caption.Text + '%'));
+               'UPPER(Caption) Like ' +
+               UpperCase(QuotedStr('%' + edRH_Send_Filter.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -902,14 +1052,81 @@ begin
   end;
 end;
 
-procedure TfrmTools.edRH_Control_Filter_CaptionChange(Sender: TObject);
+procedure TfrmTools.edRH_Send_FilterClick(Sender: TObject);
 begin
+  sRH_Send_BM:= modDados.cdRH_Send.Bookmark;
+end;
+
+procedure TfrmTools.edRmirrors_FilterChange(Sender: TObject);
+begin
+  if (edRmirrors_Filter.Text = EmptyStr) then begin
+    lbCountriesClick(Self);
+    with modDados.cdRmirrors do
+      Bookmark:= sRmirrors_BM;
+    Exit;
+  end;
+
+  try
+    with modDados.cdRmirrors do begin
+      Filtered:= False;
+      Filter:= 'UPPER(City) Like ' +
+               UpperCase(QuotedStr('%' + edRmirrors_Filter.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmTools.edRmirrors_FilterClick(Sender: TObject);
+begin
+  sRmirrors_BM:= modDados.cdRmirrors.Bookmark;
+end;
+
+procedure TfrmTools.edRcard_FilterChange(Sender: TObject);
+begin
+  if (edRcard_Filter.Text = EmptyStr) then begin
+    lbRcardClick(Self);
+    with modDados.cdRcard do
+      Bookmark:= sRcard_BM;
+    Exit;
+  end;
+
+  try
+    with modDados.cdRcard do begin
+      Filtered:= False;
+      Filter:= 'UPPER(Function) Like ' +
+               UpperCase(QuotedStr('%' + edRcard_Filter.Text + '%'));
+      Filtered:= True;
+    end;
+  except
+    //TODO
+  end;
+end;
+
+procedure TfrmTools.edRcard_FilterClick(Sender: TObject);
+begin
+  sRcard_BM:= modDados.cdRcard.Bookmark;
+end;
+
+procedure TfrmTools.edRH_Control_FilterChange(Sender: TObject);
+begin
+  if (edRH_Control_Filter.Text = EmptyStr) then begin
+    with modDados.cdRH_Control do begin
+      Filtered:= False;
+      Bookmark:= sRH_Control_BM;
+    end;
+    Exit;
+  end;
+
   try
     with modDados.cdRH_Control do begin
       Filtered:= False;
-      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Control' + '%')) +
+      Filter:= 'UPPER(Group) Like ' +
+               UpperCase(QuotedStr('%' + 'Control' + '%')) +
                ' AND ' +
-               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edRH_Control_Filter_Caption.Text + '%'));
+               'UPPER(Caption) Like ' +
+               UpperCase(QuotedStr('%' + edRH_Control_Filter.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -917,38 +1134,45 @@ begin
   end;
 end;
 
-procedure TfrmTools.edRH_Custom_Filter_CaptionChange(Sender: TObject);
+procedure TfrmTools.edRH_Control_FilterClick(Sender: TObject);
 begin
+  sRH_Control_BM:= modDados.cdRH_Control.Bookmark;
+end;
+
+procedure TfrmTools.edRH_Custom_FilterChange(Sender: TObject);
+begin
+  if (edRH_Custom_Filter.Text = EmptyStr) then begin
+    with modDados.cdRH_Custom do begin
+      Filtered:= False;
+      Bookmark:= sRH_Custom_BM;
+    end;
+    Exit;
+  end;
+
   try
     with modDados.cdRH_Custom do begin
       Filtered:= False;
-      Filter:= 'UPPER(Group) Like ' + UpperCase(QuotedStr('%' + 'Custom' + '%')) +
+      Filter:= 'UPPER(Group) Like ' +
+               UpperCase(QuotedStr('%' + 'Custom' + '%')) +
                ' AND ' +
-               'UPPER(Caption) Like ' + UpperCase(QuotedStr('%' + edRH_Custom_Filter_Caption.Text + '%'));
+               'UPPER(Caption) Like ' +
+               UpperCase(QuotedStr('%' + edRH_Custom_Filter.Text + '%'));
       Filtered:= True;
     end;
   except
     //TODO
   end;
+end;
+
+procedure TfrmTools.edRH_Custom_FilterClick(Sender: TObject);
+begin
+  sRH_Custom_BM:= modDados.cdRH_Custom.Bookmark;
 end;
 
 procedure TfrmTools.dbgApp_ShortcutsDblClick(Sender: TObject);
 begin
   with frmMain do
     actShortcutsEditExecute(nil);
-end;
-
-procedure TfrmTools.edKeys_Editor_FilterChange(Sender: TObject);
-begin
-  try
-    with modDados.cdKeys_Editor do begin
-      Filtered:= False;
-      Filter:= 'UPPER(Command) Like ' + UpperCase(QuotedStr('%' + edKeys_Editor_Filter.Text + '%'));
-      Filtered:= True;
-    end;
-  except
-    //TODO
-  end;
 end;
 
 procedure TfrmTools.edToolsRExplorerFilterKeyDown(Sender: TObject;
@@ -1062,7 +1286,7 @@ end;
 procedure TfrmTools.FormResize(Sender: TObject);
 begin
   pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgKeys_Editor);
+  pAdjustColumnWidths(dbgEditor_Keystrokes);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -1074,7 +1298,7 @@ end;
 procedure TfrmTools.FormShow(Sender: TObject);
 begin
   pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgKeys_Editor);
+  pAdjustColumnWidths(dbgEditor_Keystrokes);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -1099,6 +1323,13 @@ procedure TfrmTools.jvflbWorkExplorerStartDrag(Sender: TObject;
                                                var DragObject: TDragObject);
 begin
   frmMain.sDragSource:= (Sender as TJvFileListBox).FileName;
+end;
+
+procedure TfrmTools.pgRHChange(Sender: TObject);
+begin
+  pAdjustColumnWidths(dbgRH_Send);
+  pAdjustColumnWidths(dbgRH_Control);
+  pAdjustColumnWidths(dbgRH_Custom);
 end;
 
 procedure TfrmTools.jvhkShortcutsEnter(Sender: TObject);
@@ -1249,9 +1480,34 @@ begin
   stbRMirrors.Cursor:= crHandPoint;
 end;
 
+procedure TfrmTools.tbiHelp_KeystrokesClick(Sender: TObject);
+begin
+  with frmMain do
+    pOpen_UserGuidePDF('"Keystrokes"');
+end;
+
+procedure TfrmTools.tbiHelp_RH_SendClick(Sender: TObject);
+begin
+  with frmMain do
+    pOpen_UserGuidePDF('"RH_Send"');
+end;
+
+procedure TfrmTools.tbiHelp_RH_ControlClick(Sender: TObject);
+begin
+  with frmMain do
+    pOpen_UserGuidePDF('"RH_Control"');
+end;
+
+procedure TfrmTools.tbiHelp_RH_CustomClick(Sender: TObject);
+begin
+  with frmMain do
+    pOpen_UserGuidePDF('"RH_Custom"');
+end;
+
 procedure TfrmTools.tbRecentClick(Sender: TObject);
 begin
-  frmMain.actProjectOpenExecute(nil);
+  with frmMain do
+    frmMain.actProjectOpenExecute(nil);
 end;
 
 procedure TfrmTools.tvProjectAddition(Sender: TObject;
@@ -1533,7 +1789,7 @@ end;
 procedure TfrmTools.lbApp_ShortcutsClick(Sender: TObject);
 begin
   frmMain.iApp_ShortcutsFilter:= lbApp_Shortcuts.ItemIndex;
-  with ModDados. cdShortcuts do begin
+  with ModDados. cdApp_Shortcuts do begin
     Filter  := 'Group = ' +
                QuotedStr(lbApp_Shortcuts.Items.Strings[frmMain.iApp_ShortcutsFilter]);
     Filtered:= True;
@@ -1565,10 +1821,8 @@ begin
   frmMain.iCountriesFilter:= lbCountries.ItemIndex;
   with ModDados.cdRmirrors do begin
     DisableControls;
-
     Filter:= 'Country = ' +
              QuotedStr(lbCountries.Items.Strings[frmMain.iCountriesFilter]);
-
     Filtered:= True;
 
     // Try to locate the R mirror default
@@ -1730,7 +1984,7 @@ begin
     else if (ActivePage = tbsRMirrors)   then lbCountries.SetFocus;
 
   pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgKeys_Editor);
+  pAdjustColumnWidths(dbgEditor_Keystrokes);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -1755,7 +2009,7 @@ end;
 procedure TfrmTools.pgToolsChange(Sender: TObject);
 begin
   pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgKeys_Editor);
+  pAdjustColumnWidths(dbgEditor_Keystrokes);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -1903,7 +2157,7 @@ procedure TfrmTools.pAdjustColumnWidths(DBGrid: TDBGrid);
 begin                                     
   if (DBGrid.Name = 'dbgCompletion') or
      (DBGrid.Name = 'dbgApp_Shortcuts') or
-     (DBGrid.Name = 'dbgKeys_Editor') or
+     (DBGrid.Name = 'dbgEditor_Keystrokes') or
      (DBGrid.Name = 'dbgRH_Send') or
      (DBGrid.Name = 'dbgRH_Control') or
      (DBGrid.Name = 'dbgRH_Custom') or

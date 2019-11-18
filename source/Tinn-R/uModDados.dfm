@@ -3,10 +3,10 @@ object modDados: TmodDados
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 530
-  Width = 183
+  Width = 272
   object dsRcard: TDataSource
     DataSet = cdRcard
-    Left = 118
+    Left = 173
     Top = 12
   end
   object cdRcard: TClientDataSet
@@ -18,7 +18,7 @@ object modDados: TmodDados
     AfterScroll = cdRcardAfterScroll
     OnFilterRecord = cdRcardFilterRecord
     OnPostError = cdRcardPostError
-    Left = 31
+    Left = 59
     Top = 12
     object cdRcardGroup: TStringField
       FieldName = 'Group'
@@ -43,7 +43,7 @@ object modDados: TmodDados
     AfterPost = cdCompletionAfterPost
     AfterScroll = cdCompletionAfterScroll
     OnPostError = cdCompletionPostError
-    Left = 31
+    Left = 59
     Top = 67
     object cdCompletionGroup: TStringField
       FieldName = 'Group'
@@ -66,52 +66,52 @@ object modDados: TmodDados
   end
   object dsCompletion: TDataSource
     DataSet = cdCompletion
-    Left = 118
+    Left = 173
     Top = 67
   end
-  object cdShortcuts: TClientDataSet
+  object cdApp_Shortcuts: TClientDataSet
     Aggregates = <>
-    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Shortcuts.xml'
+    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\App_Shortcuts.xml'
     Params = <>
-    BeforeEdit = cdShortcutsBeforeEdit
-    AfterPost = cdShortcutsAfterPost
-    AfterScroll = cdShortcutsAfterScroll
-    OnNewRecord = cdShortcutsNewRecord
-    OnPostError = cdShortcutsPostError
-    Left = 31
+    BeforeEdit = cdApp_ShortcutsBeforeEdit
+    AfterPost = cdApp_ShortcutsAfterPost
+    AfterScroll = cdApp_ShortcutsAfterScroll
+    OnNewRecord = cdApp_ShortcutsNewRecord
+    OnPostError = cdApp_ShortcutsPostError
+    Left = 59
     Top = 117
-    object cdShortcutsIndex: TIntegerField
+    object cdApp_ShortcutsIndex: TIntegerField
       FieldName = 'Index'
       Required = True
     end
-    object cdShortcutsGroup: TStringField
+    object cdApp_ShortcutsGroup: TStringField
       FieldName = 'Group'
       Size = 50
     end
-    object cdShortcutsCaption: TStringField
+    object cdApp_ShortcutsCaption: TStringField
       FieldName = 'Caption'
       Size = 50
     end
-    object cdShortcutsHint: TStringField
+    object cdApp_ShortcutsHint: TStringField
       FieldName = 'Hint'
       Size = 80
     end
-    object cdShortcutsShortcut: TStringField
+    object cdApp_ShortcutsShortcut: TStringField
       Alignment = taRightJustify
       FieldName = 'Shortcut'
     end
-    object cdShortcutsImageIndex: TIntegerField
+    object cdApp_ShortcutsImageIndex: TIntegerField
       FieldName = 'Image'
     end
   end
-  object dsShortcuts: TDataSource
-    DataSet = cdShortcuts
-    Left = 117
+  object dsApp_Shortcuts: TDataSource
+    DataSet = cdApp_Shortcuts
+    Left = 172
     Top = 115
   end
   object dsCache: TDataSource
     DataSet = cdCache
-    Left = 118
+    Left = 173
     Top = 166
   end
   object cdCache: TClientDataSet
@@ -119,7 +119,7 @@ object modDados: TmodDados
     FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Cache.xml'
     Params = <>
     OnFilterRecord = cdRcardFilterRecord
-    Left = 31
+    Left = 59
     Top = 166
     object cdCacheFile: TStringField
       FieldName = 'File'
@@ -148,7 +148,7 @@ object modDados: TmodDados
     AfterPost = cdCommentsAfterPost
     AfterScroll = cdCommentsAfterScroll
     OnPostError = cdCommentsPostError
-    Left = 31
+    Left = 59
     Top = 215
     object cdCommentsLanguage: TStringField
       FieldName = 'Language'
@@ -178,7 +178,7 @@ object modDados: TmodDados
   end
   object dsComments: TDataSource
     DataSet = cdComments
-    Left = 118
+    Left = 173
     Top = 215
   end
   object cdRmirrors: TClientDataSet
@@ -189,7 +189,7 @@ object modDados: TmodDados
     AfterPost = cdRmirrorsAfterPost
     AfterScroll = cdRmirrorsAfterScroll
     OnPostError = cdRmirrorsPostError
-    Left = 31
+    Left = 59
     Top = 264
     object cdRmirrorsName: TStringField
       FieldName = 'Name'
@@ -216,14 +216,14 @@ object modDados: TmodDados
   end
   object dsRmirrors: TDataSource
     DataSet = cdRmirrors
-    Left = 118
+    Left = 173
     Top = 264
   end
   object cdRH_Send: TClientDataSet
     Aggregates = <>
     FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Send.xml'
     Params = <>
-    Left = 31
+    Left = 59
     Top = 315
     object cdRH_Send_Index: TIntegerField
       FieldName = 'Index'
@@ -245,14 +245,14 @@ object modDados: TmodDados
   end
   object dsRH_Send: TDataSource
     DataSet = cdRH_Send
-    Left = 117
+    Left = 172
     Top = 315
   end
   object cdRH_Control: TClientDataSet
     Aggregates = <>
     FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Control.xml'
     Params = <>
-    Left = 31
+    Left = 59
     Top = 367
     object cdRH_Control_Index: TIntegerField
       FieldName = 'Index'
@@ -274,7 +274,7 @@ object modDados: TmodDados
   end
   object dsRH_Control: TDataSource
     DataSet = cdRH_Control
-    Left = 117
+    Left = 172
     Top = 367
   end
   object cdRH_Custom: TClientDataSet
@@ -283,7 +283,7 @@ object modDados: TmodDados
     Params = <>
     OnNewRecord = cdRH_CustomNewRecord
     OnPostError = cdRH_CustomPostError
-    Left = 31
+    Left = 59
     Top = 422
     object cdRH_Custom_Index: TIntegerField
       FieldName = 'Index'
@@ -305,36 +305,38 @@ object modDados: TmodDados
   end
   object dsRH_Custom: TDataSource
     DataSet = cdRH_Custom
-    Left = 117
+    Left = 172
     Top = 422
   end
-  object cdKeys_Editor: TClientDataSet
+  object cdEditor_Keystrokes: TClientDataSet
     Aggregates = <>
-    FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Editor.xml'
+    FileName = 
+      'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Editor_Keystrokes.' +
+      'xml'
     Params = <>
-    OnPostError = cdKeys_EditorPostError
-    Left = 31
+    OnPostError = cdEditor_KeystrokesPostError
+    Left = 59
     Top = 472
-    object cdKeys_Editor_Index: TSmallintField
+    object cdEditor_Keystrokes_Index: TSmallintField
       FieldName = 'Index'
     end
-    object cdKeys_Editor_Group: TStringField
+    object cdEditor_Keystrokes_Group: TStringField
       FieldName = 'Group'
     end
-    object cdKeys_Editor_Command: TStringField
+    object cdEditor_Keystrokes_Command: TStringField
       FieldName = 'Command'
       Size = 50
     end
-    object cdKeys_Editor_Key: TSmallintField
+    object cdEditor_Keystrokes_Key: TSmallintField
       FieldName = 'Key'
     end
-    object cdKeys_Editor_Keystroke: TStringField
+    object cdEditor_Keystrokes_Keystroke: TStringField
       FieldName = 'Keystroke'
     end
   end
-  object dsKeys_Editor: TDataSource
-    DataSet = cdKeys_Editor
-    Left = 117
+  object dsEditor_Keystrokes: TDataSource
+    DataSet = cdEditor_Keystrokes
+    Left = 172
     Top = 472
   end
 end

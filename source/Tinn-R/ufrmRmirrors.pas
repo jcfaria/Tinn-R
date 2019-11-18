@@ -244,7 +244,7 @@ begin
     with frmMain do
       frmTools.lbCountries.Selected[iCountriesFilter]:= False;
 
-    cdRmirrors.Bookmark:= frmMain.sRmirrorsBookMark;
+    cdRmirrors.Bookmark:= frmMain.sRmirrors_BookMark;
   end;
   edtCountrySearch.SetFocus;
 end;

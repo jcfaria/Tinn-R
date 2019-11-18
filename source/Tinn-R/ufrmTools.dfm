@@ -5,7 +5,7 @@ object frmTools: TfrmTools
   AlphaBlendValue = 200
   Caption = 'Tools'
   ClientHeight = 565
-  ClientWidth = 388
+  ClientWidth = 483
   Color = 16250871
   Ctl3D = False
   DockSite = True
@@ -36,9 +36,9 @@ object frmTools: TfrmTools
   object pgTools: TJvgPageControl
     Left = 0
     Top = 0
-    Width = 388
+    Width = 483
     Height = 565
-    ActivePage = tbsDatabase
+    ActivePage = tbsR
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -83,7 +83,7 @@ object frmTools: TfrmTools
       object pgMisc: TJvgPageControl
         Left = 0
         Top = 0
-        Width = 380
+        Width = 475
         Height = 537
         ActivePage = tbsWinExplorer
         Align = alClient
@@ -115,7 +115,7 @@ object frmTools: TfrmTools
         TabSelectedStyle.BevelInner = bvNone
         TabSelectedStyle.BevelOuter = bvNone
         TabSelectedStyle.Bold = False
-        TabSelectedStyle.BackgrColor = clBtnFace
+        TabSelectedStyle.BackgrColor = clGray
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
         TabSelectedStyle.Font.Height = -12
@@ -130,7 +130,7 @@ object frmTools: TfrmTools
           object splWindows: TSplitter
             Left = 0
             Top = 130
-            Width = 372
+            Width = 467
             Height = 4
             Cursor = crVSplit
             Align = alTop
@@ -142,14 +142,14 @@ object frmTools: TfrmTools
           object panWinExplorer: TPanel
             Left = 0
             Top = 51
-            Width = 372
+            Width = 467
             Height = 79
             Align = alTop
             TabOrder = 0
             object jvdcWinExplorer: TJvDriveCombo
               Left = 1
               Top = 1
-              Width = 370
+              Width = 465
               Height = 22
               Align = alTop
               BevelInner = bvNone
@@ -168,7 +168,7 @@ object frmTools: TfrmTools
             object jvdlbWinExplorer: TJvDirectoryListBox
               Left = 1
               Top = 23
-              Width = 370
+              Width = 465
               Height = 55
               Align = alClient
               BorderStyle = bsNone
@@ -194,7 +194,7 @@ object frmTools: TfrmTools
           object Panel2: TPanel
             Left = 0
             Top = 134
-            Width = 372
+            Width = 467
             Height = 375
             Align = alClient
             Constraints.MinHeight = 40
@@ -202,7 +202,7 @@ object frmTools: TfrmTools
             object Panel7: TPanel
               Left = 1
               Top = 1
-              Width = 370
+              Width = 465
               Height = 22
               Align = alTop
               BevelOuter = bvNone
@@ -277,7 +277,7 @@ object frmTools: TfrmTools
             object jvflbWinExplorer: TJvFileListBox
               Left = 1
               Top = 23
-              Width = 370
+              Width = 465
               Height = 336
               Align = alClient
               BevelInner = bvNone
@@ -307,14 +307,14 @@ object frmTools: TfrmTools
           object panWinExplorer1: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 51
             Align = alTop
             TabOrder = 2
             object Panel8: TPanel
               Left = 1
               Top = 1
-              Width = 370
+              Width = 465
               Height = 25
               Align = alTop
               BevelOuter = bvNone
@@ -322,7 +322,7 @@ object frmTools: TfrmTools
               ParentBackground = False
               TabOrder = 0
               DesignSize = (
-                370
+                465
                 25)
               object bbtExplorerAddFavorites: TBitBtn
                 Left = 3
@@ -417,7 +417,7 @@ object frmTools: TfrmTools
               object cbExplorerFavorites: TComboBox
                 Left = 55
                 Top = 3
-                Width = 313
+                Width = 408
                 Height = 21
                 Hint = 'Windows explorer: folder (choice)'
                 BevelInner = bvSpace
@@ -443,7 +443,7 @@ object frmTools: TfrmTools
             object pan: TPanel
               Left = 1
               Top = 26
-              Width = 370
+              Width = 465
               Height = 22
               Align = alTop
               BevelOuter = bvNone
@@ -451,7 +451,7 @@ object frmTools: TfrmTools
               ParentBackground = False
               TabOrder = 1
               DesignSize = (
-                370
+                465
                 22)
               object bbtWinExplorerRefresh: TBitBtn
                 Left = 3
@@ -501,7 +501,7 @@ object frmTools: TfrmTools
               object fcbbToolsWinExplorer: TFilterComboBox
                 Left = 29
                 Top = 1
-                Width = 339
+                Width = 434
                 Height = 21
                 Hint = 'Windows explorer: filter (choice)'
                 Anchors = [akLeft, akRight]
@@ -532,7 +532,7 @@ object frmTools: TfrmTools
           object splWork: TSplitter
             Left = 0
             Top = 103
-            Width = 372
+            Width = 467
             Height = 4
             Cursor = crVSplit
             Align = alTop
@@ -545,7 +545,7 @@ object frmTools: TfrmTools
           object panWorkExplorer3: TPanel
             Left = 0
             Top = 107
-            Width = 372
+            Width = 467
             Height = 402
             Align = alClient
             Constraints.MinHeight = 40
@@ -553,7 +553,7 @@ object frmTools: TfrmTools
             object panWorkExplorer2: TPanel
               Left = 1
               Top = 1
-              Width = 370
+              Width = 465
               Height = 22
               Align = alTop
               BevelOuter = bvNone
@@ -628,7 +628,7 @@ object frmTools: TfrmTools
             object jvflbWorkExplorer: TJvFileListBox
               Left = 1
               Top = 23
-              Width = 370
+              Width = 465
               Height = 368
               Align = alClient
               BevelInner = bvNone
@@ -658,14 +658,14 @@ object frmTools: TfrmTools
           object panWorkExplorer: TPanel
             Left = 0
             Top = 24
-            Width = 372
+            Width = 467
             Height = 79
             Align = alTop
             TabOrder = 1
             object jvdcWorkExplorer: TJvDriveCombo
               Left = 1
               Top = 1
-              Width = 370
+              Width = 465
               Height = 22
               Align = alTop
               BevelInner = bvNone
@@ -684,7 +684,7 @@ object frmTools: TfrmTools
             object jvdlbWorkExplorer: TJvDirectoryListBox
               Left = 1
               Top = 23
-              Width = 370
+              Width = 465
               Height = 55
               Align = alClient
               BorderStyle = bsNone
@@ -710,7 +710,7 @@ object frmTools: TfrmTools
           object Panel1: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 24
             Align = alTop
             AutoSize = True
@@ -718,7 +718,7 @@ object frmTools: TfrmTools
             object Panel10: TPanel
               Left = 1
               Top = 1
-              Width = 370
+              Width = 465
               Height = 22
               Align = alTop
               BevelOuter = bvNone
@@ -726,7 +726,7 @@ object frmTools: TfrmTools
               ParentBackground = False
               TabOrder = 0
               DesignSize = (
-                370
+                465
                 22)
               object bbtWorkExplorerRefresh: TBitBtn
                 Left = 3
@@ -776,7 +776,7 @@ object frmTools: TfrmTools
               object fcbbToolsWorkExplorer: TFilterComboBox
                 Left = 29
                 Top = 0
-                Width = 341
+                Width = 436
                 Height = 21
                 Hint = 'Work explorer: filter (choice)'
                 Anchors = [akLeft, akRight]
@@ -807,7 +807,7 @@ object frmTools: TfrmTools
           object tvProject: TTreeView
             Left = 0
             Top = 30
-            Width = 372
+            Width = 467
             Height = 460
             Align = alClient
             Anchors = [akLeft, akRight, akBottom]
@@ -844,7 +844,7 @@ object frmTools: TfrmTools
           object panProject: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 30
             Align = alTop
             AutoSize = True
@@ -856,7 +856,7 @@ object frmTools: TfrmTools
             object TBDProject: TTBDock
               Left = 2
               Top = 2
-              Width = 368
+              Width = 463
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -1030,7 +1030,7 @@ object frmTools: TfrmTools
           object stbProject: TStatusBar
             Left = 0
             Top = 490
-            Width = 372
+            Width = 467
             Height = 19
             Color = 16250871
             Panels = <
@@ -1068,7 +1068,7 @@ object frmTools: TfrmTools
       object pgMarkup: TJvgPageControl
         Left = 0
         Top = 0
-        Width = 380
+        Width = 475
         Height = 537
         ActivePage = tbsTxt2tags
         Align = alClient
@@ -1100,7 +1100,7 @@ object frmTools: TfrmTools
         TabSelectedStyle.BevelInner = bvNone
         TabSelectedStyle.BevelOuter = bvNone
         TabSelectedStyle.Bold = False
-        TabSelectedStyle.BackgrColor = clBtnFace
+        TabSelectedStyle.BackgrColor = clGray
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
         TabSelectedStyle.Font.Height = -12
@@ -1115,7 +1115,7 @@ object frmTools: TfrmTools
           object pgTxt2tags: TJvgPageControl
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 509
             ActivePage = tbsTxt2tagsSettings
             Align = alClient
@@ -1930,7 +1930,7 @@ object frmTools: TfrmTools
           object pgLatex: TJvgPageControl
             Left = 0
             Top = 26
-            Width = 372
+            Width = 467
             Height = 483
             ActivePage = tbsLatexBracket
             Align = alClient
@@ -1976,7 +1976,7 @@ object frmTools: TfrmTools
               object jvivAccents: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -2025,7 +2025,7 @@ object frmTools: TfrmTools
               object ScrollBox3: TScrollBox
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 Align = alClient
                 BevelInner = bvNone
@@ -2035,7 +2035,7 @@ object frmTools: TfrmTools
                 object GroupBox21: TGroupBox
                   Left = 0
                   Top = 236
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Sloped '
@@ -2045,7 +2045,7 @@ object frmTools: TfrmTools
                   object jvivArrowSloped: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2083,7 +2083,7 @@ object frmTools: TfrmTools
                 object GroupBox22: TGroupBox
                   Left = 0
                   Top = 186
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Up '
@@ -2093,7 +2093,7 @@ object frmTools: TfrmTools
                   object jvivArrowUp: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2131,7 +2131,7 @@ object frmTools: TfrmTools
                 object GroupBox23: TGroupBox
                   Left = 0
                   Top = 136
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Left '
@@ -2141,7 +2141,7 @@ object frmTools: TfrmTools
                   object jvivArrowLeft: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2179,7 +2179,7 @@ object frmTools: TfrmTools
                 object GroupBox24: TGroupBox
                   Left = 0
                   Top = 86
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Down '
@@ -2189,7 +2189,7 @@ object frmTools: TfrmTools
                   object jvivArrowDown: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2227,7 +2227,7 @@ object frmTools: TfrmTools
                 object GroupBox25: TGroupBox
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 86
                   Align = alTop
                   Caption = ' Right '
@@ -2237,7 +2237,7 @@ object frmTools: TfrmTools
                   object jvivArrowRight: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 71
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2275,7 +2275,7 @@ object frmTools: TfrmTools
                 object GroupBox20: TGroupBox
                   Left = 0
                   Top = 336
-                  Width = 364
+                  Width = 459
                   Height = 119
                   Align = alClient
                   Caption = ' Box '
@@ -2285,7 +2285,7 @@ object frmTools: TfrmTools
                   object jvivArrowBox: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 104
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2323,7 +2323,7 @@ object frmTools: TfrmTools
                 object GroupBox19: TGroupBox
                   Left = 0
                   Top = 286
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Both '
@@ -2333,7 +2333,7 @@ object frmTools: TfrmTools
                   object jvivArrowBoth: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2376,7 +2376,7 @@ object frmTools: TfrmTools
               object jvivBar: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -2425,7 +2425,7 @@ object frmTools: TfrmTools
               object jvivBracket: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -2466,7 +2466,7 @@ object frmTools: TfrmTools
               object jvivDot: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -2507,7 +2507,7 @@ object frmTools: TfrmTools
               object ScrollBox1: TScrollBox
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 Align = alClient
                 BevelInner = bvNone
@@ -2517,7 +2517,7 @@ object frmTools: TfrmTools
                 object GroupBox18: TGroupBox
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Line '
@@ -2527,7 +2527,7 @@ object frmTools: TfrmTools
                   object jvivGeometryLine: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2565,7 +2565,7 @@ object frmTools: TfrmTools
                 object GroupBox17: TGroupBox
                   Left = 0
                   Top = 50
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Angle '
@@ -2575,7 +2575,7 @@ object frmTools: TfrmTools
                   object jvivGeometryAngle: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2613,7 +2613,7 @@ object frmTools: TfrmTools
                 object GroupBox16: TGroupBox
                   Left = 0
                   Top = 100
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Triangle '
@@ -2623,7 +2623,7 @@ object frmTools: TfrmTools
                   object jvivGeometryTriangle: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2661,7 +2661,7 @@ object frmTools: TfrmTools
                 object GroupBox15: TGroupBox
                   Left = 0
                   Top = 150
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Star '
@@ -2671,7 +2671,7 @@ object frmTools: TfrmTools
                   object jvivGeometryStar: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2709,7 +2709,7 @@ object frmTools: TfrmTools
                 object GroupBox14: TGroupBox
                   Left = 0
                   Top = 200
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Box '
@@ -2719,7 +2719,7 @@ object frmTools: TfrmTools
                   object jvivGeometryBox: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2757,7 +2757,7 @@ object frmTools: TfrmTools
                 object GroupBox13: TGroupBox
                   Left = 0
                   Top = 250
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Diamond '
@@ -2767,7 +2767,7 @@ object frmTools: TfrmTools
                   object jvivGeometryDiamond: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2805,7 +2805,7 @@ object frmTools: TfrmTools
                 object GroupBox12: TGroupBox
                   Left = 0
                   Top = 300
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Circle '
@@ -2815,7 +2815,7 @@ object frmTools: TfrmTools
                   object jvivGeometryCircle: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2853,7 +2853,7 @@ object frmTools: TfrmTools
                 object GroupBox11: TGroupBox
                   Left = 0
                   Top = 350
-                  Width = 364
+                  Width = 459
                   Height = 105
                   Align = alClient
                   Caption = ' Var '
@@ -2863,7 +2863,7 @@ object frmTools: TfrmTools
                   object jvivGeometryVar: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 90
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2898,7 +2898,7 @@ object frmTools: TfrmTools
                 object GroupBox10: TGroupBox
                   Left = 0
                   Top = 350
-                  Width = 364
+                  Width = 459
                   Height = 105
                   Align = alClient
                   Caption = ' Misc '
@@ -2908,7 +2908,7 @@ object frmTools: TfrmTools
                   object jvivGeometryMisc: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 90
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -2951,7 +2951,7 @@ object frmTools: TfrmTools
               object ScrollBox2: TScrollBox
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 Align = alClient
                 BevelInner = bvNone
@@ -2961,7 +2961,7 @@ object frmTools: TfrmTools
                 object GroupBox4: TGroupBox
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 86
                   Align = alTop
                   Caption = ' Lower '
@@ -2971,7 +2971,7 @@ object frmTools: TfrmTools
                   object jvivGreekLower: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 71
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3009,7 +3009,7 @@ object frmTools: TfrmTools
                 object GroupBox3: TGroupBox
                   Left = 0
                   Top = 86
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Upper '
@@ -3019,7 +3019,7 @@ object frmTools: TfrmTools
                   object jvivGreekUpper: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3057,7 +3057,7 @@ object frmTools: TfrmTools
                 object GroupBox2: TGroupBox
                   Left = 0
                   Top = 136
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Var '
@@ -3067,7 +3067,7 @@ object frmTools: TfrmTools
                   object jvivGreekVar: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3105,7 +3105,7 @@ object frmTools: TfrmTools
                 object GroupBox1: TGroupBox
                   Left = 0
                   Top = 186
-                  Width = 364
+                  Width = 459
                   Height = 269
                   Align = alClient
                   Caption = ' Misc '
@@ -3115,7 +3115,7 @@ object frmTools: TfrmTools
                   object jvivGreekMisc: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 254
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3158,7 +3158,7 @@ object frmTools: TfrmTools
               object ScrollBox5: TScrollBox
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 Align = alClient
                 BevelInner = bvNone
@@ -3168,7 +3168,7 @@ object frmTools: TfrmTools
                 object GroupBox9: TGroupBox
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Function '
@@ -3178,7 +3178,7 @@ object frmTools: TfrmTools
                   object jvivMathFunction: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3216,7 +3216,7 @@ object frmTools: TfrmTools
                 object GroupBox8: TGroupBox
                   Left = 0
                   Top = 50
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Logical '
@@ -3226,7 +3226,7 @@ object frmTools: TfrmTools
                   object jvivMathLogical: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3264,7 +3264,7 @@ object frmTools: TfrmTools
                 object GroupBox7: TGroupBox
                   Left = 0
                   Top = 100
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Set '
@@ -3274,7 +3274,7 @@ object frmTools: TfrmTools
                   object jvivMathSet: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3312,7 +3312,7 @@ object frmTools: TfrmTools
                 object GroupBox6: TGroupBox
                   Left = 0
                   Top = 150
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Var '
@@ -3322,7 +3322,7 @@ object frmTools: TfrmTools
                   object jvivMathVar: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3360,7 +3360,7 @@ object frmTools: TfrmTools
                 object GroupBox5: TGroupBox
                   Left = 0
                   Top = 200
-                  Width = 364
+                  Width = 459
                   Height = 255
                   Align = alClient
                   Caption = ' Misc '
@@ -3370,7 +3370,7 @@ object frmTools: TfrmTools
                   object jvivMathMisc: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 240
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3413,7 +3413,7 @@ object frmTools: TfrmTools
               object jvivMisc: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -3454,7 +3454,7 @@ object frmTools: TfrmTools
               object jvivNegation: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -3495,7 +3495,7 @@ object frmTools: TfrmTools
               object jvivOperator: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -3536,7 +3536,7 @@ object frmTools: TfrmTools
               object jvivRelation: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -3577,7 +3577,7 @@ object frmTools: TfrmTools
               object ScrollBox4: TScrollBox
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 Align = alClient
                 BevelInner = bvNone
@@ -3587,7 +3587,7 @@ object frmTools: TfrmTools
                 object GroupBox26: TGroupBox
                   Left = 0
                   Top = 100
-                  Width = 364
+                  Width = 459
                   Height = 355
                   Align = alClient
                   Caption = ' Var '
@@ -3597,7 +3597,7 @@ object frmTools: TfrmTools
                   object jvivSkyVar: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 340
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3635,7 +3635,7 @@ object frmTools: TfrmTools
                 object GroupBox27: TGroupBox
                   Left = 0
                   Top = 50
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Astrology '
@@ -3645,7 +3645,7 @@ object frmTools: TfrmTools
                   object jvivSkyAstrology: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3683,7 +3683,7 @@ object frmTools: TfrmTools
                 object GroupBox28: TGroupBox
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 50
                   Align = alTop
                   Caption = ' Solar '
@@ -3693,7 +3693,7 @@ object frmTools: TfrmTools
                   object jvivSkySolar: TJvImagesViewer
                     Left = 1
                     Top = 14
-                    Width = 362
+                    Width = 457
                     Height = 35
                     HorzScrollBar.Range = 31
                     HorzScrollBar.Tracking = True
@@ -3736,7 +3736,7 @@ object frmTools: TfrmTools
               object jvivUserCustom: TJvImagesViewer
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 455
                 HorzScrollBar.Range = 31
                 HorzScrollBar.Tracking = True
@@ -3775,7 +3775,7 @@ object frmTools: TfrmTools
           object TBDLatex: TTBDock
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 26
             BackgroundOnToolbars = False
             Color = 16250871
@@ -3930,7 +3930,7 @@ object frmTools: TfrmTools
       object pgResults: TJvgPageControl
         Left = 0
         Top = 0
-        Width = 380
+        Width = 475
         Height = 537
         ActivePage = tbsSearch
         Align = alClient
@@ -3962,7 +3962,7 @@ object frmTools: TfrmTools
         TabSelectedStyle.BevelInner = bvNone
         TabSelectedStyle.BevelOuter = bvNone
         TabSelectedStyle.Bold = False
-        TabSelectedStyle.BackgrColor = clBtnFace
+        TabSelectedStyle.BackgrColor = clGray
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
         TabSelectedStyle.Font.Height = -12
@@ -3977,7 +3977,7 @@ object frmTools: TfrmTools
           object memIniLog: TMemo
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 509
             Align = alClient
             BorderStyle = bsNone
@@ -3998,7 +3998,7 @@ object frmTools: TfrmTools
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 30
             Align = alTop
             AutoSize = True
@@ -4010,7 +4010,7 @@ object frmTools: TfrmTools
             object TBDSearch: TTBDock
               Left = 2
               Top = 2
-              Width = 368
+              Width = 463
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -4053,7 +4053,7 @@ object frmTools: TfrmTools
           object tvSearch: TTreeView
             Left = 0
             Top = 30
-            Width = 372
+            Width = 467
             Height = 460
             Align = alClient
             BevelInner = bvNone
@@ -4079,7 +4079,7 @@ object frmTools: TfrmTools
           object stbSearch: TStatusBar
             Left = 0
             Top = 490
-            Width = 372
+            Width = 467
             Height = 19
             Color = 16250871
             Panels = <
@@ -4115,7 +4115,7 @@ object frmTools: TfrmTools
           object ATBinHex: TATBinHex
             Left = 0
             Top = 52
-            Width = 372
+            Width = 467
             Height = 457
             Cursor = crIBeam
             Align = alClient
@@ -4151,7 +4151,7 @@ object frmTools: TfrmTools
           object rgHexViewerMode: TRadioGroup
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 52
             Align = alTop
             Caption = ' Mode '
@@ -4174,7 +4174,7 @@ object frmTools: TfrmTools
       object memSpell: TMemo
         Left = 0
         Top = 0
-        Width = 380
+        Width = 475
         Height = 537
         Align = alClient
         BorderStyle = bsNone
@@ -4199,9 +4199,9 @@ object frmTools: TfrmTools
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
-        Width = 380
+        Width = 475
         Height = 537
-        ActivePage = tbsR_Hotkeys
+        ActivePage = tbsComments
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4247,7 +4247,7 @@ object frmTools: TfrmTools
           object splShortcuts: TSplitter
             Left = 0
             Top = 113
-            Width = 372
+            Width = 467
             Height = 4
             Cursor = crVSplit
             Align = alTop
@@ -4259,7 +4259,7 @@ object frmTools: TfrmTools
           object Panel13: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -4269,7 +4269,7 @@ object frmTools: TfrmTools
             object TBD_App_Shortcuts: TTBDock
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -4284,7 +4284,7 @@ object frmTools: TfrmTools
                 DockPos = 0
                 Images = frmMain.imlTinnR
                 TabOrder = 0
-                object TBItem24: TTBItem
+                object tbiHelp_Shortcut: TTBItem
                   Action = frmMain.actShortcutsHelp
                 end
                 object TBSeparatorItem6: TTBSeparatorItem
@@ -4293,12 +4293,29 @@ object frmTools: TfrmTools
                   Action = frmMain.actShortcutsEdit
                 end
               end
+              object edApp_Shortcuts_Filter: TEdit
+                Left = 66
+                Top = 4
+                Width = 121
+                Height = 19
+                Hint = 'Shortcuts: filter'
+                Align = alClient
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clRed
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 1
+                OnChange = edApp_Shortcuts_FilterChange
+                OnClick = edApp_Shortcuts_FilterClick
+              end
             end
           end
           object panApp_Shortcuts: TPanel
             Left = 0
             Top = 26
-            Width = 372
+            Width = 467
             Height = 87
             Align = alTop
             BevelOuter = bvNone
@@ -4309,7 +4326,7 @@ object frmTools: TfrmTools
             object lbApp_Shortcuts: TListBox
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 87
               AutoComplete = False
               Align = alClient
@@ -4328,7 +4345,7 @@ object frmTools: TfrmTools
           object Panel11: TPanel
             Left = 0
             Top = 117
-            Width = 372
+            Width = 467
             Height = 392
             Align = alClient
             BevelOuter = bvNone
@@ -4338,7 +4355,7 @@ object frmTools: TfrmTools
             object dbApp_ShortcutsMemo: TDBMemo
               Left = 0
               Top = 360
-              Width = 372
+              Width = 467
               Height = 32
               HelpType = htKeyword
               Align = alBottom
@@ -4347,7 +4364,7 @@ object frmTools: TfrmTools
               Constraints.MaxHeight = 120
               Ctl3D = False
               DataField = 'Hint'
-              DataSource = modDados.dsShortcuts
+              DataSource = modDados.dsApp_Shortcuts
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -11
@@ -4365,12 +4382,12 @@ object frmTools: TfrmTools
             object dbgApp_Shortcuts: TDBGrid
               Left = 0
               Top = 18
-              Width = 372
+              Width = 467
               Height = 342
               Align = alClient
               BorderStyle = bsNone
               Ctl3D = False
-              DataSource = modDados.dsShortcuts
+              DataSource = modDados.dsApp_Shortcuts
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -4405,7 +4422,7 @@ object frmTools: TfrmTools
             object Panel12: TPanel
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 18
               Align = alTop
               BevelOuter = bvNone
@@ -4425,9 +4442,9 @@ object frmTools: TfrmTools
               object JvDBNavigator2: TJvDBNavigator
                 Left = 18
                 Top = 0
-                Width = 354
+                Width = 449
                 Height = 18
-                DataSource = modDados.dsShortcuts
+                DataSource = modDados.dsApp_Shortcuts
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
                 Align = alClient
                 Flat = True
@@ -4444,9 +4461,9 @@ object frmTools: TfrmTools
           object JvDBNavigator6: TJvDBNavigator
             Left = 0
             Top = 26
-            Width = 372
+            Width = 467
             Height = 23
-            DataSource = modDados.dsKeys_Editor
+            DataSource = modDados.dsEditor_Keystrokes
             VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
             Align = alTop
             Flat = True
@@ -4454,14 +4471,14 @@ object frmTools: TfrmTools
             ParentCtl3D = False
             TabOrder = 0
           end
-          object dbgKeys_Editor: TDBGrid
+          object dbgEditor_Keystrokes: TDBGrid
             Left = 0
             Top = 49
-            Width = 372
+            Width = 467
             Height = 460
             Align = alClient
             BorderStyle = bsNone
-            DataSource = modDados.dsKeys_Editor
+            DataSource = modDados.dsEditor_Keystrokes
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -4479,22 +4496,21 @@ object frmTools: TfrmTools
               item
                 Expanded = False
                 FieldName = 'Command'
-                Width = 200
+                Width = 150
                 Visible = True
               end
               item
                 Alignment = taRightJustify
                 Expanded = False
                 FieldName = 'Keystroke'
-                Title.Alignment = taRightJustify
-                Width = 60
+                Width = 50
                 Visible = True
               end>
           end
           object Panel17: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -4504,7 +4520,7 @@ object frmTools: TfrmTools
             object TBDock3: TTBDock
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -4519,23 +4535,36 @@ object frmTools: TfrmTools
                 DockPos = 2
                 Images = frmMain.imlTinnR
                 TabOrder = 0
-                object TBItem41: TTBItem
-                  Action = frmMain.actShortcutsHelp
+                object tbiHelp_Keystrokes: TTBItem
+                  Caption = 'Help'
+                  Hint = 'Editor keystrokes: help'
+                  ImageIndex = 25
+                  OnClick = tbiHelp_KeystrokesClick
                 end
                 object TBSeparatorItem2: TTBSeparatorItem
                 end
                 object TBItem42: TTBItem
-                  Action = frmMain.actShortcutsEdit
+                  Caption = 'Edit'
+                  Hint = 'Editor keystrokes: edit'
+                  ImageIndex = 18
                 end
               end
-              object edKeys_Editor_Filter: TEdit
-                Left = 75
+              object edEditor_Keystrokes_Filter: TEdit
+                Left = 68
                 Top = 4
                 Width = 121
                 Height = 19
+                Hint = 'Keystrokes: filter'
                 Align = alClient
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clRed
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
                 TabOrder = 1
-                OnChange = edKeys_Editor_FilterChange
+                OnChange = edEditor_Keystrokes_FilterChange
+                OnClick = edEditor_Keystrokes_FilterClick
               end
             end
           end
@@ -4543,10 +4572,10 @@ object frmTools: TfrmTools
         object tbsR_Hotkeys: TTabSheet
           Caption = 'R Hotkeys'
           ImageIndex = 4
-          object JvgPageControl1: TJvgPageControl
+          object pgRH: TJvgPageControl
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 509
             ActivePage = tbsRH_Custom
             Align = alClient
@@ -4559,6 +4588,7 @@ object frmTools: TfrmTools
             TabHeight = 18
             TabOrder = 0
             TabStop = False
+            OnChange = pgRHChange
             TabStyle.Borders = [fsdLeft, fsdTop, fsdRight, fsdBottom]
             TabStyle.BevelInner = bvNone
             TabStyle.BevelOuter = bvNone
@@ -4576,7 +4606,7 @@ object frmTools: TfrmTools
             TabSelectedStyle.BevelInner = bvNone
             TabSelectedStyle.BevelOuter = bvNone
             TabSelectedStyle.Bold = False
-            TabSelectedStyle.BackgrColor = clBtnFace
+            TabSelectedStyle.BackgrColor = clGray
             TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
             TabSelectedStyle.Font.Color = clBtnText
             TabSelectedStyle.Font.Height = -12
@@ -4591,18 +4621,17 @@ object frmTools: TfrmTools
               object Panel21: TPanel
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 26
                 Align = alTop
                 BevelOuter = bvNone
                 Color = 16250871
                 ParentBackground = False
                 TabOrder = 0
-                ExplicitWidth = 372
                 object TBDock4: TTBDock
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 26
                   BackgroundOnToolbars = False
                   Color = 16250871
@@ -4617,30 +4646,43 @@ object frmTools: TfrmTools
                     DockPos = 2
                     Images = frmMain.imlTinnR
                     TabOrder = 0
-                    object TBItem43: TTBItem
-                      Action = frmMain.actShortcutsHelp
+                    object tbiHelp_RH_Send: TTBItem
+                      Caption = 'Help'
+                      Hint = 'Hotkeys RH_Send: help'
+                      ImageIndex = 25
+                      OnClick = tbiHelp_RH_SendClick
                     end
                     object TBSeparatorItem5: TTBSeparatorItem
                     end
                     object TBItem44: TTBItem
-                      Action = frmMain.actShortcutsEdit
+                      Caption = 'Edit'
+                      Hint = 'Hotkeys RH_Send: help: edit'
+                      ImageIndex = 18
                     end
                   end
-                  object edRH_Send_Filter_Caption: TEdit
-                    Left = 75
+                  object edRH_Send_Filter: TEdit
+                    Left = 68
                     Top = 4
                     Width = 121
                     Height = 19
+                    Hint = 'Send: filter'
                     Align = alClient
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clRed
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = []
+                    ParentFont = False
                     TabOrder = 1
-                    OnChange = edRH_Send_Filter_CaptionChange
+                    OnChange = edRH_Send_FilterChange
+                    OnClick = edRH_Send_FilterClick
                   end
                 end
               end
               object JvDBNavigator7: TJvDBNavigator
                 Left = 0
                 Top = 26
-                Width = 364
+                Width = 459
                 Height = 23
                 DataSource = modDados.dsRH_Send
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -4649,13 +4691,11 @@ object frmTools: TfrmTools
                 Ctl3D = False
                 ParentCtl3D = False
                 TabOrder = 1
-                ExplicitTop = 83
-                ExplicitWidth = 607
               end
               object dbgRH_Send: TDBGrid
                 Left = 0
                 Top = 49
-                Width = 364
+                Width = 459
                 Height = 432
                 Align = alClient
                 BorderStyle = bsNone
@@ -4677,14 +4717,14 @@ object frmTools: TfrmTools
                   item
                     Expanded = False
                     FieldName = 'Caption'
-                    Width = 100
+                    Width = 150
                     Visible = True
                   end
                   item
                     Expanded = False
                     FieldName = 'Hotkey'
                     Title.Alignment = taRightJustify
-                    Width = 60
+                    Width = 50
                     Visible = True
                   end>
               end
@@ -4695,18 +4735,17 @@ object frmTools: TfrmTools
               object Panel22: TPanel
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 26
                 Align = alTop
                 BevelOuter = bvNone
                 Color = 16250871
                 ParentBackground = False
                 TabOrder = 0
-                ExplicitWidth = 372
                 object TBDock5: TTBDock
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 26
                   BackgroundOnToolbars = False
                   Color = 16250871
@@ -4721,30 +4760,43 @@ object frmTools: TfrmTools
                     DockPos = 2
                     Images = frmMain.imlTinnR
                     TabOrder = 0
-                    object TBItem45: TTBItem
-                      Action = frmMain.actShortcutsHelp
+                    object tbiHelp_RH_Control: TTBItem
+                      Caption = 'Help'
+                      Hint = 'Hotkeys RH_Control: help'
+                      ImageIndex = 25
+                      OnClick = tbiHelp_RH_ControlClick
                     end
                     object TBSeparatorItem10: TTBSeparatorItem
                     end
                     object TBItem48: TTBItem
-                      Action = frmMain.actShortcutsEdit
+                      Caption = 'Edit'
+                      Hint = 'Hotkeys RH_Control: edit'
+                      ImageIndex = 18
                     end
                   end
-                  object edRH_Control_Filter_Caption: TEdit
-                    Left = 75
+                  object edRH_Control_Filter: TEdit
+                    Left = 68
                     Top = 4
                     Width = 121
                     Height = 19
+                    Hint = 'Control: filter'
                     Align = alClient
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clRed
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = []
+                    ParentFont = False
                     TabOrder = 1
-                    OnChange = edRH_Control_Filter_CaptionChange
+                    OnChange = edRH_Control_FilterChange
+                    OnClick = edRH_Control_FilterClick
                   end
                 end
               end
               object JvDBNavigator8: TJvDBNavigator
                 Left = 0
                 Top = 26
-                Width = 364
+                Width = 459
                 Height = 22
                 DataSource = modDados.dsRH_Control
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -4753,13 +4805,11 @@ object frmTools: TfrmTools
                 Ctl3D = False
                 ParentCtl3D = False
                 TabOrder = 1
-                ExplicitTop = 83
-                ExplicitWidth = 607
               end
               object dbgRH_Control: TDBGrid
                 Left = 0
                 Top = 48
-                Width = 364
+                Width = 459
                 Height = 433
                 Align = alClient
                 BorderStyle = bsNone
@@ -4781,14 +4831,14 @@ object frmTools: TfrmTools
                   item
                     Expanded = False
                     FieldName = 'Caption'
-                    Width = 100
+                    Width = 150
                     Visible = True
                   end
                   item
                     Expanded = False
                     FieldName = 'Hotkey'
                     Title.Alignment = taRightJustify
-                    Width = 60
+                    Width = 50
                     Visible = True
                   end>
               end
@@ -4799,18 +4849,17 @@ object frmTools: TfrmTools
               object Panel23: TPanel
                 Left = 0
                 Top = 0
-                Width = 364
+                Width = 459
                 Height = 26
                 Align = alTop
                 BevelOuter = bvNone
                 Color = 16250871
                 ParentBackground = False
                 TabOrder = 0
-                ExplicitWidth = 372
                 object TBDock6: TTBDock
                   Left = 0
                   Top = 0
-                  Width = 364
+                  Width = 459
                   Height = 26
                   BackgroundOnToolbars = False
                   Color = 16250871
@@ -4825,30 +4874,43 @@ object frmTools: TfrmTools
                     DockPos = 2
                     Images = frmMain.imlTinnR
                     TabOrder = 0
-                    object TBItem49: TTBItem
-                      Action = frmMain.actShortcutsHelp
+                    object tbiHelp_RH_Custom: TTBItem
+                      Caption = 'Help'
+                      Hint = 'Hotkeys RH_Custom: help'
+                      ImageIndex = 25
+                      OnClick = tbiHelp_RH_CustomClick
                     end
                     object TBSeparatorItem21: TTBSeparatorItem
                     end
                     object TBItem50: TTBItem
-                      Action = frmMain.actShortcutsEdit
+                      Caption = 'Edit'
+                      Hint = 'Hotkeys RH_Custom: edit'
+                      ImageIndex = 18
                     end
                   end
-                  object edRH_Custom_Filter_Caption: TEdit
-                    Left = 75
+                  object edRH_Custom_Filter: TEdit
+                    Left = 68
                     Top = 4
                     Width = 121
                     Height = 19
+                    Hint = 'Custom: filter'
                     Align = alClient
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clRed
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = []
+                    ParentFont = False
                     TabOrder = 1
-                    OnChange = edRH_Custom_Filter_CaptionChange
+                    OnChange = edRH_Custom_FilterChange
+                    OnClick = edRH_Custom_FilterClick
                   end
                 end
               end
               object JvDBNavigator9: TJvDBNavigator
                 Left = 0
                 Top = 26
-                Width = 364
+                Width = 459
                 Height = 23
                 DataSource = modDados.dsRH_Custom
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -4857,13 +4919,11 @@ object frmTools: TfrmTools
                 Ctl3D = False
                 ParentCtl3D = False
                 TabOrder = 1
-                ExplicitTop = 83
-                ExplicitWidth = 607
               end
               object dbgRH_Custom: TDBGrid
                 Left = 0
                 Top = 49
-                Width = 364
+                Width = 459
                 Height = 432
                 Align = alClient
                 BorderStyle = bsNone
@@ -4885,14 +4945,14 @@ object frmTools: TfrmTools
                   item
                     Expanded = False
                     FieldName = 'Caption'
-                    Width = 100
+                    Width = 150
                     Visible = True
                   end
                   item
                     Expanded = False
                     FieldName = 'Hotkey'
                     Title.Alignment = taRightJustify
-                    Width = 60
+                    Width = 50
                     Visible = True
                   end>
               end
@@ -4904,7 +4964,7 @@ object frmTools: TfrmTools
           object splCompletion: TSplitter
             Left = 0
             Top = 113
-            Width = 372
+            Width = 467
             Height = 4
             Cursor = crVSplit
             Align = alTop
@@ -4917,7 +4977,7 @@ object frmTools: TfrmTools
           object panCompletion: TPanel
             Left = 0
             Top = 26
-            Width = 372
+            Width = 467
             Height = 87
             Align = alTop
             BevelOuter = bvNone
@@ -4926,7 +4986,7 @@ object frmTools: TfrmTools
             object lbCompletion: TListBox
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 87
               AutoComplete = False
               Align = alClient
@@ -4944,7 +5004,7 @@ object frmTools: TfrmTools
           object panCompletion4: TPanel
             Left = 0
             Top = 117
-            Width = 372
+            Width = 467
             Height = 392
             Align = alClient
             BevelOuter = bvNone
@@ -4954,7 +5014,7 @@ object frmTools: TfrmTools
             object dbCompletionMemo: TDBMemo
               Left = 0
               Top = 312
-              Width = 372
+              Width = 467
               Height = 80
               HelpType = htKeyword
               Align = alBottom
@@ -4982,7 +5042,7 @@ object frmTools: TfrmTools
             object dbgCompletion: TDBGrid
               Left = 0
               Top = 18
-              Width = 372
+              Width = 467
               Height = 294
               Align = alClient
               BorderStyle = bsNone
@@ -5021,7 +5081,7 @@ object frmTools: TfrmTools
             object panCompletion3: TPanel
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 18
               Align = alTop
               BevelOuter = bvNone
@@ -5031,7 +5091,7 @@ object frmTools: TfrmTools
               object JvDBNavigator1: TJvDBNavigator
                 Left = 0
                 Top = 0
-                Width = 372
+                Width = 467
                 Height = 18
                 DataSource = modDados.dsCompletion
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -5046,7 +5106,7 @@ object frmTools: TfrmTools
           object panCompletion1: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -5054,7 +5114,7 @@ object frmTools: TfrmTools
             object TBDCompletion: TTBDock
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -5104,6 +5164,17 @@ object frmTools: TfrmTools
                   Action = frmMain.actCompletion
                 end
               end
+              object edCompletion_Filter: TEdit
+                Left = 176
+                Top = 3
+                Width = 121
+                Height = 19
+                Hint = 'Keystrokes: filter'
+                Align = alClient
+                TabOrder = 1
+                OnChange = edCompletion_FilterChange
+                OnClick = edCompletion_FilterClick
+              end
             end
           end
         end
@@ -5113,7 +5184,7 @@ object frmTools: TfrmTools
           object Panel9: TPanel
             Left = 0
             Top = 88
-            Width = 372
+            Width = 467
             Height = 421
             Align = alClient
             BevelOuter = bvNone
@@ -5123,7 +5194,7 @@ object frmTools: TfrmTools
             object dbgComments: TDBGrid
               Left = 0
               Top = 18
-              Width = 372
+              Width = 467
               Height = 403
               Align = alClient
               BorderStyle = bsNone
@@ -5175,7 +5246,7 @@ object frmTools: TfrmTools
             object Panel14: TPanel
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 18
               Align = alTop
               BevelOuter = bvNone
@@ -5185,7 +5256,7 @@ object frmTools: TfrmTools
               object JvDBNavigator3: TJvDBNavigator
                 Left = 0
                 Top = 0
-                Width = 372
+                Width = 467
                 Height = 18
                 DataSource = modDados.dsComments
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -5200,7 +5271,7 @@ object frmTools: TfrmTools
           object Panel15: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 88
             Align = alTop
             BevelOuter = bvNone
@@ -5210,7 +5281,7 @@ object frmTools: TfrmTools
             object TBDock1: TTBDock
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -5234,11 +5305,22 @@ object frmTools: TfrmTools
                   Action = frmMain.actCommentsEdit
                 end
               end
+              object edComments_Filter: TEdit
+                Left = 66
+                Top = 4
+                Width = 121
+                Height = 19
+                Hint = 'Keystrokes: filter'
+                Align = alClient
+                TabOrder = 1
+                OnChange = edComments_FilterChange
+                OnClick = edComments_FilterClick
+              end
             end
             object GroupBox29: TGroupBox
               Left = 0
               Top = 26
-              Width = 372
+              Width = 467
               Height = 62
               Align = alClient
               Caption = ' Options '
@@ -5279,7 +5361,7 @@ object frmTools: TfrmTools
       object pgR: TJvgPageControl
         Left = 0
         Top = 0
-        Width = 380
+        Width = 475
         Height = 537
         ActivePage = tbsRMirrors
         Align = alClient
@@ -5310,7 +5392,7 @@ object frmTools: TfrmTools
         TabSelectedStyle.BevelInner = bvNone
         TabSelectedStyle.BevelOuter = bvNone
         TabSelectedStyle.Bold = False
-        TabSelectedStyle.BackgrColor = clBtnFace
+        TabSelectedStyle.BackgrColor = clGray
         TabSelectedStyle.Font.Charset = DEFAULT_CHARSET
         TabSelectedStyle.Font.Color = clBtnText
         TabSelectedStyle.Font.Height = -12
@@ -5326,7 +5408,7 @@ object frmTools: TfrmTools
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 78
             Align = alTop
             BevelOuter = bvNone
@@ -5337,7 +5419,7 @@ object frmTools: TfrmTools
             object Panel5: TPanel
               Left = 2
               Top = 51
-              Width = 368
+              Width = 463
               Height = 27
               Align = alTop
               BevelOuter = bvNone
@@ -5438,7 +5520,7 @@ object frmTools: TfrmTools
               object panRFilter: TPanel
                 Left = 141
                 Top = 0
-                Width = 227
+                Width = 322
                 Height = 27
                 Align = alClient
                 BevelOuter = bvNone
@@ -5446,12 +5528,12 @@ object frmTools: TfrmTools
                 ParentBackground = False
                 TabOrder = 1
                 DesignSize = (
-                  227
+                  322
                   27)
                 object edToolsRExplorerFilter: TEdit
                   Left = 29
                   Top = 1
-                  Width = 198
+                  Width = 293
                   Height = 22
                   Anchors = [akLeft, akRight]
                   AutoSize = False
@@ -5520,7 +5602,7 @@ object frmTools: TfrmTools
             object TBDRexplorer: TTBDock
               Left = 2
               Top = 2
-              Width = 368
+              Width = 463
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -5615,7 +5697,7 @@ object frmTools: TfrmTools
             object Panel6: TPanel
               Left = 2
               Top = 28
-              Width = 368
+              Width = 463
               Height = 23
               Align = alTop
               BevelOuter = bvNone
@@ -5623,12 +5705,12 @@ object frmTools: TfrmTools
               ParentBackground = False
               TabOrder = 2
               DesignSize = (
-                368
+                463
                 23)
               object cbbToolsREnvironment: TComboBox
                 Left = 28
                 Top = 0
-                Width = 340
+                Width = 435
                 Height = 21
                 Hint = 'Set R environment'
                 BevelInner = bvSpace
@@ -5700,7 +5782,7 @@ object frmTools: TfrmTools
           object stbRexplorer: TStatusBar
             Left = 0
             Top = 490
-            Width = 372
+            Width = 467
             Height = 19
             Color = 16250871
             Panels = <
@@ -5732,7 +5814,7 @@ object frmTools: TfrmTools
           object lvRexplorer: TListView
             Left = 0
             Top = 78
-            Width = 372
+            Width = 467
             Height = 412
             Align = alClient
             BevelInner = bvNone
@@ -5787,7 +5869,7 @@ object frmTools: TfrmTools
           object splRCard: TSplitter
             Left = 0
             Top = 113
-            Width = 372
+            Width = 467
             Height = 4
             Cursor = crVSplit
             Align = alTop
@@ -5800,7 +5882,7 @@ object frmTools: TfrmTools
           object panRCard: TPanel
             Left = 0
             Top = 26
-            Width = 372
+            Width = 467
             Height = 87
             Align = alTop
             BevelOuter = bvNone
@@ -5809,7 +5891,7 @@ object frmTools: TfrmTools
             object lbRcard: TListBox
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 87
               AutoComplete = False
               Align = alClient
@@ -5827,7 +5909,7 @@ object frmTools: TfrmTools
           object panRCard4: TPanel
             Left = 0
             Top = 117
-            Width = 372
+            Width = 467
             Height = 392
             Align = alClient
             BevelOuter = bvNone
@@ -5835,7 +5917,7 @@ object frmTools: TfrmTools
             object dbRCardMemo: TDBMemo
               Left = 0
               Top = 312
-              Width = 372
+              Width = 467
               Height = 80
               HelpType = htKeyword
               Align = alBottom
@@ -5863,7 +5945,7 @@ object frmTools: TfrmTools
             object dbgRCard: TDBGrid
               Left = 0
               Top = 18
-              Width = 372
+              Width = 467
               Height = 294
               Align = alClient
               BorderStyle = bsNone
@@ -5895,7 +5977,7 @@ object frmTools: TfrmTools
             object panRCard3: TPanel
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 18
               Align = alTop
               BevelOuter = bvNone
@@ -5905,7 +5987,7 @@ object frmTools: TfrmTools
               object JvDBNavigator4: TJvDBNavigator
                 Left = 0
                 Top = 0
-                Width = 372
+                Width = 467
                 Height = 18
                 DataSource = modDados.dsRcard
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -5920,7 +6002,7 @@ object frmTools: TfrmTools
           object panRCard1: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -5928,7 +6010,7 @@ object frmTools: TfrmTools
             object TBDRcard: TTBDock
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -5981,6 +6063,23 @@ object frmTools: TfrmTools
                   Action = frmMain.actRcardInsert
                 end
               end
+              object edRcard_Filter: TEdit
+                Left = 197
+                Top = 3
+                Width = 121
+                Height = 19
+                Hint = 'Shortcuts: filter'
+                Align = alClient
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clRed
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 1
+                OnChange = edRcard_FilterChange
+                OnClick = edRcard_FilterClick
+              end
             end
           end
         end
@@ -5990,7 +6089,7 @@ object frmTools: TfrmTools
           object Splitter1: TSplitter
             Left = 0
             Top = 113
-            Width = 372
+            Width = 467
             Height = 4
             Cursor = crVSplit
             Align = alTop
@@ -6002,7 +6101,7 @@ object frmTools: TfrmTools
           object Panel16: TPanel
             Left = 0
             Top = 0
-            Width = 372
+            Width = 467
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -6010,7 +6109,7 @@ object frmTools: TfrmTools
             object TBDock2: TTBDock
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 26
               BackgroundOnToolbars = False
               Color = 16250871
@@ -6068,12 +6167,29 @@ object frmTools: TfrmTools
                   Action = frmMain.actRmirrorsSetRepos
                 end
               end
+              object edRmirrors_Filter: TEdit
+                Left = 173
+                Top = 4
+                Width = 121
+                Height = 19
+                Hint = 'Shortcuts: filter'
+                Align = alClient
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clRed
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 1
+                OnChange = edRmirrors_FilterChange
+                OnClick = edRmirrors_FilterClick
+              end
             end
           end
           object panCountries: TPanel
             Left = 0
             Top = 26
-            Width = 372
+            Width = 467
             Height = 87
             Align = alTop
             BevelOuter = bvNone
@@ -6082,7 +6198,7 @@ object frmTools: TfrmTools
             object lbCountries: TListBox
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 87
               AutoComplete = False
               Align = alClient
@@ -6100,7 +6216,7 @@ object frmTools: TfrmTools
           object Panel18: TPanel
             Left = 0
             Top = 117
-            Width = 372
+            Width = 467
             Height = 313
             Align = alClient
             BevelOuter = bvNone
@@ -6108,7 +6224,7 @@ object frmTools: TfrmTools
             object dbgRmirrors: TDBGrid
               Left = 0
               Top = 18
-              Width = 372
+              Width = 467
               Height = 295
               Align = alClient
               BorderStyle = bsNone
@@ -6144,7 +6260,7 @@ object frmTools: TfrmTools
             object Panel19: TPanel
               Left = 0
               Top = 0
-              Width = 372
+              Width = 467
               Height = 18
               Align = alTop
               BevelOuter = bvNone
@@ -6154,7 +6270,7 @@ object frmTools: TfrmTools
               object JvDBNavigator5: TJvDBNavigator
                 Left = 0
                 Top = 0
-                Width = 372
+                Width = 467
                 Height = 18
                 DataSource = modDados.dsRmirrors
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -6169,14 +6285,14 @@ object frmTools: TfrmTools
           object Panel20: TPanel
             Left = 0
             Top = 430
-            Width = 372
+            Width = 467
             Height = 60
             Align = alBottom
             TabOrder = 3
             object dbeRmirrorsURL: TDBEdit
               Left = 1
               Top = 20
-              Width = 370
+              Width = 465
               Height = 19
               Align = alTop
               DataField = 'URL'
@@ -6194,7 +6310,7 @@ object frmTools: TfrmTools
             object dbeRmirrorsCode: TDBEdit
               Left = 1
               Top = 39
-              Width = 370
+              Width = 465
               Height = 19
               Align = alTop
               DataField = 'Code'
@@ -6204,7 +6320,7 @@ object frmTools: TfrmTools
             object dbeRmirrorsHost: TDBEdit
               Left = 1
               Top = 1
-              Width = 370
+              Width = 465
               Height = 19
               Align = alTop
               DataField = 'Host'
@@ -6215,7 +6331,7 @@ object frmTools: TfrmTools
           object stbRMirrors: TStatusBar
             Left = 0
             Top = 490
-            Width = 372
+            Width = 467
             Height = 19
             Color = 16250871
             Panels = <

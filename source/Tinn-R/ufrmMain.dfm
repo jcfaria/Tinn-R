@@ -3316,7 +3316,7 @@ object frmMain: TfrmMain
     object actShortcutsHelp: TAction
       Category = 'dtb Shortcuts'
       Caption = 'Help'
-      Hint = 'Shortcuts: help'
+      Hint = 'Hotkeys RH_Send: help'
       ImageIndex = 25
       OnExecute = actShortcutsHelpExecute
     end
