@@ -835,21 +835,21 @@ object frmRterm: TfrmRterm
       Images = frmMain.imlTinnR
       TabOrder = 0
       object TBItem7: TTBItem
-        Action = frmMain.actRContTermStartClose
+        Action = frmMain.actRCont_TermStartClose
       end
       object TBSeparatorItem5: TTBSeparatorItem
       end
       object TBItem41: TTBItem
-        Action = frmMain.actRContHelpSelectedWord
+        Action = frmMain.actRCont_HelpSelectedWord
       end
       object TBItem40: TTBItem
-        Action = frmMain.actRContExampleSelectedWord
+        Action = frmMain.actRCont_ExampleSelectedWord
       end
       object TBItem43: TTBItem
-        Action = frmMain.actRContOpenExampleSelectedWord
+        Action = frmMain.actRCont_OpenExampleSelectedWord
       end
       object TBItem42: TTBItem
-        Action = frmMain.actRContHelp
+        Action = frmMain.actRCont_Help
       end
       object TBSeparatorItem2: TTBSeparatorItem
       end

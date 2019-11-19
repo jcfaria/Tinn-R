@@ -24,3 +24,8 @@ The User guide of this software is available at:
 The stable version of this software is available at:
 - https://nbcgib.uesc.br/tinnr/en/
 - https://sourceforge.net/projects/tinn-r/
+
+A good option to keep track of developments and always use the most up-to-date version of Tinn-R
+is to clone the project in a folder on your computer (git clone), after which, pin the executable
+(Tinn_R.exe and Tinn_R_portable.exe) located in the Tinn-R/bin folder.
+This is how I use it. 
