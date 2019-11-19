@@ -38,7 +38,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 483
     Height = 565
-    ActivePage = tbsR
+    ActivePage = tbsDatabase
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -4201,7 +4201,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsComments
+        ActivePage = tbsR_Hotkeys
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4286,11 +4286,13 @@ object frmTools: TfrmTools
                 TabOrder = 0
                 object tbiHelp_Shortcut: TTBItem
                   Action = frmMain.actShortcutsHelp
+                  Hint = 'App shortcuts: help'
                 end
                 object TBSeparatorItem6: TTBSeparatorItem
                 end
                 object TBItem28: TTBItem
                   Action = frmMain.actShortcutsEdit
+                  Hint = 'App shortcuts: edit'
                 end
               end
               object edApp_Shortcuts_Filter: TEdit
@@ -4298,7 +4300,7 @@ object frmTools: TfrmTools
                 Top = 4
                 Width = 121
                 Height = 19
-                Hint = 'Shortcuts: filter'
+                Hint = 'App shortcuts: filter'
                 Align = alClient
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
@@ -4554,7 +4556,7 @@ object frmTools: TfrmTools
                 Top = 4
                 Width = 121
                 Height = 19
-                Hint = 'Keystrokes: filter'
+                Hint = 'Editor keystrokes: filter'
                 Align = alClient
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
@@ -4577,7 +4579,7 @@ object frmTools: TfrmTools
             Top = 0
             Width = 467
             Height = 509
-            ActivePage = tbsRH_Custom
+            ActivePage = tbsRH_Send
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -4656,7 +4658,7 @@ object frmTools: TfrmTools
                     end
                     object TBItem44: TTBItem
                       Caption = 'Edit'
-                      Hint = 'Hotkeys RH_Send: help: edit'
+                      Hint = 'Hotkeys RH_Send: edit'
                       ImageIndex = 18
                     end
                   end
@@ -4665,7 +4667,7 @@ object frmTools: TfrmTools
                     Top = 4
                     Width = 121
                     Height = 19
-                    Hint = 'Send: filter'
+                    Hint = 'Hotkeys RH_Send: filter'
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
@@ -4779,7 +4781,7 @@ object frmTools: TfrmTools
                     Top = 4
                     Width = 121
                     Height = 19
-                    Hint = 'Control: filter'
+                    Hint = 'Hotkeys RH_Control: filter'
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
@@ -4893,7 +4895,7 @@ object frmTools: TfrmTools
                     Top = 4
                     Width = 121
                     Height = 19
-                    Hint = 'Custom: filter'
+                    Hint = 'Hotkeys RH_Custom: filter'
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
@@ -6068,7 +6070,7 @@ object frmTools: TfrmTools
                 Top = 3
                 Width = 121
                 Height = 19
-                Hint = 'Shortcuts: filter'
+                Hint = 'Card (R): filter'
                 Align = alClient
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
@@ -6172,7 +6174,7 @@ object frmTools: TfrmTools
                 Top = 4
                 Width = 121
                 Height = 19
-                Hint = 'Shortcuts: filter'
+                Hint = 'Mirrors (R): filter'
                 Align = alClient
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
