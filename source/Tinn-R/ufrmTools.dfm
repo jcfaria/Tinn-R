@@ -38,7 +38,7 @@ object frmTools: TfrmTools
     Top = 0
     Width = 483
     Height = 565
-    ActivePage = tbsDatabase
+    ActivePage = tbsR
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -881,31 +881,31 @@ object frmTools: TfrmTools
                   Hint = 'Project: project'
                   ImageIndex = 65
                   object pmenProjNew: TTBItem
-                    Action = frmMain.actProjectNew
+                    Action = frmMain.actProject_New
                   end
                   object pmenProjOpen: TTBItem
-                    Action = frmMain.actProjectOpen
+                    Action = frmMain.actProject_Open
                   end
                   object pmenProjOpenDemo: TTBItem
-                    Action = frmMain.actProjectOpenDemo
+                    Action = frmMain.actProject_OpenDemo
                   end
                   object N102: TTBSeparatorItem
                   end
                   object pmenProjectSave: TTBItem
-                    Action = frmMain.actProjectSave
+                    Action = frmMain.actProject_Save
                   end
                   object pmenProjectSaveAs: TTBItem
-                    Action = frmMain.actProjectSaveAs
+                    Action = frmMain.actProject_SaveAs
                   end
                   object N44: TTBSeparatorItem
                   end
                   object pmenProjectClose: TTBItem
-                    Action = frmMain.actProjectClose
+                    Action = frmMain.actProject_Close
                   end
                   object N37: TTBSeparatorItem
                   end
                   object pmenProjectDeleteCurrent: TTBItem
-                    Action = frmMain.actProjectDeleteCurrent
+                    Action = frmMain.actProject_DeleteCurrent
                   end
                 end
                 object N59: TTBSeparatorItem
@@ -915,27 +915,27 @@ object frmTools: TfrmTools
                   Hint = 'Project: group'
                   ImageIndex = 70
                   object pmenGroupNew: TTBItem
-                    Action = frmMain.actGrouptNew
+                    Action = frmMain.actGroup_New
                   end
                   object N43: TTBSeparatorItem
                   end
                   object pmenGroupRename: TTBItem
-                    Action = frmMain.actGroupRename
+                    Action = frmMain.actGroup_Rename
                   end
                   object N34: TTBSeparatorItem
                   end
                   object pmenGroupDeleteCurrent: TTBItem
-                    Action = frmMain.actGroupDeleteCurrent
+                    Action = frmMain.actGroup_DeleteCurrent
                   end
                   object pmenGroupDeleteAll: TTBItem
-                    Action = frmMain.actGroupDeleteAll
+                    Action = frmMain.actGroup_DeleteAll
                   end
                 end
                 object TBItem2: TTBItem
-                  Action = frmMain.actGroupExpandAll
+                  Action = frmMain.actGroup_ExpandAll
                 end
                 object TBItem1: TTBItem
-                  Action = frmMain.actGroupCollapseAll
+                  Action = frmMain.actGroup_CollapseAll
                 end
                 object N56: TTBSeparatorItem
                 end
@@ -944,62 +944,62 @@ object frmTools: TfrmTools
                   Hint = 'Project: file'
                   ImageIndex = 49
                   object pmenFilesOpenAll: TTBItem
-                    Action = frmMain.actFilesOpenAll
+                    Action = frmMain.actFiles_OpenAll
                   end
                   object pmenFilesCloseAll: TTBItem
-                    Action = frmMain.actFilesCloseAll
+                    Action = frmMain.actFiles_CloseAll
                   end
                   object N47: TTBSeparatorItem
                   end
                   object pmenFilesOpenAllOfGroup: TTBItem
-                    Action = frmMain.actFilesOpenAllOfGroup
+                    Action = frmMain.actFiles_OpenAllOfGroup
                   end
                   object pmenFilesCloseAllOfGroup: TTBItem
-                    Action = frmMain.actFilesCloseAllOfGroup
+                    Action = frmMain.actFiles_CloseAllOfGroup
                   end
                   object n45: TTBSeparatorItem
                   end
                   object pmenFilesAdd: TTBItem
-                    Action = frmMain.actFilesAdd
+                    Action = frmMain.actFiles_Add
                   end
                   object pmenFilesAddCurrent: TTBItem
-                    Action = frmMain.actFilesAddCurrent
+                    Action = frmMain.actFiles_AddCurrent
                   end
                   object N38: TTBSeparatorItem
                   end
                   object pmenFilesDeleteAllOfProject: TTBItem
-                    Action = frmMain.actFilesRemoveAllOfProject
+                    Action = frmMain.actFiles_RemoveAllOfProject
                   end
                   object pmenFilesDeleteAllOfGroup: TTBItem
-                    Action = frmMain.actFilesRemoveAllOfGroup
+                    Action = frmMain.actFiles_RemoveAllOfGroup
                   end
                   object pmenFilesDeleteCurrent: TTBItem
-                    Action = frmMain.actFilesRemove
+                    Action = frmMain.actFiles_Remove
                   end
                   object TBSeparatorItem26: TTBSeparatorItem
                   end
                   object TBSubmenuItem11: TTBSubmenuItem
                     Caption = 'Copy full path to clipboard'
                     object TBItem46: TTBItem
-                      Action = frmMain.actFilesFullPathUnix
+                      Action = frmMain.actFiles_FullPathUnix
                     end
                     object TBItem47: TTBItem
-                      Action = frmMain.actFilesFullPathWindows
+                      Action = frmMain.actFiles_FullPathWindows
                     end
                   end
                 end
                 object TBSeparatorItem14: TTBSeparatorItem
                 end
                 object TBEditProject: TTBItem
-                  Action = frmMain.actProjectEdit
+                  Action = frmMain.actProject_Edit
                 end
                 object TBReloadProject: TTBItem
-                  Action = frmMain.actProjectReload
+                  Action = frmMain.actProject_Reload
                 end
                 object TBSeparatorItem4: TTBSeparatorItem
                 end
                 object TBItem23: TTBItem
-                  Action = frmMain.actProjectOpenNode
+                  Action = frmMain.actProject_OpenNode
                 end
                 object tbRecentBar: TToolBar
                   Left = 0
@@ -3795,18 +3795,14 @@ object frmTools: TfrmTools
                 Hint = 'LaTeX: math'
                 ImageIndex = 97
                 object TBItem59: TTBItem
-                  Action = frmMain.actLatexDimensional
                 end
                 object TBSeparatorItem30: TTBSeparatorItem
                 end
                 object TBItem71: TTBItem
-                  Action = frmMain.actLatexAlgebricFrac
                 end
                 object TBItem70: TTBItem
-                  Action = frmMain.actLatexAlgebricSqrt
                 end
                 object TBItem69: TTBItem
-                  Action = frmMain.actLatexAlgebricSqrtN
                 end
               end
               object TBSeparatorItem41: TTBSeparatorItem
@@ -3816,25 +3812,18 @@ object frmTools: TfrmTools
                 Hint = 'LaTeX: header'
                 ImageIndex = 214
                 object tbiHeader: TTBItem
-                  Action = frmMain.actLatexHeaderPart
                 end
                 object TBItem60: TTBItem
-                  Action = frmMain.actLatexHeaderChapter
                 end
                 object TBItem61: TTBItem
-                  Action = frmMain.actLatexHeaderSection
                 end
                 object TBItem62: TTBItem
-                  Action = frmMain.actLatexHeaderSubSection
                 end
                 object TBItem63: TTBItem
-                  Action = frmMain.actLatexHeaderSubSubSection
                 end
                 object TBItem64: TTBItem
-                  Action = frmMain.actLatexHeaderParagraph
                 end
                 object TBItem66: TTBItem
-                  Action = frmMain.actLatexHeaderSubParagraph
                 end
               end
               object TBSubmenuItem14: TTBSubmenuItem
@@ -3842,21 +3831,16 @@ object frmTools: TfrmTools
                 Hint = 'LaTeX: format'
                 ImageIndex = 217
                 object tbiFormat: TTBItem
-                  Action = frmMain.actLatexFormatItemization
                 end
                 object TBItem67: TTBItem
-                  Action = frmMain.actLatexFormatEnumeration
                 end
                 object TBSeparatorItem34: TTBSeparatorItem
                 end
                 object TBItem68: TTBItem
-                  Action = frmMain.actLatexFormatLeft
                 end
                 object TBItem73: TTBItem
-                  Action = frmMain.actLatexFormatCenter
                 end
                 object TBItem74: TTBItem
-                  Action = frmMain.actLatexFormatRight
                 end
               end
               object TBSubmenuItem15: TTBSubmenuItem
@@ -3864,54 +3848,38 @@ object frmTools: TfrmTools
                 Hint = 'LaTeX: font'
                 ImageIndex = 221
                 object tbiFont: TTBItem
-                  Action = frmMain.actLatexFontEnphase
                 end
                 object TBItem72: TTBItem
-                  Action = frmMain.actLatexFontBold
                 end
                 object TBItem78: TTBItem
-                  Action = frmMain.actLatexFontItalic
                 end
                 object TBItem77: TTBItem
-                  Action = frmMain.actLatexFontSlatend
                 end
                 object TBItem76: TTBItem
-                  Action = frmMain.actLatexFontTypewriter
                 end
                 object TBItem75: TTBItem
-                  Action = frmMain.actLatexFontSmallcaps
                 end
                 object TBSeparatorItem31: TTBSeparatorItem
                 end
                 object TBItem88: TTBItem
-                  Action = frmMain.actLatexFontTiny
                 end
                 object TBItem87: TTBItem
-                  Action = frmMain.actLatexFontScript
                 end
                 object TBItem86: TTBItem
-                  Action = frmMain.actLatexFontFootnote
                 end
                 object TBItem85: TTBItem
-                  Action = frmMain.actLatexFontSmall
                 end
                 object TBItem84: TTBItem
-                  Action = frmMain.actLatexFontNormal
                 end
                 object TBItem83: TTBItem
-                  Action = frmMain.actLatexFontLarge
                 end
                 object TBItem82: TTBItem
-                  Action = frmMain.actLatexFontLarger
                 end
                 object TBItem81: TTBItem
-                  Action = frmMain.actLatexFontLargest
                 end
                 object TBItem80: TTBItem
-                  Action = frmMain.actLatexFontHuge
                 end
                 object TBItem79: TTBItem
-                  Action = frmMain.actLatexFontHuger
                 end
               end
               object TBSeparatorItem29: TTBSeparatorItem
@@ -4031,20 +3999,20 @@ object frmTools: TfrmTools
                   Hint = 'Search: expand'
                   ImageIndex = 71
                   object TBItem97: TTBItem
-                    Action = frmMain.actSearchExpandOne
+                    Action = frmMain.actSearch_ExpandOne
                   end
                   object TBItem106: TTBItem
-                    Action = frmMain.actSearchExpandAll
+                    Action = frmMain.actSearch_ExpandAll
                   end
                 end
                 object Collapse: TTBSubmenuItem
                   Hint = 'Search: collapse'
                   ImageIndex = 72
                   object TBItem99: TTBItem
-                    Action = frmMain.actSearchCollapseOne
+                    Action = frmMain.actSearch_CollapseOne
                   end
                   object TBItem107: TTBItem
-                    Action = frmMain.actSearchCollapseAll
+                    Action = frmMain.actSearch_CollapseAll
                   end
                 end
               end
@@ -4201,7 +4169,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsR_Hotkeys
+        ActivePage = tbsComments
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4285,13 +4253,13 @@ object frmTools: TfrmTools
                 Images = frmMain.imlTinnR
                 TabOrder = 0
                 object tbiHelp_Shortcut: TTBItem
-                  Action = frmMain.actShortcutsHelp
+                  Action = frmMain.actShortcuts_Help
                   Hint = 'App shortcuts: help'
                 end
                 object TBSeparatorItem6: TTBSeparatorItem
                 end
                 object TBItem28: TTBItem
-                  Action = frmMain.actShortcutsEdit
+                  Action = frmMain.actShortcuts_Edit
                   Hint = 'App shortcuts: edit'
                 end
               end
@@ -4494,6 +4462,7 @@ object frmTools: TfrmTools
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = [fsBold]
+            OnDblClick = dbgEditor_KeystrokesDblClick
             Columns = <
               item
                 Expanded = False
@@ -4579,7 +4548,7 @@ object frmTools: TfrmTools
             Top = 0
             Width = 467
             Height = 509
-            ActivePage = tbsRH_Send
+            ActivePage = tbsRH_Custom
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -4715,6 +4684,7 @@ object frmTools: TfrmTools
                 TitleFont.Height = -11
                 TitleFont.Name = 'MS Sans Serif'
                 TitleFont.Style = [fsBold]
+                OnDblClick = dbgRH_SendDblClick
                 Columns = <
                   item
                     Expanded = False
@@ -4829,6 +4799,7 @@ object frmTools: TfrmTools
                 TitleFont.Height = -11
                 TitleFont.Name = 'MS Sans Serif'
                 TitleFont.Style = [fsBold]
+                OnDblClick = dbgRH_ControlDblClick
                 Columns = <
                   item
                     Expanded = False
@@ -4943,6 +4914,7 @@ object frmTools: TfrmTools
                 TitleFont.Height = -11
                 TitleFont.Name = 'MS Sans Serif'
                 TitleFont.Style = [fsBold]
+                OnDblClick = dbgRH_CustomDblClick
                 Columns = <
                   item
                     Expanded = False
@@ -5132,15 +5104,15 @@ object frmTools: TfrmTools
                 Images = frmMain.imlTinnR
                 TabOrder = 0
                 object TBItemCompletion23: TTBItem
-                  Action = frmMain.actCompletionHelp
+                  Action = frmMain.actCompletion_Help
                 end
                 object TBSeparatorItem18: TTBSeparatorItem
                 end
                 object TBItem35: TTBItem
-                  Action = frmMain.actCompletionHelpSelected
+                  Action = frmMain.actCompletion_HelpSelected
                 end
                 object TBItem21: TTBItem
-                  Action = frmMain.actCompletionExampleSelected
+                  Action = frmMain.actCompletion_ExampleSelected
                 end
                 object TBSeparatorItemCompletion21: TTBSeparatorItem
                 end
@@ -5149,16 +5121,16 @@ object frmTools: TfrmTools
                   Hint = 'Completion: copy'
                   ImageIndex = 50
                   object TBItem37: TTBItem
-                    Action = frmMain.actCompletionCopyFunction
+                    Action = frmMain.actCompletion_CopyFunction
                   end
                   object TBItem38: TTBItem
-                    Action = frmMain.actCompletionCopyDescrition
+                    Action = frmMain.actCompletion_CopyDescrition
                   end
                 end
                 object TBSeparatorItem17: TTBSeparatorItem
                 end
                 object TBItemCompletion26: TTBItem
-                  Action = frmMain.actCompletionEdit
+                  Action = frmMain.actCompletion_Edit
                 end
                 object TBSeparatorItem3: TTBSeparatorItem
                 end
@@ -5299,12 +5271,12 @@ object frmTools: TfrmTools
                 Images = frmMain.imlTinnR
                 TabOrder = 0
                 object TBItem9: TTBItem
-                  Action = frmMain.actCommentsHelp
+                  Action = frmMain.actComments_Help
                 end
                 object TBSeparatorItem7: TTBSeparatorItem
                 end
                 object TBItem25: TTBItem
-                  Action = frmMain.actCommentsEdit
+                  Action = frmMain.actComments_Edit
                 end
               end
               object edComments_Filter: TEdit
@@ -5478,7 +5450,7 @@ object frmTools: TfrmTools
                   Top = 0
                   Width = 25
                   Height = 21
-                  Action = frmMain.actRExplorerRefresh
+                  Action = frmMain.actRExpl_Refresh
                   Caption = 'Refresh explorer'
                   TabOrder = 1
                   Glyph.Data = {
@@ -5559,7 +5531,7 @@ object frmTools: TfrmTools
                   Top = 1
                   Width = 25
                   Height = 21
-                  Action = frmMain.actRFilterRefresh
+                  Action = frmMain.actRExpl_FilterRefresh
                   Caption = 'Refresh filter'
                   TabOrder = 1
                   Glyph.Data = {
@@ -5620,52 +5592,52 @@ object frmTools: TfrmTools
                 Images = frmMain.imlTinnR
                 TabOrder = 0
                 object TBItem13: TTBItem
-                  Action = frmMain.actRExplorerHelp
+                  Action = frmMain.actRExpl_Help
                 end
                 object TBSeparatorItem20: TTBSeparatorItem
                 end
                 object TBItem39: TTBItem
-                  Action = frmMain.actRExplorerHelpSelected
+                  Action = frmMain.actRExpl_HelpSelected
                 end
                 object TBItem14: TTBItem
-                  Action = frmMain.actRExplorerExampleSelected
+                  Action = frmMain.actRExpl_ExampleSelected
                 end
                 object TBItem16: TTBItem
-                  Action = frmMain.actRExplorerOpenExampleSelected
+                  Action = frmMain.actRExpl_OpenExampleSelected
                 end
                 object TBSeparatorItem19: TTBSeparatorItem
                 end
                 object Basic: TTBSubmenuItem
-                  Action = frmMain.actRExplorerBasic
+                  Action = frmMain.actRExpl_Basic
                   object TBItem3: TTBItem
-                    Action = frmMain.actRExplorerSummary
+                    Action = frmMain.actRExpl_Summary
                   end
                   object TBSeparatorItem15: TTBSeparatorItem
                   end
                   object TBItem10: TTBItem
-                    Action = frmMain.actRExplorerRemove
+                    Action = frmMain.actRExpl_Remove
                   end
                   object TBItem22: TTBItem
-                    Action = frmMain.actRExplorerRemoveAllObjects
+                    Action = frmMain.actRExpl_RemoveAllObjects
                   end
                 end
                 object TBItem15: TTBItem
-                  Action = frmMain.actRExplorerContent
+                  Action = frmMain.actRExpl_Content
                 end
                 object TBItem100: TTBItem
-                  Action = frmMain.actRExplorerPlot
+                  Action = frmMain.actRExpl_Plot
                 end
                 object TBItem5: TTBItem
-                  Action = frmMain.actRExplorerNames
+                  Action = frmMain.actRExpl_Names
                 end
                 object TBItem4: TTBItem
-                  Action = frmMain.actRExplorerStructure
+                  Action = frmMain.actRExpl_Structure
                 end
                 object TBItem7: TTBItem
-                  Action = frmMain.actRExplorerEdit
+                  Action = frmMain.actRExpl_Edit
                 end
                 object TBItem6: TTBItem
-                  Action = frmMain.actRExplorerFix
+                  Action = frmMain.actRExpl_Fix
                 end
                 object TBSeparatorItem8: TTBSeparatorItem
                 end
@@ -5674,10 +5646,10 @@ object frmTools: TfrmTools
                   Hint = 'Explorer (R): name'
                   ImageIndex = 195
                   object TBItem12: TTBItem
-                    Action = frmMain.actRExplorerSendNameToEditor
+                    Action = frmMain.actRExpl_SendNameToEditor
                   end
                   object TBItem11: TTBItem
-                    Action = frmMain.actRExplorerSendNameToClipboard
+                    Action = frmMain.actRExpl_SendNameToClipboard
                   end
                 end
                 object TBSubmenuItem4: TTBSubmenuItem
@@ -5685,14 +5657,14 @@ object frmTools: TfrmTools
                   Hint = 'Explorer (R): content'
                   ImageIndex = 196
                   object TBItem19: TTBItem
-                    Action = frmMain.actRExplorerExpRaw
+                    Action = frmMain.actRExpl_ExpRaw
                   end
                   object TBItem18: TTBItem
-                    Action = frmMain.actRExplorerExpASCII
+                    Action = frmMain.actRExpl_ExpASCII
                   end
                 end
                 object TBItem20: TTBItem
-                  Action = frmMain.actRExplorerStyle
+                  Action = frmMain.actRExpl_Style
                 end
               end
             end
@@ -5739,7 +5711,7 @@ object frmTools: TfrmTools
                 Top = 0
                 Width = 25
                 Height = 21
-                Action = frmMain.actREnvironmentRefresh
+                Action = frmMain.actRExpl_EnvironmentRefresh
                 Caption = 'Refresh environment'
                 TabOrder = 1
                 Glyph.Data = {
@@ -6028,18 +6000,18 @@ object frmTools: TfrmTools
                 Images = frmMain.imlTinnR
                 TabOrder = 0
                 object TBItemRCard23: TTBItem
-                  Action = frmMain.actRCardHelp
+                  Action = frmMain.actRcard_Help
                 end
                 object TBSeparatorItemRCard18: TTBSeparatorItem
                 end
                 object TBItem40: TTBItem
-                  Action = frmMain.actRCardHelpSelected
+                  Action = frmMain.actRcard_HelpSelected
                 end
                 object TBItemRCard24: TTBItem
-                  Action = frmMain.actRCardExampleSelected
+                  Action = frmMain.actRcard_ExampleSelected
                 end
                 object TBItem17: TTBItem
-                  Action = frmMain.actRCardOpenExampleSelected
+                  Action = frmMain.actRcard_OpenExampleSelected
                 end
                 object TBSeparatorItemRCard20: TTBSeparatorItem
                 end
@@ -6048,21 +6020,21 @@ object frmTools: TfrmTools
                   Hint = 'Card (R): copy'
                   ImageIndex = 50
                   object TBItemRCard25: TTBItem
-                    Action = frmMain.actRCardCopyFunction
+                    Action = frmMain.actRcard_CopyFunction
                   end
                   object TBItemRCard27: TTBItem
-                    Action = frmMain.actRCardCopyDescrition
+                    Action = frmMain.actRcard_CopyDescrition
                   end
                 end
                 object TBSeparatorItemRCard21: TTBSeparatorItem
                 end
                 object TBItemRCard26: TTBItem
-                  Action = frmMain.actRCardEdit
+                  Action = frmMain.actRcard_Edit
                 end
                 object TBSeparatorItem1: TTBSeparatorItem
                 end
                 object TBItem8: TTBItem
-                  Action = frmMain.actRcardInsert
+                  Action = frmMain.actRcard_Insert
                 end
               end
               object edRcard_Filter: TEdit
@@ -6127,12 +6099,12 @@ object frmTools: TfrmTools
                 Images = frmMain.imlTinnR
                 TabOrder = 0
                 object TBItem26: TTBItem
-                  Action = frmMain.actRmirrorsHelp
+                  Action = frmMain.actRmirrors_Help
                 end
                 object TBSeparatorItem16: TTBSeparatorItem
                 end
                 object TBItem27: TTBItem
-                  Action = frmMain.actRmirrorsUpdate
+                  Action = frmMain.actRmirrors_Update
                 end
                 object TBSeparatorItem11: TTBSeparatorItem
                 end
@@ -6141,10 +6113,10 @@ object frmTools: TfrmTools
                   Hint = 'Mirrors (R): open URL'
                   ImageIndex = 288
                   object TBItem33: TTBItem
-                    Action = frmMain.actRmirrorsOpenURLCurrent
+                    Action = frmMain.actRmirrors_OpenURLCurrent
                   end
                   object TBItem34: TTBItem
-                    Action = frmMain.actRmirrorsOpenURLDefault
+                    Action = frmMain.actRmirrors_OpenURLDefault
                   end
                 end
                 object TBSubmenuItem2: TTBSubmenuItem
@@ -6152,21 +6124,21 @@ object frmTools: TfrmTools
                   Hint = 'Mirrors (R): copy'
                   ImageIndex = 50
                   object TBItem29: TTBItem
-                    Action = frmMain.actRmirrorsCopyHost
+                    Action = frmMain.actRmirrors_CopyHost
                   end
                   object TBItem30: TTBItem
-                    Action = frmMain.actRmirrorsCopyURL
+                    Action = frmMain.actRmirrors_CopyURL
                   end
                 end
                 object TBSeparatorItem12: TTBSeparatorItem
                 end
                 object TBItem31: TTBItem
-                  Action = frmMain.actRmirrorsEdit
+                  Action = frmMain.actRmirrors_Edit
                 end
                 object TBSeparatorItem13: TTBSeparatorItem
                 end
                 object TBItem32: TTBItem
-                  Action = frmMain.actRmirrorsSetRepos
+                  Action = frmMain.actRmirrors_SetRepos
                 end
               end
               object edRmirrors_Filter: TEdit

@@ -268,19 +268,19 @@ begin
     *)
 
     case i of
-        0: if actRSendFile.Enabled                   then actRSendFileExecute(nil);
-        1: if actRSendSelection.Enabled              then actRSendSelectionExecute(nil);
-        2: if actRSendBlockMarked.Enabled            then actRSendBlockMarkedExecute(nil);
-        3: if actRSendContiguous.Enabled             then actRSendContiguousExecute(nil);
-        4: if actRSendSmart.Enabled                  then actRSendSmartExecute(nil);
-        5: if actRSendLine.Enabled                   then actRSendLineExecute(nil);
-        6: if actRCurrentLineToTop.Enabled           then actRCurrentLineToTopExecute(nil);
-        7: if actRSendLinesToEndPage.Enabled         then actRSendLinesToEndPageExecute(nil);
-        8: if actRSendCursorToBeginningLine.Enabled  then actRSendCursorToBeginningLineExecute(nil);
-        9: if actRSendCursorToEndLine.Enabled        then actRSendCursorToEndLineExecute(nil);
-       10: if actRSendSweave.Enabled                 then actRSendSweaveExecute(nil);
-       11: if actRSendKnitPdf.Enabled                then actRSendKnitPdfExecute(nil);
-       12: if actRSendKnitHtml.Enabled               then actRSendKnitHtmlExecute(nil);
+        0: if actRSend_File.Enabled                   then actRSend_FileExecute(nil);
+        1: if actRSend_Selection.Enabled              then actRSend_SelectionExecute(nil);
+        2: if actRSend_BlockMarked.Enabled            then actRSend_BlockMarkedExecute(nil);
+        3: if actRSend_Contiguous.Enabled             then actRSend_ContiguousExecute(nil);
+        4: if actRSend_Smart.Enabled                  then actRSend_SmartExecute(nil);
+        5: if actRSend_Line.Enabled                   then actRSend_LineExecute(nil);
+        6: if actRSend_CurrentLineToTop.Enabled       then actRSend_CurrentLineToTopExecute(nil);
+        7: if actRSend_LinesToEndPage.Enabled         then actRSend_LinesToEndPageExecute(nil);
+        8: if actRSend_CursorToBeginningLine.Enabled  then actRSend_CursorToBeginningLineExecute(nil);
+        9: if actRSend_CursorToEndLine.Enabled        then actRSend_CursorToEndLineExecute(nil);
+       10: if actRSend_Sweave.Enabled                 then actRSend_SweaveExecute(nil);
+       11: if actRSend_KnitPdf.Enabled                then actRSend_KnitPdfExecute(nil);
+       12: if actRSend_KnitHtml.Enabled               then actRSend_KnitHtmlExecute(nil);
     end;
 end;
 
@@ -330,22 +330,22 @@ begin
       *)
 
     case i of
-        0: if actRContSetWorkDirectory.Enabled        then actRContSetWorkDirectoryExecute(nil);
-        1: if actRContListAllObjects.Enabled          then actRContListAllObjectsExecute(nil);
-        2: if actRContPrintVariableContent.Enabled    then actRContPrintVariableContentExecute(nil);
-        3: if actRContPlotVariable.Enabled            then actRContPlotVariableExecute(nil);
-        4: if actRContListVariableNames.Enabled       then actRContListVariableNamesExecute(nil);
-        5: if actRContListVariableStructure.Enabled   then actRContListVariableStructureExecute(nil);
-        6: if actRContEditVariable.Enabled            then actRContEditVariableExecute(nil);
-        7: if actRContFixVariable.Enabled             then actRContFixVariableExecute(nil);
-        8: if actRContClearConsole.Enabled            then actRContClearConsoleExecute(nil);
-        9: if actRContCloseAllGraphics.Enabled        then actRContCloseAllGraphicsExecute(nil);
-       10: if actRContHelpSelectedWord.Enabled        then actRContHelpSelectedWordExecute(nil);
-       11: if actRContExampleSelectedWord.Enabled     then actRContExampleSelectedWordExecute(nil);
-       12: if actRContOpenExampleSelectedWord.Enabled then actRContOpenExampleSelectedWordExecute(nil);
-       13: if actRContHelp.Enabled                    then actRContHelpExecute(nil);
-       14: if actRContGuiPuTTYStartClose.Enabled      then actRContGuiPuTTYStartCloseExecute(nil);
-       15: if actRContTermStartClose.Enabled          then actRContTermStartCloseExecute(nil);
+        0: if actRCont_SetWorkDirectory.Enabled        then actRCont_SetWorkDirectoryExecute(nil);
+        1: if actRCont_ListAllObjects.Enabled          then actRCont_ListAllObjectsExecute(nil);
+        2: if actRCont_PrintVariableContent.Enabled    then actRCont_PrintVariableContentExecute(nil);
+        3: if actRCont_PlotVariable.Enabled            then actRCont_PlotVariableExecute(nil);
+        4: if actRCont_ListVariableNames.Enabled       then actRCont_ListVariableNamesExecute(nil);
+        5: if actRCont_ListVariableStructure.Enabled   then actRCont_ListVariableStructureExecute(nil);
+        6: if actRCont_EditVariable.Enabled            then actRCont_EditVariableExecute(nil);
+        7: if actRCont_FixVariable.Enabled             then actRCont_FixVariableExecute(nil);
+        8: if actRCont_ClearConsole.Enabled            then actRCont_ClearConsoleExecute(nil);
+        9: if actRCont_CloseAllGraphics.Enabled        then actRCont_CloseAllGraphicsExecute(nil);
+       10: if actRCont_HelpSelectedWord.Enabled        then actRCont_HelpSelectedWordExecute(nil);
+       11: if actRCont_ExampleSelectedWord.Enabled     then actRCont_ExampleSelectedWordExecute(nil);
+       12: if actRCont_OpenExampleSelectedWord.Enabled then actRCont_OpenExampleSelectedWordExecute(nil);
+       13: if actRCont_Help.Enabled                    then actRCont_HelpExecute(nil);
+       14: if actRCont_GuiPuTTYStartClose.Enabled      then actRCont_GuiPuTTYStartCloseExecute(nil);
+       15: if actRCont_TermStartClose.Enabled          then actRCont_TermStartCloseExecute(nil);
     end;
 end;
 

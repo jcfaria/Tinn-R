@@ -647,6 +647,12 @@ type
     procedure edComments_FilterChange(Sender: TObject);
     procedure edRcard_FilterChange(Sender: TObject);
     procedure edRmirrors_FilterChange(Sender: TObject);
+    procedure edEditor_Keystrokes_FilterDblClick(Sender: TObject);
+    procedure edRH_Custom_FilterDblClick(Sender: TObject);
+    procedure dbgEditor_KeystrokesDblClick(Sender: TObject);
+    procedure dbgRH_SendDblClick(Sender: TObject);
+    procedure dbgRH_ControlDblClick(Sender: TObject);
+    procedure dbgRH_CustomDblClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -711,17 +717,17 @@ end;
 
 procedure TfrmTools.bbtREnvironmentRefreshClick(Sender: TObject);
 begin
-  frmMain.actREnvironmentRefreshExecute(nil);
+  frmMain.actRExpl_EnvironmentRefreshExecute(nil);
 end;
 
 procedure TfrmTools.bbtRExplorerRefreshClick(Sender: TObject);
 begin
-  frmMain.actRExplorerRefreshExecute(nil);
+  frmMain.actRExpl_RefreshExecute(nil);
 end;
 
 procedure TfrmTools.bbtRFilterRefreshClick(Sender: TObject);
 begin
-  frmMain.actRFilterRefreshExecute(nil);
+  frmMain.actRExpl_FilterRefreshExecute(nil);
 end;
 
 procedure TfrmTools.bbtWinExplorerFilterRefreshClick(Sender: TObject);
@@ -749,17 +755,17 @@ procedure TfrmTools.cbbToolsREnvironmentKeyDown(Sender: TObject;
                                                 var Key: Word;
                                                 Shift: TShiftState);
 begin
-  if (Key = VK_RETURN) then frmMain.actREnvironmentRefreshExecute(nil);
+  if (Key = VK_RETURN) then frmMain.actRExpl_EnvironmentRefreshExecute(nil);
 end;
 
 procedure TfrmTools.cbbToolsREnvironmentSelect(Sender: TObject);
 begin
-  frmMain.actRExplorerRefreshExecute(nil);
+  frmMain.actRExpl_RefreshExecute(nil);
 end;
 
 procedure TfrmTools.cbbToolsRExplorerChange(Sender: TObject);
 begin
-  frmMain.actRExplorerRefreshExecute(nil);
+  frmMain.actRExpl_RefreshExecute(nil);
 end;
 
 procedure TfrmTools.cbbToolsRExplorerDrawItem(Control: TWinControl;
@@ -803,7 +809,7 @@ procedure TfrmTools.cbbToolsRExplorerKeyDown(Sender: TObject;
                                              var Key: Word;
                                              Shift: TShiftState);
 begin
-  if (Key = VK_RETURN) then frmMain.actRExplorerRefreshExecute(nil);
+  if (Key = VK_RETURN) then frmMain.actRExpl_RefreshExecute(nil);
 end;
 
 procedure TfrmTools.cbbToolsRExplorerMeasureItem(Control: TWinControl;
@@ -815,7 +821,7 @@ end;
 
 procedure TfrmTools.cbbToolsRExplorerSelect(Sender: TObject);
 begin
-  frmMain.actRExplorerRefreshExecute(nil);
+  frmMain.actRExpl_RefreshExecute(nil);
 end;
 
 procedure TfrmTools.cbExplorerFavoritesChange(Sender: TObject);
@@ -850,7 +856,7 @@ end;
 procedure TfrmTools.dbeRmirrorsURLClick(Sender: TObject);
 begin
   with frmMain do
-    actRmirrorsOpenURLCurrentExecute(nil);
+    actRmirrors_OpenURLCurrentExecute(nil);
 end;
 
 procedure TfrmTools.dbeRmirrorsURLMouseMove(Sender: TObject;
@@ -864,13 +870,13 @@ end;
 procedure TfrmTools.dbgCommentsDblClick(Sender: TObject);
 begin
   with frmMain do
-    actCommentsEditExecute(nil);
+    actComments_EditExecute(nil);
 end;
 
 procedure TfrmTools.dbgCompletionDblClick(Sender: TObject);
 begin
   with frmMain do
-    actCompletionEditExecute(nil);
+    actCompletion_EditExecute(nil);
 end;
 
 procedure TfrmTools.dbgCompletionKeyDown(Sender: TObject;
@@ -883,10 +889,16 @@ begin
 //  end;
 end;
 
+procedure TfrmTools.dbgEditor_KeystrokesDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
 procedure TfrmTools.dbgRcardDblClick(Sender: TObject);
 begin
   with frmMain do 
-    actRcardInsertExecute(nil);
+    actRcard_InsertExecute(nil);
 end;
 
 procedure TfrmTools.dbgRCardKeyDown(Sender: TObject;
@@ -895,14 +907,32 @@ procedure TfrmTools.dbgRCardKeyDown(Sender: TObject;
 begin
   case Key of
     VK_RETURN: with frmMain do
-                 actRcardInsertExecute(nil);
+                 actRcard_InsertExecute(nil);
   end;
+end;
+
+procedure TfrmTools.dbgRH_ControlDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
+procedure TfrmTools.dbgRH_CustomDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
+procedure TfrmTools.dbgRH_SendDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
 end;
 
 procedure TfrmTools.dbgRmirrorsDblClick(Sender: TObject);
 begin
   with frmMain do
-    actRmirrorsSetReposExecute(nil);
+    actRmirrors_SetReposExecute(nil);
 end;
 
 procedure TfrmTools.dbgRtipDblClick(Sender: TObject);
@@ -927,10 +957,12 @@ begin
     lbApp_ShortcutsClick(Self);
     with modDados.cdApp_Shortcuts do
       Bookmark:= sApp_Shortcuts_BM;
+    lbApp_Shortcuts.Enabled:= True;
     Exit;
   end;
 
   try
+    lbApp_Shortcuts.Enabled:= False;
     with modDados.cdApp_Shortcuts do begin
       Filtered:= False;
       Filter:= 'UPPER(Caption) Like ' +
@@ -980,10 +1012,12 @@ begin
     lbCompletionClick(Self);
     with modDados.cdCompletion do
       Bookmark:= sCompletion_BM;
+    lbCompletion.Enabled:= True;
     Exit;
   end;
 
   try
+    lbCompletion.Enabled:= False;
     with modDados.cdCompletion do begin
       Filtered:= False;
       Filter:= 'UPPER(Function) Like ' +
@@ -1027,6 +1061,12 @@ begin
   sEditor_Keystrokes_BM:= modDados.cdEditor_Keystrokes.Bookmark;
 end;
 
+procedure TfrmTools.edEditor_Keystrokes_FilterDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
 procedure TfrmTools.edRH_Send_FilterChange(Sender: TObject);
 begin
   if (edRH_Send_Filter.Text = EmptyStr) then begin
@@ -1063,10 +1103,12 @@ begin
     lbCountriesClick(Self);
     with modDados.cdRmirrors do
       Bookmark:= sRmirrors_BM;
+    lbCountries.Enabled:= True;
     Exit;
   end;
 
   try
+    lbCountries.Enabled:= False;
     with modDados.cdRmirrors do begin
       Filtered:= False;
       Filter:= 'UPPER(City) Like ' +
@@ -1089,10 +1131,12 @@ begin
     lbRcardClick(Self);
     with modDados.cdRcard do
       Bookmark:= sRcard_BM;
+    lbRcard.Enabled:= False;
     Exit;
   end;
 
   try
+    lbRcard.Enabled:= True;
     with modDados.cdRcard do begin
       Filtered:= False;
       Filter:= 'UPPER(Function) Like ' +
@@ -1169,10 +1213,16 @@ begin
   sRH_Custom_BM:= modDados.cdRH_Custom.Bookmark;
 end;
 
+procedure TfrmTools.edRH_Custom_FilterDblClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
 procedure TfrmTools.dbgApp_ShortcutsDblClick(Sender: TObject);
 begin
   with frmMain do
-    actShortcutsEditExecute(nil);
+    actSKH_mapExecute(nil);
 end;
 
 procedure TfrmTools.edToolsRExplorerFilterKeyDown(Sender: TObject;
@@ -1181,7 +1231,7 @@ procedure TfrmTools.edToolsRExplorerFilterKeyDown(Sender: TObject;
 begin
   if (Key = VK_RETURN) then begin
     with frmMain do
-      actRExplorerRefreshExecute(nil);
+      actRExpl_RefreshExecute(nil);
     edToolsRExplorerFilter.SetFocus;
   end;
 end;
@@ -1444,7 +1494,7 @@ end;
 procedure TfrmTools.stbRMirrorsClick(Sender: TObject);
 begin
   with frmMain do
-    actRmirrorsOpenURLDefaultExecute(nil);
+    actRmirrors_OpenURLDefaultExecute(nil);
 end;
 
 procedure TfrmTools.stbRMirrorsDrawPanel(StatusBar: TStatusBar;
@@ -1507,7 +1557,7 @@ end;
 procedure TfrmTools.tbRecentClick(Sender: TObject);
 begin
   with frmMain do
-    frmMain.actProjectOpenExecute(nil);
+    frmMain.actProject_OpenExecute(nil);
 end;
 
 procedure TfrmTools.tvProjectAddition(Sender: TObject;
@@ -1843,7 +1893,7 @@ procedure TfrmTools.lvRexplorerKeyDown(Sender: TObject;
                                        var Key: Word;
                                        Shift: TShiftState);
 begin
-  if Key = VK_DELETE then frmMain.actRExplorerRemoveExecute(nil);
+  if Key = VK_DELETE then frmMain.actRExpl_RemoveExecute(nil);
 end;
 
 procedure TfrmTools.lvRexplorerKeyUp(Sender: TObject;

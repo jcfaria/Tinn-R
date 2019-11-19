@@ -238,20 +238,20 @@ type
     actColorsPreference: TAction;
     actColumnSelect: TAction;
     actComment: TAction;
-    actCommentsEdit: TAction;
-    actCommentsHelp: TAction;
+    actComments_Edit: TAction;
+    actComments_Help: TAction;
     actCompletion: TAction;
-    actCompletionCopyDescrition: TAction;
-    actCompletionCopyFunction: TAction;
-    actCompletionEdit: TAction;
-    actCompletionExampleSelected: TAction;
-    actCompletionHelp: TAction;
-    actCompletionHelpSelected: TAction;
-    actCompletionInsert: TAction;
+    actCompletion_CopyDescrition: TAction;
+    actCompletion_CopyFunction: TAction;
+    actCompletion_Edit: TAction;
+    actCompletion_ExampleSelected: TAction;
+    actCompletion_Help: TAction;
+    actCompletion_HelpSelected: TAction;
+    actCompletion_Insert: TAction;
     actCopyFormatted: TAction;
-    actCopyFormattedHtml: TAction;
-    actCopyFormattedRtf: TAction;
-    actCopyFormattedTeX: TAction;
+    actCopyFormatted_HTML: TAction;
+    actCopyFormatted_RTF: TAction;
+    actCopyFormatted_TEX: TAction;
     actCount: TAction;
     actCount1: TMenuItem;
     actDatabaseVisible: TAction;
@@ -279,43 +279,43 @@ type
     actDviOpenAlways: TAction;
     actDviOpenFile: TAction;
     actEditorLineWrap: TAction;
-    actFileClose: TAction;
-    actFileCloseAll: TAction;
-    actFileCloseLeft: TAction;
-    actFileCloseOthers: TAction;
-    actFileCloseRight: TAction;
-    actFileNew: TAction;
-    actFileOpen: TAction;
-    actFilesAdd: TAction;
-    actFilesAddCurrent: TAction;
-    actFileSave: TAction;
-    actFileSaveAll: TAction;
-    actFileSaveAs: TAction;
-    actFilesCloseAll: TAction;
-    actFilesCloseAllOfGroup: TAction;
-    actFilesFullPathUnix: TAction;
-    actFilesFullPathWindows: TAction;
-    actFilesOpenAll: TAction;
-    actFilesOpenAllOfGroup: TAction;
-    actFilesRemove: TAction;
-    actFilesRemoveAllOfGroup: TAction;
-    actFilesRemoveAllOfProject: TAction;
+    actFile_Close: TAction;
+    actFile_CloseAll: TAction;
+    actFile_CloseLeft: TAction;
+    actFile_CloseOthers: TAction;
+    actFile_CloseRight: TAction;
+    actFile_New: TAction;
+    actFile_Open: TAction;
+    actFiles_Add: TAction;
+    actFiles_AddCurrent: TAction;
+    actFile_Save: TAction;
+    actFile_SaveAll: TAction;
+    actFile_SaveAs: TAction;
+    actFiles_CloseAll: TAction;
+    actFiles_CloseAllOfGroup: TAction;
+    actFiles_FullPathUnix: TAction;
+    actFiles_FullPathWindows: TAction;
+    actFiles_OpenAll: TAction;
+    actFiles_OpenAllOfGroup: TAction;
+    actFiles_Remove: TAction;
+    actFiles_RemoveAllOfGroup: TAction;
+    actFiles_RemoveAllOfProject: TAction;
     actFilesTabsBottom: TAction;
     actFilesTabsTop: TAction;
     actFind: TAction;
-    actFindAgain: TAction;
+    actFind_Again: TAction;
     actFontDecrease: TAction;
     actFontIncrease: TAction;
     actFormatR: TAction;
-    actFullPathUnix: TAction;
-    actFullPathWindows: TAction;
+    actFile_FullPathUnix: TAction;
+    actFile_FullPathWindows: TAction;
     actGotoLine: TAction;
-    actGroupCollapseAll: TAction;
-    actGroupDeleteAll: TAction;
-    actGroupDeleteCurrent: TAction;
-    actGroupExpandAll: TAction;
-    actGroupRename: TAction;
-    actGrouptNew: TAction;
+    actGroup_CollapseAll: TAction;
+    actGroup_DeleteAll: TAction;
+    actGroup_DeleteCurrent: TAction;
+    actGroup_ExpandAll: TAction;
+    actGroup_Rename: TAction;
+    actGroup_New: TAction;
     actGutterVisible: TAction;
     actHexViewerVisible: TAction;
     actHtmlOpenAlways: TAction;
@@ -325,38 +325,38 @@ type
     actIniLogVisible: TAction;
     actInvertCaseWord: TAction;
     actInvertSelection: TAction;
-    actLatexAlgebricFrac: TAction;
-    actLatexAlgebricSqrt: TAction;
-    actLatexAlgebricSqrtN: TAction;
-    actLatexDimensional: TAction;
-    actLatexFontBold: TAction;
-    actLatexFontEnphase: TAction;
-    actLatexFontFootnote: TAction;
-    actLatexFontHuge: TAction;
-    actLatexFontHuger: TAction;
-    actLatexFontItalic: TAction;
-    actLatexFontLarge: TAction;
-    actLatexFontLarger: TAction;
-    actLatexFontLargest: TAction;
-    actLatexFontNormal: TAction;
-    actLatexFontScript: TAction;
-    actLatexFontSlatend: TAction;
-    actLatexFontSmall: TAction;
-    actLatexFontSmallcaps: TAction;
-    actLatexFontTiny: TAction;
-    actLatexFontTypewriter: TAction;
-    actLatexFormatCenter: TAction;
-    actLatexFormatEnumeration: TAction;
-    actLatexFormatItemization: TAction;
-    actLatexFormatLeft: TAction;
-    actLatexFormatRight: TAction;
-    actLatexHeaderChapter: TAction;
-    actLatexHeaderParagraph: TAction;
-    actLatexHeaderPart: TAction;
-    actLatexHeaderSection: TAction;
-    actLatexHeaderSubParagraph: TAction;
-    actLatexHeaderSubSection: TAction;
-    actLatexHeaderSubSubSection: TAction;
+    actLatex_AlgebricFrac: TAction;
+    actLatex_AlgebricSqrt: TAction;
+    actLatex_AlgebricSqrtN: TAction;
+    actLatex_Dimensional: TAction;
+    actLatex_FontBold: TAction;
+    actLatex_FontEnphase: TAction;
+    actLatex_FontFootnote: TAction;
+    actLatex_FontHuge: TAction;
+    actLatex_FontHuger: TAction;
+    actLatex_FontItalic: TAction;
+    actLatex_FontLarge: TAction;
+    actLatex_FontLarger: TAction;
+    actLatex_FontLargest: TAction;
+    actLatex_FontNormal: TAction;
+    actLatex_FontScript: TAction;
+    actLatex_FontSlatend: TAction;
+    actLatex_FontSmall: TAction;
+    actLatex_FontSmallcaps: TAction;
+    actLatex_FontTiny: TAction;
+    actLatex_FontTypewriter: TAction;
+    actLatex_FormatCenter: TAction;
+    actLatex_FormatEnumeration: TAction;
+    actLatex_FormatItemization: TAction;
+    actLatex_FormatLeft: TAction;
+    actLatex_FormatRight: TAction;
+    actLatex_HeaderChapter: TAction;
+    actLatex_HeaderParagraph: TAction;
+    actLatex_HeaderPart: TAction;
+    actLatex_HeaderSection: TAction;
+    actLatex_HeaderSubParagraph: TAction;
+    actLatex_HeaderSubSection: TAction;
+    actLatex_HeaderSubSubSection: TAction;
     actLatexMakeIndex: TAction;
     actLatexToDviBibtex: TAction;
     actLatexToDviSingle: TAction;
@@ -378,115 +378,115 @@ type
     actNotification_US: TAction;
     actOnTop: TAction;
     actOpenMaximized: TAction;
-    actOpenMRU: TAction;
+    actOpen_MRU: TAction;
     actOrganizeScreen: TAction;
     actPdfOpenAlways: TAction;
     actPdfOpenFile: TAction;
     actPgFilesVisible: TAction;
-    actPrint: TAction;
-    actProjectClose: TAction;
-    actProjectDeleteCurrent: TAction;
-    actProjectEdit: TAction;
-    actProjectNew: TAction;
-    actProjectOpen: TAction;
-    actProjectOpenDemo: TAction;
-    actProjectOpenNode: TAction;
-    actProjectReload: TAction;
-    actProjectSave: TAction;
-    actProjectSaveAs: TAction;
+    actFile_Print: TAction;
+    actProject_Close: TAction;
+    actProject_DeleteCurrent: TAction;
+    actProject_Edit: TAction;
+    actProject_New: TAction;
+    actProject_Open: TAction;
+    actProject_OpenDemo: TAction;
+    actProject_OpenNode: TAction;
+    actProject_Reload: TAction;
+    actProject_Save: TAction;
+    actProject_SaveAs: TAction;
     actProjectVisible: TAction;
-    actRAssignmentLeft: TAction;
-    actRAssignmentRight: TAction;
-    actRcardCopyDescrition: TAction;
-    actRcardCopyFunction: TAction;
-    actRcardEdit: TAction;
-    actRCardExampleSelected: TAction;
-    actRCardHelp: TAction;
-    actRCardHelpSelected: TAction;
-    actRcardInsert: TAction;
+    actRAssignment_Left: TAction;
+    actRAssignment_Right: TAction;
+    actRcard_CopyDescrition: TAction;
+    actRcard_CopyFunction: TAction;
+    actRcard_Edit: TAction;
+    actRcard_ExampleSelected: TAction;
+    actRcard_Help: TAction;
+    actRcard_HelpSelected: TAction;
+    actRcard_Insert: TAction;
     actRComplexDefault: TAction;
-    actRContClearAll: TAction;
-    actRContClearConsole: TAction;
-    actRContCloseAllGraphics: TAction;
-    actRContEditVariable: TAction;
-    actRContEscape: TAction;
-    actRContExampleSelectedWord: TAction;
-    actRContFixVariable: TAction;
-    actRContGuiPuTTYStartClose: TAction;
-    actRContHelp: TAction;
-    actRContHelpSelectedWord: TAction;
-    actRContListAllObjects: TAction;
-    actRContListVariableNames: TAction;
-    actRContListVariableStructure: TAction;
-    actRContPacInstall: TAction;
-    actRContPacInstalled: TAction;
-    actRContPacInstallZip: TAction;
-    actRContPacInstTinnRcom: TAction;
-    actRContPackages: TAction;
-    actRContPacLoad: TAction;
-    actRContPacLoadTinnRcom: TAction;
-    actRContPacNew: TAction;
-    actRContPacRemove: TAction;
-    actRContPacStatus: TAction;
-    actRContPacUpdate: TAction;
-    actRContPlotVariable: TAction;
-    actRContPrintVariableContent: TAction;
-    actRContRemoveAllObjects: TAction;
-    actRContSetWorkDirectory: TAction;
-    actRContTCPConnection: TAction;
-    actRContTermStartClose: TAction;
-    actRCurrentLineToTop: TAction;
+    actRCont_ClearAll: TAction;
+    actRCont_ClearConsole: TAction;
+    actRCont_CloseAllGraphics: TAction;
+    actRCont_EditVariable: TAction;
+    actRCont_Escape: TAction;
+    actRCont_ExampleSelectedWord: TAction;
+    actRCont_FixVariable: TAction;
+    actRCont_GuiPuTTYStartClose: TAction;
+    actRCont_Help: TAction;
+    actRCont_HelpSelectedWord: TAction;
+    actRCont_ListAllObjects: TAction;
+    actRCont_ListVariableNames: TAction;
+    actRCont_ListVariableStructure: TAction;
+    actRCont_PacInstall: TAction;
+    actRCont_PacInstalled: TAction;
+    actRCont_PacInstallZip: TAction;
+    actRCont_PacInstTinnRcom: TAction;
+    actRCont_Packages: TAction;
+    actRCont_PacLoad: TAction;
+    actRCont_PacLoadTinnRcom: TAction;
+    actRCont_PacNew: TAction;
+    actRCont_PacRemove: TAction;
+    actRCont_PacStatus: TAction;
+    actRCont_PacUpdate: TAction;
+    actRCont_PlotVariable: TAction;
+    actRCont_PrintVariableContent: TAction;
+    actRCont_RemoveAllObjects: TAction;
+    actRCont_SetWorkDirectory: TAction;
+    actRCont_TCPConnection: TAction;
+    actRCont_TermStartClose: TAction;
+    actRSend_CurrentLineToTop: TAction;
     actReadOnly: TAction;
     actREcho: TAction;
-    actReload: TAction;
+    actFile_Reload: TAction;
     actReloadLatexSymbols: TAction;
-    actREnvironmentRefresh: TAction;
+    actRExpl_EnvironmentRefresh: TAction;
     actReplace: TAction;
     actRestoreDatabase: TAction;
     actRestoreSystemConfiguration: TAction;
     actResultsVisible: TAction;
-    actRExplorerBasic: TAction;
-    actRExplorerContent: TAction;
-    actRExplorerEdit: TAction;
-    actRExplorerExampleSelected: TAction;
-    actRExplorerExpAscii: TAction;
-    actRExplorerExpRaw: TAction;
-    actRExplorerFix: TAction;
-    actRExplorerHelp: TAction;
-    actRExplorerHelpSelected: TAction;
-    actRExplorerNames: TAction;
-    actRExplorerPlot: TAction;
-    actRExplorerRefresh: TAction;
-    actRExplorerRemove: TAction;
-    actRExplorerRemoveAllObjects: TAction;
-    actRExplorerSendNameToClipboard: TAction;
-    actRExplorerSendNameToEditor: TAction;
-    actRExplorerStructure: TAction;
-    actRExplorerStyle: TAction;
-    actRExplorerSummary: TAction;
+    actRExpl_Basic: TAction;
+    actRExpl_Content: TAction;
+    actRExpl_Edit: TAction;
+    actRExpl_ExampleSelected: TAction;
+    actRExpl_ExpASCII: TAction;
+    actRExpl_ExpRaw: TAction;
+    actRExpl_Fix: TAction;
+    actRExpl_Help: TAction;
+    actRExpl_HelpSelected: TAction;
+    actRExpl_Names: TAction;
+    actRExpl_Plot: TAction;
+    actRExpl_Refresh: TAction;
+    actRExpl_Remove: TAction;
+    actRExpl_RemoveAllObjects: TAction;
+    actRExpl_SendNameToClipboard: TAction;
+    actRExpl_SendNameToEditor: TAction;
+    actRExpl_Structure: TAction;
+    actRExpl_Style: TAction;
+    actRExpl_Summary: TAction;
     actRExplorerVisible: TAction;
-    actRFilterRefresh: TAction;
+    actRExpl_FilterRefresh: TAction;
     actRguiReturnFocus: TAction;
-    actRmirrorsCopyHost: TAction;
-    actRmirrorsCopyURL: TAction;
-    actRmirrorsEdit: TAction;
-    actRmirrorsHelp: TAction;
-    actRmirrorsOpenURLCurrent: TAction;
-    actRmirrorsOpenURLDefault: TAction;
-    actRmirrorsSetRepos: TAction;
-    actRmirrorsUpdate: TAction;
-    actRSendBlockMarked: TAction;
-    actRSendClipboard: TAction;
-    actRSendContiguous: TAction;
-    actRSendCursorToBeginningLine: TAction;
-    actRSendCursorToEndLine: TAction;
-    actRSendFile: TAction;
-    actRSendKnitHtml: TAction;
-    actRSendKnitPdf: TAction;
-    actRSendLine: TAction;
-    actRSendLinesToEndPage: TAction;
-    actRSendSelection: TAction;
-    actRSendSweave: TAction;
+    actRmirrors_CopyHost: TAction;
+    actRmirrors_CopyURL: TAction;
+    actRmirrors_Edit: TAction;
+    actRmirrors_Help: TAction;
+    actRmirrors_OpenURLCurrent: TAction;
+    actRmirrors_OpenURLDefault: TAction;
+    actRmirrors_SetRepos: TAction;
+    actRmirrors_Update: TAction;
+    actRSend_BlockMarked: TAction;
+    actRSend_Clipboard: TAction;
+    actRSend_Contiguous: TAction;
+    actRSend_CursorToBeginningLine: TAction;
+    actRSend_CursorToEndLine: TAction;
+    actRSend_File: TAction;
+    actRSend_KnitHtml: TAction;
+    actRSend_KnitPdf: TAction;
+    actRSend_Line: TAction;
+    actRSend_LinesToEndPage: TAction;
+    actRSend_Selection: TAction;
+    actRSend_Sweave: TAction;
     actRSimpleDefault: TAction;
     actRtermAutoHide: TAction;
     actRtermDivide: TAction;
@@ -526,14 +526,14 @@ type
     actRtermVisible: TAction;
     actRtermWarningError: TAction;
     actRVisible: TAction;
-    actSearchCollapseAll: TAction;
-    actSearchCollapseOne: TAction;
-    actSearchExpandAll: TAction;
-    actSearchExpandOne: TAction;
-    actSearchInFiles: TAction;
+    actSearch_CollapseAll: TAction;
+    actSearch_CollapseOne: TAction;
+    actSearch_ExpandAll: TAction;
+    actSearch_ExpandOne: TAction;
+    actSearch_InFiles: TAction;
     actSearchVisible: TAction;
-    actShortcutsEdit: TAction;
-    actShortcutsHelp: TAction;
+    actShortcuts_Edit: TAction;
+    actShortcuts_Help: TAction;
     actShowAllBars: TAction;
     actShowAppOptions: TAction;
     actSortDate: TAction;
@@ -584,7 +584,7 @@ type
     actTxt2tagsToXhtml: TAction;
     actTxt2tagsVisible: TAction;
     actUncomment: TAction;
-    actUncommentFirst: TAction;
+    actUncomment_First: TAction;
     actUnindentBlock: TAction;
     actUNIX: TAction;
     actUnmarkAll: TAction;
@@ -594,11 +594,11 @@ type
     actUTF16LE: TAction;
     actUTF8: TAction;
     actWIN: TAction;
-    actWindowArrange: TWindowArrange;
-    actWindowCascade: TWindowCascade;
-    actWindowMinimizeAll: TWindowMinimizeAll;
-    actWindowTileHorizontal: TWindowTileHorizontal;
-    actWindowTileVertical: TWindowTileVertical;
+    actWindow_Arrange: TWindowArrange;
+    actWindow_Cascade: TWindowCascade;
+    actWindow_MinimizeAll: TWindowMinimizeAll;
+    actWindow_TileHorizontal: TWindowTileHorizontal;
+    actWindow_TileVertical: TWindowTileVertical;
     actWinExplVisible: TAction;
     actWorkExplVisible: TAction;
     alMain: TActionList;
@@ -1932,10 +1932,10 @@ type
     actOpenCurrentFile: TAction;
     menToolsViewerOpenCurrent: TMenuItem;
     TBItem29: TTBItem;
-    actRContOpenExampleSelectedWord: TAction;
+    actRCont_OpenExampleSelectedWord: TAction;
     TBItem47: TTBItem;
     Openexampleselected1: TMenuItem;
-    actRExplorerOpenExampleSelected: TAction;
+    actRExpl_OpenExampleSelected: TAction;
     Openexampleselected2: TMenuItem;
     Openexampleselected3: TMenuItem;
     actRtermIO_Text_nML: TAction;
@@ -1954,9 +1954,9 @@ type
     menHelpStatRJournal: TMenuItem;
     menWebRInformationsMRAN: TMenuItem;
     menHelCheckForUpdate: TMenuItem;
-    actRCardOpenExampleSelected: TAction;
+    actRcard_OpenExampleSelected: TAction;
     imlRAVailable: TPngImageList;
-    actRSendSmart: TAction;
+    actRSend_Smart: TAction;
     TBItem67: TTBItem;
     N33: TMenuItem;
     pmemRResSendSmart: TMenuItem;
@@ -1996,20 +1996,20 @@ type
     procedure actColorsPreferenceExecute(Sender: TObject);
     procedure actColumnSelectExecute(Sender: TObject);
     procedure actCommentExecute(Sender: TObject);
-    procedure actCommentsEditExecute(Sender: TObject);
-    procedure actCommentsHelpExecute(Sender: TObject);
-    procedure actCompletionCopyDescritionExecute(Sender: TObject);
-    procedure actCompletionCopyFunctionExecute(Sender: TObject);
-    procedure actCompletionEditExecute(Sender: TObject);
-    procedure actCompletionExampleSelectedExecute(Sender: TObject);
+    procedure actComments_EditExecute(Sender: TObject);
+    procedure actComments_HelpExecute(Sender: TObject);
+    procedure actCompletion_CopyDescritionExecute(Sender: TObject);
+    procedure actCompletion_CopyFunctionExecute(Sender: TObject);
+    procedure actCompletion_EditExecute(Sender: TObject);
+    procedure actCompletion_ExampleSelectedExecute(Sender: TObject);
     procedure actCompletionExecute(Sender: TObject);
-    procedure actCompletionHelpExecute(Sender: TObject);
-    procedure actCompletionHelpSelectedExecute(Sender: TObject);
-    procedure actCompletionInsertExecute(Sender: TObject);
+    procedure actCompletion_HelpExecute(Sender: TObject);
+    procedure actCompletion_HelpSelectedExecute(Sender: TObject);
+    procedure actCompletion_InsertExecute(Sender: TObject);
     procedure actCopyFormattedExecute(Sender: TObject);
-    procedure actCopyFormattedHtmlExecute(Sender: TObject);
-    procedure actCopyFormattedRtfExecute(Sender: TObject);
-    procedure actCopyFormattedTeXExecute(Sender: TObject);
+    procedure actCopyFormatted_HTMLExecute(Sender: TObject);
+    procedure actCopyFormatted_RTFExecute(Sender: TObject);
+    procedure actCopyFormatted_TEXExecute(Sender: TObject);
     procedure actCountExecute(Sender: TObject);
     procedure actDatabaseVisibleExecute(Sender: TObject);
     procedure actDataCommentsVisibleExecute(Sender: TObject);
@@ -2036,43 +2036,43 @@ type
     procedure actDviOpenAlwaysExecute(Sender: TObject);
     procedure actDviOpenFileExecute(Sender: TObject);
     procedure actEditorLineWrapExecute(Sender: TObject);
-    procedure actFileCloseAllExecute(Sender: TObject);
-    procedure actFileCloseExecute(Sender: TObject);
-    procedure actFileCloseLeftExecute(Sender: TObject);
-    procedure actFileCloseOthersExecute(Sender: TObject);
-    procedure actFileCloseRightExecute(Sender: TObject);
-    procedure actFileNewExecute(Sender: TObject);
-    procedure actFileOpenExecute(Sender: TObject);
-    procedure actFilesAddCurrentExecute(Sender: TObject);
-    procedure actFilesAddExecute(Sender: TObject);
-    procedure actFileSaveAllExecute(Sender: TObject);
-    procedure actFileSaveAsExecute(Sender: TObject);
-    procedure actFileSaveExecute(Sender: TObject);
-    procedure actFilesCloseAllExecute(Sender: TObject);
-    procedure actFilesCloseAllOfGroupExecute(Sender: TObject);
-    procedure actFilesFullPathUnixExecute(Sender: TObject);
-    procedure actFilesFullPathWindowsExecute(Sender: TObject);
-    procedure actFilesOpenAllExecute(Sender: TObject);
-    procedure actFilesOpenAllOfGroupExecute(Sender: TObject);
-    procedure actFilesRemoveAllOfGroupExecute(Sender: TObject);
-    procedure actFilesRemoveAllOfProjectExecute(Sender: TObject);
-    procedure actFilesRemoveExecute(Sender: TObject);
+    procedure actFile_CloseAllExecute(Sender: TObject);
+    procedure actFile_CloseExecute(Sender: TObject);
+    procedure actFile_CloseLeftExecute(Sender: TObject);
+    procedure actFile_CloseOthersExecute(Sender: TObject);
+    procedure actFile_CloseRightExecute(Sender: TObject);
+    procedure actFile_NewExecute(Sender: TObject);
+    procedure actFile_OpenExecute(Sender: TObject);
+    procedure actFiles_AddCurrentExecute(Sender: TObject);
+    procedure actFiles_AddExecute(Sender: TObject);
+    procedure actFile_SaveAllExecute(Sender: TObject);
+    procedure actFile_SaveAsExecute(Sender: TObject);
+    procedure actFile_SaveExecute(Sender: TObject);
+    procedure actFiles_CloseAllExecute(Sender: TObject);
+    procedure actFiles_CloseAllOfGroupExecute(Sender: TObject);
+    procedure actFiles_FullPathUnixExecute(Sender: TObject);
+    procedure actFiles_FullPathWindowsExecute(Sender: TObject);
+    procedure actFiles_OpenAllExecute(Sender: TObject);
+    procedure actFiles_OpenAllOfGroupExecute(Sender: TObject);
+    procedure actFiles_RemoveAllOfGroupExecute(Sender: TObject);
+    procedure actFiles_RemoveAllOfProjectExecute(Sender: TObject);
+    procedure actFiles_RemoveExecute(Sender: TObject);
     procedure actFilesTabsBottomExecute(Sender: TObject);
     procedure actFilesTabsTopExecute(Sender: TObject);
-    procedure actFindAgainExecute(Sender: TObject);
+    procedure actFind_AgainExecute(Sender: TObject);
     procedure actFindExecute(Sender: TObject);
     procedure actFontDecreaseExecute(Sender: TObject);
     procedure actFontIncreaseExecute(Sender: TObject);
     procedure actFormatRExecute(Sender: TObject);
-    procedure actFullPathUnixExecute(Sender: TObject);
-    procedure actFullPathWindowsExecute(Sender: TObject);
+    procedure actFile_FullPathUnixExecute(Sender: TObject);
+    procedure actFile_FullPathWindowsExecute(Sender: TObject);
     procedure actGotoLineExecute(Sender: TObject);
-    procedure actGroupCollapseAllExecute(Sender: TObject);
-    procedure actGroupDeleteAllExecute(Sender: TObject);
-    procedure actGroupDeleteCurrentExecute(Sender: TObject);
-    procedure actGroupExpandAllExecute(Sender: TObject);
-    procedure actGroupRenameExecute(Sender: TObject);
-    procedure actGrouptNewExecute(Sender: TObject);
+    procedure actGroup_CollapseAllExecute(Sender: TObject);
+    procedure actGroup_DeleteAllExecute(Sender: TObject);
+    procedure actGroup_DeleteCurrentExecute(Sender: TObject);
+    procedure actGroup_ExpandAllExecute(Sender: TObject);
+    procedure actGroup_RenameExecute(Sender: TObject);
+    procedure actGroup_NewExecute(Sender: TObject);
     procedure actGutterVisibleExecute(Sender: TObject);
     procedure actHexViewerVisibleExecute(Sender: TObject);
     procedure actHtmlOpenAlwaysExecute(Sender: TObject);
@@ -2082,11 +2082,11 @@ type
     procedure actIniLogVisibleExecute(Sender: TObject);
     procedure actInvertCaseWordExecute(Sender: TObject);
     procedure actInvertSelectionExecute(Sender: TObject);
-    procedure actLatexAlgebricFracExecute(Sender: TObject);
-    procedure actLatexAlgebricSqrtExecute(Sender: TObject);
-    procedure actLatexAlgebricSqrtNExecute(Sender: TObject);
+    procedure actLatex_AlgebricFracExecute(Sender: TObject);
+    procedure actLatex_AlgebricSqrtExecute(Sender: TObject);
+    procedure actLatex_AlgebricSqrtNExecute(Sender: TObject);
     procedure actLatexClearWasteExecute(Sender: TObject);
-    procedure actLatexDimensionalExecute(Sender: TObject);
+    procedure actLatex_DimensionalExecute(Sender: TObject);
     procedure actLatexMakeIndexExecute(Sender: TObject);
     procedure actLatexToDviBibtexExecute(Sender: TObject);
     procedure actLatexToDviSingleExecute(Sender: TObject);
@@ -2109,119 +2109,119 @@ type
     procedure actOnTopExecute(Sender: TObject);
     procedure actOpenCurrentFileExecute(Sender: TObject);
     procedure actOpenMaximizedExecute(Sender: TObject);
-    procedure actOpenMRUExecute(Sender: TObject);
+    procedure actOpen_MRUExecute(Sender: TObject);
     procedure actOrganizeScreenExecute(Sender: TObject);
     procedure actPdfOpenAlwaysExecute(Sender: TObject);
     procedure actPdfOpenFileExecute(Sender: TObject);
     procedure actPgFilesVisibleExecute(Sender: TObject);
-    procedure actPrintExecute(Sender: TObject);
-    procedure actProjectCloseExecute(Sender: TObject);
-    procedure actProjectDeleteCurrentExecute(Sender: TObject);
-    procedure actProjectEditExecute(Sender: TObject);
-    procedure actProjectNewExecute(Sender: TObject);
-    procedure actProjectOpenDemoExecute(Sender: TObject);
-    procedure actProjectOpenExecute(Sender: TObject);
-    procedure actProjectOpenNodeExecute(Sender: TObject);
-    procedure actProjectReloadExecute(Sender: TObject);
-    procedure actProjectSaveAsExecute(Sender: TObject);
-    procedure actProjectSaveExecute(Sender: TObject);
+    procedure actFile_PrintExecute(Sender: TObject);
+    procedure actProject_CloseExecute(Sender: TObject);
+    procedure actProject_DeleteCurrentExecute(Sender: TObject);
+    procedure actProject_EditExecute(Sender: TObject);
+    procedure actProject_NewExecute(Sender: TObject);
+    procedure actProject_OpenDemoExecute(Sender: TObject);
+    procedure actProject_OpenExecute(Sender: TObject);
+    procedure actProject_OpenNodeExecute(Sender: TObject);
+    procedure actProject_ReloadExecute(Sender: TObject);
+    procedure actProject_SaveAsExecute(Sender: TObject);
+    procedure actProject_SaveExecute(Sender: TObject);
     procedure actProjectVisibleExecute(Sender: TObject);
-    procedure actRAssignmentLeftExecute(Sender: TObject);
-    procedure actRAssignmentRightExecute(Sender: TObject);
-    procedure actRcardCopyDescritionExecute(Sender: TObject);
-    procedure actRcardCopyFunctionExecute(Sender: TObject);
-    procedure actRcardEditExecute(Sender: TObject);
-    procedure actRCardExampleSelectedExecute(Sender: TObject);
-    procedure actRCardHelpExecute(Sender: TObject);
-    procedure actRCardHelpSelectedExecute(Sender: TObject);
-    procedure actRcardInsertExecute(Sender: TObject);
-    procedure actRCardOpenExampleSelectedExecute(Sender: TObject);
+    procedure actRAssignment_LeftExecute(Sender: TObject);
+    procedure actRAssignment_RightExecute(Sender: TObject);
+    procedure actRcard_CopyDescritionExecute(Sender: TObject);
+    procedure actRcard_CopyFunctionExecute(Sender: TObject);
+    procedure actRcard_EditExecute(Sender: TObject);
+    procedure actRcard_ExampleSelectedExecute(Sender: TObject);
+    procedure actRcard_HelpExecute(Sender: TObject);
+    procedure actRcard_HelpSelectedExecute(Sender: TObject);
+    procedure actRcard_InsertExecute(Sender: TObject);
+    procedure actRcard_OpenExampleSelectedExecute(Sender: TObject);
     procedure actRComplexDefaultExecute(Sender: TObject);
-    procedure actRContClearAllExecute(Sender: TObject);
-    procedure actRContClearConsoleExecute(Sender: TObject);
-    procedure actRContCloseAllGraphicsExecute(Sender: TObject);
-    procedure actRContEditVariableExecute(Sender: TObject);
-    procedure actRContEscapeExecute(Sender: TObject);
-    procedure actRContExampleSelectedWordExecute(Sender: TObject);
-    procedure actRContFixVariableExecute(Sender: TObject);
-    procedure actRContGuiPuTTYStartCloseExecute(Sender: TObject);
-    procedure actRContHelpExecute(Sender: TObject);
-    procedure actRContHelpSelectedWordExecute(Sender: TObject);
-    procedure actRContListAllObjectsExecute(Sender: TObject);
-    procedure actRContListVariableNamesExecute(Sender: TObject);
-    procedure actRContListVariableStructureExecute(Sender: TObject);
-    procedure actRContOpenExampleSelectedWordExecute(Sender: TObject);
+    procedure actRCont_ClearAllExecute(Sender: TObject);
+    procedure actRCont_ClearConsoleExecute(Sender: TObject);
+    procedure actRCont_CloseAllGraphicsExecute(Sender: TObject);
+    procedure actRCont_EditVariableExecute(Sender: TObject);
+    procedure actRCont_EscapeExecute(Sender: TObject);
+    procedure actRCont_ExampleSelectedWordExecute(Sender: TObject);
+    procedure actRCont_FixVariableExecute(Sender: TObject);
+    procedure actRCont_GuiPuTTYStartCloseExecute(Sender: TObject);
+    procedure actRCont_HelpExecute(Sender: TObject);
+    procedure actRCont_HelpSelectedWordExecute(Sender: TObject);
+    procedure actRCont_ListAllObjectsExecute(Sender: TObject);
+    procedure actRCont_ListVariableNamesExecute(Sender: TObject);
+    procedure actRCont_ListVariableStructureExecute(Sender: TObject);
+    procedure actRCont_OpenExampleSelectedWordExecute(Sender: TObject);
     procedure actRContPacAvailableExecute(Sender: TObject);
-    procedure actRContPacInstalledExecute(Sender: TObject);
-    procedure actRContPacInstallExecute(Sender: TObject);
-    procedure actRContPacInstallZipExecute(Sender: TObject);
-    procedure actRContPacInstTinnRcomExecute(Sender: TObject);
-    procedure actRContPackagesExecute(Sender: TObject);
-    procedure actRContPacLoadExecute(Sender: TObject);
-    procedure actRContPacLoadTinnRcomExecute(Sender: TObject);
-    procedure actRContPacNewExecute(Sender: TObject);
-    procedure actRContPacRemoveExecute(Sender: TObject);
-    procedure actRContPacStatusExecute(Sender: TObject);
-    procedure actRContPacUpdateExecute(Sender: TObject);
-    procedure actRContPlotVariableExecute(Sender: TObject);
-    procedure actRContPrintVariableContentExecute(Sender: TObject);
-    procedure actRContRemoveAllObjectsExecute(Sender: TObject);
-    procedure actRContSetWorkDirectoryExecute(Sender: TObject);
-    procedure actRContTCPConnectionExecute(Sender: TObject);
-    procedure actRContTermStartCloseExecute(Sender: TObject);
-    procedure actRCurrentLineToTopExecute(Sender: TObject);
+    procedure actRCont_PacInstalledExecute(Sender: TObject);
+    procedure actRCont_PacInstallExecute(Sender: TObject);
+    procedure actRCont_PacInstallZipExecute(Sender: TObject);
+    procedure actRCont_PacInstTinnRcomExecute(Sender: TObject);
+    procedure actRCont_PackagesExecute(Sender: TObject);
+    procedure actRCont_PacLoadExecute(Sender: TObject);
+    procedure actRCont_PacLoadTinnRcomExecute(Sender: TObject);
+    procedure actRCont_PacNewExecute(Sender: TObject);
+    procedure actRCont_PacRemoveExecute(Sender: TObject);
+    procedure actRCont_PacStatusExecute(Sender: TObject);
+    procedure actRCont_PacUpdateExecute(Sender: TObject);
+    procedure actRCont_PlotVariableExecute(Sender: TObject);
+    procedure actRCont_PrintVariableContentExecute(Sender: TObject);
+    procedure actRCont_RemoveAllObjectsExecute(Sender: TObject);
+    procedure actRCont_SetWorkDirectoryExecute(Sender: TObject);
+    procedure actRCont_TCPConnectionExecute(Sender: TObject);
+    procedure actRCont_TermStartCloseExecute(Sender: TObject);
+    procedure actRSend_CurrentLineToTopExecute(Sender: TObject);
     procedure actReadOnlyExecute(Sender: TObject);
     procedure actREchoExecute(Sender: TObject);
-    procedure actReloadExecute(Sender: TObject);
+    procedure actFile_ReloadExecute(Sender: TObject);
     procedure actReloadLatexSymbolsExecute(Sender: TObject);
-    procedure actREnvironmentRefreshExecute(Sender: TObject);
+    procedure actRExpl_EnvironmentRefreshExecute(Sender: TObject);
     procedure actReplaceExecute(Sender: TObject);
     procedure actRestoreDatabaseExecute(Sender: TObject);
     procedure actRestoreSystemConfigurationExecute(Sender: TObject);
     procedure actResultsVisibleExecute(Sender: TObject);
-    procedure actRExplorerBasicExecute(Sender: TObject);
-    procedure actRExplorerContentExecute(Sender: TObject);
-    procedure actRExplorerEditExecute(Sender: TObject);
-    procedure actRExplorerExampleSelectedExecute(Sender: TObject);
-    procedure actRExplorerExpAsciiExecute(Sender: TObject);
-    procedure actRExplorerExpRawExecute(Sender: TObject);
-    procedure actRExplorerFixExecute(Sender: TObject);
-    procedure actRExplorerHelpExecute(Sender: TObject);
-    procedure actRExplorerHelpSelectedExecute(Sender: TObject);
-    procedure actRExplorerNamesExecute(Sender: TObject);
-    procedure actRExplorerOpenExampleSelectedExecute(Sender: TObject);
-    procedure actRExplorerPlotExecute(Sender: TObject);
-    procedure actRExplorerRefreshExecute(Sender: TObject);
-    procedure actRExplorerRemoveAllObjectsExecute(Sender: TObject);
-    procedure actRExplorerRemoveExecute(Sender: TObject);
-    procedure actRExplorerSendNameToClipboardExecute(Sender: TObject);
-    procedure actRExplorerSendNameToEditorExecute(Sender: TObject);
-    procedure actRExplorerStructureExecute(Sender: TObject);
-    procedure actRExplorerStyleExecute(Sender: TObject);
-    procedure actRExplorerSummaryExecute(Sender: TObject);
+    procedure actRExpl_BasicExecute(Sender: TObject);
+    procedure actRExpl_ContentExecute(Sender: TObject);
+    procedure actRExpl_EditExecute(Sender: TObject);
+    procedure actRExpl_ExampleSelectedExecute(Sender: TObject);
+    procedure actRExpl_ExpASCIIExecute(Sender: TObject);
+    procedure actRExpl_ExpRawExecute(Sender: TObject);
+    procedure actRExpl_FixExecute(Sender: TObject);
+    procedure actRExpl_HelpExecute(Sender: TObject);
+    procedure actRExpl_HelpSelectedExecute(Sender: TObject);
+    procedure actRExpl_NamesExecute(Sender: TObject);
+    procedure actRExpl_OpenExampleSelectedExecute(Sender: TObject);
+    procedure actRExpl_PlotExecute(Sender: TObject);
+    procedure actRExpl_RefreshExecute(Sender: TObject);
+    procedure actRExpl_RemoveAllObjectsExecute(Sender: TObject);
+    procedure actRExpl_RemoveExecute(Sender: TObject);
+    procedure actRExpl_SendNameToClipboardExecute(Sender: TObject);
+    procedure actRExpl_SendNameToEditorExecute(Sender: TObject);
+    procedure actRExpl_StructureExecute(Sender: TObject);
+    procedure actRExpl_StyleExecute(Sender: TObject);
+    procedure actRExpl_SummaryExecute(Sender: TObject);
     procedure actRExplorerVisibleExecute(Sender: TObject);
-    procedure actRFilterRefreshExecute(Sender: TObject);
+    procedure actRExpl_FilterRefreshExecute(Sender: TObject);
     procedure actRguiReturnFocusExecute(Sender: TObject);
-    procedure actRmirrorsCopyHostExecute(Sender: TObject);
-    procedure actRmirrorsCopyURLExecute(Sender: TObject);
-    procedure actRmirrorsEditExecute(Sender: TObject);
-    procedure actRmirrorsHelpExecute(Sender: TObject);
-    procedure actRmirrorsOpenURLCurrentExecute(Sender: TObject);
-    procedure actRmirrorsOpenURLDefaultExecute(Sender: TObject);
-    procedure actRmirrorsSetReposExecute(Sender: TObject);
-    procedure actRmirrorsUpdateExecute(Sender: TObject);
-    procedure actRSendBlockMarkedExecute(Sender: TObject);
-    procedure actRSendContiguousExecute(Sender: TObject);
-    procedure actRSendCursorToBeginningLineExecute(Sender: TObject);
-    procedure actRSendCursorToEndLineExecute(Sender: TObject);
-    procedure actRSendFileExecute(Sender: TObject);
-    procedure actRSendKnitHtmlExecute(Sender: TObject);
-    procedure actRSendKnitPdfExecute(Sender: TObject);
-    procedure actRSendLineExecute(Sender: TObject);
-    procedure actRSendLinesToEndPageExecute(Sender: TObject);
-    procedure actRSendSelectionExecute(Sender: TObject);
-    procedure actRSendSmartExecute(Sender: TObject);
-    procedure actRSendSweaveExecute(Sender: TObject);
+    procedure actRmirrors_CopyHostExecute(Sender: TObject);
+    procedure actRmirrors_CopyURLExecute(Sender: TObject);
+    procedure actRmirrors_EditExecute(Sender: TObject);
+    procedure actRmirrors_HelpExecute(Sender: TObject);
+    procedure actRmirrors_OpenURLCurrentExecute(Sender: TObject);
+    procedure actRmirrors_OpenURLDefaultExecute(Sender: TObject);
+    procedure actRmirrors_SetReposExecute(Sender: TObject);
+    procedure actRmirrors_UpdateExecute(Sender: TObject);
+    procedure actRSend_BlockMarkedExecute(Sender: TObject);
+    procedure actRSend_ContiguousExecute(Sender: TObject);
+    procedure actRSend_CursorToBeginningLineExecute(Sender: TObject);
+    procedure actRSend_CursorToEndLineExecute(Sender: TObject);
+    procedure actRSend_FileExecute(Sender: TObject);
+    procedure actRSend_KnitHtmlExecute(Sender: TObject);
+    procedure actRSend_KnitPdfExecute(Sender: TObject);
+    procedure actRSend_LineExecute(Sender: TObject);
+    procedure actRSend_LinesToEndPageExecute(Sender: TObject);
+    procedure actRSend_SelectionExecute(Sender: TObject);
+    procedure actRSend_SmartExecute(Sender: TObject);
+    procedure actRSend_SweaveExecute(Sender: TObject);
     procedure actRSimpleDefaultExecute(Sender: TObject);
     procedure actRtermAutoHideExecute(Sender: TObject);
     procedure actRtermDivideExecute(Sender: TObject);
@@ -2266,15 +2266,15 @@ type
     procedure actRtermWarningErrorExecute(Sender: TObject);
     procedure actRtipInsertExecute(Sender: TObject);
     procedure actRVisibleExecute(Sender: TObject);
-    procedure actSearchCollapseAllExecute(Sender: TObject);
-    procedure actSearchCollapseOneExecute(Sender: TObject);
-    procedure actSearchExpandAllExecute(Sender: TObject);
-    procedure actSearchExpandOneExecute(Sender: TObject);
-    procedure actSearchInFilesExecute(Sender: TObject);
+    procedure actSearch_CollapseAllExecute(Sender: TObject);
+    procedure actSearch_CollapseOneExecute(Sender: TObject);
+    procedure actSearch_ExpandAllExecute(Sender: TObject);
+    procedure actSearch_ExpandOneExecute(Sender: TObject);
+    procedure actSearch_InFilesExecute(Sender: TObject);
     procedure actSearchVisibleExecute(Sender: TObject);
     procedure actShortcutsCustomizationSaveExecute(Sender: TObject);
-    procedure actShortcutsEditExecute(Sender: TObject);
-    procedure actShortcutsHelpExecute(Sender: TObject);
+    procedure actShortcuts_EditExecute(Sender: TObject);
+    procedure actShortcuts_HelpExecute(Sender: TObject);
     procedure actShowAllBarsExecute(Sender: TObject);
     procedure actShowAppOptionsExecute(Sender: TObject);
     procedure actSKH_mapExecute(Sender: TObject);
@@ -2326,7 +2326,7 @@ type
     procedure actTxt2tagsToXhtmlExecute(Sender: TObject);
     procedure actTxt2tagsVisibleExecute(Sender: TObject);
     procedure actUncommentExecute(Sender: TObject);
-    procedure actUncommentFirstExecute(Sender: TObject);
+    procedure actUncomment_FirstExecute(Sender: TObject);
     procedure actUnindentBlockExecute(Sender: TObject);
     procedure actUNIXExecute(Sender: TObject);
     procedure actUnmarkAllExecute(Sender: TObject);
@@ -2335,11 +2335,11 @@ type
     procedure actUTF16BEExecute(Sender: TObject);
     procedure actUTF16LEExecute(Sender: TObject);
     procedure actUTF8Execute(Sender: TObject);
-    procedure actWindowArrangeExecute(Sender: TObject);
-    procedure actWindowCascadeExecute(Sender: TObject);
-    procedure actWindowMinimizeAllExecute(Sender: TObject);
-    procedure actWindowTileHorizontalExecute(Sender: TObject);
-    procedure actWindowTileVerticalExecute(Sender: TObject);
+    procedure actWindow_ArrangeExecute(Sender: TObject);
+    procedure actWindow_CascadeExecute(Sender: TObject);
+    procedure actWindow_MinimizeAllExecute(Sender: TObject);
+    procedure actWindow_TileHorizontalExecute(Sender: TObject);
+    procedure actWindow_TileVerticalExecute(Sender: TObject);
     procedure actWINExecute(Sender: TObject);
     procedure actWinExplVisibleExecute(Sender: TObject);
     procedure actWorkExplVisibleExecute(Sender: TObject);
@@ -4006,42 +4006,42 @@ begin
     WriteInteger('Print', 'iZoomPreview', iZoomPreview);
 
     // Send To R alphabetically ordered
-    WriteBool('R Options', 'bRCurrentLineToTop', actRCurrentLineToTop.Visible);
     WriteBool('R Options', 'bRKnitr', bRKnitr);
-    WriteBool('R Options', 'bRSendBlockMarked', actRSendBlockMarked.Visible);
-    WriteBool('R Options', 'bRSendClipboard', actRSendClipboard.Visible);
-    WriteBool('R Options', 'bRSendContiguous', actRSendContiguous.Visible);
-    WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSendCursorToBeginningLine.Visible);
-    WriteBool('R Options', 'bRSendCursorToEndLine', actRSendCursorToEndLine.Visible);
-    WriteBool('R Options', 'bRSendFile', actRSendFile.Visible);
-    WriteBool('R Options', 'bRSendLine', actRSendLine.Visible);
-    WriteBool('R Options', 'bRSendLinesToEndPage', actRSendLinesToEndPage.Visible);
-    WriteBool('R Options', 'bRSendSelection', actRSendSelection.Visible);
-    WriteBool('R Options', 'bRSendSmart', actRSendSmart.Visible);
-    WriteBool('R Options', 'bRSweave', actRSendSweave.Visible);
+    WriteBool('R Options', 'bRSendBlockMarked', actRSend_BlockMarked.Visible);
+    WriteBool('R Options', 'bRSendClipboard', actRSend_Clipboard.Visible);
+    WriteBool('R Options', 'bRSendContiguous', actRSend_Contiguous.Visible);
+    WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSend_CursorToBeginningLine.Visible);
+    WriteBool('R Options', 'bRSendCursorToEndLine', actRSend_CursorToEndLine.Visible);
+    WriteBool('R Options', 'bRSendCurrentLineToTop', actRSend_CurrentLineToTop.Visible);
+    WriteBool('R Options', 'bRSendFile', actRSend_File.Visible);
+    WriteBool('R Options', 'bRSendLine', actRSend_Line.Visible);
+    WriteBool('R Options', 'bRSendLinesToEndPage', actRSend_LinesToEndPage.Visible);
+    WriteBool('R Options', 'bRSendSelection', actRSend_Selection.Visible);
+    WriteBool('R Options', 'bRSendSmart', actRSend_Smart.Visible);
+    WriteBool('R Options', 'bRSweave', actRSend_Sweave.Visible);
 
     // Controlling R alphabetically ordered
-    WriteBool('R Options', 'bRClearAll', actRContClearAll.Visible);
-    WriteBool('R Options', 'bRClearConsole', actRContClearConsole.Visible);
-    WriteBool('R Options', 'bRCloseAllGraphics', actRContCloseAllGraphics.Visible);
-    WriteBool('R Options', 'bREditVariable', actRContEditVariable.Visible);
-    WriteBool('R Options', 'bREscape', actRContEscape.Visible);
-    WriteBool('R Options', 'bRExampleSelectedWord', actRContExampleSelectedWord.Visible);
-    WriteBool('R Options', 'bROpenExampleSelectedWord', actRContOpenExampleSelectedWord.Visible);
-    WriteBool('R Options', 'bRFixVariable', actRContFixVariable.Visible);
-    WriteBool('R Options', 'bRguiPuTTYStartClose', actRContGuiPuTTYStartClose.Visible);
-    WriteBool('R Options', 'bRHelp', actRContHelp.Visible);
-    WriteBool('R Options', 'bRHelpSelectedWord', actRContHelpSelectedWord.Visible);
-    WriteBool('R Options', 'bRListAllObjects', actRContListAllObjects.Visible);
-    WriteBool('R Options', 'bRListVariableNames', actRContListVariableNames.Visible);
-    WriteBool('R Options', 'bRListVariableStructure', actRContListVariableStructure.Visible);
-    WriteBool('R Options', 'bRPackages', actRContPackages.Visible);
-    WriteBool('R Options', 'bRPlotVariable', actRContPlotVariable.Visible);
-    WriteBool('R Options', 'bRPrintVariableContent', actRContPrintVariableContent.Visible);
-    WriteBool('R Options', 'bRRemoveAllObjects', actRContRemoveAllObjects.Visible);
-    WriteBool('R Options', 'bRSetWorkDir', actRContSetWorkDirectory.Visible);
-    WriteBool('R Options', 'bRTCPConnection', actRContTCPConnection.Visible);
-    WriteBool('R Options', 'bRtermStartClose', actRContTermStartClose.Visible);
+    WriteBool('R Options', 'bRClearAll', actRCont_ClearAll.Visible);
+    WriteBool('R Options', 'bRClearConsole', actRCont_ClearConsole.Visible);
+    WriteBool('R Options', 'bRCloseAllGraphics', actRCont_CloseAllGraphics.Visible);
+    WriteBool('R Options', 'bREditVariable', actRCont_EditVariable.Visible);
+    WriteBool('R Options', 'bREscape', actRCont_Escape.Visible);
+    WriteBool('R Options', 'bRExampleSelectedWord', actRCont_ExampleSelectedWord.Visible);
+    WriteBool('R Options', 'bROpenExampleSelectedWord', actRCont_OpenExampleSelectedWord.Visible);
+    WriteBool('R Options', 'bRFixVariable', actRCont_FixVariable.Visible);
+    WriteBool('R Options', 'bRguiPuTTYStartClose', actRCont_GuiPuTTYStartClose.Visible);
+    WriteBool('R Options', 'bRHelp', actRCont_Help.Visible);
+    WriteBool('R Options', 'bRHelpSelectedWord', actRCont_HelpSelectedWord.Visible);
+    WriteBool('R Options', 'bRListAllObjects', actRCont_ListAllObjects.Visible);
+    WriteBool('R Options', 'bRListVariableNames', actRCont_ListVariableNames.Visible);
+    WriteBool('R Options', 'bRListVariableStructure', actRCont_ListVariableStructure.Visible);
+    WriteBool('R Options', 'bRPackages', actRCont_Packages.Visible);
+    WriteBool('R Options', 'bRPlotVariable', actRCont_PlotVariable.Visible);
+    WriteBool('R Options', 'bRPrintVariableContent', actRCont_PrintVariableContent.Visible);
+    WriteBool('R Options', 'bRRemoveAllObjects', actRCont_RemoveAllObjects.Visible);
+    WriteBool('R Options', 'bRSetWorkDir', actRCont_SetWorkDirectory.Visible);
+    WriteBool('R Options', 'bRTCPConnection', actRCont_TCPConnection.Visible);
+    WriteBool('R Options', 'bRtermStartClose', actRCont_TermStartClose.Visible);
 
     // Database status
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
@@ -4546,42 +4546,42 @@ begin
     ifTinn.EraseSection('Replace Text History');
 
     // Send To R alphabetically ordered
-     WriteBool('R Options', 'bRKnitr', bRKnitr);
-    WriteBool('R Options', 'bRSendBlockMarked', actRSendBlockMarked.Visible);
-    WriteBool('R Options', 'bRSendClipboard', actRSendClipboard.Visible);
-    WriteBool('R Options', 'bRSendContiguous', actRSendContiguous.Visible);
-    WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSendCursorToBeginningLine.Visible);
-    WriteBool('R Options', 'bRSendCursorToEndLine', actRSendCursorToEndLine.Visible);
-    WriteBool('R Options', 'bRSendFile', actRSendFile.Visible);
-    WriteBool('R Options', 'bRSendLine', actRSendLine.Visible);
-    WriteBool('R Options', 'bRSendLinesToEndPage', actRSendLinesToEndPage.Visible);
-    WriteBool('R Options', 'bRSendSelection', actRSendSelection.Visible);
-    WriteBool('R Options', 'bRSendSmart', actRSendSmart.Visible);
-    WriteBool('R Options', 'bRSweave', actRSendSweave.Visible);
-    WriteBool('R Options', 'bRCurrentLineToTop', actRCurrentLineToTop.Visible);
+    WriteBool('R Options', 'bRKnitr', bRKnitr);
+    WriteBool('R Options', 'bRSendBlockMarked', actRSend_BlockMarked.Visible);
+    WriteBool('R Options', 'bRSendClipboard', actRSend_Clipboard.Visible);
+    WriteBool('R Options', 'bRSendContiguous', actRSend_Contiguous.Visible);
+    WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSend_CursorToBeginningLine.Visible);
+    WriteBool('R Options', 'bRSendCursorToEndLine', actRSend_CursorToEndLine.Visible);
+    WriteBool('R Options', 'bRSendFile', actRSend_File.Visible);
+    WriteBool('R Options', 'bRSendLine', actRSend_Line.Visible);
+    WriteBool('R Options', 'bRSendLinesToEndPage', actRSend_LinesToEndPage.Visible);
+    WriteBool('R Options', 'bRSendSelection', actRSend_Selection.Visible);
+    WriteBool('R Options', 'bRSendSmart', actRSend_Smart.Visible);
+    WriteBool('R Options', 'bRSweave', actRSend_Sweave.Visible);
+    WriteBool('R Options', 'bRSendCurrentLineToTop', actRSend_CurrentLineToTop.Visible);
 
     // Controlling R alphabetically ordered
-    WriteBool('R Options', 'bRClearAll', actRContClearAll.Visible);
-    WriteBool('R Options', 'bRClearConsole', actRContClearConsole.Visible);
-    WriteBool('R Options', 'bRCloseAllGraphics', actRContCloseAllGraphics.Visible);
-    WriteBool('R Options', 'bREditVariable', actRContEditVariable.Visible);
-    WriteBool('R Options', 'bREscape', actRContEscape.Visible);
-    WriteBool('R Options', 'bRExampleSelectedWord', actRContExampleSelectedWord.Visible);
-    WriteBool('R Options', 'bROpenExampleSelectedWord', actRContOpenExampleSelectedWord.Visible);
-    WriteBool('R Options', 'bRFixVariable', actRContFixVariable.Visible);
-    WriteBool('R Options', 'bRguiPuTTYStartClose', actRContGuiPuTTYStartClose.Visible);
-    WriteBool('R Options', 'bRHelp', actRContHelp.Visible);
-    WriteBool('R Options', 'bRHelpSelectedWord', actRContHelpSelectedWord.Visible);
-    WriteBool('R Options', 'bRListAllObjects', actRContListAllObjects.Visible);
-    WriteBool('R Options', 'bRListVariableNames', actRContListVariableNames.Visible);
-    WriteBool('R Options', 'bRListVariableStructure', actRContListVariableStructure.Visible);
-    WriteBool('R Options', 'bRPackages', actRContPackages.Visible);
-    WriteBool('R Options', 'bRPlotVariable', actRContPlotVariable.Visible);
-    WriteBool('R Options', 'bRPrintVariableContent', actRContPrintVariableContent.Visible);
-    WriteBool('R Options', 'bRRemoveAllObjects', actRContRemoveAllObjects.Visible);
-    WriteBool('R Options', 'bRSetWorkDir', actRContSetWorkDirectory.Visible);
-    WriteBool('R Options', 'bRTCPConnection', actRContTCPConnection.Visible);
-    WriteBool('R Options', 'bRtermStartClose', actRContTermStartClose.Visible);
+    WriteBool('R Options', 'bRClearAll', actRCont_ClearAll.Visible);
+    WriteBool('R Options', 'bRClearConsole', actRCont_ClearConsole.Visible);
+    WriteBool('R Options', 'bRCloseAllGraphics', actRCont_CloseAllGraphics.Visible);
+    WriteBool('R Options', 'bREditVariable', actRCont_EditVariable.Visible);
+    WriteBool('R Options', 'bREscape', actRCont_Escape.Visible);
+    WriteBool('R Options', 'bRExampleSelectedWord', actRCont_ExampleSelectedWord.Visible);
+    WriteBool('R Options', 'bROpenExampleSelectedWord', actRCont_OpenExampleSelectedWord.Visible);
+    WriteBool('R Options', 'bRFixVariable', actRCont_FixVariable.Visible);
+    WriteBool('R Options', 'bRguiPuTTYStartClose', actRCont_GuiPuTTYStartClose.Visible);
+    WriteBool('R Options', 'bRHelp', actRCont_Help.Visible);
+    WriteBool('R Options', 'bRHelpSelectedWord', actRCont_HelpSelectedWord.Visible);
+    WriteBool('R Options', 'bRListAllObjects', actRCont_ListAllObjects.Visible);
+    WriteBool('R Options', 'bRListVariableNames', actRCont_ListVariableNames.Visible);
+    WriteBool('R Options', 'bRListVariableStructure', actRCont_ListVariableStructure.Visible);
+    WriteBool('R Options', 'bRPackages', actRCont_Packages.Visible);
+    WriteBool('R Options', 'bRPlotVariable', actRCont_PlotVariable.Visible);
+    WriteBool('R Options', 'bRPrintVariableContent', actRCont_PrintVariableContent.Visible);
+    WriteBool('R Options', 'bRRemoveAllObjects', actRCont_RemoveAllObjects.Visible);
+    WriteBool('R Options', 'bRSetWorkDir', actRCont_SetWorkDirectory.Visible);
+    WriteBool('R Options', 'bRTCPConnection', actRCont_TCPConnection.Visible);
+    WriteBool('R Options', 'bRtermStartClose', actRCont_TermStartClose.Visible);
 
     // Database status
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
@@ -5287,11 +5287,11 @@ begin
   case iViewStyleRExplorer of
     1: begin
          frmTools.lvRexplorer.ViewStyle:= vsList;
-         actRExplorerStyle.Checked     := False;
+         actRExpl_Style.Checked:= False;
        end;
     2: begin
          frmTools.lvRexplorer.ViewStyle:= vsReport;
-         actRExplorerStyle.Checked     := True;
+         actRExpl_Style.Checked:= True;
        end;
   end;
 
@@ -5328,7 +5328,7 @@ begin
   iZoomPreview     := ifTinn.ReadInteger('Print', 'iZoomPreview', 90);
 
   // Send to R alphabetically ordered
-  pmemRResCurrentLineToTop.Checked         := ifTinn.ReadBool('R Options', 'bRCurrentLineToTop', True);
+  pmemRResCurrentLineToTop.Checked         := ifTinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
   pmemRResSendBlockMarked.Checked          := ifTinn.ReadBool('R Options', 'bRSendBlockMarked', True);
   pmemRResSendClipboard.Checked            := ifTinn.ReadBool('R Options', 'bRSendClipboard', True);
   pmemRResSendContiguous.Checked           := ifTinn.ReadBool('R Options', 'bRSendContiguous', True);
@@ -5342,19 +5342,19 @@ begin
   pmemRResSendSmart.Checked                := ifTinn.ReadBool('R Options', 'bRSendSmart', False);
   pmemRResSendSweave.Checked               := ifTinn.ReadBool('R Options', 'bRSweave', True);
 
-  actRCurrentLineToTop.Visible         := ifTinn.ReadBool('R Options', 'bRCurrentLineToTop', True);
-  actRSendBlockMarked.Visible          := ifTinn.ReadBool('R Options', 'bRSendBlockMarked', True);
-  actRSendClipboard.Visible            := ifTinn.ReadBool('R Options', 'bRSendClipboard', True);
-  actRSendContiguous.Visible           := ifTinn.ReadBool('R Options', 'bRSendContiguous', True);
-  actRSendCursorToBeginningLine.Visible:= ifTinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
-  actRSendCursorToEndLine.Visible      := ifTinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
-  actRSendFile.Visible                 := ifTinn.ReadBool('R Options', 'bRSendFile', True);
-  actRSendLine.Visible                 := ifTinn.ReadBool('R Options', 'bRSendLine', True);
-  actRSendLinesToEndPage.Visible       := ifTinn.ReadBool('R Options', 'bRSendLinesToEndPage', True);
-  actRSendSelection.Visible            := ifTinn.ReadBool('R Options', 'bRSendSelection', True);
-  actRSendSmart.Visible                := ifTinn.ReadBool('R Options', 'bRSendSmart', False);
-  actRSendSweave.Visible               := ifTinn.ReadBool('R Options', 'bRSweave', True);
-  bRKnitr                              := ifTinn.ReadBool('R Options', 'bRKnitr', True);
+  actRSend_CurrentLineToTop.Visible     := ifTinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
+  actRSend_BlockMarked.Visible          := ifTinn.ReadBool('R Options', 'bRSendBlockMarked', True);
+  actRSend_Clipboard.Visible            := ifTinn.ReadBool('R Options', 'bRSendClipboard', True);
+  actRSend_Contiguous.Visible           := ifTinn.ReadBool('R Options', 'bRSendContiguous', True);
+  actRSend_CursorToBeginningLine.Visible:= ifTinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
+  actRSend_CursorToEndLine.Visible      := ifTinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
+  actRSend_File.Visible                 := ifTinn.ReadBool('R Options', 'bRSendFile', True);
+  actRSend_Line.Visible                 := ifTinn.ReadBool('R Options', 'bRSendLine', True);
+  actRSend_LinesToEndPage.Visible       := ifTinn.ReadBool('R Options', 'bRSendLinesToEndPage', True);
+  actRSend_Selection.Visible            := ifTinn.ReadBool('R Options', 'bRSendSelection', True);
+  actRSend_Smart.Visible                := ifTinn.ReadBool('R Options', 'bRSendSmart', False);
+  actRSend_Sweave.Visible               := ifTinn.ReadBool('R Options', 'bRSweave', True);
+  bRKnitr                               := ifTinn.ReadBool('R Options', 'bRKnitr', True);
 
   // Controlling R alphabetically ordered
   pmenRResContClearAll.Checked             := ifTinn.ReadBool('R Options', 'bRClearAll', True);
@@ -5378,28 +5378,27 @@ begin
   pmenRResContTCPConnection.Checked        := ifTinn.ReadBool('R Options', 'bRTCPConnection', True);
   pmenRResContTermStartClose.Checked       := ifTinn.ReadBool('R Options', 'bRtermStartClose', True);
 
-  actRContClearAll.Visible               := ifTinn.ReadBool('R Options', 'bRClearAll', True);
-  actRContClearConsole.Visible           := ifTinn.ReadBool('R Options', 'bRClearConsole', True);
-  actRContCloseAllGraphics.Visible       := ifTinn.ReadBool('R Options', 'bRCloseAllGraphics', True);
-  actRContEditVariable.Visible           := ifTinn.ReadBool('R Options', 'bREditVariable', True);
-  actRContEscape.Visible                 := ifTinn.ReadBool('R Options', 'bREscape', True);
-  actRContExampleSelectedWord.Visible    := ifTinn.ReadBool('R Options', 'bRExampleSelectedWord', True);
-  actRContOpenExampleSelectedWord.Visible:= ifTinn.ReadBool('R Options', 'bROpenExampleSelectedWord', True);
-  actRContFixVariable.Visible            := ifTinn.ReadBool('R Options', 'bRFixVariable', True);
-  actRContGuiPuTTYStartClose.Visible     := ifTinn.ReadBool('R Options', 'bRguiPuTTYStartClose', True);
-  actRContHelp.Visible                   := ifTinn.ReadBool('R Options', 'bRHelp', True);
-  actRContHelpSelectedWord.Visible       := ifTinn.ReadBool('R Options', 'bRHelpSelectedWord', True);
-  actRContListAllObjects.Visible         := ifTinn.ReadBool('R Options', 'bRListAllObjects', True);
-  actRContListVariableNames.Visible      := ifTinn.ReadBool('R Options', 'bRListVariableNames', True);
-  actRContListVariableStructure.Visible  := ifTinn.ReadBool('R Options', 'bRListVariableStructure', True);
-  actRContPackages.Visible               := ifTinn.ReadBool('R Options', 'bRPackages', True);
-  actRContPlotVariable.Visible           := ifTinn.ReadBool('R Options', 'bRPlotVariable', True);
-  actRContPrintVariableContent.Visible   := ifTinn.ReadBool('R Options', 'bRPrintVariableContent', True);
-  actRContRemoveAllObjects.Visible       := ifTinn.ReadBool('R Options', 'bRRemoveAllObjects', True);
-  actRContSetWorkDirectory.Visible       := ifTinn.ReadBool('R Options', 'bRSetWorkDir', True);
-  actRContTCPConnection.Visible          := ifTinn.ReadBool('R Options', 'bRTCPConnection', True);
-  actRContTermStartClose.Visible         := ifTinn.ReadBool('R Options', 'bRtermStartClose', True);
-  actRSendSweave.Visible                 := ifTinn.ReadBool('R Options', 'bRSweave', True);
+  actRCont_ClearAll.Visible               := ifTinn.ReadBool('R Options', 'bRClearAll', True);
+  actRCont_ClearConsole.Visible           := ifTinn.ReadBool('R Options', 'bRClearConsole', True);
+  actRCont_CloseAllGraphics.Visible       := ifTinn.ReadBool('R Options', 'bRCloseAllGraphics', True);
+  actRCont_EditVariable.Visible           := ifTinn.ReadBool('R Options', 'bREditVariable', True);
+  actRCont_Escape.Visible                 := ifTinn.ReadBool('R Options', 'bREscape', True);
+  actRCont_ExampleSelectedWord.Visible    := ifTinn.ReadBool('R Options', 'bRExampleSelectedWord', True);
+  actRCont_OpenExampleSelectedWord.Visible:= ifTinn.ReadBool('R Options', 'bROpenExampleSelectedWord', True);
+  actRCont_FixVariable.Visible            := ifTinn.ReadBool('R Options', 'bRFixVariable', True);
+  actRCont_GuiPuTTYStartClose.Visible     := ifTinn.ReadBool('R Options', 'bRguiPuTTYStartClose', True);
+  actRCont_Help.Visible                   := ifTinn.ReadBool('R Options', 'bRHelp', True);
+  actRCont_HelpSelectedWord.Visible       := ifTinn.ReadBool('R Options', 'bRHelpSelectedWord', True);
+  actRCont_ListAllObjects.Visible         := ifTinn.ReadBool('R Options', 'bRListAllObjects', True);
+  actRCont_ListVariableNames.Visible      := ifTinn.ReadBool('R Options', 'bRListVariableNames', True);
+  actRCont_ListVariableStructure.Visible  := ifTinn.ReadBool('R Options', 'bRListVariableStructure', True);
+  actRCont_Packages.Visible               := ifTinn.ReadBool('R Options', 'bRPackages', True);
+  actRCont_PlotVariable.Visible           := ifTinn.ReadBool('R Options', 'bRPlotVariable', True);
+  actRCont_PrintVariableContent.Visible   := ifTinn.ReadBool('R Options', 'bRPrintVariableContent', True);
+  actRCont_RemoveAllObjects.Visible       := ifTinn.ReadBool('R Options', 'bRRemoveAllObjects', True);
+  actRCont_SetWorkDirectory.Visible       := ifTinn.ReadBool('R Options', 'bRSetWorkDir', True);
+  actRCont_TCPConnection.Visible          := ifTinn.ReadBool('R Options', 'bRTCPConnection', True);
+  actRCont_TermStartClose.Visible         := ifTinn.ReadBool('R Options', 'bRtermStartClose', True);
 
   // Database status
   iCompletion_SavePoint   := ifTinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
@@ -6942,7 +6941,7 @@ begin
                     Format('%.*d', [2, wV4]);
 end;
 
-procedure TfrmMain.actFileNewExecute(Sender: TObject);
+procedure TfrmMain.actFile_NewExecute(Sender: TObject);
 begin
   inc(iFileCount);
 
@@ -6980,7 +6979,7 @@ begin
   pUpdate_HexViewer;
 end;
 
-procedure TfrmMain.actFileOpenExecute(Sender: TObject);
+procedure TfrmMain.actFile_OpenExecute(Sender: TObject);
 var
   i: integer;
 
@@ -7026,34 +7025,34 @@ procedure TfrmMain.pControl_Resources(bOption: boolean);
 
 begin
   // Main R menu and R toolbar alphabetically ordered
-  actRContClearAll.Enabled               := bOption;
-  actRContClearConsole.Enabled           := bOption;
-  actRContCloseAllGraphics.Enabled       := bOption;
-  actRContEditVariable.Enabled           := bOption and (pgFiles.PageCount > 0);
-  actRContEscape.Enabled                 := bOption and not fRterm_Running;
-  actRContExampleSelectedWord.Enabled    := bOption;
-  actRContOpenExampleSelectedWord.Enabled:= bOption;
-  actRContFixVariable.Enabled            := bOption and (pgFiles.PageCount > 0);
-  actRContHelp.Enabled                   := bOption;
-  actRContHelpSelectedWord.Enabled       := bOption;
-  actRContListAllObjects.Enabled         := bOption;
-  actRContListVariableNames.Enabled      := bOption and (pgFiles.PageCount > 0);
-  actRContListVariableStructure.Enabled  := bOption and (pgFiles.PageCount > 0);
-  actRContPacInstall.Enabled             := bOption;
-  actRContPacInstalled.Enabled           := bOption;
-  actRContPacInstallZip.Enabled          := bOption;
-  actRContPacInstTinnRcom.Enabled        := bOption;
-  actRContPacLoad.Enabled                := bOption;
-  actRContPacLoadTinnRcom.Enabled        := bOption;
-  actRContPacNew.Enabled                 := bOption;
-  actRContPacRemove.Enabled              := bOption;
-  actRContPacStatus.Enabled              := bOption;
-  actRContPacUpdate.Enabled              := bOption;
-  actRContPlotVariable.Enabled           := bOption and (pgFiles.PageCount > 0);
-  actRContPrintVariableContent.Enabled   := bOption and (pgFiles.PageCount > 0);
-  actRContRemoveAllObjects.Enabled       := bOption;
-  actRContTCPConnection.Enabled          := bOption or not bIPLocal;
-  actRSendClipboard.Enabled              := bOption;
+  actRCont_ClearAll.Enabled               := bOption;
+  actRCont_ClearConsole.Enabled           := bOption;
+  actRCont_CloseAllGraphics.Enabled       := bOption;
+  actRCont_EditVariable.Enabled           := bOption and (pgFiles.PageCount > 0);
+  actRCont_Escape.Enabled                 := bOption and not fRterm_Running;
+  actRCont_ExampleSelectedWord.Enabled    := bOption;
+  actRCont_OpenExampleSelectedWord.Enabled:= bOption;
+  actRCont_FixVariable.Enabled            := bOption and (pgFiles.PageCount > 0);
+  actRCont_Help.Enabled                   := bOption;
+  actRCont_HelpSelectedWord.Enabled       := bOption;
+  actRCont_ListAllObjects.Enabled         := bOption;
+  actRCont_ListVariableNames.Enabled      := bOption and (pgFiles.PageCount > 0);
+  actRCont_ListVariableStructure.Enabled  := bOption and (pgFiles.PageCount > 0);
+  actRCont_PacInstall.Enabled             := bOption;
+  actRCont_PacInstalled.Enabled           := bOption;
+  actRCont_PacInstallZip.Enabled          := bOption;
+  actRCont_PacInstTinnRcom.Enabled        := bOption;
+  actRCont_PacLoad.Enabled                := bOption;
+  actRCont_PacLoadTinnRcom.Enabled        := bOption;
+  actRCont_PacNew.Enabled                 := bOption;
+  actRCont_PacRemove.Enabled              := bOption;
+  actRCont_PacStatus.Enabled              := bOption;
+  actRCont_PacUpdate.Enabled              := bOption;
+  actRCont_PlotVariable.Enabled           := bOption and (pgFiles.PageCount > 0);
+  actRCont_PrintVariableContent.Enabled   := bOption and (pgFiles.PageCount > 0);
+  actRCont_RemoveAllObjects.Enabled       := bOption;
+  actRCont_TCPConnection.Enabled          := bOption or not bIPLocal;
+  actRSend_Clipboard.Enabled              := bOption;
 
   // Rterm
   actRtermIOHistoryNext.Enabled := bOption and fRterm_Running;
@@ -7066,22 +7065,22 @@ begin
   menRtermHistoryPrior.Enabled  := bOption and fRterm_Running;
 
   // Rcard
-  actRcardExampleSelected.Enabled    := bOption;
-  actRcardOpenExampleSelected.Enabled:= bOption;
-  actRcardHelpSelected.Enabled       := bOption;
+  actRcard_ExampleSelected.Enabled    := bOption;
+  actRcard_OpenExampleSelected.Enabled:= bOption;
+  actRcard_HelpSelected.Enabled       := bOption;
 
   // Rcompletion
-  actCompletionHelpSelected.Enabled   := bOption and fIsRSelected;
-  actCompletionExampleSelected.Enabled:= bOption and fIsRSelected;
+  actCompletion_HelpSelected.Enabled   := bOption and fIsRSelected;
+  actCompletion_ExampleSelected.Enabled:= bOption and fIsRSelected;
 
   // Mirrors
-  actRmirrorsSetRepos.Enabled:= bOption;
-  actRmirrorsUpdate.Enabled  := bOption;
+  actRmirrors_SetRepos.Enabled:= bOption;
+  actRmirrors_Update.Enabled  := bOption;
 
   // R explorer
-  actREnvironmentRefresh.Enabled:= bOption;
-  actRExplorerRefresh.Enabled   := bOption;
-  actRFilterRefresh.Enabled     := bOption;
+  actRExpl_EnvironmentRefresh.Enabled:= bOption;
+  actRExpl_Refresh.Enabled           := bOption;
+  actRExpl_FilterRefresh.Enabled     := bOption;
 
   if Assigned(frmTools) then
     with frmTools.lvRexplorer.Items do
@@ -7118,35 +7117,35 @@ begin
   end;
 
 // Alphabetically ordered
-  actFormatR.Enabled                   := bOption;
-  actRContSetWorkDirectory.Enabled     := bOption and FileExists((Self.MDIChildren[i] as TfrmEditor).sActiveFile);
-  actRCurrentLineToTop.Enabled         := bOption;
-  actRSendBlockMarked.Enabled          := bOption and bMark;
-  actRSendContiguous.Enabled           := bOption;
-  actRSendCursorToBeginningLine.Enabled:= bOption;
-  actRSendCursorToEndLine.Enabled      := bOption;
-  actRSendFile.Enabled                 := bOption;
-  actRSendKnitHtml.Enabled             := bOption;
-  actRSendKnitPdf.Enabled              := bOption;
-  actRSendLine.Enabled                 := bOption;
-  actRSendSmart.Enabled                := bOption;
-  actRSendLinesToEndPage.Enabled       := bOption;
-  actRSendSweave.Enabled               := bOption;
+  actFormatR.Enabled                    := bOption;
+  actRCont_SetWorkDirectory.Enabled     := bOption and FileExists((Self.MDIChildren[i] as TfrmEditor).sActiveFile);
+  actRSend_CurrentLineToTop.Enabled     := bOption;
+  actRSend_BlockMarked.Enabled          := bOption and bMark;
+  actRSend_Contiguous.Enabled           := bOption;
+  actRSend_CursorToBeginningLine.Enabled:= bOption;
+  actRSend_CursorToEndLine.Enabled      := bOption;
+  actRSend_File.Enabled                 := bOption;
+  actRSend_KnitHtml.Enabled             := bOption;
+  actRSend_KnitPdf.Enabled              := bOption;
+  actRSend_Line.Enabled                 := bOption;
+  actRSend_Smart.Enabled                := bOption;
+  actRSend_LinesToEndPage.Enabled       := bOption;
+  actRSend_Sweave.Enabled               := bOption;
 end;
 
-procedure TfrmMain.actWindowArrangeExecute(Sender: TObject);
+procedure TfrmMain.actWindow_ArrangeExecute(Sender: TObject);
 begin
   ArrangeIcons;
   sWindowOption:= 'Arranje icons';
 end;
 
-procedure TfrmMain.actWindowCascadeExecute(Sender: TObject);
+procedure TfrmMain.actWindow_CascadeExecute(Sender: TObject);
 begin
   Cascade;
   sWindowOption:= 'Cascade';
 end;
 
-procedure TfrmMain.actWindowMinimizeAllExecute(Sender: TObject);
+procedure TfrmMain.actWindow_MinimizeAllExecute(Sender: TObject);
 var
   i: integer;
 
@@ -7156,14 +7155,14 @@ begin
   sWindowOption:= 'Minimize all';
 end;
 
-procedure TfrmMain.actWindowTileHorizontalExecute(Sender: TObject);
+procedure TfrmMain.actWindow_TileHorizontalExecute(Sender: TObject);
 begin
   TileMode     := tbHorizontal;
   sWindowOption:= 'Tiled horizontal';
   Tile;
 end;
 
-procedure TfrmMain.actWindowTileVerticalExecute(Sender: TObject);
+procedure TfrmMain.actWindow_TileVerticalExecute(Sender: TObject);
 begin
   TileMode     := tbVertical;
   sWindowOption:= 'Tiled vertical';
@@ -7498,67 +7497,67 @@ end;
 procedure TfrmMain.pSet_Recho_True;
 begin
   // File
-  actRSendFile.Caption   := 'File (echo=TRUE)';
-  actRSendFile.Hint      := 'R send: file (echo=TRUE)';
-  actRSendFile.ImageIndex:= 2;
+  actRSend_File.Caption   := 'File (echo=TRUE)';
+  actRSend_File.Hint      := 'R send: file (echo=TRUE)';
+  actRSend_File.ImageIndex:= 2;
 
   // Selection
-  actRSendSelection.Caption   := 'Selection (echo=TRUE)';
-  actRSendSelection.Hint      := 'R send: selection (echo=TRUE)';
-  actRSendSelection.ImageIndex:= 4;
+  actRSend_Selection.Caption   := 'Selection (echo=TRUE)';
+  actRSend_Selection.Hint      := 'R send: selection (echo=TRUE)';
+  actRSend_Selection.ImageIndex:= 4;
 
   // Clipboard
-  actRSendClipboard.Caption   := 'Clipboard (echo=TRUE)';
-  actRSendClipboard.Hint      := 'R send: clipboard (echo=TRUE)';
-  actRSendClipboard.ImageIndex:= 269;
+  actRSend_Clipboard.Caption   := 'Clipboard (echo=TRUE)';
+  actRSend_Clipboard.Hint      := 'R send: clipboard (echo=TRUE)';
+  actRSend_Clipboard.ImageIndex:= 269;
 
   // Block
-  actRSendBlockMarked.Caption   := 'Marked block (echo=TRUE)';
-  actRSendBlockMarked.Hint      := 'R send: marked block (echo=TRUE)';
-  actRSendBlockMarked.ImageIndex:= 6;
+  actRSend_BlockMarked.Caption   := 'Marked block (echo=TRUE)';
+  actRSend_BlockMarked.Hint      := 'R send: marked block (echo=TRUE)';
+  actRSend_BlockMarked.ImageIndex:= 6;
 
   // Contiguous
-  actRSendContiguous.Caption   := 'Contiguous (echo=TRUE)';
-  actRSendContiguous.Hint      := 'R send: contiguous (echo=TRUE)';
-  actRSendContiguous.ImageIndex:= 271;
+  actRSend_Contiguous.Caption   := 'Contiguous (echo=TRUE)';
+  actRSend_Contiguous.Hint      := 'R send: contiguous (echo=TRUE)';
+  actRSend_Contiguous.ImageIndex:= 271;
 
   // Lines to EndPage
-  actRSendLinesToEndPage.Caption   := 'Lines to end page (echo=TRUE)';
-  actRSendLinesToEndPage.Hint      := 'R send: lines to end page (echo=TRUE)';
-  actRSendLinesToEndPage.ImageIndex:= 8;
+  actRSend_LinesToEndPage.Caption   := 'Lines to end page (echo=TRUE)';
+  actRSend_LinesToEndPage.Hint      := 'R send: lines to end page (echo=TRUE)';
+  actRSend_LinesToEndPage.ImageIndex:= 8;
 end;
 
 procedure TfrmMain.pSet_Recho_False;
 begin
   // File
-  actRSendFile.Caption   := 'File';
-  actRSendFile.Hint      := 'R send: file';
-  actRSendFile.ImageIndex:= 1;
+  actRSend_File.Caption   := 'File';
+  actRSend_File.Hint      := 'R send: file';
+  actRSend_File.ImageIndex:= 1;
 
   // Selection
-  actRSendSelection.Caption   := 'Selection';
-  actRSendSelection.Hint      := 'R send: selection';
-  actRSendSelection.ImageIndex:= 3;
+  actRSend_Selection.Caption   := 'Selection';
+  actRSend_Selection.Hint      := 'R send: selection';
+  actRSend_Selection.ImageIndex:= 3;
 
   // Clipboard
-  actRSendClipboard.Caption   := 'Clipboard';
-  actRSendClipboard.Hint      := 'R send: clipboard';
-  actRSendClipboard.ImageIndex:= 268;
+  actRSend_Clipboard.Caption   := 'Clipboard';
+  actRSend_Clipboard.Hint      := 'R send: clipboard';
+  actRSend_Clipboard.ImageIndex:= 268;
 
   // Block
-  actRSendBlockMarked.Caption   := 'Marked block';
-  actRSendBlockMarked.Hint      := 'R send: marked block';
-  actRSendBlockMarked.ImageIndex:= 5;
+  actRSend_BlockMarked.Caption   := 'Marked block';
+  actRSend_BlockMarked.Hint      := 'R send: marked block';
+  actRSend_BlockMarked.ImageIndex:= 5;
 
   // Contiguous
-  actRSendContiguous.Caption   := 'Contiguous';
-  actRSendContiguous.Hint      := 'R send: contiguous';
-  actRSendContiguous.ImageIndex:= 270;
+  actRSend_Contiguous.Caption   := 'Contiguous';
+  actRSend_Contiguous.Hint      := 'R send: contiguous';
+  actRSend_Contiguous.ImageIndex:= 270;
 
   // Lines to EndPage
-  actRSendLinesToEndPage.Caption   := 'Lines to end page';
-  actRSendLinesToEndPage.Hint      := 'R send: lines to end page';
-  actRSendLinesToEndPage.ImageIndex:= 298;
+  actRSend_LinesToEndPage.Caption   := 'Lines to end page';
+  actRSend_LinesToEndPage.Hint      := 'R send: lines to end page';
+  actRSend_LinesToEndPage.ImageIndex:= 298;
 end;
 
 procedure TfrmMain.actREchoExecute(Sender: TObject);
@@ -7661,16 +7660,16 @@ begin
   // Initial status
   pTools_ProjectControls(False);
   pTools_SearchControls(False);
-  actMacroPlay.Enabled          := False;
-  actMacroRecord.Enabled        := False;
-  actReadOnly.Enabled           := False;
-  actREnvironmentRefresh.Checked:= False;
-  actRExplorerRefresh.Checked   := False;
-  actRFilterRefresh.Checked     := False;
-  actRtermWarningError.Visible  := False;
-  actSplitHorizontal.Enabled    := False;
-  actSplitRemove.Enabled        := False;
-  actSplitVertical.Enabled      := False;
+  actMacroPlay.Enabled               := False;
+  actMacroRecord.Enabled             := False;
+  actReadOnly.Enabled                := False;
+  actRExpl_EnvironmentRefresh.Checked:= False;
+  actRExpl_Refresh.Checked           := False;
+  actRExpl_FilterRefresh.Checked     := False;
+  actRtermWarningError.Visible       := False;
+  actSplitHorizontal.Enabled         := False;
+  actSplitRemove.Enabled             := False;
+  actSplitVertical.Enabled           := False;
 
   DragAcceptFiles(Handle,
                   True);
@@ -7907,14 +7906,14 @@ begin
 
         pgFilesChange(nil);
 
-        if actNotification_US.Checked then actReloadExecute(nil)
+        if actNotification_US.Checked then actFile_ReloadExecute(nil)
         else
           if fMessageDlg(sTmp + #13 + #13 +
                          'This file has been modified by another program.' + #13 +
                          'Do you want to reload it?',
                          mtConfirmation,
                          [mbYes, mbNo],
-                         0) = mrYes then actReloadExecute(nil);
+                         0) = mrYes then actFile_ReloadExecute(nil);
       end;
   end;
 
@@ -9442,7 +9441,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRAssignmentLeftExecute(Sender: TObject);
+procedure TfrmMain.actRAssignment_LeftExecute(Sender: TObject);
 var
   seTmp: TSynEdit;
 
@@ -9463,7 +9462,7 @@ begin
     SelText:= ' <- ';
 end;
 
-procedure TfrmMain.actRAssignmentRightExecute(Sender: TObject);
+procedure TfrmMain.actRAssignment_RightExecute(Sender: TObject);
 var
   seTmp: TSynEdit;
 
@@ -9484,41 +9483,41 @@ begin
     SelText:= ' -> ';
 end;
 
-procedure TfrmMain.actRmirrorsCopyHostExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_CopyHostExecute(Sender: TObject);
 begin
   with modDados do
     Clipboard.AsText:= cdRmirrorsHost.Text;
 end;
 
-procedure TfrmMain.actRmirrorsCopyURLExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_CopyURLExecute(Sender: TObject);
 begin
   with modDados do
     Clipboard.AsText:= cdRmirrorsURL.Text;
 end;
 
-procedure TfrmMain.actRmirrorsEditExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_EditExecute(Sender: TObject);
 begin
   sRmirrors_BookMark:= modDados.cdRmirrors.Bookmark;
   menToolsDatabaseMirrorsRClick(nil);
   pSet_Focus_Main;
 end;
 
-procedure TfrmMain.actRmirrorsHelpExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_HelpExecute(Sender: TObject);
 begin
   pOpen_UserGuidePDF('"Mirrors (R)"');
 end;
 
-procedure TfrmMain.actRmirrorsOpenURLDefaultExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_OpenURLDefaultExecute(Sender: TObject);
 begin
   pOpen_Url(frmTools.stbRMirrors.Panels[1].Text);
 end;
 
-procedure TfrmMain.actRmirrorsOpenURLCurrentExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_OpenURLCurrentExecute(Sender: TObject);
 begin
   pOpen_Url(frmTools.dbeRmirrorsURL.Text);
 end;
 
-procedure TfrmMain.actRmirrorsSetReposExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_SetReposExecute(Sender: TObject);
 var
   sTmp: string;
   
@@ -9586,7 +9585,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRmirrorsUpdateExecute(Sender: TObject);
+procedure TfrmMain.actRmirrors_UpdateExecute(Sender: TObject);
 var
   i: integer;
 
@@ -9727,7 +9726,7 @@ procedure TfrmMain.FormCloseQuery(Sender: TObject;
 begin
   bRtermOptionCancel:= False;
 
-  if fRterm_Running then actRContTermStartCloseExecute(nil);
+  if fRterm_Running then actRCont_TermStartCloseExecute(nil);
   bCanClose:= not bRtermOptionCancel;  // If the choice is 'Cancel' don't close
 
   if bCanClose then begin
@@ -9936,7 +9935,7 @@ begin
   pUpdate_HexViewer;
 end;
 
-procedure TfrmMain.actPrintExecute(Sender: TObject);
+procedure TfrmMain.actFile_PrintExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     if (sActiveEditor = 'synEditor2') then
@@ -10070,7 +10069,7 @@ begin
   actOpenMaximized.Checked:= not(actOpenMaximized.Checked);
 end;
 
-procedure TfrmMain.actFileSaveAllExecute(Sender: TObject);
+procedure TfrmMain.actFile_SaveAllExecute(Sender: TObject);
 var
   i,
    iChildID,
@@ -10093,7 +10092,7 @@ begin
       iChildID:= fFind_Window_ByName(sTmp);
       with (Self.MDIChildren[iChildID] as tfrmEditor) do
         if synEditor.Modified then
-      	  actFileSaveExecute(Sender);
+      	  actFile_SaveExecute(Sender);
     end;
 
     // Bring back the starting window
@@ -10102,7 +10101,7 @@ begin
     iChildID:= fFind_Window_ByName(sTmp);
     MDIChildren[iChildID].BringToFront;
   end;
-  actFileSaveAll.Enabled:= False;
+  actFile_SaveAll.Enabled:= False;
 
   pUpdate_HexViewer;
 end;
@@ -10145,7 +10144,7 @@ begin
     iStartFile:= fFindTop_Window;
     slTmp.Text:= (Self.MDIChildren[iStartFile] as tfrmEditor).synEditor.Lines.text;
     // Create new tab and window
-    actFileNewExecute(Sender);
+    actFile_NewExecute(Sender);
     iNewFile         := fFindTop_Window;
     rsGrep.Expression:= edFilter.Text;
  
@@ -10310,7 +10309,7 @@ begin
     (Self.MDIChildren[i] as TfrmEditor).Repaint;
 end;
 
-procedure TfrmMain.actOpenMRUExecute(Sender: TObject);
+procedure TfrmMain.actOpen_MRUExecute(Sender: TObject);
 var
   i: integer;
 
@@ -10341,7 +10340,7 @@ begin
   FreeAndNil(slTmp);
 end;
 
-procedure TfrmMain.actProjectOpenNodeExecute(Sender: TObject);
+procedure TfrmMain.actProject_OpenNodeExecute(Sender: TObject);
 begin
   with frmTools do
     pDoProjectOpenNode;
@@ -10752,7 +10751,7 @@ end;
 
 procedure TfrmMain.tbReloadClick(Sender: TObject);
 begin
-  actReloadExecute(nil);
+  actFile_ReloadExecute(nil);
 end;
 
 procedure TfrmMain.panProjectDockSiteDockDrop(Sender: TObject;
@@ -10764,7 +10763,7 @@ begin
   panProjectDockSite.Width               := 150;
 end;
 
-procedure TfrmMain.actProjectNewExecute(Sender: TObject);
+procedure TfrmMain.actProject_NewExecute(Sender: TObject);
 var
   sFileExt: string;
 
@@ -10811,7 +10810,7 @@ begin
   //splTools.Visible                       := False;
 end;
 
-procedure TfrmMain.actFilesAddCurrentExecute(Sender: TObject);
+procedure TfrmMain.actFiles_AddCurrentExecute(Sender: TObject);
 var
   i: integer;
 
@@ -10832,7 +10831,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actProjectOpenDemoExecute(Sender: TObject);
+procedure TfrmMain.actProject_OpenDemoExecute(Sender: TObject);
 var
   fTmp: string;
 
@@ -10851,7 +10850,7 @@ begin
                 0);
 end;
 
-procedure TfrmMain.actProjectOpenExecute(Sender: TObject);
+procedure TfrmMain.actProject_OpenExecute(Sender: TObject);
 var
   od: TOpenDialog;
 
@@ -10874,14 +10873,14 @@ begin
   Self.Repaint;
 end;
 
-procedure TfrmMain.actProjectSaveExecute(Sender: TObject);
+procedure TfrmMain.actProject_SaveExecute(Sender: TObject);
 begin
   pSave_Project;
   pUpdate_MRU_Project(menProjRecent,
                       sProjectName);
 end;
 
-procedure TfrmMain.actFilesRemoveExecute(Sender: TObject);
+procedure TfrmMain.actFiles_RemoveExecute(Sender: TObject);
 begin
   // Remove selected file
   with frmTools.tvProject do begin
@@ -10909,7 +10908,7 @@ begin
                   'Do you like to save the changes?',
                   mtConfirmation,
                   [mbYes, mbNo],
-                  0) = mrYes) then actProjectSaveExecute(nil);
+                  0) = mrYes) then actProject_SaveExecute(nil);
 end;
 
 procedure TfrmMain.pClear_StatusBar;
@@ -10936,7 +10935,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actProjectCloseExecute(Sender: TObject);
+procedure TfrmMain.actProject_CloseExecute(Sender: TObject);
 var
   iPos: integer;
 
@@ -10971,12 +10970,12 @@ begin
   pClear_StatusBar_Project;
 end;
 
-procedure TfrmMain.actFilesOpenAllExecute(Sender: TObject);
+procedure TfrmMain.actFiles_OpenAllExecute(Sender: TObject);
 begin
   pOpen_AllFiles;
 end;
 
-procedure TfrmMain.actFilesCloseAllExecute(Sender: TObject);
+procedure TfrmMain.actFiles_CloseAllExecute(Sender: TObject);
 begin
   // Close all files of the active project;
   fClose_AllFiles_Project;
@@ -12037,11 +12036,11 @@ begin
   if fRterm_Running and
     frmRTerm.cRterm.bRterm_Ready then begin
     Sleep(1*iDelay);
-    actRContTCPConnectionExecute(nil);
+    actRCont_TCPConnectionExecute(nil);
   end
   else if fRgui_Running then begin
     Sleep(5*iDelay);
-    actRContTCPConnectionExecute(nil);
+    actRCont_TCPConnectionExecute(nil);
   end;
 
   Screen.Cursor:= crDefault;
@@ -12051,7 +12050,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
 
   procedure pRgui(bRunning: boolean);
   begin
-    with actRContGuiPuTTYStartClose do
+    with actRCont_GuiPuTTYStartClose do
       if bRunning then begin
         Caption   := 'Rgui/PuTTY (close)';
         ImageIndex:= 82
@@ -12061,7 +12060,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
         ImageIndex:= 81;
       end;
 
-    actRContGuiPuTTYStartClose.Update;
+    actRCont_GuiPuTTYStartClose.Update;
 
     if bRunning                  and
        (frmApp_Options_Dlg = nil)  and
@@ -12071,7 +12070,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
 
   procedure pRterm(bRunning: boolean);
   begin
-    with actRContTermStartClose do
+    with actRCont_TermStartClose do
       if bRunning then begin
         Caption   := 'Rterm (close)';
         ImageIndex:= 245
@@ -12081,7 +12080,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
         ImageIndex:= 244
       end;
 
-    actRContTermStartClose.Update;
+    actRCont_TermStartClose.Update;
   end;
 
   // R is running
@@ -12101,7 +12100,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                          else seEditor:= synEditor2;
       with seEditor do begin
-        actRSendSelection.Enabled:= SelAvail;
+        actRSend_Selection.Enabled:= SelAvail;
       end;
     end;
 
@@ -12135,7 +12134,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
 
     if (stbMain.Panels[6].Text <> EmptyStr) then stbMain.Panels[6].Text:= EmptyStr;
 
-    actRSendSelection.Enabled      := False;
+    actRSend_Selection.Enabled     := False;
     bAlreadyOrganized              := False;
     bTCPIPRunning                  := False;
     bRTinnRcom_Loaded              := False;
@@ -12145,7 +12144,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
     sVersion_TinnRcomInstalled     := 'UNKNOWN';
     if Assigned(slRLibPaths) then
       FreeAndNil(slRLibPaths);
-    actRContTCPConnection.ImageIndex:= 168;  
+    actRCont_TCPConnection.ImageIndex:= 168;  
   end;
 
 begin
@@ -12791,7 +12790,7 @@ begin
   i:= fFind_Window_ByName(sProjectName);
   if (i > -1) then begin
     Self.MDIChildren[i].BringToFront;
-    actReloadExecute(nil);
+    actFile_ReloadExecute(nil);
   end;
 end;
 
@@ -13005,7 +13004,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actGrouptNewExecute(Sender: TObject);
+procedure TfrmMain.actGroup_NewExecute(Sender: TObject);
 var
   newGroup: TfrmNewGroup;
 
@@ -13435,7 +13434,7 @@ begin
   pUpdate_EditMenu_Shortcuts;
 end;
 
-procedure TfrmMain.actGroupDeleteCurrentExecute(Sender: TObject);
+procedure TfrmMain.actGroup_DeleteCurrentExecute(Sender: TObject);
 begin
   with frmTools.tvProject do
     if (Selected = nil) or
@@ -13449,7 +13448,7 @@ begin
     end;
 end;
 
-procedure TfrmMain.actGroupDeleteAllExecute(Sender: TObject);
+procedure TfrmMain.actGroup_DeleteAllExecute(Sender: TObject);
 begin
   with frmTools.tvProject.Items[0] do
     if (Count > 0) then begin
@@ -13458,7 +13457,7 @@ begin
     end;
 end;
 
-procedure TfrmMain.actProjectDeleteCurrentExecute(Sender: TObject);
+procedure TfrmMain.actProject_DeleteCurrentExecute(Sender: TObject);
 var
   intPos: integer;
 
@@ -13492,7 +13491,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actGroupRenameExecute(Sender: TObject);
+procedure TfrmMain.actGroup_RenameExecute(Sender: TObject);
 var
   renGroup: TfrmGroupRename;
 
@@ -13524,7 +13523,7 @@ begin
   pSort_Project;
 end;
 
-procedure TfrmMain.actProjectSaveAsExecute(Sender: TObject);
+procedure TfrmMain.actProject_SaveAsExecute(Sender: TObject);
 var
   i: integer;
 
@@ -13609,7 +13608,7 @@ begin
 end;
 
 {$WARNINGS ON}
-procedure TfrmMain.actFilesRemoveAllOfProjectExecute(Sender: TObject);
+procedure TfrmMain.actFiles_RemoveAllOfProjectExecute(Sender: TObject);
 var
   i: integer;
 
@@ -13626,7 +13625,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actFilesRemoveAllOfGroupExecute(Sender: TObject);
+procedure TfrmMain.actFiles_RemoveAllOfGroupExecute(Sender: TObject);
 begin
   with frmTools.tvProject.Selected do
     if (level = 1) then begin
@@ -13635,7 +13634,7 @@ begin
     end;
 end;
 
-procedure TfrmMain.actFilesAddExecute(Sender: TObject);
+procedure TfrmMain.actFiles_AddExecute(Sender: TObject);
 var
   i,
    j: integer;
@@ -13667,50 +13666,50 @@ begin
   end;
 end;
 
-procedure TfrmMain.actFilesOpenAllOfGroupExecute(Sender: TObject);
+procedure TfrmMain.actFiles_OpenAllOfGroupExecute(Sender: TObject);
 begin
   pOpen_AllFilesOfGroup;
 end;
 
-procedure TfrmMain.actFilesCloseAllOfGroupExecute(Sender: TObject);
+procedure TfrmMain.actFiles_CloseAllOfGroupExecute(Sender: TObject);
 begin
   pClose_AllFiles_Group;
 end;
 
 procedure TfrmMain.pTools_ProjectControls(bOption: boolean);
 begin
-  actFilesAdd.Enabled               := bOption;
-  actFilesAddCurrent.Enabled        := bOption;
-  actFilesCloseAll.Enabled          := bOption;
-  actFilesCloseAllOfGroup.Enabled   := bOption;
-  actFilesFullPathUnix.Enabled      := bOption;
-  actFilesFullPathWindows.Enabled   := bOption;
-  actFilesOpenAll.Enabled           := bOption;
-  actFilesOpenAllOfGroup.Enabled    := bOption;
-  actFilesRemove.Enabled            := bOption;
-  actFilesRemoveAllOfGroup.Enabled  := bOption;
-  actFilesRemoveAllOfProject.Enabled:= bOption;
-  actGroupCollapseAll.Enabled       := bOption;
-  actGroupDeleteAll.Enabled         := bOption;
-  actGroupDeleteCurrent.Enabled     := bOption;
-  actGroupExpandAll.Enabled         := bOption;
-  actGroupRename.Enabled            := bOption;
-  actGrouptNew.Enabled              := bOption;
-  actProjectClose.Enabled           := bOption;
-  actProjectDeleteCurrent.Enabled   := bOption;
-  actProjectEdit.Enabled            := bOption;
-  actProjectOpenNode.Enabled        := bOption;
-  actProjectReload.Enabled          := bOption;
-  actProjectSave.Enabled            := bOption;
-  actProjectSaveAs.Enabled          := bOption;
+  actFiles_Add.Enabled               := bOption;
+  actFiles_AddCurrent.Enabled        := bOption;
+  actFiles_CloseAll.Enabled          := bOption;
+  actFiles_CloseAllOfGroup.Enabled   := bOption;
+  actFiles_FullPathUnix.Enabled      := bOption;
+  actFiles_FullPathWindows.Enabled   := bOption;
+  actFiles_OpenAll.Enabled           := bOption;
+  actFiles_OpenAllOfGroup.Enabled    := bOption;
+  actFiles_Remove.Enabled            := bOption;
+  actFiles_RemoveAllOfGroup.Enabled  := bOption;
+  actFiles_RemoveAllOfProject.Enabled:= bOption;
+  actGroup_CollapseAll.Enabled       := bOption;
+  actGroup_DeleteAll.Enabled         := bOption;
+  actGroup_DeleteCurrent.Enabled     := bOption;
+  actGroup_ExpandAll.Enabled         := bOption;
+  actGroup_Rename.Enabled            := bOption;
+  actGroup_New.Enabled              := bOption;
+  actProject_Close.Enabled           := bOption;
+  actProject_DeleteCurrent.Enabled   := bOption;
+  actProject_Edit.Enabled            := bOption;
+  actProject_OpenNode.Enabled        := bOption;
+  actProject_Reload.Enabled          := bOption;
+  actProject_Save.Enabled            := bOption;
+  actProject_SaveAs.Enabled          := bOption;
 end;
 
 procedure TfrmMain.pTools_SearchControls(bOption: boolean);
 begin
-  actSearchCollapseAll.Enabled:= bOption;
-  actSearchCollapseOne.Enabled:= bOption;
-  actSearchExpandAll.Enabled  := bOption;
-  actSearchExpandOne.Enabled  := bOption;
+  actSearch_CollapseAll.Enabled:= bOption;
+  actSearch_CollapseOne.Enabled:= bOption;
+  actSearch_ExpandAll.Enabled  := bOption;
+  actSearch_ExpandOne.Enabled  := bOption;
 end;
 
 procedure TfrmMain.edFilterKeyDown(Sender: TObject;
@@ -13725,7 +13724,7 @@ begin
   pOpen_Url('http://ess.r-project.org/');
 end;
 
-procedure TfrmMain.actGroupExpandAllExecute(Sender: TObject);
+procedure TfrmMain.actGroup_ExpandAllExecute(Sender: TObject);
 var
   tnSelected,
    tnOldSelected: TTreeNode;
@@ -13745,7 +13744,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actGroupCollapseAllExecute(Sender: TObject);
+procedure TfrmMain.actGroup_CollapseAllExecute(Sender: TObject);
 var
   tnSelected: TTreeNode;
 
@@ -14038,42 +14037,42 @@ begin
       tbTransparency.Position            := iTransparency;
 
       // Send to R
-      cbRCurrentLineToTop.Checked         := actRCurrentLineToTop.Visible;
-      cbRSendBlockMarked.Checked          := actRSendBlockMarked.Visible;
-      cbRSendClipboard.Checked            := actRSendClipboard.Visible;
-      cbRSendContiguous.Checked           := actRSendContiguous.Visible;
-      cbRSendCursorToBeginningLine.Checked:= actRSendCursorToBeginningLine.Visible;
-      cbRSendCursorToEndLine.Checked      := actRSendCursorToEndLine.Visible;
-      cbRSendFile.Checked                 := actRSendFile.Visible;
+      cbRCurrentLineToTop.Checked         := actRSend_CurrentLineToTop.Visible;
+      cbRSendBlockMarked.Checked          := actRSend_BlockMarked.Visible;
+      cbRSendClipboard.Checked            := actRSend_Clipboard.Visible;
+      cbRSendContiguous.Checked           := actRSend_Contiguous.Visible;
+      cbRSendCursorToBeginningLine.Checked:= actRSend_CursorToBeginningLine.Visible;
+      cbRSendCursorToEndLine.Checked      := actRSend_CursorToEndLine.Visible;
+      cbRSendFile.Checked                 := actRSend_File.Visible;
       cbRSendKnitr.Checked                := bRKnitr;
-      cbRSendLine.Checked                 := actRSendLine.Visible;
-      cbRSendLinesToEndPage.Checked       := actRSendLinesToEndPage.Visible;
-      cbRSendSelection.Checked            := actRSendSelection.Visible;
-      cbRSendSmart.Checked                := actRSendSmart.Visible;
-      cbRSendSweave.Checked               := actRSendSweave.Visible;
+      cbRSendLine.Checked                 := actRSend_Line.Visible;
+      cbRSendLinesToEndPage.Checked       := actRSend_LinesToEndPage.Visible;
+      cbRSendSelection.Checked            := actRSend_Selection.Visible;
+      cbRSendSmart.Checked                := actRSend_Smart.Visible;
+      cbRSendSweave.Checked               := actRSend_Sweave.Visible;
 
       // Controlling R
-      cbRClearAll.Checked               := actRContClearAll.Visible;
-      cbRClearConsole.Checked           := actRContClearConsole.Visible;
-      cbRCloseAllGraphics.Checked       := actRContCloseAllGraphics.Visible;
-      cbREditVariable.Checked           := actRContEditVariable.Visible;
-      cbREscape.Checked                 := actRContEscape.Visible;
-      cbRExampleSelectedWord.Checked    := actRContExampleSelectedWord.Visible;
-      cbROPenExampleSelectedWord.Checked:= actRContOpenExampleSelectedWord.Visible;
-      cbRFixVariable.Checked            := actRContFixVariable.Visible;
-      cbRguiPuTTYStartClose.Checked     := actRContGuiPuTTYStartClose.Visible;
-      cbRHelp.Checked                   := actRContHelp.Visible;
-      cbRHelpSelectedWord.Checked       := actRContHelpSelectedWord.Visible;
-      cbRListAllObjects.Checked         := actRContListAllObjects.Visible;
-      cbRListVariableNames.Checked      := actRContListVariableNames.Visible;
-      cbRListVariableStructure.Checked  := actRContListVariableStructure.Visible;
-      cbRPackages.Checked               := actRContPackages.Visible;
-      cbRPlotVariable.Checked           := actRContPlotVariable.Visible;
-      cbRPrintVariableContent.Checked   := actRContPrintVariableContent.Visible;
-      cbRRemoveAllObjects.Checked       := actRContRemoveAllObjects.Visible;
-      cbRSetWorkDirectory.Checked       := actRContSetWorkDirectory.Visible;
-      cbRTCPConnection.Checked          := actRContTCPConnection.Visible;
-      cbRtermStartClose.Checked         := actRContTermStartClose.Visible;
+      cbRClearAll.Checked               := actRCont_ClearAll.Visible;
+      cbRClearConsole.Checked           := actRCont_ClearConsole.Visible;
+      cbRCloseAllGraphics.Checked       := actRCont_CloseAllGraphics.Visible;
+      cbREditVariable.Checked           := actRCont_EditVariable.Visible;
+      cbREscape.Checked                 := actRCont_Escape.Visible;
+      cbRExampleSelectedWord.Checked    := actRCont_ExampleSelectedWord.Visible;
+      cbROPenExampleSelectedWord.Checked:= actRCont_OpenExampleSelectedWord.Visible;
+      cbRFixVariable.Checked            := actRCont_FixVariable.Visible;
+      cbRguiPuTTYStartClose.Checked     := actRCont_GuiPuTTYStartClose.Visible;
+      cbRHelp.Checked                   := actRCont_Help.Visible;
+      cbRHelpSelectedWord.Checked       := actRCont_HelpSelectedWord.Visible;
+      cbRListAllObjects.Checked         := actRCont_ListAllObjects.Visible;
+      cbRListVariableNames.Checked      := actRCont_ListVariableNames.Visible;
+      cbRListVariableStructure.Checked  := actRCont_ListVariableStructure.Visible;
+      cbRPackages.Checked               := actRCont_Packages.Visible;
+      cbRPlotVariable.Checked           := actRCont_PlotVariable.Visible;
+      cbRPrintVariableContent.Checked   := actRCont_PrintVariableContent.Visible;
+      cbRRemoveAllObjects.Checked       := actRCont_RemoveAllObjects.Visible;
+      cbRSetWorkDirectory.Checked       := actRCont_SetWorkDirectory.Visible;
+      cbRTCPConnection.Checked          := actRCont_TCPConnection.Visible;
+      cbRtermStartClose.Checked         := actRCont_TermStartClose.Visible;
 
       // EOL
       with rgEOL do begin
@@ -14174,19 +14173,19 @@ begin
     if (dlgApp_Options.ShowModal = mrOK) then begin
       with dlgApp_Options do begin
         // Send to R alphabetically ordered
-        actRCurrentLineToTop.Visible         := cbRCurrentLineToTop.Checked;
-        actRSendBlockMarked.Visible          := cbRSendBlockMarked.Checked;
-        actRSendClipboard.Visible            := cbRSendClipboard.Checked;
-        actRSendContiguous.Visible           := cbRSendContiguous.Checked;
-        actRSendCursorToBeginningLine.Visible:= cbRSendCursorToBeginningLine.Checked;
-        actRSendCursorToEndLine.Visible      := cbRSendCursorToEndLine.Checked;
-        actRSendFile.Visible                 := cbRSendFile.Checked;
-        actRSendLine.Visible                 := cbRSendLine.Checked;
-        actRSendLinesToEndPage.Visible       := cbRSendLinesToEndPage.Checked;
-        actRSendSelection.Visible            := cbRSendSelection.Checked;
-        actRSendSmart.Visible                := cbRSendSmart.Checked;
-        actRSendSweave.Visible               := cbRSendSweave.Checked;
-        bRKnitr                              := cbRSendKnitr.Checked;
+        actRSend_CurrentLineToTop.Visible     := cbRCurrentLineToTop.Checked;
+        actRSend_BlockMarked.Visible          := cbRSendBlockMarked.Checked;
+        actRSend_Clipboard.Visible            := cbRSendClipboard.Checked;
+        actRSend_Contiguous.Visible           := cbRSendContiguous.Checked;
+        actRSend_CursorToBeginningLine.Visible:= cbRSendCursorToBeginningLine.Checked;
+        actRSend_CursorToEndLine.Visible      := cbRSendCursorToEndLine.Checked;
+        actRSend_File.Visible                 := cbRSendFile.Checked;
+        actRSend_Line.Visible                 := cbRSendLine.Checked;
+        actRSend_LinesToEndPage.Visible       := cbRSendLinesToEndPage.Checked;
+        actRSend_Selection.Visible            := cbRSendSelection.Checked;
+        actRSend_Smart.Visible                := cbRSendSmart.Checked;
+        actRSend_Sweave.Visible               := cbRSendSweave.Checked;
+        bRKnitr                               := cbRSendKnitr.Checked;
 
         pmemRResCurrentLineToTop.Checked         := cbRCurrentLineToTop.Checked;
         pmemRResSendBlockMarked.Checked          := cbRSendBlockMarked.Checked;
@@ -14203,27 +14202,27 @@ begin
         pmemRResSendSweave.Checked               := cbRSendSweave.Checked;
 
         // Controlling R alphabetically ordered
-        actRContClearAll.Visible               := cbRClearAll.Checked;
-        actRContClearConsole.Visible           := cbRClearConsole.Checked;
-        actRContCloseAllGraphics.Visible       := cbRCloseAllGraphics.Checked;
-        actRContEditVariable.Visible           := cbREditVariable.Checked;
-        actRContEscape.Visible                 := cbREscape.Checked;
-        actRContExampleSelectedWord.Visible    := cbRExampleSelectedWord.Checked;
-        actRContOpenExampleSelectedWord.Visible:= cbROpenExampleSelectedWord.Checked;
-        actRContFixVariable.Visible            := cbRFixVariable.Checked;
-        actRContGuiPuTTYStartClose.Visible     := cbRguiPuTTYStartClose.Checked;
-        actRContHelp.Visible                   := cbRHelp.Checked;
-        actRContHelpSelectedWord.Visible       := cbRHelpSelectedWord.Checked;
-        actRContListAllObjects.Visible         := cbRListAllObjects.Checked;
-        actRContListVariableNames.Visible      := cbRListVariableNames.Checked;
-        actRContListVariableStructure.Visible  := cbRListVariableStructure.Checked;
-        actRContPackages.Visible               := cbRPackages.Checked;
-        actRContPlotVariable.Visible           := cbRPlotVariable.Checked;
-        actRContPrintVariableContent.Visible   := cbRPrintVariableContent.Checked;
-        actRContRemoveAllObjects.Visible       := cbRRemoveAllObjects.Checked;
-        actRContSetWorkDirectory.Visible       := cbRSetWorkDirectory.Checked;
-        actRContTCPConnection.Visible          := cbRTCPConnection.Checked;
-        actRContTermStartClose.Visible         := cbRtermStartClose.Checked;
+        actRCont_ClearAll.Visible               := cbRClearAll.Checked;
+        actRCont_ClearConsole.Visible           := cbRClearConsole.Checked;
+        actRCont_CloseAllGraphics.Visible       := cbRCloseAllGraphics.Checked;
+        actRCont_EditVariable.Visible           := cbREditVariable.Checked;
+        actRCont_Escape.Visible                 := cbREscape.Checked;
+        actRCont_ExampleSelectedWord.Visible    := cbRExampleSelectedWord.Checked;
+        actRCont_OpenExampleSelectedWord.Visible:= cbROpenExampleSelectedWord.Checked;
+        actRCont_FixVariable.Visible            := cbRFixVariable.Checked;
+        actRCont_GuiPuTTYStartClose.Visible     := cbRguiPuTTYStartClose.Checked;
+        actRCont_Help.Visible                   := cbRHelp.Checked;
+        actRCont_HelpSelectedWord.Visible       := cbRHelpSelectedWord.Checked;
+        actRCont_ListAllObjects.Visible         := cbRListAllObjects.Checked;
+        actRCont_ListVariableNames.Visible      := cbRListVariableNames.Checked;
+        actRCont_ListVariableStructure.Visible  := cbRListVariableStructure.Checked;
+        actRCont_Packages.Visible               := cbRPackages.Checked;
+        actRCont_PlotVariable.Visible           := cbRPlotVariable.Checked;
+        actRCont_PrintVariableContent.Visible   := cbRPrintVariableContent.Checked;
+        actRCont_RemoveAllObjects.Visible       := cbRRemoveAllObjects.Checked;
+        actRCont_SetWorkDirectory.Visible       := cbRSetWorkDirectory.Checked;
+        actRCont_TCPConnection.Visible          := cbRTCPConnection.Checked;
+        actRCont_TermStartClose.Visible         := cbRtermStartClose.Checked;
 
         pmenRResContClearAll.Checked             := cbRClearAll.Checked;
         pmenRResContClearConsole.Checked         := cbRClearConsole.Checked;
@@ -14682,24 +14681,22 @@ end;
 
 procedure TfrmMain.pSet_Rexplorer(bOption: boolean);
 begin
-  //actRExplorerExpHtml.Enabled            := bOption;
-  //actRExplorerExpTeX.Enabled             := bOption;
-  actRExplorerContent.Enabled            := bOption;
-  actRExplorerEdit.Enabled               := bOption;
-  actRExplorerExampleSelected.Enabled    := bOption;
-  actRExplorerOpenExampleSelected.Enabled:= bOption;
-  actRExplorerExpAscii.Enabled           := bOption;
-  actRExplorerExpRaw.Enabled             := bOption;
-  actRExplorerFix.Enabled                := bOption;
-  actRExplorerHelpSelected.Enabled       := bOption;
-  actRExplorerNames.Enabled              := bOption;
-  actRExplorerPlot.Enabled               := bOption;
-  actRExplorerRemove.Enabled             := bOption;
-  actRExplorerRemoveAllObjects.Enabled   := bOption;
-  actRExplorerSendNameToClipboard.Enabled:= bOption;
-  actRExplorerSendNameToEditor.Enabled   := bOption;
-  actRExplorerStructure.Enabled          := bOption;
-  actRExplorerSummary.Enabled            := bOption;
+  actRExpl_Content.Enabled            := bOption;
+  actRExpl_Edit.Enabled               := bOption;
+  actRExpl_ExampleSelected.Enabled    := bOption;
+  actRExpl_OpenExampleSelected.Enabled:= bOption;
+  actRExpl_ExpAscii.Enabled           := bOption;
+  actRExpl_ExpRaw.Enabled             := bOption;
+  actRExpl_Fix.Enabled                := bOption;
+  actRExpl_HelpSelected.Enabled       := bOption;
+  actRExpl_Names.Enabled              := bOption;
+  actRExpl_Plot.Enabled               := bOption;
+  actRExpl_Remove.Enabled             := bOption;
+  actRExpl_RemoveAllObjects.Enabled   := bOption;
+  actRExpl_SendNameToClipboard.Enabled:= bOption;
+  actRExpl_SendNameToEditor.Enabled   := bOption;
+  actRExpl_Structure.Enabled          := bOption;
+  actRExpl_Summary.Enabled            := bOption;
 end;
 
 procedure TfrmMain.pMake_Renvironment(slRObjects: TStringList);
@@ -15079,7 +15076,7 @@ begin
   i:= fFindTop_Window;
   if ((Self.MDIChildren[i] as TfrmEditor) = nil) then Exit;
 
-  actRExplorerSendNameToEditorExecute(nil);
+  actRExpl_SendNameToEditorExecute(nil);
 
   PostMessage(TWinControl(Self.MDIChildren[i] as TfrmEditor).Handle,
               WM_SETFOCUS,
@@ -15091,7 +15088,7 @@ procedure TfrmMain.csRGeneralConnect(Sender: TObject;
                                          Socket: TCustomWinSocket);
 begin
   bConectionError              := False;
-  actRContTCPConnection.Checked:= True;
+  actRCont_TCPConnection.Checked:= True;
   if Assigned(frmRServer) then begin
     with frmRServer do begin
       chbIPConnected.Checked    := True;
@@ -15115,7 +15112,7 @@ var
 
 begin
   if bConectionError then Exit;
-  actRContTCPConnection.Checked:= False;
+  actRCont_TCPConnection.Checked:= False;
   // The server sends '' when disconnect fine
   sTmp:= Socket.ReceiveText;
 
@@ -15196,7 +15193,7 @@ begin
   ErrorCode      := 0;
   bConectionError:= True;
   Socket.Close;
-  actRContTCPConnection.Checked:= False;
+  actRCont_TCPConnection.Checked:= False;
 end;
 
 procedure TfrmMain.csREnvironmentRead(Sender: TObject;
@@ -15553,7 +15550,7 @@ begin
   frmTools.bbtWorkExplorerRefreshClick(nil);
 end;
 
-procedure TfrmMain.actRExplorerHelpExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_HelpExecute(Sender: TObject);
 begin
   pOpen_UserGuidePDF('"Tools interface"');
 end;
@@ -15571,7 +15568,7 @@ begin
                                                           '::';
 end;
 
-procedure TfrmMain.actRExplorerHelpSelectedExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_HelpSelectedExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15583,7 +15580,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerExampleSelectedExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_ExampleSelectedExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15595,7 +15592,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerOpenExampleSelectedExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_OpenExampleSelectedExecute(Sender: TObject);
 
   function fGetWord(var sTopic,
                         sPackage: string): boolean;
@@ -15736,7 +15733,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRExplorerNamesExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_NamesExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15749,7 +15746,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerStructureExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_StructureExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15762,7 +15759,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerSummaryExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_SummaryExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15775,7 +15772,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerEditExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_EditExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15788,7 +15785,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerFixExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_FixExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15800,7 +15797,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerPlotExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_PlotExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15813,7 +15810,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerRemoveExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_RemoveExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15825,7 +15822,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerRemoveAllObjectsExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_RemoveAllObjectsExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15837,7 +15834,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerContentExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_ContentExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15849,7 +15846,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerSendNameToEditorExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_SendNameToEditorExecute(Sender: TObject);
 var
   seEditor: TSynEdit;
 
@@ -15874,12 +15871,12 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRExplorerSendNameToClipboardExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_SendNameToClipboardExecute(Sender: TObject);
 begin
   if Assigned(frmTools.lvRexplorer.Selected) then Clipboard.AsText:= frmTools.lvRexplorer.Selected.Caption;
 end;
 
-procedure TfrmMain.actRExplorerExpRawExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_ExpRawExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15893,7 +15890,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRExplorerExpAsciiExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_ExpASCIIExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -15907,12 +15904,12 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRCardHelpExecute(Sender: TObject);
+procedure TfrmMain.actRcard_HelpExecute(Sender: TObject);
 begin
   pOpen_UserGuidePDF('"Card (R)"');
 end;
 
-procedure TfrmMain.actRCardHelpSelectedExecute(Sender: TObject);
+procedure TfrmMain.actRcard_HelpSelectedExecute(Sender: TObject);
 
   function fGetWord: string;
   var
@@ -15954,7 +15951,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRcardInsertExecute(Sender: TObject);
+procedure TfrmMain.actRcard_InsertExecute(Sender: TObject);
 var
   i: integer;
 
@@ -15970,7 +15967,7 @@ begin
               0);
 end;
 
-procedure TfrmMain.actRCardExampleSelectedExecute(Sender: TObject);
+procedure TfrmMain.actRcard_ExampleSelectedExecute(Sender: TObject);
 
   function fGetWord: string;
   var
@@ -16012,20 +16009,20 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRcardCopyFunctionExecute(Sender: TObject);
+procedure TfrmMain.actRcard_CopyFunctionExecute(Sender: TObject);
 begin
   with modDados do
     Clipboard.AsText:= cdRcardFunction.Text;
 end;
 
-procedure TfrmMain.actRcardEditExecute(Sender: TObject);
+procedure TfrmMain.actRcard_EditExecute(Sender: TObject);
 begin
   sRcard_BookMark:= modDados.cdRcard.Bookmark;
   menToolsDatabaseCardRClick(nil);
   pSet_Focus_Main;
 end;
 
-procedure TfrmMain.actRcardCopyDescritionExecute(Sender: TObject);
+procedure TfrmMain.actRcard_CopyDescritionExecute(Sender: TObject);
 begin
   with modDados do
     if frmTools.dbRcardMemo.SelLength <> 0 then Clipboard.AsText:= frmTools.dbRcardMemo.SelText
@@ -16041,16 +16038,16 @@ begin
     if sActiveEditor = 'synEditor' then seEditor:= synEditor
                                    else seEditor:= synEditor2;
   with seEditor do begin
-    actCopyFormattedHtml.Enabled := SelAvail;
-    actCopyFormattedRtf.Enabled  := SelAvail;
-    actCopyFormattedTeX.Enabled  := SelAvail;
-    actIndentBlock.Enabled       := SelAvail;
-    actInvertSelection.Enabled   := SelAvail;
-    actLowerCaseSelection.Enabled:= SelAvail;
-    actUnindentBlock.Enabled     := SelAvail;
-    actUpperCaseSelection.Enabled:= SelAvail;
-    menEdit_Cut.Enabled          := SelAvail;
-    pmenEdit_Cut.Enabled         := SelAvail;
+    actCopyFormatted_HTML.Enabled := SelAvail;
+    actCopyFormatted_RTF.Enabled  := SelAvail;
+    actCopyFormatted_TEX.Enabled  := SelAvail;
+    actIndentBlock.Enabled        := SelAvail;
+    actInvertSelection.Enabled    := SelAvail;
+    actLowerCaseSelection.Enabled := SelAvail;
+    actUnindentBlock.Enabled      := SelAvail;
+    actUpperCaseSelection.Enabled := SelAvail;
+    menEdit_Cut.Enabled           := SelAvail;
+    pmenEdit_Cut.Enabled          := SelAvail;
 //    pmenIO_Cut.Enabled           := SelAvail;
 //    pmenLOG_Cut.Enabled          := SelAvail;
   end;
@@ -16107,11 +16104,11 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRExplorerStyleExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_StyleExecute(Sender: TObject);
 begin
-  actRExplorerStyle.Checked:= not actRExplorerStyle.Checked;
+  actRExpl_Style.Checked:= not actRExpl_Style.Checked;
 
-  if actRExplorerStyle.Checked then begin
+  if actRExpl_Style.Checked then begin
     frmTools.lvRexplorer.ViewStyle:= vsReport;
     iViewStyleRExplorer           := 2;
   end
@@ -16989,14 +16986,14 @@ begin
   if not fValidR_Running then Exit;
   i:= fFindTop_Window;
 
-  if ((Self.MDIChildren[i] as TfrmEditor).synEditor.Modified = True) then actFileSaveExecute(Self);
+  if ((Self.MDIChildren[i] as TfrmEditor).synEditor.Modified = True) then actFile_SaveExecute(Self);
   sDos:= (Self.MDIChildren[i] as TfrmEditor).sActiveFile;
 
   if bFull then Result:= DosPathToUnixPath(sDos)
            else Result:= DosPathToUnixPath(ExtractFilePath(sDos));
 end;
 
-procedure TfrmMain.actRSendFileExecute(Sender: TObject);
+procedure TfrmMain.actRSend_FileExecute(Sender: TObject);
 var
   sTmp,
    sToSend: string;
@@ -17025,7 +17022,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendSelectionExecute(Sender: TObject);
+procedure TfrmMain.actRSend_SelectionExecute(Sender: TObject);
 var
   sTmp,
    sToSend: string;
@@ -17054,7 +17051,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendSmartExecute(Sender: TObject);
+procedure TfrmMain.actRSend_SmartExecute(Sender: TObject);
 
   procedure pDoSend_RU(var sTmp: string);
   var
@@ -17153,7 +17150,7 @@ begin
           BlockEnd:= BufferCoord(iLen + 1,
                                  iEnd);
         end;
-        actRSendSelectionExecute(Self);
+        actRSend_SelectionExecute(Self);
       end
       else
         fMessageDlg('Sorry, it was not possible to find the smart context!' + #13 + #13 +
@@ -17202,7 +17199,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendBlockMarkedExecute(Sender: TObject);
+procedure TfrmMain.actRSend_BlockMarkedExecute(Sender: TObject);
 var
   sTmp,
    sToSend: string;
@@ -17231,7 +17228,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendContiguousExecute(Sender: TObject);
+procedure TfrmMain.actRSend_ContiguousExecute(Sender: TObject);
 var
   sTmp,
    sToSend: string;
@@ -17260,7 +17257,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendLineExecute(Sender: TObject);
+procedure TfrmMain.actRSend_LineExecute(Sender: TObject);
 var
   bGoToNextValidLine: boolean;
 
@@ -17295,7 +17292,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendLinesToEndPageExecute(Sender: TObject);
+procedure TfrmMain.actRSend_LinesToEndPageExecute(Sender: TObject);
 var
   bSingleLine: boolean;
 
@@ -17324,7 +17321,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRCurrentLineToTopExecute(Sender: TObject);
+procedure TfrmMain.actRSend_CurrentLineToTopExecute(Sender: TObject);
 var
   seEditor: TSynEdit;
 
@@ -17342,7 +17339,7 @@ begin
   pSet_Focus_Rgui(iDelay);
 end;
 
-procedure TfrmMain.actRSendCursorToBeginningLineExecute(Sender: TObject);
+procedure TfrmMain.actRSend_CursorToBeginningLineExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17352,7 +17349,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendCursorToEndLineExecute(Sender: TObject);
+procedure TfrmMain.actRSend_CursorToEndLineExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17362,7 +17359,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRSendSweaveExecute(Sender: TObject);
+procedure TfrmMain.actRSend_SweaveExecute(Sender: TObject);
 var
   i: integer;
 
@@ -17430,7 +17427,7 @@ begin
   
 end;
 
-procedure TfrmMain.actRSendKnitPdfExecute(Sender: TObject);
+procedure TfrmMain.actRSend_KnitPdfExecute(Sender: TObject);
 var
   i: integer;
 
@@ -17523,7 +17520,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRSendKnitHtmlExecute(Sender: TObject);
+procedure TfrmMain.actRSend_KnitHtmlExecute(Sender: TObject);
 var
   i: integer;
 
@@ -17658,7 +17655,7 @@ begin
 
 end;
 
-procedure TfrmMain.actRContSetWorkDirectoryExecute(Sender: TObject);
+procedure TfrmMain.actRCont_SetWorkDirectoryExecute(Sender: TObject);
 var
   sTmp,
    sUnix: string;
@@ -17674,7 +17671,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContListAllObjectsExecute(Sender: TObject);
+procedure TfrmMain.actRCont_ListAllObjectsExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17684,7 +17681,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPrintVariableContentExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PrintVariableContentExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17703,7 +17700,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContListVariableNamesExecute(Sender: TObject);
+procedure TfrmMain.actRCont_ListVariableNamesExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17725,7 +17722,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContListVariableStructureExecute(Sender: TObject);
+procedure TfrmMain.actRCont_ListVariableStructureExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17747,7 +17744,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContOpenExampleSelectedWordExecute(Sender: TObject);
+procedure TfrmMain.actRCont_OpenExampleSelectedWordExecute(Sender: TObject);
 
   function fGetWord(var sTopic,
                         sPackage: string): boolean;
@@ -17944,7 +17941,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRContEditVariableExecute(Sender: TObject);
+procedure TfrmMain.actRCont_EditVariableExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17966,7 +17963,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContFixVariableExecute(Sender: TObject);
+procedure TfrmMain.actRCont_FixVariableExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -17988,7 +17985,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPlotVariableExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PlotVariableExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -18107,12 +18104,12 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRContClearConsoleExecute(Sender: TObject);
+procedure TfrmMain.actRCont_ClearConsoleExecute(Sender: TObject);
 begin
   actRtermIOandLogClearExecute(nil);
 end;
 
-procedure TfrmMain.actRContCloseAllGraphicsExecute(Sender: TObject);
+procedure TfrmMain.actRCont_CloseAllGraphicsExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -18122,7 +18119,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContRemoveAllObjectsExecute(Sender: TObject);
+procedure TfrmMain.actRCont_RemoveAllObjectsExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -18132,7 +18129,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContClearAllExecute(Sender: TObject);
+procedure TfrmMain.actRCont_ClearAllExecute(Sender: TObject);
 var
   i: integer;
 
@@ -18207,7 +18204,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRContEscapeExecute(Sender: TObject);
+procedure TfrmMain.actRCont_EscapeExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -18227,7 +18224,7 @@ begin
   pSet_Focus_Rgui(iDelay);
 end;
 
-procedure TfrmMain.actRContHelpSelectedWordExecute(Sender: TObject);
+procedure TfrmMain.actRCont_HelpSelectedWordExecute(Sender: TObject);
 
   function fGetWord: string;
   var
@@ -18324,7 +18321,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContExampleSelectedWordExecute(Sender: TObject);
+procedure TfrmMain.actRCont_ExampleSelectedWordExecute(Sender: TObject);
 
   function fGetWord: string;
   var
@@ -18421,7 +18418,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContHelpExecute(Sender: TObject);
+procedure TfrmMain.actRCont_HelpExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -18431,7 +18428,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actREnvironmentRefreshExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_EnvironmentRefreshExecute(Sender: TObject);
 
  procedure pReadTmpFile(sRFile: string);
  var
@@ -18536,7 +18533,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRExplorerRefreshExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_RefreshExecute(Sender: TObject);
 var
   i,
    iFocus: integer;
@@ -18689,7 +18686,7 @@ begin
   //splTools.Update;
 end;
 
-procedure TfrmMain.actProjectReloadExecute(Sender: TObject);
+procedure TfrmMain.actProject_ReloadExecute(Sender: TObject);
 begin
   pCheck_Project_Changed;
   Application.ProcessMessages;
@@ -18707,7 +18704,7 @@ begin
   pOpen_FileIntoTinn(sProjectName);
 end;
 
-procedure TfrmMain.actProjectEditExecute(Sender: TObject);
+procedure TfrmMain.actProject_EditExecute(Sender: TObject);
 begin
   pOpen_FileIntoTinn(sProjectName,
                     0,
@@ -19315,7 +19312,7 @@ begin
 
   oldCursor:= (Self.MDIChildren[i] as TfrmEditor).Cursor;
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
-  actFileSaveExecute(Self);
+  actFile_SaveExecute(Self);
 
   pCheck_ProcessingPath(sPathInterpreter);
   pCheck_ProcessingPath(sPathConversor);
@@ -19384,7 +19381,7 @@ begin
   i:= fFindTop_Window;
   oldCursor:= (Self.MDIChildren[i] as TfrmEditor).Cursor;
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
-  actFileSaveExecute(Self);
+  actFile_SaveExecute(Self);
 
   pCheck_ProcessingPath(sPath_Pandoc);
 
@@ -19710,7 +19707,7 @@ begin
   if (LowerCase(ExtractFileExt(sTmpFile)) <> '.tex') then Exit;
   oldCursor:= (Self.MDIChildren[i] as TfrmEditor).Cursor;
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
-  actFileSaveExecute(Self);
+  actFile_SaveExecute(Self);
   sTmpDir:= ExtractFilePath((Self.MDIChildren[i] as TfrmEditor).sActiveFile);
 
   try
@@ -19986,7 +19983,7 @@ begin
 end;
 
 // Reload file from disk
-procedure TfrmMain.actReloadExecute(Sender: TObject);
+procedure TfrmMain.actFile_ReloadExecute(Sender: TObject);
 var
   bcPos: TBufferCoord;
 
@@ -20335,37 +20332,37 @@ end;
 
 procedure TfrmMain.pmemRResSendBlockMarkedClick(Sender: TObject);
 begin
-  with actRSendBlockMarked do
+  with actRSend_BlockMarked do
     Visible:= not Visible;
-  pmemRResSendBlockMarked.Checked:= actRSendBlockMarked.Visible;
+  pmemRResSendBlockMarked.Checked:= actRSend_BlockMarked.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendClipboardClick(Sender: TObject);
 begin
-  with actRSendClipboard do
+  with actRSend_Clipboard do
     Visible:= not Visible;
-  pmemRResSendClipboard.Checked:= actRSendClipboard.Visible;
+  pmemRResSendClipboard.Checked:= actRSend_Clipboard.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendContiguousClick(Sender: TObject);
 begin
-  with actRSendContiguous do
+  with actRSend_Contiguous do
     Visible:= not Visible;
-  pmemRResSendContiguous.Checked:= actRSendContiguous.Visible;
+  pmemRResSendContiguous.Checked:= actRSend_Contiguous.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendFileClick(Sender: TObject);
 begin
-  with actRSendFile do
+  with actRSend_File do
     Visible:= not Visible;
-  pmemRResSendFile.Checked:= actRSendFile.Visible;
+  pmemRResSendFile.Checked:= actRSend_File.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendSelectionClick(Sender: TObject);
 begin
-  with actRSendSelection do
+  with actRSend_Selection do
     Visible:= not Visible;
-  pmemRResSendSelection.Checked:= actRSendSelection.Visible;
+  pmemRResSendSelection.Checked:= actRSend_Selection.Visible;
 end;
 
 procedure TfrmMain.pmenIO_CopyClick(Sender: TObject);
@@ -20430,51 +20427,51 @@ end;
 
 procedure TfrmMain.pmemRResCurrentLineToTopClick(Sender: TObject);
 begin
-  with actRCurrentLineToTop do
+  with actRSend_CurrentLineToTop do
     Visible:= not Visible;
-  pmemRResCurrentLineToTop.Checked:= actRCurrentLineToTop.Visible;
+  pmemRResCurrentLineToTop.Checked:= actRSend_CurrentLineToTop.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendLineClick(Sender: TObject);
 begin
-  with actRSendLine do
+  with actRSend_Line do
     Visible:= not Visible;
-  pmemRResSendLine.Checked:= actRSendLine.Visible;
+  pmemRResSendLine.Checked:= actRSend_Line.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendSmartClick(Sender: TObject);
 begin
-  with actRSendSmart do
+  with actRSend_Smart do
     Visible:= not Visible;
-  pmemRResSendSmart.Checked:= actRSendSmart.Visible;
+  pmemRResSendSmart.Checked:= actRSend_Smart.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendLinesToEndPageClick(Sender: TObject);
 begin
-  with actRSendLinesToEndPage do
+  with actRSend_LinesToEndPage do
     Visible:= not Visible;
-  pmemRResSendLinesToEndPage.Checked:= actRSendLinesToEndPage.Visible;
+  pmemRResSendLinesToEndPage.Checked:= actRSend_LinesToEndPage.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendCursorToBeginningLineClick(Sender: TObject);
 begin
-  with actRSendCursorToBeginningLine do
+  with actRSend_CursorToBeginningLine do
     Visible:= not Visible;
-  pmemRResSendCursorToBeginningLine.Checked:= actRSendCursorToBeginningLine.Visible;
+  pmemRResSendCursorToBeginningLine.Checked:= actRSend_CursorToBeginningLine.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendCursorToEndLineClick(Sender: TObject);
 begin
-  with actRSendCursorToEndLine do
+  with actRSend_CursorToEndLine do
     Visible:= not Visible;
-  pmemRResSendCursorToEndLine.Checked:= actRSendCursorToEndLine.Visible;
+  pmemRResSendCursorToEndLine.Checked:= actRSend_CursorToEndLine.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendSweaveClick(Sender: TObject);
 begin
-  with actRSendSweave do
+  with actRSend_Sweave do
     Visible:= not Visible;
-  pmemRResSendSweave.Checked:= actRSendSweave.Visible;
+  pmemRResSendSweave.Checked:= actRSend_Sweave.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendKnitrClick(Sender: TObject);
@@ -20487,142 +20484,142 @@ end;
 
 procedure TfrmMain.pmenRResContSetWorkDirectoryClick(Sender: TObject);
 begin
-  with actRContSetWorkDirectory do
+  with actRCont_SetWorkDirectory do
     Visible:= not Visible;
-  pmenRResContSetWorkDirectory.Checked:= actRContSetWorkDirectory.Visible;
+  pmenRResContSetWorkDirectory.Checked:= actRCont_SetWorkDirectory.Visible;
 end;
 
 procedure TfrmMain.pmenRResContListAllObjectsClick(Sender: TObject);
 begin
-  with actRContListAllObjects do
+  with actRCont_ListAllObjects do
     Visible:= not Visible;
-  pmenRResContListAllObjects.Checked:= actRContListAllObjects.Visible;
+  pmenRResContListAllObjects.Checked:= actRCont_ListAllObjects.Visible;
 end;
 
 procedure TfrmMain.pmenRResContPrintVariableContentClick(Sender: TObject);
 begin
-  with actRContPrintVariableContent do
+  with actRCont_PrintVariableContent do
     Visible:= not Visible;
-  pmenRResContPrintVariableContent.Checked:= actRContPrintVariableContent.Visible;
+  pmenRResContPrintVariableContent.Checked:= actRCont_PrintVariableContent.Visible;
 end;
 
 procedure TfrmMain.pmenRResContPlotVariableClick(Sender: TObject);
 begin
-  with actRContPlotVariable do
+  with actRCont_PlotVariable do
     Visible:= not Visible;
-  pmenRResContPlotVariable.Checked:= actRContPlotVariable.Visible;
+  pmenRResContPlotVariable.Checked:= actRCont_PlotVariable.Visible;
 end;
 
 procedure TfrmMain.pmenRResContListVariableNamesClick(Sender: TObject);
 begin
-  with actRContListVariableNames do
+  with actRCont_ListVariableNames do
     Visible:= not Visible;
-  pmenRResContListVariableNames.Checked:= actRContListVariableNames.Visible;
+  pmenRResContListVariableNames.Checked:= actRCont_ListVariableNames.Visible;
 end;
 
 procedure TfrmMain.pmenRResContListVariableStructureClick(Sender: TObject);
 begin
-  with actRContListVariableStructure do
+  with actRCont_ListVariableStructure do
     Visible:= not Visible;
-  pmenRResContListVariableStructure.Checked:= actRContListVariableStructure.Visible;
+  pmenRResContListVariableStructure.Checked:= actRCont_ListVariableStructure.Visible;
 end;
 
 procedure TfrmMain.pmenRResContEditVariableClick(Sender: TObject);
 begin
-  with actRContEditVariable do
+  with actRCont_EditVariable do
     Visible:= not Visible;
-  pmenRResContEditVariable.Checked:= actRContEditVariable.Visible;
+  pmenRResContEditVariable.Checked:= actRCont_EditVariable.Visible;
 end;
 
 procedure TfrmMain.pmenRResContFixVariableClick(Sender: TObject);
 begin
-  with actRContFixVariable do
+  with actRCont_FixVariable do
     Visible:= not Visible;
-  pmenRResContFixVariable.Checked:= actRContFixVariable.Visible;
+  pmenRResContFixVariable.Checked:= actRCont_FixVariable.Visible;
 end;
 
 procedure TfrmMain.pmenRResContClearConsoleClick(Sender: TObject);
 begin
-  with actRContClearConsole do
+  with actRCont_ClearConsole do
     Visible:= not Visible;
-  pmenRResContClearConsole.Checked:= actRContClearConsole.Visible;
+  pmenRResContClearConsole.Checked:= actRCont_ClearConsole.Visible;
 end;
 
 procedure TfrmMain.pmenRResContCloseAllGraphicsClick(Sender: TObject);
 begin
-  with actRContCloseAllGraphics do
+  with actRCont_CloseAllGraphics do
     Visible:= not Visible;
-  pmenRResContCloseAllGraphics.Checked:= actRContCloseAllGraphics.Visible;
+  pmenRResContCloseAllGraphics.Checked:= actRCont_CloseAllGraphics.Visible;
 end;
 
 procedure TfrmMain.pmenRResContRemoveAllObjectsClick(Sender: TObject);
 begin
-  with actRContRemoveAllObjects do
+  with actRCont_RemoveAllObjects do
     Visible:= not Visible;
-  pmenRResContRemoveAllObjects.Checked:= actRContRemoveAllObjects.Visible;
+  pmenRResContRemoveAllObjects.Checked:= actRCont_RemoveAllObjects.Visible;
 end;
 
 procedure TfrmMain.pmenRResContClearAllClick(Sender: TObject);
 begin
-  with actRContClearAll do
+  with actRCont_ClearAll do
     Visible:= not Visible;
-  pmenRResContClearAll.Checked:= actRContClearAll.Visible;
+  pmenRResContClearAll.Checked:= actRCont_ClearAll.Visible;
 end;
 
 procedure TfrmMain.pmenRResContEscapeClick(Sender: TObject);
 begin
-  with actRContEscape do
+  with actRCont_Escape do
     Visible:= not Visible;
-  pmenRResContEscape.Checked:= actRContEscape.Visible;
+  pmenRResContEscape.Checked:= actRCont_Escape.Visible;
 end;
 
 procedure TfrmMain.pmenRResContHelpSelectedWordClick(Sender: TObject);
 begin
-  with actRContHelpSelectedWord do
+  with actRCont_HelpSelectedWord do
     Visible:= not Visible;
-  pmenRResContHelpSelectedWord.Checked:= actRContHelpSelectedWord.Visible;
+  pmenRResContHelpSelectedWord.Checked:= actRCont_HelpSelectedWord.Visible;
 end;
 
 procedure TfrmMain.pmenRResContExampleSelectedWordClick(Sender: TObject);
 begin
-  with actRContExampleSelectedWord do
+  with actRCont_ExampleSelectedWord do
     Visible:= not Visible;
-  pmenRResContExampleSelectedWord.Checked:= actRContExampleSelectedWord.Visible;
+  pmenRResContExampleSelectedWord.Checked:= actRCont_ExampleSelectedWord.Visible;
 end;
 
 procedure TfrmMain.pmenRResContHelpClick(Sender: TObject);
 begin
-  with actRContHelp do
+  with actRCont_Help do
     Visible:= not Visible;
-  pmenRResContHelp.Checked:= actRContHelp.Visible;
+  pmenRResContHelp.Checked:= actRCont_Help.Visible;
 end;
 
 procedure TfrmMain.pmenRResContGuiPuTTYStartCloseClick(Sender: TObject);
 begin
-  with actRContGuiPuTTYStartClose do
+  with actRCont_GuiPuTTYStartClose do
     Visible:= not Visible;
-  pmenRResContGuiPuTTYStartClose.Checked:= actRContGuiPuTTYStartClose.Visible;
+  pmenRResContGuiPuTTYStartClose.Checked:= actRCont_GuiPuTTYStartClose.Visible;
 end;
 
 procedure TfrmMain.pmenRResContTermStartCloseClick(Sender: TObject);
 begin
-  with actRContTermStartClose do
+  with actRCont_TermStartClose do
     Visible:= not Visible;
-  pmenRResContTermStartClose.Checked:= actRContTermStartClose.Visible;
+  pmenRResContTermStartClose.Checked:= actRCont_TermStartClose.Visible;
 end;
 
 procedure TfrmMain.pmenRResContPackagesClick(Sender: TObject);
 begin
-  with actRContPackages do
+  with actRCont_Packages do
     Visible:= not Visible;
-  pmenRResContPackages.Checked:= actRContPackages.Visible;
+  pmenRResContPackages.Checked:= actRCont_Packages.Visible;
 end;
 
 procedure TfrmMain.pmenRResContTCPConnectionClick(Sender: TObject);
 begin
-  with actRContTCPConnection do
+  with actRCont_TCPConnection do
     Visible:= not Visible;
-  pmenRResContTCPConnection.Checked:= actRContTCPConnection.Visible;
+  pmenRResContTCPConnection.Checked:= actRCont_TCPConnection.Visible;
 end;
 
 procedure TfrmMain.pUpdate_File(var seEditor: TSynEdit;
@@ -20772,12 +20769,12 @@ begin
   //
 end;
 
-procedure TfrmMain.actShortcutsEditExecute(Sender: TObject);
+procedure TfrmMain.actShortcuts_EditExecute(Sender: TObject);
 begin
   actSKH_mapExecute(nil);
 end;
 
-procedure TfrmMain.actShortcutsHelpExecute(Sender: TObject);
+procedure TfrmMain.actShortcuts_HelpExecute(Sender: TObject);
 begin
   pOpen_UserGuidePDF('"Shortcuts"');
 end;
@@ -20788,7 +20785,7 @@ begin
     pFind;
 end;
 
-procedure TfrmMain.actFindAgainExecute(Sender: TObject);
+procedure TfrmMain.actFind_AgainExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFind_Again;
@@ -20801,7 +20798,7 @@ begin
 end;
 
 {$WARNINGS OFF}
-procedure TfrmMain.actSearchInFilesExecute(Sender: TObject);
+procedure TfrmMain.actSearch_InFilesExecute(Sender: TObject);
 var
   dlg: TfrmSearch_InFiles_Dlg;
 
@@ -20918,7 +20915,7 @@ begin
 
       with frmTools.tvSearch do begin
         Selected:= Items.GetFirstNode;
-        actSearchExpandOneExecute(Self);
+        actSearch_ExpandOneExecute(Self);
         if (Items.Count > 2) then pTools_SearchControls(True)
                              else pTools_SearchControls(False);
       end;
@@ -20933,25 +20930,25 @@ begin
     pGoto_Line;
 end;
 
-procedure TfrmMain.actCopyFormattedRtfExecute(Sender: TObject);
+procedure TfrmMain.actCopyFormatted_RTFExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pCopy_Formatted_RTF;
 end;
 
-procedure TfrmMain.actCopyFormattedHtmlExecute(Sender: TObject);
+procedure TfrmMain.actCopyFormatted_HTMLExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pCopy_Formatted_HTML;
 end;
 
-procedure TfrmMain.actCopyFormattedTeXExecute(Sender: TObject);
+procedure TfrmMain.actCopyFormatted_TEXExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pCopy_Formatted_TeX;
 end;
 
-procedure TfrmMain.actFileSaveExecute(Sender: TObject);
+procedure TfrmMain.actFile_SaveExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     // File notify: Stop
@@ -20974,7 +20971,7 @@ begin
   pUpdate_HexViewer;
 end;
 
-procedure TfrmMain.actFileSaveAsExecute(Sender: TObject);
+procedure TfrmMain.actFile_SaveAsExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
     // File notify: Stop
@@ -20998,7 +20995,7 @@ begin
   pUpdate_HexViewer;
 end;
 
-procedure TfrmMain.actFullPathUnixExecute(Sender: TObject);
+procedure TfrmMain.actFile_FullPathUnixExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFullPath_Unix;
@@ -21006,7 +21003,7 @@ begin
   pSet_Focus_Main;
 end;
 
-procedure TfrmMain.actFullPathWindowsExecute(Sender: TObject);
+procedure TfrmMain.actFile_FullPathWindowsExecute(Sender: TObject);
 begin
   with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
     pFullPath_Windows;
@@ -21336,7 +21333,7 @@ var
    sFileExt: string;
 
 begin
-  actFileNewExecute(nil);
+  actFile_NewExecute(nil);
 
   sContent:= fFile_ToString(sFile);
   sFileExt:= ExtractFileExt(sFile);
@@ -21460,39 +21457,39 @@ begin
   end;
 end;
 
-procedure TfrmMain.actCommentsEditExecute(Sender: TObject);
+procedure TfrmMain.actComments_EditExecute(Sender: TObject);
 begin
   sComments_Bookmark:= modDados.cdComments.Bookmark;
   menToolsDatabaseCommentsClick(nil);
   pSet_Focus_Main;
 end;
 
-procedure TfrmMain.actCommentsHelpExecute(Sender: TObject);
+procedure TfrmMain.actComments_HelpExecute(Sender: TObject);
 begin
   pOpen_UserGuidePDF('"Comments"');
 end;
 
-procedure TfrmMain.actCompletionCopyDescritionExecute(Sender: TObject);
+procedure TfrmMain.actCompletion_CopyDescritionExecute(Sender: TObject);
 begin
   with modDados do
     if frmTools.dbCompletionMemo.SelLength <> 0 then Clipboard.AsText:= frmTools.dbCompletionMemo.SelText
                                                 else Clipboard.AsText:= cdCompletionCompletion.Value;
 end;
 
-procedure TfrmMain.actCompletionCopyFunctionExecute(Sender: TObject);
+procedure TfrmMain.actCompletion_CopyFunctionExecute(Sender: TObject);
 begin
   with modDados do
     Clipboard.AsText:= cdCompletionFunction.Text;
 end;
 
-procedure TfrmMain.actCompletionEditExecute(Sender: TObject);
+procedure TfrmMain.actCompletion_EditExecute(Sender: TObject);
 begin
   sCompletion_BookMark:= modDados.cdCompletion.Bookmark;
   menToolsDatabaseCompletionClick(nil);
   pSet_Focus_Main;
 end;
 
-procedure TfrmMain.actCompletionExampleSelectedExecute(Sender: TObject);
+procedure TfrmMain.actCompletion_ExampleSelectedExecute(Sender: TObject);
 
   function fGetWord: string;
   var
@@ -21547,12 +21544,12 @@ begin
               0);
 end;
 
-procedure TfrmMain.actCompletionHelpExecute(Sender: TObject);
+procedure TfrmMain.actCompletion_HelpExecute(Sender: TObject);
 begin
   pOpen_UserGuidePDF('"Completion"');
 end;
 
-procedure TfrmMain.actCompletionHelpSelectedExecute(Sender: TObject);
+procedure TfrmMain.actCompletion_HelpSelectedExecute(Sender: TObject);
 
   function fGetWord: string;
   var
@@ -21592,7 +21589,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actCompletionInsertExecute(Sender: TObject);
+procedure TfrmMain.actCompletion_InsertExecute(Sender: TObject);
 var
   i: integer;
 
@@ -21769,7 +21766,7 @@ begin
              sEndComment);
 end;
 
-procedure TfrmMain.actUncommentFirstExecute(Sender: TObject);
+procedure TfrmMain.actUncomment_FirstExecute(Sender: TObject);
 begin
   sBeginComment:= EmptyStr;  // Initial status
 
@@ -21790,13 +21787,13 @@ begin
                [rfReplaceAll]);
 end;
 
-procedure TfrmMain.actFileCloseExecute(Sender: TObject);
+procedure TfrmMain.actFile_CloseExecute(Sender: TObject);
 begin
   (Self.MDIChildren[fFindTop_Window] as TfrmEditor).Close;
   if (pgFiles.PageCount > 0) then pgFilesChange(nil);
 end;
 
-procedure TfrmMain.actFileCloseOthersExecute(Sender: TObject);
+procedure TfrmMain.actFile_CloseOthersExecute(Sender: TObject);
 var
   i,
    iChildID: integer;
@@ -21825,7 +21822,7 @@ begin
   pgFiles.ActivePageIndex:= 0;
 end;
 
-procedure TfrmMain.actFileCloseAllExecute(Sender: TObject);
+procedure TfrmMain.actFile_CloseAllExecute(Sender: TObject);
 var
   iChildID: integer;
 
@@ -21847,7 +21844,7 @@ begin
   if (pgFiles.PageCount = 0) then pClear_StatusBar;
 end;
 
-procedure TfrmMain.actFileCloseRightExecute(Sender: TObject);
+procedure TfrmMain.actFile_CloseRightExecute(Sender: TObject);
 var
   iTotPages,
    iPos,
@@ -21876,7 +21873,7 @@ begin
   pgFiles.ActivePageIndex:= iPos;
 end;
 
-procedure TfrmMain.actFileCloseLeftExecute(Sender: TObject);
+procedure TfrmMain.actFile_CloseLeftExecute(Sender: TObject);
 var
   iPos,
    iChildID: integer;
@@ -21906,7 +21903,7 @@ begin
   // Nothing, but don't remove!
 end;
 
-procedure TfrmMain.actRExplorerBasicExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_BasicExecute(Sender: TObject);
 begin
   // Nothing, but don't remove!
 end;
@@ -22068,9 +22065,9 @@ begin
   pOpen_UserGuidePDF('"What is new?"');
 end;
 
-procedure TfrmMain.actRFilterRefreshExecute(Sender: TObject);
+procedure TfrmMain.actRExpl_FilterRefreshExecute(Sender: TObject);
 begin
-  actRExplorerRefreshExecute(nil);
+  actRExpl_RefreshExecute(nil);
 end;
 
 procedure TfrmMain.pMySort(iSort: integer);
@@ -22369,7 +22366,7 @@ begin
                                     bActive);
 end;
 
-procedure TfrmMain.actRContTCPConnectionExecute(Sender: TObject);
+procedure TfrmMain.actRCont_TCPConnectionExecute(Sender: TObject);
 var
   sStart,
    sStop: string;
@@ -22396,14 +22393,14 @@ begin
 
   try
     // It will connect
-    if not actRContTCPConnection.Checked then begin
+    if not actRCont_TCPConnection.Checked then begin
       // Related to Rterm local
       if fRterm_Running and
          bIPLocal then begin
         pDo_RConnection(sStart,
                         True,
                         True);
-        actRContTCPConnection.ImageIndex:= 293;
+        actRCont_TCPConnection.ImageIndex:= 293;
         Exit;
       end;
 
@@ -22412,7 +22409,7 @@ begin
         pDo_RConnection(sStart,
                         True,
                         False);
-        actRContTCPConnection.ImageIndex:= 293;
+        actRCont_TCPConnection.ImageIndex:= 293;
         Exit;
       end;
 
@@ -22420,7 +22417,7 @@ begin
       if fRgui_Running then begin
         pDo_RguiConnection(sStart,
                            True);
-        actRContTCPConnection.ImageIndex:= 293;
+        actRCont_TCPConnection.ImageIndex:= 293;
       end;
     end
     // It will disconnect
@@ -22433,7 +22430,7 @@ begin
         pDo_RConnection(sStop,
                         False,
                         True);
-        actRContTCPConnection.ImageIndex:= 168;
+        actRCont_TCPConnection.ImageIndex:= 168;
         Exit;
       end;
 
@@ -22442,7 +22439,7 @@ begin
         pDo_RConnection(sStop,
                         False,
                         False);
-        actRContTCPConnection.ImageIndex:= 168;
+        actRCont_TCPConnection.ImageIndex:= 168;
         Exit;
       end;
 
@@ -22450,7 +22447,7 @@ begin
       if fRgui_Running then begin
         pDo_RguiConnection(sStop,
                            False);
-        actRContTCPConnection.ImageIndex:= 168;
+        actRCont_TCPConnection.ImageIndex:= 168;
       end;
     end;
   except
@@ -22467,7 +22464,7 @@ begin
                              else Result:= ExtractFilePath(sPath_Rgui);
 end;
 
-procedure TfrmMain.actRContGuiPuTTYStartCloseExecute(Sender: TObject);
+procedure TfrmMain.actRCont_GuiPuTTYStartCloseExecute(Sender: TObject);
 
   function fIsRQuestionRunning(sCaption: string): Boolean;
   var
@@ -22552,7 +22549,7 @@ var
   sTmp: string;
 
 begin
-  if (actRContGuiPuTTYStartClose.Caption = 'Rgui/PuTTY (start)') then begin
+  if (actRCont_GuiPuTTYStartClose.Caption = 'Rgui/PuTTY (start)') then begin
 
     // It will start PuTTY (SSH connection)
     if (iRecognition_Caption = 4) then begin
@@ -22648,7 +22645,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actFilesFullPathUnixExecute(Sender: TObject);
+procedure TfrmMain.actFiles_FullPathUnixExecute(Sender: TObject);
 var
   sFilePath: string;
 
@@ -22673,7 +22670,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actFilesFullPathWindowsExecute(Sender: TObject);
+procedure TfrmMain.actFiles_FullPathWindowsExecute(Sender: TObject);
 var
   sFilePath: string;
 
@@ -23081,7 +23078,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRContPackagesExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PackagesExecute(Sender: TObject);
 begin
   // Don't remove!
 end;
@@ -23100,7 +23097,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPacInstallExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacInstallExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23120,7 +23117,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPacInstallZipExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacInstallZipExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23136,7 +23133,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPacInstalledExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacInstalledExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23145,7 +23142,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPacLoadExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacLoadExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23159,7 +23156,7 @@ begin
 end;
 
 // Install TinnRcom from TinnRcom_X.X.X.zip
-procedure TfrmMain.actRContPacInstTinnRcomExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacInstTinnRcomExecute(Sender: TObject);
 
   function fIsPackageInstalled(sName: string): boolean;
   var
@@ -23358,7 +23355,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRContPacLoadTinnRcomExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacLoadTinnRcomExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23371,7 +23368,7 @@ begin
   Screen.Cursor:= crDefault;
 end;
 
-procedure TfrmMain.actRContPacNewExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacNewExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23385,7 +23382,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPacRemoveExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacRemoveExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23398,7 +23395,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPacStatusExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacStatusExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23412,7 +23409,7 @@ begin
   pDo_Send(sTmp);
 end;
 
-procedure TfrmMain.actRContPacUpdateExecute(Sender: TObject);
+procedure TfrmMain.actRCont_PacUpdateExecute(Sender: TObject);
 var
   sTmp: string;
 
@@ -23630,31 +23627,31 @@ procedure TfrmMain.pUpdate_CloseFileOptions;
 begin
   if (pgFiles.PageCount > 1) then begin
     if (pgFiles.ActivePageIndex = 0) then begin // First
-      actFileCloseAll.Enabled   := True;
-      actFileCloseOthers.Enabled:= True;
-      actFileCloseLeft.Enabled  := False;
-      actFileCloseRight.Enabled := True;
+      actFile_CloseAll.Enabled   := True;
+      actFile_CloseOthers.Enabled:= True;
+      actFile_CloseLeft.Enabled  := False;
+      actFile_CloseRight.Enabled := True;
     end
     else
       if (pgFiles.ActivePageIndex = (pgFiles.PageCount - 1)) then begin  // Last
-        actFileCloseAll.Enabled   := True;
-        actFileCloseOthers.Enabled:= True;
-        actFileCloseLeft.Enabled  := True;
-        actFileCloseRight.Enabled := False;
+        actFile_CloseAll.Enabled   := True;
+        actFile_CloseOthers.Enabled:= True;
+        actFile_CloseLeft.Enabled  := True;
+        actFile_CloseRight.Enabled := False;
       end
       else begin  // Among
-        actFileCloseAll.Enabled   := True;
-        actFileCloseOthers.Enabled:= True;
-        actFileCloseLeft.Enabled  := True;
-        actFileCloseRight.Enabled := True;
+        actFile_CloseAll.Enabled   := True;
+        actFile_CloseOthers.Enabled:= True;
+        actFile_CloseLeft.Enabled  := True;
+        actFile_CloseRight.Enabled := True;
       end;
   end
   else begin  // < 1
-    actFileCloseAll.Enabled   := False;
-    actFileCloseOthers.Enabled:= False;
-    actFileCloseLeft.Enabled  := False;
-    actFileCloseRight.Enabled := False;
-    actFileSaveAll.Enabled    := False;
+    actFile_CloseAll.Enabled   := False;
+    actFile_CloseOthers.Enabled:= False;
+    actFile_CloseLeft.Enabled  := False;
+    actFile_CloseRight.Enabled := False;
+    actFile_SaveAll.Enabled    := False;
   end;
 end;
 
@@ -23797,7 +23794,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actLatexDimensionalExecute(Sender: TObject);
+procedure TfrmMain.actLatex_DimensionalExecute(Sender: TObject);
 var
   seEditor: TSynEdit;
 
@@ -24076,7 +24073,7 @@ begin
 
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= crHourGlass;
 
-  actFileSaveExecute(Self);
+  actFile_SaveExecute(Self);
   sTmpDir:= ExtractFilePath((Self.MDIChildren[i] as TfrmEditor).sActiveFile);
 
   try
@@ -24611,7 +24608,7 @@ begin
               0);
 end;
 
-procedure TfrmMain.actLatexAlgebricFracExecute(Sender: TObject);
+procedure TfrmMain.actLatex_AlgebricFracExecute(Sender: TObject);
 
   function fCountStrings(sTmp: string): integer;
   var
@@ -24690,7 +24687,7 @@ begin
                         -3);
 end;
 
-procedure TfrmMain.actLatexAlgebricSqrtExecute(Sender: TObject);
+procedure TfrmMain.actLatex_AlgebricSqrtExecute(Sender: TObject);
 
   function fFormatSqrt(sTmp: string): string;
   begin
@@ -24723,7 +24720,7 @@ begin
                         -1);
 end;
 
-procedure TfrmMain.actLatexAlgebricSqrtNExecute(Sender: TObject);
+procedure TfrmMain.actLatex_AlgebricSqrtNExecute(Sender: TObject);
 
   function fCountStrings(sTmp: string): integer;
   var
@@ -24856,7 +24853,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRContTermStartCloseExecute(Sender: TObject);
+procedure TfrmMain.actRCont_TermStartCloseExecute(Sender: TObject);
 
   procedure pCloseRterm;
   begin
@@ -25250,7 +25247,7 @@ begin
   pOpen_FileFromSearch;
 end;
 
-procedure TfrmMain.actSearchExpandOneExecute(Sender: TObject);
+procedure TfrmMain.actSearch_ExpandOneExecute(Sender: TObject);
 var
   i: integer;
 
@@ -25275,7 +25272,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actSearchExpandAllExecute(Sender: TObject);
+procedure TfrmMain.actSearch_ExpandAllExecute(Sender: TObject);
 var
   tnSelected,
    tnOldSelected: TTreeNode;
@@ -25296,7 +25293,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actSearchCollapseOneExecute(Sender: TObject);
+procedure TfrmMain.actSearch_CollapseOneExecute(Sender: TObject);
 var
   i: integer;
 
@@ -25323,7 +25320,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.actSearchCollapseAllExecute(Sender: TObject);
+procedure TfrmMain.actSearch_CollapseAllExecute(Sender: TObject);
 var
   tnSelected: TTreeNode;
 
@@ -25926,7 +25923,7 @@ begin
   if (pgFiles.PageCount > 0) then (Self.MDIChildren[fFindTop_Window] as tfrmEditor).FormActivate(nil);
 end;
 
-procedure TfrmMain.actRCardOpenExampleSelectedExecute(Sender: TObject);
+procedure TfrmMain.actRcard_OpenExampleSelectedExecute(Sender: TObject);
 
   function fGetWord(var sTopic,
                        sPackage: string): boolean;

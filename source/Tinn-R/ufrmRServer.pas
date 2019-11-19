@@ -172,7 +172,7 @@ end;
 procedure TfrmRServer.btnConnectTCPIPClick(Sender: TObject);
 begin
   with frmMain do
-    actRContTCPConnectionExecute(nil);
+    actRCont_TCPConnectionExecute(nil);
 end;
 
 procedure TfrmRServer.btnDisconnectTCPIPClick(Sender: TObject);
