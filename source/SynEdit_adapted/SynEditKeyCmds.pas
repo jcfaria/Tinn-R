@@ -189,7 +189,6 @@ const
 
   ecBlockIndent     = 610;  // Indent selection
   ecBlockUnindent   = 611;  // Unindent selection
-
   ecTab             = 612;  // Tab key
   ecShiftTab        = 613;  // Shift+Tab key
 
@@ -214,11 +213,12 @@ type
 
   TSynEditKeyStroke = class(TCollectionItem)
   private
-    FKey: word;          // Virtual keycode, i.e. VK_xxx
-    FShift: TShiftState;
+    FKey: word;  // Virtual keycode, i.e. VK_xxx
     FKey2: word;
+    FShift: TShiftState;
     FShift2: TShiftState;
     FCommand: TSynEditorCommand;
+
     function GetShortCut: TShortCut;
     function GetShortCut2: TShortCut;
     procedure SetCommand(const Value: TSynEditorCommand);
@@ -228,10 +228,12 @@ type
     procedure SetShift2(const Value: TShiftState);
     procedure SetShortCut(const Value: TShortCut);
     procedure SetShortCut2(const Value: TShortCut);
+
   protected
 {$IFDEF SYN_COMPILER_3_UP}
     function GetDisplayName: string; override;
 {$ENDIF}
+
   public
     procedure Assign(Source: TPersistent); override;
     procedure LoadFromStream(AStream: TStream);
@@ -241,6 +243,7 @@ type
     property Key2: word read FKey2 write SetKey2;
     property Shift: TShiftState read FShift write SetShift;
     property Shift2: TShiftState read FShift2 write SetShift2;
+
   published
     property Command: TSynEditorCommand read FCommand write SetCommand;
     property ShortCut: TShortCut read GetShortCut write SetShortCut
@@ -254,43 +257,44 @@ type
     FOwner: TPersistent;
     function GetItem(Index: Integer): TSynEditKeyStroke;
     procedure SetItem(Index: Integer; Value: TSynEditKeyStroke);
+
   protected
 {$IFDEF SYN_COMPILER_3_UP}
     function GetOwner: TPersistent; override;
 {$ENDIF}
+
   public
     constructor Create(AOwner: TPersistent);
     function Add: TSynEditKeyStroke;
-    procedure AddKey(const ACmd: TSynEditorCommand; const AKey: word;
-       const AShift: TShiftState);
+    procedure AddKey(const ACmd: TSynEditorCommand; const AKey: word; const AShift: TShiftState);
     procedure Assign(Source: TPersistent); override;
     function FindCommand(Cmd: TSynEditorCommand): integer;
     function FindKeycode(Code: word; SS: TShiftState): integer;
-    function FindKeycode2(Code1: word; SS1: TShiftState;
-      Code2: word; SS2: TShiftState): integer;
+    function FindKeycode2(Code1: word; SS1: TShiftState; Code2: word; SS2: TShiftState): integer;
     function FindShortcut(SC: TShortcut): integer;
     function FindShortcut2(SC, SC2: TShortcut): integer;
     procedure LoadFromStream(AStream: TStream);
     procedure ResetDefaults;
     procedure SaveToStream(AStream: TStream);
+
   public
     property Items[Index: Integer]: TSynEditKeyStroke read GetItem
       write SetItem; default;
   end;
 
-// These are mainly for the TSynEditorCommand property editor, but could be
-// useful elsewhere.
-function EditorCommandToDescrString(Cmd: TSynEditorCommand): string;
-function EditorCommandToCodeString(Cmd: TSynEditorCommand): string;
-procedure GetEditorCommandValues(Proc: TGetStrProc);
-procedure GetEditorCommandExtended(Proc: TGetStrProc);
-function IdentToEditorCommand(const Ident: string; var Cmd: longint): Boolean;
-function EditorCommandToIdent(Cmd: longint; var Ident: string): Boolean;
-function ConvertCodeStringToExtended(AString: string): string;
-function ConvertExtendedToCodeString(AString: string): string;
-function ConvertExtendedToCommand(AString: string): TSynEditorCommand;
-function ConvertCodeStringToCommand(AString: string): TSynEditorCommand;
-function IndexToEditorCommand(const AIndex: Integer): Integer;
+    // These are mainly for the TSynEditorCommand property editor, but could be
+    // useful elsewhere.
+    function EditorCommandToDescrString(Cmd: TSynEditorCommand): string;
+    function EditorCommandToCodeString(Cmd: TSynEditorCommand): string;
+    procedure GetEditorCommandValues(Proc: TGetStrProc);
+    procedure GetEditorCommandExtended(Proc: TGetStrProc);
+    function IdentToEditorCommand(const Ident: string; var Cmd: longint): Boolean;
+    function EditorCommandToIdent(Cmd: longint; var Ident: string): Boolean;
+    function ConvertCodeStringToExtended(AString: string): string;
+    function ConvertExtendedToCodeString(AString: string): string;
+    function ConvertExtendedToCommand(AString: string): TSynEditorCommand;
+    function ConvertCodeStringToCommand(AString: string): TSynEditorCommand;
+    function IndexToEditorCommand(const AIndex: Integer): Integer;
 
 implementation
 
@@ -319,7 +323,7 @@ type
 {$ENDIF}
 
 const
-  EditorCommandStrs: array[0..97] {array[0..100] J.C.Faria} of TIdentMapEntry = (
+  EditorCommandStrs: array[0..100] of TIdentMapEntry = (
     (Value: ecNone; Name: 'ecNone'),
     (Value: ecLeft; Name: 'ecLeft'),
     (Value: ecRight; Name: 'ecRight'),
@@ -381,11 +385,8 @@ const
     (Value: ecInsertMode; Name: 'ecInsertMode'),
     (Value: ecOverwriteMode; Name: 'ecOverwriteMode'),
     (Value: ecToggleMode; Name: 'ecToggleMode'),
-
-{ J.C.Faria
     (Value: ecBlockIndent; Name: 'ecBlockIndent'),
     (Value: ecBlockUnindent; Name: 'ecBlockUnindent'),
-}
     (Value: ecTab; Name: 'ecTab'),
     (Value: ecShiftTab; Name: 'ecShiftTab'),
     (Value: ecMatchBracket; Name: 'ecMatchBracket'),
@@ -395,10 +396,7 @@ const
     (Value: ecLineSelect; Name: 'ecLineSelect'),
     (Value: ecAutoCompletion; Name: 'ecAutoCompletion'),
     (Value: ecUserFirst; Name: 'ecUserFirst'),
-
-{ J.C.Faria
     (Value: ecContextHelp; Name: 'ecContextHelp'),
-}
     (Value: ecGotoMarker0; Name: 'ecGotoMarker0'),
     (Value: ecGotoMarker1; Name: 'ecGotoMarker1'),
     (Value: ecGotoMarker2; Name: 'ecGotoMarker2'),
@@ -657,9 +655,8 @@ begin
   Result := TSynEditKeyStroke(inherited Add);
 end;
 
-procedure TSynEditKeyStrokes.AddKey(const ACmd: TSynEditorCommand;
-                                    const AKey: word;
-                                    const AShift: TShiftState);
+procedure TSynEditKeyStrokes.AddKey(const ACmd: TSynEditorCommand; const AKey: word;
+  const AShift: TShiftState);
 var
   NewKeystroke: TSynEditKeyStroke;
 begin
@@ -793,6 +790,7 @@ procedure TSynEditKeyStrokes.ResetDefaults;
 begin
   Clear;
 
+  //procedure AddKey(const ACmd: TSynEditorCommand; const AKey: word; const AShift: TShiftState);
   AddKey(ecUp, SYNEDIT_UP, []);
   AddKey(ecSelUp, SYNEDIT_UP, [ssShift]);
   AddKey(ecScrollUp, SYNEDIT_UP, [ssCtrl]);
@@ -824,33 +822,29 @@ begin
   AddKey(ecEditorBottom, SYNEDIT_END, [ssCtrl]);
   AddKey(ecSelEditorBottom, SYNEDIT_END, [ssShift,ssCtrl]);
   AddKey(ecToggleMode, SYNEDIT_INSERT, []);
-  AddKey(ecCopy, SYNEDIT_INSERT, [ssCtrl]);
-  AddKey(ecCut, SYNEDIT_DELETE, [ssShift]);
-  AddKey(ecPaste, SYNEDIT_INSERT, [ssShift]);
+//  AddKey(ecCopy, SYNEDIT_INSERT, [ssCtrl]);            //J.C.Faria: To Tinn-R necessity
+//  AddKey(ecCut, SYNEDIT_DELETE, [ssShift]);            //J.C.Faria
+//  AddKey(ecPaste, SYNEDIT_INSERT, [ssShift]);          //J.C.Faria
   AddKey(ecDeleteChar, SYNEDIT_DELETE, []);
   AddKey(ecDeleteLastChar, SYNEDIT_BACK, []);
-  AddKey(ecDeleteLastChar, SYNEDIT_BACK, [ssShift]);
+//  AddKey(ecDeleteLastChar, SYNEDIT_BACK, [ssShift]);   //J.C.Faria
   AddKey(ecDeleteLastWord, SYNEDIT_BACK, [ssCtrl]);
-  AddKey(ecUndo, SYNEDIT_BACK, [ssAlt]);
-  AddKey(ecRedo, SYNEDIT_BACK, [ssAlt,ssShift]);
+//  AddKey(ecUndo, SYNEDIT_BACK, [ssAlt]);
+//  AddKey(ecRedo, SYNEDIT_BACK, [ssAlt,ssShift]);       //J.C.Faria
   AddKey(ecLineBreak, SYNEDIT_RETURN, []);
-  AddKey(ecLineBreak, SYNEDIT_RETURN, [ssShift]);
+//  AddKey(ecLineBreak, SYNEDIT_RETURN, [ssShift]);      //J.C.Faria
   AddKey(ecTab, SYNEDIT_TAB, []);
   AddKey(ecShiftTab, SYNEDIT_TAB, [ssShift]);
-
-{ J.C.Faria
   AddKey(ecContextHelp, SYNEDIT_F1, []);
-}
+
+  //procedure AddKey(const ACmd: TSynEditorCommand; const AKey: word; const AShift: TShiftState);
   AddKey(ecSelectAll, ord('A'), [ssCtrl]);
   AddKey(ecCopy, ord('C'), [ssCtrl]);
   AddKey(ecPaste, ord('V'), [ssCtrl]);
   AddKey(ecCut, ord('X'), [ssCtrl]);
-
-{ J.C.Faria
   AddKey(ecBlockIndent, ord('I'), [ssCtrl,ssShift]);
   AddKey(ecBlockUnindent, ord('U'), [ssCtrl,ssShift]);
-}
-  AddKey(ecLineBreak, ord('M'), [ssCtrl]);
+//  AddKey(ecLineBreak, ord('M'), [ssCtrl]);             //J.C.Faria
   AddKey(ecInsertLine, ord('N'), [ssCtrl]);
   AddKey(ecDeleteWord, ord('T'), [ssCtrl]);
   AddKey(ecDeleteLine, ord('Y'), [ssCtrl]);

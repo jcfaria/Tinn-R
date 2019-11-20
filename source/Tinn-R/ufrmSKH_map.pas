@@ -1306,9 +1306,6 @@ begin
 end;
 
 procedure TfrmSKH_Map_Dlg.FormActivate(Sender: TObject);
-var
-  pTmp: pointer;
-
 begin
   with frmMain do begin
     pgSKH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
@@ -1343,17 +1340,8 @@ begin
     Panels[2].Text:= ExtractFileName(frmMain.sShortcutsInUse);
   end;
 
-  with ModDados.cdApp_Shortcuts do begin
-    pTmp:= GetBookmark;
-    Filtered:= False;
-  end;
-
-  frmTools.lbApp_Shortcuts.Selected[frmMain.iApp_ShortcutsFilter]:= False;
-
-  with modDados.cdApp_Shortcuts do begin
-    if BookmarkValid(pTmp) then GoToBookmark(pTmp);
-    FreeBookmark(pTmp);
-  end;
+  with ModDados do
+    cdApp_Shortcuts.Bookmark:= frmMain.sAppShortcuts_BookMark;
 end;
 
 procedure TfrmSKH_Map_Dlg.FormClose(Sender: TObject; var Action: TCloseAction);

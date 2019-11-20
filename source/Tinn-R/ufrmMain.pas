@@ -2978,6 +2978,7 @@ type
     sUpdate                      : string;
     sUtilsOrigin                 : string;
     sWorkingDir                  : string;
+    sAppShortcuts_BookMark       : string;
 
     function fFindTop_Window: integer;
     function fGetBuild_Info: string;
@@ -11454,6 +11455,7 @@ var
 
 begin
   with modDados do begin
+    // RH_Send
     with cdRH_Send do begin
       SetLength(frmMain.ajavHK_Send,
                 RecordCount);
@@ -11463,6 +11465,7 @@ begin
           if Assigned(ajavHK_Send[i]) then ajavHK_Send[i].Active:= bStatus;
     end;
 
+    // RH_Control
     with cdRH_Control do begin
       SetLength(frmMain.ajavHK_Control,
                 RecordCount);
@@ -11472,6 +11475,7 @@ begin
           if Assigned(ajavHK_Control[i]) then ajavHK_Control[i].Active:= bStatus;
     end;
 
+    // RH_Custom
     with cdRH_Custom do begin
       SetLength(frmMain.ajavHK_Custom,
                 RecordCount);
@@ -14526,14 +14530,21 @@ end;
 
 procedure TfrmMain.actSKH_mapExecute(Sender: TObject);
 var
-  pTmp: pointer;
+  pAppShortcut_Bookmark: pointer;
 
   i: integer;
 
 begin
-  // Related to Shortcuts
+  // App_Shortcuts: it stores the status before to open SKH_map
   with modDados.cdApp_Shortcuts do
-    pTmp:= GetBookmark;
+    pAppShortcut_Bookmark:= GetBookmark;
+
+  // App_Shortcuts: it stores database position and remove filter
+  with ModDados do begin
+    sAppShortcuts_BookMark:= cdApp_Shortcuts.Bookmark;
+    cdApp_Shortcuts.Filtered:= False;
+    frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= False;
+  end;
 
   try
     // Initial status
@@ -14548,7 +14559,7 @@ begin
     end;
 
     pSet_Hotkeys_Status(False);  // Set temporarily pSet_Hotkeys_Status to False: it is necessary to manager Hotkeys!
-    // If OK
+
     if (dlgSKH_Map.ShowModal = mrOK) then begin
       // App
       with modDados.cdApp_Shortcuts do begin
@@ -14667,8 +14678,8 @@ begin
     pSet_Hotkeys_Status(bHotKeys_On);
 
     with modDados.cdApp_Shortcuts do begin
-      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
-      FreeBookmark(pTmp);
+      if BookmarkValid(pAppShortcut_Bookmark) then GoToBookmark(pAppShortcut_Bookmark);
+      FreeBookmark(pAppShortcut_Bookmark);
     end;
   end;
 end;
@@ -20771,6 +20782,7 @@ end;
 
 procedure TfrmMain.actShortcuts_EditExecute(Sender: TObject);
 begin
+  sAppShortcuts_BookMark:= modDados.cdApp_Shortcuts.Bookmark;
   actSKH_mapExecute(nil);
 end;
 

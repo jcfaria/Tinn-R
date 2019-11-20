@@ -69,6 +69,7 @@ uses
   uActionMacro in '..\thirdy\uActionMacro.pas',
   ufrmAsciiChart in '..\thirdy\ufrmAsciiChart.pas' {frmAsciiChart},
   ufrmDiffMain in '..\diff\ufrmDiffMain.pas' {frmDiffMain},
+  SynEditKeyCmds in '..\SynEdit_adapted\SynEditKeyCmds',
   SynCompletionProposal in '..\SynEdit_adapted\SynCompletionProposal.pas',
   SynEditOC in '..\SynEdit_adapted\SynEditOC.pas',
   SynEditPrintPreview in '..\SynEdit_adapted\SynEditPrintPreview.pas',

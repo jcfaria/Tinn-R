@@ -1131,12 +1131,12 @@ begin
     lbRcardClick(Self);
     with modDados.cdRcard do
       Bookmark:= sRcard_BM;
-    lbRcard.Enabled:= False;
+    lbRcard.Enabled:= True;
     Exit;
   end;
 
   try
-    lbRcard.Enabled:= True;
+    lbRcard.Enabled:= False;
     with modDados.cdRcard do begin
       Filtered:= False;
       Filter:= 'UPPER(Function) Like ' +

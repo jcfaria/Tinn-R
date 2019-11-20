@@ -56,6 +56,7 @@
       <Form>frmDiffMain</Form>
     </DCCReference>
     <DCCReference Include="..\SynEdit_adapted\SynCompletionProposal.pas" />
+    <DCCReference Include="..\SynEdit_adapted\SynEditKeyCmds" />
     <DCCReference Include="..\SynEdit_adapted\SynEditOC.pas" />
     <DCCReference Include="..\SynEdit_adapted\SynEditPrintPreview.pas" />
     <DCCReference Include="..\SynEdit_adapted\SynEditStrConst.pas" />
