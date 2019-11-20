@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 983
+  Height = 788
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,13 +1035,14 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 805
+    Height = 630
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
+    ExplicitHeight = 805
   end
   object Panel1: TPanel
     Left = 0
@@ -1218,7 +1219,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 13
+          ItemHeight = 0
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -1583,7 +1584,7 @@ object frmMain: TfrmMain
           Font.Style = []
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
-          ItemHeight = 13
+          ItemHeight = 0
           ItemIndex = 0
           ParentFont = False
           Style = csDropDownList
@@ -2017,13 +2018,14 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 805
+    Height = 630
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
+    ExplicitHeight = 805
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2038,7 +2040,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 912
+    Top = 737
     Width = 994
     Height = 20
     AutoHint = True
@@ -2093,22 +2095,24 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
+    ExplicitTop = 912
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 805
+    Height = 630
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
+    ExplicitHeight = 805
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 903
+    Top = 728
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2117,6 +2121,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
+    ExplicitTop = 903
   end
   object pgFiles: TJvgPageControl
     Left = 0

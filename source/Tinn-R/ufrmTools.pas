@@ -346,7 +346,7 @@ type
     TBItem25: TTBItem;
     TBItem26: TTBItem;
     TBItem27: TTBItem;
-    TBItem28: TTBItem;
+    tbiAppShortcuts_Edit: TTBItem;
     TBItem29: TTBItem;
     TBItem3: TTBItem;
     TBItem30: TTBItem;
@@ -494,7 +494,7 @@ type
     TBToolbar5: TTBToolbar;
     tbiHelp_Keystrokes: TTBItem;
     TBSeparatorItem2: TTBSeparatorItem;
-    TBItem42: TTBItem;
+    tbiEditorKeystrokes_Edit: TTBItem;
     edEditor_Keystrokes_Filter: TEdit;
     pgRH: TJvgPageControl;
     tbsRH_Send: TTabSheet;
@@ -505,21 +505,21 @@ type
     TBToolbar6: TTBToolbar;
     tbiHelp_RH_Send: TTBItem;
     TBSeparatorItem5: TTBSeparatorItem;
-    TBItem44: TTBItem;
+    tbiRH_Send_Edit: TTBItem;
     edRH_Send_Filter: TEdit;
     Panel22: TPanel;
     TBDock5: TTBDock;
     TBToolbar7: TTBToolbar;
     tbiHelp_RH_Control: TTBItem;
     TBSeparatorItem10: TTBSeparatorItem;
-    TBItem48: TTBItem;
+    tbiRH_Control_Edit: TTBItem;
     edRH_Control_Filter: TEdit;
     Panel23: TPanel;
     TBDock6: TTBDock;
     TBToolbar8: TTBToolbar;
     tbiHelp_RH_Custom: TTBItem;
     TBSeparatorItem21: TTBSeparatorItem;
-    TBItem50: TTBItem;
+    tbiRH_Custom_Edit: TTBItem;
     edRH_Custom_Filter: TEdit;
     JvDBNavigator7: TJvDBNavigator;
     dbgRH_Send: TDBGrid;
@@ -653,6 +653,11 @@ type
     procedure dbgRH_SendDblClick(Sender: TObject);
     procedure dbgRH_ControlDblClick(Sender: TObject);
     procedure dbgRH_CustomDblClick(Sender: TObject);
+    procedure tbiAppShortcuts_EditClick(Sender: TObject);
+    procedure tbiEditorKeystrokes_EditClick(Sender: TObject);
+    procedure tbiRH_Send_EditClick(Sender: TObject);
+    procedure tbiRH_Control_EditClick(Sender: TObject);
+    procedure tbiRH_Custom_EditClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -1540,6 +1545,36 @@ procedure TfrmTools.tbiHelp_RH_SendClick(Sender: TObject);
 begin
   with frmMain do
     pOpen_UserGuidePDF('"RH_Send"');
+end;
+
+procedure TfrmTools.tbiRH_Control_EditClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
+procedure TfrmTools.tbiRH_Custom_EditClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
+procedure TfrmTools.tbiRH_Send_EditClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
+procedure TfrmTools.tbiAppShortcuts_EditClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
+end;
+
+procedure TfrmTools.tbiEditorKeystrokes_EditClick(Sender: TObject);
+begin
+  with frmMain do
+    actSKH_mapExecute(nil);
 end;
 
 procedure TfrmTools.tbiHelp_RH_ControlClick(Sender: TObject);

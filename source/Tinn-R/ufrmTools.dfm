@@ -4261,7 +4261,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsApp_Shortcuts
+        ActivePage = tbsR_Hotkeys
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4350,9 +4350,11 @@ object frmTools: TfrmTools
                 end
                 object TBSeparatorItem6: TTBSeparatorItem
                 end
-                object TBItem28: TTBItem
-                  Action = frmMain.actShortcuts_Edit
-                  Hint = 'App shortcuts: edit'
+                object tbiAppShortcuts_Edit: TTBItem
+                  Caption = 'Edit'
+                  Hint = 'Shortcuts: edit'
+                  ImageIndex = 18
+                  OnClick = tbiAppShortcuts_EditClick
                 end
               end
               object edApp_Shortcuts_Filter: TEdit
@@ -4606,10 +4608,11 @@ object frmTools: TfrmTools
                 end
                 object TBSeparatorItem2: TTBSeparatorItem
                 end
-                object TBItem42: TTBItem
+                object tbiEditorKeystrokes_Edit: TTBItem
                   Caption = 'Edit'
                   Hint = 'Editor keystrokes: edit'
                   ImageIndex = 18
+                  OnClick = tbiEditorKeystrokes_EditClick
                 end
               end
               object edEditor_Keystrokes_Filter: TEdit
@@ -4635,10 +4638,6 @@ object frmTools: TfrmTools
         object tbsR_Hotkeys: TTabSheet
           Caption = 'R Hotkeys'
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgRH: TJvgPageControl
             Left = 0
             Top = 0
@@ -4685,10 +4684,6 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsRH_Send: TTabSheet
               Caption = 'Send'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel21: TPanel
                 Left = 0
                 Top = 0
@@ -4725,10 +4720,11 @@ object frmTools: TfrmTools
                     end
                     object TBSeparatorItem5: TTBSeparatorItem
                     end
-                    object TBItem44: TTBItem
+                    object tbiRH_Send_Edit: TTBItem
                       Caption = 'Edit'
                       Hint = 'Hotkeys RH_Send: edit'
                       ImageIndex = 18
+                      OnClick = tbiRH_Send_EditClick
                     end
                   end
                   object edRH_Send_Filter: TEdit
@@ -4804,10 +4800,6 @@ object frmTools: TfrmTools
             object tbsRH_Control: TTabSheet
               Caption = 'Control'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel22: TPanel
                 Left = 0
                 Top = 0
@@ -4844,10 +4836,11 @@ object frmTools: TfrmTools
                     end
                     object TBSeparatorItem10: TTBSeparatorItem
                     end
-                    object TBItem48: TTBItem
+                    object tbiRH_Control_Edit: TTBItem
                       Caption = 'Edit'
                       Hint = 'Hotkeys RH_Control: edit'
                       ImageIndex = 18
+                      OnClick = tbiRH_Control_EditClick
                     end
                   end
                   object edRH_Control_Filter: TEdit
@@ -4923,10 +4916,6 @@ object frmTools: TfrmTools
             object tbsRH_Custom: TTabSheet
               Caption = 'Custom'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel23: TPanel
                 Left = 0
                 Top = 0
@@ -4963,10 +4952,11 @@ object frmTools: TfrmTools
                     end
                     object TBSeparatorItem21: TTBSeparatorItem
                     end
-                    object TBItem50: TTBItem
+                    object tbiRH_Custom_Edit: TTBItem
                       Caption = 'Edit'
                       Hint = 'Hotkeys RH_Custom: edit'
                       ImageIndex = 18
+                      OnClick = tbiRH_Custom_EditClick
                     end
                   end
                   object edRH_Custom_Filter: TEdit

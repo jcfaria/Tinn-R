@@ -2979,6 +2979,10 @@ type
     sUtilsOrigin                 : string;
     sWorkingDir                  : string;
     sAppShortcuts_BookMark       : string;
+    sEditorKeystrokes_BookMark   : string;
+    sRH_Send_BookMark            : string;
+    sRH_Control_BookMark         : string;
+    sRH_Custom_BookMark          : string;
 
     function fFindTop_Window: integer;
     function fGetBuild_Info: string;
@@ -14535,29 +14539,31 @@ var
   i: integer;
 
 begin
-  // App_Shortcuts: it stores the status before to open SKH_map
+  // App_Shortcuts: the below set bookmark for the active record in cdApp_Shortcuts before to open SKH_map interface
   with modDados.cdApp_Shortcuts do
     pAppShortcut_Bookmark:= GetBookmark;
 
-  // App_Shortcuts: it stores database position and remove filter
+  // The below set bookmarks for the active records. It will be used in SKH_map (FormActivate)
   with ModDados do begin
+    // App_Shortcut
     sAppShortcuts_BookMark:= cdApp_Shortcuts.Bookmark;
     cdApp_Shortcuts.Filtered:= False;
     frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= False;
+
+    // Editor_Keystrokes
+    sEditorKeystrokes_BookMark:= cdEditor_Keystrokes.Bookmark;
+
+    // RH_Send
+    sRH_Send_BookMark:= cdRH_Send.Bookmark;
+
+    // RH_Control
+    sRH_Control_BookMark:= cdRH_Control.Bookmark;
+
+    // RH_Custom
+    sRH_Custom_BookMark:= cdRH_Custom.Bookmark;
   end;
 
   try
-    // Initial status
-    with dlgSKH_Map do begin
-      edApp_Filter_Group.Text  := '';
-      edApp_Search_Group.Text  := '';
-      edApp_Filter_Caption.Text:= '';
-      edApp_Search_Caption.Text:= '';
-
-      pgSKH.ActivePage:= tbsAppShortcuts;
-      pgRH.ActivePage := tbsRH_Send;
-    end;
-
     pSet_Hotkeys_Status(False);  // Set temporarily pSet_Hotkeys_Status to False: it is necessary to manager Hotkeys!
 
     if (dlgSKH_Map.ShowModal = mrOK) then begin
@@ -20782,7 +20788,6 @@ end;
 
 procedure TfrmMain.actShortcuts_EditExecute(Sender: TObject);
 begin
-  sAppShortcuts_BookMark:= modDados.cdApp_Shortcuts.Bookmark;
   actSKH_mapExecute(nil);
 end;
 

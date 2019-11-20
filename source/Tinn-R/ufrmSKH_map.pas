@@ -1335,13 +1335,36 @@ begin
     end;
   end;
 
+  pgSKH.ActivePage:= tbsAppShortcuts;
+  pgRH.ActivePage := tbsRH_Send;
+
   with stbShortcuts do begin
     Panels[0].Text:= 'Browse mode';
     Panels[2].Text:= ExtractFileName(frmMain.sShortcutsInUse);
   end;
 
-  with ModDados do
-    cdApp_Shortcuts.Bookmark:= frmMain.sAppShortcuts_BookMark;
+  // the below set the active records to bookmarks
+  with modDados do begin
+    // App_Shortcuts
+    with frmMain do
+      cdApp_Shortcuts.Bookmark:= sAppShortcuts_BookMark;
+
+    // Editor_Keystrokes
+    with frmMain do
+      cdEditor_Keystrokes.Bookmark:= sEditorKeystrokes_BookMark;
+
+    // RH_Send
+    with frmMain do
+      cdRH_Send.Bookmark:= sRH_Send_BookMark;
+
+    // RH_Control
+    with frmMain do
+      cdRH_Control.Bookmark:= sRH_Control_BookMark;
+
+    // RH_Custom
+    with frmMain do
+      cdRH_Custom.Bookmark:= sRH_Custom_BookMark;
+  end;
 end;
 
 procedure TfrmSKH_Map_Dlg.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1357,7 +1380,6 @@ var
   i: integer;
 
 begin
-  pgRH.TabIndex:= 0;
   Application.OnMessage:= pAppMessage;
 
   with modDados.cdRH_Send do begin
@@ -1400,13 +1422,6 @@ begin
                             Fields[3].AsString);
       Next;
     end;
-    First;
-    EnableControls;
-  end;
-
-  // Editor_Keystrokes
-  with modDados.cdEditor_Keystrokes do begin
-    DisableControls;
     First;
     EnableControls;
   end;
