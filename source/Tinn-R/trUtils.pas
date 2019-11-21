@@ -103,6 +103,7 @@ type
   function fStripp_No_ASCII(const s: string): string;
 
   procedure pCapture_Console_Output(const ACommand, AParameters: String; AMemo: TMemo);
+  procedure pClear_Edits(Owner: TWinControl);
   procedure pDelete_Dir(sDir: string);
   procedure pDelete_FilesOfPath(path: string);
   procedure pGet_DriveLetters(slTmp: TStringList);  // Portable
@@ -2097,6 +2098,16 @@ procedure pRemove_Line_Empty(var sTmp: string);
 begin
   sTmp:= fRegEx_Multiline(sTmp,
                           '.*$');  // \o/
+end;
+
+// From: https://stackoverflow.com/questions/42624343/delphi-command-to-clear-all-tedit
+procedure pClear_Edits(Owner: TWinControl);
+var
+  i: integer;
+
+begin
+  for i:= 0 to (Owner.ComponentCount - 1) do
+    if Owner.Components[i] is TEdit then TEdit(Owner.Components[i]).Clear;
 end;
 
 function fSingleLine(sTmp: string): boolean;

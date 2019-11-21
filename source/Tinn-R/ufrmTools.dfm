@@ -85,7 +85,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsWinExplorer
+        ActivePage = tbsProject
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1065,16 +1065,12 @@ object frmTools: TfrmTools
     object tbsMarkup: TTabSheet
       Caption = 'Markup'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgMarkup: TJvgPageControl
         Left = 0
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsTxt2tags
+        ActivePage = tbsLatex
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1116,10 +1112,6 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsTxt2tags: TTabSheet
           Caption = 'Txt2tags'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgTxt2tags: TJvgPageControl
             Left = 0
             Top = 0
@@ -1165,10 +1157,6 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsTxt2tagsMarks: TTabSheet
               Caption = 'Marks'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Label1: TLabel
                 Tag = 1
                 Left = 8
@@ -1713,10 +1701,6 @@ object frmTools: TfrmTools
             object tbsTxt2tagsMacros: TTabSheet
               Caption = 'Macros'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Label31: TLabel
                 Tag = 31
                 Left = 8
@@ -1829,10 +1813,6 @@ object frmTools: TfrmTools
             object tbsTxt2tagsSettings: TTabSheet
               Caption = 'Settings'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Label37: TLabel
                 Tag = 37
                 Left = 8
@@ -1947,10 +1927,6 @@ object frmTools: TfrmTools
         object tbsLatex: TTabSheet
           Caption = 'LaTeX'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgLatex: TJvgPageControl
             Left = 0
             Top = 26
@@ -1997,10 +1973,6 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsLatexAccent: TTabSheet
               Caption = 'Accent'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivAccents: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2050,10 +2022,6 @@ object frmTools: TfrmTools
             object tbsLatexArrow: TTabSheet
               Caption = 'Arrow'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox3: TScrollBox
                 Left = 0
                 Top = 0
@@ -2405,10 +2373,6 @@ object frmTools: TfrmTools
             object tbsLatexBar: TTabSheet
               Caption = 'Bar'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivBar: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2458,10 +2422,6 @@ object frmTools: TfrmTools
             object tbsLatexBracket: TTabSheet
               Caption = 'Bracket'
               ImageIndex = 3
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivBracket: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2503,10 +2463,6 @@ object frmTools: TfrmTools
             object tbsLatexDot: TTabSheet
               Caption = 'Dot'
               ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivDot: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2548,10 +2504,6 @@ object frmTools: TfrmTools
             object tbsLatexGeometry: TTabSheet
               Caption = 'Geometry'
               ImageIndex = 8
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox1: TScrollBox
                 Left = 0
                 Top = 0
@@ -2996,10 +2948,6 @@ object frmTools: TfrmTools
             object tbsLatexGreek: TTabSheet
               Caption = 'Greek'
               ImageIndex = 9
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox2: TScrollBox
                 Left = 0
                 Top = 0
@@ -3207,10 +3155,6 @@ object frmTools: TfrmTools
             object tbsLatexMath: TTabSheet
               Caption = 'Math'
               ImageIndex = 10
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox5: TScrollBox
                 Left = 0
                 Top = 0
@@ -3466,10 +3410,6 @@ object frmTools: TfrmTools
             object tbsLatexMisc: TTabSheet
               Caption = 'Misc'
               ImageIndex = 11
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivMisc: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3511,10 +3451,6 @@ object frmTools: TfrmTools
             object tbsLatexNegation: TTabSheet
               Caption = 'Negation'
               ImageIndex = 12
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivNegation: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3556,10 +3492,6 @@ object frmTools: TfrmTools
             object tbsLatexOperator: TTabSheet
               Caption = 'Operator'
               ImageIndex = 5
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivOperator: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3601,10 +3533,6 @@ object frmTools: TfrmTools
             object tbsLatexRelation: TTabSheet
               Caption = 'Relation'
               ImageIndex = 6
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivRelation: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3646,10 +3574,6 @@ object frmTools: TfrmTools
             object tbsLatexSky: TTabSheet
               Caption = 'Sky'
               ImageIndex = 7
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object ScrollBox4: TScrollBox
                 Left = 0
                 Top = 0
@@ -3809,10 +3733,6 @@ object frmTools: TfrmTools
             object tbsLatexUserCustom: TTabSheet
               Caption = 'User custom'
               ImageIndex = 13
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object jvivUserCustom: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3980,7 +3900,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsSearch
+        ActivePage = tbsHexViewer
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4022,10 +3942,6 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsIniLog: TTabSheet
           Caption = 'Ini log'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object memIniLog: TMemo
             Left = 0
             Top = 0
@@ -4164,10 +4080,6 @@ object frmTools: TfrmTools
         object tbsHexViewer: TTabSheet
           Caption = 'Hex viewer'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object ATBinHex: TATBinHex
             Left = 0
             Top = 52
@@ -4227,10 +4139,6 @@ object frmTools: TfrmTools
     object tbsSpell: TTabSheet
       Caption = 'Spell'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memSpell: TMemo
         Left = 0
         Top = 0
@@ -4261,7 +4169,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsR_Hotkeys
+        ActivePage = tbsApp_Shortcuts
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -5253,10 +5161,6 @@ object frmTools: TfrmTools
         object tbsComments: TTabSheet
           Caption = 'Comments'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel9: TPanel
             Left = 0
             Top = 88
@@ -5439,7 +5343,7 @@ object frmTools: TfrmTools
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsRCard
+        ActivePage = tbsRMirrors
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -6329,6 +6233,7 @@ object frmTools: TfrmTools
                 item
                   Expanded = False
                   FieldName = 'City'
+                  Width = 64
                   Visible = True
                 end>
             end

@@ -238,7 +238,7 @@ begin
   end;
 
   stbRmirrors.Panels[0].Text:= 'Browse mode';
-  with ModDados do begin
+  with modDados do begin
     cdRmirrors.Filtered:= False;
 
     with frmMain do

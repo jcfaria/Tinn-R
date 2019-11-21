@@ -190,7 +190,7 @@ begin
 
   stbRcard.Panels[0].Text:= 'Browse mode';
 
-  with ModDados do begin
+  with modDados do begin
     cdRcard.Filtered:= False;
     with frmMain do
       frmTools.lbRcard.Selected[iRcardFilter]:= False;

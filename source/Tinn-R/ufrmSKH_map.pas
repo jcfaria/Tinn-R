@@ -189,7 +189,8 @@ implementation
 uses
   ufrmMain,
   uModDados,
-  ufrmTools;
+  ufrmTools,
+  trUtils;
 
 {$R *.dfm}
 
@@ -1428,21 +1429,10 @@ begin
 end;
 
 procedure TfrmSKH_Map_Dlg.FormShow(Sender: TObject);
-
-  // From: https://stackoverflow.com/questions/42624343/delphi-command-to-clear-all-tedit
-  procedure pClear_Edits(Owner: TWinControl);
-  var
-    i: integer;
-
-  begin
-    for i:= 0 to (Owner.ComponentCount - 1) do
-      if Owner.Components[i] is TEdit then TEdit(Owner.Components[i]).Clear;
-  end;
-
 begin
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
   rdgTinnRHotKeys.ItemIndex:= Integer(frmMain.bHotKeys_On);
-  pClear_Edits(Self);
+  pClear_Edits(frmMain.dlgSKH_Map);
 end;
 
 procedure TfrmSKH_Map_Dlg.lvKeystrokesDblClick(Sender: TObject);

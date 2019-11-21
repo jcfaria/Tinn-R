@@ -1863,7 +1863,7 @@ end;
 procedure TfrmTools.lbRcardClick(Sender: TObject);
 begin
   frmMain.iRcardFilter:= lbRcard.ItemIndex;
-  with ModDados.cdRcard do begin
+  with modDados.cdRcard do begin
     Filter  := 'Group = ' +
                QuotedStr(lbRcard.Items.Strings[frmMain.iRcardFilter]);
     Filtered:= True;
@@ -1874,7 +1874,7 @@ end;
 procedure TfrmTools.lbApp_ShortcutsClick(Sender: TObject);
 begin
   frmMain.iApp_ShortcutsFilter:= lbApp_Shortcuts.ItemIndex;
-  with ModDados. cdApp_Shortcuts do begin
+  with modDados.cdApp_Shortcuts do begin
     Filter  := 'Group = ' +
                QuotedStr(lbApp_Shortcuts.Items.Strings[frmMain.iApp_ShortcutsFilter]);
     Filtered:= True;
@@ -1889,7 +1889,7 @@ begin
        (ItemIndex > Count - 1) then ItemIndex:= 0;
 
   frmMain.iCompletionFilter:= lbCompletion.ItemIndex;
-  with ModDados.cdCompletion do begin
+  with modDados.cdCompletion do begin
     Filter  := 'Group = ' +
                QuotedStr(lbCompletion.Items.Strings[frmMain.iCompletionFilter]);
     Filtered:= True;
@@ -1904,7 +1904,7 @@ begin
        (ItemIndex > Count - 1) then ItemIndex:= 0;
 
   frmMain.iCountriesFilter:= lbCountries.ItemIndex;
-  with ModDados.cdRmirrors do begin
+  with modDados.cdRmirrors do begin
     DisableControls;
     Filter:= 'Country = ' +
              QuotedStr(lbCountries.Items.Strings[frmMain.iCountriesFilter]);

@@ -1042,7 +1042,7 @@ object frmMain: TfrmMain
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 805
+    ExplicitHeight = 610
   end
   object Panel1: TPanel
     Left = 0
@@ -2025,7 +2025,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 805
+    ExplicitHeight = 610
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2095,7 +2095,7 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 912
+    ExplicitTop = 717
   end
   object TBDockRight: TTBDock
     Left = 985
@@ -2108,7 +2108,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 805
+    ExplicitHeight = 610
   end
   object TBDockBottom: TTBDock
     Left = 0
@@ -2121,7 +2121,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 903
+    ExplicitTop = 708
   end
   object pgFiles: TJvgPageControl
     Left = 0

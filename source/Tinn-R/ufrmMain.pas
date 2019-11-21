@@ -9543,7 +9543,7 @@ end;
 procedure TfrmMain.pRmirrorsInterface_Update;
 begin
   // TfrmRmirrors.FormActivate
-  with ModDados do begin
+  with modDados do begin
     cdRmirrors.Filtered:= False;
 
     frmTools.lbCountries.Selected[iCountriesFilter]:= False;
@@ -11304,7 +11304,7 @@ procedure TfrmMain.menToolsUtilsActionlistToDatasetClick(Sender: TObject);
       with zipKit do begin
         FileName:= sBackup;
 
-        with ModDados do begin
+        with modDados do begin
           AddFiles(sPath_Data + '\*.*',
                    0);
           CloseArchive;
@@ -14544,40 +14544,49 @@ var
 
 begin
   // The below set bookmarks for the active records before to open SKH_map interface
-  with modDados.cdApp_Shortcuts do begin
+  with modDados do begin
     // App_Shortcuts
-    pApp_Shortcut_Bookmark:= GetBookmark;
+    with cdApp_Shortcuts do
+      pApp_Shortcut_Bookmark:= GetBookmark;
 
     // Editor_Keystrokes
-    pEditor_Keystrokes_Bookmark:= GetBookmark;
+    with cdEditor_Keystrokes do
+      pEditor_Keystrokes_Bookmark:= GetBookmark;
 
     // RH_Send
-    pRH_Send_Bookmark:= GetBookmark;
+    with cdRH_Send do
+      pRH_Send_Bookmark:= GetBookmark;
 
     // RH_Control
-    pRH_Control_Bookmark:= GetBookmark;
+    with cdRH_Control do
+      pRH_Control_Bookmark:= GetBookmark;
 
     // RH_Custom
-    pRH_Custom_Bookmark:= GetBookmark;
+    with cdRH_Custom do
+      pRH_Custom_Bookmark:= GetBookmark;
   end;
 
   // The below set bookmarks for the active records. It will be used in SKH_map (FormActivate)
-  with ModDados do begin
+  with modDados do begin
     // App_Shortcut
     sApp_Shortcuts_BookMark:= cdApp_Shortcuts.Bookmark;
     cdApp_Shortcuts.Filtered:= False;
     frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= False;
 
     // Editor_Keystrokes
+    cdEditor_Keystrokes.Filtered:= False;
     sEditor_Keystrokes_BookMark:= cdEditor_Keystrokes.Bookmark;
 
     // RH_Send
+    cdRH_Send.Filtered:= False;
     sRH_Send_BookMark:= cdRH_Send.Bookmark;
 
     // RH_Control
+    cdRH_Control.Filtered:= False;
     sRH_Control_BookMark:= cdRH_Control.Bookmark;
 
     // RH_Custom
+    cdRH_Custom.Filtered:= False;
     sRH_Custom_BookMark:= cdRH_Custom.Bookmark;
   end;
 
@@ -14700,6 +14709,15 @@ begin
 
   finally
     pSet_Hotkeys_Status(bHotKeys_On);
+
+    // Clear all filters
+    with frmTools do begin
+      edApp_Shortcuts_Filter.Text:= '';
+      edEditor_Keystrokes_Filter.Text:= '';
+      edRH_Send_Filter.Text:= '';
+      edRH_Control_Filter.Text:= '';
+      edRH_Custom_Filter.Text:= '';
+    end;
 
     with modDados do begin
       // App_Shortcuts
@@ -18963,7 +18981,7 @@ begin
             end;
           end;
 
-          with ModDados do begin
+          with modDados do begin
             AddFiles(sPath_Data + '\*.*',
                      0);
             CloseArchive;
@@ -19067,7 +19085,7 @@ begin
           if bRestart then begin
           bRestored:= True;  // Will be used in OnCloseQuery event
 
-          with ModDados do
+          with modDados do
             DataModuleCreate(nil);
             if (fMessageDlg('The full Tinn-R INI was successfully restored.' + #13 +
                             'Tinn-R must be restarted for the changes to take effect!' + #13 + #13 +
@@ -19103,7 +19121,7 @@ begin
                     [mbOk],
                     0);
 
-        with ModDados do
+        with modDados do
           DataModuleCreate(nil);
       end;
     end;  // if (od.Execute)
@@ -19174,7 +19192,7 @@ begin
           Exit;
         end;
 
-        with ModDados do begin
+        with modDados do begin
           cdCache.Close;
           cdComments.Close;
           cdCompletion.Close;
@@ -19197,7 +19215,7 @@ begin
         zipKit.CloseArchive;
 
         bDatabaseRestored:= True;
-        with ModDados do
+        with modDados do
           DataModuleCreate(nil);
         fMessageDlg('The DATABASE was successfully restored.' + #13 + #13 +
                     'You can continue your work normally!',
