@@ -1584,7 +1584,7 @@ object frmMain: TfrmMain
           Font.Style = []
           BiDiMode = bdLeftToRight
           ParentBiDiMode = False
-          ItemHeight = 0
+          ItemHeight = 13
           ItemIndex = 0
           ParentFont = False
           Style = csDropDownList

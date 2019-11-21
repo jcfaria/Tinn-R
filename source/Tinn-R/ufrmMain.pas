@@ -2740,7 +2740,7 @@ type
     procedure pCheck_ProcessingPath(sPath: string);
     procedure pCheck_Project;
     procedure pCheck_Project_Changed;
-    procedure pCheck_REcho;
+    procedure pCheck_Recho;
     procedure pCheck_Temporary;
     procedure pCheck_Top;
     procedure pCheck_Version;
@@ -2866,8 +2866,8 @@ type
     bPrintSyntaxColor            : boolean;
     bProjectChanged              : boolean;
     bRArchitecture64             : boolean;
-    bRAsServer                   : boolean;
-    bREcho                       : boolean;
+    bRasServer                   : boolean;
+    bRecho                       : boolean;
     bRememberFileState           : boolean;
     bRemoveExtension             : boolean;
     bRguiReturnFocus             : boolean;
@@ -2978,8 +2978,8 @@ type
     sUpdate                      : string;
     sUtilsOrigin                 : string;
     sWorkingDir                  : string;
-    sAppShortcuts_BookMark       : string;
-    sEditorKeystrokes_BookMark   : string;
+    sApp_Shortcuts_BookMark      : string;
+    sEditor_Keystrokes_BookMark  : string;
     sRH_Send_BookMark            : string;
     sRH_Control_BookMark         : string;
     sRH_Custom_BookMark          : string;
@@ -3105,11 +3105,11 @@ begin
   frmTools.lbApp_ShortcutsClick(Self);
 end;
 
-procedure TfrmMain.pCheck_REcho;
+procedure TfrmMain.pCheck_Recho;
 begin
-  bREcho:= ifTinn.ReadBool('App', 'bREcho', True);
+  bRecho:= ifTinn.ReadBool('App', 'bRecho', True);
 
-  if bREcho then begin
+  if bRecho then begin
     actREcho.Checked:= True;
     pSet_Recho_True;
   end
@@ -3907,9 +3907,9 @@ begin
     WriteBool('App', 'bPdfOpenAlways', actPdfOpenAlways.Checked);
     WriteBool('App', 'bPgFiles.Visible', actPgFilesVisible.Checked);
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
-    WriteBool('App', 'bRAsServer', bRAsServer);
+    WriteBool('App', 'bRasServer', bRasServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bREcho', actREcho.Checked);
+    WriteBool('App', 'bRecho', actREcho.Checked);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
@@ -4441,9 +4441,9 @@ begin
     WriteBool('App', 'bPdfOpenAlways', actPdfOpenAlways.Checked);
     WriteBool('App', 'bPgFiles.Visible', actPgFilesVisible.Checked);
     WriteBool('App', 'bRArchitecture64', bRArchitecture64);
-    WriteBool('App', 'bRAsServer', bRAsServer);
+    WriteBool('App', 'bRasServer', bRasServer);
     WriteBool('App', 'bRComplexDefault', actRComplexDefault.Checked);
-    WriteBool('App', 'bREcho', actREcho.Checked);
+    WriteBool('App', 'bRecho', actREcho.Checked);
     WriteBool('App', 'bRememberFileState', bRememberFileState);
     WriteBool('App', 'bRemoveExtension', bRemoveExtension);
     WriteBool('App', 'bRestoreIniDock', bRestoreIniDock);
@@ -5179,7 +5179,7 @@ begin
      ifTinn.ReadBool('App', 'bRArchitecture64', True) then bRArchitecture64:= True
                                                       else bRArchitecture64:= False;
 
-  bRAsServer                   := ifTinn.ReadBool('App', 'bRAsServer', True);
+  bRasServer                   := ifTinn.ReadBool('App', 'bRasServer', True);
   bRestoreIniDock              := ifTinn.ReadBool('App', 'bRestoreIniDock', False);
   bRguiReturnFocus             := ifTinn.ReadBool('App', 'bRguiReturnFocus', True);
   bRMirros_Update              := ifTinn.ReadBool('App', 'bRMirros_Update', False);
@@ -7568,13 +7568,13 @@ end;
 procedure TfrmMain.actREchoExecute(Sender: TObject);
 begin
   if not actREcho.Checked then begin
-    bREcho:= True;
-    actREcho.Checked:= bREcho;
+    bRecho:= True;
+    actREcho.Checked:= bRecho;
     pSet_Recho_True;
   end
   else begin
-    bREcho:= False;
-    actREcho.Checked:= bREcho;
+    bRecho:= False;
+    actREcho.Checked:= bRecho;
     pSet_Recho_False;
   end;
 end;
@@ -10352,7 +10352,7 @@ begin
 end;
 
 procedure TfrmMain.pSearch_InOpenFiles(var iFileCount,
-                                          iMatchCount: integer);
+                                       iMatchCount: integer);
 var
   bFileFind: boolean;
 
@@ -10450,10 +10450,10 @@ begin
 end;
 
 procedure TfrmMain.pSearch_InDirectories(const sDir,
-                                                  sMask: string;
-                                            var iFileCount,
-                                                iMatchCount,
-                                                iTotFileCount: integer);
+                                         sMask: string;
+                                         var iFileCount,
+                                          iMatchCount,
+                                          iTotFileCount: integer);
 var
   bFileFind: boolean;
 
@@ -10649,8 +10649,8 @@ begin
 end;
 
 procedure TfrmMain.pTraverseDir(sPath: string;
-                                    var tsFileList: TStringList;
-                                    sMask: string);
+                                var tsFileList: TStringList;
+                                sMask: string);
 var
   curFile: WIN32_FIND_DATA;
 
@@ -10720,7 +10720,7 @@ begin
 end;
 
 procedure TfrmMain.pRecordActions(baAction: TBasicAction;
-                                      var bHandled: Boolean);
+                                  var bHandled: Boolean);
 var
   aEvent: TActionMacroEvent;
 
@@ -10760,9 +10760,9 @@ begin
 end;
 
 procedure TfrmMain.panProjectDockSiteDockDrop(Sender: TObject;
-                                                  Source: TDragDockObject;
-                                                  X,
-                                                  Y: Integer);
+                                              Source: TDragDockObject;
+                                              X,
+                                               Y: Integer);
 begin
   panProjectDockSite.Constraints.MinWidth:= 20;
   panProjectDockSite.Width               := 150;
@@ -10806,9 +10806,9 @@ begin
 end;
 
 procedure TfrmMain.panProjectDockSiteUnDock(Sender: TObject;
-                                                Client: TControl;
-                                                NewTarget: TWinControl;
-                                                var Allow: Boolean);
+                                            Client: TControl;
+                                            NewTarget: TWinControl;
+                                            var Allow: Boolean);
 begin
   panProjectDockSite.Constraints.MinWidth:= 1;
   panProjectDockSite.Width               := 0;
@@ -11126,10 +11126,10 @@ begin
 end;
 
 procedure TfrmMain.pgFilesMouseDown(Sender: TObject;
-                                        Button: TMouseButton;
-                                        Shift: TShiftState;
-                                        X,
-                                        Y: Integer);
+                                    Button: TMouseButton;
+                                    Shift: TShiftState;
+                                    X,
+                                     Y: Integer);
 var
   i: integer;
 
@@ -11152,9 +11152,9 @@ begin
 end;
 
 procedure TfrmMain.pgFilesMouseMove(Sender: TObject;
-                                        Shift: TShiftState;
-                                        X,
-                                         Y: Integer);
+                                    Shift: TShiftState;
+                                    X,
+                                     Y: Integer);
 var
   i: integer;
 
@@ -11169,9 +11169,9 @@ begin
 end;
 
 procedure TfrmMain.pgFilesDragDrop(Sender,
-                                       Source: TObject;
-                                       X,
-                                       Y: Integer);
+                                   Source: TObject;
+                                   X,
+                                    Y: Integer);
 const
   TCM_GETITEMRECT = $130A;
 
@@ -11200,11 +11200,11 @@ begin
 end;
 
 procedure TfrmMain.pgFilesDragOver(Sender,
-                                       Source: TObject;
-                                       X,
-                                       Y: Integer;
-                                       State: TDragState;
-                                       var Accept: Boolean);
+                                   Source: TObject;
+                                   X,
+                                    Y: Integer;
+                                   State: TDragState;
+                                   var Accept: Boolean);
 begin
   if Sender is TPageControl then Accept:= True;
 end;
@@ -11212,7 +11212,7 @@ end;
 function TfrmMain.fUseTCPIP: boolean;
 begin
   Result:= False;
-  if bRAsServer then
+  if bRasServer then
     if csREnvironment.Active and
        csRExplorer.Active    and
        csRGeneral.Active     and
@@ -13979,7 +13979,7 @@ begin
       cbNotification.Checked             := actNotification.Checked;
       cbNotification_US.Checked          := actNotification_US.Checked;
       cbPdfOpenAlways.Checked            := actPdfOpenAlways.Checked;
-      cbREcho.Checked                    := bREcho;
+      cbRecho.Checked                    := bRecho;
       cbRememberFileState.Checked        := bRememberFileState;
       cbRemoveExtension.Checked          := bRemoveExtension;
       cbRguiOrganizeAutomatically.Checked:= bOrganizeAutomatically;
@@ -14266,7 +14266,7 @@ begin
         bConnectionBeepOnError        := cbConnectionBeepOnError.Checked;
         bMinimizeTinnAfterLastFile    := cbMinimizeTinn.Checked;
         bOrganizeAutomatically        := cbRguiOrganizeAutomatically.Checked;
-        bREcho                        := cbREcho.Checked;
+        bRecho                        := cbRecho.Checked;
         bRememberFileState            := cbRememberFileState.Checked;
         bRemoveExtension              := cbRemoveExtension.Checked;
         bRestoreIniDock               := cbRestoreIniDock.Checked;
@@ -14324,7 +14324,7 @@ begin
         frmTools.cbComPriority_Line.Checked      := cbComPriority_Line.Checked;
         frmTools.cbComAutoDetect_Language.Checked:= cbComAutoDetect_Language.Checked;
 
-        if bREcho then begin
+        if bRecho then begin
           actREcho.Checked:= True;
           pSet_Recho_True;
         end
@@ -14534,24 +14534,42 @@ end;
 
 procedure TfrmMain.actSKH_mapExecute(Sender: TObject);
 var
-  pAppShortcut_Bookmark: pointer;
+  pApp_Shortcut_Bookmark,
+   pEditor_Keystrokes_Bookmark,
+   pRH_Send_Bookmark,
+   pRH_Control_Bookmark,
+   pRH_Custom_Bookmark: pointer;
 
   i: integer;
 
 begin
-  // App_Shortcuts: the below set bookmark for the active record in cdApp_Shortcuts before to open SKH_map interface
-  with modDados.cdApp_Shortcuts do
-    pAppShortcut_Bookmark:= GetBookmark;
+  // The below set bookmarks for the active records before to open SKH_map interface
+  with modDados.cdApp_Shortcuts do begin
+    // App_Shortcuts
+    pApp_Shortcut_Bookmark:= GetBookmark;
+
+    // Editor_Keystrokes
+    pEditor_Keystrokes_Bookmark:= GetBookmark;
+
+    // RH_Send
+    pRH_Send_Bookmark:= GetBookmark;
+
+    // RH_Control
+    pRH_Control_Bookmark:= GetBookmark;
+
+    // RH_Custom
+    pRH_Custom_Bookmark:= GetBookmark;
+  end;
 
   // The below set bookmarks for the active records. It will be used in SKH_map (FormActivate)
   with ModDados do begin
     // App_Shortcut
-    sAppShortcuts_BookMark:= cdApp_Shortcuts.Bookmark;
+    sApp_Shortcuts_BookMark:= cdApp_Shortcuts.Bookmark;
     cdApp_Shortcuts.Filtered:= False;
     frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= False;
 
     // Editor_Keystrokes
-    sEditorKeystrokes_BookMark:= cdEditor_Keystrokes.Bookmark;
+    sEditor_Keystrokes_BookMark:= cdEditor_Keystrokes.Bookmark;
 
     // RH_Send
     sRH_Send_BookMark:= cdRH_Send.Bookmark;
@@ -14683,9 +14701,36 @@ begin
   finally
     pSet_Hotkeys_Status(bHotKeys_On);
 
-    with modDados.cdApp_Shortcuts do begin
-      if BookmarkValid(pAppShortcut_Bookmark) then GoToBookmark(pAppShortcut_Bookmark);
-      FreeBookmark(pAppShortcut_Bookmark);
+    with modDados do begin
+      // App_Shortcuts
+      with cdApp_Shortcuts do begin
+        if BookmarkValid(pApp_Shortcut_Bookmark) then GoToBookmark(pApp_Shortcut_Bookmark);
+        FreeBookmark(pApp_Shortcut_Bookmark);
+      end;
+
+      // Editor_Keystrokes
+      with cdEditor_Keystrokes do begin
+        if BookmarkValid(pEditor_Keystrokes_Bookmark) then GoToBookmark(pEditor_Keystrokes_Bookmark);
+        FreeBookmark(pEditor_Keystrokes_Bookmark);
+      end;
+
+      // RH_Send
+      with cdRH_Send do begin
+        if BookmarkValid(pRH_Send_Bookmark) then GoToBookmark(pRH_Send_Bookmark);
+        FreeBookmark(pRH_Send_Bookmark);
+      end;
+
+      // RH_Control
+      with cdRH_Control do begin
+        if BookmarkValid(pRH_Control_Bookmark) then GoToBookmark(pRH_Control_Bookmark);
+        FreeBookmark(pRH_Control_Bookmark);
+      end;
+
+      // RH_Custom
+      with cdRH_Custom do begin
+        if BookmarkValid(pRH_Custom_Bookmark) then GoToBookmark(pRH_Custom_Bookmark);
+        FreeBookmark(pRH_Custom_Bookmark);
+      end;
     end;
   end;
 end;
@@ -17024,7 +17069,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bREcho then
+    if bRecho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -17053,7 +17098,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bREcho then
+    if bRecho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -17201,7 +17246,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bREcho then
+    if bRecho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -17230,7 +17275,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bREcho then
+    if bRecho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -17259,7 +17304,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bREcho then
+    if bRecho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +
@@ -17323,7 +17368,7 @@ begin
   if bSingleLine then
     sTmp:= sToSend
   else
-    if bREcho then
+    if bRecho then
       sTmp:= 'source(' +
              sToSend +
              ', echo=TRUE' +

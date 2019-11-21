@@ -1084,7 +1084,7 @@ begin
       if bSingleLine then
         sTmp:= sToSend
       else
-        if frmMain.bREcho then
+        if frmMain.bRecho then
           sTmp:= 'source(' +
                  sToSend +
                  ', echo=TRUE' +

@@ -1347,11 +1347,11 @@ begin
   with modDados do begin
     // App_Shortcuts
     with frmMain do
-      cdApp_Shortcuts.Bookmark:= sAppShortcuts_BookMark;
+      cdApp_Shortcuts.Bookmark:= sApp_Shortcuts_BookMark;
 
     // Editor_Keystrokes
     with frmMain do
-      cdEditor_Keystrokes.Bookmark:= sEditorKeystrokes_BookMark;
+      cdEditor_Keystrokes.Bookmark:= sEditor_Keystrokes_BookMark;
 
     // RH_Send
     with frmMain do
