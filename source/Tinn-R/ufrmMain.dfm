@@ -1035,14 +1035,13 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 630
+    Height = 610
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 610
   end
   object Panel1: TPanel
     Left = 0
@@ -1219,7 +1218,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2018,14 +2017,13 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 630
+    Height = 610
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 610
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2040,7 +2038,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 737
+    Top = 717
     Width = 994
     Height = 20
     AutoHint = True
@@ -2095,24 +2093,22 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 717
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 630
+    Height = 610
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 610
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 728
+    Top = 708
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2121,7 +2117,6 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 708
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -7628,7 +7623,7 @@ object frmMain: TfrmMain
       object menOptionsApplication: TMenuItem
         Action = actShowAppOptions
       end
-      object menSKH: TMenuItem
+      object menOption_SKH: TMenuItem
         Action = actSKH_map
       end
       object N119: TMenuItem

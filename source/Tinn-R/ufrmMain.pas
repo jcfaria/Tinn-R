@@ -1967,7 +1967,7 @@ type
     Rnomultlinestring6: TMenuItem;
     imlRSend_Plus: TPngImageList;
     synIO_History: TSynCompletionProposal;
-    menSKH: TMenuItem;
+    menOption_SKH: TMenuItem;
     Clear1: TMenuItem;
     actLatexClearWaste: TAction;
     TBItem68: TTBItem;

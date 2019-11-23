@@ -80,6 +80,10 @@ object frmTools: TfrmTools
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsMisc: TTabSheet
       Caption = 'Misc'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pgMisc: TJvgPageControl
         Left = 0
         Top = 0
@@ -127,6 +131,10 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsWinExplorer: TTabSheet
           Caption = 'Windows expl.'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object splWindows: TSplitter
             Left = 0
             Top = 130
@@ -432,7 +440,7 @@ object frmTools: TfrmTools
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
                 Font.Style = []
-                ItemHeight = 13
+                ItemHeight = 0
                 ParentCtl3D = False
                 ParentFont = False
                 Sorted = True
@@ -529,6 +537,10 @@ object frmTools: TfrmTools
         object tbsWorkExplorer: TTabSheet
           Caption = 'Work expl.'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object splWork: TSplitter
             Left = 0
             Top = 103
@@ -804,6 +816,10 @@ object frmTools: TfrmTools
         object tbsProject: TTabSheet
           Caption = 'Project'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object tvProject: TTreeView
             Left = 0
             Top = 30
@@ -1065,6 +1081,10 @@ object frmTools: TfrmTools
     object tbsMarkup: TTabSheet
       Caption = 'Markup'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pgMarkup: TJvgPageControl
         Left = 0
         Top = 0
@@ -1112,6 +1132,10 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsTxt2tags: TTabSheet
           Caption = 'Txt2tags'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object pgTxt2tags: TJvgPageControl
             Left = 0
             Top = 0
@@ -1157,6 +1181,10 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsTxt2tagsMarks: TTabSheet
               Caption = 'Marks'
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label1: TLabel
                 Tag = 1
                 Left = 8
@@ -1701,6 +1729,10 @@ object frmTools: TfrmTools
             object tbsTxt2tagsMacros: TTabSheet
               Caption = 'Macros'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label31: TLabel
                 Tag = 31
                 Left = 8
@@ -1813,6 +1845,10 @@ object frmTools: TfrmTools
             object tbsTxt2tagsSettings: TTabSheet
               Caption = 'Settings'
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Label37: TLabel
                 Tag = 37
                 Left = 8
@@ -1927,6 +1963,10 @@ object frmTools: TfrmTools
         object tbsLatex: TTabSheet
           Caption = 'LaTeX'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object pgLatex: TJvgPageControl
             Left = 0
             Top = 26
@@ -1973,6 +2013,10 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsLatexAccent: TTabSheet
               Caption = 'Accent'
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivAccents: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2022,6 +2066,10 @@ object frmTools: TfrmTools
             object tbsLatexArrow: TTabSheet
               Caption = 'Arrow'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object ScrollBox3: TScrollBox
                 Left = 0
                 Top = 0
@@ -2373,6 +2421,10 @@ object frmTools: TfrmTools
             object tbsLatexBar: TTabSheet
               Caption = 'Bar'
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivBar: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2422,6 +2474,10 @@ object frmTools: TfrmTools
             object tbsLatexBracket: TTabSheet
               Caption = 'Bracket'
               ImageIndex = 3
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivBracket: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2463,6 +2519,10 @@ object frmTools: TfrmTools
             object tbsLatexDot: TTabSheet
               Caption = 'Dot'
               ImageIndex = 4
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivDot: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -2504,6 +2564,10 @@ object frmTools: TfrmTools
             object tbsLatexGeometry: TTabSheet
               Caption = 'Geometry'
               ImageIndex = 8
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object ScrollBox1: TScrollBox
                 Left = 0
                 Top = 0
@@ -2948,6 +3012,10 @@ object frmTools: TfrmTools
             object tbsLatexGreek: TTabSheet
               Caption = 'Greek'
               ImageIndex = 9
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object ScrollBox2: TScrollBox
                 Left = 0
                 Top = 0
@@ -3155,6 +3223,10 @@ object frmTools: TfrmTools
             object tbsLatexMath: TTabSheet
               Caption = 'Math'
               ImageIndex = 10
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object ScrollBox5: TScrollBox
                 Left = 0
                 Top = 0
@@ -3410,6 +3482,10 @@ object frmTools: TfrmTools
             object tbsLatexMisc: TTabSheet
               Caption = 'Misc'
               ImageIndex = 11
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivMisc: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3451,6 +3527,10 @@ object frmTools: TfrmTools
             object tbsLatexNegation: TTabSheet
               Caption = 'Negation'
               ImageIndex = 12
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivNegation: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3492,6 +3572,10 @@ object frmTools: TfrmTools
             object tbsLatexOperator: TTabSheet
               Caption = 'Operator'
               ImageIndex = 5
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivOperator: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3533,6 +3617,10 @@ object frmTools: TfrmTools
             object tbsLatexRelation: TTabSheet
               Caption = 'Relation'
               ImageIndex = 6
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivRelation: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3574,6 +3662,10 @@ object frmTools: TfrmTools
             object tbsLatexSky: TTabSheet
               Caption = 'Sky'
               ImageIndex = 7
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object ScrollBox4: TScrollBox
                 Left = 0
                 Top = 0
@@ -3733,6 +3825,10 @@ object frmTools: TfrmTools
             object tbsLatexUserCustom: TTabSheet
               Caption = 'User custom'
               ImageIndex = 13
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object jvivUserCustom: TJvImagesViewer
                 Left = 0
                 Top = 0
@@ -3895,6 +3991,10 @@ object frmTools: TfrmTools
     object tbsResults: TTabSheet
       Caption = 'Results'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pgResults: TJvgPageControl
         Left = 0
         Top = 0
@@ -3942,6 +4042,10 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsIniLog: TTabSheet
           Caption = 'Ini log'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object memIniLog: TMemo
             Left = 0
             Top = 0
@@ -3963,6 +4067,10 @@ object frmTools: TfrmTools
         object tbsSearch: TTabSheet
           Caption = 'Search'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -4080,6 +4188,10 @@ object frmTools: TfrmTools
         object tbsHexViewer: TTabSheet
           Caption = 'Hex viewer'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object ATBinHex: TATBinHex
             Left = 0
             Top = 52
@@ -4139,6 +4251,10 @@ object frmTools: TfrmTools
     object tbsSpell: TTabSheet
       Caption = 'Spell'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object memSpell: TMemo
         Left = 0
         Top = 0
@@ -4164,12 +4280,16 @@ object frmTools: TfrmTools
     object tbsDatabase: TTabSheet
       Caption = 'Database'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
         Width = 475
         Height = 537
-        ActivePage = tbsApp_Shortcuts
+        ActivePage = tbsR_Hotkeys
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -4212,6 +4332,10 @@ object frmTools: TfrmTools
         object tbsApp_Shortcuts: TTabSheet
           Caption = 'Shortcuts'
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object splShortcuts: TSplitter
             Left = 0
             Top = 113
@@ -4365,7 +4489,7 @@ object frmTools: TfrmTools
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentCtl3D = False
               ParentFont = False
               PopupMenu = frmMain.pmenShortcuts
@@ -4430,6 +4554,10 @@ object frmTools: TfrmTools
         object tbsEditor_Keystrokes: TTabSheet
           Caption = 'Keystrokes'
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object JvDBNavigator6: TJvDBNavigator
             Left = 0
             Top = 26
@@ -4546,6 +4674,10 @@ object frmTools: TfrmTools
         object tbsR_Hotkeys: TTabSheet
           Caption = 'R Hotkeys'
           ImageIndex = 4
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object pgRH: TJvgPageControl
             Left = 0
             Top = 0
@@ -4592,6 +4724,10 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsRH_Send: TTabSheet
               Caption = 'Send'
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel21: TPanel
                 Left = 0
                 Top = 0
@@ -4680,7 +4816,7 @@ object frmTools: TfrmTools
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
                 Font.Style = []
-                Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+                Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
                 ParentFont = False
                 TabOrder = 2
                 TitleFont.Charset = DEFAULT_CHARSET
@@ -4708,6 +4844,10 @@ object frmTools: TfrmTools
             object tbsRH_Control: TTabSheet
               Caption = 'Control'
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel22: TPanel
                 Left = 0
                 Top = 0
@@ -4824,6 +4964,10 @@ object frmTools: TfrmTools
             object tbsRH_Custom: TTabSheet
               Caption = 'Custom'
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel23: TPanel
                 Left = 0
                 Top = 0
@@ -4912,7 +5056,7 @@ object frmTools: TfrmTools
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
                 Font.Style = []
-                Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+                Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
                 ParentFont = False
                 TabOrder = 2
                 TitleFont.Charset = DEFAULT_CHARSET
@@ -4941,6 +5085,10 @@ object frmTools: TfrmTools
         end
         object tbsCompletion: TTabSheet
           Caption = 'Completion'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object splCompletion: TSplitter
             Left = 0
             Top = 113
@@ -5032,7 +5180,7 @@ object frmTools: TfrmTools
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = frmMain.pmenCompletion
               TabOrder = 1
@@ -5161,6 +5309,10 @@ object frmTools: TfrmTools
         object tbsComments: TTabSheet
           Caption = 'Comments'
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel9: TPanel
             Left = 0
             Top = 88
@@ -5184,7 +5336,7 @@ object frmTools: TfrmTools
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = frmMain.pmenComments
               TabOrder = 0
@@ -5338,6 +5490,10 @@ object frmTools: TfrmTools
     object tbsR: TTabSheet
       Caption = 'R'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pgR: TJvgPageControl
         Left = 0
         Top = 0
@@ -5385,6 +5541,10 @@ object frmTools: TfrmTools
         object tbsRExplorer: TTabSheet
           Caption = 'Explorer'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -5846,6 +6006,10 @@ object frmTools: TfrmTools
         end
         object tbsRCard: TTabSheet
           Caption = 'Card'
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object splRCard: TSplitter
             Left = 0
             Top = 113
@@ -5935,7 +6099,7 @@ object frmTools: TfrmTools
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              Options = [dgIndicator, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgIndicator, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = frmMain.pmenRcard
               TabOrder = 1
@@ -6066,6 +6230,10 @@ object frmTools: TfrmTools
         object tbsRMirrors: TTabSheet
           Caption = 'Mirrors'
           ImageIndex = 4
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Splitter1: TSplitter
             Left = 0
             Top = 113
@@ -6214,7 +6382,7 @@ object frmTools: TfrmTools
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = frmMain.pmenRmirrors
               TabOrder = 0

@@ -741,7 +741,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 0
         Width = 615
         Height = 435
-        ActivePage = tbsRH_Custom
+        ActivePage = tbsRH_Send
         Align = alTop
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -779,6 +779,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         TabSelectedStyle.Gradient.Active = False
         TabSelectedStyle.Gradient.Orientation = fgdHorizontal
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+        ExplicitTop = -1
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
           ExplicitLeft = 0
@@ -1340,7 +1341,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             TabOrder = 2
             TitleFont.Charset = DEFAULT_CHARSET

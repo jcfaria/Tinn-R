@@ -1336,15 +1336,31 @@ begin
     end;
   end;
 
-  pgSKH.ActivePage:= tbsAppShortcuts;
-  pgRH.ActivePage := tbsRH_Send;
+  // SKH_Map_Dlg called from main menu (menOption_SKH)
+  if not frmTools.Visible then
+    with frmMain.dlgSKH_Map do begin
+      pgSKH.ActivePage:= tbsAppShortcuts;
+      pgRH.ActivePage := tbsRH_Send;
+    end
+  else
+    // SKH_Map_Dlg called from Tools interface
+    with frmMain.dlgSKH_Map do begin
+      case frmTools.pgDatabase.TabIndex of
+        0: pgSKH.ActivePage:= tbsAppShortcuts;
+        1: pgSKH.ActivePage:= tbsEditorKeystrokes;
+        2: begin
+             pgSKH.ActivePage    := tbsRHotkeys;
+             pgRH.ActivePageIndex:= frmTools.pgRH.TabIndex;
+        end;
+      end;
+    end;
 
   with stbShortcuts do begin
     Panels[0].Text:= 'Browse mode';
     Panels[2].Text:= ExtractFileName(frmMain.sShortcutsInUse);
   end;
 
-  // the below set the active records to bookmarks
+  // The below set the active records to bookmarks
   with modDados do begin
     // App_Shortcuts
     with frmMain do

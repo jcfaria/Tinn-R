@@ -675,7 +675,7 @@ type
 
   public
     { Public declarations }
-    iSize: integer;
+    iSize             : integer;
 
     procedure pDoProjectOpenNode;
   end;
@@ -1362,7 +1362,7 @@ begin
   pAdjustColumnWidths(dbgComments);
 
   frmMain.pUpdate_HexViewer;
-  
+
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
 end;
 
@@ -1385,6 +1385,8 @@ begin
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
+
+//  iRH_TabIndex:= pgRH.TabIndex;
 end;
 
 procedure TfrmTools.jvhkShortcutsEnter(Sender: TObject);
