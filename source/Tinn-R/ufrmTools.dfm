@@ -80,10 +80,6 @@ object frmTools: TfrmTools
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsMisc: TTabSheet
       Caption = 'Misc'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgMisc: TJvgPageControl
         Left = 0
         Top = 0
@@ -131,10 +127,6 @@ object frmTools: TfrmTools
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsWinExplorer: TTabSheet
           Caption = 'Windows expl.'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splWindows: TSplitter
             Left = 0
             Top = 130
@@ -440,7 +432,7 @@ object frmTools: TfrmTools
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
                 Font.Style = []
-                ItemHeight = 0
+                ItemHeight = 13
                 ParentCtl3D = False
                 ParentFont = False
                 Sorted = True
@@ -537,10 +529,6 @@ object frmTools: TfrmTools
         object tbsWorkExplorer: TTabSheet
           Caption = 'Work expl.'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splWork: TSplitter
             Left = 0
             Top = 103
@@ -816,10 +804,6 @@ object frmTools: TfrmTools
         object tbsProject: TTabSheet
           Caption = 'Project'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object tvProject: TTreeView
             Left = 0
             Top = 30
@@ -3991,10 +3975,6 @@ object frmTools: TfrmTools
     object tbsResults: TTabSheet
       Caption = 'Results'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgResults: TJvgPageControl
         Left = 0
         Top = 0
@@ -4067,10 +4047,6 @@ object frmTools: TfrmTools
         object tbsSearch: TTabSheet
           Caption = 'Search'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -4280,10 +4256,6 @@ object frmTools: TfrmTools
     object tbsDatabase: TTabSheet
       Caption = 'Database'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
@@ -4330,12 +4302,8 @@ object frmTools: TfrmTools
         TabSelectedStyle.Gradient.Orientation = fgdHorizontal
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
         object tbsApp_Shortcuts: TTabSheet
-          Caption = 'Shortcuts'
+          Caption = 'Shortcuts (app)'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splShortcuts: TSplitter
             Left = 0
             Top = 113
@@ -4552,12 +4520,8 @@ object frmTools: TfrmTools
           end
         end
         object tbsEditor_Keystrokes: TTabSheet
-          Caption = 'Keystrokes'
+          Caption = 'Keystrokes (editor)'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object JvDBNavigator6: TJvDBNavigator
             Left = 0
             Top = 26
@@ -4672,12 +4636,8 @@ object frmTools: TfrmTools
           end
         end
         object tbsR_Hotkeys: TTabSheet
-          Caption = 'R Hotkeys'
+          Caption = 'Hotkeys (R)'
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgRH: TJvgPageControl
             Left = 0
             Top = 0
@@ -4964,10 +4924,6 @@ object frmTools: TfrmTools
             object tbsRH_Custom: TTabSheet
               Caption = 'Custom'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel23: TPanel
                 Left = 0
                 Top = 0
@@ -5085,10 +5041,6 @@ object frmTools: TfrmTools
         end
         object tbsCompletion: TTabSheet
           Caption = 'Completion'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splCompletion: TSplitter
             Left = 0
             Top = 113
@@ -5490,10 +5442,6 @@ object frmTools: TfrmTools
     object tbsR: TTabSheet
       Caption = 'R'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgR: TJvgPageControl
         Left = 0
         Top = 0
@@ -5541,10 +5489,6 @@ object frmTools: TfrmTools
         object tbsRExplorer: TTabSheet
           Caption = 'Explorer'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -6006,10 +5950,6 @@ object frmTools: TfrmTools
         end
         object tbsRCard: TTabSheet
           Caption = 'Card'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splRCard: TSplitter
             Left = 0
             Top = 113
@@ -6230,10 +6170,6 @@ object frmTools: TfrmTools
         object tbsRMirrors: TTabSheet
           Caption = 'Mirrors'
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Splitter1: TSplitter
             Left = 0
             Top = 113
@@ -6401,7 +6337,6 @@ object frmTools: TfrmTools
                 item
                   Expanded = False
                   FieldName = 'City'
-                  Width = 64
                   Visible = True
                 end>
             end

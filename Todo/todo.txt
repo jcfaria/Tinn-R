@@ -9,18 +9,6 @@
 
 3- Ver se consegue eliminar a alternância do flip no retorno de foco entre Tinn-R e Rgui (ainda bastante usado).
 
-4- Ver se é possível melhorar a instalação automática do package TinnRcom em máquinas onde o C:\R está bloqueado
-   (segurança da Microsoft) e o R emite uma mensagem solicitando confirmação (muitas vezes não visível) sob Rterm
-   do local alternativo.
-   
-5- Adicionar opção no gerenciamento de pacotes para instalar e atualizar pacotes diretamente do GitHub.
+4- Adicionar opção no gerenciamento de pacotes para instalar e atualizar pacotes diretamente do GitHub.
 
-6- Opção para remoção automática de arquivos auxiliares do LaTeX.
-
-7- Check for update no menu Help.
-
-8- Script do setup não está adicionando o ícone na barra de inicialização rápida.
-
-9- Salvar arquivos UTF-8 sem BOM.
-
-10- Verificar possibilidade de reinstalar o aplicativo sem desisntalar previa versão (InnoSetup).
+5- Script do setup não está adicionando o ícone na barra de inicialização rápida.

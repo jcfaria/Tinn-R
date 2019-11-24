@@ -91,7 +91,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsRHotkeys
+    ActivePage = tbsAppShortcuts
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -130,11 +130,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsAppShortcuts: TTabSheet
-      Caption = ' Shortcuts (aplication)'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      Caption = ' Shortcuts (app)'
       object Panel2: TPanel
         Left = 0
         Top = 123
@@ -702,10 +698,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsRHotkeys: TTabSheet
       Caption = 'Hotkeys (R)'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object rdgTinnRHotKeys: TRadioGroup
         Left = 4
         Top = 434
@@ -779,13 +771,8 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         TabSelectedStyle.Gradient.Active = False
         TabSelectedStyle.Gradient.Orientation = fgdHorizontal
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-        ExplicitTop = -1
         object tbsRH_Send: TTabSheet
           Caption = 'Send'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GroupBox1: TGroupBox
             Left = 0
             Top = 0
