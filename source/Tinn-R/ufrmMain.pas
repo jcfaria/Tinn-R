@@ -14574,20 +14574,20 @@ begin
     frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= False;
 
     // Editor_Keystrokes
-    cdEditor_Keystrokes.Filtered:= False;
     sEditor_Keystrokes_BookMark:= cdEditor_Keystrokes.Bookmark;
+    cdEditor_Keystrokes.Filtered:= False;
 
     // RH_Send
-    cdRH_Send.Filtered:= False;
     sRH_Send_BookMark:= cdRH_Send.Bookmark;
+    cdRH_Send.Filtered:= False;
 
     // RH_Control
-    cdRH_Control.Filtered:= False;
     sRH_Control_BookMark:= cdRH_Control.Bookmark;
+    cdRH_Control.Filtered:= False;
 
     // RH_Custom
-    cdRH_Custom.Filtered:= False;
     sRH_Custom_BookMark:= cdRH_Custom.Bookmark;
+    cdRH_Custom.Filtered:= False;
   end;
 
   try
