@@ -48,7 +48,7 @@ fm <- lm(y ~ x,
 summary(fm)
 # Fit a simple linear regression of y on x and look at the analysis
 
-fm1 <- lm(y ~ x, 
+fm1 <- lm(y ~ x,
           data=dummy,
           weight=1/w^2)
 
@@ -85,7 +85,7 @@ plot(fitted(fm),
      resid(fm),
      xlab="Fitted values",
      ylab="Residuals",
-     main="Residuals vs 
+     main="Residuals vs
            Fitted")
 # A standard regression diagnostic plot to check for heteroscedasticity. Can you see it?
 
