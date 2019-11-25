@@ -41,7 +41,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *)
 
-unit ufrmRServer;
+unit ufrmRserver;
 
 interface
 
@@ -50,9 +50,9 @@ uses
   Dialogs, StdCtrls, Buttons, ComCtrls, ExtCtrls, ScktComp, JvgPage;
 
 type
-  TfrmRServer = class(TForm)
-    bbtRServerClose: TBitBtn;
-    bbtRServerSave: TBitBtn;
+  TfrmRserver = class(TForm)
+    bbtRserverClose: TBitBtn;
+    bbtRserverSave: TBitBtn;
     btnClearMemoTCPIP: TButton;
     btnConnectTCPIP: TButton;
     btnDisconnectTCPIP: TButton;
@@ -88,8 +88,8 @@ type
     tbsTCPIP: TTabSheet;
     
     //procedure edtSendKeyPress(Sender: TObject; var Key: Char);
-    procedure bbtRServerCloseClick(Sender: TObject);
-    procedure bbtRServerSaveClick(Sender: TObject);
+    procedure bbtRserverCloseClick(Sender: TObject);
+    procedure bbtRserverSaveClick(Sender: TObject);
     procedure btnClearMemoTCPIPClick(Sender: TObject);
     procedure btnConnectTCPIPClick(Sender: TObject);
     procedure btnDisconnectTCPIPClick(Sender: TObject);
@@ -109,7 +109,7 @@ type
   end;
 
 var
-  frmRServer: TfrmRServer;
+  frmRserver: TfrmRserver;
 
 implementation
 
@@ -121,9 +121,9 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmRServer.FormShow(Sender: TObject);
+procedure TfrmRserver.FormShow(Sender: TObject);
 begin
-  pgRServer.TabIndex:= 0;
+  pgRserver.TabIndex:= 0;
   with frmMain do begin
     if bIPLocal then rdgIPType.ItemIndex:= 0
                 else rdgIPType.ItemIndex:= 1;
@@ -151,7 +151,7 @@ begin
   end;
 end;
 
-procedure TfrmRServer.pSaveOptions;
+procedure TfrmRserver.pSaveOptions;
 begin
   with frmMain do begin
     if (rdgIPType.ItemIndex = 0) then bIPLocal:= True
@@ -163,19 +163,19 @@ begin
   end;
 end;
 
-procedure TfrmRServer.bbtRServerCloseClick(Sender: TObject);
+procedure TfrmRserver.bbtRserverCloseClick(Sender: TObject);
 begin
   pSaveOptions;
   Close;
 end;
 
-procedure TfrmRServer.btnConnectTCPIPClick(Sender: TObject);
+procedure TfrmRserver.btnConnectTCPIPClick(Sender: TObject);
 begin
   with frmMain do
     actRCont_TCPConnectionExecute(nil);
 end;
 
-procedure TfrmRServer.btnDisconnectTCPIPClick(Sender: TObject);
+procedure TfrmRserver.btnDisconnectTCPIPClick(Sender: TObject);
 var
   sStop: string;
 
@@ -208,12 +208,12 @@ begin
   end;
 end;
 
-procedure TfrmRServer.btnClearMemoTCPIPClick(Sender: TObject);
+procedure TfrmRserver.btnClearMemoTCPIPClick(Sender: TObject);
 begin
   memRTCPIP.Clear;
 end;
 
-procedure TfrmRServer.btnSendTCPIPClick(Sender: TObject);
+procedure TfrmRserver.btnSendTCPIPClick(Sender: TObject);
 var
   sTmp,
    sToSend: string;
@@ -240,20 +240,20 @@ begin
   edtSend.SelectAll;
 end;
 
-procedure TfrmRServer.bbtRServerSaveClick(Sender: TObject);
+procedure TfrmRserver.bbtRserverSaveClick(Sender: TObject);
 begin
   pSaveOptions;
 end;
 
 {
-procedure TfrmRServer.edtSendKeyPress(Sender: TObject; var Key: Char);
+procedure TfrmRserver.edtSendKeyPress(Sender: TObject; var Key: Char);
 begin
   if (Key = #13) then
     if frmMain.fUseTCPIP then btnSendTCPIPClick(Self);
 end;
 }
 
-procedure TfrmRServer.FormActivate(Sender: TObject);
+procedure TfrmRserver.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
     pgRserver.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
@@ -266,7 +266,7 @@ begin
   end;
 end;
 
-procedure TfrmRServer.rdgIPTypeClick(Sender: TObject);
+procedure TfrmRserver.rdgIPTypeClick(Sender: TObject);
 begin
   if (rdgIPType.ItemIndex = 0) then begin
     frmMain.bIPLocal:= True;
@@ -278,7 +278,7 @@ begin
   end;
 end;
 
-procedure TfrmRServer.edtSendKeyDown(Sender: TObject;
+procedure TfrmRserver.edtSendKeyDown(Sender: TObject;
                                      var Key: Word;
                                      Shift: TShiftState);
 begin
@@ -293,7 +293,7 @@ begin
     end;
 end;
 
-procedure TfrmRServer.memRTCPIPKeyDown(Sender: TObject;
+procedure TfrmRserver.memRTCPIPKeyDown(Sender: TObject;
                                        var Key: Word;
                                        Shift: TShiftState);
 begin

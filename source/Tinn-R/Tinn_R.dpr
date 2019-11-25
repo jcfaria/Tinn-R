@@ -105,7 +105,7 @@ uses
   ufrmRcard in 'ufrmRcard.pas' {frmRcard},
   ufrmReplace in 'ufrmReplace.pas' {frmReplaceDlg},
   ufrmRmirrors in 'ufrmRmirrors.pas' {frmRmirrors},
-  ufrmRServer in 'ufrmRServer.pas' {frmRServer},
+  ufrmRserver in 'ufrmRserver.pas' {frmRserver},
   ufrmRterm in 'ufrmRterm.pas' {frmRterm},
   ufrmSearchInFiles in 'ufrmSearchInFiles.pas' {frmSearch_InFiles_Dlg},
   ufrmSearch in 'ufrmSearch.pas' {frmSearchDlg},

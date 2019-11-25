@@ -1165,7 +1165,7 @@ begin
   pEnable_Save;
 end;
 
-// Send current line to R when editing
+// Send current line or selection to R interpreter
 procedure TfrmEditor.pCR;
 var
   seEditor: TSynEdit;
@@ -1177,7 +1177,8 @@ begin
   // Define the active editor
   if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                    else seEditor:= synEditor2;
-
+{
+  // Old code to send line and insert a new blank line
   bSendToREditing:= True;
   with seEditor do begin  // The below is redundant (but low cust) and avoid send intermitent final character!
     ExecuteCommand(ecLineEnd,
@@ -1196,6 +1197,10 @@ begin
   end;
   bSendToREditing:= False;
   pEnable_Save;
+}
+  with seEditor do
+    if SelAvail then frmMain.actRSend_SelectionExecute(nil)
+                else frmMain.actRSend_LineExecute(nil);
 end;
 
 procedure TfrmEditor.synEditorKeyDown(Sender: TObject;

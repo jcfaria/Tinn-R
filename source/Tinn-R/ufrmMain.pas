@@ -615,7 +615,6 @@ type
     cbSyntax: TComboBox;
     cdMain: TColorDialog;
     Clear3: TMenuItem;
-    Clipboard1: TMenuItem;
     Closeallselectedgroup2: TMenuItem;
     Commentsshowhide1: TMenuItem;
     Completionshowhide1: TMenuItem;
@@ -887,7 +886,7 @@ type
     menRPackagesRemove: TMenuItem;
     menRPackagesStatus: TMenuItem;
     menRPackagesUpdate: TMenuItem;
-    menRServer: TMenuItem;
+    menRserver: TMenuItem;
     menRSet_trPaths: TMenuItem;
     menRStartClose: TMenuItem;
     menRterm: TMenuItem;
@@ -1338,7 +1337,6 @@ type
     N76: TMenuItem;
     N77: TMenuItem;
     N78: TMenuItem;
-    N79: TMenuItem;
     N8: TMenuItem;
     N80: TMenuItem;
     N81: TMenuItem;
@@ -1454,7 +1452,6 @@ type
     pmemLogSyntaxText: TMenuItem;
     pmemRResCurrentLineToTop: TMenuItem;
     pmemRResSendBlockMarked: TMenuItem;
-    pmemRResSendClipboard: TMenuItem;
     pmemRResSendContiguous: TMenuItem;
     pmemRResSendCursorToBeginningLine: TMenuItem;
     pmemRResSendCursorToEndLine: TMenuItem;
@@ -2407,7 +2404,7 @@ type
     procedure menHelUserGuideClick(Sender: TObject);
     procedure menHelUserListClick(Sender: TObject);
     procedure menRget_InfoClick(Sender: TObject);
-    procedure menRServerClick(Sender: TObject);
+    procedure menRserverClick(Sender: TObject);
     procedure menRSet_trPathsClick(Sender: TObject);
     procedure menRtermHistoryNextClick(Sender: TObject);
     procedure menRtermHistoryPriorClick(Sender: TObject);
@@ -2465,7 +2462,6 @@ type
     procedure pgFilesMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure pmemRResCurrentLineToTopClick(Sender: TObject);
     procedure pmemRResSendBlockMarkedClick(Sender: TObject);
-    procedure pmemRResSendClipboardClick(Sender: TObject);
     procedure pmemRResSendContiguousClick(Sender: TObject);
     procedure pmemRResSendCursorToBeginningLineClick(Sender: TObject);
     procedure pmemRResSendCursorToEndLineClick(Sender: TObject);
@@ -2682,7 +2678,7 @@ type
     sRLogSaved                     : string;
     sSearch_DirHistory             : string;
     sSearch_FileMaskHistory        : string;
-    sTipFromRServer                : string;
+    sTipFromRserver                : string;
     sVersion_Cache                 : string;
     sVersion_Comments              : string;
     sVersion_Completion            : string;
@@ -3053,7 +3049,7 @@ uses
   ufrmNewGoup,
   ufrmPrintPreview,
   ufrmRcard,
-  ufrmRServer,
+  ufrmRserver,
   ufrmSearchInFiles,
   ufrmSplash,
   ufrmTools,
@@ -5335,7 +5331,6 @@ begin
   // Send to R alphabetically ordered
   pmemRResCurrentLineToTop.Checked         := ifTinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
   pmemRResSendBlockMarked.Checked          := ifTinn.ReadBool('R Options', 'bRSendBlockMarked', True);
-  pmemRResSendClipboard.Checked            := ifTinn.ReadBool('R Options', 'bRSendClipboard', True);
   pmemRResSendContiguous.Checked           := ifTinn.ReadBool('R Options', 'bRSendContiguous', True);
   pmemRResSendCursorToBeginningLine.Checked:= ifTinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
   pmemRResSendCursorToEndLine.Checked      := ifTinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
@@ -5891,7 +5886,7 @@ procedure TfrmMain.pGet_CallTip(var sRObject,
 
       if (sRTip <> EmptyStr) then begin
         bTipFound      := True;
-        sTipFromRServer:= 'TCP/IP';
+        sTipFromRserver:= 'TCP/IP';
       end
       else begin
         stbMain.Panels[8].Text:= 'Tip not found';
@@ -6253,7 +6248,7 @@ var
 begin
   seEditor:= nil;
 
-  sTipFromRServer:= EmptyStr;
+  sTipFromRserver:= EmptyStr;
 
   i:= fFindTop_Window;
   if Assigned(Self.MDIChildren[i] as TfrmEditor) then
@@ -6807,8 +6802,8 @@ var
   slTmp: TStringList;
 
 const
-  NMC_RServer = '"[..] NOT MATCHED: Check integrity of the parameter(s) for this function in the R Server!"';
-  NMP_RServer = '"(..) NOT MATCHED: Check integrity of the parameter(s) for this function in the R Server!"';
+  NMC_Rserver = '"[..] NOT MATCHED: Check integrity of the parameter(s) for this function in the R Server!"';
+  NMP_Rserver = '"(..) NOT MATCHED: Check integrity of the parameter(s) for this function in the R Server!"';
 
 begin
   if not fValidR_Running then Exit;
@@ -6833,7 +6828,7 @@ begin
   if (not bTipFound) then Exit;
 
   TSynCompletionProposal(Sender).ItemList.Clear;
-  if (sTipFromRServer <> EmptyStr) then pGet_RInfo(sRTip,
+  if (sTipFromRserver <> EmptyStr) then pGet_RInfo(sRTip,
                                                    sRPackage,
                                                    sRObject);  // Get info, [package] and <object>, from the returned
 
@@ -6869,11 +6864,11 @@ begin
 
   sTipToWrite:= fTipTowrite_Adequation(sRTip);  // Will be available to be inserted (Ctrl + *)
 
-  if (sTipFromRServer <> EmptyStr) then begin
+  if (sTipFromRserver <> EmptyStr) then begin
     if (sRPackage = EmptyStr) then sRPackage:= ' [.ClobalEnv]';
 
     sTip:= //'R -> ' +
-           //sTipFromRServer +
+           //sTipFromRserver +
            //' ' +
            sRPackage;
 
@@ -14197,7 +14192,6 @@ begin
 
         pmemRResCurrentLineToTop.Checked         := cbRCurrentLineToTop.Checked;
         pmemRResSendBlockMarked.Checked          := cbRSendBlockMarked.Checked;
-        pmemRResSendClipboard.Checked            := cbRSendClipboard.Checked;
         pmemRResSendContiguous.Checked           := cbRSendContiguous.Checked;
         pmemRResSendCursorToBeginningLine.Checked:= cbRSendCursorToBeginningLine.Checked;
         pmemRResSendCursorToEndLine.Checked      := cbRSendCursorToEndLine.Checked;
@@ -15058,13 +15052,13 @@ begin
   end;
 end;
 
-procedure TfrmMain.menRServerClick(Sender: TObject);
+procedure TfrmMain.menRserverClick(Sender: TObject);
 begin
   try
-    frmRServer:= TfrmRServer.Create(nil);
-    frmRServer.ShowModal;
+    frmRserver:= TfrmRserver.Create(nil);
+    frmRserver.ShowModal;
   finally
-    FreeAndNil(frmRServer);
+    FreeAndNil(frmRserver);
     pSet_Focus_Main;
   end;
   frmMain.Refresh;
@@ -15169,8 +15163,8 @@ procedure TfrmMain.csRGeneralConnect(Sender: TObject;
 begin
   bConectionError              := False;
   actRCont_TCPConnection.Checked:= True;
-  if Assigned(frmRServer) then begin
-    with frmRServer do begin
+  if Assigned(frmRserver) then begin
+    with frmRserver do begin
       chbIPConnected.Checked    := True;
       edtIPClientIP.Text        := Socket.LocalAddress;
       edtIPClient.Text          := Socket.LocalHost;
@@ -15201,8 +15195,8 @@ begin
   if (i <= 1) then sTmp:= 'Local R socket server disconnected.' +
                           #13#10 {#$D#$A};
 
-  if Assigned(frmRServer) then begin
-    with frmRServer do begin
+  if Assigned(frmRserver) then begin
+    with frmRserver do begin
       memRTCPIP.Lines.Add(sTmp);
       chbIPConnected.Checked    := False;
       edtIPClientIP.Text        := EmptyStr;
@@ -15259,8 +15253,8 @@ begin
                 [mbOk],
                 0);
 
-  if Assigned(frmRServer) then begin
-    with frmRServer do begin
+  if Assigned(frmRserver) then begin
+    with frmRserver do begin
       chbIPConnected.Checked    := False;
       edtIPClientIP.Text        := EmptyStr;
       edtIPClient.Text          := EmptyStr;
@@ -15282,7 +15276,7 @@ var
   iRemoteIP,
    iPriorMessage: integer;
 
-  slFromRServer: TStringList;
+  slFromRserver: TStringList;
 
   sTmp: string;
 
@@ -15302,13 +15296,13 @@ begin
            iPriorMessage-1);
   end;
 
-  slFromRServer:= TStringList.Create;
+  slFromRserver:= TStringList.Create;
   sTmp         := (sTmp) +
                   #13#10;
 
-  slFromRServer.Text:= sTmp;
-  pMake_Renvironment(slFromRServer);
-  FreeAndNil(slFromRServer);
+  slFromRserver.Text:= sTmp;
+  pMake_Renvironment(slFromRserver);
+  FreeAndNil(slFromRserver);
 end;
 
 procedure TfrmMain.csRGeneralRead(Sender: TObject;
@@ -15348,9 +15342,9 @@ begin
       GetMem(buf,
              1024);
       // R server output
-      if Assigned(frmRServer) then
-        if (frmRServer.Visible) then
-          with frmRServer.memRTCPIP do begin
+      if Assigned(frmRserver) then
+        if (frmRserver.Visible) then
+          with frmRserver.memRTCPIP do begin
             Lines.BeginUpdate;
             Lines.SaveToStream(mePriorContent);
             muStream_1.AddStream(mePriorContent);
@@ -18512,20 +18506,20 @@ procedure TfrmMain.actRExpl_EnvironmentRefreshExecute(Sender: TObject);
 
  procedure pReadTmpFile(sRFile: string);
  var
-   strlFromRServer: TStringList;
+   strlFromRserver: TStringList;
 
  begin
    try
-     strlFromRServer:= TStringList.Create;
-     strlFromRServer.LoadFromFile(sRFile);
-     strlFromRServer.Delete(0);
+     strlFromRserver:= TStringList.Create;
+     strlFromRserver.LoadFromFile(sRFile);
+     strlFromRserver.Delete(0);
 
      with frmTools.cbbToolsREnvironment do begin
-       Items.Assign(strlFromRServer);
+       Items.Assign(strlFromRserver);
        ItemIndex:= 0;
      end;
    finally
-     FreeAndNil(strlFromRServer);
+     FreeAndNil(strlFromRserver);
    end;
  end;
 
@@ -20415,13 +20409,6 @@ begin
   with actRSend_BlockMarked do
     Visible:= not Visible;
   pmemRResSendBlockMarked.Checked:= actRSend_BlockMarked.Visible;
-end;
-
-procedure TfrmMain.pmemRResSendClipboardClick(Sender: TObject);
-begin
-  with actRSend_Clipboard do
-    Visible:= not Visible;
-  pmemRResSendClipboard.Checked:= actRSend_Clipboard.Visible;
 end;
 
 procedure TfrmMain.pmemRResSendContiguousClick(Sender: TObject);

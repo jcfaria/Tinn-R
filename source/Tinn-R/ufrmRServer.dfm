@@ -1,4 +1,4 @@
-object frmRServer: TfrmRServer
+object frmRserver: TfrmRserver
   Left = 550
   Top = 114
   AlphaBlend = True
@@ -91,10 +91,6 @@ object frmRServer: TfrmRServer
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsTCPIP: TTabSheet
       Caption = 'TCP/IP'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 436
@@ -267,10 +263,6 @@ object frmRServer: TfrmRServer
           Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
           object tbsIPLocal: TTabSheet
             Caption = 'Local'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label3: TLabel
               Left = 6
               Top = 3
@@ -309,10 +301,6 @@ object frmRServer: TfrmRServer
           object tbsIPRemote: TTabSheet
             Caption = 'Remote'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Label14: TLabel
               Left = 6
               Top = 3

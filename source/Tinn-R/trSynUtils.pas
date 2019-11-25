@@ -845,7 +845,7 @@ end;
 //
 //      if (sRTip <> EmptyStr) then begin
 //        bTipFound:= True;
-//        frmTinnMain.sTipFromRServer:= 'TCP/IP';
+//        frmTinnMain.sTipFromRserver:= 'TCP/IP';
 //      end
 //      else begin
 //        frmTinnMain.stbMain.Panels[8].Text:= 'Tip not found';
@@ -1230,7 +1230,7 @@ end;
 //begin
 //  seEditor:= nil;
 //
-//  frmTinnMain.sTipFromRServer:= EmptyStr;
+//  frmTinnMain.sTipFromRserver:= EmptyStr;
 //
 //  i:= fFindTopWindow;
 //  if Assigned(Self.MDIChildren[i] as TfrmEditor) then

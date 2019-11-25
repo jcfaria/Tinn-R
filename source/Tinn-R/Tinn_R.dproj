@@ -162,7 +162,7 @@
       <Form>frmRmirrors</Form>
     </DCCReference>
     <DCCReference Include="ufrmRServer.pas">
-      <Form>frmRServer</Form>
+      <Form>frmRserver</Form>
     </DCCReference>
     <DCCReference Include="ufrmRterm.pas">
       <Form>frmRterm</Form>

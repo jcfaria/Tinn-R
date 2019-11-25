@@ -363,7 +363,7 @@ type
     edKnit: TEditAlign;
     GroupBox28: TGroupBox;
     cbRsvSocket_Connect: TCheckBox;
-    gpbRServerTCPIP: TGroupBox;
+    gpbRserverTCPIP: TGroupBox;
     gpbRTCPIPParameter: TGroupBox;
     pgIP: TJvgPageControl;
     tbsIPLocal: TTabSheet;
