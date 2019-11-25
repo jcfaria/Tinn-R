@@ -44,5 +44,13 @@
     <Transaction>2019/11/25 07:45:21.888.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmConfirm_Replace_Dlg.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmReplace_Confirm_Dlg.dfm</Transaction>
     <Transaction>2019/11/25 14:21:37.607.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmApp_Options.pas</Transaction>
     <Transaction>2019/11/25 14:21:37.607.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmApp_Options.dfm</Transaction>
+    <Transaction>2019/11/25 14:39:40.838.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRCard.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Card.pas</Transaction>
+    <Transaction>2019/11/25 14:39:40.838.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRCard.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Card.dfm</Transaction>
+    <Transaction>2019/11/25 14:43:58.653.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRmirrors.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Mirrors.pas</Transaction>
+    <Transaction>2019/11/25 14:43:58.653.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRmirrors.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Mirrors.dfm</Transaction>
+    <Transaction>2019/11/25 14:47:26.004.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRServer.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Server.pas</Transaction>
+    <Transaction>2019/11/25 14:47:26.004.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRServer.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Server.dfm</Transaction>
+    <Transaction>2019/11/25 14:50:13.070.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Term.pas</Transaction>
+    <Transaction>2019/11/25 14:50:13.070.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Term.dfm</Transaction>
   </Transactions>
 </BorlandProject>

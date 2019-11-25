@@ -184,7 +184,7 @@ implementation
 
 uses
   ufrmMain,
-  ufrmRcard,
+  ufrmR_Card,
   ufrmCompletion,
   ufrmTools,
   Variants,
@@ -192,7 +192,7 @@ uses
   ActnList,
   ufrmComments,
   trUtils,
-  ufrmRmirrors,
+  ufrmR_Mirrors,
   ufrmSKH_map;
 
 {$R *.DFM}
@@ -994,24 +994,24 @@ end;
 
 procedure TmodDados.cdRmirrorsAfterPost(DataSet: TDataSet);
 begin
-  if Assigned(frmRmirrors) then
-    with frmRmirrors do begin
+  if Assigned(frmR_Mirrors) then
+    with frmR_Mirrors do begin
       stbRmirrors.Panels[0].Text:= 'Browse mode';
-      frmRmirrors.bbtRmirrorsClose.Enabled:= True;
+      frmR_Mirrors.bbtRmirrorsClose.Enabled:= True;
     end;
 end;
 
 procedure TmodDados.cdRmirrorsAfterScroll(DataSet: TDataSet);
 begin
-  if Assigned(frmRmirrors) then
-    with frmRmirrors.stbRmirrors do
+  if Assigned(frmR_Mirrors) then
+    with frmR_Mirrors.stbRmirrors do
       if Visible then Panels[0].Text:= 'Browse mode';
 end;
 
 procedure TmodDados.cdRmirrorsBeforeEdit(DataSet: TDataSet);
 begin
-  if Assigned(frmRmirrors) then
-    with frmRmirrors.stbRmirrors do
+  if Assigned(frmR_Mirrors) then
+    with frmR_Mirrors.stbRmirrors do
       Panels[0].Text:= 'Edit mode';
 end;
 
@@ -1202,24 +1202,24 @@ end;
 
 procedure TmodDados.cdRcardAfterPost(DataSet: TDataSet);
 begin
-  if Assigned(frmRcard) then
-    with frmRcard do begin
+  if Assigned(frmR_Card) then
+    with frmR_Card do begin
       stbRcard.Panels[0].Text:= 'Browse mode';
-      frmRcard.bbtRcardClose.Enabled:= True;
+      frmR_Card.bbtRcardClose.Enabled:= True;
     end;
 end;
 
 procedure TmodDados.cdRcardAfterScroll(DataSet: TDataSet);
 begin
-  if Assigned(frmRcard) then
-    with frmRcard.stbRcard do
+  if Assigned(frmR_Card) then
+    with frmR_Card.stbRcard do
       if Visible then Panels[0].Text:= 'Browse mode';
 end;
 
 procedure TmodDados.cdRcardBeforeEdit(DataSet: TDataSet);
 begin
-  if Assigned(frmRcard) then
-    with frmRcard.stbRcard do
+  if Assigned(frmR_Card) then
+    with frmR_Card.stbRcard do
       Panels[0].Text:= 'Edit mode';
 end;
 

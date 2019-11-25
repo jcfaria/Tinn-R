@@ -101,12 +101,12 @@ uses
   ufrmGoup_New in 'ufrmGoup_New.pas' {frmGroup_New},
   ufrmPandoc in 'ufrmPandoc.pas' {frmPandoc},
   ufrmPrint_Preview in 'ufrmPrint_Preview.pas' {frmPrint_Preview},
-  ufrmRcard in 'ufrmRcard.pas' {frmRcard},
+  ufrmR_Card in 'ufrmR_Card.pas' {frmR_Card},
   ufrmReplace_Dlg in 'ufrmReplace_Dlg.pas' {frmReplace_Dlg},
   ufrmReplace_Confirm_Dlg in 'ufrmReplace_Confirm_Dlg.pas' {frmReplace_Confirm_Dlg},
-  ufrmRmirrors in 'ufrmRmirrors.pas' {frmRmirrors},
-  ufrmRserver in 'ufrmRserver.pas' {frmRserver},
-  ufrmRterm in 'ufrmRterm.pas' {frmRterm},
+  ufrmR_Mirrors in 'ufrmR_Mirrors.pas' {frmR_Mirrors},
+  ufrmR_Server in 'ufrmR_Server.pas' {frmR_Server},
+  ufrmR_Term in 'ufrmR_Term.pas' {frmR_Term},
   ufrmSearch_Dlg in 'ufrmSearch_Dlg.pas' {frmSearch_Dlg},
   ufrmSearch_InFiles in 'ufrmSearch_InFiles.pas' {frmSearch_InFiles_Dlg},
   ufrmSplash in 'ufrmSplash.pas' {frmSplash},
@@ -114,8 +114,7 @@ uses
   ufrmUpdater in 'ufrmUpdater.pas' {frmUpdater},
   uModDados in 'uModDados.pas' {modDados: TDataModule},
   ufrmSKH_map in 'ufrmSKH_map.pas' {frmSKH_Map_Dlg},
-  ufrmSKH_Manager in 'ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg}
-  ;
+  ufrmSKH_Manager in 'ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg};
 
 {$R Tinn_R.KLR}
 {$R *.RES}

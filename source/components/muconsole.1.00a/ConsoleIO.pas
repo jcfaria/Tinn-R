@@ -136,7 +136,7 @@ procedure Register;
 implementation
 uses
   ufrmMain,
-  ufrmRterm;
+  ufrmR_Term;
 
 procedure Register;
 begin
@@ -473,7 +473,7 @@ begin
   // Check if it was sent an incomplete instruction and R return '+ '.
   // If yes, and R return '+ ',
   // it will send the next line of the script until to coomplete the R code block.
-  with frmRterm do
+  with frmR_Term do
     if bIO_Keyed then begin  // Set True in synIOKeyDown event
       bIO_Keyed:= False;     // Restart the control variable
       Exit;
@@ -640,7 +640,7 @@ begin
   // Check if it was sent an incomplete instruction and R return '+ '.
   // If yes, and R return '+ ',
   // it will send the next line of the script until to coomplete the R code block.
-  with frmRterm do
+  with frmR_Term do
     if bIO_Keyed then begin  // Set True in synIOKeyDown event
       bIO_Keyed:= False;     // Restart the control variable
       Exit;

@@ -689,7 +689,7 @@ uses
   ufrmMain,
   trCodeSender,
   ufrmEditor,
-  ufrmRterm,
+  ufrmR_Term,
   uModDados,
   trUtils,
   Menus;
@@ -2036,7 +2036,7 @@ begin
       else begin
         pCheck_Rterm;
         pSend_ToConsole(sTmp);
-        frmRterm.cRterm.SendInput(sToSend);
+        frmR_Term.cRterm.SendInput(sToSend);
       end;
 
     end

@@ -101,12 +101,12 @@ uses
   ufrmGoup_New in '..\Tinn-R\ufrmGoup_New.pas' {frmGroup_New},
   ufrmPandoc in '..\Tinn-R\ufrmPandoc.pas' {frmPandoc},
   ufrmPrint_Preview in '..\Tinn-R\ufrmPrint_Preview.pas' {frmPrint_Preview},
-  ufrmRcard in '..\Tinn-R\ufrmRcard.pas' {frmRcard},
+  ufrmR_Card in '..\Tinn-R\ufrmR_Card.pas' {frmR_Card},
   ufrmReplace_Dlg in '..\Tinn-R\ufrmReplace_Dlg.pas' {frmReplace_Dlg},
   ufrmReplace_Confirm_Dlg in '..\Tinn-R\ufrmReplace_Confirm_Dlg.pas' {frmReplace_Confirm_Dlg},
-  ufrmRmirrors in '..\Tinn-R\ufrmRmirrors.pas' {frmRmirrors},
-  ufrmRserver in '..\Tinn-R\ufrmRserver.pas' {frmRserver},
-  ufrmRterm in '..\Tinn-R\ufrmRterm.pas' {frmRterm},
+  ufrmR_Mirrors in '..\Tinn-R\ufrmR_Mirrors.pas' {frmR_Mirrors},
+  ufrmR_Server in '..\Tinn-R\ufrmR_Server.pas' {frmR_Server},
+  ufrmR_Term in '..\Tinn-R\ufrmR_Term.pas' {frmR_Term},
   ufrmSearch_Dlg in '..\Tinn-R\ufrmSearch_Dlg.pas' {frmSearch_Dlg},
   ufrmSearch_InFiles in '..\Tinn-R\ufrmSearch_InFiles.pas' {frmSearch_InFiles_Dlg},
   ufrmSplash in '..\Tinn-R\ufrmSplash.pas' {frmSplash},
@@ -114,7 +114,8 @@ uses
   ufrmUpdater in '..\Tinn-R\ufrmUpdater.pas' {frmUpdater},
   uModDados in '..\Tinn-R\uModDados.pas' {modDados: TDataModule},
   ufrmSKH_map in '..\Tinn-R\ufrmSKH_map.pas' {frmSKH_Map_Dlg},
-  ufrmSKH_Manager in '..\Tinn-R\ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg};
+  ufrmSKH_Manager in '..\Tinn-R\ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg}
+  ;
 
 {$R Tinn_R_portable.KLR}
 {$R *.RES}

@@ -101,10 +101,9 @@
       <Form>frmAbout</Form>
     </DCCReference>
     <DCCReference Include="..\Tinn-R\ufrmAppOptions.pas">
-      <ModuleName>ufrmApp_Options</ModuleName>
       <Form>frmApp_Options_Dlg</Form>
     </DCCReference>
-    <DCCReference Include="..\Tinn-R\ufrmAppOptions.pas">
+    <DCCReference Include="..\Tinn-R\ufrmApp_Options.pas">
       <Form>frmApp_Options_Dlg</Form>
     </DCCReference>
     <DCCReference Include="..\Tinn-R\ufrmColors.pas">
@@ -163,6 +162,18 @@
     </DCCReference>
     <DCCReference Include="..\Tinn-R\ufrmRterm.pas">
       <Form>frmRterm</Form>
+    </DCCReference>
+    <DCCReference Include="..\Tinn-R\ufrmR_Card.pas">
+      <Form>frmR_Card</Form>
+    </DCCReference>
+    <DCCReference Include="..\Tinn-R\ufrmR_Mirrors.pas">
+      <Form>frmR_Mirrors</Form>
+    </DCCReference>
+    <DCCReference Include="..\Tinn-R\ufrmR_Server.pas">
+      <Form>frmR_Server</Form>
+    </DCCReference>
+    <DCCReference Include="..\Tinn-R\ufrmR_Term.pas">
+      <Form>frmR_term</Form>
     </DCCReference>
     <DCCReference Include="..\Tinn-R\ufrmSearch_Dlg.pas">
       <Form>frmSearch_Dlg</Form>

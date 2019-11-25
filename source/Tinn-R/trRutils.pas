@@ -76,7 +76,7 @@ implementation
 
 uses
   trUtils,
-  ufrmRterm,
+  ufrmR_Term,
   ufrmMain;
 
 constructor TR_Useful.Create;//(AOwner: TComponent);
@@ -124,13 +124,13 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
                   '^[0-9]+:');
 
     if (sRex <> EmptyStr) then
-      with frmRterm do begin
+      with frmR_Term do begin
         bRUnderScan_Function:= True;
 
         sRScan_Prefix:= sRex;
       end
     else
-      with frmRterm do begin
+      with frmR_Term do begin
         bRUnderScan_Function:= False;
         if not bRUnderScan_Function then sRScan_Prefix:= '';
       end;
@@ -149,7 +149,7 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
     iPosDbg2:= Pos(']>',
                    Cmd);
 
-    with frmRterm do
+    with frmR_Term do
       if (iPosDbg1 <> 0) and
          (iPosDbg2 <> 0) and
          (iPosDbg1 < iPosDbg2) then begin
@@ -175,7 +175,7 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
     iPosDbg2:= Pos(')>',
                    Cmd);
 
-    with frmRterm do
+    with frmR_Term do
       if (iPosDbg1 <> 0) and
          (iPosDbg2 <> 0) and
          (iPosDbg1 < iPosDbg2) then begin
@@ -319,8 +319,8 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
 //                                  [rfReplaceAll]);
 //
 //       with synIO_RU do
-//         if frmRterm.bRUnderDebug_Function or
-//            frmRterm.bRUnderDebug_Package then begin
+//         if frmR_Term.bRUnderDebug_Function or
+//            frmR_Term.bRUnderDebug_Package then begin
 //           Lines.Add('');
 //           Lines.AddStrings(slTmp);
 //         end

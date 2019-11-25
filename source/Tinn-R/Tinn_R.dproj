@@ -142,23 +142,23 @@
     <DCCReference Include="ufrmPrint_Preview.pas">
       <Form>frmPrint_Preview</Form>
     </DCCReference>
-    <DCCReference Include="ufrmRcard.pas">
-      <Form>frmRcard</Form>
-    </DCCReference>
     <DCCReference Include="ufrmReplace_Confirm_Dlg.pas">
       <Form>frmReplace_Confirm_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmReplace_Dlg.pas">
       <Form>frmReplace_Dlg</Form>
     </DCCReference>
-    <DCCReference Include="ufrmRmirrors.pas">
-      <Form>frmRmirrors</Form>
+    <DCCReference Include="ufrmR_Card.pas">
+      <Form>frmR_Card</Form>
     </DCCReference>
-    <DCCReference Include="ufrmRserver.pas">
-      <Form>frmRserver</Form>
+    <DCCReference Include="ufrmR_Mirrors.pas">
+      <Form>frmR_Mirrors</Form>
     </DCCReference>
-    <DCCReference Include="ufrmRterm.pas">
-      <Form>frmRterm</Form>
+    <DCCReference Include="ufrmR_Server.pas">
+      <Form>frmR_Server</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmR_Term.pas">
+      <Form>frmR_Term</Form>
     </DCCReference>
     <DCCReference Include="ufrmSearch_Dlg.pas">
       <Form>frmSearch_Dlg</Form>

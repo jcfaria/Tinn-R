@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 788
+  Height = 808
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1219,7 +1219,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -4612,14 +4612,6 @@ object frmMain: TfrmMain
       Hint = 'R send: selection (echo=TRUE)'
       ImageIndex = 4
       OnExecute = actRSend_SelectionExecute
-    end
-    object actRSend_Clipboard: TAction
-      Category = 'R send'
-      Caption = 'Clipboard (echo=TRUE)'
-      Enabled = False
-      Hint = 'R send: clipboard (echo=TRUE)'
-      ImageIndex = 269
-      ShortCut = 16465
     end
     object actRSend_BlockMarked: TAction
       Category = 'R send'
@@ -8343,7 +8335,7 @@ object frmMain: TfrmMain
         object menSendToRBlockMarked: TMenuItem
           Action = actRSend_BlockMarked
         end
-        object ContiguousechoTRUE1: TMenuItem
+        object menSendToRContiguous: TMenuItem
           Action = actRSend_Contiguous
         end
         object menSendToRSmart: TMenuItem

@@ -474,7 +474,6 @@ type
     actRmirrors_SetRepos: TAction;
     actRmirrors_Update: TAction;
     actRSend_BlockMarked: TAction;
-    actRSend_Clipboard: TAction;
     actRSend_Contiguous: TAction;
     actRSend_CursorToBeginningLine: TAction;
     actRSend_CursorToEndLine: TAction;
@@ -616,7 +615,6 @@ type
     Closeallselectedgroup2: TMenuItem;
     Commentsshowhide1: TMenuItem;
     Completionshowhide1: TMenuItem;
-    ContiguousechoTRUE1: TMenuItem;
     Copyhost1: TMenuItem;
     CopyURL1: TMenuItem;
     csREnvironment: TClientSocket;
@@ -1976,6 +1974,7 @@ type
     menEdit_Paste: TMenuItem;
     menEdit_Cut: TMenuItem;
     menEdit_Selectall: TMenuItem;
+    menSendToRContiguous: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2616,18 +2615,18 @@ type
     R_Useful                       : TR_Useful;
     rsSearch                       : TRegExpr;
     sApp_Data                      : string;
-    sCurrentVersion_Cache          : string;
-    sCurrentVersion_Comments       : string;
-    sCurrentVersion_Completion     : string;
-    sCurrentVersion_Editor         : string;
-    sCurrentVersion_Latex          : string;
-    sCurrentVersion_Project        : string;
-    sCurrentVersion_Rcard          : string;
-    sCurrentVersion_RH_Control     : string;
-    sCurrentVersion_RH_Custom      : string;
-    sCurrentVersion_RH_Send        : string;
-    sCurrentVersion_Rmirrors       : string;
-    sCurrentVersion_Shortcuts      : string;
+    sCurr_Version_Cache            : string;
+    sCurr_Version_Comments         : string;
+    sCurr_Version_Completion       : string;
+    sCurr_Version_Editor_Keystrokes: string;
+    sCurr_Version_Latex            : string;
+    sCurr_Version_Project          : string;
+    sCurr_Version_Rcard            : string;
+    sCurr_Version_RH_Control       : string;
+    sCurr_Version_RH_Custom        : string;
+    sCurr_Version_RH_Send          : string;
+    sCurr_Version_Rmirrors         : string;
+    sCurr_Version_App_Shortcuts    : string;
     sEncodingDefault               : string;
     sEOLDefault                    : string;
     seTmp                          : TSynEdit;
@@ -2680,7 +2679,7 @@ type
     sVersion_Cache                 : string;
     sVersion_Comments              : string;
     sVersion_Completion            : string;
-    sVersion_Editor                : string;
+    sVersion_Editor_Keystrokes     : string;
     sVersion_Ini                   : string;
     sVersion_Latex                 : string;
     sVersion_Project               : string;
@@ -2689,7 +2688,7 @@ type
     sVersion_RH_Custom             : string;
     sVersion_RH_Send               : string;
     sVersion_Rmirrors              : string;
-    sVersion_Shortcuts             : string;
+    sVersion_App_Shortcuts         : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
@@ -3039,15 +3038,15 @@ uses
   ufrmColors,
   ufrmPrint_Configure,
   ufrmPrint_Preview,
-  ufrmRterm,
+  ufrmR_Term,
   ufrmCount,
   ufrmDiffMain,
   ufrmEditor,
   ufrmGroup_Rename,
   ufrmGoup_New,
   ufrmLatex_Dimensional,
-  ufrmRcard,
-  ufrmRserver,
+  ufrmR_Card,
+  ufrmR_Server,
   ufrmSearch_InFiles,
   ufrmSplash,
   ufrmTools,
@@ -3055,7 +3054,7 @@ uses
   ufrmCompletion,
   ufrmPandoc,
   ufrmComments,
-  ufrmRmirrors,
+  ufrmR_Mirrors,
   ufrmUpdater;
 
 {$R *.DFM}
@@ -3116,87 +3115,87 @@ end;
 procedure TfrmMain.pCheck_Version;
 begin
   // Versions in use by user: from ini file
-  sVersion_Cache     := ifTinn.ReadString('App', 'sVersion_Cache'     , '0.0.0.0');
-  sVersion_Comments  := ifTinn.ReadString('App', 'sVersion_Comments'  , '0.0.0.0');
-  sVersion_Completion:= ifTinn.ReadString('App', 'sVersion_Completion', '0.0.0.0');
-  sVersion_Ini       := ifTinn.ReadString('App', 'sVersion_Ini'       , '0.0.0.0');
-  sVersion_Latex     := ifTinn.ReadString('App', 'sVersion_Latex'     , '0.0.0.0');
-  sVersion_Project   := ifTinn.ReadString('App', 'sVersion_Project'   , '0.0.0.0');
-  sVersion_Rcard     := ifTinn.ReadString('App', 'sVersion_Rcard'     , '0.0.0.0');
-  sVersion_Rmirrors  := ifTinn.ReadString('App', 'sVersion_Rmirrors'  , '0.0.0.0');
-  sVersion_Shortcuts := ifTinn.ReadString('App', 'sVersion_Shortcuts' , '0.0.0.0');
-  sVersion_RH_Send   := ifTinn.ReadString('App', 'sVersion_RH_Send'   , '0.0.0.0');
-  sVersion_RH_Control:= ifTinn.ReadString('App', 'sVersion_RH_Control', '0.0.0.0');
-  sVersion_RH_Custom := ifTinn.ReadString('App', 'sVersion_RH_Custom' , '0.0.0.0');
-  sVersion_Editor    := ifTinn.ReadString('App', 'sVersion_Editor'    , '0.0.0.0');
+  sVersion_Cache            := ifTinn.ReadString('App', 'sVersion_Cache'            , '0.0.0.0');
+  sVersion_Comments         := ifTinn.ReadString('App', 'sVersion_Comments'         , '0.0.0.0');
+  sVersion_Completion       := ifTinn.ReadString('App', 'sVersion_Completion'       , '0.0.0.0');
+  sVersion_Ini              := ifTinn.ReadString('App', 'sVersion_Ini'              , '0.0.0.0');
+  sVersion_Latex            := ifTinn.ReadString('App', 'sVersion_Latex'            , '0.0.0.0');
+  sVersion_Project          := ifTinn.ReadString('App', 'sVersion_Project'          , '0.0.0.0');
+  sVersion_Rcard            := ifTinn.ReadString('App', 'sVersion_Rcard'            , '0.0.0.0');
+  sVersion_Rmirrors         := ifTinn.ReadString('App', 'sVersion_Rmirrors'         , '0.0.0.0');
+  sVersion_App_Shortcuts    := ifTinn.ReadString('App', 'sVersion_App_Shortcuts'    , '0.0.0.0');
+  sVersion_RH_Send          := ifTinn.ReadString('App', 'sVersion_RH_Send'          , '0.0.0.0');
+  sVersion_RH_Control       := ifTinn.ReadString('App', 'sVersion_RH_Control'       , '0.0.0.0');
+  sVersion_RH_Custom        := ifTinn.ReadString('App', 'sVersion_RH_Custom'        , '0.0.0.0');
+  sVersion_Editor_Keystrokes:= ifTinn.ReadString('App', 'sVersion_Editor_Keystrokes', '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
-  sCurrentVersion_Cache     := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
-  sCurrentVersion_Comments  := '3.00.02.01';
-  sCurrentVersion_Completion:= '5.02.03.00';
-  sCurrentVersion_Editor    := '5.04.03.01';  // Started from version '5.04.03.00'/beta
-  sCurrentVersion_Latex     := '2.01.01.01';
-  sCurrentVersion_Project   := '5.03.05.01';
-  sCurrentVersion_Rcard     := '2.03.00.00';
-  sCurrentVersion_Rmirrors  := '5.04.01.00';
-  sCurrentVersion_Shortcuts := '5.04.01.02';
-  sCurrentVersion_RH_Send   := '5.04.03.01';  // Started from version '5.04.03.00'/beta
-  sCurrentVersion_RH_Control:= '5.04.03.00';  // Started from version '5.04.03.00'/beta
-  sCurrentVersion_RH_Custom := '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_Cache            := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
+  sCurr_Version_Comments         := '3.00.02.01';
+  sCurr_Version_Completion       := '5.02.03.00';
+  sCurr_Version_Editor_Keystrokes:= '5.04.03.01';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_Latex            := '2.01.01.01';
+  sCurr_Version_Project          := '5.03.05.01';
+  sCurr_Version_Rcard            := '2.03.00.00';
+  sCurr_Version_Rmirrors         := '5.04.01.00';
+  sCurr_Version_App_Shortcuts    := '5.04.03.01';
+  sCurr_Version_RH_Send          := '5.04.03.01';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_RH_Control       := '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_RH_Custom        := '5.04.03.00';  // Started from version '5.04.03.00'/beta
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
-                     sCurrentVersion_Cache) < 0) then begin
+                     sCurr_Version_Cache) < 0) then begin
     bUpdate_Cache := True;
-    sVersion_Cache:= sCurrentVersion_Cache;
+    sVersion_Cache:= sCurr_Version_Cache;
   end;
 
   // Comments
   if (AnsiCompareStr(sVersion_Comments,
-                     sCurrentVersion_Comments) < 0) then begin
+                     sCurr_Version_Comments) < 0) then begin
     bUpdate_Comments := True;
-    sVersion_Comments:= sCurrentVersion_Comments;
+    sVersion_Comments:= sCurr_Version_Comments;
   end;
 
   // Completion
   if (AnsiCompareStr(sVersion_Completion,
-                     sCurrentVersion_Completion) < 0) then begin
+                     sCurr_Version_Completion) < 0) then begin
     bUpdate_Completion := True;
-    sVersion_Completion:= sCurrentVersion_Completion;
+    sVersion_Completion:= sCurr_Version_Completion;
   end;
 
   // Latex
   if (AnsiCompareStr(sVersion_Latex,
-                     sCurrentVersion_Latex) < 0) then begin
+                     sCurr_Version_Latex) < 0) then begin
     bUpdate_Latex := True;
-    sVersion_Latex:= sCurrentVersion_Latex;
+    sVersion_Latex:= sCurr_Version_Latex;
   end;
 
   // Project
   if (AnsiCompareStr(sVersion_Project,
-                     sCurrentVersion_Project) < 0) then begin
+                     sCurr_Version_Project) < 0) then begin
     bUpdate_Project := True;
-    sVersion_Project:= sCurrentVersion_Project;
+    sVersion_Project:= sCurr_Version_Project;
   end;
 
   // Rcard
   if (AnsiCompareStr(sVersion_Rcard,
-                     sCurrentVersion_Rcard) < 0) then begin
+                     sCurr_Version_Rcard) < 0) then begin
     bUpdate_Rcard := True;
-    sVersion_Rcard:= sCurrentVersion_Rcard;
+    sVersion_Rcard:= sCurr_Version_Rcard;
   end;
 
   // Mirrors
   if (AnsiCompareStr(sVersion_Rmirrors,
-                     sCurrentVersion_Rmirrors) < 0) then begin
+                     sCurr_Version_Rmirrors) < 0) then begin
     bUpdate_Rmirrors := True;
-    sVersion_Rmirrors:= sCurrentVersion_Rmirrors;
+    sVersion_Rmirrors:= sCurr_Version_Rmirrors;
   end;
 
   // App_Shortcuts
-  if (AnsiCompareStr(sVersion_Shortcuts,
-                     sCurrentVersion_Shortcuts) < 0) then begin
-    sVersion_Shortcuts:= sCurrentVersion_Shortcuts;
+  if (AnsiCompareStr(sVersion_App_Shortcuts,
+                     sCurr_Version_App_Shortcuts) < 0) then begin
+    sVersion_App_Shortcuts:= sCurr_Version_App_Shortcuts;
     if FileExists(sPath_Data +
                   '\App_Shortcuts.xml') then
       bUpdate_Shortcuts:= True;
@@ -3204,8 +3203,8 @@ begin
 
   // RH_Send
   if (AnsiCompareStr(sVersion_RH_Send,
-                     sCurrentVersion_RH_Send) < 0) then begin
-    sVersion_RH_Send:= sCurrentVersion_RH_Send;
+                     sCurr_Version_RH_Send) < 0) then begin
+    sVersion_RH_Send:= sCurr_Version_RH_Send;
     if FileExists(sPath_Data +
                   '\RH_Send.xml') then
       bUpdate_RH_Send:= True;
@@ -3213,8 +3212,8 @@ begin
 
   // RH_Control
   if (AnsiCompareStr(sVersion_RH_Control,
-                     sCurrentVersion_RH_Control) < 0) then begin
-    sVersion_RH_Control:= sCurrentVersion_RH_Control;
+                     sCurr_Version_RH_Control) < 0) then begin
+    sVersion_RH_Control:= sCurr_Version_RH_Control;
     if FileExists(sPath_Data +
                   '\RH_Control.xml') then
       bUpdate_RH_Control:= True;
@@ -3222,17 +3221,17 @@ begin
 
   // RH_Custom
   if (AnsiCompareStr(sVersion_RH_Custom,
-                     sCurrentVersion_RH_Custom) < 0) then begin
-    sVersion_RH_Custom:= sCurrentVersion_RH_Custom;
+                     sCurr_Version_RH_Custom) < 0) then begin
+    sVersion_RH_Custom:= sCurr_Version_RH_Custom;
     if FileExists(sPath_Data +
                   '\RH_Custom.xml') then
       bUpdate_RH_Custom:= True;
   end;
 
   // Editor
-  if (AnsiCompareStr(sVersion_Editor,
-                     sCurrentVersion_Editor) < 0) then begin
-    sVersion_Editor:= sCurrentVersion_Editor;
+  if (AnsiCompareStr(sVersion_Editor_Keystrokes,
+                     sCurr_Version_Editor_Keystrokes) < 0) then begin
+    sVersion_Editor_Keystrokes:= sCurr_Version_Editor_Keystrokes;
     if FileExists(sPath_Data +
                   '\Editor_Keystrokes.xml') then
       bUpdate_Editor:= True;
@@ -3756,19 +3755,19 @@ begin
 
   with ifTinn_Tmp do begin
     // Version control
-    WriteString('App', 'sVersion_Cache'     , sVersion_Cache);
-    WriteString('App', 'sVersion_Comments'  , sVersion_Comments);
-    WriteString('App', 'sVersion_Completion', sVersion_Completion);
-    WriteString('App', 'sVersion_Ini'       , fGetBuild_Info);
-    WriteString('App', 'sVersion_Latex'     , sVersion_Latex);
-    WriteString('App', 'sVersion_Project'   , sVersion_Project);
-    WriteString('App', 'sVersion_Rcard'     , sVersion_Rcard);
-    WriteString('App', 'sVersion_Rmirrors'  , sVersion_Rmirrors);
-    WriteString('App', 'sVersion_Shortcuts' , sVersion_Shortcuts);
-    WriteString('App', 'sVersion_RH_Send'   , sVersion_RH_Send);
-    WriteString('App', 'sVersion_RH_Control', sVersion_RH_Control);
-    WriteString('App', 'sVersion_RH_Custom' , sVersion_RH_Custom);
-    WriteString('App', 'sVersion_Editor'    , sVersion_Editor);
+    WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
+    WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
+    WriteString('App', 'sVersion_Completion'       , sVersion_Completion);
+    WriteString('App', 'sVersion_Ini'              , fGetBuild_Info);
+    WriteString('App', 'sVersion_Latex'            , sVersion_Latex);
+    WriteString('App', 'sVersion_Project'          , sVersion_Project);
+    WriteString('App', 'sVersion_Rcard'            , sVersion_Rcard);
+    WriteString('App', 'sVersion_Rmirrors'         , sVersion_Rmirrors);
+    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
+    WriteString('App', 'sVersion_RH_Send'          , sVersion_RH_Send);
+    WriteString('App', 'sVersion_RH_Control'       , sVersion_RH_Control);
+    WriteString('App', 'sVersion_RH_Custom'        , sVersion_RH_Custom);
+    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -3835,9 +3834,9 @@ begin
     WriteBool('App', 'bRtermSingle', bRtermSingle);
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
-    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
-    WriteInteger('App', 'iSynLOG2.Height', frmRterm.iSynLOG2Height);
-    WriteInteger('App', 'iSynLOG2.Width', frmRterm.iSynLOG2Width);
+    WriteInteger('App', 'iRterm.Size', frmR_Term.iSize);
+    WriteInteger('App', 'iSynLOG2.Height', frmR_Term.iSynLOG2Height);
+    WriteInteger('App', 'iSynLOG2.Width', frmR_Term.iSynLOG2Width);
 
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
@@ -3943,7 +3942,7 @@ begin
     WriteInteger('App', 'iPandocFrom', iPandocFrom);
     WriteInteger('App', 'iPandocTo', iPandocTo);
     WriteInteger('App', 'iPgFiles.TabsPosition', integer(pgFiles.TabsPosition));
-    WriteInteger('App', 'iPgRterm.TabsPosition', integer(frmRterm.pgRterm.TabsPosition));
+    WriteInteger('App', 'iPgRterm.TabsPosition', integer(frmR_Term.pgRterm.TabsPosition));
     WriteInteger('App', 'iPgTools.TabsPosition', integer(frmTools.pgTools.TabsPosition));
     WriteInteger('App', 'iRecognition_Caption', iRecognition_Caption);
     WriteInteger('App', 'iReformatRSplit', iReformatRSplit);
@@ -4007,7 +4006,6 @@ begin
     // Send To R alphabetically ordered
     WriteBool('R Options', 'bRKnitr', bRKnitr);
     WriteBool('R Options', 'bRSendBlockMarked', actRSend_BlockMarked.Visible);
-    WriteBool('R Options', 'bRSendClipboard', actRSend_Clipboard.Visible);
     WriteBool('R Options', 'bRSendContiguous', actRSend_Contiguous.Visible);
     WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSend_CursorToBeginningLine.Visible);
     WriteBool('R Options', 'bRSendCursorToEndLine', actRSend_CursorToEndLine.Visible);
@@ -4293,16 +4291,16 @@ begin
   // Application
   with ifTinn do begin
     // Version control
-    WriteString('App', 'sVersion_Cache'     , sVersion_Cache);
-    WriteString('App', 'sVersion_Comments'  , sVersion_Comments);
-    WriteString('App', 'sVersion_Completion', sVersion_Completion);
-    WriteString('App', 'sVersion_Rcard'     , sVersion_Rcard);
-    WriteString('App', 'sVersion_Rmirrors'  , sVersion_Rmirrors);
-    WriteString('App', 'sVersion_Shortcuts' , sVersion_Shortcuts);
-    WriteString('App', 'sVersion_RH_Send'   , sVersion_RH_Send);
-    WriteString('App', 'sVersion_RH_Control', sVersion_RH_Control);
-    WriteString('App', 'sVersion_RH_Custom' , sVersion_RH_Custom);
-    WriteString('App', 'sVersion_Editor'    , sVersion_Editor);
+    WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
+    WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
+    WriteString('App', 'sVersion_Completion'       , sVersion_Completion);
+    WriteString('App', 'sVersion_Rcard'            , sVersion_Rcard);
+    WriteString('App', 'sVersion_Rmirrors'         , sVersion_Rmirrors);
+    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
+    WriteString('App', 'sVersion_RH_Send'          , sVersion_RH_Send);
+    WriteString('App', 'sVersion_RH_Control'       , sVersion_RH_Control);
+    WriteString('App', 'sVersion_RH_Custom'        , sVersion_RH_Custom);
+    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -4369,9 +4367,9 @@ begin
     WriteBool('App', 'bRtermSingle', bRtermSingle);
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
-    WriteInteger('App', 'iRterm.Size', frmRterm.iSize);
-    WriteInteger('App', 'iSynLOG2.Height', frmRterm.iSynLOG2Height);
-    WriteInteger('App', 'iSynLOG2.Width', frmRterm.iSynLOG2Width);
+    WriteInteger('App', 'iRterm.Size', frmR_Term.iSize);
+    WriteInteger('App', 'iSynLOG2.Height', frmR_Term.iSynLOG2Height);
+    WriteInteger('App', 'iSynLOG2.Width', frmR_Term.iSynLOG2Width);
 
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
@@ -4477,7 +4475,7 @@ begin
     WriteInteger('App', 'iPandocFrom', iPandocFrom);
     WriteInteger('App', 'iPandocTo', iPandocTo);
     WriteInteger('App', 'iPgFiles.TabsPosition', integer(pgFiles.TabsPosition));
-    WriteInteger('App', 'iPgRterm.TabsPosition', integer(frmRterm.pgRterm.TabsPosition));
+    WriteInteger('App', 'iPgRterm.TabsPosition', integer(frmR_Term.pgRterm.TabsPosition));
     WriteInteger('App', 'iPgTools.TabsPosition', integer(frmTools.pgTools.TabsPosition));
     WriteInteger('App', 'iRecognition_Caption', iRecognition_Caption);
     WriteInteger('App', 'iReformatRSplit', iReformatRSplit);
@@ -4547,7 +4545,6 @@ begin
     // Send To R alphabetically ordered
     WriteBool('R Options', 'bRKnitr', bRKnitr);
     WriteBool('R Options', 'bRSendBlockMarked', actRSend_BlockMarked.Visible);
-    WriteBool('R Options', 'bRSendClipboard', actRSend_Clipboard.Visible);
     WriteBool('R Options', 'bRSendContiguous', actRSend_Contiguous.Visible);
     WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSend_CursorToBeginningLine.Visible);
     WriteBool('R Options', 'bRSendCursorToEndLine', actRSend_CursorToEndLine.Visible);
@@ -5262,20 +5259,20 @@ begin
   actRguiReturnFocus.Checked:= bRguiReturnFocus;
 
   // Rterm
-  bIOLineWrap            := ifTinn.ReadBool('App', 'bIOLineWrap', True);
-  bLogLineWrap           := ifTinn.ReadBool('App', 'bLogLineWrap', True);
-  bRtermCanFloat         := ifTinn.ReadBool('App', 'bRtermCanFloat', False);
-  bRtermSend_Plus        := ifTinn.ReadBool('App', 'bRtermSend_Plus', True);
-  bRtermCloseWithoutAsk  := ifTinn.ReadBool('App', 'bRtermCloseWithoutAsk', False);
-  bRtermHorizontal       := ifTinn.ReadBool('App', 'bRtermHorizontal', True);
-  bRtermSingle           := ifTinn.ReadBool('App', 'bRtermSingle', True);
-  frmRterm.iSize         := ifTinn.ReadInteger('App', 'iRterm.Size', 480);
-  frmRterm.iSynLOG2Height:= ifTinn.ReadInteger('App', 'iSynLOG2.Height', 90);
-  frmRterm.iSynLOG2Width := ifTinn.ReadInteger('App', 'iSynLOG2.Width', 140);
-  iIO_Syntax             := ifTinn.ReadInteger('App', 'iIO_Syntax', 2);   // .R
-  iLOG_Syntax            := ifTinn.ReadInteger('App', 'iLOG_Syntax', 0);  // .txt
+  bIOLineWrap             := ifTinn.ReadBool('App', 'bIOLineWrap', True);
+  bLogLineWrap            := ifTinn.ReadBool('App', 'bLogLineWrap', True);
+  bRtermCanFloat          := ifTinn.ReadBool('App', 'bRtermCanFloat', False);
+  bRtermSend_Plus         := ifTinn.ReadBool('App', 'bRtermSend_Plus', True);
+  bRtermCloseWithoutAsk   := ifTinn.ReadBool('App', 'bRtermCloseWithoutAsk', False);
+  bRtermHorizontal        := ifTinn.ReadBool('App', 'bRtermHorizontal', True);
+  bRtermSingle            := ifTinn.ReadBool('App', 'bRtermSingle', True);
+  frmR_Term.iSize         := ifTinn.ReadInteger('App', 'iRterm.Size', 480);
+  frmR_Term.iSynLOG2Height:= ifTinn.ReadInteger('App', 'iSynLOG2.Height', 90);
+  frmR_Term.iSynLOG2Width := ifTinn.ReadInteger('App', 'iSynLOG2.Width', 140);
+  iIO_Syntax              := ifTinn.ReadInteger('App', 'iIO_Syntax', 2);   // .R
+  iLOG_Syntax             := ifTinn.ReadInteger('App', 'iLOG_Syntax', 0);  // .txt
 
-  with frmRterm do begin
+  with frmR_Term do begin
     synIO.WordWrap := bIOLineWrap;
     synLOG.WordWrap:= bLogLineWrap;
   end;
@@ -5342,7 +5339,6 @@ begin
 
   actRSend_CurrentLineToTop.Visible     := ifTinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
   actRSend_BlockMarked.Visible          := ifTinn.ReadBool('R Options', 'bRSendBlockMarked', True);
-  actRSend_Clipboard.Visible            := ifTinn.ReadBool('R Options', 'bRSendClipboard', True);
   actRSend_Contiguous.Visible           := ifTinn.ReadBool('R Options', 'bRSendContiguous', True);
   actRSend_CursorToBeginningLine.Visible:= ifTinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
   actRSend_CursorToEndLine.Visible      := ifTinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
@@ -5670,7 +5666,7 @@ begin
   frmTools.stbRMirrors.Panels[1].Text:= sRmirror;
 
   frmTools.JvDockClientTools.CanFloat:= bToolsCanFloat;
-  frmRterm.JvDockClientRterm.CanFloat:= bRtermCanFloat;
+  frmR_Term.JvDockClientRterm.CanFloat:= bRtermCanFloat;
 
   iAlphaBlendValue:= 255 - (255 * iTransparency) Div 100;
 end;
@@ -6254,7 +6250,7 @@ begin
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                        else seEditor:= synEditor2;
 
-  if (iSynWithFocus = 3) then pGetFunction_Completion(frmRTerm.synIO,
+  if (iSynWithFocus = 3) then pGetFunction_Completion(frmR_Term.synIO,
                                                       sLocLine,
                                                       sContext,
                                                       iOpenBrk,
@@ -6418,7 +6414,7 @@ procedure TfrmMain.synCompletion(Kind: SynCompletionType;
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                          else seEditor:= synEditor2;
 
-    if (iSynWithFocus = 3) then pGetLocLine(frmRTerm.synIO,
+    if (iSynWithFocus = 3) then pGetLocLine(frmR_Term.synIO,
                                             sLocLine)
                            else pGetLocLine(seEditor,
                                             sLocLine);
@@ -6591,7 +6587,7 @@ procedure TfrmMain.synCompletion(Kind: SynCompletionType;
         if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                          else seEditor:= synEditor2;
 
-    if (iSynWithFocus = 3) then pGetLocLine(frmRTerm.synIO,
+    if (iSynWithFocus = 3) then pGetLocLine(frmR_Term.synIO,
                                             sLocLine)
                            else pGetLocLine(seEditor,
                                             sLocLine);
@@ -7050,7 +7046,6 @@ begin
   actRCont_PrintVariableContent.Enabled   := bOption and (pgFiles.PageCount > 0);
   actRCont_RemoveAllObjects.Enabled       := bOption;
   actRCont_TCPConnection.Enabled          := bOption or not bIPLocal;
-  actRSend_Clipboard.Enabled              := bOption;
 
   // Rterm
   actRtermIOHistoryNext.Enabled := bOption and fRterm_Running;
@@ -7504,11 +7499,6 @@ begin
   actRSend_Selection.Hint      := 'R send: selection (echo=TRUE)';
   actRSend_Selection.ImageIndex:= 4;
 
-  // Clipboard
-  actRSend_Clipboard.Caption   := 'Clipboard (echo=TRUE)';
-  actRSend_Clipboard.Hint      := 'R send: clipboard (echo=TRUE)';
-  actRSend_Clipboard.ImageIndex:= 269;
-
   // Block
   actRSend_BlockMarked.Caption   := 'Marked block (echo=TRUE)';
   actRSend_BlockMarked.Hint      := 'R send: marked block (echo=TRUE)';
@@ -7536,11 +7526,6 @@ begin
   actRSend_Selection.Caption   := 'Selection';
   actRSend_Selection.Hint      := 'R send: selection';
   actRSend_Selection.ImageIndex:= 3;
-
-  // Clipboard
-  actRSend_Clipboard.Caption   := 'Clipboard';
-  actRSend_Clipboard.Hint      := 'R send: clipboard';
-  actRSend_Clipboard.ImageIndex:= 268;
 
   // Block
   actRSend_BlockMarked.Caption   := 'Marked block';
@@ -7693,7 +7678,7 @@ begin
 
     pSave_Preferences_Old_Version;
 
-    frmRterm:= TfrmRterm.Create(nil);
+    frmR_Term:= TfrmR_Term.Create(nil);
     frmSplash.pb.Position:= 4;
 
     pSet_Preferences_Application;
@@ -7872,7 +7857,7 @@ begin
   end;
 
   pSet_DataCompletion(synIO_Tip,
-                      frmRterm.synIO,
+                      frmR_Term.synIO,
                       'CTRL+SPACE');
 
 
@@ -7880,7 +7865,7 @@ begin
     RHistory.fLoad_FromFile(sPath_App + '\Rhistory.txt');
 
   pSet_DataCompletion(synIO_History,
-                      frmRterm.synIO,
+                      frmR_Term.synIO,
                       'CTRL+ALT+SPACE');
 end;
 
@@ -8446,30 +8431,30 @@ procedure TfrmMain.pCheck_Data;
 
 var
   sPathReadmeDB,
-   sFileRcard,
-   sFileRmirrors,
-   sFileComments,
-   sFileCompletion,
-   sFileShortcuts,
-   sFileRH_Send,
-   sFileRH_Control,
-   sFileRH_Custom,
-   sFileEditor,
-   sFileCache: string;
+   sFile_Rcard,
+   sFile_Rmirrors,
+   sFile_Comments,
+   sFile_Completion,
+   sFile_App_Shortcuts,
+   sFile_RH_Send,
+   sFile_RH_Control,
+   sFile_RH_Custom,
+   sFile_Editor_Keystrokes,
+   sFile_Cache: string;
 
   tfTmp: TextFile;
 
 begin
-  sFileCache     := sPath_Data + '\Cache.xml';
-  sFileRcard     := sPath_Data + '\Rcard.xml';
-  sFileRmirrors  := sPath_Data + '\Rmirrors.xml';
-  sFileComments  := sPath_Data + '\Comments.xml';
-  sFileCompletion:= sPath_Data + '\Completion.xml';
-  sFileShortcuts := sPath_Data + '\App_Shortcuts.xml';
-  sFileRH_Send   := sPath_Data + '\RH_Send.xml';
-  sFileRH_Control:= sPath_Data + '\RH_Control.xml';
-  sFileRH_Custom := sPath_Data + '\RH_Custom.xml';
-  sFileEditor    := sPath_Data + '\Editor_Keystrokes.xml';
+  sFile_Cache            := sPath_Data + '\Cache.xml';
+  sFile_Rcard            := sPath_Data + '\Rcard.xml';
+  sFile_Rmirrors         := sPath_Data + '\Rmirrors.xml';
+  sFile_Comments         := sPath_Data + '\Comments.xml';
+  sFile_Completion       := sPath_Data + '\Completion.xml';
+  sFile_App_Shortcuts    := sPath_Data + '\App_Shortcuts.xml';
+  sFile_RH_Send          := sPath_Data + '\RH_Send.xml';
+  sFile_RH_Control       := sPath_Data + '\RH_Control.xml';
+  sFile_RH_Custom        := sPath_Data + '\RH_Custom.xml';
+  sFile_Editor_Keystrokes:= sPath_Data + '\Editor_Keystrokes.xml';
 
   try
     // Both files below were renamed in version 5.6.1.1: they can be deleted
@@ -8536,15 +8521,15 @@ begin
     end;
 
     // Cache
-    if not FileExists(sFileCache)  then begin
+    if not FileExists(sFile_Cache)  then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'Cache.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileCache) +
+                                   ExtractFileName(sFile_Cache) +
                                    '(version = ' +
-                                   sCurrentVersion_Cache +
+                                   sCurr_Version_Cache +
                                    ')' +
                                    ': CREATED');
     end
@@ -8555,23 +8540,23 @@ begin
                    'Cache.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileCache) +
+                                   ExtractFileName(sFile_Cache) +
                                    '(version = ' +
-                                   sCurrentVersion_Cache +
+                                   sCurr_Version_Cache +
                                    ')' +
                                    ': OK');
     end;
 
     // Comments
-    if not FileExists(sFileComments)  then begin
+    if not FileExists(sFile_Comments)  then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'Comments.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileComments) +
+                                   ExtractFileName(sFile_Comments) +
                                    '(version = ' +
-                                   sCurrentVersion_Comments +
+                                   sCurr_Version_Comments +
                                    ')' +
                                    ': CREATED');
     end
@@ -8582,23 +8567,23 @@ begin
                      'Comments.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileComments) +
+                                   ExtractFileName(sFile_Comments) +
                                    '(version = ' +
-                                   sCurrentVersion_Comments +
+                                   sCurr_Version_Comments +
                                    ')' +
                                    ': OK');
     end;
 
     // Completion
-    if not FileExists(sFileCompletion)  then begin
+    if not FileExists(sFile_Completion)  then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'Completion.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileCompletion) +
+                                   ExtractFileName(sFile_Completion) +
                                    '(version = ' +
-                                   sCurrentVersion_Completion +
+                                   sCurr_Version_Completion +
                                    ')' +
                                    ': CREATED');
     end
@@ -8609,23 +8594,23 @@ begin
                      'Completion.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileCompletion) +
+                                   ExtractFileName(sFile_Completion) +
                                    '(version = ' +
-                                   sCurrentVersion_Completion +
+                                   sCurr_Version_Completion +
                                    ')' +
                                    ': OK');
     end;
 
     // Editor
-    if not FileExists(sFileEditor) then begin
+    if not FileExists(sFile_Editor_Keystrokes) then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'Editor_Keystrokes.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileEditor) +
+                                   ExtractFileName(sFile_Editor_Keystrokes) +
                                    '(version = ' +
-                                   sCurrentVersion_Editor +
+                                   sCurr_Version_Editor_Keystrokes +
                                    ')' +
                                    ': CREATED');
     end
@@ -8636,23 +8621,23 @@ begin
                      'Editor_Keystrokes.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileEditor) +
+                                   ExtractFileName(sFile_Editor_Keystrokes) +
                                    '(version = ' +
-                                   sCurrentVersion_Editor +
+                                   sCurr_Version_Editor_Keystrokes +
                                    ')' +
                                    ': OK');
     end;
 
     // Rcard
-    if not FileExists(sFileRcard) then begin
+    if not FileExists(sFile_Rcard) then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'Rcard.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRcard) +
+                                   ExtractFileName(sFile_Rcard) +
                                    '(version = ' +
-                                   sCurrentVersion_Rcard +
+                                   sCurr_Version_Rcard +
                                    ')' +
                                    ': CREATED');
     end
@@ -8663,23 +8648,23 @@ begin
                      'Rcard.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRcard) +
+                                   ExtractFileName(sFile_Rcard) +
                                    '(version = ' +
-                                   sCurrentVersion_Rcard +
+                                   sCurr_Version_Rcard +
                                    ')' +
                                    ': OK');
     end;
 
     // RH_Control
-    if not FileExists(sFileRH_Control) then begin
+    if not FileExists(sFile_RH_Control) then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'RH_Control.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Control) +
+                                   ExtractFileName(sFile_RH_Control) +
                                    '(version = ' +
-                                   sCurrentVersion_RH_Control +
+                                   sCurr_Version_RH_Control +
                                    ')' +
                                    ': CREATED');
     end
@@ -8690,23 +8675,23 @@ begin
                      'RH_Control.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Control) +
+                                   ExtractFileName(sFile_RH_Control) +
                                    '(version = ' +
-                                   sCurrentVersion_RH_Control +
+                                   sCurr_Version_RH_Control +
                                    ')' +
                                    ': OK');
     end;
 
     // RH_Custom
-    if not FileExists(sFileRH_Custom) then begin
+    if not FileExists(sFile_RH_Custom) then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'RH_Custom.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Custom) +
+                                   ExtractFileName(sFile_RH_Custom) +
                                    '(version = ' +
-                                   sCurrentVersion_RH_Custom +
+                                   sCurr_Version_RH_Custom +
                                    ')' +
                                    ': CREATED');
     end
@@ -8717,23 +8702,23 @@ begin
                      'RH_Custom.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Custom) +
+                                   ExtractFileName(sFile_RH_Custom) +
                                    '(version = ' +
-                                   sCurrentVersion_RH_Custom +
+                                   sCurr_Version_RH_Custom +
                                    ')' +
                                    ': OK');
     end;
 
     // RH_Send
-    if not FileExists(sFileRH_Send) then begin
+    if not FileExists(sFile_RH_Send) then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'RH_Send.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Send) +
+                                   ExtractFileName(sFile_RH_Send) +
                                    '(version = ' +
-                                   sCurrentVersion_RH_Send +
+                                   sCurr_Version_RH_Send +
                                    ')' +
                                    ': CREATED');
     end
@@ -8744,23 +8729,23 @@ begin
                      'RH_Send.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRH_Send) +
+                                   ExtractFileName(sFile_RH_Send) +
                                    '(version = ' +
-                                   sCurrentVersion_RH_Send +
+                                   sCurr_Version_RH_Send +
                                    ')' +
                                    ': OK');
     end;
 
     // Rmirrors
-    if not FileExists(sFileRmirrors) then begin
+    if not FileExists(sFile_Rmirrors) then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'Rmirrors.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRmirrors) +
+                                   ExtractFileName(sFile_Rmirrors) +
                                    '(version = ' +
-                                   sCurrentVersion_Rmirrors +
+                                   sCurr_Version_Rmirrors +
                                    ')' +
                                    ': CREATED');
     end
@@ -8771,9 +8756,9 @@ begin
                      'Rmirrors.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileRmirrors) +
+                                   ExtractFileName(sFile_Rmirrors) +
                                    '(version = ' +
-                                   sCurrentVersion_Rmirrors +
+                                   sCurr_Version_Rmirrors +
                                    ')' +
                                    ': OK');
     end;
@@ -8781,15 +8766,15 @@ begin
     // Shortcuts
     if not FileExists(sShortcutsInUse) then sShortcutsInUse:= sPath_Data +
                                                               '\App_Shortcuts.xml';
-    if not FileExists(sFileShortcuts)  then begin
+    if not FileExists(sFile_App_Shortcuts)  then begin
       pUnpack_File(sFileDataOrigin,
                    sPath_Data,
                    'App_Shortcuts.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileShortcuts) +
+                                   ExtractFileName(sFile_App_Shortcuts) +
                                    '(version = ' +
-                                   sCurrentVersion_Shortcuts +
+                                   sCurr_Version_App_Shortcuts +
                                    ')' +
                                    ': CREATED');
     end
@@ -8800,9 +8785,9 @@ begin
                      'App_Shortcuts.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFileShortcuts) +
+                                   ExtractFileName(sFile_App_Shortcuts) +
                                    '(version = ' +
-                                   sCurrentVersion_Shortcuts +
+                                   sCurr_Version_App_Shortcuts +
                                    ')' +
                                    ': OK');
     end;
@@ -9450,8 +9435,8 @@ begin
     0: Exit;
     1: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor;
     2: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2;
-    3: seTmp:= frmRterm.synIO;
-    4: with frmRterm do
+    3: seTmp:= frmR_Term.synIO;
+    4: with frmR_Term do
          if Assigned(synLOG2) then seTmp:= synLOG2
                               else seTmp:= synLOG;
   end;
@@ -9471,8 +9456,8 @@ begin
     0: Exit;
     1: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor;
     2: seTmp:= (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2;
-    3: seTmp:= frmRterm.synIO;
-    4: with frmRterm do
+    3: seTmp:= frmR_Term.synIO;
+    4: with frmR_Term do
          if Assigned(synLOG2) then seTmp:= synLOG2
                               else seTmp:= synLOG;
   end;
@@ -9535,7 +9520,7 @@ end;
 
 procedure TfrmMain.pRmirrorsInterface_Update;
 begin
-  // TfrmRmirrors.FormActivate
+  // TfrmR_Mirrors.FormActivate
   with modDados do begin
     cdRmirrors.Filtered:= False;
 
@@ -9544,7 +9529,7 @@ begin
     cdRmirrors.Bookmark:= sRmirrors_BookMark;
   end;
 
-  // TfrmRmirrors.FormCloseQuery
+  // TfrmR_Mirrors.FormCloseQuery
   with modDados.cdRmirrors do begin
     IndexDefs.Clear;
 
@@ -9558,7 +9543,7 @@ begin
     IndexName:= 'Rmirrors_Idx';
   end;
 
-  // TfrmRmirrors.ActualizeCountries
+  // TfrmR_Mirrors.ActualizeCountries
   with modDados do begin
     pRmirrorsCountries_Filter(nil);
 
@@ -9568,7 +9553,7 @@ begin
     FreeAndNil(slRmirrors_Countries);
   end;
 
-  // TfrmRmirrors.FormClose
+  // TfrmR_Mirrors.FormClose
   with frmTools do begin
     lbCountries.ItemIndex:= iCountriesFilter;
     lbCountriesClick(Self);
@@ -9592,8 +9577,8 @@ var
 
 begin
   if fRterm_Running and
-     (not frmRTerm.cRterm.bRterm_Ready) then Exit
-                                        else Sleep(10*iDelay);
+     (not frmR_Term.cRterm.bRterm_Ready) then Exit
+                                         else Sleep(10*iDelay);
 
   sPath:= sUtilsOrigin +
           '\mirrors.R';
@@ -9757,10 +9742,10 @@ begin
         FreeAndNil(frmTools);
       end;
 
-    if Assigned(frmRterm) then
-      with frmRterm do begin
+    if Assigned(frmR_Term) then
+      with frmR_Term do begin
         Close;
-        FreeAndNil(frmRterm);
+        FreeAndNil(frmR_Term);
       end;
 
     if Assigned(frmDiffMain) then begin
@@ -11507,8 +11492,8 @@ begin
          with (Self.MDIChildren[i] as TfrmEditor) do
            if (sActiveEditor = 'synEditor') then seTmp:= (Self.MDIChildren[i] as TfrmEditor).synEditor
                                             else seTmp:= (Self.MDIChildren[i] as TfrmEditor).synEditor2;
-    3: seTmp:= frmRterm.synIO;
-    4: with frmRterm do
+    3: seTmp:= frmR_Term.synIO;
+    4: with frmR_Term do
          if Assigned(synLOG2) then seTmp:= synLOG2
                               else seTmp:= synLOG;
   end;
@@ -11729,7 +11714,7 @@ begin
   // Get Info
   if (not bRTinnRcom_Info) then
     if fRterm_Running and
-       (frmRTerm.cRterm.bRterm_Ready) then pR_Info
+       (frmR_Term.cRterm.bRterm_Ready) then pR_Info
     else if fRgui_Running then pR_Info;
 
   // Start svSocket
@@ -11834,7 +11819,7 @@ begin
                      else pSet_Mirrors(sInfo, 'FALSE');
 
   if fRterm_Running then begin
-    with frmRterm do
+    with frmR_Term do
       iWidth:= (synIO.Width - synIO.Gutter.Width - 20) div synIO.CharWidth;
 
     if (iWidth >= 20) then
@@ -11898,7 +11883,7 @@ begin
 
   pDo_Send(sToSend);
 
-  if fRterm_Running then frmRTerm.cRterm.bRterm_Ready:= False;
+  if fRterm_Running then frmR_Term.cRterm.bRterm_Ready:= False;
   //ShowMessage(sInfo); Exit;  // To debug only
 end;
 
@@ -12035,7 +12020,7 @@ begin
   Screen.Cursor:= crHourglass;
 
   if fRterm_Running and
-    frmRTerm.cRterm.bRterm_Ready then begin
+    frmR_Term.cRterm.bRterm_Ready then begin
     Sleep(1*iDelay);
     actRCont_TCPConnectionExecute(nil);
   end
@@ -13041,28 +13026,28 @@ begin
   j:= 0;
   
   if (not bUpdate_FontSize) then begin
-    i:= frmRterm.synIO.Font.Size;
+    i:= frmR_Term.synIO.Font.Size;
 
-    if Assigned(frmRterm.synLOG2) then j:= frmRterm.synLOG2.Font.Size
-                                  else j:= frmRterm.synLOG.Font.Size;
+    if Assigned(frmR_Term.synLOG2) then j:= frmR_Term.synLOG2.Font.Size
+                                   else j:= frmR_Term.synLOG.Font.Size;
   end;
 
   with coEditor do begin
-    AssignTo(frmRterm.synIO);
+    AssignTo(frmR_Term.synIO);
 
-    if Assigned(frmRterm.synLOG2) then AssignTo(frmRterm.synLOG2)
-                                  else AssignTo(frmRterm.synLOG);
+    if Assigned(frmR_Term.synLOG2) then AssignTo(frmR_Term.synLOG2)
+                                   else AssignTo(frmR_Term.synLOG);
   end;
 
   if (not bUpdate_FontSize) then begin
-    frmRterm.synIO.Font.Size:= i;
+    frmR_Term.synIO.Font.Size:= i;
 
-    if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Font.Size:= j
-                                  else frmRterm.synLOG.Font.Size:= j;
+    if Assigned(frmR_Term.synLOG2) then frmR_Term.synLOG2.Font.Size:= j
+                                   else frmR_Term.synLOG.Font.Size:= j;
   end;
 
   // Not all options of the editor are suitable to synIO
-  with frmRterm.synIO do begin
+  with frmR_Term.synIO do begin
     // Gutter
     Gutter.ShowLineNumbers:= False;  // Fixed vaule!
     Gutter.Width          := 15;     // It is necessary to gutter be visible when ShowLineNumbers is False and Gutter.Visible is True;
@@ -13079,7 +13064,7 @@ begin
   end;
 
   // Not all options of the editor are suitable to synLOG
-  with frmRterm.synLOG do begin
+  with frmR_Term.synLOG do begin
     // Gutter
     Gutter.ShowLineNumbers:= False;  // Fixed vaule!
     Gutter.Width          := 15;     // Fixed vaule!
@@ -13095,8 +13080,8 @@ begin
   end;
 
   // Not all options of the editor are suitable to synLOG2
-  if Assigned(frmRterm.synLOG2) then
-    with frmRterm.synLOG2 do begin
+  if Assigned(frmR_Term.synLOG2) then
+    with frmR_Term.synLOG2 do begin
       // Gutter
       Gutter.ShowLineNumbers:= False;  // Fixed vaule!
       Gutter.Width          := 15;     // Fixed vaule!
@@ -13285,8 +13270,8 @@ begin
     pgTxt2Tags.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
   end;
 
-  with frmRterm do
-    frmRterm.pgRterm.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+  with frmR_Term do
+    frmR_Term.pgRterm.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
 
 end;
 
@@ -13356,7 +13341,7 @@ begin
      bRestoreIniDock then begin
     frmTools.Visible       := True;
     actToolsVisible.Checked:= True;
-    frmRterm.Visible       := True;
+    frmR_Term.Visible       := True;
     actRtermVisible.Checked:= True;
     DeleteFile(sIniDockFilePath);  // Delete old Tinn_dock.ini
     bRestoreIniDock:= False;
@@ -13370,7 +13355,7 @@ begin
                nil,
                AlClient);
 
-  with frmRterm do
+  with frmR_Term do
     ManualDock(JvDockServer.RightDockPanel,
                nil,
                AlClient);
@@ -13390,7 +13375,7 @@ begin
     actRtermVisible.Checked:= True;
 
     ShowDockForm(frmTools);
-    ShowDockForm(frmRterm);
+    ShowDockForm(frmR_Term);
 
     actRtermDivideExecute(nil);
     pSet_InterfaceSize(frmTools,
@@ -13407,10 +13392,10 @@ begin
   FreeAndNil(ifTinn_Tmp);
 }
   actToolsVisible.Checked:= GetFormVisible(frmTools);
-  actRtermVisible.Checked:= GetFormVisible(frmRterm);
+  actRtermVisible.Checked:= GetFormVisible(frmR_Term);
 
-  with frmRterm.pgRterm do
-    ActivePage:= frmRterm.tbsIO;
+  with frmR_Term.pgRterm do
+    ActivePage:= frmR_Term.tbsIO;
 
   // Rterm
   if bRtermSingle then  // IO and Log in the same view
@@ -14040,7 +14025,6 @@ begin
       // Send to R
       cbRCurrentLineToTop.Checked         := actRSend_CurrentLineToTop.Visible;
       cbRSendBlockMarked.Checked          := actRSend_BlockMarked.Visible;
-      cbRSendClipboard.Checked            := actRSend_Clipboard.Visible;
       cbRSendContiguous.Checked           := actRSend_Contiguous.Visible;
       cbRSendCursorToBeginningLine.Checked:= actRSend_CursorToBeginningLine.Visible;
       cbRSendCursorToEndLine.Checked      := actRSend_CursorToEndLine.Visible;
@@ -14129,17 +14113,17 @@ begin
                             else ItemIndex:= 1;
 
       with rdgRtermIO_Syntax do begin
-        if (frmRterm.synIO.Highlighter = dmSyn.synText)      then ItemIndex:= 0;
-        if (frmRterm.synIO.Highlighter = dmSyn.synText_term) then ItemIndex:= 1;
-        if (frmRterm.synIO.Highlighter = dmSyn.synR)         then ItemIndex:= 2;
-        if (frmRterm.synIO.Highlighter = dmSyn.synR_term)    then ItemIndex:= 3;
+        if (frmR_Term.synIO.Highlighter = dmSyn.synText)      then ItemIndex:= 0;
+        if (frmR_Term.synIO.Highlighter = dmSyn.synText_term) then ItemIndex:= 1;
+        if (frmR_Term.synIO.Highlighter = dmSyn.synR)         then ItemIndex:= 2;
+        if (frmR_Term.synIO.Highlighter = dmSyn.synR_term)    then ItemIndex:= 3;
       end;
 
       with rdgRtermLOG_Syntax do begin
-        if (frmRterm.synLOG.Highlighter = dmSyn.synText)      then ItemIndex:= 0;
-        if (frmRterm.synLOG.Highlighter = dmSyn.synText_term) then ItemIndex:= 1;
-        if (frmRterm.synLOG.Highlighter = dmSyn.synR)         then ItemIndex:= 2;
-        if (frmRterm.synLOG.Highlighter = dmSyn.synR_term)    then ItemIndex:= 3;
+        if (frmR_Term.synLOG.Highlighter = dmSyn.synText)      then ItemIndex:= 0;
+        if (frmR_Term.synLOG.Highlighter = dmSyn.synText_term) then ItemIndex:= 1;
+        if (frmR_Term.synLOG.Highlighter = dmSyn.synR)         then ItemIndex:= 2;
+        if (frmR_Term.synLOG.Highlighter = dmSyn.synR_term)    then ItemIndex:= 3;
       end;
 
       with rdgRtermSend_Plus do
@@ -14176,7 +14160,6 @@ begin
         // Send to R alphabetically ordered
         actRSend_CurrentLineToTop.Visible     := cbRCurrentLineToTop.Checked;
         actRSend_BlockMarked.Visible          := cbRSendBlockMarked.Checked;
-        actRSend_Clipboard.Visible            := cbRSendClipboard.Checked;
         actRSend_Contiguous.Visible           := cbRSendContiguous.Checked;
         actRSend_CursorToBeginningLine.Visible:= cbRSendCursorToBeginningLine.Checked;
         actRSend_CursorToEndLine.Visible      := cbRSendCursorToEndLine.Checked;
@@ -14441,7 +14424,7 @@ begin
       end;
 
       frmTools.JvDockClientTools.CanFloat:= bToolsCanFloat;
-      frmRterm.JvDockClientRterm.CanFloat:= bRtermCanFloat;
+      frmR_Term.JvDockClientRterm.CanFloat:= bRtermCanFloat;
 
       // Update General
       pUpdate_Appearance;
@@ -15053,10 +15036,10 @@ end;
 procedure TfrmMain.menRserverClick(Sender: TObject);
 begin
   try
-    frmRserver:= TfrmRserver.Create(nil);
-    frmRserver.ShowModal;
+    frmR_Server:= TfrmR_Server.Create(nil);
+    frmR_Server.ShowModal;
   finally
-    FreeAndNil(frmRserver);
+    FreeAndNil(frmR_Server);
     pSet_Focus_Main;
   end;
   frmMain.Refresh;
@@ -15088,20 +15071,20 @@ procedure TfrmMain.menRtermHistoryNextClick(Sender: TObject);
 begin
   if not fRterm_Running then Exit;
 
-  with frmRterm do begin
+  with frmR_Term do begin
     synIO.CaretY:= synIO.Lines.Count;
     if (synIO.SelText <> EmptyStr) then Exit;
-    if frmRterm.bRterm_Plus then synIO.LineText:= '+ ' +
+    if frmR_Term.bRterm_Plus then synIO.LineText:= '+ ' +
                                                   RHistory.fGet_Next
     else begin
-      if frmRterm.bRUnderDebug_Function or
-         frmRterm.bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
-                                                             ' ' +
-                                                             RHistory.fGet_Next
+      if frmR_Term.bRUnderDebug_Function or
+         frmR_Term.bRUnderDebug_Package then synIO.LineText:= frmR_Term.sRDebug_Prefix +
+                                                              ' ' +
+                                                              RHistory.fGet_Next
                               else synIO.LineText:= '> ' +
                                                     RHistory.fGet_Next;
 
-      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+      if bRUnderScan_Function then synIO.LineText:= frmR_Term.sRScan_Prefix +
                                                     RHistory.fGet_Next
                               else synIO.LineText:= '> ' +
                                                     RHistory.fGet_Next;
@@ -15116,7 +15099,7 @@ procedure TfrmMain.menRtermHistoryPriorClick(Sender: TObject);
 begin
   if not fRterm_Running then Exit;
 
-  with frmRterm do begin
+  with frmR_Term do begin
     synIO.CaretY:= synIO.Lines.Count;
     if (synIO.SelText <> EmptyStr) then Exit;
     if bRterm_Plus then synIO.LineText:= '+ ' +
@@ -15129,7 +15112,7 @@ begin
                               else synIO.LineText:= '> ' +
                                                     RHistory.fGet_Prior;
 
-      if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+      if bRUnderScan_Function then synIO.LineText:= frmR_Term.sRScan_Prefix +
                                                     RHistory.fGet_Prior
                               else synIO.LineText:= '> ' +
                                                     RHistory.fGet_Prior;
@@ -15161,8 +15144,8 @@ procedure TfrmMain.csRGeneralConnect(Sender: TObject;
 begin
   bConectionError              := False;
   actRCont_TCPConnection.Checked:= True;
-  if Assigned(frmRserver) then begin
-    with frmRserver do begin
+  if Assigned(frmR_Server) then begin
+    with frmR_Server do begin
       chbIPConnected.Checked    := True;
       edtIPClientIP.Text        := Socket.LocalAddress;
       edtIPClient.Text          := Socket.LocalHost;
@@ -15193,8 +15176,8 @@ begin
   if (i <= 1) then sTmp:= 'Local R socket server disconnected.' +
                           #13#10 {#$D#$A};
 
-  if Assigned(frmRserver) then begin
-    with frmRserver do begin
+  if Assigned(frmR_Server) then begin
+    with frmR_Server do begin
       memRTCPIP.Lines.Add(sTmp);
       chbIPConnected.Checked    := False;
       edtIPClientIP.Text        := EmptyStr;
@@ -15208,7 +15191,7 @@ begin
   end;
 
   if not bIPLocal then bIPRemoteConnected:= False;
-  frmRterm.synIO.Lines.Add(sTmp);
+  frmR_Term.synIO.Lines.Add(sTmp);
 end;
 
 procedure TfrmMain.csREnvironmentError(Sender: TObject;
@@ -15251,8 +15234,8 @@ begin
                 [mbOk],
                 0);
 
-  if Assigned(frmRserver) then begin
-    with frmRserver do begin
+  if Assigned(frmR_Server) then begin
+    with frmR_Server do begin
       chbIPConnected.Checked    := False;
       edtIPClientIP.Text        := EmptyStr;
       edtIPClient.Text          := EmptyStr;
@@ -15340,9 +15323,9 @@ begin
       GetMem(buf,
              1024);
       // R server output
-      if Assigned(frmRserver) then
-        if (frmRserver.Visible) then
-          with frmRserver.memRTCPIP do begin
+      if Assigned(frmR_Server) then
+        if (frmR_Server.Visible) then
+          with frmR_Server.memRTCPIP do begin
             Lines.BeginUpdate;
             Lines.SaveToStream(mePriorContent);
             muStream_1.AddStream(mePriorContent);
@@ -15358,7 +15341,7 @@ begin
           end;
 
       // R output
-      with frmRterm.synIO do begin
+      with frmR_Term.synIO do begin
         Lines.BeginUpdate;
         Lines.Add(EmptyStr);
         mePriorContent.Clear;
@@ -15405,7 +15388,7 @@ begin
      not bRTCPIPConsoleEcho then Exit;
   sInstruction:= TrimRight(sInstruction);
 
-  with frmRterm.synIO do begin
+  with frmR_Term.synIO do begin
     Lines.BeginUpdate;
     if bNewLine then Lines.Add(sSignal +
                                sInstruction)
@@ -16212,14 +16195,14 @@ var
 
 begin
   //RHistory.Add(trim(sTmp));
-  with frmRterm.synIO do begin
+  with frmR_Term.synIO do begin
     ExecuteCommand(ecEditorBottom,
                    #0,
                    nil);
 
-    if frmRterm.bRterm_Plus then begin
+    if frmR_Term.bRterm_Plus then begin
       LineText  := '+ ' + sTmp;
-      frmRterm.bRterm_Plus:= False;
+      frmR_Term.bRterm_Plus:= False;
     end
     else
       if (trim(LineText) = '>') or
@@ -16249,15 +16232,15 @@ begin
                    #0,
                    nil);
 
-    frmRTerm.synIO.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
+    frmR_Term.synIO.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
   end;
 end;
 
 procedure TfrmMain.pCheck_Rterm;
 begin
-  if not GetFormVisible(frmRterm) then ShowDockForm(frmRterm);
+  if not GetFormVisible(frmR_Term) then ShowDockForm(frmR_Term);
 
-  actRtermVisible.Checked:= GetFormVisible(frmRterm);
+  actRtermVisible.Checked:= GetFormVisible(frmR_Term);
 end;
 
 procedure TfrmMain.pDo_Send(var sTmp: string;
@@ -16278,7 +16261,7 @@ begin
     // The order below is important for sincronization: do not change!
     if bSendToSynIO then
       pSend_ToConsole(sTmp);
-    with frmRterm.cRterm do
+    with frmR_Term.cRterm do
       SendInput(sToSend);
   end
   // Rgui: priority 2
@@ -17350,14 +17333,14 @@ begin
   end;
 
   seEditor.OnPaintTransient:= nil;
-  frmRTerm.synIO.OnPaintTransient:= nil;
+  frmR_Term.synIO.OnPaintTransient:= nil;
 
   sTmp:= fGetLine(bGoToNextValidLine,
                   seEditor);
   seEditor.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
 
   if (sTmp = EmptyStr) then begin
-    frmRTerm.synIO.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
+    frmR_Term.synIO.OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
     Exit;
   end;
 
@@ -18139,10 +18122,10 @@ begin
   if fRterm_Running then begin
     pCheck_Rterm;
 
-    if frmRterm.bRUnderDebug_Function or
-       frmRterm.bRUnderDebug_Package then begin
+    if frmR_Term.bRUnderDebug_Function or
+       frmR_Term.bRUnderDebug_Package then begin
 
-      with frmRterm do begin
+      with frmR_Term do begin
         synIO.LineText:= sRDebug_Prefix +
                          ' ';
         synIO.ExecuteCommand(ecLineEnd,
@@ -18152,7 +18135,7 @@ begin
     end
     else sToSend:= EmptyStr + #13#10;
 
-    frmRterm.cRterm.SendInput(sToSend);
+    frmR_Term.cRterm.SendInput(sToSend);
     Exit;
   end;
 
@@ -18169,7 +18152,7 @@ begin
   // R remote: priority 3
   if bIPRemoteConnected then begin
     if not fUseTCPIP then Exit;
-    frmRterm.synIO.Clear;
+    frmR_Term.synIO.Clear;
     sToSend:= EmptyStr + #13#10;
     csRGeneral.Socket.SendText(sToSend);
     pSet_Focus_Rgui(iDelay div 4);
@@ -18218,15 +18201,15 @@ begin
     //Sleep(2*iDelay);
 
     // IO
-    with frmRterm.synIO do begin
+    with frmR_Term.synIO do begin
       for i:= 0 to 9 do
         ClearBookMark(i);
       Clear;
     end;
 
     // Log
-    if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                  else seLOG:= frmRterm.synLOG;
+    if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                   else seLOG:= frmR_Term.synLOG;
 
     with seLOG do begin
       for i:= 0 to 9 do
@@ -18264,7 +18247,7 @@ begin
   // R remote: priority 3
   if bIPRemoteConnected then begin
     if not fUseTCPIP then Exit;
-    with frmRterm.synIO do begin
+    with frmR_Term.synIO do begin
       for i:= 0 to 9 do
         ClearBookMark(i);
       Clear;
@@ -18553,7 +18536,7 @@ begin
       if (csREnvironment.Active) then csREnvironment.Socket.SendText(sToSend)
       else begin
         pCheck_Rterm;
-        frmRterm.cRterm.SendInput(sToSend);
+        frmR_Term.cRterm.SendInput(sToSend);
         pSend_ToConsole(sTmp);
       end;
 
@@ -18596,7 +18579,7 @@ begin
          2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
               if CanFocus then SetFocus;
          // synIO
-         3: with (frmRterm.synIO as TSynEdit) do
+         3: with (frmR_Term.synIO as TSynEdit) do
               if CanFocus then SetFocus;
       end;
     end;
@@ -18706,7 +18689,7 @@ begin
       if (csRExplorer.Active) then csRExplorer.Socket.SendText(sToSend)
       else begin
         pCheck_Rterm;
-        frmRterm.cRterm.SendInput(sToSend);
+        frmR_Term.cRterm.SendInput(sToSend);
         pSend_ToConsole(sTmp);
       end;
     end
@@ -18748,7 +18731,7 @@ begin
          2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
               if CanFocus then SetFocus;
          // synIO
-         3: with (frmRterm.synIO as TSynEdit) do
+         3: with (frmR_Term.synIO as TSynEdit) do
               if CanFocus then SetFocus;
       end;
     end;
@@ -19234,7 +19217,7 @@ var
   i: integer;
   
 begin
-  synMR.Editor:= frmRterm.synIO;
+  synMR.Editor:= frmR_Term.synIO;
   i:= fFindTop_Window;
   with (Self.MDIChildren[i] as TfrmEditor) do
     if (sActiveEditor = 'synEditor2') then synMR.Editor:= (Self.MDIChildren[i] as TfrmEditor).synEditor2
@@ -19981,15 +19964,15 @@ var
 begin
   with modDados.cdRcard do
     pTmp:= GetBookmark;
-  Application.CreateForm(TfrmRcard,
-                         frmRcard);
+  Application.CreateForm(TfrmR_Card,
+                         frmR_Card);
 
-  with frmRcard do
+  with frmR_Card do
     try
       ShowModal;
     finally
       frmMain.Refresh;
-      FreeAndNil(frmRcard);
+      FreeAndNil(frmR_Card);
     end;
 
   with modDados.cdRcard do begin
@@ -20005,15 +19988,15 @@ var
 begin
   with modDados.cdRmirrors do
     pTmp:= GetBookmark;
-  Application.CreateForm(TfrmRmirrors,
-                         frmRmirrors);
+  Application.CreateForm(TfrmR_Mirrors,
+                         frmR_Mirrors);
 
-  with frmRmirrors do
+  with frmR_Mirrors do
     try
       ShowModal;
     finally
       frmMain.Refresh;
-      FreeAndNil(frmRmirrors);
+      FreeAndNil(frmR_Mirrors);
     end;
 
   with modDados.cdRmirrors do begin
@@ -21211,8 +21194,8 @@ var
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -21221,7 +21204,7 @@ begin
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           CopyToClipboard;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
+     3: with (frmR_Term.synIO as TSynEdit) do
           CopyToClipboard;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
@@ -21237,8 +21220,8 @@ var
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -21247,7 +21230,7 @@ begin
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           CutToClipboard;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
+     3: with (frmR_Term.synIO as TSynEdit) do
           CutToClipboard;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
@@ -21265,8 +21248,8 @@ var
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -21278,7 +21261,7 @@ begin
 
      // synIO
      3: begin
-        with (frmRterm.synIO as TSynEdit) do begin
+        with (frmR_Term.synIO as TSynEdit) do begin
           sLine:= trim(LineText);
           sLine:= StringReplace(sLine,
                                 '>',
@@ -21315,8 +21298,8 @@ var
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -21325,7 +21308,7 @@ begin
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           Undo;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
+     3: with (frmR_Term.synIO as TSynEdit) do
           Undo;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
@@ -21341,8 +21324,8 @@ var
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLog2) then seLog:= frmRterm.synLOG2
-                                else seLog:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLog2) then seLog:= frmR_Term.synLOG2
+                                 else seLog:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -21351,7 +21334,7 @@ begin
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           Redo;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
+     3: with (frmR_Term.synIO as TSynEdit) do
           Redo;
      // synLOG and synLOG2
      4: with (seLog as TSynEdit) do
@@ -21367,8 +21350,8 @@ var
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -21377,7 +21360,7 @@ begin
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           SelectAll;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
+     3: with (frmR_Term.synIO as TSynEdit) do
           SelectAll;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
@@ -21501,14 +21484,14 @@ begin
     if (sActiveEditor = 'synEditor') then seEditor:= synEditor
                                      else seEditor:= synEditor2;
 
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
 
   case fGet_Focus of
         // synEditor or synEditor2
     1..2: pMatch_Bracket(seEditor);
         // synIO
-       3: pMatch_Bracket(frmRterm.synIO);
+       3: pMatch_Bracket(frmR_Term.synIO);
         // synLOG and synLOG2
        4: pMatch_Bracket(seLOG);
   end;
@@ -21741,8 +21724,8 @@ begin
   with actRtermLogLineWrap do
     Checked:= not Checked;
 
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
 
   with seLOG do
     WordWrap:= actRtermLogLineWrap.Checked;
@@ -21765,7 +21748,7 @@ begin
   with actRtermIOLineWrap do
     Checked:= not Checked;
 
-  with frmRterm.synIO do
+  with frmR_Term.synIO do
     WordWrap:= actRtermIOLineWrap.Checked;
 end;
 
@@ -22402,7 +22385,7 @@ begin
   if bSendTask then begin  // Rterm local must be running!
     pCheck_Rterm;
     sToSend:= sTmp + #13#10;
-    frmRterm.cRterm.SendInput(sToSend);
+    frmR_Term.cRterm.SendInput(sToSend);
     pSend_ToConsole(sTmp);
   end;
 
@@ -23753,8 +23736,8 @@ begin
 
   Result:= False;
 
-  if Assigned(frmRterm) then
-    with frmRterm do
+  if Assigned(frmR_Term) then
+    with frmR_Term do
       Result:= bRterm_Running;
 
   with actRguiReturnFocus do
@@ -24922,8 +24905,8 @@ procedure TfrmMain.actRCont_TermStartCloseExecute(Sender: TObject);
 
   procedure pCloseRterm;
   begin
-    if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Clear
-                                  else frmRterm.synLOG.Clear;
+    if Assigned(frmR_Term.synLOG2) then frmR_Term.synLOG2.Clear
+                                   else frmR_Term.synLOG.Clear;
 
     stbMain.Panels[9].Text:= EmptyStr;
 
@@ -24932,10 +24915,10 @@ procedure TfrmMain.actRCont_TermStartCloseExecute(Sender: TObject);
       Checked:= False;
     end;
 
-    frmRterm.cRterm.StopProcess;
+    frmR_Term.cRterm.StopProcess;
     if Assigned(R_Useful) then R_Useful.Free;
 
-    frmRterm.bRterm_Plus:= False;
+    frmR_Term.bRterm_Plus:= False;
     bRRequireKnitr:= False;
   end;
 
@@ -24974,7 +24957,7 @@ begin
 
 // Trying to solve focus in SynIO whem Auto Hide is On
 //    if (pgFiles.PageCount <= 0) then begin
-//      ShowDockForm(frmRterm);
+//      ShowDockForm(frmR_Term);
 //      Application.ProcessMessages;
 //      Sleep(1000);
 //    end;
@@ -24983,10 +24966,10 @@ begin
     pSet_Rlibrary_Path(sPath_Rterm);
     pCheck_Rterm;
 
-    if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Clear
-                                  else frmRterm.synLOG.Clear;
+    if Assigned(frmR_Term.synLOG2) then frmR_Term.synLOG2.Clear
+                                   else frmR_Term.synLOG.Clear;
 
-    with frmRterm do begin
+    with frmR_Term do begin
       synIO.Clear;
 
       iSynWithFocus:= 3;
@@ -25015,7 +24998,7 @@ begin
 
       case userOption of
         mrYes: begin
-                 with frmRterm.synIO do begin
+                 with frmR_Term.synIO do begin
                    sTmp:= 'save.image()';
                    pDo_Send(sTmp);
                  end;
@@ -25066,16 +25049,16 @@ const
   iH = 143;
 
 begin
-  if not GetFormVisible(frmRterm) then Exit;
+  if not GetFormVisible(frmR_Term) then Exit;
 
   if GetFormVisible(frmTools) then HideDockForm(frmTools);
   actToolsVisible.Checked:= GetFormVisible(frmTools);
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then pSet_InterfaceSize(frmRterm, frmMain.Width  - iW)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then pSet_InterfaceSize(frmRterm, frmMain.Height - iH)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then pSet_InterfaceSize(frmRterm, frmMain.Width  - iW)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then pSet_InterfaceSize(frmRterm, frmMain.Height - iH); // Bottom
+    if      LeftDockPanel.ContainsControl(frmR_Term)   then pSet_InterfaceSize(frmR_Term, frmMain.Width  - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmR_Term)    then pSet_InterfaceSize(frmR_Term, frmMain.Height - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmR_Term)  then pSet_InterfaceSize(frmR_Term, frmMain.Width  - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmR_Term) then pSet_InterfaceSize(frmR_Term, frmMain.Height - iH); // Bottom
 
   pSet_Focus_Main;
 end;
@@ -25084,15 +25067,15 @@ procedure TfrmMain.actRtermAutoHideExecute(Sender: TObject);
 begin
   if not actRtermVisible.Checked then Exit;  // Nothing to do
 
-  if frmRterm.CanFocus then begin  // Toogles to auto hide on
+  if frmR_Term.CanFocus then begin  // Toogles to auto hide on
     with JvDockServer do
-      if      LeftDockPanel.ContainsControl(frmRterm)   then TJvDockVSNETPanel(JvDockServer.LeftDockPanel).DoAutoHideControl(frmRterm)    // Left
-      else if TopDockPanel.ContainsControl(frmRterm)    then TJvDockVSNETPanel(JvDockServer.TopDockPanel).DoAutoHideControl(frmRterm)     // Top
-      else if RightDockPanel.ContainsControl(frmRterm)  then TJvDockVSNETPanel(JvDockServer.RightDockPanel).DoAutoHideControl(frmRterm)   // Right
-      else if BottomDockPanel.ContainsControl(frmRterm) then TJvDockVSNETPanel(JvDockServer.BottomDockPanel).DoAutoHideControl(frmRterm); // Bottom
+      if      LeftDockPanel.ContainsControl(frmR_Term)   then TJvDockVSNETPanel(JvDockServer.LeftDockPanel).DoAutoHideControl(frmR_Term)    // Left
+      else if TopDockPanel.ContainsControl(frmR_Term)    then TJvDockVSNETPanel(JvDockServer.TopDockPanel).DoAutoHideControl(frmR_Term)     // Top
+      else if RightDockPanel.ContainsControl(frmR_Term)  then TJvDockVSNETPanel(JvDockServer.RightDockPanel).DoAutoHideControl(frmR_Term)   // Right
+      else if BottomDockPanel.ContainsControl(frmR_Term) then TJvDockVSNETPanel(JvDockServer.BottomDockPanel).DoAutoHideControl(frmR_Term); // Bottom
   end
   else  // Toogles to auto hide off
-    JvDockVSNetStyle.DoUnAutoHideDockForm(frmRterm);
+    JvDockVSNetStyle.DoUnAutoHideDockForm(frmR_Term);
 end;
 
 procedure TfrmMain.actRtermDivideExecute(Sender: TObject);
@@ -25101,13 +25084,13 @@ const
   iH = 74;
 
 begin
-  if not GetFormVisible(frmRterm) then Exit;
+  if not GetFormVisible(frmR_Term) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then pSet_InterfaceSize(frmRterm, frmMain.Width  div 2 - iW)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then pSet_InterfaceSize(frmRterm, frmMain.Height div 2 - iH)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then pSet_InterfaceSize(frmRterm, frmMain.Width  div 2 - iW)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then pSet_InterfaceSize(frmRterm, frmMain.Height div 2 - iH); // Bottom
+    if      LeftDockPanel.ContainsControl(frmR_Term)   then pSet_InterfaceSize(frmR_Term, frmMain.Width  div 2 - iW)  // Left
+    else if TopDockPanel.ContainsControl(frmR_Term)    then pSet_InterfaceSize(frmR_Term, frmMain.Height div 2 - iH)  // Top
+    else if RightDockPanel.ContainsControl(frmR_Term)  then pSet_InterfaceSize(frmR_Term, frmMain.Width  div 2 - iW)  // Right
+    else if BottomDockPanel.ContainsControl(frmR_Term) then pSet_InterfaceSize(frmR_Term, frmMain.Height div 2 - iH); // Bottom
 
   pSet_Focus_Main;
 end;
@@ -25117,13 +25100,13 @@ const
   iK = 20;
 
 begin
-  if not GetFormVisible(frmRterm) then Exit;
+  if not GetFormVisible(frmR_Term) then Exit;
 
   with JvDockServer do
-    if      LeftDockPanel.ContainsControl(frmRterm)   then pSet_InterfaceSize(frmRterm, frmMain.Width  div iK)  // Left
-    else if TopDockPanel.ContainsControl(frmRterm)    then pSet_InterfaceSize(frmRterm, frmMain.Height div iK)  // Top
-    else if RightDockPanel.ContainsControl(frmRterm)  then pSet_InterfaceSize(frmRterm, frmMain.Width  div iK)  // Right
-    else if BottomDockPanel.ContainsControl(frmRterm) then pSet_InterfaceSize(frmRterm, frmMain.Height div iK); // Bottom
+    if      LeftDockPanel.ContainsControl(frmR_Term)   then pSet_InterfaceSize(frmR_Term, frmMain.Width  div iK)  // Left
+    else if TopDockPanel.ContainsControl(frmR_Term)    then pSet_InterfaceSize(frmR_Term, frmMain.Height div iK)  // Top
+    else if RightDockPanel.ContainsControl(frmR_Term)  then pSet_InterfaceSize(frmR_Term, frmMain.Width  div iK)  // Right
+    else if BottomDockPanel.ContainsControl(frmR_Term) then pSet_InterfaceSize(frmR_Term, frmMain.Height div iK); // Bottom
 
   pSet_Focus_Main;
 end;
@@ -25136,8 +25119,8 @@ const
 begin
   if not GetFormVisible(frmTools) then Exit;
 
-  if GetFormVisible(frmRterm) then HideDockForm(frmRterm);
-  actRtermVisible.Checked:= GetFormVisible(frmRterm);
+  if GetFormVisible(frmR_Term) then HideDockForm(frmR_Term);
+  actRtermVisible.Checked:= GetFormVisible(frmR_Term);
 
   with JvDockServer do
     if      LeftDockPanel.ContainsControl(frmTools)   then pSet_InterfaceSize(frmTools, frmMain.Width  - iW)  // Left
@@ -25403,17 +25386,17 @@ end;
 
 procedure TfrmMain.actRtermVisibleExecute(Sender: TObject);
 begin
-  if not Assigned(frmRterm) then Exit;
+  if not Assigned(frmR_Term) then Exit;
 
-  if GetFormVisible(frmRterm) then HideDockForm(frmRterm)
-                              else begin
-                                ShowDockForm(frmRterm);
+  if GetFormVisible(frmR_Term) then HideDockForm(frmR_Term)
+                               else begin
+                                 ShowDockForm(frmR_Term);
 
-                                pSet_InterfaceSize(frmRterm,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
-                                                  frmRterm.iSize);  // http://stackoverflow.com/questions/27696359/delphi-jedi-docking-storage-remember
+                                 pSet_InterfaceSize(frmR_Term,         // It was necessary due to a bug in the component (hard to fix for simple users like me)
+                                                    frmR_Term.iSize);  // http://stackoverflow.com/questions/27696359/delphi-jedi-docking-storage-remember
                               end;
 
-  actRtermVisible.Checked:= GetFormVisible(frmRterm);
+  actRtermVisible.Checked:= GetFormVisible(frmR_Term);
 end;
 
 procedure TfrmMain.actToolsVisibleExecute(Sender: TObject);
@@ -25433,48 +25416,48 @@ end;
 
 procedure TfrmMain.actRtermTabsBottomExecute(Sender: TObject);
 begin
-  if not Assigned(frmRterm) then Exit;
-  with frmRterm.pgRterm do
+  if not Assigned(frmR_Term) then Exit;
+  with frmR_Term.pgRterm do
     TabsPosition:= fsdBottom;
   actRtermTabsBottom.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermTabsLeftExecute(Sender: TObject);
 begin
-  if not Assigned(frmRterm) then Exit;
-  with frmRterm.pgRterm do
+  if not Assigned(frmR_Term) then Exit;
+  with frmR_Term.pgRterm do
     TabsPosition:= fsdLeft;
   actRtermTabsLeft.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermTabsRightExecute(Sender: TObject);
 begin
-  if not Assigned(frmRterm) then Exit;
-  with frmRterm.pgRterm do
+  if not Assigned(frmR_Term) then Exit;
+  with frmR_Term.pgRterm do
     TabsPosition:= fsdRight;
   actRtermTabsRight.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermTabsTopExecute(Sender: TObject);
 begin
-  if not Assigned(frmRterm) then Exit;
-  with frmRterm.pgRterm do
+  if not Assigned(frmR_Term) then Exit;
+  with frmR_Term.pgRterm do
     TabsPosition:= fsdTop;
   actRtermTabsTop.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermWarningErrorExecute(Sender: TObject);
 begin
-  if not Assigned(frmRterm) then Exit;
+  if not Assigned(frmR_Term) then Exit;
 
   actRtermWarningError.Visible:= False;
   stbMain.Panels[9].Text:= EmptyStr; 
 
-  ShowDockForm(frmRterm);
-  if actRtermIOSplitRemove.Checked then frmRterm.pgRterm.ActivePage:= frmRterm.tbsLog
-                                   else frmRterm.pgRterm.ActivePage:= frmRterm.tbsIO;
+  ShowDockForm(frmR_Term);
+  if actRtermIOSplitRemove.Checked then frmR_Term.pgRterm.ActivePage:= frmR_Term.tbsLog
+                                   else frmR_Term.pgRterm.ActivePage:= frmR_Term.tbsIO;
 
-  actRtermVisible.Checked:= GetFormVisible(frmRterm);
+  actRtermVisible.Checked:= GetFormVisible(frmR_Term);
 end;
 
 procedure TfrmMain.actRtipInsertExecute(Sender: TObject);
@@ -25504,9 +25487,9 @@ end;
 
 procedure TfrmMain.actRtermIOSetFocusExecute(Sender: TObject);
 begin
-  if not frmRterm.Visible then Exit;
+  if not frmR_Term.Visible then Exit;
 
-  with frmRterm do
+  with frmR_Term do
     try
       pgRterm.ActivePage:= tbsIO;
       with synIO do
@@ -25524,18 +25507,18 @@ var
   sPriorLog: string;
 
 begin
-  if Assigned(frmRterm.synLOG2) then sPriorLog:= frmRterm.synLOG2.Text
-                                else sPriorLog:= frmRterm.synLOG.Text;
+  if Assigned(frmR_Term.synLOG2) then sPriorLog:= frmR_Term.synLOG2.Text
+                                 else sPriorLog:= frmR_Term.synLOG.Text;
 
-  frmRterm.pRtermSplit;
-  if Assigned(frmRterm.synLOG2) then
+  frmR_Term.pRtermSplit;
+  if Assigned(frmR_Term.synLOG2) then
 
-    with frmRterm.synLOG2 do begin
+    with frmR_Term.synLOG2 do begin
       BeginUpdate;
       WordWrap:= bLogLineWrap;
       Text:= sPriorLog;
 
-      PostMessage(TWinControl(frmRterm.synLOG2).Handle,
+      PostMessage(TWinControl(frmR_Term.synLOG2).Handle,
                   WM_SETFOCUS,
                   0,
                   0);  // Will force ecEditorBottom below
@@ -25546,12 +25529,12 @@ begin
       EndUpdate;
     end;
 
-  frmRterm.tbsLog.TabVisible:= False;
-  if frmRterm.Visible then
-    with frmRterm.synIO do
+  frmR_Term.tbsLog.TabVisible:= False;
+  if frmR_Term.Visible then
+    with frmR_Term.synIO do
         if Parent.CanFocus then SetFocus;
 
-  actRtermIOSplitHorizontal.Checked:= Assigned(frmRterm.synLOG2);
+  actRtermIOSplitHorizontal.Checked:= Assigned(frmR_Term.synLOG2);
   bRtermSingle    := True;
   bRtermHorizontal:= True;
 end;
@@ -25561,18 +25544,18 @@ var
   sPriorLog: string;
 
 begin
-  if Assigned(frmRterm.synLOG2) then sPriorLog:= frmRterm.synLOG2.Text
-                                else sPriorLog:= frmRterm.synLOG.Text;
+  if Assigned(frmR_Term.synLOG2) then sPriorLog:= frmR_Term.synLOG2.Text
+                                 else sPriorLog:= frmR_Term.synLOG.Text;
   
-  frmRterm.pRtermSplit(False);
+  frmR_Term.pRtermSplit(False);
 
-  if Assigned(frmRterm.synLOG2) then
-    with frmRterm.synLOG2 do begin
+  if Assigned(frmR_Term.synLOG2) then
+    with frmR_Term.synLOG2 do begin
       BeginUpdate;
       WordWrap:= bLogLineWrap;
       Text:= sPriorLog;
 
-      PostMessage(TWinControl(frmRterm.synLOG2).Handle,
+      PostMessage(TWinControl(frmR_Term.synLOG2).Handle,
                   WM_SETFOCUS,
                   0,
                   0);  // Will force ecEditorBottom below
@@ -25584,12 +25567,12 @@ begin
       EndUpdate;
     end;
 
-  frmRterm.tbsLog.TabVisible:= False;
-  if frmRterm.Visible then
-    with frmRterm.synIO do
+  frmR_Term.tbsLog.TabVisible:= False;
+  if frmR_Term.Visible then
+    with frmR_Term.synIO do
         if Parent.CanFocus then SetFocus;
 
-  actRtermIOSplitVertical.Checked:= Assigned(frmRterm.synLOG2);
+  actRtermIOSplitVertical.Checked:= Assigned(frmR_Term.synLOG2);
   bRtermSingle    := True;
   bRtermHorizontal:= False;
 end;
@@ -25599,26 +25582,26 @@ var
   sPriorLog: string;
 
 begin
-  if Assigned(frmRterm.synLOG2) then sPriorLog:= frmRterm.synLOG2.Text
-                                else sPriorLog:= frmRterm.synLOG.Text;
+  if Assigned(frmR_Term.synLOG2) then sPriorLog:= frmR_Term.synLOG2.Text
+                                 else sPriorLog:= frmR_Term.synLOG.Text;
 
-  if Assigned(frmRterm.splRIO) then FreeAndNil(frmRterm.splRIO);
+  if Assigned(frmR_Term.splRIO) then FreeAndNil(frmR_Term.splRIO);
 
-  if Assigned(frmRterm.synLOG2) then begin
-    with frmRterm.synIO do
+  if Assigned(frmR_Term.synLOG2) then begin
+    with frmR_Term.synIO do
       if CanFocus then SetFocus;
     Application.ProcessMessages;
-    FreeAndNil(frmRterm.synLOG2);
+    FreeAndNil(frmR_Term.synLOG2);
   end;
 
-  with frmRterm.synLOG do begin
+  with frmR_Term.synLOG do begin
     BeginUpdate;
 
     WordWrap:= bLogLineWrap;
 
     Text:= sPriorLog;
   
-    PostMessage(TWinControl(frmRterm.synLOG).Handle,
+    PostMessage(TWinControl(frmR_Term.synLOG).Handle,
                 WM_SETFOCUS,
                 0,
                 0);  // Will force ecEditorBottom below
@@ -25630,26 +25613,26 @@ begin
     EndUpdate;
   end;
 
-  frmRterm.synIO.Align:= alClient;
-  frmRterm.tbsLog.TabVisible:= True;
-  actRtermIOSplitRemove.Checked:= (frmRterm.synLOG2 = nil);
+  frmR_Term.synIO.Align:= alClient;
+  frmR_Term.tbsLog.TabVisible:= True;
+  actRtermIOSplitRemove.Checked:= (frmR_Term.synLOG2 = nil);
   bRtermSingle:= False;
   pUpdate_Rterm_Appearance;
 end;
 
 procedure TfrmMain.actRtermLOGSetFocusExecute(Sender: TObject);
 begin
-  if not frmRterm.Visible then Exit;
+  if not frmR_Term.Visible then Exit;
 
-  with frmRterm do
+  with frmR_Term do
     try
       if Assigned(synLOG2) then begin
-        pgRterm.ActivePage:= frmRterm.tbsIO;
+        pgRterm.ActivePage:= frmR_Term.tbsIO;
         with synLOG2 do
           if CanFocus then SetFocus;
       end
       else begin
-        pgRterm.ActivePage:= frmRterm.tbsLog;
+        pgRterm.ActivePage:= frmR_Term.tbsLog;
         with synLOG do
           if CanFocus then SetFocus;
       end;
@@ -25698,60 +25681,60 @@ end;
 
 procedure TfrmMain.actRtermIO_TextExecute(Sender: TObject);
 begin
-  frmRterm.synIO.Highlighter:= dmSyn.synText;
+  frmR_Term.synIO.Highlighter:= dmSyn.synText;
   iIO_Syntax:= 0;
   actRtermIO_Text.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermIO_Text_nMLExecute(Sender: TObject);
 begin
-  frmRterm.synIO.Highlighter:= dmSyn.synText_term;
+  frmR_Term.synIO.Highlighter:= dmSyn.synText_term;
   iIO_Syntax:= 1;
   actRtermIO_Text_nML.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermLOG_TextExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synText;
-  frmRterm.synLOG.Highlighter:= dmSyn.synText;
+  if Assigned(frmR_Term.synLOG2) then frmR_Term.synLOG2.Highlighter:= dmSyn.synText;
+  frmR_Term.synLOG.Highlighter:= dmSyn.synText;
   iLOG_Syntax:= 0;
   actRtermLOG_Text.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermLOG_Text_nMLExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synText_term;
-  frmRterm.synLOG.Highlighter:= dmSyn.synText_term;
+  if Assigned(frmR_Term.synLOG2) then frmR_Term.synLOG2.Highlighter:= dmSyn.synText_term;
+  frmR_Term.synLOG.Highlighter:= dmSyn.synText_term;
   iLOG_Syntax:= 1;
   actRtermLOG_Text_nML.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermIO_RExecute(Sender: TObject);
 begin
-  frmRterm.synIO.Highlighter:= dmSyn.synR;
+  frmR_Term.synIO.Highlighter:= dmSyn.synR;
   iIO_Syntax:= 2;
   actRtermIO_R.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermIO_R_nMLExecute(Sender: TObject);
 begin
-  frmRterm.synIO.Highlighter:= dmSyn.synR_term;
+  frmR_Term.synIO.Highlighter:= dmSyn.synR_term;
   iIO_Syntax:= 3;
   actRtermIO_R_nML.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermLOG_RExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synR;
-  frmRterm.synLOG.Highlighter:= dmSyn.synR;
+  if Assigned(frmR_Term.synLOG2) then frmR_Term.synLOG2.Highlighter:= dmSyn.synR;
+  frmR_Term.synLOG.Highlighter:= dmSyn.synR;
   iLOG_Syntax:= 2;
   actRtermLOG_R.Checked:= True;
 end;
 
 procedure TfrmMain.actRtermLOG_R_nMLExecute(Sender: TObject);
 begin
-  if Assigned(frmRterm.synLOG2) then frmRterm.synLOG2.Highlighter:= dmSyn.synR_term;
-  frmRterm.synLOG.Highlighter:= dmSyn.synR_term;
+  if Assigned(frmR_Term.synLOG2) then frmR_Term.synLOG2.Highlighter:= dmSyn.synR_term;
+  frmR_Term.synLOG.Highlighter:= dmSyn.synR_term;
   iLOG_Syntax:= 3;
   actRtermLOG_R_nML.Checked:= True;
 end;
@@ -25766,7 +25749,7 @@ begin
     Visible:= False;
     Checked:= False;
   end;
-  with frmRterm.synIO do begin
+  with frmR_Term.synIO do begin
     for i:= 0 to 9 do
       ClearBookMark(i);
     Clear;
@@ -25778,7 +25761,7 @@ procedure TfrmMain.actRtermIOHistoryPriorExecute(Sender: TObject);
 begin
   if not fRterm_Running then Exit;
   
-  with frmRterm do begin
+  with frmR_Term do begin
     synIO.CaretY:= synIO.Lines.Count;
 
     if (synIO.SelText <> EmptyStr) then Exit;
@@ -25787,10 +25770,10 @@ begin
                                          RHistory.fGet_Prior
     else begin
       if bRUnderDebug_Function or
-         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
+         bRUnderDebug_Package then synIO.LineText:= frmR_Term.sRDebug_Prefix +
                                                     ' ' +
                                                     RHistory.fGet_Prior
-      else if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+      else if bRUnderScan_Function then synIO.LineText:= frmR_Term.sRScan_Prefix +
                                                          RHistory.fGet_Prior
                                    else synIO.LineText:= '> ' +
                                                          RHistory.fGet_Prior;
@@ -25806,7 +25789,7 @@ procedure TfrmMain.actRtermIOHistoryNextExecute(Sender: TObject);
 begin
   if not fRterm_Running then Exit;
 
-  with frmRterm do begin
+  with frmR_Term do begin
     synIO.CaretY:= synIO.Lines.Count;
 
     if (synIO.SelText <> EmptyStr) then Exit;
@@ -25815,10 +25798,10 @@ begin
                                          RHistory.fGet_Next
     else begin
       if bRUnderDebug_Function or
-         bRUnderDebug_Package then synIO.LineText:= frmRterm.sRDebug_Prefix +
+         bRUnderDebug_Package then synIO.LineText:= frmR_Term.sRDebug_Prefix +
                                                     ' ' +
                                                     RHistory.fGet_Next
-      else if bRUnderScan_Function then synIO.LineText:= frmRterm.sRScan_Prefix +
+      else if bRUnderScan_Function then synIO.LineText:= frmR_Term.sRScan_Prefix +
                                                          RHistory.fGet_Next
                                    else synIO.LineText:= '> ' +
                                                          RHistory.fGet_Next;
@@ -25843,8 +25826,8 @@ begin
     Checked:= False;
   end;
 
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   
   with seLOG do begin
     for i:= 0 to 9 do
@@ -25861,7 +25844,7 @@ end;
 
 procedure TfrmMain.actRtermIOPrintExecute(Sender: TObject);
 begin
-  with frmRterm.synIO do
+  with frmR_Term.synIO do
     if (SelText <> EmptyStr) then bSelectedToPreview:= True
                              else bSelectedToPreview:= False;
   
@@ -25869,8 +25852,8 @@ begin
 
   with frmPrint_Configure do begin
     try
-      with frmRterm.synIO do
-        ShowDialog(frmRterm.synIO);
+      with frmR_Term.synIO do
+        ShowDialog(frmR_Term.synIO);
     finally
       FreeAndNil(frmPrint_Configure);
       frmMain.Repaint;
@@ -25883,8 +25866,8 @@ var
   seLOG: TSynEdit;
 
 begin
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
 
   with seLOG do
     if (seLOG.SelText <> EmptyStr) then bSelectedToPreview:= True
@@ -25905,13 +25888,13 @@ end;
 
 procedure TfrmMain.actRtermIOSaveExecute(Sender: TObject);
 begin
-  if FileExists(sRIOSaved) then frmRterm.synIO.Lines.SaveToFile(sRIOSaved)
+  if FileExists(sRIOSaved) then frmR_Term.synIO.Lines.SaveToFile(sRIOSaved)
                            else actRtermIOSaveAsExecute(nil);
 end;
 
 procedure TfrmMain.actRtermLOGSaveExecute(Sender: TObject);
 begin
-  if FileExists(sRLogSaved) then frmRterm.synIO.Lines.SaveToFile(sRLogSaved)
+  if FileExists(sRLogSaved) then frmR_Term.synIO.Lines.SaveToFile(sRLogSaved)
                             else actRtermLogSaveAsExecute(nil);
 end;
 
@@ -25924,7 +25907,7 @@ begin
   
   pFile_SaveGeneric(sTmp +
                     '_io.txt',
-                    frmRterm.synIO);
+                    frmR_Term.synIO);
 end;
 
 procedure TfrmMain.actRtermLOGSaveAsExecute(Sender: TObject);
@@ -25935,8 +25918,8 @@ var
 
 begin
   sTmp:= fRemove_FileExtension(pgFiles.ActivePage.Caption);
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
 
   pFile_SaveGeneric(sTmp +
                     '_log.txt',
@@ -25976,8 +25959,8 @@ begin
     sWorkingDir:= fStrip_FileName(sFile);
   end;
 
-  if (frmRterm.pgRterm.ActivePage = frmRterm.tbsIO) then sRIOSaved := sFile
-                                                    else sRLogSaved:= sFile;
+  if (frmR_Term.pgRterm.ActivePage = frmR_Term.tbsIO) then sRIOSaved := sFile
+                                                      else sRLogSaved:= sFile;
   sSaveAsFileExt:= EmptyStr;
   sdMain.Filter := slFilters.Text;
 end;
@@ -26334,13 +26317,13 @@ begin
   end;
 //  else
 //    {
-//    PostMessage(TWinControl(frmRTerm.synIO).Handle,
+//    PostMessage(TWinControl(frmR_Term.synIO).Handle,
 //                WM_SETFOCUS,
 //                0,
 //                0);
 //    }
-//    if frmRTerm.Visible then
-//      frmRterm.synIO.SetFocus;  // Problem if autohide os on!
+//    if frmR_Term.Visible then
+//      frmR_Term.synIO.SetFocus;  // Problem if autohide os on!
 //  end;
 end;
 
@@ -26350,8 +26333,8 @@ var
 
 begin
   Result:= 0;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   // Editors
   if (pgFiles.PageCount <> 0) then
     with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
@@ -26363,7 +26346,7 @@ begin
         if synEditor2.Focused then Result:= 2;
     end;
   // synIO
-  if frmRterm.synIO.Focused                          then Result:= 3
+  if frmR_Term.synIO.Focused                         then Result:= 3
   // syLog and synLOG2
   else if seLOG.Focused                              then Result:= 4
   // jvdlbWinExplorer
@@ -26421,8 +26404,8 @@ var
 begin  // Font.Size < 50
   iFocus:= fGet_Focus;
   
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   
   case iFocus of
      // synEditor1
@@ -26438,9 +26421,9 @@ begin  // Font.Size < 50
             pUpdate_HexViewer;
           end;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do begin
+     3: with (frmR_Term.synIO as TSynEdit) do begin
           if (Font.Size < 50) then Font.Size:= Font.Size + 1;
-          frmRterm.pgRtermResize(nil);
+          frmR_Term.pgRtermResize(nil);
         end;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
@@ -26522,8 +26505,8 @@ var
 
 begin  //Font.Size > 02
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -26538,9 +26521,9 @@ begin  //Font.Size > 02
             pUpdate_HexViewer;
           end;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do begin
+     3: with (frmR_Term.synIO as TSynEdit) do begin
           if (Font.Size > 02) then Font.Size:= Font.Size - 1;
-          frmRterm.pgRtermResize(nil);
+          frmR_Term.pgRtermResize(nil);
         end;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
@@ -26901,7 +26884,7 @@ Finalization
     end;
 
     pSetDataCompletion(synIO_Tip,
-                       frmRterm.synIO,
+                       frmR_Term.synIO,
                        'CTRL+SPACE');
   end;
 
@@ -26965,8 +26948,8 @@ var
 
 begin
   iFocus:= fGet_Focus;
-  if Assigned(frmRterm.synLOG2) then seLOG:= frmRterm.synLOG2
-                                else seLOG:= frmRterm.synLOG;
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                else seLOG:= frmR_Term.synLOG;
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -26975,7 +26958,7 @@ begin
      2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
           CutToClipboard;
      // synIO
-     3: with (frmRterm.synIO as TSynEdit) do
+     3: with (frmR_Term.synIO as TSynEdit) do
           CutToClipboard;
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
