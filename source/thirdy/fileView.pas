@@ -23,7 +23,7 @@ uses
   ufrmDiffMain, HashUnit, DiffUnit, Menus;
 
 type
-  TfrmFilesFrame = class(TFrame)
+  TfrmFrame_Files = class(TFrame)
     pnlMain: TPanel;
     Splitter1: TSplitter;
     pnlLeft: TPanel;
@@ -112,7 +112,7 @@ uses ufrmMain;
 // TFilesFrame methods
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.Setup;
+procedure TfrmFrame_Files.Setup;
 begin
   //the diff engine ...
   Diff := TDiff.create(self);
@@ -163,7 +163,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.Cleanup;
+procedure TfrmFrame_Files.Cleanup;
 begin
   Diff.free;
   Lines1.free;
@@ -172,7 +172,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.SetMenuEventsToFileView;
+procedure TfrmFrame_Files.SetMenuEventsToFileView;
 begin
   with frmDiffMain do begin
     tbFolder.ImageIndex := ufrmDiffMain.FILEVIEW;
@@ -261,7 +261,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.AppActivate(Sender: TObject);
+procedure TfrmFrame_Files.AppActivate(Sender: TObject);
 begin
   //if a file change externally after being loaded in TextDiff,
   //then automatically reload that file ...
@@ -272,14 +272,14 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.FrameResize(Sender: TObject);
+procedure TfrmFrame_Files.FrameResize(Sender: TObject);
 begin
   if frmDiffMain.mnuHorzSplit.checked then pnlLeft.height := pnlMain.ClientHeight div 2 -1
   else pnlLeft.width := pnlMain.ClientWidth div 2 -1;
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.OpenClick(Sender: TObject);
+procedure TfrmFrame_Files.OpenClick(Sender: TObject);
 var
   IsFile1: boolean;
 
@@ -300,7 +300,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.HorzSplitClick(Sender: TObject);
+procedure TfrmFrame_Files.HorzSplitClick(Sender: TObject);
 begin
   with frmDiffMain do
   begin
@@ -332,7 +332,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CompareClick(Sender: TObject);
+procedure TfrmFrame_Files.CompareClick(Sender: TObject);
 var
   i: integer;
   HashList1,HashList2: TList;
@@ -400,7 +400,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.DiffProgress(Sender: TObject; percent: integer);
+procedure TfrmFrame_Files.DiffProgress(Sender: TObject; percent: integer);
 begin
   with frmDiffMain do begin
     Statusbar1.Panels[3].text := format('Approx. %d%% complete',[percent] );
@@ -409,14 +409,14 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CancelClick(Sender: TObject);
+procedure TfrmFrame_Files.CancelClick(Sender: TObject);
 begin
   Diff.Cancel;
   frmDiffMain.Statusbar1.Panels[3].text := 'Compare cancelled.'
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.DisplayDiffs;
+procedure TfrmFrame_Files.DisplayDiffs;
 var
   i,j,k: integer;
   linesAdd, linesMod, linesDel: integer;
@@ -530,7 +530,7 @@ end;
 //Syncronise scrolling of both CodeEdits (once files are compared)...
 var IsSyncing: boolean;
 
-procedure TfrmFilesFrame.SyncScroll(Sender: TObject);
+procedure TfrmFrame_Files.SyncScroll(Sender: TObject);
 begin
   if IsSyncing or not (Sender is TCodeEdit) then exit;
   IsSyncing := true; //stops recursion
@@ -545,7 +545,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.ToggleCodeEditModified(IsCodeEdit1, IsModified: boolean);
+procedure TfrmFrame_Files.ToggleCodeEditModified(IsCodeEdit1, IsModified: boolean);
 const
   clr: array[boolean] of TColor = (clBtnFace, ISMODIFIED_COLOR);
 begin
@@ -563,14 +563,14 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CodeEditLinesOnChange(Sender: TObject);
+procedure TfrmFrame_Files.CodeEditLinesOnChange(Sender: TObject);
 begin
   ToggleCodeEditModified(Sender = CodeEdit1.Lines, true);
 end;
 //---------------------------------------------------------------------
 
 //detect whenever the caret is moved into a colored difference block
-function TfrmFilesFrame.CaretInClrBlk(CodeEdit: TCodeEdit): boolean;
+function TfrmFrame_Files.CaretInClrBlk(CodeEdit: TCodeEdit): boolean;
 begin
   with CodeEdit do
     Result := FilesCompared and (CaretPt.Y < lines.Count) and
@@ -579,7 +579,7 @@ end;
 //---------------------------------------------------------------------
 
 //change menu options depending on whether caret is in a diff color block or not
-procedure TfrmFilesFrame.CodeEditOnCaretPtChange(Sender: TObject);
+procedure TfrmFrame_Files.CodeEditOnCaretPtChange(Sender: TObject);
 var
   caretInClrBlock: boolean;
 begin
@@ -590,7 +590,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CodeEditOnEnter(Sender: TObject);
+procedure TfrmFrame_Files.CodeEditOnEnter(Sender: TObject);
 begin
   //keep compared text carets roughly in sync ...
   if FilesCompared and (CaretPosY >= 0) then
@@ -598,7 +598,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CodeEditOnExit(Sender: TObject);
+procedure TfrmFrame_Files.CodeEditOnExit(Sender: TObject);
 begin
   //keep compared text carets roughly in sync too ...
   with TCodeEdit(Sender) do
@@ -610,7 +610,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.ToggleLinkedScroll(IsLinked: boolean);
+procedure TfrmFrame_Files.ToggleLinkedScroll(IsLinked: boolean);
 begin
   if IsLinked then begin//FilesCompared = true
     CodeEdit1.OnScroll := SyncScroll;
@@ -626,7 +626,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.pbScrollPosMarkerPaint(Sender: TObject);
+procedure TfrmFrame_Files.pbScrollPosMarkerPaint(Sender: TObject);
 var
   yPos: integer;
 begin
@@ -644,14 +644,14 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.pbDiffMarkerPaint(Sender: TObject);
+procedure TfrmFrame_Files.pbDiffMarkerPaint(Sender: TObject);
 begin
   with pbDiffMarker do
     Canvas.StretchDraw(Rect(0,0,width,Height),pbDiffMarkerBmp);
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.FileDrop(Sender: TObject;
+procedure TfrmFrame_Files.FileDrop(Sender: TObject;
     const Filename: string; var DropAccepted: boolean);
 begin
   DoOpenFile(Filename, Sender = CodeEdit1);
@@ -660,7 +660,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.DoOpenFile(const Filename: string; IsFile1: boolean);
+procedure TfrmFrame_Files.DoOpenFile(const Filename: string; IsFile1: boolean);
 var
   CodeEdit: TCodeEdit;
 begin
@@ -702,7 +702,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.UpdateDiffMarkerBmp;
+procedure TfrmFrame_Files.UpdateDiffMarkerBmp;
 var
   i,y: integer;
   clr: TColor;
@@ -730,7 +730,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.PaintLeftMargin(Sender: TObject; Canvas: TCanvas;
+procedure TfrmFrame_Files.PaintLeftMargin(Sender: TObject; Canvas: TCanvas;
   MarginRec: TRect; LineNo, Tag: integer);
 var
   numStr: string;
@@ -743,7 +743,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-function TfrmFilesFrame.FindNext(CodeEdit: TCodeEdit): boolean;
+function TfrmFrame_Files.FindNext(CodeEdit: TCodeEdit): boolean;
 var
   i, PatLen, fndOffset: integer;
 
@@ -789,7 +789,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-function TfrmFilesFrame.FindPrevious(CodeEdit: TCodeEdit): boolean;
+function TfrmFrame_Files.FindPrevious(CodeEdit: TCodeEdit): boolean;
 var
   i, PatLen, fndOffset, lastFoundXPos: integer;
 
@@ -837,7 +837,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.ReplaceDown(CodeEdit: TCodeEdit);
+procedure TfrmFrame_Files.ReplaceDown(CodeEdit: TCodeEdit);
 var
   ReplaceType: TReplaceType;
   CaretCoord: TPoint;
@@ -874,7 +874,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.ReplaceUp(CodeEdit: TCodeEdit);
+procedure TfrmFrame_Files.ReplaceUp(CodeEdit: TCodeEdit);
 var
   ReplaceType: TReplaceType;
   CaretCoord: TPoint;
@@ -912,7 +912,7 @@ end;
 //------------------------------------------------------------------------------
 
 //go to next color block (only enabled if files have been compared)
-procedure TfrmFilesFrame.NextClick(Sender: TObject);
+procedure TfrmFrame_Files.NextClick(Sender: TObject);
 var
   i: integer;
   clr: TColor;
@@ -953,7 +953,7 @@ end;
 //---------------------------------------------------------------------
 
 //go to previous color block (only enabled if files have been compared)
-procedure TfrmFilesFrame.PrevClick(Sender: TObject);
+procedure TfrmFrame_Files.PrevClick(Sender: TObject);
 var
   i: integer;
   clr: TColor;
@@ -992,7 +992,7 @@ notFound: beep;
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.SaveFileClick(Sender: TObject);
+procedure TfrmFrame_Files.SaveFileClick(Sender: TObject);
 var
   i, LineCnt: integer;
   s, fName: string;
@@ -1057,7 +1057,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFilesFrame.SaveReportClick(Sender: TObject);
+procedure TfrmFrame_Files.SaveReportClick(Sender: TObject);
 var
   i, ln: integer;
   clr: TColor;
@@ -1142,7 +1142,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CodeEditKeyDown(Sender: TObject; var Key: Word;
+procedure TfrmFrame_Files.CodeEditKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if not FilesCompared or (Shift * [ssAlt,ssCtrl] <> [ssAlt,ssCtrl]) then exit;
@@ -1153,7 +1153,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CopyBlockRightClick(Sender: TObject);
+procedure TfrmFrame_Files.CopyBlockRightClick(Sender: TObject);
 var
   blockTopLine: integer;
   blockBottomLine: integer;
@@ -1204,7 +1204,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CopyBlockLeftClick(Sender: TObject);
+procedure TfrmFrame_Files.CopyBlockLeftClick(Sender: TObject);
 var
   blockTopLine: integer;
   blockBottomLine: integer;
@@ -1253,21 +1253,21 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.UndoClick(Sender: TObject);
+procedure TfrmFrame_Files.UndoClick(Sender: TObject);
 begin
   if frmDiffMain.ActiveControl = CodeEdit1 then CodeEdit1.Undo
   else if frmDiffMain.ActiveControl = CodeEdit2 then CodeEdit2.Undo;
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.RedoClick(Sender: TObject);
+procedure TfrmFrame_Files.RedoClick(Sender: TObject);
 begin
   if frmDiffMain.ActiveControl = CodeEdit1 then CodeEdit1.Redo
   else if frmDiffMain.ActiveControl = CodeEdit2 then CodeEdit2.Redo;
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.EditClick(Sender: TObject);
+procedure TfrmFrame_Files.EditClick(Sender: TObject);
 begin
   with frmDiffMain do begin
     if ActiveControl = CodeEdit1 then begin
@@ -1291,7 +1291,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CutClick(Sender: TObject);
+procedure TfrmFrame_Files.CutClick(Sender: TObject);
 begin
   if frmDiffMain.ActiveControl = CodeEdit1 then
     CodeEdit1.CutToClipBoard
@@ -1300,7 +1300,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.CopyClick(Sender: TObject);
+procedure TfrmFrame_Files.CopyClick(Sender: TObject);
 begin
   if frmDiffMain.ActiveControl = CodeEdit1 then
     CodeEdit1.CopyToClipBoard
@@ -1309,7 +1309,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.PasteClick(Sender: TObject);
+procedure TfrmFrame_Files.PasteClick(Sender: TObject);
 begin
   if frmDiffMain.ActiveControl = CodeEdit1 then
     CodeEdit1.PasteFromClipBoard
@@ -1318,7 +1318,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.FindClick(Sender: TObject);
+procedure TfrmFrame_Files.FindClick(Sender: TObject);
 begin
   if not GetFindInfo(frmDiffMain, FindInfo) then exit;
   Search.Pattern := FindInfo.findStr;
@@ -1327,7 +1327,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.FindNextClick(Sender: TObject);
+procedure TfrmFrame_Files.FindNextClick(Sender: TObject);
 var
   codeEdit: TCodeEdit;
 begin
@@ -1345,7 +1345,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.ReplaceClick(Sender: TObject);
+procedure TfrmFrame_Files.ReplaceClick(Sender: TObject);
 var
   codeEdit: TCodeEdit;
 begin
@@ -1361,7 +1361,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFilesFrame.FontClick(Sender: TObject);
+procedure TfrmFrame_Files.FontClick(Sender: TObject);
 begin
   if not fdFiles.Execute then exit;
   CodeEdit1.Font := fdFiles.Font;

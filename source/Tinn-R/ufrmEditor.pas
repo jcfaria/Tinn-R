@@ -198,12 +198,12 @@ uses
   trSynUtils,
   trUtils,
   uDMSyn,
-  ufrmConfirmReplace,
   ufrmGotoBox,
   ufrmMain,
-  ufrmPrintPreview,
-  ufrmReplace,
-  ufrmSearch,
+  ufrmPrint_Preview,
+  ufrmReplace_Dlg,
+  ufrmReplace_Confirm_Dlg,
+  ufrmSearch_Dlg,
   uModDados,
   ufrmTools;
 
@@ -1400,8 +1400,8 @@ begin
     editRect.TopLeft    := ClientToScreen(editRect.TopLeft);
     editRect.BottomRight:= ClientToScreen(editRect.BottomRight);
 
-    if (frmConfirm_Replace_Dlg = nil) then
-      frmConfirm_Replace_Dlg:= TfrmConfirm_Replace_Dlg.Create(Application);
+    if (frmReplace_Confirm_Dlg = nil) then
+      frmReplace_Confirm_Dlg:= TfrmReplace_Confirm_Dlg.Create(Application);
 
     {
     // The dialog stay alway near of the ASearch: fine but a bit tired!
@@ -1414,13 +1414,13 @@ begin
 
 
     // The dialog will stay on top and right aligned
-    with frmConfirm_Replace_Dlg do
+    with frmReplace_Confirm_Dlg do
       pPrepareShow(editRect,
                    pPos.X,
                    pPos.Y,
                    ASearch);
 
-    case frmConfirm_Replace_Dlg.ShowModal of
+    case frmReplace_Confirm_Dlg.ShowModal of
       mrYes     : Action:= raReplace;
       mrYesToAll: Action:= raReplaceAll;
       mrNo      : Action:= raSkip;
@@ -1600,13 +1600,12 @@ end;
 
 procedure TfrmEditor.pShowSearchReplaceDialog(bReplace: boolean);
 var
-  dlg: TfrmSearchDlg;
+  dlg: TfrmReplace_Dlg;
 
   seEditor: TSynEdit;
 
 begin
-  if bReplace then dlg:= TfrmReplaceDlg.Create(Self)
-              else dlg:= TfrmSearchDlg.Create(Self);
+  dlg:= TfrmReplace_Dlg.Create(Self);
 
   with dlg do try
     // Assign search options
@@ -1639,9 +1638,9 @@ begin
     end;
 
     if bReplace then
-      with dlg as TfrmReplaceDlg do begin
+      with dlg as TfrmReplace_Dlg do begin
         ReplaceText       := sReplace_Text;
-        ReplaceTextHistory:= frmMain.sReplaceTextHistory;
+        ReplaceTextHistory:= frmMain.sReplace_TextHistory;
       end;
 
     if (ShowModal = mrOK) then begin
@@ -1655,9 +1654,9 @@ begin
       sSearch_Text                 := SearchText;
 
       if bReplace then
-        with dlg as TfrmReplaceDlg do begin
+        with dlg as TfrmReplace_Dlg do begin
           sReplace_Text              := ReplaceText;
-          frmMain.sReplaceTextHistory:= ReplaceTextHistory;
+          frmMain.sReplace_TextHistory:= ReplaceTextHistory;
         end;
 
       if (sSearch_Text <> EmptyStr) then pDo_SearchReplace(bReplace,
@@ -1759,7 +1758,7 @@ begin
     end;
 
   end;
-  if Assigned(frmConfirm_Replace_Dlg) then FreeAndNil(frmConfirm_Replace_Dlg);
+  if Assigned(frmReplace_Confirm_Dlg) then FreeAndNil(frmReplace_Confirm_Dlg);
 end;
 
 procedure TfrmEditor.pFind_Again;

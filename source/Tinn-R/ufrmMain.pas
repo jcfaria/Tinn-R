@@ -164,8 +164,6 @@ unit ufrmMain;
  under Delphi 7
 *)
 
-
-
 {$WARN UNIT_PLATFORM OFF}
 {$WARN SYMBOL_PLATFORM OFF}
 
@@ -2963,7 +2961,7 @@ type
     sPuttyPassword               : string;
     sPuttyUser                   : string;
     sRcard_BookMark              : string;
-    sReplaceTextHistory          : string;
+    sReplace_TextHistory         : string;
     sRmirror                     : string;
     sRmirrors_BookMark           : string;
     sRtip_BookMark               : string;
@@ -3036,21 +3034,21 @@ uses
   trCodeSender,
   uActionMacro,
   uDMSyn,
-  ufrmAppOptions,
+  ufrmApp_Options,
   ufrmAsciiChart,
   ufrmColors,
-  ufrmConfigurePrint,
+  ufrmPrint_Configure,
+  ufrmPrint_Preview,
   ufrmRterm,
   ufrmCount,
   ufrmDiffMain,
   ufrmEditor,
-  ufrmGroupRename,
-  ufrmLatexDimensional,
-  ufrmNewGoup,
-  ufrmPrintPreview,
+  ufrmGroup_Rename,
+  ufrmGoup_New,
+  ufrmLatex_Dimensional,
   ufrmRcard,
   ufrmRserver,
-  ufrmSearchInFiles,
+  ufrmSearch_InFiles,
   ufrmSplash,
   ufrmTools,
   uModDados,
@@ -4130,7 +4128,7 @@ begin
 
   // Replace Text History
   slReplace     := TStringList.Create;
-  slReplace.Text:= sReplaceTextHistory;
+  slReplace.Text:= sReplace_TextHistory;
   i:= 0;
   while (slReplace.Count >= 1) and
         (i < iLastSearch) do begin
@@ -4668,7 +4666,7 @@ begin
 
   // Replace Text History
   slReplace     := TStringList.Create;
-  slReplace.Text:= sReplaceTextHistory;
+  slReplace.Text:= sReplace_TextHistory;
   i:= 0;
   while (slReplace.Count >= 1) and
         (i < iLastSearch) do begin
@@ -5526,13 +5524,13 @@ begin
                   iPos + 1,
                   length(sTmp));
 
-      if (i = 0) then sReplaceTextHistory:= sTmp
-                 else sReplaceTextHistory:= sReplaceTextHistory +
-                                            #10 +
-                                            sTmp;
+      if (i = 0) then sReplace_TextHistory:= sTmp
+                 else sReplace_TextHistory:= sReplace_TextHistory +
+                                             #10 +
+                                             sTmp;
     end;
   end
-  else sReplaceTextHistory:= EmptyStr;
+  else sReplace_TextHistory:= EmptyStr;
 
   //Search Dir History
   slSearch:= TStringList.Create;
@@ -9946,9 +9944,9 @@ begin
                                          else bSelectedToPreview:= False;
   end;
  
-  frmConfigurePrint:= TfrmConfigurePrint.Create(Self);
- 
-  with frmConfigurePrint do begin
+  frmPrint_Configure:= TfrmPrint_Configure.Create(Self);
+
+  with frmPrint_Configure do begin
     try
       if (pgFiles.PageCount <> 0) then begin
         with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
@@ -9957,7 +9955,7 @@ begin
         end;
       end;
     finally
-      FreeAndNil(frmConfigurePrint);
+      FreeAndNil(frmPrint_Configure);
       frmMain.Repaint;
       pSet_Focus_Main;
     end;
@@ -13009,10 +13007,10 @@ end;
 
 procedure TfrmMain.actGroup_NewExecute(Sender: TObject);
 var
-  newGroup: TfrmNewGroup;
+  newGroup: TfrmGroup_New;
 
 begin
-  newGroup:= TfrmNewGroup.Create(Self);
+  newGroup:= TfrmGroup_New.Create(Self);
   with newGroup do begin
     if (ShowModal = mrOK) then begin
       if (edtNewGroup.Text <> EmptyStr) then begin
@@ -13496,13 +13494,13 @@ end;
 
 procedure TfrmMain.actGroup_RenameExecute(Sender: TObject);
 var
-  renGroup: TfrmGroupRename;
+  renGroup: TfrmGroup_Rename;
 
 begin
   with frmTools.tvProject do
     if (Selected = nil) or
        (Selected.Level <> 1) then Exit;
-  renGroup:= TfrmGroupRename.Create(Self);
+  renGroup:= TfrmGroup_Rename.Create(Self);
 
   with renGroup do begin
     edtOldGroupName.Text:= frmTools.tvProject.Selected.Text;
@@ -23867,7 +23865,7 @@ var
 
   bcCurPos: TBufferCoord;
 
-  dlg: TfrmLatexDimensional;
+  dlg: TfrmLatex_Dimensional;
 
   sTmp: string;
 
@@ -24005,7 +24003,7 @@ begin
 
   if ((Self.MDIChildren[fFindTop_Window] as TfrmEditor) = nil) then Exit;
 
-  dlg:= TfrmLatexDimensional.Create(Self);
+  dlg:= TfrmLatex_Dimensional.Create(Self);
 
   with dlg do begin
     rdgType.ItemIndex:= iLatexDimensionalElement;
@@ -25867,14 +25865,14 @@ begin
     if (SelText <> EmptyStr) then bSelectedToPreview:= True
                              else bSelectedToPreview:= False;
   
-  frmConfigurePrint:= TfrmConfigurePrint.Create(Self);
-  
-  with frmConfigurePrint do begin
+  frmPrint_Configure:= TfrmPrint_Configure.Create(Self);
+
+  with frmPrint_Configure do begin
     try
       with frmRterm.synIO do
         ShowDialog(frmRterm.synIO);
     finally
-      FreeAndNil(frmConfigurePrint);
+      FreeAndNil(frmPrint_Configure);
       frmMain.Repaint;
     end;
   end;
@@ -25892,14 +25890,14 @@ begin
     if (seLOG.SelText <> EmptyStr) then bSelectedToPreview:= True
                                    else bSelectedToPreview:= False;
 
-  frmConfigurePrint:= TfrmConfigurePrint.Create(Self);
+  frmPrint_Configure:= TfrmPrint_Configure.Create(Self);
 
-  with frmConfigurePrint do begin
+  with frmPrint_Configure do begin
     try
       with seLOG do
         ShowDialog(seLOG);
     finally
-      FreeAndNil(frmConfigurePrint);
+      FreeAndNil(frmPrint_Configure);
       frmMain.Repaint;
     end;
   end;

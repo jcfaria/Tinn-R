@@ -35,7 +35,7 @@ type
     Difference: TFolderDiff;
   end;
 
-  TfrmFoldersFrame = class(TFrame)
+  TfrmFrame_Folders = class(TFrame)
     pnlMain: TPanel;
     Splitter1: TSplitter;
     pnlLeft: TPanel;
@@ -196,7 +196,7 @@ end;
 // TFoldersFrame methods
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.Setup;
+procedure TfrmFrame_Folders.Setup;
 begin
   fFolderBmp := TBitmap.create;
   fFolderBmp.LoadFromResourceName(hInstance,'FOLDER');
@@ -236,7 +236,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.Cleanup;
+procedure TfrmFrame_Folders.Cleanup;
 begin
   fFolderBmp.free;
   fBulletBmp.free;
@@ -249,7 +249,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.SetMenuEventsToFolderView;
+procedure TfrmFrame_Folders.SetMenuEventsToFolderView;
 begin
   with frmDiffMain do begin
     tbFolder.ImageIndex := ufrmDiffMain.FOLDERVIEW;
@@ -305,7 +305,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.OpenClick(Sender: TObject);
+procedure TfrmFrame_Folders.OpenClick(Sender: TObject);
 var
   IsFolder1: boolean;
 begin
@@ -322,7 +322,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.DoOpenFolder(const Foldername: string; IsFolder1: boolean);
+procedure TfrmFrame_Folders.DoOpenFolder(const Foldername: string; IsFolder1: boolean);
 begin
   if IsFolder1 then begin
     LastOpenedFolder1 := Foldername;
@@ -347,7 +347,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.DirectoryWatchOnChange(Sender: TObject);
+procedure TfrmFrame_Folders.DirectoryWatchOnChange(Sender: TObject);
 begin
   //a file or folder has been added, deleted or modified in
   //one of the directories so reload the directory list ...
@@ -357,7 +357,7 @@ begin
 end;
 //---------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.sgFolder1DrawCell(Sender: TObject; ACol,
+procedure TfrmFrame_Folders.sgFolder1DrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
 var
   idx, textLen: integer;
@@ -441,7 +441,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.LoadFolderList(const Path: string; IsFolder1: boolean);
+procedure TfrmFrame_Folders.LoadFolderList(const Path: string; IsFolder1: boolean);
 var
   res: integer;
   FolderStringList: TStringList;
@@ -487,7 +487,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.DisplayFolderList(IsFolder1: boolean);
+procedure TfrmFrame_Folders.DisplayFolderList(IsFolder1: boolean);
 var
   i,j: integer;
   FolderStringList: TStringList;
@@ -516,7 +516,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.ClearFolderSL(folderSL: TStringList);
+procedure TfrmFrame_Folders.ClearFolderSL(folderSL: TStringList);
 var
   i: integer;
 begin
@@ -527,7 +527,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.CompareClick(Sender: TObject);
+procedure TfrmFrame_Folders.CompareClick(Sender: TObject);
 begin
     DiffFolders;
     DisplayFolderList(true);
@@ -540,7 +540,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.DiffFolders;
+procedure TfrmFrame_Folders.DiffFolders;
 var
   FolderRec, FolderRec1, FolderRec2: PFolderRec;
   i, j, compResult, ADCnt, DDCnt, AFCnt, MFCnt, DFCnt: integer;
@@ -624,7 +624,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.sgFolder1TopLeftChanged(Sender: TObject);
+procedure TfrmFrame_Folders.sgFolder1TopLeftChanged(Sender: TObject);
 begin
   if not fFoldersCompared then exit;
   if Sender = sgFolder1 then
@@ -633,7 +633,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.sgFolder1Click(Sender: TObject);
+procedure TfrmFrame_Folders.sgFolder1Click(Sender: TObject);
 var
   i: integer;
 begin
@@ -648,7 +648,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.FrameResize(Sender: TObject);
+procedure TfrmFrame_Folders.FrameResize(Sender: TObject);
 begin
   pnlLeft.width := pnlMain.ClientWidth div 2 -1;
 
@@ -658,7 +658,7 @@ begin
 end;
 //------------------------------------------------------------------------------
 
-procedure TfrmFoldersFrame.sgFolder1DblClick(Sender: TObject);
+procedure TfrmFrame_Folders.sgFolder1DblClick(Sender: TObject);
 var
   i: integer;
 begin
@@ -669,7 +669,7 @@ begin
       //toggle to fileview ...
       frmDiffMain.mnuFolderClick(nil);
       //check for overwriting of opened files ...
-      with TfrmFilesFrame(frmDiffMain.FilesFrame) do begin
+      with TfrmFrame_Files(frmDiffMain.FilesFrame) do begin
         if (pnlCaptionLeft.Color = ISMODIFIED_COLOR) then begin
           case application.MessageBox(pchar('Save changes to'#10 +
             pnlCaptionLeft.Caption+' ?  '),pchar(application.title),

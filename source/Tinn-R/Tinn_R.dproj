@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{fcaa4792-2d68-496b-b932-0330d11ee09b}</ProjectGuid>
     <MainSource>Tinn_R.dpr</MainSource>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
     <DCC_DependencyCheckOutputName>..\..\bin\Tinn_R.exe</DCC_DependencyCheckOutputName>
@@ -62,10 +62,8 @@
     <DCCReference Include="..\SynEdit_adapted\SynEditStrConst.pas" />
     <DCCReference Include="..\SynEdit_highlighters\SynHighlighterAll.pas" />
     <DCCReference Include="..\SynEdit_highlighters\SynHighlighterR.pas" />
-    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterR_term.pas" />
     <DCCReference Include="..\SynEdit_highlighters\SynHighlighterTeX.pas" />
     <DCCReference Include="..\SynEdit_highlighters\SynHighlighterText.pas" />
-    <DCCReference Include="..\SynEdit_highlighters\SynHighlighterText_term.pas" />
     <DCCReference Include="..\SynEdit_highlighters\SynHighlighterURI.pas" />
     <DCCReference Include="..\thirdy\ATxCodepages.pas" />
     <DCCReference Include="..\thirdy\clMultiStream.pas" />
@@ -73,12 +71,12 @@
     <DCCReference Include="..\thirdy\diffUnit.pas" />
     <DCCReference Include="..\thirdy\dirWatch.pas" />
     <DCCReference Include="..\thirdy\fileView.pas">
-      <Form>frmFilesFrame</Form>
+      <Form>frmFrame_Files</Form>
       <DesignClass>TFrame</DesignClass>
     </DCCReference>
     <DCCReference Include="..\thirdy\findReplace.pas" />
     <DCCReference Include="..\thirdy\folderView.pas">
-      <Form>frmFoldersFrame</Form>
+      <Form>frmFrame_Folders</Form>
       <DesignClass>TFrame</DesignClass>
     </DCCReference>
     <DCCReference Include="..\thirdy\hashUnit.pas" />
@@ -90,11 +88,9 @@
       <Form>frmAsciiChart</Form>
     </DCCReference>
     <DCCReference Include="trCodeSender.pas" />
-    <DCCReference Include="trHistory.pas" />
     <DCCReference Include="trRHistory.pas" />
     <DCCReference Include="trRutils.pas" />
     <DCCReference Include="trSendSmart.pas" />
-    <DCCReference Include="trSendSmart_OK.pas" />
     <DCCReference Include="trSynUtils.pas" />
     <DCCReference Include="trUtils.pas" />
     <DCCReference Include="udmSyn.pas">
@@ -104,7 +100,7 @@
     <DCCReference Include="ufrmAbout.pas">
       <Form>frmAbout</Form>
     </DCCReference>
-    <DCCReference Include="ufrmAppOptions.pas">
+    <DCCReference Include="ufrmApp_Options.pas">
       <Form>frmApp_Options_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmColors.pas">
@@ -116,12 +112,6 @@
     <DCCReference Include="ufrmCompletion.pas">
       <Form>frmCompletion</Form>
     </DCCReference>
-    <DCCReference Include="ufrmConfigurePrint.pas">
-      <Form>frmConfigurePrint</Form>
-    </DCCReference>
-    <DCCReference Include="ufrmConfirmReplace.pas">
-      <Form>frmConfirm_Replace_Dlg</Form>
-    </DCCReference>
     <DCCReference Include="ufrmCount.pas">
       <Form>frmCount</Form>
     </DCCReference>
@@ -131,46 +121,49 @@
     <DCCReference Include="ufrmGotoBox.pas">
       <Form>frmGotoBox</Form>
     </DCCReference>
-    <DCCReference Include="ufrmGroupRename.pas">
-      <Form>frmGroupRename</Form>
+    <DCCReference Include="ufrmGoup_New.pas">
+      <Form>frmGroup_New</Form>
     </DCCReference>
-    <DCCReference Include="ufrmHotKeys.pas">
-      <Form>frmHotKeys</Form>
+    <DCCReference Include="ufrmGroup_Rename.pas">
+      <Form>frmGroup_Rename</Form>
     </DCCReference>
-    <DCCReference Include="ufrmLatexDimensional.pas">
-      <Form>frmLatexDimensional</Form>
+    <DCCReference Include="ufrmLatex_Dimensional.pas">
+      <Form>frmLatex_Dimensional</Form>
     </DCCReference>
     <DCCReference Include="ufrmMain.pas">
       <Form>frmMain</Form>
     </DCCReference>
-    <DCCReference Include="ufrmNewGoup.pas">
-      <Form>frmNewGroup</Form>
-    </DCCReference>
     <DCCReference Include="ufrmPandoc.pas">
       <Form>frmPandoc</Form>
     </DCCReference>
-    <DCCReference Include="ufrmPrintPreview.pas">
-      <Form>frmPrintPreview</Form>
+    <DCCReference Include="ufrmPrint_Configure.pas">
+      <Form>frmPrint_Configure</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmPrint_Preview.pas">
+      <Form>frmPrint_Preview</Form>
     </DCCReference>
     <DCCReference Include="ufrmRcard.pas">
       <Form>frmRcard</Form>
     </DCCReference>
-    <DCCReference Include="ufrmReplace.pas">
-      <Form>frmReplaceDlg</Form>
+    <DCCReference Include="ufrmReplace_Confirm_Dlg.pas">
+      <Form>frmReplace_Confirm_Dlg</Form>
+    </DCCReference>
+    <DCCReference Include="ufrmReplace_Dlg.pas">
+      <Form>frmReplace_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmRmirrors.pas">
       <Form>frmRmirrors</Form>
     </DCCReference>
-    <DCCReference Include="ufrmRServer.pas">
+    <DCCReference Include="ufrmRserver.pas">
       <Form>frmRserver</Form>
     </DCCReference>
     <DCCReference Include="ufrmRterm.pas">
       <Form>frmRterm</Form>
     </DCCReference>
-    <DCCReference Include="ufrmSearch.pas">
-      <Form>frmSearchDlg</Form>
+    <DCCReference Include="ufrmSearch_Dlg.pas">
+      <Form>frmSearch_Dlg</Form>
     </DCCReference>
-    <DCCReference Include="ufrmSearchInFiles.pas">
+    <DCCReference Include="ufrmSearch_InFiles.pas">
       <Form>frmSearch_InFiles_Dlg</Form>
     </DCCReference>
     <DCCReference Include="ufrmSKH_Manager.pas">

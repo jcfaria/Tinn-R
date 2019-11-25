@@ -142,12 +142,12 @@ uses FileView, FolderView, ufrmMain, WinHelpViewer;
 
 procedure TfrmDiffMain.FormCreate(Sender: TObject);
 begin
-  FilesFrame := TfrmFilesFrame.Create(self);
+  FilesFrame := TfrmFrame_Files.Create(self);
   FilesFrame.Parent := self;
   FilesFrame.Align := alClient;
   FilesFrame.ScaleBy(Screen.PixelsPerInch, DESIGN_RESOLUTION);
 
-  FoldersFrame := TfrmFoldersFrame.Create(self);
+  FoldersFrame := TfrmFrame_Folders.Create(self);
   FoldersFrame.Parent := self;
   FoldersFrame.Align := alClient;
   FoldersFrame.ScaleBy(Screen.PixelsPerInch, DESIGN_RESOLUTION);
@@ -155,8 +155,8 @@ begin
 
   //load ini settings before calling FileFrame.Setup ...
   LoadOptionsFromIni;
-  TfrmFilesFrame(FilesFrame).Setup;
-  TfrmFoldersFrame(FoldersFrame).Setup;
+  TfrmFrame_Files(FilesFrame).Setup;
+  TfrmFrame_Folders(FoldersFrame).Setup;
 
   Statusbar1.Panels[2].Text := #150;
 
@@ -165,14 +165,14 @@ begin
   begin
     //load files or folders from the commandline ...
     if directoryExists(paramstr(1)) then
-      with TfrmFoldersFrame(FoldersFrame) do
+      with TfrmFrame_Folders(FoldersFrame) do
       begin
         mnuFolderClick(nil);
         DoOpenFolder(paramstr(1), true);
         DoOpenFolder(paramstr(2), false);
       end
     else
-      with TfrmFilesFrame(FilesFrame) do
+      with TfrmFrame_Files(FilesFrame) do
       begin
         mnuFolder.Checked := true; //trick the toggle
         mnuFolderClick(nil);
@@ -183,14 +183,14 @@ begin
   end
   //nb: FoldersFrame.Visible set in LoadOptionsFromIni ...
   else if FoldersFrame.Visible then mnuFolderClick(nil)
-  else TfrmFilesFrame(FilesFrame).SetMenuEventsToFileView;
+  else TfrmFrame_Files(FilesFrame).SetMenuEventsToFileView;
 end;
 //---------------------------------------------------------------------
 
 procedure TfrmDiffMain.FormDestroy(Sender: TObject);
 begin
-  TfrmFilesFrame(FilesFrame).Cleanup;
-  TfrmFoldersFrame(FoldersFrame).Cleanup;
+  TfrmFrame_Files(FilesFrame).Cleanup;
+  TfrmFrame_Folders(FoldersFrame).Cleanup;
 end;
 procedure TfrmDiffMain.FormShow(Sender: TObject);
 begin
@@ -223,7 +223,7 @@ begin
     delClr := strtointdef(ReadString('Diff Options', 'sDelColor', ''), $BB77FF);
 
     // set font
-    with TfrmFilesFrame(FilesFrame).fdFiles.Font do begin
+    with TfrmFrame_Files(FilesFrame).fdFiles.Font do begin
       Name  := ReadString('Diff Options', 'sFont.Name', 'Courier New');
       Size  := ReadInteger('Diff Options', 'iFont.Size', 10);
       Color := strtointdef(ReadString('Diff Options', 'sFont.Color', ''), $00000000);
@@ -260,7 +260,7 @@ begin
     WriteString('Diff Options', 'sAddColor', '$' + inttohex(addClr, 8));
     WriteString('Diff Options', 'sModColor', '$' + inttohex(modClr, 8));
     WriteString('Diff Options', 'sDelColor', '$' + inttohex(delClr, 8));
-    with TfrmFilesFrame(FilesFrame).fdFiles.Font do begin
+    with TfrmFrame_Files(FilesFrame).fdFiles.Font do begin
       WriteString ('Diff Options', 'sFont.Name', Name);
       WriteInteger('Diff Options', 'iFont.Size', Size);
       WriteString('Diff Options', 'sFont.Color', '$' + inttohex(Color, 8));
@@ -316,7 +316,7 @@ procedure TfrmDiffMain.mnuShowDiffsOnlyClick(Sender: TObject);
 begin
   mnuShowDiffsOnly.checked := not mnuShowDiffsOnly.checked;
   //if files have already been compared then refresh the changes
-  with TfrmFilesFrame(FilesFrame) do
+  with TfrmFrame_Files(FilesFrame) do
     if FilesCompared then DisplayDiffs;
 end;
 //---------------------------------------------------------------------
@@ -379,14 +379,14 @@ begin
   mnuFolder.Checked := not mnuFolder.Checked;
 
   if mnuFolder.Checked then begin
-    TfrmFoldersFrame(FoldersFrame).Visible := true;
-    TfrmFilesFrame(FilesFrame).Visible := false;
-    TfrmFoldersFrame(FoldersFrame).SetMenuEventsToFolderView;
+    TfrmFrame_Folders(FoldersFrame).Visible := true;
+    TfrmFrame_Files(FilesFrame).Visible := false;
+    TfrmFrame_Folders(FoldersFrame).SetMenuEventsToFolderView;
   end
   else begin
-    TfrmFilesFrame(FilesFrame).Visible := true;
-    TfrmFoldersFrame(FoldersFrame).Visible := false;
-    TfrmFilesFrame(FilesFrame).SetMenuEventsToFileView;
+    TfrmFrame_Files(FilesFrame).Visible := true;
+    TfrmFrame_Folders(FoldersFrame).Visible := false;
+    TfrmFrame_Files(FilesFrame).SetMenuEventsToFileView;
   end;
 end;
 //------------------------------------------------------------------------------
