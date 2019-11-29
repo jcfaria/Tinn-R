@@ -91,6 +91,8 @@ type
     shBrackets: TtrShape;
     shFG: TtrShape;
     synSample: TSynEdit;
+    BitBtn2: TBitBtn;
+    rdgColors: TRadioGroup;
 
     procedure actTextAttributesExecute(Sender: TObject);
     procedure bbHelpClick(Sender: TObject);

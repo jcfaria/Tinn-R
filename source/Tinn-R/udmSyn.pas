@@ -138,7 +138,7 @@ type
     synVBScript   : TSynVBScriptSyn;
     synXML        : TSynXMLSyn;
 
-    procedure pLoadSyntaxFromIni;
+    procedure pLoad_Syntax_FromIni;
   end;
 
 var
@@ -771,10 +771,10 @@ begin
   //---------------------------------------------------------------
 
   iHigCount:= ComponentCount;
-  pLoadSyntaxFromIni;
+  pLoad_Syntax_FromIni;
 end;
 
-procedure TdmSyn.pLoadSyntaxFromIni;
+procedure TdmSyn.pLoad_Syntax_FromIni;
 var
   i: integer;
 

@@ -116,12 +116,12 @@ dt  = TMsgDlgType                  ex: dtMyType
 f   = TFileNotification            ex: fNotif
 ff  = TSynEditFileFormat           ex: ffDefault
 fd  = TFontDialog                  ex: fdMain
-frm  = Tform                       ex: frmMyForm 
+frm  = Tform                       ex: frmMyForm
 fs  = TFileStream                  ex: fsMyFileStream
 h   = handle                       ex: hMyHandle
 hk  = TfrmHotKeys                  ex: hkMyHotkeys
 i   = integer                      ex: iMyInteger
-if  = TIniFile                     ex: ifMyFile
+ini = TIniFile                     ex: ini_MyFile
 im  = im                           ex: imMyImage
 ks  = TKeyboardState               ex: ksMyState
 l   = TLabel                       ex: lMyLabel
@@ -2594,11 +2594,13 @@ type
     bUpdate_RH_Send                : boolean;
     bUpdate_Rmirrors               : boolean;
     bUpdate_Shortcuts              : boolean;
+    bUpdate_Syntax_Default         : boolean;
+    bUpdate_Syntax_Dark            : boolean;
     iCols                          : integer;
-    ifEditor                       : TIniFile;
-    ifEditor_Tmp                   : TIniFile;
-    ifTinn                         : TIniFile;
-    ifTinn_Tmp                     : TIniFile;
+    ini_Editor                     : TIniFile;
+    ini_Editor_Tmp                 : TIniFile;
+    ini_Tinn                       : TIniFile;
+    ini_Tinn_Tmp                   : TIniFile;
     iIO_Syntax                     : integer;
     iLastFile                      : integer;
     iLastSearch                    : integer;
@@ -2627,11 +2629,13 @@ type
     sCurr_Version_RH_Send          : string;
     sCurr_Version_Rmirrors         : string;
     sCurr_Version_App_Shortcuts    : string;
+    sCurr_Version_Syntax_Default   : string;
+    sCurr_Version_Syntax_Dark      : string;
     sEncodingDefault               : string;
     sEOLDefault                    : string;
     seTmp                          : TSynEdit;
-    sFileLatexOrigin               : string;
-    sFileProjectOrigin             : string;
+    sFile_LatexOrigin              : string;
+    sFile_ProjectOrigin            : string;
     sformatR                       : string;
     sGuiRRunning                   : string;
     sIniDockFilePath               : string;
@@ -2644,7 +2648,6 @@ type
     slRAvailable                   : TStringList;
     slRLibPaths                    : TStringList;
     slTextDiff                     : TStringList;
-    sOldPreferencesTmp             : string;
     sParDeplate                    : string;
     sParDviBibtex                  : string;
     sParDviSingle                  : string;
@@ -2662,16 +2665,17 @@ type
     sPath_R                        : string;
     sPath_R_Connected              : string;
     sPath_Rgui                     : string;
-    sPathDeplate_Converter         : string;
-    sPathDeplate_Interpreter       : string;
-    sPathIniEditor_Tmp             : string;
-    sPathIniTinn_Tmp               : string;
-    sPathTinnRcom_Installed        : string;
-    sPathTxt2tags_Converter        : string;
-    sPathTxt2tags_Interpreter      : string;
+    sPath_Deplate_Converter        : string;
+    sPath_Deplate_Interpreter      : string;
+    sPath_IniEditor_Tmp            : string;
+    sPath_IniTinn_Tmp              : string;
+    sPath_TinnRcom_Installed       : string;
+    sPath_Txt2tags_Converter       : string;
+    sPath_Txt2tags_Interpreter     : string;
+    sPreferences_OldVersion        : string;
     sProjectName                   : string;
     sRIOSaved                      : string;
-    sRLibPathDefault               : string;
+    sRLibPath_Default              : string;
     sRLogSaved                     : string;
     sSearch_DirHistory             : string;
     sSearch_FileMaskHistory        : string;
@@ -2689,6 +2693,8 @@ type
     sVersion_RH_Send               : string;
     sVersion_Rmirrors              : string;
     sVersion_App_Shortcuts         : string;
+    sVersion_Syntax_Default        : string;
+    sVersion_Syntax_Dark           : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
@@ -2778,7 +2784,7 @@ type
     procedure pRToolbar(bOption: boolean);
     procedure pSave_NewIni_Application;
     procedure pSave_NewIni_Editor;
-    procedure pSave_Preferences_Old_Version;
+    procedure pSave_Preferences_OldVersion;
     procedure pSave_Project;
     procedure pSearch_InDirectories(const sDir, sMask: string; var iFileCount, iMatchCount, iTotFileCount: integer);
     procedure pSearch_InOpenFiles(var iFileCount, iMatchCount: integer);
@@ -2953,9 +2959,9 @@ type
     sPath_TinnR                  : string;
     sPath_TinnRcom               : string;
     sPath_Tmp                    : string;
-    sPathColor_Custom            : string;
-    sPathIniEditor_File          : string;
-    sPathIniTinn_File            : string;
+    sPath_Color_Custom           : string;
+    sPath_IniEditor_File         : string;
+    sPath_IniTinn_File           : string;
     sPuttyHost                   : string;
     sPuttyPassword               : string;
     sPuttyUser                   : string;
@@ -3100,7 +3106,7 @@ end;
 
 procedure TfrmMain.pCheck_Recho;
 begin
-  bRecho:= ifTinn.ReadBool('App', 'bRecho', True);
+  bRecho:= ini_Tinn.ReadBool('App', 'bRecho', True);
 
   if bRecho then begin
     actREcho.Checked:= True;
@@ -3115,19 +3121,21 @@ end;
 procedure TfrmMain.pCheck_Version;
 begin
   // Versions in use by user: from ini file
-  sVersion_Cache            := ifTinn.ReadString('App', 'sVersion_Cache'            , '0.0.0.0');
-  sVersion_Comments         := ifTinn.ReadString('App', 'sVersion_Comments'         , '0.0.0.0');
-  sVersion_Completion       := ifTinn.ReadString('App', 'sVersion_Completion'       , '0.0.0.0');
-  sVersion_Ini              := ifTinn.ReadString('App', 'sVersion_Ini'              , '0.0.0.0');
-  sVersion_Latex            := ifTinn.ReadString('App', 'sVersion_Latex'            , '0.0.0.0');
-  sVersion_Project          := ifTinn.ReadString('App', 'sVersion_Project'          , '0.0.0.0');
-  sVersion_Rcard            := ifTinn.ReadString('App', 'sVersion_Rcard'            , '0.0.0.0');
-  sVersion_Rmirrors         := ifTinn.ReadString('App', 'sVersion_Rmirrors'         , '0.0.0.0');
-  sVersion_App_Shortcuts    := ifTinn.ReadString('App', 'sVersion_App_Shortcuts'    , '0.0.0.0');
-  sVersion_RH_Send          := ifTinn.ReadString('App', 'sVersion_RH_Send'          , '0.0.0.0');
-  sVersion_RH_Control       := ifTinn.ReadString('App', 'sVersion_RH_Control'       , '0.0.0.0');
-  sVersion_RH_Custom        := ifTinn.ReadString('App', 'sVersion_RH_Custom'        , '0.0.0.0');
-  sVersion_Editor_Keystrokes:= ifTinn.ReadString('App', 'sVersion_Editor_Keystrokes', '0.0.0.0');
+  sVersion_Cache            := ini_Tinn.ReadString('App', 'sVersion_Cache'            , '0.0.0.0');
+  sVersion_Comments         := ini_Tinn.ReadString('App', 'sVersion_Comments'         , '0.0.0.0');
+  sVersion_Completion       := ini_Tinn.ReadString('App', 'sVersion_Completion'       , '0.0.0.0');
+  sVersion_Editor_Keystrokes:= ini_Tinn.ReadString('App', 'sVersion_Editor_Keystrokes', '0.0.0.0');
+  sVersion_Latex            := ini_Tinn.ReadString('App', 'sVersion_Latex'            , '0.0.0.0');
+  sVersion_Project          := ini_Tinn.ReadString('App', 'sVersion_Project'          , '0.0.0.0');
+  sVersion_Rcard            := ini_Tinn.ReadString('App', 'sVersion_Rcard'            , '0.0.0.0');
+  sVersion_Rmirrors         := ini_Tinn.ReadString('App', 'sVersion_Rmirrors'         , '0.0.0.0');
+  sVersion_App_Shortcuts    := ini_Tinn.ReadString('App', 'sVersion_App_Shortcuts'    , '0.0.0.0');
+  sVersion_RH_Send          := ini_Tinn.ReadString('App', 'sVersion_RH_Send'          , '0.0.0.0');
+  sVersion_RH_Control       := ini_Tinn.ReadString('App', 'sVersion_RH_Control'       , '0.0.0.0');
+  sVersion_RH_Custom        := ini_Tinn.ReadString('App', 'sVersion_RH_Custom'        , '0.0.0.0');
+  sVersion_Syntax_Default   := ini_Tinn.ReadString('App', 'sVersion_Syntax_Default'   , '0.0.0.0');
+  sVersion_Syntax_Dark      := ini_Tinn.ReadString('App', 'sVersion_Syntax_Dark'      , '0.0.0.0');
+  sVersion_Ini              := ini_Tinn.ReadString('App', 'sVersion_Ini'              , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
   sCurr_Version_Cache            := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
@@ -3142,6 +3150,8 @@ begin
   sCurr_Version_RH_Send          := '5.04.03.01';  // Started from version '5.04.03.00'/beta
   sCurr_Version_RH_Control       := '5.04.03.00';  // Started from version '5.04.03.00'/beta
   sCurr_Version_RH_Custom        := '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_Syntax_Default   := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
+  sCurr_Version_Syntax_Dark      := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3162,6 +3172,15 @@ begin
                      sCurr_Version_Completion) < 0) then begin
     bUpdate_Completion := True;
     sVersion_Completion:= sCurr_Version_Completion;
+  end;
+
+  // Editor_Keystrokes
+  if (AnsiCompareStr(sVersion_Editor_Keystrokes,
+                     sCurr_Version_Editor_Keystrokes) < 0) then begin
+    sVersion_Editor_Keystrokes:= sCurr_Version_Editor_Keystrokes;
+    if FileExists(sPath_Data +
+                  '\Editor_Keystrokes.xml') then
+      bUpdate_Editor:= True;
   end;
 
   // Latex
@@ -3228,13 +3247,18 @@ begin
       bUpdate_RH_Custom:= True;
   end;
 
-  // Editor
-  if (AnsiCompareStr(sVersion_Editor_Keystrokes,
-                     sCurr_Version_Editor_Keystrokes) < 0) then begin
-    sVersion_Editor_Keystrokes:= sCurr_Version_Editor_Keystrokes;
-    if FileExists(sPath_Data +
-                  '\Editor_Keystrokes.xml') then
-      bUpdate_Editor:= True;
+  // Syntax_Default
+  if (AnsiCompareStr(sVersion_Syntax_Default,
+                     sCurr_Version_Syntax_Default) < 0) then begin
+    bUpdate_Syntax_Default:= True;
+    sVersion_Syntax_Default:= sCurr_Version_Syntax_Default;
+  end;
+
+  // Syntax_Dark
+  if (AnsiCompareStr(sVersion_Syntax_Dark,
+                     sCurr_Version_Syntax_Dark) < 0) then begin
+    bUpdate_Syntax_Dark:= True;
+    sVersion_Syntax_Dark:= sCurr_Version_Syntax_Dark;
   end;
 
   // SynUnihighlighter: It was removed from the project!
@@ -3742,18 +3766,18 @@ begin
   end;
 
   // Aplication
-  ifTinn_Tmp:= TIniFile.create(sPath_App +
-                               '\Tinn.tmp');
-  sPathIniTinn_Tmp:= (sPath_App +
-                      '\Tinn.tmp');
-  if FileExists(sPathIniTinn_Tmp) then DeleteFile(sPathIniTinn_Tmp);  // Delete any old Tinn.tmp
+  ini_Tinn_Tmp:= TIniFile.create(sPath_App +
+                                 '\Tinn.tmp');
+  sPath_IniTinn_Tmp:= (sPath_App +
+                       '\Tinn.tmp');
+  if FileExists(sPath_IniTinn_Tmp) then DeleteFile(sPath_IniTinn_Tmp);  // Delete any old Tinn.tmp
 
   // RToolbar status
   TBIniSavePositions(Self,
-                     sPathIniTinn_Tmp,
+                     sPath_IniTinn_Tmp,
                      EmptyStr);
 
-  with ifTinn_Tmp do begin
+  with ini_Tinn_Tmp do begin
     // Version control
     WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
     WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
@@ -3971,14 +3995,14 @@ begin
     WriteString('App', 'sPath_Pandoc', sPath_Pandoc);
     WriteString('App', 'sPath_Rgui', sPath_Rgui);
     WriteString('App', 'sPath_Rterm', sPath_Rterm);
-    WriteString('App', 'sPathDeplate_Converter', sPathDeplate_Converter);
-    WriteString('App', 'sPathDeplate_Interpreter', sPathDeplate_Interpreter);
-    WriteString('App', 'sPathTxt2tags_Converter', sPathTxt2tags_Converter);
-    WriteString('App', 'sPathTxt2tags_Interpreter', sPathTxt2tags_Interpreter);
+    WriteString('App', 'sPath_Deplate_Converter', sPath_Deplate_Converter);
+    WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
+    WriteString('App', 'sPath_Txt2tags_Converter', sPath_Txt2tags_Converter);
+    WriteString('App', 'sPath_Txt2tags_Interpreter', sPath_Txt2tags_Interpreter);
     WriteString('App', 'sPuttyHost', sPuttyHost);
     WriteString('App', 'sPuttyPassword', sPuttyPassword);
     WriteString('App', 'sPuttyUser', sPuttyUser);
-    WriteString('App', 'sRLibPathDefault', sRLibPathDefault);
+    WriteString('App', 'sRLibPath_Default', sRLibPath_Default);
     WriteString('App', 'sRmirror', sRmirror);
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
 
@@ -4063,9 +4087,9 @@ begin
   while (slPandocHistory.Count >= 1) and
         (i < 10) do begin
     if (trim(slPandocHistory.Strings[0]) <> EmptyStr) then begin
-      ifTinn_Tmp.WriteString('Pandoc History',
-                             IntToStr(i),
-                             slPandocHistory.Strings[0]);
+      ini_Tinn_Tmp.WriteString('Pandoc History',
+                               IntToStr(i),
+                               slPandocHistory.Strings[0]);
       inc(i);
     end;
     slPandocHistory.Delete(0);
@@ -4081,9 +4105,9 @@ begin
   while (slPandocHistoryFrom.Count >= 1) and
         (i < 10) do begin
     if (trim(slPandocHistoryFrom.Strings[0]) <> EmptyStr) then begin
-      ifTinn_Tmp.WriteString('Pandoc History From',
-                             IntToStr(i),
-                             slPandocHistoryFrom.Strings[0]);
+      ini_Tinn_Tmp.WriteString('Pandoc History From',
+                               IntToStr(i),
+                               slPandocHistoryFrom.Strings[0]);
       inc(i);
     end;
     slPandocHistoryFrom.Delete(0);
@@ -4099,9 +4123,9 @@ begin
   while (slPandocHistoryTo.Count >= 1) and
         (i < 10) do begin
     if (trim(slPandocHistoryTo.Strings[0]) <> EmptyStr) then begin
-      ifTinn_Tmp.WriteString('Pandoc History To',
-                             IntToStr(i),
-                             slPandocHistoryTo.Strings[0]);
+      ini_Tinn_Tmp.WriteString('Pandoc History To',
+                               IntToStr(i),
+                               slPandocHistoryTo.Strings[0]);
       inc(i);
     end;
     slPandocHistoryTo.Delete(0);
@@ -4115,9 +4139,9 @@ begin
   while (slSearch.Count >= 1) and
         (i < iLastSearch) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
-      ifTinn_Tmp.WriteString('Search Text History',
-                             IntToStr(i),
-                             slSearch.Strings[0]);
+      ini_Tinn_Tmp.WriteString('Search Text History',
+                               IntToStr(i),
+                               slSearch.Strings[0]);
       inc(i);
     end;
     slSearch.Delete(0);
@@ -4131,7 +4155,7 @@ begin
   while (slReplace.Count >= 1) and
         (i < iLastSearch) do begin
     if (trim(slReplace.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Replace Text History',
+      ini_Tinn.WriteString('Replace Text History',
                          IntToStr(i),
                          slReplace.Strings[0]);
       inc(i);
@@ -4146,9 +4170,9 @@ begin
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
-      ifTinn_Tmp.WriteString('Search Dir History',
-                             IntToStr(i),
-                             slSearch.Strings[0]);
+      ini_Tinn_Tmp.WriteString('Search Dir History',
+                               IntToStr(i),
+                               slSearch.Strings[0]);
       inc(i);
     end;
     slSearch.Delete(0);
@@ -4161,9 +4185,9 @@ begin
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
-      ifTinn_Tmp.WriteString('Search File Mask History',
-                             IntToStr(i),
-                             slSearch.Strings[0]);
+      ini_Tinn_Tmp.WriteString('Search File Mask History',
+                               IntToStr(i),
+                               slSearch.Strings[0]);
       inc(i);
     end;
     slSearch.Delete(0);
@@ -4171,34 +4195,34 @@ begin
   FreeAndNil(slSearch);
 
   for i:= 0 to (frmTools.cbExplorerFavorites.Items.Count-1) do
-    ifTinn_Tmp.WriteString('Explorer Favorites',
-                           IntToStr(i),
-                           frmTools.cbExplorerFavorites.Items.Strings[i]);
+    ini_Tinn_Tmp.WriteString('Explorer Favorites',
+                             IntToStr(i),
+                             frmTools.cbExplorerFavorites.Items.Strings[i]);
 
   i:= 0;
   while (slFileMRU.Count >= 1) and
         (i < iLastFile) do begin
-    ifTinn_Tmp.WriteString('File MRU',
-                           IntToStr(i),
-                           slFileMRU.Values[IntToStr(i)]);
+    ini_Tinn_Tmp.WriteString('File MRU',
+                             IntToStr(i),
+                             slFileMRU.Values[IntToStr(i)]);
     inc(i);
   end;
 
   i:= 0;
   while (slprojectMRU.Count >= 1) and
         (i < iLastFile) do begin
-    ifTinn_Tmp.WriteString('Project MRU',
-                           IntToStr(i),
-                           slprojectMRU.Values[IntToStr(i)]);
+    ini_Tinn_Tmp.WriteString('Project MRU',
+                             IntToStr(i),
+                             slprojectMRU.Values[IntToStr(i)]);
     inc(i);
   end;
 
   with slTextDiff do begin
     if (Count >= 1) then
       for i:= 0 to (Count-1) do
-        ifTinn_Tmp.WriteString('Diff Options',
-                               Names[i],
-                               ValueFromIndex[i]);
+        ini_Tinn_Tmp.WriteString('Diff Options',
+                                 Names[i],
+                                 ValueFromIndex[i]);
     FreeAndNil(slTextDiff);
   end;
 end;
@@ -4221,13 +4245,13 @@ begin
   end;
 
   // Editor
-  ifEditor_Tmp:= TIniFile.create(sPath_Editor +
-                                 '\Editor.tmp');
-  sPathIniEditor_Tmp:= (sPath_Editor +
-                        '\Editor.tmp');
-  if FileExists(sPathIniEditor_Tmp) then DeleteFile(sPathIniEditor_Tmp);  // Delete any old Editor.tmp
+  ini_Editor_Tmp:= TIniFile.create(sPath_Editor +
+                                   '\Editor.tmp');
+  sPath_IniEditor_Tmp:= (sPath_Editor +
+                         '\Editor.tmp');
+  if FileExists(sPath_IniEditor_Tmp) then DeleteFile(sPath_IniEditor_Tmp);  // Delete any old Editor.tmp
 
-  with ifEditor_Tmp do begin
+  with ini_Editor_Tmp do begin
     // Gutter settings
     WriteBool('Gutter', 'bAutoSize', coEditor.Gutter.AutoSize);
     WriteBool('Gutter', 'bLeadingZeros', coEditor.Gutter.LeadingZeros);
@@ -4259,7 +4283,7 @@ begin
     WriteString('Editor', 'sFont.Name', coEditor.Font.Name);
   end;
 
-  FreeAndNil(ifEditor_Tmp);
+  FreeAndNil(ini_Editor_Tmp);
 end;
 
 procedure TfrmMain.pWrite_IniFile_Application(bMakingBackup: boolean);
@@ -4289,7 +4313,7 @@ begin
   end;
 
   // Application
-  with ifTinn do begin
+  with ini_Tinn do begin
     // Version control
     WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
     WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
@@ -4504,14 +4528,14 @@ begin
     WriteString('App', 'sPath_Pandoc', sPath_Pandoc);
     WriteString('App', 'sPath_Rgui', sPath_Rgui);
     WriteString('App', 'sPath_Rterm', sPath_Rterm);
-    WriteString('App', 'sPathDeplate_Converter', sPathDeplate_Converter);
-    WriteString('App', 'sPathDeplate_Interpreter', sPathDeplate_Interpreter);
-    WriteString('App', 'sPathTxt2tags_Converter', sPathTxt2tags_Converter);
-    WriteString('App', 'sPathTxt2tags_Interpreter', sPathTxt2tags_Interpreter);
+    WriteString('App', 'sPath_Deplate_Converter', sPath_Deplate_Converter);
+    WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
+    WriteString('App', 'sPath_Txt2tags_Converter', sPath_Txt2tags_Converter);
+    WriteString('App', 'sPath_Txt2tags_Interpreter', sPath_Txt2tags_Interpreter);
     WriteString('App', 'sPuttyHost', sPuttyHost);
     WriteString('App', 'sPuttyPassword', sPuttyPassword);
     WriteString('App', 'sPuttyUser', sPuttyUser);
-    WriteString('App', 'sRLibPathDefault', sRLibPathDefault);
+    WriteString('App', 'sRLibPath_Default', sRLibPath_Default);
     WriteString('App', 'sRmirror', sRmirror);
     WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
 
@@ -4536,11 +4560,11 @@ begin
     WriteInteger('Print', 'iScaleMode', iScaleMode);
     WriteInteger('Print', 'iZoomPreview', iZoomPreview);
 
-    ifTinn.EraseSection('Pandoc History');
-    ifTinn.EraseSection('Pandoc History From');
-    ifTinn.EraseSection('Pandoc History To');
-    ifTinn.EraseSection('Search Text History');
-    ifTinn.EraseSection('Replace Text History');
+    ini_Tinn.EraseSection('Pandoc History');
+    ini_Tinn.EraseSection('Pandoc History From');
+    ini_Tinn.EraseSection('Pandoc History To');
+    ini_Tinn.EraseSection('Search Text History');
+    ini_Tinn.EraseSection('Replace Text History');
 
     // Send To R alphabetically ordered
     WriteBool('R Options', 'bRKnitr', bRKnitr);
@@ -4602,7 +4626,7 @@ begin
   while (slPandocHistory.Count >= 1) and
         (i < 10) do begin
     if (trim(slPandocHistory.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Pandoc History',
+      ini_Tinn.WriteString('Pandoc History',
                          IntToStr(i),
                          slPandocHistory.Strings[0]);
       inc(i);
@@ -4619,7 +4643,7 @@ begin
   while (slPandocHistoryFrom.Count >= 1) and
         (i < 10) do begin
     if (trim(slPandocHistoryFrom.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Pandoc History From',
+      ini_Tinn.WriteString('Pandoc History From',
                          IntToStr(i),
                          slPandocHistoryFrom.Strings[0]);
       inc(i);
@@ -4636,7 +4660,7 @@ begin
   while (slPandocHistoryTo.Count >= 1) and
         (i < 10) do begin
     if (trim(slPandocHistoryTo.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Pandoc History To',
+      ini_Tinn.WriteString('Pandoc History To',
                          IntToStr(i),
                          slPandocHistoryTo.Strings[0]);
       inc(i);
@@ -4652,7 +4676,7 @@ begin
   while (slSearch.Count >= 1) and
         (i < iLastSearch) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Search Text History',
+      ini_Tinn.WriteString('Search Text History',
                          IntToStr(i),
                          slSearch.Strings[0]);
       inc(i);
@@ -4668,7 +4692,7 @@ begin
   while (slReplace.Count >= 1) and
         (i < iLastSearch) do begin
     if (trim(slReplace.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Replace Text History',
+      ini_Tinn.WriteString('Replace Text History',
                          IntToStr(i),
                          slReplace.Strings[0]);
       inc(i);
@@ -4678,13 +4702,13 @@ begin
   FreeAndNil(slReplace);
 
   // Search Dir History
-  ifTinn.EraseSection('Search Dir History');
+  ini_Tinn.EraseSection('Search Dir History');
   slSearch     := TStringList.Create;
   slSearch.Text:= sSearch_DirHistory;
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Search Dir History',
+      ini_Tinn.WriteString('Search Dir History',
                          IntToStr(i),
                          slSearch.Strings[0]);
       inc(i);
@@ -4694,13 +4718,13 @@ begin
   FreeAndNil(slSearch);
 
   // Search File Mask History
-  ifTinn.EraseSection('Search File Mask History');
+  ini_Tinn.EraseSection('Search File Mask History');
   slSearch     := TStringList.Create;
   slSearch.Text:= sSearch_FileMaskHistory;
   i:= 0;
   while (slSearch.Count >= 1) do begin
     if (trim(slSearch.Strings[0]) <> EmptyStr) then begin
-      ifTinn.WriteString('Search File Mask History',
+      ini_Tinn.WriteString('Search File Mask History',
                          IntToStr(i),
                          slSearch.Strings[0]);
       inc(i);
@@ -4710,18 +4734,18 @@ begin
   FreeAndNil(slSearch);
 
   // Explorer Favorites
-  ifTinn.EraseSection('Explorer Favorites');
+  ini_Tinn.EraseSection('Explorer Favorites');
   for i:= 0 to (frmTools.cbExplorerFavorites.Items.Count - 1) do
-    ifTinn.WriteString('Explorer Favorites',
+    ini_Tinn.WriteString('Explorer Favorites',
                        IntToStr(i),
                        frmTools.cbExplorerFavorites.Items.Strings[i]);
 
   // File MRU
-  ifTinn.EraseSection('File MRU');
+  ini_Tinn.EraseSection('File MRU');
   i:= 0;
   while (slFileMRU.Count >= 1) and
         (i < iLastFile) do begin
-    ifTinn.WriteString('File MRU',
+    ini_Tinn.WriteString('File MRU',
                        IntToStr(i),
                        slFileMRU.Values[IntToStr(i)]);
     inc(i);
@@ -4729,11 +4753,11 @@ begin
   end;
 
   // Project MRU
-  ifTinn.EraseSection('Project MRU');
+  ini_Tinn.EraseSection('Project MRU');
   i:= 0;
   while (slprojectMRU.Count >= 1) and
         (i < iLastFile) do begin
-    ifTinn.WriteString('Project MRU',
+    ini_Tinn.WriteString('Project MRU',
                        IntToStr(i),
                        slprojectMRU.Values[IntToStr(i)]);
     inc(i);
@@ -4742,7 +4766,7 @@ begin
 
   if not bMakingBackup then begin
     if Assigned(dlgSKH_Map) then FreeAndNil(dlgSKH_Map);
-    if Assigned(ifTinn) then FreeAndNil(ifTinn);
+    if Assigned(ini_Tinn) then FreeAndNil(ini_Tinn);
   end;
 end;
 
@@ -4763,7 +4787,7 @@ begin
     end;
   end;
 
-  with ifEditor do begin
+  with ini_Editor do begin
     // Gutter settings
     WriteBool('Gutter', 'bAutoSize', coEditor.Gutter.AutoSize);
     WriteBool('Gutter', 'bLeadingZeros', coEditor.Gutter.LeadingZeros);
@@ -4797,7 +4821,7 @@ begin
 
   if not bMakingBackup then begin
     if Assigned(coEditor) then FreeAndNil(coEditor);
-    if Assigned(ifEditor) then FreeAndNil(ifEditor);
+    if Assigned(ini_Editor) then FreeAndNil(ini_Editor);
   end;
 end;
 
@@ -4974,109 +4998,109 @@ var
 
 begin
   TBIniLoadPositions(Self,
-                     sPathIniTinn_File,
+                     sPath_IniTinn_File,
                      EmptyStr);
 
-  actTobRVisible.Checked:= ifTinn.ReadBool('TBRMain', 'bTobVisible', True);
+  actTobRVisible.Checked:= ini_Tinn.ReadBool('TBRMain', 'bTobVisible', True);
 
   // Dir and Top
-  bTop       := ifTinn.ReadBool('App', 'bAlwaysOnTop', False);
-  sWorkingDir:= trim(ifTinn.ReadString('App', 'sWorkingDir', EmptyStr));
+  bTop       := ini_Tinn.ReadBool('App', 'bAlwaysOnTop', False);
+  sWorkingDir:= trim(ini_Tinn.ReadString('App', 'sWorkingDir', EmptyStr));
   if (bTop) then actOnTopExecute(nil);
 
   // File Bar
-  tobFile.Left   := ifTinn.ReadInteger('App', 'iTobFile.Left', tobFile.Left);
-  tobFile.Top    := ifTinn.ReadInteger('App', 'iTobFile.Top', tobFile.Top);
-  tobFile.Visible:= ifTinn.ReadBool('App', 'bTobFile.Visible', True);
+  tobFile.Left   := ini_Tinn.ReadInteger('App', 'iTobFile.Left', tobFile.Left);
+  tobFile.Top    := ini_Tinn.ReadInteger('App', 'iTobFile.Top', tobFile.Top);
+  tobFile.Visible:= ini_Tinn.ReadBool('App', 'bTobFile.Visible', True);
   actTobFilesVisible.Checked:= tobFile.Visible;
 
   // Edit Bar
-  tobEdit.Left   := ifTinn.ReadInteger('App', 'iTobEdit.Left', tobEdit.Left);
-  tobEdit.Top    := ifTinn.ReadInteger('App', 'iTobEdit.Top', tobEdit.Top);
-  tobEdit.Visible:= ifTinn.ReadBool('App', 'bTobEdit.Visible', True);
+  tobEdit.Left   := ini_Tinn.ReadInteger('App', 'iTobEdit.Left', tobEdit.Left);
+  tobEdit.Top    := ini_Tinn.ReadInteger('App', 'iTobEdit.Top', tobEdit.Top);
+  tobEdit.Visible:= ini_Tinn.ReadBool('App', 'bTobEdit.Visible', True);
   actTobEditVisible.Checked:= tobEdit.Visible;
 
   // Search Bar
-  tobSearch.Left   := ifTinn.ReadInteger('App', 'iTobSearch.Left', tobSearch.Left);
-  tobSearch.Top    := ifTinn.ReadInteger('App', 'iTobSearch.Top', tobSearch.Top);
-  tobSearch.Visible:= ifTinn.ReadBool('App', 'bTobSearch.Visible', True);
+  tobSearch.Left   := ini_Tinn.ReadInteger('App', 'iTobSearch.Left', tobSearch.Left);
+  tobSearch.Top    := ini_Tinn.ReadInteger('App', 'iTobSearch.Top', tobSearch.Top);
+  tobSearch.Visible:= ini_Tinn.ReadBool('App', 'bTobSearch.Visible', True);
   actTobSearchVisible.Checked:= tobSearch.Visible;
 
   // Misc Bar
-  tobMisc.Left   := ifTinn.ReadInteger('App', 'iTobMisc.Left', tobMisc.Left);
-  tobMisc.Top    := ifTinn.ReadInteger('App', 'iTobMisc.Top', tobMisc.Top);
-  tobMisc.Visible:= ifTinn.ReadBool('App', 'bTobMisc.Visible', True);
+  tobMisc.Left   := ini_Tinn.ReadInteger('App', 'iTobMisc.Left', tobMisc.Left);
+  tobMisc.Top    := ini_Tinn.ReadInteger('App', 'iTobMisc.Top', tobMisc.Top);
+  tobMisc.Visible:= ini_Tinn.ReadBool('App', 'bTobMisc.Visible', True);
   actTobMiscVisible.Checked:= tobMisc.Visible;
 
   // Processing Bar
-  tobProcessing.Left   := ifTinn.ReadInteger('App', 'iTobProcessing.Left', tobProcessing.Left);
-  tobProcessing.Top    := ifTinn.ReadInteger('App', 'iTobProcessing.Top', tobProcessing.Top);
-  tobProcessing.Visible:= ifTinn.ReadBool('App', 'bTobProcessing.Visible', True);
+  tobProcessing.Left   := ini_Tinn.ReadInteger('App', 'iTobProcessing.Left', tobProcessing.Left);
+  tobProcessing.Top    := ini_Tinn.ReadInteger('App', 'iTobProcessing.Top', tobProcessing.Top);
+  tobProcessing.Visible:= ini_Tinn.ReadBool('App', 'bTobProcessing.Visible', True);
   actTobProcessingVisible.Checked:= tobProcessing.Visible;
 
   // Format Bar
-  tobFormat.Left   := ifTinn.ReadInteger('App', 'iTobFormat.Left', tobFormat.Left);
-  tobFormat.Top    := ifTinn.ReadInteger('App', 'iTobFormat.Top', tobFormat.Top);
-  tobFormat.Visible:= ifTinn.ReadBool('App', 'bTobFormat.Visible', True);
+  tobFormat.Left   := ini_Tinn.ReadInteger('App', 'iTobFormat.Left', tobFormat.Left);
+  tobFormat.Top    := ini_Tinn.ReadInteger('App', 'iTobFormat.Top', tobFormat.Top);
+  tobFormat.Visible:= ini_Tinn.ReadBool('App', 'bTobFormat.Visible', True);
   actTobFormatVisible.Checked:= tobFormat.Visible;
 
   // View Bar
-  tobView.Left   := ifTinn.ReadInteger('App', 'iTobView.Left', tobView.Left);
-  tobView.Top    := ifTinn.ReadInteger('App', 'iTobView.Top', tobView.Top);
-  tobView.Visible:= ifTinn.ReadBool('App', 'bTobView.Visible', True);
+  tobView.Left   := ini_Tinn.ReadInteger('App', 'iTobView.Left', tobView.Left);
+  tobView.Top    := ini_Tinn.ReadInteger('App', 'iTobView.Top', tobView.Top);
+  tobView.Visible:= ini_Tinn.ReadBool('App', 'bTobView.Visible', True);
   actTobViewVisible.Checked:= tobView.Visible;
 
   // Macro Bar
-  tobMacro.Left   := ifTinn.ReadInteger('App', 'iTobMacro.Left', tobMacro.Left);
-  tobMacro.Top    := ifTinn.ReadInteger('App', 'iTobMacro.Top', tobMacro.Top);
-  tobMacro.Visible:= ifTinn.ReadBool('App', 'bTobMacro.Visible', False);
+  tobMacro.Left   := ini_Tinn.ReadInteger('App', 'iTobMacro.Left', tobMacro.Left);
+  tobMacro.Top    := ini_Tinn.ReadInteger('App', 'iTobMacro.Top', tobMacro.Top);
+  tobMacro.Visible:= ini_Tinn.ReadBool('App', 'bTobMacro.Visible', False);
   actTobMacroVisible.Checked:= tobMacro.Visible;
 
   // Filter Bar
-  tobFilter.Left   := ifTinn.ReadInteger('App', 'iTobFilter.Left', tobFilter.Left);
-  tobFilter.Top    := ifTinn.ReadInteger('App', 'iTobFilter.Top', tobFilter.Top);
-  tobFilter.Visible:= ifTinn.ReadBool('App', 'bTobFilter.Visible', False);
+  tobFilter.Left   := ini_Tinn.ReadInteger('App', 'iTobFilter.Left', tobFilter.Left);
+  tobFilter.Top    := ini_Tinn.ReadInteger('App', 'iTobFilter.Top', tobFilter.Top);
+  tobFilter.Visible:= ini_Tinn.ReadBool('App', 'bTobFilter.Visible', False);
   actTobFilterVisible.Checked:= tobFilter.Visible;
 
   // Syntax Bar
-  tobSyntax.Left   := ifTinn.ReadInteger('App', 'iTobSyntax.Left', tobSyntax.Left);
-  tobSyntax.Top    := ifTinn.ReadInteger('App', 'iTobSyntax.Top', tobSyntax.Top);
-  tobSyntax.Visible:= ifTinn.ReadBool('App', 'bTobSyntax.Visible', True);
+  tobSyntax.Left   := ini_Tinn.ReadInteger('App', 'iTobSyntax.Left', tobSyntax.Left);
+  tobSyntax.Top    := ini_Tinn.ReadInteger('App', 'iTobSyntax.Top', tobSyntax.Top);
+  tobSyntax.Visible:= ini_Tinn.ReadBool('App', 'bTobSyntax.Visible', True);
   actTobSyntaxVisible.Checked:= tobSyntax.Visible;
 
   // Spell Bar
-  tobSpell.Left   := ifTinn.ReadInteger('App', 'iTobSpell.Left', tobSpell.Left);
-  tobSpell.Top    := ifTinn.ReadInteger('App', 'iTobSpell.Top', tobSpell.Top);
-  tobSpell.Visible:= ifTinn.ReadBool('App', 'bTobSpell.Visible', False);
+  tobSpell.Left   := ini_Tinn.ReadInteger('App', 'iTobSpell.Left', tobSpell.Left);
+  tobSpell.Top    := ini_Tinn.ReadInteger('App', 'iTobSpell.Top', tobSpell.Top);
+  tobSpell.Visible:= ini_Tinn.ReadBool('App', 'bTobSpell.Visible', False);
   actTobSpellVisible.Checked:= tobSpell.Visible;
 
   // Misc
-  bMinimizeTinnAfterLastFile:= ifTinn.ReadBool('App', 'bMinimizeTinnAfterLastFile', False);
-  bRememberFileState        := ifTinn.ReadBool('App', 'bRememberFileState', True);
-  bRemoveExtension          := ifTinn.ReadBool('App', 'bRemoveExtension', True);
-  bUndoAfterSave            := ifTinn.ReadBool('App', 'bUndoAfterSave', True);
-  actOpenMaximized.Checked  := ifTinn.ReadBool('App', 'bOpenMaximized', True);
+  bMinimizeTinnAfterLastFile:= ini_Tinn.ReadBool('App', 'bMinimizeTinnAfterLastFile', False);
+  bRememberFileState        := ini_Tinn.ReadBool('App', 'bRememberFileState', True);
+  bRemoveExtension          := ini_Tinn.ReadBool('App', 'bRemoveExtension', True);
+  bUndoAfterSave            := ini_Tinn.ReadBool('App', 'bUndoAfterSave', True);
+  actOpenMaximized.Checked  := ini_Tinn.ReadBool('App', 'bOpenMaximized', True);
 
-  actDatabaseVisible.Checked         := ifTinn.ReadBool('App', 'bDatabase.Visible', True);
-  actDataCommentsVisible.Checked     := ifTinn.ReadBool('App', 'bDataComments.Visible', True);
-  actDataCompletionVisible.Checked   := ifTinn.ReadBool('App', 'bDataCompletion.Visible', True);
-  actDataRcardVisible.Checked        := ifTinn.ReadBool('App', 'bDataRcard.Visible', True);
-  actDataRmirrorsVisible.Checked     := ifTinn.ReadBool('App', 'bDataRmirrors.Visible', True);
-  actDataShortcutsVisible.Checked    := ifTinn.ReadBool('App', 'bDataShortcuts.Visible', True);
-  actHexViewerVisible.Checked        := ifTinn.ReadBool('App', 'bHexViewer.Visible', True);
-  actIniLogVisible.Checked           := ifTinn.ReadBool('App', 'bIniLog.Visible', True);
-  actLatexVisible.Checked            := ifTinn.ReadBool('App', 'bLatex.Visible', True);
-  actMarkupVisible.Checked           := ifTinn.ReadBool('App', 'bMarkup.Visible', True);
-  actMiscVisible.Checked             := ifTinn.ReadBool('App', 'bMisc.Visible', True);
-  actProjectVisible.Checked          := ifTinn.ReadBool('App', 'bProject.Visible', True);
-  actResultsVisible.Checked          := ifTinn.ReadBool('App', 'bResults.Visible', True);
-  actRExplorerVisible.Checked        := ifTinn.ReadBool('App', 'bRExplorer.Visible', True);
-  actRVisible.Checked                := ifTinn.ReadBool('App', 'bR.Visible', True);
-  actSearchVisible.Checked           := ifTinn.ReadBool('App', 'bSearch.Visible', True);
-  actSpellVisible.Checked            := ifTinn.ReadBool('App', 'bSpell.Visible', True);
-  actTxt2tagsVisible.Checked         := ifTinn.ReadBool('App', 'bTxt2tags.Visible', True);
-  actWinExplVisible.Checked          := ifTinn.ReadBool('App', 'bWinExpl.Visible', True);
-  actWorkExplVisible.Checked         := ifTinn.ReadBool('App', 'bWorkExpl.Visible', True);
+  actDatabaseVisible.Checked         := ini_Tinn.ReadBool('App', 'bDatabase.Visible', True);
+  actDataCommentsVisible.Checked     := ini_Tinn.ReadBool('App', 'bDataComments.Visible', True);
+  actDataCompletionVisible.Checked   := ini_Tinn.ReadBool('App', 'bDataCompletion.Visible', True);
+  actDataRcardVisible.Checked        := ini_Tinn.ReadBool('App', 'bDataRcard.Visible', True);
+  actDataRmirrorsVisible.Checked     := ini_Tinn.ReadBool('App', 'bDataRmirrors.Visible', True);
+  actDataShortcutsVisible.Checked    := ini_Tinn.ReadBool('App', 'bDataShortcuts.Visible', True);
+  actHexViewerVisible.Checked        := ini_Tinn.ReadBool('App', 'bHexViewer.Visible', True);
+  actIniLogVisible.Checked           := ini_Tinn.ReadBool('App', 'bIniLog.Visible', True);
+  actLatexVisible.Checked            := ini_Tinn.ReadBool('App', 'bLatex.Visible', True);
+  actMarkupVisible.Checked           := ini_Tinn.ReadBool('App', 'bMarkup.Visible', True);
+  actMiscVisible.Checked             := ini_Tinn.ReadBool('App', 'bMisc.Visible', True);
+  actProjectVisible.Checked          := ini_Tinn.ReadBool('App', 'bProject.Visible', True);
+  actResultsVisible.Checked          := ini_Tinn.ReadBool('App', 'bResults.Visible', True);
+  actRExplorerVisible.Checked        := ini_Tinn.ReadBool('App', 'bRExplorer.Visible', True);
+  actRVisible.Checked                := ini_Tinn.ReadBool('App', 'bR.Visible', True);
+  actSearchVisible.Checked           := ini_Tinn.ReadBool('App', 'bSearch.Visible', True);
+  actSpellVisible.Checked            := ini_Tinn.ReadBool('App', 'bSpell.Visible', True);
+  actTxt2tagsVisible.Checked         := ini_Tinn.ReadBool('App', 'bTxt2tags.Visible', True);
+  actWinExplVisible.Checked          := ini_Tinn.ReadBool('App', 'bWinExpl.Visible', True);
+  actWorkExplVisible.Checked         := ini_Tinn.ReadBool('App', 'bWorkExpl.Visible', True);
 
   frmTools.tbsComments.TabVisible     := actDataCommentsVisible.Checked;
   frmTools.tbsCompletion.TabVisible   := actDataCompletionVisible.Checked;
@@ -5099,114 +5123,114 @@ begin
   frmTools.tbsWinExplorer.TabVisible  := actWinExplVisible.Checked;
   frmTools.tbsWorkExplorer.TabVisible := actWorkExplVisible.Checked;
 
-  actShowAllBars.Checked:= ifTinn.ReadBool('App', 'bShowAllBars', True);
+  actShowAllBars.Checked:= ini_Tinn.ReadBool('App', 'bShowAllBars', True);
   pUpdate_Bars(actShowAllBars.Checked);
 
-  actAlwaysAddBOM.Checked  := ifTinn.ReadBool('App', 'bAlwaysAddBOM', False);
-  actApplyToANSI.Checked   := ifTinn.ReadBool('App', 'bApplyToANSI', False);
-  actEditorLineWrap.Checked:= ifTinn.ReadBool('App', 'bEditorLineWrap', True);
+  actAlwaysAddBOM.Checked  := ini_Tinn.ReadBool('App', 'bAlwaysAddBOM', False);
+  actApplyToANSI.Checked   := ini_Tinn.ReadBool('App', 'bApplyToANSI', False);
+  actEditorLineWrap.Checked:= ini_Tinn.ReadBool('App', 'bEditorLineWrap', True);
 
-  bActiveLine           := ifTinn.ReadBool('App', 'bActiveLine', True);
-  clActiveLine          := ifTinn.ReadInteger('App', 'clActiveLine', Tcolor(clYellow));
-  clBGApplication       := ifTinn.ReadInteger('App', 'clBGApplication', Tcolor(clWindow));
-  clBGForAllHighlighters:= ifTinn.ReadInteger('App', 'clBGForAllHighlighters', Tcolor(clWindow));
-  clBGPreferred         := ifTinn.ReadInteger('App', 'clBGPreferred', Tcolor(clWindow));
-  clBGTabSelectedNew    := ifTinn.ReadInteger('App', 'clBGTabSelectedNew', Tcolor(clMedGray));
-  clBrackets            := ifTinn.ReadInteger('App', 'clBrackets', Tcolor(clRed));
-  clFGApplication       := ifTinn.ReadInteger('App', 'clFGApplication', Tcolor(clBlack));
-  iDelay                := ifTinn.ReadInteger('App', 'iDelay', 100);
-  iPandocFrom           := ifTinn.ReadInteger('App', 'iPandocFrom', 4);
-  iPandocTo             := ifTinn.ReadInteger('App', 'iPandocTo', 7);
-  iTransparency         := ifTinn.ReadInteger('App', 'iTransparency', 0);
-  iViewStyleRExplorer   := ifTinn.ReadInteger('App', 'iViewStyleRExplorer', 1);
-  sShortcutsInUse       := trim(ifTinn.ReadString('App', 'sShortcutsInUse', sPath_Data + '\App_Shortcuts.xml'));
+  bActiveLine           := ini_Tinn.ReadBool('App', 'bActiveLine', True);
+  clActiveLine          := ini_Tinn.ReadInteger('App', 'clActiveLine', Tcolor(clYellow));
+  clBGApplication       := ini_Tinn.ReadInteger('App', 'clBGApplication', Tcolor(clWindow));
+  clBGForAllHighlighters:= ini_Tinn.ReadInteger('App', 'clBGForAllHighlighters', Tcolor(clWindow));
+  clBGPreferred         := ini_Tinn.ReadInteger('App', 'clBGPreferred', Tcolor(clWindow));
+  clBGTabSelectedNew    := ini_Tinn.ReadInteger('App', 'clBGTabSelectedNew', Tcolor(clMedGray));
+  clBrackets            := ini_Tinn.ReadInteger('App', 'clBrackets', Tcolor(clRed));
+  clFGApplication       := ini_Tinn.ReadInteger('App', 'clFGApplication', Tcolor(clBlack));
+  iDelay                := ini_Tinn.ReadInteger('App', 'iDelay', 100);
+  iPandocFrom           := ini_Tinn.ReadInteger('App', 'iPandocFrom', 4);
+  iPandocTo             := ini_Tinn.ReadInteger('App', 'iPandocTo', 7);
+  iTransparency         := ini_Tinn.ReadInteger('App', 'iTransparency', 0);
+  iViewStyleRExplorer   := ini_Tinn.ReadInteger('App', 'iViewStyleRExplorer', 1);
+  sShortcutsInUse       := trim(ini_Tinn.ReadString('App', 'sShortcutsInUse', sPath_Data + '\App_Shortcuts.xml'));
 
-  bIPLocal     := ifTinn.ReadBool('App', 'bIPLocal', True);
-  iIPPortLocal := ifTinn.ReadInteger('App', 'iIPPortLocal', 8889);
-  iIPPortRemote:= ifTinn.ReadInteger('App', 'iIPPortLocal', 8889);
-  sIPHostLocal := ifTinn.ReadString('App', 'sIPHostLocal', '127.0.0.1');
-  sIPHostRemote:= ifTinn.ReadString('App', 'sIPHostRemote', '000.000.000.000');
+  bIPLocal     := ini_Tinn.ReadBool('App', 'bIPLocal', True);
+  iIPPortLocal := ini_Tinn.ReadInteger('App', 'iIPPortLocal', 8889);
+  iIPPortRemote:= ini_Tinn.ReadInteger('App', 'iIPPortLocal', 8889);
+  sIPHostLocal := ini_Tinn.ReadString('App', 'sIPHostLocal', '127.0.0.1');
+  sIPHostRemote:= ini_Tinn.ReadString('App', 'sIPHostRemote', '000.000.000.000');
 
-  sFormatR                 := trim(ifTinn.ReadString('App', 'sFormatR', EmptyStr));
-  sKnit                    := trim(ifTinn.ReadString('App', 'sKnit', EmptyStr));
-  sLatexClearWaste         := trim(ifTinn.ReadString('App', 'sLatexClearWaste', '.aux, .log, .lof, .lot, .bbl, .blg, .out, .toc'));
-  sParDeplate              := trim(ifTinn.ReadString('App', 'sParDeplate', '-f'));
-  sParDviBibtex            := trim(ifTinn.ReadString('App', 'sParDviBibtex', 'bibtex --src-specials'));
-  sParDviSingle            := trim(ifTinn.ReadString('App', 'sParDviSingle', 'latex -c-style-errors --src-specials'));
-  sParPdfBibtex            := trim(ifTinn.ReadString('App', 'sParPdfBibtex', 'bibtex'));
-  sParPdfSingle            := trim(ifTinn.ReadString('App', 'sParPdfSingle', 'pdflatex -c-style-errors'));
-  sParRgui                 := trim(ifTinn.ReadString('App', 'sParRgui', '--sdi'));
-  sParRPuTTY               := trim(ifTinn.ReadString('App', 'sParRPuTTY', '--no-save'));
-  sParRterm                := trim(ifTinn.ReadString('App', 'sParRterm', '--ess'));
-  sParTxt2tags             := trim(ifTinn.ReadString('App', 'sParTxt2tags', '-t'));
-  sPath_Pandoc             := trim(ifTinn.ReadString('App', 'sPath_Pandoc', EmptyStr));
-  sPathDeplate_Converter   := trim(ifTinn.ReadString('App', 'sPathDeplate_Converter', EmptyStr));
-  sPathDeplate_Interpreter := trim(ifTinn.ReadString('App', 'sPathDeplate_Interpreter', EmptyStr));
-  sPathTxt2tags_Converter  := trim(ifTinn.ReadString('App', 'sPathTxt2tags_Converter', EmptyStr));
-  sPathTxt2tags_Interpreter:= trim(ifTinn.ReadString('App', 'sPathTxt2tags_Interpreter', EmptyStr));
-  sPuttyHost               := trim(ifTinn.ReadString('App', 'sPuttyHost', EmptyStr));
-  sPuttyPassword           := trim(ifTinn.ReadString('App', 'sPuttyPassword', EmptyStr));
-  sPuttyUser               := trim(ifTinn.ReadString('App', 'sPuttyUser', EmptyStr));
-  sRLibPathDefault         := trim(ifTinn.ReadString('App', 'sRLibPathDefault', '.libPaths()[1L]'));
+  sFormatR                  := trim(ini_Tinn.ReadString('App', 'sFormatR', EmptyStr));
+  sKnit                     := trim(ini_Tinn.ReadString('App', 'sKnit', EmptyStr));
+  sLatexClearWaste          := trim(ini_Tinn.ReadString('App', 'sLatexClearWaste', '.aux, .log, .lof, .lot, .bbl, .blg, .out, .toc'));
+  sParDeplate               := trim(ini_Tinn.ReadString('App', 'sParDeplate', '-f'));
+  sParDviBibtex             := trim(ini_Tinn.ReadString('App', 'sParDviBibtex', 'bibtex --src-specials'));
+  sParDviSingle             := trim(ini_Tinn.ReadString('App', 'sParDviSingle', 'latex -c-style-errors --src-specials'));
+  sParPdfBibtex             := trim(ini_Tinn.ReadString('App', 'sParPdfBibtex', 'bibtex'));
+  sParPdfSingle             := trim(ini_Tinn.ReadString('App', 'sParPdfSingle', 'pdflatex -c-style-errors'));
+  sParRgui                  := trim(ini_Tinn.ReadString('App', 'sParRgui', '--sdi'));
+  sParRPuTTY                := trim(ini_Tinn.ReadString('App', 'sParRPuTTY', '--no-save'));
+  sParRterm                 := trim(ini_Tinn.ReadString('App', 'sParRterm', '--ess'));
+  sParTxt2tags              := trim(ini_Tinn.ReadString('App', 'sParTxt2tags', '-t'));
+  sPath_Pandoc              := trim(ini_Tinn.ReadString('App', 'sPath_Pandoc', EmptyStr));
+  sPath_Deplate_Converter   := trim(ini_Tinn.ReadString('App', 'sPath_Deplate_Converter', EmptyStr));
+  sPath_Deplate_Interpreter := trim(ini_Tinn.ReadString('App', 'sPath_Deplate_Interpreter', EmptyStr));
+  sPath_Txt2tags_Converter  := trim(ini_Tinn.ReadString('App', 'sPath_Txt2tags_Converter', EmptyStr));
+  sPath_Txt2tags_Interpreter:= trim(ini_Tinn.ReadString('App', 'sPath_Txt2tags_Interpreter', EmptyStr));
+  sPuttyHost                := trim(ini_Tinn.ReadString('App', 'sPuttyHost', EmptyStr));
+  sPuttyPassword            := trim(ini_Tinn.ReadString('App', 'sPuttyPassword', EmptyStr));
+  sPuttyUser                := trim(ini_Tinn.ReadString('App', 'sPuttyUser', EmptyStr));
+  sRLibPath_Default         := trim(ini_Tinn.ReadString('App', 'sRLibPath_Default', '.libPaths()[1L]'));
 
-  actCloseDVIViewer.Checked    := ifTinn.ReadBool('App', 'bCloseDVIViewer', False);
-  actClosePDFViewer.Checked    := ifTinn.ReadBool('App', 'bClosePDFViewer', True);
-  actDosMinimizedAlways.Checked:= ifTinn.ReadBool('App', 'bDosMinimizedAlways', True);
-  actDviOpenAlways.Checked     := ifTinn.ReadBool('App', 'bDviOpenAlways', True);
-  actHtmlOpenAlways.Checked    := ifTinn.ReadBool('App', 'bHtmlOpenAlways', True);
-  actPdfOpenAlways.Checked     := ifTinn.ReadBool('App', 'bPdfOpenAlways', True);
-  actRComplexDefault.Checked   := ifTinn.ReadBool('App', 'bRComplexDefault', False);
-  actRSimpleDefault.Checked    := ifTinn.ReadBool('App', 'bRSimpleDefault', True);
-  actTextDefault.Checked       := ifTinn.ReadBool('App', 'bTextDefault', False);
+  actCloseDVIViewer.Checked    := ini_Tinn.ReadBool('App', 'bCloseDVIViewer', False);
+  actClosePDFViewer.Checked    := ini_Tinn.ReadBool('App', 'bClosePDFViewer', True);
+  actDosMinimizedAlways.Checked:= ini_Tinn.ReadBool('App', 'bDosMinimizedAlways', True);
+  actDviOpenAlways.Checked     := ini_Tinn.ReadBool('App', 'bDviOpenAlways', True);
+  actHtmlOpenAlways.Checked    := ini_Tinn.ReadBool('App', 'bHtmlOpenAlways', True);
+  actPdfOpenAlways.Checked     := ini_Tinn.ReadBool('App', 'bPdfOpenAlways', True);
+  actRComplexDefault.Checked   := ini_Tinn.ReadBool('App', 'bRComplexDefault', False);
+  actRSimpleDefault.Checked    := ini_Tinn.ReadBool('App', 'bRSimpleDefault', True);
+  actTextDefault.Checked       := ini_Tinn.ReadBool('App', 'bTextDefault', False);
 
-  bAllNames              := ifTinn.ReadBool('App', 'bAllNames', True);
-  bConnectionBeepOnError := ifTinn.ReadBool('App', 'bConnectionBeepOnError', True);
-  bDataCompletionAnywhere:= ifTinn.ReadBool('App', 'bDataCompletionAnywhere', True);
-  bHotKeys_On            := ifTinn.ReadBool('App', 'bHotKeys_On', False);
-  bOrganizeAutomatically := ifTinn.ReadBool('App', 'bOrganizeAutomatically', False);
+  bAllNames              := ini_Tinn.ReadBool('App', 'bAllNames', True);
+  bConnectionBeepOnError := ini_Tinn.ReadBool('App', 'bConnectionBeepOnError', True);
+  bDataCompletionAnywhere:= ini_Tinn.ReadBool('App', 'bDataCompletionAnywhere', True);
+  bHotKeys_On            := ini_Tinn.ReadBool('App', 'bHotKeys_On', False);
+  bOrganizeAutomatically := ini_Tinn.ReadBool('App', 'bOrganizeAutomatically', False);
 
   // There is still some 32 bit computer in use today!
   if (fIs_64Bit_OS) and
-     ifTinn.ReadBool('App', 'bRArchitecture64', True) then bRArchitecture64:= True
+     ini_Tinn.ReadBool('App', 'bRArchitecture64', True) then bRArchitecture64:= True
                                                       else bRArchitecture64:= False;
 
-  bRasServer                   := ifTinn.ReadBool('App', 'bRasServer', True);
-  bRestoreIniDock              := ifTinn.ReadBool('App', 'bRestoreIniDock', False);
-  bRguiReturnFocus             := ifTinn.ReadBool('App', 'bRguiReturnFocus', True);
-  bRMirros_Update              := ifTinn.ReadBool('App', 'bRMirros_Update', False);
-  bRSendAll                    := ifTinn.ReadBool('App', 'bRSendAll', False);
-  bRSetget_Info                := ifTinn.ReadBool('App', 'bRSetget_Info', True);
-  bRSetWorkDir_Starting        := ifTinn.ReadBool('App', 'bRSetWorkDir_Starting', True);
-  bRSmart                      := ifTinn.ReadBool('App', 'bRSmart', True);
-  bRsvSocket_Connect           := ifTinn.ReadBool('App', 'bRsvSocketConnect', True);
-  bRTCPIPConsoleEcho           := ifTinn.ReadBool('App', 'bRTCPIPConsoleEcho', False);
-  bRTCPIPConsoleUse            := ifTinn.ReadBool('App', 'bRTCPIPConsoleUse', False);
-  bRtermBeepOnError            := ifTinn.ReadBool('App', 'bRtermBeepOnError', True);
-  bRtermFindError              := ifTinn.ReadBool('App', 'bRtermFindError', False);
-  bRtermWidth                  := ifTinn.ReadBool('App', 'bRtermWidth', True);
-  bRTinnRcom_Install           := ifTinn.ReadBool('App', 'bRTinnRcomInstall', True);
-  bRTinnRcom_Load              := ifTinn.ReadBool('App', 'bRTinnRcomLoad', True);
-  bRUseLatest                  := ifTinn.ReadBool('App', 'bRUseLatest', True);
-  bScroll_SendingLines         := ifTinn.ReadBool('App', 'bScroll_SendingLines', True);
-  iRecognition_Caption         := ifTinn.ReadInteger('App', 'iRecognition_Caption', 2);
-  iReformatRSplit              := ifTinn.ReadInteger('App', 'iReformatRSPlit', 1);
-  iRguiTinnR_Disposition       := ifTinn.ReadInteger('App', 'iRguiTinnR_Disposition', 0);
-  iRguiTinnR_Proportion        := ifTinn.ReadInteger('App', 'iRguiTinnR_Proportion', 58);
+  bRasServer                   := ini_Tinn.ReadBool('App', 'bRasServer', True);
+  bRestoreIniDock              := ini_Tinn.ReadBool('App', 'bRestoreIniDock', False);
+  bRguiReturnFocus             := ini_Tinn.ReadBool('App', 'bRguiReturnFocus', True);
+  bRMirros_Update              := ini_Tinn.ReadBool('App', 'bRMirros_Update', False);
+  bRSendAll                    := ini_Tinn.ReadBool('App', 'bRSendAll', False);
+  bRSetget_Info                := ini_Tinn.ReadBool('App', 'bRSetget_Info', True);
+  bRSetWorkDir_Starting        := ini_Tinn.ReadBool('App', 'bRSetWorkDir_Starting', True);
+  bRSmart                      := ini_Tinn.ReadBool('App', 'bRSmart', True);
+  bRsvSocket_Connect           := ini_Tinn.ReadBool('App', 'bRsvSocketConnect', True);
+  bRTCPIPConsoleEcho           := ini_Tinn.ReadBool('App', 'bRTCPIPConsoleEcho', False);
+  bRTCPIPConsoleUse            := ini_Tinn.ReadBool('App', 'bRTCPIPConsoleUse', False);
+  bRtermBeepOnError            := ini_Tinn.ReadBool('App', 'bRtermBeepOnError', True);
+  bRtermFindError              := ini_Tinn.ReadBool('App', 'bRtermFindError', False);
+  bRtermWidth                  := ini_Tinn.ReadBool('App', 'bRtermWidth', True);
+  bRTinnRcom_Install           := ini_Tinn.ReadBool('App', 'bRTinnRcomInstall', True);
+  bRTinnRcom_Load              := ini_Tinn.ReadBool('App', 'bRTinnRcomLoad', True);
+  bRUseLatest                  := ini_Tinn.ReadBool('App', 'bRUseLatest', True);
+  bScroll_SendingLines         := ini_Tinn.ReadBool('App', 'bScroll_SendingLines', True);
+  iRecognition_Caption         := ini_Tinn.ReadInteger('App', 'iRecognition_Caption', 2);
+  iReformatRSplit              := ini_Tinn.ReadInteger('App', 'iReformatRSPlit', 1);
+  iRguiTinnR_Disposition       := ini_Tinn.ReadInteger('App', 'iRguiTinnR_Disposition', 0);
+  iRguiTinnR_Proportion        := ini_Tinn.ReadInteger('App', 'iRguiTinnR_Proportion', 58);
 
-  actPgFilesVisible.Checked                := ifTinn.ReadBool('App', 'bPgFiles.Visible', True);
-  actStatusBarVisible.Checked              := ifTinn.ReadBool('App','bStatusBar', True);
-  frmTools.cbComAutoDetect_Language.Checked:= ifTinn.ReadBool('App', 'bComAutoDetect_Language', True);
-  frmTools.cbComPriority_Line.Checked      := ifTinn.ReadBool('App', 'bComPriority_Line', True);
-  frmTools.panCompletion.Height            := ifTinn.ReadInteger('App', 'iCompletion.Height', 41);
-  frmTools.panCountries.Height             := ifTinn.ReadInteger('App', 'iCountries.Height', 79);
-  frmTools.panRcard.Height                 := ifTinn.ReadInteger('App', 'iRcard.Height', 79);
-  frmTools.panRExplorer.Width              := ifTinn.ReadInteger('App', 'iRExplorer.Width', 200);
-  frmTools.panApp_Shortcuts.Height         := ifTinn.ReadInteger('App', 'iApp_Shortcuts.Height', 79);
-  frmTools.panWinExplorer.Height           := ifTinn.ReadInteger('App', 'iWinExplorer.Height', 75);
-  frmTools.panWorkExplorer.Height          := ifTinn.ReadInteger('App', 'iWorkExplorer.Height', 75);
+  actPgFilesVisible.Checked                := ini_Tinn.ReadBool('App', 'bPgFiles.Visible', True);
+  actStatusBarVisible.Checked              := ini_Tinn.ReadBool('App','bStatusBar', True);
+  frmTools.cbComAutoDetect_Language.Checked:= ini_Tinn.ReadBool('App', 'bComAutoDetect_Language', True);
+  frmTools.cbComPriority_Line.Checked      := ini_Tinn.ReadBool('App', 'bComPriority_Line', True);
+  frmTools.panCompletion.Height            := ini_Tinn.ReadInteger('App', 'iCompletion.Height', 41);
+  frmTools.panCountries.Height             := ini_Tinn.ReadInteger('App', 'iCountries.Height', 79);
+  frmTools.panRcard.Height                 := ini_Tinn.ReadInteger('App', 'iRcard.Height', 79);
+  frmTools.panRExplorer.Width              := ini_Tinn.ReadInteger('App', 'iRExplorer.Width', 200);
+  frmTools.panApp_Shortcuts.Height         := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.Height', 79);
+  frmTools.panWinExplorer.Height           := ini_Tinn.ReadInteger('App', 'iWinExplorer.Height', 75);
+  frmTools.panWorkExplorer.Height          := ini_Tinn.ReadInteger('App', 'iWorkExplorer.Height', 75);
 
   // pgFiles
-  iTmp:= ifTinn.ReadInteger('App', 'iPgFiles.TabsPosition', 1);
+  iTmp:= ini_Tinn.ReadInteger('App', 'iPgFiles.TabsPosition', 1);
   // 0=fsdLeft, 1=fsdTop, 2=fsdRight, 3=fsdBottom
   case (iTmp) of
     1: actFilesTabsTopExecute(nil);
@@ -5214,7 +5238,7 @@ begin
   end;
 
   // pgTools
-  iTmp:= ifTinn.ReadInteger('App', 'iPgTools.TabsPosition', 1);
+  iTmp:= ini_Tinn.ReadInteger('App', 'iPgTools.TabsPosition', 1);
   // 0=fsdLeft, 1=fsdTop, 2=fsdRight, 3=fsdBottom
   case (iTmp) of
     0: actToolsTabsLeftExecute(nil);
@@ -5224,7 +5248,7 @@ begin
   end;
 
   // pgConsole
-  iTmp:= ifTinn.ReadInteger('App', 'iPgConsole.TabsPosition', 1);
+  iTmp:= ini_Tinn.ReadInteger('App', 'iPgConsole.TabsPosition', 1);
   // 0=fsdLeft, 1=fsdTop, 2=fsdRight, 3=fsdBottom
   case (iTmp) of
     0: actRtermTabsLeftExecute(nil);
@@ -5237,40 +5261,40 @@ begin
   stbMain.Visible:= actStatusBarVisible.Checked;
 
   // Tools
-  bToolsCanFloat              := ifTinn.ReadBool('App', 'bToolsCanFloat', False);
-  frmTools.iSize              := ifTinn.ReadInteger('App', 'iTools.Size', 310);
-  frmTools.pgDatabase.TabIndex:= ifTinn.ReadInteger('App', 'iDatabase.TabIndex', 0);
-  frmTools.pgRH.TabIndex      := ifTinn.ReadInteger('App', 'iRH.TabIndex', 0);
-  frmTools.pgLatex.TabIndex   := ifTinn.ReadInteger('App', 'iLatex.TabIndex', 0);
-  frmTools.pgMarkup.TabIndex  := ifTinn.ReadInteger('App', 'iMarkup.TabIndex', 0);
-  frmTools.pgMisc.TabIndex    := ifTinn.ReadInteger('App', 'iMIsc.TabIndex', 0);
-  frmTools.pgR.TabIndex       := ifTinn.ReadInteger('App', 'iR.TabIndex', 0);
-  frmTools.pgResults.TabIndex := ifTinn.ReadInteger('App', 'iResults.TabIndex', 0);
-  frmTools.pgTools.TabIndex   := ifTinn.ReadInteger('App', 'iTools.TabIndex', 0);
-  frmTools.pgTxt2tags.TabIndex:= ifTinn.ReadInteger('App', 'iTxt2tags.TabIndex', 0);
+  bToolsCanFloat              := ini_Tinn.ReadBool('App', 'bToolsCanFloat', False);
+  frmTools.iSize              := ini_Tinn.ReadInteger('App', 'iTools.Size', 310);
+  frmTools.pgDatabase.TabIndex:= ini_Tinn.ReadInteger('App', 'iDatabase.TabIndex', 0);
+  frmTools.pgRH.TabIndex      := ini_Tinn.ReadInteger('App', 'iRH.TabIndex', 0);
+  frmTools.pgLatex.TabIndex   := ini_Tinn.ReadInteger('App', 'iLatex.TabIndex', 0);
+  frmTools.pgMarkup.TabIndex  := ini_Tinn.ReadInteger('App', 'iMarkup.TabIndex', 0);
+  frmTools.pgMisc.TabIndex    := ini_Tinn.ReadInteger('App', 'iMIsc.TabIndex', 0);
+  frmTools.pgR.TabIndex       := ini_Tinn.ReadInteger('App', 'iR.TabIndex', 0);
+  frmTools.pgResults.TabIndex := ini_Tinn.ReadInteger('App', 'iResults.TabIndex', 0);
+  frmTools.pgTools.TabIndex   := ini_Tinn.ReadInteger('App', 'iTools.TabIndex', 0);
+  frmTools.pgTxt2tags.TabIndex:= ini_Tinn.ReadInteger('App', 'iTxt2tags.TabIndex', 0);
 
-  cbSpellLanguage.ItemIndex:= ifTinn.ReadInteger('App', 'iSpellLanguage.ItemIndex', -1);
-  iCompletionFilter        := ifTinn.ReadInteger('App', 'iCompletion.ItemIndex', 0);
-  iCountriesFilter         := ifTinn.ReadInteger('App', 'iCountries.ItemIndex', 0);
-  iRcardFilter             := ifTinn.ReadInteger('App', 'iRcard.ItemIndex', 0);
-  iRtipFilter              := ifTinn.ReadInteger('App', 'iRtip.ItemIndex', 0);
-  iApp_ShortcutsFilter     := ifTinn.ReadInteger('App', 'iApp_Shortcuts.ItemIndex', 0);
+  cbSpellLanguage.ItemIndex:= ini_Tinn.ReadInteger('App', 'iSpellLanguage.ItemIndex', -1);
+  iCompletionFilter        := ini_Tinn.ReadInteger('App', 'iCompletion.ItemIndex', 0);
+  iCountriesFilter         := ini_Tinn.ReadInteger('App', 'iCountries.ItemIndex', 0);
+  iRcardFilter             := ini_Tinn.ReadInteger('App', 'iRcard.ItemIndex', 0);
+  iRtipFilter              := ini_Tinn.ReadInteger('App', 'iRtip.ItemIndex', 0);
+  iApp_ShortcutsFilter     := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.ItemIndex', 0);
 
   actRguiReturnFocus.Checked:= bRguiReturnFocus;
 
   // Rterm
-  bIOLineWrap             := ifTinn.ReadBool('App', 'bIOLineWrap', True);
-  bLogLineWrap            := ifTinn.ReadBool('App', 'bLogLineWrap', True);
-  bRtermCanFloat          := ifTinn.ReadBool('App', 'bRtermCanFloat', False);
-  bRtermSend_Plus         := ifTinn.ReadBool('App', 'bRtermSend_Plus', True);
-  bRtermCloseWithoutAsk   := ifTinn.ReadBool('App', 'bRtermCloseWithoutAsk', False);
-  bRtermHorizontal        := ifTinn.ReadBool('App', 'bRtermHorizontal', True);
-  bRtermSingle            := ifTinn.ReadBool('App', 'bRtermSingle', True);
-  frmR_Term.iSize         := ifTinn.ReadInteger('App', 'iRterm.Size', 480);
-  frmR_Term.iSynLOG2Height:= ifTinn.ReadInteger('App', 'iSynLOG2.Height', 90);
-  frmR_Term.iSynLOG2Width := ifTinn.ReadInteger('App', 'iSynLOG2.Width', 140);
-  iIO_Syntax              := ifTinn.ReadInteger('App', 'iIO_Syntax', 2);   // .R
-  iLOG_Syntax             := ifTinn.ReadInteger('App', 'iLOG_Syntax', 0);  // .txt
+  bIOLineWrap             := ini_Tinn.ReadBool('App', 'bIOLineWrap', True);
+  bLogLineWrap            := ini_Tinn.ReadBool('App', 'bLogLineWrap', True);
+  bRtermCanFloat          := ini_Tinn.ReadBool('App', 'bRtermCanFloat', False);
+  bRtermSend_Plus         := ini_Tinn.ReadBool('App', 'bRtermSend_Plus', True);
+  bRtermCloseWithoutAsk   := ini_Tinn.ReadBool('App', 'bRtermCloseWithoutAsk', False);
+  bRtermHorizontal        := ini_Tinn.ReadBool('App', 'bRtermHorizontal', True);
+  bRtermSingle            := ini_Tinn.ReadBool('App', 'bRtermSingle', True);
+  frmR_Term.iSize         := ini_Tinn.ReadInteger('App', 'iRterm.Size', 480);
+  frmR_Term.iSynLOG2Height:= ini_Tinn.ReadInteger('App', 'iSynLOG2.Height', 90);
+  frmR_Term.iSynLOG2Width := ini_Tinn.ReadInteger('App', 'iSynLOG2.Width', 140);
+  iIO_Syntax              := ini_Tinn.ReadInteger('App', 'iIO_Syntax', 2);   // .R
+  iLOG_Syntax             := ini_Tinn.ReadInteger('App', 'iLOG_Syntax', 0);  // .txt
 
   with frmR_Term do begin
     synIO.WordWrap := bIOLineWrap;
@@ -5291,129 +5315,129 @@ begin
        end;
   end;
 
-  iMaxDeparseLength := ifTinn.ReadInteger('App', 'iMaxDeparseLength', 150);
-  sAppSelected      := ifTinn.ReadString('App', 'sAppSelected', 'General');
+  iMaxDeparseLength := ini_Tinn.ReadInteger('App', 'iMaxDeparseLength', 150);
+  sAppSelected      := ini_Tinn.ReadString('App', 'sAppSelected', 'General');
 
   // Encoding
-  sEncodingDefault:= ifTinn.ReadString('App', 'sEncodingDefault', 'ANSI');
+  sEncodingDefault:= ini_Tinn.ReadString('App', 'sEncodingDefault', 'ANSI');
   pSet_EncodingDefault(sEncodingDefault);
 
   // EOL
-  sEOLDefault:= ifTinn.ReadString('App', 'sEOLDefault', 'WIN');
+  sEOLDefault:= ini_Tinn.ReadString('App', 'sEOLDefault', 'WIN');
   pSet_EOLDefault(sEOLDefault);
 
   // Search Settings
-  bSearch_Backwards    := ifTinn.ReadBool('Search', 'bSearch_Backwards', False);
-  bSearch_CaseSensitive:= ifTinn.ReadBool('Search', 'bSearch_CaseSensitive', False);
-  bSearch_Directory    := ifTinn.ReadBool('Search', 'bSearch_Directory', False);
-  bSearch_FromCursor   := ifTinn.ReadBool('Search', 'bSearch_FromCursor', False);
-  bSearch_InSub        := ifTinn.ReadBool('Search', 'bSearch_InSub', False);
-  bSearch_OpenFiles    := ifTinn.ReadBool('Search', 'bSearch_OpenFiles', True);
-  bSearch_RegExp       := ifTinn.ReadBool('Search', 'bSearch_RegExp', False);
-  bSearch_WholeWords   := ifTinn.ReadBool('Search', 'bSearch_WholeWords', False);
-  iLastSearch          := ifTinn.ReadInteger('Search', 'iLastSearch', 10);
+  bSearch_Backwards    := ini_Tinn.ReadBool('Search', 'bSearch_Backwards', False);
+  bSearch_CaseSensitive:= ini_Tinn.ReadBool('Search', 'bSearch_CaseSensitive', False);
+  bSearch_Directory    := ini_Tinn.ReadBool('Search', 'bSearch_Directory', False);
+  bSearch_FromCursor   := ini_Tinn.ReadBool('Search', 'bSearch_FromCursor', False);
+  bSearch_InSub        := ini_Tinn.ReadBool('Search', 'bSearch_InSub', False);
+  bSearch_OpenFiles    := ini_Tinn.ReadBool('Search', 'bSearch_OpenFiles', True);
+  bSearch_RegExp       := ini_Tinn.ReadBool('Search', 'bSearch_RegExp', False);
+  bSearch_WholeWords   := ini_Tinn.ReadBool('Search', 'bSearch_WholeWords', False);
+  iLastSearch          := ini_Tinn.ReadInteger('Search', 'iLastSearch', 10);
 
   // Print settings
-  bPrintColors     := ifTinn.ReadBool('Print', 'bPrintColors', True);
-  bPrintFileName   := ifTinn.ReadBool('Print', 'bPrintFileName', True);
-  bPrintLineNumber := ifTinn.ReadBool('Print', 'bPrintLineNumber', False);
-  bPrintLineWrap   := ifTinn.ReadBool('Print', 'bPrintLineWrap', True);
-  bPrintPageNumber := ifTinn.ReadBool('Print', 'bPrintPageNumber', True);
-  bPrintSyntaxColor:= ifTinn.ReadBool('Print', 'bPrintSyntaxColor', True);
-  iScaleMode       := ifTinn.ReadInteger('Print', 'iScaleMode', 1);
-  iZoomPreview     := ifTinn.ReadInteger('Print', 'iZoomPreview', 90);
+  bPrintColors     := ini_Tinn.ReadBool('Print', 'bPrintColors', True);
+  bPrintFileName   := ini_Tinn.ReadBool('Print', 'bPrintFileName', True);
+  bPrintLineNumber := ini_Tinn.ReadBool('Print', 'bPrintLineNumber', False);
+  bPrintLineWrap   := ini_Tinn.ReadBool('Print', 'bPrintLineWrap', True);
+  bPrintPageNumber := ini_Tinn.ReadBool('Print', 'bPrintPageNumber', True);
+  bPrintSyntaxColor:= ini_Tinn.ReadBool('Print', 'bPrintSyntaxColor', True);
+  iScaleMode       := ini_Tinn.ReadInteger('Print', 'iScaleMode', 1);
+  iZoomPreview     := ini_Tinn.ReadInteger('Print', 'iZoomPreview', 90);
 
   // Send to R alphabetically ordered
-  pmemRResCurrentLineToTop.Checked         := ifTinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
-  pmemRResSendBlockMarked.Checked          := ifTinn.ReadBool('R Options', 'bRSendBlockMarked', True);
-  pmemRResSendContiguous.Checked           := ifTinn.ReadBool('R Options', 'bRSendContiguous', True);
-  pmemRResSendCursorToBeginningLine.Checked:= ifTinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
-  pmemRResSendCursorToEndLine.Checked      := ifTinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
-  pmemRResSendFile.Checked                 := ifTinn.ReadBool('R Options', 'bRSendFile', True);
-  pmemRResSendKnitr.Checked                := ifTinn.ReadBool('R Options', 'bRKnitr', True);
-  pmemRResSendLine.Checked                 := ifTinn.ReadBool('R Options', 'bRSendLine', True);
-  pmemRResSendLinesToEndPage.Checked       := ifTinn.ReadBool('R Options', 'bRSendLinesToEndPage', True);
-  pmemRResSendSelection.Checked            := ifTinn.ReadBool('R Options', 'bRSendSelection', True);
-  pmemRResSendSmart.Checked                := ifTinn.ReadBool('R Options', 'bRSendSmart', False);
-  pmemRResSendSweave.Checked               := ifTinn.ReadBool('R Options', 'bRSweave', True);
+  pmemRResCurrentLineToTop.Checked         := ini_Tinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
+  pmemRResSendBlockMarked.Checked          := ini_Tinn.ReadBool('R Options', 'bRSendBlockMarked', True);
+  pmemRResSendContiguous.Checked           := ini_Tinn.ReadBool('R Options', 'bRSendContiguous', True);
+  pmemRResSendCursorToBeginningLine.Checked:= ini_Tinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
+  pmemRResSendCursorToEndLine.Checked      := ini_Tinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
+  pmemRResSendFile.Checked                 := ini_Tinn.ReadBool('R Options', 'bRSendFile', True);
+  pmemRResSendKnitr.Checked                := ini_Tinn.ReadBool('R Options', 'bRKnitr', True);
+  pmemRResSendLine.Checked                 := ini_Tinn.ReadBool('R Options', 'bRSendLine', True);
+  pmemRResSendLinesToEndPage.Checked       := ini_Tinn.ReadBool('R Options', 'bRSendLinesToEndPage', True);
+  pmemRResSendSelection.Checked            := ini_Tinn.ReadBool('R Options', 'bRSendSelection', True);
+  pmemRResSendSmart.Checked                := ini_Tinn.ReadBool('R Options', 'bRSendSmart', False);
+  pmemRResSendSweave.Checked               := ini_Tinn.ReadBool('R Options', 'bRSweave', True);
 
-  actRSend_CurrentLineToTop.Visible     := ifTinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
-  actRSend_BlockMarked.Visible          := ifTinn.ReadBool('R Options', 'bRSendBlockMarked', True);
-  actRSend_Contiguous.Visible           := ifTinn.ReadBool('R Options', 'bRSendContiguous', True);
-  actRSend_CursorToBeginningLine.Visible:= ifTinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
-  actRSend_CursorToEndLine.Visible      := ifTinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
-  actRSend_File.Visible                 := ifTinn.ReadBool('R Options', 'bRSendFile', True);
-  actRSend_Line.Visible                 := ifTinn.ReadBool('R Options', 'bRSendLine', True);
-  actRSend_LinesToEndPage.Visible       := ifTinn.ReadBool('R Options', 'bRSendLinesToEndPage', True);
-  actRSend_Selection.Visible            := ifTinn.ReadBool('R Options', 'bRSendSelection', True);
-  actRSend_Smart.Visible                := ifTinn.ReadBool('R Options', 'bRSendSmart', False);
-  actRSend_Sweave.Visible               := ifTinn.ReadBool('R Options', 'bRSweave', True);
-  bRKnitr                               := ifTinn.ReadBool('R Options', 'bRKnitr', True);
+  actRSend_CurrentLineToTop.Visible     := ini_Tinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
+  actRSend_BlockMarked.Visible          := ini_Tinn.ReadBool('R Options', 'bRSendBlockMarked', True);
+  actRSend_Contiguous.Visible           := ini_Tinn.ReadBool('R Options', 'bRSendContiguous', True);
+  actRSend_CursorToBeginningLine.Visible:= ini_Tinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
+  actRSend_CursorToEndLine.Visible      := ini_Tinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
+  actRSend_File.Visible                 := ini_Tinn.ReadBool('R Options', 'bRSendFile', True);
+  actRSend_Line.Visible                 := ini_Tinn.ReadBool('R Options', 'bRSendLine', True);
+  actRSend_LinesToEndPage.Visible       := ini_Tinn.ReadBool('R Options', 'bRSendLinesToEndPage', True);
+  actRSend_Selection.Visible            := ini_Tinn.ReadBool('R Options', 'bRSendSelection', True);
+  actRSend_Smart.Visible                := ini_Tinn.ReadBool('R Options', 'bRSendSmart', False);
+  actRSend_Sweave.Visible               := ini_Tinn.ReadBool('R Options', 'bRSweave', True);
+  bRKnitr                               := ini_Tinn.ReadBool('R Options', 'bRKnitr', True);
 
   // Controlling R alphabetically ordered
-  pmenRResContClearAll.Checked             := ifTinn.ReadBool('R Options', 'bRClearAll', True);
-  pmenRResContClearConsole.Checked         := ifTinn.ReadBool('R Options', 'bRClearConsole', True);
-  pmenRResContCloseAllGraphics.Checked     := ifTinn.ReadBool('R Options', 'bRCloseAllGraphics', True);
-  pmenRResContEditVariable.Checked         := ifTinn.ReadBool('R Options', 'bREditVariable', True);
-  pmenRResContEscape.Checked               := ifTinn.ReadBool('R Options', 'bREscape', True);
-  pmenRResContExampleSelectedWord.Checked  := ifTinn.ReadBool('R Options', 'bRExampleSelectedWord', True);
-  pmenRResContFixVariable.Checked          := ifTinn.ReadBool('R Options', 'bRFixVariable', True);
-  pmenRResContGuiPuTTYStartClose.Checked   := ifTinn.ReadBool('R Options', 'bRguiPuTTYStartClose', True);
-  pmenRResContHelp.Checked                 := ifTinn.ReadBool('R Options', 'bRHelp', True);
-  pmenRResContHelpSelectedWord.Checked     := ifTinn.ReadBool('R Options', 'bRHelpSelectedWord', True);
-  pmenRResContListAllObjects.Checked       := ifTinn.ReadBool('R Options', 'bRListAllObjects', True);
-  pmenRResContListVariableNames.Checked    := ifTinn.ReadBool('R Options', 'bRListVariableNames', True);
-  pmenRResContListVariableStructure.Checked:= ifTinn.ReadBool('R Options', 'bRListVariableStructure', True);
-  pmenRResContPackages.Checked             := ifTinn.ReadBool('R Options', 'bRPackages', True);
-  pmenRResContPlotVariable.Checked         := ifTinn.ReadBool('R Options', 'bRPlotVariable', True);
-  pmenRResContPrintVariableContent.Checked := ifTinn.ReadBool('R Options', 'bRPrintVariableContent', True);
-  pmenRResContRemoveAllObjects.Checked     := ifTinn.ReadBool('R Options', 'bRRemoveAllObjects', True);
-  pmenRResContSetWorkDirectory.Checked     := ifTinn.ReadBool('R Options', 'bRSetWorkDir', True);
-  pmenRResContTCPConnection.Checked        := ifTinn.ReadBool('R Options', 'bRTCPConnection', True);
-  pmenRResContTermStartClose.Checked       := ifTinn.ReadBool('R Options', 'bRtermStartClose', True);
+  pmenRResContClearAll.Checked             := ini_Tinn.ReadBool('R Options', 'bRClearAll', True);
+  pmenRResContClearConsole.Checked         := ini_Tinn.ReadBool('R Options', 'bRClearConsole', True);
+  pmenRResContCloseAllGraphics.Checked     := ini_Tinn.ReadBool('R Options', 'bRCloseAllGraphics', True);
+  pmenRResContEditVariable.Checked         := ini_Tinn.ReadBool('R Options', 'bREditVariable', True);
+  pmenRResContEscape.Checked               := ini_Tinn.ReadBool('R Options', 'bREscape', True);
+  pmenRResContExampleSelectedWord.Checked  := ini_Tinn.ReadBool('R Options', 'bRExampleSelectedWord', True);
+  pmenRResContFixVariable.Checked          := ini_Tinn.ReadBool('R Options', 'bRFixVariable', True);
+  pmenRResContGuiPuTTYStartClose.Checked   := ini_Tinn.ReadBool('R Options', 'bRguiPuTTYStartClose', True);
+  pmenRResContHelp.Checked                 := ini_Tinn.ReadBool('R Options', 'bRHelp', True);
+  pmenRResContHelpSelectedWord.Checked     := ini_Tinn.ReadBool('R Options', 'bRHelpSelectedWord', True);
+  pmenRResContListAllObjects.Checked       := ini_Tinn.ReadBool('R Options', 'bRListAllObjects', True);
+  pmenRResContListVariableNames.Checked    := ini_Tinn.ReadBool('R Options', 'bRListVariableNames', True);
+  pmenRResContListVariableStructure.Checked:= ini_Tinn.ReadBool('R Options', 'bRListVariableStructure', True);
+  pmenRResContPackages.Checked             := ini_Tinn.ReadBool('R Options', 'bRPackages', True);
+  pmenRResContPlotVariable.Checked         := ini_Tinn.ReadBool('R Options', 'bRPlotVariable', True);
+  pmenRResContPrintVariableContent.Checked := ini_Tinn.ReadBool('R Options', 'bRPrintVariableContent', True);
+  pmenRResContRemoveAllObjects.Checked     := ini_Tinn.ReadBool('R Options', 'bRRemoveAllObjects', True);
+  pmenRResContSetWorkDirectory.Checked     := ini_Tinn.ReadBool('R Options', 'bRSetWorkDir', True);
+  pmenRResContTCPConnection.Checked        := ini_Tinn.ReadBool('R Options', 'bRTCPConnection', True);
+  pmenRResContTermStartClose.Checked       := ini_Tinn.ReadBool('R Options', 'bRtermStartClose', True);
 
-  actRCont_ClearAll.Visible               := ifTinn.ReadBool('R Options', 'bRClearAll', True);
-  actRCont_ClearConsole.Visible           := ifTinn.ReadBool('R Options', 'bRClearConsole', True);
-  actRCont_CloseAllGraphics.Visible       := ifTinn.ReadBool('R Options', 'bRCloseAllGraphics', True);
-  actRCont_EditVariable.Visible           := ifTinn.ReadBool('R Options', 'bREditVariable', True);
-  actRCont_Escape.Visible                 := ifTinn.ReadBool('R Options', 'bREscape', True);
-  actRCont_ExampleSelectedWord.Visible    := ifTinn.ReadBool('R Options', 'bRExampleSelectedWord', True);
-  actRCont_OpenExampleSelectedWord.Visible:= ifTinn.ReadBool('R Options', 'bROpenExampleSelectedWord', True);
-  actRCont_FixVariable.Visible            := ifTinn.ReadBool('R Options', 'bRFixVariable', True);
-  actRCont_GuiPuTTYStartClose.Visible     := ifTinn.ReadBool('R Options', 'bRguiPuTTYStartClose', True);
-  actRCont_Help.Visible                   := ifTinn.ReadBool('R Options', 'bRHelp', True);
-  actRCont_HelpSelectedWord.Visible       := ifTinn.ReadBool('R Options', 'bRHelpSelectedWord', True);
-  actRCont_ListAllObjects.Visible         := ifTinn.ReadBool('R Options', 'bRListAllObjects', True);
-  actRCont_ListVariableNames.Visible      := ifTinn.ReadBool('R Options', 'bRListVariableNames', True);
-  actRCont_ListVariableStructure.Visible  := ifTinn.ReadBool('R Options', 'bRListVariableStructure', True);
-  actRCont_Packages.Visible               := ifTinn.ReadBool('R Options', 'bRPackages', True);
-  actRCont_PlotVariable.Visible           := ifTinn.ReadBool('R Options', 'bRPlotVariable', True);
-  actRCont_PrintVariableContent.Visible   := ifTinn.ReadBool('R Options', 'bRPrintVariableContent', True);
-  actRCont_RemoveAllObjects.Visible       := ifTinn.ReadBool('R Options', 'bRRemoveAllObjects', True);
-  actRCont_SetWorkDirectory.Visible       := ifTinn.ReadBool('R Options', 'bRSetWorkDir', True);
-  actRCont_TCPConnection.Visible          := ifTinn.ReadBool('R Options', 'bRTCPConnection', True);
-  actRCont_TermStartClose.Visible         := ifTinn.ReadBool('R Options', 'bRtermStartClose', True);
+  actRCont_ClearAll.Visible               := ini_Tinn.ReadBool('R Options', 'bRClearAll', True);
+  actRCont_ClearConsole.Visible           := ini_Tinn.ReadBool('R Options', 'bRClearConsole', True);
+  actRCont_CloseAllGraphics.Visible       := ini_Tinn.ReadBool('R Options', 'bRCloseAllGraphics', True);
+  actRCont_EditVariable.Visible           := ini_Tinn.ReadBool('R Options', 'bREditVariable', True);
+  actRCont_Escape.Visible                 := ini_Tinn.ReadBool('R Options', 'bREscape', True);
+  actRCont_ExampleSelectedWord.Visible    := ini_Tinn.ReadBool('R Options', 'bRExampleSelectedWord', True);
+  actRCont_OpenExampleSelectedWord.Visible:= ini_Tinn.ReadBool('R Options', 'bROpenExampleSelectedWord', True);
+  actRCont_FixVariable.Visible            := ini_Tinn.ReadBool('R Options', 'bRFixVariable', True);
+  actRCont_GuiPuTTYStartClose.Visible     := ini_Tinn.ReadBool('R Options', 'bRguiPuTTYStartClose', True);
+  actRCont_Help.Visible                   := ini_Tinn.ReadBool('R Options', 'bRHelp', True);
+  actRCont_HelpSelectedWord.Visible       := ini_Tinn.ReadBool('R Options', 'bRHelpSelectedWord', True);
+  actRCont_ListAllObjects.Visible         := ini_Tinn.ReadBool('R Options', 'bRListAllObjects', True);
+  actRCont_ListVariableNames.Visible      := ini_Tinn.ReadBool('R Options', 'bRListVariableNames', True);
+  actRCont_ListVariableStructure.Visible  := ini_Tinn.ReadBool('R Options', 'bRListVariableStructure', True);
+  actRCont_Packages.Visible               := ini_Tinn.ReadBool('R Options', 'bRPackages', True);
+  actRCont_PlotVariable.Visible           := ini_Tinn.ReadBool('R Options', 'bRPlotVariable', True);
+  actRCont_PrintVariableContent.Visible   := ini_Tinn.ReadBool('R Options', 'bRPrintVariableContent', True);
+  actRCont_RemoveAllObjects.Visible       := ini_Tinn.ReadBool('R Options', 'bRRemoveAllObjects', True);
+  actRCont_SetWorkDirectory.Visible       := ini_Tinn.ReadBool('R Options', 'bRSetWorkDir', True);
+  actRCont_TCPConnection.Visible          := ini_Tinn.ReadBool('R Options', 'bRTCPConnection', True);
+  actRCont_TermStartClose.Visible         := ini_Tinn.ReadBool('R Options', 'bRtermStartClose', True);
 
   // Database status
-  iCompletion_SavePoint   := ifTinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
-  iRcard_SavePoint        := ifTinn.ReadInteger('Database', 'iRcard_SavePoint', 0);
-  iRtip_SavePoint         := ifTinn.ReadInteger('Database', 'iRtip_SavePoint', 0);
-  iApp_Shortcuts_SavePoint:= ifTinn.ReadInteger('Database', 'iApp_Shortcuts_SavePoint', 0);
-  iRH_Send_SavePoint      := ifTinn.ReadInteger('Database', 'iRH_Send_SavePoint', 0);
-  iRH_Control_SavePoint   := ifTinn.ReadInteger('Database', 'iRH_Control_SavePoint', 0);
-  iRH_Custom_SavePoint    := ifTinn.ReadInteger('Database', 'iRH_Custom_SavePoint', 0);
+  iCompletion_SavePoint   := ini_Tinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
+  iRcard_SavePoint        := ini_Tinn.ReadInteger('Database', 'iRcard_SavePoint', 0);
+  iRtip_SavePoint         := ini_Tinn.ReadInteger('Database', 'iRtip_SavePoint', 0);
+  iApp_Shortcuts_SavePoint:= ini_Tinn.ReadInteger('Database', 'iApp_Shortcuts_SavePoint', 0);
+  iRH_Send_SavePoint      := ini_Tinn.ReadInteger('Database', 'iRH_Send_SavePoint', 0);
+  iRH_Control_SavePoint   := ini_Tinn.ReadInteger('Database', 'iRH_Control_SavePoint', 0);
+  iRH_Custom_SavePoint    := ini_Tinn.ReadInteger('Database', 'iRH_Custom_SavePoint', 0);
 
   // Latex Dimensional element
-  iCols                   := ifTinn.ReadInteger('Latex', 'iCols', 2);
-  iLatexDimensionalAlign  := ifTinn.ReadInteger('Latex', 'iLatexDimensionalAlign', 0);
-  iLatexDimensionalElement:= ifTinn.ReadInteger('Latex', 'iLatexDimensionalElement', 0);
-  iRows                   := ifTinn.ReadInteger('Latex', 'iRows', 2);
+  iCols                   := ini_Tinn.ReadInteger('Latex', 'iCols', 2);
+  iLatexDimensionalAlign  := ini_Tinn.ReadInteger('Latex', 'iLatexDimensionalAlign', 0);
+  iLatexDimensionalElement:= ini_Tinn.ReadInteger('Latex', 'iLatexDimensionalElement', 0);
+  iRows                   := ini_Tinn.ReadInteger('Latex', 'iRows', 2);
 
   tbKnitr.Visible:= bRKnitr;
 
   // Pandoc history
   slPandocHistory:= TStringList.Create;
-  ifTinn.ReadSectionValues('Pandoc History',
+  ini_Tinn.ReadSectionValues('Pandoc History',
                            slPandocHistory);
   if (slPandocHistory.Count > 0) then begin
     for i:= 0 to (slPandocHistory.Count - 1) do begin
@@ -5436,7 +5460,7 @@ begin
 
   // Pandoc history: From
   slPandocHistoryFrom:= TStringList.Create;
-  ifTinn.ReadSectionValues('Pandoc History From',
+  ini_Tinn.ReadSectionValues('Pandoc History From',
                            slPandocHistoryFrom);
 
   if (slPandocHistoryFrom.Count > 0) then begin
@@ -5460,7 +5484,7 @@ begin
 
   // Pandoc history: To
   slPandocHistoryTo:= TStringList.Create;
-  ifTinn.ReadSectionValues('Pandoc History To',
+  ini_Tinn.ReadSectionValues('Pandoc History To',
                            slPandocHistoryTo);
 
   if (slPandocHistoryTo.Count > 0) then begin
@@ -5484,7 +5508,7 @@ begin
 
   // Search Text History
   slSearch:= TStringList.Create;
-  ifTinn.ReadSectionValues('Search Text History',
+  ini_Tinn.ReadSectionValues('Search Text History',
                            slSearch);
   if (slSearch.Count > 0) then begin
     for i:= 0 to (slSearch.Count - 1) do begin
@@ -5507,7 +5531,7 @@ begin
 
   // Replace Text History
   slReplace:= TStringList.Create;
-  ifTinn.ReadSectionValues('Replace Text History',
+  ini_Tinn.ReadSectionValues('Replace Text History',
                            slReplace);
   if (slReplace.Count > 0) then begin
     for i:= 0 to (slReplace.Count - 1) do begin
@@ -5532,7 +5556,7 @@ begin
   slSearch:= TStringList.Create;
   sSearch_DirHistory:= EmptyStr;
 
-  ifTinn.ReadSectionValues('Search Dir History',
+  ini_Tinn.ReadSectionValues('Search Dir History',
                            slSearch);
 
   if (slSearch.Count > 0) then begin
@@ -5557,7 +5581,7 @@ begin
 
   // Search File Mask History
   slSearch:= TStringList.Create;
-  ifTinn.ReadSectionValues('Search File Mask History',
+  ini_Tinn.ReadSectionValues('Search File Mask History',
                            slSearch);
 
   if (slSearch.Count > 0) then begin
@@ -5582,7 +5606,7 @@ begin
   // Favorite Folders
   slTmpFavoriteFolders:= TStringList.Create;
   slFavoriteFolders   := TStringList.Create;
-  ifTinn.ReadSectionValues('Explorer Favorites',
+  ini_Tinn.ReadSectionValues('Explorer Favorites',
                            slTmpFavoriteFolders);
   if (slTmpFavoriteFolders.Count > 0) then begin
     for i:= 0 to (slTmpFavoriteFolders.Count - 1) do begin
@@ -5603,18 +5627,18 @@ begin
   FreeAndNil(slTmpFavoriteFolders);
   FreeAndNil(slFavoriteFolders);
 
-  iLastFile:= ifTinn.ReadInteger('App', 'iLastFile', 10);
+  iLastFile:= ini_Tinn.ReadInteger('App', 'iLastFile', 10);
 
   // Read the list of File MRU docs and add them to the menu and the drop down menu
-  ifTinn.ReadSectionValues('File MRU', slFileMRU);
+  ini_Tinn.ReadSectionValues('File MRU', slFileMRU);
   pBuild_MRU(menFileRecentFiles);
 
   // Do the same for Projects
-  ifTinn.ReadSectionValues('Project MRU', slprojectMRU);
+  ini_Tinn.ReadSectionValues('Project MRU', slprojectMRU);
   pBuild_MRU_Project(menProjRecent);
 
   slTextDiff:= TStringList.Create;
-  ifTinn.ReadSectionValues('Diff Options', slTextDiff);
+  ini_Tinn.ReadSectionValues('Diff Options', slTextDiff);
 
   // Paths and version of R
   sPath_R:= fGet_Registry_InstallPath('SOFTWARE\R-core\R');
@@ -5632,7 +5656,7 @@ begin
   end
   else begin
     // Will read from INI because the user choice is not to use the latest instaled version of R
-    sPath_Rterm:= trim(ifTinn.ReadString('App', 'sPath_Rterm', EmptyStr));
+    sPath_Rterm:= trim(ini_Tinn.ReadString('App', 'sPath_Rterm', EmptyStr));
     if fIs_Portable_Version then
       if not fPath_R_Exists(sPath_Rterm) then begin  // Portable
         sPath_R    := 'UNKNOWN';
@@ -5645,7 +5669,7 @@ begin
            sPath_Rterm:= 'UNKNOWN';
       end;
 
-    sPath_Rgui:= trim(ifTinn.ReadString('App', 'sPath_Rgui', EmptyStr));
+    sPath_Rgui:= trim(ini_Tinn.ReadString('App', 'sPath_Rgui', EmptyStr));
     if fIs_Portable_Version then
       if not fPath_R_Exists(sPath_Rgui) then begin  // Portable
         sPath_R    := 'UNKNOWN';
@@ -5659,10 +5683,10 @@ begin
       end;
   end;
 
-  actNotification.Checked   := ifTinn.ReadBool('App', 'bNotification', True);
-  actNotification_US.Checked:= ifTinn.ReadBool('App', 'bNotification_US', False);
+  actNotification.Checked   := ini_Tinn.ReadBool('App', 'bNotification', True);
+  actNotification_US.Checked:= ini_Tinn.ReadBool('App', 'bNotification_US', False);
 
-  sRmirror:= trim(ifTinn.ReadString('App', 'sRmirror', 'http://cran.at.r-project.org/'));
+  sRmirror:= trim(ini_Tinn.ReadString('App', 'sRmirror', 'http://cran.at.r-project.org/'));
   frmTools.stbRMirrors.Panels[1].Text:= sRmirror;
 
   frmTools.JvDockClientTools.CanFloat:= bToolsCanFloat;
@@ -5677,36 +5701,36 @@ begin
 
   // Gutter Options
   with coEditor.Gutter do begin
-    AutoSize       := ifEditor.ReadBool('Gutter', 'bAutoSize', True);
-    Color          := ifEditor.ReadInteger('Gutter', 'iColor', coEditor.Gutter.Color);
-    DigitCount     := ifEditor.ReadInteger('Gutter', 'iDigitCount', 2);
-    Font.Color     := ifEditor.ReadInteger('Gutter', 'iFont.Color', 0);
-    Font.Name      := ifEditor.ReadString('Gutter', 'sFont.Name', 'Courier New');
-    Font.Size      := ifEditor.ReadInteger('Gutter', 'iFont.Size', 8);
-    LeadingZeros   := ifEditor.ReadBool('Gutter', 'bLeadingZeros', False);
-    ShowLineNumbers:= ifEditor.ReadBool('Gutter', 'bLineNumber', True);
-    Visible        := ifEditor.ReadBool('Gutter', 'bVisible', True);
-    Width          := ifEditor.ReadInteger('Gutter', 'iWidth', 20);
-    ZeroStart      := ifEditor.ReadBool('Gutter', 'bZeroStart', False);
+    AutoSize       := ini_Editor.ReadBool('Gutter', 'bAutoSize', True);
+    Color          := ini_Editor.ReadInteger('Gutter', 'iColor', coEditor.Gutter.Color);
+    DigitCount     := ini_Editor.ReadInteger('Gutter', 'iDigitCount', 2);
+    Font.Color     := ini_Editor.ReadInteger('Gutter', 'iFont.Color', 0);
+    Font.Name      := ini_Editor.ReadString('Gutter', 'sFont.Name', 'Courier New');
+    Font.Size      := ini_Editor.ReadInteger('Gutter', 'iFont.Size', 8);
+    LeadingZeros   := ini_Editor.ReadBool('Gutter', 'bLeadingZeros', False);
+    ShowLineNumbers:= ini_Editor.ReadBool('Gutter', 'bLineNumber', True);
+    Visible        := ini_Editor.ReadBool('Gutter', 'bVisible', True);
+    Width          := ini_Editor.ReadInteger('Gutter', 'iWidth', 20);
+    ZeroStart      := ini_Editor.ReadBool('Gutter', 'bZeroStart', False);
   end;
 
   // Editor Options
   with coEditor do begin
-    actAutoCompletion.Checked:= ifEditor.ReadBool('Editor', 'bAutocompletion', True);
-    ExtraLineSpacing         := ifEditor.ReadInteger('Editor', 'iExtraLineSpacing', 0);
-    Font.Color               := ifEditor.ReadInteger('Editor', 'iFont.Color', 0);
-    Font.Name                := ifEditor.ReadString('Editor', 'sFont.Name', 'Courier New');
-    Font.Size                := ifEditor.ReadInteger('Editor', 'iFont.Size', 11);
-    HideSelection            := ifEditor.ReadBool('Editor', 'bHideSelection', False);
-    InsertCaret              := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iInsertCaret', 0));
-    Options                  := TSynEditorOptions(ifEditor.ReadInteger('Editor', 'iOptions', 124618775));  // My basic preferences!
-    OverWriteCaret           := TSynEditCaretType(ifEditor.ReadInteger('Editor', 'iOverWriteCaret', 3));
-    RightEdge                := ifEditor.ReadInteger('Editor', 'iRightEdge', 80);
-    RightEdgeColor           := ifEditor.ReadInteger('Editor', 'iRightEdgeColor', coEditor.RightEdgeColor);
-    SelectedColor.Background := ifEditor.ReadInteger('Editor', 'iSelectedColor.Background', coEditor.SelectedColor.Background);
-    SelectedColor.Foreground := ifEditor.ReadInteger('Editor', 'iSelectedColor.Foreground', coEditor.SelectedColor.Foreground);
-    TabWidth                 := ifEditor.ReadInteger('Editor', 'iTab.Width', 2);
-    WantTabs                 := ifEditor.ReadBool('Editor', 'bWantTabs', True);
+    actAutoCompletion.Checked:= ini_Editor.ReadBool('Editor', 'bAutocompletion', True);
+    ExtraLineSpacing         := ini_Editor.ReadInteger('Editor', 'iExtraLineSpacing', 0);
+    Font.Color               := ini_Editor.ReadInteger('Editor', 'iFont.Color', 0);
+    Font.Name                := ini_Editor.ReadString('Editor', 'sFont.Name', 'Courier New');
+    Font.Size                := ini_Editor.ReadInteger('Editor', 'iFont.Size', 11);
+    HideSelection            := ini_Editor.ReadBool('Editor', 'bHideSelection', False);
+    InsertCaret              := TSynEditCaretType(ini_Editor.ReadInteger('Editor', 'iInsertCaret', 0));
+    Options                  := TSynEditorOptions(ini_Editor.ReadInteger('Editor', 'iOptions', 124618775));  // My basic preferences!
+    OverWriteCaret           := TSynEditCaretType(ini_Editor.ReadInteger('Editor', 'iOverWriteCaret', 3));
+    RightEdge                := ini_Editor.ReadInteger('Editor', 'iRightEdge', 80);
+    RightEdgeColor           := ini_Editor.ReadInteger('Editor', 'iRightEdgeColor', coEditor.RightEdgeColor);
+    SelectedColor.Background := ini_Editor.ReadInteger('Editor', 'iSelectedColor.Background', coEditor.SelectedColor.Background);
+    SelectedColor.Foreground := ini_Editor.ReadInteger('Editor', 'iSelectedColor.Foreground', coEditor.SelectedColor.Foreground);
+    TabWidth                 := ini_Editor.ReadInteger('Editor', 'iTab.Width', 2);
+    WantTabs                 := ini_Editor.ReadBool('Editor', 'bWantTabs', True);
   end;
 
   // These options tend to be changed very often.
@@ -7200,7 +7224,7 @@ procedure TfrmMain.pOpen_UserGuidePDF(sWhere: string);
 var
   sFile,
    sViewerDefault,
-   sPathSumatra,
+   sPath_Sumatra,
    sParameter: string;
 
 begin
@@ -7225,11 +7249,11 @@ begin
                    nil,
                    sw_shownormal)
     else begin
-      sPathSumatra:= sPath_TinnR +
-                     '\sumatra\SumatraPDF.exe';
+      sPath_Sumatra:= sPath_TinnR +
+                      '\sumatra\SumatraPDF.exe';
 
       // Open SumatraPDF viewer
-      fOpen_CmdLine(sPathSumatra +
+      fOpen_CmdLine(sPath_Sumatra +
                     ' "' +
                     sFile +
                     '" ' +
@@ -7347,13 +7371,13 @@ procedure TfrmMain.pWMCopyData(var msg: TWMCopyData);
 var
   chReceived: PChar;
 
-  sPathReceived: string;
+  sPath_Received: string;
 
 begin
-  chReceived   := msg.CopyDataStruct.lpData;
-  sPathReceived:= AnsiExtractQuotedStr(chReceived,
+  chReceived    := msg.CopyDataStruct.lpData;
+  sPath_Received:= AnsiExtractQuotedStr(chReceived,
                                        '"');
-  pCheck_IfFileFromDvi(StringReplace(sPathReceived,
+  pCheck_IfFileFromDvi(StringReplace(sPath_Received,
                                     '/',
                                     '\',
                                     [rfReplaceAll]));
@@ -7673,10 +7697,10 @@ begin
 
     pCheck_Version;
 
-    sOldPreferencesTmp:= sPath_Ini +
-                         '_tmp';
+    sPreferences_OldVersion:= sPath_Ini +
+                              '_tmp';
 
-    pSave_Preferences_Old_Version;
+    pSave_Preferences_OldVersion;
 
     frmR_Term:= TfrmR_Term.Create(nil);
     frmSplash.pb.Position:= 4;
@@ -7717,7 +7741,7 @@ begin
 
     frmSplash.pb.Position:= 9;
 
-    pDelete_Dir(sOldPreferencesTmp);
+    pDelete_Dir(sPreferences_OldVersion);
     if bColors_OldVersion or
        bCustom_OldVersion or
        bSyntax_OldVersion then begin
@@ -7733,18 +7757,18 @@ begin
     frmSplash.pb.Position:= 10;
 
     // Application
-    pSave_NewIni_Application;                                                  // Will create a new and clean Tinn.tmp
-    if FileExists(sPathIniTinn_File) then DeleteFile(sPathIniTinn_File);      // Delete old Tinn.ini
+    pSave_NewIni_Application;                                                   // Will create a new (and clean) Tinn.tmp
+    if FileExists(sPath_IniTinn_File) then DeleteFile(sPath_IniTinn_File);      // Delete old Tinn.ini
 
-    RenameFile(sPathIniTinn_Tmp,
-               sPathIniTinn_File);                                            // Set the new Tinn.ini
+    RenameFile(sPath_IniTinn_Tmp,
+               sPath_IniTinn_File);                                             // Set the new Tinn.ini
 
     // Editor
-    pSave_NewIni_Editor;                                                       // Will create a new and clean Tinn.tmp
-    if FileExists(sPathIniEditor_File) then DeleteFile(sPathIniEditor_File);  // Delete old Tinn.ini
+    pSave_NewIni_Editor;                                                        // Will create a new (and clean) Tinn.tmp
+    if FileExists(sPath_IniEditor_File) then DeleteFile(sPath_IniEditor_File);  // Delete old Tinn.ini
 
-    RenameFile(sPathIniEditor_Tmp,
-               sPathIniEditor_File);                                          // Set the new Editor.ini
+    RenameFile(sPath_IniEditor_Tmp,
+               sPath_IniEditor_File);                                           // Set the new Editor.ini
 
     frmSplash.pb.Position:= 11;
 
@@ -7998,11 +8022,11 @@ begin
   sUtilsOrigin:= sPath_TinnR +
                  '\utils';
 
-  sFileLatexOrigin:= sPath_TinnR +
-                     '\latex\latex.zip';
+  sFile_LatexOrigin:= sPath_TinnR +
+                      '\latex\latex.zip';
 
-  sFileProjectOrigin:= sPath_TinnR +
-                       '\project\project.zip';
+  sFile_ProjectOrigin:= sPath_TinnR +
+                        '\project\project.zip';
 
   //sPath_Pandoc:= sPath_TinnR +
   //               '\pandoc\pandoc.exe';
@@ -8012,7 +8036,7 @@ begin
         sFileDataOrigin);
 
     Add('  latex  - ' +
-        sFileLatexOrigin);
+        sFile_LatexOrigin);
 
     //Add('  pandoc - ' +
     //    sPath_Pandoc);
@@ -8038,7 +8062,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pSave_Preferences_Old_Version;
+procedure TfrmMain.pSave_Preferences_OldVersion;
 
   function fMakeBackup(sPathSource,
                        sPathDest,
@@ -8065,7 +8089,7 @@ var
    sPathSyntax_OldVersion: string;
 
 begin
-  if not DirectoryExists(sOldPreferencesTmp) then CreateDir(sOldPreferencesTmp);
+  if not DirectoryExists(sPreferences_OldVersion) then CreateDir(sPreferences_OldVersion);
 
   // Colors of old version
   if not FileExists(sPath_Ini +
@@ -8076,7 +8100,7 @@ begin
 
   if DirectoryExists(sPathColors_OldVersion) then begin
     if fMakeBackup(sPathColors_OldVersion,
-                   sOldPreferencesTmp +
+                   sPreferences_OldVersion +
                    '\colors_bkp.zip',
                    '\*.ini') then bColors_OldVersion:= True;
   end;
@@ -8087,7 +8111,7 @@ begin
 
   if DirectoryExists(sPathSyntax_OldVersion) then begin
     if fMakeBackup(sPathSyntax_OldVersion,
-                   sOldPreferencesTmp +
+                   sPreferences_OldVersion +
                    '\syntax_bkp.zip',
                    '\*.ini') then bSyntax_OldVersion:= True;
   end;
@@ -8101,7 +8125,7 @@ procedure TfrmMain.pSet_IniStructure;
   end;
 
 begin
-  // Portable simple
+  // Tinn-R (portable)
   if fIs_Portable_Version then begin
     sPath_Ini:= Copy(sPath_TinnR,
                      1,
@@ -8114,8 +8138,7 @@ begin
     sPath_Ini:= sApp_Data + '\Tinn-R';
   end;
 
-//  ShowMessage('sPath_Ini: ' + sPath_Ini);
-
+  // ShowMessage('sPath_Ini: ' + sPath_Ini);
   sPath_App      := sPath_Ini + '\app';
   sPath_Bkp      := sPath_Ini + '\bkp';
   sPath_Color    := sPath_Ini + '\colors';
@@ -8127,15 +8150,15 @@ begin
   sPath_SyntaxBKP:= sPath_Ini + '\syntax bkp';
   sPath_Tmp      := fGet_LocalTmp;
 
-  sPathColor_Custom:= sPath_Color +
-                      '\Custom.txt';  // It will stores cdMain custom colors
+  sPath_Color_Custom:= sPath_Color +
+                       '\Custom.txt';  // It will stores cdMain custom colors
 
   // Ini files
-  sPathIniTinn_File  := sPath_App + '\Tinn.ini';
-  sPathIniEditor_File:= sPath_Editor + '\Editor.ini';
+  sPath_IniTinn_File  := sPath_App + '\Tinn.ini';
+  sPath_IniEditor_File:= sPath_Editor + '\Editor.ini';
 
-  ifTinn  := TIniFile.Create(sPathIniTinn_File);
-  ifEditor:= TIniFile.Create(sPathIniEditor_File);
+  ini_Tinn  := TIniFile.Create(sPath_IniTinn_File);
+  ini_Editor:= TIniFile.Create(sPath_IniEditor_File);
 
   with frmTools.memIniLog.Lines do begin
     Add(EmptyStr);
@@ -8191,7 +8214,7 @@ begin
                     sPath_App);
 
     // Tinn-R
-//    ShowMessage('sPath_Ini: ' + sPath_Ini);
+    // ShowMessage('sPath_Ini: ' + sPath_Ini);
     if (not DirectoryExists(sPath_Ini)) then begin
       CreateDir(sPath_Ini);
       frmTools.memIniLog.Lines.Add('  Main folder - ' +
@@ -8231,7 +8254,7 @@ begin
                                    ExtractFileName(sPath_Color) +
                                    '     : CREATED');
       // Recover colors from old version
-      if bColors_OldVersion then pUnpack_File(sOldPreferencesTmp +
+      if bColors_OldVersion then pUnpack_File(sPreferences_OldVersion +
                                               '\colors_bkp.zip',
                                               sPath_Color,
                                               '*.*');
@@ -8241,8 +8264,8 @@ begin
                                       '     : OK');
 
     // If the file does not exists, it will be created as an empty file
-    if not FileExists(sPathColor_Custom) then
-      fFile_Save_Fast(sPathColor_Custom,
+    if not FileExists(sPath_Color_Custom) then
+      fFile_Save_Fast(sPath_Color_Custom,
                       '');
 
     // Tinn-R\editor
@@ -8256,14 +8279,14 @@ begin
                                       ExtractFileName(sPath_Editor) +
                                       '     : OK');
 
-    // Tinn-R\Syntax
+    // Tinn-R\syntax
     if (not DirectoryExists(sPath_Syntax)) then begin
       CreateDir(sPath_Syntax);
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sPath_Syntax) +
                                    '     : CREATED');
       // Recover syntax from old version
-      if bSyntax_OldVersion then pUnpack_File(sOldPreferencesTmp +
+      if bSyntax_OldVersion then pUnpack_File(sPreferences_OldVersion +
                                               '\syntax_bkp.zip',
                                               sPath_Syntax,
                                               '*.*');
@@ -8836,7 +8859,7 @@ procedure TfrmMain.pCheck_Latex(bReload: boolean);
   procedure pCreateLatexDir;
   begin
     CreateDir(sPath_Latex);
-    zipKit.FileName:= sFileLatexOrigin;
+    zipKit.FileName:= sFile_LatexOrigin;
     zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
 
     with zipKit do begin
@@ -9086,7 +9109,7 @@ var
   procedure pCreateProjectDir;
   begin
     CreateDir(sPath_Project);
-    zipKit.FileName:= sFileProjectOrigin;
+    zipKit.FileName:= sFile_ProjectOrigin;
     zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
 
     with zipKit do begin
@@ -9766,8 +9789,8 @@ begin
     if Assigned(seTmp) then FreeAndNil(seTmp);
 
     // Save custom colors
-    if FileExists(sPathColor_Custom) then
-      cdMain.CustomColors.SaveToFile(sPathColor_Custom);
+    if FileExists(sPath_Color_Custom) then
+      cdMain.CustomColors.SaveToFile(sPath_Color_Custom);
 
     // Destroy StringList
     FreeAndNil(slFilters);
@@ -10159,7 +10182,7 @@ var
 
   i: integer;
 
-  sSyntaxBackupFile: string;
+  sSyntax_BackupFile: string;
 
 begin
   clBrackets_Prior:= clBrackets;
@@ -10175,28 +10198,28 @@ begin
         bActiveLine           := cbActiveLineBG.Checked;
       end;
     end
-    else begin  // Cancel: it will restore a prior backup o all ini syntax files
-      sSyntaxBackupFile:= sPath_SyntaxBKP +
-                          '\syntax_bkp.zip';
+    else begin  // Cancel: it will restore a prior backup of all ini syntax files
+      sSyntax_BackupFile:= sPath_SyntaxBKP +
+                           '\syntax_bkp.zip';
 
       try
         pDelete_Dir(sPath_Syntax);
         zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
 
         with zipKit do begin
-          FileName     := sSyntaxBackupFile;
+          FileName     := sSyntax_BackupFile;
           BaseDirectory:= ExtractFileDrive(sPath_Ini) +
                                            '\';
           ExtractFiles('*.*');
         end;
 
         zipKit.CloseArchive;
-        if FileExists(sSyntaxBackupFile) then DeleteFile(sSyntaxBackupFile);
+        if FileExists(sSyntax_BackupFile) then DeleteFile(sSyntax_BackupFile);
       except
         // TODO
       end;
       clBrackets:= clBrackets_Prior;
-      dmSyn.pLoadSyntaxFromIni;
+      dmSyn.pLoad_Syntax_FromIni;
     end;
   finally
     synURIOpener.Editor:= nil;  // Don't remove from here!
@@ -11522,7 +11545,7 @@ end;
 procedure TfrmMain.TBRMainMove(Sender: TObject);
 begin
   TBIniSavePositions(Self,
-                     sPathIniTinn_File,
+                     sPath_IniTinn_File,
                      EmptyStr);
 end;
 
@@ -11961,9 +11984,9 @@ begin
     // R remote under PuTTY
     if (iRecognition_Caption = 4) and
        not fRterm_Running then begin
-      sPath_R_Connected         := trim(slTmp.Strings[0]);
-      sPathTinnRcom_Installed   := trim(slTmp.Strings[1]);
-      sVersion_TinnRcomInstalled:= trim(slTmp.Strings[2]);
+      sPath_R_Connected          := trim(slTmp.Strings[0]);
+      sPath_TinnRcom_Installed   := trim(slTmp.Strings[1]);
+      sVersion_TinnRcomInstalled := trim(slTmp.Strings[2]);
 
       if (slTmp.Count > 3) then  // .libPaths has more than one folder
         for i:= 0 to (slTmp.Count - 4) do
@@ -11972,7 +11995,7 @@ begin
     else begin
       if DirectoryExists(trim(slTmp.Strings[0])) then begin  // R running path
         sPath_R_Connected         := UnixPathToDosPath(trim(slTmp.Strings[0]));
-        sPathTinnRcom_Installed   := UnixPathToDosPath(trim(slTmp.Strings[1]));
+        sPath_TinnRcom_Installed  := UnixPathToDosPath(trim(slTmp.Strings[1]));
         sVersion_TinnRcomInstalled:= trim(slTmp.Strings[2]);
 
         if (slTmp.Count > 3) then  // .libPaths has more than one folder
@@ -11980,16 +12003,16 @@ begin
             slRLibPaths.Add(UnixPathToDosPath(trim(slTmp.Strings[i + 3])));
       end
       else begin
-        sPath_R_Connected         := 'UNKNOWN';
-        sPathTinnRcom_Installed   := 'UNKNOWN';
-        sVersion_TinnRcomInstalled:= 'UNKNOWN';
+        sPath_R_Connected          := 'UNKNOWN';
+        sPath_TinnRcom_Installed   := 'UNKNOWN';
+        sVersion_TinnRcomInstalled := 'UNKNOWN';
         slRLibPaths.Add('UNKNOWN');
       end;
     end;
 
-    if (sPathTinnRcom_Installed = 'Not installed') or
-       (sPathTinnRcom_Installed = 'UNKNOWN') then bRTinnRcom_Installed:= False
-                                             else bRTinnRcom_Installed:= True;
+    if (sPath_TinnRcom_Installed = 'Not installed') or
+       (sPath_TinnRcom_Installed = 'UNKNOWN') then bRTinnRcom_Installed:= False
+                                              else bRTinnRcom_Installed:= True;
 
     if bRMirros_Update then
       if FileExists(sPath_Tmp +
@@ -12126,7 +12149,7 @@ procedure TfrmMain.tRRuningTimer(Sender: TObject);
     bRTinnRcom_Loaded              := False;
     bRTinnRcom_Info                := False;
     sPath_R_Connected              := 'UNKNOWN';
-    sPathTinnRcom_Installed        := 'UNKNOWN';
+    sPath_TinnRcom_Installed       := 'UNKNOWN';
     sVersion_TinnRcomInstalled     := 'UNKNOWN';
     if Assigned(slRLibPaths) then
       FreeAndNil(slRLibPaths);
@@ -13383,13 +13406,13 @@ begin
   end;
 
 { // For tests only!
-  ifTinn_Tmp:= TIniFile.create(sPath_App + '\Tinn_dock.ini');
-  ShowMessage(ifTinn_Tmp.ReadString('Forms\frmTools', 'ParentName', ''));
-  ShowMessage(IntToStr(ifTinn_Tmp.ReadInteger('Forms\frmTools', 'DockTop', 0)));
-  ShowMessage(IntToStr(ifTinn_Tmp.ReadInteger('Forms\frmTools', 'DockRight', 0)));
-  ShowMessage(IntToStr(ifTinn_Tmp.ReadInteger('Forms\frmTools', 'DockBottom', 0)));
-  ShowMessage(BoolToStr(ifTinn_Tmp.ReadBool('Forms\frmTools', 'Visible', False)));
-  FreeAndNil(ifTinn_Tmp);
+  ini_Tinn_Tmp:= TIniFile.create(sPath_App + '\Tinn_dock.ini');
+  ShowMessage(ini_Tinn_Tmp.ReadString('Forms\frmTools', 'ParentName', ''));
+  ShowMessage(IntToStr(ini_Tinn_Tmp.ReadInteger('Forms\frmTools', 'DockTop', 0)));
+  ShowMessage(IntToStr(ini_Tinn_Tmp.ReadInteger('Forms\frmTools', 'DockRight', 0)));
+  ShowMessage(IntToStr(ini_Tinn_Tmp.ReadInteger('Forms\frmTools', 'DockBottom', 0)));
+  ShowMessage(BoolToStr(ini_Tinn_Tmp.ReadBool('Forms\frmTools', 'Visible', False)));
+  FreeAndNil(ini_Tinn_Tmp);
 }
   actToolsVisible.Checked:= GetFormVisible(frmTools);
   actRtermVisible.Checked:= GetFormVisible(frmR_Term);
@@ -13404,11 +13427,11 @@ begin
     else                // IO and Log in distinct view
       actRtermIOSplitRemoveExecute(nil);
 
-  cbSpellLanguage.ItemIndex:= ifTinn.ReadInteger('App',
-                                                 'iSpellLanguage.ItemIndex',
-                                                 -1);
+  cbSpellLanguage.ItemIndex:= ini_Tinn.ReadInteger('App',
+                                                   'iSpellLanguage.ItemIndex',
+                                                   -1);
 
-  if FileExists(sPathColor_Custom) then cdMain.CustomColors.LoadFromFile(sPathColor_Custom);
+  if FileExists(sPath_Color_Custom) then cdMain.CustomColors.LoadFromFile(sPath_Color_Custom);
 
   tRRuning.Enabled:= True;  // Do no remove from here!
 
@@ -13776,7 +13799,7 @@ begin
   pRToolbar(actTobRVisible.Checked and actShowAllBars.Checked);
   Application.ProcessMessages;
   TBIniSavePositions(Self,
-                     (sPathIniTinn_File),
+                     (sPath_IniTinn_File),
                      EmptyStr);
 end;
 
@@ -13990,15 +14013,15 @@ begin
       edParRterm.Text                    := sParRterm;
       edParTxt2tags.Text                 := sParTxt2tags;
       edPath_Pandoc.Text                 := sPath_Pandoc;
-      edRLibPathDefault.Text             := sRLibPathDefault;
-      edPathDeplate_Converter.Text       := sPathDeplate_Converter;
-      edPathDeplate_Interpreter.Text     := sPathDeplate_Interpreter;
+      edRLibPathDefault.Text             := sRLibPath_Default;
+      edPathDeplate_Converter.Text       := sPath_Deplate_Converter;
+      edPathDeplate_Interpreter.Text     := sPath_Deplate_Interpreter;
       edPathR_Connected.Text             := sPath_R_Connected;
       edPathRgui.Text                    := sPath_Rgui;
       edPathRterm.Text                   := sPath_Rterm;
-      edPathTinnRcom_Installed.Text      := sPathTinnRcom_Installed;
-      edPathTxt2tags_Converter.Text      := sPathTxt2tags_Converter;
-      edPathTxt2tags_Interpreter.Text    := sPathTxt2tags_Interpreter;
+      edPathTinnRcom_Installed.Text      := sPath_TinnRcom_Installed;
+      edPathTxt2tags_Converter.Text      := sPath_Txt2tags_Converter;
+      edPathTxt2tags_Interpreter.Text    := sPath_Txt2tags_Interpreter;
       edPuttyHost.Text                   := sPuttyHost;
       edPuttyPassword.Text               := sPuttyPassword;
       edPuttyUser.Text                   := sPuttyUser;
@@ -14288,13 +14311,13 @@ begin
         sPuttyHost                    := edPuttyHost.Text;
         sPuttyPassword                := edPuttyPassword.Text;
         sPuttyUser                    := edPuttyUser.Text;
-        sRLibPathDefault              := edRLibPathDefault.Text;
-        sPathDeplate_Converter        := edPathDeplate_Converter.Text;
-        sPathDeplate_Interpreter      := edPathDeplate_Interpreter.Text;
+        sRLibPath_Default             := edRLibPathDefault.Text;
+        sPath_Deplate_Converter       := edPathDeplate_Converter.Text;
+        sPath_Deplate_Interpreter     := edPathDeplate_Interpreter.Text;
         sPath_Rgui                    := edPathRgui.Text;
         sPath_Rterm                   := edPathRterm.Text;
-        sPathTxt2tags_Converter       := edPathTxt2tags_Converter.Text;
-        sPathTxt2tags_Interpreter     := edPathTxt2tags_Interpreter.Text;
+        sPath_Txt2tags_Converter      := edPathTxt2tags_Converter.Text;
+        sPath_Txt2tags_Interpreter    := edPathTxt2tags_Interpreter.Text;
 
         frmTools.cbComPriority_Line.Checked      := cbComPriority_Line.Checked;
         frmTools.cbComAutoDetect_Language.Checked:= cbComAutoDetect_Language.Checked;
@@ -19479,112 +19502,112 @@ procedure TfrmMain.actDeplateToLaTeXDramatistExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' latex-dramatist',
                    '.tex',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToLaTeXExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' latex',
                    '.tex',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToPhpExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' php',
                    '.php',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToPlainExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' plain',
                    '.text',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToLatexExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' tex',
                    '.tex',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToLoutExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' lout',
                    '.lout',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToManExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' man',
                    '.man',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToMgpExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' mgp',
                    '.mgp',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToMoinExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' moin',
                    '.moin',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToPm6Execute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' pm6',
                    '.pm6',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToSweaveExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' latex',
                    '.rnw',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToXhtmlMathMlExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' xhtml11m',
                    '.xhtml',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToXhtmlTransitionalExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' xhtml10t',
                    '.xhtml',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToSgmlExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' sgml',
                    '.sgml',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
@@ -19592,32 +19615,32 @@ procedure TfrmMain.actTxt2tagsToSweaveExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' tex',
                    '.rnw',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToTxtExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' txt',
                    '.txt',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToWikiExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' wiki',
                    '.wiki',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToXhtmlExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' xhtml',
                    '.xhtml',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
@@ -19625,32 +19648,32 @@ procedure TfrmMain.actDeplateToDocbookArticleExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' dbk-article',
                    '.xml',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToDocbookBookExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' dbk-book',
                    '.xml',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToDocbookReferenceExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' dbk-ref',
                    '.xml',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
 end;
 
 procedure TfrmMain.actDeplateToHtmlExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' html',
                    '.html',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter);
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
@@ -19658,8 +19681,8 @@ procedure TfrmMain.actDeplateToHtmlSiteExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' htmlsite',
                    '.html',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter,
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter,
                    False);
 end;
 
@@ -19667,8 +19690,8 @@ procedure TfrmMain.actDeplateToHtmlSlidesExecute(Sender: TObject);
 begin
   pFile_Conversion(sParDeplate + ' htmlslides',
                    '.html',
-                   sPathDeplate_Converter,
-                   sPathDeplate_Interpreter,
+                   sPath_Deplate_Converter,
+                   sPath_Deplate_Interpreter,
                    False);
 end;
 
@@ -19676,24 +19699,24 @@ procedure TfrmMain.actTxt2tagsToDokuExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' doku',
                    '.doku',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToGwikiExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' gwiki',
                    '.gwiki',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
 end;
 
 procedure TfrmMain.actTxt2tagsToHtmlExecute(Sender: TObject);
 begin
   pFile_Conversion(sParTxt2tags + ' html',
                    '.html',
-                   sPathTxt2tags_Converter,
-                   sPathTxt2tags_Interpreter);
+                   sPath_Txt2tags_Converter,
+                   sPath_Txt2tags_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
 end;
 
@@ -23157,7 +23180,7 @@ begin
 
   sTmp:= 'install.packages(NULL, ' +
          'lib=' +
-         sRLibPathDefault +
+         sRLibPath_Default +
          ', ' +
          'dependencies=NA, ' +
          'type=getOption("pkgType")' +
@@ -23173,7 +23196,7 @@ begin
   sTmp:= 'install.packages(choose.files("", ' +
          'filters=Filters[c("zip", "All"), ]), ' +
          'lib=' +
-         sRLibPathDefault +
+         sRLibPath_Default +
          ', ' +
          'repos=NULL, ' +
          'type="binary"' +
@@ -23469,7 +23492,7 @@ begin
   end;
 
   sTmp:= 'update.packages(checkBuilt=TRUE, ask=FALSE, instlib=' +
-         sRLibPathDefault
+         sRLibPath_Default
          + ')';
 
   pDo_Send(sTmp);

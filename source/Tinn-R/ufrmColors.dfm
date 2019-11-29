@@ -6,7 +6,7 @@ object frmColors: TfrmColors
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Highlighters settings'
-  ClientHeight = 537
+  ClientHeight = 534
   ClientWidth = 1012
   Color = 16250871
   Font.Charset = DEFAULT_CHARSET
@@ -25,7 +25,7 @@ object frmColors: TfrmColors
     Left = 97
     Top = 432
     Width = 366
-    Height = 72
+    Height = 66
     Shape = bsFrame
   end
   object lWarning_1: TLabel
@@ -85,7 +85,7 @@ object frmColors: TfrmColors
   end
   object bbtOK: TBitBtn
     Left = 857
-    Top = 508
+    Top = 504
     Width = 75
     Height = 25
     Caption = 'O&K'
@@ -96,7 +96,7 @@ object frmColors: TfrmColors
   end
   object bbtCancel: TBitBtn
     Left = 932
-    Top = 508
+    Top = 504
     Width = 75
     Height = 25
     Cancel = True
@@ -110,7 +110,7 @@ object frmColors: TfrmColors
     Left = 6
     Top = 4
     Width = 85
-    Height = 499
+    Height = 493
     Caption = ' Highlighters '
     Ctl3D = False
     ParentCtl3D = False
@@ -119,7 +119,7 @@ object frmColors: TfrmColors
       Left = 1
       Top = 14
       Width = 83
-      Height = 484
+      Height = 478
       Align = alClient
       BevelInner = bvNone
       BevelOuter = bvNone
@@ -397,9 +397,9 @@ object frmColors: TfrmColors
   end
   object gpbSample: TGroupBox
     Left = 468
-    Top = 4
+    Top = 49
     Width = 538
-    Height = 500
+    Height = 448
     Caption = ' Sample code '
     Ctl3D = False
     ParentCtl3D = False
@@ -408,7 +408,7 @@ object frmColors: TfrmColors
       Left = 1
       Top = 14
       Width = 536
-      Height = 485
+      Height = 433
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -442,7 +442,7 @@ object frmColors: TfrmColors
   end
   object bbHelp: TBitBtn
     Left = 782
-    Top = 508
+    Top = 504
     Width = 75
     Height = 25
     Caption = '&Help'
@@ -489,6 +489,31 @@ object frmColors: TfrmColors
       FC00B6DFF8006BBBED0056AFE80077BEEC00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00B0E2F500A7DCF5009DD9F50091D1F10082CBF00076C4
       EF006DBFED0077C3EE00FF00FF00FF00FF00FF00FF00FF00FF00}
+  end
+  object BitBtn2: TBitBtn
+    Left = 702
+    Top = 504
+    Width = 80
+    Height = 25
+    Caption = '&Restore'
+    TabOrder = 7
+  end
+  object rdgColors: TRadioGroup
+    Left = 468
+    Top = 5
+    Width = 538
+    Height = 40
+    Caption = ' Color settings (speed) '
+    Columns = 4
+    Ctl3D = False
+    ItemIndex = 0
+    Items.Strings = (
+      'Default'
+      'Dark'
+      'Gray'
+      'Light gray')
+    ParentCtl3D = False
+    TabOrder = 8
   end
   object alAttributes: TActionList
     Left = 25

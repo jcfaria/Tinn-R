@@ -173,7 +173,7 @@
       <Form>frmR_Server</Form>
     </DCCReference>
     <DCCReference Include="..\Tinn-R\ufrmR_Term.pas">
-      <Form>frmR_term</Form>
+      <Form>frmR_Term</Form>
     </DCCReference>
     <DCCReference Include="..\Tinn-R\ufrmSearch_Dlg.pas">
       <Form>frmSearch_Dlg</Form>
