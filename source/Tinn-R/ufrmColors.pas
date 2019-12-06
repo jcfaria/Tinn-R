@@ -171,6 +171,7 @@ begin
                          sSyntax_InUse;
 
   dmSyn.pLoad_Syntax_FromIni;
+  pShow_Attributes;
 end;
 
 procedure TfrmColors.pStructure_IniSyntaxFiles(clPreferred: TColor);
