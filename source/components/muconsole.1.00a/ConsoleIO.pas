@@ -481,7 +481,7 @@ begin
 
   if (sCmd = '+ ') then
     with frmMain do
-      if bRtermSend_Plus then actRSend_LineExecute(nil);
+      if bRterm_Send_Plus then actRSend_LineExecute(nil);
 end;
 
 (*

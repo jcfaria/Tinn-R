@@ -54,7 +54,8 @@ type
   function fCheck_Rversion(sText: string): boolean;
   function fClipboardTxt_ToFile (sFileTXT: string): boolean;
   function fContrast_Color(FontC: TColor): TColor;
-  function fCount_Char(Text, Sub: string): Integer;
+  function fCount_Char(Text, Sub: string): integer;
+  function fCount_Files(pathToSearch: string): integer;
   function fDataFolder: string;
   function fDirectory_IsEmpty(Directory: string): boolean;
   function fDownload_File(const url: string; const sFileName: string): boolean;
@@ -73,7 +74,7 @@ type
   function fGet_Registry_Key(KeyName: string): string;
   function fGet_RObject(sTmp: string): string;
   function fGet_RPackage(sTmp: string): string;
-  function fGet_SpecialFolder(const ASpecialFolderID: Integer): string;
+  function fGet_SpecialFolder(const ASpecialFolderID: integer): string;
   function fGet_WindowHandle(const chCaption: PChar; const bPartial: boolean = True): HWND;
   function fIs_64Bit_OS: boolean;
   function fIs_Connected: boolean;
@@ -82,21 +83,21 @@ type
   function fIs_Portable_Version: boolean;
   function fIs_URL(s: string): boolean;
   function fIs_ValidNumber_Rversion(s: string): boolean;
-  function fLastPos(sSub, s: string): Integer;
+  function fLastPos(sSub, s: string): integer;
   function fOpen_CmdLine(const CmdLine: string; wWindowState: Word): boolean;
   function fPath_Browser: String;
   function fPath_R_Exists(var sPathR: string): boolean;  // Portable
   function fRegEx(sSubject, sRegEx: string; bReplace: boolean = False; sReplacement: string = ''; bReplace_All: boolean = False; opOptions: TPerlRegExOptions = []): string;
   function fRegEx_Multiline(sSubject, sRegEx: string): string;
   function fRemove_FileExtension(sFile: string): string;
-  function fRunFile(const sName: string = ''; const sPar1: string = '';  const sPar2: string = ''): Integer;
+  function fRunFile(const sName: string = ''; const sPar1: string = '';  const sPar2: string = ''): integer;
   function fSanitize_FileName(const sInputString: string): string;
   function fSave_PriorClipboard_Text: boolean;
   function fSingleLine(sTmp: string): boolean;
-  function fSort_Date(List: TStringList; Index1, Index2: Integer): Integer;
-  function fSort_Integer(List: TStringList; Index1, Index2: Integer): Integer;
+  function fSort_Date(List: TStringList; Index1, Index2: integer): integer;
+  function fSort_Integer(List: TStringList; Index1, Index2: integer): integer;
   function fString_Invert(sStr: string): string;
-  function fString_ToCase_Select(sSelector : string; aCaseList: array of string): Integer;
+  function fString_ToCase_Select(sSelector : string; aCaseList: array of string): integer;
   function fStrip_FileName(sFileName: string): string;
   function fStrip_NonConforming(const sTmp: string; const ValidChars: TCharSet): string;
   function fStrip_Path(sFileName: string): string;
@@ -104,6 +105,7 @@ type
 
   procedure pCapture_Console_Output(const ACommand, AParameters: String; AMemo: TMemo);
   procedure pClear_Edits(Owner: TWinControl);
+  procedure pCopy_Folder(CopyFrom, CopyTo, CopyMask: String);
   procedure pDelete_Dir(sDir: string);
   procedure pDelete_FilesOfPath(path: string);
   procedure pGet_DriveLetters(slTmp: TStringList);  // Portable
@@ -186,7 +188,7 @@ function fGet_WindowHandle(const chCaption: PChar;
 var
   chTmp: PChar;
 
-  i: Integer;
+  i: integer;
 
   hTmp: HWND;
 
@@ -338,7 +340,7 @@ function fContrast_Color(FontC: TColor): TColor;
 var
   iR,
    iG,
-   iB: Integer;
+   iB: integer;
 
 begin
   iR:= GetRValue(abs(FontC)) * 2;
@@ -391,7 +393,7 @@ end;
 
 function fRunFile(const sName: string = '';
                   const sPar1: string = '';
-                  const sPar2: string = ''): Integer;
+                  const sPar2: string = ''): integer;
 begin
   Result:= ShellExecute(0,
                         nil,
@@ -440,7 +442,7 @@ case fStringToCaseSelect('Delphi',
 end;
 }
 function fString_ToCase_Select(sSelector: string;
-                               aCaseList: array of string): Integer;
+                               aCaseList: array of string): integer;
 var
   iCnt: integer;
 
@@ -721,7 +723,7 @@ function fPath_Browser: String;
 var
   sBrowser: String;
 
-  i: Integer;
+  i: integer;
 
   reg: TRegistry;
 
@@ -762,7 +764,7 @@ end;
 
 function fSort_Date(List: TStringList;
                     Index1,
-                    Index2: Integer): Integer;
+                    Index2: integer): integer;
 var
   d1,
    d2: TDateTime;
@@ -777,7 +779,7 @@ end;
 
 function fSort_Integer(List: TStringList;
                        Index1,
-                       Index2: Integer): Integer;
+                       Index2: integer): integer;
 var
   b1,
    b2: boolean;
@@ -786,9 +788,9 @@ var
    i2: integer;
 
   function IsInt(AString : string;
-                 var AInteger : Integer): boolean;
+                 var AInteger : integer): boolean;
   var
-    iCode: Integer;
+    iCode: integer;
 
   begin
     Val(AString,
@@ -910,7 +912,7 @@ end;
 function fStripp_No_ASCII(const s: string): string;
 var
   i,
-   Count: Integer;
+   Count: integer;
 
 begin
   SetLength(Result, Length(s));
@@ -928,7 +930,7 @@ function fStrip_NonConforming(const sTmp: string;
                               const ValidChars: TCharSet): string;
 var
   iDest,
-   iSource: Integer;
+   iSource: integer;
 
 begin
   SetLength(Result,
@@ -951,7 +953,7 @@ type
                              var IsWow64: BOOL): BOOL; stdcall;
 
 var
-  hKernel32     : Integer;
+  hKernel32     : integer;
   IsWow64Process: TIsWow64Process;
   IsWow64       : BOOL;
 
@@ -1334,7 +1336,7 @@ begin
 end;
 
 
-function fLastPos(sSub, s: string): Integer;
+function fLastPos(sSub, s: string): integer;
 var
   iFound, iLen, iPos: integer;
 
@@ -1354,9 +1356,9 @@ end;
 
 // From Marco Cantu
 function fCount_Char(Text,
-                     Sub: string): Integer;
+                     Sub: string): integer;
 var
-  iPos: Integer;
+  iPos: integer;
 
 begin
   Result:= 0;
@@ -1488,7 +1490,7 @@ end;
 
 // Function to ask Windows for a special folder and convert the "Windows string" into Delphi string
 // From: http://forum.codecall.net/topic/60120-using-special-folders-to-comply-with-uac-enabled-windows-with-delphi-code/
-function fGet_SpecialFolder(const ASpecialFolderID: Integer): string;
+function fGet_SpecialFolder(const ASpecialFolderID: integer): string;
 var
   vSFolder:  pItemIDList;
 
@@ -2015,7 +2017,7 @@ function fDirectory_IsEmpty(Directory: string): boolean;
 var
   SR: TSearchRec;
 
-  i: Integer;
+  i: integer;
 
 begin
   Result:= False;
@@ -2117,6 +2119,43 @@ begin
           sTmp) <=0) or
      ((length(sTmp) - 1) = Pos(#13#10,
                                sTmp)) then Result:= True;
+end;
+
+function fCount_Files(pathToSearch: string): integer;
+var
+  rec: TSearchRec;
+
+  iFileCount: integer;
+
+begin
+  iFileCount:= 0;
+  if (FindFirst(pathToSearch,
+                faAnyFile,
+                rec) = 0) then
+  begin
+    repeat
+      // Exclude directories from the list of files.
+      if ((rec.Attr and faDirectory) <> faDirectory) then
+        Inc(iFileCount);
+    until FindNext(rec) <> 0;
+    FindClose(rec);
+  end;
+  Result:= iFileCount;
+end;
+
+// From: http://www.delphipages.com/forum/showthread.php?t=94936 
+procedure pCopy_Folder(CopyFrom, CopyTo, CopyMask: String);
+var
+  FO: TSHFileOpStruct;
+
+begin
+  If Not DirectoryExists(CopyFrom) Then Exit;
+  FO.Wnd:= Application.Handle;
+  FO.wFunc:= FO_COPY;
+  FO.pFrom:= PChar(IncludeTrailingBackSlash(CopyFrom) + CopyMask + #0#0);
+  FO.pTo:= PChar(IncludeTrailingBackSlash(CopyTo) + #0#0);
+  FO.fFlags:= FOF_NOCONFIRMATION Or FOF_NOCONFIRMMKDIR Or FOF_SILENT Or FOF_ALLOWUNDO;
+  ShFileOperation(FO);
 end;
 
 {sRVersion:= Copy(sPath_R,

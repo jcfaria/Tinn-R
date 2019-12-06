@@ -771,7 +771,7 @@ begin
   // Shortcuts
   with cdApp_Shortcuts do begin
     Active   := False;
-    FileName := frmMain.sShortcutsInUse;
+    FileName := frmMain.sShortcuts_InUse;
     Active   := True;
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
@@ -880,7 +880,7 @@ begin
   end;
 
   with frmMain do begin
-    if not bDatabaseRestored then begin
+    if not bDatabase_Restored then begin
       cdRcard.SavePoint            := iRcard_SavePoint;
       cdRmirrors.SavePoint         := iRmirrors_SavePoint;
       cdCompletion.SavePoint       := iCompletion_SavePoint;
@@ -899,7 +899,7 @@ begin
       iRH_Control_SavePoint       := cdRH_Control.SavePoint;
       iRH_Custom_SavePoint        := cdRH_Custom.SavePoint;
       iEditor_Keystrokes_SavePoint:= cdEditor_Keystrokes.SavePoint;
-      bDatabaseRestored           := False
+      bDatabase_Restored          := False
     end;
   end;
 

@@ -217,12 +217,12 @@ begin
   FreeAndNil(prnConfigureDlg);
 
   with frmMain do begin
-    bPrintFileName   := actFileName.Checked;
-    bPrintLineNumber := actLineNumber.Checked;
-    bPrintPageNumber := actPageNumber.Checked;
-    bPrintColors     := actImpressionColored.Checked;
-    bPrintSyntaxColor:= actSyntaxColor.Checked;
-    bPrintLineWrap   := actLineWrap.Checked;
+    bPrint_FileName   := actFileName.Checked;
+    bPrint_LineNumber := actLineNumber.Checked;
+    bPrint_PageNumber := actPageNumber.Checked;
+    bPrint_Colors     := actImpressionColored.Checked;
+    bPrint_SyntaxColor:= actSyntaxColor.Checked;
+    bPrint_LineWrap   := actLineWrap.Checked;
   end;
   Close;
 end;
@@ -230,12 +230,12 @@ end;
 procedure TfrmPrint_Configure.FormCreate(Sender: TObject);
 begin
   with frmMain do begin
-    actFileName.Checked         := bPrintFileName;
-    actLineNumber.Checked       := bPrintLineNumber;
-    actPageNumber.Checked       := bPrintPageNumber;
-    actImpressionColored.Checked:= bPrintColors;
-    actSyntaxColor.Checked      := bPrintSyntaxColor;
-    actLineWrap.Checked         := bPrintLineWrap;
+    actFileName.Checked         := bPrint_FileName;
+    actLineNumber.Checked       := bPrint_LineNumber;
+    actPageNumber.Checked       := bPrint_PageNumber;
+    actImpressionColored.Checked:= bPrint_Colors;
+    actSyntaxColor.Checked      := bPrint_SyntaxColor;
+    actLineWrap.Checked         := bPrint_LineWrap;
     rbSelection.Checked         := bselectedToPreview;
   end;
   bbtPrintConfig.Glyph:= nil;

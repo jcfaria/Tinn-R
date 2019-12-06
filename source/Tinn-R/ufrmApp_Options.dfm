@@ -1261,7 +1261,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 0
             Items.Strings = (
               'Vertical Line'
@@ -1275,7 +1275,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 0
+            ItemHeight = 13
             TabOrder = 1
             Items.Strings = (
               'Vertical Line'
@@ -1289,6 +1289,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Encoding/EOL'
         ImageIndex = 25
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox25: TGroupBox
           Left = 0
           Top = 228

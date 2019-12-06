@@ -168,24 +168,24 @@ procedure TfrmR_Card.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
     with dbeRGroup do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeRFunction do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbmDescription do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 
   with dbgRcard do begin  //Necessary to avoid conflit of names (frmMain)
-    Color     := frmMain.clBGApplication;
-    Font.Color:= frmMain.clFGApplication;
+    Color     := frmMain.clBG_Application;
+    Font.Color:= frmMain.clFG_Application;
   end;
 
   stbRcard.Panels[0].Text:= 'Browse mode';
@@ -321,12 +321,12 @@ end;
 
 procedure TfrmR_Card.bbtRcardRestoreDefaultClick(Sender: TObject);
 begin
-  if not FileExists(frmMain.sFileDataOrigin) then Exit;
+  if not FileExists(frmMain.sFile_Data_Origin) then Exit;
   try
     modDados.cdRcard.Active:= False;
 
     with frmMain.zipKit do begin
-      FileName     := frmMain.sFileDataOrigin;
+      FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
       ExtractFiles('Rcard.xml');
       CloseArchive;

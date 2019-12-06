@@ -91,6 +91,10 @@ object frmR_Server: TfrmR_Server
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsTCPIP: TTabSheet
       Caption = 'TCP/IP'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Panel2: TPanel
         Left = 0
         Top = 436
@@ -305,6 +309,10 @@ object frmR_Server: TfrmR_Server
           object tbsIPRemote: TTabSheet
             Caption = 'Remote'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label14: TLabel
               Left = 6
               Top = 3

@@ -89,8 +89,9 @@ object frmColors: TfrmColors
     Width = 75
     Height = 25
     Caption = 'O&K'
+    Default = True
     ModalResult = 1
-    TabOrder = 1
+    TabOrder = 0
     OnClick = bbtOKClick
     NumGlyphs = 2
   end
@@ -101,9 +102,8 @@ object frmColors: TfrmColors
     Height = 25
     Cancel = True
     Caption = '&Cancel'
-    Default = True
     ModalResult = 2
-    TabOrder = 0
+    TabOrder = 1
     NumGlyphs = 2
   end
   object gpbHighlighters: TGroupBox
@@ -490,15 +490,16 @@ object frmColors: TfrmColors
       FF00FF00FF00FF00FF00B0E2F500A7DCF5009DD9F50091D1F10082CBF00076C4
       EF006DBFED0077C3EE00FF00FF00FF00FF00FF00FF00FF00FF00}
   end
-  object BitBtn2: TBitBtn
-    Left = 702
+  object bbtRestore: TBitBtn
+    Left = 682
     Top = 504
-    Width = 80
+    Width = 100
     Height = 25
-    Caption = '&Restore'
+    Caption = '&Restore default'
     TabOrder = 7
+    OnClick = bbtRestoreClick
   end
-  object rdgColors: TRadioGroup
+  object rdgSyntax: TRadioGroup
     Left = 468
     Top = 5
     Width = 538
@@ -511,9 +512,10 @@ object frmColors: TfrmColors
       'Default'
       'Dark'
       'Gray'
-      'Light gray')
+      'LGray')
     ParentCtl3D = False
     TabOrder = 8
+    OnClick = rdgSyntaxClick
   end
   object alAttributes: TActionList
     Left = 25

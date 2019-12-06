@@ -91,8 +91,8 @@ type
     shBrackets: TtrShape;
     shFG: TtrShape;
     synSample: TSynEdit;
-    BitBtn2: TBitBtn;
-    rdgColors: TRadioGroup;
+    bbtRestore: TBitBtn;
+    rdgSyntax: TRadioGroup;
 
     procedure actTextAttributesExecute(Sender: TObject);
     procedure bbHelpClick(Sender: TObject);
@@ -116,15 +116,17 @@ type
     procedure synSampleChange(Sender: TObject);
     procedure synSampleClick(Sender: TObject);
     procedure synSampleKeyPress(Sender: TObject; var Key: WideChar);
+    procedure rdgSyntaxClick(Sender: TObject);
+    procedure bbtRestoreClick(Sender: TObject);
 
   private
     { Private declarations }
-    procedure pSavePreferences;
+    procedure pSave_Preferences;
     procedure pSetAttr_SavePreferences(var AttrStyle: TFontStyles; att: TSynHighlighterAttributes);
-    procedure pShowAttributes;
-    procedure pStructureIniSyntaxFiles(clPreferred: TColor);
-    procedure pUpdateActiveLine;
-    procedure pUpdateColors(shTemp: TtrShape; clTemp: TColor);
+    procedure pShow_Attributes;
+    procedure pStructure_IniSyntaxFiles(clPreferred: TColor);
+    procedure pUpdate_ActiveLine;
+    procedure pUpdate_Colors(shTemp: TtrShape; clTemp: TColor);
 
   public
     { Public declarations }
@@ -148,8 +150,8 @@ uses
 
 {$R *.DFM}
 
-procedure TfrmColors.pUpdateColors(shTemp: TtrShape;
-                                   clTemp: TColor);
+procedure TfrmColors.pUpdate_Colors(shTemp: TtrShape;
+                                    clTemp: TColor);
 begin
   with shTemp do begin
     Brush.Color:= clTemp;
@@ -158,7 +160,20 @@ begin
 end;
 
 
-procedure TfrmColors.pStructureIniSyntaxFiles(clPreferred: TColor);
+procedure TfrmColors.rdgSyntaxClick(Sender: TObject);
+begin
+  with rdgSyntax do
+    frmMain.sSyntax_InUse:= Items[ItemIndex];
+
+  with frmMain do
+    sPath_Syntax_InUse:= sPath_Syntax +
+                         '\' +
+                         sSyntax_InUse;
+
+  dmSyn.pLoad_Syntax_FromIni;
+end;
+
+procedure TfrmColors.pStructure_IniSyntaxFiles(clPreferred: TColor);
 var
   att: TSynHighlighterAttributes;
 
@@ -185,9 +200,9 @@ begin
   for i:= 0 to (lbHighlighters.Items.Count - 1) do begin
     sHighlighter:= lbHighlighters.Items.Strings[i];
 
-    // Will show the attribute of the selected highlighter
+    // It will show the attribute of the selected highlighter
     iHighlighterID:= -1;
-    for j:= 0 to (dmSyn.iHigCount - 1) do begin
+    for j:= 0 to (dmSyn.iComponent_Count - 1) do begin
       sName:= (dmSyn.Components[j] as TSynCustomHighlighter).GetFriendlyLanguageName;
 
       if (sName = 'General_Multi-Highlighter') then sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
@@ -253,7 +268,7 @@ begin
       end;
       lbIdentifiers.ItemIndex:= (j + 1)
     end;
-    pSavePreferences;
+    pSave_Preferences;
 
     lbHighlighters.ItemIndex:= (i + 1);
   end;
@@ -265,50 +280,49 @@ end;
 
 procedure TfrmColors.FormCreate(Sender: TObject);
 
-  function CountFiles(pathToSearch: string): integer;
-  var
-    rec: TSearchRec;
-
-    iFileCount: integer;
-
-  begin
-    iFileCount:= 0;
-    if (FindFirst(pathToSearch,
-                  faAnyFile,
-                  rec) = 0) then
-    begin
-      repeat
-        // Exclude directories from the list of files.
-        if ((rec.Attr and faDirectory) <> faDirectory) then
-          Inc(iFileCount);
-      until FindNext(rec) <> 0;
-      FindClose(rec);
-    end;
-    Result:= iFileCount;
-  end;
+//  function fCount_Files(pathToSearch: string): integer;
+//  var
+//    rec: TSearchRec;
+//
+//    iFileCount: integer;
+//
+//  begin
+//    iFileCount:= 0;
+//    if (FindFirst(pathToSearch,
+//                  faAnyFile,
+//                  rec) = 0) then
+//    begin
+//      repeat
+//        // Exclude directories from the list of files.
+//        if ((rec.Attr and faDirectory) <> faDirectory) then
+//          Inc(iFileCount);
+//      until FindNext(rec) <> 0;
+//      FindClose(rec);
+//    end;
+//    Result:= iFileCount;
+//  end;
 
 var
   i,
    j,
-   iIniSyntaxFiles: integer;
+   iSyntax_Count: integer;
 
-  sName,
-   sSyntaxBKP: string;
+  sName: string;
 
 begin
   // Update the appearance of some components based in public variables (frmTinnMain)
   with frmMain do begin
-    pUpdateColors(shActiveLine,
-                  clActiveLine);
+    pUpdate_Colors(shActiveLine,
+                   clActiveLine);
 
-    pUpdateColors(shBrackets,
-                  clBrackets);
+    pUpdate_Colors(shBrackets,
+                   clBrackets);
 
-    pUpdateColors(shBGPreferred,
-                  clBGPreferred);
+    pUpdate_Colors(shBGPreferred,
+                   clBG_Preferred);
 
-    pUpdateColors(shBGAllHighlighters,
-                  clBGForAllHighlighters);
+    pUpdate_Colors(shBGAllHighlighters,
+                   clBG_ForAllHighlighters);
 
     cbActiveLineBG.Checked:= bActiveLine;
 
@@ -322,25 +336,8 @@ begin
     coEditor.AssignTo(synSample);
   end;
 
-  // Do a prior backup of all syntax files of ini
-  sSyntaxBKP:= frmMain.sPath_SyntaxBKP +
-               '\syntax_bkp.zip';
-  try
-    if FileExists(sSyntaxBKP) then DeleteFile(sSyntaxBKP);
-  except
-    //todo
-  end;
-  with frmMain do begin
-    zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
-    with zipKit do begin
-      FileName:= sSyntaxBKP;
-      AddFiles(sPath_Syntax + '\*.*', 0);
-      CloseArchive;
-    end;
-  end;
-
   // Load the highlighters names into the listbox
-  for j:= 0 to (dmSyn.iHigCount - 1) do begin
+  for j:= 0 to (dmSyn.iComponent_Count - 1) do begin
     sName:= (dmSyn.Components[j] as TSynCustomHighlighter).GetFriendlyLanguageName;
     if (sName = 'General_Multi-Highlighter') then
       sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
@@ -350,10 +347,10 @@ begin
       lbHighlighters.Items.Add(sName)
   end;
 
-  iIniSyntaxFiles:= CountFiles(frmMain.sPath_Syntax +
+  iSyntax_Count:= fCount_Files(frmMain.sPath_Syntax_InUse +
                                '\*.*');
 
-  if (iIniSyntaxFiles <= 1) then pStructureIniSyntaxFiles(clWhite);
+  if (iSyntax_Count <= 1) then pStructure_IniSyntaxFiles(clWhite);
 
   // Try to find the language used in the main editor
   sName:= frmMain.cbSyntax.Items[frmMain.cbSyntax.ItemIndex];
@@ -416,7 +413,7 @@ begin
 
   // Will show the attribute of the selected highlighter
   lbIdentifiers.Clear;
-  for j:= 0 to (dmSyn.iHigCount - 1) do begin
+  for j:= 0 to (dmSyn.iComponent_Count - 1) do begin
     sTemp:= (dmSyn.Components[j] as TSynCustomHighlighter).GetFriendlyLanguageName;
 
     if (sTemp = 'General_Multi-Highlighter') then begin
@@ -482,11 +479,11 @@ begin
     end;
     lbIdentifiers.ItemIndex:= 0;
 
-    pShowAttributes;
+    pShow_Attributes;
   end;
 end;
 
-procedure TfrmColors.pShowAttributes;
+procedure TfrmColors.pShow_Attributes;
 var
   clFG,
    clBG: TColor;
@@ -542,7 +539,7 @@ end;
 
 procedure TfrmColors.lbIdentifiersClick(Sender: TObject);
 begin
-  pShowAttributes;
+  pShow_Attributes;
 end;
 
 procedure TfrmColors.bbHelpClick(Sender: TObject);
@@ -551,23 +548,17 @@ begin
 end;
 
 procedure TfrmColors.bbtOKClick(Sender: TObject);
-var
-  syntaxBackupFile: string;
-
 begin
-  syntaxBackupFile:= frmMain.sPath_SyntaxBKP +
-                     '\syntax_bkp.zip';
   try
     frmMain.zipKit.CloseArchive;
-    if FileExists(syntaxBackupFile) then DeleteFile(syntaxBackupFile);
   except
-    //todo
+    //TODO
   end;
 
-  pSavePreferences;
+  pSave_Preferences;
 end;
 
-procedure TfrmColors.pSavePreferences;
+procedure TfrmColors.pSave_Preferences;
 var
   LanguageName: string;
 
@@ -576,7 +567,8 @@ begin
   LanguageName:= synSample.Highlighter.GetFriendlyLanguageName;
 
   if (LanguageName = 'C/C++') then LanguageName:= 'C++';
-  synSample.Highlighter.SaveToFile(frmMain.sPath_Syntax +
+
+  synSample.Highlighter.SaveToFile(frmMain.sPath_Syntax_InUse +
                                    '\' +
                                    LanguageName +
                                    '.ini');
@@ -617,7 +609,7 @@ begin
       EndUpdate;
     end;
 
-  pSavePreferences;
+  pSave_Preferences;
 end;
 
 procedure TfrmColors.actTextAttributesExecute(Sender: TObject);
@@ -643,7 +635,7 @@ begin
       pSetAttr_SavePreferences(AttrStyle,
                                att);
     finally
-      pShowAttributes;
+      pShow_Attributes;
       FreeAndNil(att);
     end;
   end;
@@ -688,7 +680,7 @@ begin
       end;
       FreeAndNil(att);
     end;
-    pShowAttributes;
+    pShow_Attributes;
   end;
 end;
 
@@ -707,8 +699,8 @@ begin
   with frmMain do begin
     cdMain.Color:= shFG.Brush.Color;
 
-    if (cdMain.Execute) then pUpdateColors(shFG,
-                                           cdMain.Color)
+    if (cdMain.Execute) then pUpdate_Colors(shFG,
+                                            cdMain.Color)
                         else Exit;
   end;
 
@@ -726,7 +718,7 @@ begin
                                att);
     finally
       FreeAndNil(att);
-      pShowAttributes;
+      pShow_Attributes;
     end;
   end;
 end;
@@ -746,8 +738,8 @@ begin
   with frmMain do begin
     cdMain.Color:= shBG.Brush.Color;
 
-    if (cdMain.Execute) then pUpdateColors(shBG,
-                                           cdMain.Color)
+    if (cdMain.Execute) then pUpdate_Colors(shBG,
+                                            cdMain.Color)
                         else Exit;
   end;
 
@@ -766,7 +758,7 @@ begin
                                att);
     finally
       FreeAndNil(att);
-      pShowAttributes;
+      pShow_Attributes;
     end;
   end;
 end;
@@ -779,8 +771,8 @@ begin
   with frmMain do begin
     cdMain.Color:= shBGPreferred.Brush.Color;
 
-    if (cdMain.Execute) then pUpdateColors(shBGPreferred,
-                                           cdMain.Color)
+    if (cdMain.Execute) then pUpdate_Colors(shBGPreferred,
+                                            cdMain.Color)
                         else Exit;
   end;
 end;
@@ -793,12 +785,12 @@ begin
   with frmMain do begin
     cdMain.Color:= shActiveLine.Brush.Color;
 
-    if (cdMain.Execute) then pUpdateColors(shActiveLine,
-                                           cdMain.Color)
+    if (cdMain.Execute) then pUpdate_Colors(shActiveLine,
+                                            cdMain.Color)
                         else Exit;
   end;
 
-  pUpdateActiveLine;
+  pUpdate_ActiveLine;
 end;
 
 procedure TfrmColors.shBGAllHighlightersMouseUp(Sender: TObject;
@@ -809,8 +801,8 @@ begin
   with frmMain do begin
     cdMain.Color:= shBGAllHighlighters.Brush.Color;
 
-  if (cdMain.Execute) then pUpdateColors(shBGAllHighlighters,
-                                         cdMain.Color)
+  if (cdMain.Execute) then pUpdate_Colors(shBGAllHighlighters,
+                                          cdMain.Color)
                       else Exit;
   end;
 end;
@@ -849,7 +841,7 @@ begin
                                att);
     finally
       FreeAndNil(att);
-      pShowAttributes;
+      pShow_Attributes;
     end;
   end;
 end;
@@ -918,8 +910,8 @@ begin
     Items.EndUpdate;
   end;
 
-  pSavePreferences;
-  pShowAttributes;
+  pSave_Preferences;
+  pShow_Attributes;
 end;
 
 procedure TfrmColors.synSampleClick(Sender: TObject);
@@ -1009,29 +1001,61 @@ begin
   // Set background color for all identifires of all highlighters
   iPos:= lbHighlighters.ItemIndex;
 
-  pStructureIniSyntaxFiles(shBGAllHighlighters.Brush.Color);
+  pStructure_IniSyntaxFiles(shBGAllHighlighters.Brush.Color);
 
   lbHighlighters.ItemIndex:= iPos;
 
   lbHighlightersClick(nil);
 end;
 
+procedure TfrmColors.bbtRestoreClick(Sender: TObject);
+begin
+ if (MessageDlg(frmMain.sPath_Syntax + #13 + #13 +
+                'Do you want to overwrite all syntax files from the path above?',
+                mtConfirmation,
+                [mbYes, mbCancel],
+                0) <> idYes) then Exit;
+
+  with frmMain do begin
+    pDelete_Dir(sPath_Syntax);  // Beter to remove the entire foder to make a new structure!
+    pDelete_Dir(sPath_Syntax +
+                '_tmp');
+
+    CreateDir(sPath_Syntax);
+    zipKit.FileName:= sFile_Syntax_Origin;
+    zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
+
+    with zipKit do begin
+      BaseDirectory:= sPath_Syntax;
+      ExtractFiles('*.ini');
+    end;
+
+    zipKit.CloseArchive;
+  end;
+
+  // Update all syntax in synedit instances
+  rdgSyntaxClick(nil);
+
+  // Force user to cloe the dlg with no more actions.
+  bbtCancel.Enabled:= False;
+end;
+
 procedure TfrmColors.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
     with lbHighlighters do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with lbIdentifiers do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 end;
 
-procedure TfrmColors.pUpdateActiveLine;
+procedure TfrmColors.pUpdate_ActiveLine;
 begin
   with synSample do
     if cbActiveLineBG.Checked then ActiveLineColor:= TColor(shActiveLine.Brush.Color)
@@ -1044,7 +1068,7 @@ procedure TfrmColors.cbActiveLineBGMouseUp(Sender: TObject;
                                            Shift: TShiftState;
                                            X, Y: Integer);
 begin
-  pUpdateActiveLine;
+  pUpdate_ActiveLine;
 end;
 
 procedure TfrmColors.FormShow(Sender: TObject);
@@ -1064,8 +1088,8 @@ begin
 
     if (cdMain.Execute) then
     begin
-      pUpdateColors(shBrackets,
-                    cdMain.Color);
+      pUpdate_Colors(shBrackets,
+                     cdMain.Color);
       clBrackets:= cdMain.Color;
       with synSample do begin
         BeginUpdate;

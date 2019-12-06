@@ -232,8 +232,8 @@ procedure TfrmSKH_Manager_Dlg.FormActivate(Sender: TObject);
 begin
   with frmMain do
     with eKeyShort do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 end;
 

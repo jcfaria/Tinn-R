@@ -1,4 +1,3 @@
-plot(1)
 plot(1:10)
 Y1
 Y3
@@ -97,3 +96,5 @@ sqrt
 source(.paths[5], echo=TRUE, max.deparse.length=2000)
 ls()
 sd
+str(binom)
+str(dbinom)

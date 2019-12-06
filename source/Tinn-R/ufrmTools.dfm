@@ -4280,6 +4280,10 @@ object frmTools: TfrmTools
     object tbsDatabase: TTabSheet
       Caption = 'Database'
       ImageIndex = 6
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
@@ -4670,6 +4674,10 @@ object frmTools: TfrmTools
         object tbsR_Hotkeys: TTabSheet
           Caption = 'Hotkeys (R)'
           ImageIndex = 4
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object pgRH: TJvgPageControl
             Left = 0
             Top = 0
@@ -4956,6 +4964,10 @@ object frmTools: TfrmTools
             object tbsRH_Custom: TTabSheet
               Caption = 'Custom'
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel23: TPanel
                 Left = 0
                 Top = 0
@@ -5848,7 +5860,7 @@ object frmTools: TfrmTools
                 Anchors = [akLeft, akRight]
                 Ctl3D = False
                 DropDownCount = 25
-                ItemHeight = 0
+                ItemHeight = 13
                 ItemIndex = 0
                 ParentCtl3D = False
                 ParentShowHint = False

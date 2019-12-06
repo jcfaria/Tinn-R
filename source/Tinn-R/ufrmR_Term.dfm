@@ -74,6 +74,10 @@ object frmR_Term: TfrmR_Term
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsIO: TTabSheet
       Caption = 'IO'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synIO: TSynEdit
         Left = 0
         Top = 0
@@ -447,6 +451,10 @@ object frmR_Term: TfrmR_Term
     object tbsLog: TTabSheet
       Caption = 'LOG'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object synLog: TSynEdit
         Left = 0
         Top = 0

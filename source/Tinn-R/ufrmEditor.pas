@@ -1451,7 +1451,7 @@ begin
 
   if (sExt <> EmptyStr) then begin  //Will to try to find the file type
     sExt:= '*' + LowerCase(sExt);
-    for i:= 0 to (dmSyn.iHigCount - 1) do begin
+    for i:= 0 to (dmSyn.iComponent_Count - 1) do begin
       sDefaultFilter:= (dmSyn.Components[i] as TSynCustomHighlighter).DefaultFilter;
       iLenFilter:= length(sDefaultFilter);
 
@@ -1534,7 +1534,7 @@ var
   sHighligh: string;
 
 begin
-  for i:= 0 to (dmSyn.iHigCount - 1) do begin
+  for i:= 0 to (dmSyn.iComponent_Count - 1) do begin
     sHighligh:= (dmSyn.Components[i] as TSynCustomHighlighter).GetFriendlyLanguageName;
 
     if (sSynName = 'Text') then
@@ -1803,7 +1803,7 @@ begin
   sSynName:= synEditor.Highlighter.DefaultFilter;
   bFound  := False;
 
-  for j:= 0 to (dmSyn.iHigCount - 1) do begin
+  for j:= 0 to (dmSyn.iComponent_Count - 1) do begin
     sTmp:= (dmSyn.Components[j] as TSynCustomHighlighter).DefaultFilter;
 
     if (sTmp = sSynName) then begin

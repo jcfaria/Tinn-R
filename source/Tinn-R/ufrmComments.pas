@@ -195,28 +195,28 @@ procedure TfrmComments.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
     with dbeLanguage do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeLine do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeBegin do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeEnd do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbgComments do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 
@@ -304,11 +304,11 @@ end;
 
 procedure TfrmComments.bbtCommentsRestoreDefaultClick(Sender: TObject);
 begin
-  if not FileExists(frmMain.sFileDataOrigin) then Exit;
+  if not FileExists(frmMain.sFile_Data_Origin) then Exit;
   try
     modDados.cdComments.Active:= False;
     with frmMain.zipKit do begin
-      FileName     := frmMain.sFileDataOrigin;
+      FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
       ExtractFiles('Comments.xml');
       CloseArchive;

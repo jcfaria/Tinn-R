@@ -198,28 +198,28 @@ procedure TfrmCompletion.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
     with dbeGroup do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeFunction do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbmCompletion do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeTrigger do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbgCompletion do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 
@@ -359,12 +359,12 @@ end;
 
 procedure TfrmCompletion.bbtCompletionRestoreDefaultClick(Sender: TObject);
 begin
-  if not FileExists(frmMain.sFileDataOrigin) then Exit;
+  if not FileExists(frmMain.sFile_Data_Origin) then Exit;
   try
     modDados.cdCompletion.Active:= False;
 
     with frmMain.zipKit do begin
-      FileName     := frmMain.sFileDataOrigin;
+      FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
       ExtractFiles('Completion.xml');
       CloseArchive;

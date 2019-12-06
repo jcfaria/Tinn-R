@@ -93,10 +93,10 @@ type
 
   public
     { Public declarations }
-    sPandocExtension  : string;
-    sPandocFrom       : string;
-    sPandocInstruction: string;
-    sPandocTo         : string;
+    sPandoc_Extension  : string;
+    sPandoc_From       : string;
+    sPandoc_Instruction: string;
+    sPandoc_To         : string;
 
     property PandocHistory    : string   read fGetPandocHistory       write pSetPandocHistory;
     property PandocHistoryFrom: string   read fGetPandocHistoryFrom   write pSetPandocHistoryFrom;
@@ -137,9 +137,9 @@ var
 
 begin
   slTmp:= TStringList.Create;
-  slTmp.Text:= frmMain.sPandocHistoryFrom;
+  slTmp.Text:= frmMain.sPandoc_History_From;
   slTmp.Insert(0,
-               sPandocFrom);
+               sPandoc_From);
   if (iToRemove <> -1) then
     slTmp.Delete(iToRemove);
 
@@ -161,9 +161,9 @@ var
 
 begin
   slTmp:= TStringList.Create;
-  slTmp.Text:= frmMain.sPandocHistoryTo;
+  slTmp.Text:= frmMain.sPandoc_History_To;
   slTmp.Insert(0,
-               sPandocTo);
+               sPandoc_To);
 
   if (iToRemove <> -1) then
     slTmp.Delete(iToRemove);
@@ -194,8 +194,8 @@ var
 begin
   slHistory:= TStringList.Create;
   slFrom   := TStringList.Create;
-  slHistory.Text:= frmMain.sPandocHistory;
-  slFrom.Text   := frmMain.sPandocHistoryFrom;
+  slHistory.Text:= frmMain.sPandoc_History;
+  slFrom.Text   := frmMain.sPandoc_History_From;
 
   i:= 0;
   while (slHistory.Count >= 1) and
@@ -222,8 +222,8 @@ var
 begin
   slHistory:= TStringList.Create;
   slTo     := TStringList.Create;
-  slHistory.Text:= frmMain.sPandocHistory;
-  slTo.Text     := frmMain.sPandocHistoryTo;
+  slHistory.Text:= frmMain.sPandoc_History;
+  slTo.Text     := frmMain.sPandoc_History_To;
 
   i:= 0;
   while (slHistory.Count >= 1) and
@@ -267,15 +267,15 @@ procedure TfrmPandoc.pMakePandocInstruction(sInstruction,
                                             sFrom,
                                             sTo: string);
 begin
-  sPandocInstruction:= StringReplace(sInstruction,
-                                     '%from',
-                                     sFrom,
-                                     []);
+  sPandoc_Instruction:= StringReplace(sInstruction,
+                                      '%from',
+                                      sFrom,
+                                      []);
 
-  sPandocInstruction:= StringReplace(sPandocInstruction,
-                                     '%to',
-                                     sTo,
-                                     []);
+  sPandoc_Instruction:= StringReplace(sPandoc_Instruction,
+                                      '%to',
+                                      sTo,
+                                      []);
 end;
 
 procedure TfrmPandoc.pPandocDefaultInstruction(iFrom,
@@ -308,12 +308,12 @@ procedure TfrmPandoc.pPandocDefaultInstruction(iFrom,
   end;
 
 begin
-  sPandocFrom:= GetInputFile;
-  sPandocTo  := ChangeFileExt(sPandocFrom,
-                              '.' +
-                              GetName(rdgTo.Items[iTo]));
-  edFrom.Text:= sPandocFrom;
-  edTo.Text  := sPandocTo;
+  sPandoc_From:= GetInputFile;
+  sPandoc_To  := ChangeFileExt(sPandoc_From,
+                               '.' +
+                               GetName(rdgTo.Items[iTo]));
+  edFrom.Text:= sPandoc_From;
+  edTo.Text  := sPandoc_To;
 
   edInstruction.Text:= 'pandoc'                       +
                         ' -f '                        +
@@ -327,17 +327,17 @@ begin
                         '%to';
 
   pMakePandocInstruction(edInstruction.Text,
-                         sPandocFrom,
-                         sPandocTo);
+                         sPandoc_From,
+                         sPandoc_To);
 end;
 
 procedure TfrmPandoc.bbtPandocRestoreDefaultClick(Sender: TObject);
 begin
   with frmMain do begin
-    rdgFrom.ItemIndex:= iPandocFrom;
-    rdgTo.ItemIndex  := iPandocTo;
-    pPandocDefaultInstruction(iPandocFrom,
-                              iPandocTo);
+    rdgFrom.ItemIndex:= iPandoc_From;
+    rdgTo.ItemIndex  := iPandoc_To;
+    pPandocDefaultInstruction(iPandoc_From,
+                              iPandoc_To);
   end;
 end;
 
@@ -352,12 +352,12 @@ begin
      (edHistoryFrom.Text <> '') and
      (edHistoryTo.Text <> '') then begin
 
-    sPandocFrom:= edHistoryFrom.Text;
-    sPandocTo  := edHistoryTo.Text;
+    sPandoc_From:= edHistoryFrom.Text;
+    sPandoc_To  := edHistoryTo.Text;
 
     pMakePandocInstruction(cbPandocHistory.Text,
-                           sPandocFrom,
-                           sPandocTo);
+                           sPandoc_From,
+                           sPandoc_To);
 
     sTmp:= cbPandocHistory.Text;
     if (ModalResult = mrOK) and
@@ -387,8 +387,8 @@ begin
     end
     else cbPandocHistory.Items.Insert(0,
                                       sTmp);
-    sPandocFrom:= edFrom.Text;
-    sPandocTo  := edTo.Text;
+    sPandoc_From:= edFrom.Text;
+    sPandoc_To  := edTo.Text;
   end;
 end;
 
@@ -397,8 +397,8 @@ begin
   if not fCanMakeInstruction then Exit;
 
   with frmMain do
-    pPandocDefaultInstruction(iPandocFrom,
-                              iPandocTo);
+    pPandocDefaultInstruction(iPandoc_From,
+                              iPandoc_To);
 end;
 
 procedure TfrmPandoc.FormShow(Sender: TObject);

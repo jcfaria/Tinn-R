@@ -164,7 +164,7 @@ begin
   panPage.Caption:= IntToStr(PageNumber) +
                     '/' +
                     IntToStr(synPP.PageCount);
-  synPP.PageBGColor:= frmMain.clBGApplication;
+  synPP.PageBGColor:= frmMain.clBG_Application;
 end;
 
 procedure TfrmPrint_Preview.tbCloseClick(Sender: TObject);

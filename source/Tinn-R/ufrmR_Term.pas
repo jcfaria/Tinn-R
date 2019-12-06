@@ -668,9 +668,9 @@ begin
 
       actRtermWarningError.ImageIndex:= 254;
 
-      if bRtermBeepOnError then Beep;
+      if bRterm_BeepOnError then Beep;
 
-      if bRtermFindError then
+      if bRterm_FindError then
         if not bRterm_Sent and
            not Assigned(slError) then
           slError:= TStringList.Create;
@@ -706,7 +706,7 @@ begin
     EndUpdate;
   end;
 
-  if frmMain.bRtermFindError and
+  if frmMain.bRterm_FindError and
      Assigned(slError) then slError.Add(Cmd);
 
   with frmMain.actRtermWarningError do begin
@@ -772,7 +772,7 @@ var
 
 begin
   if (not bRterm_Running) or
-     not frmMain.bRtermWidth then Exit;
+     not frmMain.bRterm_Width then Exit;
 
   iWidth:= (synIO.Width - synIO.Gutter.Width - 20) div synIO.CharWidth;
 

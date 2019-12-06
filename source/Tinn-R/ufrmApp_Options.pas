@@ -834,12 +834,12 @@ end;
 procedure TfrmApp_Options_Dlg.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
-    pgIP.TabSelectedStyle.BackgrColor                   := clBGTabSelectedNew;
-    pgRterm.TabSelectedStyle.BackgrColor                := clBGTabSelectedNew;
-    pgRgui_PuTTY.TabSelectedStyle.BackgrColor           := clBGTabSelectedNew;
-    pgPackages.TabSelectedStyle.BackgrColor             := clBGTabSelectedNew;
-    pgProcessing_Conversion.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
-    pgProcessing_Latex.TabSelectedStyle.BackgrColor     := clBGTabSelectedNew;
+    pgIP.TabSelectedStyle.BackgrColor                   := clBG_TabSelectedNew;
+    pgRterm.TabSelectedStyle.BackgrColor                := clBG_TabSelectedNew;
+    pgRgui_PuTTY.TabSelectedStyle.BackgrColor           := clBG_TabSelectedNew;
+    pgPackages.TabSelectedStyle.BackgrColor             := clBG_TabSelectedNew;
+    pgProcessing_Conversion.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
+    pgProcessing_Latex.TabSelectedStyle.BackgrColor     := clBG_TabSelectedNew;
 
     pgRterm.TabIndex                := 0;
     pgRgui_PuTTY.TabIndex           := 0;
@@ -848,8 +848,8 @@ begin
     pgProcessing_Latex.TabIndex     := 0;
 
     with jtvAppOptions do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 
@@ -920,28 +920,28 @@ begin
 
   with frmMain do begin
     // Files
-    mFiles.Color     := clBGApplication;
-    mFiles.Font.Color:= clFGApplication;
+    mFiles.Color     := clBG_Application;
+    mFiles.Font.Color:= clFG_Application;
 
     // FormatR
-    edFormatR.Color      := clBGApplication;
-    edFormatR.Font.Color := clFGApplication;
-    memFormatR.Color     := clBGApplication;
-    memFormatR.Font.Color:= clFGApplication;
+    edFormatR.Color      := clBG_Application;
+    edFormatR.Font.Color := clFG_Application;
+    memFormatR.Color     := clBG_Application;
+    memFormatR.Font.Color:= clFG_Application;
 
     // Knitr
-    edKnit.Color      := clBGApplication;
-    edKnit.Font.Color := clFGApplication;
-    memKnit.Color     := clBGApplication;
-    memKnit.Font.Color:= clFGApplication;
+    edKnit.Color      := clBG_Application;
+    edKnit.Font.Color := clFG_Application;
+    memKnit.Color     := clBG_Application;
+    memKnit.Font.Color:= clFG_Application;
 
     // TinnRcom
-    mRLibPaths.Color     := clBGApplication;
-    mRLibPaths.Font.Color:= clFGApplication;
+    mRLibPaths.Color     := clBG_Application;
+    mRLibPaths.Font.Color:= clFG_Application;
 
     // R Paths
-    //memRAvailable.Color     := clBGApplication;
-    //memRAvailable.Font.Color:= clFGApplication;
+    //memRAvailable.Color     := clBG_Application;
+    //memRAvailable.Font.Color:= clFG_Application;
   end;
 
   AlphaBlendValue:= frmMain.iAlphaBlendValue;

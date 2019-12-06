@@ -1695,7 +1695,7 @@ begin
           tvProject.Selected.MoveTo(tnItem,
                                     attachMode);
           tnItem.AlphaSort(True);
-          frmMain.bProjectChanged:= True;
+          frmMain.bProject_Changed:= True;
         end;
       end;
     end;
@@ -1738,7 +1738,7 @@ begin
         if (Selected.Level = 1) or
            (Selected.Level = 2) then begin
           Selected.Delete;
-          frmMain.bProjectChanged:= True;
+          frmMain.bProject_Changed:= True;
         end;
       end;
 

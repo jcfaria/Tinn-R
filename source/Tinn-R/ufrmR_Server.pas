@@ -256,12 +256,12 @@ end;
 procedure TfrmR_Server.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
-    pgRserver.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
-    pgIP.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+    pgRserver.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
+    pgIP.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
 
     with memRTCPIP do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 end;

@@ -432,14 +432,14 @@ procedure TfrmSKH_Map_Dlg.bbtHotkeys_RestoreDefaultClick(Sender: TObject);
                             var iHotkeys_SavePoint: integer);
   begin
     pClear_Warnings;
-    if not FileExists(frmMain.sFileDataOrigin) then Exit;
+    if not FileExists(frmMain.sFile_Data_Origin) then Exit;
 
     try
       with cdRH do
         Active:= False;
 
       with frmMain.zipKit do begin
-        FileName     := frmMain.sFileDataOrigin;
+        FileName     := frmMain.sFile_Data_Origin;
         BaseDirectory:= frmMain.sPath_Data;
         ExtractFiles(sXML);
         CloseArchive;
@@ -488,14 +488,14 @@ end;
 procedure TfrmSKH_Map_Dlg.bbtEditor_Keystrokes_RestoreDefaultClick(Sender: TObject);
 begin
   pClear_Warnings;
-  if not FileExists(frmMain.sFileDataOrigin) then Exit;
+  if not FileExists(frmMain.sFile_Data_Origin) then Exit;
 
   try
     with modDados.cdEditor_Keystrokes do
       Active:= False;
 
     with frmMain.zipKit do begin
-      FileName     := frmMain.sFileDataOrigin;
+      FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
       ExtractFiles('Editor_Keystrokes.xml');
       CloseArchive;
@@ -754,11 +754,11 @@ begin
 
         with frmMain do begin
           iApp_Shortcuts_SavePoint:= modDados.cdApp_Shortcuts.SavePoint;
-          sShortcutsInUse         := sFile;
+          sShortcuts_InUse        := sFile;
         end;
 
         with stbShortcuts do
-          Panels[2].Text:= ExtractFileName(frmMain.sShortcutsInUse);
+          Panels[2].Text:= ExtractFileName(frmMain.sShortcuts_InUse);
           
         MessageDlg(sFile + #13 + #13 +
                    'The file above was successfully loaded.' + #13 +
@@ -777,14 +777,14 @@ procedure TfrmSKH_Map_Dlg.bbtShortcuts_RestoreDefaultClick(Sender: TObject);
 begin
   pClear_Warnings;
   bbtShortcuts_CancelAllClick(nil);
-  if not FileExists(frmMain.sFileDataOrigin) then Exit;
+  if not FileExists(frmMain.sFile_Data_Origin) then Exit;
 
   try
     with modDados.cdApp_Shortcuts do
       Active:= False;
 
     with frmMain.zipKit do begin
-      FileName     := frmMain.sFileDataOrigin;
+      FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
       ExtractFiles('Shortcuts.xml');
       CloseArchive;
@@ -797,11 +797,11 @@ begin
 
     with frmMain do begin
       iApp_Shortcuts_SavePoint:= modDados.cdApp_Shortcuts.SavePoint;
-      sShortcutsInUse         := frmMain.sPath_Data + '\Shortcuts.xml';
+      sShortcuts_InUse        := frmMain.sPath_Data + '\Shortcuts.xml';
     end;
 
     with stbShortcuts do
-      Panels[2].Text:= ExtractFileName(frmMain.sShortcutsInUse);
+      Panels[2].Text:= ExtractFileName(frmMain.sShortcuts_InUse);
 
     MessageDlg('The original ''Shortcuts.xml'' was successfully restored.' + #13 + #13 +
                'It will be, from now, the default shortcuts!',
@@ -865,11 +865,11 @@ begin
         end;
 
         with frmMain do begin
-          sdMain.Filter  := slFilters.Text;
-          sShortcutsInUse:= sFile;
+          sdMain.Filter   := slFilters.Text;
+          sShortcuts_InUse:= sFile;
         end;
         with stbShortcuts do
-          Panels[2].Text:= ExtractFileName(frmMain.sShortcutsInUse);
+          Panels[2].Text:= ExtractFileName(frmMain.sShortcuts_InUse);
       end;
     end;
   finally
@@ -1309,30 +1309,30 @@ end;
 procedure TfrmSKH_Map_Dlg.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
-    pgSKH.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
-    pgRH.TabSelectedStyle.BackgrColor := clBGTabSelectedNew;
+    pgSKH.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
+    pgRH.TabSelectedStyle.BackgrColor := clBG_TabSelectedNew;
   end;
 
   pClear_Warnings;
   with frmMain do begin
     with dbeApp_Group do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeApp_Caption do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbmHint do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbgShortcuts do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 
@@ -1357,7 +1357,7 @@ begin
 
   with stbShortcuts do begin
     Panels[0].Text:= 'Browse mode';
-    Panels[2].Text:= ExtractFileName(frmMain.sShortcutsInUse);
+    Panels[2].Text:= ExtractFileName(frmMain.sShortcuts_InUse);
   end;
 
   // The below set the active records to bookmarks

@@ -99,7 +99,7 @@ begin
   with frmMain do
     cRTerm_RU.RunProcess(sPath_Rterm +
                          ' ' +
-                         sParRterm,
+                         sPar_Rterm,
                          fRWorkDir);
 end;
 

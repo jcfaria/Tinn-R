@@ -202,38 +202,38 @@ procedure TfrmR_Mirrors.FormActivate(Sender: TObject);
 begin
   with frmMain do begin
     with dbeCountry do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeName do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeCity do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeHost do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeURL do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbeCode do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
 
     with dbgRmirrors do begin
-      Color     := clBGApplication;
-      Font.Color:= clFGApplication;
+      Color     := clBG_Application;
+      Font.Color:= clFG_Application;
     end;
   end;
 
@@ -370,12 +370,12 @@ end;
 
 procedure TfrmR_Mirrors.bbtRmirrorsRestoreDefaultClick(Sender: TObject);
 begin
-  if not FileExists(frmMain.sFileDataOrigin) then Exit;
+  if not FileExists(frmMain.sFile_Data_Origin) then Exit;
   try
     modDados.cdRmirrors.Active:= False;
 
     with frmMain.zipKit do begin
-      FileName     := frmMain.sFileDataOrigin;
+      FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
       ExtractFiles('Rmirrors.xml');
       CloseArchive;

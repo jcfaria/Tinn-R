@@ -374,7 +374,7 @@ end;
 procedure TfrmAbout.FormActivate(Sender: TObject);
 begin
   with frmMain do
-    pgAbout.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+    pgAbout.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
 
   with synAboutProject do begin
     OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;

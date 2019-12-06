@@ -98,7 +98,7 @@ type
   public
     { Public declarations }
     boolLoadedFileFromStartUp: boolean;
-    iHigCount                : integer;
+    iComponent_Count         : integer;
 
     // highlighters alphabetically ordered:
     synAll        : TSynAllSyn;
@@ -568,7 +568,8 @@ const
 
 implementation
 
-uses ufrmMain;
+uses
+  ufrmMain;
 
 {$R *.DFM}
 
@@ -770,7 +771,8 @@ begin
   // End MultiHighlighters
   //---------------------------------------------------------------
 
-  iHigCount:= ComponentCount;
+  iComponent_Count:= ComponentCount;
+
   pLoad_Syntax_FromIni;
 end;
 
@@ -781,31 +783,25 @@ var
   sSyntax: string;
 
 begin
+//  ShowMessage('running: pLoad_Syntax_FromIni');  // To debug only
   // Load all colors from ini
-  for i:= 0 to (iHigCount - 1) do begin
+  for i:= 0 to (iComponent_Count - 1) do begin
     sSyntax:= (Components[i] as TSynCustomHighlighter).GetFriendlyLanguageName;
+
     if (sSyntax = 'General_Multi-Highlighter') then begin
       sSyntax:= (Components[i] as TSynMultiSyn).DefaultLanguageName;
-      (Components[i] as TSynMultiSyn).LoadFromFile(frmMain.sPath_Syntax +
+      (Components[i] as TSynMultiSyn).LoadFromFile(frmMain.sPath_Syntax_InUse +
                                                    '\' +
                                                    sSyntax +
                                                    '.ini');
     end
     else
-    if (sSyntax = 'C/C++') then
-      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
-                                                            '\C++.ini')
-//    else if (sSyntax = 'R term') then
-//      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
-//                                                            '\R.ini')
-//    else if (sSyntax = 'Text term') then
-//      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
-//                                                            '\Text.ini')
-    else
-      (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax +
-                                                            '\' +
-                                                            sSyntax +
-                                                            '.ini')
+      if (sSyntax = 'C/C++') then (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax_InUse +
+                                                                                        '\C++.ini')
+                             else (Components[i] as TSynCustomHighlighter).LoadFromFile(frmMain.sPath_Syntax_InUse +
+                                                                                        '\' +
+                                                                                        sSyntax +
+                                                                                        '.ini')
   end;
 end;
 

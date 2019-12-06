@@ -2544,9 +2544,9 @@ type
     aImg                           : Array[0..9] of TBitmap;
     bAlreadyOrganized              : boolean;
     bAskActualizeChangedFiles      : boolean;
-    bColors_OldVersion             : boolean;
+//    bColors_OldVersion             : boolean;
     bConectionError                : boolean;
-    bCustom_OldVersion             : boolean;
+//    bCustom_OldVersion             : boolean;
     bDataCompletionAnywhere        : boolean;
     bInExecute                     : boolean;
     bIOLineWrap                    : boolean;
@@ -2562,11 +2562,11 @@ type
     bRSetget_Info                  : boolean;
     bRSetWorkDir_Starting          : boolean;
     bRsvSocket_Connect             : boolean;
-    bRtermCanFloat                 : boolean;
-    bRtermCloseWithoutAsk          : boolean;
-    bRtermHorizontal               : boolean;  // IO disposition for IO and Log in the same view
-    bRtermOptionCancel             : boolean;
-    bRtermSingle                   : boolean;  // IO and Log in the same view
+    bRterm_CanFloat                : boolean;
+    bRterm_CloseWithoutAsk         : boolean;
+    bRterm_Horizontal              : boolean;  // IO disposition for IO and Log in the same view
+    bRterm_OptionCancel            : boolean;
+    bRterm_Single                  : boolean;  // IO and Log in the same view
     bRTinnRcom_Info                : boolean;
     bRTinnRcom_Install             : boolean;
     bRTinnRcom_Installed           : boolean;
@@ -2578,8 +2578,8 @@ type
     bSearch_Directory              : boolean;
     bSearch_InSub                  : boolean;
     bSearch_OpenFiles              : boolean;
-    bStartingUp                    : boolean;
-    bSyntax_OldVersion             : boolean;
+    bStarting_Up                   : boolean;
+//    bSyntax_OldVersion             : boolean;
     bTCPIPRunning                  : boolean;
     bToolsCanFloat                 : boolean;
     bUpdate_Cache                  : boolean;
@@ -2596,6 +2596,8 @@ type
     bUpdate_Shortcuts              : boolean;
     bUpdate_Syntax_Default         : boolean;
     bUpdate_Syntax_Dark            : boolean;
+    bUpdate_Syntax_Gray            : boolean;
+    bUpdate_Syntax_LGray           : boolean;
     iCols                          : integer;
     ini_Editor                     : TIniFile;
     ini_Editor_Tmp                 : TIniFile;
@@ -2631,11 +2633,13 @@ type
     sCurr_Version_App_Shortcuts    : string;
     sCurr_Version_Syntax_Default   : string;
     sCurr_Version_Syntax_Dark      : string;
+    sCurr_Version_Syntax_Gray      : string;
+    sCurr_Version_Syntax_LGray     : string;
     sEncodingDefault               : string;
     sEOLDefault                    : string;
     seTmp                          : TSynEdit;
-    sFile_LatexOrigin              : string;
-    sFile_ProjectOrigin            : string;
+    sFile_Latex_Origin             : string;
+    sFile_Project_Origin           : string;
     sformatR                       : string;
     sGuiRRunning                   : string;
     sIniDockFilePath               : string;
@@ -2648,14 +2652,14 @@ type
     slRAvailable                   : TStringList;
     slRLibPaths                    : TStringList;
     slTextDiff                     : TStringList;
-    sParDeplate                    : string;
-    sParDviBibtex                  : string;
-    sParDviSingle                  : string;
-    sParPdfBibtex                  : string;
-    sParPdfSingle                  : string;
-    sParRgui                       : string;
-    sParRPuTTY                     : string;
-    sParTxt2tags                   : string;
+    sPar_Deplate                   : string;
+    sPar_DviBibtex                 : string;
+    sPar_DviSingle                 : string;
+    sPar_PdfBibtex                 : string;
+    sPar_PdfSingle                 : string;
+    sPar_Rgui                      : string;
+    sPar_RPuTTY                    : string;
+    sPar_Txt2tags                  : string;
     sPath_Bkp                      : string;
     sPath_Editor                   : string;
     sPath_Ini                      : string;
@@ -2672,7 +2676,7 @@ type
     sPath_TinnRcom_Installed       : string;
     sPath_Txt2tags_Converter       : string;
     sPath_Txt2tags_Interpreter     : string;
-    sPreferences_OldVersion        : string;
+    //sPreferences_OldVersion        : string;
     sProjectName                   : string;
     sRIOSaved                      : string;
     sRLibPath_Default              : string;
@@ -2695,6 +2699,8 @@ type
     sVersion_App_Shortcuts         : string;
     sVersion_Syntax_Default        : string;
     sVersion_Syntax_Dark           : string;
+    sVersion_Syntax_Gray           : string;
+    sVersion_Syntax_LGray          : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
@@ -2740,9 +2746,10 @@ type
     procedure pCheck_Project;
     procedure pCheck_Project_Changed;
     procedure pCheck_Recho;
+    procedure pCheck_Syntax;
     procedure pCheck_Temporary;
     procedure pCheck_Top;
-    procedure pCheck_Version;
+    procedure pCheck_Versions;
     procedure pClear_StatusBar_Project;
     procedure pClose_AllFiles_Group;
     procedure pCompile_LaTeX(sMikPar, sBibPar, sExtension: string; bWait: boolean);
@@ -2773,7 +2780,7 @@ type
     procedure pOpen_HelpFile(sFileToOpen: string);
     procedure pOpen_Project;
     procedure pOpen_ProjectIntoTinn(sProjectName: string);
-    procedure pPandocConversion(sPandocInstruction, sPandocFrom, sPandocTo: string; bWait: boolean = True);
+    procedure pPandoc_Conversion(sPandocInstruction, sPandocFrom, sPandocTo: string; bWait: boolean = True);
     procedure pR_Info;
     procedure pRecentProjectFileClick(Sender: TObject);
     procedure pRecordActions(baAction: TBasicAction; var bHandled: Boolean);
@@ -2784,7 +2791,7 @@ type
     procedure pRToolbar(bOption: boolean);
     procedure pSave_NewIni_Application;
     procedure pSave_NewIni_Editor;
-    procedure pSave_Preferences_OldVersion;
+//    procedure pSave_Preferences_OldVersion;
     procedure pSave_Project;
     procedure pSearch_InDirectories(const sDir, sMask: string; var iFileCount, iMatchCount, iTotFileCount: integer);
     procedure pSearch_InOpenFiles(var iFileCount, iMatchCount: integer);
@@ -2807,7 +2814,7 @@ type
     procedure pSet_Rlibrary_Path(sTmp: string);
     procedure pSet_Rmirrors;
     procedure pSet_SaveFormat(sf: TSaveFormat);
-    procedure pSet_Shortcuts;
+    procedure pSet_App_Shortcuts;
     procedure pSet_SKH;
     procedure pSetup_SearchParameters(sSearchText: string);
     procedure pSort_Project;
@@ -2852,18 +2859,18 @@ type
     bBOM                         : boolean;
     bCloseCanceled               : boolean;
     bConnectionBeepOnError       : boolean;
-    bDatabaseRestored            : boolean;
+    bDatabase_Restored           : boolean;
     bEditorLineWrap              : boolean;
     bHotKeys_On                  : boolean;
     bIPLocal                     : boolean;  // It controls the type of TCPIP connection: False: Remote, True: Local
     bIPRemoteConnected           : boolean;
-    bPrintColors                 : boolean;
-    bPrintFileName               : boolean;
-    bPrintLineNumber             : boolean;
-    bPrintLineWrap               : boolean;
-    bPrintPageNumber             : boolean;
-    bPrintSyntaxColor            : boolean;
-    bProjectChanged              : boolean;
+    bPrint_Colors                : boolean;
+    bPrint_FileName              : boolean;
+    bPrint_LineNumber            : boolean;
+    bPrint_LineWrap              : boolean;
+    bPrint_PageNumber            : boolean;
+    bPrint_SyntaxColor           : boolean;
+    bProject_Changed             : boolean;
     bRArchitecture64             : boolean;
     bRasServer                   : boolean;
     bRecho                       : boolean;
@@ -2872,12 +2879,12 @@ type
     bRguiReturnFocus             : boolean;
     bRSendAll                    : boolean;
     bRSmart                      : boolean;
-    bRTCPIPConsoleEcho           : boolean;
-    bRTCPIPConsoleUse            : boolean;
-    bRtermBeepOnError            : boolean;
-    bRtermFindError              : boolean;
-    bRtermSend_Plus              : boolean;
-    bRtermWidth                  : boolean;
+    bRTCPIP_ConsoleEcho          : boolean;
+    bRTCPIP_ConsoleUse           : boolean;
+    bRterm_BeepOnError           : boolean;
+    bRterm_FindError             : boolean;
+    bRterm_Send_Plus             : boolean;
+    bRterm_Width                 : boolean;
     bSearch_Backwards            : boolean;
     bSearch_CaseSensitive        : boolean;
     bSearch_FromCursor           : boolean;
@@ -2887,12 +2894,12 @@ type
     bUndoAfterSave               : boolean;
     bUpdating                    : boolean;
     clActiveLine                 : TColor;
-    clBGApplication              : TColor;
-    clBGForAllHighlighters       : TColor;
-    clBGPreferred                : TColor;
-    clBGTabSelectedNew           : TColor;
+    clBG_Application             : TColor;
+    clBG_ForAllHighlighters      : TColor;
+    clBG_Preferred               : TColor;
+    clBG_TabSelectedNew          : TColor;
     clBrackets                   : TColor;
-    clFGApplication              : TColor;
+    clFG_Application             : TColor;
     coEditor                     : TSynEditorOC;
     dlgSKH_Map                   : TfrmSKH_Map_Dlg;
     ffDefault                    : TSynEditFileFormat;
@@ -2911,8 +2918,8 @@ type
     iEditor_Keystrokes_SavePoint : integer;
     iLatexDimensionalAlign       : integer;
     iMaxDeparseLength            : integer;
-    iPandocFrom                  : integer;
-    iPandocTo                    : integer;
+    iPandoc_From                 : integer;
+    iPandoc_To                   : integer;
     iProjecSelected              : integer;
     iRcard_SavePoint             : integer;
     iRcardFilter                 : integer;
@@ -2939,32 +2946,34 @@ type
     sEndComment                  : string;
     seUsed                       : TSynEncoding;
     sfDefault                    : TSaveFormat;
-    sFileDataOrigin              : string;
+    sFile_Data_Origin            : string;
+    sFile_Syntax_Origin          : string;
     sFileExtensions              : string;
     sIPHostLocal                 : string;
     sIPHostRemote                : string;
     slFileNotify                 : TStringList;
     slFilters                    : TStringList;
     sLineComment                 : string;
-    sPandocHistory               : string;
-    sPandocHistoryFrom           : string;
-    sPandocHistoryTo             : string;
-    sParRterm                    : string;
+    sPandoc_History              : string;
+    sPandoc_History_From         : string;
+    sPandoc_History_To           : string;
+    sPar_Rterm                   : string;
     sPath_App                    : string;
     sPath_Color                  : string;
     sPath_Data                   : string;
     sPath_Rterm                  : string;
     sPath_Syntax                 : string;
-    sPath_SyntaxBKP              : string;
+    sPath_Syntax_BKP             : string;
+    sPath_Syntax_InUse           : string;    
     sPath_TinnR                  : string;
     sPath_TinnRcom               : string;
     sPath_Tmp                    : string;
     sPath_Color_Custom           : string;
     sPath_IniEditor_File         : string;
     sPath_IniTinn_File           : string;
-    sPuttyHost                   : string;
-    sPuttyPassword               : string;
-    sPuttyUser                   : string;
+    sPutty_Host                  : string;
+    sPutty_Password              : string;
+    sPutty_User                  : string;
     sRcard_BookMark              : string;
     sReplace_TextHistory         : string;
     sRmirror                     : string;
@@ -2972,10 +2981,11 @@ type
     sRtip_BookMark               : string;
     sSaveAsFileExt               : string;
     sSearch_TextHistory          : string;
-    sShortcutsInUse              : string;
+    sShortcuts_InUse             : string;
+    sSyntax_InUse                : string;
     sTipToWrite                  : string;
     sUpdate                      : string;
-    sUtilsOrigin                 : string;
+    sUtils_Origin                : string;
     sWorkingDir                  : string;
     sApp_Shortcuts_BookMark      : string;
     sEditor_Keystrokes_BookMark  : string;
@@ -3067,10 +3077,10 @@ uses
 
 (*
 ----------------------------------------------------
- pSet_Shortcuts: It is very important for developers!
+ pSet_App_Shortcuts: It is very important for developers!
 ----------------------------------------------------
 *)
-procedure TfrmMain.pSet_Shortcuts;
+procedure TfrmMain.pSet_App_Shortcuts;
 begin
 (*
 ----------------------------------------------------------------------------------------------
@@ -3118,7 +3128,7 @@ begin
   end;
 end;
 
-procedure TfrmMain.pCheck_Version;
+procedure TfrmMain.pCheck_Versions;
 begin
   // Versions in use by user: from ini file
   sVersion_Cache            := ini_Tinn.ReadString('App', 'sVersion_Cache'            , '0.0.0.0');
@@ -3135,6 +3145,8 @@ begin
   sVersion_RH_Custom        := ini_Tinn.ReadString('App', 'sVersion_RH_Custom'        , '0.0.0.0');
   sVersion_Syntax_Default   := ini_Tinn.ReadString('App', 'sVersion_Syntax_Default'   , '0.0.0.0');
   sVersion_Syntax_Dark      := ini_Tinn.ReadString('App', 'sVersion_Syntax_Dark'      , '0.0.0.0');
+  sVersion_Syntax_Gray      := ini_Tinn.ReadString('App', 'sVersion_Syntax_Gray'      , '0.0.0.0');
+  sVersion_Syntax_LGray     := ini_Tinn.ReadString('App', 'sVersion_Syntax_LGray'     , '0.0.0.0');
   sVersion_Ini              := ini_Tinn.ReadString('App', 'sVersion_Ini'              , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
@@ -3152,6 +3164,8 @@ begin
   sCurr_Version_RH_Custom        := '5.04.03.00';  // Started from version '5.04.03.00'/beta
   sCurr_Version_Syntax_Default   := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
   sCurr_Version_Syntax_Dark      := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
+  sCurr_Version_Syntax_Gray      := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
+  sCurr_Version_Syntax_LGray     := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3259,6 +3273,20 @@ begin
                      sCurr_Version_Syntax_Dark) < 0) then begin
     bUpdate_Syntax_Dark:= True;
     sVersion_Syntax_Dark:= sCurr_Version_Syntax_Dark;
+  end;
+
+  // Syntax_Gray
+  if (AnsiCompareStr(sVersion_Syntax_Gray,
+                     sCurr_Version_Syntax_Gray) < 0) then begin
+    bUpdate_Syntax_Gray:= True;
+    sVersion_Syntax_Gray:= sCurr_Version_Syntax_Gray;
+  end;
+
+  // Syntax_LGray
+  if (AnsiCompareStr(sVersion_Syntax_LGray,
+                     sCurr_Version_Syntax_LGray) < 0) then begin
+    bUpdate_Syntax_LGray:= True;
+    sVersion_Syntax_LGray:= sCurr_Version_Syntax_LGray;
   end;
 
   // SynUnihighlighter: It was removed from the project!
@@ -3792,6 +3820,10 @@ begin
     WriteString('App', 'sVersion_RH_Control'       , sVersion_RH_Control);
     WriteString('App', 'sVersion_RH_Custom'        , sVersion_RH_Custom);
     WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
+    WriteString('App', 'sVersion_Syntax_Default'   , sVersion_Syntax_Default);
+    WriteString('App', 'sVersion_Syntax_Dark'      , sVersion_Syntax_Dark);
+    WriteString('App', 'sVersion_Syntax_Gray'      , sVersion_Syntax_Gray);
+    WriteString('App', 'sVersion_Syntax_LGray'     , sVersion_Syntax_LGray);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -3851,11 +3883,11 @@ begin
     WriteInteger('App', 'iWorkExplorer.Height', frmTools.panWorkExplorer.Height);
 
     // Rterm
-    WriteBool('App', 'bRtermCanFloat', bRtermCanFloat);
-    WriteBool('App', 'bRtermSend_Plus', bRtermSend_Plus);
-    WriteBool('App', 'bRtermCloseWithoutAsk', bRtermCloseWithoutAsk);
-    WriteBool('App', 'bRtermHorizontal', bRtermHorizontal);
-    WriteBool('App', 'bRtermSingle', bRtermSingle);
+    WriteBool('App', 'bRterm_CanFloat', bRterm_CanFloat);
+    WriteBool('App', 'bRterm_Send_Plus', bRterm_Send_Plus);
+    WriteBool('App', 'bRterm_CloseWithoutAsk', bRterm_CloseWithoutAsk);
+    WriteBool('App', 'bRterm_Horizontal', bRterm_Horizontal);
+    WriteBool('App', 'bRterm_Single', bRterm_Single);
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
     WriteInteger('App', 'iRterm.Size', frmR_Term.iSize);
@@ -3937,14 +3969,14 @@ begin
     WriteBool('App', 'bRSetWorkDir_Starting', bRSetWorkDir_Starting);
     WriteBool('App', 'bRSimpleDefault', actRSimpleDefault.Checked);
     WriteBool('App', 'bRSmart', bRSmart);
-    WriteBool('App', 'bRsvSocketConnect', bRsvSocket_Connect);
-    WriteBool('App', 'bRTCPIPConsoleEcho', bRTCPIPConsoleEcho);
-    WriteBool('App', 'bRTCPIPConsoleUse', bRTCPIPConsoleUse);
-    WriteBool('App', 'bRtermBeepOnError', bRtermBeepOnError);
-    WriteBool('App', 'bRtermFindError', bRtermFindError);
-    WriteBool('App', 'bRtermWidth', bRtermWidth);
-    WriteBool('App', 'bRTinnRcomInstall', bRTinnRcom_Install);
-    WriteBool('App', 'bRTinnRcomLoad', bRTinnRcom_Load);
+    WriteBool('App', 'bRsvSocket_Connect', bRsvSocket_Connect);
+    WriteBool('App', 'bRTCPIP_ConsoleEcho', bRTCPIP_ConsoleEcho);
+    WriteBool('App', 'bRTCPIP_ConsoleUse', bRTCPIP_ConsoleUse);
+    WriteBool('App', 'bRterm_BeepOnError', bRterm_BeepOnError);
+    WriteBool('App', 'bRterm_FindError', bRterm_FindError);
+    WriteBool('App', 'bRterm_Width', bRterm_Width);
+    WriteBool('App', 'bRTinnRcom_Install', bRTinnRcom_Install);
+    WriteBool('App', 'bRTinnRcom_Load', bRTinnRcom_Load);
     WriteBool('App', 'bRUseLatest', bRUseLatest);
     WriteBool('App', 'bScroll_SendingLines', bScroll_SendingLines);
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
@@ -3953,18 +3985,18 @@ begin
     WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
-    WriteInteger('App', 'clBGApplication', Tcolor(clBGApplication));
-    WriteInteger('App', 'clBGForAllHighlighters', Tcolor(clBGForAllHighlighters));
-    WriteInteger('App', 'clBGPreferred', Tcolor(clBGPreferred));
-    WriteInteger('App', 'clBGTabSelectedNew', Tcolor(clBGTabSelectedNew));
+    WriteInteger('App', 'clBG_Application', Tcolor(clBG_Application));
+    WriteInteger('App', 'clBG_ForAllHighlighters', Tcolor(clBG_ForAllHighlighters));
+    WriteInteger('App', 'clBG_Preferred', Tcolor(clBG_Preferred));
+    WriteInteger('App', 'clBG_TabSelectedNew', Tcolor(clBG_TabSelectedNew));
     WriteInteger('App', 'clBrackets', Tcolor(clBrackets));
-    WriteInteger('App', 'clFGApplication', Tcolor(clFGApplication));
+    WriteInteger('App', 'clFG_Application', Tcolor(clFG_Application));
     WriteInteger('App', 'iDelay', iDelay);
     WriteInteger('App', 'iIPPortLocal', iIPPortLocal);
     WriteInteger('App', 'iIPPortRemote', iIPPortRemote);
     WriteInteger('App', 'iMaxDeparseLength', iMaxDeparseLength);
-    WriteInteger('App', 'iPandocFrom', iPandocFrom);
-    WriteInteger('App', 'iPandocTo', iPandocTo);
+    WriteInteger('App', 'iPandoc_From', iPandoc_From);
+    WriteInteger('App', 'iPandoc_To', iPandoc_To);
     WriteInteger('App', 'iPgFiles.TabsPosition', integer(pgFiles.TabsPosition));
     WriteInteger('App', 'iPgRterm.TabsPosition', integer(frmR_Term.pgRterm.TabsPosition));
     WriteInteger('App', 'iPgTools.TabsPosition', integer(frmTools.pgTools.TabsPosition));
@@ -3983,15 +4015,15 @@ begin
     WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
-    WriteString('App', 'sParDeplate', sParDeplate);
-    WriteString('App', 'sParDviBibtex', sParDviBibtex);
-    WriteString('App', 'sParDviSingle', sParDviSingle);
-    WriteString('App', 'sParPdfBibtex', sParPdfBibtex);
-    WriteString('App', 'sParPdfSingle', sParPdfSingle);
-    WriteString('App', 'sParRgui', sParRgui);
-    WriteString('App', 'sParRPuTTY', sParRPuTTY);
-    WriteString('App', 'sParRterm', sParRterm);
-    WriteString('App', 'sParTxt2tags', sParTxt2tags);
+    WriteString('App', 'sPar_Deplate', sPar_Deplate);
+    WriteString('App', 'sPar_DviBibtex', sPar_DviBibtex);
+    WriteString('App', 'sPar_DviSingle', sPar_DviSingle);
+    WriteString('App', 'sPar_PdfBibtex', sPar_PdfBibtex);
+    WriteString('App', 'sPar_PdfSingle', sPar_PdfSingle);
+    WriteString('App', 'sPar_Rgui', sPar_Rgui);
+    WriteString('App', 'sPar_RPuTTY', sPar_RPuTTY);
+    WriteString('App', 'sPar_Rterm', sPar_Rterm);
+    WriteString('App', 'sPar_Txt2tags', sPar_Txt2tags);
     WriteString('App', 'sPath_Pandoc', sPath_Pandoc);
     WriteString('App', 'sPath_Rgui', sPath_Rgui);
     WriteString('App', 'sPath_Rterm', sPath_Rterm);
@@ -3999,12 +4031,13 @@ begin
     WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
     WriteString('App', 'sPath_Txt2tags_Converter', sPath_Txt2tags_Converter);
     WriteString('App', 'sPath_Txt2tags_Interpreter', sPath_Txt2tags_Interpreter);
-    WriteString('App', 'sPuttyHost', sPuttyHost);
-    WriteString('App', 'sPuttyPassword', sPuttyPassword);
-    WriteString('App', 'sPuttyUser', sPuttyUser);
+    WriteString('App', 'sPutty_Host', sPutty_Host);
+    WriteString('App', 'sPutty_Password', sPutty_Password);
+    WriteString('App', 'sPutty_User', sPutty_User);
     WriteString('App', 'sRLibPath_Default', sRLibPath_Default);
     WriteString('App', 'sRmirror', sRmirror);
-    WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
+    WriteString('App', 'sShortcuts_InUse', sShortcuts_InUse);
+    WriteString('App', 'sSyntax_InUse', sSyntax_InUse);
 
     // Search settings
     WriteBool('Search', 'bSearch_Backwards', bSearch_Backwards);
@@ -4018,12 +4051,12 @@ begin
     WriteInteger('Search', 'iLastSearch', iLastSearch);
 
     // Print settings
-    WriteBool('Print', 'bPrintColors', bPrintColors);
-    WriteBool('Print', 'bPrintFileName', bPrintFileName);
-    WriteBool('Print', 'bPrintLineNumber', bPrintLineNumber);
-    WriteBool('Print', 'bPrintLineWrap', bPrintLineWrap);
-    WriteBool('Print', 'bPrintPageNumber', bPrintPageNumber);
-    WriteBool('Print', 'bPrintSyntaxColor', bPrintSyntaxColor);
+    WriteBool('Print', 'bPrint_Colors', bPrint_Colors);
+    WriteBool('Print', 'bPrint_FileName', bPrint_FileName);
+    WriteBool('Print', 'bPrint_LineNumber', bPrint_LineNumber);
+    WriteBool('Print', 'bPrint_LineWrap', bPrint_LineWrap);
+    WriteBool('Print', 'bPrint_PageNumber', bPrint_PageNumber);
+    WriteBool('Print', 'bPrint_SyntaxColor', bPrint_SyntaxColor);
     WriteInteger('Print', 'iScaleMode', iScaleMode);
     WriteInteger('Print', 'iZoomPreview', iZoomPreview);
 
@@ -4082,7 +4115,7 @@ begin
 
   // Pandoc history
   slPandocHistory     := TStringList.Create;
-  slPandocHistory.Text:= sPandocHistory;
+  slPandocHistory.Text:= sPandoc_History;
   i:= 0;
   while (slPandocHistory.Count >= 1) and
         (i < 10) do begin
@@ -4099,7 +4132,7 @@ begin
 
   // Pandoc history: From
   slPandocHistoryFrom     := TStringList.Create;
-  slPandocHistoryFrom.Text:= sPandocHistoryFrom;
+  slPandocHistoryFrom.Text:= sPandoc_History_From;
 
   i:= 0;
   while (slPandocHistoryFrom.Count >= 1) and
@@ -4117,7 +4150,7 @@ begin
 
   // Pandoc history: To
   slPandocHistoryTo     := TStringList.Create;
-  slPandocHistoryTo.Text:= sPandocHistoryTo;
+  slPandocHistoryTo.Text:= sPandoc_History_To;
 
   i:= 0;
   while (slPandocHistoryTo.Count >= 1) and
@@ -4325,6 +4358,10 @@ begin
     WriteString('App', 'sVersion_RH_Control'       , sVersion_RH_Control);
     WriteString('App', 'sVersion_RH_Custom'        , sVersion_RH_Custom);
     WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
+    WriteString('App', 'sVersion_Syntax_Default'   , sVersion_Syntax_Default);
+    WriteString('App', 'sVersion_Syntax_Dark'      , sVersion_Syntax_Dark);
+    WriteString('App', 'sVersion_Syntax_Gray'      , sVersion_Syntax_Gray);
+    WriteString('App', 'sVersion_Syntax_LGray'     , sVersion_Syntax_LGray);
 
     // Last path
     WriteString('App', 'sWorkingDir', sWorkingDir);
@@ -4384,11 +4421,11 @@ begin
     WriteInteger('App', 'iWorkExplorer.Height', frmTools.panWorkExplorer.Height);
 
     // Rterm
-    WriteBool('App', 'bRtermCanFloat', bRtermCanFloat);
-    WriteBool('App', 'bRtermSend_Plus', bRtermSend_Plus);
-    WriteBool('App', 'bRtermCloseWithoutAsk', bRtermCloseWithoutAsk);
-    WriteBool('App', 'bRtermHorizontal', bRtermHorizontal);
-    WriteBool('App', 'bRtermSingle', bRtermSingle);
+    WriteBool('App', 'bRterm_CanFloat', bRterm_CanFloat);
+    WriteBool('App', 'bRterm_Send_Plus', bRterm_Send_Plus);
+    WriteBool('App', 'bRterm_CloseWithoutAsk', bRterm_CloseWithoutAsk);
+    WriteBool('App', 'bRterm_Horizontal', bRterm_Horizontal);
+    WriteBool('App', 'bRterm_Single', bRterm_Single);
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
     WriteInteger('App', 'iRterm.Size', frmR_Term.iSize);
@@ -4470,14 +4507,14 @@ begin
     WriteBool('App', 'bRSetWorkDir_Starting', bRSetWorkDir_Starting);
     WriteBool('App', 'bRSimpleDefault', actRSimpleDefault.Checked);
     WriteBool('App', 'bRSmart', bRSmart);
-    WriteBool('App', 'bRsvSocketConnect', bRsvSocket_Connect);
-    WriteBool('App', 'bRTCPIPConsoleEcho', bRTCPIPConsoleEcho);
-    WriteBool('App', 'bRTCPIPConsoleUse', bRTCPIPConsoleUse);
-    WriteBool('App', 'bRtermBeepOnError', bRtermBeepOnError);
-    WriteBool('App', 'bRtermFindError', bRtermFindError);
-    WriteBool('App', 'bRtermWidth', bRtermWidth);
-    WriteBool('App', 'bRTinnRcomInstall', bRTinnRcom_Install);
-    WriteBool('App', 'bRTinnRcomLoad', bRTinnRcom_Load);
+    WriteBool('App', 'bRsvSocket_Connect', bRsvSocket_Connect);
+    WriteBool('App', 'bRTCPIP_ConsoleEcho', bRTCPIP_ConsoleEcho);
+    WriteBool('App', 'bRTCPIP_ConsoleUse', bRTCPIP_ConsoleUse);
+    WriteBool('App', 'bRterm_BeepOnError', bRterm_BeepOnError);
+    WriteBool('App', 'bRterm_FindError', bRterm_FindError);
+    WriteBool('App', 'bRterm_Width', bRterm_Width);
+    WriteBool('App', 'bRTinnRcom_Install', bRTinnRcom_Install);
+    WriteBool('App', 'bRTinnRcom_Load', bRTinnRcom_Load);
     WriteBool('App', 'bRUseLatest', bRUseLatest);
     WriteBool('App', 'bScroll_SendingLines', bScroll_SendingLines);
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
@@ -4486,18 +4523,18 @@ begin
     WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
-    WriteInteger('App', 'clBGApplication', Tcolor(clBGApplication));
-    WriteInteger('App', 'clBGForAllHighlighters', Tcolor(clBGForAllHighlighters));
-    WriteInteger('App', 'clBGPreferred', Tcolor(clBGPreferred));
-    WriteInteger('App', 'clBGTabSelectedNew', Tcolor(clBGTabSelectedNew));
+    WriteInteger('App', 'clBG_Application', Tcolor(clBG_Application));
+    WriteInteger('App', 'clBG_ForAllHighlighters', Tcolor(clBG_ForAllHighlighters));
+    WriteInteger('App', 'clBG_Preferred', Tcolor(clBG_Preferred));
+    WriteInteger('App', 'clBG_TabSelectedNew', Tcolor(clBG_TabSelectedNew));
     WriteInteger('App', 'clBrackets', Tcolor(clBrackets));
-    WriteInteger('App', 'clFGApplication', Tcolor(clFGApplication));
+    WriteInteger('App', 'clFG_Application', Tcolor(clFG_Application));
     WriteInteger('App', 'iDelay', iDelay);
     WriteInteger('App', 'iIPPortLocal', iIPPortLocal);
     WriteInteger('App', 'iIPPortRemote', iIPPortRemote);
     WriteInteger('App', 'iMaxDeparseLength', iMaxDeparseLength);
-    WriteInteger('App', 'iPandocFrom', iPandocFrom);
-    WriteInteger('App', 'iPandocTo', iPandocTo);
+    WriteInteger('App', 'iPandoc_From', iPandoc_From);
+    WriteInteger('App', 'iPandoc_To', iPandoc_To);
     WriteInteger('App', 'iPgFiles.TabsPosition', integer(pgFiles.TabsPosition));
     WriteInteger('App', 'iPgRterm.TabsPosition', integer(frmR_Term.pgRterm.TabsPosition));
     WriteInteger('App', 'iPgTools.TabsPosition', integer(frmTools.pgTools.TabsPosition));
@@ -4516,15 +4553,15 @@ begin
     WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
-    WriteString('App', 'sParDeplate', sParDeplate);
-    WriteString('App', 'sParDviBibtex', sParDviBibtex);
-    WriteString('App', 'sParDviSingle', sParDviSingle);
-    WriteString('App', 'sParPdfBibtex', sParPdfBibtex);
-    WriteString('App', 'sParPdfSingle', sParPdfSingle);
-    WriteString('App', 'sParRgui', sParRgui);
-    WriteString('App', 'sParRPuTTY', sParRPuTTY);
-    WriteString('App', 'sParRterm', sParRterm);
-    WriteString('App', 'sParTxt2tags', sParTxt2tags);
+    WriteString('App', 'sPar_Deplate', sPar_Deplate);
+    WriteString('App', 'sPar_DviBibtex', sPar_DviBibtex);
+    WriteString('App', 'sPar_DviSingle', sPar_DviSingle);
+    WriteString('App', 'sPar_PdfBibtex', sPar_PdfBibtex);
+    WriteString('App', 'sPar_PdfSingle', sPar_PdfSingle);
+    WriteString('App', 'sPar_Rgui', sPar_Rgui);
+    WriteString('App', 'sPar_RPuTTY', sPar_RPuTTY);
+    WriteString('App', 'sPar_Rterm', sPar_Rterm);
+    WriteString('App', 'sPar_Txt2tags', sPar_Txt2tags);
     WriteString('App', 'sPath_Pandoc', sPath_Pandoc);
     WriteString('App', 'sPath_Rgui', sPath_Rgui);
     WriteString('App', 'sPath_Rterm', sPath_Rterm);
@@ -4532,12 +4569,13 @@ begin
     WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
     WriteString('App', 'sPath_Txt2tags_Converter', sPath_Txt2tags_Converter);
     WriteString('App', 'sPath_Txt2tags_Interpreter', sPath_Txt2tags_Interpreter);
-    WriteString('App', 'sPuttyHost', sPuttyHost);
-    WriteString('App', 'sPuttyPassword', sPuttyPassword);
-    WriteString('App', 'sPuttyUser', sPuttyUser);
+    WriteString('App', 'sPutty_Host', sPutty_Host);
+    WriteString('App', 'sPutty_Password', sPutty_Password);
+    WriteString('App', 'sPutty_User', sPutty_User);
     WriteString('App', 'sRLibPath_Default', sRLibPath_Default);
     WriteString('App', 'sRmirror', sRmirror);
-    WriteString('App', 'sShortcutsInUse', sShortcutsInUse);
+    WriteString('App', 'sShortcuts_InUse', sShortcuts_InUse);
+    WriteString('App', 'sSyntax_InUse', sSyntax_InUse);
 
     // Search settings
     WriteBool('Search', 'bSearch_Backwards', bSearch_Backwards);
@@ -4551,12 +4589,12 @@ begin
     WriteInteger('Search', 'iLastSearch', iLastSearch);
 
     // Print settings
-    WriteBool('Print', 'bPrintColors', bPrintColors);
-    WriteBool('Print', 'bPrintFileName', bPrintFileName);
-    WriteBool('Print', 'bPrintLineNumber', bPrintLineNumber);
-    WriteBool('Print', 'bPrintLineWrap', bPrintLineWrap);
-    WriteBool('Print', 'bPrintPageNumber', bPrintPageNumber);
-    WriteBool('Print', 'bPrintSyntaxColor', bPrintSyntaxColor);
+    WriteBool('Print', 'bPrint_Colors', bPrint_Colors);
+    WriteBool('Print', 'bPrint_FileName', bPrint_FileName);
+    WriteBool('Print', 'bPrint_LineNumber', bPrint_LineNumber);
+    WriteBool('Print', 'bPrint_LineWrap', bPrint_LineWrap);
+    WriteBool('Print', 'bPrint_PageNumber', bPrint_PageNumber);
+    WriteBool('Print', 'bPrint_SyntaxColor', bPrint_SyntaxColor);
     WriteInteger('Print', 'iScaleMode', iScaleMode);
     WriteInteger('Print', 'iZoomPreview', iZoomPreview);
 
@@ -4621,7 +4659,7 @@ begin
 
   // Pandoc history
   slPandocHistory     := TStringList.Create;
-  slPandocHistory.Text:= sPandocHistory;
+  slPandocHistory.Text:= sPandoc_History;
   i:= 0;
   while (slPandocHistory.Count >= 1) and
         (i < 10) do begin
@@ -4637,7 +4675,7 @@ begin
 
   // Pandoc history: From
   slPandocHistoryFrom     := TStringList.Create;
-  slPandocHistoryFrom.Text:= sPandocHistoryFrom;
+  slPandocHistoryFrom.Text:= sPandoc_History_From;
 
   i:= 0;
   while (slPandocHistoryFrom.Count >= 1) and
@@ -4654,7 +4692,7 @@ begin
 
   // Pandoc history: To
   slPandocHistoryTo     := TStringList.Create;
-  slPandocHistoryTo.Text:= sPandocHistoryTo;
+  slPandocHistoryTo.Text:= sPandoc_History_To;
 
   i:= 0;
   while (slPandocHistoryTo.Count >= 1) and
@@ -5130,20 +5168,21 @@ begin
   actApplyToANSI.Checked   := ini_Tinn.ReadBool('App', 'bApplyToANSI', False);
   actEditorLineWrap.Checked:= ini_Tinn.ReadBool('App', 'bEditorLineWrap', True);
 
-  bActiveLine           := ini_Tinn.ReadBool('App', 'bActiveLine', True);
-  clActiveLine          := ini_Tinn.ReadInteger('App', 'clActiveLine', Tcolor(clYellow));
-  clBGApplication       := ini_Tinn.ReadInteger('App', 'clBGApplication', Tcolor(clWindow));
-  clBGForAllHighlighters:= ini_Tinn.ReadInteger('App', 'clBGForAllHighlighters', Tcolor(clWindow));
-  clBGPreferred         := ini_Tinn.ReadInteger('App', 'clBGPreferred', Tcolor(clWindow));
-  clBGTabSelectedNew    := ini_Tinn.ReadInteger('App', 'clBGTabSelectedNew', Tcolor(clMedGray));
-  clBrackets            := ini_Tinn.ReadInteger('App', 'clBrackets', Tcolor(clRed));
-  clFGApplication       := ini_Tinn.ReadInteger('App', 'clFGApplication', Tcolor(clBlack));
-  iDelay                := ini_Tinn.ReadInteger('App', 'iDelay', 100);
-  iPandocFrom           := ini_Tinn.ReadInteger('App', 'iPandocFrom', 4);
-  iPandocTo             := ini_Tinn.ReadInteger('App', 'iPandocTo', 7);
-  iTransparency         := ini_Tinn.ReadInteger('App', 'iTransparency', 0);
-  iViewStyleRExplorer   := ini_Tinn.ReadInteger('App', 'iViewStyleRExplorer', 1);
-  sShortcutsInUse       := trim(ini_Tinn.ReadString('App', 'sShortcutsInUse', sPath_Data + '\App_Shortcuts.xml'));
+  bActiveLine            := ini_Tinn.ReadBool('App', 'bActiveLine', True);
+  clActiveLine           := ini_Tinn.ReadInteger('App', 'clActiveLine', Tcolor(clYellow));
+  clBG_Application       := ini_Tinn.ReadInteger('App', 'clBG_Application', Tcolor(clWindow));
+  clBG_ForAllHighlighters:= ini_Tinn.ReadInteger('App', 'clBG_ForAllHighlighters', Tcolor(clWindow));
+  clBG_Preferred         := ini_Tinn.ReadInteger('App', 'clBG_Preferred', Tcolor(clWindow));
+  clBG_TabSelectedNew    := ini_Tinn.ReadInteger('App', 'clBG_TabSelectedNew', Tcolor(clMedGray));
+  clBrackets             := ini_Tinn.ReadInteger('App', 'clBrackets', Tcolor(clRed));
+  clFG_Application       := ini_Tinn.ReadInteger('App', 'clFG_Application', Tcolor(clBlack));
+  iDelay                 := ini_Tinn.ReadInteger('App', 'iDelay', 100);
+  iPandoc_From           := ini_Tinn.ReadInteger('App', 'iPandoc_From', 4);
+  iPandoc_To             := ini_Tinn.ReadInteger('App', 'iPandoc_To', 7);
+  iTransparency          := ini_Tinn.ReadInteger('App', 'iTransparency', 0);
+  iViewStyleRExplorer    := ini_Tinn.ReadInteger('App', 'iViewStyleRExplorer', 1);
+  sShortcuts_InUse       := trim(ini_Tinn.ReadString('App', 'sShortcuts_InUse', sPath_Data + '\App_Shortcuts.xml'));
+  sSyntax_InUse          := trim(ini_Tinn.ReadString('App', 'sSyntax_InUse', 'Default'));
 
   bIPLocal     := ini_Tinn.ReadBool('App', 'bIPLocal', True);
   iIPPortLocal := ini_Tinn.ReadInteger('App', 'iIPPortLocal', 8889);
@@ -5154,23 +5193,23 @@ begin
   sFormatR                  := trim(ini_Tinn.ReadString('App', 'sFormatR', EmptyStr));
   sKnit                     := trim(ini_Tinn.ReadString('App', 'sKnit', EmptyStr));
   sLatexClearWaste          := trim(ini_Tinn.ReadString('App', 'sLatexClearWaste', '.aux, .log, .lof, .lot, .bbl, .blg, .out, .toc'));
-  sParDeplate               := trim(ini_Tinn.ReadString('App', 'sParDeplate', '-f'));
-  sParDviBibtex             := trim(ini_Tinn.ReadString('App', 'sParDviBibtex', 'bibtex --src-specials'));
-  sParDviSingle             := trim(ini_Tinn.ReadString('App', 'sParDviSingle', 'latex -c-style-errors --src-specials'));
-  sParPdfBibtex             := trim(ini_Tinn.ReadString('App', 'sParPdfBibtex', 'bibtex'));
-  sParPdfSingle             := trim(ini_Tinn.ReadString('App', 'sParPdfSingle', 'pdflatex -c-style-errors'));
-  sParRgui                  := trim(ini_Tinn.ReadString('App', 'sParRgui', '--sdi'));
-  sParRPuTTY                := trim(ini_Tinn.ReadString('App', 'sParRPuTTY', '--no-save'));
-  sParRterm                 := trim(ini_Tinn.ReadString('App', 'sParRterm', '--ess'));
-  sParTxt2tags              := trim(ini_Tinn.ReadString('App', 'sParTxt2tags', '-t'));
+  sPar_Deplate              := trim(ini_Tinn.ReadString('App', 'sPar_Deplate', '-f'));
+  sPar_DviBibtex            := trim(ini_Tinn.ReadString('App', 'sPar_DviBibtex', 'bibtex --src-specials'));
+  sPar_DviSingle            := trim(ini_Tinn.ReadString('App', 'sPar_DviSingle', 'latex -c-style-errors --src-specials'));
+  sPar_PdfBibtex            := trim(ini_Tinn.ReadString('App', 'sPar_PdfBibtex', 'bibtex'));
+  sPar_PdfSingle            := trim(ini_Tinn.ReadString('App', 'sPar_PdfSingle', 'pdflatex -c-style-errors'));
+  sPar_Rgui                 := trim(ini_Tinn.ReadString('App', 'sPar_Rgui', '--sdi'));
+  sPar_RPuTTY               := trim(ini_Tinn.ReadString('App', 'sPar_RPuTTY', '--no-save'));
+  sPar_Rterm                := trim(ini_Tinn.ReadString('App', 'sPar_Rterm', '--ess'));
+  sPar_Txt2tags             := trim(ini_Tinn.ReadString('App', 'sPar_Txt2tags', '-t'));
   sPath_Pandoc              := trim(ini_Tinn.ReadString('App', 'sPath_Pandoc', EmptyStr));
   sPath_Deplate_Converter   := trim(ini_Tinn.ReadString('App', 'sPath_Deplate_Converter', EmptyStr));
   sPath_Deplate_Interpreter := trim(ini_Tinn.ReadString('App', 'sPath_Deplate_Interpreter', EmptyStr));
   sPath_Txt2tags_Converter  := trim(ini_Tinn.ReadString('App', 'sPath_Txt2tags_Converter', EmptyStr));
   sPath_Txt2tags_Interpreter:= trim(ini_Tinn.ReadString('App', 'sPath_Txt2tags_Interpreter', EmptyStr));
-  sPuttyHost                := trim(ini_Tinn.ReadString('App', 'sPuttyHost', EmptyStr));
-  sPuttyPassword            := trim(ini_Tinn.ReadString('App', 'sPuttyPassword', EmptyStr));
-  sPuttyUser                := trim(ini_Tinn.ReadString('App', 'sPuttyUser', EmptyStr));
+  sPutty_Host               := trim(ini_Tinn.ReadString('App', 'sPutty_Host', EmptyStr));
+  sPutty_Password           := trim(ini_Tinn.ReadString('App', 'sPutty_Password', EmptyStr));
+  sPutty_User               := trim(ini_Tinn.ReadString('App', 'sPutty_User', EmptyStr));
   sRLibPath_Default         := trim(ini_Tinn.ReadString('App', 'sRLibPath_Default', '.libPaths()[1L]'));
 
   actCloseDVIViewer.Checked    := ini_Tinn.ReadBool('App', 'bCloseDVIViewer', False);
@@ -5202,14 +5241,14 @@ begin
   bRSetget_Info                := ini_Tinn.ReadBool('App', 'bRSetget_Info', True);
   bRSetWorkDir_Starting        := ini_Tinn.ReadBool('App', 'bRSetWorkDir_Starting', True);
   bRSmart                      := ini_Tinn.ReadBool('App', 'bRSmart', True);
-  bRsvSocket_Connect           := ini_Tinn.ReadBool('App', 'bRsvSocketConnect', True);
-  bRTCPIPConsoleEcho           := ini_Tinn.ReadBool('App', 'bRTCPIPConsoleEcho', False);
-  bRTCPIPConsoleUse            := ini_Tinn.ReadBool('App', 'bRTCPIPConsoleUse', False);
-  bRtermBeepOnError            := ini_Tinn.ReadBool('App', 'bRtermBeepOnError', True);
-  bRtermFindError              := ini_Tinn.ReadBool('App', 'bRtermFindError', False);
-  bRtermWidth                  := ini_Tinn.ReadBool('App', 'bRtermWidth', True);
-  bRTinnRcom_Install           := ini_Tinn.ReadBool('App', 'bRTinnRcomInstall', True);
-  bRTinnRcom_Load              := ini_Tinn.ReadBool('App', 'bRTinnRcomLoad', True);
+  bRsvSocket_Connect           := ini_Tinn.ReadBool('App', 'bRsvSocket_Connect', True);
+  bRTCPIP_ConsoleEcho          := ini_Tinn.ReadBool('App', 'bRTCPIP_ConsoleEcho', False);
+  bRTCPIP_ConsoleUse           := ini_Tinn.ReadBool('App', 'bRTCPIP_ConsoleUse', False);
+  bRterm_BeepOnError           := ini_Tinn.ReadBool('App', 'bRterm_BeepOnError', True);
+  bRterm_FindError             := ini_Tinn.ReadBool('App', 'bRterm_FindError', False);
+  bRterm_Width                 := ini_Tinn.ReadBool('App', 'bRterm_Width', True);
+  bRTinnRcom_Install           := ini_Tinn.ReadBool('App', 'bRTinnRcom_Install', True);
+  bRTinnRcom_Load              := ini_Tinn.ReadBool('App', 'bRTinnRcom_Load', True);
   bRUseLatest                  := ini_Tinn.ReadBool('App', 'bRUseLatest', True);
   bScroll_SendingLines         := ini_Tinn.ReadBool('App', 'bScroll_SendingLines', True);
   iRecognition_Caption         := ini_Tinn.ReadInteger('App', 'iRecognition_Caption', 2);
@@ -5285,11 +5324,11 @@ begin
   // Rterm
   bIOLineWrap             := ini_Tinn.ReadBool('App', 'bIOLineWrap', True);
   bLogLineWrap            := ini_Tinn.ReadBool('App', 'bLogLineWrap', True);
-  bRtermCanFloat          := ini_Tinn.ReadBool('App', 'bRtermCanFloat', False);
-  bRtermSend_Plus         := ini_Tinn.ReadBool('App', 'bRtermSend_Plus', True);
-  bRtermCloseWithoutAsk   := ini_Tinn.ReadBool('App', 'bRtermCloseWithoutAsk', False);
-  bRtermHorizontal        := ini_Tinn.ReadBool('App', 'bRtermHorizontal', True);
-  bRtermSingle            := ini_Tinn.ReadBool('App', 'bRtermSingle', True);
+  bRterm_CanFloat         := ini_Tinn.ReadBool('App', 'bRterm_CanFloat', False);
+  bRterm_Send_Plus        := ini_Tinn.ReadBool('App', 'bRterm_Send_Plus', True);
+  bRterm_CloseWithoutAsk  := ini_Tinn.ReadBool('App', 'bRterm_CloseWithoutAsk', False);
+  bRterm_Horizontal       := ini_Tinn.ReadBool('App', 'bRterm_Horizontal', True);
+  bRterm_Single           := ini_Tinn.ReadBool('App', 'bRterm_Single', True);
   frmR_Term.iSize         := ini_Tinn.ReadInteger('App', 'iRterm.Size', 480);
   frmR_Term.iSynLOG2Height:= ini_Tinn.ReadInteger('App', 'iSynLOG2.Height', 90);
   frmR_Term.iSynLOG2Width := ini_Tinn.ReadInteger('App', 'iSynLOG2.Width', 140);
@@ -5338,14 +5377,14 @@ begin
   iLastSearch          := ini_Tinn.ReadInteger('Search', 'iLastSearch', 10);
 
   // Print settings
-  bPrintColors     := ini_Tinn.ReadBool('Print', 'bPrintColors', True);
-  bPrintFileName   := ini_Tinn.ReadBool('Print', 'bPrintFileName', True);
-  bPrintLineNumber := ini_Tinn.ReadBool('Print', 'bPrintLineNumber', False);
-  bPrintLineWrap   := ini_Tinn.ReadBool('Print', 'bPrintLineWrap', True);
-  bPrintPageNumber := ini_Tinn.ReadBool('Print', 'bPrintPageNumber', True);
-  bPrintSyntaxColor:= ini_Tinn.ReadBool('Print', 'bPrintSyntaxColor', True);
-  iScaleMode       := ini_Tinn.ReadInteger('Print', 'iScaleMode', 1);
-  iZoomPreview     := ini_Tinn.ReadInteger('Print', 'iZoomPreview', 90);
+  bPrint_Colors     := ini_Tinn.ReadBool('Print', 'bPrint_Colors', True);
+  bPrint_FileName   := ini_Tinn.ReadBool('Print', 'bPrint_FileName', True);
+  bPrint_LineNumber := ini_Tinn.ReadBool('Print', 'bPrint_LineNumber', False);
+  bPrint_LineWrap   := ini_Tinn.ReadBool('Print', 'bPrint_LineWrap', True);
+  bPrint_PageNumber := ini_Tinn.ReadBool('Print', 'bPrint_PageNumber', True);
+  bPrint_SyntaxColor:= ini_Tinn.ReadBool('Print', 'bPrint_SyntaxColor', True);
+  iScaleMode        := ini_Tinn.ReadInteger('Print', 'iScaleMode', 1);
+  iZoomPreview      := ini_Tinn.ReadInteger('Print', 'iZoomPreview', 90);
 
   // Send to R alphabetically ordered
   pmemRResCurrentLineToTop.Checked         := ini_Tinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
@@ -5450,13 +5489,13 @@ begin
                   iPos + 1,
                   length(sTmp));
 
-      if (i = 0) then sPandocHistory:= sTmp
-                 else sPandocHistory:= sPandocHistory +
-                                       #10 +
-                                       sTmp;
+      if (i = 0) then sPandoc_History:= sTmp
+                 else sPandoc_History:= sPandoc_History +
+                                        #10 +
+                                        sTmp;
     end;
   end
-  else sPandocHistory:= EmptyStr;
+  else sPandoc_History:= EmptyStr;
 
   // Pandoc history: From
   slPandocHistoryFrom:= TStringList.Create;
@@ -5474,13 +5513,13 @@ begin
                   iPos + 1,
                   length(sTmp));
 
-      if (i = 0) then sPandocHistoryFrom:= sTmp
-                 else sPandocHistoryFrom:= sPandocHistoryFrom +
-                                           #10 +
-                                           sTmp;
+      if (i = 0) then sPandoc_History_From:= sTmp
+                 else sPandoc_History_From:= sPandoc_History_From +
+                                             #10 +
+                                             sTmp;
     end;
   end
-  else sPandocHistory:= EmptyStr;
+  else sPandoc_History:= EmptyStr;
 
   // Pandoc history: To
   slPandocHistoryTo:= TStringList.Create;
@@ -5498,13 +5537,13 @@ begin
                   iPos + 1,
                   length(sTmp));
 
-      if (i = 0) then sPandocHistoryTo:= sTmp
-                 else sPandocHistoryTo:= sPandocHistoryTo +
-                                         #10 +
-                                         sTmp;
+      if (i = 0) then sPandoc_History_To:= sTmp
+                 else sPandoc_History_To:= sPandoc_History_To +
+                                           #10 +
+                                           sTmp;
     end;
   end
-  else sPandocHistoryTo:= EmptyStr;
+  else sPandoc_History_To:= EmptyStr;
 
   // Search Text History
   slSearch:= TStringList.Create;
@@ -5690,7 +5729,7 @@ begin
   frmTools.stbRMirrors.Panels[1].Text:= sRmirror;
 
   frmTools.JvDockClientTools.CanFloat:= bToolsCanFloat;
-  frmR_Term.JvDockClientRterm.CanFloat:= bRtermCanFloat;
+  frmR_Term.JvDockClientRterm.CanFloat:= bRterm_CanFloat;
 
   iAlphaBlendValue:= 255 - (255 * iTransparency) Div 100;
 end;
@@ -7681,29 +7720,35 @@ begin
   DragAcceptFiles(Handle,
                   True);
 
-  bStartingUp := True;
+  bStarting_Up:= True;
   slFileMRU   := TStringList.Create;
   slprojectMRU:= TStringList.Create;
-  frmSplash.pb.Position:= 1;
 
   try
     frmTools:= TfrmTools.Create(nil);
-    frmSplash.pb.Position:= 2;
+    frmSplash.pb.Position:= 1;
+
+    // Version and time of start
+    with frmTools.memIniLog.Lines do begin
+      Add('Version - ' +
+          fGetBuild_Info);
+
+      Add('Started - ' +
+          DateTimeToStr(Now));
+
+      Add(EmptyStr);
+    end;
 
     pCheck_Origin;
 
     pSet_IniStructure;
-    frmSplash.pb.Position:= 3;
 
-    pCheck_Version;
+    pCheck_Versions;
 
-    sPreferences_OldVersion:= sPath_Ini +
-                              '_tmp';
-
-    pSave_Preferences_OldVersion;
+//    pSave_Preferences_OldVersion;
 
     frmR_Term:= TfrmR_Term.Create(nil);
-    frmSplash.pb.Position:= 4;
+    frmSplash.pb.Position:= 2;
 
     pSet_Preferences_Application;
     pSet_Preferences_Editor;
@@ -7711,50 +7756,55 @@ begin
     pCheck_Ini;
 
     pCheck_IniDock;
-    frmSplash.pb.Position:= 5;
+    frmSplash.pb.Position:= 3;
 
+    pCheck_Syntax;
     pCheck_Data;
 
     Application.CreateForm(TmodDados,
                            modDados);
-    frmSplash.pb.Position:= 6;
+    frmSplash.pb.Position:= 4;
 
     pSet_SKH;  // Dlg to unified manager of: Shortcuts|Keystrokes|Hotkeys
-    pSet_Rcard;
-    frmSplash.pb.Position:= 7;
+    frmSplash.pb.Position:= 5;
 
+    pSet_Rcard;
     pSet_Completion;
     pSet_Rmirrors;
-    frmSplash.pb.Position:= 8;
+    frmSplash.pb.Position:= 6;
 
-    pSet_Shortcuts;
-    pCheck_Recho;  // Must be after pSet_Shortcuts!
+    pSet_App_Shortcuts;
+    pCheck_Recho;  // Must be after pSet_App_Shortcuts!
 
     frmTools.tbsLatex.TabVisible:= actLatexVisible.Checked;
     pCheck_Latex(False);
 
     pCheck_Project;
 
+    frmSplash.pb.Position:= 7;
+
     pCheck_EditorOptions;
 
     pCheck_Temporary;
 
-    frmSplash.pb.Position:= 9;
+//    pDelete_Dir(sPreferences_OldVersion);
+//    if bColors_OldVersion or
+//       bCustom_OldVersion or
+//       bSyntax_OldVersion then begin
+//      bColors_OldVersion:= False;
+//      bCustom_OldVersion:= False;
+//      bSyntax_OldVersion:= False;
+//    end;
 
-    pDelete_Dir(sPreferences_OldVersion);
-    if bColors_OldVersion or
-       bCustom_OldVersion or
-       bSyntax_OldVersion then begin
-      bColors_OldVersion:= False;
-      bCustom_OldVersion:= False;
-      bSyntax_OldVersion:= False;
-    end;
+    sPath_Syntax_InUse:= sPath_Syntax +
+                         '\' +
+                         sSyntax_InUse;
 
     Application.CreateForm(TdmSyn,
                            dmSyn);
 
     synURIOpener.URIHighlighter:= dmSyn.synURI;
-    frmSplash.pb.Position:= 10;
+    frmSplash.pb.Position:= 8;
 
     // Application
     pSave_NewIni_Application;                                                   // Will create a new (and clean) Tinn.tmp
@@ -7770,7 +7820,7 @@ begin
     RenameFile(sPath_IniEditor_Tmp,
                sPath_IniEditor_File);                                           // Set the new Editor.ini
 
-    frmSplash.pb.Position:= 11;
+    frmSplash.pb.Position:= 9;
 
   except
     fMessageDlg(sPath_Ini + #13 + #13 +
@@ -7793,7 +7843,7 @@ begin
   end;
 
   // Load the highlighters names into the listbox
-  for j:= 0 to (dmSyn.iHigCount - 1) do begin
+  for j:= 0 to (dmSyn.iComponent_Count - 1) do begin
     sName:= (dmSyn.Components[j] as TSynCustomHighlighter).GetFriendlyLanguageName;
     if (sName = 'General_Multi-Highlighter') then
       sName:= (dmSyn.Components[j] as TSynMultiSyn).DefaultLanguageName;
@@ -7806,7 +7856,7 @@ begin
     end;
   end;
 
-  frmSplash.pb.Position:= 12;
+  frmSplash.pb.Position:= 10;
 
   //cbSyntax.Sorted:= True; // It is important!!!
   i:= 0;
@@ -7826,6 +7876,7 @@ begin
     inc(i);
   end;
 
+  frmSplash.pb.Position:= 11;
   sdMain.Filter:= slFilters.Text;
 
   with frmTools do begin
@@ -7879,6 +7930,8 @@ begin
     Sorted:= True;
     Duplicates:= dupIgnore;
   end;
+
+  frmSplash.pb.Position:= 12;
 
   pSet_DataCompletion(synIO_Tip,
                       frmR_Term.synIO,
@@ -7990,14 +8043,6 @@ end;
 procedure TfrmMain.pCheck_Origin;
 begin
   with frmTools.memIniLog.Lines do begin
-    Add('Version - ' +
-        fGetBuild_Info);
-
-    Add('Started - ' +
-        DateTimeToStr(Now));
-
-    Add(EmptyStr);
-
     Add('1. Path of executable and sources (origin)');
 
     Add('  Tinn-R - ' +
@@ -8016,106 +8061,115 @@ begin
   sPath_TinnRcom:= sPath_TinnR +
                    '\packages';
 
-  sFileDataOrigin:= sPath_TinnR +
-                    '\data\data.zip';
+  sFile_Data_Origin:= sPath_TinnR +
+                      '\data\data.zip';
 
-  sUtilsOrigin:= sPath_TinnR +
-                 '\utils';
+  sFile_Syntax_Origin:= sPath_TinnR +
+                        '\syntax\syntax.zip';
 
-  sFile_LatexOrigin:= sPath_TinnR +
-                      '\latex\latex.zip';
+  sUtils_Origin:= sPath_TinnR +
+                  '\utils';
 
-  sFile_ProjectOrigin:= sPath_TinnR +
-                        '\project\project.zip';
+  sFile_Latex_Origin:= sPath_TinnR +
+                       '\latex\latex.zip';
+
+  sFile_Project_Origin:= sPath_TinnR +
+                         '\project\project.zip';
 
   //sPath_Pandoc:= sPath_TinnR +
   //               '\pandoc\pandoc.exe';
 
   with frmTools.memIniLog.Lines do begin
     Add('  data   - ' +
-        sFileDataOrigin);
+        sFile_Data_Origin);
 
     Add('  latex  - ' +
-        sFile_LatexOrigin);
+        sFile_Latex_Origin);
 
     //Add('  pandoc - ' +
     //    sPath_Pandoc);
 
+    Add('  syntax - ' +
+        sFile_Syntax_Origin);
+
     Add('  utils  - ' +
-        sUtilsOrigin);
+        sUtils_Origin);
 
     Add('   \example - ' +
-        sUtilsOrigin +
+        sUtils_Origin +
         '\example.R');
 
     Add('   \info    - ' +
-        sUtilsOrigin +
+        sUtils_Origin +
         '\info.R');
 
     Add('   \install - ' +
-        sUtilsOrigin +
+        sUtils_Origin +
         '\install.R');
 
     Add('   \mirrors - ' +
-        sUtilsOrigin +
+        sUtils_Origin +
         '\mirrors.R');
   end;
 end;
 
-procedure TfrmMain.pSave_Preferences_OldVersion;
-
-  function fMakeBackup(sPathSource,
-                       sPathDest,
-                       sFiles: string): boolean;
-  begin
-    try
-      if FileExists(sPathDest) then DeleteFile(sPathDest);
-    except
-      //TODO
-    end;
-    zipKit.StoreOptions:= [soStripPath];
-
-    with zipKit do begin
-      FileName:= sPathDest;
-      AddFiles(sPathSource + sFiles,
-               0 );
-      CloseArchive;
-      Result:= True;
-    end;
-  end;
-
-var
-  sPathColors_OldVersion,
-   sPathSyntax_OldVersion: string;
-
-begin
-  if not DirectoryExists(sPreferences_OldVersion) then CreateDir(sPreferences_OldVersion);
-
-  // Colors of old version
-  if not FileExists(sPath_Ini +
-                    '\colors\Custom_colors.ini') then Exit;
-
-  sPathColors_OldVersion:= sPath_Ini +
-                           '\colors';
-
-  if DirectoryExists(sPathColors_OldVersion) then begin
-    if fMakeBackup(sPathColors_OldVersion,
-                   sPreferences_OldVersion +
-                   '\colors_bkp.zip',
-                   '\*.ini') then bColors_OldVersion:= True;
-  end;
-
-  // Syntax of old version
-  sPathSyntax_OldVersion:= sPath_Ini +
-                           '\syntax';
-
-  if DirectoryExists(sPathSyntax_OldVersion) then begin
-    if fMakeBackup(sPathSyntax_OldVersion,
-                   sPreferences_OldVersion +
-                   '\syntax_bkp.zip',
-                   '\*.ini') then bSyntax_OldVersion:= True;
-  end;
-end;
+//procedure TfrmMain.pSave_Preferences_OldVersion;
+//
+//  function fMakeBackup(sPathSource,
+//                       sPathDest,
+//                       sFiles: string): boolean;
+//  begin
+//    try
+//      if FileExists(sPathDest) then DeleteFile(sPathDest);
+//    except
+//      //TODO
+//    end;
+//    zipKit.StoreOptions:= [soStripPath];
+//
+//    with zipKit do begin
+//      FileName:= sPathDest;
+//      AddFiles(sPathSource + sFiles,
+//               0 );
+//      CloseArchive;
+//      Result:= True;
+//    end;
+//  end;
+//
+//var
+//  sPathColors_OldVersion,
+//   sPathSyntax_OldVersion: string;
+//
+//begin
+//  sPreferences_OldVersion:= sPath_Ini +
+//                            '_tmp';
+//
+//  if not DirectoryExists(sPreferences_OldVersion) then CreateDir(sPreferences_OldVersion);
+//
+//  // Colors of old version
+//  if not FileExists(sPath_Ini +
+//                    '\colors\Custom_colors.ini') then Exit;
+//
+//  sPathColors_OldVersion:= sPath_Ini +
+//                           '\colors';
+//
+//  if DirectoryExists(sPathColors_OldVersion) then begin
+//    if fMakeBackup(sPathColors_OldVersion,
+//                   sPreferences_OldVersion +
+//                   '\colors_bkp.zip',
+//                   '\*.ini') then bColors_OldVersion:= True;
+//  end;
+//
+//  // Syntax of old version
+//  sPathSyntax_OldVersion:= sPath_Ini +
+//                           '\syntax';
+//
+//  if DirectoryExists(sPathSyntax_OldVersion) then begin
+//    if fMakeBackup(sPathSyntax_OldVersion,
+//                   sPreferences_OldVersion +
+//                   '\syntax_bkp.zip',
+//                   '\*.ini') then bSyntax_OldVersion:= True;
+//  end;
+//end;
 
 procedure TfrmMain.pSet_IniStructure;
 
@@ -8139,16 +8193,16 @@ begin
   end;
 
   // ShowMessage('sPath_Ini: ' + sPath_Ini);
-  sPath_App      := sPath_Ini + '\app';
-  sPath_Bkp      := sPath_Ini + '\bkp';
-  sPath_Color    := sPath_Ini + '\colors';
-  sPath_Data     := sPath_Ini + '\data';
-  sPath_Editor   := sPath_Ini + '\editor';
-  sPath_Latex    := sPath_Ini + '\latex';
-  sPath_Project  := sPath_Ini + '\project';
-  sPath_Syntax   := sPath_Ini + '\syntax';
-  sPath_SyntaxBKP:= sPath_Ini + '\syntax bkp';
-  sPath_Tmp      := fGet_LocalTmp;
+  sPath_App       := sPath_Ini + '\app';
+  sPath_Bkp       := sPath_Ini + '\bkp';
+  sPath_Color     := sPath_Ini + '\colors';
+  sPath_Data      := sPath_Ini + '\data';
+  sPath_Editor    := sPath_Ini + '\editor';
+  sPath_Latex     := sPath_Ini + '\latex';
+  sPath_Project   := sPath_Ini + '\project';
+  sPath_Syntax    := sPath_Ini + '\syntax';
+  sPath_Syntax_BKP:= sPath_Ini + '\syntax_bkp';
+  sPath_Tmp       := fGet_LocalTmp;
 
   sPath_Color_Custom:= sPath_Color +
                        '\Custom.txt';  // It will stores cdMain custom colors
@@ -8172,20 +8226,19 @@ begin
     Add('   \' + ExtractFileName(sPath_Project));
     Add('   \' + ExtractFileName(sPath_Latex));
     Add('   \' + ExtractFileName(sPath_Syntax));
-    Add('   \' + ExtractFileName(sPath_SyntaxBKP));
+    Add('   \' + ExtractFileName(sPath_Syntax_BKP));
   end;
 end;
 
 procedure TfrmMain.pCheck_Ini;
 
-  procedure pCheckPriorTo_2(sPathUser,
-                            sPath_Ini: string);
+  procedure pCheck_Version_PriorTo_2;
   begin
     try
-      if DirectoryExists(sPathUser) and
-        (StrToInt(sVersion_Ini[1]) < 2) then begin
+      if (StrToInt(sVersion_Ini[1]) < 2) and
+         DirectoryExists(sPath_Ini) then begin
         pBackup_SystemConfiguration(True);
-        pDelete_Dir(sPathUser);
+        pDelete_Dir(sPath_Ini);
       end;
     except
       //TODO;
@@ -8196,9 +8249,7 @@ var
   sPathReadme_User,
    sPathReadme_Bkp,
    sPathReadme_App,
-   sPathReadme_Color,
-   sPathReadme_Syntax,
-   sPathReadme_SyntaxBKP: string;
+   sPathReadme_Color: string;
 
   tfTmp: TextFile;
 
@@ -8206,12 +8257,18 @@ begin
   with frmTools.memIniLog.Lines do begin
     Add(EmptyStr);
     Add('3. Verification of necessary folder and files');
-    Add('3.1. Tinn-R, app, bkp, colors, syntax and syntax bkp');
+//    Add('3.1. Tinn-R, app, bkp, colors, syntax and syntax_bkp');
+    Add('3.1. Tinn-R, app, bkp, colors and editor');
   end;
 
   try
-    pCheckPriorTo_2(sPath_Ini,
-                    sPath_App);
+//  // Notice: \syntax bkp was renamed to \syntax_bkp in version 6.01.01.01/2019
+//    if DirectoryExists(sPath_Ini +
+//                       '\syntax bkp') then
+//      pDelete_Dir(sPath_Ini +
+//                  '\syntax bkp');
+
+    pCheck_Version_PriorTo_2;
 
     // Tinn-R
     // ShowMessage('sPath_Ini: ' + sPath_Ini);
@@ -8253,11 +8310,11 @@ begin
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sPath_Color) +
                                    '     : CREATED');
-      // Recover colors from old version
-      if bColors_OldVersion then pUnpack_File(sPreferences_OldVersion +
-                                              '\colors_bkp.zip',
-                                              sPath_Color,
-                                              '*.*');
+//      // Recover colors from old version
+//      if bColors_OldVersion then pUnpack_File(sPreferences_OldVersion +
+//                                              '\colors_bkp.zip',
+//                                              sPath_Color,
+//                                              '*.*');
     end
     else frmTools.memIniLog.Lines.Add('   \' +
                                       ExtractFileName(sPath_Color) +
@@ -8278,33 +8335,6 @@ begin
     else frmTools.memIniLog.Lines.Add('   \' +
                                       ExtractFileName(sPath_Editor) +
                                       '     : OK');
-
-    // Tinn-R\syntax
-    if (not DirectoryExists(sPath_Syntax)) then begin
-      CreateDir(sPath_Syntax);
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sPath_Syntax) +
-                                   '     : CREATED');
-      // Recover syntax from old version
-      if bSyntax_OldVersion then pUnpack_File(sPreferences_OldVersion +
-                                              '\syntax_bkp.zip',
-                                              sPath_Syntax,
-                                              '*.*');
-    end
-    else frmTools.memIniLog.Lines.Add('   \' +
-                                      ExtractFileName(sPath_Syntax) +
-                                      '     : OK');
-
-    // Tinn-R\syntax bkp
-    if (not DirectoryExists(sPath_SyntaxBKP)) then begin
-      CreateDir(sPath_SyntaxBKP);
-      frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sPath_SyntaxBKP) +
-                                   ' : CREATED');
-    end
-    else frmTools.memIniLog.Lines.Add('   \' +
-                                      ExtractFileName(sPath_SyntaxBKP) +
-                                      ' : OK');
   except
     raise;
     Exit;
@@ -8322,7 +8352,7 @@ begin
              sPathReadme_User);
   Rewrite(tfTmp);
     WriteLn(tfTmp, 'This main folder stores the folders:' + #13 +
-                   'app, bkp, colors, data, editor, latex, project, syntax and syntax bkp.');
+                   'app, bkp, colors, data, editor, latex, project, syntax and syntax_bkp.');
   CloseFile(tfTmp);
 
 
@@ -8360,30 +8390,6 @@ begin
             'This folder stores the file:' + #13 +
             'Custom.txt.');
   CloseFile(tfTmp);
-
-
-  // syntax
-  sPathReadme_Syntax:= sPath_Syntax +
-                       '\Readme.txt';
-  AssignFile(tfTmp,
-             sPathReadme_Syntax);
-  Rewrite(tfTmp);
-    WriteLn(tfTmp,
-            'This folder stores:' + #13 +
-            'All syntax user preferences.');
-  CloseFile(tfTmp);
-
-
-  // syntax bkp
-  sPathReadme_SyntaxBKP:= sPath_SyntaxBKP +
-                          '\Readme.txt';
-  AssignFile(tfTmp,
-             sPathReadme_SyntaxBKP);
-  Rewrite(tfTmp);
-    WriteLn(tfTmp,
-            'This folder stores:' + #13 +
-            'Temporary backups of syntax preferences.');
-  CloseFile(tfTmp);
 end;
 
 procedure TfrmMain.pCheck_Temporary;
@@ -8391,7 +8397,7 @@ begin
   // Tinn-R: temporary folder
   with frmTools.memIniLog.Lines do begin
     Add(EmptyStr);
-    Add('3.6. Temporary folder');
+    Add('3.7. Temporary folder');
   end;
 
   if (DirectoryExists(sPath_Tmp)) then pDelete_Dir(sPath_Tmp);  // Tinn-R was terminated abnormally
@@ -8413,10 +8419,10 @@ end;
 
 procedure TfrmMain.pCheck_Data;
 
-  procedure pCreateDataDir;
+  procedure pCreate_DataDir;
   begin
     CreateDir(sPath_Data);
-    zipKit.FileName:= sFileDataOrigin;
+    zipKit.FileName:= sFile_Data_Origin;
     zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
 
     with zipKit do begin
@@ -8430,18 +8436,18 @@ procedure TfrmMain.pCheck_Data;
                                  ': CREATED');
   end;
 
-  procedure pMakeDataBackup(sFile: string);
+  procedure pMake_DataBackup(sFile: string);
   begin
     zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
     with zipKit do begin
       FileName:= sPath_Bkp +
                  fRemove_FileExtension(sFile) +
                  '_bkp_' +
+                 IntToStr(Integer(YearOf(Date))) +
+                 '.' +
                  IntToStr(Integer(MonthOf(Date))) +
                  '.' +
                  IntToStr(Integer(DayOf(Date))) +
-                 '.' +
-                 IntToStr(Integer(YearOf(Date))) +
                  '.zip';
       AddFiles(sPath_Data + sFile,
                0);
@@ -8453,7 +8459,7 @@ procedure TfrmMain.pCheck_Data;
   end;
 
 var
-  sPathReadmeDB,
+  sPath_Readme,
    sFile_Rcard,
    sFile_Rmirrors,
    sFile_Comments,
@@ -8488,32 +8494,32 @@ begin
 
     with frmTools.memIniLog.Lines do begin
       Add(EmptyStr);
-      Add('3.2. Data');
+      Add('3.3. Data');
     end;
 
-    if not DirectoryExists(sPath_Data) then pCreateDataDir
+    if not DirectoryExists(sPath_Data) then pCreate_DataDir
     else begin
       frmTools.memIniLog.Lines.Add('  Main folder - ' +
                                    sPath_Data +
                                    ': OK');
 
-      if (bUpdate_Cache)      then pMakeDataBackup('\Cache.xml');
-      if (bUpdate_Rcard)      then pMakeDataBackup('\Rcard.xml');
-      if (bUpdate_Rmirrors)   then pMakeDataBackup('\Rmirrors.xml');
-      if (bUpdate_Comments)   then pMakeDataBackup('\Comments.xml');
-      if (bUpdate_Completion) then pMakeDataBackup('\Completion.xml');
+      if (bUpdate_Cache)      then pMake_DataBackup('\Cache.xml');
+      if (bUpdate_Rcard)      then pMake_DataBackup('\Rcard.xml');
+      if (bUpdate_Rmirrors)   then pMake_DataBackup('\Rmirrors.xml');
+      if (bUpdate_Comments)   then pMake_DataBackup('\Comments.xml');
+      if (bUpdate_Completion) then pMake_DataBackup('\Completion.xml');
 
       if (bUpdate_Shortcuts)  then begin
-        pMakeDataBackup('\App_Shortcuts.xml');
+        pMake_DataBackup('\App_Shortcuts.xml');
         // Shortcuts in use: = App_Shortcuts.xml
-        if (sShortcutsInUse = sPath_Data +
+        if (sShortcuts_InUse = sPath_Data +
             '\App_Shortcuts.xml') then begin
           RenameFile(sPath_Data +
                      '\App_Shortcuts.xml',
                      sPath_Data +
                      '\OldApp_Shortcuts.xml');
 
-          pUnpack_File(sFileDataOrigin,
+          pUnpack_File(sFile_Data_Origin,
                        sPath_Data,
                        'App_Shortcuts.xml');  // It is necessary to make a new copy from origin
 
@@ -8527,25 +8533,25 @@ begin
         end
         // Shortcuts in use: <> App_Shortcuts.xml
         else begin
-          pUnpack_File(sFileDataOrigin,
+          pUnpack_File(sFile_Data_Origin,
                        sPath_Data,
                        'App_Shortcuts.xml');  // It is necessary to make a new copy from origin
 
           with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new App_Shortcuts.xml
-            pShortcuts_Validation(sShortcutsInUse,
+            pShortcuts_Validation(sShortcuts_InUse,
                                   sPath_Data +
                                   '\App_Shortcuts.xml');
-          DeleteFile(sShortcutsInUse);
+          DeleteFile(sShortcuts_InUse);
         end;
 
-        sShortcutsInUse:= sPath_Data +
-                          '\App_Shortcuts.xml';
+        sShortcuts_InUse:= sPath_Data +
+                           '\App_Shortcuts.xml';
       end;
     end;
 
     // Cache
     if not FileExists(sFile_Cache)  then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'Cache.xml');
 
@@ -8557,10 +8563,18 @@ begin
                                    ': CREATED');
     end
     else begin
-    if bUpdate_Cache then
-      pUnpack_File(sFileDataOrigin,
-                   sPath_Data,
-                   'Cache.xml');
+      if bUpdate_Cache then begin
+        pUnpack_File(sFile_Data_Origin,
+                     sPath_Data,
+                     'Cache.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_Cache) +
+                                     '(version = ' +
+                                     sCurr_Version_Cache +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_Cache) +
@@ -8572,7 +8586,7 @@ begin
 
     // Comments
     if not FileExists(sFile_Comments)  then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'Comments.xml');
 
@@ -8584,10 +8598,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_Comments then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_Comments then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'Comments.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_Comments) +
+                                     '(version = ' +
+                                     sCurr_Version_Comments +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_Comments) +
@@ -8599,7 +8621,7 @@ begin
 
     // Completion
     if not FileExists(sFile_Completion)  then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'Completion.xml');
 
@@ -8611,10 +8633,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_Completion then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_Completion then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'Completion.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_Completion) +
+                                     '(version = ' +
+                                     sCurr_Version_Completion +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_Completion) +
@@ -8626,7 +8656,7 @@ begin
 
     // Editor
     if not FileExists(sFile_Editor_Keystrokes) then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'Editor_Keystrokes.xml');
 
@@ -8638,10 +8668,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_Editor then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_Editor then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'Editor_Keystrokes.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_Editor_Keystrokes) +
+                                     '(version = ' +
+                                     sCurr_Version_Editor_Keystrokes +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_Editor_Keystrokes) +
@@ -8653,7 +8691,7 @@ begin
 
     // Rcard
     if not FileExists(sFile_Rcard) then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'Rcard.xml');
 
@@ -8665,10 +8703,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_Rcard then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_Rcard then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'Rcard.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_Rcard) +
+                                     '(version = ' +
+                                     sCurr_Version_Rcard +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_Rcard) +
@@ -8680,7 +8726,7 @@ begin
 
     // RH_Control
     if not FileExists(sFile_RH_Control) then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'RH_Control.xml');
 
@@ -8692,10 +8738,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_RH_Control then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_RH_Control then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'RH_Control.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_RH_Control) +
+                                     '(version = ' +
+                                     sCurr_Version_RH_Control +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_RH_Control) +
@@ -8707,7 +8761,7 @@ begin
 
     // RH_Custom
     if not FileExists(sFile_RH_Custom) then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'RH_Custom.xml');
 
@@ -8719,10 +8773,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_RH_Custom then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_RH_Custom then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'RH_Custom.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_RH_Custom) +
+                                     '(version = ' +
+                                     sCurr_Version_RH_Custom +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_RH_Custom) +
@@ -8734,7 +8796,7 @@ begin
 
     // RH_Send
     if not FileExists(sFile_RH_Send) then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'RH_Send.xml');
 
@@ -8746,10 +8808,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_RH_Send then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_RH_Send then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'RH_Send.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_RH_Send) +
+                                     '(version = ' +
+                                     sCurr_Version_RH_Send +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_RH_Send) +
@@ -8761,7 +8831,7 @@ begin
 
     // Rmirrors
     if not FileExists(sFile_Rmirrors) then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'Rmirrors.xml');
 
@@ -8773,10 +8843,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_Rmirrors then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_Rmirrors then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'Rmirrors.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_Rmirrors) +
+                                     '(version = ' +
+                                     sCurr_Version_Rmirrors +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_Rmirrors) +
@@ -8787,10 +8865,10 @@ begin
     end;
 
     // Shortcuts
-    if not FileExists(sShortcutsInUse) then sShortcutsInUse:= sPath_Data +
-                                                              '\App_Shortcuts.xml';
+    if not FileExists(sShortcuts_InUse) then sShortcuts_InUse:= sPath_Data +
+                                                                '\App_Shortcuts.xml';
     if not FileExists(sFile_App_Shortcuts)  then begin
-      pUnpack_File(sFileDataOrigin,
+      pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
                    'App_Shortcuts.xml');
 
@@ -8802,10 +8880,18 @@ begin
                                    ': CREATED');
     end
     else begin
-      if bUpdate_Shortcuts then
-        pUnpack_File(sFileDataOrigin,
+      if bUpdate_Shortcuts then begin
+        pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
                      'App_Shortcuts.xml');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sFile_App_Shortcuts) +
+                                     '(version = ' +
+                                     sCurr_Version_App_Shortcuts +
+                                     ')' +
+                                     ': UPDATED');
+      end;
 
       frmTools.memIniLog.Lines.Add('   \' +
                                    ExtractFileName(sFile_App_Shortcuts) +
@@ -8818,7 +8904,255 @@ begin
     raise;
     Exit;
   end;
-  sPathReadmeDB:= sPath_Data +
+  sPath_Readme:= sPath_Data +
+                 '\Readme.txt';
+
+  AssignFile(tfTmp,
+             sPath_Readme);
+
+  Rewrite(tfTmp);
+    WriteLn(tfTmp,
+            'This folder stores (by default):' + #13 +
+            'The XML files: Cache.xml, Comments.xml, Completion.xml, Editor_Keystrokes.xml, Rcard.xlm, Rmirrors.xml, App_Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
+  CloseFile(tfTmp);
+end;
+
+procedure TfrmMain.pCheck_Syntax;
+
+  procedure pCreate_SyntaxDir;
+  begin
+    CreateDir(sPath_Syntax);
+    zipKit.FileName:= sFile_Syntax_Origin;
+    zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
+
+    with zipKit do begin
+      BaseDirectory:= sPath_Syntax;
+      ExtractFiles('*.ini');
+    end;
+
+    zipKit.CloseArchive;
+    frmTools.memIniLog.Lines.Add('  Folder - ' +
+                                 sPath_Syntax +
+                                 ': CREATED');
+  end;
+
+  procedure pMake_Syntax_BKP(sDir: string);
+  begin
+    if (not DirectoryExists(sPath_Syntax_BKP)) then CreateDir(sPath_Syntax_BKP);
+
+    zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
+    with zipKit do begin
+      FileName:= sPath_Syntax_BKP +
+                 '\' +  // It is important to file put the backup in corretc folder: ...Tinn-R/syntax_backup
+                 sDir +
+                 '_' +
+                 IntToStr(Integer(YearOf(Date))) +
+                 '.' +
+                 IntToStr(Integer(MonthOf(Date))) +
+                 '.' +
+                 IntToStr(Integer(DayOf(Date))) +
+                 '.zip';
+      AddFiles(sPath_Syntax + '\*.*', 0);
+      frmTools.memIniLog.Lines.Add('  Backup - ' +
+                                   zipKit.FileName +
+                                   ': DONE');
+      CloseArchive;
+    end;
+  end;
+
+var
+  sPathReadmeDB,
+   sDir_Syntax_Default,
+   sDir_Syntax_Dark,
+   sDir_Syntax_Gray,
+   sDir_Syntax_LGray: string;
+
+  tfTmp: TextFile;
+
+begin
+  // Notice: '\syntax bkp' was renamed to '\syntax_bkp' in version 6.01.01.02/2019
+  if (AnsiCompareStr(sVersion_ini,
+                     '6.01.01.02') < 0) then begin
+
+    pDelete_Dir(sPath_Ini +
+                '\syntax');  // Beter to remove the entire foder to make a new structure!
+
+    pDelete_Dir(sPath_Ini +
+                '\syntax bkp');
+  end;
+
+  sDir_Syntax_Default:= sPath_Syntax + '\Default';
+  sDir_Syntax_Dark   := sPath_Syntax + '\Dark';
+  sDir_Syntax_Gray   := sPath_Syntax + '\Gray';
+  sDir_Syntax_LGray  := sPath_Syntax + '\LGray';
+
+  try
+    with frmTools.memIniLog.Lines do begin
+      Add(EmptyStr);
+      Add('3.2. Syntax');
+    end;
+
+    if not DirectoryExists(sPath_Syntax) then pCreate_SyntaxDir
+    else begin
+      frmTools.memIniLog.Lines.Add('  Main folder - ' +
+                                   sPath_Syntax +
+                                   ': OK');
+
+      if (bUpdate_Syntax_Default) then pMake_Syntax_BKP('Default');
+      if (bUpdate_Syntax_Dark)    then pMake_Syntax_BKP('Dark');
+      if (bUpdate_Syntax_Gray)    then pMake_Syntax_BKP('Gray');
+      if (bUpdate_Syntax_LGray)   then pMake_Syntax_BKP('LGray');
+    end;
+
+    // Default
+    if not DirectoryExists(sDir_Syntax_Default)  then begin
+      CreateDir(sDir_Syntax_Default);
+      pUnpack_File(sFile_Syntax_Origin,
+                   sDir_Syntax_Default,
+                   'Default\*.ini');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_Default) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_Default +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_Syntax_Default then begin
+        pUnpack_File(sFile_Syntax_Origin,
+                     sDir_Syntax_Default,
+                     'Default\*.ini');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sDir_Syntax_Default) +
+                                     '(version = ' +
+                                     sCurr_Version_Syntax_Default +
+                                     ')' +
+                                     ': UPDATED');
+      end;
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_Default) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_Default +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // Dark
+    if not DirectoryExists(sDir_Syntax_Dark)  then begin
+      CreateDir(sDir_Syntax_Dark);
+      pUnpack_File(sFile_Syntax_Origin,
+                   sDir_Syntax_Dark,
+                   'Dark\*.ini');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_Dark) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_Dark +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_Syntax_Dark then begin
+        pUnpack_File(sFile_Syntax_Origin,
+                     sDir_Syntax_Dark,
+                     'Dark\*.ini');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sDir_Syntax_Dark) +
+                                     '(version = ' +
+                                     sCurr_Version_Syntax_Dark +
+                                     ')' +
+                                     ': UPDATED');
+      end;
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_Dark) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_Dark +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // Gray
+    if not DirectoryExists(sDir_Syntax_Gray)  then begin
+      CreateDir(sDir_Syntax_Gray);
+      pUnpack_File(sFile_Syntax_Origin,
+                   sDir_Syntax_Gray,
+                   'Gray\*.ini');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_Gray) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_Gray +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_Syntax_Gray then begin
+        pUnpack_File(sFile_Syntax_Origin,
+                     sDir_Syntax_Gray,
+                     'Gray\*.ini');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sDir_Syntax_Gray) +
+                                     '(version = ' +
+                                     sCurr_Version_Syntax_Gray +
+                                     ')' +
+                                     ': UPDATED');
+      end;
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_Gray) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_Gray +
+                                   ')' +
+                                   ': OK');
+    end;
+
+    // LGray
+    if not DirectoryExists(sDir_Syntax_LGray)  then begin
+      CreateDir(sDir_Syntax_LGray);
+      pUnpack_File(sFile_Syntax_Origin,
+                   sDir_Syntax_LGray,
+                   'LGray\*.ini');
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_LGray) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_LGray +
+                                   ')' +
+                                   ': CREATED');
+    end
+    else begin
+      if bUpdate_Syntax_LGray then begin
+        pUnpack_File(sFile_Syntax_Origin,
+                     sDir_Syntax_LGray,
+                     'LGray\*.ini');
+
+        frmTools.memIniLog.Lines.Add('   \' +
+                                     ExtractFileName(sDir_Syntax_LGray) +
+                                     '(version = ' +
+                                     sCurr_Version_Syntax_LGray +
+                                     ')' +
+                                     ': UPDATED');
+      end;
+
+      frmTools.memIniLog.Lines.Add('   \' +
+                                   ExtractFileName(sDir_Syntax_LGray) +
+                                   '(version = ' +
+                                   sCurr_Version_Syntax_LGray +
+                                   ')' +
+                                   ': OK');
+    end;
+
+  except
+    raise;
+    Exit;
+  end;
+  sPathReadmeDB:= sPath_Syntax +
                   '\Readme.txt';
 
   AssignFile(tfTmp,
@@ -8826,8 +9160,8 @@ begin
 
   Rewrite(tfTmp);
     WriteLn(tfTmp,
-            'This folder stores (by default):' + #13 +
-            'The XML files: Cache.xml, Comments.xml, Completion.xml, Editor_Keystrokes.xml, Rcard.xlm, Rmirrors.xml, App_Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
+            'This folder stores:' + #13 +
+            'Dark, Default, Gray and LGray folders, each contain the ini files (All.ini, Assembly x86.ini, ..., XML.ini).');
   CloseFile(tfTmp);
 end;
 
@@ -8859,7 +9193,7 @@ procedure TfrmMain.pCheck_Latex(bReload: boolean);
   procedure pCreateLatexDir;
   begin
     CreateDir(sPath_Latex);
-    zipKit.FileName:= sFile_LatexOrigin;
+    zipKit.FileName:= sFile_Latex_Origin;
     zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
 
     with zipKit do begin
@@ -8893,11 +9227,11 @@ begin
   try
     with frmTools.memIniLog.Lines do begin
       Add(EmptyStr);
-      if not bReload then Add('3.3. Latex' +
+      if not bReload then Add('3.4. Latex' +
                               ' (version = ' +
                               sVersion_Latex +
                               ')')
-                     else Add('3.3. Latex (reload)' +
+                     else Add('3.4. Latex (reload)' +
                               ' (version = ' +
                               sVersion_Latex +
                               ')');
@@ -8906,15 +9240,14 @@ begin
     if (bUpdate_Latex) then begin
       if DirectoryExists(sPath_Latex) then begin  // Will make a backup of old latex folder
         zipKit.StoreOptions:= [soRecurse];        // soRecurse: will include all files of all folders and sub-folders
-
         with zipKit do begin
           FileName:= sPath_Bkp +
                      '\latex_bkp_' +
+                     IntToStr(Integer(YearOf(Date))) +
+                     '.' +
                      IntToStr(Integer(MonthOf(Date))) +
                      '.' +
                      IntToStr(Integer(DayOf(Date))) +
-                     '.' +
-                     IntToStr(Integer(YearOf(Date))) +
                      '.zip';
           AddFiles(sPath_Latex +
                    '\*.*',
@@ -9109,7 +9442,7 @@ var
   procedure pCreateProjectDir;
   begin
     CreateDir(sPath_Project);
-    zipKit.FileName:= sFile_ProjectOrigin;
+    zipKit.FileName:= sFile_Project_Origin;
     zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
 
     with zipKit do begin
@@ -9127,7 +9460,7 @@ begin
   try
     with frmTools.memIniLog.Lines do begin
       Add(EmptyStr);
-      Add('3.4. Project' +
+      Add('3.5. Project' +
           ' (version = ' +
           sVersion_Project +
           ')');
@@ -9190,7 +9523,7 @@ begin
   try
     with frmTools.memIniLog.Lines do begin
       Add(EmptyStr);
-      Add('3.5. Editor options');
+      Add('3.6. Editor options');
     end;
 
     pDataset_To_EditorOC;  // It will set to coEditor.Keystrokes from modDados.cdEditor
@@ -9603,7 +9936,7 @@ begin
      (not frmR_Term.cRterm.bRterm_Ready) then Exit
                                          else Sleep(10*iDelay);
 
-  sPath:= sUtilsOrigin +
+  sPath:= sUtils_Origin +
           '\mirrors.R';
 
   sTmp:= 'source('''+
@@ -9730,10 +10063,10 @@ end;
 procedure TfrmMain.FormCloseQuery(Sender: TObject;
                                       var bCanClose: Boolean);
 begin
-  bRtermOptionCancel:= False;
+  bRterm_OptionCancel:= False;
 
   if fRterm_Running then actRCont_TermStartCloseExecute(nil);
-  bCanClose:= not bRtermOptionCancel;  // If the choice is 'Cancel' don't close
+  bCanClose:= not bRterm_OptionCancel;  // If the choice is 'Cancel' don't close
 
   if bCanClose then begin
     pCheck_Project_Changed;
@@ -9839,7 +10172,7 @@ begin
   imlRSend_Plus.Draw(stbMain.Canvas,
                      iLeft + 2,
                      2,
-                     ord(bRtermSend_Plus));
+                     ord(bRterm_Send_Plus));
 end;
 
 procedure TfrmMain.pDraw_SelectionMode(iSelMode: integer);
@@ -10182,44 +10515,66 @@ var
 
   i: integer;
 
-  sSyntax_BackupFile: string;
+  sPath_Syntax_TMP,
+   sSyntax_InUse_Prior: string;
 
 begin
+  // Both lines below will be used in case of CANCEL the dlg TfrmColors
   clBrackets_Prior:= clBrackets;
+  sSyntax_InUse_Prior:= sSyntax_InUse;
 
   try
     dlg:= TfrmColors.Create(Self);
+    //  dlg.rdgSyntax: Color settings (speed)
+    with dlg.rdgSyntax do
+      ItemIndex:= fString_ToCase_Select(sSyntax_InUse,
+                                        ['Default',  // 0
+                                         'Dark',     // 1
+                                         'Gray',     // 2
+                                         'LGray']);  // 3
+
+    // Do a prior backup of all syntax files of ini
+    sPath_Syntax_TMP:= sPath_Ini +
+                       '\syntax_tmp';
+
+    pCopy_Folder(sPath_Syntax,
+                 sPath_Syntax_TMP,
+                 '*.*');
+
     if (dlg.ShowModal = mrOK) then begin  // OK
+      with dlg.rdgSyntax do
+        sSyntax_InUse:= Items[ItemIndex];
+
       with dlg do begin
-        clActiveLine          := shActiveLine.Brush.Color;
-        clBrackets            := shBrackets.Brush.Color;
-        clBGForAllHighlighters:= shBGAllHighlighters.Brush.Color;
-        clBGPreferred         := shBGPreferred.Brush.Color;
-        bActiveLine           := cbActiveLineBG.Checked;
+        clActiveLine           := shActiveLine.Brush.Color;
+        clBrackets             := shBrackets.Brush.Color;
+        clBG_ForAllHighlighters:= shBGAllHighlighters.Brush.Color;
+        clBG_Preferred         := shBGPreferred.Brush.Color;
+        bActiveLine            := cbActiveLineBG.Checked;
       end;
+
+      if DirectoryExists(sPath_Syntax_TMP) then pDelete_Dir(sPath_Syntax_TMP);
     end
     else begin  // Cancel: it will restore a prior backup of all ini syntax files
-      sSyntax_BackupFile:= sPath_SyntaxBKP +
-                           '\syntax_bkp.zip';
+      // Restore the status of all syntx before open the dlg
+      pCopy_Folder(sPath_Syntax_TMP,
+                   sPath_Syntax,
+                   '*.*');
+      // Delete dir sPath_Syntax_TMP
+      if DirectoryExists(sPath_Syntax_TMP) then pDelete_Dir(sPath_Syntax_TMP);
 
-      try
-        pDelete_Dir(sPath_Syntax);
-        zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
 
-        with zipKit do begin
-          FileName     := sSyntax_BackupFile;
-          BaseDirectory:= ExtractFileDrive(sPath_Ini) +
-                                           '\';
-          ExtractFiles('*.*');
-        end;
-
-        zipKit.CloseArchive;
-        if FileExists(sSyntax_BackupFile) then DeleteFile(sSyntax_BackupFile);
-      except
-        // TODO
-      end;
+      // Restore prior options
       clBrackets:= clBrackets_Prior;
-      dmSyn.pLoad_Syntax_FromIni;
+      sSyntax_InUse:= sSyntax_InUse_Prior;
+
+      // Set the path of the syntx in use
+      sPath_Syntax_InUse:= sPath_Syntax +
+                           '\' +
+                           sSyntax_InUse;
+
+      // Update instances of synedit
+      dmSyn.pLoad_Syntax_FromIni;  // It will use iSyntax variable
     end;
   finally
     synURIOpener.Editor:= nil;  // Don't remove from here!
@@ -10230,6 +10585,7 @@ begin
     with (Self.MDIChildren[i] as TfrmEditor).synEditor do begin
       if bActiveLine then ActiveLineColor:= TColor(clActiveLine)
                      else ActiveLineColor:= TColor(clNone);
+
       WordWrap:= actEditorLineWrap.Checked;
     end;
     (Self.MDIChildren[i] as TfrmEditor).Repaint;
@@ -10237,6 +10593,7 @@ begin
 
   // It is necessary to update pSyn_PaintTransient in cases where the brackets are selected!
   i:= fFindTop_Window;
+
   if Assigned(Self.MDIChildren[i] as TfrmEditor) then
     with (Self.MDIChildren[i] as TfrmEditor) do begin
       if Assigned(synEditor) then synEditor.Repaint;
@@ -10893,7 +11250,7 @@ begin
     if (SelectionCount <= 0) then Exit;
     if (Selected.Level = 2) then begin
       Selected.Delete;
-      bProjectChanged:= True;
+      bProject_Changed:= True;
     end;
   end;
 end;
@@ -10903,7 +11260,7 @@ var
   i: integer;
 
 begin
-  if not bProjectChanged then Exit;
+  if not bProject_Changed then Exit;
 
   // Bring to front the textual project, if it is opened
   i:= fFind_Window_ByName(sProjectName);
@@ -10972,7 +11329,7 @@ begin
   end;
 
   if Assigned(slProjectChanges) then slProjectChanges.Clear;
-  bProjectChanged:= False;
+  bProject_Changed:= False;
   pClear_StatusBar_Project;
 end;
 
@@ -10995,7 +11352,7 @@ begin
   frmTools.pgTools.ActivePage:= frmTools.tbsMisc;
   frmTools.pgMisc.ActivePage:= frmTools.tbsProject;
   pOpen_Project;
-  bProjectChanged:= False;
+  bProject_Changed:= False;
   pTools_ProjectControls(True);
 
   pUpdate_MRU_Project(menProjRecent,
@@ -11813,13 +12170,13 @@ var
    sPathPuTTY: string;
 
 begin
-  sInfo:= fFile_ToString(sUtilsOrigin +
+  sInfo:= fFile_ToString(sUtils_Origin +
                          '\info.R');
 
   sFileInfo:= sPath_Tmp +
               '\info.R';
 
-  sInput:= DosPathToUnixPath(sUtilsOrigin +
+  sInput:= DosPathToUnixPath(sUtils_Origin +
                              '\mirrors.R');
 
   pSet_Repos(sInfo);
@@ -11861,9 +12218,9 @@ begin
     if fFile_Save_Fast_PuTTY(sFileInfo,
                              sInfo,
                              sPathPuTTY,
-                             sPuTTYPassword,
-                             sPuTTYUser,
-                             sPuTTYHost) then begin
+                             sPuTTY_Password,
+                             sPuTTY_User,
+                             sPuTTY_Host) then begin
 
       Sleep(5*iDelay);
 
@@ -11877,10 +12234,10 @@ begin
         if fFile_Exists_PuTTY(sFileInfo,
                               '/tmp/Tinn-R/info.R',
                               sPathPuTTY,
-                              sPuTTYPassword,
-                              sPuTTYUser,
-                              sPuTTYHost) then Break
-                                          else inc(i)
+                              sPuTTY_Password,
+                              sPuTTY_User,
+                              sPuTTY_Host) then Break
+                                           else inc(i)
       until (i = 20);
 
       if (not FileExists(sFileInfo)) then Exit
@@ -11961,10 +12318,10 @@ begin
         if fFile_Exists_PuTTY(sPath_Tmp + '\info.txt',
                               '/tmp/Tinn-R/info.txt',
                               sPath_TinnR + '\putty\pscp.exe',
-                              sPuTTYPassword,
-                              sPuTTYUser,
-                              sPuTTYHost) then Break
-                                          else inc(i)
+                              sPuTTY_Password,
+                              sPuTTY_User,
+                              sPuTTY_Host) then Break
+                                           else inc(i)
       else
         if FileExists(sTmp) then Break
                             else inc(i);
@@ -12719,7 +13076,7 @@ begin
     tnChildNode.ImageIndex   := 2;
     tnChildNode.SelectedIndex:= 3;
     frmTools.tvProject.Selected.Expand(True);
-    bProjectChanged:= True;
+    bProject_Changed:= True;
     frmTools.tvProject.AlphaSort;
   end
   else if (frmTools.tvProject.Selected.Level = 2) then begin
@@ -12729,7 +13086,7 @@ begin
     tnChildNode.ImageIndex   := 2;
     tnChildNode.SelectedIndex:= 3;
     frmTools.tvProject.Selected.Expand(True);
-    bProjectChanged:= True;
+    bProject_Changed:= True;
     frmTools.tvProject.AlphaSort;
   end
   else begin
@@ -12740,7 +13097,7 @@ begin
       tnChildNode.ImageIndex   := 2;
       tnChildNode.SelectedIndex:= 3;
       frmTools.tvProject.Selected.Expand(True);
-      bProjectChanged:= True;
+      bProject_Changed:= True;
       frmTools.tvProject.AlphaSort;
     end
     else
@@ -12793,7 +13150,7 @@ begin
   end;
   meTmp.Lines.SaveToFile(sProjectName);
   FreeAndNil(meTmp);
-  bProjectChanged:= False;
+  bProject_Changed:= False;
 
   // Update the textual project, if it is opened
   i:= fFind_Window_ByName(sProjectName);
@@ -13024,7 +13381,7 @@ begin
       if (edtNewGroup.Text <> EmptyStr) then begin
         if not fGroup_ExistsAsNode(edtNewGroup.Text) then begin
           pCreate_Group(edtNewGroup.Text);
-          bProjectChanged:= True;
+          bProject_Changed:= True;
         end
         else fMessageDlg(edtNewGroup.Text + #13 + #13 +
                          'A group with this name already exists in this project!',
@@ -13128,173 +13485,173 @@ begin
   pUpdate_Rterm_Appearance(bFontSize);
 
   // WinExpl - BG
-  frmTools.edWinExplorerFilter.Color:= clBGApplication;
-  frmTools.jvdcWinExplorer.Color    := clBGApplication;
-  frmTools.jvdlbWinExplorer.Color   := clBGApplication;
-  frmTools.jvflbWinExplorer.Color   := clBGApplication;
+  frmTools.edWinExplorerFilter.Color:= clBG_Application;
+  frmTools.jvdcWinExplorer.Color    := clBG_Application;
+  frmTools.jvdlbWinExplorer.Color   := clBG_Application;
+  frmTools.jvflbWinExplorer.Color   := clBG_Application;
 
   // WinExpl - FG
-  frmTools.edWinExplorerFilter.Font.Color:= clFGApplication;
-  frmTools.jvdcWinExplorer.Font.Color    := clFGApplication;
-  frmTools.jvdlbWinExplorer.Font.Color   := clFGApplication;
-  frmTools.jvflbWinExplorer.Font.Color   := clFGApplication;
+  frmTools.edWinExplorerFilter.Font.Color:= clFG_Application;
+  frmTools.jvdcWinExplorer.Font.Color    := clFG_Application;
+  frmTools.jvdlbWinExplorer.Font.Color   := clFG_Application;
+  frmTools.jvflbWinExplorer.Font.Color   := clFG_Application;
 
   // WorkExpl - BG
-  frmTools.edWorkExplorerFilter.Color:= clBGApplication;
-  frmTools.jvdcWorkExplorer.Color    := clBGApplication;
-  frmTools.jvdlbWorkExplorer.Color   := clBGApplication;
-  frmTools.jvflbWorkExplorer.Color   := clBGApplication;
+  frmTools.edWorkExplorerFilter.Color:= clBG_Application;
+  frmTools.jvdcWorkExplorer.Color    := clBG_Application;
+  frmTools.jvdlbWorkExplorer.Color   := clBG_Application;
+  frmTools.jvflbWorkExplorer.Color   := clBG_Application;
 
   // WorkExpl - FG
-  frmTools.edWorkExplorerFilter.Font.Color:= clFGApplication;
-  frmTools.jvdcWorkExplorer.Font.Color    := clFGApplication;
-  frmTools.jvdlbWorkExplorer.Font.Color   := clFGApplication;
-  frmTools.jvflbWorkExplorer.Font.Color   := clFGApplication;
+  frmTools.edWorkExplorerFilter.Font.Color:= clFG_Application;
+  frmTools.jvdcWorkExplorer.Font.Color    := clFG_Application;
+  frmTools.jvdlbWorkExplorer.Font.Color   := clFG_Application;
+  frmTools.jvflbWorkExplorer.Font.Color   := clFG_Application;
 
   // Project - BG
-  frmTools.tvProject.Color:= clBGApplication;
+  frmTools.tvProject.Color:= clBG_Application;
 
   // Project - FG
-  frmTools.tvProject.Font.Color:= clFGApplication;
+  frmTools.tvProject.Font.Color:= clFG_Application;
 
   // Markup - BG
-  frmTools.jvivAccents.Color         := clBGApplication;
-  frmTools.jvivArrowBoth.Color       := clBGApplication;
-  frmTools.jvivArrowBox.Color        := clBGApplication;
-  frmTools.jvivArrowDown.Color       := clBGApplication;
-  frmTools.jvivArrowLeft.Color       := clBGApplication;
-  frmTools.jvivArrowRight.Color      := clBGApplication;
-  frmTools.jvivArrowSloped.Color     := clBGApplication;
-  frmTools.jvivArrowUp.Color         := clBGApplication;
-  frmTools.jvivBar.Color             := clBGApplication;
-  frmTools.jvivBracket.Color         := clBGApplication;
-  frmTools.jvivDot.Color             := clBGApplication;
-  frmTools.jvivGeometryAngle.Color   := clBGApplication;
-  frmTools.jvivGeometryBox.Color     := clBGApplication;
-  frmTools.jvivGeometryCircle.Color  := clBGApplication;
-  frmTools.jvivGeometryDiamond.Color := clBGApplication;
-  frmTools.jvivGeometryLine.Color    := clBGApplication;
-  frmTools.jvivGeometryMisc.Color    := clBGApplication;
-  frmTools.jvivGeometryStar.Color    := clBGApplication;
-  frmTools.jvivGeometryTriangle.Color:= clBGApplication;
-  frmTools.jvivGeometryVar.Color     := clBGApplication;
-  frmTools.jvivGreekLower.Color      := clBGApplication;
-  frmTools.jvivGreekMisc.Color       := clBGApplication;
-  frmTools.jvivGreekUpper.Color      := clBGApplication;
-  frmTools.jvivGreekVar.Color        := clBGApplication;
-  frmTools.jvivMathFunction.Color    := clBGApplication;
-  frmTools.jvivMathLogical.Color     := clBGApplication;
-  frmTools.jvivMathMisc.Color        := clBGApplication;
-  frmTools.jvivMathSet.Color         := clBGApplication;
-  frmTools.jvivMathVar.Color         := clBGApplication;
-  frmTools.jvivMisc.Color            := clBGApplication;
-  frmTools.jvivNegation.Color        := clBGApplication;
-  frmTools.jvivOperator.Color        := clBGApplication;
-  frmTools.jvivRelation.Color        := clBGApplication;
-  frmTools.jvivSkyAstrology.Color    := clBGApplication;
-  frmTools.jvivSkySolar.Color        := clBGApplication;
-  frmTools.jvivSkyVar.Color          := clBGApplication;
-  frmTools.jvivUserCustom.Color      := clBGApplication;
+  frmTools.jvivAccents.Color         := clBG_Application;
+  frmTools.jvivArrowBoth.Color       := clBG_Application;
+  frmTools.jvivArrowBox.Color        := clBG_Application;
+  frmTools.jvivArrowDown.Color       := clBG_Application;
+  frmTools.jvivArrowLeft.Color       := clBG_Application;
+  frmTools.jvivArrowRight.Color      := clBG_Application;
+  frmTools.jvivArrowSloped.Color     := clBG_Application;
+  frmTools.jvivArrowUp.Color         := clBG_Application;
+  frmTools.jvivBar.Color             := clBG_Application;
+  frmTools.jvivBracket.Color         := clBG_Application;
+  frmTools.jvivDot.Color             := clBG_Application;
+  frmTools.jvivGeometryAngle.Color   := clBG_Application;
+  frmTools.jvivGeometryBox.Color     := clBG_Application;
+  frmTools.jvivGeometryCircle.Color  := clBG_Application;
+  frmTools.jvivGeometryDiamond.Color := clBG_Application;
+  frmTools.jvivGeometryLine.Color    := clBG_Application;
+  frmTools.jvivGeometryMisc.Color    := clBG_Application;
+  frmTools.jvivGeometryStar.Color    := clBG_Application;
+  frmTools.jvivGeometryTriangle.Color:= clBG_Application;
+  frmTools.jvivGeometryVar.Color     := clBG_Application;
+  frmTools.jvivGreekLower.Color      := clBG_Application;
+  frmTools.jvivGreekMisc.Color       := clBG_Application;
+  frmTools.jvivGreekUpper.Color      := clBG_Application;
+  frmTools.jvivGreekVar.Color        := clBG_Application;
+  frmTools.jvivMathFunction.Color    := clBG_Application;
+  frmTools.jvivMathLogical.Color     := clBG_Application;
+  frmTools.jvivMathMisc.Color        := clBG_Application;
+  frmTools.jvivMathSet.Color         := clBG_Application;
+  frmTools.jvivMathVar.Color         := clBG_Application;
+  frmTools.jvivMisc.Color            := clBG_Application;
+  frmTools.jvivNegation.Color        := clBG_Application;
+  frmTools.jvivOperator.Color        := clBG_Application;
+  frmTools.jvivRelation.Color        := clBG_Application;
+  frmTools.jvivSkyAstrology.Color    := clBG_Application;
+  frmTools.jvivSkySolar.Color        := clBG_Application;
+  frmTools.jvivSkyVar.Color          := clBG_Application;
+  frmTools.jvivUserCustom.Color      := clBG_Application;
 
   // Results - BG
-  frmTools.memIniLog.Color:= clBGApplication;
-  frmTools.tvSearch.Color := clBGApplication;
-  frmTools.ATBinHex.Color := clBGApplication;
+  frmTools.memIniLog.Color:= clBG_Application;
+  frmTools.tvSearch.Color := clBG_Application;
+  frmTools.ATBinHex.Color := clBG_Application;
 
   // Results - FG
-  frmTools.memIniLog.Font.Color:= clFGApplication;
-  frmTools.tvSearch.Font.Color := clFGApplication;
-  frmTools.ATBinHex.Font.Color := clFGApplication;
+  frmTools.memIniLog.Font.Color:= clFG_Application;
+  frmTools.tvSearch.Font.Color := clFG_Application;
+  frmTools.ATBinHex.Font.Color := clFG_Application;
 
   // Spell - BG
-  frmTools.memSpell.Color:= clBGApplication;
+  frmTools.memSpell.Color:= clBG_Application;
 
   // Spell - FG
-  frmTools.memSpell.Font.Color:= clFGApplication;
+  frmTools.memSpell.Font.Color:= clFG_Application;
 
   // Rcard - BG
-  frmTools.dbgRcard.Color   := clBGApplication;
-  frmTools.dbRcardMemo.Color:= clBGApplication;
-  frmTools.lbRcard.Color    := clBGApplication;
+  frmTools.dbgRcard.Color   := clBG_Application;
+  frmTools.dbRcardMemo.Color:= clBG_Application;
+  frmTools.lbRcard.Color    := clBG_Application;
 
   // Rcard - FG
-  frmTools.dbgRcard.Font.Color   := clFGApplication;
-  frmTools.dbRcardMemo.Font.Color:= clFGApplication;
-  frmTools.lbRcard.Font.Color    := clFGApplication;
+  frmTools.dbgRcard.Font.Color   := clFG_Application;
+  frmTools.dbRcardMemo.Font.Color:= clFG_Application;
+  frmTools.lbRcard.Font.Color    := clFG_Application;
 
   // Rmirrors - BG
-  frmTools.dbeRmirrorsCode.Color:= clBGApplication;
-  frmTools.dbeRmirrorsHost.Color:= clBGApplication;
-  frmTools.dbeRmirrorsURL.Color := clBGApplication;
-  frmTools.dbgRmirrors.Color    := clBGApplication;
-  frmTools.lbCountries.Color    := clBGApplication;
+  frmTools.dbeRmirrorsCode.Color:= clBG_Application;
+  frmTools.dbeRmirrorsHost.Color:= clBG_Application;
+  frmTools.dbeRmirrorsURL.Color := clBG_Application;
+  frmTools.dbgRmirrors.Color    := clBG_Application;
+  frmTools.lbCountries.Color    := clBG_Application;
 
   // Rmirrors - FG
-  frmTools.dbeRmirrorsCode.Font.Color:= clFGApplication;
-  frmTools.dbeRmirrorsHost.Font.Color:= clFGApplication;
-  frmTools.dbeRmirrorsURL.Font.Color := clFGApplication;
-  frmTools.dbgRmirrors.Font.Color    := clFGApplication;
-  frmTools.lbCountries.Font.Color    := clFGApplication;
+  frmTools.dbeRmirrorsCode.Font.Color:= clFG_Application;
+  frmTools.dbeRmirrorsHost.Font.Color:= clFG_Application;
+  frmTools.dbeRmirrorsURL.Font.Color := clFG_Application;
+  frmTools.dbgRmirrors.Font.Color    := clFG_Application;
+  frmTools.lbCountries.Font.Color    := clFG_Application;
 
   // Completion - BG
-  frmTools.dbCompletionMemo.Color:= clBGApplication;
-  frmTools.dbgCompletion.Color   := clBGApplication;
-  frmTools.lbCompletion.Color    := clBGApplication;
+  frmTools.dbCompletionMemo.Color:= clBG_Application;
+  frmTools.dbgCompletion.Color   := clBG_Application;
+  frmTools.lbCompletion.Color    := clBG_Application;
 
   // Completion - FG
-  frmTools.dbCompletionMemo.Font.Color:= clFGApplication;
-  frmTools.dbgCompletion.Font.Color   := clFGApplication;
-  frmTools.lbCompletion.Font.Color    := clFGApplication;
+  frmTools.dbCompletionMemo.Font.Color:= clFG_Application;
+  frmTools.dbgCompletion.Font.Color   := clFG_Application;
+  frmTools.lbCompletion.Font.Color    := clFG_Application;
 
   // Comments - BG
-  frmTools.dbgComments.Color:= clBGApplication;
+  frmTools.dbgComments.Color:= clBG_Application;
 
   // Comments - FG
-  frmTools.dbgComments.Font.Color:= clFGApplication;
+  frmTools.dbgComments.Font.Color:= clFG_Application;
 
   // App_Shortcuts - BG
-  frmTools.dbgApp_Shortcuts.Color   := clBGApplication;
-  frmTools.dbApp_ShortcutsMemo.Color:= clBGApplication;
-  frmTools.lbApp_Shortcuts.Color    := clBGApplication;
+  frmTools.dbgApp_Shortcuts.Color   := clBG_Application;
+  frmTools.dbApp_ShortcutsMemo.Color:= clBG_Application;
+  frmTools.lbApp_Shortcuts.Color    := clBG_Application;
 
   // App_Shortcuts - FG
-  frmTools.dbgApp_Shortcuts.Font.Color   := clFGApplication;
-  frmTools.dbApp_ShortcutsMemo.Font.Color:= clFGApplication;
-  frmTools.lbApp_Shortcuts.Font.Color    := clFGApplication;
+  frmTools.dbgApp_Shortcuts.Font.Color   := clFG_Application;
+  frmTools.dbApp_ShortcutsMemo.Font.Color:= clFG_Application;
+  frmTools.lbApp_Shortcuts.Font.Color    := clFG_Application;
 
   // Editor_Keystrokes - BG
-  frmTools.dbgEditor_Keystrokes.Color:= clBGApplication;
+  frmTools.dbgEditor_Keystrokes.Color:= clBG_Application;
 
   // Editor_Keystrokes - FG
-  frmTools.dbgEditor_Keystrokes.Font.Color:= clFGApplication;
+  frmTools.dbgEditor_Keystrokes.Font.Color:= clFG_Application;
 
   // R explorer - BG
-  frmTools.cbbToolsREnvironment.Color  := clBGApplication;
-  frmTools.cbbToolsRExplorer.Color     := clBGApplication;
-  frmTools.edToolsRExplorerFilter.Color:= clBGApplication;
-  frmTools.lvRexplorer.Color           := clBGApplication;
+  frmTools.cbbToolsREnvironment.Color  := clBG_Application;
+  frmTools.cbbToolsRExplorer.Color     := clBG_Application;
+  frmTools.edToolsRExplorerFilter.Color:= clBG_Application;
+  frmTools.lvRexplorer.Color           := clBG_Application;
 
   // R explorer - FG
-  //edToolsRExplorerFilter.Font.Color:= clFGApplication;
-  frmTools.cbbToolsREnvironment.Font.Color:= clFGApplication;
-  frmTools.cbbToolsRExplorer.Font.Color   := clFGApplication;
-  frmTools.lvRexplorer.Font.Color         := clFGApplication;
+  //edToolsRExplorerFilter.Font.Color:= clFG_Application;
+  frmTools.cbbToolsREnvironment.Font.Color:= clFG_Application;
+  frmTools.cbbToolsRExplorer.Font.Color   := clFG_Application;
+  frmTools.lvRexplorer.Font.Color         := clFG_Application;
 
   // TabSelected - BG
-  pgFiles.TabSelectedStyle.BackgrColor     := clBGTabSelectedNew;
+  pgFiles.TabSelectedStyle.BackgrColor     := clBG_TabSelectedNew;
   with frmTools do begin
-    pgdatabase.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
-    pgLatex.TabSelectedStyle.BackgrColor   := clBGTabSelectedNew;
-    pgMarkup.TabSelectedStyle.BackgrColor  := clBGTabSelectedNew;
-    pgMisc.TabSelectedStyle.BackgrColor    := clBGTabSelectedNew;
-    pgR.TabSelectedStyle.BackgrColor       := clBGTabSelectedNew;
-    pgResults.TabSelectedStyle.BackgrColor := clBGTabSelectedNew;
-    pgTools.TabSelectedStyle.BackgrColor   := clBGTabSelectedNew;
-    pgTxt2Tags.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+    pgdatabase.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
+    pgLatex.TabSelectedStyle.BackgrColor   := clBG_TabSelectedNew;
+    pgMarkup.TabSelectedStyle.BackgrColor  := clBG_TabSelectedNew;
+    pgMisc.TabSelectedStyle.BackgrColor    := clBG_TabSelectedNew;
+    pgR.TabSelectedStyle.BackgrColor       := clBG_TabSelectedNew;
+    pgResults.TabSelectedStyle.BackgrColor := clBG_TabSelectedNew;
+    pgTools.TabSelectedStyle.BackgrColor   := clBG_TabSelectedNew;
+    pgTxt2Tags.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
   end;
 
   with frmR_Term do
-    frmR_Term.pgRterm.TabSelectedStyle.BackgrColor:= clBGTabSelectedNew;
+    frmR_Term.pgRterm.TabSelectedStyle.BackgrColor:= clBG_TabSelectedNew;
 
 end;
 
@@ -13421,9 +13778,9 @@ begin
     ActivePage:= frmR_Term.tbsIO;
 
   // Rterm
-  if bRtermSingle then  // IO and Log in the same view
-    if bRtermHorizontal then actRtermIOSplitHorizontalExecute(nil)
-                        else actRtermIOSplitVerticalExecute(nil)
+  if bRterm_Single then  // IO and Log in the same view
+    if bRterm_Horizontal then actRtermIOSplitHorizontalExecute(nil)
+                         else actRtermIOSplitVerticalExecute(nil)
     else                // IO and Log in distinct view
       actRtermIOSplitRemoveExecute(nil);
 
@@ -13452,7 +13809,7 @@ begin
   with frmTools.tvProject.Selected do
     if (Level = 1) then begin
       Delete;
-      bProjectChanged:= True;
+      bProject_Changed:= True;
       pSort_Project;
     end;
 end;
@@ -13462,7 +13819,7 @@ begin
   with frmTools.tvProject.Items[0] do
     if (Count > 0) then begin
       DeleteChildren;
-      bProjectChanged:= True;
+      bProject_Changed:= True;
     end;
 end;
 
@@ -13517,7 +13874,7 @@ begin
       if (edtNewGroupName.Text = EmptyStr) then Exit;
       if not fGroup_ExistsAsNode(edtNewGroupName.Text) then begin
         frmTools.tvProject.Selected.Text:= edtNewGroupName.Text;
-        bProjectChanged:= True;
+        bProject_Changed:= True;
       end
       else fMessageDlg(edtNewGroupName.Text + #13 + #13 +
                        'A group with this name already exists in this project!',
@@ -13600,7 +13957,7 @@ begin
 
     meTmp.Lines.SaveToFile(sName);
     FreeAndNil(meTmp);
-    bProjectChanged:= False;
+    bProject_Changed:= False;
 
     pUpdate_MRU_Project(menProjRecent,
                         sName);
@@ -13627,7 +13984,7 @@ begin
       for i:= 1 to (items.Count-1) do
         if (Items[i].Level = 1) then begin
           Items[i].DeleteChildren;
-          if not bProjectChanged then bProjectChanged:= True;;
+          if not bProject_Changed then bProject_Changed:= True;;
         end;
   except
     Exit;
@@ -13639,7 +13996,7 @@ begin
   with frmTools.tvProject.Selected do
     if (level = 1) then begin
       DeleteChildren;
-      bProjectChanged:= True;
+      bProject_Changed:= True;
     end;
 end;
 
@@ -13991,9 +14348,9 @@ begin
       cbRSetWorkDir_Starting.Checked     := bRSetWorkDir_Starting;
       cbRSmart.Checked                   := bRSmart;
       cbRsvSocket_Connect.Checked        := bRsvSocket_Connect;
-      cbRTCPIPConsoleEcho.Checked        := bRTCPIPConsoleEcho;
-      cbRTCPIPConsoleUse.Checked         := bRTCPIPConsoleUse;
-      cbRtermCanFloat.Checked            := bRtermCanFloat;
+      cbRTCPIPConsoleEcho.Checked        := bRTCPIP_ConsoleEcho;
+      cbRTCPIPConsoleUse.Checked         := bRTCPIP_ConsoleUse;
+      cbRtermCanFloat.Checked            := bRterm_CanFloat;
       cbRTinnRcom_Install.Checked        := bRTinnRcom_Install;
       cbRTinnRcom_Load.Checked           := bRTinnRcom_Load;
       cbScrollSendingLines.Checked       := bScroll_SendingLines;
@@ -14003,15 +14360,15 @@ begin
       edKnit.Text                        := sKnit;
       edLatexClearWaste.Text             := sLatexClearWaste;
       edMaxDeparseLength.Text            := IntToStr(iMaxDeparseLength);
-      edParDeplate.Text                  := sParDeplate;
-      edParDviBibtex.Text                := sParDviBibtex;
-      edParDviSingle.Text                := sParDviSingle;
-      edParPdfBibtex.Text                := sParPdfBibtex;
-      edParPdfSingle.Text                := sParPdfSingle;
-      edParRgui.Text                     := sParRgui;
-      edParRPuTTY.Text                   := sParRPuTTY;
-      edParRterm.Text                    := sParRterm;
-      edParTxt2tags.Text                 := sParTxt2tags;
+      edParDeplate.Text                  := sPar_Deplate;
+      edParDviBibtex.Text                := sPar_DviBibtex;
+      edParDviSingle.Text                := sPar_DviSingle;
+      edParPdfBibtex.Text                := sPar_PdfBibtex;
+      edParPdfSingle.Text                := sPar_PdfSingle;
+      edParRgui.Text                     := sPar_Rgui;
+      edParRPuTTY.Text                   := sPar_RPuTTY;
+      edParRterm.Text                    := sPar_Rterm;
+      edParTxt2tags.Text                 := sPar_Txt2tags;
       edPath_Pandoc.Text                 := sPath_Pandoc;
       edRLibPathDefault.Text             := sRLibPath_Default;
       edPathDeplate_Converter.Text       := sPath_Deplate_Converter;
@@ -14022,23 +14379,23 @@ begin
       edPathTinnRcom_Installed.Text      := sPath_TinnRcom_Installed;
       edPathTxt2tags_Converter.Text      := sPath_Txt2tags_Converter;
       edPathTxt2tags_Interpreter.Text    := sPath_Txt2tags_Interpreter;
-      edPuttyHost.Text                   := sPuttyHost;
-      edPuttyPassword.Text               := sPuttyPassword;
-      edPuttyUser.Text                   := sPuttyUser;
+      edPuttyHost.Text                   := sPutty_Host;
+      edPuttyPassword.Text               := sPutty_Password;
+      edPuttyUser.Text                   := sPutty_User;
       edtIPHostLocal.Text                := sIPHostLocal;
       edtIPHostRemote.Text               := sIPHostRemote;
       edtIPPortLocal.Text                := intToStr(iIPPortLocal);
       edtIPPortRemote.Text               := intToStr(iIPPortRemote);
       edVersion_TinnRcomInstalled.Text   := sVersion_TinnRcomInstalled;
       rgRguiTinnR_Disposition.ItemIndex  := iRguiTinnR_Disposition;
-      shBGApplication.Brush.Color        := clBGApplication;
-      shBGApplication.Font.Color         := fContrast_Color(clBGApplication);
-      shBGTabSelected.Brush.Color        := clBGTabSelectedNew;
-      shBGTabSelected.Font.Color         := fContrast_Color(clBGTabSelectedNew);
-      shFGApplication.Brush.Color        := clFGApplication;
-      shFGApplication.Font.Color         := fContrast_Color(clFGApplication);
-      shSampleApplication.Brush.Color    := clBGApplication;
-      shSampleApplication.Font.Color     := clFGApplication;
+      shBGApplication.Brush.Color        := clBG_Application;
+      shBGApplication.Font.Color         := fContrast_Color(clBG_Application);
+      shBGTabSelected.Brush.Color        := clBG_TabSelectedNew;
+      shBGTabSelected.Font.Color         := fContrast_Color(clBG_TabSelectedNew);
+      shFGApplication.Brush.Color        := clFG_Application;
+      shFGApplication.Font.Color         := fContrast_Color(clFG_Application);
+      shSampleApplication.Brush.Color    := clBG_Application;
+      shSampleApplication.Font.Color     := clFG_Application;
       tbDelay.Position                   := iDelay;
       tbLastFile.Position                := iLastFile;
       tbLastSearch.Position              := iLastSearch;
@@ -14108,11 +14465,11 @@ begin
       if bDataCompletionAnywhere then rdgDataCompletion_Pattern.ItemIndex:= 0
                                  else rdgDataCompletion_Pattern.ItemIndex:= 1;
 
-      if bRtermFindError then rdgRtermFindError.ItemIndex:= 0
-                         else rdgRtermFindError.ItemIndex:= 1;
+      if bRterm_FindError then rdgRtermFindError.ItemIndex:= 0
+                          else rdgRtermFindError.ItemIndex:= 1;
 
-      if bRtermBeepOnError then rdgRtermBeepOnError.ItemIndex:= 0
-                           else rdgRtermBeepOnError.ItemIndex:= 1;
+      if bRterm_BeepOnError then rdgRtermBeepOnError.ItemIndex:= 0
+                            else rdgRtermBeepOnError.ItemIndex:= 1;
 
       rdgRecognition_Caption.ItemIndex:= iRecognition_Caption;
       rdgReformatRSplit.ItemIndex:= iReformatRSplit;
@@ -14122,18 +14479,18 @@ begin
                                      else ItemIndex:= 1;
 
       with rdgRtermType do
-        if bRtermSingle then ItemIndex:= 0
-                        else ItemIndex:= 1;
+        if bRterm_Single then ItemIndex:= 0
+                         else ItemIndex:= 1;
 
-      rdgRtermDisposition.Enabled:= bRtermSingle;
+      rdgRtermDisposition.Enabled:= bRterm_Single;
 
       with rdgRtermWidth do
-        if bRtermWidth then ItemIndex:= 0
-                       else ItemIndex:= 1;
+        if bRterm_Width then ItemIndex:= 0
+                        else ItemIndex:= 1;
 
       with rdgRtermDisposition do
-        if bRtermHorizontal then ItemIndex:= 0
-                            else ItemIndex:= 1;
+        if bRterm_Horizontal then ItemIndex:= 0
+                             else ItemIndex:= 1;
 
       with rdgRtermIO_Syntax do begin
         if (frmR_Term.synIO.Highlighter = dmSyn.synText)      then ItemIndex:= 0;
@@ -14150,12 +14507,12 @@ begin
       end;
 
       with rdgRtermSend_Plus do
-        if bRtermSend_Plus then ItemIndex:= 0
-                           else ItemIndex:= 1;
+        if bRterm_Send_Plus then ItemIndex:= 0
+                            else ItemIndex:= 1;
 
       with rdgRtermClose do
-        if bRtermCloseWithoutAsk then ItemIndex:= 0
-                                 else ItemIndex:= 1;
+        if bRterm_CloseWithoutAsk then ItemIndex:= 0
+                                  else ItemIndex:= 1;
 
       ckAutocomplete.Checked:= actAutoCompletion.Checked;
 
@@ -14275,17 +14632,17 @@ begin
         bRSetWorkDir_Starting         := cbRSetWorkDir_Starting.Checked;
         bRSmart                       := cbRSmart.Checked;
         bRsvSocket_Connect            := cbRsvSocket_Connect.Checked;
-        bRTCPIPConsoleEcho            := cbRTCPIPConsoleEcho.Checked;
-        bRTCPIPConsoleUse             := cbRTCPIPConsoleUse.Checked;
-        bRtermCanFloat                := cbRtermCanFloat.Checked;
+        bRTCPIP_ConsoleEcho           := cbRTCPIPConsoleEcho.Checked;
+        bRTCPIP_ConsoleUse            := cbRTCPIPConsoleUse.Checked;
+        bRterm_CanFloat               := cbRtermCanFloat.Checked;
         bRTinnRcom_Install            := cbRTinnRcom_Install.Checked;
         bRTinnRcom_Load               := cbRTinnRcom_Load.Checked;
         bScroll_SendingLines          := cbScrollSendingLines.Checked;
         bToolsCanFloat                := cbToolsCanFloat.Checked;
         bUndoAfterSave                := cbUndoAfterSave.Checked;
-        clBGApplication               := shSampleApplication.Brush.Color;
-        clFGApplication               := shSampleApplication.Font.Color;
-        frmMain.clBGTabSelectedNew    := shBGTabSelected.Brush.Color;
+        clBG_Application              := shSampleApplication.Brush.Color;
+        clFG_Application              := shSampleApplication.Font.Color;
+        frmMain.clBG_TabSelectedNew   := shBGTabSelected.Brush.Color;
         iIPPortLocal                  := StrToInt(edtIPPortLocal.Text);
         iIPPortRemote                 := StrToInt(edtIPPortRemote.Text);
         iLastFile                     := tbLastFile.Position;
@@ -14298,19 +14655,19 @@ begin
         sLatexClearWaste              := edLatexClearWaste.Text;
         sIPHostLocal                  := edtIPHostLocal.Text;
         sIPHostRemote                 := edtIPHostRemote.Text;
-        sParDeplate                   := edParDeplate.Text;
-        sParDviBibtex                 := edParDviBibtex.Text;
-        sParDviSingle                 := edParDviSingle.Text;
-        sParPdfBibtex                 := edParPdfBibtex.Text;
-        sParPdfSingle                 := edParPdfSingle.Text;
-        sParRgui                      := edParRgui.Text;
-        sParRPuTTY                    := edParRPuTTY.Text;
-        sParRterm                     := edParRterm.Text;
-        sParTxt2tags                  := edParTxt2tags.Text;
+        sPar_Deplate                  := edParDeplate.Text;
+        sPar_DviBibtex                := edParDviBibtex.Text;
+        sPar_DviSingle                := edParDviSingle.Text;
+        sPar_PdfBibtex                := edParPdfBibtex.Text;
+        sPar_PdfSingle                := edParPdfSingle.Text;
+        sPar_Rgui                     := edParRgui.Text;
+        sPar_RPuTTY                   := edParRPuTTY.Text;
+        sPar_Rterm                    := edParRterm.Text;
+        sPar_Txt2tags                 := edParTxt2tags.Text;
         sPath_Pandoc                  := edPath_Pandoc.Text;
-        sPuttyHost                    := edPuttyHost.Text;
-        sPuttyPassword                := edPuttyPassword.Text;
-        sPuttyUser                    := edPuttyUser.Text;
+        sPutty_Host                   := edPuttyHost.Text;
+        sPutty_Password               := edPuttyPassword.Text;
+        sPutty_User                   := edPuttyUser.Text;
         sRLibPath_Default             := edRLibPathDefault.Text;
         sPath_Deplate_Converter       := edPathDeplate_Converter.Text;
         sPath_Deplate_Interpreter     := edPathDeplate_Interpreter.Text;
@@ -14362,23 +14719,23 @@ begin
         if (rdgRArchitecture.ItemIndex = 1) then bRArchitecture64:= True
                                             else bRArchitecture64:= False;
 
-        if (rdgRtermFindError.ItemIndex = 0) then bRtermFindError:= True
-                                             else bRtermFindError:= False;
+        if (rdgRtermFindError.ItemIndex = 0) then bRterm_FindError:= True
+                                             else bRterm_FindError:= False;
 
-        if (rdgRtermBeepOnError.ItemIndex = 0) then bRtermBeepOnError:= True
-                                               else bRtermBeepOnError:= False;
+        if (rdgRtermBeepOnError.ItemIndex = 0) then bRterm_BeepOnError:= True
+                                               else bRterm_BeepOnError:= False;
 
-        if (rdgRtermSend_Plus.ItemIndex = 0) then bRtermSend_Plus:= True
-                                             else bRtermSend_Plus:= False;
+        if (rdgRtermSend_Plus.ItemIndex = 0) then bRterm_Send_Plus:= True
+                                             else bRterm_Send_Plus:= False;
 
-        if (rdgRtermClose.ItemIndex = 0) then bRtermCloseWithoutAsk:= True
-                                         else bRtermCloseWithoutAsk:= False;
+        if (rdgRtermClose.ItemIndex = 0) then bRterm_CloseWithoutAsk:= True
+                                         else bRterm_CloseWithoutAsk:= False;
 
         if (rdgDataCompletion_Pattern.ItemIndex = 0) then bDataCompletionAnywhere:= True
                                                      else bDataCompletionAnywhere:= False;
 
-        if (rdgRtermWidth.ItemIndex = 0) then bRtermWidth:= True
-                                         else bRtermWidth:= False;
+        if (rdgRtermWidth.ItemIndex = 0) then bRterm_Width:= True
+                                         else bRterm_Width:= False;
 
         iRecognition_Caption:= rdgRecognition_Caption.ItemIndex;
         iReformatRSplit:= rdgReformatRSplit.ItemIndex;
@@ -14387,7 +14744,7 @@ begin
           // IO and Log in the same view
           0: begin
                // It avoid the not always necessary (and expensive) procedures below
-               if (bRtermSingle <> True) then  // The user changed the prior option related
+               if (bRterm_Single <> True) then  // The user changed the prior option related
                  case rdgRtermDisposition.ItemIndex of
                    0: actRtermIOSplitHorizontalExecute(nil);
                    1: actRtermIOSplitVerticalExecute(nil);
@@ -14447,7 +14804,7 @@ begin
       end;
 
       frmTools.JvDockClientTools.CanFloat:= bToolsCanFloat;
-      frmR_Term.JvDockClientRterm.CanFloat:= bRtermCanFloat;
+      frmR_Term.JvDockClientRterm.CanFloat:= bRterm_CanFloat;
 
       // Update General
       pUpdate_Appearance;
@@ -15310,7 +15667,7 @@ begin
 end;
 
 procedure TfrmMain.csRGeneralRead(Sender: TObject;
-                                      Socket: TCustomWinSocket);
+                                  Socket: TCustomWinSocket);
 var
   aBuffer: array [0..4095] of char;
 
@@ -15395,20 +15752,20 @@ begin
 end;
 
 procedure TfrmMain.csRtipError(Sender: TObject;
-                                   Socket: TCustomWinSocket;
-                                   ErrorEvent: TErrorEvent;
-                                   var ErrorCode: Integer);
+                               Socket: TCustomWinSocket;
+                               ErrorEvent: TErrorEvent;
+                               var ErrorCode: Integer);
 begin
   ErrorCode:= 0;
   Socket.Close;
 end;
 
 procedure TfrmMain.pPrint_Message(sInstruction: string;
-                                     bNewLine: boolean;
-                                     sSignal: string = '> ');
+                                  bNewLine: boolean;
+                                  sSignal: string = '> ');
 begin
-  if not bRTCPIPConsoleUse or
-     not bRTCPIPConsoleEcho then Exit;
+  if not bRTCPIP_ConsoleUse or
+     not bRTCPIP_ConsoleEcho then Exit;
   sInstruction:= TrimRight(sInstruction);
 
   with frmR_Term.synIO do begin
@@ -15749,7 +16106,7 @@ begin
                 sPackage +
                 '.R';
 
-    sInfo:= fFile_ToString(sUtilsOrigin +
+    sInfo:= fFile_ToString(sUtils_Origin +
                            '\example.R');
 
     pSetArgs(sInfo,
@@ -17957,7 +18314,7 @@ begin
                 sPackage +
                 '.R';
 
-    sInfo:= fFile_ToString(sUtilsOrigin +
+    sInfo:= fFile_ToString(sUtils_Origin +
                            '\example.R');
 
     pSetArgs(sInfo,
@@ -18776,7 +19133,7 @@ begin
     EndUpdate;
   end;
   if Assigned(slProjectChanges) then slProjectChanges.Clear;
-  bProjectChanged:= False;
+  bProject_Changed:= False;
 
   pClear_StatusBar_Project;
   pOpen_FileIntoTinn(sProjectName);
@@ -18801,7 +19158,7 @@ begin
   with sd do begin
     InitialDir:= sWorkingDir;
     if not bStarting then FileName:= 'Tinn-R_' + fGetBuild_Info + '_full_bkp'
-                     else FileName:= 'Tinn-R_prior_to2_bkp';
+                     else FileName:= 'Tinn-R_prior_to_version_2_bkp';
     Filter    := 'Tinn backup (*.zip)|*.zip';
     DefaultExt:= '.zip';
   end;
@@ -19059,7 +19416,7 @@ begin
         Application.ProcessMessages;
 
         try
-          //pDeleteDir(sPath_Ini); // Will remove all ini files and subfolders
+          // pDeleteDir(sPath_Ini); // Will remove all ini files and subfolders
           pDelete_FilesOfPath(sPath_Ini);
           pDelete_FilesOfPath(sPath_App);
           pDelete_FilesOfPath(sPath_Bkp);
@@ -19069,7 +19426,7 @@ begin
           pDelete_FilesOfPath(sPath_Latex);
           pDelete_FilesOfPath(sPath_Project);
           pDelete_FilesOfPath(sPath_Syntax);
-          pDelete_FilesOfPath(sPath_SyntaxBKP);
+          pDelete_FilesOfPath(sPath_Syntax_BKP);
           pDelete_FilesOfPath(sPath_Tmp);
 
           with zipKit do begin
@@ -19212,7 +19569,7 @@ begin
         end;
         zipKit.CloseArchive;
 
-        bDatabaseRestored:= True;
+        bDatabase_Restored:= True;
         with modDados do
           DataModuleCreate(nil);
         fMessageDlg('The DATABASE was successfully restored.' + #13 + #13 +
@@ -19446,10 +19803,10 @@ begin
   (Self.MDIChildren[i] as TfrmEditor).Cursor:= oldCursor;
 end;
 
-procedure TfrmMain.pPandocConversion(sPandocInstruction,
-                                         sPandocFrom,
-                                         sPandocTo: string;
-                                         bWait: boolean = True);
+procedure TfrmMain.pPandoc_Conversion(sPandocInstruction,
+                                      sPandocFrom,
+                                      sPandocTo: string;
+                                      bWait: boolean = True);
 var
   oldCursor: TCursor;
 
@@ -19500,7 +19857,7 @@ end;
 
 procedure TfrmMain.actDeplateToLaTeXDramatistExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' latex-dramatist',
+  pFile_Conversion(sPar_Deplate + ' latex-dramatist',
                    '.tex',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19508,7 +19865,7 @@ end;
 
 procedure TfrmMain.actDeplateToLaTeXExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' latex',
+  pFile_Conversion(sPar_Deplate + ' latex',
                    '.tex',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19516,7 +19873,7 @@ end;
 
 procedure TfrmMain.actDeplateToPhpExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' php',
+  pFile_Conversion(sPar_Deplate + ' php',
                    '.php',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19524,7 +19881,7 @@ end;
 
 procedure TfrmMain.actDeplateToPlainExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' plain',
+  pFile_Conversion(sPar_Deplate + ' plain',
                    '.text',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19532,7 +19889,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToLatexExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' tex',
+  pFile_Conversion(sPar_Txt2tags + ' tex',
                    '.tex',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19540,7 +19897,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToLoutExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' lout',
+  pFile_Conversion(sPar_Txt2tags + ' lout',
                    '.lout',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19548,7 +19905,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToManExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' man',
+  pFile_Conversion(sPar_Txt2tags + ' man',
                    '.man',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19556,7 +19913,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToMgpExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' mgp',
+  pFile_Conversion(sPar_Txt2tags + ' mgp',
                    '.mgp',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19564,7 +19921,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToMoinExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' moin',
+  pFile_Conversion(sPar_Txt2tags + ' moin',
                    '.moin',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19572,7 +19929,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToPm6Execute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' pm6',
+  pFile_Conversion(sPar_Txt2tags + ' pm6',
                    '.pm6',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19580,7 +19937,7 @@ end;
 
 procedure TfrmMain.actDeplateToSweaveExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' latex',
+  pFile_Conversion(sPar_Deplate + ' latex',
                    '.rnw',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19588,7 +19945,7 @@ end;
 
 procedure TfrmMain.actDeplateToXhtmlMathMlExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' xhtml11m',
+  pFile_Conversion(sPar_Deplate + ' xhtml11m',
                    '.xhtml',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19596,7 +19953,7 @@ end;
 
 procedure TfrmMain.actDeplateToXhtmlTransitionalExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' xhtml10t',
+  pFile_Conversion(sPar_Deplate + ' xhtml10t',
                    '.xhtml',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19604,7 +19961,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToSgmlExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' sgml',
+  pFile_Conversion(sPar_Txt2tags + ' sgml',
                    '.sgml',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19613,7 +19970,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToSweaveExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' tex',
+  pFile_Conversion(sPar_Txt2tags + ' tex',
                    '.rnw',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19621,7 +19978,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToTxtExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' txt',
+  pFile_Conversion(sPar_Txt2tags + ' txt',
                    '.txt',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19629,7 +19986,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToWikiExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' wiki',
+  pFile_Conversion(sPar_Txt2tags + ' wiki',
                    '.wiki',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19637,7 +19994,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToXhtmlExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' xhtml',
+  pFile_Conversion(sPar_Txt2tags + ' xhtml',
                    '.xhtml',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19646,7 +20003,7 @@ end;
 
 procedure TfrmMain.actDeplateToDocbookArticleExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' dbk-article',
+  pFile_Conversion(sPar_Deplate + ' dbk-article',
                    '.xml',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19654,7 +20011,7 @@ end;
 
 procedure TfrmMain.actDeplateToDocbookBookExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' dbk-book',
+  pFile_Conversion(sPar_Deplate + ' dbk-book',
                    '.xml',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19662,7 +20019,7 @@ end;
 
 procedure TfrmMain.actDeplateToDocbookReferenceExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' dbk-ref',
+  pFile_Conversion(sPar_Deplate + ' dbk-ref',
                    '.xml',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19670,7 +20027,7 @@ end;
 
 procedure TfrmMain.actDeplateToHtmlExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' html',
+  pFile_Conversion(sPar_Deplate + ' html',
                    '.html',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter);
@@ -19679,7 +20036,7 @@ end;
 
 procedure TfrmMain.actDeplateToHtmlSiteExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' htmlsite',
+  pFile_Conversion(sPar_Deplate + ' htmlsite',
                    '.html',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter,
@@ -19688,7 +20045,7 @@ end;
 
 procedure TfrmMain.actDeplateToHtmlSlidesExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParDeplate + ' htmlslides',
+  pFile_Conversion(sPar_Deplate + ' htmlslides',
                    '.html',
                    sPath_Deplate_Converter,
                    sPath_Deplate_Interpreter,
@@ -19697,7 +20054,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToDokuExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' doku',
+  pFile_Conversion(sPar_Txt2tags + ' doku',
                    '.doku',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19705,7 +20062,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToGwikiExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' gwiki',
+  pFile_Conversion(sPar_Txt2tags + ' gwiki',
                    '.gwiki',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19713,7 +20070,7 @@ end;
 
 procedure TfrmMain.actTxt2tagsToHtmlExecute(Sender: TObject);
 begin
-  pFile_Conversion(sParTxt2tags + ' html',
+  pFile_Conversion(sPar_Txt2tags + ' html',
                    '.html',
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
@@ -19903,29 +20260,29 @@ begin
   try
     dlg:= TfrmPandoc.Create(Self);
     with dlg do begin
-      rdgFrom.ItemIndex:= iPandocFrom;
-      rdgTo.ItemIndex  := iPandocTo;
-      PandocHistory    := sPandocHistory;
+      rdgFrom.ItemIndex:= iPandoc_From;
+      rdgTo.ItemIndex  := iPandoc_To;
+      PandocHistory    := sPandoc_History;
     end;
 
     if (dlg.ShowModal = mrOK) then begin
       with dlg do begin
-        iPandocFrom       := rdgFrom.ItemIndex;
-        iPandocTo         := rdgTo.ItemIndex;
-        sPandocHistory    := PandocHistory;
-        sPandocHistoryFrom:= PandocHistoryFrom;
-        sPandocHistoryTo  := PandocHistoryTo;
-        pPandocConversion(sPandocInstruction,
-                          sPandocFrom,
-                          sPandocTo);
+        iPandoc_From        := rdgFrom.ItemIndex;
+        iPandoc_To          := rdgTo.ItemIndex;
+        sPandoc_History     := PandocHistory;
+        sPandoc_History_From:= PandocHistoryFrom;
+        sPandoc_History_To  := PandocHistoryTo;
+        pPandoc_Conversion(sPandoc_Instruction,
+                           sPandoc_From,
+                           sPandoc_To);
 
         if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
       end;
     end;
   finally
     with dlg do begin
-      iPandocFrom:= rdgFrom.ItemIndex;
-      iPandocTo  := rdgTo.ItemIndex;
+      iPandoc_From:= rdgFrom.ItemIndex;
+      iPandoc_To  := rdgTo.ItemIndex;
     end;
 
     FreeAndNil(dlg);
@@ -20030,34 +20387,34 @@ end;
 
 procedure TfrmMain.actLatexToDviSingleExecute(Sender: TObject);
 begin
-  pCompile_LaTeX(sParDviSingle,
-                'N',
-                '.dvi',
-                actDviOpenAlways.Checked);
+  pCompile_LaTeX(sPar_DviSingle,
+                 'N',
+                 '.dvi',
+                 actDviOpenAlways.Checked);
 end;
 
 procedure TfrmMain.actLatexToDviBibtexExecute(Sender: TObject);
 begin
-  pCompile_LaTeX(sParDviSingle,
-                sParDviBibtex,
-                '.dvi',
-                actDviOpenAlways.Checked);
+  pCompile_LaTeX(sPar_DviSingle,
+                 sPar_DviBibtex,
+                 '.dvi',
+                 actDviOpenAlways.Checked);
 end;
 
 procedure TfrmMain.actLatexToPdfSingleExecute(Sender: TObject);
 begin
-  pCompile_LaTeX(sParPdfSingle,
-                'N',
-                '.pdf',
-                actPdfOpenAlways.Checked)
+  pCompile_LaTeX(sPar_PdfSingle,
+                 'N',
+                 '.pdf',
+                 actPdfOpenAlways.Checked)
 end;
 
 procedure TfrmMain.actLatexToPdfBibtexExecute(Sender: TObject);
 begin
-  pCompile_LaTeX(sParPdfSingle,
-                sParPdfBibtex,
-                '.pdf',
-                actPdfOpenAlways.Checked)
+  pCompile_LaTeX(sPar_PdfSingle,
+                 sPar_PdfBibtex,
+                 '.pdf',
+                 actPdfOpenAlways.Checked)
 end;
 
 // Reload file from disk
@@ -22585,16 +22942,16 @@ procedure TfrmMain.actRCont_GuiPuTTYStartCloseExecute(Sender: TObject);
 
     sCmd:= sPath +
            ' -ssh ' +
-           sPuttyUser +
+           sPutty_User +
            '@' +
-           sPuttyHost +
+           sPutty_Host +
            ' -pw ' +
-           sPuttyPassword;
+           sPutty_Password;
 
     if fOpen_CmdLine(sCmd,
                      SW_NORMAL) then begin
       sTmp:= 'R ' +
-             sParRPuTTY;
+             sPar_RPuTTY;
 
       Sleep(30*iDelay);
 
@@ -22660,7 +23017,7 @@ begin
 
     // It will open preferred Rgui
     resShellExecute:= fRunFile(sPath_Rgui,
-                               sParRgui,
+                               sPar_Rgui,
                                fRWorkDir);
 
     if (resShellExecute <= 32) then pSend_Message(resShellExecute);  // function fail
@@ -23259,7 +23616,7 @@ procedure TfrmMain.actRCont_PacInstTinnRcomExecute(Sender: TObject);
      sToSend: string;
 
   begin
-    sDepends:= fFile_ToString(sUtilsOrigin +
+    sDepends:= fFile_ToString(sUtils_Origin +
                              '\install.R');
 
     sDepends:= StringReplace(sDepends,
@@ -23557,7 +23914,7 @@ begin
         end;
 
      7: begin
-          bRtermSend_Plus:= not bRtermSend_Plus;
+          bRterm_Send_Plus:= not bRterm_Send_Plus;
           pDraw_RtermSend_Plus;
         end;
 
@@ -24999,7 +25356,7 @@ begin
 
       cRterm.RunProcess(sPath_Rterm +
                         ' ' +
-                        sParRterm,
+                        sPar_Rterm,
                         fRWorkDir);
 
       //R_Useful:= TR_Useful.Create;
@@ -25010,7 +25367,7 @@ begin
   else begin
     pCheck_Rterm;
 
-    if bRtermCloseWithoutAsk then
+    if bRterm_CloseWithoutAsk then
       pCloseRterm
     else begin
       userOption:= fMessageDlg('Save workspace image (Rhistory and Rdata)' + #13 +
@@ -25031,7 +25388,7 @@ begin
         mrNo: pCloseRterm;
 
         mrCancel: begin
-                    bRtermOptionCancel:= True;
+                    bRterm_OptionCancel:= True;
                     Exit;
                   end;
       end;
@@ -25558,8 +25915,8 @@ begin
         if Parent.CanFocus then SetFocus;
 
   actRtermIOSplitHorizontal.Checked:= Assigned(frmR_Term.synLOG2);
-  bRtermSingle    := True;
-  bRtermHorizontal:= True;
+  bRterm_Single    := True;
+  bRterm_Horizontal:= True;
 end;
 
 procedure TfrmMain.actRtermIOSplitVerticalExecute(Sender: TObject);
@@ -25596,8 +25953,8 @@ begin
         if Parent.CanFocus then SetFocus;
 
   actRtermIOSplitVertical.Checked:= Assigned(frmR_Term.synLOG2);
-  bRtermSingle    := True;
-  bRtermHorizontal:= False;
+  bRterm_Single    := True;
+  bRterm_Horizontal:= False;
 end;
 
 procedure TfrmMain.actRtermIOSplitRemoveExecute(Sender: TObject);
@@ -25639,7 +25996,7 @@ begin
   frmR_Term.synIO.Align:= alClient;
   frmR_Term.tbsLog.TabVisible:= True;
   actRtermIOSplitRemove.Checked:= (frmR_Term.synLOG2 = nil);
-  bRtermSingle:= False;
+  bRterm_Single:= False;
   pUpdate_Rterm_Appearance;
 end;
 
@@ -26137,7 +26494,7 @@ begin
                 sPackage +
                 '.R';
 
-    sInfo:= fFile_ToString(sUtilsOrigin +
+    sInfo:= fFile_ToString(sUtils_Origin +
                            '\example.R');
 
     pSetArgs(sInfo,
@@ -27034,6 +27391,153 @@ begin
   FreeAndNil(stream);
 end;
 }
+
+{
+  // Tinn-R\syntax
+  if (not DirectoryExists(sPath_Syntax)) then begin
+    CreateDir(sPath_Syntax);
+    frmTools.memIniLog.Lines.Add('   \' +
+                                 ExtractFileName(sPath_Syntax) +
+                                 '     : CREATED');
+
+    // Recover syntax from old version
+    if bSyntax_OldVersion then pUnpack_File(sPreferences_OldVersion +
+                                            '\syntax_bkp.zip',
+                                            sPath_Syntax,
+                                            '*.*');
+  end
+  else frmTools.memIniLog.Lines.Add('   \' +
+                                    ExtractFileName(sPath_Syntax) +
+                                    '     : OK');
+
+  // Tinn-R\syntax_bkp
+  if (not DirectoryExists(sPath_SyntaxBKP)) then begin
+    CreateDir(sPath_SyntaxBKP);
+    frmTools.memIniLog.Lines.Add('   \' +
+                                 ExtractFileName(sPath_SyntaxBKP) +
+                                 ' : CREATED');
+  end
+  else frmTools.memIniLog.Lines.Add('   \' +
+                                    ExtractFileName(sPath_SyntaxBKP) +
+                                    ' : OK');
+}
+
+(* Before to make it clean
+procedure TfrmMain.actColorsPreferenceExecute(Sender: TObject);
+
+//  // Make a syntax backup
+//  procedure pMake_Syntax_BKP(var sFile_Syntax_BKP: string);
+//  begin
+//    if (not DirectoryExists(sPath_Syntax_BKP)) then CreateDir(sPath_Syntax_BKP);
+//
+//    zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
+//    with zipKit do begin
+//      FileName:= sFile_Syntax_BKP;
+//      AddFiles(sPath_Syntax + '\*.*', 0);
+//      CloseArchive;
+//    end;
+//  end;
+
+//  // Make a syntax restore
+//  procedure ppMake_Syntax_REST(var sFile_Syntax_BKP: string);
+//  begin
+//    //CreateDir(sPath_Syntax);
+//    zipKit.FileName:= sFile_Syntax_BKP;
+//    zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
+//
+//    with zipKit do begin
+//      BaseDirectory:= sPath_Syntax;
+//      ExtractFiles('*.*');
+//    end;
+//
+//    zipKit.CloseArchive;
+//  end;
+
+var
+  dlg: TfrmColors;
+
+  clBrackets_Prior: TColor;
+
+  i,
+   iSyntax_Prior: integer;
+
+  sPath_Syntax_TMP: string;
+
+begin
+  // Both below will be used in case of CANCEL the dlg TfrmColors
+  clBrackets_Prior:= clBrackets;
+  iSyntax_Prior:= iSyntax;
+
+  try
+    dlg:= TfrmColors.Create(Self);
+    dlg.rdgSyntax.ItemIndex:= iSyntax;  // iSyntax = Color settings (speed)
+
+//    // Do a prior backup of all syntax files of ini
+//    sFile_Syntax_BKP:= sPath_Syntax_BKP +
+//                       '\syntax_bkp.zip';
+
+    sPath_Syntax_TMP:= sPath_Ini +
+                       '\syntax_tmp';
+
+//    pMake_Syntax_BKP(sFile_Syntax_BKP);
+    pCopy_Folder(sPath_Syntax,
+                 sPath_Syntax_TMP,
+                 '*.*');
+
+    if (dlg.ShowModal = mrOK) then begin  // OK
+      iSyntax:= dlg.rdgSyntax.ItemIndex;  // iSyntax = Color settings (speed)
+
+      with dlg do begin
+        clActiveLine           := shActiveLine.Brush.Color;
+        clBrackets             := shBrackets.Brush.Color;
+        clBG_ForAllHighlighters:= shBGAllHighlighters.Brush.Color;
+        clBG_Preferred         := shBGPreferred.Brush.Color;
+        bActiveLine            := cbActiveLineBG.Checked;
+      end;
+//      if FileExists(sFile_Syntax_BKP) then DeleteFile(sFile_Syntax_BKP);
+        if DirectoryExists(sPath_Syntax_TMP) then pDelete_Dir(sPath_Syntax_TMP);
+    end
+    else begin  // Cancel: it will restore a prior backup of all ini syntax files
+//      ppMake_Syntax_REST(sFile_Syntax_BKP);  { It was very slow! }
+      pCopy_Folder(sPath_Syntax_TMP,
+                   sPath_Syntax,
+                   '*.*');
+
+      if DirectoryExists(sPath_Syntax_TMP) then pDelete_Dir(sPath_Syntax_TMP);
+
+      clBrackets:= clBrackets_Prior;
+      iSyntax:= iSyntax_Prior;
+
+      dmSyn.pLoad_Syntax_FromIni;  // It will use iSyntax variable
+    end;
+  finally
+    synURIOpener.Editor:= nil;  // Don't remove from here!
+    FreeAndNil(dlg);
+  end;
+
+  for i:= (Self.MDIChildCount - 1) downto 0 do begin
+    with (Self.MDIChildren[i] as TfrmEditor).synEditor do begin
+      if bActiveLine then ActiveLineColor:= TColor(clActiveLine)
+                     else ActiveLineColor:= TColor(clNone);
+
+      WordWrap:= actEditorLineWrap.Checked;
+    end;
+    (Self.MDIChildren[i] as TfrmEditor).Repaint;
+  end;
+
+  // It is necessary to update pSyn_PaintTransient in cases where the brackets are selected!
+  i:= fFindTop_Window;
+
+  if Assigned(Self.MDIChildren[i] as TfrmEditor) then
+    with (Self.MDIChildren[i] as TfrmEditor) do begin
+      if Assigned(synEditor) then synEditor.Repaint;
+      if Assigned(synEditor2) then synEditor2.Repaint;
+    end;
+
+  pUpdate_Appearance(False);
+  pSet_Focus_Main;
+end;
+*)
 
 end.
 
