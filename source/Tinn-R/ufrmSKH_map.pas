@@ -156,6 +156,7 @@ type
     procedure strgHK_CustomDblClick(Sender: TObject);
     procedure strgHK_CustomSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure strgHK_SendDblClick(Sender: TObject);
+    procedure bbHelpClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -482,6 +483,22 @@ begin
     2: pRestore_Hotkey(modDados.cdRH_Custom,
                        'RH_Custom.xml',
                        frmMain.iRH_Custom_SavePoint);
+  end;
+end;
+
+procedure TfrmSKH_Map_Dlg.bbHelpClick(Sender: TObject);
+begin
+  with frmMain do begin
+    case dlgSKH_Map.pgSKH.ActivePageIndex of
+      // App
+      0: pOpen_UserGuidePDF('"Shortcuts (Application)"');
+
+      // Editor_Keystrokes
+      1: pOpen_UserGuidePDF('"Keystrokes (Editor)"');
+
+      // R_Hotkeys
+      2: pOpen_UserGuidePDF('"Hotkeys (R Send/Control/Custom)"')
+    end;
   end;
 end;
 
