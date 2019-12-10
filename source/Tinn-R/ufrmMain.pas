@@ -8414,6 +8414,10 @@ begin
   sIniDockFilePath:= (sPath_App +
                       '\Tinn_dock.ini');
 
+  // Notice: 'frmRterm' was renamed to 'frmR_Term' in version 6.01.01.02/2019
+  if (AnsiCompareStr(sVersion_ini,
+                     '6.01.01.02') < 0) then DeleteFile(sIniDockFilePath);  // Delete old Tinn_dock.ini
+
   JvAppIniFileStorage.FileName:= sIniDockFilePath;
 end;
 
