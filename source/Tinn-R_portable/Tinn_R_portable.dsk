@@ -100,8 +100,8 @@ EditViewName=Borland.FormDesignerView
 [View3]
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-CursorX=33
-CursorY=8979
+CursorX=77
+CursorY=8948
 TopLine=8934
 LeftCol=1
 Elisions=

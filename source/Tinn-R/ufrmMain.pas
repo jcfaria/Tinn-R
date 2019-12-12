@@ -1,4 +1,4 @@
-﻿{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
+{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
 {$MINSTACKSIZE $00004000}
 {$MAXSTACKSIZE $00100000}
 {$IMAGEBASE $00400000}
@@ -282,13 +282,17 @@ type
     actFile_CloseLeft: TAction;
     actFile_CloseOthers: TAction;
     actFile_CloseRight: TAction;
+    actFile_FullPathUnix: TAction;
+    actFile_FullPathWindows: TAction;
     actFile_New: TAction;
     actFile_Open: TAction;
-    actFiles_Add: TAction;
-    actFiles_AddCurrent: TAction;
+    actFile_Print: TAction;
+    actFile_Reload: TAction;
     actFile_Save: TAction;
     actFile_SaveAll: TAction;
     actFile_SaveAs: TAction;
+    actFiles_Add: TAction;
+    actFiles_AddCurrent: TAction;
     actFiles_CloseAll: TAction;
     actFiles_CloseAllOfGroup: TAction;
     actFiles_FullPathUnix: TAction;
@@ -305,15 +309,13 @@ type
     actFontDecrease: TAction;
     actFontIncrease: TAction;
     actFormatR: TAction;
-    actFile_FullPathUnix: TAction;
-    actFile_FullPathWindows: TAction;
     actGotoLine: TAction;
     actGroup_CollapseAll: TAction;
     actGroup_DeleteAll: TAction;
     actGroup_DeleteCurrent: TAction;
     actGroup_ExpandAll: TAction;
-    actGroup_Rename: TAction;
     actGroup_New: TAction;
+    actGroup_Rename: TAction;
     actGutterVisible: TAction;
     actHexViewerVisible: TAction;
     actHtmlOpenAlways: TAction;
@@ -355,6 +357,7 @@ type
     actLatex_HeaderSubParagraph: TAction;
     actLatex_HeaderSubSection: TAction;
     actLatex_HeaderSubSubSection: TAction;
+    actLatexClearWaste: TAction;
     actLatexMakeIndex: TAction;
     actLatexToDviBibtex: TAction;
     actLatexToDviSingle: TAction;
@@ -375,13 +378,13 @@ type
     actNotification: TAction;
     actNotification_US: TAction;
     actOnTop: TAction;
-    actOpenMaximized: TAction;
     actOpen_MRU: TAction;
+    actOpenCurrentFile: TAction;
+    actOpenMaximized: TAction;
     actOrganizeScreen: TAction;
     actPdfOpenAlways: TAction;
     actPdfOpenFile: TAction;
     actPgFilesVisible: TAction;
-    actFile_Print: TAction;
     actProject_Close: TAction;
     actProject_DeleteCurrent: TAction;
     actProject_Edit: TAction;
@@ -402,6 +405,7 @@ type
     actRcard_Help: TAction;
     actRcard_HelpSelected: TAction;
     actRcard_Insert: TAction;
+    actRcard_OpenExampleSelected: TAction;
     actRComplexDefault: TAction;
     actRCont_ClearAll: TAction;
     actRCont_ClearConsole: TAction;
@@ -416,6 +420,7 @@ type
     actRCont_ListAllObjects: TAction;
     actRCont_ListVariableNames: TAction;
     actRCont_ListVariableStructure: TAction;
+    actRCont_OpenExampleSelectedWord: TAction;
     actRCont_PacInstall: TAction;
     actRCont_PacInstalled: TAction;
     actRCont_PacInstallZip: TAction;
@@ -433,12 +438,9 @@ type
     actRCont_SetWorkDirectory: TAction;
     actRCont_TCPConnection: TAction;
     actRCont_TermStartClose: TAction;
-    actRSend_CurrentLineToTop: TAction;
     actReadOnly: TAction;
     actREcho: TAction;
-    actFile_Reload: TAction;
     actReloadLatexSymbols: TAction;
-    actRExpl_EnvironmentRefresh: TAction;
     actReplace: TAction;
     actRestoreDatabase: TAction;
     actRestoreSystemConfiguration: TAction;
@@ -446,13 +448,16 @@ type
     actRExpl_Basic: TAction;
     actRExpl_Content: TAction;
     actRExpl_Edit: TAction;
+    actRExpl_EnvironmentRefresh: TAction;
     actRExpl_ExampleSelected: TAction;
     actRExpl_ExpASCII: TAction;
     actRExpl_ExpRaw: TAction;
+    actRExpl_FilterRefresh: TAction;
     actRExpl_Fix: TAction;
     actRExpl_Help: TAction;
     actRExpl_HelpSelected: TAction;
     actRExpl_Names: TAction;
+    actRExpl_OpenExampleSelected: TAction;
     actRExpl_Plot: TAction;
     actRExpl_Refresh: TAction;
     actRExpl_Remove: TAction;
@@ -463,7 +468,6 @@ type
     actRExpl_Style: TAction;
     actRExpl_Summary: TAction;
     actRExplorerVisible: TAction;
-    actRExpl_FilterRefresh: TAction;
     actRguiReturnFocus: TAction;
     actRmirrors_CopyHost: TAction;
     actRmirrors_CopyURL: TAction;
@@ -475,6 +479,7 @@ type
     actRmirrors_Update: TAction;
     actRSend_BlockMarked: TAction;
     actRSend_Contiguous: TAction;
+    actRSend_CurrentLineToTop: TAction;
     actRSend_CursorToBeginningLine: TAction;
     actRSend_CursorToEndLine: TAction;
     actRSend_File: TAction;
@@ -483,11 +488,16 @@ type
     actRSend_Line: TAction;
     actRSend_LinesToEndPage: TAction;
     actRSend_Selection: TAction;
+    actRSend_Smart: TAction;
     actRSend_Sweave: TAction;
     actRSimpleDefault: TAction;
     actRtermAutoHide: TAction;
     actRtermDivide: TAction;
     actRtermEditorSetFocus: TAction;
+    actRtermIO_R: TAction;
+    actRtermIO_R_nML: TAction;
+    actRtermIO_Text: TAction;
+    actRtermIO_Text_nML: TAction;
     actRtermIOandLOGClear: TAction;
     actRtermIOClear: TAction;
     actRtermIOHistoryNext: TAction;
@@ -502,6 +512,10 @@ type
     actRtermIOSplitVertical: TAction;
     actRtermLoadHistory: TAction;
     actRtermLoadWorkspace: TAction;
+    actRtermLOG_R: TAction;
+    actRtermLOG_R_nML: TAction;
+    actRtermLOG_Text: TAction;
+    actRtermLOG_Text_nML: TAction;
     actRtermLOGClear: TAction;
     actRtermLOGLineWrap: TAction;
     actRtermLOGPrint: TAction;
@@ -512,10 +526,6 @@ type
     actRtermMinimize: TAction;
     actRtermSaveHistory: TAction;
     actRtermSaveWorkspace: TAction;
-    actRtermIO_R: TAction;
-    actRtermIO_Text: TAction;
-    actRtermLOG_R: TAction;
-    actRtermLOG_Text: TAction;
     actRtermTabsBottom: TAction;
     actRtermTabsLeft: TAction;
     actRtermTabsRight: TAction;
@@ -533,6 +543,7 @@ type
     actShortcuts_Help: TAction;
     actShowAllBars: TAction;
     actShowAppOptions: TAction;
+    actSKH_map: TAction;
     actSortDate: TAction;
     actSortNumber: TAction;
     actSortString: TAction;
@@ -607,10 +618,13 @@ type
     Bottom1: TMenuItem;
     Bottom2: TMenuItem;
     Bottom3: TMenuItem;
+    btRedo: TToolButton;
+    btUndo: TToolButton;
     Card1: TMenuItem;
     cbSpellLanguage: TSpellLanguageComboBox;
     cbSyntax: TComboBox;
     cdMain: TColorDialog;
+    Clear1: TMenuItem;
     Clear3: TMenuItem;
     Closeallselectedgroup2: TMenuItem;
     Commentsshowhide1: TMenuItem;
@@ -634,6 +648,12 @@ type
     Exampleselected1: TMenuItem;
     Exampleselected2: TMenuItem;
     Explorer1: TMenuItem;
+    ext1: TMenuItem;
+    extnomultlinestring1: TMenuItem;
+    extnomultlinestring2: TMenuItem;
+    extnomultlinestring3: TMenuItem;
+    extnomultlinestring4: TMenuItem;
+    extnomultlinestring5: TMenuItem;
     Fontofactivecontrolnotpermanent1: TMenuItem;
     GoogleCodeWiki1: TMenuItem;
     Help1: TMenuItem;
@@ -645,7 +665,9 @@ type
     Helpselected2: TMenuItem;
     Hewviewershowhide1: TMenuItem;
     imlProject: TPngImageList;
+    imlRAVailable: TPngImageList;
     imlRexplorer: TPngImageList;
+    imlRSend_Plus: TPngImageList;
     imlSearch: TPngImageList;
     imlStatusBar: TPngImageList;
     imlTinnR: TPngImageList;
@@ -670,6 +692,7 @@ type
     Left1: TMenuItem;
     Left2: TMenuItem;
     Linewrap1: TMenuItem;
+    Loadstream1: TMenuItem;
     Log1: TMenuItem;
     Log2: TMenuItem;
     Lout1: TMenuItem;
@@ -700,6 +723,12 @@ type
     menControlRRemoveAllObjects: TMenuItem;
     menControlRSetWorkDir: TMenuItem;
     menEdit: TMenuItem;
+    menEdit_Copy: TMenuItem;
+    menEdit_Cut: TMenuItem;
+    menEdit_Paste: TMenuItem;
+    menEdit_Redo: TMenuItem;
+    menEdit_Selectall: TMenuItem;
+    menEdit_Undo: TMenuItem;
     menEditComment: TMenuItem;
     menEditCopyFormated: TMenuItem;
     menEditCopyFormatedHtml: TMenuItem;
@@ -756,6 +785,7 @@ type
     menForUTF8: TMenuItem;
     menForWord: TMenuItem;
     menHelAbout: TMenuItem;
+    menHelCheckForUpdate: TMenuItem;
     menHelCitation: TMenuItem;
     menHelExampleOfScript: TMenuItem;
     menHelFileConversion: TMenuItem;
@@ -768,6 +798,7 @@ type
     menHelpRecognizedWords: TMenuItem;
     menHelpStatHyperstat: TMenuItem;
     menHelpStatJSS: TMenuItem;
+    menHelpStatRJournal: TMenuItem;
     menHelpStatStatSoft: TMenuItem;
     menHelSecrets: TMenuItem;
     menHelUserGuide: TMenuItem;
@@ -820,6 +851,7 @@ type
     menMarksMark: TMenuItem;
     menMarksUnmark: TMenuItem;
     menMarksUnmarkAll: TMenuItem;
+    menOption_SKH: TMenuItem;
     menOptionAlwaysOnTop: TMenuItem;
     menOptionColorPreference: TMenuItem;
     menOptionEcho: TMenuItem;
@@ -933,12 +965,14 @@ type
     menSendToR: TMenuItem;
     menSendToRAll: TMenuItem;
     menSendToRBlockMarked: TMenuItem;
+    menSendToRContiguous: TMenuItem;
     menSendToRCursorToBegginingLine: TMenuItem;
     menSendToRCursorToEndLine: TMenuItem;
     menSendToRKnitr: TMenuItem;
     menSendToRLine: TMenuItem;
     menSendToRLinesToEndPage: TMenuItem;
     menSendToRSelection: TMenuItem;
+    menSendToRSmart: TMenuItem;
     menTools: TMenuItem;
     menToolsAsciiChart: TMenuItem;
     menToolsBackup: TMenuItem;
@@ -1004,6 +1038,7 @@ type
     menToolsViewerHtmlOpenAlways: TMenuItem;
     menToolsViewerHtmlOpenCurrent: TMenuItem;
     menToolsViewerHtmlOpenFile: TMenuItem;
+    menToolsViewerOpenCurrent: TMenuItem;
     menToolsViewerPdf: TMenuItem;
     menToolsViewerPdfOpenAlways: TMenuItem;
     menToolsViewerPdfOpenFile: TMenuItem;
@@ -1113,6 +1148,7 @@ type
     menWebRgui: TMenuItem;
     menWebRguiRComander: TMenuItem;
     menWebRGuiRStudio: TMenuItem;
+    menWebRGuiRTVS: TMenuItem;
     menWebRguiTinnR: TMenuItem;
     menWebRGuiTinnRLEC: TMenuItem;
     menWebRguiTinnRSourceForge: TMenuItem;
@@ -1120,6 +1156,7 @@ type
     menWebRInformation: TMenuItem;
     menWebRInformationsBioconductor: TMenuItem;
     menWebRInformationsCRAN: TMenuItem;
+    menWebRInformationsMRAN: TMenuItem;
     menWebRInformationsNews: TMenuItem;
     menWebRInformationsOmega: TMenuItem;
     menWebRInformationsRWiki: TMenuItem;
@@ -1182,6 +1219,7 @@ type
     N117: TMenuItem;
     N118: TMenuItem;
     N119: TMenuItem;
+    N12: TMenuItem;
     N120: TMenuItem;
     N121: TMenuItem;
     N122: TMenuItem;
@@ -1212,6 +1250,7 @@ type
     N147: TMenuItem;
     N148: TMenuItem;
     N149: TMenuItem;
+    N15: TMenuItem;
     N150: TMenuItem;
     N151: TMenuItem;
     N152: TMenuItem;
@@ -1278,6 +1317,7 @@ type
     N30: TMenuItem;
     N31: TMenuItem;
     N32: TMenuItem;
+    N33: TMenuItem;
     N34: TMenuItem;
     N34_OLD: TMenuItem;
     N36: TMenuItem;
@@ -1355,6 +1395,7 @@ type
     N97: TMenuItem;
     N98: TMenuItem;
     N99: TMenuItem;
+    Nvim_R_plugin: TMenuItem;
     odMain: TOpenDialog;
     oolsdivide1: TMenuItem;
     oolsmaximize1: TMenuItem;
@@ -1364,6 +1405,9 @@ type
     op2: TMenuItem;
     op3: TMenuItem;
     Openallselectedgroup1: TMenuItem;
+    Openexampleselected1: TMenuItem;
+    Openexampleselected2: TMenuItem;
+    Openexampleselected3: TMenuItem;
     Opennode1: TMenuItem;
     OpenURLactive1: TMenuItem;
     OpenURLcurrent1: TMenuItem;
@@ -1376,8 +1420,6 @@ type
     pmemIOClear: TMenuItem;
     pmemIOClearIO: TMenuItem;
     pmemIOClearIOLog: TMenuItem;
-    pmenIO_Copy: TMenuItem;
-    pmenIO_Cut: TMenuItem;
     pmemIOEdit: TMenuItem;
     pmemIOFile: TMenuItem;
     pmemIOFilePrint: TMenuItem;
@@ -1393,9 +1435,6 @@ type
     pmemIOHistoryPrior: TMenuItem;
     pmemIOHistorySave: TMenuItem;
     pmemIOLineWrap: TMenuItem;
-    pmenIO_Paste: TMenuItem;
-    pmenIO_Redo: TMenuItem;
-    pmenIO_SelectAll: TMenuItem;
     pmemIOSetFocusConsole: TMenuItem;
     pmemIOSetFocusEditor: TMenuItem;
     pmemIOSetFocusLog: TMenuItem;
@@ -1411,7 +1450,6 @@ type
     pmemIOSplitVertical: TMenuItem;
     pmemIOSyntaxR: TMenuItem;
     pmemIOSyntaxText: TMenuItem;
-    pmenIO_Undo: TMenuItem;
     pmemIOWorkspace: TMenuItem;
     pmemIOWorkspaceLoad: TMenuItem;
     pmemIOWorkspaceSave: TMenuItem;
@@ -1419,12 +1457,6 @@ type
     pmemLogClearIOLog: TMenuItem;
     pmemLogClearLog: TMenuItem;
     pmemLogEdit: TMenuItem;
-    pmenLOG_Copy: TMenuItem;
-    pmenLOG_Cut: TMenuItem;
-    pmenLOG_Paste: TMenuItem;
-    pmenLOG_Redo: TMenuItem;
-    pmenLOG_SelectAll: TMenuItem;
-    pmenLOG_Undo: TMenuItem;
     pmemLogFile: TMenuItem;
     pmemLogFilePrint: TMenuItem;
     pmemLogFileSave: TMenuItem;
@@ -1456,6 +1488,7 @@ type
     pmemRResSendLine: TMenuItem;
     pmemRResSendLinesToEndPage: TMenuItem;
     pmemRResSendSelection: TMenuItem;
+    pmemRResSendSmart: TMenuItem;
     pmemRResSendSweave: TMenuItem;
     pmemSpellClearAll: TMenuItem;
     pmemSpellCopy: TMenuItem;
@@ -1469,6 +1502,12 @@ type
     pmenComments: TJvPopupMenu;
     pmenCompletion: TJvPopupMenu;
     pmenCompletionMemo: TJvPopupMenu;
+    pmenEdit_Copy: TMenuItem;
+    pmenEdit_Cut: TMenuItem;
+    pmenEdit_Paste: TMenuItem;
+    pmenEdit_Redo: TMenuItem;
+    pmenEdit_SelectAll: TMenuItem;
+    pmenEdit_Undo: TMenuItem;
     pmenEditor: TJvPopupMenu;
     pmenEditorClose: TMenuItem;
     pmenEditorCloseAll: TMenuItem;
@@ -1477,10 +1516,8 @@ type
     pmenEditorCloseOthers: TMenuItem;
     pmenEditorCloseRight: TMenuItem;
     pmenEditorComment: TMenuItem;
-    pmenEdit_Copy: TMenuItem;
     pmenEditorCopyFormatted: TMenuItem;
     pmenEditorCount: TMenuItem;
-    pmenEdit_Cut: TMenuItem;
     pmenEditorEdit: TMenuItem;
     pmenEditorFile: TMenuItem;
     pmenEditorFont: TMenuItem;
@@ -1491,15 +1528,12 @@ type
     pmenEditorFormatSelection: TMenuItem;
     pmenEditorFormatWord: TMenuItem;
     pmenEditorLineWrap: TMenuItem;
-    pmenEdit_Paste: TMenuItem;
     pmenEditorPrint: TMenuItem;
     pmenEditorReadOnly: TMenuItem;
-    pmenEdit_Redo: TMenuItem;
     pmenEditorReload: TMenuItem;
     pmenEditorSave: TMenuItem;
     pmenEditorSaveAll: TMenuItem;
     pmenEditorSaveAs: TMenuItem;
-    pmenEdit_SelectAll: TMenuItem;
     pmenEditorSort: TMenuItem;
     pmenEditorSortDate: TMenuItem;
     pmenEditorSortNumber: TMenuItem;
@@ -1507,7 +1541,6 @@ type
     pmenEditorSpell: TMenuItem;
     pmenEditorUncommentAll: TMenuItem;
     pmenEditorUncommentFirsts: TMenuItem;
-    pmenEdit_Undo: TMenuItem;
     pmenFilePath: TMenuItem;
     pmenFilePathUnix: TMenuItem;
     pmenFilePathWindows: TMenuItem;
@@ -1534,7 +1567,19 @@ type
     pmenGroupNew_OLD: TMenuItem;
     pmenGroupRename_OLD: TMenuItem;
     pmenIO: TJvPopupMenu;
+    pmenIO_Copy: TMenuItem;
+    pmenIO_Cut: TMenuItem;
+    pmenIO_Paste: TMenuItem;
+    pmenIO_Redo: TMenuItem;
+    pmenIO_SelectAll: TMenuItem;
+    pmenIO_Undo: TMenuItem;
     pmenLOG: TJvPopupMenu;
+    pmenLOG_Copy: TMenuItem;
+    pmenLOG_Cut: TMenuItem;
+    pmenLOG_Paste: TMenuItem;
+    pmenLOG_Redo: TMenuItem;
+    pmenLOG_SelectAll: TMenuItem;
+    pmenLOG_Undo: TMenuItem;
     pmenLogFont: TMenuItem;
     pmenLogFontDecrease: TMenuItem;
     pmenLogFontIncrease: TMenuItem;
@@ -1672,6 +1717,12 @@ type
     Results2: TMenuItem;
     Right1: TMenuItem;
     Right2: TMenuItem;
+    Rnomultlinestring1: TMenuItem;
+    Rnomultlinestring2: TMenuItem;
+    Rnomultlinestring3: TMenuItem;
+    Rnomultlinestring4: TMenuItem;
+    Rnomultlinestring5: TMenuItem;
+    Rnomultlinestring6: TMenuItem;
     Rshowhide1: TMenuItem;
     Rtermautohideonoff1: TMenuItem;
     Rtermautohideonoff2: TMenuItem;
@@ -1690,13 +1741,14 @@ type
     SpellChecker: TSpellChecker;
     stbMain: TStatusBar;
     Sweave1: TMenuItem;
-    synEditor2_Tip: TSynCompletionProposal;
     synEditor_Tip: TSynCompletionProposal;
+    synEditor2_Tip: TSynCompletionProposal;
     synEditPrint: TSynEditPrint;
     SynEditSearch: TSynEditSearch;
     synExporterHtml: TSynExporterHtml;
     synExporterRtf: TSynExporterRtf;
     synExporterTeX: TSynExporterTeX;
+    synIO_History: TSynCompletionProposal;
     synIO_Tip: TSynCompletionProposal;
     synMR: TSynMacroRecorder;
     synURIOpener: TSynURIOpener;
@@ -1733,6 +1785,7 @@ type
     TBItem25: TTBItem;
     TBItem27: TTBItem;
     TBItem28: TTBItem;
+    TBItem29: TTBItem;
     TBItem3: TTBItem;
     TBItem30: TTBItem;
     TBItem31: TTBItem;
@@ -1752,6 +1805,7 @@ type
     TBItem44: TTBItem;
     TBItem45: TTBItem;
     TBItem46: TTBItem;
+    TBItem47: TTBItem;
     TBItem48: TTBItem;
     TBItem49: TTBItem;
     TBItem5: TTBItem;
@@ -1773,6 +1827,8 @@ type
     TBItem64: TTBItem;
     TBItem65: TTBItem;
     TBItem66: TTBItem;
+    TBItem67: TTBItem;
+    TBItem68: TTBItem;
     TBItem7: TTBItem;
     TBItem72: TTBItem;
     TBItem73: TTBItem;
@@ -1896,8 +1952,6 @@ type
     tobView: TTBToolbar;
     ToolButton1: TToolButton;
     ToolButton11: TToolButton;
-    btUndo: TToolButton;
-    btRedo: TToolButton;
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
     ToolButton7: TToolButton;
@@ -1914,7 +1968,6 @@ type
     UTF16BE1: TMenuItem;
     UTF16LE1: TMenuItem;
     UTF81: TMenuItem;
-    Nvim_R_plugin: TMenuItem;
     Wikipedia1: TMenuItem;
     WIN1: TMenuItem;
     Windowsexplorer1: TMenuItem;
@@ -1922,59 +1975,6 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
-    actOpenCurrentFile: TAction;
-    menToolsViewerOpenCurrent: TMenuItem;
-    TBItem29: TTBItem;
-    actRCont_OpenExampleSelectedWord: TAction;
-    TBItem47: TTBItem;
-    Openexampleselected1: TMenuItem;
-    actRExpl_OpenExampleSelected: TAction;
-    Openexampleselected2: TMenuItem;
-    Openexampleselected3: TMenuItem;
-    actRtermIO_Text_nML: TAction;
-    actRtermIO_R_nML: TAction;
-    actRtermLOG_Text_nML: TAction;
-    actRtermLOG_R_nML: TAction;
-    extnomultlinestring1: TMenuItem;
-    Rnomultlinestring1: TMenuItem;
-    extnomultlinestring2: TMenuItem;
-    Rnomultlinestring2: TMenuItem;
-    extnomultlinestring3: TMenuItem;
-    Rnomultlinestring3: TMenuItem;
-    extnomultlinestring4: TMenuItem;
-    Rnomultlinestring4: TMenuItem;
-    menWebRGuiRTVS: TMenuItem;
-    menHelpStatRJournal: TMenuItem;
-    menWebRInformationsMRAN: TMenuItem;
-    menHelCheckForUpdate: TMenuItem;
-    actRcard_OpenExampleSelected: TAction;
-    imlRAVailable: TPngImageList;
-    actRSend_Smart: TAction;
-    TBItem67: TTBItem;
-    N33: TMenuItem;
-    pmemRResSendSmart: TMenuItem;
-    menSendToRSmart: TMenuItem;
-    ext1: TMenuItem;
-    Rnomultlinestring5: TMenuItem;
-    extnomultlinestring5: TMenuItem;
-    Rnomultlinestring6: TMenuItem;
-    imlRSend_Plus: TPngImageList;
-    synIO_History: TSynCompletionProposal;
-    menOption_SKH: TMenuItem;
-    Clear1: TMenuItem;
-    actLatexClearWaste: TAction;
-    TBItem68: TTBItem;
-    actSKH_map: TAction;
-    Loadstream1: TMenuItem;
-    menEdit_Undo: TMenuItem;
-    menEdit_Redo: TMenuItem;
-    N12: TMenuItem;
-    N15: TMenuItem;
-    menEdit_Copy: TMenuItem;
-    menEdit_Paste: TMenuItem;
-    menEdit_Cut: TMenuItem;
-    menEdit_Selectall: TMenuItem;
-    menSendToRContiguous: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -1996,14 +1996,14 @@ type
     procedure actCompletion_CopyFunctionExecute(Sender: TObject);
     procedure actCompletion_EditExecute(Sender: TObject);
     procedure actCompletion_ExampleSelectedExecute(Sender: TObject);
-    procedure actCompletionExecute(Sender: TObject);
     procedure actCompletion_HelpExecute(Sender: TObject);
     procedure actCompletion_HelpSelectedExecute(Sender: TObject);
     procedure actCompletion_InsertExecute(Sender: TObject);
-    procedure actCopyFormattedExecute(Sender: TObject);
+    procedure actCompletionExecute(Sender: TObject);
     procedure actCopyFormatted_HTMLExecute(Sender: TObject);
     procedure actCopyFormatted_RTFExecute(Sender: TObject);
     procedure actCopyFormatted_TEXExecute(Sender: TObject);
+    procedure actCopyFormattedExecute(Sender: TObject);
     procedure actCountExecute(Sender: TObject);
     procedure actDatabaseVisibleExecute(Sender: TObject);
     procedure actDataCommentsVisibleExecute(Sender: TObject);
@@ -2035,13 +2035,17 @@ type
     procedure actFile_CloseLeftExecute(Sender: TObject);
     procedure actFile_CloseOthersExecute(Sender: TObject);
     procedure actFile_CloseRightExecute(Sender: TObject);
+    procedure actFile_FullPathUnixExecute(Sender: TObject);
+    procedure actFile_FullPathWindowsExecute(Sender: TObject);
     procedure actFile_NewExecute(Sender: TObject);
     procedure actFile_OpenExecute(Sender: TObject);
-    procedure actFiles_AddCurrentExecute(Sender: TObject);
-    procedure actFiles_AddExecute(Sender: TObject);
+    procedure actFile_PrintExecute(Sender: TObject);
+    procedure actFile_ReloadExecute(Sender: TObject);
     procedure actFile_SaveAllExecute(Sender: TObject);
     procedure actFile_SaveAsExecute(Sender: TObject);
     procedure actFile_SaveExecute(Sender: TObject);
+    procedure actFiles_AddCurrentExecute(Sender: TObject);
+    procedure actFiles_AddExecute(Sender: TObject);
     procedure actFiles_CloseAllExecute(Sender: TObject);
     procedure actFiles_CloseAllOfGroupExecute(Sender: TObject);
     procedure actFiles_FullPathUnixExecute(Sender: TObject);
@@ -2058,15 +2062,13 @@ type
     procedure actFontDecreaseExecute(Sender: TObject);
     procedure actFontIncreaseExecute(Sender: TObject);
     procedure actFormatRExecute(Sender: TObject);
-    procedure actFile_FullPathUnixExecute(Sender: TObject);
-    procedure actFile_FullPathWindowsExecute(Sender: TObject);
     procedure actGotoLineExecute(Sender: TObject);
     procedure actGroup_CollapseAllExecute(Sender: TObject);
     procedure actGroup_DeleteAllExecute(Sender: TObject);
     procedure actGroup_DeleteCurrentExecute(Sender: TObject);
     procedure actGroup_ExpandAllExecute(Sender: TObject);
-    procedure actGroup_RenameExecute(Sender: TObject);
     procedure actGroup_NewExecute(Sender: TObject);
+    procedure actGroup_RenameExecute(Sender: TObject);
     procedure actGutterVisibleExecute(Sender: TObject);
     procedure actHexViewerVisibleExecute(Sender: TObject);
     procedure actHtmlOpenAlwaysExecute(Sender: TObject);
@@ -2079,8 +2081,8 @@ type
     procedure actLatex_AlgebricFracExecute(Sender: TObject);
     procedure actLatex_AlgebricSqrtExecute(Sender: TObject);
     procedure actLatex_AlgebricSqrtNExecute(Sender: TObject);
-    procedure actLatexClearWasteExecute(Sender: TObject);
     procedure actLatex_DimensionalExecute(Sender: TObject);
+    procedure actLatexClearWasteExecute(Sender: TObject);
     procedure actLatexMakeIndexExecute(Sender: TObject);
     procedure actLatexToDviBibtexExecute(Sender: TObject);
     procedure actLatexToDviSingleExecute(Sender: TObject);
@@ -2101,14 +2103,13 @@ type
     procedure actNotification_USExecute(Sender: TObject);
     procedure actNotificationExecute(Sender: TObject);
     procedure actOnTopExecute(Sender: TObject);
+    procedure actOpen_MRUExecute(Sender: TObject);
     procedure actOpenCurrentFileExecute(Sender: TObject);
     procedure actOpenMaximizedExecute(Sender: TObject);
-    procedure actOpen_MRUExecute(Sender: TObject);
     procedure actOrganizeScreenExecute(Sender: TObject);
     procedure actPdfOpenAlwaysExecute(Sender: TObject);
     procedure actPdfOpenFileExecute(Sender: TObject);
     procedure actPgFilesVisibleExecute(Sender: TObject);
-    procedure actFile_PrintExecute(Sender: TObject);
     procedure actProject_CloseExecute(Sender: TObject);
     procedure actProject_DeleteCurrentExecute(Sender: TObject);
     procedure actProject_EditExecute(Sender: TObject);
@@ -2145,7 +2146,6 @@ type
     procedure actRCont_ListVariableNamesExecute(Sender: TObject);
     procedure actRCont_ListVariableStructureExecute(Sender: TObject);
     procedure actRCont_OpenExampleSelectedWordExecute(Sender: TObject);
-    procedure actRContPacAvailableExecute(Sender: TObject);
     procedure actRCont_PacInstalledExecute(Sender: TObject);
     procedure actRCont_PacInstallExecute(Sender: TObject);
     procedure actRCont_PacInstallZipExecute(Sender: TObject);
@@ -2163,12 +2163,10 @@ type
     procedure actRCont_SetWorkDirectoryExecute(Sender: TObject);
     procedure actRCont_TCPConnectionExecute(Sender: TObject);
     procedure actRCont_TermStartCloseExecute(Sender: TObject);
-    procedure actRSend_CurrentLineToTopExecute(Sender: TObject);
+    procedure actRContPacAvailableExecute(Sender: TObject);
     procedure actReadOnlyExecute(Sender: TObject);
     procedure actREchoExecute(Sender: TObject);
-    procedure actFile_ReloadExecute(Sender: TObject);
     procedure actReloadLatexSymbolsExecute(Sender: TObject);
-    procedure actRExpl_EnvironmentRefreshExecute(Sender: TObject);
     procedure actReplaceExecute(Sender: TObject);
     procedure actRestoreDatabaseExecute(Sender: TObject);
     procedure actRestoreSystemConfigurationExecute(Sender: TObject);
@@ -2176,9 +2174,11 @@ type
     procedure actRExpl_BasicExecute(Sender: TObject);
     procedure actRExpl_ContentExecute(Sender: TObject);
     procedure actRExpl_EditExecute(Sender: TObject);
+    procedure actRExpl_EnvironmentRefreshExecute(Sender: TObject);
     procedure actRExpl_ExampleSelectedExecute(Sender: TObject);
     procedure actRExpl_ExpASCIIExecute(Sender: TObject);
     procedure actRExpl_ExpRawExecute(Sender: TObject);
+    procedure actRExpl_FilterRefreshExecute(Sender: TObject);
     procedure actRExpl_FixExecute(Sender: TObject);
     procedure actRExpl_HelpExecute(Sender: TObject);
     procedure actRExpl_HelpSelectedExecute(Sender: TObject);
@@ -2194,7 +2194,6 @@ type
     procedure actRExpl_StyleExecute(Sender: TObject);
     procedure actRExpl_SummaryExecute(Sender: TObject);
     procedure actRExplorerVisibleExecute(Sender: TObject);
-    procedure actRExpl_FilterRefreshExecute(Sender: TObject);
     procedure actRguiReturnFocusExecute(Sender: TObject);
     procedure actRmirrors_CopyHostExecute(Sender: TObject);
     procedure actRmirrors_CopyURLExecute(Sender: TObject);
@@ -2206,6 +2205,7 @@ type
     procedure actRmirrors_UpdateExecute(Sender: TObject);
     procedure actRSend_BlockMarkedExecute(Sender: TObject);
     procedure actRSend_ContiguousExecute(Sender: TObject);
+    procedure actRSend_CurrentLineToTopExecute(Sender: TObject);
     procedure actRSend_CursorToBeginningLineExecute(Sender: TObject);
     procedure actRSend_CursorToEndLineExecute(Sender: TObject);
     procedure actRSend_FileExecute(Sender: TObject);
@@ -2266,9 +2266,9 @@ type
     procedure actSearch_ExpandOneExecute(Sender: TObject);
     procedure actSearch_InFilesExecute(Sender: TObject);
     procedure actSearchVisibleExecute(Sender: TObject);
-    procedure actShortcutsCustomizationSaveExecute(Sender: TObject);
     procedure actShortcuts_EditExecute(Sender: TObject);
     procedure actShortcuts_HelpExecute(Sender: TObject);
+    procedure actShortcutsCustomizationSaveExecute(Sender: TObject);
     procedure actShowAllBarsExecute(Sender: TObject);
     procedure actShowAppOptionsExecute(Sender: TObject);
     procedure actSKH_mapExecute(Sender: TObject);
@@ -2319,8 +2319,8 @@ type
     procedure actTxt2tagsToWikiExecute(Sender: TObject);
     procedure actTxt2tagsToXhtmlExecute(Sender: TObject);
     procedure actTxt2tagsVisibleExecute(Sender: TObject);
-    procedure actUncommentExecute(Sender: TObject);
     procedure actUncomment_FirstExecute(Sender: TObject);
+    procedure actUncommentExecute(Sender: TObject);
     procedure actUnindentBlockExecute(Sender: TObject);
     procedure actUNIXExecute(Sender: TObject);
     procedure actUnmarkAllExecute(Sender: TObject);
@@ -2541,12 +2541,11 @@ type
 
   private
     { Private declarations }
+    //sPreferences_OldVersion        : string;
     aImg                           : Array[0..9] of TBitmap;
     bAlreadyOrganized              : boolean;
     bAskActualizeChangedFiles      : boolean;
-//    bColors_OldVersion             : boolean;
     bConectionError                : boolean;
-//    bCustom_OldVersion             : boolean;
     bDataCompletionAnywhere        : boolean;
     bInExecute                     : boolean;
     bIOLineWrap                    : boolean;
@@ -2579,7 +2578,6 @@ type
     bSearch_InSub                  : boolean;
     bSearch_OpenFiles              : boolean;
     bStarting_Up                   : boolean;
-//    bSyntax_OldVersion             : boolean;
     bTCPIPRunning                  : boolean;
     bToolsCanFloat                 : boolean;
     bUpdate_Cache                  : boolean;
@@ -2594,20 +2592,20 @@ type
     bUpdate_RH_Send                : boolean;
     bUpdate_Rmirrors               : boolean;
     bUpdate_Shortcuts              : boolean;
-    bUpdate_Syntax_Default         : boolean;
     bUpdate_Syntax_Dark            : boolean;
+    bUpdate_Syntax_Default         : boolean;
     bUpdate_Syntax_Gray            : boolean;
     bUpdate_Syntax_LGray           : boolean;
     iCols                          : integer;
-    ini_Editor                     : TIniFile;
-    ini_Editor_Tmp                 : TIniFile;
-    ini_Tinn                       : TIniFile;
-    ini_Tinn_Tmp                   : TIniFile;
     iIO_Syntax                     : integer;
     iLastFile                      : integer;
     iLastSearch                    : integer;
     iLatexDimensionalElement       : integer;
     iLOG_Syntax                    : integer;
+    ini_Editor                     : TIniFile;
+    ini_Editor_Tmp                 : TIniFile;
+    ini_Tinn                       : TIniFile;
+    ini_Tinn_Tmp                   : TIniFile;
     iReformatRSplit                : integer;
     iRFormatted                    : integer;
     iRguiTinnR_Disposition         : integer;
@@ -2619,6 +2617,7 @@ type
     R_Useful                       : TR_Useful;
     rsSearch                       : TRegExpr;
     sApp_Data                      : string;
+    sCurr_Version_App_Shortcuts    : string;
     sCurr_Version_Cache            : string;
     sCurr_Version_Comments         : string;
     sCurr_Version_Completion       : string;
@@ -2630,9 +2629,8 @@ type
     sCurr_Version_RH_Custom        : string;
     sCurr_Version_RH_Send          : string;
     sCurr_Version_Rmirrors         : string;
-    sCurr_Version_App_Shortcuts    : string;
-    sCurr_Version_Syntax_Default   : string;
     sCurr_Version_Syntax_Dark      : string;
+    sCurr_Version_Syntax_Default   : string;
     sCurr_Version_Syntax_Gray      : string;
     sCurr_Version_Syntax_LGray     : string;
     sEncodingDefault               : string;
@@ -2661,22 +2659,21 @@ type
     sPar_RPuTTY                    : string;
     sPar_Txt2tags                  : string;
     sPath_Bkp                      : string;
+    sPath_Deplate_Converter        : string;
+    sPath_Deplate_Interpreter      : string;
     sPath_Editor                   : string;
     sPath_Ini                      : string;
+    sPath_IniEditor_Tmp            : string;
+    sPath_IniTinn_Tmp              : string;
     sPath_Latex                    : string;
     sPath_Pandoc                   : string;
     sPath_Project                  : string;
     sPath_R                        : string;
     sPath_R_Connected              : string;
     sPath_Rgui                     : string;
-    sPath_Deplate_Converter        : string;
-    sPath_Deplate_Interpreter      : string;
-    sPath_IniEditor_Tmp            : string;
-    sPath_IniTinn_Tmp              : string;
     sPath_TinnRcom_Installed       : string;
     sPath_Txt2tags_Converter       : string;
     sPath_Txt2tags_Interpreter     : string;
-    //sPreferences_OldVersion        : string;
     sProjectName                   : string;
     sRIOSaved                      : string;
     sRLibPath_Default              : string;
@@ -2684,6 +2681,7 @@ type
     sSearch_DirHistory             : string;
     sSearch_FileMaskHistory        : string;
     sTipFromRserver                : string;
+    sVersion_App_Shortcuts         : string;
     sVersion_Cache                 : string;
     sVersion_Comments              : string;
     sVersion_Completion            : string;
@@ -2696,14 +2694,15 @@ type
     sVersion_RH_Custom             : string;
     sVersion_RH_Send               : string;
     sVersion_Rmirrors              : string;
-    sVersion_App_Shortcuts         : string;
-    sVersion_Syntax_Default        : string;
     sVersion_Syntax_Dark           : string;
+    sVersion_Syntax_Default        : string;
     sVersion_Syntax_Gray           : string;
     sVersion_Syntax_LGray          : string;
     sVersion_TinnRcomInstalled     : string;
     sWindowOption                  : string;
     tnGenericGroup                 : TTreeNode;
+//    bColors_OldVersion             : boolean;
+//    bCustom_OldVersion             : boolean;
 
     function fActivePanel: integer;
     function fCheck_Connection: boolean;
@@ -2791,11 +2790,11 @@ type
     procedure pRToolbar(bOption: boolean);
     procedure pSave_NewIni_Application;
     procedure pSave_NewIni_Editor;
-//    procedure pSave_Preferences_OldVersion;
     procedure pSave_Project;
     procedure pSearch_InDirectories(const sDir, sMask: string; var iFileCount, iMatchCount, iTotFileCount: integer);
     procedure pSearch_InOpenFiles(var iFileCount, iMatchCount: integer);
     procedure pSend_Resources(bOption: boolean);
+    procedure pSet_App_Shortcuts;
     procedure pSet_Completion;
     procedure pSet_EncodingDefault(sTmp: string);
     procedure pSet_EOLDefault(sTmp: string);
@@ -2814,7 +2813,6 @@ type
     procedure pSet_Rlibrary_Path(sTmp: string);
     procedure pSet_Rmirrors;
     procedure pSet_SaveFormat(sf: TSaveFormat);
-    procedure pSet_App_Shortcuts;
     procedure pSet_SKH;
     procedure pSetup_SearchParameters(sSearchText: string);
     procedure pSort_Project;
@@ -2905,17 +2903,19 @@ type
     ffDefault                    : TSynEditFileFormat;
     hRgui                        : HWND;
     iAlphaBlendValue             : integer;
+    iApp_Shortcuts_SavePoint     : integer;
+    iApp_ShortcutsFilter         : integer;
     iComments_SavePoint          : integer;
     iCompletion_SavePoint        : integer;
     iCompletionFilter            : integer;
     iCountriesFilter             : integer;
     iDelay                       : integer;
     iDragLevel                   : integer;
+    iEditor_Keystrokes_SavePoint : integer;
     iFileCount                   : integer;
     iFilterToSaveAs              : integer;
     iIPPortLocal                 : integer;
     iIPPortRemote                : integer;
-    iEditor_Keystrokes_SavePoint : integer;
     iLatexDimensionalAlign       : integer;
     iMaxDeparseLength            : integer;
     iPandoc_From                 : integer;
@@ -2931,11 +2931,10 @@ type
     iRtip_SavePoint              : integer;
     iRtipFilter                  : integer;
     iScaleMode                   : integer;
-    iApp_Shortcuts_SavePoint     : integer;
-    iApp_ShortcutsFilter         : integer;
     iSynWithFocus                : integer;
     iTransparency                : integer;
     iZoomPreview                 : integer;
+    sApp_Shortcuts_BookMark      : string;
     sAppSelected                 : string;
     sBeginComment                : string;
     sComments_BookMark           : string;
@@ -2943,6 +2942,7 @@ type
     sDragSource                  : string;
     sDragSourceLine              : string;
     seDefault                    : TSynEncoding;
+    sEditor_Keystrokes_BookMark  : string;
     sEndComment                  : string;
     seUsed                       : TSynEncoding;
     sfDefault                    : TSaveFormat;
@@ -2960,22 +2960,25 @@ type
     sPar_Rterm                   : string;
     sPath_App                    : string;
     sPath_Color                  : string;
+    sPath_Color_Custom           : string;
     sPath_Data                   : string;
+    sPath_IniEditor_File         : string;
+    sPath_IniTinn_File           : string;
     sPath_Rterm                  : string;
     sPath_Syntax                 : string;
     sPath_Syntax_BKP             : string;
-    sPath_Syntax_InUse           : string;    
+    sPath_Syntax_InUse           : string;
     sPath_TinnR                  : string;
     sPath_TinnRcom               : string;
     sPath_Tmp                    : string;
-    sPath_Color_Custom           : string;
-    sPath_IniEditor_File         : string;
-    sPath_IniTinn_File           : string;
     sPutty_Host                  : string;
     sPutty_Password              : string;
     sPutty_User                  : string;
     sRcard_BookMark              : string;
     sReplace_TextHistory         : string;
+    sRH_Control_BookMark         : string;
+    sRH_Custom_BookMark          : string;
+    sRH_Send_BookMark            : string;
     sRmirror                     : string;
     sRmirrors_BookMark           : string;
     sRtip_BookMark               : string;
@@ -2987,11 +2990,6 @@ type
     sUpdate                      : string;
     sUtils_Origin                : string;
     sWorkingDir                  : string;
-    sApp_Shortcuts_BookMark      : string;
-    sEditor_Keystrokes_BookMark  : string;
-    sRH_Send_BookMark            : string;
-    sRH_Control_BookMark         : string;
-    sRH_Custom_BookMark          : string;
 
     function fFindTop_Window: integer;
     function fGetBuild_Info: string;
@@ -3131,25 +3129,26 @@ end;
 procedure TfrmMain.pCheck_Versions;
 begin
   // Versions in use by user: from ini file
+  sVersion_App_Shortcuts    := ini_Tinn.ReadString('App', 'sVersion_App_Shortcuts'    , '0.0.0.0');
   sVersion_Cache            := ini_Tinn.ReadString('App', 'sVersion_Cache'            , '0.0.0.0');
   sVersion_Comments         := ini_Tinn.ReadString('App', 'sVersion_Comments'         , '0.0.0.0');
   sVersion_Completion       := ini_Tinn.ReadString('App', 'sVersion_Completion'       , '0.0.0.0');
   sVersion_Editor_Keystrokes:= ini_Tinn.ReadString('App', 'sVersion_Editor_Keystrokes', '0.0.0.0');
+  sVersion_Ini              := ini_Tinn.ReadString('App', 'sVersion_Ini'              , '0.0.0.0');
   sVersion_Latex            := ini_Tinn.ReadString('App', 'sVersion_Latex'            , '0.0.0.0');
   sVersion_Project          := ini_Tinn.ReadString('App', 'sVersion_Project'          , '0.0.0.0');
   sVersion_Rcard            := ini_Tinn.ReadString('App', 'sVersion_Rcard'            , '0.0.0.0');
-  sVersion_Rmirrors         := ini_Tinn.ReadString('App', 'sVersion_Rmirrors'         , '0.0.0.0');
-  sVersion_App_Shortcuts    := ini_Tinn.ReadString('App', 'sVersion_App_Shortcuts'    , '0.0.0.0');
-  sVersion_RH_Send          := ini_Tinn.ReadString('App', 'sVersion_RH_Send'          , '0.0.0.0');
   sVersion_RH_Control       := ini_Tinn.ReadString('App', 'sVersion_RH_Control'       , '0.0.0.0');
   sVersion_RH_Custom        := ini_Tinn.ReadString('App', 'sVersion_RH_Custom'        , '0.0.0.0');
-  sVersion_Syntax_Default   := ini_Tinn.ReadString('App', 'sVersion_Syntax_Default'   , '0.0.0.0');
+  sVersion_RH_Send          := ini_Tinn.ReadString('App', 'sVersion_RH_Send'          , '0.0.0.0');
+  sVersion_Rmirrors         := ini_Tinn.ReadString('App', 'sVersion_Rmirrors'         , '0.0.0.0');
   sVersion_Syntax_Dark      := ini_Tinn.ReadString('App', 'sVersion_Syntax_Dark'      , '0.0.0.0');
+  sVersion_Syntax_Default   := ini_Tinn.ReadString('App', 'sVersion_Syntax_Default'   , '0.0.0.0');
   sVersion_Syntax_Gray      := ini_Tinn.ReadString('App', 'sVersion_Syntax_Gray'      , '0.0.0.0');
   sVersion_Syntax_LGray     := ini_Tinn.ReadString('App', 'sVersion_Syntax_LGray'     , '0.0.0.0');
-  sVersion_Ini              := ini_Tinn.ReadString('App', 'sVersion_Ini'              , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
+  sCurr_Version_App_Shortcuts    := '5.04.03.01';
   sCurr_Version_Cache            := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurr_Version_Comments         := '3.00.02.01';
   sCurr_Version_Completion       := '5.02.03.00';
@@ -3157,15 +3156,14 @@ begin
   sCurr_Version_Latex            := '2.01.01.01';
   sCurr_Version_Project          := '5.03.05.01';
   sCurr_Version_Rcard            := '2.03.00.00';
-  sCurr_Version_Rmirrors         := '5.04.01.00';
-  sCurr_Version_App_Shortcuts    := '5.04.03.01';
-  sCurr_Version_RH_Send          := '5.04.03.01';  // Started from version '5.04.03.00'/beta
   sCurr_Version_RH_Control       := '5.04.03.00';  // Started from version '5.04.03.00'/beta
   sCurr_Version_RH_Custom        := '5.04.03.00';  // Started from version '5.04.03.00'/beta
-  sCurr_Version_Syntax_Default   := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
-  sCurr_Version_Syntax_Dark      := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
-  sCurr_Version_Syntax_Gray      := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
-  sCurr_Version_Syntax_LGray     := '5.04.03.00';  // Started from version '5.04.03.00'/beta;
+  sCurr_Version_RH_Send          := '5.04.03.01';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_Rmirrors         := '5.04.01.00';
+  sCurr_Version_Syntax_Dark      := '5.04.03.01';  // Started from version '5.04.03.00'/beta;
+  sCurr_Version_Syntax_Default   := '5.04.03.01';  // Started from version '5.04.03.00'/beta;
+  sCurr_Version_Syntax_Gray      := '5.04.03.01';  // Started from version '5.04.03.00'/beta;
+  sCurr_Version_Syntax_LGray     := '5.04.03.01';  // Started from version '5.04.03.00'/beta;
 
   // Cache
   if (AnsiCompareStr(sVersion_Cache,
@@ -3807,21 +3805,21 @@ begin
 
   with ini_Tinn_Tmp do begin
     // Version control
+    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
     WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
     WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
     WriteString('App', 'sVersion_Completion'       , sVersion_Completion);
+    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
     WriteString('App', 'sVersion_Ini'              , fGetBuild_Info);
     WriteString('App', 'sVersion_Latex'            , sVersion_Latex);
     WriteString('App', 'sVersion_Project'          , sVersion_Project);
     WriteString('App', 'sVersion_Rcard'            , sVersion_Rcard);
-    WriteString('App', 'sVersion_Rmirrors'         , sVersion_Rmirrors);
-    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
-    WriteString('App', 'sVersion_RH_Send'          , sVersion_RH_Send);
     WriteString('App', 'sVersion_RH_Control'       , sVersion_RH_Control);
     WriteString('App', 'sVersion_RH_Custom'        , sVersion_RH_Custom);
-    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
-    WriteString('App', 'sVersion_Syntax_Default'   , sVersion_Syntax_Default);
+    WriteString('App', 'sVersion_RH_Send'          , sVersion_RH_Send);
+    WriteString('App', 'sVersion_Rmirrors'         , sVersion_Rmirrors);
     WriteString('App', 'sVersion_Syntax_Dark'      , sVersion_Syntax_Dark);
+    WriteString('App', 'sVersion_Syntax_Default'   , sVersion_Syntax_Default);
     WriteString('App', 'sVersion_Syntax_Gray'      , sVersion_Syntax_Gray);
     WriteString('App', 'sVersion_Syntax_LGray'     , sVersion_Syntax_LGray);
 
@@ -3847,6 +3845,9 @@ begin
     WriteBool('App', 'bTobSyntax.Visible', tobSyntax.Visible);
     WriteBool('App', 'bTobView.Visible', tobView.Visible);
     WriteBool('TBRMain', 'bTobVisible', actTobRVisible.Checked);
+
+    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
+    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
     WriteInteger('App', 'iCompletion.Height', frmTools.panCompletion.Height);
     WriteInteger('App', 'iCompletion.ItemIndex', frmTools.lbCompletion.ItemIndex);
     WriteInteger('App', 'iCountries.Height', frmTools.panCountries.Height);
@@ -3854,8 +3855,6 @@ begin
     WriteInteger('App', 'iRcard.Height', frmTools.panRcard.Height);
     WriteInteger('App', 'iRcard.ItemIndex', frmTools.lbRcard.ItemIndex);
     WriteInteger('App', 'iRExplorer.Width', frmTools.panRExplorer.Width);
-    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
-    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
     WriteInteger('App', 'iSpellLanguage.ItemIndex', cbSpellLanguage.ItemIndex);
     WriteInteger('App', 'iTobEdit.Left', tobEdit.Left);
     WriteInteger('App', 'iTobEdit.Top', tobEdit.Top);
@@ -3884,9 +3883,9 @@ begin
 
     // Rterm
     WriteBool('App', 'bRterm_CanFloat', bRterm_CanFloat);
-    WriteBool('App', 'bRterm_Send_Plus', bRterm_Send_Plus);
     WriteBool('App', 'bRterm_CloseWithoutAsk', bRterm_CloseWithoutAsk);
     WriteBool('App', 'bRterm_Horizontal', bRterm_Horizontal);
+    WriteBool('App', 'bRterm_Send_Plus', bRterm_Send_Plus);
     WriteBool('App', 'bRterm_Single', bRterm_Single);
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
@@ -3897,12 +3896,12 @@ begin
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
     WriteInteger('App', 'iDatabase.TabIndex', frmTools.pgDatabase.TabIndex);
-    WriteInteger('App', 'iRH.TabIndex', frmTools.pgRH.TabIndex);
     WriteInteger('App', 'iLatex.TabIndex', frmTools.pgLatex.TabIndex);
     WriteInteger('App', 'iMarkup.TabIndex', frmTools.pgMarkup.TabIndex);
     WriteInteger('App', 'iMisc.TabIndex', frmTools.pgMisc.TabIndex);
     WriteInteger('App', 'iR.TabIndex', frmTools.pgR.TabIndex);
     WriteInteger('App', 'iResults.TabIndex', frmTools.pgResults.TabIndex);
+    WriteInteger('App', 'iRH.TabIndex', frmTools.pgRH.TabIndex);
     WriteInteger('App', 'iTools.Size', frmTools.iSize);
     WriteInteger('App', 'iTools.TabIndex', frmTools.pgTools.TabIndex);
     WriteInteger('App', 'iTxt2tags.TabIndex', frmTools.pgTxt2tags.TabIndex);
@@ -3944,6 +3943,7 @@ begin
     WriteBool('App', 'bDviOpenAlways', actDviOpenAlways.Checked);
     WriteBool('App', 'bEditorLineWrap', actEditorLineWrap.Checked);
     WriteBool('App', 'bFormatR', actFormatR.Visible);
+    WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bHtmlOpenAlways', actHtmlOpenAlways.Checked);
     WriteBool('App', 'bIOLineWrap', actRtermIOLineWrap.Checked);
     WriteBool('App', 'bIPLocal', bIPLocal);
@@ -3982,7 +3982,6 @@ begin
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
-    WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
     WriteInteger('App', 'clBG_Application', Tcolor(clBG_Application));
@@ -4011,10 +4010,10 @@ begin
     WriteString('App', 'sEndComment', sEndComment);
     WriteString('App', 'sEOLDefault', fGet_EOLDefault);
     WriteString('App', 'sFormatR', sFormatR);
-    WriteString('App', 'sKnit', sKnit);
-    WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
+    WriteString('App', 'sKnit', sKnit);
+    WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sPar_Deplate', sPar_Deplate);
     WriteString('App', 'sPar_DviBibtex', sPar_DviBibtex);
     WriteString('App', 'sPar_DviSingle', sPar_DviSingle);
@@ -4024,11 +4023,11 @@ begin
     WriteString('App', 'sPar_RPuTTY', sPar_RPuTTY);
     WriteString('App', 'sPar_Rterm', sPar_Rterm);
     WriteString('App', 'sPar_Txt2tags', sPar_Txt2tags);
+    WriteString('App', 'sPath_Deplate_Converter', sPath_Deplate_Converter);
+    WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
     WriteString('App', 'sPath_Pandoc', sPath_Pandoc);
     WriteString('App', 'sPath_Rgui', sPath_Rgui);
     WriteString('App', 'sPath_Rterm', sPath_Rterm);
-    WriteString('App', 'sPath_Deplate_Converter', sPath_Deplate_Converter);
-    WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
     WriteString('App', 'sPath_Txt2tags_Converter', sPath_Txt2tags_Converter);
     WriteString('App', 'sPath_Txt2tags_Interpreter', sPath_Txt2tags_Interpreter);
     WriteString('App', 'sPutty_Host', sPutty_Host);
@@ -4064,9 +4063,9 @@ begin
     WriteBool('R Options', 'bRKnitr', bRKnitr);
     WriteBool('R Options', 'bRSendBlockMarked', actRSend_BlockMarked.Visible);
     WriteBool('R Options', 'bRSendContiguous', actRSend_Contiguous.Visible);
+    WriteBool('R Options', 'bRSendCurrentLineToTop', actRSend_CurrentLineToTop.Visible);
     WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSend_CursorToBeginningLine.Visible);
     WriteBool('R Options', 'bRSendCursorToEndLine', actRSend_CursorToEndLine.Visible);
-    WriteBool('R Options', 'bRSendCurrentLineToTop', actRSend_CurrentLineToTop.Visible);
     WriteBool('R Options', 'bRSendFile', actRSend_File.Visible);
     WriteBool('R Options', 'bRSendLine', actRSend_Line.Visible);
     WriteBool('R Options', 'bRSendLinesToEndPage', actRSend_LinesToEndPage.Visible);
@@ -4081,7 +4080,6 @@ begin
     WriteBool('R Options', 'bREditVariable', actRCont_EditVariable.Visible);
     WriteBool('R Options', 'bREscape', actRCont_Escape.Visible);
     WriteBool('R Options', 'bRExampleSelectedWord', actRCont_ExampleSelectedWord.Visible);
-    WriteBool('R Options', 'bROpenExampleSelectedWord', actRCont_OpenExampleSelectedWord.Visible);
     WriteBool('R Options', 'bRFixVariable', actRCont_FixVariable.Visible);
     WriteBool('R Options', 'bRguiPuTTYStartClose', actRCont_GuiPuTTYStartClose.Visible);
     WriteBool('R Options', 'bRHelp', actRCont_Help.Visible);
@@ -4089,6 +4087,7 @@ begin
     WriteBool('R Options', 'bRListAllObjects', actRCont_ListAllObjects.Visible);
     WriteBool('R Options', 'bRListVariableNames', actRCont_ListVariableNames.Visible);
     WriteBool('R Options', 'bRListVariableStructure', actRCont_ListVariableStructure.Visible);
+    WriteBool('R Options', 'bROpenExampleSelectedWord', actRCont_OpenExampleSelectedWord.Visible);
     WriteBool('R Options', 'bRPackages', actRCont_Packages.Visible);
     WriteBool('R Options', 'bRPlotVariable', actRCont_PlotVariable.Visible);
     WriteBool('R Options', 'bRPrintVariableContent', actRCont_PrintVariableContent.Visible);
@@ -4098,20 +4097,20 @@ begin
     WriteBool('R Options', 'bRtermStartClose', actRCont_TermStartClose.Visible);
 
     // Database status
+    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
     WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
-    WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
-    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
-    WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
     WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
     WriteInteger('Database', 'iRH_Custom_SavePoint', iRH_Custom_SavePoint);
+    WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
+    WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
 
     // Latex Dimensional
     WriteInteger('Latex', 'iCols', iCols);
     WriteInteger('Latex', 'iLatexDimensionalAlign', iLatexDimensionalAlign);
     WriteInteger('Latex', 'iLatexDimensionalElement', iLatexDimensionalElement);
     WriteInteger('Latex', 'iRows', iRows);
-  end;
+end;
 
   // Pandoc history
   slPandocHistory     := TStringList.Create;
@@ -4348,18 +4347,18 @@ begin
   // Application
   with ini_Tinn do begin
     // Version control
+    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
     WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
     WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
     WriteString('App', 'sVersion_Completion'       , sVersion_Completion);
+    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
     WriteString('App', 'sVersion_Rcard'            , sVersion_Rcard);
-    WriteString('App', 'sVersion_Rmirrors'         , sVersion_Rmirrors);
-    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
-    WriteString('App', 'sVersion_RH_Send'          , sVersion_RH_Send);
     WriteString('App', 'sVersion_RH_Control'       , sVersion_RH_Control);
     WriteString('App', 'sVersion_RH_Custom'        , sVersion_RH_Custom);
-    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
-    WriteString('App', 'sVersion_Syntax_Default'   , sVersion_Syntax_Default);
+    WriteString('App', 'sVersion_RH_Send'          , sVersion_RH_Send);
+    WriteString('App', 'sVersion_Rmirrors'         , sVersion_Rmirrors);
     WriteString('App', 'sVersion_Syntax_Dark'      , sVersion_Syntax_Dark);
+    WriteString('App', 'sVersion_Syntax_Default'   , sVersion_Syntax_Default);
     WriteString('App', 'sVersion_Syntax_Gray'      , sVersion_Syntax_Gray);
     WriteString('App', 'sVersion_Syntax_LGray'     , sVersion_Syntax_LGray);
 
@@ -4385,6 +4384,8 @@ begin
     WriteBool('App', 'bTobSyntax.Visible', tobSyntax.Visible);
     WriteBool('App', 'bTobView.Visible', tobView.Visible);
     WriteBool('TBRMain', 'bTobVisible', actTobRVisible.Checked);
+    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
+    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
     WriteInteger('App', 'iCompletion.Height', frmTools.panCompletion.Height);
     WriteInteger('App', 'iCompletion.ItemIndex', frmTools.lbCompletion.ItemIndex);
     WriteInteger('App', 'iCountries.Height', frmTools.panCountries.Height);
@@ -4392,8 +4393,6 @@ begin
     WriteInteger('App', 'iRcard.Height', frmTools.panRcard.Height);
     WriteInteger('App', 'iRcard.ItemIndex', frmTools.lbRcard.ItemIndex);
     WriteInteger('App', 'iRExplorer.Width', frmTools.panRExplorer.Width);
-    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
-    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
     WriteInteger('App', 'iSpellLanguage.ItemIndex', cbSpellLanguage.ItemIndex);
     WriteInteger('App', 'iTobEdit.Left', tobEdit.Left);
     WriteInteger('App', 'iTobEdit.Top', tobEdit.Top);
@@ -4422,9 +4421,9 @@ begin
 
     // Rterm
     WriteBool('App', 'bRterm_CanFloat', bRterm_CanFloat);
-    WriteBool('App', 'bRterm_Send_Plus', bRterm_Send_Plus);
     WriteBool('App', 'bRterm_CloseWithoutAsk', bRterm_CloseWithoutAsk);
     WriteBool('App', 'bRterm_Horizontal', bRterm_Horizontal);
+    WriteBool('App', 'bRterm_Send_Plus', bRterm_Send_Plus);
     WriteBool('App', 'bRterm_Single', bRterm_Single);
     WriteInteger('App', 'iIO_Syntax', iIO_Syntax);
     WriteInteger('App', 'iLOG_Syntax', iLOG_Syntax);
@@ -4435,12 +4434,12 @@ begin
     // Tools
     WriteBool('App', 'bToolsCanFloat', bToolsCanFloat);
     WriteInteger('App', 'iDatabase.TabIndex', frmTools.pgDatabase.TabIndex);
-    WriteInteger('App', 'iRH.TabIndex', frmTools.pgRH.TabIndex);
     WriteInteger('App', 'iLatex.TabIndex', frmTools.pgLatex.TabIndex);
     WriteInteger('App', 'iMarkup.TabIndex', frmTools.pgMarkup.TabIndex);
     WriteInteger('App', 'iMisc.TabIndex', frmTools.pgMisc.TabIndex);
     WriteInteger('App', 'iR.TabIndex', frmTools.pgR.TabIndex);
     WriteInteger('App', 'iResults.TabIndex', frmTools.pgResults.TabIndex);
+    WriteInteger('App', 'iRH.TabIndex', frmTools.pgRH.TabIndex);
     WriteInteger('App', 'iTools.Size', frmTools.iSize);
     WriteInteger('App', 'iTools.TabIndex', frmTools.pgTools.TabIndex);
     WriteInteger('App', 'iTxt2tags.TabIndex', frmTools.pgTxt2tags.TabIndex);
@@ -4482,6 +4481,7 @@ begin
     WriteBool('App', 'bDviOpenAlways', actDviOpenAlways.Checked);
     WriteBool('App', 'bEditorLineWrap', actEditorLineWrap.Checked);
     WriteBool('App', 'bFormatR', actFormatR.Visible);
+    WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bHtmlOpenAlways', actHtmlOpenAlways.Checked);
     WriteBool('App', 'bIOLineWrap', actRtermIOLineWrap.Checked);
     WriteBool('App', 'bIPLocal', bIPLocal);
@@ -4520,7 +4520,6 @@ begin
     WriteBool('App', 'bShowAllBars', actShowAllBars.Checked);
     WriteBool('App', 'bStatusBar', actStatusBarVisible.Checked);
     WriteBool('App', 'bTextDefault', actTextDefault.Checked);
-    WriteBool('App', 'bHotKeys_On', bHotKeys_On);
     WriteBool('App', 'bUndoAfterSave', bUndoAfterSave);
     WriteInteger('App', 'clActiveLine', Tcolor(clActiveLine));
     WriteInteger('App', 'clBG_Application', Tcolor(clBG_Application));
@@ -4549,10 +4548,10 @@ begin
     WriteString('App', 'sEndComment', sEndComment);
     WriteString('App', 'sEOLDefault', fGet_EOLDefault);
     WriteString('App', 'sFormatR', sFormatR);
-    WriteString('App', 'sKnit', sKnit);
-    WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sIPHostLocal', sIPHostLocal);
     WriteString('App', 'sIPHostRemote', sIPHostRemote);
+    WriteString('App', 'sKnit', sKnit);
+    WriteString('App', 'sLatexClearWaste', sLatexClearWaste);
     WriteString('App', 'sPar_Deplate', sPar_Deplate);
     WriteString('App', 'sPar_DviBibtex', sPar_DviBibtex);
     WriteString('App', 'sPar_DviSingle', sPar_DviSingle);
@@ -4562,11 +4561,11 @@ begin
     WriteString('App', 'sPar_RPuTTY', sPar_RPuTTY);
     WriteString('App', 'sPar_Rterm', sPar_Rterm);
     WriteString('App', 'sPar_Txt2tags', sPar_Txt2tags);
+    WriteString('App', 'sPath_Deplate_Converter', sPath_Deplate_Converter);
+    WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
     WriteString('App', 'sPath_Pandoc', sPath_Pandoc);
     WriteString('App', 'sPath_Rgui', sPath_Rgui);
     WriteString('App', 'sPath_Rterm', sPath_Rterm);
-    WriteString('App', 'sPath_Deplate_Converter', sPath_Deplate_Converter);
-    WriteString('App', 'sPath_Deplate_Interpreter', sPath_Deplate_Interpreter);
     WriteString('App', 'sPath_Txt2tags_Converter', sPath_Txt2tags_Converter);
     WriteString('App', 'sPath_Txt2tags_Interpreter', sPath_Txt2tags_Interpreter);
     WriteString('App', 'sPutty_Host', sPutty_Host);
@@ -4598,16 +4597,17 @@ begin
     WriteInteger('Print', 'iScaleMode', iScaleMode);
     WriteInteger('Print', 'iZoomPreview', iZoomPreview);
 
-    ini_Tinn.EraseSection('Pandoc History');
     ini_Tinn.EraseSection('Pandoc History From');
     ini_Tinn.EraseSection('Pandoc History To');
-    ini_Tinn.EraseSection('Search Text History');
+    ini_Tinn.EraseSection('Pandoc History');
     ini_Tinn.EraseSection('Replace Text History');
+    ini_Tinn.EraseSection('Search Text History');
 
     // Send To R alphabetically ordered
     WriteBool('R Options', 'bRKnitr', bRKnitr);
     WriteBool('R Options', 'bRSendBlockMarked', actRSend_BlockMarked.Visible);
     WriteBool('R Options', 'bRSendContiguous', actRSend_Contiguous.Visible);
+    WriteBool('R Options', 'bRSendCurrentLineToTop', actRSend_CurrentLineToTop.Visible);
     WriteBool('R Options', 'bRSendCursorToBeginningLine', actRSend_CursorToBeginningLine.Visible);
     WriteBool('R Options', 'bRSendCursorToEndLine', actRSend_CursorToEndLine.Visible);
     WriteBool('R Options', 'bRSendFile', actRSend_File.Visible);
@@ -4616,7 +4616,6 @@ begin
     WriteBool('R Options', 'bRSendSelection', actRSend_Selection.Visible);
     WriteBool('R Options', 'bRSendSmart', actRSend_Smart.Visible);
     WriteBool('R Options', 'bRSweave', actRSend_Sweave.Visible);
-    WriteBool('R Options', 'bRSendCurrentLineToTop', actRSend_CurrentLineToTop.Visible);
 
     // Controlling R alphabetically ordered
     WriteBool('R Options', 'bRClearAll', actRCont_ClearAll.Visible);
@@ -4625,7 +4624,6 @@ begin
     WriteBool('R Options', 'bREditVariable', actRCont_EditVariable.Visible);
     WriteBool('R Options', 'bREscape', actRCont_Escape.Visible);
     WriteBool('R Options', 'bRExampleSelectedWord', actRCont_ExampleSelectedWord.Visible);
-    WriteBool('R Options', 'bROpenExampleSelectedWord', actRCont_OpenExampleSelectedWord.Visible);
     WriteBool('R Options', 'bRFixVariable', actRCont_FixVariable.Visible);
     WriteBool('R Options', 'bRguiPuTTYStartClose', actRCont_GuiPuTTYStartClose.Visible);
     WriteBool('R Options', 'bRHelp', actRCont_Help.Visible);
@@ -4633,6 +4631,7 @@ begin
     WriteBool('R Options', 'bRListAllObjects', actRCont_ListAllObjects.Visible);
     WriteBool('R Options', 'bRListVariableNames', actRCont_ListVariableNames.Visible);
     WriteBool('R Options', 'bRListVariableStructure', actRCont_ListVariableStructure.Visible);
+    WriteBool('R Options', 'bROpenExampleSelectedWord', actRCont_OpenExampleSelectedWord.Visible);
     WriteBool('R Options', 'bRPackages', actRCont_Packages.Visible);
     WriteBool('R Options', 'bRPlotVariable', actRCont_PlotVariable.Visible);
     WriteBool('R Options', 'bRPrintVariableContent', actRCont_PrintVariableContent.Visible);
@@ -4642,13 +4641,13 @@ begin
     WriteBool('R Options', 'bRtermStartClose', actRCont_TermStartClose.Visible);
 
     // Database status
+    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
     WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
-    WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
-    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
-    WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
     WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
     WriteInteger('Database', 'iRH_Custom_SavePoint', iRH_Custom_SavePoint);
+    WriteInteger('Database', 'iRH_Send_SavePoint', iRH_Send_SavePoint);
+    WriteInteger('Database', 'iRtip_SavePoint', iRtip_SavePoint);
 
     // Latex Dimensional
     WriteInteger('Latex', 'iCols', iCols);
@@ -4855,7 +4854,7 @@ begin
     WriteInteger('Editor', 'iSelectedColor.Foreground', coEditor.SelectedColor.Foreground);
     WriteInteger('Editor', 'iTab.Width', coEditor.TabWidth);
     WriteString('Editor', 'sFont.Name', coEditor.Font.Name);
-  end;
+end;
 
   if not bMakingBackup then begin
     if Assigned(coEditor) then FreeAndNil(coEditor);
@@ -5050,66 +5049,77 @@ begin
   tobFile.Left   := ini_Tinn.ReadInteger('App', 'iTobFile.Left', tobFile.Left);
   tobFile.Top    := ini_Tinn.ReadInteger('App', 'iTobFile.Top', tobFile.Top);
   tobFile.Visible:= ini_Tinn.ReadBool('App', 'bTobFile.Visible', True);
+
   actTobFilesVisible.Checked:= tobFile.Visible;
 
   // Edit Bar
   tobEdit.Left   := ini_Tinn.ReadInteger('App', 'iTobEdit.Left', tobEdit.Left);
   tobEdit.Top    := ini_Tinn.ReadInteger('App', 'iTobEdit.Top', tobEdit.Top);
   tobEdit.Visible:= ini_Tinn.ReadBool('App', 'bTobEdit.Visible', True);
+
   actTobEditVisible.Checked:= tobEdit.Visible;
 
   // Search Bar
   tobSearch.Left   := ini_Tinn.ReadInteger('App', 'iTobSearch.Left', tobSearch.Left);
   tobSearch.Top    := ini_Tinn.ReadInteger('App', 'iTobSearch.Top', tobSearch.Top);
   tobSearch.Visible:= ini_Tinn.ReadBool('App', 'bTobSearch.Visible', True);
+
   actTobSearchVisible.Checked:= tobSearch.Visible;
 
   // Misc Bar
   tobMisc.Left   := ini_Tinn.ReadInteger('App', 'iTobMisc.Left', tobMisc.Left);
   tobMisc.Top    := ini_Tinn.ReadInteger('App', 'iTobMisc.Top', tobMisc.Top);
   tobMisc.Visible:= ini_Tinn.ReadBool('App', 'bTobMisc.Visible', True);
+
   actTobMiscVisible.Checked:= tobMisc.Visible;
 
   // Processing Bar
   tobProcessing.Left   := ini_Tinn.ReadInteger('App', 'iTobProcessing.Left', tobProcessing.Left);
   tobProcessing.Top    := ini_Tinn.ReadInteger('App', 'iTobProcessing.Top', tobProcessing.Top);
   tobProcessing.Visible:= ini_Tinn.ReadBool('App', 'bTobProcessing.Visible', True);
+
   actTobProcessingVisible.Checked:= tobProcessing.Visible;
 
   // Format Bar
   tobFormat.Left   := ini_Tinn.ReadInteger('App', 'iTobFormat.Left', tobFormat.Left);
   tobFormat.Top    := ini_Tinn.ReadInteger('App', 'iTobFormat.Top', tobFormat.Top);
   tobFormat.Visible:= ini_Tinn.ReadBool('App', 'bTobFormat.Visible', True);
+
   actTobFormatVisible.Checked:= tobFormat.Visible;
 
   // View Bar
   tobView.Left   := ini_Tinn.ReadInteger('App', 'iTobView.Left', tobView.Left);
   tobView.Top    := ini_Tinn.ReadInteger('App', 'iTobView.Top', tobView.Top);
   tobView.Visible:= ini_Tinn.ReadBool('App', 'bTobView.Visible', True);
+
   actTobViewVisible.Checked:= tobView.Visible;
 
   // Macro Bar
   tobMacro.Left   := ini_Tinn.ReadInteger('App', 'iTobMacro.Left', tobMacro.Left);
   tobMacro.Top    := ini_Tinn.ReadInteger('App', 'iTobMacro.Top', tobMacro.Top);
   tobMacro.Visible:= ini_Tinn.ReadBool('App', 'bTobMacro.Visible', False);
+
   actTobMacroVisible.Checked:= tobMacro.Visible;
 
   // Filter Bar
   tobFilter.Left   := ini_Tinn.ReadInteger('App', 'iTobFilter.Left', tobFilter.Left);
   tobFilter.Top    := ini_Tinn.ReadInteger('App', 'iTobFilter.Top', tobFilter.Top);
   tobFilter.Visible:= ini_Tinn.ReadBool('App', 'bTobFilter.Visible', False);
+
   actTobFilterVisible.Checked:= tobFilter.Visible;
 
   // Syntax Bar
   tobSyntax.Left   := ini_Tinn.ReadInteger('App', 'iTobSyntax.Left', tobSyntax.Left);
   tobSyntax.Top    := ini_Tinn.ReadInteger('App', 'iTobSyntax.Top', tobSyntax.Top);
   tobSyntax.Visible:= ini_Tinn.ReadBool('App', 'bTobSyntax.Visible', True);
+
   actTobSyntaxVisible.Checked:= tobSyntax.Visible;
 
   // Spell Bar
   tobSpell.Left   := ini_Tinn.ReadInteger('App', 'iTobSpell.Left', tobSpell.Left);
   tobSpell.Top    := ini_Tinn.ReadInteger('App', 'iTobSpell.Top', tobSpell.Top);
   tobSpell.Visible:= ini_Tinn.ReadBool('App', 'bTobSpell.Visible', False);
+
   actTobSpellVisible.Checked:= tobSpell.Visible;
 
   // Misc
@@ -5117,6 +5127,7 @@ begin
   bRememberFileState        := ini_Tinn.ReadBool('App', 'bRememberFileState', True);
   bRemoveExtension          := ini_Tinn.ReadBool('App', 'bRemoveExtension', True);
   bUndoAfterSave            := ini_Tinn.ReadBool('App', 'bUndoAfterSave', True);
+
   actOpenMaximized.Checked  := ini_Tinn.ReadBool('App', 'bOpenMaximized', True);
 
   actDatabaseVisible.Checked         := ini_Tinn.ReadBool('App', 'bDatabase.Visible', True);
@@ -5140,6 +5151,7 @@ begin
   actWinExplVisible.Checked          := ini_Tinn.ReadBool('App', 'bWinExpl.Visible', True);
   actWorkExplVisible.Checked         := ini_Tinn.ReadBool('App', 'bWorkExpl.Visible', True);
 
+  frmTools.tbsApp_Shortcuts.TabVisible:= actDataShortcutsVisible.Checked;
   frmTools.tbsComments.TabVisible     := actDataCommentsVisible.Checked;
   frmTools.tbsCompletion.TabVisible   := actDataCompletionVisible.Checked;
   frmTools.tbsDatabase.TabVisible     := actDatabaseVisible.Checked;
@@ -5155,7 +5167,6 @@ begin
   frmTools.tbsRExplorer.TabVisible    := actRExplorerVisible.Checked;
   frmTools.tbsRmirrors.TabVisible     := actDataRmirrorsVisible.Checked;
   frmTools.tbsSearch.TabVisible       := actSearchVisible.Checked;
-  frmTools.tbsApp_Shortcuts.TabVisible:= actDataShortcutsVisible.Checked;
   frmTools.tbsSpell.TabVisible        := actSpellVisible.Checked;
   frmTools.tbsTxt2tags.TabVisible     := actTxt2tagsVisible.Checked;
   frmTools.tbsWinExplorer.TabVisible  := actWinExplVisible.Checked;
@@ -5202,9 +5213,9 @@ begin
   sPar_RPuTTY               := trim(ini_Tinn.ReadString('App', 'sPar_RPuTTY', '--no-save'));
   sPar_Rterm                := trim(ini_Tinn.ReadString('App', 'sPar_Rterm', '--ess'));
   sPar_Txt2tags             := trim(ini_Tinn.ReadString('App', 'sPar_Txt2tags', '-t'));
-  sPath_Pandoc              := trim(ini_Tinn.ReadString('App', 'sPath_Pandoc', EmptyStr));
   sPath_Deplate_Converter   := trim(ini_Tinn.ReadString('App', 'sPath_Deplate_Converter', EmptyStr));
   sPath_Deplate_Interpreter := trim(ini_Tinn.ReadString('App', 'sPath_Deplate_Interpreter', EmptyStr));
+  sPath_Pandoc              := trim(ini_Tinn.ReadString('App', 'sPath_Pandoc', EmptyStr));
   sPath_Txt2tags_Converter  := trim(ini_Tinn.ReadString('App', 'sPath_Txt2tags_Converter', EmptyStr));
   sPath_Txt2tags_Interpreter:= trim(ini_Tinn.ReadString('App', 'sPath_Txt2tags_Interpreter', EmptyStr));
   sPutty_Host               := trim(ini_Tinn.ReadString('App', 'sPutty_Host', EmptyStr));
@@ -5260,11 +5271,11 @@ begin
   actStatusBarVisible.Checked              := ini_Tinn.ReadBool('App','bStatusBar', True);
   frmTools.cbComAutoDetect_Language.Checked:= ini_Tinn.ReadBool('App', 'bComAutoDetect_Language', True);
   frmTools.cbComPriority_Line.Checked      := ini_Tinn.ReadBool('App', 'bComPriority_Line', True);
+  frmTools.panApp_Shortcuts.Height         := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.Height', 79);
   frmTools.panCompletion.Height            := ini_Tinn.ReadInteger('App', 'iCompletion.Height', 41);
   frmTools.panCountries.Height             := ini_Tinn.ReadInteger('App', 'iCountries.Height', 79);
   frmTools.panRcard.Height                 := ini_Tinn.ReadInteger('App', 'iRcard.Height', 79);
   frmTools.panRExplorer.Width              := ini_Tinn.ReadInteger('App', 'iRExplorer.Width', 200);
-  frmTools.panApp_Shortcuts.Height         := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.Height', 79);
   frmTools.panWinExplorer.Height           := ini_Tinn.ReadInteger('App', 'iWinExplorer.Height', 75);
   frmTools.panWorkExplorer.Height          := ini_Tinn.ReadInteger('App', 'iWorkExplorer.Height', 75);
 
@@ -5303,21 +5314,21 @@ begin
   bToolsCanFloat              := ini_Tinn.ReadBool('App', 'bToolsCanFloat', False);
   frmTools.iSize              := ini_Tinn.ReadInteger('App', 'iTools.Size', 310);
   frmTools.pgDatabase.TabIndex:= ini_Tinn.ReadInteger('App', 'iDatabase.TabIndex', 0);
-  frmTools.pgRH.TabIndex      := ini_Tinn.ReadInteger('App', 'iRH.TabIndex', 0);
   frmTools.pgLatex.TabIndex   := ini_Tinn.ReadInteger('App', 'iLatex.TabIndex', 0);
   frmTools.pgMarkup.TabIndex  := ini_Tinn.ReadInteger('App', 'iMarkup.TabIndex', 0);
   frmTools.pgMisc.TabIndex    := ini_Tinn.ReadInteger('App', 'iMIsc.TabIndex', 0);
   frmTools.pgR.TabIndex       := ini_Tinn.ReadInteger('App', 'iR.TabIndex', 0);
   frmTools.pgResults.TabIndex := ini_Tinn.ReadInteger('App', 'iResults.TabIndex', 0);
+  frmTools.pgRH.TabIndex      := ini_Tinn.ReadInteger('App', 'iRH.TabIndex', 0);
   frmTools.pgTools.TabIndex   := ini_Tinn.ReadInteger('App', 'iTools.TabIndex', 0);
   frmTools.pgTxt2tags.TabIndex:= ini_Tinn.ReadInteger('App', 'iTxt2tags.TabIndex', 0);
 
   cbSpellLanguage.ItemIndex:= ini_Tinn.ReadInteger('App', 'iSpellLanguage.ItemIndex', -1);
+  iApp_ShortcutsFilter     := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.ItemIndex', 0);
   iCompletionFilter        := ini_Tinn.ReadInteger('App', 'iCompletion.ItemIndex', 0);
   iCountriesFilter         := ini_Tinn.ReadInteger('App', 'iCountries.ItemIndex', 0);
   iRcardFilter             := ini_Tinn.ReadInteger('App', 'iRcard.ItemIndex', 0);
   iRtipFilter              := ini_Tinn.ReadInteger('App', 'iRtip.ItemIndex', 0);
-  iApp_ShortcutsFilter     := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.ItemIndex', 0);
 
   actRguiReturnFocus.Checked:= bRguiReturnFocus;
 
@@ -5325,9 +5336,9 @@ begin
   bIOLineWrap             := ini_Tinn.ReadBool('App', 'bIOLineWrap', True);
   bLogLineWrap            := ini_Tinn.ReadBool('App', 'bLogLineWrap', True);
   bRterm_CanFloat         := ini_Tinn.ReadBool('App', 'bRterm_CanFloat', False);
-  bRterm_Send_Plus        := ini_Tinn.ReadBool('App', 'bRterm_Send_Plus', True);
   bRterm_CloseWithoutAsk  := ini_Tinn.ReadBool('App', 'bRterm_CloseWithoutAsk', False);
   bRterm_Horizontal       := ini_Tinn.ReadBool('App', 'bRterm_Horizontal', True);
+  bRterm_Send_Plus        := ini_Tinn.ReadBool('App', 'bRterm_Send_Plus', True);
   bRterm_Single           := ini_Tinn.ReadBool('App', 'bRterm_Single', True);
   frmR_Term.iSize         := ini_Tinn.ReadInteger('App', 'iRterm.Size', 480);
   frmR_Term.iSynLOG2Height:= ini_Tinn.ReadInteger('App', 'iSynLOG2.Height', 90);
@@ -5400,9 +5411,9 @@ begin
   pmemRResSendSmart.Checked                := ini_Tinn.ReadBool('R Options', 'bRSendSmart', False);
   pmemRResSendSweave.Checked               := ini_Tinn.ReadBool('R Options', 'bRSweave', True);
 
-  actRSend_CurrentLineToTop.Visible     := ini_Tinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
   actRSend_BlockMarked.Visible          := ini_Tinn.ReadBool('R Options', 'bRSendBlockMarked', True);
   actRSend_Contiguous.Visible           := ini_Tinn.ReadBool('R Options', 'bRSendContiguous', True);
+  actRSend_CurrentLineToTop.Visible     := ini_Tinn.ReadBool('R Options', 'bRSendCurrentLineToTop', True);
   actRSend_CursorToBeginningLine.Visible:= ini_Tinn.ReadBool('R Options', 'bRSendCursorToBeginningLine', True);
   actRSend_CursorToEndLine.Visible      := ini_Tinn.ReadBool('R Options', 'bRSendCursorToEndLine', True);
   actRSend_File.Visible                 := ini_Tinn.ReadBool('R Options', 'bRSendFile', True);
@@ -5441,7 +5452,6 @@ begin
   actRCont_EditVariable.Visible           := ini_Tinn.ReadBool('R Options', 'bREditVariable', True);
   actRCont_Escape.Visible                 := ini_Tinn.ReadBool('R Options', 'bREscape', True);
   actRCont_ExampleSelectedWord.Visible    := ini_Tinn.ReadBool('R Options', 'bRExampleSelectedWord', True);
-  actRCont_OpenExampleSelectedWord.Visible:= ini_Tinn.ReadBool('R Options', 'bROpenExampleSelectedWord', True);
   actRCont_FixVariable.Visible            := ini_Tinn.ReadBool('R Options', 'bRFixVariable', True);
   actRCont_GuiPuTTYStartClose.Visible     := ini_Tinn.ReadBool('R Options', 'bRguiPuTTYStartClose', True);
   actRCont_Help.Visible                   := ini_Tinn.ReadBool('R Options', 'bRHelp', True);
@@ -5449,6 +5459,7 @@ begin
   actRCont_ListAllObjects.Visible         := ini_Tinn.ReadBool('R Options', 'bRListAllObjects', True);
   actRCont_ListVariableNames.Visible      := ini_Tinn.ReadBool('R Options', 'bRListVariableNames', True);
   actRCont_ListVariableStructure.Visible  := ini_Tinn.ReadBool('R Options', 'bRListVariableStructure', True);
+  actRCont_OpenExampleSelectedWord.Visible:= ini_Tinn.ReadBool('R Options', 'bROpenExampleSelectedWord', True);
   actRCont_Packages.Visible               := ini_Tinn.ReadBool('R Options', 'bRPackages', True);
   actRCont_PlotVariable.Visible           := ini_Tinn.ReadBool('R Options', 'bRPlotVariable', True);
   actRCont_PrintVariableContent.Visible   := ini_Tinn.ReadBool('R Options', 'bRPrintVariableContent', True);
@@ -5458,13 +5469,13 @@ begin
   actRCont_TermStartClose.Visible         := ini_Tinn.ReadBool('R Options', 'bRtermStartClose', True);
 
   // Database status
+  iApp_Shortcuts_SavePoint:= ini_Tinn.ReadInteger('Database', 'iApp_Shortcuts_SavePoint', 0);
   iCompletion_SavePoint   := ini_Tinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
   iRcard_SavePoint        := ini_Tinn.ReadInteger('Database', 'iRcard_SavePoint', 0);
-  iRtip_SavePoint         := ini_Tinn.ReadInteger('Database', 'iRtip_SavePoint', 0);
-  iApp_Shortcuts_SavePoint:= ini_Tinn.ReadInteger('Database', 'iApp_Shortcuts_SavePoint', 0);
-  iRH_Send_SavePoint      := ini_Tinn.ReadInteger('Database', 'iRH_Send_SavePoint', 0);
   iRH_Control_SavePoint   := ini_Tinn.ReadInteger('Database', 'iRH_Control_SavePoint', 0);
   iRH_Custom_SavePoint    := ini_Tinn.ReadInteger('Database', 'iRH_Custom_SavePoint', 0);
+  iRH_Send_SavePoint      := ini_Tinn.ReadInteger('Database', 'iRH_Send_SavePoint', 0);
+  iRtip_SavePoint         := ini_Tinn.ReadInteger('Database', 'iRtip_SavePoint', 0);
 
   // Latex Dimensional element
   iCols                   := ini_Tinn.ReadInteger('Latex', 'iCols', 2);
@@ -5770,7 +5781,7 @@ begin
     SelectedColor.Foreground := ini_Editor.ReadInteger('Editor', 'iSelectedColor.Foreground', coEditor.SelectedColor.Foreground);
     TabWidth                 := ini_Editor.ReadInteger('Editor', 'iTab.Width', 2);
     WantTabs                 := ini_Editor.ReadBool('Editor', 'bWantTabs', True);
-  end;
+end;
 
   // These options tend to be changed very often.
   // In this way was preferred to put in acts!
@@ -7745,8 +7756,6 @@ begin
 
     pCheck_Versions;
 
-//    pSave_Preferences_OldVersion;
-
     frmR_Term:= TfrmR_Term.Create(nil);
     frmSplash.pb.Position:= 2;
 
@@ -7786,15 +7795,6 @@ begin
     pCheck_EditorOptions;
 
     pCheck_Temporary;
-
-//    pDelete_Dir(sPreferences_OldVersion);
-//    if bColors_OldVersion or
-//       bCustom_OldVersion or
-//       bSyntax_OldVersion then begin
-//      bColors_OldVersion:= False;
-//      bCustom_OldVersion:= False;
-//      bSyntax_OldVersion:= False;
-//    end;
 
     sPath_Syntax_InUse:= sPath_Syntax +
                          '\' +
@@ -8112,64 +8112,6 @@ begin
         '\mirrors.R');
   end;
 end;
-
-//procedure TfrmMain.pSave_Preferences_OldVersion;
-//
-//  function fMakeBackup(sPathSource,
-//                       sPathDest,
-//                       sFiles: string): boolean;
-//  begin
-//    try
-//      if FileExists(sPathDest) then DeleteFile(sPathDest);
-//    except
-//      //TODO
-//    end;
-//    zipKit.StoreOptions:= [soStripPath];
-//
-//    with zipKit do begin
-//      FileName:= sPathDest;
-//      AddFiles(sPathSource + sFiles,
-//               0 );
-//      CloseArchive;
-//      Result:= True;
-//    end;
-//  end;
-//
-//var
-//  sPathColors_OldVersion,
-//   sPathSyntax_OldVersion: string;
-//
-//begin
-//  sPreferences_OldVersion:= sPath_Ini +
-//                            '_tmp';
-//
-//  if not DirectoryExists(sPreferences_OldVersion) then CreateDir(sPreferences_OldVersion);
-//
-//  // Colors of old version
-//  if not FileExists(sPath_Ini +
-//                    '\colors\Custom_colors.ini') then Exit;
-//
-//  sPathColors_OldVersion:= sPath_Ini +
-//                           '\colors';
-//
-//  if DirectoryExists(sPathColors_OldVersion) then begin
-//    if fMakeBackup(sPathColors_OldVersion,
-//                   sPreferences_OldVersion +
-//                   '\colors_bkp.zip',
-//                   '\*.ini') then bColors_OldVersion:= True;
-//  end;
-//
-//  // Syntax of old version
-//  sPathSyntax_OldVersion:= sPath_Ini +
-//                           '\syntax';
-//
-//  if DirectoryExists(sPathSyntax_OldVersion) then begin
-//    if fMakeBackup(sPathSyntax_OldVersion,
-//                   sPreferences_OldVersion +
-//                   '\syntax_bkp.zip',
-//                   '\*.ini') then bSyntax_OldVersion:= True;
-//  end;
-//end;
 
 procedure TfrmMain.pSet_IniStructure;
 
@@ -27176,373 +27118,6 @@ Initialization
 Finalization
   FreeAndNil(RHistory);
   FreeAndNil(RSend_Smart);
-
-//procedure TfrmMain.menSKHClick(Sender: TObject);
-//var
-//  pTmp: pointer;
-//
-//  bHotkeys_Status: boolean;
-//
-//begin
-//  bHotkeys_Status:= False;
-//
-//  // Related to Shortcuts
-//  with modDados.cdShortcuts do
-//    pTmp:= GetBookmark;
-//
-//  try
-//    dlgSH_Map:= TfrmSH_Map_Dlg.Create(Self);
-//
-//    // Initial status
-//    with dlgSH_Map do begin
-//      pgShortcuts.ActivePage:= tbsAppShortcuts;
-//      pgRhotkeys.ActivePage:= tbsSend_Control;
-//    end;
-//
-//    // Stores the status of the Hotkeys and turn all off
-//    bHotkeys_Status:= bHotKeys_On;
-//    if bHotKeys_On then begin
-//      bHotKeys_On:= False;
-//      with frmHotkeys do
-//        pSetHotkeys(False);
-//    end;
-//
-//    // If OK
-//    if (dlgSH_Map.ShowModal = mrOK) then begin
-//      with modDados.cdShortcuts do begin
-//        Edit;
-//        try
-//          Post;
-//          MergeChangeLog;
-//          SaveToFile();
-//          frmMain.iShortcutsBeforeChanges:= SavePoint;
-//        except
-//          //TODO
-//        end;
-//      end;
-//
-//      with modDados.cdShortcuts do
-//        IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
-//      pDatasetToActionList;
-//      pSet_Focus_Main;
-//    end // if (dlgSH_Map.ShowModal = mrOK)
-//    // Else
-//    else begin
-//      with modDados do begin
-//        cdShortcuts.SavePoint:= frmMain.iShortcutsBeforeChanges;
-//        cdShortcutsAfterScroll(nil);
-//      end;
-//    end;
-//
-//  finally
-//    with modDados.cdShortcuts do begin
-//      if BookmarkValid(pTmp) then GoToBookmark(pTmp);
-//      FreeBookmark(pTmp);
-//    end;
-//
-//    FreeAndNil(dlgSH_Map);
-//
-//    // Restore the Hotkeys status
-//    bHotKeys_On:= bHotkeys_Status;
-//    with frmHotkeys do
-//      pSetHotkeys(bHotKeys_On);
-//  end;
-//end;
-
-{
-  procedure pUpdateCompletionArgs;
-  var
-    i: integer;
-
-  begin
-    i:= fFindTop_Window;
-
-    if Assigned(Self.MDIChildren[i] as TfrmEditor) then begin
-      pSetDataCompletion(synEditor_Tip,
-                         (Self.MDIChildren[i] as TfrmEditor).synEditor,
-                         'CTRL+SPACE');
-
-      pSetDataCompletion(synEditor2_Tip,
-                         (Self.MDIChildren[i] as TfrmEditor).synEditor2,
-                         'CTRL+SPACE');
-    end;
-
-    pSetDataCompletion(synIO_Tip,
-                       frmR_Term.synIO,
-                       'CTRL+SPACE');
-  end;
-
-var
-  pTmp: pointer;
-
-  n: integer;
-
-  sShortcuts: array of string;
-
-  procedure pRemoveShortcuts;
-  var
-    i: integer;
-
-  begin
-    // Reset all shortcuts
-    with alMain do begin
-      n:= ActionCount;
-      SetLength(sShortcuts,
-                n);
-
-      for i:= 0 to n - 1 do
-        If (Actions[i] is TAction) then begin
-           sShortcuts[i]:= ShortCutToText(TAction(Actions[i]).Shortcut);
-           TAction(Actions[i]).Shortcut:= TextToShortCut('None');
-        end;
-    end;
-  end;
-
-begin
-
-  with modDados.cdShortcuts do
-    pTmp:= GetBookmark;
-
-  Application.CreateForm(TfrmShortcuts,
-                         frmShortcuts);
-
-  with frmShortcuts do
-    try
-      pRemoveShortcuts;
-      ShowModal;
-      with modDados.cdShortcuts do begin
-        if BookmarkValid(pTmp) then GoToBookmark(pTmp);
-        FreeBookmark(pTmp);
-      end;
-    finally
-      frmMain.Refresh;
-      FreeAndNil(frmShortcuts);
-      pDatasetToActionList;
-      pUpdateCompletionArgs;
-      pSet_Focus_Main;
-    end;
-}
-
-{
-procedure TfrmMain.actEditCutExecute(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLOG: TSynEdit;
-
-begin
-  iFocus:= fGet_Focus;
-  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
-                                else seLOG:= frmR_Term.synLOG;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          CutToClipboard;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          CutToClipboard;
-     // synIO
-     3: with (frmR_Term.synIO as TSynEdit) do
-          CutToClipboard;
-     // synLOG and synLOG2
-     4: with (seLOG as TSynEdit) do
-          CutToClipboard;
-  end;
-end;
-}
-
-{
-procedure TfrmMain.pLoad_EditorKeystrokes;
-var
-  sEditor: string;
-
-  stream: TStream;
-
-begin
-  sEditor:= sPath_Editor +
-            '\Editor.kst';
-
-  if FileExists(sEditor) then begin
-    stream:= TFileStream.Create(sEditor,
-                                fmOpenRead);
-
-    with coEditor.Keystrokes do
-      LoadFromStream(stream);
-
-    FreeAndNil(stream);
-  end;
-end;
-
-procedure TfrmMain.pSave_EditorKeystrokes;
-var
-  sEditor: string;
-
-  stream: TStream;
-
-begin
-  sEditor:= sPath_Editor +
-            '\Editor.kst';
-
-  if FileExists(sEditor) then
-    DeleteFile(sEditor);
-
-  stream:= TFileStream.Create(sEditor,
-                              fmCreate);
-
-  with coEditor.Keystrokes do
-    SaveToStream(stream);
-
-  FreeAndNil(stream);
-end;
-}
-
-{
-  // Tinn-R\syntax
-  if (not DirectoryExists(sPath_Syntax)) then begin
-    CreateDir(sPath_Syntax);
-    frmTools.memIniLog.Lines.Add('   \' +
-                                 ExtractFileName(sPath_Syntax) +
-                                 '     : CREATED');
-
-    // Recover syntax from old version
-    if bSyntax_OldVersion then pUnpack_File(sPreferences_OldVersion +
-                                            '\syntax_bkp.zip',
-                                            sPath_Syntax,
-                                            '*.*');
-  end
-  else frmTools.memIniLog.Lines.Add('   \' +
-                                    ExtractFileName(sPath_Syntax) +
-                                    '     : OK');
-
-  // Tinn-R\syntax_bkp
-  if (not DirectoryExists(sPath_SyntaxBKP)) then begin
-    CreateDir(sPath_SyntaxBKP);
-    frmTools.memIniLog.Lines.Add('   \' +
-                                 ExtractFileName(sPath_SyntaxBKP) +
-                                 ' : CREATED');
-  end
-  else frmTools.memIniLog.Lines.Add('   \' +
-                                    ExtractFileName(sPath_SyntaxBKP) +
-                                    ' : OK');
-}
-
-(* Before to make it clean
-procedure TfrmMain.actColorsPreferenceExecute(Sender: TObject);
-
-//  // Make a syntax backup
-//  procedure pMake_Syntax_BKP(var sFile_Syntax_BKP: string);
-//  begin
-//    if (not DirectoryExists(sPath_Syntax_BKP)) then CreateDir(sPath_Syntax_BKP);
-//
-//    zipKit.StoreOptions:= [soRecurse];  // soRecurse: will include all files of all folders and sub-folders
-//    with zipKit do begin
-//      FileName:= sFile_Syntax_BKP;
-//      AddFiles(sPath_Syntax + '\*.*', 0);
-//      CloseArchive;
-//    end;
-//  end;
-
-//  // Make a syntax restore
-//  procedure ppMake_Syntax_REST(var sFile_Syntax_BKP: string);
-//  begin
-//    //CreateDir(sPath_Syntax);
-//    zipKit.FileName:= sFile_Syntax_BKP;
-//    zipKit.ExtractOptions:= [eoCreateDirs, eoRestorePath];
-//
-//    with zipKit do begin
-//      BaseDirectory:= sPath_Syntax;
-//      ExtractFiles('*.*');
-//    end;
-//
-//    zipKit.CloseArchive;
-//  end;
-
-var
-  dlg: TfrmColors;
-
-  clBrackets_Prior: TColor;
-
-  i,
-   iSyntax_Prior: integer;
-
-  sPath_Syntax_TMP: string;
-
-begin
-  // Both below will be used in case of CANCEL the dlg TfrmColors
-  clBrackets_Prior:= clBrackets;
-  iSyntax_Prior:= iSyntax;
-
-  try
-    dlg:= TfrmColors.Create(Self);
-    dlg.rdgSyntax.ItemIndex:= iSyntax;  // iSyntax = Color settings (speed)
-
-//    // Do a prior backup of all syntax files of ini
-//    sFile_Syntax_BKP:= sPath_Syntax_BKP +
-//                       '\syntax_bkp.zip';
-
-    sPath_Syntax_TMP:= sPath_Ini +
-                       '\syntax_tmp';
-
-//    pMake_Syntax_BKP(sFile_Syntax_BKP);
-    pCopy_Folder(sPath_Syntax,
-                 sPath_Syntax_TMP,
-                 '*.*');
-
-    if (dlg.ShowModal = mrOK) then begin  // OK
-      iSyntax:= dlg.rdgSyntax.ItemIndex;  // iSyntax = Color settings (speed)
-
-      with dlg do begin
-        clActiveLine           := shActiveLine.Brush.Color;
-        clBrackets             := shBrackets.Brush.Color;
-        clBG_ForAllHighlighters:= shBGAllHighlighters.Brush.Color;
-        clBG_Preferred         := shBGPreferred.Brush.Color;
-        bActiveLine            := cbActiveLineBG.Checked;
-      end;
-//      if FileExists(sFile_Syntax_BKP) then DeleteFile(sFile_Syntax_BKP);
-        if DirectoryExists(sPath_Syntax_TMP) then pDelete_Dir(sPath_Syntax_TMP);
-    end
-    else begin  // Cancel: it will restore a prior backup of all ini syntax files
-//      ppMake_Syntax_REST(sFile_Syntax_BKP);  { It was very slow! }
-      pCopy_Folder(sPath_Syntax_TMP,
-                   sPath_Syntax,
-                   '*.*');
-
-      if DirectoryExists(sPath_Syntax_TMP) then pDelete_Dir(sPath_Syntax_TMP);
-
-      clBrackets:= clBrackets_Prior;
-      iSyntax:= iSyntax_Prior;
-
-      dmSyn.pLoad_Syntax_FromIni;  // It will use iSyntax variable
-    end;
-  finally
-    synURIOpener.Editor:= nil;  // Don't remove from here!
-    FreeAndNil(dlg);
-  end;
-
-  for i:= (Self.MDIChildCount - 1) downto 0 do begin
-    with (Self.MDIChildren[i] as TfrmEditor).synEditor do begin
-      if bActiveLine then ActiveLineColor:= TColor(clActiveLine)
-                     else ActiveLineColor:= TColor(clNone);
-
-      WordWrap:= actEditorLineWrap.Checked;
-    end;
-    (Self.MDIChildren[i] as TfrmEditor).Repaint;
-  end;
-
-  // It is necessary to update pSyn_PaintTransient in cases where the brackets are selected!
-  i:= fFindTop_Window;
-
-  if Assigned(Self.MDIChildren[i] as TfrmEditor) then
-    with (Self.MDIChildren[i] as TfrmEditor) do begin
-      if Assigned(synEditor) then synEditor.Repaint;
-      if Assigned(synEditor2) then synEditor2.Repaint;
-    end;
-
-  pUpdate_Appearance(False);
-  pSet_Focus_Main;
-end;
-*)
-
 end.
 
 

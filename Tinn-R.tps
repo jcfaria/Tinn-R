@@ -41,30 +41,29 @@
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmApp_Options.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmColors.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmComments.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmCompletion.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmConfigurePrint.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmConfirmReplace.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmCount.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmDiffMain.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGotoBox.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGroupRename.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmHotKeys.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLatexDimensional.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGoup_New.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGroup_Rename.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLatex_Dimensional.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmNewGoup.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPandoc.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPrintPreview.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRCard.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmReplace.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRmirrors.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRServer.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearch.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearchInFiles.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPrint_Configure.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPrint_Preview.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Card.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Mirrors.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Server.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Term.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmReplace_Confirm_Dlg.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmReplace_Dlg.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearch_Dlg.pas
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearch_InFiles.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSplash.pas
@@ -73,20 +72,14 @@
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.pas
 \04. pas_highlighter
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterAll.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR - Copia.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterR_term.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterTeX.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterText.pas
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterText_term.pas
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\SynEdit_highlighters\SynHighlighterURI.pas
-\05. dfm_external
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmConfigurePrint.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmConfirmReplace.dfm
-\06. dfm_internal
+\05. dfm_internal
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udmSyn.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAppOptions.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmApp_Options.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmColors.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmComments.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmCompletion.dfm
@@ -94,42 +87,54 @@
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmDiffMain.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmEditor.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGotoBox.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGroupRename.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmHotKeys.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLatexDimensional.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGoup_New.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmGroup_Rename.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLatex_Dimensional.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmNewGoup.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPandoc.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPrintPreview.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRCard.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmReplace.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRmirrors.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRServer.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearch.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearchInFiles.dfm
-  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmShortcuts.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPrint_Configure.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmPrint_Preview.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Card.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Mirrors.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Server.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Term.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmReplace_Confirm_Dlg.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmReplace_Dlg.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearch_Dlg.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSearch_InFiles.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_Manager.dfm
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSplash.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmTools.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.dfm
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\uModDados.dfm
-\07. dof
+\06. dof
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dof
-\08. data
+\07. data
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\App_Shortcuts.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Cache.xml
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Cache.xml
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Comments.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Comments.xml
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Completion.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Completion.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Editor_Keystrokes.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Rcard.xml
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Rcard.xml
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Readme.txt
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Control.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Custom.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\RH_Send.xml
+  C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Rmirrors.xml
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Rmirrors.xml
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Shortcuts.xml
-\09. doc
+\08. doc
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\doc\citation.txt
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\doc\licence_gpl2.txt
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\doc\licence_gpl3.tex
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\doc\licence_gpl3.txt
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\doc\Tinn-R_recognized words.R
-\10. project
+\09. project
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\project\deplate.dplt
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\project\example.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\project\info.R
@@ -149,12 +154,12 @@
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\project\Tinn-R_example of script.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\project\Tinn-R_recognized words.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\project\txt2tags.t2t
-\11. sample
+\10. sample
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\sample\deplate.dplt
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\sample\pandoc.markdown
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\sample\Tinn-R_example of script.r
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\sample\txt2tags.t2t
-\12. template
+\11. template
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\templates\R doc_dataset.Rd
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\templates\R doc_empty.Rd
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\templates\R doc_function.Rd
@@ -162,18 +167,18 @@
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\templates\R markdown.Rmd
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\templates\R script.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\templates\R_noweb.Rnw
-\13. util
+\12. util
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\utils\example.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\utils\info.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\utils\install.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\utils\mirrors.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\utils\packages_available.txt
-\14. other
+\13. other
   C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\LICENSE
   C:\Users\jcfaria\Documents\GitHub\project_clean.bat
   C:\Users\jcfaria\Documents\Git_Bitbucket\Tinn-R\README.md
   C:\Users\jcfaria\Documents\GitHub\SynEdit_options.txt
-\15. todo
+\14. todo
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\todo\bugs_to_fix.R
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\todo\Proposta_Philipe.txt
   C:\Users\jcfaria\Documents\GitHub\Tinn-R\todo\todo.txt
