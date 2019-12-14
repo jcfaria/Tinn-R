@@ -24,7 +24,5 @@
     <ROW Index="11" Group="Control" Caption="Example (selected)" Hotkey=""/>
     <ROW Index="12" Group="Control" Caption="Open example (selected)" Hotkey=""/>
     <ROW Index="13" Group="Control" Caption="Help" Hotkey=""/>
-    <ROW Index="14" Group="Control" Caption="Rgui/PuTTY (start/close)" Hotkey=""/>
-    <ROW Index="15" Group="Control" Caption="Rterm (start/close)" Hotkey=""/>
   </ROWDATA>
 </DATAPACKET>

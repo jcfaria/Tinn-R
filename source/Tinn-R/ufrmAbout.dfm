@@ -6,7 +6,7 @@ object frmAbout: TfrmAbout
   BorderStyle = bsDialog
   Caption = 'About'
   ClientHeight = 346
-  ClientWidth = 600
+  ClientWidth = 614
   Color = 16250871
   TransparentColorValue = clMaroon
   Ctl3D = False
@@ -23,7 +23,7 @@ object frmAbout: TfrmAbout
   PixelsPerInch = 96
   TextHeight = 13
   object bbtOK: TBitBtn
-    Left = 522
+    Left = 534
     Top = 315
     Width = 75
     Height = 25
@@ -42,9 +42,9 @@ object frmAbout: TfrmAbout
   object pgAbout: TJvgPageControl
     Left = 0
     Top = 0
-    Width = 600
+    Width = 614
     Height = 312
-    ActivePage = tbsAboutProject
+    ActivePage = tbsAboutVersion
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
@@ -84,12 +84,10 @@ object frmAbout: TfrmAbout
     TabSelectedStyle.Gradient.Active = False
     TabSelectedStyle.Gradient.Orientation = fgdHorizontal
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
+    ExplicitWidth = 600
     object tbsAboutVersion: TTabSheet
       Caption = 'Version'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 592
       object lVersion: TLabel
         Left = 260
         Top = 148
@@ -190,21 +188,18 @@ object frmAbout: TfrmAbout
       object im2: TImage
         Left = 0
         Top = 274
-        Width = 600
+        Width = 604
         Height = 10
       end
     end
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 592
       object synAboutProject: TSynEdit
         Left = 0
         Top = 0
-        Width = 592
+        Width = 606
         Height = 284
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -236,6 +231,7 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
+        ExplicitWidth = 592
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -251,14 +247,11 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 592
       object synAboutAknowledgments: TSynEdit
         Left = 0
         Top = 0
-        Width = 592
+        Width = 606
         Height = 284
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -301,6 +294,7 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
+        ExplicitWidth = 592
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -316,14 +310,11 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 592
       object synAboutCredits: TSynEdit
         Left = 0
         Top = 0
-        Width = 592
+        Width = 606
         Height = 284
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -375,6 +366,7 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
+        ExplicitWidth = 592
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -390,14 +382,10 @@ object frmAbout: TfrmAbout
     object tbsDonation: TTabSheet
       Caption = 'Donation'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synAboutDonation: TSynEdit
         Left = 0
         Top = 0
-        Width = 592
+        Width = 606
         Height = 284
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
@@ -445,7 +433,7 @@ object frmAbout: TfrmAbout
     end
   end
   object bbHelp: TBitBtn
-    Left = 447
+    Left = 459
     Top = 315
     Width = 75
     Height = 25

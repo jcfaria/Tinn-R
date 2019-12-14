@@ -1,4 +1,4 @@
-{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
+﻿{$A8,B-,C+,D+,E-,F-,G+,H+,I+,J+,K-,L+,M-,N+,O+,P+,Q-,R-,S-,T-,U-,V+,W-,X+,Y+,Z1}
 {$MINSTACKSIZE $00004000}
 {$MAXSTACKSIZE $00100000}
 {$IMAGEBASE $00400000}
@@ -3156,7 +3156,7 @@ begin
   sCurr_Version_Latex            := '2.01.01.01';
   sCurr_Version_Project          := '5.03.05.01';
   sCurr_Version_Rcard            := '2.03.00.00';
-  sCurr_Version_RH_Control       := '5.04.03.00';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_RH_Control       := '5.04.03.01';  // Started from version '5.04.03.00'/beta
   sCurr_Version_RH_Custom        := '5.04.03.00';  // Started from version '5.04.03.00'/beta
   sCurr_Version_RH_Send          := '5.04.03.01';  // Started from version '5.04.03.00'/beta
   sCurr_Version_Rmirrors         := '5.04.01.00';
