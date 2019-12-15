@@ -9,25 +9,25 @@ File_6=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\udm
 File_7=TSourceModule,'C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmUpdater.pas',0,1,64,14,81,0,0,,
 
 [Modules]
-Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
-Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
+Module0=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
+Module1=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 Module2=default.htm
 Module3=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj
-Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
+Module4=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas
 Module5=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trUtils.pas
 Module6=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\trRutils.pas
 Count=7
 EditWindowCount=1
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
@@ -35,7 +35,7 @@ ModuleType=TURLModule
 [C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Tinn_R.dproj]
 ModuleType=TBaseProject
 
-[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas]
+[C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmSKH_map.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -56,7 +56,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=7
-CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
+CurrentEditView=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
 View0=0
 View1=1
 View2=2
@@ -83,13 +83,13 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1896
 LeftPanelClients=StructureView,PropertyInspector
-LeftPanelData=00000800010100000000C3130000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D0100000000252300001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=000008000101000000009D0F0000000000000168070000000000000100000000580E00001100000053747275637475726556696577466F726D0100000000C51B00001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=0
 RightPanelClients=DockSite2,ToolForm
 RightPanelData=0000080001010200000009000000446F636B536974653208000000546F6F6C466F726D9E1200000000000001CF07000000000000FFFFFFFF
-BottomPanelSize=0
+BottomPanelSize=1849
 BottomPanelClients=MessageView@EditWindow0,DockSite1
-BottomPanelData=000008000102020000000B0000004D6573736167655669657709000000446F636B53697465317A45000000000000023907000000000000FFFFFFFF
+BottomPanelData=0000080001020100000009000000446F636B53697465317A4500000000000002390700000000000001000000007A4500000B0000004D65737361676556696577FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465302D1900000000000000771B000000000000FFFFFFFF
@@ -146,12 +146,12 @@ EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmMain.pas
 CustomEditViewType=TEditView
 Module=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
 CursorX=1
-CursorY=52
-TopLine=36
+CursorY=421
+TopLine=401
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmAbout.pas
 
 [View6]
 CustomEditViewType=TEditView
@@ -572,11 +572,11 @@ State=0
 Left=0
 Top=305
 Width=1896
-Height=5026
+Height=3138
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=5026
+ClientHeight=3138
 TBDockHeight=417
 LRDockWidth=1896
 Dockable=1
@@ -585,7 +585,7 @@ SplitPos=111
 
 [PropInspDesignerSelection]
 ArrangeBy=Category
-SelectedItem=Action,
+SelectedItem=Action,Visual.OnActivate
 ExpandedItems=Action=1,"Drag Drop/Docking=1","Help and Hints=1",Input=1,Layout=1,Legacy=1,Linkage=1,Locale=1,Localizable=1,Miscellaneous=1,Visual=1
 
 [BreakpointWindow]
@@ -635,18 +635,18 @@ StayOnTop=0
 [MessageView@EditWindow0]
 PercentageSizes=1
 Create=1
-Visible=0
+Visible=1
 Docked=1
 State=0
 Left=0
-Top=0
-Width=4327
-Height=1641
+Top=23
+Width=10000
+Height=1549
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=4327
-ClientHeight=1641
-TBDockHeight=1641
+ClientWidth=10000
+ClientHeight=1549
+TBDockHeight=1549
 LRDockWidth=4327
 Dockable=1
 StayOnTop=0

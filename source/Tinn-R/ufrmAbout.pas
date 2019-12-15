@@ -417,6 +417,12 @@ begin
   synAboutAknowledgments.Gutter.ShowLineNumbers:= False;
   synAboutCredits.Gutter.ShowLineNumbers:= False;
   synAboutDonation.Gutter.ShowLineNumbers:= False;
+
+  // I think it is better to fix the font size here!
+  synAboutProject.Font.Size       := 11;
+  synAboutAknowledgments.Font.Size:= 11;
+  synAboutCredits.Font.Size       := 11;
+  synAboutDonation.Font.Size      := 11;
 end;
 
 procedure TfrmAbout.CMDialogKey(var Message: TCMDialogKey);
