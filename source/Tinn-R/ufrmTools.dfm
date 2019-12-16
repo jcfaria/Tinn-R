@@ -4280,10 +4280,6 @@ object frmTools: TfrmTools
     object tbsDatabase: TTabSheet
       Caption = 'Database'
       ImageIndex = 6
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pgDatabase: TJvgPageControl
         Left = 0
         Top = 0
@@ -4332,10 +4328,6 @@ object frmTools: TfrmTools
         object tbsApp_Shortcuts: TTabSheet
           Caption = 'Shortcuts (app)'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splShortcuts: TSplitter
             Left = 0
             Top = 113
@@ -4394,7 +4386,7 @@ object frmTools: TfrmTools
                 Top = 4
                 Width = 121
                 Height = 19
-                Hint = 'App shortcuts: filter'
+                Hint = 'Shortcuts (app): filter'
                 Align = alClient
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
@@ -4554,10 +4546,6 @@ object frmTools: TfrmTools
         object tbsEditor_Keystrokes: TTabSheet
           Caption = 'Keystrokes (editor)'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object JvDBNavigator6: TJvDBNavigator
             Left = 0
             Top = 26
@@ -4656,7 +4644,7 @@ object frmTools: TfrmTools
                 Top = 4
                 Width = 121
                 Height = 19
-                Hint = 'Editor keystrokes: filter'
+                Hint = 'keystrokes (editor) : filter'
                 Align = alClient
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
@@ -4674,16 +4662,12 @@ object frmTools: TfrmTools
         object tbsR_Hotkeys: TTabSheet
           Caption = 'Hotkeys (R)'
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object pgRH: TJvgPageControl
             Left = 0
             Top = 0
             Width = 467
             Height = 509
-            ActivePage = tbsRH_Custom
+            ActivePage = tbsRH_Send
             Align = alClient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -4724,10 +4708,6 @@ object frmTools: TfrmTools
             Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
             object tbsRH_Send: TTabSheet
               Caption = 'Send'
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel21: TPanel
                 Left = 0
                 Top = 0
@@ -4776,7 +4756,7 @@ object frmTools: TfrmTools
                     Top = 4
                     Width = 121
                     Height = 19
-                    Hint = 'Hotkeys RH_Send: filter'
+                    Hint = 'Hotkeys (RH_Send): filter'
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
@@ -4844,10 +4824,6 @@ object frmTools: TfrmTools
             object tbsRH_Control: TTabSheet
               Caption = 'Control'
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel22: TPanel
                 Left = 0
                 Top = 0
@@ -4896,7 +4872,7 @@ object frmTools: TfrmTools
                     Top = 4
                     Width = 121
                     Height = 19
-                    Hint = 'Hotkeys RH_Control: filter'
+                    Hint = 'Hotkeys (RH_Control): filter'
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
@@ -4964,10 +4940,6 @@ object frmTools: TfrmTools
             object tbsRH_Custom: TTabSheet
               Caption = 'Custom'
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel23: TPanel
                 Left = 0
                 Top = 0
@@ -5016,7 +4988,7 @@ object frmTools: TfrmTools
                     Top = 4
                     Width = 121
                     Height = 19
-                    Hint = 'Hotkeys RH_Custom: filter'
+                    Hint = 'Hotkeys (RH_Custom): filter'
                     Align = alClient
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
@@ -5085,10 +5057,6 @@ object frmTools: TfrmTools
         end
         object tbsCompletion: TTabSheet
           Caption = 'Completion'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object splCompletion: TSplitter
             Left = 0
             Top = 113
@@ -5297,7 +5265,7 @@ object frmTools: TfrmTools
                 Top = 3
                 Width = 121
                 Height = 19
-                Hint = 'Keystrokes: filter'
+                Hint = 'Completion: filter'
                 Align = alClient
                 TabOrder = 1
                 OnChange = edCompletion_FilterChange
@@ -5309,10 +5277,6 @@ object frmTools: TfrmTools
         object tbsComments: TTabSheet
           Caption = 'Comments'
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel9: TPanel
             Left = 0
             Top = 88
@@ -5442,7 +5406,7 @@ object frmTools: TfrmTools
                 Top = 4
                 Width = 121
                 Height = 19
-                Hint = 'Keystrokes: filter'
+                Hint = 'Comments: filter'
                 Align = alClient
                 TabOrder = 1
                 OnChange = edComments_FilterChange
@@ -5860,7 +5824,7 @@ object frmTools: TfrmTools
                 Anchors = [akLeft, akRight]
                 Ctl3D = False
                 DropDownCount = 25
-                ItemHeight = 13
+                ItemHeight = 0
                 ItemIndex = 0
                 ParentCtl3D = False
                 ParentShowHint = False
