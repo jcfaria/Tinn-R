@@ -13568,6 +13568,16 @@ begin
   // Editor_Keystrokes - BG
   frmTools.dbgEditor_Keystrokes.Color:= clBG_Application;
 
+  // R Hotkeys - BG
+  frmTools.dbgRH_Send.Color   := clBG_Application;
+  frmTools.dbgRH_Control.Color:= clBG_Application;
+  frmTools.dbgRH_Custom.Color := clBG_Application;
+
+  // R Hotkeys - FG
+  frmTools.dbgRH_Send.Font.Color   := clFG_Application;
+  frmTools.dbgRH_Control.Font.Color:= clFG_Application;
+  frmTools.dbgRH_Custom.Font.Color := clFG_Application;
+
   // Editor_Keystrokes - FG
   frmTools.dbgEditor_Keystrokes.Font.Color:= clFG_Application;
 

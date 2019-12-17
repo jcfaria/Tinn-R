@@ -818,14 +818,14 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.edLineWidthKeyDown(Sender: TObject;
-                                            var Key: Word;
-                                            Shift: TShiftState);
+                                                 var Key: Word;
+                                                 Shift: TShiftState);
 begin
   // Only digits allowed
 end;
 
 procedure TfrmApp_Options_Dlg.edMaxDeparseLengthKeyPress(Sender: TObject;
-                                                    var Key: Char);
+                                                         var Key: Char);
 begin
   if not (Key in['0'..'9',
           Chr(8)]) then Key:= #0;
@@ -847,10 +847,10 @@ begin
     pgProcessing_Conversion.TabIndex:= 0;
     pgProcessing_Latex.TabIndex     := 0;
 
-    with jtvAppOptions do begin
-      Color     := clBG_Application;
-      Font.Color:= clFG_Application;
-    end;
+//    with jtvAppOptions do begin
+//      Color     := clBG_Application;
+//      Font.Color:= clFG_Application;
+//    end;
   end;
 
   // Force both to be executed
@@ -952,7 +952,7 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.jtvAppOptionsChange(Sender: TObject;
-                                             Node: TTreeNode);
+                                                  Node: TTreeNode);
 begin
 // // the below bother me with time.
 //  case fStringToCaseSelect(Node.Text,
@@ -1111,7 +1111,9 @@ begin
   pRAvailable_Set;
 end;
 
-procedure TfrmApp_Options_Dlg.tvRAVailableKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TfrmApp_Options_Dlg.tvRAVailableKeyUp(Sender: TObject;
+                                                var Key: Word;
+                                                Shift: TShiftState);
 begin
   pRAvailable_Set;
 end;
@@ -1263,10 +1265,10 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.sGutterColorMouseUp(Sender: TObject;
-                                             Button: TMouseButton;
-                                             Shift: TShiftState;
-                                             X,
-                                              Y: Integer);
+                                                  Button: TMouseButton;
+                                                  Shift: TShiftState;
+                                                  X,
+                                                   Y: Integer);
 begin
   with frmMain do begin
     cdMain.Color:= sGutterColor.Brush.Color;
@@ -1275,10 +1277,10 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.shBGApplicationMouseUp(Sender: TObject;
-                                                Button: TMouseButton;
-                                                Shift: TShiftState;
-                                                X,
-                                                Y: Integer);
+                                                     Button: TMouseButton;
+                                                     Shift: TShiftState;
+                                                     X,
+                                                     Y: Integer);
 var
   clTemp: TColor;
 
@@ -1300,10 +1302,10 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.shFGApplicationMouseUp(Sender: TObject;
-                                                Button: TMouseButton;
-                                                Shift: TShiftState;
-                                                X,
-                                                 Y: Integer);
+                                                     Button: TMouseButton;
+                                                     Shift: TShiftState;
+                                                     X,
+                                                      Y: Integer);
 var
   clTemp: TColor;
 
@@ -1325,10 +1327,10 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.sRightEdgeColorMouseUp(Sender: TObject;
-                                                Button: TMouseButton;
-                                                Shift: TShiftState;
-                                                X,
-                                                 Y: Integer);
+                                                     Button: TMouseButton;
+                                                     Shift: TShiftState;
+                                                     X,
+                                                      Y: Integer);
 begin
   with frmMain do begin
     cdMain.Color:= sRightEdgeColor.Brush.Color;
@@ -1337,10 +1339,10 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.shBGTabSelectedMouseUp(Sender: TObject;
-                                                Button: TMouseButton;
-                                                Shift: TShiftState;
-                                                X,
-                                                Y: Integer);
+                                                     Button: TMouseButton;
+                                                     Shift: TShiftState;
+                                                     X,
+                                                     Y: Integer);
 var
   clTemp: TColor;
 
@@ -1380,7 +1382,10 @@ begin
   pOpen_Url('http://deplate.sourceforge.net/index.php');
 end;
 
-procedure TfrmApp_Options_Dlg.lblURLDeplateMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLDeplateMouseMove(Sender: TObject;
+                                                     Shift: TShiftState;
+                                                     X,
+                                                      Y: Integer);
 begin
   lblURLDeplate.Cursor:= crHandPoint;
 end;
@@ -1390,7 +1395,10 @@ begin
   pOpen_Url('http://pandoc.org');
 end;
 
-procedure TfrmApp_Options_Dlg.lblURLPandocMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLPandocMouseMove(Sender: TObject;
+                                                    Shift: TShiftState;
+                                                    X,
+                                                     Y: Integer);
 begin
   lblURLPandoc.Cursor:= crHandPoint;
 end;
@@ -1400,7 +1408,10 @@ begin
   pOpen_Url('http://www.r-project.org');
 end;
 
-procedure TfrmApp_Options_Dlg.lblURLRMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLRMouseMove(Sender: TObject;
+                                               Shift: TShiftState;
+                                               X,
+                                                Y: Integer);
 begin
   lblURLR.Cursor:= crHandPoint;
 end;
@@ -1410,7 +1421,10 @@ begin
   pOpen_Url('http://txt2tags.org');
 end;
 
-procedure TfrmApp_Options_Dlg.lblURLTxt2tagsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+procedure TfrmApp_Options_Dlg.lblURLTxt2tagsMouseMove(Sender: TObject;
+                                                      Shift: TShiftState;
+                                                      X,
+                                                       Y: Integer);
 begin
   lblURLTxt2tags.Cursor:= crHandPoint;
 end;
@@ -1557,10 +1571,10 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.imGeneralMouseDown(Sender: TObject;
-                                            Button: TMouseButton;
-                                            Shift: TShiftState;
-                                            X,
-                                             Y: Integer);
+                                                 Button: TMouseButton;
+                                                 Shift: TShiftState;
+                                                 X,
+                                                  Y: Integer);
 var
   P : TPoint;
 
@@ -1574,10 +1588,10 @@ begin
 end;
 
 procedure TfrmApp_Options_Dlg.imGutterMouseDown(Sender: TObject;
-                                           Button: TMouseButton;
-                                           Shift: TShiftState;
-                                           X,
-                                            Y: Integer);
+                                                Button: TMouseButton;
+                                                Shift: TShiftState;
+                                                X,
+                                                 Y: Integer);
 var
   P : TPoint;
 
@@ -1610,7 +1624,7 @@ end;
 
 //J.C.Faria: perhaps it is not the best option... but it works!
 procedure TfrmApp_Options_Dlg.pShowAdjustedFont(lbl: TLabel;
-                                           pan: TPanel);
+                                                pan: TPanel);
 var
   x: integer;
 

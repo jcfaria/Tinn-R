@@ -20,11 +20,12 @@ md "Tinn-R\doc"
 md "Tinn-R\latex"
 md "Tinn-R\packages"
 md "Tinn-R\project"
+md "Tinn-R\putty"
 md "Tinn-R\res"
 md "Tinn-R\sample"
 md "Tinn-R\sumatra"
+md "Tinn-R\syntax"
 md "Tinn-R\templates"
-md "Tinn-R\updater"
 md "Tinn-R\utils"
 
 ::Moving script action focus two folders above
@@ -33,7 +34,7 @@ cd..\..\..
 ::Begin of file's copy
 xcopy    bin\Tinn_R_portable.exe distribution\Tinn-R_portable\zip\Tinn-R\bin /e
 xcopy    bin\Tinn_R_portable.exe.manifest distribution\Tinn-R_portable\zip\Tinn-R\bin /e
-xcopy /s data\"data.zip" distribution\Tinn-R_portable\zip\Tinn-R\data /e
+xcopy    data\"data.zip" distribution\Tinn-R_portable\zip\Tinn-R\data /e
 xcopy /s doc distribution\Tinn-R_portable\zip\Tinn-R\doc /e
 xcopy    latex\"latex.zip" distribution\Tinn-R_portable\zip\Tinn-R\latex
 xcopy /s packages distribution\Tinn-R_portable\zip\Tinn-R\packages /e
@@ -41,12 +42,13 @@ xcopy /s packages distribution\Tinn-R_portable\zip\Tinn-R\packages /e
 ::Deleting one not necessary file from packages
 ::del   /q distribution\Tinn-R_portable\zip\Tinn-R\packages\readme.txt
 
-xcopy /s project\"project.zip" distribution\Tinn-R_portable\zip\Tinn-R\project /e
+xcopy    project\"project.zip" distribution\Tinn-R_portable\zip\Tinn-R\project /e
+xcopy    putty\"putty.zip" distribution\Tinn-R_portable\zip\Tinn-R\putty /e
 xcopy /s res distribution\Tinn-R_portable\zip\Tinn-R\res /e
 xcopy /s sample distribution\Tinn-R_portable\zip\Tinn-R\sample /e
 xcopy /s sumatra distribution\Tinn-R_portable\zip\Tinn-R\sumatra /e
+xcopy    syntax\"syntax.zip" distribution\Tinn-R_portable\zip\Tinn-R\syntax /e
 xcopy /s templates distribution\Tinn-R_portable\zip\Tinn-R\templates /e
-xcopy /s updater distribution\Tinn-R_portable\zip\Tinn-R\updater /e
 xcopy /s utils distribution\Tinn-R_portable\zip\Tinn-R\utils /e
 ::End of file's copy
 
@@ -64,7 +66,8 @@ rename   Tinn-R\bin\Tinn_R_portable.exe.manifest "Tinn-R_portable.exe.manifest"
 ::for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.02.01_portable.zip" "Tinn-R\"
 ::for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.03.01_portable.zip" "Tinn-R\"
 ::for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.04.01_portable.zip" "Tinn-R\"
-for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.05.01_portable.zip" "Tinn-R\"
+::for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_5.03.05.01_portable.zip" "Tinn-R\"
+for /d %%X in (*Tinn-R) do "..\tools\7-Zip\7z.exe" a "Tinn-R_6.01.01.02_portable.zip" "Tinn-R\"
 
 ::Deleting the not longer needed Tinn-R folder
 rmdir /s /q Tinn-R

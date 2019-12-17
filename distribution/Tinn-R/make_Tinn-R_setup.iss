@@ -9,15 +9,15 @@ AppPublisher         = Tinn-R Team
 AppPublisherURL      = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppSupportURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
 AppUpdatesURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppVerName           = Tinn-R 5.03.05.01
-AppVersion           = 5.03.05.01
+AppVerName           = Tinn-R 6.01.01.02
+AppVersion           = 6.01.01.02
 AppID                = {{TINN2016-BIOS-PONT-SAPE-183999669100}
 ChangesAssociations  = true
 Compression          = lzma
 DefaultDirName       = {sd}\Tinn-R
 DefaultGroupName     = Tinn-R
 LicenseFile          = .\..\..\doc\licence_gpl3.txt
-OutputBaseFilename   = Tinn-R_5.03.05.01_setup
+OutputBaseFilename   = Tinn-R_6.01.01.02_setup
 OutputDir            = .\bin
 SolidCompression     = yes
 SetupIconFile        = .\..\..\res\tinn48.ico
@@ -63,11 +63,16 @@ Source: .\..\..\packages\svSocket_0.9-57.zip;        DestDir: {app}\packages
 Source: .\..\..\packages\TinnRcom_1.0.21.tar.gz;     DestDir: {app}\packages
 Source: .\..\..\packages\TinnRcom_1.0.21.zip;        DestDir: {app}\packages
 Source: .\..\..\project\project.zip;                 DestDir: {app}\project
+Source: .\..\..\putty\putty.zip;                     DestDir: {app}\putty
+Source: .\..\..\res\footer.jpg;                      DestDir: {app}\res
+Source: .\..\..\res\footer_long.jpg;                 DestDir: {app}\res
+Source: .\..\..\res\logo_long.jpg;                   DestDir: {app}\res
 Source: .\..\..\sample\deplate.dplt;                 DestDir: {app}\sample
 Source: .\..\..\sample\pandoc.markdown;              DestDir: {app}\sample
 Source: .\..\..\sample\Tinn-R_example of script.R;   DestDir: {app}\sample
 Source: .\..\..\sample\txt2tags.t2t;                 DestDir: {app}\sample
-SOurce: .\..\..\sumatra\SumatraPDF.exe;              DestDir: {app}\sumatra
+Source: .\..\..\sumatra\SumatraPDF.exe;              DestDir: {app}\sumatra
+Source: .\..\..\syntax\syntax.zip;                   DestDir: {app}\syntax
 Source: .\..\..\templates\R doc_dataset.Rd;          DestDir: {app}\templates
 Source: .\..\..\templates\R doc_empty.Rd;            DestDir: {app}\templates
 Source: .\..\..\templates\R doc_function.Rd;         DestDir: {app}\templates
@@ -75,8 +80,8 @@ Source: .\..\..\templates\R html.Rhtml;              DestDir: {app}\templates
 Source: .\..\..\templates\R markdown.Rmd;            DestDir: {app}\templates
 Source: .\..\..\templates\R script.R;                DestDir: {app}\templates
 Source: .\..\..\templates\R_noweb.Rnw;               DestDir: {app}\templates
-Source: .\..\..\updater\footer.jpg;                  DestDir: {app}\updater
-Source: .\..\..\updater\logo-update2.jpg;            DestDir: {app}\updater
+;Source: .\..\..\updater\footer.jpg;                  DestDir: {app}\updater
+;Source: .\..\..\updater\logo-update2.jpg;            DestDir: {app}\updater
 Source: .\..\..\utils\example.R;                     DestDir: {app}\utils
 Source: .\..\..\utils\info.R;                        DestDir: {app}\utils
 Source: .\..\..\utils\install.R;                     DestDir: {app}\utils
@@ -127,45 +132,45 @@ Root: HKCR; Subkey: Tinn-R\shell\open\command; ValueType: string; ValueData: """
 
 [Code]
 // About
-Procedure AboutButtonOnClick(Sender: TObject);
-Begin
+procedure AboutButtonOnClick(Sender: TObject);
+begin
   MsgBox('Tinn-R is a Open Source project under the GNU General Public License versions 2 and 3.', 
          mbInformation, 
          mb_Ok);
-End;
+end;
 
 // URL link
-Procedure URLLabelOnClick(Sender: TObject);
-Var
+procedure URLLabelOnClick(Sender: TObject);
+var
   ErrorCode: Integer;
 
-Begin
-  If not ShellExec('open', 
+begin
+  if not ShellExec('open', 
                    //'http://nbcgib.uesc.br/lec/software/editores/tinn-r/en',
                    'https://nbcgib.uesc.br/tinnr/en/',
                    '', 
                    '', 
                    SW_SHOW, 
                    ewNoWait, 
-                   ErrorCode) Then MsgBox('Please, check the browser.', 
+                   ErrorCode) then MsgBox('Please, check the browser.', 
                                           mbInformation, 
                                           mb_Ok);
-End;
+end;
 
-Function IsAppInstalled: boolean;
+function IsAppInstalled: boolean;
 begin
   result := RegKeyExists(HKEY_LOCAL_MACHINE,
                          'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{TINN2016-BIOS-PONT-SAPE-183999669100}_is1');
 end;
 
-Procedure InitializeWizard();
-Var
+procedure InitializeWizard();
+var
   AboutButton, CancelButton: TButton;
   URLLabel: TNewStaticText;
   uninstaller: string;
   ErrorCode: Integer;
 
-Begin
+begin
   if IsAppInstalled = true then
     if MsgBox('Tinn-R is already installed.' + #13#10 + 
               'It is recommended to uninstall it before installing a new version!' + #13#10 +
@@ -207,5 +212,4 @@ Begin
   URLLabel.Cursor    := crHand;
   URLLabel.OnClick   := @URLLabelOnClick;
   URLLabel.Parent    := WizardForm;
-
 end;
