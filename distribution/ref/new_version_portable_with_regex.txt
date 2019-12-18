@@ -1,6 +1,0 @@
-http://nbcgib.uesc.br/lec/update/Tinn-R_5.02.03.00_portable.zip
-18-Oct-2018 10:20
-
-The above text will be submitted to two RegEx:
-- '\d{1}\.\d{2}\.\d{2}\.\d{2}(?=_(setup.exe|portable.zip))'
-- '\d{2}-\w{3}-\d{4} \d{2}:\d{2}'
