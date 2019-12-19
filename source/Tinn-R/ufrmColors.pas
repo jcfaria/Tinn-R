@@ -93,6 +93,7 @@ type
     synSample: TSynEdit;
     bbtRestore: TBitBtn;
     rdgSyntax: TRadioGroup;
+    stbColor: TStatusBar;
 
     procedure actTextAttributesExecute(Sender: TObject);
     procedure bbHelpClick(Sender: TObject);
@@ -1017,6 +1018,10 @@ begin
                 [mbYes, mbCancel],
                 0) <> idYes) then Exit;
 
+  synSample.Enabled:= False;
+  Screen.Cursor:= crHourGlass;
+  stbColor.SimpleText:= 'Please, wait...';
+
   with frmMain do begin
     pDelete_Dir(sPath_Syntax);  // Beter to remove the entire foder to make a new structure!
     pDelete_Dir(sPath_Syntax +
@@ -1037,7 +1042,11 @@ begin
   // Update all syntax in synedit instances
   rdgSyntaxClick(nil);
 
-  // Force user to cloe the dlg with no more actions.
+  synSample.Enabled:= True;
+  Screen.Cursor:= crDefault;
+  stbColor.SimpleText:= 'Done!';
+
+  // Force user to close the dlg with no more actions.
   bbtCancel.Enabled:= False;
 end;
 

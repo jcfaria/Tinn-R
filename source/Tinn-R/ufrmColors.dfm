@@ -517,6 +517,15 @@ object frmColors: TfrmColors
     TabOrder = 8
     OnClick = rdgSyntaxClick
   end
+  object stbColor: TStatusBar
+    Left = 7
+    Top = 504
+    Width = 456
+    Height = 22
+    Align = alNone
+    Panels = <>
+    SimplePanel = True
+  end
   object alAttributes: TActionList
     Left = 25
     Top = 27

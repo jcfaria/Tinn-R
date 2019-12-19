@@ -803,24 +803,24 @@ begin
     with frmMain.zipKit do begin
       FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
-      ExtractFiles('Shortcuts.xml');
+      ExtractFiles('App_Shortcuts.xml');
       CloseArchive;
     end;
 
     with modDados.cdApp_Shortcuts do begin
-      FileName:= frmMain.sPath_Data + '\Shortcuts.xml';
+      FileName:= frmMain.sPath_Data + '\App_Shortcuts.xml';
       Active  := True;
     end;
 
     with frmMain do begin
       iApp_Shortcuts_SavePoint:= modDados.cdApp_Shortcuts.SavePoint;
-      sShortcuts_InUse        := frmMain.sPath_Data + '\Shortcuts.xml';
+      sShortcuts_InUse        := frmMain.sPath_Data + '\App_Shortcuts.xml';
     end;
 
     with stbShortcuts do
       Panels[2].Text:= ExtractFileName(frmMain.sShortcuts_InUse);
 
-    MessageDlg('The original ''Shortcuts.xml'' was successfully restored.' + #13 + #13 +
+    MessageDlg('The original ''App_Shortcuts.xml'' was successfully restored.' + #13 + #13 +
                'It will be, from now, the default shortcuts!',
                mtInformation,
                [MBOK],
