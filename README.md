@@ -11,9 +11,8 @@ The project is coordinate by José Cláudio Faria/UESC/DCET.
 All users are welcome to make it better!
 
 #### Development Version
-Setup: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R/bin
-
-Portable: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R_portable/zip
+- Setup: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R/bin
+- Portable: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R_portable/zip
 
 #### How to clone the project?
 To download do the following in a terminal emulator:
