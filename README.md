@@ -7,7 +7,7 @@ You should use it if you want to contribute to its development:
 testing unreleased versions, fixing bugs, writing code, writing documentation, etc.
 
 Tinn-R is free, simple but efficient replacement for the basic code editor provided by Rgui.
-The project is coordinate by JosÈ Cl·udio Faria/UESC/DCET.
+The project is coordinate by Jos√© Cl√°udio Faria/UESC/DCET.
 All users are welcome to make it better!
 
 #### Development Version
