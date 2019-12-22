@@ -3,6 +3,7 @@
 - IDE: *DELPHI 2007*
 
 This is the development code of the project **Tinn-R Editor - GUI for R Language and Environment**.
+
 You should use it if you want to contribute to its development:
 testing unreleased versions, fixing bugs, writing code, writing documentation, etc.
 
@@ -15,7 +16,7 @@ All users are welcome to make it better!
 - Portable: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R_portable/zip
 
 #### How to clone the project?
-To download do the following in a terminal emulator:
+Do the following in a terminal emulator:
 
 > git clone git://github.com/jcfaria/Tinn-R.git
 >
@@ -23,8 +24,8 @@ To download do the following in a terminal emulator:
 >
 > git clone https://jcfaria@github.com/jcfaria/Tinn-R.git
 
-#### User guide of the project
-The User guide of this software is available at:
+#### Where to find project documentation source code?
+The documentation source (LaTeX) of this software is available at
 - https://github.com/jcfaria/Tinn-R-doc
 
 #### How to use the app after cloning the project?
@@ -33,8 +34,8 @@ is to clone the project in a folder on your computer (git clone), after which, p
 (Tinn_R.exe and Tinn_R_portable.exe) located in the Tinn-R/bin folder.
 This is how I use it. 
 
-#### Stable versions
-The stable version of this software is available at:
-- https://nbcgib.uesc.br/tinnr/en/
-- https://sourceforge.net/projects/tinn-r/
+#### Where to find the stable version of the project?
+The stable version is available in two repositories
+- https://nbcgib.uesc.br/tinnr/en/ (the main web page)
+- https://sourceforge.net/projects/tinn-r/ (public SourceForge)
 
