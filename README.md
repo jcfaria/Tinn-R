@@ -37,5 +37,5 @@ This is how I use it.
 #### Where to find the stable version of the project?
 The stable version is available in two repositories
 - https://nbcgib.uesc.br/tinnr/en/ (the main web page)
-- https://sourceforge.net/projects/tinn-r/ (public SourceForge)
+- https://sourceforge.net/projects/tinn-r/ (public repository)
 
