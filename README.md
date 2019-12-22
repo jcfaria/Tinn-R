@@ -1,6 +1,6 @@
 ### Tinn-R
-LANGUAGE: *Object Pascal*
-IDE: *DELPHI 2007*
+- LANGUAGE: *Object Pascal*
+- IDE: *DELPHI 2007*
 
 This is the development code of the project **Tinn-R Editor - GUI for R Language and Environment**.
 You should use it if you want to contribute to its development:
@@ -11,8 +11,8 @@ The project is coordinate by José Cláudio Faria/UESC/DCET.
 All users are welcome to make it better!
 
 #### Development Version
-Setup:https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R/bin
-Portable: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R_portable/zip
+- Setup: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R/bin
+- Portable: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R_portable/zip
 
 #### How to clone the project?
 To download do the following in a terminal emulator:
