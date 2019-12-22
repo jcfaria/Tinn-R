@@ -1,6 +1,6 @@
 ### Tinn-R
-LANGUAGE: *Object Pascal*
-IDE: *DELPHI 2007*
+- LANGUAGE: *Object Pascal*
+- IDE: *DELPHI 2007*
 
 This is the development code of the project **Tinn-R Editor - GUI for R Language and Environment**.
 You should use it if you want to contribute to its development:
