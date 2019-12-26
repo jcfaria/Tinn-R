@@ -1,4 +1,4 @@
-6.1.1.2 (jan/01/2020)
+6.1.1.3 (jan/01/2020)
 ---------------------
 
 -   Some parts of the Object Pascal **pipe** were rewritten. It is now

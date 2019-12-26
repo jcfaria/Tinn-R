@@ -22,7 +22,9 @@ unit ConsoleIO platform;
 interface
 
 uses Messages, Windows, SysUtils, Classes, Forms,
-     Controls{J.C.Faria}, trUtils{J.C.Faria, we needs of RegEx in this class}, Dialogs;
+     Controls{J.C.Faria},
+     trUtils{J.C.Faria, we needs of TRegEx in this class},
+     Dialogs;
 
 const
   MIO_OFFSET             = $1911;
@@ -317,6 +319,12 @@ procedure TConsoleIO.ReceiveOutput(poBuf: Pointer;
   begin
     if (fRegEx(Trim(ptOutputBuffer),
                'to start :$') <> '') then
+      pReceive_ptOutputBuffer;
+
+    // Plotrix demo: "Choose a group -"
+    // Plotrix demo: "Choose a plot -"
+    if (fRegEx(Trim(ptOutputBuffer),
+               'Choose (a|an) (group|plot|enhancement) -$') <> '') then
       pReceive_ptOutputBuffer;
   end;
 

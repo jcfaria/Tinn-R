@@ -114,7 +114,7 @@ end;
 procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
                                             const Cmd: string);
 
-  procedure pCheckIfUnderScan_Function;
+  procedure pCheck_Scan_Function;
   var
     sRex : string;
 
@@ -136,7 +136,7 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
       end;
   end;
 
-  procedure pCheckIfUnderDebug_Function;
+  procedure pCheck_Debug_Function;
   var
     iPosDbg1,
      iPosDbg2 : integer;
@@ -162,7 +162,7 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
       else bRUnderDebug_Function:= False;
   end;
 
-  procedure pCheckIfUnderDebug_Package;
+  procedure pCheck_Debug_Package;
   var
     iPosDbg1,
      iPosDbg2 : integer;
@@ -332,9 +332,9 @@ procedure TR_Useful.cRTerm_RU_ReceiveOutput(Sender: TObject;
 //   end;
 
 begin
-  pCheckIfUnderScan_Function;
-  pCheckIfUnderDebug_Function;
-  pCheckIfUnderDebug_Package;
+  pCheck_Scan_Function;
+  pCheck_Debug_Function;
+  pCheck_Debug_Package;
 
   bIncomplete:= False;
   with synIO_RU do begin

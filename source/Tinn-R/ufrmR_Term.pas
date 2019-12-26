@@ -49,7 +49,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, JvgPage, JvDockTree, JvDockControlForm, JvComponentBase,
   ExtCtrls, ConsoleIO, ToolWin, TB2Item, TB2Dock, TB2Toolbar,
-  ActnList, PerlRegEx, Menus,
+  ActnList, PerlRegEx, Menus, StrUtils,
   SynEdit, SynEditTypes, SynEditKeyCmds, SynCompletionProposal;
 
 type
@@ -156,11 +156,12 @@ type
 
   private
     { Private declarations }
-    bRterm_Sent : boolean;
-    bTab        : boolean;
-    slError     : TStringList;
-    sTab        : string;
-    sTabPrefix  : string;
+    bRterm_Sent         : boolean;
+    bTab                : boolean;
+    sDemo_Plotrix_Prefix: string;
+    slError             : TStringList;
+    sTab                : string;
+    sTabPrefix          : string;
 
     procedure CMDialogKey(var Message: TCMDialogKey); message CM_DIALOGKEY;
 
@@ -301,7 +302,20 @@ procedure TfrmR_Term.cRTermReceiveOutput(Sender: TObject;
     end;
   end;
 
-  procedure pCheckIfUnderScan_Function;
+  procedure pCheck_Plotrix_Demo;
+  var
+    sRex : string;
+
+  begin
+    // If under plotrix demo
+    sRex:= fRegEx(Cmd,
+                  'Choose (a|an) (group|plot|enhancement) -');
+
+    if (sRex <> EmptyStr) then
+      sDemo_Plotrix_Prefix:= sRex;
+  end;
+
+  procedure pCheck_Scan_Function;
   var
     sRex : string;
 
@@ -323,7 +337,7 @@ procedure TfrmR_Term.cRTermReceiveOutput(Sender: TObject;
       end;
   end;
 
-  procedure pCheckIfUnderDebug_Function;
+  procedure pCheck_Debug_Function;
   var
     iPosDbg1,
      iPosDbg2 : integer;
@@ -348,7 +362,7 @@ procedure TfrmR_Term.cRTermReceiveOutput(Sender: TObject;
      else bRUnderDebug_Function:= False;
    end;
 
-  procedure pCheckIfUnderDebug_Package;
+  procedure pCheck_Debug_Package;
   var
     iPosDbg1,
      iPosDbg2 : integer;
@@ -538,9 +552,10 @@ begin
   end;
 
   pgRterm.ActivePage:= tbsIO;
-  pCheckIfUnderScan_Function;
-  pCheckIfUnderDebug_Function;
-  pCheckIfUnderDebug_Package;
+  pCheck_Scan_Function;
+  pCheck_Debug_Function;
+  pCheck_Debug_Package;
+  pCheck_Plotrix_Demo;
 
   with synIO do begin
     BeginUpdate;
@@ -930,7 +945,7 @@ procedure TfrmR_Term.pCR;
 
   // It check if under interactive funcion scan()
   procedure pCheck_Scan(var sTmp,
-                        sPre: string);
+                            sPre: string);
   var
     sRex: string;
 
@@ -946,6 +961,32 @@ procedure TfrmR_Term.pCR;
                     '');
 
       sPre:= sRex;
+    end;
+  end;
+
+  // It check if under interactive funcion scan()
+  function fCheck_Demo_Plotrix(var sTmp,
+                                   sPre: string): boolean;
+  var
+    sRex: string;
+
+  begin
+    Result:= False;
+
+    // If under Demo_Plotrix:
+    //   Choose a group -$
+    //   Choose a plot -$
+    sRex:= fRegEx(sTmp,
+                  '^Choose (a|an) (group|plot|enhancement) -');
+
+    if (sRex <> '') then begin
+      sTmp:= trim(fRegEx(sTmp,
+                         '^Choose (a|an) (group|plot|enhancement) -',
+                         True,
+                         ''));
+
+      sPre:= sRex;
+      Result:= True;
     end;
   end;
 
@@ -983,8 +1024,8 @@ procedure TfrmR_Term.pCR;
   end;  // pCheck_RHistory
 
   procedure pProcess_CR(var sTmp,
-                          sPre,
-                          sSend: string);
+                             sPre,
+                             sSend: string);
   begin
     // Remove space(s) after '>'
     if (fRegEx(sTmp,
@@ -1029,24 +1070,34 @@ procedure TfrmR_Term.pCR;
 
       // It will checks if is under debug
       if fCheck_Debug(sSend) then
-      begin
-        LineText:= sRDebug_Prefix + sSend;
-      end
-      else
+        LineText:= sRDebug_Prefix + sSend
+      else begin
+        // result of cat('something')
+        if (sSend = sTmp) and
+           (fRegEx(sTmp, '>$') <> '') and
+           (sPre = '') then sSend:= ''
+        else begin
+          // Check if under plotrix(demo)
+          if fCheck_Demo_Plotrix(sTmp,
+                                 sPre) then begin
+            sSend:= sTmp;
+            
+            Linetext:= sPre +
+                       ' ' +
+                       trim(sSend);
+          end;
 
-      // result of cat('something')
-      if (sSend = sTmp) and (fRegEx(sTmp, '>$') <> '') and (sPre = '') then
-        sSend:= ''
-      else
-        case fString_ToCase_Select(sPre,
-                                   ['>',
-                                    '+',
-                                    '']) of
-          0: LineText:= sPre + ' ' + sSend;
-          1: LineText:= sPre + ' ' + sSend;
-          2: if (sSend <> '') then
-                LineText:= '>' + ' ' + sSend;
+          case fString_ToCase_Select(sPre,
+                                     ['>',
+                                      '+',
+                                      '']) of
+            0: LineText:= sPre + ' ' + sSend;
+            1: LineText:= sPre + ' ' + sSend;
+            2: if (sSend <> '') then
+                 LineText:= '>' + ' ' + sSend;
+          end;
         end;
+      end;
 
       frmMain.pDo_Send(sSend,
                        False);
@@ -1192,7 +1243,20 @@ var
    sPrior,
    sAfter: string;
 
+  aR_Prompt: array of string;
+
 begin
+  SetLength(aR_Prompt,
+            6);
+
+  // All recognized prompts of Rterm
+  aR_Prompt[0]:= '>';
+  aR_Prompt[1]:= '+';
+  aR_Prompt[2]:= sRDebug_Prefix;
+  aR_Prompt[3]:= sDemo_Plotrix_Prefix;
+  aR_Prompt[4]:= 'Type  <Return>	 to start :';  // Do not change it!!!
+  aR_Prompt[5]:= 'Waiting to confirm page change...';
+
   bIO_Keyed:= True;  // Some instruction was typed in the RTerm_IO!
 
   with frmMain do
@@ -1340,16 +1404,15 @@ begin
     if not frmMain.fRterm_Running then Exit;
 
     case Key of
-     ord('Y'): with synIO do // CTRL+Y
-                 if (CaretY = Lines.Count) then Key:= VK_PAUSE;
+      ord('Y'): with synIO do // CTRL+Y
+                  if (CaretY = Lines.Count) then Key:= VK_PAUSE;
 
       VK_BACK: with synIO do begin  // CTRL+BACK
                  if (CaretY = Lines.Count) then begin
                    sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
 
-                   if (sPrior = '>') or
-                      (sPrior = '+') or
-                      (sPrior = sRDebug_Prefix) then key:= VK_PAUSE;
+                   if MatchStr(sPrior,
+                               aR_Prompt) then key:= VK_PAUSE;
                  end;
                end;
 
@@ -1357,9 +1420,8 @@ begin
                  if (CaretY = Lines.Count) then begin
                    sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
 
-                   if (sPrior = '>') or
-                      (sPrior = '+') or
-                      (sPrior = sRDebug_Prefix) then key:= VK_PAUSE;
+                   if MatchStr(sPrior,
+                               aR_Prompt) then key:= VK_PAUSE;
                  end;
                end;
 
@@ -1502,10 +1564,8 @@ begin
                    if not SelAvail then begin
                      sPrior:= trim(ConsoleGetCursorTo('BeginningLine'));
 
-                     if (sPrior = '>') or
-                        (sPrior = '+') or
-                        (sPrior = sRDebug_Prefix) then
-                       key:= VK_PAUSE;
+                   if MatchStr(sPrior,
+                               aR_Prompt) then key:= VK_PAUSE;
                    end
                    else begin
                      if (CaretY = Lines.Count) and
@@ -1528,9 +1588,8 @@ begin
 
                        sAfter:= Trim(ConsoleGetCursorTo('EndLine'));
 
-                       if (sPrior = '>') or
-                          (sPrior = '+') or
-                          (sPrior = sRDebug_Prefix) then
+                       if MatchStr(sPrior,
+                                   aR_Prompt) then
                          if (sAfter = '')  then
                            key:= VK_PAUSE;
                      end
@@ -1562,9 +1621,8 @@ begin
                  if not SelAvail then begin
                    sPrior:= Trim(ConsoleGetCursorTo('BeginningLine'));
 
-                   if (sPrior = '>') or
-                      (sPrior = '+') or
-                      (sPrior = sRDebug_Prefix) then
+                   if MatchStr(sPrior,
+                               aR_Prompt) then
                      if (sAfter = '')  then begin
                        CaretX:= Length(sPrior) + 2;
                        key:= VK_PAUSE;
