@@ -74,10 +74,6 @@ object frmR_Term: TfrmR_Term
     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
     object tbsIO: TTabSheet
       Caption = 'IO'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synIO: TSynEdit
         Left = 0
         Top = 0
@@ -917,13 +913,16 @@ object frmR_Term: TfrmR_Term
         Caption = 'Clear'
         ImageIndex = 20
         object TBItem24: TTBItem
-          Action = frmMain.actRtermIOClear
+          Action = frmMain.actRterm_Clear_IO
         end
         object TBItem34: TTBItem
-          Action = frmMain.actRtermLOGClear
+          Action = frmMain.actRterm_Clear_LOG
         end
         object TBItem8: TTBItem
-          Action = frmMain.actRtermIOandLOGClear
+          Action = frmMain.actRterm_Clear_IO_LOG
+        end
+        object TBItem48: TTBItem
+          Action = frmMain.actRterm_Clear_History
         end
       end
       object TBSubmenuItem8: TTBSubmenuItem

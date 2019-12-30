@@ -498,8 +498,8 @@ type
     actRtermIO_R_nML: TAction;
     actRtermIO_Text: TAction;
     actRtermIO_Text_nML: TAction;
-    actRtermIOandLOGClear: TAction;
-    actRtermIOClear: TAction;
+    actRterm_Clear_IO_LOG: TAction;
+    actRterm_Clear_IO: TAction;
     actRtermIOHistoryNext: TAction;
     actRtermIOHistoryPrior: TAction;
     actRtermIOLineWrap: TAction;
@@ -516,7 +516,7 @@ type
     actRtermLOG_R_nML: TAction;
     actRtermLOG_Text: TAction;
     actRtermLOG_Text_nML: TAction;
-    actRtermLOGClear: TAction;
+    actRterm_Clear_LOG: TAction;
     actRtermLOGLineWrap: TAction;
     actRtermLOGPrint: TAction;
     actRtermLOGSave: TAction;
@@ -1228,7 +1228,6 @@ type
     N125: TMenuItem;
     N126: TMenuItem;
     N127: TMenuItem;
-    N128: TMenuItem;
     N129: TMenuItem;
     N13: TMenuItem;
     N130: TMenuItem;
@@ -1975,6 +1974,18 @@ type
     Workexpl1: TMenuItem;
     xt1: TMenuItem;
     zipKit: TAbZipKit;
+    actRterm_Clear_History: TAction;
+    History1: TMenuItem;
+    History2: TMenuItem;
+    Keystrokeseditor1: TMenuItem;
+    HotkeysR1: TMenuItem;
+    actDataKeystrokesVisible: TAction;
+    actDataHotkeysVisible: TAction;
+    Keystrokesshowhide1: TMenuItem;
+    Hotkeysshowhide1: TMenuItem;
+    actDeleteBracket: TAction;
+    N35: TMenuItem;
+    Deletebracket1: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2224,8 +2235,8 @@ type
     procedure actRtermIO_RExecute(Sender: TObject);
     procedure actRtermIO_Text_nMLExecute(Sender: TObject);
     procedure actRtermIO_TextExecute(Sender: TObject);
-    procedure actRtermIOandLOGClearExecute(Sender: TObject);
-    procedure actRtermIOClearExecute(Sender: TObject);
+    procedure actRterm_Clear_IO_LOGExecute(Sender: TObject);
+    procedure actRterm_Clear_IOExecute(Sender: TObject);
     procedure actRtermIOHistoryNextExecute(Sender: TObject);
     procedure actRtermIOHistoryPriorExecute(Sender: TObject);
     procedure actRtermIOLineWrapExecute(Sender: TObject);
@@ -2242,7 +2253,7 @@ type
     procedure actRtermLOG_RExecute(Sender: TObject);
     procedure actRtermLOG_Text_nMLExecute(Sender: TObject);
     procedure actRtermLOG_TextExecute(Sender: TObject);
-    procedure actRtermLOGClearExecute(Sender: TObject);
+    procedure actRterm_Clear_LOGExecute(Sender: TObject);
     procedure actRtermLOGLineWrapExecute(Sender: TObject);
     procedure actRtermLOGPrintExecute(Sender: TObject);
     procedure actRtermLOGSaveAsExecute(Sender: TObject);
@@ -2538,6 +2549,12 @@ type
     procedure TBRMainMove(Sender: TObject);
     procedure tRRuningTimer(Sender: TObject);
     procedure tUpdateOptionsTimer(Sender: TObject);
+    procedure actRterm_Clear_HistoryExecute(Sender: TObject);
+    procedure Keystrokeseditor1Click(Sender: TObject);
+    procedure HotkeysR1Click(Sender: TObject);
+    procedure actDataKeystrokesVisibleExecute(Sender: TObject);
+    procedure actDataHotkeysVisibleExecute(Sender: TObject);
+    procedure actDeleteBracketExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2772,7 +2789,6 @@ type
     procedure pMake_Template(sFile: string);
     procedure pMake_Tree(sRObjName, sRObjDim, sRObjGroup, sRObjClass: string);
     procedure pMake_TreeRExplorer_TmpFile(slRObjects: TStringList);
-    procedure pMatch_Bracket(seActive: TSynEdit);
     procedure pMySort(iSort: integer);
     procedure pOnTop(hHandle: HWND);
     procedure pOpen_FileWithViewer(sFilter, sDefaultExt: string);
@@ -3148,7 +3164,7 @@ begin
   sVersion_Syntax_LGray     := ini_Tinn.ReadString('App', 'sVersion_Syntax_LGray'     , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
-  sCurr_Version_App_Shortcuts    := '5.04.03.01';
+  sCurr_Version_App_Shortcuts    := '6.01.01.04';
   sCurr_Version_Cache            := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurr_Version_Comments         := '3.00.02.01';
   sCurr_Version_Completion       := '5.02.03.00';
@@ -3913,6 +3929,8 @@ begin
     WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
     WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
     WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
+    WriteBool('App', 'bDataKeystrokes.Visible', actDataKeystrokesVisible.Checked);
+    WriteBool('App', 'bDataHotkeys.Visible', actDataHotkeysVisible.Checked);
     WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
     WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
     WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
@@ -4451,6 +4469,8 @@ begin
     WriteBool('App', 'bDataRcard.Visible', actDataRcardVisible.Checked);
     WriteBool('App', 'bDataRmirrors.Visible', actDataRmirrorsVisible.Checked);
     WriteBool('App', 'bDataShortcuts.Visible', actDataShortcutsVisible.Checked);
+    WriteBool('App', 'bDataKeystrokes.Visible', actDataKeystrokesVisible.Checked);
+    WriteBool('App', 'bDataHotkeys.Visible', actDataHotkeysVisible.Checked);
     WriteBool('App', 'bHexViewer.Visible', actHexViewerVisible.Checked);
     WriteBool('App', 'bIniLog.Visible', actIniLogVisible.Checked);
     WriteBool('App', 'bLatex.Visible', actLatexVisible.Checked);
@@ -5136,6 +5156,8 @@ begin
   actDataRcardVisible.Checked        := ini_Tinn.ReadBool('App', 'bDataRcard.Visible', True);
   actDataRmirrorsVisible.Checked     := ini_Tinn.ReadBool('App', 'bDataRmirrors.Visible', True);
   actDataShortcutsVisible.Checked    := ini_Tinn.ReadBool('App', 'bDataShortcuts.Visible', True);
+  actDataKeystrokesVisible.Checked   := ini_Tinn.ReadBool('App', 'bDataKeystrokes.Visible', True);
+  actDataHotkeysVisible.Checked      := ini_Tinn.ReadBool('App', 'bDataHotkeys.Visible', True);
   actHexViewerVisible.Checked        := ini_Tinn.ReadBool('App', 'bHexViewer.Visible', True);
   actIniLogVisible.Checked           := ini_Tinn.ReadBool('App', 'bIniLog.Visible', True);
   actLatexVisible.Checked            := ini_Tinn.ReadBool('App', 'bLatex.Visible', True);
@@ -5151,26 +5173,28 @@ begin
   actWinExplVisible.Checked          := ini_Tinn.ReadBool('App', 'bWinExpl.Visible', True);
   actWorkExplVisible.Checked         := ini_Tinn.ReadBool('App', 'bWorkExpl.Visible', True);
 
-  frmTools.tbsApp_Shortcuts.TabVisible:= actDataShortcutsVisible.Checked;
-  frmTools.tbsComments.TabVisible     := actDataCommentsVisible.Checked;
-  frmTools.tbsCompletion.TabVisible   := actDataCompletionVisible.Checked;
-  frmTools.tbsDatabase.TabVisible     := actDatabaseVisible.Checked;
-  frmTools.tbsHexViewer.TabVisible    := actHexViewerVisible.Checked;
-  frmTools.tbsIniLog.TabVisible       := actIniLogVisible.Checked;
-  frmTools.tbsLatex.TabVisible        := actLatexVisible.Checked;
-  frmTools.tbsMarkup.TabVisible       := actMarkupVisible.Checked;
-  frmTools.tbsMisc.TabVisible         := actMiscVisible.Checked;
-  frmTools.tbsProject.TabVisible      := actProjectVisible.Checked;
-  frmTools.tbsR.TabVisible            := actRVisible.Checked;
-  frmTools.tbsRcard.TabVisible        := actDataRcardVisible.Checked;
-  frmTools.tbsResults.TabVisible      := actResultsVisible.Checked;
-  frmTools.tbsRExplorer.TabVisible    := actRExplorerVisible.Checked;
-  frmTools.tbsRmirrors.TabVisible     := actDataRmirrorsVisible.Checked;
-  frmTools.tbsSearch.TabVisible       := actSearchVisible.Checked;
-  frmTools.tbsSpell.TabVisible        := actSpellVisible.Checked;
-  frmTools.tbsTxt2tags.TabVisible     := actTxt2tagsVisible.Checked;
-  frmTools.tbsWinExplorer.TabVisible  := actWinExplVisible.Checked;
-  frmTools.tbsWorkExplorer.TabVisible := actWorkExplVisible.Checked;
+  frmTools.tbsApp_Shortcuts.TabVisible    := actDataShortcutsVisible.Checked;
+  frmTools.tbsEditor_Keystrokes.TabVisible:= actDataKeystrokesVisible.Checked;
+  frmTools.tbsR_Hotkeys.TabVisible        := actDataHotkeysVisible.Checked;
+  frmTools.tbsComments.TabVisible         := actDataCommentsVisible.Checked;
+  frmTools.tbsCompletion.TabVisible       := actDataCompletionVisible.Checked;
+  frmTools.tbsDatabase.TabVisible         := actDatabaseVisible.Checked;
+  frmTools.tbsHexViewer.TabVisible        := actHexViewerVisible.Checked;
+  frmTools.tbsIniLog.TabVisible           := actIniLogVisible.Checked;
+  frmTools.tbsLatex.TabVisible            := actLatexVisible.Checked;
+  frmTools.tbsMarkup.TabVisible           := actMarkupVisible.Checked;
+  frmTools.tbsMisc.TabVisible             := actMiscVisible.Checked;
+  frmTools.tbsProject.TabVisible          := actProjectVisible.Checked;
+  frmTools.tbsR.TabVisible                := actRVisible.Checked;
+  frmTools.tbsRcard.TabVisible            := actDataRcardVisible.Checked;
+  frmTools.tbsResults.TabVisible          := actResultsVisible.Checked;
+  frmTools.tbsRExplorer.TabVisible        := actRExplorerVisible.Checked;
+  frmTools.tbsRmirrors.TabVisible         := actDataRmirrorsVisible.Checked;
+  frmTools.tbsSearch.TabVisible           := actSearchVisible.Checked;
+  frmTools.tbsSpell.TabVisible            := actSpellVisible.Checked;
+  frmTools.tbsTxt2tags.TabVisible         := actTxt2tagsVisible.Checked;
+  frmTools.tbsWinExplorer.TabVisible      := actWinExplVisible.Checked;
+  frmTools.tbsWorkExplorer.TabVisible     := actWorkExplVisible.Checked;
 
   actShowAllBars.Checked:= ini_Tinn.ReadBool('App', 'bShowAllBars', True);
   pUpdate_Bars(actShowAllBars.Checked);
@@ -5607,7 +5631,7 @@ begin
   sSearch_DirHistory:= EmptyStr;
 
   ini_Tinn.ReadSectionValues('Search Dir History',
-                           slSearch);
+                             slSearch);
 
   if (slSearch.Count > 0) then begin
     for i:= 0 to (slSearch.Count - 1) do begin
@@ -7268,6 +7292,16 @@ begin
       pSet_SyntaxComboBox(sTmp);
     end;
   end;
+end;
+
+procedure TfrmMain.HotkeysR1Click(Sender: TObject);
+begin
+  actSKH_mapExecute(nil);
+end;
+
+procedure TfrmMain.Keystrokeseditor1Click(Sender: TObject);
+begin
+  actSKH_mapExecute(nil);
 end;
 
 procedure TfrmMain.pOpen_UserGuidePDF(sWhere: string);
@@ -18497,7 +18531,7 @@ end;
 
 procedure TfrmMain.actRCont_ClearConsoleExecute(Sender: TObject);
 begin
-  actRtermIOandLogClearExecute(nil);
+  actRterm_Clear_IO_LOGExecute(nil);
 end;
 
 procedure TfrmMain.actRCont_CloseAllGraphicsExecute(Sender: TObject);
@@ -19955,6 +19989,92 @@ begin
                    sPath_Txt2tags_Converter,
                    sPath_Txt2tags_Interpreter);
   if actHtmlOpenAlways.Checked then actHtmlOpenCurrentFileExecute(nil);
+end;
+
+procedure TfrmMain.actDeleteBracketExecute(Sender: TObject);
+
+  procedure pDelete_Bracket(synTMP: TSynEdit);
+  var
+    bcOrigin,
+     bcMatch: TBufferCoord;
+
+  begin
+    with synTMP do begin
+      BeginUpdate;
+
+      // Save original position
+      bcOrigin:= CaretXY;
+
+      // Match bracket
+      if not fMatch_Bracket(synTMP) then begin
+        EndUpdate;
+        Exit;
+      end
+      else
+        bcMatch:= CaretXY;
+
+//// To debug only!
+//      ShowMessage('Origin :' +
+//                  IntToStr(bcOrigin.Char) +
+//                  '|' +
+//                  IntToStr(bcOrigin.Line) + #10#13 +
+//                  'Match :' +
+//                  IntToStr(bcMatch.Char) +
+//                  '|' +
+//                  IntToStr(bcMatch.Line));
+
+      // Go back to original CaretXY
+      CaretXY:= bcOrigin;
+
+      // Delete origin bracket
+      ExecuteCommand(ecDeleteChar,
+                     #0,
+                     nil);
+
+      if (bcOrigin.Line = bcMatch.Line) and
+         (bcOrigin.Char < bcMatch.Char) then bcMatch.Char:= bcMatch.Char - 1;
+
+      // Go to match
+      CaretXY:= bcMatch;
+
+      // Delete the character
+      ExecuteCommand(ecDeleteChar,
+                     #0,
+                     nil);
+
+      // Go back to original CaretXY
+      if (bcOrigin.Line = bcMatch.Line) and
+         (bcOrigin.Char > bcMatch.Char) then bcOrigin.Char:= bcOrigin.Char - 1;
+      CaretXY:= bcOrigin;
+
+      EndUpdate;
+    end;
+  end;
+
+var
+  seEditor,
+   seLOG,
+   seIO: TSynEdit;
+
+begin
+  if (pgFiles.PageCount > 0) then
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
+
+  seIO:= frmR_Term.synIO;
+
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
+
+  case fGet_Focus of
+      // synEditor or synEditor2
+    1..2: pDelete_Bracket(seEditor);
+      // synIO
+       3: pDelete_Bracket(seIO);
+      // synLOG and synLOG2
+       4: pDelete_Bracket(seLOG);
+  end;
 end;
 
 procedure TfrmMain.actDeplateToDocbookArticleExecute(Sender: TObject);
@@ -21478,50 +21598,6 @@ begin
     pInvert_Case;
 end;
 
-procedure TfrmMain.pMatch_Bracket(seActive: TSynEdit);
-const
-  allBrackets = ['{',
-                 '[',
-                 '(',
-                 '<',
-                 '}',
-                 ']',
-                 ')',
-                 '>'];
-
-var
-  att: TSynHighlighterAttributes;
-
-  bcPos: TBufferCoord;
-
-  cTmp: WideChar;
-
-  iPos: integer;
-
-  sAtCursor: WideString;
-
-begin
-  with seActive do begin
-    if (SelStart <> SelEnd) then Exit;
-    iPos:= SelStart;
-    cTmp:= Text[iPos + 1];
-    sAtCursor:= cTmp;
-
-    if not(CharInSet(cTmp,
-                     AllBrackets)) then Exit;
-
-    bcPos:= CaretXY;
-    GetHighlighterAttriAtRowCol(bcPos,
-                                sAtCursor,
-                                att);
-
-    if (Highlighter.SymbolAttribute = att) then
-      ExecuteCommand(ecMatchBracket,
-                     #0,
-                     nil)
-  end
-end;
-
 procedure TfrmMain.menEdit_CopyClick(Sender: TObject);
 var
   iFocus: integer;
@@ -21813,23 +21889,27 @@ end;
 procedure TfrmMain.actMatchBracketExecute(Sender: TObject);
 var
   seEditor,
-   seLOG: TSynEdit;
+   seLOG,
+   seIO: TSynEdit;
 
 begin
-  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    if (sActiveEditor = 'synEditor') then seEditor:= synEditor
-                                     else seEditor:= synEditor2;
+  if (pgFiles.PageCount > 0) then
+    with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
+      if (sActiveEditor = 'synEditor') then seEditor:= synEditor
+                                       else seEditor:= synEditor2;
+
+  seIO:= frmR_Term.synIO;
 
   if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
                                  else seLOG:= frmR_Term.synLOG;
 
   case fGet_Focus of
         // synEditor or synEditor2
-    1..2: pMatch_Bracket(seEditor);
+    1..2: fMatch_Bracket(seEditor);
         // synIO
-       3: pMatch_Bracket(frmR_Term.synIO);
+       3: fMatch_Bracket(seIO);
         // synLOG and synLOG2
-       4: pMatch_Bracket(seLOG);
+       4: fMatch_Bracket(seLOG);
   end;
 end;
 
@@ -22003,6 +22083,22 @@ begin
   with frmTools.tbsCompletion do begin
     TabVisible:= not TabVisible;
     actDataCompletionVisible.Checked:= TabVisible;
+  end;
+end;
+
+procedure TfrmMain.actDataHotkeysVisibleExecute(Sender: TObject);
+begin
+  with frmTools.tbsR_Hotkeys do begin
+    TabVisible:= not TabVisible;
+    actDataHotkeysVisible.Checked:= TabVisible;
+  end;
+end;
+
+procedure TfrmMain.actDataKeystrokesVisibleExecute(Sender: TObject);
+begin
+  with frmTools.tbsEditor_Keystrokes do begin
+    TabVisible:= not TabVisible;
+    actDataKeystrokesVisible.Checked:= TabVisible;
   end;
 end;
 
@@ -25996,6 +26092,11 @@ begin
   actRtermEditorSetFocus.Checked := True;
 end;
 
+procedure TfrmMain.actRterm_Clear_HistoryExecute(Sender: TObject);
+begin
+  RHistory.Clear;
+end;
+
 procedure TfrmMain.synIOClick(Sender: TObject);
 begin
   actRtermIOSetFocus.Checked:= True;
@@ -26075,7 +26176,7 @@ begin
   actRtermLOG_R_nML.Checked:= True;
 end;
 
-procedure TfrmMain.actRtermIOClearExecute(Sender: TObject);
+procedure TfrmMain.actRterm_Clear_IOExecute(Sender: TObject);
 var
   i: integer;
 
@@ -26149,7 +26250,7 @@ begin
    end;
 end;
 
-procedure TfrmMain.actRtermLOGClearExecute(Sender: TObject);
+procedure TfrmMain.actRterm_Clear_LOGExecute(Sender: TObject);
 var
   i: integer;
 
@@ -26172,10 +26273,10 @@ begin
   end;
 end;
 
-procedure TfrmMain.actRtermIOandLOGClearExecute(Sender: TObject);
+procedure TfrmMain.actRterm_Clear_IO_LOGExecute(Sender: TObject);
 begin
-  actRtermIOClearExecute(nil);
-  actRtermLogClearExecute(nil);
+  actRterm_Clear_IOExecute(nil);
+  actRterm_Clear_LOGExecute(nil);
 end;
 
 procedure TfrmMain.actRtermIOPrintExecute(Sender: TObject);

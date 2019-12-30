@@ -60,7 +60,7 @@ type
   TRHistory = class
 
   protected
-    aRHistory: array[0..99] of string;  // it will remember the last 100 instructions sended
+    aRHistory: array[0..99] of string;  // it will remember the last 100 instructions sent
     iCur: integer;
     sLatest: string;
 
@@ -83,6 +83,7 @@ type
     function fSave_ToFile(sPath: string): boolean;
 
     procedure Add(sInstruction: string);
+    procedure Clear;
   end;
 
 implementation
@@ -128,6 +129,17 @@ begin
   aRHistory[iCur]:= sInstruction;
 
   Itens.Add(sInstruction);
+end;
+
+procedure TRHistory.Clear;
+var
+  i: integer;
+
+begin
+  for i:= 0 to 99 do
+    aRHistory[i]:= EmptyStr;
+
+  Itens.Clear;
 end;
 
 // It will reorder the array aRHistory

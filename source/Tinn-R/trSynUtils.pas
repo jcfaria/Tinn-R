@@ -66,6 +66,7 @@ type
   function fTrigger_Find(seTmp: TSynEdit): string;
   function fTrigger_Get_Left(seTmp: TSynEdit): string;
   function fTrigger_Select(seTmp: TSynEdit): boolean;
+  function fMatch_Bracket(seActive: TSynEdit): boolean;
 
   procedure pInsert_Text_Smart(seEditor: TSynEdit; sText: string; iLen: integer = 0);
   procedure pSet_DataCompletion(synDC: TSynCompletionProposal; synTmp: TSynEdit; sTmp: string);
@@ -82,8 +83,8 @@ uses
 // SynEdit_UNICODE
 // https://stackoverflow.com/questions/11314641/method-pointer-and-regular-procedure-incompatible
 class procedure TSyn_Transient.pSyn_PaintTransient(Sender: TObject;
-                                                  Canvas: TCanvas;
-                                                  TransientType: TTransientType);
+                                                   Canvas: TCanvas;
+                                                   TransientType: TTransientType);
 var
   seEditor: TSynEdit;
 
@@ -259,6 +260,59 @@ begin
       end;  // if (sTmp = aOpenChar[i])
     end;  // for i:= low(aOpenChar) to High(aOpenChar)
   end;  // if (seEditor.Highlighter.SymbolAttribute = Attri)
+end;
+
+function fMatch_Bracket(seActive: TSynEdit): boolean;
+const
+  allBrackets = ['{',
+                 '[',
+                 '(',
+                 '<',
+                 '}',
+                 ']',
+                 ')',
+                 '>'];
+
+var
+  att: TSynHighlighterAttributes;
+
+  bcPos: TBufferCoord;
+
+  cTmp: WideChar;
+
+  iPos: integer;
+
+  sAtCursor: WideString;
+
+begin
+  try
+    Result:= False;
+    with seActive do begin
+      if (SelStart <> SelEnd) then Exit;
+      iPos:= SelStart;
+
+      cTmp:= Text[iPos + 1];
+      sAtCursor:= cTmp;
+
+      if not(CharInSet(cTmp,
+                       AllBrackets)) then Exit;
+
+      bcPos:= CaretXY;
+      GetHighlighterAttriAtRowCol(bcPos,
+                                  sAtCursor,
+                                  att);
+
+      if (Highlighter.SymbolAttribute = att) then begin
+        ExecuteCommand(ecMatchBracket,
+                       #0,
+                       nil);
+
+        Result:= True;
+      end;
+  end
+  except
+    // TODO
+  end;
 end;
 
 // Get complex words at the cursor: aaa.bbb-ccc_ddd.eee_fff

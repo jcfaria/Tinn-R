@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 788
+  Height = 828
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,14 +1035,14 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 630
+    Height = 670
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 610
+    ExplicitHeight = 650
   end
   object Panel1: TPanel
     Left = 0
@@ -2018,14 +2018,14 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 630
+    Height = 670
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 610
+    ExplicitHeight = 650
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2040,7 +2040,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 737
+    Top = 777
     Width = 994
     Height = 20
     AutoHint = True
@@ -2095,24 +2095,24 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 717
+    ExplicitTop = 757
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 630
+    Height = 670
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 610
+    ExplicitHeight = 650
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 728
+    Top = 768
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2121,7 +2121,7 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 708
+    ExplicitTop = 748
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -4829,29 +4829,37 @@ object frmMain: TfrmMain
       ImageIndex = 153
       OnExecute = actRtermLOGPrintExecute
     end
-    object actRtermIOClear: TAction
+    object actRterm_Clear_IO: TAction
       Category = 'Rterm'
       Caption = 'IO'
       Hint = 'Rterm: IO (clear)'
       ImageIndex = 20
       ShortCut = 16460
-      OnExecute = actRtermIOClearExecute
+      OnExecute = actRterm_Clear_IOExecute
     end
-    object actRtermLOGClear: TAction
+    object actRterm_Clear_LOG: TAction
       Category = 'Rterm'
       Caption = 'LOG'
       Hint = 'Rterm: LOG (clear)'
       ImageIndex = 20
       ShortCut = 32844
-      OnExecute = actRtermLOGClearExecute
+      OnExecute = actRterm_Clear_LOGExecute
     end
-    object actRtermIOandLOGClear: TAction
+    object actRterm_Clear_IO_LOG: TAction
       Category = 'Rterm'
       Caption = 'IO and LOG'
       Hint = 'Rterm: IO and LOG (clear)'
       ImageIndex = 275
       ShortCut = 24642
-      OnExecute = actRtermIOandLOGClearExecute
+      OnExecute = actRterm_Clear_IO_LOGExecute
+    end
+    object actRterm_Clear_History: TAction
+      Category = 'Rterm'
+      Caption = 'History'
+      Hint = 'Rterm: history (clear)'
+      ImageIndex = 151
+      ShortCut = 32776
+      OnExecute = actRterm_Clear_HistoryExecute
     end
     object actRtermSaveHistory: TAction
       Category = 'Rterm'
@@ -5372,9 +5380,8 @@ object frmMain: TfrmMain
       OnExecute = actCountExecute
     end
     object actMatchBracket: TAction
-      Category = 'Tools'
-      Caption = 'Match bracket'
-      Enabled = False
+      Category = 'Edit'
+      Caption = 'Match (bracket)'
       Hint = 'Tools: match bracket'
       ShortCut = 16450
       OnExecute = actMatchBracketExecute
@@ -5462,6 +5469,20 @@ object frmMain: TfrmMain
       Checked = True
       Hint = 'Visualization: tools shortcuts (show/hide)'
       OnExecute = actDataShortcutsVisibleExecute
+    end
+    object actDataKeystrokesVisible: TAction
+      Category = 'Visualization'
+      Caption = 'Keystrokes (show/hide)'
+      Checked = True
+      Hint = 'Visualization: tools keystrokes (show/hide)'
+      OnExecute = actDataKeystrokesVisibleExecute
+    end
+    object actDataHotkeysVisible: TAction
+      Category = 'Visualization'
+      Caption = 'Hotkeys (show/hide)'
+      Checked = True
+      Hint = 'Visualization: tools hotkeys (show/hide)'
+      OnExecute = actDataHotkeysVisibleExecute
     end
     object actDataCompletionVisible: TAction
       Category = 'Visualization'
@@ -6072,6 +6093,13 @@ object frmMain: TfrmMain
       Caption = 'Always add the BOM'
       OnExecute = actAlwaysAddBOMExecute
     end
+    object actDeleteBracket: TAction
+      Category = 'Edit'
+      Caption = 'Delete bracket'
+      Hint = 'Edit: delete bracket'
+      ShortCut = 16430
+      OnExecute = actDeleteBracketExecute
+    end
   end
   object pmenEditor: TJvPopupMenu
     Images = imlTinnR
@@ -6505,10 +6533,13 @@ object frmMain: TfrmMain
       Caption = 'Clear'
       ImageIndex = 20
       object pmemIOClearIO: TMenuItem
-        Action = actRtermIOClear
+        Action = actRterm_Clear_IO
       end
       object pmemIOClearIOLog: TMenuItem
-        Action = actRtermIOandLOGClear
+        Action = actRterm_Clear_IO_LOG
+      end
+      object History1: TMenuItem
+        Action = actRterm_Clear_History
       end
     end
     object pmemIOFocus: TMenuItem
@@ -6731,10 +6762,13 @@ object frmMain: TfrmMain
       Caption = 'Clear'
       ImageIndex = 20
       object pmemLogClearLog: TMenuItem
-        Action = actRtermLOGClear
+        Action = actRterm_Clear_LOG
       end
       object pmemLogClearIOLog: TMenuItem
-        Action = actRtermIOandLOGClear
+        Action = actRterm_Clear_IO_LOG
+      end
+      object History2: TMenuItem
+        Action = actRterm_Clear_History
       end
     end
     object pmemLogFocus: TMenuItem
@@ -7248,6 +7282,19 @@ object frmMain: TfrmMain
         Action = actUncomment
         GroupIndex = 6
       end
+      object N35: TMenuItem
+        Caption = '-'
+        GroupIndex = 6
+      end
+      object menToolsMatchBracket: TMenuItem
+        Action = actMatchBracket
+        GroupIndex = 12
+      end
+      object Deletebracket1: TMenuItem
+        Action = actDeleteBracket
+        Caption = 'Delete (bracket)'
+        GroupIndex = 12
+      end
     end
     object menFormat: TMenuItem
       Caption = 'Form&at'
@@ -7715,18 +7762,18 @@ object frmMain: TfrmMain
         Caption = 'Utils (visible in debug mode and runtime only)'
         GroupIndex = 12
         Visible = False
-        object menToolsUtilsActionlistToClipboard: TMenuItem
-          Caption = 'Actionlist to clipboard'
-          GroupIndex = 12
-          OnClick = menToolsUtilsActionlistToClipboardClick
-        end
         object menToolsUtilsActionlistToDataset: TMenuItem
           Caption = 'Actionlist to dataset'
           GroupIndex = 12
           OnClick = menToolsUtilsActionlistToDatasetClick
         end
+        object menToolsUtilsActionlistToClipboard: TMenuItem
+          Caption = 'Actionlist to clipboard'
+          GroupIndex = 12
+          OnClick = menToolsUtilsActionlistToClipboardClick
+        end
         object menToolsUtilsDatasetToActionlist: TMenuItem
-          Caption = 'Dataset to Actionlist'
+          Caption = 'Dataset to actionlist'
           GroupIndex = 12
           OnClick = menToolsUtilsDatasetToActionlistClick
         end
@@ -7959,9 +8006,17 @@ object frmMain: TfrmMain
         Caption = 'Database'
         GroupIndex = 12
         object menToolsDatabaseShortcuts: TMenuItem
-          Caption = 'Shortcuts'
+          Caption = 'Shortcuts (app)'
           ImageIndex = 159
           OnClick = menToolsDatabaseShortcutsClick
+        end
+        object Keystrokeseditor1: TMenuItem
+          Caption = 'Keystrokes (editor)'
+          OnClick = Keystrokeseditor1Click
+        end
+        object HotkeysR1: TMenuItem
+          Caption = 'Hotkeys (R)'
+          OnClick = HotkeysR1Click
         end
         object menToolsDatabaseCompletion: TMenuItem
           Caption = 'Completion'
@@ -8065,14 +8120,6 @@ object frmMain: TfrmMain
         Action = actCount
         GroupIndex = 12
       end
-      object N128: TMenuItem
-        Caption = '-'
-        GroupIndex = 12
-      end
-      object menToolsMatchBracket: TMenuItem
-        Action = actMatchBracket
-        GroupIndex = 12
-      end
     end
     object menR: TMenuItem
       Caption = '&R'
@@ -8163,13 +8210,13 @@ object frmMain: TfrmMain
           Caption = 'Clear'
           ImageIndex = 20
           object IO1: TMenuItem
-            Action = actRtermIOClear
+            Action = actRterm_Clear_IO
           end
           object Log1: TMenuItem
-            Action = actRtermLOGClear
+            Action = actRterm_Clear_LOG
           end
           object IOandLog4: TMenuItem
-            Action = actRtermIOandLOGClear
+            Action = actRterm_Clear_IO_LOG
           end
         end
         object menRtermFocus: TMenuItem
@@ -8704,6 +8751,12 @@ object frmMain: TfrmMain
             end
             object menViewToolsResShortcuts: TMenuItem
               Action = actDataShortcutsVisible
+            end
+            object Keystrokesshowhide1: TMenuItem
+              Action = actDataKeystrokesVisible
+            end
+            object Hotkeysshowhide1: TMenuItem
+              Action = actDataHotkeysVisible
             end
             object Completionshowhide1: TMenuItem
               Action = actDataCompletionVisible

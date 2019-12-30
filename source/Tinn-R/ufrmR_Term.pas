@@ -134,6 +134,7 @@ type
     TBItem45: TTBItem;
     TBItem46: TTBItem;
     TBItem47: TTBItem;
+    TBItem48: TTBItem;
 
     procedure cRTermError(Sender: TObject; const Cmd: string);
     procedure cRTermProcessStatusChange(Sender: TObject; IsRunning: Boolean);

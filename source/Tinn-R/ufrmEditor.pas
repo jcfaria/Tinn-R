@@ -364,7 +364,8 @@ begin
       actLowerCaseWord.Enabled             := False;
       actMacroPlay.Enabled                 := False;
       actMacroRecord.Enabled               := False;
-      actMatchBracket.Enabled              := False;
+//      actMatchBracket.Enabled              := False;
+//      actDeleteBracket.Enabled             := False;
       actNormalSelect.Enabled              := False;
       actOpenCurrentFile.Enabled           := False;
       actFile_Print.Enabled                := False;
@@ -810,7 +811,8 @@ begin
     actLowerCaseWord.Enabled             := True;
     actMacroPlay.Enabled                 := True;
     actMacroRecord.Enabled               := True;
-    actMatchBracket.Enabled              := True;
+//    actMatchBracket.Enabled              := True;
+//    actDeleteBracket.Enabled             := True;
     actNormalSelect.Enabled              := True;
     actOpenCurrentFile.Enabled           := True;
     actFile_Print.Enabled                := True;
