@@ -83,9 +83,9 @@ type
     dbgCompletion: TDBGrid;
     dbgRcard: TDBGrid;
     dbgRmirrors: TDBGrid;
-    dbgApp_Shortcuts: TDBGrid;
+    dbgShortcuts_App: TDBGrid;
     dbRcardMemo: TDBMemo;
-    dbApp_ShortcutsMemo: TDBMemo;
+    dbShortcuts_App_Memo: TDBMemo;
     edToolsRExplorerFilter: TEdit;
     edWinExplorerFilter: TEdit;
     edWorkExplorerFilter: TEdit;
@@ -216,7 +216,7 @@ type
     lbCompletion: TListBox;
     lbCountries: TListBox;
     lbRcard: TListBox;
-    lbApp_Shortcuts: TListBox;
+    lbShortcuts_App: TListBox;
     lvRexplorer: TListView;
     memIniLog: TMemo;
     memSpell: TMemo;
@@ -259,7 +259,7 @@ type
     panRcard4: TPanel;
     panRExplorer: TPanel;
     panRFilter: TPanel;
-    panApp_Shortcuts: TPanel;
+    panShortcuts_App: TPanel;
     panWinExplorer: TPanel;
     panWinExplorer1: TPanel;
     panWorkExplorer: TPanel;
@@ -458,7 +458,7 @@ type
     tbsRExplorer: TTabSheet;
     tbsRMirrors: TTabSheet;
     tbsSearch: TTabSheet;
-    tbsApp_Shortcuts: TTabSheet;
+    tbsShortcuts_App: TTabSheet;
     tbsSpell: TTabSheet;
     tbsTxt2tags: TTabSheet;
     tbsTxt2tagsMacros: TTabSheet;
@@ -485,17 +485,17 @@ type
     tvSearch: TTreeView;
     TBItem16: TTBItem;
     TBItem17: TTBItem;
-    tbsEditor_Keystrokes: TTabSheet;
+    tbsKeystrokes_Editor: TTabSheet;
     tbsR_Hotkeys: TTabSheet;
     JvDBNavigator6: TJvDBNavigator;
-    dbgEditor_Keystrokes: TDBGrid;
+    dbgKeystrokes_Editor: TDBGrid;
     Panel17: TPanel;
     TBDock3: TTBDock;
     TBToolbar5: TTBToolbar;
     tbiHelp_Keystrokes: TTBItem;
     TBSeparatorItem2: TTBSeparatorItem;
     tbiEditorKeystrokes_Edit: TTBItem;
-    edEditor_Keystrokes_Filter: TEdit;
+    edKeystrokes_Editor_Filter: TEdit;
     pgRH: TJvgPageControl;
     tbsRH_Send: TTabSheet;
     tbsRH_Control: TTabSheet;
@@ -528,7 +528,7 @@ type
     JvDBNavigator9: TJvDBNavigator;
     dbgRH_Custom: TDBGrid;
     JvDockClientTools: TJvDockClient;
-    edApp_Shortcuts_Filter: TEdit;
+    edShortcuts_App_Filter: TEdit;
     edCompletion_Filter: TEdit;
     edComments_Filter: TEdit;
     edRcard_Filter: TEdit;
@@ -561,7 +561,7 @@ type
     procedure dbgRmirrorsDblClick(Sender: TObject);
     procedure dbgRtipDblClick(Sender: TObject);
     procedure dbgRtipKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure dbgApp_ShortcutsDblClick(Sender: TObject);
+    procedure dbgShortcuts_AppDblClick(Sender: TObject);
     procedure edToolsRExplorerFilterKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edWinExplorerFilterKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure edWorkExplorerFilterKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -591,7 +591,7 @@ type
     procedure lbCompletionClick(Sender: TObject);
     procedure lbCountriesClick(Sender: TObject);
     procedure lbRcardClick(Sender: TObject);
-    procedure lbApp_ShortcutsClick(Sender: TObject);
+    procedure lbShortcuts_AppClick(Sender: TObject);
     procedure lvRexplorerDblClick(Sender: TObject);
     procedure lvRexplorerKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure lvRexplorerKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -628,14 +628,14 @@ type
     procedure edRH_Control_FilterChange(Sender: TObject);
     procedure edRH_Custom_FilterChange(Sender: TObject);
     procedure pgRHChange(Sender: TObject);
-    procedure edApp_Shortcuts_FilterChange(Sender: TObject);
+    procedure edShortcuts_App_FilterChange(Sender: TObject);
     procedure tbiHelp_KeystrokesClick(Sender: TObject);
     procedure tbiHelp_RH_SendClick(Sender: TObject);
     procedure tbiHelp_RH_ControlClick(Sender: TObject);
     procedure tbiHelp_RH_CustomClick(Sender: TObject);
-    procedure edEditor_Keystrokes_FilterChange(Sender: TObject);
-    procedure edApp_Shortcuts_FilterClick(Sender: TObject);
-    procedure edEditor_Keystrokes_FilterClick(Sender: TObject);
+    procedure edKeystrokes_Editor_FilterChange(Sender: TObject);
+    procedure edShortcuts_App_FilterClick(Sender: TObject);
+    procedure edKeystrokes_Editor_FilterClick(Sender: TObject);
     procedure edRH_Send_FilterClick(Sender: TObject);
     procedure edRH_Control_FilterClick(Sender: TObject);
     procedure edRH_Custom_FilterClick(Sender: TObject);
@@ -649,7 +649,7 @@ type
     procedure edRmirrors_FilterChange(Sender: TObject);
     procedure edEditor_Keystrokes_FilterDblClick(Sender: TObject);
     procedure edRH_Custom_FilterDblClick(Sender: TObject);
-    procedure dbgEditor_KeystrokesDblClick(Sender: TObject);
+    procedure dbgKeystrokes_EditorDblClick(Sender: TObject);
     procedure dbgRH_SendDblClick(Sender: TObject);
     procedure dbgRH_ControlDblClick(Sender: TObject);
     procedure dbgRH_CustomDblClick(Sender: TObject);
@@ -661,8 +661,8 @@ type
 
   private
     { Private declarations }
-    sApp_Shortcuts_BM    : string;
-    sEditor_Keystrokes_BM: string;
+    sShortcuts_App_BM    : string;
+    sKeystrokes_Editor_BM: string;
     sRH_Send_BM          : string;
     sRH_Control_BM       : string;
     sRH_Custom_BM        : string;
@@ -894,7 +894,7 @@ begin
 //  end;
 end;
 
-procedure TfrmTools.dbgEditor_KeystrokesDblClick(Sender: TObject);
+procedure TfrmTools.dbgKeystrokes_EditorDblClick(Sender: TObject);
 begin
   with frmMain do
     actSKH_mapExecute(nil);
@@ -956,22 +956,22 @@ begin
   end;
 end;
 
-procedure TfrmTools.edApp_Shortcuts_FilterChange(Sender: TObject);
+procedure TfrmTools.edShortcuts_App_FilterChange(Sender: TObject);
 begin
-  if (edApp_Shortcuts_Filter.Text = EmptyStr) then begin
-    lbApp_ShortcutsClick(Self);
-    with modDados.cdApp_Shortcuts do
-      Bookmark:= sApp_Shortcuts_BM;
-    lbApp_Shortcuts.Enabled:= True;
+  if (edShortcuts_App_Filter.Text = EmptyStr) then begin
+    lbShortcuts_AppClick(Self);
+    with modDados.cdShortcuts_App do
+      Bookmark:= sShortcuts_App_BM;
+    lbShortcuts_App.Enabled:= True;
     Exit;
   end;
 
   try
-    lbApp_Shortcuts.Enabled:= False;
-    with modDados.cdApp_Shortcuts do begin
+    lbShortcuts_App.Enabled:= False;
+    with modDados.cdShortcuts_App do begin
       Filtered:= False;
       Filter:= 'UPPER(Caption) Like ' +
-               UpperCase(QuotedStr('%' + edApp_Shortcuts_Filter.Text + '%'));
+               UpperCase(QuotedStr('%' + edShortcuts_App_Filter.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -979,9 +979,9 @@ begin
   end;
 end;
 
-procedure TfrmTools.edApp_Shortcuts_FilterClick(Sender: TObject);
+procedure TfrmTools.edShortcuts_App_FilterClick(Sender: TObject);
 begin
-  sApp_Shortcuts_BM:= modDados.cdApp_Shortcuts.Bookmark;
+  sShortcuts_App_BM:= modDados.cdShortcuts_App.Bookmark;
 end;
 
 procedure TfrmTools.edComments_FilterChange(Sender: TObject);
@@ -1039,21 +1039,21 @@ begin
   sCompletion_BM:= modDados.cdCompletion.Bookmark;
 end;
 
-procedure TfrmTools.edEditor_Keystrokes_FilterChange(Sender: TObject);
+procedure TfrmTools.edKeystrokes_Editor_FilterChange(Sender: TObject);
 begin
-  if (edEditor_Keystrokes_Filter.Text = EmptyStr) then begin
-    with modDados.cdEditor_Keystrokes do begin
+  if (edKeystrokes_Editor_Filter.Text = EmptyStr) then begin
+    with modDados.cdKeystrokes_Editor do begin
       Filtered:= False;
-      Bookmark:= sEditor_Keystrokes_BM;
+      Bookmark:= sKeystrokes_Editor_BM;
     end;
     Exit;
   end;
 
   try
-    with modDados.cdEditor_Keystrokes do begin
+    with modDados.cdKeystrokes_Editor do begin
       Filtered:= False;
       Filter:= 'UPPER(Command) Like ' +
-               UpperCase(QuotedStr('%' + edEditor_Keystrokes_Filter.Text + '%'));
+               UpperCase(QuotedStr('%' + edKeystrokes_Editor_Filter.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -1061,9 +1061,9 @@ begin
   end;
 end;
 
-procedure TfrmTools.edEditor_Keystrokes_FilterClick(Sender: TObject);
+procedure TfrmTools.edKeystrokes_Editor_FilterClick(Sender: TObject);
 begin
-  sEditor_Keystrokes_BM:= modDados.cdEditor_Keystrokes.Bookmark;
+  sKeystrokes_Editor_BM:= modDados.cdKeystrokes_Editor.Bookmark;
 end;
 
 procedure TfrmTools.edEditor_Keystrokes_FilterDblClick(Sender: TObject);
@@ -1224,7 +1224,7 @@ begin
     actSKH_mapExecute(nil);
 end;
 
-procedure TfrmTools.dbgApp_ShortcutsDblClick(Sender: TObject);
+procedure TfrmTools.dbgShortcuts_AppDblClick(Sender: TObject);
 begin
   with frmMain do
     actSKH_mapExecute(nil);
@@ -1340,8 +1340,8 @@ end;
 
 procedure TfrmTools.FormResize(Sender: TObject);
 begin
-  pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgEditor_Keystrokes);
+  pAdjustColumnWidths(dbgShortcuts_App);
+  pAdjustColumnWidths(dbgKeystrokes_Editor);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -1352,8 +1352,8 @@ end;
 
 procedure TfrmTools.FormShow(Sender: TObject);
 begin
-  pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgEditor_Keystrokes);
+  pAdjustColumnWidths(dbgShortcuts_App);
+  pAdjustColumnWidths(dbgKeystrokes_Editor);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -1873,12 +1873,12 @@ begin
   end;
 end;
 
-procedure TfrmTools.lbApp_ShortcutsClick(Sender: TObject);
+procedure TfrmTools.lbShortcuts_AppClick(Sender: TObject);
 begin
-  frmMain.iApp_ShortcutsFilter:= lbApp_Shortcuts.ItemIndex;
-  with modDados.cdApp_Shortcuts do begin
+  frmMain.iShortcuts_App_Filter:= lbShortcuts_App.ItemIndex;
+  with modDados.cdShortcuts_App do begin
     Filter  := 'Group = ' +
-               QuotedStr(lbApp_Shortcuts.Items.Strings[frmMain.iApp_ShortcutsFilter]);
+               QuotedStr(lbShortcuts_App.Items.Strings[frmMain.iShortcuts_App_Filter]);
     Filtered:= True;
     First;
   end;
@@ -2070,8 +2070,8 @@ begin
     else if (ActivePage = tbsCompletion) then lbCompletion.SetFocus
     else if (ActivePage = tbsRMirrors)   then lbCountries.SetFocus;
 
-  pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgEditor_Keystrokes);
+  pAdjustColumnWidths(dbgShortcuts_App);
+  pAdjustColumnWidths(dbgKeystrokes_Editor);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -2095,8 +2095,8 @@ end;
 
 procedure TfrmTools.pgToolsChange(Sender: TObject);
 begin
-  pAdjustColumnWidths(dbgApp_Shortcuts);
-  pAdjustColumnWidths(dbgEditor_Keystrokes);
+  pAdjustColumnWidths(dbgShortcuts_App);
+  pAdjustColumnWidths(dbgKeystrokes_Editor);
   pAdjustColumnWidths(dbgRH_Send);
   pAdjustColumnWidths(dbgRH_Control);
   pAdjustColumnWidths(dbgRH_Custom);
@@ -2243,8 +2243,8 @@ end;
 procedure TfrmTools.pAdjustColumnWidths(DBGrid: TDBGrid);
 begin                                     
   if (DBGrid.Name = 'dbgCompletion') or
-     (DBGrid.Name = 'dbgApp_Shortcuts') or
-     (DBGrid.Name = 'dbgEditor_Keystrokes') or
+     (DBGrid.Name = 'dbgShortcuts_App') or
+     (DBGrid.Name = 'dbgKeystrokes_Editor') or
      (DBGrid.Name = 'dbgRH_Send') or
      (DBGrid.Name = 'dbgRH_Control') or
      (DBGrid.Name = 'dbgRH_Custom') or

@@ -165,7 +165,7 @@ begin
       Exit;
     end;
 
-  // Editor_Keystrokes
+  // Keystrokes_Editor
   with modDados do
     if fCheck_keystroke_Editor(ShortCutToText(eKeyShort.HotKey),
                                               sBy) then begin
@@ -220,7 +220,7 @@ begin
 //  Map of iSKH_Used_By
 //   iSKH_Used_By:= 0; Not used
 //   iSKH_Used_By:= 1; App
-//   iSKH_Used_By:= 2; Editor_Keystrokes
+//   iSKH_Used_By:= 2; Keystrokes_Editor
 //   iSKH_Used_By:= 3; RHK_Send
 //   iSKH_Used_By:= 4; RHK_Control
 //   iSKH_Used_By:= 5; RHK_Custom
@@ -267,7 +267,7 @@ begin
     // App
     0: begin
          gbInfo.Caption:= ' Info (Group | Identification | Hint) ';
-         with modDados.cdApp_Shortcuts do begin
+         with modDados.cdShortcuts_App do begin
            eKeyShort.HotKey:= TextToShortcut(FieldByName('Shortcut').Value);
 
            with lbId_Cur do
@@ -287,9 +287,9 @@ begin
         Exit;
     end;  //0:
 
-    // Editor_Keystrokes
+    // Keystrokes_Editor
     1: begin
-         with modDados.cdEditor_Keystrokes do begin
+         with modDados.cdKeystrokes_Editor do begin
            eKeyShort.HotKey:= TextToShortcut(FieldByName('Keystroke').Value);
 
            with lbId_Cur do

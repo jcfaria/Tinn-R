@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 828
+  Height = 968
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,14 +1035,13 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 670
+    Height = 790
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
     TabOrder = 0
     OnDockDrop = panProjectDockSiteDockDrop
     OnUnDock = panProjectDockSiteUnDock
-    ExplicitHeight = 650
   end
   object Panel1: TPanel
     Left = 0
@@ -1219,7 +1218,7 @@ object frmMain: TfrmMain
           Font.Name = 'Tahoma'
           Font.Pitch = fpFixed
           Font.Style = []
-          ItemHeight = 0
+          ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
           Sorted = True
@@ -2018,14 +2017,13 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 670
+    Height = 790
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpLeft
-    ExplicitHeight = 650
   end
   object panInvisibleParent: TPanel
     Left = 47
@@ -2040,7 +2038,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 777
+    Top = 897
     Width = 994
     Height = 20
     AutoHint = True
@@ -2095,24 +2093,22 @@ object frmMain: TfrmMain
     OnClick = stbMainClick
     OnMouseMove = stbMainMouseMove
     OnDrawPanel = stbMainDrawPanel
-    ExplicitTop = 757
   end
   object TBDockRight: TTBDock
     Left = 985
     Top = 98
     Width = 9
-    Height = 670
+    Height = 790
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpRight
-    ExplicitHeight = 650
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 768
+    Top = 888
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -2121,7 +2117,6 @@ object frmMain: TfrmMain
     LimitToOneRow = True
     PopupMenu = pmenRRes
     Position = dpBottom
-    ExplicitTop = 748
   end
   object pgFiles: TJvgPageControl
     Left = 0
@@ -2515,7 +2510,7 @@ object frmMain: TfrmMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 48
-    Top = 304
+    Top = 336
     object Help5: TMenuItem
       Action = actRcard_Help
     end
@@ -2574,7 +2569,7 @@ object frmMain: TfrmMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 80
-    Top = 304
+    Top = 336
     object pmenRCardMemoCopy: TMenuItem
       Action = actRcard_CopyDescrition
     end
@@ -2612,7 +2607,7 @@ object frmMain: TfrmMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 16
-    Top = 304
+    Top = 336
     object act1: TMenuItem
       Action = actRExpl_Help
     end
@@ -3164,6 +3159,76 @@ object frmMain: TfrmMain
       ShortCut = 16452
       OnExecute = actDateStampExecute
     end
+    object actShortcuts_App_Help: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Help'
+      Hint = 'Shortcuts (app): help'
+      ImageIndex = 25
+      OnExecute = actShortcuts_App_HelpExecute
+    end
+    object actShortcuts_App_Edit: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Edit'
+      Hint = 'Shortcuts (app): edit'
+      ImageIndex = 18
+      OnExecute = actShortcuts_App_EditExecute
+    end
+    object actKeystrokes_Editor_Help: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Help'
+      Hint = 'Keystrokes (editor): help'
+      ImageIndex = 25
+      OnExecute = actShortcuts_App_HelpExecute
+    end
+    object actKeystrokes_Editor_Edit: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Edit'
+      Hint = 'Keystrokes (editor): edit'
+      ImageIndex = 18
+      OnExecute = actShortcuts_App_EditExecute
+    end
+    object actRH_Send_Help: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Help'
+      Hint = 'Hotkeys (R) send: help'
+      ImageIndex = 25
+      OnExecute = actRH_Send_HelpExecute
+    end
+    object actRH_Send_Edit: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Edit'
+      Hint = 'Hotkeys (R) send: edit'
+      ImageIndex = 18
+      OnExecute = actRH_Send_EditExecute
+    end
+    object actRH_Control_Help: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Help'
+      Hint = 'Hotkeys (R) control: help'
+      ImageIndex = 25
+      OnExecute = actRH_Control_HelpExecute
+    end
+    object actRH_Control_Edit: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Edit'
+      Hint = 'Hotkeys (R) control: edit'
+      ImageIndex = 18
+      OnExecute = actRH_Control_EditExecute
+    end
+    object actRH_Custom_Help: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Help'
+      Hint = 'Hotkeys (R) custom: help'
+      ImageIndex = 25
+      OnExecute = actRH_Custom_HelpExecute
+    end
+    object actRH_Custom_Edit: TAction
+      Category = 'dtb S/K/H'
+      Caption = 'Edit'
+      Hint = 'Hotkeys (R) custom: edit'
+      ImageIndex = 18
+      OnExecute = actRH_Custom_EditExecute
+    end
     object actCompletion: TAction
       Category = 'Insert'
       Caption = 'Database (R, LaTeX, etc)'
@@ -3303,20 +3368,6 @@ object frmMain: TfrmMain
       Hint = 'Card (R): insert'
       ImageIndex = 267
       OnExecute = actRcard_InsertExecute
-    end
-    object actShortcuts_Help: TAction
-      Category = 'dtb Shortcuts'
-      Caption = 'Help'
-      Hint = 'Hotkeys RH_Send: help'
-      ImageIndex = 25
-      OnExecute = actShortcuts_HelpExecute
-    end
-    object actShortcuts_Edit: TAction
-      Category = 'dtb Shortcuts'
-      Caption = 'Edit'
-      Hint = 'Shortcuts: edit'
-      ImageIndex = 18
-      OnExecute = actShortcuts_EditExecute
     end
     object actCopyFormatted: TAction
       Category = 'Edit'
@@ -4346,6 +4397,7 @@ object frmMain: TfrmMain
       Caption = 'Rterm (start/close)'
       Hint = 'R control: term (start/close)'
       ImageIndex = 244
+      ShortCut = 49374
       OnExecute = actRCont_TermStartCloseExecute
     end
     object actRCont_TCPConnection: TAction
@@ -6917,7 +6969,7 @@ object frmMain: TfrmMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 16
-    Top = 336
+    Top = 368
     object pmenGenericFont: TMenuItem
       Caption = 'Font (not permanent)'
       ImageIndex = 260
@@ -7286,10 +7338,6 @@ object frmMain: TfrmMain
         Caption = '-'
         GroupIndex = 6
       end
-      object menToolsMatchBracket: TMenuItem
-        Action = actMatchBracket
-        GroupIndex = 12
-      end
       object Deletebracket1: TMenuItem
         Action = actDeleteBracket
         Caption = 'Delete (bracket)'
@@ -7649,7 +7697,11 @@ object frmMain: TfrmMain
       end
       object menSearchGoTo: TMenuItem
         Action = actGotoLine
-        GroupIndex = 3
+        GroupIndex = 12
+      end
+      object menToolsMatchBracket: TMenuItem
+        Action = actMatchBracket
+        GroupIndex = 12
       end
     end
     object menOptions: TMenuItem
@@ -9383,8 +9435,8 @@ object frmMain: TfrmMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 80
-    Top = 272
+    Left = 48
+    Top = 304
     object MenuItem20: TMenuItem
       Action = actCompletion_CopyDescrition
     end
@@ -9412,8 +9464,8 @@ object frmMain: TfrmMain
     ImageSize.Height = 0
     ImageSize.Width = 0
     TextMargin = 1
-    Left = 48
-    Top = 272
+    Left = 16
+    Top = 304
     object Help4: TMenuItem
       Action = actCompletion_Help
     end
@@ -9554,7 +9606,7 @@ object frmMain: TfrmMain
       end
     end
   end
-  object pmenShortcuts: TJvPopupMenu
+  object pmenShortcuts_App: TJvPopupMenu
     Images = imlTinnR
     Style = msOffice
     ImageMargin.Left = 0
@@ -9566,13 +9618,25 @@ object frmMain: TfrmMain
     Left = 16
     Top = 272
     object Help1: TMenuItem
-      Action = actShortcuts_Help
+      Action = actShortcuts_App_Help
     end
     object N192: TMenuItem
       Caption = '-'
     end
     object Edit1: TMenuItem
-      Action = actShortcuts_Edit
+      Action = actShortcuts_App_Edit
+    end
+    object N37: TMenuItem
+      Caption = '-'
+    end
+    object Fontnotpermanent1: TMenuItem
+      Caption = 'Font (not permanent)'
+      object Increase2: TMenuItem
+        Action = actFontIncrease
+      end
+      object Decrease2: TMenuItem
+        Action = actFontDecrease
+      end
     end
   end
   object tUpdateOptions: TJvTimer
@@ -9604,8 +9668,8 @@ object frmMain: TfrmMain
     ImageMargin.Bottom = 0
     ImageSize.Height = 0
     ImageSize.Width = 0
-    Left = 112
-    Top = 272
+    Left = 80
+    Top = 304
     object MenuItem1: TMenuItem
       Action = actComments_Help
     end
@@ -9627,7 +9691,7 @@ object frmMain: TfrmMain
     ImageSize.Width = 0
     TextMargin = 1
     Left = 112
-    Top = 304
+    Top = 336
     object MenuItem3: TMenuItem
       Action = actRmirrors_Help
     end
@@ -22817,5 +22881,137 @@ object frmMain: TfrmMain
     Top = 240
     EndOfTokenChrW = '()[]. '
     TriggerCharsW = '.'
+  end
+  object pmenKeystrokes_Editor: TJvPopupMenu
+    Images = imlTinnR
+    Style = msOffice
+    ImageMargin.Left = 0
+    ImageMargin.Top = 0
+    ImageMargin.Right = 0
+    ImageMargin.Bottom = 0
+    ImageSize.Height = 0
+    ImageSize.Width = 0
+    Left = 48
+    Top = 272
+    object MenuItem17: TMenuItem
+      Action = actShortcuts_App_Help
+    end
+    object MenuItem18: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem19: TMenuItem
+      Action = actShortcuts_App_Edit
+    end
+    object MenuItem36: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem39: TMenuItem
+      Caption = 'Font (not permanent)'
+      object MenuItem40: TMenuItem
+        Action = actFontIncrease
+      end
+      object MenuItem41: TMenuItem
+        Action = actFontDecrease
+      end
+    end
+  end
+  object pmenHotkeys_R_Send: TJvPopupMenu
+    Images = imlTinnR
+    Style = msOffice
+    ImageMargin.Left = 0
+    ImageMargin.Top = 0
+    ImageMargin.Right = 0
+    ImageMargin.Bottom = 0
+    ImageSize.Height = 0
+    ImageSize.Width = 0
+    Left = 80
+    Top = 272
+    object MenuItem42: TMenuItem
+      Action = actShortcuts_App_Help
+    end
+    object MenuItem44: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem45: TMenuItem
+      Action = actShortcuts_App_Edit
+    end
+    object MenuItem46: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem47: TMenuItem
+      Caption = 'Font (not permanent)'
+      object MenuItem48: TMenuItem
+        Action = actFontIncrease
+      end
+      object MenuItem49: TMenuItem
+        Action = actFontDecrease
+      end
+    end
+  end
+  object pmenHotkeys_R_Control: TJvPopupMenu
+    Images = imlTinnR
+    Style = msOffice
+    ImageMargin.Left = 0
+    ImageMargin.Top = 0
+    ImageMargin.Right = 0
+    ImageMargin.Bottom = 0
+    ImageSize.Height = 0
+    ImageSize.Width = 0
+    Left = 112
+    Top = 272
+    object MenuItem50: TMenuItem
+      Action = actShortcuts_App_Help
+    end
+    object MenuItem51: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem52: TMenuItem
+      Action = actShortcuts_App_Edit
+    end
+    object MenuItem53: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem54: TMenuItem
+      Caption = 'Font (not permanent)'
+      object MenuItem55: TMenuItem
+        Action = actFontIncrease
+      end
+      object MenuItem56: TMenuItem
+        Action = actFontDecrease
+      end
+    end
+  end
+  object pmenHotkeys_R_Custom: TJvPopupMenu
+    Images = imlTinnR
+    Style = msOffice
+    ImageMargin.Left = 0
+    ImageMargin.Top = 0
+    ImageMargin.Right = 0
+    ImageMargin.Bottom = 0
+    ImageSize.Height = 0
+    ImageSize.Width = 0
+    Left = 144
+    Top = 272
+    object MenuItem57: TMenuItem
+      Action = actShortcuts_App_Help
+    end
+    object MenuItem58: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem59: TMenuItem
+      Action = actShortcuts_App_Edit
+    end
+    object MenuItem60: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem61: TMenuItem
+      Caption = 'Font (not permanent)'
+      object MenuItem62: TMenuItem
+        Action = actFontIncrease
+      end
+      object MenuItem63: TMenuItem
+        Action = actFontDecrease
+      end
+    end
   end
 end

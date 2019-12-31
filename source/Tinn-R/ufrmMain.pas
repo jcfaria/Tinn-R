@@ -539,8 +539,8 @@ type
     actSearch_ExpandOne: TAction;
     actSearch_InFiles: TAction;
     actSearchVisible: TAction;
-    actShortcuts_Edit: TAction;
-    actShortcuts_Help: TAction;
+    actShortcuts_App_Edit: TAction;
+    actShortcuts_App_Help: TAction;
     actShowAllBars: TAction;
     actShowAppOptions: TAction;
     actSKH_map: TAction;
@@ -1671,7 +1671,7 @@ type
     pmenRResContTermStartClose: TMenuItem;
     pmenRResSend: TMenuItem;
     pmenSearch: TJvPopupMenu;
-    pmenShortcuts: TJvPopupMenu;
+    pmenShortcuts_App: TJvPopupMenu;
     pmenSpell: TJvPopupMenu;
     pmenViewToolbars: TJvPopupMenu;
     pmenViewToolbarsEdit: TMenuItem;
@@ -1986,6 +1986,50 @@ type
     actDeleteBracket: TAction;
     N35: TMenuItem;
     Deletebracket1: TMenuItem;
+    Fontnotpermanent1: TMenuItem;
+    Decrease2: TMenuItem;
+    Increase2: TMenuItem;
+    N37: TMenuItem;
+    pmenKeystrokes_Editor: TJvPopupMenu;
+    MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
+    MenuItem36: TMenuItem;
+    MenuItem39: TMenuItem;
+    MenuItem40: TMenuItem;
+    MenuItem41: TMenuItem;
+    pmenHotkeys_R_Send: TJvPopupMenu;
+    MenuItem42: TMenuItem;
+    MenuItem44: TMenuItem;
+    MenuItem45: TMenuItem;
+    MenuItem46: TMenuItem;
+    MenuItem47: TMenuItem;
+    MenuItem48: TMenuItem;
+    MenuItem49: TMenuItem;
+    pmenHotkeys_R_Control: TJvPopupMenu;
+    MenuItem50: TMenuItem;
+    MenuItem51: TMenuItem;
+    MenuItem52: TMenuItem;
+    MenuItem53: TMenuItem;
+    MenuItem54: TMenuItem;
+    MenuItem55: TMenuItem;
+    MenuItem56: TMenuItem;
+    pmenHotkeys_R_Custom: TJvPopupMenu;
+    MenuItem57: TMenuItem;
+    MenuItem58: TMenuItem;
+    MenuItem59: TMenuItem;
+    MenuItem60: TMenuItem;
+    MenuItem61: TMenuItem;
+    MenuItem62: TMenuItem;
+    MenuItem63: TMenuItem;
+    actKeystrokes_Editor_Help: TAction;
+    actKeystrokes_Editor_Edit: TAction;
+    actRH_Send_Help: TAction;
+    actRH_Send_Edit: TAction;
+    actRH_Control_Edit: TAction;
+    actRH_Custom_Edit: TAction;
+    actRH_Control_Help: TAction;
+    actRH_Custom_Help: TAction;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2277,8 +2321,8 @@ type
     procedure actSearch_ExpandOneExecute(Sender: TObject);
     procedure actSearch_InFilesExecute(Sender: TObject);
     procedure actSearchVisibleExecute(Sender: TObject);
-    procedure actShortcuts_EditExecute(Sender: TObject);
-    procedure actShortcuts_HelpExecute(Sender: TObject);
+    procedure actShortcuts_App_EditExecute(Sender: TObject);
+    procedure actShortcuts_App_HelpExecute(Sender: TObject);
     procedure actShortcutsCustomizationSaveExecute(Sender: TObject);
     procedure actShowAllBarsExecute(Sender: TObject);
     procedure actShowAppOptionsExecute(Sender: TObject);
@@ -2555,6 +2599,12 @@ type
     procedure actDataKeystrokesVisibleExecute(Sender: TObject);
     procedure actDataHotkeysVisibleExecute(Sender: TObject);
     procedure actDeleteBracketExecute(Sender: TObject);
+    procedure actRH_Send_HelpExecute(Sender: TObject);
+    procedure actRH_Control_HelpExecute(Sender: TObject);
+    procedure actRH_Custom_HelpExecute(Sender: TObject);
+    procedure actRH_Send_EditExecute(Sender: TObject);
+    procedure actRH_Control_EditExecute(Sender: TObject);
+    procedure actRH_Custom_EditExecute(Sender: TObject);
 
   private
     { Private declarations }
@@ -2634,11 +2684,11 @@ type
     R_Useful                       : TR_Useful;
     rsSearch                       : TRegExpr;
     sApp_Data                      : string;
-    sCurr_Version_App_Shortcuts    : string;
+    sCurr_Version_Shortcuts_App    : string;
     sCurr_Version_Cache            : string;
     sCurr_Version_Comments         : string;
     sCurr_Version_Completion       : string;
-    sCurr_Version_Editor_Keystrokes: string;
+    sCurr_Version_Keystrokes_Editor: string;
     sCurr_Version_Latex            : string;
     sCurr_Version_Project          : string;
     sCurr_Version_Rcard            : string;
@@ -2698,11 +2748,11 @@ type
     sSearch_DirHistory             : string;
     sSearch_FileMaskHistory        : string;
     sTipFromRserver                : string;
-    sVersion_App_Shortcuts         : string;
+    sVersion_Shortcuts_App         : string;
     sVersion_Cache                 : string;
     sVersion_Comments              : string;
     sVersion_Completion            : string;
-    sVersion_Editor_Keystrokes     : string;
+    sVersion_Keystrokes_Editor     : string;
     sVersion_Ini                   : string;
     sVersion_Latex                 : string;
     sVersion_Project               : string;
@@ -2810,7 +2860,7 @@ type
     procedure pSearch_InDirectories(const sDir, sMask: string; var iFileCount, iMatchCount, iTotFileCount: integer);
     procedure pSearch_InOpenFiles(var iFileCount, iMatchCount: integer);
     procedure pSend_Resources(bOption: boolean);
-    procedure pSet_App_Shortcuts;
+    procedure pSet_Shortcuts_App;
     procedure pSet_Completion;
     procedure pSet_EncodingDefault(sTmp: string);
     procedure pSet_EOLDefault(sTmp: string);
@@ -2919,15 +2969,15 @@ type
     ffDefault                    : TSynEditFileFormat;
     hRgui                        : HWND;
     iAlphaBlendValue             : integer;
-    iApp_Shortcuts_SavePoint     : integer;
-    iApp_ShortcutsFilter         : integer;
+    iShortcuts_App_SavePoint     : integer;
+    iShortcuts_App_Filter        : integer;
     iComments_SavePoint          : integer;
     iCompletion_SavePoint        : integer;
     iCompletionFilter            : integer;
     iCountriesFilter             : integer;
     iDelay                       : integer;
     iDragLevel                   : integer;
-    iEditor_Keystrokes_SavePoint : integer;
+    iKeystrokes_Editor_SavePoint : integer;
     iFileCount                   : integer;
     iFilterToSaveAs              : integer;
     iIPPortLocal                 : integer;
@@ -2950,7 +3000,7 @@ type
     iSynWithFocus                : integer;
     iTransparency                : integer;
     iZoomPreview                 : integer;
-    sApp_Shortcuts_BookMark      : string;
+    sShortcuts_App_BookMark      : string;
     sAppSelected                 : string;
     sBeginComment                : string;
     sComments_BookMark           : string;
@@ -2958,7 +3008,7 @@ type
     sDragSource                  : string;
     sDragSourceLine              : string;
     seDefault                    : TSynEncoding;
-    sEditor_Keystrokes_BookMark  : string;
+    sKeystrokes_Editor_BookMark  : string;
     sEndComment                  : string;
     seUsed                       : TSynEncoding;
     sfDefault                    : TSaveFormat;
@@ -3091,10 +3141,10 @@ uses
 
 (*
 ----------------------------------------------------
- pSet_App_Shortcuts: It is very important for developers!
+ pSet_Shortcuts_App: It is very important for developers!
 ----------------------------------------------------
 *)
-procedure TfrmMain.pSet_App_Shortcuts;
+procedure TfrmMain.pSet_Shortcuts_App;
 begin
 (*
 ----------------------------------------------------------------------------------------------
@@ -3115,17 +3165,17 @@ begin
   pDataset_To_ActionList;
 (*-------------------------*)
 
-  // Create items in lbApp_Shortcuts from strApp_ShortcutsGroups create in uModDados
+  // Create items in lbShortcuts_App from strShortcuts_AppGroups create in uModDados
   with modDados do begin
-    frmTools.lbApp_Shortcuts.Items:= slApp_Shortcuts_Groups;
-    frmTools.lbApp_Shortcuts.Refresh;
-    FreeAndNil(slApp_Shortcuts_Groups);
+    frmTools.lbShortcuts_App.Items:= slShortcuts_App_Groups;
+    frmTools.lbShortcuts_App.Refresh;
+    FreeAndNil(slShortcuts_App_Groups);
   end;
 
   // To prevent some problem
-  if (iApp_ShortcutsFilter < 0) then iApp_ShortcutsFilter:= 0;
-  frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= True;
-  frmTools.lbApp_ShortcutsClick(Self);
+  if (iShortcuts_App_Filter < 0) then iShortcuts_App_Filter:= 0;
+  frmTools.lbShortcuts_App.Selected[iShortcuts_App_Filter]:= True;
+  frmTools.lbShortcuts_AppClick(Self);
 end;
 
 procedure TfrmMain.pCheck_Recho;
@@ -3145,11 +3195,11 @@ end;
 procedure TfrmMain.pCheck_Versions;
 begin
   // Versions in use by user: from ini file
-  sVersion_App_Shortcuts    := ini_Tinn.ReadString('App', 'sVersion_App_Shortcuts'    , '0.0.0.0');
+  sVersion_Shortcuts_App    := ini_Tinn.ReadString('App', 'sVersion_Shortcuts_App'    , '0.0.0.0');
   sVersion_Cache            := ini_Tinn.ReadString('App', 'sVersion_Cache'            , '0.0.0.0');
   sVersion_Comments         := ini_Tinn.ReadString('App', 'sVersion_Comments'         , '0.0.0.0');
   sVersion_Completion       := ini_Tinn.ReadString('App', 'sVersion_Completion'       , '0.0.0.0');
-  sVersion_Editor_Keystrokes:= ini_Tinn.ReadString('App', 'sVersion_Editor_Keystrokes', '0.0.0.0');
+  sVersion_Keystrokes_Editor:= ini_Tinn.ReadString('App', 'sVersion_Keystrokes_Editor', '0.0.0.0');
   sVersion_Ini              := ini_Tinn.ReadString('App', 'sVersion_Ini'              , '0.0.0.0');
   sVersion_Latex            := ini_Tinn.ReadString('App', 'sVersion_Latex'            , '0.0.0.0');
   sVersion_Project          := ini_Tinn.ReadString('App', 'sVersion_Project'          , '0.0.0.0');
@@ -3164,11 +3214,11 @@ begin
   sVersion_Syntax_LGray     := ini_Tinn.ReadString('App', 'sVersion_Syntax_LGray'     , '0.0.0.0');
 
   // Version of the main resources: database and TinnRcom packages
-  sCurr_Version_App_Shortcuts    := '6.01.01.04';
+  sCurr_Version_Shortcuts_App    := '6.01.01.04';
   sCurr_Version_Cache            := '5.04.01.01';  // A personal cache was being distributed, and this makes no sense. This one is clean.
   sCurr_Version_Comments         := '3.00.02.01';
   sCurr_Version_Completion       := '5.02.03.00';
-  sCurr_Version_Editor_Keystrokes:= '5.04.03.01';  // Started from version '5.04.03.00'/beta
+  sCurr_Version_Keystrokes_Editor:= '6.01.01.04';  // Started from version '5.04.03.00'/beta
   sCurr_Version_Latex            := '2.01.01.01';
   sCurr_Version_Project          := '5.03.05.01';
   sCurr_Version_Rcard            := '2.03.00.00';
@@ -3202,12 +3252,12 @@ begin
     sVersion_Completion:= sCurr_Version_Completion;
   end;
 
-  // Editor_Keystrokes
-  if (AnsiCompareStr(sVersion_Editor_Keystrokes,
-                     sCurr_Version_Editor_Keystrokes) < 0) then begin
-    sVersion_Editor_Keystrokes:= sCurr_Version_Editor_Keystrokes;
+  // Keystrokes_Editor
+  if (AnsiCompareStr(sVersion_Keystrokes_Editor,
+                     sCurr_Version_Keystrokes_Editor) < 0) then begin
+    sVersion_Keystrokes_Editor:= sCurr_Version_Keystrokes_Editor;
     if FileExists(sPath_Data +
-                  '\Editor_Keystrokes.xml') then
+                  '\Keystrokes_Editor.xml') then
       bUpdate_Editor:= True;
   end;
 
@@ -3239,12 +3289,12 @@ begin
     sVersion_Rmirrors:= sCurr_Version_Rmirrors;
   end;
 
-  // App_Shortcuts
-  if (AnsiCompareStr(sVersion_App_Shortcuts,
-                     sCurr_Version_App_Shortcuts) < 0) then begin
-    sVersion_App_Shortcuts:= sCurr_Version_App_Shortcuts;
+  // Shortcuts_App
+  if (AnsiCompareStr(sVersion_Shortcuts_App,
+                     sCurr_Version_Shortcuts_App) < 0) then begin
+    sVersion_Shortcuts_App:= sCurr_Version_Shortcuts_App;
     if FileExists(sPath_Data +
-                  '\App_Shortcuts.xml') then
+                  '\Shortcuts_App.xml') then
       bUpdate_Shortcuts:= True;
   end;
 
@@ -3821,11 +3871,11 @@ begin
 
   with ini_Tinn_Tmp do begin
     // Version control
-    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
+    WriteString('App', 'sVersion_Shortcuts_App'    , sVersion_Shortcuts_App);
     WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
     WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
     WriteString('App', 'sVersion_Completion'       , sVersion_Completion);
-    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
+    WriteString('App', 'sVersion_Keystrokes_Editor', sVersion_Keystrokes_Editor);
     WriteString('App', 'sVersion_Ini'              , fGetBuild_Info);
     WriteString('App', 'sVersion_Latex'            , sVersion_Latex);
     WriteString('App', 'sVersion_Project'          , sVersion_Project);
@@ -3862,8 +3912,8 @@ begin
     WriteBool('App', 'bTobView.Visible', tobView.Visible);
     WriteBool('TBRMain', 'bTobVisible', actTobRVisible.Checked);
 
-    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
-    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
+    WriteInteger('App', 'iShortcuts_App.Height', frmTools.panShortcuts_App.Height);
+    WriteInteger('App', 'iShortcuts_App.ItemIndex', frmTools.lbShortcuts_App.ItemIndex);
     WriteInteger('App', 'iCompletion.Height', frmTools.panCompletion.Height);
     WriteInteger('App', 'iCompletion.ItemIndex', frmTools.lbCompletion.ItemIndex);
     WriteInteger('App', 'iCountries.Height', frmTools.panCountries.Height);
@@ -4115,7 +4165,7 @@ begin
     WriteBool('R Options', 'bRtermStartClose', actRCont_TermStartClose.Visible);
 
     // Database status
-    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
+    WriteInteger('Database', 'iShortcuts_App_SavePoint', iShortcuts_App_SavePoint);
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
     WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
     WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
@@ -4365,11 +4415,11 @@ begin
   // Application
   with ini_Tinn do begin
     // Version control
-    WriteString('App', 'sVersion_App_Shortcuts'    , sVersion_App_Shortcuts);
+    WriteString('App', 'sVersion_Shortcuts_App'    , sVersion_Shortcuts_App);
     WriteString('App', 'sVersion_Cache'            , sVersion_Cache);
     WriteString('App', 'sVersion_Comments'         , sVersion_Comments);
     WriteString('App', 'sVersion_Completion'       , sVersion_Completion);
-    WriteString('App', 'sVersion_Editor_Keystrokes', sVersion_Editor_Keystrokes);
+    WriteString('App', 'sVersion_Keystrokes_Editor', sVersion_Keystrokes_Editor);
     WriteString('App', 'sVersion_Rcard'            , sVersion_Rcard);
     WriteString('App', 'sVersion_RH_Control'       , sVersion_RH_Control);
     WriteString('App', 'sVersion_RH_Custom'        , sVersion_RH_Custom);
@@ -4402,8 +4452,8 @@ begin
     WriteBool('App', 'bTobSyntax.Visible', tobSyntax.Visible);
     WriteBool('App', 'bTobView.Visible', tobView.Visible);
     WriteBool('TBRMain', 'bTobVisible', actTobRVisible.Checked);
-    WriteInteger('App', 'iApp_Shortcuts.Height', frmTools.panApp_Shortcuts.Height);
-    WriteInteger('App', 'iApp_Shortcuts.ItemIndex', frmTools.lbApp_Shortcuts.ItemIndex);
+    WriteInteger('App', 'iShortcuts_App.Height', frmTools.panShortcuts_App.Height);
+    WriteInteger('App', 'iShortcuts_App.ItemIndex', frmTools.lbShortcuts_App.ItemIndex);
     WriteInteger('App', 'iCompletion.Height', frmTools.panCompletion.Height);
     WriteInteger('App', 'iCompletion.ItemIndex', frmTools.lbCompletion.ItemIndex);
     WriteInteger('App', 'iCountries.Height', frmTools.panCountries.Height);
@@ -4661,7 +4711,7 @@ begin
     WriteBool('R Options', 'bRtermStartClose', actRCont_TermStartClose.Visible);
 
     // Database status
-    WriteInteger('Database', 'iApp_Shortcuts_SavePoint', iApp_Shortcuts_SavePoint);
+    WriteInteger('Database', 'iShortcuts_App_SavePoint', iShortcuts_App_SavePoint);
     WriteInteger('Database', 'iCompletion_SavePoint', iCompletion_SavePoint);
     WriteInteger('Database', 'iRcard_SavePoint', iRcard_SavePoint);
     WriteInteger('Database', 'iRH_Control_SavePoint', iRH_Control_SavePoint);
@@ -5173,8 +5223,8 @@ begin
   actWinExplVisible.Checked          := ini_Tinn.ReadBool('App', 'bWinExpl.Visible', True);
   actWorkExplVisible.Checked         := ini_Tinn.ReadBool('App', 'bWorkExpl.Visible', True);
 
-  frmTools.tbsApp_Shortcuts.TabVisible    := actDataShortcutsVisible.Checked;
-  frmTools.tbsEditor_Keystrokes.TabVisible:= actDataKeystrokesVisible.Checked;
+  frmTools.tbsShortcuts_App.TabVisible    := actDataShortcutsVisible.Checked;
+  frmTools.tbsKeystrokes_Editor.TabVisible:= actDataKeystrokesVisible.Checked;
   frmTools.tbsR_Hotkeys.TabVisible        := actDataHotkeysVisible.Checked;
   frmTools.tbsComments.TabVisible         := actDataCommentsVisible.Checked;
   frmTools.tbsCompletion.TabVisible       := actDataCompletionVisible.Checked;
@@ -5216,7 +5266,7 @@ begin
   iPandoc_To             := ini_Tinn.ReadInteger('App', 'iPandoc_To', 7);
   iTransparency          := ini_Tinn.ReadInteger('App', 'iTransparency', 0);
   iViewStyleRExplorer    := ini_Tinn.ReadInteger('App', 'iViewStyleRExplorer', 1);
-  sShortcuts_InUse       := trim(ini_Tinn.ReadString('App', 'sShortcuts_InUse', sPath_Data + '\App_Shortcuts.xml'));
+  sShortcuts_InUse       := trim(ini_Tinn.ReadString('App', 'sShortcuts_InUse', sPath_Data + '\Shortcuts_App.xml'));
   sSyntax_InUse          := trim(ini_Tinn.ReadString('App', 'sSyntax_InUse', 'Default'));
 
   bIPLocal     := ini_Tinn.ReadBool('App', 'bIPLocal', True);
@@ -5295,7 +5345,7 @@ begin
   actStatusBarVisible.Checked              := ini_Tinn.ReadBool('App','bStatusBar', True);
   frmTools.cbComAutoDetect_Language.Checked:= ini_Tinn.ReadBool('App', 'bComAutoDetect_Language', True);
   frmTools.cbComPriority_Line.Checked      := ini_Tinn.ReadBool('App', 'bComPriority_Line', True);
-  frmTools.panApp_Shortcuts.Height         := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.Height', 79);
+  frmTools.panShortcuts_App.Height         := ini_Tinn.ReadInteger('App', 'iShortcuts_App.Height', 79);
   frmTools.panCompletion.Height            := ini_Tinn.ReadInteger('App', 'iCompletion.Height', 41);
   frmTools.panCountries.Height             := ini_Tinn.ReadInteger('App', 'iCountries.Height', 79);
   frmTools.panRcard.Height                 := ini_Tinn.ReadInteger('App', 'iRcard.Height', 79);
@@ -5348,7 +5398,7 @@ begin
   frmTools.pgTxt2tags.TabIndex:= ini_Tinn.ReadInteger('App', 'iTxt2tags.TabIndex', 0);
 
   cbSpellLanguage.ItemIndex:= ini_Tinn.ReadInteger('App', 'iSpellLanguage.ItemIndex', -1);
-  iApp_ShortcutsFilter     := ini_Tinn.ReadInteger('App', 'iApp_Shortcuts.ItemIndex', 0);
+  iShortcuts_App_Filter    := ini_Tinn.ReadInteger('App', 'iShortcuts_App.ItemIndex', 0);
   iCompletionFilter        := ini_Tinn.ReadInteger('App', 'iCompletion.ItemIndex', 0);
   iCountriesFilter         := ini_Tinn.ReadInteger('App', 'iCountries.ItemIndex', 0);
   iRcardFilter             := ini_Tinn.ReadInteger('App', 'iRcard.ItemIndex', 0);
@@ -5493,7 +5543,7 @@ begin
   actRCont_TermStartClose.Visible         := ini_Tinn.ReadBool('R Options', 'bRtermStartClose', True);
 
   // Database status
-  iApp_Shortcuts_SavePoint:= ini_Tinn.ReadInteger('Database', 'iApp_Shortcuts_SavePoint', 0);
+  iShortcuts_App_SavePoint:= ini_Tinn.ReadInteger('Database', 'iShortcuts_App_SavePoint', 0);
   iCompletion_SavePoint   := ini_Tinn.ReadInteger('Database', 'iCompletion_SavePoint', 0);
   iRcard_SavePoint        := ini_Tinn.ReadInteger('Database', 'iRcard_SavePoint', 0);
   iRH_Control_SavePoint   := ini_Tinn.ReadInteger('Database', 'iRH_Control_SavePoint', 0);
@@ -7816,8 +7866,8 @@ begin
     pSet_Rmirrors;
     frmSplash.pb.Position:= 6;
 
-    pSet_App_Shortcuts;
-    pCheck_Recho;  // Must be after pSet_App_Shortcuts!
+    pSet_Shortcuts_App;
+    pCheck_Recho;  // Must be after pSet_Shortcuts_App!
 
     frmTools.tbsLatex.TabVisible:= actLatexVisible.Checked;
     pCheck_Latex(False);
@@ -8036,14 +8086,14 @@ var
   i: integer;
 
 begin
-   with modDados.cdEditor_Keystrokes do begin
-    IndexFieldNames:= 'Index';  // To Editor_Keystrokes has the same order than coEditor.Keystrokes.Items
+   with modDados.cdKeystrokes_Editor do begin
+    IndexFieldNames:= 'Index';  // To Keystrokes_Editor has the same order than coEditor.Keystrokes.Items
     DisableControls;
     First;
     for i:=0 to (RecordCount - 1) do begin
       with coEditor.Keystrokes.Items[i] do begin
 // To debug only
-//        ShowMessage('Editor_Keystrokes.xml: ' +
+//        ShowMessage('Keystrokes_Editor.xml: ' +
 //                    FieldByName('Command').Value +
 //                    ' | ' +
 //                    'coEditor: ' +
@@ -8444,11 +8494,11 @@ var
    sFile_Rmirrors,
    sFile_Comments,
    sFile_Completion,
-   sFile_App_Shortcuts,
+   sFile_Shortcuts_App,
    sFile_RH_Send,
    sFile_RH_Control,
    sFile_RH_Custom,
-   sFile_Editor_Keystrokes,
+   sFile_Keystrokes_Editor,
    sFile_Cache: string;
 
   tfTmp: TextFile;
@@ -8459,11 +8509,11 @@ begin
   sFile_Rmirrors         := sPath_Data + '\Rmirrors.xml';
   sFile_Comments         := sPath_Data + '\Comments.xml';
   sFile_Completion       := sPath_Data + '\Completion.xml';
-  sFile_App_Shortcuts    := sPath_Data + '\App_Shortcuts.xml';
+  sFile_Shortcuts_App    := sPath_Data + '\Shortcuts_App.xml';
   sFile_RH_Send          := sPath_Data + '\RH_Send.xml';
   sFile_RH_Control       := sPath_Data + '\RH_Control.xml';
   sFile_RH_Custom        := sPath_Data + '\RH_Custom.xml';
-  sFile_Editor_Keystrokes:= sPath_Data + '\Editor_Keystrokes.xml';
+  sFile_Keystrokes_Editor:= sPath_Data + '\Keystrokes_Editor.xml';
 
   try
     // Both files below were renamed in version 5.6.1.1: they can be deleted
@@ -8490,42 +8540,42 @@ begin
       if (bUpdate_Completion) then pMake_DataBackup('\Completion.xml');
 
       if (bUpdate_Shortcuts)  then begin
-        pMake_DataBackup('\App_Shortcuts.xml');
-        // Shortcuts in use: = App_Shortcuts.xml
+        pMake_DataBackup('\Shortcuts_App.xml');
+        // Shortcuts in use: = Shortcuts_App.xml
         if (sShortcuts_InUse = sPath_Data +
-            '\App_Shortcuts.xml') then begin
+            '\Shortcuts_App.xml') then begin
           RenameFile(sPath_Data +
-                     '\App_Shortcuts.xml',
+                     '\Shortcuts_App.xml',
                      sPath_Data +
-                     '\OldApp_Shortcuts.xml');
+                     '\OldShortcuts_App.xml');
 
           pUnpack_File(sFile_Data_Origin,
                        sPath_Data,
-                       'App_Shortcuts.xml');  // It is necessary to make a new copy from origin
+                       'Shortcuts_App.xml');  // It is necessary to make a new copy from origin
 
-          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new App_Shortcuts.xml
+          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts_App.xml
             pShortcuts_Validation(sPath_Data +
-                                  '\OldApp_Shortcuts.xml',
+                                  '\OldShortcuts_App.xml',
                                   sPath_Data +
-                                  '\App_Shortcuts.xml');
+                                  '\Shortcuts_App.xml');
           DeleteFile(sPath_Data +
-                     '\OldApp_Shortcuts.xml');
+                     '\OldShortcuts_App.xml');
         end
-        // Shortcuts in use: <> App_Shortcuts.xml
+        // Shortcuts in use: <> Shortcuts_App.xml
         else begin
           pUnpack_File(sFile_Data_Origin,
                        sPath_Data,
-                       'App_Shortcuts.xml');  // It is necessary to make a new copy from origin
+                       'Shortcuts_App.xml');  // It is necessary to make a new copy from origin
 
-          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new App_Shortcuts.xml
+          with modDados do              // All useful information related to user preferences (shortcuts) will be add int the new Shortcuts_App.xml
             pShortcuts_Validation(sShortcuts_InUse,
                                   sPath_Data +
-                                  '\App_Shortcuts.xml');
+                                  '\Shortcuts_App.xml');
           DeleteFile(sShortcuts_InUse);
         end;
 
         sShortcuts_InUse:= sPath_Data +
-                           '\App_Shortcuts.xml';
+                           '\Shortcuts_App.xml';
       end;
     end;
 
@@ -8635,15 +8685,20 @@ begin
     end;
 
     // Editor
-    if not FileExists(sFile_Editor_Keystrokes) then begin
+    // Delete old Shortcuts file name
+    if FileExists(sPath_Data +
+                  '\Editor_Keystrokes.xml') then DeleteFile(sPath_Data +
+                                                            '\Editor_Keystrokes.xml');
+
+    if not FileExists(sFile_Keystrokes_Editor) then begin
       pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
-                   'Editor_Keystrokes.xml');
+                   'Keystrokes_Editor.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFile_Editor_Keystrokes) +
+                                   ExtractFileName(sFile_Keystrokes_Editor) +
                                    '(version = ' +
-                                   sCurr_Version_Editor_Keystrokes +
+                                   sCurr_Version_Keystrokes_Editor +
                                    ')' +
                                    ': CREATED');
     end
@@ -8651,20 +8706,20 @@ begin
       if bUpdate_Editor then begin
         pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
-                     'Editor_Keystrokes.xml');
+                     'Keystrokes_Editor.xml');
 
         frmTools.memIniLog.Lines.Add('   \' +
-                                     ExtractFileName(sFile_Editor_Keystrokes) +
+                                     ExtractFileName(sFile_Keystrokes_Editor) +
                                      '(version = ' +
-                                     sCurr_Version_Editor_Keystrokes +
+                                     sCurr_Version_Keystrokes_Editor +
                                      ')' +
                                      ': UPDATED');
       end;
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFile_Editor_Keystrokes) +
+                                   ExtractFileName(sFile_Keystrokes_Editor) +
                                    '(version = ' +
-                                   sCurr_Version_Editor_Keystrokes +
+                                   sCurr_Version_Keystrokes_Editor +
                                    ')' +
                                    ': OK');
     end;
@@ -8845,17 +8900,22 @@ begin
     end;
 
     // Shortcuts
+    // Delete old Shortcuts file name
+    if FileExists(sPath_Data +
+                  '\App_Shortcuts.xml') then DeleteFile(sPath_Data +
+                                                        '\App_Shortcuts.xml');
+
     if not FileExists(sShortcuts_InUse) then sShortcuts_InUse:= sPath_Data +
-                                                                '\App_Shortcuts.xml';
-    if not FileExists(sFile_App_Shortcuts)  then begin
+                                                                '\Shortcuts_App.xml';
+    if not FileExists(sFile_Shortcuts_App)  then begin
       pUnpack_File(sFile_Data_Origin,
                    sPath_Data,
-                   'App_Shortcuts.xml');
+                   'Shortcuts_App.xml');
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFile_App_Shortcuts) +
+                                   ExtractFileName(sFile_Shortcuts_App) +
                                    '(version = ' +
-                                   sCurr_Version_App_Shortcuts +
+                                   sCurr_Version_Shortcuts_App +
                                    ')' +
                                    ': CREATED');
     end
@@ -8863,20 +8923,20 @@ begin
       if bUpdate_Shortcuts then begin
         pUnpack_File(sFile_Data_Origin,
                      sPath_Data,
-                     'App_Shortcuts.xml');
+                     'Shortcuts_App.xml');
 
         frmTools.memIniLog.Lines.Add('   \' +
-                                     ExtractFileName(sFile_App_Shortcuts) +
+                                     ExtractFileName(sFile_Shortcuts_App) +
                                      '(version = ' +
-                                     sCurr_Version_App_Shortcuts +
+                                     sCurr_Version_Shortcuts_App +
                                      ')' +
                                      ': UPDATED');
       end;
 
       frmTools.memIniLog.Lines.Add('   \' +
-                                   ExtractFileName(sFile_App_Shortcuts) +
+                                   ExtractFileName(sFile_Shortcuts_App) +
                                    '(version = ' +
-                                   sCurr_Version_App_Shortcuts +
+                                   sCurr_Version_Shortcuts_App +
                                    ')' +
                                    ': OK');
     end;
@@ -8893,7 +8953,7 @@ begin
   Rewrite(tfTmp);
     WriteLn(tfTmp,
             'This folder stores (by default):' + #13 +
-            'The XML files: Cache.xml, Comments.xml, Completion.xml, Editor_Keystrokes.xml, Rcard.xlm, Rmirrors.xml, App_Shortcuts.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
+            'The XML files: Cache.xml, Comments.xml, Completion.xml, Keystrokes_Editor.xml, Rcard.xlm, Rmirrors.xml, Shortcuts_App.xml, RH_Send.xml, RH_Control.xml and RH_Custom.xml.');
   CloseFile(tfTmp);
 end;
 
@@ -9758,6 +9818,36 @@ begin
     bRguiReturnFocus          := False;
     actRguiReturnFocus.Checked:= False;
   end;
+end;
+
+procedure TfrmMain.actRH_Control_EditExecute(Sender: TObject);
+begin
+  actSKH_mapExecute(nil);
+end;
+
+procedure TfrmMain.actRH_Control_HelpExecute(Sender: TObject);
+begin
+  pOpen_UserGuidePDF('"RH_Control"');
+end;
+
+procedure TfrmMain.actRH_Custom_EditExecute(Sender: TObject);
+begin
+  actSKH_mapExecute(nil);
+end;
+
+procedure TfrmMain.actRH_Custom_HelpExecute(Sender: TObject);
+begin
+  pOpen_UserGuidePDF('"RH_Custom"');
+end;
+
+procedure TfrmMain.actRH_Send_EditExecute(Sender: TObject);
+begin
+  actSKH_mapExecute(nil);
+end;
+
+procedure TfrmMain.actRH_Send_HelpExecute(Sender: TObject);
+begin
+  pOpen_UserGuidePDF('"RH_Send"');
 end;
 
 procedure TfrmMain.actRAssignment_LeftExecute(Sender: TObject);
@@ -11685,11 +11775,11 @@ begin
 
   sOrigin:= sPath_Data +
             '\' +
-            'App_Shortcuts.xml';
+            'Shortcuts_App.xml';
 
   sDest:= sPath_TinnR +
           '\data\' +
-          'App_Shortcuts.xml';
+          'Shortcuts_App.xml';
 
   try
     if not (CopyFile(PChar(sOrigin),
@@ -11707,7 +11797,7 @@ begin
 
   with stbMain do begin
     Panels[8].Text:= 'Done!';
-    Panels[9].Text:= 'App_Shortcuts.xml replaced: ' +
+    Panels[9].Text:= 'Shortcuts_App.xml replaced: ' +
                      sPath_Data;
   end;
 end;
@@ -11749,7 +11839,7 @@ var
 begin
   alMain.State:= asSuspended;
 
-  with modDados.cdApp_Shortcuts do begin
+  with modDados.cdShortcuts_App do begin
     pTmp:= GetBookmark;
     DisableControls;
     Filtered:= False;
@@ -13589,18 +13679,18 @@ begin
   // Comments - FG
   frmTools.dbgComments.Font.Color:= clFG_Application;
 
-  // App_Shortcuts - BG
-  frmTools.dbgApp_Shortcuts.Color   := clBG_Application;
-  frmTools.dbApp_ShortcutsMemo.Color:= clBG_Application;
-  frmTools.lbApp_Shortcuts.Color    := clBG_Application;
+  // Shortcuts_App - BG
+  frmTools.dbgShortcuts_App.Color    := clBG_Application;
+  frmTools.dbShortcuts_App_Memo.Color:= clBG_Application;
+  frmTools.lbShortcuts_App.Color     := clBG_Application;
 
-  // App_Shortcuts - FG
-  frmTools.dbgApp_Shortcuts.Font.Color   := clFG_Application;
-  frmTools.dbApp_ShortcutsMemo.Font.Color:= clFG_Application;
-  frmTools.lbApp_Shortcuts.Font.Color    := clFG_Application;
+  // Shortcuts_App - FG
+  frmTools.dbgShortcuts_App.Font.Color    := clFG_Application;
+  frmTools.dbShortcuts_App_Memo.Font.Color:= clFG_Application;
+  frmTools.lbShortcuts_App.Font.Color     := clFG_Application;
 
-  // Editor_Keystrokes - BG
-  frmTools.dbgEditor_Keystrokes.Color:= clBG_Application;
+  // Keystrokes_Editor - BG
+  frmTools.dbgKeystrokes_Editor.Color:= clBG_Application;
 
   // R Hotkeys - BG
   frmTools.dbgRH_Send.Color   := clBG_Application;
@@ -13612,8 +13702,8 @@ begin
   frmTools.dbgRH_Control.Font.Color:= clFG_Application;
   frmTools.dbgRH_Custom.Font.Color := clFG_Application;
 
-  // Editor_Keystrokes - FG
-  frmTools.dbgEditor_Keystrokes.Font.Color:= clFG_Application;
+  // Keystrokes_Editor - FG
+  frmTools.dbgKeystrokes_Editor.Font.Color:= clFG_Application;
 
   // R explorer - BG
   frmTools.cbbToolsREnvironment.Color  := clBG_Application;
@@ -14879,8 +14969,8 @@ end;
 
 procedure TfrmMain.actSKH_mapExecute(Sender: TObject);
 var
-  pApp_Shortcut_Bookmark,
-   pEditor_Keystrokes_Bookmark,
+  pShortcuts_App_Bookmark,
+   pKeystrokes_Editor_Bookmark,
    pRH_Send_Bookmark,
    pRH_Control_Bookmark,
    pRH_Custom_Bookmark: pointer;
@@ -14890,13 +14980,13 @@ var
 begin
   // The below set bookmarks for the active records before to open SKH_map interface
   with modDados do begin
-    // App_Shortcuts
-    with cdApp_Shortcuts do
-      pApp_Shortcut_Bookmark:= GetBookmark;
+    // Shortcuts_App
+    with cdShortcuts_App do
+      pShortcuts_App_Bookmark:= GetBookmark;
 
-    // Editor_Keystrokes
-    with cdEditor_Keystrokes do
-      pEditor_Keystrokes_Bookmark:= GetBookmark;
+    // Keystrokes_Editor
+    with cdKeystrokes_Editor do
+      pKeystrokes_Editor_Bookmark:= GetBookmark;
 
     // RH_Send
     with cdRH_Send do
@@ -14913,14 +15003,14 @@ begin
 
   // The below set bookmarks for the active records. It will be used in SKH_map (FormActivate)
   with modDados do begin
-    // App_Shortcut
-    sApp_Shortcuts_BookMark:= cdApp_Shortcuts.Bookmark;
-    cdApp_Shortcuts.Filtered:= False;
-    frmTools.lbApp_Shortcuts.Selected[iApp_ShortcutsFilter]:= False;
+    // Shortcuts_App
+    sShortcuts_App_BookMark:= cdShortcuts_App.Bookmark;
+    cdShortcuts_App.Filtered:= False;
+    frmTools.lbShortcuts_App.Selected[iShortcuts_App_Filter]:= False;
 
-    // Editor_Keystrokes
-    sEditor_Keystrokes_BookMark:= cdEditor_Keystrokes.Bookmark;
-    cdEditor_Keystrokes.Filtered:= False;
+    // Keystrokes_Editor
+    sKeystrokes_Editor_BookMark:= cdKeystrokes_Editor.Bookmark;
+    cdKeystrokes_Editor.Filtered:= False;
 
     // RH_Send
     sRH_Send_BookMark:= cdRH_Send.Bookmark;
@@ -14940,34 +15030,34 @@ begin
 
     if (dlgSKH_Map.ShowModal = mrOK) then begin
       // App
-      with modDados.cdApp_Shortcuts do begin
+      with modDados.cdShortcuts_App do begin
         Filtered:= False;
         Edit;
         try
           Post;
           MergeChangeLog;
           SaveToFile();
-          frmMain.iApp_Shortcuts_SavePoint:= SavePoint;
+          frmMain.iShortcuts_App_SavePoint:= SavePoint;
         except
           //TODO
         end;
       end;
 
-      with modDados.cdApp_Shortcuts do
+      with modDados.cdShortcuts_App do
         IndexFieldNames:= 'Index';  // The user may have made changes to the index by clicking on the dbgShortcuts title bar.
 
       bHotKeys_On:= LongBool(dlgSKH_Map.rdgTinnRHotKeys.ItemIndex);
       pDataset_To_ActionList;  //It will update all options related to the alMain (ActionList)
 
-      // Editor_Keystrokes
-      with modDados.cdEditor_Keystrokes do begin
+      // Keystrokes_Editor
+      with modDados.cdKeystrokes_Editor do begin
         Filtered:= False;
         Edit;
         try
           Post;
           MergeChangeLog;
           SaveToFile();
-          frmMain.iEditor_Keystrokes_SavePoint:= SavePoint;
+          frmMain.iKeystrokes_Editor_SavePoint:= SavePoint;
         except
           //TODO
         end;
@@ -15043,12 +15133,12 @@ begin
     // else (dlgSH_Map.ShowModal <> mrOK)
     else begin
       with modDados do begin
-        cdApp_Shortcuts.SavePoint    := iApp_Shortcuts_SavePoint;
+        cdShortcuts_App.SavePoint    := iShortcuts_App_SavePoint;
         cdRH_Send.SavePoint          := iRH_Send_SavePoint;
         cdRH_Control.SavePoint       := iRH_Control_SavePoint;
         cdRH_Custom.SavePoint        := iRH_Custom_SavePoint;
-        cdEditor_Keystrokes.SavePoint:= iEditor_Keystrokes_SavePoint;
-        cdApp_ShortcutsAfterScroll(nil);
+        cdKeystrokes_Editor.SavePoint:= iKeystrokes_Editor_SavePoint;
+        cdShortcuts_AppAfterScroll(nil);
       end;
     end;
 
@@ -15057,24 +15147,24 @@ begin
 
     // Clear all filters
     with frmTools do begin
-      edApp_Shortcuts_Filter.Text:= '';
-      edEditor_Keystrokes_Filter.Text:= '';
+      edShortcuts_App_Filter.Text:= '';
+      edKeystrokes_Editor_Filter.Text:= '';
       edRH_Send_Filter.Text:= '';
       edRH_Control_Filter.Text:= '';
       edRH_Custom_Filter.Text:= '';
     end;
 
     with modDados do begin
-      // App_Shortcuts
-      with cdApp_Shortcuts do begin
-        if BookmarkValid(pApp_Shortcut_Bookmark) then GoToBookmark(pApp_Shortcut_Bookmark);
-        FreeBookmark(pApp_Shortcut_Bookmark);
+      // Shortcuts_App
+      with cdShortcuts_App do begin
+        if BookmarkValid(pShortcuts_App_Bookmark) then GoToBookmark(pShortcuts_App_Bookmark);
+        FreeBookmark(pShortcuts_App_Bookmark);
       end;
 
-      // Editor_Keystrokes
-      with cdEditor_Keystrokes do begin
-        if BookmarkValid(pEditor_Keystrokes_Bookmark) then GoToBookmark(pEditor_Keystrokes_Bookmark);
-        FreeBookmark(pEditor_Keystrokes_Bookmark);
+      // Keystrokes_Editor
+      with cdKeystrokes_Editor do begin
+        if BookmarkValid(pKeystrokes_Editor_Bookmark) then GoToBookmark(pKeystrokes_Editor_Bookmark);
+        FreeBookmark(pKeystrokes_Editor_Bookmark);
       end;
 
       // RH_Send
@@ -19281,13 +19371,13 @@ begin
               end;
             end;
 
-            with cdApp_Shortcuts do begin
+            with cdShortcuts_App do begin
               Edit;
               try
                 Post;
                 MergeChangeLog;
                 SaveToFile();
-                iApp_Shortcuts_SavePoint:= SavePoint;
+                iShortcuts_App_SavePoint:= SavePoint;
               except
               end;
             end;
@@ -19510,7 +19600,7 @@ begin
                   sTmp) > 0) or
              (Pos('Completion.xml',
                   sTmp) > 0) or
-             (Pos('Editor_Keystrokes.xml',
+             (Pos('Keystrokes_Editor.xml',
                   sTmp) > 0) or
              (Pos('Rcard.xml',
                   sTmp) > 0) or
@@ -19522,7 +19612,7 @@ begin
                   sTmp) > 0) or
              (Pos('Rmirrors.xml',
                   sTmp) > 0) or
-             (Pos('App_Shortcuts.xml',
+             (Pos('Shortcuts_App.xml',
                   sTmp) > 0) then inc(j);
         end;
 
@@ -19541,13 +19631,13 @@ begin
           cdCache.Close;
           cdComments.Close;
           cdCompletion.Close;
-          cdEditor_Keystrokes.Close;
+          cdKeystrokes_Editor.Close;
           cdRcard.Close;
           cdRH_Send.Close;
           cdRH_Control.Close;
           cdRH_Custom.Close;
           cdRmirrors.Close;
-          cdApp_Shortcuts.Close;
+          cdShortcuts_App.Close;
         end;
         pDelete_Dir(sPath_Data);
         CreateDir(sPath_Data);
@@ -20057,6 +20147,8 @@ var
    seIO: TSynEdit;
 
 begin
+  seEditor:= nil;
+
   if (pgFiles.PageCount > 0) then
     with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
@@ -21273,12 +21365,12 @@ begin
   //
 end;
 
-procedure TfrmMain.actShortcuts_EditExecute(Sender: TObject);
+procedure TfrmMain.actShortcuts_App_EditExecute(Sender: TObject);
 begin
   actSKH_mapExecute(nil);
 end;
 
-procedure TfrmMain.actShortcuts_HelpExecute(Sender: TObject);
+procedure TfrmMain.actShortcuts_App_HelpExecute(Sender: TObject);
 begin
   pOpen_UserGuidePDF('"Shortcuts"');
 end;
@@ -21893,6 +21985,8 @@ var
    seIO: TSynEdit;
 
 begin
+  seEditor:= nil;
+
   if (pgFiles.PageCount > 0) then
     with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
       if (sActiveEditor = 'synEditor') then seEditor:= synEditor
@@ -22096,7 +22190,7 @@ end;
 
 procedure TfrmMain.actDataKeystrokesVisibleExecute(Sender: TObject);
 begin
-  with frmTools.tbsEditor_Keystrokes do begin
+  with frmTools.tbsKeystrokes_Editor do begin
     TabVisible:= not TabVisible;
     actDataKeystrokesVisible.Checked:= TabVisible;
   end;
@@ -26731,7 +26825,7 @@ end;
 
 procedure TfrmMain.actDataShortcutsVisibleExecute(Sender: TObject);
 begin
-  with frmTools.tbsApp_Shortcuts do begin
+  with frmTools.tbsShortcuts_App do begin
     TabVisible:= not TabVisible;
     actDataShortcutsVisible.Checked:= TabVisible;
   end;
@@ -26777,59 +26871,67 @@ begin
     with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do begin
       // synEditor1
       if sActiveEditor = 'synEditor' then
-        if synEditor.Focused then Result:= 1;
+        if synEditor.Focused                             then Result:= 1;
       // synEditor2
       if sActiveEditor = 'synEditor2' then
-        if synEditor2.Focused then Result:= 2;
+        if synEditor2.Focused                            then Result:= 2;
     end;
   // synIO
-  if frmR_Term.synIO.Focused                         then Result:= 3
+  if frmR_Term.synIO.Focused                             then Result:= 3
   // syLog and synLOG2
-  else if seLOG.Focused                              then Result:= 4
+  else if seLOG.Focused                                  then Result:= 4
   // jvdlbWinExplorer
-  else if (frmTools.jvdlbWinExplorer.Focused = True) then Result:= 5
+  else if (frmTools.jvdlbWinExplorer.Focused = True)     then Result:= 5
   // jvflbWinExplorer
-  else if (frmTools.jvflbWinExplorer.Focused = True) then Result:= 6
+  else if (frmTools.jvflbWinExplorer.Focused = True)     then Result:= 6
   // jvdlbWorkExplorer
-  else if frmTools.jvdlbWorkExplorer.Focused         then Result:= 7
+  else if frmTools.jvdlbWorkExplorer.Focused             then Result:= 7
   // jvflbWorkExplorer
-  else if frmTools.jvflbWorkExplorer.Focused         then Result:= 8
+  else if frmTools.jvflbWorkExplorer.Focused             then Result:= 8
   // tvProject
-  else if (frmTools.tvProject.Focused = True)        then Result:= 9
+  else if (frmTools.tvProject.Focused = True)            then Result:= 9
   // memIniLog
-  else if frmTools.memIniLog.Focused                 then Result:= 10
+  else if frmTools.memIniLog.Focused                     then Result:= 10
   // tvSearch
-  else if (frmTools.tvSearch.Focused = True)         then Result:= 11
+  else if (frmTools.tvSearch.Focused = True)             then Result:= 11
   // memSpell
-  else if frmTools.memSpell.Focused                  then Result:= 12
+  else if frmTools.memSpell.Focused                      then Result:= 12
   // lbRcard
-  else if frmTools.lbRcard.Focused                   then Result:= 13
+  else if frmTools.lbRcard.Focused                       then Result:= 13
   // dbgRcard
-  else if frmTools.dbgRcard.Focused                  then Result:= 14
+  else if frmTools.dbgRcard.Focused                      then Result:= 14
   // dbRcardMemo
-  else if frmTools.dbRcardMemo.Focused               then Result:= 15
+  else if frmTools.dbRcardMemo.Focused                   then Result:= 15
    // lbCountries
-  else if frmTools.lbCountries.Focused               then Result:= 16
+  else if frmTools.lbCountries.Focused                   then Result:= 16
    // dbgRmirrors
-  else if frmTools.dbgRmirrors.Focused               then Result:= 17
+  else if frmTools.dbgRmirrors.Focused                   then Result:= 17
    // dbeRmirrorsURL
-  else if frmTools.dbeRmirrorsURL.Focused            then Result:= 18
+  else if frmTools.dbeRmirrorsURL.Focused                then Result:= 18
   // lbCompletion
-  else if frmTools.lbCompletion.Focused              then Result:= 19
+  else if frmTools.lbCompletion.Focused                  then Result:= 19
   // dbgCompletion
-  else if frmTools.dbgCompletion.Focused             then Result:= 20
+  else if frmTools.dbgCompletion.Focused                 then Result:= 20
   // dbCompletionMemo
-  else if frmTools.dbCompletionMemo.Focused          then Result:= 21
+  else if frmTools.dbCompletionMemo.Focused              then Result:= 21
   // dbgComments
-  else if frmTools.dbgComments.Focused               then Result:= 22
+  else if frmTools.dbgComments.Focused                   then Result:= 22
   // lbShortcuts
-  else if frmTools.lbApp_Shortcuts.Focused           then Result:= 23
+  else if frmTools.lbShortcuts_App.Focused               then Result:= 23
   // dbgShortcuts
-  else if frmTools.dbgApp_Shortcuts.Focused          then Result:= 24
+  else if frmTools.dbgShortcuts_App.Focused              then Result:= 24
   // dbShortcutsMemo
-  else if frmTools.dbApp_ShortcutsMemo.Focused       then Result:= 25
+  else if frmTools.dbShortcuts_App_Memo.Focused          then Result:= 25
   // lvRexplorer
-  else if (frmTools.lvRexplorer.Focused = True)      then Result:= 26;
+  else if (frmTools.lvRexplorer.Focused = True)          then Result:= 26
+  // dbgKeystrokes_Editor
+  else if (frmTools.dbgKeystrokes_Editor.Focused = True) then Result:= 27
+  // dbgRH_Send
+  else if (frmTools.dbgRH_Send.Focused = True)           then Result:= 28
+  // dbgRH_Control
+  else if (frmTools.dbgRH_Control.Focused = True)        then Result:= 29
+  // dbgRH_Custom
+  else if (frmTools.dbgRH_Custom.Focused = True)         then Result:= 30;
 end;
 
 procedure TfrmMain.actFontIncreaseExecute(Sender: TObject);
@@ -26840,10 +26942,10 @@ var
 
 begin  // Font.Size < 50
   iFocus:= fGet_Focus;
-  
+
   if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
                                  else seLOG:= frmR_Term.synLOG;
-  
+
   case iFocus of
      // synEditor1
      1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
@@ -26880,56 +26982,68 @@ begin  // Font.Size < 50
      // tvProject
      9: with frmTools.tvProject do
           if (Font.Size < 20) then Font.Size:= Font.Size + 2;
-     // memIniLog
+    // memIniLog
     10: with frmTools.memIniLog do
           if (Font.Size < 50) then Font.Size:= Font.Size + 1;
-     // tvSearch
+    // tvSearch
     11: with frmTools.tvSearch do
           if (Font.Size < 20) then Font.Size:= Font.Size + 2;
-     // memSpell
+    // memSpell
     12: with frmTools.memSpell do
           if (Font.Size < 50) then Font.Size:= Font.Size + 1;
-     // lbRcard
+    // lbRcard
     13: with frmTools.lbRcard do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbgRcard
+    // dbgRcard
     14: with frmTools.dbgRcard do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbRcardMemo
+    // dbRcardMemo
     15: with frmTools.dbRcardMemo do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // lbCountries
+    // lbCountries
     16: with frmTools.lbCountries do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbgRmirrors
+    // dbgRmirrors
     17: with frmTools.dbgRmirrors do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbeRmirrorsURL
+    // dbeRmirrorsURL
     18: with frmTools.dbeRmirrorsURL do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // lbCompletion
+    // lbCompletion
     19: with frmTools.lbCompletion do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbgCompletion
+    // dbgCompletion
     20: with frmTools.dbgCompletion do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbCompletionMemo
+    // dbCompletionMemo
     21: with frmTools.dbCompletionMemo do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbgComments
+    // dbgComments
     22: with frmTools.dbgComments do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // lbShortcuts
-    23: with frmTools.lbApp_Shortcuts do
+    // lbShortcuts
+    23: with frmTools.lbShortcuts_App do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbgShortcuts
-    24: with frmTools.dbgApp_Shortcuts do
+    // dbgShortcuts
+    24: with frmTools.dbgShortcuts_App do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
-     // dbShortcutsMemo
-    25: with frmTools.dbApp_ShortcutsMemo do
+    // dbShortcutsMemo
+    25: with frmTools.dbShortcuts_App_Memo do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
     // lvRexplorer
     26: with frmTools.lvRexplorer do
+          if (Font.Size < 20) then Font.Size:= Font.Size + 1;
+    // dbgKeystrokes_Editor
+    27: with frmTools.dbgKeystrokes_Editor do
+          if (Font.Size < 20) then Font.Size:= Font.Size + 1;
+    // dbgRH_Send
+    28: with frmTools.dbgRH_Send do
+          if (Font.Size < 20) then Font.Size:= Font.Size + 1;
+    // dbgRH_Control
+    29: with frmTools.dbgRH_Control do
+          if (Font.Size < 20) then Font.Size:= Font.Size + 1;
+    // dbgRH_Custom
+    30: with frmTools.dbgRH_Custom do
           if (Font.Size < 20) then Font.Size:= Font.Size + 1;
   end;
 end;
@@ -26980,57 +27094,69 @@ begin  //Font.Size > 02
      // tvProject
      9: with frmTools.tvProject do
           if (Font.Size > 06) then Font.Size:= Font.Size - 2;
-     // memIniLog
+    // memIniLog
     10: with frmTools.memIniLog do
           if (Font.Size > 02) then Font.Size:= Font.Size - 1;
-     // tvSerach
+    // tvSerach
     11: with frmTools.tvSearch do
           if (Font.Size > 06) then Font.Size:= Font.Size - 2;
-     // memSpell
+    // memSpell
     12: with frmTools.memSpell do
           if (Font.Size > 02) then Font.Size:= Font.Size - 1;
-     // lbRcard
+    // lbRcard
     13: with frmTools.lbRcard do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbgRcard
+    // dbgRcard
     14: with frmTools.dbgRcard do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbRcardMemo
+    // dbRcardMemo
     15: with frmTools.dbRcardMemo do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // lbCountries
+    // lbCountries
     16: with frmTools.lbCountries do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbgRmirrors
+    // dbgRmirrors
     17: with frmTools.dbgRmirrors do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbeRmirrorsURL
+    // dbeRmirrorsURL
     18: with frmTools.dbeRmirrorsURL do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // lbCompletion
+    // lbCompletion
     19: with frmTools.lbCompletion do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbgCompletion
+    // dbgCompletion
     20: with frmTools.dbgCompletion do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbCompletionMemo
+    // dbCompletionMemo
     21: with frmTools.dbCompletionMemo do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbgComments
+    // dbgComments
     22: with frmTools.dbgComments do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // lbShortcuts
-    23: with frmTools.lbApp_Shortcuts do
+    // lbShortcuts
+    23: with frmTools.lbShortcuts_App do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbgShortcuts
-    24: with frmTools.dbgApp_Shortcuts do
+    // dbgShortcuts
+    24: with frmTools.dbgShortcuts_App do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
-     // dbShortcutsMemo
-    25: with frmTools.dbApp_ShortcutsMemo do
+    // dbShortcutsMemo
+    25: with frmTools.dbShortcuts_App_Memo do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
     // lvRexplorer
     26: with frmTools.lvRexplorer do
           if (Font.Size > 06) then Font.Size:= Font.Size - 1;
+    // dbgKeystrokes_Editor
+    27: with frmTools.dbgKeystrokes_Editor do
+          if (Font.Size < 20) then Font.Size:= Font.Size - 1;
+    // dbgRH_Send
+    28: with frmTools.dbgRH_Send do
+          if (Font.Size < 20) then Font.Size:= Font.Size - 1;
+    // dbgRH_Control
+    29: with frmTools.dbgRH_Control do
+          if (Font.Size < 20) then Font.Size:= Font.Size - 1;
+    // dbgRH_Custom
+    30: with frmTools.dbgRH_Custom do
+          if (Font.Size < 20) then Font.Size:= Font.Size - 1;
   end;
 end;
 

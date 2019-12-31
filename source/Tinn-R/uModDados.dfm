@@ -69,43 +69,43 @@ object modDados: TmodDados
     Left = 173
     Top = 67
   end
-  object cdApp_Shortcuts: TClientDataSet
+  object cdShortcuts_App: TClientDataSet
     Aggregates = <>
     FileName = 'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\App_Shortcuts.xml'
     Params = <>
-    BeforeEdit = cdApp_ShortcutsBeforeEdit
-    AfterPost = cdApp_ShortcutsAfterPost
-    AfterScroll = cdApp_ShortcutsAfterScroll
-    OnNewRecord = cdApp_ShortcutsNewRecord
-    OnPostError = cdApp_ShortcutsPostError
+    BeforeEdit = cdShortcuts_AppBeforeEdit
+    AfterPost = cdShortcuts_AppAfterPost
+    AfterScroll = cdShortcuts_AppAfterScroll
+    OnNewRecord = cdShortcuts_AppNewRecord
+    OnPostError = cdShortcuts_AppPostError
     Left = 59
     Top = 117
-    object cdApp_ShortcutsIndex: TIntegerField
+    object cdShortcuts_App_Index: TIntegerField
       FieldName = 'Index'
       Required = True
     end
-    object cdApp_ShortcutsGroup: TStringField
+    object cdShortcuts_App_Group: TStringField
       FieldName = 'Group'
       Size = 50
     end
-    object cdApp_ShortcutsCaption: TStringField
+    object cdShortcuts_App_Caption: TStringField
       FieldName = 'Caption'
       Size = 50
     end
-    object cdApp_ShortcutsHint: TStringField
+    object cdShortcuts_App_Hint: TStringField
       FieldName = 'Hint'
       Size = 80
     end
-    object cdApp_ShortcutsShortcut: TStringField
+    object cdShortcuts_App_Shortcut: TStringField
       Alignment = taRightJustify
       FieldName = 'Shortcut'
     end
-    object cdApp_ShortcutsImageIndex: TIntegerField
+    object cdShortcuts_App_ImageIndex: TIntegerField
       FieldName = 'Image'
     end
   end
-  object dsApp_Shortcuts: TDataSource
-    DataSet = cdApp_Shortcuts
+  object dsShortcuts_App: TDataSource
+    DataSet = cdShortcuts_App
     Left = 172
     Top = 115
   end
@@ -308,34 +308,34 @@ object modDados: TmodDados
     Left = 172
     Top = 422
   end
-  object cdEditor_Keystrokes: TClientDataSet
+  object cdKeystrokes_Editor: TClientDataSet
     Aggregates = <>
     FileName = 
       'C:\Users\jcfaria\Documents\GitHub\Tinn-R\data\Editor_Keystrokes.' +
       'xml'
     Params = <>
-    OnPostError = cdEditor_KeystrokesPostError
+    OnPostError = cdKeystrokes_EditorPostError
     Left = 59
     Top = 472
-    object cdEditor_Keystrokes_Index: TSmallintField
+    object cdKeystrokes_Editor_Index: TSmallintField
       FieldName = 'Index'
     end
-    object cdEditor_Keystrokes_Group: TStringField
+    object cdKeystrokes_Editor_Group: TStringField
       FieldName = 'Group'
     end
-    object cdEditor_Keystrokes_Command: TStringField
+    object cdKeystrokes_Editor_Command: TStringField
       FieldName = 'Command'
       Size = 50
     end
-    object cdEditor_Keystrokes_Key: TSmallintField
+    object cdKeystrokes_Editor_Key: TSmallintField
       FieldName = 'Key'
     end
-    object cdEditor_Keystrokes_Keystroke: TStringField
+    object cdKeystrokes_Editor_Keystroke: TStringField
       FieldName = 'Keystroke'
     end
   end
-  object dsEditor_Keystrokes: TDataSource
-    DataSet = cdEditor_Keystrokes
+  object dsKeystrokes_Editor: TDataSource
+    DataSet = cdKeystrokes_Editor
     Left = 172
     Top = 472
   end

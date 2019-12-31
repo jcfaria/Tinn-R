@@ -79,19 +79,19 @@ type
     cdRmirrorsHost: TStringField;
     cdRmirrorsName: TStringField;
     cdRmirrorsURL: TStringField;
-    cdApp_Shortcuts: TClientDataSet;
-    cdApp_ShortcutsCaption: TStringField;
-    cdApp_ShortcutsGroup: TStringField;
-    cdApp_ShortcutsHint: TStringField;
-    cdApp_ShortcutsImageIndex: TIntegerField;
-    cdApp_ShortcutsIndex: TIntegerField;
-    cdApp_ShortcutsShortcut: TStringField;
+    cdShortcuts_App: TClientDataSet;
+    cdShortcuts_App_Caption: TStringField;
+    cdShortcuts_App_Group: TStringField;
+    cdShortcuts_App_Hint: TStringField;
+    cdShortcuts_App_ImageIndex: TIntegerField;
+    cdShortcuts_App_Index: TIntegerField;
+    cdShortcuts_App_Shortcut: TStringField;
     dsCache: TDataSource;
     dsComments: TDataSource;
     dsCompletion: TDataSource;
     dsRcard: TDataSource;
     dsRmirrors: TDataSource;
-    dsApp_Shortcuts: TDataSource;
+    dsShortcuts_App: TDataSource;
     cdRH_Send: TClientDataSet;
     cdRH_Send_Index: TIntegerField;
     cdRH_Send_Group: TStringField;
@@ -107,13 +107,13 @@ type
     cdRH_Custom_Group: TStringField;
     cdRH_Custom_Caption: TStringField;
     dsRH_Custom: TDataSource;
-    cdEditor_Keystrokes: TClientDataSet;
-    dsEditor_Keystrokes: TDataSource;
-    cdEditor_Keystrokes_Index: TSmallintField;
-    cdEditor_Keystrokes_Group: TStringField;
-    cdEditor_Keystrokes_Command: TStringField;
-    cdEditor_Keystrokes_Key: TSmallintField;
-    cdEditor_Keystrokes_Keystroke: TStringField;
+    cdKeystrokes_Editor: TClientDataSet;
+    dsKeystrokes_Editor: TDataSource;
+    cdKeystrokes_Editor_Index: TSmallintField;
+    cdKeystrokes_Editor_Group: TStringField;
+    cdKeystrokes_Editor_Command: TStringField;
+    cdKeystrokes_Editor_Key: TSmallintField;
+    cdKeystrokes_Editor_Keystroke: TStringField;
     cdRH_Send_Hotkey: TStringField;
     cdRH_Control_Hotkey: TStringField;
     cdRH_Custom_Hotkey: TStringField;
@@ -136,16 +136,16 @@ type
     procedure cdRmirrorsBeforeEdit(DataSet: TDataSet);
     procedure cdRmirrorsPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdRtipPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
-    procedure cdApp_ShortcutsAfterPost(DataSet: TDataSet);
-    procedure cdApp_ShortcutsAfterScroll(DataSet: TDataSet);
-    procedure cdApp_ShortcutsBeforeEdit(DataSet: TDataSet);
-    procedure cdApp_ShortcutsNewRecord(DataSet: TDataSet);
-    procedure cdApp_ShortcutsPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
+    procedure cdShortcuts_AppAfterPost(DataSet: TDataSet);
+    procedure cdShortcuts_AppAfterScroll(DataSet: TDataSet);
+    procedure cdShortcuts_AppBeforeEdit(DataSet: TDataSet);
+    procedure cdShortcuts_AppNewRecord(DataSet: TDataSet);
+    procedure cdShortcuts_AppPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure cdRH_CustomNewRecord(DataSet: TDataSet);
     procedure cdRH_CustomPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
-    procedure cdEditor_KeystrokesPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
+    procedure cdKeystrokes_EditorPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 
   private
     { Private declarations }
@@ -155,7 +155,7 @@ type
     slCompletion_Groups   : TStringList;  //Stores groups of Completion
     slRcard_Groups        : TStringList;  //Stores groups of R card
     slRmirrors_Countries  : TStringList;  //Stores countries of R mirrors
-    slApp_Shortcuts_Groups: TStringList;  //Stores groups of Shortcuts
+    slShortcuts_App_Groups: TStringList;  //Stores groups of Shortcuts
 
     function fActionlist_To_Dataset: boolean;
     function fCheck_Hotkey_RH_Control(sShortcut: string; var sBy: string; bShortcut_Clear: boolean = False): boolean;
@@ -223,7 +223,7 @@ var
 begin
   Result:= False;
 
-  with cdApp_Shortcuts do begin
+  with cdShortcuts_App do begin
     pTmp:= GetBookmark;
     DisableControls;
     bFiltered:= Filtered;
@@ -429,7 +429,7 @@ var
 begin
   Result:= False;
 
-  with cdEditor_Keystrokes do begin
+  with cdKeystrokes_Editor do begin
     pTmp:= GetBookmark;
     DisableControls;
     bFiltered:= Filtered;
@@ -474,7 +474,7 @@ var
   bFiltered: boolean;
 
 begin
-  with cdEditor_Keystrokes do begin
+  with cdKeystrokes_Editor do begin
     pTmp:= GetBookmark;
     DisableControls;
     bFiltered:= Filtered;
@@ -701,15 +701,15 @@ var
   strTemp: string;
 
 begin
-  slApp_Shortcuts_Groups:= TStringList.Create;
-  slApp_Shortcuts_Groups.CaseSensitive:= True;
+  slShortcuts_App_Groups:= TStringList.Create;
+  slShortcuts_App_Groups.CaseSensitive:= True;
 
-  with cdApp_Shortcuts do begin
+  with cdShortcuts_App do begin
     DisableControls;
     First;
     for i:=1 to RecordCount do begin
-      strTemp:= cdApp_ShortcutsGroup.Value;
-      with slApp_Shortcuts_Groups do
+      strTemp:= cdShortcuts_App_Group.Value;
+      with slShortcuts_App_Groups do
         if (IndexOf(strTemp) = -1) then
           Add(strTemp);
       Next;
@@ -769,7 +769,7 @@ begin
   end;
 
   // Shortcuts
-  with cdApp_Shortcuts do begin
+  with cdShortcuts_App do begin
     Active   := False;
     FileName := frmMain.sShortcuts_InUse;
     Active   := True;
@@ -863,11 +863,11 @@ begin
     IndexName:= 'RH_Custom_Idx';
   end;
 
-  // Editor_Keystrokes
-  with cdEditor_Keystrokes do begin
+  // Keystrokes_Editor
+  with cdKeystrokes_Editor do begin
     Active   := False;
     FileName := frmMain.sPath_Data +
-                '\Editor_Keystrokes.xml';
+                '\Keystrokes_Editor.xml';
     Active   := True;
     IndexDefs.Clear;
     with IndexDefs.AddIndexDef do
@@ -884,21 +884,21 @@ begin
       cdRcard.SavePoint            := iRcard_SavePoint;
       cdRmirrors.SavePoint         := iRmirrors_SavePoint;
       cdCompletion.SavePoint       := iCompletion_SavePoint;
-      cdApp_Shortcuts.SavePoint    := iApp_Shortcuts_SavePoint;
+      cdShortcuts_App.SavePoint    := iShortcuts_App_SavePoint;
       cdRH_Send.SavePoint          := iRH_Send_SavePoint;
       cdRH_Control.SavePoint       := iRH_Control_SavePoint;
       cdRH_Custom.SavePoint        := iRH_Custom_SavePoint;
-      cdEditor_Keystrokes.SavePoint:= iEditor_Keystrokes_SavePoint;
+      cdKeystrokes_Editor.SavePoint:= iKeystrokes_Editor_SavePoint;
     end
     else begin
       iRcard_SavePoint            := cdRcard.SavePoint;
       iRmirrors_SavePoint         := cdRmirrors.SavePoint;
       iCompletion_SavePoint       := cdCompletion.SavePoint;
-      iApp_Shortcuts_SavePoint    := cdApp_Shortcuts.SavePoint;
+      iShortcuts_App_SavePoint    := cdShortcuts_App.SavePoint;
       iRH_Send_SavePoint          := cdRH_Send.SavePoint;
       iRH_Control_SavePoint       := cdRH_Control.SavePoint;
       iRH_Custom_SavePoint        := cdRH_Custom.SavePoint;
-      iEditor_Keystrokes_SavePoint:= cdEditor_Keystrokes.SavePoint;
+      iKeystrokes_Editor_SavePoint:= cdKeystrokes_Editor.SavePoint;
       bDatabase_Restored          := False
     end;
   end;
@@ -920,7 +920,7 @@ begin
   with cdCompletion do
     Close; //Will also save to file whether any change was made!
 
-  with cdApp_SHortcuts do
+  with cdShortcuts_App do
     Close; //Will also save to file whether any change was made!
 
   with cdCache do
@@ -938,7 +938,7 @@ begin
   with cdRH_Custom do
     Close; //Will also save to file whether any change was made!
 
-  with cdEditor_Keystrokes do
+  with cdKeystrokes_Editor do
     Close; //Will also save to file whether any change was made!
 
 end;
@@ -1045,7 +1045,7 @@ begin
   Action:= daAbort;
 end;
 
-procedure TmodDados.cdApp_ShortcutsPostError(DataSet: TDataSet;
+procedure TmodDados.cdShortcuts_AppPostError(DataSet: TDataSet;
                                              E: EDatabaseError;
                                              var Action: TDataAction);
 begin
@@ -1075,7 +1075,7 @@ begin
   Action:= daAbort;
 end;
 
-procedure TmodDados.cdEditor_KeystrokesPostError(DataSet: TDataSet;
+procedure TmodDados.cdKeystrokes_EditorPostError(DataSet: TDataSet;
                                                  E: EDatabaseError;
                                                  var Action: TDataAction);
 begin
@@ -1090,7 +1090,7 @@ begin
   Action:= daAbort;
 end;
 
-procedure TmodDados.cdApp_ShortcutsAfterPost(DataSet: TDataSet);
+procedure TmodDados.cdShortcuts_AppAfterPost(DataSet: TDataSet);
 begin
   if Assigned(frmMain.dlgSKH_Map) then
     with frmMain.dlgSKH_Map do begin
@@ -1098,12 +1098,12 @@ begin
     end;
 end;
 
-procedure TmodDados.cdApp_ShortcutsAfterScroll(DataSet: TDataSet);
+procedure TmodDados.cdShortcuts_AppAfterScroll(DataSet: TDataSet);
 begin
   if Assigned(frmMain.dlgSKH_Map) then
     with frmMain.dlgSKH_Map do begin
       imgShortcut.Picture.Bitmap:= nil;
-      frmMain.imlTinnR.GetBitmap(cdApp_Shortcuts.FieldByName('Image').Value,
+      frmMain.imlTinnR.GetBitmap(cdShortcuts_App.FieldByName('Image').Value,
                                  imgShortcut.Picture.Bitmap);
       if Visible then stbShortcuts.Panels[0].Text:= 'Browse mode';
     end;
@@ -1112,31 +1112,31 @@ begin
   if Assigned(dlgSKH_Map) then
     with dlgSKH_Map do begin
       imgShortcut.Picture.Bitmap:= nil;
-      imlTinnR.GetBitmap(cdApp_Shortcuts.FieldByName('Image').Value,
+      imlTinnR.GetBitmap(cdShortcuts_App.FieldByName('Image').Value,
                          imgShortcut.Picture.Bitmap);
       if Visible then stbShortcuts.Panels[0].Text:= 'Browse mode';
     end;
 
-  if (cdApp_Shortcuts.State <> dsBrowse) then Exit;
+  if (cdShortcuts_App.State <> dsBrowse) then Exit;
   frmTools.imgShortcut.Picture.Bitmap:= nil;
-  frmMain.imlTinnR.GetBitmap(cdApp_Shortcuts.FieldByName('Image').Value,
+  frmMain.imlTinnR.GetBitmap(cdShortcuts_App.FieldByName('Image').Value,
                              frmTools.imgShortcut.Picture.Bitmap);
 end;
 
-procedure TmodDados.cdApp_ShortcutsBeforeEdit(DataSet: TDataSet);
+procedure TmodDados.cdShortcuts_AppBeforeEdit(DataSet: TDataSet);
 begin
   if Assigned(frmMain.dlgSKH_Map) then
     with frmMain.dlgSKH_Map.stbShortcuts do
       Panels[0].Text:= 'Edit mode';
 end;
 
-procedure TmodDados.cdApp_ShortcutsNewRecord(DataSet: TDataSet);
+procedure TmodDados.cdShortcuts_AppNewRecord(DataSet: TDataSet);
 var
   i: integer;
 
 begin
-  i:= cdApp_Shortcuts.RecordCount;
-  cdApp_ShortcutsIndex.AsInteger:= i;
+  i:= cdShortcuts_App.RecordCount;
+  cdShortcuts_App_Index.AsInteger:= i;
 end;
 
 procedure TmodDados.cdCommentsAfterPost(DataSet: TDataSet);
@@ -1283,7 +1283,7 @@ function TmodDados.fActionlist_To_Dataset: boolean;
       end;
 
       FileName:= frmMain.sPath_Data +
-                 '\App_Shortcuts.xml';
+                 '\Shortcuts_App.xml';
       CreateDataSet;
     end;
   end;

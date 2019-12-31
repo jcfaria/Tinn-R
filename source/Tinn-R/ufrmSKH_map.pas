@@ -84,23 +84,23 @@ type
     Label16: TLabel;
     Label14: TLabel;
     Label17: TLabel;
-    btnEditor_Keystrokes_Clear: TButton;
-    bbtEditor_Keystrokes_RestoreDefault: TBitBtn;
+    btnKeystrokes_Editor_Clear: TButton;
+    bbtKeystrokes_Editor_RestoreDefault: TBitBtn;
     bbtHotkeys_RestoreDefault: TBitBtn;
     GroupBox4: TGroupBox;
     Label18: TLabel;
     Label19: TLabel;
     Label21: TLabel;
     Label22: TLabel;
-    dbeEditor_Keystrokes_Command: TDBEdit;
-    edEditor_Keystrokes_Search: TEdit;
-    dbeEditor_Keystrokes_Group: TDBEdit;
-    edEditor_Keystrokes_Filter: TEdit;
+    dbeKeystrokes_Editor_Command: TDBEdit;
+    edKeystrokes_Editor_Search: TEdit;
+    dbeKeystrokes_Editor_Group: TDBEdit;
+    edKeystrokes_Editor_Filter: TEdit;
     JvDBNavigator5: TJvDBNavigator;
-    dbgEditor_Keystrokes: TDBGrid;
+    dbgKeystrokes_Editor: TDBGrid;
 
     procedure bbtHotkeys_RestoreDefaultClick(Sender: TObject);
-    procedure bbtEditor_Keystrokes_RestoreDefaultClick(Sender: TObject);
+    procedure bbtKeystrokes_Editor_RestoreDefaultClick(Sender: TObject);
     procedure bbtShortcut_HelpClick(Sender: TObject);
     procedure bbtShortcuts_CancelAllClick(Sender: TObject);
     procedure bbtShortcuts_CancelClick(Sender: TObject);
@@ -111,12 +111,12 @@ type
     procedure bbtShortcuts_SaveClick(Sender: TObject);
     procedure bbtShortcuts_SaveDefaultClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
-    procedure btnEditor_Keystrokes_ClearClick(Sender: TObject);
+    procedure btnKeystrokes_Editor_ClearClick(Sender: TObject);
     procedure btnNew_RH_CustomClick(Sender: TObject);
     procedure btnRH_ClearClick(Sender: TObject);
-    procedure dbgEditor_KeystrokesDblClick(Sender: TObject);
-    procedure dbgEditor_KeystrokesEnter(Sender: TObject);
-    procedure dbgEditor_KeystrokesTitleClick(Column: TColumn);
+    procedure dbgKeystrokes_EditorDblClick(Sender: TObject);
+    procedure dbgKeystrokes_EditorEnter(Sender: TObject);
+    procedure dbgKeystrokes_EditorTitleClick(Column: TColumn);
     procedure dbgRH_ControlDblClick(Sender: TObject);
     procedure dbgRH_ControlTitleClick(Column: TColumn);
     procedure dbgRH_CustomDblClick(Sender: TObject);
@@ -135,8 +135,8 @@ type
     procedure edApp_Search_CaptionEnter(Sender: TObject);
     procedure edApp_Search_GroupChange(Sender: TObject);
     procedure edApp_Search_GroupEnter(Sender: TObject);
-    procedure edEditor_Keystrokes_FilterChange(Sender: TObject);
-    procedure edEditor_Keystrokes_SearchChange(Sender: TObject);
+    procedure edKeystrokes_Editor_FilterChange(Sender: TObject);
+    procedure edKeystrokes_Editor_SearchChange(Sender: TObject);
     procedure edRH_Control_Filter_CaptionChange(Sender: TObject);
     procedure edRH_Control_Search_CaptionChange(Sender: TObject);
     procedure edRH_Custom_Filter_CaptionChange(Sender: TObject);
@@ -493,7 +493,7 @@ begin
       // App
       0: pOpen_UserGuidePDF('"Shortcuts (Application)"');
 
-      // Editor_Keystrokes
+      // Keystrokes_Editor
       1: pOpen_UserGuidePDF('"Keystrokes (Editor)"');
 
       // R_Hotkeys
@@ -502,31 +502,31 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.bbtEditor_Keystrokes_RestoreDefaultClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.bbtKeystrokes_Editor_RestoreDefaultClick(Sender: TObject);
 begin
   pClear_Warnings;
   if not FileExists(frmMain.sFile_Data_Origin) then Exit;
 
   try
-    with modDados.cdEditor_Keystrokes do
+    with modDados.cdKeystrokes_Editor do
       Active:= False;
 
     with frmMain.zipKit do begin
       FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
-      ExtractFiles('Editor_Keystrokes.xml');
+      ExtractFiles('Keystrokes_Editor.xml');
       CloseArchive;
     end;
 
-    with modDados.cdEditor_Keystrokes do begin
-      FileName:= frmMain.sPath_Data + '\Editor_Keystrokes.xml';
+    with modDados.cdKeystrokes_Editor do begin
+      FileName:= frmMain.sPath_Data + '\Keystrokes_Editor.xml';
       Active  := True;
     end;
 
     with frmMain do
-      iEditor_Keystrokes_SavePoint:= modDados.cdEditor_Keystrokes.SavePoint;
+      iKeystrokes_Editor_SavePoint:= modDados.cdKeystrokes_Editor.SavePoint;
 
-    MessageDlg('The original ''Editor_Keystrokes.xml'' was successfully restored!',
+    MessageDlg('The original ''Keystrokes_Editor.xml'' was successfully restored!',
                mtInformation,
                [MBOK],
                0);
@@ -540,8 +540,8 @@ begin
   pClear_Warnings;
 
   with modDados do begin
-    cdApp_Shortcuts.SavePoint:= frmMain.iApp_Shortcuts_SavePoint;
-    cdApp_ShortcutsAfterScroll(nil);
+    cdShortcuts_App.SavePoint:= frmMain.iShortcuts_App_SavePoint;
+    cdShortcuts_AppAfterScroll(nil);
   end;
 end;
 
@@ -550,8 +550,8 @@ begin
   pClear_Warnings;
 
   with modDados do begin
-    cdApp_Shortcuts.Cancel;
-    cdApp_ShortcutsAfterScroll(nil);
+    cdShortcuts_App.Cancel;
+    cdShortcuts_AppAfterScroll(nil);
   end;
   with stbShortcuts do
     Panels[0].Text:= 'Browse mode';
@@ -564,15 +564,15 @@ begin
   case iSKH_Assign_To of
     // Application
     1: with modDados do
-         with cdApp_Shortcuts do begin
+         with cdShortcuts_App do begin
            Edit;
            FieldByName('Shortcut').Value:= sSHK;
            Post;
          end;
 
-    // Editor_Keystrokes
+    // Keystrokes_Editor
     2: with modDados do
-         with cdEditor_Keystrokes do begin
+         with cdKeystrokes_Editor do begin
            Edit;
            FieldByName('Keystroke').Value:= sSHK;
            Post;
@@ -719,7 +719,7 @@ end;
 procedure TfrmSKH_Map_Dlg.bbtShortcuts_EditClick(Sender: TObject);
 begin
   pClear_Warnings;
-  with modDados.cdApp_Shortcuts do
+  with modDados.cdShortcuts_App do
     Edit;
   dbeApp_Group.SetFocus;
   with stbShortcuts do
@@ -747,7 +747,7 @@ begin
         sFile:= od.FileName;
 
         try
-          with modDados.cdApp_Shortcuts do begin
+          with modDados.cdShortcuts_App do begin
             sOldFile:= FileName;
             Active  := False;
             FileName:= sFile;
@@ -760,7 +760,7 @@ begin
                        mtError,
                        [MBOK],
                        0);
-            with modDados.cdApp_Shortcuts do begin
+            with modDados.cdShortcuts_App do begin
               Active  := False;
               FileName:= sOldFile;
               Active  := True;
@@ -770,7 +770,7 @@ begin
         end; 
 
         with frmMain do begin
-          iApp_Shortcuts_SavePoint:= modDados.cdApp_Shortcuts.SavePoint;
+          iShortcuts_App_SavePoint:= modDados.cdShortcuts_App.SavePoint;
           sShortcuts_InUse        := sFile;
         end;
 
@@ -797,30 +797,30 @@ begin
   if not FileExists(frmMain.sFile_Data_Origin) then Exit;
 
   try
-    with modDados.cdApp_Shortcuts do
+    with modDados.cdShortcuts_App do
       Active:= False;
 
     with frmMain.zipKit do begin
       FileName     := frmMain.sFile_Data_Origin;
       BaseDirectory:= frmMain.sPath_Data;
-      ExtractFiles('App_Shortcuts.xml');
+      ExtractFiles('Shortcuts_App.xml');
       CloseArchive;
     end;
 
-    with modDados.cdApp_Shortcuts do begin
-      FileName:= frmMain.sPath_Data + '\App_Shortcuts.xml';
+    with modDados.cdShortcuts_App do begin
+      FileName:= frmMain.sPath_Data + '\Shortcuts_App.xml';
       Active  := True;
     end;
 
     with frmMain do begin
-      iApp_Shortcuts_SavePoint:= modDados.cdApp_Shortcuts.SavePoint;
-      sShortcuts_InUse        := frmMain.sPath_Data + '\App_Shortcuts.xml';
+      iShortcuts_App_SavePoint:= modDados.cdShortcuts_App.SavePoint;
+      sShortcuts_InUse        := frmMain.sPath_Data + '\Shortcuts_App.xml';
     end;
 
     with stbShortcuts do
       Panels[2].Text:= ExtractFileName(frmMain.sShortcuts_InUse);
 
-    MessageDlg('The original ''App_Shortcuts.xml'' was successfully restored.' + #13 + #13 +
+    MessageDlg('The original ''Shortcuts_App.xml'' was successfully restored.' + #13 + #13 +
                'It will be, from now, the default shortcuts!',
                mtInformation,
                [MBOK],
@@ -834,14 +834,14 @@ procedure TfrmSKH_Map_Dlg.bbtShortcuts_SaveClick(Sender: TObject);
 begin
   pClear_Warnings;
 
-  with modDados.cdApp_Shortcuts do begin
+  with modDados.cdShortcuts_App do begin
     Edit;
     try
       Post;
       MergeChangeLog;
       SaveToFile();
       with frmMain do
-        iApp_Shortcuts_SavePoint:= SavePoint;
+        iShortcuts_App_SavePoint:= SavePoint;
     except
     end;
   end;
@@ -873,7 +873,7 @@ begin
                          0) <> idYES) then Exit;
           DeleteFile(sFile);
 
-        with modDados.cdApp_Shortcuts do begin
+        with modDados.cdShortcuts_App do begin
           Edit;
           Post;
           MergeChangeLog;
@@ -904,12 +904,12 @@ begin
   frmMain.pOpen_UserGuidePDF('"3.5 Hotkeys (operational system)"');
 end;
 
-procedure TfrmSKH_Map_Dlg.btnEditor_Keystrokes_ClearClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.btnKeystrokes_Editor_ClearClick(Sender: TObject);
 begin
   pClear_Warnings;
 
-  // Editor_Keystrokes
-  with modDados.cdEditor_Keystrokes do begin
+  // Keystrokes_Editor
+  with modDados.cdKeystrokes_Editor do begin
     Edit;
     FieldByName('Keystroke').Value:= '';
     Post;
@@ -1008,22 +1008,22 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.dbgEditor_KeystrokesDblClick(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.dbgKeystrokes_EditorDblClick(Sender: TObject);
 begin
   bbtShortcuts_ManagerClick(nil);
 end;
 
-procedure TfrmSKH_Map_Dlg.dbgEditor_KeystrokesEnter(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.dbgKeystrokes_EditorEnter(Sender: TObject);
 begin
   pClear_Warnings;
 end;
 
-procedure TfrmSKH_Map_Dlg.dbgEditor_KeystrokesTitleClick(Column: TColumn);
+procedure TfrmSKH_Map_Dlg.dbgKeystrokes_EditorTitleClick(Column: TColumn);
 begin
   pClear_Warnings;
 
   with modDados do begin
-    cdEditor_Keystrokes.IndexFieldNames:= Column.FieldName;
+    cdKeystrokes_Editor.IndexFieldNames:= Column.FieldName;
   end;
 end;
 
@@ -1047,15 +1047,15 @@ begin
   pClear_Warnings;
 
   with modDados do begin
-    cdApp_Shortcuts.IndexFieldNames:= Column.FieldName;
-    cdApp_ShortcutsAfterScroll(nil);
+    cdShortcuts_App.IndexFieldNames:= Column.FieldName;
+    cdShortcuts_AppAfterScroll(nil);
   end;
 end;
 
 procedure TfrmSKH_Map_Dlg.edApp_Filter_CaptionChange(Sender: TObject);
 begin
   try
-    with modDados.cdApp_Shortcuts do begin
+    with modDados.cdShortcuts_App do begin
       Filtered:= False;
       Filter:= 'UPPER(Group) Like ' +
                UpperCase(QuotedStr('%' + edApp_Filter_Group.Text + '%')) +
@@ -1072,7 +1072,7 @@ end;
 procedure TfrmSKH_Map_Dlg.edApp_Filter_GroupChange(Sender: TObject);
 begin
   try
-    with modDados.cdApp_Shortcuts do begin
+    with modDados.cdShortcuts_App do begin
       Filtered:= False;
       Filter:= 'UPPER(Group) Like ' +
                UpperCase(QuotedStr('%' + edApp_Filter_Group.Text + '%')) +
@@ -1230,7 +1230,7 @@ begin
       Exit;
     end;
 
-    if (modDados.cdApp_Shortcuts.Locate('Caption',
+    if (modDados.cdShortcuts_App.Locate('Caption',
                                         Text,
                                         [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
@@ -1262,7 +1262,7 @@ begin
       Exit;
     end;
 
-    if (modDados.cdApp_Shortcuts.Locate('Group',
+    if (modDados.cdShortcuts_App.Locate('Group',
                                         Text,
                                         [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
@@ -1282,13 +1282,13 @@ begin
   pClear_Warnings;
 end;
 
-procedure TfrmSKH_Map_Dlg.edEditor_Keystrokes_FilterChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edKeystrokes_Editor_FilterChange(Sender: TObject);
 begin
   try
-    with modDados.cdEditor_Keystrokes do begin
+    with modDados.cdKeystrokes_Editor do begin
       Filtered:= False;
       Filter:= 'UPPER(Command) Like ' +
-               UpperCase(QuotedStr('%' + edEditor_Keystrokes_Filter.Text + '%'));
+               UpperCase(QuotedStr('%' + edKeystrokes_Editor_Filter.Text + '%'));
       Filtered:= True;
     end;
   except
@@ -1296,11 +1296,11 @@ begin
   end;
 end;
 
-procedure TfrmSKH_Map_Dlg.edEditor_Keystrokes_SearchChange(Sender: TObject);
+procedure TfrmSKH_Map_Dlg.edKeystrokes_Editor_SearchChange(Sender: TObject);
 begin
   pClear_Warnings;
 
-  with edEditor_Keystrokes_Search do begin
+  with edKeystrokes_Editor_Search do begin
     if (Text = '') then begin
       Color     := clWindow;
       Font.Color:= clBlack;
@@ -1308,7 +1308,7 @@ begin
       Exit;
     end;
 
-    if (modDados.cdEditor_Keystrokes.Locate('Command',
+    if (modDados.cdKeystrokes_Editor.Locate('Command',
                                             Text,
                                             [loCaseInsensitive, loPartialKey]) = True) then begin
       Color     := clWindow;
@@ -1379,13 +1379,13 @@ begin
 
   // The below set the active records to bookmarks
   with modDados do begin
-    // App_Shortcuts
+    // Shortcuts_App
     with frmMain do
-      cdApp_Shortcuts.Bookmark:= sApp_Shortcuts_BookMark;
+      cdShortcuts_App.Bookmark:= sShortcuts_App_BookMark;
 
-    // Editor_Keystrokes
+    // Keystrokes_Editor
     with frmMain do
-      cdEditor_Keystrokes.Bookmark:= sEditor_Keystrokes_BookMark;
+      cdKeystrokes_Editor.Bookmark:= sKeystrokes_Editor_BookMark;
 
     // RH_Send
     with frmMain do
@@ -1404,8 +1404,8 @@ end;
 procedure TfrmSKH_Map_Dlg.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   with frmMain do begin
-    frmTools.lbApp_Shortcuts.ItemIndex:= iApp_ShortcutsFilter;
-    frmTools.lbApp_ShortcutsClick(Self);
+    frmTools.lbShortcuts_App.ItemIndex:= iShortcuts_App_Filter;
+    frmTools.lbShortcuts_AppClick(Self);
   end;
 end;
 

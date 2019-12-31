@@ -4209,7 +4209,7 @@ object frmTools: TfrmTools
         TabSelectedStyle.Gradient.Active = False
         TabSelectedStyle.Gradient.Orientation = fgdHorizontal
         Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
-        object tbsApp_Shortcuts: TTabSheet
+        object tbsShortcuts_App: TTabSheet
           Caption = 'Shortcuts (app)'
           ImageIndex = 3
           object splShortcuts: TSplitter
@@ -4253,8 +4253,7 @@ object frmTools: TfrmTools
                 Images = frmMain.imlTinnR
                 TabOrder = 0
                 object tbiHelp_Shortcut: TTBItem
-                  Action = frmMain.actShortcuts_Help
-                  Hint = 'Shortcuts (app): help'
+                  Action = frmMain.actShortcuts_App_Help
                 end
                 object TBSeparatorItem6: TTBSeparatorItem
                 end
@@ -4265,7 +4264,7 @@ object frmTools: TfrmTools
                   OnClick = tbiAppShortcuts_EditClick
                 end
               end
-              object edApp_Shortcuts_Filter: TEdit
+              object edShortcuts_App_Filter: TEdit
                 Left = 66
                 Top = 4
                 Width = 121
@@ -4279,12 +4278,12 @@ object frmTools: TfrmTools
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 1
-                OnChange = edApp_Shortcuts_FilterChange
-                OnClick = edApp_Shortcuts_FilterClick
+                OnChange = edShortcuts_App_FilterChange
+                OnClick = edShortcuts_App_FilterClick
               end
             end
           end
-          object panApp_Shortcuts: TPanel
+          object panShortcuts_App: TPanel
             Left = 0
             Top = 26
             Width = 467
@@ -4295,7 +4294,7 @@ object frmTools: TfrmTools
             Constraints.MinHeight = 15
             ParentBackground = False
             TabOrder = 1
-            object lbApp_Shortcuts: TListBox
+            object lbShortcuts_App: TListBox
               Left = 0
               Top = 0
               Width = 467
@@ -4311,7 +4310,7 @@ object frmTools: TfrmTools
               PopupMenu = frmMain.pmenFontGeneric
               Sorted = True
               TabOrder = 0
-              OnClick = lbApp_ShortcutsClick
+              OnClick = lbShortcuts_AppClick
             end
           end
           object Panel11: TPanel
@@ -4324,7 +4323,7 @@ object frmTools: TfrmTools
             Color = 16250871
             ParentBackground = False
             TabOrder = 2
-            object dbApp_ShortcutsMemo: TDBMemo
+            object dbShortcuts_App_Memo: TDBMemo
               Left = 0
               Top = 360
               Width = 467
@@ -4336,7 +4335,7 @@ object frmTools: TfrmTools
               Constraints.MaxHeight = 120
               Ctl3D = False
               DataField = 'Hint'
-              DataSource = modDados.dsApp_Shortcuts
+              DataSource = modDados.dsShortcuts_App
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -11
@@ -4351,7 +4350,7 @@ object frmTools: TfrmTools
               TabOrder = 0
               WantReturns = False
             end
-            object dbgApp_Shortcuts: TDBGrid
+            object dbgShortcuts_App: TDBGrid
               Left = 0
               Top = 18
               Width = 467
@@ -4359,7 +4358,7 @@ object frmTools: TfrmTools
               Align = alClient
               BorderStyle = bsNone
               Ctl3D = False
-              DataSource = modDados.dsApp_Shortcuts
+              DataSource = modDados.dsShortcuts_App
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -4368,14 +4367,14 @@ object frmTools: TfrmTools
               Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentCtl3D = False
               ParentFont = False
-              PopupMenu = frmMain.pmenShortcuts
+              PopupMenu = frmMain.pmenShortcuts_App
               TabOrder = 1
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = [fsBold]
-              OnDblClick = dbgApp_ShortcutsDblClick
+              OnDblClick = dbgShortcuts_AppDblClick
               Columns = <
                 item
                   Expanded = False
@@ -4416,7 +4415,7 @@ object frmTools: TfrmTools
                 Top = 0
                 Width = 449
                 Height = 18
-                DataSource = modDados.dsApp_Shortcuts
+                DataSource = modDados.dsShortcuts_App
                 VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
                 Align = alClient
                 Flat = True
@@ -4427,7 +4426,7 @@ object frmTools: TfrmTools
             end
           end
         end
-        object tbsEditor_Keystrokes: TTabSheet
+        object tbsKeystrokes_Editor: TTabSheet
           Caption = 'Keystrokes (editor)'
           ImageIndex = 3
           object JvDBNavigator6: TJvDBNavigator
@@ -4435,7 +4434,7 @@ object frmTools: TfrmTools
             Top = 26
             Width = 467
             Height = 23
-            DataSource = modDados.dsEditor_Keystrokes
+            DataSource = modDados.dsKeystrokes_Editor
             VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
             Align = alTop
             Flat = True
@@ -4443,14 +4442,14 @@ object frmTools: TfrmTools
             ParentCtl3D = False
             TabOrder = 0
           end
-          object dbgEditor_Keystrokes: TDBGrid
+          object dbgKeystrokes_Editor: TDBGrid
             Left = 0
             Top = 49
             Width = 467
             Height = 460
             Align = alClient
             BorderStyle = bsNone
-            DataSource = modDados.dsEditor_Keystrokes
+            DataSource = modDados.dsKeystrokes_Editor
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -4458,13 +4457,14 @@ object frmTools: TfrmTools
             Font.Style = []
             Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
+            PopupMenu = frmMain.pmenKeystrokes_Editor
             TabOrder = 1
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = [fsBold]
-            OnDblClick = dbgEditor_KeystrokesDblClick
+            OnDblClick = dbgKeystrokes_EditorDblClick
             Columns = <
               item
                 Expanded = False
@@ -4523,7 +4523,7 @@ object frmTools: TfrmTools
                   OnClick = tbiEditorKeystrokes_EditClick
                 end
               end
-              object edEditor_Keystrokes_Filter: TEdit
+              object edKeystrokes_Editor_Filter: TEdit
                 Left = 68
                 Top = 4
                 Width = 121
@@ -4537,8 +4537,8 @@ object frmTools: TfrmTools
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 1
-                OnChange = edEditor_Keystrokes_FilterChange
-                OnClick = edEditor_Keystrokes_FilterClick
+                OnChange = edKeystrokes_Editor_FilterChange
+                OnClick = edKeystrokes_Editor_FilterClick
               end
             end
           end
@@ -4682,6 +4682,7 @@ object frmTools: TfrmTools
                 Font.Style = []
                 Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
                 ParentFont = False
+                PopupMenu = frmMain.pmenHotkeys_R_Send
                 TabOrder = 2
                 TitleFont.Charset = DEFAULT_CHARSET
                 TitleFont.Color = clWindowText
@@ -4798,6 +4799,7 @@ object frmTools: TfrmTools
                 Font.Style = []
                 Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
                 ParentFont = False
+                PopupMenu = frmMain.pmenHotkeys_R_Control
                 TabOrder = 2
                 TitleFont.Charset = DEFAULT_CHARSET
                 TitleFont.Color = clWindowText
@@ -4914,6 +4916,7 @@ object frmTools: TfrmTools
                 Font.Style = []
                 Options = [dgTitles, dgIndicator, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
                 ParentFont = False
+                PopupMenu = frmMain.pmenHotkeys_R_Custom
                 TabOrder = 2
                 TitleFont.Charset = DEFAULT_CHARSET
                 TitleFont.Color = clWindowText
@@ -6233,6 +6236,7 @@ object frmTools: TfrmTools
                 item
                   Expanded = False
                   FieldName = 'City'
+                  Width = 64
                   Visible = True
                 end>
             end
@@ -6335,7 +6339,7 @@ object frmTools: TfrmTools
   object JvDockClientTools: TJvDockClient
     DirectDrag = False
     DockStyle = frmMain.JvDockVSNetStyle
-    Left = 357
+    Left = 453
     Top = 3
   end
 end

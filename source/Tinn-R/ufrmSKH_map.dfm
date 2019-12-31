@@ -98,7 +98,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     Top = 0
     Width = 623
     Height = 502
-    ActivePage = tbsAppShortcuts
+    ActivePage = tbsEditorKeystrokes
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -153,7 +153,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Top = 0
           Width = 615
           Height = 23
-          DataSource = modDados.dsApp_Shortcuts
+          DataSource = modDados.dsShortcuts_App
           VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
           Align = alClient
           Flat = True
@@ -247,7 +247,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           BevelOuter = bvNone
           BorderStyle = bsNone
           DataField = 'Caption'
-          DataSource = modDados.dsApp_Shortcuts
+          DataSource = modDados.dsShortcuts_App
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -284,7 +284,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           BorderStyle = bsNone
           Ctl3D = False
           DataField = 'Group'
-          DataSource = modDados.dsApp_Shortcuts
+          DataSource = modDados.dsShortcuts_App
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -304,7 +304,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           BevelOuter = bvNone
           BorderStyle = bsNone
           DataField = 'Hint'
-          DataSource = modDados.dsApp_Shortcuts
+          DataSource = modDados.dsShortcuts_App
           TabOrder = 6
         end
         object edApp_Search_Group: TEdit
@@ -412,7 +412,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Height = 290
         Align = alTop
         BorderStyle = bsNone
-        DataSource = modDados.dsApp_Shortcuts
+        DataSource = modDados.dsShortcuts_App
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -473,10 +473,6 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
     object tbsEditorKeystrokes: TTabSheet
       Caption = 'Keystrokes (editor)'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label20: TLabel
         Left = 0
         Top = 436
@@ -493,23 +489,23 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Caption = '** Some may be overlaid by the main program!'
         Enabled = False
       end
-      object btnEditor_Keystrokes_Clear: TButton
+      object btnKeystrokes_Editor_Clear: TButton
         Left = 524
         Top = 440
         Width = 90
         Height = 25
         Caption = 'Clear (K)'
         TabOrder = 0
-        OnClick = btnEditor_Keystrokes_ClearClick
+        OnClick = btnKeystrokes_Editor_ClearClick
       end
-      object bbtEditor_Keystrokes_RestoreDefault: TBitBtn
+      object bbtKeystrokes_Editor_RestoreDefault: TBitBtn
         Left = 414
         Top = 440
         Width = 110
         Height = 25
         Caption = 'Restore default (K)'
         TabOrder = 1
-        OnClick = bbtEditor_Keystrokes_RestoreDefaultClick
+        OnClick = bbtKeystrokes_Editor_RestoreDefaultClick
       end
       object GroupBox4: TGroupBox
         Left = 0
@@ -571,7 +567,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ParentColor = False
           ParentFont = False
         end
-        object dbeEditor_Keystrokes_Command: TDBEdit
+        object dbeKeystrokes_Editor_Command: TDBEdit
           Left = 295
           Top = 58
           Width = 304
@@ -580,7 +576,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           BevelOuter = bvNone
           BorderStyle = bsNone
           DataField = 'Command'
-          DataSource = modDados.dsEditor_Keystrokes
+          DataSource = modDados.dsKeystrokes_Editor
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -590,7 +586,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ReadOnly = True
           TabOrder = 3
         end
-        object edEditor_Keystrokes_Search: TEdit
+        object edKeystrokes_Editor_Search: TEdit
           Left = 295
           Top = 40
           Width = 304
@@ -605,10 +601,10 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 1
-          OnChange = edEditor_Keystrokes_SearchChange
+          OnChange = edKeystrokes_Editor_SearchChange
           OnEnter = edApp_Search_CaptionEnter
         end
-        object dbeEditor_Keystrokes_Group: TDBEdit
+        object dbeKeystrokes_Editor_Group: TDBEdit
           Left = 52
           Top = 58
           Width = 170
@@ -618,7 +614,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           BorderStyle = bsNone
           Ctl3D = False
           DataField = 'Group'
-          DataSource = modDados.dsEditor_Keystrokes
+          DataSource = modDados.dsKeystrokes_Editor
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -629,7 +625,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           ReadOnly = True
           TabOrder = 2
         end
-        object edEditor_Keystrokes_Filter: TEdit
+        object edKeystrokes_Editor_Filter: TEdit
           Left = 295
           Top = 22
           Width = 304
@@ -644,7 +640,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          OnChange = edEditor_Keystrokes_FilterChange
+          OnChange = edKeystrokes_Editor_FilterChange
         end
       end
       object JvDBNavigator5: TJvDBNavigator
@@ -652,7 +648,7 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         Top = 83
         Width = 615
         Height = 23
-        DataSource = modDados.dsEditor_Keystrokes
+        DataSource = modDados.dsKeystrokes_Editor
         VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
         Align = alTop
         Flat = True
@@ -660,14 +656,14 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         ParentCtl3D = False
         TabOrder = 3
       end
-      object dbgEditor_Keystrokes: TDBGrid
+      object dbgKeystrokes_Editor: TDBGrid
         Left = 0
         Top = 106
         Width = 615
         Height = 322
         Align = alTop
         BorderStyle = bsNone
-        DataSource = modDados.dsEditor_Keystrokes
+        DataSource = modDados.dsKeystrokes_Editor
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -681,9 +677,9 @@ object frmSKH_Map_Dlg: TfrmSKH_Map_Dlg
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = [fsBold]
-        OnDblClick = dbgEditor_KeystrokesDblClick
-        OnEnter = dbgEditor_KeystrokesEnter
-        OnTitleClick = dbgEditor_KeystrokesTitleClick
+        OnDblClick = dbgKeystrokes_EditorDblClick
+        OnEnter = dbgKeystrokes_EditorEnter
+        OnTitleClick = dbgKeystrokes_EditorTitleClick
         Columns = <
           item
             Expanded = False
