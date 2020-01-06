@@ -104,7 +104,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
       Top = 1
       Width = 341
       Height = 487
-      ActivePage = tbsEditor_Encoding
+      ActivePage = tbsR_Resources
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1887,7 +1887,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           Left = 0
           Top = 0
           Width = 333
-          Height = 158
+          Height = 139
           Align = alTop
           Caption = ' Send (resources visibles) '
           Ctl3D = False
@@ -1900,20 +1900,20 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           ParentFont = False
           TabOrder = 0
           object cbRSendLine: TCheckBox
-            Left = 163
-            Top = 56
+            Left = 11
+            Top = 54
             Width = 43
             Height = 17
             Caption = 'Line'
-            TabOrder = 5
+            TabOrder = 4
           end
           object cbRSendCursorToEndLine: TCheckBox
             Left = 163
-            Top = 111
+            Top = 94
             Width = 108
             Height = 17
             Caption = 'Cursor to end line'
-            TabOrder = 10
+            TabOrder = 9
           end
           object cbRSendFile: TCheckBox
             Left = 11
@@ -1932,81 +1932,73 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             TabOrder = 1
           end
           object cbRSendBlockMarked: TCheckBox
-            Left = 163
-            Top = 37
+            Left = 11
+            Top = 35
             Width = 87
             Height = 17
             Caption = 'Marked block'
-            TabOrder = 3
+            TabOrder = 2
           end
           object cbRSendLinesToEndPage: TCheckBox
             Left = 163
-            Top = 92
+            Top = 75
             Width = 108
             Height = 17
             Caption = 'Lines to end page'
-            TabOrder = 8
+            TabOrder = 7
           end
           object cbRSendCursorToBeginningLine: TCheckBox
             Left = 11
-            Top = 109
+            Top = 92
             Width = 133
             Height = 17
             Caption = 'Cursor to beginning line'
-            TabOrder = 9
+            TabOrder = 8
           end
           object cbRSendSweave: TCheckBox
             Left = 11
-            Top = 129
+            Top = 112
             Width = 62
             Height = 17
             Caption = 'Sweave'
-            TabOrder = 11
-          end
-          object cbRSendClipboard: TCheckBox
-            Left = 11
-            Top = 35
-            Width = 70
-            Height = 17
-            Caption = 'Clipboard'
-            TabOrder = 2
+            TabOrder = 10
           end
           object cbRSendContiguous: TCheckBox
-            Left = 11
-            Top = 54
+            Left = 163
+            Top = 37
             Width = 78
             Height = 17
             Caption = 'Contiguous'
-            TabOrder = 4
+            TabOrder = 3
           end
           object cbRCurrentLineToTop: TCheckBox
             Left = 11
-            Top = 90
+            Top = 73
             Width = 112
             Height = 17
             Caption = 'Current line to top'
-            TabOrder = 7
+            TabOrder = 6
           end
           object cbRSendKnitr: TCheckBox
             Left = 163
-            Top = 131
+            Top = 114
             Width = 45
             Height = 17
             Caption = 'Knitr'
-            TabOrder = 12
+            TabOrder = 11
           end
           object cbRSendSmart: TCheckBox
-            Left = 11
-            Top = 72
+            Left = 163
+            Top = 56
             Width = 78
             Height = 17
             Caption = 'Smart'
-            TabOrder = 6
+            TabOrder = 5
           end
         end
         object gbControlling: TGroupBox
           Left = 0
-          Top = 158
+          Top = 139
           Width = 333
           Height = 220
           Align = alTop
@@ -2020,6 +2012,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           ParentCtl3D = False
           ParentFont = False
           TabOrder = 1
+          ExplicitTop = 158
           object cbRSetWorkDirectory: TCheckBox
             Left = 11
             Top = 15

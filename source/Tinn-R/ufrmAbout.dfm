@@ -44,7 +44,7 @@ object frmAbout: TfrmAbout
     Top = 0
     Width = 614
     Height = 312
-    ActivePage = tbsAboutVersion
+    ActivePage = tbsAboutProject
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
@@ -133,12 +133,12 @@ object frmAbout: TfrmAbout
         OnClick = lblURLWebPageClick
         OnMouseMove = lblURLWebPageMouseMove
       end
-      object Copyright: TLabel
+      object lCopyright: TLabel
         Left = 186
         Top = 213
-        Width = 118
+        Width = 60
         Height = 16
-        Caption = 'Copyright 2001-2020'
+        Caption = 'Copyright: '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -193,10 +193,6 @@ object frmAbout: TfrmAbout
     object tbsAboutProject: TTabSheet
       Caption = 'Project'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 592
-      ExplicitHeight = 0
       object synAboutProject: TSynEdit
         Left = 0
         Top = 0
@@ -220,19 +216,19 @@ object frmAbout: TfrmAbout
         Gutter.Visible = False
         Gutter.Width = 0
         Lines.UnicodeStrings = 
-          'COORDINATION'#13#10' - Jos'#233' Cl'#225'udio Faria'#13#10'   Universidade Estadual de' +
-          ' Santa Cruz - UESC/BA/BRASIL'#13#10'   Departamento de Ci'#234'ncias Exatas' +
-          ' e Tecnol'#243'gicas - DCET'#13#10#13#10'ACTIVE DEVELOPER(S)'#13#10' - Jos'#233' Cl'#225'udio F' +
-          'aria'#13#10'   email: joseclaudio.faria@gmail.com'#13#10#13#10' - Philiphe A. R.' +
-          ' Kramer'#13#10'   email: pharkrum@gmail.com'#13#10#13#10'CONTRIBUTORS (historica' +
-          'l order)'#13#10' - Marco de Groot'#13#10' - Philippe Grosjean'#13#10' - Huashan Ch' +
-          'en'#13#10' - Enio Galinkin Jelihovschi'#13#10' - Ricardo Pietrobon'#13#10' - Phili' +
-          'pe Silva Farias'#13#10' - Swami de P. Lima'#13#10#13#10'Tinn-R would not be what' +
-          ' it is without all contributors, '#13#10'thanks very much!'
+          'PROJECT LEADER/MAIN DEVELOPER'#13#10' - Jos'#233' Cl'#225'udio Faria'#13#10'   Univers' +
+          'idade Estadual de Santa Cruz - UESC/BA/BRASIL'#13#10'   Departamento d' +
+          'e Ci'#234'ncias Exatas e Tecnol'#243'gicas - DCET'#13#10#13#10'ACTIVE DEVELOPER(S)'#13#10 +
+          ' - Jos'#233' Cl'#225'udio Faria'#13#10'   email: joseclaudio.faria@gmail.com'#13#10#13#10 +
+          ' - Philiphe A. R. Kramer'#13#10'   email: pharkrum@gmail.com'#13#10#13#10'CONTRI' +
+          'BUTORS (historical order)'#13#10' - Marco de Groot'#13#10' - Philippe Grosje' +
+          'an'#13#10' - Huashan Chen'#13#10' - Enio Galinkin Jelihovschi'#13#10' - Ricardo Pi' +
+          'etrobon'#13#10' - Philipe Silva Farias'#13#10' - Swami de P. Lima'#13#10#13#10'Tinn-R ' +
+          'would not be what it is without all contributors, '#13#10'thanks very ' +
+          'much!'
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 592
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -248,10 +244,6 @@ object frmAbout: TfrmAbout
     object tbsAboutAcknowledgments: TTabSheet
       Caption = 'Acknowledgments'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 592
-      ExplicitHeight = 0
       object synAboutAknowledgments: TSynEdit
         Left = 0
         Top = 0
@@ -298,7 +290,6 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 592
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -314,10 +305,6 @@ object frmAbout: TfrmAbout
     object tbsAboutCredits: TTabSheet
       Caption = 'Credits'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 592
-      ExplicitHeight = 0
       object synAboutCredits: TSynEdit
         Left = 0
         Top = 0
@@ -373,7 +360,6 @@ object frmAbout: TfrmAbout
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
-        ExplicitWidth = 592
         RemovedKeystrokes = <
           item
             Command = ecContextHelp
@@ -389,10 +375,6 @@ object frmAbout: TfrmAbout
     object tbsDonation: TTabSheet
       Caption = 'Donation'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synAboutDonation: TSynEdit
         Left = 0
         Top = 0

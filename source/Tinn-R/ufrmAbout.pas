@@ -48,13 +48,13 @@ interface
 uses
   Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   Buttons, ExtCtrls, ShellAPI, jpeg, Dialogs, ComCtrls, JvgPage, pngimage,
-  SynEdit, JvExExtCtrls, JvImage;
+  SynEdit, JvExExtCtrls, JvImage, DateUtils;
 
 type
   TfrmAbout = class(TForm)
     bbHelp: TBitBtn;
     bbtOK: TBitBtn;
-    Copyright: TLabel;
+    lCopyright: TLabel;
     Label1: TLabel;
     lblURLSourceforge: TLabel;
     lblURLWebPage: TLabel;
@@ -337,6 +337,9 @@ end;
 procedure TfrmAbout.FormShow(Sender: TObject);
 begin
   AlphaBlendValue:= frmMain.iAlphaBlendValue;
+
+  with lCopyright do
+    Caption:= Caption + '2001 - ' + IntToStr(DateUtils.YearOf(Date));
 end;
 
 procedure TfrmAbout.imgDonationClick(Sender: TObject);

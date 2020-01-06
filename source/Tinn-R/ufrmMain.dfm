@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Width = 1002
-  Height = 968
+  Height = 1100
   AlphaBlend = True
   AlphaBlendValue = 200
   AutoScroll = True
@@ -1035,7 +1035,7 @@ object frmMain: TfrmMain
     Left = 0
     Top = 98
     Width = 1
-    Height = 790
+    Height = 922
     Align = alLeft
     BevelOuter = bvNone
     DockSite = True
@@ -2017,7 +2017,7 @@ object frmMain: TfrmMain
     Left = 1
     Top = 98
     Width = 9
-    Height = 790
+    Height = 922
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
@@ -2038,7 +2038,7 @@ object frmMain: TfrmMain
   end
   object stbMain: TStatusBar
     Left = 0
-    Top = 897
+    Top = 1029
     Width = 994
     Height = 20
     AutoHint = True
@@ -2098,7 +2098,7 @@ object frmMain: TfrmMain
     Left = 985
     Top = 98
     Width = 9
-    Height = 790
+    Height = 922
     BoundLines = [blTop, blBottom, blLeft, blRight]
     Color = 16250871
     FixAlign = True
@@ -2108,7 +2108,7 @@ object frmMain: TfrmMain
   end
   object TBDockBottom: TTBDock
     Left = 0
-    Top = 888
+    Top = 1020
     Width = 994
     Height = 9
     BoundLines = [blTop, blBottom, blLeft, blRight]
@@ -6539,12 +6539,14 @@ object frmMain: TfrmMain
       object pmenIO_Copy: TMenuItem
         AutoHotkeys = maManual
         Caption = 'Copy'
+        Enabled = False
         Hint = 'Edit: copy'
         OnClick = pmenIO_CopyClick
       end
       object pmenIO_Cut: TMenuItem
         AutoHotkeys = maManual
         Caption = 'Cut'
+        Enabled = False
         Hint = 'Edit: cut'
         ImageIndex = 47
         OnClick = pmenIO_CutClick
@@ -6687,6 +6689,13 @@ object frmMain: TfrmMain
       object pmemIOHistoryNext: TMenuItem
         Action = actRtermIOHistoryNext
       end
+      object N79: TMenuItem
+        Caption = '-'
+      end
+      object History5: TMenuItem
+        Action = actRterm_Clear_History
+        Caption = 'Clear'
+      end
     end
     object pmemIOWorkspace: TMenuItem
       Caption = 'Workspace'
@@ -6768,12 +6777,14 @@ object frmMain: TfrmMain
       object pmenLOG_Copy: TMenuItem
         AutoHotkeys = maManual
         Caption = 'Copy'
+        Enabled = False
         Hint = 'Edit: copy'
         OnClick = pmenLOG_CopyClick
       end
       object pmenLOG_Cut: TMenuItem
         AutoHotkeys = maManual
         Caption = 'Cut'
+        Enabled = False
         Hint = 'Edit: cut'
         ImageIndex = 47
         OnClick = pmenLOG_CutClick
@@ -8270,6 +8281,9 @@ object frmMain: TfrmMain
           object IOandLog4: TMenuItem
             Action = actRterm_Clear_IO_LOG
           end
+          object History3: TMenuItem
+            Action = actRterm_Clear_History
+          end
         end
         object menRtermFocus: TMenuItem
           Caption = 'Focus'
@@ -8393,6 +8407,13 @@ object frmMain: TfrmMain
           end
           object menRtermHistoryNext: TMenuItem
             Action = actRtermIOHistoryNext
+          end
+          object N71: TMenuItem
+            Caption = '-'
+          end
+          object History4: TMenuItem
+            Action = actRterm_Clear_History
+            Caption = 'Clear'
           end
         end
         object menRtermWorkspace: TMenuItem

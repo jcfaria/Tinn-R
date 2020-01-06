@@ -2030,6 +2030,11 @@ type
     actRH_Custom_Edit: TAction;
     actRH_Control_Help: TAction;
     actRH_Custom_Help: TAction;
+    History3: TMenuItem;
+    N71: TMenuItem;
+    History4: TMenuItem;
+    N79: TMenuItem;
+    History5: TMenuItem;
 
     procedure actAboutExecute(Sender: TObject);
     procedure actAlwaysAddBOMExecute(Sender: TObject);
@@ -2891,7 +2896,6 @@ type
     procedure pUnpack_File(sFile, sPath, sChoice: string);
     procedure pUpdate_Appearance(bFontSize: boolean = True);
     procedure pUpdate_Bars(bOption: boolean);
-    procedure pUpdate_CloseFileOptions;
     procedure pUpdate_EditMenu_Shortcuts;
     procedure pUpdate_File(var seEditor: TSynEdit; var smOption: TSynSelectionMode);
     procedure pUpdate_FileIntoTinn(sFile: string; iLineNumberJump: integer = 0);
@@ -3070,6 +3074,8 @@ type
     procedure pCheck_Rterm;
     procedure pClear_MRU;
     procedure pClear_StatusBar;
+    procedure pCopy;
+    procedure pCut;
     procedure pDataset_To_ActionList;
     procedure pDo_RConnection(sTmp: string; bActive, bSendTask: boolean);
     procedure pDo_RguiConnection(sTmp: string; bActive: boolean);
@@ -3083,8 +3089,11 @@ type
     procedure pOpen_FileFromSearch;
     procedure pOpen_FileIntoTinn(sFile: string; iLineNumberJump: integer = 0; bOpenProjetcText: boolean = False; bUpdateMRU: boolean = True);
     procedure pOpen_UserGuidePDF(sWhere: string);
+    procedure pPaste;
     procedure pPrint_Message(sInstruction: string; bNewLine: boolean; sSignal: string = '> ');
+    procedure pRedo;
     procedure pRemoveTab(sTabCaption: string);
+    procedure pSelectAll;
     procedure pSend_Clipboard_ToRterm;
     procedure pSend_Rcustom(sRC: string);
     procedure pSend_ToConsole(sTmp: string);
@@ -3095,6 +3104,7 @@ type
     procedure pSet_SyntaxMenuItem(sSynName: string);
     procedure pSet_TabTitle(sStat: string);
     procedure pSet_ToolbarProcessing(sFileExtension: string);
+    procedure pUndo;
     procedure pUpdate_CursorPos(Sender: TSynEdit);
     procedure pUpdate_HexViewer;
     procedure pUpdate_MRU(var miItem: TMenuItem; sFileName: string);
@@ -13749,37 +13759,51 @@ begin
     sUndo := fGet_keystroke_Editor('ecUndo');
     sRedo := fGet_keystroke_Editor('ecRedo');
     sCopy := fGet_keystroke_Editor('ecCopy');
-    sPaste:= fGet_keystroke_Editor('ecPaste');
     sCut  := fGet_keystroke_Editor('ecCut');
+    sPaste:= fGet_keystroke_Editor('ecPaste');
     sSelectAll:= fGet_keystroke_Editor('ecSelectAll');
+  end;
 
-    menEdit_Undo.ShortCut := TextToShortcut(sUndo);
-    menEdit_Redo.ShortCut := TextToShortcut(sRedo);
-    menEdit_Copy.ShortCut := TextToShortcut(sCopy);
-    menEdit_Paste.ShortCut:= TextToShortcut(sPaste);
-    menEdit_Cut.ShortCut  := TextToShortcut(sCut);
-    menEdit_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+  // Main menu Edit
+  menEdit_Undo.ShortCut     := TextToShortcut(sUndo);
+  menEdit_Redo.ShortCut     := TextToShortcut(sRedo);
+  menEdit_Copy.ShortCut     := TextToShortcut(sCopy);
+  menEdit_Cut.ShortCut      := TextToShortcut(sCut);
+  menEdit_Paste.ShortCut    := TextToShortcut(sPaste);
+  menEdit_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
 
-    pmenEdit_Undo.ShortCut := TextToShortcut(sUndo);
-    pmenEdit_Redo.ShortCut := TextToShortcut(sRedo);
-    pmenEdit_Copy.ShortCut := TextToShortcut(sCopy);
-    pmenEdit_Paste.ShortCut:= TextToShortcut(sPaste);
-    pmenEdit_Cut.ShortCut  := TextToShortcut(sCut);
-    pmenEdit_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+  // Popup menu Edit
+  pmenEdit_Undo.ShortCut     := TextToShortcut(sUndo);
+  pmenEdit_Redo.ShortCut     := TextToShortcut(sRedo);
+  pmenEdit_Copy.ShortCut     := TextToShortcut(sCopy);
+  pmenEdit_Cut.ShortCut      := TextToShortcut(sCut);
+  pmenEdit_Paste.ShortCut    := TextToShortcut(sPaste);
+  pmenEdit_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
 
-    pmenIO_Undo.ShortCut := TextToShortcut(sUndo);
-    pmenIO_Redo.ShortCut := TextToShortcut(sRedo);
-    pmenIO_Copy.ShortCut := TextToShortcut(sCopy);
-    pmenIO_Paste.ShortCut:= TextToShortcut(sPaste);
-    pmenIO_Cut.ShortCut  := TextToShortcut(sCut);
-    pmenIO_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+  // Popup menu IO
+  pmenIO_Undo.ShortCut     := TextToShortcut(sUndo);
+  pmenIO_Redo.ShortCut     := TextToShortcut(sRedo);
+  pmenIO_Copy.ShortCut     := TextToShortcut(sCopy);
+  pmenIO_Cut.ShortCut      := TextToShortcut(sCut);
+  pmenIO_Paste.ShortCut    := TextToShortcut(sPaste);
+  pmenIO_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
 
-    pmenLOG_Undo.ShortCut := TextToShortcut(sUndo);
-    pmenLOG_Redo.ShortCut := TextToShortcut(sRedo);
-    pmenLOG_Copy.ShortCut := TextToShortcut(sCopy);
-    pmenLOG_Paste.ShortCut:= TextToShortcut(sPaste);
-    pmenLOG_Cut.ShortCut  := TextToShortcut(sCut);
-    pmenLOG_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+  // Popup menu LOG
+  pmenLOG_Undo.ShortCut     := TextToShortcut(sUndo);
+  pmenLOG_Redo.ShortCut     := TextToShortcut(sRedo);
+  pmenLOG_Copy.ShortCut     := TextToShortcut(sCopy);
+  pmenLOG_Cut.ShortCut      := TextToShortcut(sCut);
+  pmenLOG_Paste.ShortCut    := TextToShortcut(sPaste);
+  pmenLOG_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
+
+  // Rterm Toolbar
+  with frmR_Term do begin
+    tbiRterm_Undo.ShortCut     := TextToShortcut(sUndo);
+    tbiRterm_Redo.ShortCut     := TextToShortcut(sRedo);
+    tbiRterm_Copy.ShortCut     := TextToShortcut(sCopy);
+    tbiRterm_Cut.ShortCut      := TextToShortcut(sCut);
+    tbiRterm_Paste.ShortCut    := TextToShortcut(sPaste);
+    tbiRterm_SelectAll.ShortCut:= TextToShortcut(sSelectAll);
   end;
 end;
 
@@ -14369,8 +14393,13 @@ end;
 
 procedure TfrmMain.menHelCitationClick(Sender: TObject);
 begin
-  Clipboard.AsText:= 'Tinn-R Team (2018). Tinn-R Editor - GUI for R Language and Environment.' + #13 +
-                     'URL http://nbcgib.uesc.br/lec/software/editores/tinn-r/en';
+  Clipboard.AsText:= 'Tinn-R Team' +
+                     ' ('
+                     +
+                     IntToStr(DateUtils.YearOf(Date)) +
+                     '). ' +
+                     'Tinn-R Editor - GUI for R Language and Environment.' + #13 +
+                     'URL https://nbcgib.uesc.br/tinnr/en/.';
 
   fMessageDlg('Many thanks for cite Tinn-R.' + #13 + #13 +
               'The citation was put on clipboard!',
@@ -15863,32 +15892,32 @@ end;
 
 procedure TfrmMain.pmenEdit_CopyClick(Sender: TObject);
 begin
-  menEdit_CopyClick(nil);
+  pCopy;
 end;
 
 procedure TfrmMain.pmenEdit_CutClick(Sender: TObject);
 begin
-  menEdit_CutClick(nil);
+  pCut;
 end;
 
 procedure TfrmMain.pmenEdit_PasteClick(Sender: TObject);
 begin
-  menEdit_PasteClick(nil);
+  pPaste;
 end;
 
 procedure TfrmMain.pmenEdit_RedoClick(Sender: TObject);
 begin
-  menEdit_RedoClick(nil);
+  pRedo;
 end;
 
 procedure TfrmMain.pmenEdit_SelectAllClick(Sender: TObject);
 begin
-  menEdit_SelectAllClick(nil);
+  pSelectAll;
 end;
 
 procedure TfrmMain.pmenEdit_UndoClick(Sender: TObject);
 begin
-  menEdit_UndoClick(nil);
+  pUndo;
 end;
 
 procedure TfrmMain.pmenProjRSendToRClick(Sender: TObject);
@@ -16545,28 +16574,35 @@ begin
 end;
 
 procedure TfrmMain.pUpdate_Options;
-var
-  seEditor: TSynEdit;
-
 begin
-  with (Self.MDIChildren[fFindTop_Window] as TfrmEditor) do
-    if sActiveEditor = 'synEditor' then seEditor:= synEditor
-                                   else seEditor:= synEditor2;
-  with seEditor do begin
-    actCopyFormatted_HTML.Enabled := SelAvail;
-    actCopyFormatted_RTF.Enabled  := SelAvail;
-    actCopyFormatted_TEX.Enabled  := SelAvail;
-    actIndentBlock.Enabled        := SelAvail;
-    actInvertSelection.Enabled    := SelAvail;
-    actLowerCaseSelection.Enabled := SelAvail;
-    actUnindentBlock.Enabled      := SelAvail;
-    actUpperCaseSelection.Enabled := SelAvail;
-    menEdit_Cut.Enabled           := SelAvail;
-    pmenEdit_Cut.Enabled          := SelAvail;
-//    pmenIO_Cut.Enabled           := SelAvail;
-//    pmenLOG_Cut.Enabled          := SelAvail;
+  if (pgFiles.PageCount > 1) then begin
+    if (pgFiles.ActivePageIndex = 0) then begin // First
+      actFile_CloseAll.Enabled   := True;
+      actFile_CloseOthers.Enabled:= True;
+      actFile_CloseLeft.Enabled  := False;
+      actFile_CloseRight.Enabled := True;
+    end
+    else
+      if (pgFiles.ActivePageIndex = (pgFiles.PageCount - 1)) then begin  // Last
+        actFile_CloseAll.Enabled   := True;
+        actFile_CloseOthers.Enabled:= True;
+        actFile_CloseLeft.Enabled  := True;
+        actFile_CloseRight.Enabled := False;
+      end
+      else begin  // Among
+        actFile_CloseAll.Enabled   := True;
+        actFile_CloseOthers.Enabled:= True;
+        actFile_CloseLeft.Enabled  := True;
+        actFile_CloseRight.Enabled := True;
+      end;
+  end
+  else begin  // < 1
+    actFile_CloseAll.Enabled   := False;
+    actFile_CloseOthers.Enabled:= False;
+    actFile_CloseLeft.Enabled  := False;
+    actFile_CloseRight.Enabled := False;
+    actFile_SaveAll.Enabled    := False;
   end;
-  pUpdate_CloseFileOptions;
 end;
 
 procedure TfrmMain.actSplitVerticalExecute(Sender: TObject);
@@ -20963,62 +20999,62 @@ end;
 
 procedure TfrmMain.pmenIO_CopyClick(Sender: TObject);
 begin
-  menEdit_CopyClick(nil);
+  pCopy;
 end;
 
 procedure TfrmMain.pmenIO_CutClick(Sender: TObject);
 begin
-  menEdit_CutClick(nil);
+  pCut;
 end;
 
 procedure TfrmMain.pmenIO_PasteClick(Sender: TObject);
 begin
-  menEdit_PasteClick(nil);
+  pPaste;
 end;
 
 procedure TfrmMain.pmenIO_RedoClick(Sender: TObject);
 begin
-  menEdit_RedoClick(nil);
+  pRedo;
 end;
 
 procedure TfrmMain.pmenIO_SelectAllClick(Sender: TObject);
 begin
-  menEdit_SelectAllClick(nil);
+  pSelectAll;
 end;
 
 procedure TfrmMain.pmenIO_UndoClick(Sender: TObject);
 begin
-  menEdit_UndoClick(nil);
+  pUndo;
 end;
 
 procedure TfrmMain.pmenLOG_CopyClick(Sender: TObject);
 begin
-  menEdit_CopyClick(nil);
+  pCopy;
 end;
 
 procedure TfrmMain.pmenLOG_CutClick(Sender: TObject);
 begin
-  menEdit_CutClick(nil);
+  pCut;
 end;
 
 procedure TfrmMain.pmenLOG_PasteClick(Sender: TObject);
 begin
-  menEdit_PasteClick(nil);
+  pPaste;
 end;
 
 procedure TfrmMain.pmenLOG_RedoClick(Sender: TObject);
 begin
-  menEdit_RedoClick(nil);
+  pRedo;
 end;
 
 procedure TfrmMain.pmenLOG_SelectAllClick(Sender: TObject);
 begin
-  menEdit_SelectAllClick(nil);
+  pSelectAll;
 end;
 
 procedure TfrmMain.pmenLOG_UndoClick(Sender: TObject);
 begin
-  menEdit_UndoClick(nil);
+  pUndo;
 end;
 
 procedure TfrmMain.pmemRResCurrentLineToTopClick(Sender: TObject);
@@ -21690,7 +21726,7 @@ begin
     pInvert_Case;
 end;
 
-procedure TfrmMain.menEdit_CopyClick(Sender: TObject);
+procedure TfrmMain.pCopy;
 var
   iFocus: integer;
 
@@ -21713,36 +21749,48 @@ begin
      // synLOG and synLOG2
      4: with (seLOG as TSynEdit) do
           CopyToClipboard;
+  end;
+end;
+
+procedure TfrmMain.menEdit_CopyClick(Sender: TObject);
+begin
+  pCopy;
+end;
+
+procedure TfrmMain.pCut;
+var
+  iFocus: integer;
+
+  seLOG: TSynEdit;
+
+begin
+  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
+                                 else seLOG:= frmR_Term.synLOG;
+
+  iFocus:= fGet_Focus;
+
+  case iFocus of
+     // synEditor1
+     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
+          CutToClipboard;
+     // synEditor2
+     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
+          CutToClipboard;
+     // synIO
+     3: with (frmR_Term.synIO as TSynEdit) do
+          CutToClipboard;
+     // synLOG and synLOG2
+     4: with (seLOG as TSynEdit) do
+          CutToClipboard;
   end;
 end;
 
 procedure TfrmMain.menEdit_CutClick(Sender: TObject);
-var
-  iFocus: integer;
-
-  seLOG: TSynEdit;
-
 begin
-  iFocus:= fGet_Focus;
-  if Assigned(frmR_Term.synLOG2) then seLOG:= frmR_Term.synLOG2
-                                 else seLOG:= frmR_Term.synLOG;
-  case iFocus of
-     // synEditor1
-     1: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor do
-          CutToClipboard;
-     // synEditor2
-     2: with (Self.MDIChildren[fFindTop_Window] as TfrmEditor).synEditor2 do
-          CutToClipboard;
-     // synIO
-     3: with (frmR_Term.synIO as TSynEdit) do
-          CutToClipboard;
-     // synLOG and synLOG2
-     4: with (seLOG as TSynEdit) do
-          CutToClipboard;
-  end;
+  pCut;
 end;
 
-procedure TfrmMain.menEdit_PasteClick(Sender: TObject);
+procedure TfrmMain.pPaste;
 var
   iFocus: integer;
 
@@ -21794,7 +21842,12 @@ begin
   end;
 end;
 
-procedure TfrmMain.menEdit_UndoClick(Sender: TObject);
+procedure TfrmMain.menEdit_PasteClick(Sender: TObject);
+begin
+  pPaste
+end;
+
+procedure TfrmMain.pUndo;
 var
   iFocus: integer;
 
@@ -21820,7 +21873,12 @@ begin
   end;
 end;
 
-procedure TfrmMain.menEdit_RedoClick(Sender: TObject);
+procedure TfrmMain.menEdit_UndoClick(Sender: TObject);
+begin
+  pUndo;
+end;
+
+procedure TfrmMain.pRedo;
 var
   iFocus: integer;
 
@@ -21846,7 +21904,12 @@ begin
   end;
 end;
 
-procedure TfrmMain.menEdit_SelectallClick(Sender: TObject);
+procedure TfrmMain.menEdit_RedoClick(Sender: TObject);
+begin
+  pRedo;
+end;
+
+procedure TfrmMain.pSelectAll;
 var
   iFocus: integer;
 
@@ -21870,6 +21933,11 @@ begin
      4: with (seLOG as TSynEdit) do
           SelectAll;
   end;
+end;
+
+procedure TfrmMain.menEdit_SelectallClick(Sender: TObject);
+begin
+  pSelectAll;
 end;
 
 procedure TfrmMain.menEncConUTF8wClick(Sender: TObject);
@@ -24195,38 +24263,6 @@ begin
     stbTmp.Hint:= sTmp;
     Application.CancelHint;  // makes sure new hint shows if user moves mouse inside statusbar
   end; {if}
-end;
-
-procedure TfrmMain.pUpdate_CloseFileOptions;
-begin
-  if (pgFiles.PageCount > 1) then begin
-    if (pgFiles.ActivePageIndex = 0) then begin // First
-      actFile_CloseAll.Enabled   := True;
-      actFile_CloseOthers.Enabled:= True;
-      actFile_CloseLeft.Enabled  := False;
-      actFile_CloseRight.Enabled := True;
-    end
-    else
-      if (pgFiles.ActivePageIndex = (pgFiles.PageCount - 1)) then begin  // Last
-        actFile_CloseAll.Enabled   := True;
-        actFile_CloseOthers.Enabled:= True;
-        actFile_CloseLeft.Enabled  := True;
-        actFile_CloseRight.Enabled := False;
-      end
-      else begin  // Among
-        actFile_CloseAll.Enabled   := True;
-        actFile_CloseOthers.Enabled:= True;
-        actFile_CloseLeft.Enabled  := True;
-        actFile_CloseRight.Enabled := True;
-      end;
-  end
-  else begin  // < 1
-    actFile_CloseAll.Enabled   := False;
-    actFile_CloseOthers.Enabled:= False;
-    actFile_CloseLeft.Enabled  := False;
-    actFile_CloseRight.Enabled := False;
-    actFile_SaveAll.Enabled    := False;
-  end;
 end;
 
 procedure TfrmMain.pInsert_LatexSymbol(sSymbol: string;

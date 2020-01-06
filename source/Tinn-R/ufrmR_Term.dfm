@@ -30,7 +30,7 @@ object frmR_Term: TfrmR_Term
     Top = 26
     Width = 408
     Height = 333
-    ActivePage = tbsIO
+    ActivePage = tbsLog
     Align = alClient
     Anchors = []
     Font.Charset = ANSI_CHARSET
@@ -447,10 +447,6 @@ object frmR_Term: TfrmR_Term
     object tbsLog: TTabSheet
       Caption = 'LOG'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object synLog: TSynEdit
         Left = 0
         Top = 0
@@ -860,21 +856,38 @@ object frmR_Term: TfrmR_Term
       object TBSubmenuItem10: TTBSubmenuItem
         Caption = 'Edit'
         ImageIndex = 276
-        object TBItem29: TTBItem
+        object tbiRterm_Undo: TTBItem
+          Caption = 'Undo'
+          ImageIndex = 130
+          OnClick = tbiRterm_UndoClick
         end
-        object TBItem28: TTBItem
+        object tbiRterm_Redo: TTBItem
+          Caption = 'Redo'
+          ImageIndex = 131
+          OnClick = tbiRterm_RedoClick
         end
         object TBSeparatorItem4: TTBSeparatorItem
         end
-        object TBItem32: TTBItem
+        object tbiRterm_Copy: TTBItem
+          Caption = 'Copy'
+          Enabled = False
+          OnClick = tbiRterm_CopyClick
         end
-        object TBItem31: TTBItem
+        object tbiRterm_Cut: TTBItem
+          Caption = 'Cut'
+          Enabled = False
+          ImageIndex = 47
+          OnClick = tbiRterm_CutClick
         end
-        object TBItem30: TTBItem
+        object tbiRterm_Paste: TTBItem
+          Caption = 'Paste'
+          OnClick = tbiRterm_PasteClick
         end
         object TBSeparatorItem8: TTBSeparatorItem
         end
-        object TBItem33: TTBItem
+        object tbiRterm_SelectAll: TTBItem
+          Caption = 'Select All'
+          OnClick = tbiRterm_SelectAllClick
         end
       end
       object TBSubmenuItem11: TTBSubmenuItem
@@ -1030,6 +1043,12 @@ object frmR_Term: TfrmR_Term
         end
         object TBItem18: TTBItem
           Action = frmMain.actRtermIOHistoryNext
+        end
+        object TBSeparatorItem10: TTBSeparatorItem
+        end
+        object TBItem49: TTBItem
+          Action = frmMain.actRterm_Clear_History
+          Caption = 'Clear'
         end
       end
       object TBSubmenuItem5: TTBSubmenuItem

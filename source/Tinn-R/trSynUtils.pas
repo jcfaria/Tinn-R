@@ -285,8 +285,9 @@ var
   sAtCursor: WideString;
 
 begin
+  Result:= False;
+
   try
-    Result:= False;
     with seActive do begin
       if (SelStart <> SelEnd) then Exit;
       iPos:= SelStart;

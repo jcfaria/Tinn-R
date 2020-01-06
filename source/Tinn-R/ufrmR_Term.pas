@@ -70,14 +70,14 @@ type
     TBItem42: TTBItem;
     TBSeparatorItem2: TTBSeparatorItem;
     TBSubmenuItem10: TTBSubmenuItem;
-    TBItem29: TTBItem;
-    TBItem28: TTBItem;
+    tbiRterm_Undo: TTBItem;
+    tbiRterm_Redo: TTBItem;
     TBSeparatorItem4: TTBSeparatorItem;
-    TBItem32: TTBItem;
-    TBItem31: TTBItem;
-    TBItem30: TTBItem;
+    tbiRterm_Copy: TTBItem;
+    tbiRterm_Cut: TTBItem;
+    tbiRterm_Paste: TTBItem;
     TBSeparatorItem8: TTBSeparatorItem;
-    TBItem33: TTBItem;
+    tbiRterm_SelectAll: TTBItem;
     TBSubmenuItem11: TTBSubmenuItem;
     TBSubmenuItem13: TTBSubmenuItem;
     TBItem1: TTBItem;
@@ -135,6 +135,8 @@ type
     TBItem46: TTBItem;
     TBItem47: TTBItem;
     TBItem48: TTBItem;
+    TBSeparatorItem10: TTBSeparatorItem;
+    TBItem49: TTBItem;
 
     procedure cRTermError(Sender: TObject; const Cmd: string);
     procedure cRTermProcessStatusChange(Sender: TObject; IsRunning: Boolean);
@@ -154,6 +156,12 @@ type
     procedure synLOGKeyPress(Sender: TObject; var Key: WideChar);
     procedure synLOGKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synLOGMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure tbiRterm_UndoClick(Sender: TObject);
+    procedure tbiRterm_RedoClick(Sender: TObject);
+    procedure tbiRterm_CopyClick(Sender: TObject);
+    procedure tbiRterm_CutClick(Sender: TObject);
+    procedure tbiRterm_PasteClick(Sender: TObject);
+    procedure tbiRterm_SelectAllClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -1785,8 +1793,22 @@ end;
 procedure TfrmR_Term.synIOKeyUp(Sender: TObject;
                                 var Key: Word;
                                 Shift: TShiftState);
+var
+  seLOG: TSynEdit;
+
 begin
   frmMain.iSynWithFocus:= 3;
+
+  if Assigned(synLOG2) then seLOG:= synLOG2
+                       else seLOG:= synLOG;
+
+  tbiRterm_Copy.Enabled:= synIO.SelAvail or
+                          seLOG.SelAvail;
+  tbiRterm_Cut.Enabled := synIO.SelAvail or
+                          seLOG.SelAvail;
+
+  frmMain.pmenIO_Copy.Enabled:= synIO.SelAvail;
+  frmMain.pmenIO_Cut.Enabled := synIO.SelAvail;
 
   if not frmMain.fRterm_Running then Exit;
 
@@ -1802,8 +1824,22 @@ procedure TfrmR_Term.synIOMouseUp(Sender: TObject;
                                   Shift: TShiftState;
                                   X,
                                   Y: Integer);
+var
+  seLOG: TSynEdit;
+
 begin
   frmMain.iSynWithFocus:= 3;
+
+  if Assigned(synLOG2) then seLOG:= synLOG2
+                       else seLOG:= synLOG;
+
+  tbiRterm_Copy.Enabled:= synIO.SelAvail or
+                          seLOG.SelAvail;
+  tbiRterm_Cut.Enabled := synIO.SelAvail or
+                          seLOG.SelAvail;
+
+  frmMain.pmenIO_Copy.Enabled:= synIO.SelAvail;
+  frmMain.pmenIO_Cut.Enabled := synIO.SelAvail;
 
   if not frmMain.fRterm_Running then Exit;
 
@@ -1938,8 +1974,22 @@ end;
 procedure TfrmR_Term.synLOGKeyUp(Sender: TObject;
                                  var Key: Word;
                                  Shift: TShiftState);
+var
+  seLOG: TSynEdit;
+
 begin
   frmMain.iSynWithFocus:= 4;
+
+  if Assigned(synLOG2) then seLOG:= synLOG2
+                       else seLOG:= synLOG;
+
+  tbiRterm_Copy.Enabled:= synIO.SelAvail or
+                          seLOG.SelAvail;
+  tbiRterm_Cut.Enabled := synIO.SelAvail or
+                          seLOG.SelAvail;
+
+  frmMain.pmenLOG_Copy.Enabled:= seLOG.SelAvail;
+  frmMain.pmenLOG_Cut.Enabled := seLOG.SelAvail;
 end;
 
 procedure TfrmR_Term.synLOGMouseUp(Sender: TObject;
@@ -1947,8 +1997,58 @@ procedure TfrmR_Term.synLOGMouseUp(Sender: TObject;
                                    Shift: TShiftState;
                                    X,
                                    Y: Integer);
+var
+  seLOG: TSynEdit;
+
 begin
   frmMain.iSynWithFocus:= 4;
+
+  if Assigned(synLOG2) then seLOG:= synLOG2
+                       else seLOG:= synLOG;
+
+  tbiRterm_Copy.Enabled:= synIO.SelAvail or
+                          seLOG.SelAvail;
+  tbiRterm_Cut.Enabled := synIO.SelAvail or
+                          seLOG.SelAvail;
+
+  frmMain.pmenLOG_Copy.Enabled:= seLOG.SelAvail;
+  frmMain.pmenLOG_Cut.Enabled := seLOG.SelAvail;
+end;
+
+procedure TfrmR_Term.tbiRterm_CopyClick(Sender: TObject);
+begin
+  with frmMain do
+    pCopy;
+end;
+
+procedure TfrmR_Term.tbiRterm_CutClick(Sender: TObject);
+begin
+  with frmMain do
+    pCut;
+end;
+
+procedure TfrmR_Term.tbiRterm_PasteClick(Sender: TObject);
+begin
+  with frmMain do
+    pPaste;
+end;
+
+procedure TfrmR_Term.tbiRterm_RedoClick(Sender: TObject);
+begin
+  with frmMain do
+    pRedo;
+end;
+
+procedure TfrmR_Term.tbiRterm_SelectAllClick(Sender: TObject);
+begin
+  with frmMain do
+    pSelectAll;
+end;
+
+procedure TfrmR_Term.tbiRterm_UndoClick(Sender: TObject);
+begin
+  with frmMain do
+    pUndo;
 end;
 
 procedure TfrmR_Term.psplRIOMoved(Sender: TObject);

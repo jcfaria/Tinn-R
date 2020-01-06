@@ -194,7 +194,6 @@ implementation
 uses
   DB,
   StrUtils,
-  //synEditKeyCmds,
   trSynUtils,
   trUtils,
   uDMSyn,
@@ -364,8 +363,6 @@ begin
       actLowerCaseWord.Enabled             := False;
       actMacroPlay.Enabled                 := False;
       actMacroRecord.Enabled               := False;
-//      actMatchBracket.Enabled              := False;
-//      actDeleteBracket.Enabled             := False;
       actNormalSelect.Enabled              := False;
       actOpenCurrentFile.Enabled           := False;
       actFile_Print.Enabled                := False;
@@ -402,24 +399,12 @@ begin
       tbiPandoc.Enabled                    := False;
       menEdit_Undo.Enabled                 := False;
       menEdit_Redo.Enabled                 := False;
-      menEdit_Copy.Enabled                 := False;
       menEdit_Paste.Enabled                := False;
       menEdit_SelectAll.Enabled            := False;
       pmenEdit_Undo.Enabled                := False;
       pmenEdit_Redo.Enabled                := False;
-      pmenEdit_Copy.Enabled                := False;
       pmenEdit_Paste.Enabled               := False;
       pmenEdit_SelectAll.Enabled           := False;
-//      pmenIO_Undo.Enabled                 := False;
-//      pmenIO_Redo.Enabled                 := False;
-//      pmenIO_Copy.Enabled                 := False;
-//      pmenIO_Paste.Enabled                := False;
-//      pmenIO_SelectAll.Enabled            := False;
-//      pmenLOG_Undo.Enabled                := False;
-//      pmenLOG_Redo.Enabled                := False;
-//      pmenLOG_Copy.Enabled                := False;
-//      pmenLOG_Paste.Enabled               := False;
-//      pmenLOG_SelectAll.Enabled           := False;
       pMinimize_TinnAfterLastFile;
 
       with tUpdateOptions do
@@ -811,8 +796,6 @@ begin
     actLowerCaseWord.Enabled             := True;
     actMacroPlay.Enabled                 := True;
     actMacroRecord.Enabled               := True;
-//    actMatchBracket.Enabled              := True;
-//    actDeleteBracket.Enabled             := True;
     actNormalSelect.Enabled              := True;
     actOpenCurrentFile.Enabled           := True;
     actFile_Print.Enabled                := True;
@@ -843,24 +826,12 @@ begin
     menWebSearchSelRSite.Enabled         := True;
     menEdit_Undo.Enabled                 := True;
     menEdit_Redo.Enabled                 := True;
-    menEdit_Copy.Enabled                 := True;
     menEdit_Paste.Enabled                := True;
     menEdit_SelectAll.Enabled            := True;
     pmenEdit_Undo.Enabled                := True;
     pmenEdit_Redo.Enabled                := True;
-    pmenEdit_Copy.Enabled                := True;
     pmenEdit_Paste.Enabled               := True;
     pmenEdit_SelectAll.Enabled           := True;
-//    pmenIO_Undo.Enabled                 := True;
-//    pmenIO_Redo.Enabled                 := True;
-//    pmenIO_Copy.Enabled                 := True;
-//    pmenIO_Paste.Enabled                := True;
-//    pmenIO_SelectAll.Enabled            := True;
-//    pmenLOG_Undo.Enabled                := True;
-//    pmenLOG_Redo.Enabled                := True;
-//    pmenLOG_Copy.Enabled                := True;
-//    pmenLOG_Paste.Enabled               := True;
-//    pmenLOG_SelectAll.Enabled           := True;
     pMinimize_TinnAfterLastFile;
     synMR.Editor                         := synEditor;
     tbFilter.Enabled                     := True;
@@ -1359,10 +1330,30 @@ end;
 procedure TfrmEditor.synEditorKeyUp(Sender: TObject;
                                     var Key: Word;
                                     Shift: TShiftState);
+var
+  seEditor: TSynEdit;
+
 begin
   if (Sender = synEditor) then frmMain.iSynWithFocus:= 1
                           else frmMain.iSynWithFocus:= 2;
 
+  if sActiveEditor = 'synEditor' then seEditor:= synEditor
+                                 else seEditor:= synEditor2;
+
+  with frmMain do begin
+    actCopyFormatted_HTML.Enabled:= seEditor.SelAvail;
+    actCopyFormatted_RTF.Enabled := seEditor.SelAvail;
+    actCopyFormatted_TEX.Enabled := seEditor.SelAvail;
+    actIndentBlock.Enabled       := seEditor.SelAvail;
+    actInvertSelection.Enabled   := seEditor.SelAvail;
+    actLowerCaseSelection.Enabled:= seEditor.SelAvail;
+    actUnindentBlock.Enabled     := seEditor.SelAvail;
+    actUpperCaseSelection.Enabled:= seEditor.SelAvail;
+    menEdit_Copy.Enabled         := seEditor.SelAvail;
+    menEdit_Cut.Enabled          := seEditor.SelAvail;
+    pmenEdit_Copy.Enabled        := seEditor.SelAvail;
+    pmenEdit_Cut.Enabled         := seEditor.SelAvail;
+  end;
 end;
 
 procedure TfrmEditor.synEditorMouseUp(Sender: TObject;
@@ -1370,9 +1361,30 @@ procedure TfrmEditor.synEditorMouseUp(Sender: TObject;
                                       Shift: TShiftState;
                                       X,
                                       Y: Integer);
+var
+  seEditor: TSynEdit;
+
 begin
   if (Sender = synEditor) then frmMain.iSynWithFocus:= 1
                           else frmMain.iSynWithFocus:= 2;
+
+  if sActiveEditor = 'synEditor' then seEditor:= synEditor
+                                 else seEditor:= synEditor2;
+
+  with frmMain do begin
+    actCopyFormatted_HTML.Enabled:= seEditor.SelAvail;
+    actCopyFormatted_RTF.Enabled := seEditor.SelAvail;
+    actCopyFormatted_TEX.Enabled := seEditor.SelAvail;
+    actIndentBlock.Enabled       := seEditor.SelAvail;
+    actInvertSelection.Enabled   := seEditor.SelAvail;
+    actLowerCaseSelection.Enabled:= seEditor.SelAvail;
+    actUnindentBlock.Enabled     := seEditor.SelAvail;
+    actUpperCaseSelection.Enabled:= seEditor.SelAvail;
+    menEdit_Copy.Enabled         := seEditor.SelAvail;
+    menEdit_Cut.Enabled          := seEditor.SelAvail;
+    pmenEdit_Copy.Enabled        := seEditor.SelAvail;
+    pmenEdit_Cut.Enabled         := seEditor.SelAvail;
+  end;
 end;
 
 procedure TfrmEditor.synEditorReplaceText(Sender: TObject;
@@ -1729,8 +1741,8 @@ begin
   if not bSearchAgain then
     if not frmMain.bSearch_FromCursor then Include(synSearchOptions,
                                                    ssoEntireScope);
-  if bSearchSelectionOnly                then Include(synSearchOptions,
-                                                      ssoSelectedOnly);
+  if bSearchSelectionOnly             then Include(synSearchOptions,
+                                                   ssoSelectedOnly);
   if frmMain.bSearch_WholeWords       then Include(synSearchOptions,
                                                    ssoWholeWord);
 
@@ -1822,7 +1834,7 @@ procedure TfrmEditor.pEnable_Save;
 begin
   if Assigned(synEditor2) then synEditor2.Modified:= True;
 
-  synEditor.Modified                := True;
+  synEditor.Modified             := True;
   frmMain.actFile_Save.Enabled   := True;
   frmMain.actFile_SaveAs.Enabled := True;
   frmMain.actFile_SaveAll.Enabled:= True;

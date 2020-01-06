@@ -1,3 +1,15 @@
+6.1.1.5 (jan/06/2020)
+---------------------
+
+- Some improvements and refinements have been made in the previous version 6.1.1.4.
+
+
+6.1.1.4 (jan/02/2020)
+---------------------
+
+- Many improvements and refinements have been made in the previous version 6.1.1.3.
+
+
 6.1.1.3 (jan/01/2020)
 ---------------------
 

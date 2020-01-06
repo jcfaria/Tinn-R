@@ -111,7 +111,6 @@ type
     cbRRemoveAllObjects: TCheckBox;
     cbRSendAll: TCheckBox;
     cbRSendBlockMarked: TCheckBox;
-    cbRSendClipboard: TCheckBox;
     cbRSendContiguous: TCheckBox;
     cbRSendCursorToBeginningLine: TCheckBox;
     cbRSendCursorToEndLine: TCheckBox;
