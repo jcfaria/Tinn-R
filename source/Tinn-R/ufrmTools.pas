@@ -1116,7 +1116,7 @@ begin
     lbCountries.Enabled:= False;
     with modDados.cdRmirrors do begin
       Filtered:= False;
-      Filter:= 'UPPER(City) Like ' +
+      Filter:= 'UPPER(Host) Like ' +
                UpperCase(QuotedStr('%' + edRmirrors_Filter.Text + '%'));
       Filtered:= True;
     end;
