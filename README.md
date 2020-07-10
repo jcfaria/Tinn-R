@@ -7,8 +7,8 @@ This is the development code of the project **Tinn-R Editor - GUI for R Language
 You should use it if you want to contribute to its development:
 testing unreleased versions, fixing bugs, writing code, writing documentation, etc.
 
-Tinn-R is free, simple but efficient replacement for the basic code editor provided by Rgui.
-The project is coordinate by José Cláudio Faria/UESC/DCET.
+Tinn-R simple but efficient replacement for the basic code editor provided by Rgui.
+The project leader and main developer is José Cláudio Faria/UESC/DCET.
 All users are welcome to make it better!
 
 #### Development Version
@@ -36,6 +36,6 @@ This is how I use it.
 
 #### Where to find the stable version of the project?
 The stable version is available in two repositories
-- https://nbcgib.uesc.br/tinnr/en/ (the main web page)
+- https://tinn-r.org/en/ (the main web page)
 - https://sourceforge.net/projects/tinn-r/ (public repository)
 
