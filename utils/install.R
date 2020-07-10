@@ -4,7 +4,7 @@
 #------------------------------------------------------------------------
 #.. Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 04/09/2019 09:56:06
+# 06/05/2020 19:33:43
 #------------------------------------------------------------------------
 
 # By default it will install/update only binary packages
@@ -30,10 +30,10 @@ try(detach('package:svSocket'),
     silent=TRUE)
 
 # Packages: necessary
-packs <- c('formatR_1.5.zip',
+packs <- c('formatR_1.7.zip',
            'svMisc_1.1.0.zip',
-           'svSocket_0.9-57.zip',
-           'TinnRcom_1.0.20.zip')
+           'svSocket_1.0.0.zip',
+           'TinnRcom_1.0.21.zip')
 
 # Packages: install
 install.packages(packs,

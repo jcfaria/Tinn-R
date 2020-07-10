@@ -1,5 +1,24 @@
 <blockquote>
-  <h5>Tinn-R version 6.01.01.04</h5>
+  <h5>Tinn-R version 6.01.01.06</h5>
+  <h6 class="light italic">09 Mai 2020 - Tinn-R Team</h6>
+</blockquote>
+<ul>
+<li><p>Bug(s) fixed:</p>
+<ul>
+<li><p>All dependencies of the TinnRcom package that are distributed with the Tinn-R setup (formatR, svMisc and svSocket), as well as the TinnRcom package itself, have been rebuilt with the R-devel version (4.1). The startup issues that arose in the current version 4.0 of R have been fixed.</p></li>
+<li><p>A bug associated with the package <code>semPlot</code> was fixed. Thanks to <code>Frank</code> for pointing it out.</p></li>
+</ul></li>
+<li><p>Filter of <code>Tools/R/Mirros</code> from now on will be applied by <code>Host</code>.</p></li>
+</ul>
+
+<style>
+  .bottom-three {
+     margin-bottom: 1.5cm;
+  }
+</style>
+
+<blockquote>
+  <h5>Tinn-R version 6.01.01.05</h5>
   <h6 class="light italic">06 Jan 2020 - Tinn-R Team</h6>
 </blockquote>
 <ul>
@@ -26,12 +45,10 @@
   }
 </style>
 
-<p class="bottom-three">
 <blockquote>
   <h5>Tinn-R version 6.01.01.03</h5>
-  <h6 class="light italic">01 Jan 2020 - Tinn-R Team</h6>
+  <h6 class="light italic">02 Jan 2020 - Tinn-R Team</h6>
 </blockquote>
-</p>
 <ul>
 <li><p>Some parts of the Object Pascal <strong>pipe</strong> were rewritten. It is now faster, stable and robust.</p></li>
 <li><p>The handling of all shortcuts, keystrokes and hotkeys are now centered on a single user interface that is simpler and more efficient than previous options. As result, a new menu option has been created: <code>Options/Shortcuts/keystrokes/hotkeys (map)</code>. It was a very hard and time consuming work, we hope you enjoy the final results.</p></li>
@@ -43,7 +60,7 @@
 </ul></li>
 <li><p>From now on, the shortcut <strong>CTRL + ENTER</strong> (not configurable) is also associated to send line (or selection) from the Editor to the interpreter. The previous use (send the current line and insert a new one) was removed. This was an old request from users but we believe it is no longer used much. Therefore, unless otherwise stated, we don’t wish wish to make this feature available anymore.</p></li>
 <li><p>The option to send the clipboard content, with shortcut <strong>CTRL + Q</strong> by default, to interpreter was removed.</p></li>
-<li><p>The <code>R highlighter</code> was improved, it has new objects and from now on, will not be case sensitive, that is, it will highlight, for example, <strong>LETTERS, letters, CO2, co2, …</strong> in the same way.</p></li>
+<li><p>The <code>R highlighter</code> was improved, it has new objects and from now on, will be case sensitive. That is, it will highlight, for example, <strong>LETTERS, letters, CO2, co2, …</strong>, recognized and different R objects, in the same group with the same attributes.</p></li>
 <li><p>From this version, the instructions stored in <code>R history</code> are only those typed in and submitted directly into <code>Rterm IO</code> interface.</p></li>
 <li><p>The highlighter identifier <code>Note</code> was renamed to <code>Note_0</code>. It makes more sense, since <code>Note_1</code> and <code>Note_2</code> were created in previous version.</p></li>
 <li><p>Due to low usage, all shortcuts (default) associated with Txt2tags to Deplate converters have been removed.</p></li>

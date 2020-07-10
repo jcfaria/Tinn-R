@@ -7,7 +7,7 @@
 #------------------------------------------------------------------------
 #.. Please, do not change if you do not know what you're doing!
 # J.C.Faria - Tinn-R Team
-# 04/09/2019 09:56:06
+# 06/05/2020 19:33:33
 #------------------------------------------------------------------------
 
 # The tcltk package is necessary to show messages inside a TK windows:
@@ -100,14 +100,14 @@ if(!tr_packs_dep ||
   {
     # Packages: necessary
     if(Sys.info()[['sysname']] == 'Windows'){
-      packs <- c('formatR_1.5.zip',
+      packs <- c('formatR_1.7.zip',
                  'svMisc_1.1.0.zip',
-                 'svSocket_0.9-57.zip',
+                 'svSocket_1.0.0.zip',
                  'TinnRcom_1.0.21.zip')
     } else {
-      packs <- c('formatR_1.5.tar.gz',
+      packs <- c('formatR_1.7.tar.gz',
                  'svMisc_1.1.0.tar.gz',
-                 'svSocket_0.9-57.tar.gz',
+                 'svSocket_1.0.0.zip',
                  'TinnRcom_1.0.21.tar.gz')
     }
 

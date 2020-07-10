@@ -1,23 +1,23 @@
-; Tinn-R Inno (Installer) Setup Script
-; By: Tinn-R Team (31/09/2018 08:13:05)
-; Tinn-R: http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
+; Tinn-R Inno (Installer) setup script
+; By: Tinn-R Team (2020/07/01 10:24:05)
+; Tinn-R: https://tinn-r.org/en/
 ; INNO Setup: http://www.innosetup.com
 
 [Setup]
 AppName              = Tinn-R
 AppPublisher         = Tinn-R Team
-AppPublisherURL      = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppSupportURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppUpdatesURL        = http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
-AppVerName           = Tinn-R 6.01.01.05
-AppVersion           = 6.01.01.05
+AppPublisherURL      = https://tinn-r.org/en
+AppSupportURL        = https://tinn-r.org/en
+AppUpdatesURL        = https://tinn-r.org/en
+AppVerName           = Tinn-R 8.1.1.1
+AppVersion           = 8.1.1.1
 AppID                = {{TINN2016-BIOS-PONT-SAPE-183999669100}
 ChangesAssociations  = true
 Compression          = lzma
 DefaultDirName       = {sd}\Tinn-R
 DefaultGroupName     = Tinn-R
 LicenseFile          = .\..\..\doc\licence_gpl3.txt
-OutputBaseFilename   = Tinn-R_6.01.01.06_setup
+OutputBaseFilename   = Tinn-R_8.1.1.1_setup
 OutputDir            = .\bin
 SolidCompression     = yes
 SetupIconFile        = .\..\..\res\tinn48.ico
@@ -26,7 +26,7 @@ WizardImageFile      = .\..\..\res\setup.bmp
 WizardSmallImageFile = .\..\..\res\setup_small.bmp
 
 [Tasks]
-Name: desktopicon;          Description: {cm:CreateDesktopIcon};                           GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
+Name: desktopicon;          Description: {cm:CreateDesktopIcon};                           GroupDescription: {cm:AdditionalIcons};  Flags: unchecked
 Name: quicklaunchicon;      Description: {cm:CreateQuickLaunchIcon};                       GroupDescription: {cm:AdditionalIcons}
 Name: history_association;  Description: &Associate (*.Rhistory, *.rhistory) - R history;  GroupDescription: Files association:
 Name: q_association;        Description: &Associate (*.Q, *.q) - S script;                 GroupDescription: Files association:
@@ -36,13 +36,13 @@ Name: rhtml_association;    Description: &Associate (*.Rhtml, *.rhtml) - R html;
 Name: rmd_association;      Description: &Associate (*.Rmd, *.rmd) - R markdown;           GroupDescription: Files association:
 Name: rnw_association;      Description: &Associate (*.Rnw, *.rnw) - Sweave;               GroupDescription: Files association:
 Name: snw_association;      Description: &Associate (*.Snw, *.snw) - Sweave;               GroupDescription: Files association:
-Name: tex_association;      Description: &Associate (*.sty) - LaTeX;                       GroupDescription: Files association:; Flags: unchecked
-Name: tex_association;      Description: &Associate (*.tex) - LaTeX;                       GroupDescription: Files association:; Flags: unchecked
+Name: tex_association;      Description: &Associate (*.sty) - LaTeX;                       GroupDescription: Files association:;    Flags: unchecked
+Name: tex_association;      Description: &Associate (*.tex) - LaTeX;                       GroupDescription: Files association:;    Flags: unchecked
 Name: tps_association;      Description: &Associate (*.tps) - Tinn-R project;              GroupDescription: Files association:
-Name: txt_association;      Description: &Associate (*.txt) - Text;                        GroupDescription: Files association:; Flags: unchecked
+Name: txt_association;      Description: &Associate (*.txt) - Text;                        GroupDescription: Files association:;    Flags: unchecked
 
 [INI]
-Filename: {app}\Tinn-R.url; Section: InternetShortcut; Key: URL; String: http://nbcgib.uesc.br/lec/software/editores/tinn-r/en
+Filename: {app}\Tinn-R.url; Section: InternetShortcut; Key: URL; String: https://tinn-r.org/en
 
 [Files]
 Source: .\..\..\bin\Tinn-R.exe.manifest;             DestDir: {app}\bin
@@ -54,12 +54,12 @@ Source: .\..\..\doc\textdiff.hlp;                    DestDir: {app}\doc
 Source: .\..\..\doc\Tinn-R_recognized words.R;       DestDir: {app}\doc
 Source: .\..\..\doc\User_guide.pdf;                  DestDir: {app}\doc
 Source: .\..\..\latex\latex.zip;                     DestDir: {app}\latex
-Source: .\..\..\packages\formatR_1.5.tar.gz;         DestDir: {app}\packages
-Source: .\..\..\packages\formatR_1.5.zip;            DestDir: {app}\packages
+Source: .\..\..\packages\formatR_1.7.tar.gz;         DestDir: {app}\packages
+Source: .\..\..\packages\formatR_1.7.zip;            DestDir: {app}\packages
 Source: .\..\..\packages\svMisc_1.1.0.tar.gz;        DestDir: {app}\packages
 Source: .\..\..\packages\svMisc_1.1.0.zip;           DestDir: {app}\packages
-Source: .\..\..\packages\svSocket_0.9-57.tar.gz;     DestDir: {app}\packages
-Source: .\..\..\packages\svSocket_0.9-57.zip;        DestDir: {app}\packages
+Source: .\..\..\packages\svSocket_1.0.0.tar.gz;      DestDir: {app}\packages
+Source: .\..\..\packages\svSocket_1.0.0.zip;         DestDir: {app}\packages
 Source: .\..\..\packages\TinnRcom_1.0.21.tar.gz;     DestDir: {app}\packages
 Source: .\..\..\packages\TinnRcom_1.0.21.zip;        DestDir: {app}\packages
 Source: .\..\..\project\project.zip;                 DestDir: {app}\project
@@ -126,8 +126,8 @@ Root: HKCR; Subkey: .tps;      ValueType: string; ValueData: Tinn-R; Flags: unin
 Root: HKCR; Subkey: .txt;      ValueType: string; ValueData: Tinn-R; Flags: uninsdeleteValue;                       Tasks: txt_association
 
 ; Program
-Root: HKCR; Subkey: Tinn-R; ValueType: string; ValueData: Tinn-R; Flags: uninsdeletekey deletekey
-Root: HKCR; Subkey: Tinn-R\DefaultIcon;        ValueType: string; ValueData: {app}\bin\Tinn-R.exe,0; Flags: uninsdeletekey deletekey
+Root: HKCR; Subkey: Tinn-R;                    ValueType: string; ValueData: Tinn-R;                            Flags: uninsdeletekey deletekey
+Root: HKCR; Subkey: Tinn-R\DefaultIcon;        ValueType: string; ValueData: {app}\bin\Tinn-R.exe,0;            Flags: uninsdeletekey deletekey
 Root: HKCR; Subkey: Tinn-R\shell\open\command; ValueType: string; ValueData: """{app}\bin\Tinn-R.exe"" ""%1"""; Flags: uninsdeletekey deletekey
 
 [Code]
@@ -147,7 +147,8 @@ var
 begin
   if not ShellExec('open', 
                    //'http://nbcgib.uesc.br/lec/software/editores/tinn-r/en',
-                   'https://nbcgib.uesc.br/tinnr/en/',
+                   //'https://nbcgib.uesc.br/tinnr/en/',
+                   'https://tinn-r.org/en/',
                    '', 
                    '', 
                    SW_SHOW, 

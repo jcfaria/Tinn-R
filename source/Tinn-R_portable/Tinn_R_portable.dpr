@@ -114,7 +114,8 @@ uses
   ufrmUpdater in '..\Tinn-R\ufrmUpdater.pas' {frmUpdater},
   uModDados in '..\Tinn-R\uModDados.pas' {modDados: TDataModule},
   ufrmSKH_map in '..\Tinn-R\ufrmSKH_map.pas' {frmSKH_Map_Dlg},
-  ufrmSKH_Manager in '..\Tinn-R\ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg}
+  ufrmSKH_Manager in '..\Tinn-R\ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg},
+  ufrmLM_Dlg in '..\Tinn-R\ufrmLM_Dlg.pas' {frmLM_Dlg}
   ;
 
 {$R Tinn_R_portable.KLR}

@@ -114,7 +114,8 @@ uses
   ufrmUpdater in 'ufrmUpdater.pas' {frmUpdater},
   uModDados in 'uModDados.pas' {modDados: TDataModule},
   ufrmSKH_map in 'ufrmSKH_map.pas' {frmSKH_Map_Dlg},
-  ufrmSKH_Manager in 'ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg};
+  ufrmSKH_Manager in 'ufrmSKH_Manager.pas' {frmSKH_Manager_Dlg},
+  ufrmLM_Dlg in 'ufrmLM_Dlg.pas' {frmLM_Dlg};
 
 {$R Tinn_R.KLR}
 {$R *.RES}
@@ -238,10 +239,10 @@ var
   copyDataStruct: TCopyDataStruct;
 
 begin
-  copyDataStruct.dwData:= 0; //Use it to identify the message contents
+  copyDataStruct.dwData:= 0; // Use it to identify the message contents
   //copyDataStruct.cbData:= 1 + Length(sToSend);
 
-  copyDataStruct.cbData:= (length(sToSend) + 1) * sizeof(char); //Radoslaw Bujak
+  copyDataStruct.cbData:= (length(sToSend) + 1) * sizeof(char);  // Radoslaw Bujak
 
   copyDataStruct.lpData:= PChar(sToSend);
 
@@ -261,7 +262,7 @@ begin
   // The condition below avoid multiples instances of Tinn-R!
   // If Tinn-R IS RUNNIG and the user select more than one
   // associated file from win_explorer.
-  //PS: NOT CHANGE THIS PLACE
+  // PS: NOT CHANGE THIS PLACE
   if (hPrevious <> 0) then begin
     SetForegroundWindow(hPrevious);
 

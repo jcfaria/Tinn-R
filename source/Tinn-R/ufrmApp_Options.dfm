@@ -146,6 +146,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'General'
         ImageIndex = 3
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox4: TGroupBox
           Left = 0
           Top = 0
@@ -414,6 +418,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Appearance'
         ImageIndex = 24
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox20: TGroupBox
           Left = 0
           Top = 0
@@ -515,6 +523,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Files (extensions)'
         ImageIndex = 21
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox18: TGroupBox
           Left = 0
           Top = 0
@@ -542,6 +554,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Dock/Float (Tools and Rterm)'
         ImageIndex = 5
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox8: TGroupBox
           Left = 0
           Top = 0
@@ -623,6 +639,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Display'
         ImageIndex = 21
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object gbRightEdge: TGroupBox
           Left = 0
           Top = 0
@@ -932,6 +952,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Advanced'
         ImageIndex = 22
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Label23: TLabel
           Left = 0
           Top = 320
@@ -1237,7 +1261,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 0
             Items.Strings = (
               'Vertical Line'
@@ -1251,7 +1275,7 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
             Width = 210
             Height = 21
             Style = csDropDownList
-            ItemHeight = 13
+            ItemHeight = 0
             TabOrder = 1
             Items.Strings = (
               'Vertical Line'
@@ -1265,6 +1289,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Encoding/EOL'
         ImageIndex = 25
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox25: TGroupBox
           Left = 0
           Top = 228
@@ -1355,6 +1383,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Path and options'
         ImageIndex = 8
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object lblURLR: TLabel
           Left = 0
           Top = 379
@@ -1588,6 +1620,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Installed'
         ImageIndex = 27
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GroupBox11: TGroupBox
           Left = 0
           Top = 0
@@ -1684,6 +1720,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Basic'
         ImageIndex = 9
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object gpbMaxDeparseLength: TGroupBox
           Left = 0
           Top = 174
@@ -2012,7 +2052,6 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           ParentCtl3D = False
           ParentFont = False
           TabOrder = 1
-          ExplicitTop = 158
           object cbRSetWorkDirectory: TCheckBox
             Left = 11
             Top = 15
@@ -2187,6 +2226,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Rterm'
         ImageIndex = 14
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgRterm: TJvgPageControl
           Left = 0
           Top = 0
@@ -2233,6 +2276,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
           object TabSheet1: TTabSheet
             Caption = 'Options'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label28: TLabel
               Left = 0
               Top = 421
@@ -2385,6 +2432,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet2: TTabSheet
             Caption = 'Error'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label1: TLabel
               Left = 0
               Top = 93
@@ -2432,6 +2483,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Rgui/PuTTY'
         ImageIndex = 12
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgRgui_PuTTY: TJvgPageControl
           Left = 0
           Top = 0
@@ -2477,6 +2532,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
           object TabSheet3: TTabSheet
             Caption = 'Options'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label33: TLabel
               Left = 0
               Top = 436
@@ -2715,6 +2774,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet4: TTabSheet
             Caption = 'Recognition'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object rdgRecognition_Caption: TRadioGroup
               Left = 0
               Top = 0
@@ -2766,6 +2829,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Packages'
         ImageIndex = 26
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgPackages: TJvgPageControl
           Left = 0
           Top = 0
@@ -2810,6 +2877,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
           object TabSheet5: TTabSheet
             Caption = 'Library'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label37: TLabel
               Left = 0
               Top = 203
@@ -2891,6 +2962,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet6: TTabSheet
             Caption = 'TinnRcom'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label30: TLabel
               Left = 0
               Top = 171
@@ -2971,6 +3046,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet7: TTabSheet
             Caption = 'svSocket'
             ImageIndex = 2
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object Label39: TLabel
               Left = 0
               Top = 241
@@ -3069,6 +3148,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
                     Options = [ftoAutoFontDirection, ftoExcludeGlyphs]
                     object tbsIPLocal: TTabSheet
                       Caption = 'Local'
+                      ExplicitLeft = 0
+                      ExplicitTop = 0
+                      ExplicitWidth = 0
+                      ExplicitHeight = 0
                       object Label2: TLabel
                         Left = 5
                         Top = 3
@@ -3107,6 +3190,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
                     object tbsIPRemote: TTabSheet
                       Caption = 'Remote'
                       ImageIndex = 1
+                      ExplicitLeft = 0
+                      ExplicitTop = 0
+                      ExplicitWidth = 0
+                      ExplicitHeight = 0
                       object Label14: TLabel
                         Left = 5
                         Top = 3
@@ -3187,6 +3274,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet8: TTabSheet
             Caption = 'formatR'
             ImageIndex = 3
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object GroupBox15: TGroupBox
               Left = 0
               Top = 91
@@ -3278,6 +3369,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet9: TTabSheet
             Caption = 'knitr'
             ImageIndex = 4
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object GroupBox26: TGroupBox
               Left = 0
               Top = 91
@@ -3342,6 +3437,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Conversion'
         ImageIndex = 15
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgProcessing_conversion: TJvgPageControl
           Left = 0
           Top = 0
@@ -3387,6 +3486,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet11: TTabSheet
             Caption = 'Pandoc'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object lblURLPandoc: TLabel
               Left = 0
               Top = 100
@@ -3452,6 +3555,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet12: TTabSheet
             Caption = 'Txt2tags'
             ImageIndex = 2
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object lblURLTxt2tags: TLabel
               Left = 0
               Top = 284
@@ -3603,6 +3710,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           end
           object TabSheet10: TTabSheet
             Caption = 'Deplate'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object lblURLDeplate: TLabel
               Left = 0
               Top = 284
@@ -3755,6 +3866,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet13: TTabSheet
             Caption = 'More'
             ImageIndex = 3
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object gpbConversionMore: TGroupBox
               Left = 0
               Top = 0
@@ -3785,6 +3900,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
         Caption = 'Latex'
         ImageIndex = 18
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object pgProcessing_Latex: TJvgPageControl
           Left = 0
           Top = 0
@@ -3830,6 +3949,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet15: TTabSheet
             Caption = 'PDF'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object gpbPDFParameters: TGroupBox
               Left = 0
               Top = 0
@@ -3922,6 +4045,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           end
           object TabSheet14: TTabSheet
             Caption = 'DVI'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object gpbDVIParameters: TGroupBox
               Left = 0
               Top = 0
@@ -4015,6 +4142,10 @@ object frmApp_Options_Dlg: TfrmApp_Options_Dlg
           object TabSheet16: TTabSheet
             Caption = 'More'
             ImageIndex = 2
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object gpbLatexOptions: TGroupBox
               Left = 0
               Top = 0

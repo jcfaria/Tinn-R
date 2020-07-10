@@ -72,6 +72,8 @@ type
     synAboutDonation: TSynEdit;
     im1: TImage;
     im2: TImage;
+    tbsLicensing: TTabSheet;
+    synLicensing: TSynEdit;
 
     procedure bbHelpClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -97,6 +99,8 @@ type
     procedure synAboutCreditsKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure synAboutDonationKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure pgAboutChange(Sender: TObject);
+    procedure synLicensingClick(Sender: TObject);
+    procedure synLicensingKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 
   private
     { Private declarations }
@@ -159,7 +163,9 @@ begin
                      //' ' +
                      //'RC';
 
-  pgAbout.ActivePage:= tbsAboutVersion;
+  with frmMain do
+    if not bLicencing_Focus then pgAbout.ActivePage:= tbsAboutVersion
+                            else pgAbout.ActivePage:= tbsLicensing;
 end;
 
 procedure TfrmAbout.lblURLTinnClick(Sender: TObject);
@@ -200,8 +206,10 @@ end;
 
 procedure TfrmAbout.lblURLWebPageClick(Sender: TObject);
 begin
+// History of the project websites :)
 //  pOpen_Url('http://nbcgib.uesc.br/lec/software/editores/tinn-r/en');
-  pOpen_Url('https://nbcgib.uesc.br/tinnr/en/');
+//  pOpen_Url('https://nbcgib.uesc.br/tinnr/en/');
+  pOpen_Url('https://tinn-r.org/en/');
 end;
 
 procedure TfrmAbout.lblURLWebPageMouseMove(Sender: TObject;
@@ -234,22 +242,6 @@ end;
 procedure TfrmAbout.lblURLNotesClick(Sender: TObject);
 begin
   pOpen_Url('http://notes.codigolivre.org.br/');
-end;
-
-function TfrmAbout.fMessageDlg(const sMsg: string;
-                               DlgType: TMsgDlgType;
-                               Buttons: TMsgDlgButtons;
-                               HelpCtx: Integer): Integer;
-begin
-  with CreateMessageDialog(sMsg,
-                           DlgType,
-                           Buttons) do
-    try
-      Position:= poOwnerFormCenter;
-      Result:= ShowModal
-    finally
-      Free;
-    end
 end;
 
 procedure TfrmAbout.synAboutAknowledgmentsClick(Sender: TObject);
@@ -291,6 +283,22 @@ end;
 
 // The four procedures below are a bit redundant, but are working well.
 procedure TfrmAbout.synAboutProjectKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if (Shift = [ssCtrl]) and
+     (Key = VK_TAB) then pCtrl_Tab;
+
+  if (Shift = [ssCtrl, ssShift]) and
+     (Key = VK_TAB) then pCtrl_Tab(False);
+
+  Key:= VK_PAUSE;
+end;
+
+procedure TfrmAbout.synLicensingClick(Sender: TObject);
+begin
+  frmMain.synURIOpener.Editor:= synLicensing;
+end;
+
+procedure TfrmAbout.synLicensingKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if (Shift = [ssCtrl]) and
      (Key = VK_TAB) then pCtrl_Tab;
@@ -403,29 +411,45 @@ begin
                            else ActiveLineColor:= TColor(clNone);
   end;
 
+  with synLicensing do begin
+    OnPaintTransient:= TSyn_Transient.pSyn_PaintTransient;
+    if frmMain.bActiveLine then ActiveLineColor:= TColor(frmMain.clActiveLine)
+                           else ActiveLineColor:= TColor(clNone);
+  end;
+
   // Update the appearance based in the editor
   with frmMain.coEditor do begin
     AssignTo(synAboutProject);
     AssignTo(synAboutAknowledgments);
     AssignTo(synAboutCredits);
     AssignTo(synAboutDonation);
+    AssignTo(synLicensing);
   end;
 
   synAboutProject.Highlighter       := dmSyn.synURI;
   synAboutAknowledgments.Highlighter:= dmSyn.synURI;
   synAboutCredits.Highlighter       := dmSyn.synURI;
   synAboutDonation.Highlighter      := dmSyn.synURI;
-
-  synAboutProject.Gutter.ShowLineNumbers:= False;
+  synLicensing.Highlighter          := dmSyn.synURI;
+  
+  synAboutProject.Gutter.ShowLineNumbers       := False;
   synAboutAknowledgments.Gutter.ShowLineNumbers:= False;
-  synAboutCredits.Gutter.ShowLineNumbers:= False;
-  synAboutDonation.Gutter.ShowLineNumbers:= False;
+  synAboutCredits.Gutter.ShowLineNumbers       := False;
+  synAboutDonation.Gutter.ShowLineNumbers      := False;
+  synLicensing.Gutter.ShowLineNumbers          := False;
 
-  // I think it is better to fix the font size here!
+  // I think it is better to fix the font (name e size) here!
+  synAboutProject.Font.Name       := 'Consolas';
+  synAboutAknowledgments.Font.Name:= 'Consolas';
+  synAboutCredits.Font.Name       := 'Consolas';
+  synAboutDonation.Font.Name      := 'Consolas';
+  synLicensing.Font.Name          := 'Consolas';
+
   synAboutProject.Font.Size       := 11;
   synAboutAknowledgments.Font.Size:= 11;
   synAboutCredits.Font.Size       := 11;
   synAboutDonation.Font.Size      := 11;
+  synLicensing.Font.Size          := 11;
 end;
 
 procedure TfrmAbout.CMDialogKey(var Message: TCMDialogKey);
@@ -443,6 +467,22 @@ begin
     Message.Result:= 1;
   end
   else inherited;
+end;
+
+function TfrmAbout.fMessageDlg(const sMsg: string;
+                               DlgType: TMsgDlgType;
+                               Buttons: TMsgDlgButtons;
+                               HelpCtx: Integer): Integer;
+begin
+  with CreateMessageDialog(sMsg,
+                           DlgType,
+                           Buttons) do
+    try
+      Position:= poOwnerFormCenter;
+      Result:= ShowModal
+    finally
+      Free;
+    end
 end;
 
 end.

@@ -45,12 +45,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Dialogs, Classes, Clipbrd, Registry, Graphics, Controls, StrUtils,
-  ActiveX, ShlObj, ComObj, PerlRegEx, WinInet, StdCtrls;
+  ActiveX, ShlObj, ComObj, PerlRegEx, WinInet, StdCtrls, Variants;
 
 type
   TCharSet = set of Char;
   TGuiType = (gtJGR, gtUnknown);
-
+  KNOWNFOLDERID = TGuid;
+  
   function fCheck_Rversion(sText: string): boolean;
   function fClipboardTxt_ToFile (sFileTXT: string): boolean;
   function fContrast_Color(FontC: TColor): TColor;
@@ -68,6 +69,7 @@ type
   function fFile_ToString(sPath: string): string;
   function fGet_Association(const DocFileName: string): string;
   function fGet_EnvVariable(Name: string; User: boolean = True): string;
+  function fGet_MotherBoard_Serial: string;
   function fGet_PosMatching_Backward(Str: string; parIni, parFim: string): integer;
   function fGet_PosMatching_Forward(Str: string; parIni, parFim: string): integer;
   function fGet_Registry_InstallPath(KeyName: string): string;
@@ -2143,7 +2145,7 @@ begin
   Result:= iFileCount;
 end;
 
-// From: http://www.delphipages.com/forum/showthread.php?t=94936 
+// From: http://www.delphipages.com/forum/showthread.php?t=94936
 procedure pCopy_Folder(CopyFrom, CopyTo, CopyMask: String);
 var
   FO: TSHFileOpStruct;
@@ -2158,9 +2160,52 @@ begin
   ShFileOperation(FO);
 end;
 
-{sRVersion:= Copy(sPath_R,
-                  LastDelimiter('\',
-                                sPath_R) + 1,
-                  Length(sPath_R));}
+// Adapted from: https://delphisourcecodes.blogspot.com/2011/12/how-to-get-motherboard-id-or-serial.html?showCo
+function fGet_MotherBoard_Serial: string;
+var
+  ovWMIService,
+   ovItem,
+   ovItems: OLEVariant;
+
+  evEnum: IEnumvariant;
+
+  lValue: Longword;
+
+  function fGet_WMIObject(const sObject_Name: string): IDispatch;
+  var
+    iEaten : Integer;
+    BindCtx: IBindCtx;
+    Moniker: IMoniker;
+
+  begin
+    OleCheck(CreateBindCtx(0,
+                           bindCtx));
+
+    OleCheck(MkParseDisplayName(BindCtx,
+                                StringToOleStr(sObject_Name),
+                                iEaten,
+                                Moniker));
+
+    OleCheck(Moniker.BindToObject(BindCtx,
+                                  nil,
+                                  IDispatch,
+                                  Result));
+  end;
+
+begin
+  Result:= '';
+  ovWMIService:= fGet_WMIObject('winmgmts:\\localhost\root\cimv2');
+
+  ovItems:= ovWMIService.ExecQuery('SELECT SerialNumber FROM Win32_BaseBoard',
+                                   'WQL',
+                                   0);
+
+  evEnum:= IUnknown(ovItems._NewEnum) as IEnumVariant;
+
+  if (evEnum.Next(1,
+                  ovItem,
+                  lValue) = 0) then Result:= VarToStr(ovItem.SerialNumber);
+end;
+
 
 end.

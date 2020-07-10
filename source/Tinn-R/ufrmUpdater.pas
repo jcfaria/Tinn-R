@@ -245,7 +245,8 @@ begin
     end;
 
     try
-      sDownload_Link:= 'http://nbcgib.uesc.br/lec/update/' +
+      sDownload_Link:= //'http://nbcgib.uesc.br/lec/update/' +
+                       'http://tinn-r.org/update/' +
                        sFileName;
 
       sDownload_Size:= fGetDownloadSize;
@@ -265,7 +266,8 @@ procedure TfrmUpdater.lWhatIsNewClick(Sender: TObject);
 begin
   try
     HlinkNavigateString(nil,
-                        'http://nbcgib.uesc.br/lec/software/editores/tinn-r/en#h9-what-is-new');
+                        //'https://nbcgib.uesc.br/tinnr/en/download#patch'
+                        'https://tinn-r.org/en/download#patch');
   except
     on E: Exception do
       Showmessage('ERROR: ' + E.Message);

@@ -52,5 +52,9 @@
     <Transaction>2019/11/25 14:47:26.004.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRServer.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Server.dfm</Transaction>
     <Transaction>2019/11/25 14:50:13.070.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Term.pas</Transaction>
     <Transaction>2019/11/25 14:50:13.070.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmRterm.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmR_Term.dfm</Transaction>
+    <Transaction>2020/01/13 10:21:26.789.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Unit1.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLicence_Manager_Dlg.pas</Transaction>
+    <Transaction>2020/01/13 10:21:26.789.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\Unit1.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLicence_Manager_Dlg.dfm</Transaction>
+    <Transaction>2020/01/13 13:37:12.918.pas,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLicence_Manager_Dlg.pas=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLM_Dlg.pas</Transaction>
+    <Transaction>2020/01/13 13:37:12.918.dfm,C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLicence_Manager_Dlg.dfm=C:\Users\jcfaria\Documents\GitHub\Tinn-R\source\Tinn-R\ufrmLM_Dlg.dfm</Transaction>
   </Transactions>
 </BorlandProject>

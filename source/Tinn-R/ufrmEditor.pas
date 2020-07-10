@@ -407,7 +407,7 @@ begin
       pmenEdit_SelectAll.Enabled           := False;
       pMinimize_TinnAfterLastFile;
 
-      with tUpdateOptions do
+      with tOptions_Update do
         if (Enabled) then Enabled:= False;
 
       pSet_ToolbarProcessing('fileAllClosed.disableAll');  // will disable all Deplate, Txt2tags and MikTeX options
@@ -841,7 +841,7 @@ begin
 
     if (synEditor.ReadOnly = False) then actFile_Save.Enabled:= True;
 
-    with tUpdateOptions do  // Activate the timer who control the R options..
+    with tOptions_Update do  // Activate the timer who control the R options..
       if not Enabled then Enabled:= True;
 
     stbMain.Panels[8].Text:= EmptyStr;
@@ -3034,20 +3034,6 @@ begin
   end;
 end;
 
-function TfrmEditor.fMessageDlg(const Msg: string;
-                                DlgType: TMsgDlgType;
-                                Buttons: TMsgDlgButtons;
-                                HelpCtx: Integer): Integer;
-begin
-  with CreateMessageDialog(Msg, DlgType, Buttons) do
-    try
-      Position:= poOwnerFormCenter;
-      Result:= ShowModal;
-    finally
-      Free;
-    end
-end;
-
 procedure TfrmEditor.synEditorDragOver(Sender,
                                        Source: TObject;
                                        X,
@@ -3123,6 +3109,20 @@ procedure TfrmEditor.synEditorEnter(Sender: TObject);
 begin
   with frmMain do
     actRtermEditorSetFocus.Checked:= True;
+end;
+
+function TfrmEditor.fMessageDlg(const Msg: string;
+                                DlgType: TMsgDlgType;
+                                Buttons: TMsgDlgButtons;
+                                HelpCtx: Integer): Integer;
+begin
+  with CreateMessageDialog(Msg, DlgType, Buttons) do
+    try
+      Position:= poOwnerFormCenter;
+      Result:= ShowModal;
+    finally
+      Free;
+    end
 end;
 
 (*

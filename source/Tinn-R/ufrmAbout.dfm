@@ -5,7 +5,7 @@ object frmAbout: TfrmAbout
   AlphaBlendValue = 200
   BorderStyle = bsDialog
   Caption = 'About'
-  ClientHeight = 346
+  ClientHeight = 348
   ClientWidth = 614
   Color = 16250871
   TransparentColorValue = clMaroon
@@ -24,7 +24,7 @@ object frmAbout: TfrmAbout
   TextHeight = 13
   object bbtOK: TBitBtn
     Left = 534
-    Top = 315
+    Top = 319
     Width = 75
     Height = 25
     Caption = 'O&K'
@@ -43,13 +43,13 @@ object frmAbout: TfrmAbout
     Left = 0
     Top = 0
     Width = 614
-    Height = 312
-    ActivePage = tbsAboutProject
+    Height = 318
+    ActivePage = tbsAboutVersion
     Align = alTop
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
     Font.Height = -11
-    Font.Name = 'MS Sans Serif'
+    Font.Name = 'Consolas'
     Font.Style = []
     ParentFont = False
     Style = tsFlatButtons
@@ -197,12 +197,12 @@ object frmAbout: TfrmAbout
         Left = 0
         Top = 0
         Width = 606
-        Height = 284
+        Height = 290
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Courier New'
+        Font.Height = -15
+        Font.Name = 'Consolas'
         Font.Style = []
         TabOrder = 0
         OnClick = synAboutProjectClick
@@ -248,12 +248,12 @@ object frmAbout: TfrmAbout
         Left = 0
         Top = 0
         Width = 606
-        Height = 284
+        Height = 290
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Courier New'
+        Font.Height = -15
+        Font.Name = 'Consolas'
         Font.Style = []
         TabOrder = 0
         OnClick = synAboutAknowledgmentsClick
@@ -309,12 +309,12 @@ object frmAbout: TfrmAbout
         Left = 0
         Top = 0
         Width = 606
-        Height = 284
+        Height = 290
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Courier New'
+        Font.Height = -15
+        Font.Name = 'Consolas'
         Font.Style = []
         TabOrder = 0
         OnClick = synAboutCreditsClick
@@ -379,12 +379,12 @@ object frmAbout: TfrmAbout
         Left = 0
         Top = 0
         Width = 606
-        Height = 284
+        Height = 290
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Courier New'
+        Font.Height = -15
+        Font.Name = 'Consolas'
         Font.Style = []
         TabOrder = 0
         OnClick = synAboutDonationClick
@@ -398,17 +398,85 @@ object frmAbout: TfrmAbout
         Gutter.Visible = False
         Gutter.Width = 0
         Lines.UnicodeStrings = 
-          'Tinn-R Editor - GUI for R Language and Environment'#13#10'is a project' +
-          ' under GPL and distributed as freeware.'#13#10#13#10'Since creating and ma' +
-          'intaining the project involve many'#13#10'costs, donations are welcome' +
-          '. If you wish to express your '#13#10'appreciation and to make a donat' +
-          'ion, make a credit to:'#13#10'   -------------------------------------' +
-          '-------------'#13#10'      JOS'#201' CL'#193'UDIO FARIA'#13#10'   --------------------' +
-          '------------------------------'#13#10'      BANCO SANTANDER (BRASIL) S' +
-          '.A'#13#10'      AG: 3150'#13#10'      CC: 01088351-7'#13#10'      CPF: 471.262.057' +
-          '-91'#13#10'      IBAN: BR57 9040 0888 0315 0001 0883 517 C'#13#10'      SWIF' +
-          'T: BSCMBRSP'#13#10'   ------------------------------------------------' +
-          '--'
+          'Tinn-R Editor - GUI for R Language and Environment is a project'#13 +
+          #10'under GPL and distributed as freeware for educational purposes ' +
+          #13#10'(teachers and students) of any level.'#13#10#13#10'Since creating and ma' +
+          'intaining the project involve many costs, '#13#10'donations are welcom' +
+          'e! If you wish to express your appreciation'#13#10'make a donation and' +
+          ' let us know: tinn-r.org.gmail.com.'#13#10'   ------------------------' +
+          '--------------------------'#13#10'      BENEFICIARY'#13#10'         IBAN: BR' +
+          '57 9040 0888 0315 0001 0883 517 C'#13#10'         SWIFT: BSCMBRSP'#13#10'   ' +
+          '      Account name: JOS'#201' CL'#193'UDIO FARIA'#13#10'         Account number:' +
+          ' 01088351-7'#13#10'         Social Identifier: 471.262.057-91 (C.P.F)'#13 +
+          #10#13#10'      BANK DETAILS'#13#10'         BANCO SANTANDER (BRASIL) S.A'#13#10'  ' +
+          '       Agency: 3150'#13#10'         Ilh'#233'us/Bahia/Brasil'#13#10'   ----------' +
+          '----------------------------------------'
+        ReadOnly = True
+        WordWrap = True
+        FontSmoothing = fsmNone
+        RemovedKeystrokes = <
+          item
+            Command = ecContextHelp
+            ShortCut = 112
+          end>
+        AddedKeystrokes = <
+          item
+            Command = ecContextHelp
+            ShortCut = 16496
+          end>
+      end
+    end
+    object tbsLicensing: TTabSheet
+      Caption = 'Licensing'
+      ImageIndex = 5
+      object synLicensing: TSynEdit
+        Left = 0
+        Top = 0
+        Width = 606
+        Height = 290
+        Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Consolas'
+        Font.Style = []
+        TabOrder = 0
+        OnClick = synLicensingClick
+        OnKeyDown = synLicensingKeyDown
+        BorderStyle = bsNone
+        Gutter.Font.Charset = DEFAULT_CHARSET
+        Gutter.Font.Color = clWindowText
+        Gutter.Font.Height = -11
+        Gutter.Font.Name = 'Terminal'
+        Gutter.Font.Style = []
+        Gutter.Visible = False
+        Gutter.Width = 0
+        Lines.UnicodeStrings = 
+          'Tinn-R project remains free for use in the following sectors:'#13#10'e' +
+          'ducational, governmental and non-governmental organizations '#13#10'de' +
+          'dicated to the wildlife management and fishing resources.'#13#10'For t' +
+          'hese sectors, request a free license (renewed annually).'#13#10#13#10'We i' +
+          'nvite the users to give financial support to the project!'#13#10#13#10'The' +
+          're are two options, both supplies a licence (renewed annually):'#13 +
+          #10'I - Donation (project friends)'#13#10'    - Minimum value: $50'#13#10'    -' +
+          ' Suport: project list (discussion group)'#13#10'    - Instructions:'#13#10' ' +
+          '     - Help/About/Donation'#13#10'      - https://nbcgib.uesc.br/tinnr' +
+          '/en/donation'#13#10#13#10'II - Purchase (person or entity)'#13#10'      - Value:' +
+          ' $100'#13#10'      - Suport: priority (if necessary with remote softwa' +
+          're)'#13#10#13#10'                            JUSTIFICATIONS'#13#10'Tinn-R was cr' +
+          'eated and maintained in the academic context. '#13#10'However, as the ' +
+          'leader and main developer of the project, I'#39'm close'#13#10'to ending m' +
+          'y activities on the academic environment.'#13#10#13#10'With the contributi' +
+          'on of financial resources, it is intended to expand'#13#10'the project' +
+          #39's resources and make it multi-platform. The technology is '#13#10'ava' +
+          'ilable (ObjectPascal with Delphi IDE) but not free. The proposal' +
+          ' is '#13#10'to add paid human resources to the project for some necess' +
+          'ary and '#13#10'laborious tasks.'#13#10#13#10'In time, we have been porting the ' +
+          'main features of the Tinn-R'#13#10'project to a new platform (ObjectPa' +
+          'scal with Lazarus IDE). '#13#10'The new project (R Freedon) is under d' +
+          'evelopment and available '#13#10'on GitHub. We believe that in this to' +
+          'tally free platform of '#13#10'development, the project can receive th' +
+          'e collaboration of a larger '#13#10'number of programmers.'
         ReadOnly = True
         WordWrap = True
         FontSmoothing = fsmNone
@@ -427,7 +495,7 @@ object frmAbout: TfrmAbout
   end
   object bbHelp: TBitBtn
     Left = 459
-    Top = 315
+    Top = 319
     Width = 75
     Height = 25
     Caption = '&Help'

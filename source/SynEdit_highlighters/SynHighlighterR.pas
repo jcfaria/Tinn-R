@@ -3600,7 +3600,8 @@ procedure TSynRSyn.String34Proc;
     Result:= False;
 
     case fLine[Run] of
-      #34: if fLine[Run-1] = '\' then Result:= False
+      #34: if (fLine[Run-1] = '\') and
+              (fLine[Run-2] <> '\') then Result:= False  // Marc Laurencelle suggestion "\\" (2020/05/20)
       else
         Result:= True;
     end;

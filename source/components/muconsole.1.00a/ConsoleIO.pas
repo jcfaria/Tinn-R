@@ -448,6 +448,21 @@ begin
   psem_Package_Check;
   ptxtProgressBar_Check;
 
+{
+ The R package "semPlot" when loaded changes the default line separator (Line Feed) #13#10 (Windows)
+ to #10 (Linux and Mac) in the messaging system of the Windows operating system. Even worse,
+ even after detached - detach (packages: semPlot) - the change is persistent only returning to normal
+ if the R section ends. So the best way is to guarantee the replacement of #10 to the standard #13#10.
+}
+  if (Pos(#13#10,
+          ptOutputBuffer) = 0) and
+     (Pos(#10,
+          ptOutputBuffer) > 0) then
+    ptOutputBuffer:= StringReplace(ptOutputBuffer,
+                                   #10,
+                                   #13#10,
+                                   [rfReplaceAll]);
+
   if (Pos(#13#10,
           ptOutputBuffer) > 0) then SplitMode:= sm0D0A
                                else SplitMode:= smChar;
@@ -464,12 +479,12 @@ begin
   sOutput := '';
   if (SplitMode = sm0D0A) then  //#13#10
     pGrindReceived(#13#10,
-      2,
-      sOutput)
+                   2,
+                   sOutput)
   else  //Char...
     pGrindReceived(SplitChar,
-      1,
-      sOutput);
+                   1,
+                   sOutput);
 
   if (sOutput <> '') then
     reOnReceiveOutput(Self,

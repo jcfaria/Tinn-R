@@ -1,16 +1,32 @@
+6.1.1.6 (mai/09/2020)
+---------------------
+
+-   Bug(s) fixed:
+
+    -   All dependencies of the TinnRcom package that are distributed
+        with the Tinn-R setup (formatR, svMisc and svSocket), as well as
+        the TinnRcom package itself, have been rebuilt with the R-devel
+        version (4.1). The startup issues that arose in the current
+        version 4.0 of R have been fixed.
+
+    -   A bug associated with the package `semPlot` was fixed. Thanks to
+        `Frank` for pointing it out.
+
+-   Filter of `Tools/R/Mirros` from now on will be applied by `Host`.
+
 6.1.1.5 (jan/06/2020)
 ---------------------
 
-- Some improvements and refinements have been made in the previous version 6.1.1.4.
-
+-   Some improvements and refinements have been made in the previous
+    version 6.1.1.4.
 
 6.1.1.4 (jan/02/2020)
 ---------------------
 
-- Many improvements and refinements have been made in the previous version 6.1.1.3.
+-   Many improvements and refinements have been made in the previous
+    version 6.1.1.3.
 
-
-6.1.1.3 (jan/01/2020)
+6.1.1.3 (jan/02/2020)
 ---------------------
 
 -   Some parts of the Object Pascal **pipe** were rewritten. It is now
@@ -49,8 +65,9 @@
     by default, to interpreter was removed.
 
 -   The `R highlighter` was improved, it has new objects and from now
-    on, will not be case sensitive, that is, it will highlight, for
-    example, **LETTERS, letters, CO2, co2, …** in the same way.
+    on, will be case sensitive. That is, it will highlight, for example,
+    **LETTERS, letters, CO2, co2, …**, recognized and different R
+    objects, in the same group with the same attributes.
 
 -   From this version, the instructions stored in `R history` are only
     those typed in and submitted directly into `Rterm IO` interface.
@@ -69,5 +86,3 @@
     program will be distributed with at least 4 fast coloring sets:
     Default, Dark, Gray and LGray. Additionally, the interface allows
     you to restore all default values with a new option.
-
-

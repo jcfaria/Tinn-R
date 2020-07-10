@@ -3,3 +3,5 @@ sqrt
 var
 1:10
 read.table
+.paths[5]
+.paths

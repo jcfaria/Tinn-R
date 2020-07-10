@@ -1,3 +1,17 @@
+\subsection*{6.1.1.6 (mai/09/2020)}
+\begin{itemize}
+  \item Bug(s) fixed:
+    \begin{itemize}
+      \item All dependencies of the TinnRcom package that are distributed with the Tinn-R setup
+        (formatR, svMisc and svSocket), as well as the TinnRcom package itself, have been rebuilt
+        with the R-devel version (4.1). The startup issues that arose in the current version 4.0 of
+        R have been fixed.
+      \item A bug associated with the package \texttt{semPlot} was fixed.
+        Thanks to \texttt{Frank} for pointing it out.
+    \end{itemize}
+  \item Filter of \texttt{Tools/R/Mirros} from now on will be applied by \texttt{Host}.
+\end{itemize}
+
 \subsection*{6.1.1.5 (jan/06/2020)}
 \begin{itemize}
   \item Some improvements and refinements have been made in the previous version 6.1.1.4.
@@ -8,7 +22,7 @@
   \item Many improvements and refinements have been made in the previous version 6.1.1.3.
 \end{itemize}
 
-\subsection*{6.1.1.2 (jan/02/2020)}
+\subsection*{6.1.1.3 (jan/02/2020)}
 \begin{itemize}
   \item Some parts of the Object Pascal \textbf{pipe} were rewritten. It is now faster, stable and robust.
   \item The handling of all shortcuts, keystrokes and hotkeys are now centered on a single user interface
@@ -28,8 +42,8 @@
     Editor to the \RR{} interpreter. The previous use (send the current line and insert a new one) was removed. This was an old request
     from users but we believe it is no longer used much. Therefore, unless otherwise stated, we don't wish wish to make this feature available anymore.
   \item The option to send the clipboard content, with shortcut \textbf{CTRL + Q} by default, to \RR{} interpreter was removed.
-  \item The \texttt{R highlighter} was improved, it has new objects and from now on, will not be case sensitive, that is, it will highlight, for example,
-    \textbf{LETTERS, letters, CO2, co2, \ldots} in the same way.
+  \item The \texttt{R highlighter} was improved, it has new objects and from now on, will be case sensitive. That is, it will highlight, for example,
+    \textbf{LETTERS, letters, CO2, co2, \ldots}, recognized and different R objects, in the same group with the same attributes.
   \item From this version, the instructions stored in \texttt{R history} are only those typed in and submitted directly into \texttt{Rterm IO} interface.
   \item The highlighter identifier \texttt{Note} was renamed to \texttt{Note\_0}. It makes more sense, since \texttt{Note\_1} and \texttt{Note\_2} were created
     in previous version.

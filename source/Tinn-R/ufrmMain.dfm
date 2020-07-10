@@ -1024,6 +1024,7 @@ object frmMain: TfrmMain
   ShowHint = True
   Visible = True
   WindowMenu = menWindow
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDragDrop = FormDragDrop
@@ -9412,11 +9413,21 @@ object frmMain: TfrmMain
         Caption = '-'
         GroupIndex = 1
       end
+      object menHelLM: TMenuItem
+        Caption = 'License manager'
+        GroupIndex = 1
+        ImageIndex = 209
+        OnClick = menHelLMClick
+      end
       object menHelCitation: TMenuItem
         Caption = 'Citation (put on clipboard)'
         GroupIndex = 1
         ImageIndex = 156
         OnClick = menHelCitationClick
+      end
+      object N128: TMenuItem
+        Caption = '-'
+        GroupIndex = 1
       end
       object menHelAbout: TMenuItem
         Action = actAbout
@@ -9660,18 +9671,18 @@ object frmMain: TfrmMain
       end
     end
   end
-  object tUpdateOptions: TJvTimer
+  object tOptions_Update: TJvTimer
     Enabled = False
     Interval = 500
-    OnTimer = tUpdateOptionsTimer
+    OnTimer = tOptions_UpdateTimer
     Left = 240
     Top = 112
   end
-  object tRRuning: TJvTimer
+  object tR_Running: TJvTimer
     EventTime = tetPost
     Enabled = False
     Interval = 500
-    OnTimer = tRRuningTimer
+    OnTimer = tR_RunningTimer
     Left = 240
     Top = 144
   end
