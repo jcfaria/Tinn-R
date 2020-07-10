@@ -9,7 +9,6 @@ testing unreleased versions, fixing bugs, writing code, writing documentation, e
 
 Tinn-R simple but efficient replacement for the basic code editor provided by Rgui.
 The project leader and main developer is José Cláudio Faria/UESC/DCET.
-All users are welcome to make it better!
 
 #### Development Version
 - Setup: https://github.com/jcfaria/Tinn-R/tree/master/distribution/Tinn-R/bin
